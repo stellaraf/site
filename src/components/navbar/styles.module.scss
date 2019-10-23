@@ -9,14 +9,14 @@
   border-color: $nav-card-border-color !important;
 }
 
-.menuTitle {
+.menuHeader {
+  background-color: transparent !important;
   border-bottom: $card-border-width solid $nav-card-border-color !important;
 }
 
-.menuTitle,
-.menuBody {
-  // background-color: rgba(0, 0, 0, 0.2) !important;
-  // border-color: $nav-card-border-color;
+.menuTitle {
+  margin-bottom: unset !important;
+  color: $nav-card-title-color;
 }
 
 .menuTwoColumn {
@@ -25,16 +25,32 @@
   border-radius: $border-radius;
 }
 
-// .menuList {
-//   padding-left: 0;
-// }
-
 .menuList {
   background-color: transparent !important;
-  // border: $card-border-width solid $nav-card-border-color !important;
+  color: $nav-card-color !important;
   border: none !important;
+}
+
+.menuList:hover,
+.menuList:active {
+  background-color: rgba($bg1, 0.33) !important;
+  color: $nav-card-color !important;
+  border-radius: $border-radius !important;
 }
 
 .navLink {
   color: $st-white !important;
+}
+
+.navDropdown {
+  background-color: lighten($st-background, 20%);
+}
+
+.navCollapse {
+  margin-top: $nav-collapse-margin;
+  margin-bottom: $nav-collapse-margin;
+}
+
+.menuRow {
+  margin-top: $nav-collapse-margin;
 }

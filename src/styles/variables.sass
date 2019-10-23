@@ -1,4 +1,4 @@
-// App Styles
+// App Variables
 $st-primary: #266dd3
 $st-secondary: #043456
 $st-light: #f0f0f0
@@ -7,37 +7,26 @@ $st-white: #fcfcfc
 $st-gray: #6c757d
 $st-background: #222C4C
 
-$theme-colors: ('primary': $st-primary, 'secondary': $st-secondary, 'light': $st-light, 'dark': $st-dark)
+$bg1: $st-background
+$bg2: lighten($st-background, 10%)
 
-$font-headings: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'
+$st-colors: ('primary': $st-primary, 'secondary': $st-secondary, 'light': $st-light, 'dark': $st-dark, 'bg1': $bg1, 'bg2': $bg2)
 
-//// Spacing
-$hero-btn-margin-x: .5rem
-
-//// Navigation
-$nav-card-background: rgba(0,0,0,0.2)
-$nav-card-color: $st-white
-$nav-card-border-color: rgba($st-white, .125)
-
-//// Section Card
-$section-card-title-color: $st-dark
-$section-card-text-color: $st-gray
-$section-card-icon-height: 70px
-$section-card-padding-x: 1.5rem
-$section-card-padding-y: 3rem
-$main-card-padding: 3rem
-$main-card-title-color: $st-dark
-$main-card-text-color: $st-gray
+$st-fonts-body: 'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'
+$st-fonts-mono: 'Fira Code', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace
+$st-fonts-headings: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'
 
 // Bootstrap Overrides
 
 //// Color
-$white:         $st-white
-$body-color:    $st-dark
+$theme-colors: $st-colors
+$white: $st-white
+$body-color: $st-dark
 
 //// Typography
-$font-family-sans-serif:    'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'
-$font-family-monospace:     'Fira Code', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace
+$font-family-sans-serif: $st-fonts-body
+$font-family-monospace: $st-fonts-mono
+$font-headings: $st-fonts-headings
 
 $font-size-base:              1rem
 $font-size-lg:                $font-size-base * 1.25
@@ -84,3 +73,31 @@ $border-radius-sm: .4rem
 
 //// Buttons
 $input-btn-focus-box-shadow: none
+
+// App Styles
+
+//// Spacing
+$hero-btn-margin-x: .5rem
+
+//// Navigation
+$nav-card-background: rgba(0,0,0,0.2)
+$nav-card-color: $st-white
+$nav-card-border-color: rgba($st-white, .125)
+$nav-card-title-color: $nav-card-color
+$nav-collapse-margin: 2.5rem
+
+//// Section Card
+$section-card-title-color: $st-dark
+$section-card-text-color: $st-gray
+$section-card-icon-height: 70px
+$section-card-padding-x: 1.5rem
+$section-card-padding-y: 3rem
+$main-card-padding: 3rem
+$main-card-title-color: $st-dark
+$main-card-text-color: $st-gray
+
+//// Footer
+$footer-background: $bg2
+$footer-color: $st-white
+$footer-heading-size: $font-size-base
+$footer-link-size: $font-size-base * .8

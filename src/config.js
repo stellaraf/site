@@ -84,7 +84,7 @@ const navConfig = [
 
 const heroConfig = {
   homeOne: {
-    headings: ["Lux", "the Enterprise Native Cloud"],
+    headings: ["Title", "tagline words"],
     text: ""
   }
 };

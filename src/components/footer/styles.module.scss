@@ -1,0 +1,49 @@
+@import "../../styles/variables.sass";
+
+.footerSticky {
+  flex-shrink: 0;
+  flex-direction: column;
+}
+
+.footerLink {
+  list-style: none;
+}
+
+.footerLinkTitle,
+.footerLinkItem {
+  color: $footer-color;
+}
+
+.footerLinkTitle {
+  font-size: $footer-heading-size;
+}
+
+.footerLinkItem {
+  font-size: $footer-link-size;
+}
+
+.footerLinkItem:hover,
+.footerLinkItem:focus,
+.footerLinkItem:active {
+  color: $footer-color;
+}
+
+.footerStyle {
+  background-color: $footer-background;
+  color: $footer-color;
+}
+
+.copyrightText {
+  text-align: center;
+  font-size: $footer-link-size;
+  margin-bottom: 0;
+  color: darken($footer-color, 25%);
+}
+
+.copyrightRow {
+  width: 100%;
+  margin-bottom: 0;
+  padding-bottom: 0.5rem;
+  padding-top: 3rem;
+  justify-content: center;
+}

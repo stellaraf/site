@@ -1,23 +1,19 @@
 import React, { Component } from "react";
-import { Container, Row } from "react-bootstrap";
+import { CardDeck, Container } from "react-bootstrap";
 import { SectionCard } from "components/home/cards";
 import styles from "components/home/styles.module.scss";
 import classNames from "classnames";
 
-const rowStyle = classNames("heroRow");
-
-const sectionStyle = classNames(styles.heroSection, "sectionOne");
-
 class SectionOne extends Component {
   render() {
     return (
-      <section className={sectionStyle}>
+      <section className={classNames(styles.heroSection, "sectionOne")}>
         <Container>
-          <Row className={rowStyle}>
+          <CardDeck>
             <SectionCard delay={128} />
             <SectionCard delay={64} />
             <SectionCard />
-          </Row>
+          </CardDeck>
         </Container>
       </section>
     );

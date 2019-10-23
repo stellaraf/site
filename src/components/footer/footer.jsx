@@ -1,25 +1,16 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import styles from "components/footer/styles.module.css";
+import styles from "components/footer/styles.module.scss";
 import { footerConfig } from "config";
 import Copyright from "components/footer/copyright";
 import classNames from "classnames";
 
-const footerStyle = classNames(
-  "navbar",
-  "navbar-footer",
-  "bg-light",
-  styles.footerSticky
-);
-
 function FooterLink({ name, link }) {
   return (
     <li className={styles.footerLink}>
-      <small>
-        <a href={link} className={styles.footerLinkItem}>
-          {name}
-        </a>
-      </small>
+      <a href={link} className={styles.footerLinkItem}>
+        {name}
+      </a>
     </li>
   );
 }
@@ -27,7 +18,7 @@ function FooterLink({ name, link }) {
 function FooterHeading({ title }) {
   return (
     <li className={styles.footerLink}>
-      <small className={styles.footerLinkTitle}>{title}</small>
+      <p className={styles.footerLinkTitle}>{title}</p>
     </li>
   );
 }
@@ -57,7 +48,7 @@ class Footer extends Component {
     return (
       <>
         <nav
-          className={footerStyle}
+          className={classNames("navbar", "navbar-footer", styles.footerStyle)}
           style={{
             paddingTop: "3rem",
             paddingBottom: "1rem"

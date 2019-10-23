@@ -6,7 +6,51 @@ $break-md: map-get($grid-breakpoints, md)
 $break-lg: map-get($grid-breakpoints, lg)
 $break-xl: map-get($grid-breakpoints, xl)
 
+// Note: See here for weird indented Sass mixin/include syntax:
+// https://sass-lang.com/documentation/at-rules/mixin#indented-mixin-syntax
+
 // App Classes
+
++media-breakpoint-down(sm)
+    #navbar > .container
+        max-width: none !important
+        padding-right: 0 !important
+        padding-left: 0 !important
+
+    .navbar .card
+        border: none !important
+
++media-breakpoint-up(sm)
+    .sectionOne
+        margin-top: ($break-sm / 4) !important
+    .navCol:not(:first-child):not(:last-child)
+        margin-top: $nav-collapse-margin
+
++media-breakpoint-up(md)
+    .heroRow
+        height: ($break-md/4) !important
+        align-items: center !important
+    .sectionOne
+        margin-top: ($break-md / 4) !important
+
+    #navbar > .container
+        +make-container()
+
++media-breakpoint-up(lg)
+    .heroRow
+        height: ($break-lg/4) !important
+        align-items: center !important
+    .sectionOne
+        margin-top: ($break-lg / 4) !important
+
++media-breakpoint-up(xl)
+    .heroRow
+        height: ($break-xl/4) !important
+        align-items: center !important
+    .sectionOne
+        margin-top: ($break-xl / 4) !important
+    .navCol:not(:first-child):not(:last-child)
+        margin-top: 0
 
 body
     background: $st-background
@@ -16,40 +60,8 @@ body
         .card-body
             border-radius: $border-radius
 
-@media (min-width: $break-xs)
-    .heroRow
-        // height: ($break-xs/4) !important
-        // align-items: center !important
-    .sectionOne
-        margin-top: ($break-xs / 4)
-
-@media (min-width: $break-sm)
-    .heroRow
-        // height: ($break-sm/4) !important
-        align-items: center !important
-    .sectionOne
-        margin-top: ($break-sm / 4)
-
-@media (min-width: $break-md)
-    .heroRow
-        height: ($break-md/4) !important
-        align-items: center !important
-    .sectionOne
-        margin-top: ($break-md / 4)
-
-@media (min-width: $break-lg)
-    .heroRow
-        height: ($break-lg/4) !important
-        align-items: center !important
-    .sectionOne
-        margin-top: ($break-lg / 4)
-
-@media (min-width: $break-xl)
-    .heroRow
-        height: ($break-xl/4) !important
-        align-items: center !important
-    .sectionOne
-        margin-top: ($break-xl / 4)
+.sectionOne
+    margin-top: ($break-xs / 4)
 
 .heroCol
     display: flex
@@ -76,6 +88,26 @@ body
     background-color: transparent
     color: $nav-card-color !important
 
+.navbar .card-group > .card > .card-body a
+    color: $nav-card-color !important
+
+.navbar .card-group > .card:nth-child(1) > .card-header, .dropdown-menu .card-group > .card:nth-child(1) > .card-body,
+    background-color: transparent
+    color: $nav-card-color !important
+
+.navbar .card-group > .card:nth-child(2) > .card-header, .dropdown-menu .card-group > .card:nth-child(2) > .card-body
+    background-color: transparent
+    color: $nav-card-color !important
+
+.navbar .card-group > .card:nth-child(3) > .card-header, .dropdown-menu .card-group > .card:nth-child(3) > .card-body
+    background-color: transparent
+    color: $nav-card-color !important
+
+// .navbar-collapse .card-group .card .card-body .list-group .list-group-item:hover
+//     background-color: rgba($bg1, 0.33) !important
+//     color: $nav-card-color !important
+//     border-radius: $border-radius !important
+
 .card-group > .card:first-child > .card-header
     border-top-right-radius: 0
     border-bottom-right-radius: 0
@@ -98,6 +130,9 @@ body
     border-top-left-radius: 0
     border-top-right-radius: 0
     border-bottom-left-radius: 0
+
+.navbar-toggler:focus
+    outline: none !important
 
 // React-Slide Fixes
 

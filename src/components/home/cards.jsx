@@ -33,21 +33,19 @@ class SectionCard extends Component {
         cascade={this.props.cascade}
       >
         <div>
-          <Col>
-            <Card className={styles.sectionCard}>
-              <div className={styles.sectionCardTop}>{this.props.icon}</div>
-              <div className={styles.sectionCardBottom}>
-                {this.props.children || (
-                  <>
-                    <h5 className={styles.sectionCardTitle}>
-                      {this.props.title}
-                    </h5>
-                    <p className={styles.sectionCardText}>{this.props.text}</p>
-                  </>
-                )}
-              </div>
-            </Card>
-          </Col>
+          <Card className={styles.sectionCard}>
+            <div className={styles.sectionCardTop}>{this.props.icon}</div>
+            <div className={styles.sectionCardBottom}>
+              {this.props.children || (
+                <>
+                  <h5 className={styles.sectionCardTitle}>
+                    {this.props.title}
+                  </h5>
+                  <p className={styles.sectionCardText}>{this.props.text}</p>
+                </>
+              )}
+            </div>
+          </Card>
         </div>
       </Slide>
     );

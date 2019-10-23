@@ -37,7 +37,7 @@ class Hero extends Component {
             </Col>
             <Col className={heroColRight}>
               <HeroCard
-                title={"Main Placeholder Title"}
+                title={"Main Card Title"}
                 titleClass={"h2"}
                 text={"Cool Stories"}
                 align={"right"}
