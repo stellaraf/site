@@ -7,7 +7,7 @@ import classNames from "classnames";
 class SectionOne extends Component {
   render() {
     return (
-      <section className={classNames(styles.heroSection, "sectionOne")}>
+      <section className={classNames(styles.heroSection, "infoSection")}>
         <Container>
           <CardDeck>
             <SectionCard delay={128} />

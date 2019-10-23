@@ -81,27 +81,25 @@ class HeroCard extends Component {
         cascade={this.props.cascade}
       >
         <div>
-          <Col>
-            <Card
-              className={styles.mainCard}
-              style={{ textAlign: this.props.align }}
-            >
-              <Card.Body className={styles.mainCardBody}>
-                <>
-                  <p
-                    className={classNames(
-                      this.props.titleClass,
-                      styles.mainCardTitle
-                    )}
-                  >
-                    {this.props.title}
-                  </p>
-                  <p className={styles.mainCardText}>{this.props.text}</p>
-                </>
-                {this.props.children}
-              </Card.Body>
-            </Card>
-          </Col>
+          <Card
+            className={styles.mainCard}
+            style={{ textAlign: this.props.align }}
+          >
+            <Card.Body className={styles.mainCardBody}>
+              <>
+                <p
+                  className={classNames(
+                    this.props.titleClass,
+                    styles.mainCardTitle
+                  )}
+                >
+                  {this.props.title}
+                </p>
+                <p className={styles.mainCardText}>{this.props.text}</p>
+              </>
+              {this.props.children}
+            </Card.Body>
+          </Card>
         </div>
       </Slide>
     );
