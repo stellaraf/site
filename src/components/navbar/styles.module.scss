@@ -1,0 +1,40 @@
+@import "../../styles/variables.sass";
+
+.menuLink {
+  list-style: none;
+}
+
+.menuSection {
+  background-color: transparent !important;
+  border-color: $nav-card-border-color !important;
+}
+
+.menuTitle {
+  border-bottom: $card-border-width solid $nav-card-border-color !important;
+}
+
+.menuTitle,
+.menuBody {
+  // background-color: rgba(0, 0, 0, 0.2) !important;
+  // border-color: $nav-card-border-color;
+}
+
+.menuTwoColumn {
+  padding: 0 !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border-radius: $border-radius;
+}
+
+// .menuList {
+//   padding-left: 0;
+// }
+
+.menuList {
+  background-color: transparent !important;
+  // border: $card-border-width solid $nav-card-border-color !important;
+  border: none !important;
+}
+
+.navLink {
+  color: $st-white !important;
+}

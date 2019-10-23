@@ -1,0 +1,106 @@
+// Local Variables
+
+$break-xs: map-get($grid-breakpoints, xs)
+$break-sm: map-get($grid-breakpoints, sm)
+$break-md: map-get($grid-breakpoints, md)
+$break-lg: map-get($grid-breakpoints, lg)
+$break-xl: map-get($grid-breakpoints, xl)
+
+// App Classes
+
+body
+    background: $st-background
+
+.card-group
+    .card
+        .card-body
+            border-radius: $border-radius
+
+@media (min-width: $break-xs)
+    .heroRow
+        // height: ($break-xs/4) !important
+        // align-items: center !important
+    .sectionOne
+        margin-top: ($break-xs / 4)
+
+@media (min-width: $break-sm)
+    .heroRow
+        // height: ($break-sm/4) !important
+        align-items: center !important
+    .sectionOne
+        margin-top: ($break-sm / 4)
+
+@media (min-width: $break-md)
+    .heroRow
+        height: ($break-md/4) !important
+        align-items: center !important
+    .sectionOne
+        margin-top: ($break-md / 4)
+
+@media (min-width: $break-lg)
+    .heroRow
+        height: ($break-lg/4) !important
+        align-items: center !important
+    .sectionOne
+        margin-top: ($break-lg / 4)
+
+@media (min-width: $break-xl)
+    .heroRow
+        height: ($break-xl/4) !important
+        align-items: center !important
+    .sectionOne
+        margin-top: ($break-xl / 4)
+
+.heroCol
+    display: flex
+    align-items: center !important
+    align-content: center !important
+    flex-wrap: wrap !important
+    height: 100% !important
+
+.heroRow .col
+    display: flex
+
+.dropdown-menu .card-group > .card > .card-body a
+    color: $nav-card-color !important
+
+.dropdown-menu .card-group > .card:nth-child(1) > .card-header, .dropdown-menu .card-group > .card:nth-child(1) > .card-body,
+    background-color: transparent
+    color: $nav-card-color !important
+
+.dropdown-menu .card-group > .card:nth-child(2) > .card-header, .dropdown-menu .card-group > .card:nth-child(2) > .card-body
+    background-color: transparent
+    color: $nav-card-color !important
+
+.dropdown-menu .card-group > .card:nth-child(3) > .card-header, .dropdown-menu .card-group > .card:nth-child(3) > .card-body
+    background-color: transparent
+    color: $nav-card-color !important
+
+.card-group > .card:first-child > .card-header
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+    border-bottom-left-radius: 0
+
+.card-group > .card:first-child > .card-body
+    border-top-left-radius: 0
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+
+.card-group > .card:not(:first-child):not(:last-child) > .card-header, .card-group > .card:not(:first-child):not(:last-child) > .card-body
+    border-radius: 0
+
+.card-group > .card:last-child > .card-header
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+
+.card-group > .card:last-child > .card-body
+    border-top-left-radius: 0
+    border-top-right-radius: 0
+    border-bottom-left-radius: 0
+
+// React-Slide Fixes
+
+.react-reveal
+    display: flex !important
+    flex-grow: 1 !important

@@ -1,0 +1,11 @@
+@import "./variables.sass";
+
+:export {
+  stPrimary: $st-primary;
+  stSecondary: $st-secondary;
+  stLight: $st-light;
+  stDark: $st-dark;
+  stWhite: $st-white;
+  stGray: $st-gray;
+  stBackground: $st-background;
+}
