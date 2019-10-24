@@ -1,56 +1,56 @@
-@import "../../styles/variables.sass";
+@import "../../styles/variables.scss";
 
 .menuLink {
-  list-style: none;
+    list-style: none;
 }
 
 .menuSection {
-  background-color: transparent !important;
-  border-color: $nav-card-border-color !important;
+    background-color: transparent !important;
+    border-color: $nav-card-border-color !important;
 }
 
 .menuHeader {
-  background-color: transparent !important;
-  border-bottom: $card-border-width solid $nav-card-border-color !important;
+    background-color: transparent !important;
+    border-bottom: $card-border-width solid $nav-card-border-color !important;
 }
 
 .menuTitle {
-  margin-bottom: unset !important;
-  color: $nav-card-title-color;
+    margin-bottom: unset !important;
+    color: $nav-card-title-color;
 }
 
 .menuTwoColumn {
-  padding: 0 !important;
-  background-color: rgba(0, 0, 0, 0.2) !important;
-  border-radius: $border-radius;
+    padding: 0 !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-radius: $border-radius;
 }
 
 .menuList {
-  background-color: transparent !important;
-  color: $nav-card-color !important;
-  border: none !important;
+    background-color: transparent !important;
+    color: $nav-card-color !important;
+    border: none !important;
 }
 
 .menuList:hover,
 .menuList:active {
-  background-color: rgba($bg1, 0.33) !important;
-  color: $nav-card-color !important;
-  border-radius: $border-radius !important;
+    background-color: rgba($bg1, 0.33) !important;
+    color: $nav-card-color !important;
+    border-radius: $border-radius !important;
 }
 
 .navLink {
-  color: $st-white !important;
+    color: $st-white !important;
 }
 
 .navDropdown {
-  background-color: lighten($st-background, 20%);
+    background-color: lighten($st-background, 20%);
 }
 
 .navCollapse {
-  margin-top: $nav-collapse-margin;
-  margin-bottom: $nav-collapse-margin;
+    margin-top: $nav-collapse-margin;
+    margin-bottom: $nav-collapse-margin;
 }
 
 .menuRow {
-  margin-top: $nav-collapse-margin;
+    margin-top: $nav-collapse-margin;
 }

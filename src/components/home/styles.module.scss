@@ -1,85 +1,85 @@
-@import "../../styles/variables.sass";
+@import "../../styles/variables.scss";
 
 .overlayBackground {
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: column;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
 }
 
 .heroSection {
-  display: flex;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-  flex-direction: column;
+    display: flex;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    flex-direction: column;
 }
 
 .heroButton:first-of-type {
-  margin-right: $hero-btn-margin-x;
-  margin-left: 0 !important;
+    margin-right: $hero-btn-margin-x;
+    margin-left: 0 !important;
 }
 
 .heroButton:last-of-type {
-  margin-left: $hero-btn-margin-x;
-  margin-right: 0 !important;
+    margin-left: $hero-btn-margin-x;
+    margin-right: 0 !important;
 }
 
 .heroButton:not(:first-of-type),
 .heroButton:not(:last-of-type) {
-  margin-left: $hero-btn-margin-x;
-  margin-right: $hero-btn-margin-x;
+    margin-left: $hero-btn-margin-x;
+    margin-right: $hero-btn-margin-x;
 }
 
 .heroHeadingFirst {
-  color: $headings-color;
-  font-size: $display3-size;
-  width: 100%;
+    color: $headings-color;
+    font-size: $display3-size;
+    width: 100%;
 }
 
 .heroHeadingRemaining {
-  color: darken($headings-color, 40%);
+    color: darken($headings-color, 40%);
 }
 
 .sectionCard {
-  text-align: center;
-  flex-grow: 1;
-  background-color: $section-card-background !important;
+    text-align: center;
+    flex-grow: 1;
+    background-color: $section-card-background !important;
 }
 
 .sectionCardIcon {
-  height: $section-card-icon-height;
-  width: 100%;
+    height: $section-card-icon-height;
+    width: 100%;
 }
 
 .sectionCardTop {
-  padding: $section-card-padding-y $section-card-padding-x !important;
+    padding: $section-card-padding-y $section-card-padding-x !important;
 }
 
 .sectionCardBottom {
-  padding-right: $section-card-padding-x !important;
-  padding-left: $section-card-padding-x !important;
-  padding-bottom: $section-card-padding-y !important;
+    padding-right: $section-card-padding-x !important;
+    padding-left: $section-card-padding-x !important;
+    padding-bottom: $section-card-padding-y !important;
 }
 
 .sectionCardTitle {
-  color: $section-card-title-color;
+    color: $section-card-title-color;
 }
 
 .sectionCardText {
-  color: $section-card-text-color;
+    color: $section-card-text-color;
 }
 
 .mainCard {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 .mainCardBody {
-  padding: $main-card-padding !important;
+    padding: $main-card-padding !important;
 }
 
 .mainCardTitle {
-  color: $main-card-title-color !important;
+    color: $main-card-title-color !important;
 }
 
 .mainCardText {
-  color: $main-card-text-color !important;
+    color: $main-card-text-color !important;
 }
