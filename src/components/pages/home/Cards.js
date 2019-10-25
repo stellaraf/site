@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Card } from "react-bootstrap";
 import Slide from "react-reveal/Slide";
-import IconNotFound from "components/home/iconNotFound";
-import styles from "components/home/styles.module.scss";
+import { IconNotFound } from "components/svg";
+import styles from "components/pages/home/styles.module.scss";
 import classNames from "classnames";
 
 class SectionCard extends Component {

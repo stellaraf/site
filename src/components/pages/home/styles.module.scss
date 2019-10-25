@@ -1,10 +1,4 @@
-@import "../../styles/variables.scss";
-
-.overlayBackground {
-    display: flex;
-    flex: 1 0 auto;
-    flex-direction: column;
-}
+@import "~styles/variables.scss";
 
 .heroSection {
     display: flex;
@@ -43,11 +37,6 @@
     text-align: center;
     flex-grow: 1;
     background-color: $section-card-background !important;
-}
-
-.sectionCardIcon {
-    height: $section-card-icon-height;
-    width: 100%;
 }
 
 .sectionCardTop {
