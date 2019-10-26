@@ -45,13 +45,13 @@ class Hero extends Component {
                                 align={"right"}>
                                 <Button
                                     href="#"
-                                    variant="outline-secondary"
+                                    variant="primary"
                                     className={styles.heroButton}>
                                     Button 1
                                 </Button>
                                 <Button
                                     href="#"
-                                    variant="outline-secondary"
+                                    variant="outline-primary"
                                     className={styles.heroButton}>
                                     Button 2
                                 </Button>

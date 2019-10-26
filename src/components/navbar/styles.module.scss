@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "~styles/_variables.scss";
 
 .menuLink {
     list-style: none;
@@ -33,7 +33,7 @@
 
 .menuList:hover,
 .menuList:active {
-    background-color: rgba($bg1, 0.33) !important;
+    background-color: rgba($st-gray, 0.2) !important;
     color: $nav-card-color !important;
     border-radius: $border-radius !important;
 }
@@ -43,7 +43,12 @@
 }
 
 .navDropdown {
-    background-color: lighten($st-background, 20%);
+    background-color: transparent;
+}
+
+.navDropdownOpen {
+    composes: navDropdown;
+    border-bottom: $navbar-bottom-border;
 }
 
 .navCollapse {

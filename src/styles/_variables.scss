@@ -1,34 +1,61 @@
-@use "sass:list";
-
 // App Variables
-$st-primary: #266dd3;
+// $st-primary: #266dd3;
+$st-primary: #2e3191;
 $st-secondary: #043456;
+$st-danger: #ca2e55;
+$st-warning: #f49d37;
 $st-light: #f0f0f0;
-$st-dark: #071013;
+$st-dark: #0e1e25;
 $st-white: #fcfcfc;
-$st-gray: #6c757d;
-$st-background: #222c4c;
-$st-background-alt: #58a4b0;
+$st-gray: rgba($st-dark, 0.38);
+// $st-gray: #757780;
+// $st-background: #222c4c;
+// $st-background-alt: #58a4b0;
 
-$bg1: $st-background;
-$bg2: lighten($st-background, 6%);
-$bg3: darken($st-background, 4%);
+$st-gradient-1: #2e3191;
+$st-gradient-2: #2b004a;
+$st-gradient-3: $st-dark;
+// $st-gradient-3: #000000;
+
+// $st-gradient-colors: $st-gradient-1, $st-gradient-2, $st-gradient-3;
+$st-gradient-colors: $st-gradient-2, $st-gradient-3;
+$st-gradient: linear-gradient(to bottom, $st-gradient-colors);
+
+// $bg1: $st-background;
+// $bg2: lighten($st-background, 6%);
+// $bg3: darken($st-background, 4%);
+// $map-fill: transparent;
+// $map-stroke: #d6d6da;
+$map-fill: transparent;
+$map-stroke: $st-gray;
+$globe-stroke: rgba($st-light, 0.1);
+$map-text: $st-white;
+// $map-fill: #eaeaec;
+// $map-stroke: #d6d6da;
+
+$st-background: $st-gradient;
 
 $st-colors: (
     "primary": $st-primary,
     "secondary": $st-secondary,
+    "danger": $st-danger,
+    "warning": $st-warning,
     "light": $st-light,
     "dark": $st-dark,
-    "bg1": $bg1,
-    "bg2": $bg2
+    "gradient1": $st-gradient-1,
+    "gradient2": $st-gradient-2
 );
 
-$st-fonts-body: "Kanit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-$st-fonts-mono: "Fira Code", SFMono-Regular, Menlo, Monaco, Consolas,
+$st-font-body: "Open Sans";
+$st-font-headings: "Open Sans";
+$st-font-mono: "Fira Code";
+
+$st-fonts-body: $st-font-body, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$st-fonts-mono: $st-font-mono, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
-$st-fonts-headings: "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+$st-fonts-headings: $st-font-headings, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
@@ -48,11 +75,14 @@ $font-size-base: 1rem;
 $font-size-lg: $font-size-base * 1.25;
 $font-size-sm: $font-size-base * 0.875;
 
-$font-weight-lighter: lighter;
-$font-weight-light: 200;
-$font-weight-normal: 300;
+// $font-weight-lighter: lighter;
+// $font-weight-light: 200;
+// $font-weight-normal: 300;
+// $font-weight-bold: 600;
+// $font-weight-bolder: bolder;
+$font-weight-light: 400;
+$font-weight-normal: 400;
 $font-weight-bold: 600;
-$font-weight-bolder: bolder;
 
 $font-weight-base: $font-weight-normal;
 $line-height-base: 1.5;
@@ -65,7 +95,7 @@ $h5-font-size: $font-size-base * 1.25;
 $h6-font-size: $font-size-base;
 
 $headings-font-family: $font-headings;
-$headings-font-weight: 700;
+$headings-font-weight: 800;
 $headings-color: $st-white;
 
 $display1-size: 6rem;
@@ -99,11 +129,12 @@ $nav-card-color: $st-white;
 $nav-card-border-color: rgba($st-white, 0.125);
 $nav-card-title-color: $nav-card-color;
 $nav-collapse-margin: 2.5rem;
+$navbar-bottom-border: $border-width solid $nav-card-border-color;
 
 //// Section Card
-$section-card-background: $bg3;
-$section-card-title-color: $st-white;
-$section-card-text-color: $st-white;
+$section-card-background: $st-light;
+$section-card-title-color: $st-dark;
+$section-card-text-color: $st-dark;
 $section-card-icon-height: 70px;
 $section-card-padding-x: 1.5rem;
 $section-card-padding-y: 3rem;
@@ -113,7 +144,11 @@ $main-card-title-color: $st-dark;
 $main-card-text-color: $st-gray;
 
 //// Footer
-$footer-background: $bg2;
+// $footer-background: $bg2;
+$footer-background: transparent;
 $footer-color: $st-white;
 $footer-heading-size: $font-size-base;
 $footer-link-size: $font-size-base * 0.8;
+
+//// Forms
+$input-placeholder-color: $st-gray;

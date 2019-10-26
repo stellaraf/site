@@ -1,0 +1,25 @@
+@import "~styles/_variables";
+
+.contactFormField {
+    margin-bottom: 1rem;
+}
+
+.contactTitle {
+    color: $st-dark !important;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    text-align: center;
+}
+
+.contactMessageCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactMessageForm {
+    height: 100% !important;
+}
+
+.contactLabel {
+    font-weight: $font-weight-bold;
+}

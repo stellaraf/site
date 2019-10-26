@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { SectionOne, TitleBlock } from "components/pages/cloud/Sections";
+import { SectionOne, TitleBlock } from "components/pages/contact/Sections";
 
-class Cloud extends Component {
+class Contact extends Component {
     render() {
         return (
             <>
@@ -11,4 +11,4 @@ class Cloud extends Component {
         );
     }
 }
-export default Cloud;
+export default Contact;

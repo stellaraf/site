@@ -3,9 +3,18 @@
 :export {
     stPrimary: $st-primary;
     stSecondary: $st-secondary;
+    stDanger: $st-danger;
+    stWarning: $st-warning;
     stLight: $st-light;
     stDark: $st-dark;
     stWhite: $st-white;
     stGray: $st-gray;
     stBackground: $st-background;
+    mapFill: $map-fill;
+    mapStroke: $map-stroke;
+    globeStroke: $globe-stroke;
+    mapText: $map-text;
+    stGradient: $st-gradient;
+    stGradient1: $st-gradient-1;
+    stGradient2: $st-gradient-2;
 }

@@ -15,6 +15,7 @@
 
 const siteConfig = {
     legalName: "Stellar Technologies Inc.",
+    givenName: "Stellar",
     navIconSize: 40
 };
 

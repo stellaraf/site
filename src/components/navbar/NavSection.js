@@ -18,7 +18,8 @@ class NavSection extends Component {
                                     <LinkContainer to={item.link} key={i}>
                                         <ListGroup.Item
                                             action
-                                            className={styles.menuList}>
+                                            className={styles.menuList}
+                                            onClick={this.props.handleNavClick}>
                                             {item.name}
                                         </ListGroup.Item>
                                     </LinkContainer>

@@ -12,8 +12,25 @@ $break-xl: map-get($grid-breakpoints, xl);
 // App Classes
 
 //// Default Classes
-body {
+
+#root {
     background: $st-background;
+}
+
+// @supports (font-variation-settings: normal) {
+//     html {
+//         font-family: $st-fonts-body;
+//     }
+// }
+
+// body {
+//     background: $st-background;
+// }
+
+main {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
 }
 
 .heroRow {
@@ -35,6 +52,15 @@ body {
 .navbar-toggler:focus {
     outline: none !important;
 }
+
+.btn {
+    font-weight: $font-weight-bold;
+}
+
+// h1,
+// .h1 {
+//     font-weight: 600 !important;
+// }
 
 //// Responsive Size-Specific Classes
 
