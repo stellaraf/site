@@ -13,20 +13,6 @@ $break-xl: map-get($grid-breakpoints, xl);
 
 //// Default Classes
 
-#root {
-    background: $st-background;
-}
-
-// @supports (font-variation-settings: normal) {
-//     html {
-//         font-family: $st-fonts-body;
-//     }
-// }
-
-// body {
-//     background: $st-background;
-// }
-
 main {
     display: flex !important;
     flex-direction: column !important;
@@ -57,10 +43,10 @@ main {
     font-weight: $font-weight-bold;
 }
 
-// h1,
-// .h1 {
-//     font-weight: 600 !important;
-// }
+.form-control::placeholder {
+    font-size: $font-size-sm;
+    color: $st-gray;
+}
 
 //// Responsive Size-Specific Classes
 

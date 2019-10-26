@@ -1,10 +1,16 @@
 import React from "react";
-import { STAR_COORDS } from "./star-coords";
 import styled from "styled-components";
-import { MeteorShower } from "./meteor-shower";
-import { TwinkleStars } from "./twinkle-stars";
 
-import * as basicScroll from "./basicScroll";
+import { STAR_COORDS } from "components/stars/universe/star-coords";
+import { MeteorShower } from "components/stars/universe/meteor-shower";
+import { TwinkleStars } from "components/stars/universe/twinkle-stars";
+import * as basicScroll from "components/stars/universe/basicScroll";
+
+// import { STAR_COORDS } from "./star-coords";
+// import styled from "styled-components";
+// import { MeteorShower } from "./meteor-shower";
+// import { TwinkleStars } from "./twinkle-stars";
+// import * as basicScroll from "./basicScroll";
 
 const Layout = styled.div`
     position: fixed;
@@ -60,7 +66,6 @@ class Universe extends React.Component {
             event.preventDefault();
         }
     }
-
     render() {
         return (
             <Layout
