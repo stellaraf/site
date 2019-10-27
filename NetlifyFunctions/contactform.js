@@ -25,12 +25,12 @@ exports.handler = function(event, context, callback) {
         if (err) {
             msg = `Error submitting form: ${err}`;
         } else {
-            msg = `Submitted form: ${body}`;
+            msg = `Submitted form: ${JSON.stringify(body)}`;
         }
         callback(null, {
             statusCode: 200,
             body: msg
         });
-        return console.log(msg);
+        console.log(`Message: ${msg}`);
     });
 };
