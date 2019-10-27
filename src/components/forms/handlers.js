@@ -1,5 +1,5 @@
 import { siteConfig } from "config";
-import axios from "axios";
+import request from "request";
 
 class HandleError extends Error {
     constructor(xhrState = 0, message = "HTTP request is not open") {
@@ -16,21 +16,18 @@ const sfAttr = {
 };
 
 function SalesforceLead(formData) {
-    const apiConfig = {
-        // url: sfAttr.leadUri,
-        // baseUrl: sfAttr.baseUrl,
-        // baseUrl: "https://webhook.site/",
+    const apiParams = {
         url: "/.netlify/functions/contactform",
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        data: formData,
-        timeout: 5000,
-        responseType: "json",
-        responseEncoding: "utf8"
+        json: formData
     };
-    axios(apiConfig).then(response => {
-        console.log(`Raw Response: ${JSON.stringify(response)}`);
-        return response;
+    request.post(apiParams, (err, httpResponse, body) => {
+        let msg;
+        if (err) {
+            msg = `Error submitting form: ${err}`;
+        } else {
+            msg = `Submitted form to server: ${body}`;
+        }
+        return msg;
     });
 }
 
