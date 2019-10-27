@@ -4,7 +4,8 @@ let request = require("request");
 exports.handler = function(event, context, callback) {
     console.info(event);
     try {
-        const data = event.body;
+        const data = JSON.parse(event.body);
+        console.info(JSON.stringify(data));
         const names = data.contactName.split(" ");
         const apiURL =
             "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b";
