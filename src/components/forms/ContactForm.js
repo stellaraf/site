@@ -3,6 +3,7 @@ import { Button, Card, Col, Form, FormControl } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
+import { SalesforceLead } from "components/forms/handlers";
 import styles from "components/forms/styles.module.scss";
 
 const phoneRegExp = /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,3})|(\(?\d{2,3}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext| x | ext | ext.| ext. )\d{1,5}){0,1}$/;
@@ -30,7 +31,20 @@ const validationSchema = Yup.object({
 function RawForm() {
     return (
         <Formik
+            netlify
             validationSchema={validationSchema}
+            // onSubmit={(values, { setSubmitting }) => {
+            //     setTimeout(() => {
+            //         console.log(
+            //             `Submitting: ${JSON.stringify(values, null, 2)}`
+            //         );
+            //         const response = SalesforceLead(values);
+            //         console.log(`Response: ${response}`);
+            //         if (response) {
+            //             setSubmitting(false);
+            //         }
+            //     }, 400);
+            // }}
             onSubmit={console.log}
             initialValues={{
                 contactName: "",

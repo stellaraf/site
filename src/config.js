@@ -16,6 +16,7 @@
 const siteConfig = {
     legalName: "Stellar Technologies Inc.",
     givenName: "Stellar",
+    salesforceInstanceName: "stellartech",
     navIconSize: 40
 };
 
