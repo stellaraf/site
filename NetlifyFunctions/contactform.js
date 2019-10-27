@@ -27,7 +27,7 @@ exports.handler = async (event, context) => {
     let response;
     try {
         response = await axios.request(apiConfig);
-        console.log(JSON.stringify(response));
+        console.log(response);
     } catch (error) {
         console.error(error);
     }
