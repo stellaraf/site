@@ -28,7 +28,6 @@ function SalesforceLead(formData) {
             console.error(err);
         } else {
             msg = body;
-            console.info(JSON.stringify(msg));
         }
     });
     return msg;

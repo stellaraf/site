@@ -41,7 +41,7 @@ function RawForm() {
                     } else {
                         console.error("No response");
                     }
-                }, 6000);
+                }, 10000);
             }}
             // onSubmit={console.log}
             initialValues={{
