@@ -19,8 +19,8 @@ exports.handler = async (event, context, callback) => {
     const names = data.contactName.split(" ");
     const formData = {
         Company: data.contactCompany,
-        LastName: names[1],
-        FirstName: names[0],
+        LastName: names[1] || "",
+        FirstName: names[0] || "",
         Email: data.contactEmail,
         Phone: data.contactPhone,
         LeadSource: "stellar.tech Contact Form",
