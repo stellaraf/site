@@ -1,18 +1,4 @@
 const axios = require("axios");
-// import fetch from "node-fetch";
-// const { API_KEY } = process.env;
-
-// const API_ENDPOINT = "https://hooks.zapier.com/hooks/catch/5955199/ougxh9k/";
-
-// exports.handler = async (event, context) => {
-//     return fetch(API_ENDPOINT, { headers: { Accept: "application/json" } })
-//         .then(response => response.json())
-//         .then(data => ({
-//             statusCode: 200,
-//             body: data
-//         }))
-//         .catch(error => ({ statusCode: 422, body: String(error) }));
-// };
 
 exports.handler = async (event, context, callback) => {
     const data = JSON.parse(event.body);
@@ -24,21 +10,23 @@ exports.handler = async (event, context, callback) => {
         Email: data.contactEmail,
         Phone: data.contactPhone,
         LeadSource: "stellar.tech Contact Form",
-        Description: `Form Data:\nSubject:${data.contactSubject}\nMessage:\n${data.contactMessage}\n\nMetadata:\n${""}`
+        Description: `Form Data:\nSubject:${data.contactSubject}\nMessage:\n${
+            data.contactMessage
+        }\n\nMetadata:\n${""}`
     };
     const apiConfig = {
         url: "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b",
         method: "post",
         headers: { "Content-Type": "application/json" },
-        data: formData,
-        timeout: 5000,
+        data: JSON.stringify(formData),
+        timeout: 10000,
         responseType: "json",
         responseEncoding: "utf8"
     };
     console.log(JSON.stringify(formData));
     axios(apiConfig).then(response => {
         console.log(`Raw Response: ${response}`);
-        return callback(null, {
+        callback(null, {
             statusCode: 200,
             body: JSON.stringify(response.data)
         });
