@@ -20,7 +20,7 @@ function SalesforceLead(formData) {
         // url: sfAttr.leadUri,
         // baseUrl: sfAttr.baseUrl,
         // baseUrl: "https://webhook.site/",
-        url: "/",
+        url: "/.netlify/functions/contactform",
         method: "post",
         headers: { "Content-Type": "application/json" },
         data: formData,
