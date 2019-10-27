@@ -29,10 +29,8 @@ function SalesforceLead(formData) {
         responseEncoding: "utf8"
     };
     axios(apiConfig).then(response => {
-        console.log(`Raw Response: ${response}`);
-        console.log(
-            `Response:\nData: ${response.data}\nStatus: ${response.status}\nstatusText: ${response.statusText}\nHeaders: ${response.headers}`
-        );
+        console.log(`Raw Response: ${JSON.stringify(response)}`);
+        console.log(`Data: ${JSON.stringify(response.data)}`);
         return response;
     });
 }

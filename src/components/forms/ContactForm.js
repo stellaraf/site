@@ -34,15 +34,12 @@ function RawForm() {
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
-                    console.log(
-                        `Submitting: ${JSON.stringify(values, null, 2)}`
-                    );
                     const response = SalesforceLead(values);
-                    console.log(`Response: ${response}`);
+                    console.log(`Response: ${response.data}`);
                     if (response) {
                         setSubmitting(false);
                     }
-                }, 400);
+                }, 6000);
             }}
             // onSubmit={console.log}
             initialValues={{
