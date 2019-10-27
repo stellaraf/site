@@ -31,21 +31,20 @@ const validationSchema = Yup.object({
 function RawForm() {
     return (
         <Formik
-            netlify
             validationSchema={validationSchema}
-            // onSubmit={(values, { setSubmitting }) => {
-            //     setTimeout(() => {
-            //         console.log(
-            //             `Submitting: ${JSON.stringify(values, null, 2)}`
-            //         );
-            //         const response = SalesforceLead(values);
-            //         console.log(`Response: ${response}`);
-            //         if (response) {
-            //             setSubmitting(false);
-            //         }
-            //     }, 400);
-            // }}
-            onSubmit={console.log}
+            onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                    console.log(
+                        `Submitting: ${JSON.stringify(values, null, 2)}`
+                    );
+                    const response = SalesforceLead(values);
+                    console.log(`Response: ${response}`);
+                    if (response) {
+                        setSubmitting(false);
+                    }
+                }, 400);
+            }}
+            // onSubmit={console.log}
             initialValues={{
                 contactName: "",
                 contactCompany: "",

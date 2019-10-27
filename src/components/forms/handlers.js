@@ -20,7 +20,7 @@ function SalesforceLead(formData) {
         // url: sfAttr.leadUri,
         // baseUrl: sfAttr.baseUrl,
         // baseUrl: "https://webhook.site/",
-        url: "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b",
+        url: "/",
         method: "post",
         headers: { "Content-Type": "application/json" },
         data: formData,
@@ -28,7 +28,6 @@ function SalesforceLead(formData) {
         responseType: "json",
         responseEncoding: "utf8"
     };
-    // const apiInstance = axios.create(apiConfig);
     axios(apiConfig).then(response => {
         console.log(`Raw Response: ${response}`);
         console.log(

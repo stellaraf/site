@@ -34,7 +34,7 @@
 }
 
 .copyrightText {
-    text-align: center;
+    text-align: left;
     font-size: $footer-link-size;
     margin-bottom: 0;
     color: darken($footer-color, 25%);
@@ -45,5 +45,5 @@
     margin-bottom: 0;
     padding-bottom: 0.5rem;
     padding-top: 3rem;
-    justify-content: center;
+    justify-content: left;
 }
