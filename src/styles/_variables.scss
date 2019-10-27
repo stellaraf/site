@@ -146,10 +146,20 @@ $main-card-text-color: $st-gray;
 
 //// Footer
 // $footer-background: $bg2;
-$footer-background: transparent;
+// $footer-background: transparent;
+$footer-background: $st-gradient-3;
 $footer-color: $st-white;
 $footer-heading-size: $font-size-base;
 $footer-link-size: $font-size-base * 0.8;
 
 //// Forms
 $input-placeholder-color: $st-gray;
+
+$line-height-base: 1.5 !default;
+$input-btn-padding-y: 0.375rem !default;
+$input-padding-y: $input-btn-padding-y !default;
+$input-btn-line-height: $line-height-base !default;
+$input-line-height: $input-btn-line-height !default;
+$input-height-inner-quarter: calc(
+    #{$input-line-height * 0.4em} + #{$input-padding-y / 2}
+);

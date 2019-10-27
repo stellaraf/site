@@ -16,8 +16,9 @@ const sfAttr = {
 };
 
 function SalesforceLead(formData) {
+    const baseUrl = window.location.hostname;
     const apiParams = {
-        url: "/.netlify/functions/contactform",
+        url: `https://${baseUrl}/.netlify/functions/contactform`,
         json: formData
     };
     let msg;
