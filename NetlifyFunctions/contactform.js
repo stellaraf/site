@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-exports.handler = async (event, context, callback) => {
+exports.handler = async (event, context) => {
     const data = JSON.parse(event.body);
     const names = data.contactName.split(" ");
     const formData = {
@@ -24,11 +24,15 @@ exports.handler = async (event, context, callback) => {
         responseEncoding: "utf8"
     };
     console.log(JSON.stringify(formData));
-    axios(apiConfig).then(response => {
-        console.log(`Raw Response: ${response}`);
-        callback(null, {
-            statusCode: 200,
-            body: JSON.stringify(response.data)
-        });
-    });
+    let response;
+    try {
+        response = await axios.post(apiConfig);
+        console.log(JSON.stringify(response));
+    } catch (error) {
+        console.error(error);
+    }
+    return {
+        statusCode: 200,
+        body: JSON.stringify({ data: JSON.stringify(response) })
+    };
 };
