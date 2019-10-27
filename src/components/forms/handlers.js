@@ -24,9 +24,11 @@ function SalesforceLead(formData) {
     let msg;
     request.post(apiParams, (err, httpResponse, body) => {
         if (err) {
-            msg = `Error submitting form: ${err}`;
+            msg = `Error: ${err}`;
+            console.error(err);
         } else {
-            msg = `Submitted form to server: ${body}`;
+            msg = body;
+            console.info(JSON.stringify(msg));
         }
     });
     return msg;
