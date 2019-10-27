@@ -35,7 +35,7 @@ function RawForm() {
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
                     const response = SalesforceLead(values);
-                    console.log(`Response: ${response.data}`);
+                    console.log(`Response: ${response}`);
                     if (response) {
                         setSubmitting(false);
                     }
