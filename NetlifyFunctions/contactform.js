@@ -16,8 +16,6 @@ const axios = require("axios");
 
 exports.handler = async (event, context, callback) => {
     const data = JSON.parse(event.body);
-    console.log(event);
-    console.log(data);
     const names = data.contactName.split(" ");
     const formData = {
         Company: data.contactCompany,
@@ -36,6 +34,7 @@ exports.handler = async (event, context, callback) => {
         responseType: "json",
         responseEncoding: "utf8"
     };
+    console.log(JSON.stringify(formData));
     axios(apiConfig).then(response => {
         console.log(`Raw Response: ${response}`);
         return callback(null, {
