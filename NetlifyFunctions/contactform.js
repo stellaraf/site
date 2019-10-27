@@ -29,7 +29,7 @@ exports.handler = function(event, context, callback) {
             if (err) {
                 msg = `Error submitting form: ${err}`;
             } else {
-                msg = JSON.stringify(body);
+                msg = body;
             }
             callback(null, {
                 statusCode: 200,
