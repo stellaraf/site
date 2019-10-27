@@ -2,7 +2,7 @@ let request = require("request");
 
 // Handle the lambda invocation
 exports.handler = function(event, context, callback) {
-    const data = JSON.parse(event.body);
+    const data = event.body;
     const names = data.contactName.split(" ");
     const apiURL = "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b";
     const formData = {

@@ -48,6 +48,11 @@ main {
     color: $st-gray;
 }
 
+.form-control.is-invalid,
+.form-control.is-valid {
+    background-position-x: 98% !important;
+}
+
 //// Responsive Size-Specific Classes
 
 // Small Devices and Smaller
