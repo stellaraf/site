@@ -1,4 +1,4 @@
-import axios from "axios";
+const axios = require("axios");
 // import fetch from "node-fetch";
 // const { API_KEY } = process.env;
 
