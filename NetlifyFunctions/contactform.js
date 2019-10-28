@@ -19,7 +19,7 @@ exports.handler = (event, context, callback) => {
         console.error(content);
         callback(null, {
             statusCode: 400,
-            body: { status: "failure", content: content }
+            body: JSON.stringify({ status: "failure", content: content })
         });
     }
     if ((data === undefined) | null) {
@@ -27,7 +27,10 @@ exports.handler = (event, context, callback) => {
         console.error("[contactform.js] Null/Undefined Data:");
         callback(null, {
             statusCode: 500,
-            body: { status: "failure", content: "No Data Received" }
+            body: JSON.stringify({
+                status: "failure",
+                content: "No Data Received"
+            })
         });
     }
     // Submit the for data to Salesforce
@@ -57,17 +60,24 @@ exports.handler = (event, context, callback) => {
                     console.warn(content);
                     callback(null, {
                         statusCode: 501,
-                        body: { status: "failure", content: content }
+                        body: JSON.stringify({
+                            status: "failure",
+                            content: content
+                        })
                     });
                 } else {
+                    const response = JSON.parse(body);
                     // If data submission is successful, verify that the Salesforce "success" field is set to "true"
-                    if (body.success !== "true") {
+                    if (response.success !== "true") {
                         // If success field is "false", return an error
                         console.warn(`[contactform.js] Creation Error`);
-                        content = body.errors.join(", ");
+                        content = response.errors.join(", ");
                         callback(null, {
                             statusCode: 501,
-                            body: { status: "failure", content: content }
+                            body: JSON.stringify({
+                                status: "failure",
+                                content: content
+                            })
                         });
                     } else {
                         // if success field is "true", return a success message
@@ -75,7 +85,10 @@ exports.handler = (event, context, callback) => {
                         console.info(`[contactform.js] content: ${content}`);
                         callback(null, {
                             statusCode: 201,
-                            body: { status: "success", content: content }
+                            body: JSON.stringify({
+                                status: "success",
+                                content: content
+                            })
                         });
                     }
                 }
@@ -87,7 +100,7 @@ exports.handler = (event, context, callback) => {
         console.error(`[contactform.js]: Submission Error: ${content}`);
         callback(null, {
             statusCode: 504,
-            body: { status: "failure", content: content }
+            body: JSON.stringify({ status: "failure", content: content })
         });
     }
 };
