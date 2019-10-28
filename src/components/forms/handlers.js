@@ -13,8 +13,15 @@ function SalesforceLead(formData) {
             status = "failure";
             console.error(err);
         } else {
-            msg = body;
-            status = "success";
+            const apiStatus = body.success;
+            if (apiStatus === true) {
+                msg = "Success!";
+                status = "success";
+            } else {
+                msg = "Failure :(";
+                status = "failure";
+            }
+            console.info(msg);
         }
     });
     return { status: status, content: msg };
