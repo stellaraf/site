@@ -1,8 +1,11 @@
-import React from "react";
-import { Button, Card, Col, Form, FormControl } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Col, Form } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import Pulse from "react-reveal/Pulse";
 
+import FormField from "components/forms/FormField";
+import FormButton from "components/forms/FormButton";
 import { SalesforceLead } from "components/forms/handlers";
 import styles from "components/forms/styles.module.scss";
 
@@ -29,21 +32,58 @@ const validationSchema = Yup.object({
 });
 
 function RawForm() {
+    const [status, setStatus] = useState("initial");
+    const [formError, setFormError] = useState(undefined);
+
     return (
         <Formik
             validationSchema={validationSchema}
-            onSubmit={(values, { setSubmitting }) => {
+            onSubmit={(values, { setSubmitting, resetForm }) => {
+                const updateForm = params => {
+                    setSubmitting(params.submitting);
+                    setStatus(params.status);
+                    setTimeout(() => {
+                        resetForm();
+                        setStatus("initial");
+                    }, params.resetTimeout);
+                };
+                setStatus("loading");
+                // const response = {
+                //     status: "success",
+                //     //content: "Major problems"
+                //     content: JSON.stringify({ youSaid: values })
+                // };
+                const response = SalesforceLead(values);
                 setTimeout(() => {
-                    const response = SalesforceLead(values);
-                    if (response) {
-                        setSubmitting(false);
-                        console.log(`Response: ${response}`);
+                    let errorMsg;
+                    if (response.status === undefined || null) {
+                        errorMsg = "No Response";
+                        console.error(errorMsg);
+                        setFormError(errorMsg);
+                        updateForm({
+                            submitting: false,
+                            status: "error",
+                            resetTimeout: 2000
+                        });
+                    } else if (response.status === "failure") {
+                        errorMsg = response.content;
+                        console.error(errorMsg);
+                        setFormError(errorMsg);
+                        updateForm({
+                            submitting: false,
+                            status: "error",
+                            resetTimeout: 2000
+                        });
                     } else {
-                        console.error("No response");
+                        console.info(response.content);
+                        updateForm({
+                            submitting: false,
+                            status: "submitted",
+                            resetTimeout: 300
+                        });
                     }
-                }, 10000);
+                }, 5000);
             }}
-            // onSubmit={console.log}
             initialValues={{
                 contactName: "",
                 contactCompany: "",
@@ -53,197 +93,105 @@ function RawForm() {
                 contactMessage: ""
             }}>
             {({
-                handleSubmit,
-                handleChange,
                 handleBlur,
-                values,
-                touched,
-                isValid,
-                errors
+                handleChange,
+                handleReset,
+                handleSubmit,
+                values
             }) => (
                 <Form noValidate onSubmit={handleSubmit}>
                     <Form.Row>
-                        <Form.Group
-                            as={Col}
-                            sm={12}
-                            md={6}
-                            controlId="contactName">
-                            <Form.Label
-                                id="contactName"
-                                className={styles.contactLabel}>
-                                Name
-                            </Form.Label>
-                            <FormControl
-                                aria-label="Name"
-                                aria-describedby="contactName"
-                                placeholder="First & Last Name"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                isValid={
-                                    touched.contactName && !errors.contactName
-                                }
-                                isInvalid={!!errors.contactName}
-                                value={values.contactName}
-                            />
-                            {touched.contactName && errors.contactName ? (
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.contactName}
-                                </Form.Control.Feedback>
-                            ) : null}
-                        </Form.Group>
-                        <Form.Group
-                            as={Col}
-                            sm={12}
-                            md={6}
-                            controlId="contactCompany">
-                            <Form.Label
-                                id="contactCompany"
-                                className={styles.contactLabel}>
-                                Company
-                            </Form.Label>
-                            <FormControl
-                                aria-label="Company"
-                                aria-describedby="contactCompany"
-                                placeholder="Company Name"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                isValid={
-                                    touched.contactCompany &&
-                                    !errors.contactCompany
-                                }
-                                isInvalid={!!errors.contactCompany}
-                                value={values.contactCompany}
-                            />
-                            {touched.contactCompany && errors.contactCompany ? (
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.contactCompany}
-                                </Form.Control.Feedback>
-                            ) : null}
-                        </Form.Group>
+                        <FormField
+                            fieldStyle={{ as: Col, sm: 12, md: 6 }}
+                            id={"contactName"}
+                            label={"Name"}
+                            name={"contactName"}
+                            placeholder={"First & Last Name"}
+                            value={values.contactName}
+                            fieldEvents={{
+                                onChange: handleChange,
+                                onBlur: handleBlur,
+                                onReset: handleReset
+                            }}
+                        />
+                        <FormField
+                            fieldStyle={{ as: Col, sm: 12, md: 6 }}
+                            id={"contactCompany"}
+                            label={"Company"}
+                            name={"contactCompany"}
+                            placeholder={"Company Name"}
+                            value={values.contactCompany}
+                            fieldEvents={{
+                                onChange: handleChange,
+                                onBlur: handleBlur,
+                                onReset: handleReset
+                            }}
+                        />
                     </Form.Row>
                     <Form.Row>
-                        <Form.Group
-                            as={Col}
-                            sm={12}
-                            md={6}
-                            controlId="contactEmail">
-                            <Form.Label
-                                id="contactEmail"
-                                className={styles.contactLabel}>
-                                Email Address
-                            </Form.Label>
-                            <FormControl
-                                aria-label="Email Address"
-                                aria-describedby="contactEmail"
-                                placeholder="name@example.tld"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                isValid={
-                                    touched.contactEmail && !errors.contactEmail
-                                }
-                                value={values.contactEmail}
-                                isInvalid={!!errors.contactEmail}
-                            />
-                            {touched.contactEmail && errors.contactEmail ? (
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.contactEmail}
-                                </Form.Control.Feedback>
-                            ) : null}
-                        </Form.Group>
-                        <Form.Group
-                            as={Col}
-                            sm={12}
-                            md={6}
-                            controlId="contactPhone">
-                            <Form.Label
-                                id="contactPhone"
-                                className={styles.contactLabel}>
-                                Phone Number
-                            </Form.Label>
-                            <FormControl
-                                aria-label="Phone Number"
-                                aria-describedby="contactPhone"
-                                placeholder="(555) 867-5309 (Optional)"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                isValid={
-                                    touched.contactPhone && !errors.contactPhone
-                                }
-                                value={values.contactPhone}
-                                isInvalid={!!errors.contactPhone}
-                            />
-                            {touched.contactPhone && errors.contactPhone ? (
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.contactPhone}
-                                </Form.Control.Feedback>
-                            ) : null}
-                        </Form.Group>
+                        <FormField
+                            fieldStyle={{ as: Col, sm: 12, md: 6 }}
+                            id={"contactEmail"}
+                            label={"Email Address"}
+                            name={"contactEmail"}
+                            placeholder={"name@example.tld"}
+                            value={values.contactEmail}
+                            fieldEvents={{
+                                onChange: handleChange,
+                                onBlur: handleBlur,
+                                onReset: handleReset
+                            }}
+                        />
+                        <FormField
+                            fieldStyle={{ as: Col, sm: 12, md: 6 }}
+                            id={"contactPhone"}
+                            label={"Phone Number"}
+                            name={"contactPhone"}
+                            placeholder={"(555) 867-5309 (Optional)"}
+                            value={values.contactPhone}
+                            fieldEvents={{
+                                onChange: handleChange,
+                                onBlur: handleBlur,
+                                onReset: handleReset
+                            }}
+                        />
                     </Form.Row>
                     <Form.Row>
-                        <Form.Group
-                            as={Col}
-                            sm={12}
-                            md={12}
-                            controlId="contactSubject">
-                            <Form.Label
-                                id="contactSubject"
-                                className={styles.contactLabel}>
-                                Subject
-                            </Form.Label>
-                            <FormControl
-                                aria-label="Subject"
-                                aria-describedby="contactSubject"
-                                placeholder="Subject"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                isValid={
-                                    touched.contactSubject &&
-                                    !errors.contactSubject
-                                }
-                                value={values.contactSubject}
-                                isInvalid={!!errors.contactSubject}
-                            />
-                            {touched.contactSubject && errors.contactSubject ? (
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.contactSubject}
-                                </Form.Control.Feedback>
-                            ) : null}
-                        </Form.Group>
+                        <FormField
+                            fieldStyle={{ as: Col, sm: 12 }}
+                            id={"contactSubject"}
+                            label={"Subject"}
+                            name={"contactSubject"}
+                            placeholder={"Subject"}
+                            value={values.contactSubject}
+                            fieldEvents={{
+                                onChange: handleChange,
+                                onBlur: handleBlur,
+                                onReset: handleReset
+                            }}
+                        />
                     </Form.Row>
                     <Form.Row>
-                        <Form.Group
-                            as={Col}
-                            sm={12}
-                            className={styles.contactMessageCol}
-                            controlId="contactMessage">
-                            <Form.Label
-                                id="contactMessage"
-                                className={styles.contactLabel}>
-                                Message
-                            </Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                aria-label="Message"
-                                aria-describedby="contactMessage"
-                                className={styles.contactMessageForm}
-                                placeholder="How can we help you?"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                isValid={
-                                    touched.contactMessage &&
-                                    !errors.contactMessage
-                                }
-                                isInvalid={!!errors.contactMessage}
-                                value={values.contactMessage}
-                            />
-                            {touched.contactMessage && errors.contactMessage ? (
-                                <Form.Control.Feedback type="invalid">
-                                    {errors.contactMessage}
-                                </Form.Control.Feedback>
-                            ) : null}
-                        </Form.Group>
+                        <FormField
+                            fieldStyle={{
+                                as: Col,
+                                sm: 12,
+                                className: styles.contactMessageForm
+                            }}
+                            type={"textarea"}
+                            id={"contactMessage"}
+                            label={"Message"}
+                            name={"contactMessage"}
+                            placeholder={"How can we help you?"}
+                            value={values.contactMessage}
+                            fieldEvents={{
+                                onChange: handleChange,
+                                onBlur: handleBlur,
+                                onReset: handleReset
+                            }}
+                        />
                     </Form.Row>
-                    <Button type="submit">Submit</Button>
+                    <FormButton status={status} errorMsg={formError} />
                 </Form>
             )}
         </Formik>
@@ -252,11 +200,13 @@ function RawForm() {
 
 function ContactForm() {
     return (
-        <Card>
-            <Card.Body>
-                <RawForm />
-            </Card.Body>
-        </Card>
+        <Pulse duration={300}>
+            <Card>
+                <Card.Body>
+                    <RawForm />
+                </Card.Body>
+            </Card>
+        </Pulse>
     );
 }
 export default ContactForm;

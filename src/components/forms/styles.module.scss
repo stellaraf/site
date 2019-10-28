@@ -23,3 +23,24 @@
 .contactLabel {
     font-weight: $font-weight-bold;
 }
+
+.formLabel {
+    font-weight: $font-weight-bold;
+}
+
+.formField {
+    margin-bottom: 1rem;
+}
+
+.formBtnStatusText {
+    margin: $spinner-border-width 0 $spinner-border-width $spinner-border-width;
+}
+.formBtnStatus {
+    margin: $spinner-border-width;
+}
+
+.formError {
+    margin: $form-error-margin-y 0 0 0.1rem !important;
+    color: $st-danger;
+    font-size: $font-size-sm;
+}

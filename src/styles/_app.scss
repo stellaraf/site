@@ -52,6 +52,9 @@ main {
 .form-control.is-valid {
     background-position-x: 98% !important;
 }
+.spinner-border.spinner-border-sm.btn-with-text {
+    margin: $spinner-border-width;
+}
 
 //// Responsive Size-Specific Classes
 

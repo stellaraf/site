@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { CardDeck, Container, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { Menu as FeatherMenu } from "react-feather";
+import { FiMenu } from "react-icons/fi";
 import NavSection from "components/navbar/NavSection";
 import Logo from "components/svg/Logos";
 import { navConfig, siteConfig } from "config";
@@ -49,12 +49,11 @@ class NavBar extends Component {
                             </LinkContainer>
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="main-nav">
-                            <FeatherMenu
+                            <FiMenu
                                 color={theme.stWhite}
                                 size={siteConfig.navIconSize}
-                                className={
-                                    styles.toggleButtonIcon
-                                }></FeatherMenu>
+                                className={styles.toggleButtonIcon}
+                            />
                         </Navbar.Toggle>
                         <Navbar.Collapse
                             id="main-nav"
