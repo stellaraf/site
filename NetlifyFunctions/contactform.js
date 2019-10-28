@@ -8,9 +8,6 @@ const apiURL = "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b";
 // Handle the lambda invocation
 exports.handler = (event, context, callback) => {
     console.info(event);
-    var content = "General Error",
-        statusMsg = "failure",
-        statusCode = 500;
     // Serialize submitted form data
     try {
         const data = JSON.parse(event.body);
@@ -41,6 +38,9 @@ exports.handler = (event, context, callback) => {
             }\nMessage:\n${data.contactMessage}\n\nMetadata:\n${""}`
         };
         // POST the data
+        let content = "General Error",
+            statusMsg = "failure",
+            statusCode = 500;
         request.post(
             { url: apiURL, json: true, body: formData },
             (err, httpResponse, body) => {
@@ -67,23 +67,17 @@ exports.handler = (event, context, callback) => {
                 }
             }
         );
-        console.log(`[contactform.js]: Content: ${content}`);
-        console.log(`[contactform.js]: Status: ${statusCode}`);
-    } catch (submissionError) {
-        // If errors occur while submitting the data to Salesforce, return an error
-        const content = String(submissionError);
-        statusCode = 504;
-        console.error(`[contactform.js]: Submission Error: ${content}`);
-    } finally {
-        console.log(
-            `Final Callback: ${JSON.stringify({
-                status: statusMsg,
-                content: content
-            })}`
-        );
         callback(null, {
             statusCode: statusCode,
             body: JSON.stringify({ status: statusMsg, content: content })
+        });
+    } catch (submissionError) {
+        // If errors occur while submitting the data to Salesforce, return an error
+        const content = String(submissionError);
+        console.error(`[contactform.js]: Submission Error: ${content}`);
+        callback(null, {
+            statusCode: 504,
+            body: JSON.stringify({ status: "failure", content: content })
         });
     }
 };
