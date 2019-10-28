@@ -19,7 +19,7 @@ const CODES = {
     GATEWAY_TIMEOUT: 504
 };
 
-console.log(`TEMP: all env vars: ${process.env}`);
+// console.log(`TEMP: all env vars: ${process.env}`);
 console.log(`API_CONTACT_FORM_URL: ${API_CONTACT_FORM_URL}`);
 
 // Handle the lambda invocation
