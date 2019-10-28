@@ -14,7 +14,7 @@ exports.handler = (event, context, callback) => {
         statusCode = 500;
     // Serialize submitted form data
     try {
-        data = JSON.parse(event.body);
+        data = event.body;
         console.debug(`[contactform.js]: Data: ${JSON.stringify(data)}`);
 
         if ((data === undefined) | null) {
