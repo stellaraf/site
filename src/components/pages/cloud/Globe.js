@@ -11,7 +11,7 @@ import {
 } from "react-simple-maps";
 
 import { geoOrthographic } from "d3-geo";
-import { MapPin } from "react-feather";
+import { FiMapPin } from "react-icons/fi";
 import styles from "components/pages/cloud/styles.module.scss";
 import theme from "styles/exports.module.scss";
 
@@ -117,7 +117,7 @@ class Globe extends Component {
                             textPosition
                         }) => (
                             <Marker key={name} coordinates={coordinates}>
-                                <MapPin color={theme.stDanger} size={16} />
+                                <FiMapPin color={theme.stDanger} size={16} />
                                 {/* <circle
                                     r={2}
                                     fill="#ff1166"
