@@ -7,35 +7,29 @@ const apiURL = "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b";
 
 // Handle the lambda invocation
 exports.handler = (event, context, callback) => {
-    let data;
     console.info(event);
+    let data,
+        content = "General Error",
+        statusMsg = "failure",
+        statusCode = 500;
     // Serialize submitted form data
     try {
         data = JSON.parse(event.body);
-        console.info(`[contactform.js] Data: ${JSON.stringify(data)}`);
-    } catch (formError) {
-        // If a serialization error occurs, return an error
-        const content = String(formError);
-        console.error(content);
-        callback(null, {
-            statusCode: 400,
-            body: JSON.stringify({ status: "failure", content: content })
-        });
-    }
-    if ((data === undefined) | null) {
-        // If the data is serialized but is empty for some reason, return an error
-        console.error("[contactform.js] Null/Undefined Data:");
-        callback(null, {
-            statusCode: 500,
-            body: JSON.stringify({
-                status: "failure",
-                content: "No Data Received"
-            })
-        });
-    }
-    // Submit the for data to Salesforce
-    try {
-        let content;
+        console.debug(`[contactform.js]: Data: ${JSON.stringify(data)}`);
+
+        if ((data === undefined) | null) {
+            // If the data is serialized but is empty for some reason, return an error
+            console.warn("[contactform.js] Null/Undefined Data:");
+            callback(null, {
+                statusCode: 500,
+                body: JSON.stringify({
+                    status: "failure",
+                    content: "No Data Received"
+                })
+            });
+        }
+        // Submit the for data to Salesforce
+        console.debug(`[contactform.js]: Data Again: ${JSON.stringify(data)}`);
         // Simple string splitting to parse a last name which is required by Salesforce
         const names = data.contactName.split(" ");
         // Re-serialize the data in the format Salesforce is expecting
@@ -57,14 +51,8 @@ exports.handler = (event, context, callback) => {
                 if (err) {
                     // If HTTP errors are received, return an error
                     content = String(err);
+                    statusCode = 501;
                     console.warn(content);
-                    callback(null, {
-                        statusCode: 501,
-                        body: JSON.stringify({
-                            status: "failure",
-                            content: content
-                        })
-                    });
                 } else {
                     const response = JSON.parse(body);
                     // If data submission is successful, verify that the Salesforce "success" field is set to "true"
@@ -72,24 +60,13 @@ exports.handler = (event, context, callback) => {
                         // If success field is "false", return an error
                         console.warn(`[contactform.js] Creation Error`);
                         content = response.errors.join(", ");
-                        callback(null, {
-                            statusCode: 501,
-                            body: JSON.stringify({
-                                status: "failure",
-                                content: content
-                            })
-                        });
+                        statusCode = 501;
                     } else {
                         // if success field is "true", return a success message
                         content = "Success!";
+                        statusMsg = "success";
+                        statusCode = 201;
                         console.info(`[contactform.js] content: ${content}`);
-                        callback(null, {
-                            statusCode: 201,
-                            body: JSON.stringify({
-                                status: "success",
-                                content: content
-                            })
-                        });
                     }
                 }
             }
@@ -97,10 +74,12 @@ exports.handler = (event, context, callback) => {
     } catch (submissionError) {
         // If errors occur while submitting the data to Salesforce, return an error
         const content = String(submissionError);
+        statusCode = 504;
         console.error(`[contactform.js]: Submission Error: ${content}`);
+    } finally {
         callback(null, {
-            statusCode: 504,
-            body: JSON.stringify({ status: "failure", content: content })
+            statusCode: statusCode,
+            body: JSON.stringify({ status: statusMsg, content: content })
         });
     }
 };
