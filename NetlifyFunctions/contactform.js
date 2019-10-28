@@ -7,7 +7,7 @@ const request = require("request");
 const parser = require("ua-parser-js");
 
 // Global Variables
-const { API_CONTACT_FORM_URL } = process.env;
+const API_CONTACT_FORM_URL = process.env.API_CONTACT_FORM_URL;
 const IP_INFO_URL = "http://free.ipwhois.io/json/";
 const CODES = {
     CREATED: 201,
@@ -16,6 +16,9 @@ const CODES = {
     NOT_IMPLEMENTED: 501,
     GATEWAY_TIMEOUT: 504
 };
+
+console.log(`TEMP: all env vars: ${process.env}`);
+console.log(`API_CONTACT_FORM_URL: ${API_CONTACT_FORM_URL}`);
 
 // Handle the lambda invocation
 exports.handler = (event, context, callback) => {
