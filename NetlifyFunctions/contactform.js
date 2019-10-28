@@ -49,7 +49,7 @@ exports.handler = (event, context, callback) => {
         };
         // POST the data
         request.post(
-            { url: apiURL, json: formData },
+            { url: apiURL, json: true, body: formData },
             (err, httpResponse, body) => {
                 if (err) {
                     // If HTTP errors are received, return an error
