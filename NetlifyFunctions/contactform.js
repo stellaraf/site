@@ -13,7 +13,7 @@ exports.handler = (event, context, callback) => {
         statusCode = 500;
     // Serialize submitted form data
     try {
-        const data = event.body;
+        const data = JSON.parse(event.body);
         console.info(`[contactform.js]: event.body: ${event.body}`);
         console.info(`[contactform.js]: data type: ${typeof data}`);
         console.info(`[contactform.js]: data.contactName: ${data.contactName}`);
