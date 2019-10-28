@@ -3,7 +3,7 @@ import request from "request";
 function SalesforceLead(formData) {
     const baseUrl = window.location.hostname;
     const apiParams = {
-        url: `https://${baseUrl}/.netlify/functions/contactform`,
+        url: `https://${baseUrl}/.netlify/functions/contact`,
         json: true,
         body: formData
     };
