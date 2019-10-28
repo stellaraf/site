@@ -38,12 +38,12 @@ exports.handler = (event, context, callback) => {
             }\nMessage:\n${data.contactMessage}\n\nMetadata:\n${""}`
         };
         // POST the data
-        let content = "General Error",
-            statusMsg = "failure",
-            statusCode = 500;
         request.post(
             { url: apiURL, json: true, body: formData },
             (err, httpResponse, body) => {
+                let content = "General Error",
+                    statusMsg = "failure",
+                    statusCode = 500;
                 if (err) {
                     // If HTTP errors are received, return an error
                     content = String(err);
@@ -65,12 +65,15 @@ exports.handler = (event, context, callback) => {
                         console.info(`[contactform.js] content: ${content}`);
                     }
                 }
+                callback(null, {
+                    statusCode: statusCode,
+                    body: JSON.stringify({
+                        status: statusMsg,
+                        content: content
+                    })
+                });
             }
         );
-        callback(null, {
-            statusCode: statusCode,
-            body: JSON.stringify({ status: statusMsg, content: content })
-        });
     } catch (submissionError) {
         // If errors occur while submitting the data to Salesforce, return an error
         const content = String(submissionError);
