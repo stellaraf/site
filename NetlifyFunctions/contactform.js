@@ -8,7 +8,7 @@ const parser = require("ua-parser-js");
 
 // Global Variables
 const { API_CONTACT_FORM_URL } = process.env;
-const IP_INFO_URL = ip => `http://free.ipwhois.io/json/${ip}`;
+const IP_INFO_URL = "http://free.ipwhois.io/json/";
 const CODES = {
     CREATED: 201,
     UNAUTHORIZED: 401,
@@ -88,8 +88,9 @@ exports.handler = (event, context, callback) => {
             city: "Error"
         };
         request.get(
-            IP_INFO_URL(metadataRaw.clientIP),
+            `${IP_INFO_URL}${metadataRaw.clientIP}`,
             (err, httpResponse, body) => {
+                console.info(`Raw IP Info: ${body}`);
                 if (
                     (body !== undefined || body !== null) &&
                     body.success === true
@@ -107,6 +108,7 @@ exports.handler = (event, context, callback) => {
                 }
             }
         );
+        console.info(`Constructed IP Info: ${ipInfoRaw}`);
         const formDescription = `
         Form Data:
 
@@ -139,12 +141,12 @@ exports.handler = (event, context, callback) => {
             Description: formDescription
         };
         // POST the data
+        var content = "General Error",
+            statusMsg = "failure",
+            statusCode = CODES.SERVER_ERROR;
         request.post(
             { url: API_CONTACT_FORM_URL, json: true, body: formData },
             (err, httpResponse, body) => {
-                let content = "General Error",
-                    statusMsg = "failure",
-                    statusCode = CODES.SERVER_ERROR;
                 if (err) {
                     // If HTTP errors are received, return an error
                     content = String(err);
@@ -166,6 +168,12 @@ exports.handler = (event, context, callback) => {
                         console.info(`[contactform.js] content: ${content}`);
                     }
                 }
+                console.log(
+                    `[contactform.js]: Status Code: ${statusCode} Callback: ${{
+                        status: statusMsg,
+                        content: content
+                    }}`
+                );
                 callback(null, {
                     statusCode: statusCode,
                     body: JSON.stringify({
