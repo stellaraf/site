@@ -16,11 +16,12 @@ exports.handler = (event, context, callback) => {
         const data = event.body;
         console.info(`[contactform.js]: event.body: ${event.body}`);
         console.info(`[contactform.js]: data: ${JSON.stringify(data)}`);
-        console.info(`[contactform.js]: data.contactName: ${data.contactName}`);
+        console.info(
+            `[contactform.js]: data.contactName: ${data["contactName"]}`
+        );
 
         if ((data === undefined) | null) {
             // If the data is serialized but is empty for some reason, return an error
-            console.warn("[contactform.js] Null/Undefined Data:");
             callback(null, {
                 statusCode: 500,
                 body: JSON.stringify({
@@ -31,11 +32,11 @@ exports.handler = (event, context, callback) => {
         }
         // Submit the for data to Salesforce
         // Simple string splitting to parse a last name which is required by Salesforce
-        const names = data.contactName.split(" ");
+        const names = data["contactName"].split(" ");
         // Re-serialize the data in the format Salesforce is expecting
         const formData = {
             Company: data.contactCompany,
-            LastName: names.slice(1) || "",
+            LastName: names.slice(1).join(" ") || "",
             FirstName: names[0] || "",
             Email: data.contactEmail,
             Phone: data.contactPhone,
