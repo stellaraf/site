@@ -2,26 +2,97 @@
 Netlify function code for Salesforce Lead Submission
 */
 
+// Module Imports
 const request = require("request");
-const apiURL = "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b";
+const parser = require("ua-parser-js");
+
+// Global Variables
+const { API_CONTACT_FORM_URL } = process.env;
+const CODES = {
+    CREATED: 201,
+    UNAUTHORIZED: 401,
+    SERVER_ERROR: 500,
+    NOT_IMPLEMENTED: 501,
+    GATEWAY_TIMEOUT: 504
+};
 
 // Handle the lambda invocation
 exports.handler = (event, context, callback) => {
     console.info(event);
+    if (API_CONTACT_FORM_URL === undefined || API_CONTACT_FORM_URL === null) {
+        callback(null, {
+            statusCode: CODES.SERVER_ERROR,
+            body: JSON.stringify({
+                status: "failure",
+                content: "Unable to read API URL from environment variables"
+            })
+        });
+    }
     // Serialize submitted form data
     try {
         const data = JSON.parse(event.body);
+        const headers = JSON.parse(event.headers);
+
+        if (!("origin" in headers)) {
+            callback(null, {
+                statusCode: CODES.UNAUTHORIZED,
+                body: JSON.stringify({
+                    status: "failure",
+                    content: "Request did not originate from browser"
+                })
+            });
+        }
 
         if (data === undefined || data === null || typeof data === "string") {
             // If the data is serialized but is empty for some reason, return an error
             callback(null, {
-                statusCode: 500,
+                statusCode: CODES.SERVER_ERROR,
                 body: JSON.stringify({
                     status: "failure",
                     content: "No Data Received"
                 })
             });
         }
+        let metadataRaw = {
+            clientIP: headers["client-ip"] || "Unknown",
+            requestID: headers["x-bb-client-request-uuid"] || "Unknown",
+            userAgent: headers["user-agent"] || "Unknown"
+        };
+        if (metadataRaw.userAgent !== "") {
+            const parsedUA = parser(metadataRaw.userAgent);
+            for (const key in parsedUA) {
+                if (typeof parsedUA[key] === "object") {
+                    for (const block in parsedUA[key]) {
+                        if (typeof parsedUA[key][block] !== "string") {
+                            parsedUA[key][block] = String(parsedUA[key][block]);
+                        }
+                    }
+                } else if (
+                    typeof parsedUA[key] !== "string" ||
+                    typeof parsedUA[key] !== "object"
+                ) {
+                    parsedUA[key] = String(parsedUA[key]);
+                }
+            }
+            metadataRaw.userAgent = parsedUA;
+        }
+
+        const formDescription = `
+        Form Data:
+
+        Subject: ${data.contactSubject}
+        Message:
+        ${data.contactMessage}
+
+        Request Metadata:
+        Request ID: ${metadataRaw.requestID}
+        IP Address: ${metadataRaw.clientIP}
+        Device Type: ${metadataRaw.userAgent.device.type}
+        Device: ${metadataRaw.userAgent.device.vendor} ${metadataRaw.userAgent.device.model}
+        OS: ${metadataRaw.userAgent.os.name} ${metadataRaw.userAgent.os.version}
+        Browser: ${metadataRaw.userAgent.browser.name} Version ${metadataRaw.userAgent.browser.version}
+        `;
+
         // Submit the for data to Salesforce
         // Simple string splitting to parse a last name which is required by Salesforce
         const names = data["contactName"].split(" ");
@@ -33,21 +104,19 @@ exports.handler = (event, context, callback) => {
             Email: data.contactEmail,
             Phone: data.contactPhone,
             LeadSource: "stellar.tech Contact Form",
-            Description: `Form Data:\nSubject:${
-                data.contactSubject
-            }\nMessage:\n${data.contactMessage}\n\nMetadata:\n${""}`
+            Description: formDescription
         };
         // POST the data
         request.post(
-            { url: apiURL, json: true, body: formData },
+            { url: API_CONTACT_FORM_URL, json: true, body: formData },
             (err, httpResponse, body) => {
                 let content = "General Error",
                     statusMsg = "failure",
-                    statusCode = 500;
+                    statusCode = CODES.SERVER_ERROR;
                 if (err) {
                     // If HTTP errors are received, return an error
                     content = String(err);
-                    statusCode = 501;
+                    statusCode = CODES.NOT_IMPLEMENTED;
                     console.warn(content);
                 } else {
                     const response = body;
@@ -56,12 +125,12 @@ exports.handler = (event, context, callback) => {
                         // If success field is "false", return an error
                         console.warn(`[contactform.js] Creation Error`);
                         content = response.errors.join(", ");
-                        statusCode = 501;
+                        statusCode = CODES.NOT_IMPLEMENTED;
                     } else {
                         // if success field is "true", return a success message
                         content = "Success!";
                         statusMsg = "success";
-                        statusCode = 201;
+                        statusCode = CODES.CREATED;
                         console.info(`[contactform.js] content: ${content}`);
                     }
                 }
@@ -79,7 +148,7 @@ exports.handler = (event, context, callback) => {
         const content = String(submissionError);
         console.error(`[contactform.js]: Submission Error: ${content}`);
         callback(null, {
-            statusCode: 504,
+            statusCode: CODES.GATEWAY_TIMEOUT,
             body: JSON.stringify({ status: "failure", content: content })
         });
     }
