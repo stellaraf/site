@@ -31,6 +31,16 @@ const validationSchema = Yup.object({
         .required("Required")
 });
 
+async function sendData(data) {
+    // const response = {
+    //     status: "success",
+    //     //content: "Major problems"
+    //     content: "Success!"
+    // };
+    const response = SalesforceLead(data);
+    return response;
+}
+
 function RawForm() {
     const [formError, setFormError] = useState(undefined);
 
@@ -38,54 +48,51 @@ function RawForm() {
         <Formik
             initialStatus={"initial"}
             validationSchema={validationSchema}
-            onSubmit={(values, { setSubmitting, resetForm, setStatus }) => {
-                const updateForm = (
-                    submitting = false,
-                    status,
-                    resetTimeout
-                ) => {
-                    setSubmitting(submitting);
-                    setStatus(status);
-                    setTimeout(() => {
-                        resetForm();
-                        setStatus("initial");
-                    }, resetTimeout);
-                };
+            onSubmit={async (
+                values,
+                { setSubmitting, resetForm, setStatus }
+            ) => {
+                // const updateForm = (
+                //     submitting = false,
+                //     status,
+                //     resetTimeout
+                // ) => {
+                //     setSubmitting(submitting);
+                //     setStatus(status);
+                //     setTimeout(() => {
+                //         resetForm();
+                //         setStatus("initial");
+                //     }, resetTimeout);
+                // };
                 setStatus("loading");
-                function sendForm(formData) {
-                    return new Promise((resolve, reject) => {
-                        // const response = {
-                        //     status: "success",
-                        //     //content: "Major problems"
-                        //     content: "Success!"
-                        // };
-                        const response = SalesforceLead(values);
-                        if (response.status === "success") {
-                            setStatus("submitted");
-                            resolve(response.content);
-                        } else if (response.status === "failure") {
-                            setFormError(response.content);
-                            setStatus("error");
-                            reject(new Error(response.content));
-                        } else if (
-                            response === undefined ||
-                            response === null
-                        ) {
-                            setFormError("No Response");
-                            setStatus("error");
-                            reject(new Error("No Response"));
-                        }
-                    });
-                }
-                const formSubmission = sendForm(values);
-                formSubmission.then(
+                // let sendData = new Promise((resolve, reject) => {
+                //     const response = {
+                //         status: "success",
+                //         //content: "Major problems"
+                //         content: "Success!"
+                //     };
+                //     // const response = SalesforceLead(values);
+                //     if (response.status === "success") {
+                //         resolve(response.content);
+                //     } else if (response.status === "failure") {
+                //         reject(response.content);
+                //     } else if (response === undefined || response === null) {
+                //         reject("No Response");
+                //     }
+                // });
+                // const formSubmission = sendForm(values);
+                const response = sendData(values);
+                response.then(
                     res => {
                         console.info(res);
+                        setStatus("submitted");
                         setSubmitting(false);
                         setTimeout(resetForm(), 2000);
                     },
                     rej => {
                         console.error(rej);
+                        setStatus("error");
+                        setFormError(rej);
                         setSubmitting(false);
                         setTimeout(resetForm(), 2000);
                     }
