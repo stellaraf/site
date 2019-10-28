@@ -8,16 +8,15 @@ const apiURL = "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b";
 // Handle the lambda invocation
 exports.handler = (event, context, callback) => {
     console.info(event);
-    let data,
-        content = "General Error",
+    let content = "General Error",
         statusMsg = "failure",
         statusCode = 500;
     // Serialize submitted form data
     try {
-        data = event.body;
+        const data = event.body;
         console.info(`[contactform.js]: event.body: ${event.body}`);
         console.info(`[contactform.js]: data: ${JSON.stringify(data)}`);
-        console.info(`[contactform.js]: data Obj: ${data}`);
+        console.info(`[contactform.js]: data.contactName: ${data.contactName}`);
 
         if ((data === undefined) | null) {
             // If the data is serialized but is empty for some reason, return an error
