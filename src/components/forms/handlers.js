@@ -6,25 +6,24 @@ function SalesforceLead(formData) {
         url: `https://${baseUrl}/.netlify/functions/contactform`,
         json: formData
     };
-    let msg, status;
-    request.post(apiParams, (err, httpResponse, body) => {
-        if (err) {
-            msg = err;
-            status = "failure";
-            console.error(err);
-        } else {
-            const apiStatus = body.success;
-            if (apiStatus === true) {
-                msg = "Success!";
-                status = "success";
-            } else {
-                msg = "Failure :(";
+    let status, content;
+    try {
+        request.post(apiParams, (err, httpResponse, body) => {
+            if (err) {
+                content = String(err);
                 status = "failure";
+                console.error(`[handlers.js] Error: ${content}`);
+            } else {
+                content = body.content;
+                status = body.status;
             }
-            console.info(msg);
-        }
-    });
-    return { status: status, content: msg };
+        });
+    } catch (error) {
+        content = String(error);
+        status = "failure";
+        console.error(`[handlers.js] Error: ${content}`);
+    }
+    return { status: status, content: content };
 }
 
 export { SalesforceLead };

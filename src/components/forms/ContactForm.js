@@ -39,13 +39,17 @@ function RawForm() {
         <Formik
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting, resetForm }) => {
-                const updateForm = params => {
-                    setSubmitting(params.submitting);
-                    setStatus(params.status);
+                const updateForm = (
+                    submitting = false,
+                    status = "error",
+                    resetTimeout = 5000
+                ) => {
+                    setSubmitting(submitting);
+                    setStatus(status);
                     setTimeout(() => {
                         resetForm();
                         setStatus("initial");
-                    }, params.resetTimeout);
+                    }, resetTimeout);
                 };
                 setStatus("loading");
                 // const response = {
@@ -60,24 +64,14 @@ function RawForm() {
                         errorMsg = "No Response";
                         console.error(errorMsg);
                         setFormError(errorMsg);
-                        updateForm({
-                            submitting: false,
-                            status: "error",
-                            resetTimeout: 2000
-                        });
+                        updateForm();
                     } else if (response.status === "failure") {
                         errorMsg = response.content;
-                        console.error(errorMsg);
                         setFormError(errorMsg);
-                        updateForm({
-                            submitting: false,
-                            status: "error",
-                            resetTimeout: 2000
-                        });
+                        updateForm();
                     } else {
                         console.info(response.content);
                         updateForm({
-                            submitting: false,
                             status: "submitted",
                             resetTimeout: 300
                         });

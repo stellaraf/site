@@ -1,14 +1,41 @@
-let request = require("request");
+/*
+Netlify function code for Salesforce Lead Submission
+*/
+
+const request = require("request");
+const apiURL = "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b";
 
 // Handle the lambda invocation
-exports.handler = function(event, context, callback) {
+exports.handler = (event, context, callback) => {
+    let data;
     console.info(event);
+    // Serialize submitted form data
     try {
-        const data = JSON.parse(event.body);
-        console.info(JSON.stringify(data));
+        data = JSON.parse(event.body);
+        console.info(`[contactform.js] Data: ${JSON.stringify(data)}`);
+    } catch (formError) {
+        // If a serialization error occurs, return an error
+        const content = String(formError);
+        console.error(content);
+        callback(null, {
+            statusCode: 400,
+            body: { status: "failure", content: content }
+        });
+    }
+    if ((data === undefined) | null) {
+        // If the data is serialized but is empty for some reason, return an error
+        console.error("[contactform.js] Null/Undefined Data:");
+        callback(null, {
+            statusCode: 500,
+            body: { status: "failure", content: "No Data Received" }
+        });
+    }
+    // Submit the for data to Salesforce
+    try {
+        let content;
+        // Simple string splitting to parse a last name which is required by Salesforce
         const names = data.contactName.split(" ");
-        const apiURL =
-            "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b";
+        // Re-serialize the data in the format Salesforce is expecting
         const formData = {
             Company: data.contactCompany,
             LastName: names[1] || "",
@@ -20,28 +47,47 @@ exports.handler = function(event, context, callback) {
                 data.contactSubject
             }\nMessage:\n${data.contactMessage}\n\nMetadata:\n${""}`
         };
-        request.post({ url: apiURL, json: formData }, function(
-            err,
-            httpResponse,
-            body
-        ) {
-            let msg;
-            if (err) {
-                msg = `Error submitting form: ${err}`;
-            } else {
-                msg = body;
+        // POST the data
+        request.post(
+            { url: apiURL, json: formData },
+            (err, httpResponse, body) => {
+                if (err) {
+                    // If HTTP errors are received, return an error
+                    content = String(err);
+                    console.warn(content);
+                    callback(null, {
+                        statusCode: 501,
+                        body: { status: "failure", content: content }
+                    });
+                } else {
+                    // If data submission is successful, verify that the Salesforce "success" field is set to "true"
+                    if (body.success !== "true") {
+                        // If success field is "false", return an error
+                        console.warn(`[contactform.js] Creation Error`);
+                        content = body.errors.join(", ");
+                        callback(null, {
+                            statusCode: 501,
+                            body: { status: "failure", content: content }
+                        });
+                    } else {
+                        // if success field is "true", return a success message
+                        content = "Success!";
+                        console.info(`[contactform.js] content: ${content}`);
+                        callback(null, {
+                            statusCode: 201,
+                            body: { status: "success", content: content }
+                        });
+                    }
+                }
             }
-            callback(null, {
-                statusCode: 200,
-                body: msg
-            });
-            console.log(`Message: ${msg}`);
-        });
-    } catch (error) {
-        console.error(error);
+        );
+    } catch (submissionError) {
+        // If errors occur while submitting the data to Salesforce, return an error
+        const content = String(submissionError);
+        console.error(`[contactform.js]: Submission Error: ${content}`);
         callback(null, {
-            statusCode: 500,
-            body: error
+            statusCode: 504,
+            body: { status: "failure", content: content }
         });
     }
 };
