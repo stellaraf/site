@@ -8,7 +8,7 @@ const apiURL = "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b";
 // Handle the lambda invocation
 exports.handler = (event, context, callback) => {
     console.info(event);
-    let content = "General Error",
+    var content = "General Error",
         statusMsg = "failure",
         statusCode = 500;
     // Serialize submitted form data
