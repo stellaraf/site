@@ -6,7 +6,7 @@ import styles from "components/forms/styles.module.scss";
 
 function FormButton({ status, formError }) {
     const contentLoading = () => (
-        <>
+        <Button type={"submit"} disabled>
             <Spinner
                 animation="border"
                 as={"span"}
@@ -15,7 +15,7 @@ function FormButton({ status, formError }) {
                 className={styles.formBtnStatus}
             />
             <span className={styles.formBtnStatusText}>Submitting...</span>
-        </>
+        </Button>
     );
     const contentError = () => (
         <>
@@ -29,10 +29,10 @@ function FormButton({ status, formError }) {
         </>
     );
     const contentSuccess = () => (
-        <>
+        <Button type={"submit"}>
             <FiCheck size={16} className={styles.formBtnStatus} />
             <span className={styles.formBtnStatusText}>Submitted</span>
-        </>
+        </Button>
     );
     let btnContent;
     switch (status) {
@@ -44,11 +44,11 @@ function FormButton({ status, formError }) {
             break;
         case "error":
             btnContent = contentError();
-            return contentError();
+            break;
         default:
-            btnContent = "Submit";
+            btnContent = <Button type={"submit"}>Submit</Button>;
     }
-    return <Button type="submit">{btnContent}</Button>;
+    return btnContent;
 }
 
 export default FormButton;
