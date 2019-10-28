@@ -8,6 +8,7 @@ const parser = require("ua-parser-js");
 
 // Global Variables
 const { API_CONTACT_FORM_URL } = process.env;
+const IP_INFO_URL = ip => `http://free.ipwhois.io/json/${ip}`;
 const CODES = {
     CREATED: 201,
     UNAUTHORIZED: 401,
@@ -31,7 +32,7 @@ exports.handler = (event, context, callback) => {
     // Serialize submitted form data
     try {
         const data = JSON.parse(event.body);
-        const headers = JSON.parse(event.headers);
+        const headers = event.headers;
 
         if (!("origin" in headers)) {
             callback(null, {
@@ -76,7 +77,36 @@ exports.handler = (event, context, callback) => {
             }
             metadataRaw.userAgent = parsedUA;
         }
-
+        var ipInfoRaw = {
+            ip: "Error",
+            asn: "Error",
+            ipVersion: "Error",
+            ipOwner: "Error",
+            asnOwner: "Error",
+            country: "Error",
+            state: "Error",
+            city: "Error"
+        };
+        request.get(
+            IP_INFO_URL(metadataRaw.clientIP),
+            (err, httpResponse, body) => {
+                if (
+                    (body !== undefined || body !== null) &&
+                    body.success === true
+                ) {
+                    ipInfoRaw = {
+                        ip: body.ip || "Unknown",
+                        asn: body.asn || "Unknown",
+                        ipVersion: body.type || "Unknown",
+                        ipOwner: body.org || "Unknown",
+                        asnOwner: body.isp || "Unknown",
+                        country: body.country || "Unknown",
+                        state: body.region || "Unknown",
+                        city: body.city || "Unknown"
+                    };
+                }
+            }
+        );
         const formDescription = `
         Form Data:
 
@@ -86,14 +116,16 @@ exports.handler = (event, context, callback) => {
 
         Request Metadata:
         Request ID: ${metadataRaw.requestID}
-        IP Address: ${metadataRaw.clientIP}
+        IP Address: ${metadataRaw.clientIP} (${ipInfoRaw.ipOwner})
+        ASN: ${ipInfoRaw.asn} (${ipInfoRaw.asnOwner})
+        Location: ${ipInfoRaw.city}, ${ipInfoRaw.state}, ${ipInfoRaw.country}
         Device Type: ${metadataRaw.userAgent.device.type}
         Device: ${metadataRaw.userAgent.device.vendor} ${metadataRaw.userAgent.device.model}
         OS: ${metadataRaw.userAgent.os.name} ${metadataRaw.userAgent.os.version}
         Browser: ${metadataRaw.userAgent.browser.name} Version ${metadataRaw.userAgent.browser.version}
         `;
 
-        // Submit the for data to Salesforce
+        // Submit the form data to Salesforce
         // Simple string splitting to parse a last name which is required by Salesforce
         const names = data["contactName"].split(" ");
         // Re-serialize the data in the format Salesforce is expecting
