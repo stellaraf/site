@@ -2,6 +2,7 @@
 // $st-primary: #266dd3;
 $st-primary: #2e3191;
 $st-secondary: #043456;
+$st-success: #48a9a6;
 $st-danger: #ca2e55;
 $st-warning: #f49d37;
 $st-light: #f0f0f0;
@@ -153,8 +154,8 @@ $footer-heading-size: $font-size-base;
 $footer-link-size: $font-size-base * 0.8;
 
 //// Forms
+$form-group-margin-bottom: 1rem !default;
 $input-placeholder-color: $st-gray;
-$form-error-margin-y: 0.5rem;
 
 //// Spinner
 $spinner-border-width: 0.2em;

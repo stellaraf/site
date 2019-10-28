@@ -4,7 +4,7 @@ import Slide from "react-reveal/Slide";
 import { FiAlertTriangle, FiCheck } from "react-icons/fi";
 import styles from "components/forms/styles.module.scss";
 
-function FormButton({ status, formError, valid }) {
+function FormButton({ status, message }) {
     const contentLoading = () => (
         <Button type={"submit"} disabled>
             <Spinner
@@ -24,15 +24,20 @@ function FormButton({ status, formError, valid }) {
                 <span className={styles.formBtnStatusText}>Error</span>
             </Button>
             <Slide bottom duration={300}>
-                <p className={styles.formError}>{formError}</p>
+                <p className={styles.formError}>{message}</p>
             </Slide>
         </>
     );
     const contentSuccess = () => (
-        <Button type={"submit"}>
-            <FiCheck size={16} className={styles.formBtnStatus} />
-            <span className={styles.formBtnStatusText}>Submitted</span>
-        </Button>
+        <>
+            <Button type={"submit"}>
+                <FiCheck size={16} className={styles.formBtnStatus} />
+                <span className={styles.formBtnStatusText}>Submitted</span>
+            </Button>
+            <Slide bottom duration={300}>
+                <p className={styles.formSuccess}>{message}</p>
+            </Slide>
+        </>
     );
     const contentReady = () => <Button type={"submit"}>Submit</Button>;
     const contentDefault = () => (
@@ -65,7 +70,6 @@ function FormButton({ status, formError, valid }) {
     //     default:
     //         btnContent = contentDefault();
     // }
-    console.info(`Button state: ${status}`);
     return btnContent;
 }
 

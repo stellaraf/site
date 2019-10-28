@@ -4,9 +4,11 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import Pulse from "react-reveal/Pulse";
 
+import { sleep } from "components/forms/util";
 import FormField from "components/forms/FormField";
 import FormButton from "components/forms/FormButton";
 import { SalesforceLead } from "components/forms/handlers";
+import { contactFormConfig } from "config";
 import styles from "components/forms/styles.module.scss";
 
 const phoneRegExp = /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,3})|(\(?\d{2,3}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext| x | ext | ext.| ext. )\d{1,5}){0,1}$/;
@@ -33,93 +35,43 @@ const validationSchema = Yup.object({
 
 async function sendData(data) {
     // const response = {
-    //     status: "success",
-    //     //content: "Major problems"
-    //     content: "Success!"
+    //     status: "failure",
+    //     content: "Major problems"
+    //     // content: "Success!"
     // };
     const response = SalesforceLead(data);
     return response;
 }
 
 function RawForm() {
-    const [formError, setFormError] = useState(undefined);
+    const [submitMsg, setSubmitMsg] = useState(undefined);
 
     return (
         <Formik
             initialStatus={"initial"}
             validationSchema={validationSchema}
-            onSubmit={async (
-                values,
-                { setSubmitting, resetForm, setStatus }
-            ) => {
-                // const updateForm = (
-                //     submitting = false,
-                //     status,
-                //     resetTimeout
-                // ) => {
-                //     setSubmitting(submitting);
-                //     setStatus(status);
-                //     setTimeout(() => {
-                //         resetForm();
-                //         setStatus("initial");
-                //     }, resetTimeout);
-                // };
-                setStatus("loading");
-                // let sendData = new Promise((resolve, reject) => {
-                //     const response = {
-                //         status: "success",
-                //         //content: "Major problems"
-                //         content: "Success!"
-                //     };
-                //     // const response = SalesforceLead(values);
-                //     if (response.status === "success") {
-                //         resolve(response.content);
-                //     } else if (response.status === "failure") {
-                //         reject(response.content);
-                //     } else if (response === undefined || response === null) {
-                //         reject("No Response");
-                //     }
-                // });
-                // const formSubmission = sendForm(values);
+            onSubmit={async (values, actions) => {
+                actions.setStatus("loading");
                 const response = sendData(values);
                 response.then(
                     res => {
-                        console.info(res);
-                        setStatus("submitted");
-                        setSubmitting(false);
-                        setTimeout(resetForm(), 2000);
+                        let responseStatus = "error";
+                        if (res.status === "success") {
+                            responseStatus = "submitted";
+                        }
+                        actions.setStatus(responseStatus);
+                        setSubmitMsg(contactFormConfig.message[res.status]);
+                        actions.setSubmitting(false);
                     },
                     rej => {
                         console.error(rej);
-                        setStatus("error");
-                        setFormError(rej);
-                        setSubmitting(false);
-                        setTimeout(resetForm(), 2000);
+                        actions.setStatus("error");
+                        setSubmitMsg(contactFormConfig.message[rej.status]);
+                        actions.setSubmitting(false);
                     }
                 );
-
-                // setTimeout(() => {
-                //     let errorMsg;
-                //     if (
-                //         response.status === undefined ||
-                //         response.status === null
-                //     ) {
-                //         errorMsg = "No Response";
-                //         console.error(errorMsg);
-                //         setFormError(errorMsg);
-                //         updateForm();
-                //     } else if (response.status === "failure") {
-                //         errorMsg = response.content;
-                //         setFormError(errorMsg);
-                //         updateForm();
-                //     } else {
-                //         console.info(response.content);
-                //         updateForm({
-                //             status: "submitted",
-                //             resetTimeout: 300
-                //         });
-                //     }
-                // }, 5000);
+                await sleep(contactFormConfig.resetTimeout);
+                actions.resetForm();
             }}
             initialValues={{
                 contactName: "",
@@ -229,7 +181,7 @@ function RawForm() {
                             }}
                         />
                     </Form.Row>
-                    <FormButton status={status} errorMsg={formError} />
+                    <FormButton status={status} message={submitMsg} />
                 </Form>
             )}
         </Formik>

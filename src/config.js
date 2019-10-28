@@ -20,6 +20,14 @@ const siteConfig = {
     navIconSize: 40
 };
 
+const contactFormConfig = {
+    message: {
+        success: "Thank you!",
+        failure: "Something went wrong. Please email us: sales@stellar.tech"
+    },
+    resetTimeout: 5000
+};
+
 const navConfig = [
     {
         title: "Cloud",
@@ -115,4 +123,10 @@ const footerConfig = {
     ]
 };
 
-module.exports = { heroConfig, footerConfig, siteConfig, navConfig };
+module.exports = {
+    heroConfig,
+    footerConfig,
+    siteConfig,
+    navConfig,
+    contactFormConfig
+};

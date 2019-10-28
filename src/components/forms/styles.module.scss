@@ -39,8 +39,17 @@
     margin: $spinner-border-width;
 }
 
-.formError {
-    margin: $form-error-margin-y 0 0 0.1rem !important;
-    color: $st-danger;
+.formMessage {
+    margin: $form-group-margin-bottom 0 0 0.1rem !important;
     font-size: $font-size-sm;
+    line-height: 1;
+}
+
+.formError {
+    composes: formMessage;
+    color: $st-danger;
+}
+.formSuccess {
+    composes: formMessage;
+    color: $st-success;
 }
