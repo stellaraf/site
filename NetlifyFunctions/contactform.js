@@ -7,7 +7,9 @@ const request = require("request");
 const parser = require("ua-parser-js");
 
 // Global Variables
-const API_CONTACT_FORM_URL = process.env.API_CONTACT_FORM_URL;
+// const API_CONTACT_FORM_URL = process.env.API_CONTACT_FORM_URL;
+const API_CONTACT_FORM_URL =
+    "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b";
 const IP_INFO_URL = "http://free.ipwhois.io/json/";
 const CODES = {
     CREATED: 201,
