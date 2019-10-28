@@ -55,7 +55,7 @@ exports.handler = (event, context, callback) => {
                     statusCode = 501;
                     console.warn(content);
                 } else {
-                    const response = JSON.parse(body);
+                    const response = body;
                     // If data submission is successful, verify that the Salesforce "success" field is set to "true"
                     if (response.success !== "true") {
                         // If success field is "false", return an error
