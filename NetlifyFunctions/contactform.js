@@ -14,14 +14,8 @@ exports.handler = (event, context, callback) => {
     // Serialize submitted form data
     try {
         const data = JSON.parse(event.body);
-        console.info(`[contactform.js]: event.body: ${event.body}`);
-        console.info(`[contactform.js]: data type: ${typeof data}`);
-        console.info(`[contactform.js]: data.contactName: ${data.contactName}`);
-        console.info(
-            `[contactform.js]: event.body.contactName: ${event.body.contactName}`
-        );
 
-        if ((data === undefined) | null) {
+        if (data === undefined || data === null || typeof data === "string") {
             // If the data is serialized but is empty for some reason, return an error
             callback(null, {
                 statusCode: 500,
@@ -73,12 +67,20 @@ exports.handler = (event, context, callback) => {
                 }
             }
         );
+        console.log(`[contactform.js]: Content: ${content}`);
+        console.log(`[contactform.js]: Status: ${statusCode}`);
     } catch (submissionError) {
         // If errors occur while submitting the data to Salesforce, return an error
         const content = String(submissionError);
         statusCode = 504;
         console.error(`[contactform.js]: Submission Error: ${content}`);
     } finally {
+        console.log(
+            `Final Callback: ${JSON.stringify({
+                status: statusMsg,
+                content: content
+            })}`
+        );
         callback(null, {
             statusCode: statusCode,
             body: JSON.stringify({ status: statusMsg, content: content })
