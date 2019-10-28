@@ -5,7 +5,7 @@ function SalesforceLead(formData) {
     const apiParams = {
         url: `https://${baseUrl}/.netlify/functions/contactform`,
         json: true,
-        body: JSON.stringify(formData)
+        body: formData
     };
     let status, content;
     try {
