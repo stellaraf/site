@@ -15,9 +15,11 @@ exports.handler = (event, context, callback) => {
     try {
         const data = event.body;
         console.info(`[contactform.js]: event.body: ${event.body}`);
-        console.info(`[contactform.js]: data: ${JSON.stringify(data)}`);
+        console.info(`[contactform.js]: data string: ${JSON.stringify(data)}`);
+        console.info(`[contactform.js]: data obj: ${data}`);
+        console.info(`[contactform.js]: data.contactName: ${data.contactName}`);
         console.info(
-            `[contactform.js]: data.contactName: ${data["contactName"]}`
+            `[contactform.js]: event.body.contactName: ${event.body.contactName}`
         );
 
         if ((data === undefined) | null) {
