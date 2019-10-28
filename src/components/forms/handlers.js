@@ -10,7 +10,7 @@ function SalesforceLead(formData) {
     let status, content;
     try {
         request.post(apiParams, (err, httpResponse, body) => {
-            const response = JSON.parse(body);
+            const response = body;
             if (err) {
                 content = String(err);
                 status = "failure";
