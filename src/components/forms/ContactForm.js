@@ -32,17 +32,17 @@ const validationSchema = Yup.object({
 });
 
 function RawForm() {
-    const [status, setStatus] = useState("initial");
     const [formError, setFormError] = useState(undefined);
 
     return (
         <Formik
+            initialStatus={"initial"}
             validationSchema={validationSchema}
-            onSubmit={(values, { setSubmitting, resetForm }) => {
+            onSubmit={(values, { setSubmitting, resetForm, setStatus }) => {
                 const updateForm = (
                     submitting = false,
-                    status = "error",
-                    resetTimeout = 5000
+                    status,
+                    resetTimeout
                 ) => {
                     setSubmitting(submitting);
                     setStatus(status);
@@ -52,31 +52,67 @@ function RawForm() {
                     }, resetTimeout);
                 };
                 setStatus("loading");
-                // const response = {
-                //     status: "success",
-                //     //content: "Major problems"
-                //     content: JSON.stringify({ youSaid: values })
-                // };
-                const response = SalesforceLead(values);
-                setTimeout(() => {
-                    let errorMsg;
-                    if (response.status === undefined || null) {
-                        errorMsg = "No Response";
-                        console.error(errorMsg);
-                        setFormError(errorMsg);
-                        updateForm();
-                    } else if (response.status === "failure") {
-                        errorMsg = response.content;
-                        setFormError(errorMsg);
-                        updateForm();
-                    } else {
-                        console.info(response.content);
-                        updateForm({
-                            status: "submitted",
-                            resetTimeout: 300
-                        });
+                function sendForm(formData) {
+                    return new Promise((resolve, reject) => {
+                        // const response = {
+                        //     status: "success",
+                        //     //content: "Major problems"
+                        //     content: "Success!"
+                        // };
+                        const response = SalesforceLead(values);
+                        if (response.status === "success") {
+                            setStatus("submitted");
+                            resolve(response.content);
+                        } else if (response.status === "failure") {
+                            setFormError(response.content);
+                            setStatus("error");
+                            reject(new Error(response.content));
+                        } else if (
+                            response === undefined ||
+                            response === null
+                        ) {
+                            setFormError("No Response");
+                            setStatus("error");
+                            reject(new Error("No Response"));
+                        }
+                    });
+                }
+                const formSubmission = sendForm(values);
+                formSubmission.then(
+                    res => {
+                        console.info(res);
+                        setSubmitting(false);
+                        setTimeout(resetForm(), 2000);
+                    },
+                    rej => {
+                        console.error(rej);
+                        setSubmitting(false);
+                        setTimeout(resetForm(), 2000);
                     }
-                }, 5000);
+                );
+
+                // setTimeout(() => {
+                //     let errorMsg;
+                //     if (
+                //         response.status === undefined ||
+                //         response.status === null
+                //     ) {
+                //         errorMsg = "No Response";
+                //         console.error(errorMsg);
+                //         setFormError(errorMsg);
+                //         updateForm();
+                //     } else if (response.status === "failure") {
+                //         errorMsg = response.content;
+                //         setFormError(errorMsg);
+                //         updateForm();
+                //     } else {
+                //         console.info(response.content);
+                //         updateForm({
+                //             status: "submitted",
+                //             resetTimeout: 300
+                //         });
+                //     }
+                // }, 5000);
             }}
             initialValues={{
                 contactName: "",
@@ -91,7 +127,8 @@ function RawForm() {
                 handleChange,
                 handleReset,
                 handleSubmit,
-                values
+                values,
+                status
             }) => (
                 <Form noValidate onSubmit={handleSubmit}>
                     <Form.Row>

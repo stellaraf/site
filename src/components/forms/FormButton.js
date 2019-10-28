@@ -4,7 +4,7 @@ import Slide from "react-reveal/Slide";
 import { FiAlertTriangle, FiCheck } from "react-icons/fi";
 import styles from "components/forms/styles.module.scss";
 
-function FormButton({ status, formError }) {
+function FormButton({ status, formError, valid }) {
     const contentLoading = () => (
         <Button type={"submit"} disabled>
             <Spinner
@@ -19,7 +19,7 @@ function FormButton({ status, formError }) {
     );
     const contentError = () => (
         <>
-            <Button type="submit">
+            <Button type={"submit"} disabled>
                 <FiAlertTriangle size={16} className={styles.formBtnStatus} />
                 <span className={styles.formBtnStatusText}>Error</span>
             </Button>
@@ -34,6 +34,12 @@ function FormButton({ status, formError }) {
             <span className={styles.formBtnStatusText}>Submitted</span>
         </Button>
     );
+    const contentReady = () => <Button type={"submit"}>Submit</Button>;
+    const contentDefault = () => (
+        <Button type={"submit"} disabled>
+            Submit
+        </Button>
+    );
     let btnContent;
     switch (status) {
         case "loading":
@@ -45,9 +51,21 @@ function FormButton({ status, formError }) {
         case "error":
             btnContent = contentError();
             break;
+        case "initial":
+            // btnContent = contentDefault();
+            btnContent = contentReady();
+            break;
         default:
-            btnContent = <Button type={"submit"}>Submit</Button>;
+            btnContent = contentDefault();
     }
+    // switch (valid) {
+    //     case true:
+    //         btnContent = contentReady();
+    //         break;
+    //     default:
+    //         btnContent = contentDefault();
+    // }
+    console.info(`Button state: ${status}`);
     return btnContent;
 }
 
