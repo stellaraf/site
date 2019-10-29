@@ -225,7 +225,7 @@ async function handleFormSubmit(event, context, callback) {
             });
         });
     } catch (error) {
-        console.trace();
+        console.trace(error);
         let errorCode, errorMessage, errorContent;
         if (!(error instanceof FormError)) {
             errorCode = 500;
