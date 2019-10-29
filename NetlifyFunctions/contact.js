@@ -99,7 +99,7 @@ async function getIPInfo(ip) {
     ipInfoRaw.country = response.country;
     ipInfoRaw.state = response.state;
     ipInfoRaw.city = response.city;
-    console.info(`Constructed IP Info: ${ipInfoRaw}`);
+    console.info(`Constructed IP Info: ${JSON.stringify(ipInfoRaw)}`);
     return ipInfoRaw;
 }
 
@@ -109,6 +109,9 @@ async function submitFormData(formData, callback) {
         status: "failure",
         content: "General Error"
     });
+    console.log(
+        `[contact.js] Submitting form data: ${JSON.stringify(formData)}`
+    );
     axios({
         method: "post",
         url: API_CONTACT_FORM_URL,
@@ -326,7 +329,7 @@ async function handleFormSubmit(event, context, callback) {
         //         });
         //     }
         // );
-        submitFormData(formData, callback);
+        await submitFormData(formData, callback);
     } catch (submissionError) {
         // If errors occur while submitting the data to Salesforce, return an error
         const content = String(submissionError);
