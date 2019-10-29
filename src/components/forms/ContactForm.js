@@ -33,16 +33,6 @@ const validationSchema = Yup.object({
         .required("Required")
 });
 
-async function sendData(data) {
-    // const response = {
-    //     status: "failure",
-    //     content: "Major problems"
-    //     // content: "Success!"
-    // };
-    const response = SalesforceLead(data);
-    return response;
-}
-
 function RawForm() {
     const [submitMsg, setSubmitMsg] = useState(undefined);
 
@@ -50,28 +40,14 @@ function RawForm() {
         <Formik
             initialStatus={"initial"}
             validationSchema={validationSchema}
-            onSubmit={async (values, actions) => {
+            onSubmit={(values, actions) => {
                 actions.setStatus("loading");
-                const response = sendData(values);
-                response.then(
-                    res => {
-                        let responseStatus = "error";
-                        if (res.status === "success") {
-                            responseStatus = "submitted";
-                        }
-                        actions.setStatus(responseStatus);
-                        setSubmitMsg(contactFormConfig.message[res.status]);
-                        actions.setSubmitting(false);
-                    },
-                    rej => {
-                        console.error(rej);
-                        actions.setStatus("error");
-                        setSubmitMsg(contactFormConfig.message[rej.status]);
-                        actions.setSubmitting(false);
-                    }
-                );
-                await sleep(contactFormConfig.resetTimeout);
-                actions.resetForm();
+                SalesforceLead(values, response => {
+                    actions.setStatus(response.status);
+                    setSubmitMsg(contactFormConfig.message[response.status]);
+                    actions.setSubmitting(false);
+                });
+                setTimeout(actions.resetForm(), contactFormConfig.resetTimeout);
             }}
             initialValues={{
                 contactName: "",
