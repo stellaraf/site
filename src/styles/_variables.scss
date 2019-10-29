@@ -16,7 +16,8 @@ $st-grey: $st-gray;
 // $st-background-alt: #58a4b0;
 
 $st-gradient-1: #2e3191;
-$st-gradient-2: #2b004a;
+// $st-gradient-2: #2b004a;
+$st-gradient-2: #0d0e59;
 $st-gradient-3: $st-dark;
 // $st-gradient-3: #000000;
 
@@ -36,7 +37,7 @@ $map-text: $st-white;
 // $map-fill: #eaeaec;
 // $map-stroke: #d6d6da;
 
-$st-background: $st-gradient;
+$st-background: $st-dark;
 
 $st-colors: (
     "primary": $st-primary,
@@ -149,7 +150,8 @@ $main-card-text-color: $st-gray;
 //// Footer
 // $footer-background: $bg2;
 // $footer-background: transparent;
-$footer-background: $st-gradient-3;
+// $footer-background: $st-dark;
+$footer-background: transparent;
 $footer-color: $st-white;
 $footer-heading-size: $font-size-base;
 $footer-link-size: $font-size-base * 0.8;
