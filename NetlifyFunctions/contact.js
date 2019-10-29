@@ -141,7 +141,7 @@ function submitFormData(formData, callback) {
                 status: "success",
                 content: "Success!"
             });
-            console.info("[Salesforce Response]", response);
+            console.info("[Salesforce Response]", response.data);
             callback(callbackBody);
         })
         .catch(err => {

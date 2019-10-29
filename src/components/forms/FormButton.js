@@ -50,10 +50,10 @@ function FormButton({ status, message }) {
         case "loading":
             btnContent = contentLoading();
             break;
-        case "submitted":
+        case "success":
             btnContent = contentSuccess();
             break;
-        case "error":
+        case "failure":
             btnContent = contentError();
             break;
         case "initial":

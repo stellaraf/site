@@ -1,31 +1,20 @@
-import request from "request";
+import axios from "axios";
 
-function SalesforceLead(formData) {
+function SalesforceLead(formData, callback) {
     const baseUrl = window.location.hostname;
-    const apiParams = {
+    const axiosConfig = {
         url: `https://${baseUrl}/.netlify/functions/contact`,
-        json: true,
-        body: formData
+        data: formData
     };
-    let status, content;
-    try {
-        request.post(apiParams, (err, httpResponse, body) => {
-            const response = body;
-            if (err) {
-                content = String(err);
-                status = "failure";
-                console.error(`[handlers.js] Error: ${content}`);
-            } else {
-                content = response.content;
-                status = response.status;
-            }
+    axios(axiosConfig)
+        .then(response => {
+            const data = response.data;
+            callback({ status: data.status, content: data.content });
+        })
+        .catch(error => {
+            console.error(error);
+            callback({ status: "failure", content: String(error) });
         });
-    } catch (error) {
-        content = String(error);
-        status = "failure";
-        console.error(`[handlers.js] Error: ${content}`);
-    }
-    return { status: status, content: content };
 }
 
 export { SalesforceLead };
