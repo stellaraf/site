@@ -159,15 +159,9 @@ async function submitFormData(formData, callback) {
                 status: statusMsg,
                 content: content
             });
-            console.log(
-                `[contact.js] Calling back: Status Code: ${statusCode}, Body: ${callbackBody}`
-            );
-            callback(null, {
-                statusCode: statusCode,
-                body: callbackBody
-            });
+            console.log(`[contact.js] Build Callback Body: ${callbackBody}`);
         });
-    return callbackBody;
+    return [statusCode, callbackBody];
 }
 
 async function handleFormSubmit(event, context, callback) {
@@ -341,7 +335,14 @@ async function handleFormSubmit(event, context, callback) {
         //         });
         //     }
         // );
-        submitFormData(formData, callback);
+        submitFormData(formData, callback).then((statusCode, callbackBody) => {
+            console.log(`[contact.js] Status: ${String(statusCode)}`);
+            console.log(`[contact.js] Callback Body: ${callbackBody}`);
+            callback(null, {
+                statusCode: statusCode,
+                body: callbackBody
+            });
+        });
     } catch (submissionError) {
         // If errors occur while submitting the data to Salesforce, return an error
         const content = String(submissionError);
