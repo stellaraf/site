@@ -1,7 +1,6 @@
 import axios from "axios";
 
 function SalesforceLead(formData, callback) {
-    console.info("Submitted form data", formData);
     const baseUrl = window.location.hostname;
     const axiosConfig = {
         url: `https://${baseUrl}/.netlify/functions/contact`,
