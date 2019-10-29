@@ -45,7 +45,7 @@ function RawForm() {
                     setSubmitMsg(contactFormConfig.message[response.status]);
                     actions.setSubmitting(false);
                 });
-                setTimeout(actions.resetForm(), contactFormConfig.resetTimeout);
+                setTimeout(actions.resetForm, contactFormConfig.resetTimeout);
             }}
             initialValues={{
                 contactName: "",
