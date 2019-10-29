@@ -19,42 +19,55 @@ const CODES = {
     GATEWAY_TIMEOUT: 504
 };
 
-function checkEventData(event, callback) {
+/**
+ *
+ * @param {number} code HTTP status code
+ * @param {"success"|"failure"} message Success/failure state
+ * @param {string} content Details
+ */
+function FormError(code, message, content) {
+    this.name = "FormError";
+    this.code = code;
+    this.message = message;
+    this.content = content;
+}
+
+function checkEventData(event) {
+    let eventData = [];
     try {
         const data = JSON.parse(event.body);
         const headers = event.headers;
-        const status = "failure";
-        var content, code;
-
         if (!("origin" in headers)) {
-            content = "Request did not originate from browser";
-            code = CODES.UNAUTHORIZED;
+            throw new FormError(
+                CODES.UNAUTHORIZED,
+                "failure",
+                "Request did not originate from browser"
+            );
         } else if (
             data === undefined ||
             data === null ||
             typeof data === "string"
         ) {
             // If the data is serialized but is empty for some reason, return an error
-            content = "No Data Received";
-            code = CODES.SERVER_ERROR;
-        }
-        if (content === undefined && code === undefined) {
-            return [data, headers];
-        } else {
-            console.error(
-                `[contact.js] Code: ${String(code)} Content: ${content}`
+            throw new FormError(
+                CODES.SERVER_ERROR,
+                "failure",
+                "No Form Data Received"
             );
-            callback(null, {
-                statusCode: code || CODES.SERVER_ERROR,
-                body: JSON.stringify({
-                    status: status,
-                    content: content || "General Error"
-                })
-            });
         }
-    } catch (runtimeError) {
-        console.error(`[contact.js] Runtime Error: ${runtimeError}`);
+        eventData = [data, headers];
+    } catch (error) {
+        if (error instanceof FormError) {
+            throw error;
+        } else {
+            throw new FormError(
+                CODES.BAD_REQUEST,
+                "failure",
+                "Event Data Error"
+            );
+        }
     }
+    return eventData;
 }
 
 function parseUserAgent(userAgentString) {
@@ -104,71 +117,63 @@ async function getIPInfo(ip) {
             ipInfoRaw.city = res.data.city;
         })
         .catch(err => {
-            console.error(err);
-        })
-        .finally(() => {
-            console.info(`Constructed IP Info: ${JSON.stringify(ipInfoRaw)}`);
-            return ipInfoRaw;
+            console.trace(err);
         });
+    console.info(`Constructed IP Info: ${JSON.stringify(ipInfoRaw)}`);
+    return ipInfoRaw;
 }
 
-async function submitFormData(formData, callback) {
-    var statusCode, statusMsg, content;
-    var callbackBody = JSON.stringify({
-        status: "failure",
-        content: "General Error"
-    });
+async function submitFormData(formData) {
+    var callbackBody;
     console.log(
         `[contact.js] Submitting form data: ${JSON.stringify(formData)}`
     );
-    axios({
-        method: "post",
-        url: API_CONTACT_FORM_URL,
-        data: formData,
-        headers: { "Content-Type": "application/json" }
-    })
+    axios
+        .post(API_CONTACT_FORM_URL, {
+            data: formData,
+            headers: { "Content-Type": "application/json" }
+        })
         .then(res => {
             if (res.data.success === "true") {
-                content = "Success!";
-                statusCode = CODES.CREATED;
-                statusMsg = "success";
+                callbackBody = JSON.stringify({
+                    status: "success",
+                    content: "Success!"
+                });
                 console.info(
                     `[contact.js] Success, Response: ${JSON.stringify(
                         res.data
                     )}`
                 );
             } else {
-                content = res.data.errors.join(", ");
-                statusCode = CODES.BAD_REQUEST;
-                statusMsg = "failure";
+                const errors = res.data.errors.join(", ");
                 console.error(
                     `[contact.js] Failure, Response: ${JSON.stringify(
                         res.data
                     )}`
                 );
+                throw new FormError(CODES.BAD_REQUEST, "failure", errors);
             }
         })
         .catch(error => {
-            content = String(error);
-            statusCode = CODES.NOT_IMPLEMENTED;
-            statusMsg = "failure";
-            console.error(`[contact.js] Failure, Error: ${error}`);
-        })
-        .finally(() => {
-            callbackBody = JSON.stringify({
-                status: statusMsg,
-                content: content
-            });
-            console.log(`[contact.js] Build Callback Body: ${callbackBody}`);
+            if (error instanceof FormError) {
+                throw error;
+            } else {
+                throw new FormError(
+                    CODES.NOT_IMPLEMENTED,
+                    "failure",
+                    String(error)
+                );
+            }
         });
-    return [statusCode, callbackBody];
+    console.log(`[contact.js] Built Callback Body: ${callbackBody}`);
+    return callbackBody;
 }
 
 async function handleFormSubmit(event, context, callback) {
     console.info(event);
     // Serialize submitted form data
     try {
-        const [data, headers] = checkEventData(event, callback);
+        const [data, headers] = checkEventData(event);
         var metadataRaw = {
             clientIP: headers["client-ip"] || "Unknown",
             requestID: headers["x-bb-client-request-uuid"] || "Unknown",
@@ -212,21 +217,32 @@ async function handleFormSubmit(event, context, callback) {
             LeadSource: "stellar.tech Contact Form",
             Description: formDescription
         };
-        submitFormData(formData, callback).then((statusCode, callbackBody) => {
-            console.log(`[contact.js] Status: ${String(statusCode)}`);
+        submitFormData(formData).then(callbackBody => {
             console.log(`[contact.js] Callback Body: ${callbackBody}`);
             callback(null, {
-                statusCode: statusCode,
+                statusCode: CODES.CREATED,
                 body: callbackBody
             });
         });
-    } catch (submissionError) {
+    } catch (error) {
+        console.trace();
+        let errorCode, errorMessage, errorContent;
+        if (!(error instanceof FormError)) {
+            errorCode = 500;
+            errorMessage = "failure";
+            errorContent = "General Error";
+        } else {
+            errorCode = error.code;
+            errorMessage = error.message;
+            errorContent = error.content;
+        }
         // If errors occur while submitting the data to Salesforce, return an error
-        const content = String(submissionError);
-        console.trace(`[contact.js]: Submission Error: ${content}`);
         callback(null, {
-            statusCode: CODES.GATEWAY_TIMEOUT,
-            body: JSON.stringify({ status: "failure", content: content })
+            statusCode: errorCode,
+            body: JSON.stringify({
+                status: errorMessage,
+                content: errorContent
+            })
         });
     }
 }
