@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Container } from "react-bootstrap";
 import Globe from "components/pages/cloud/Globe";
 import Map from "components/pages/cloud/Map";
 import styles from "components/pages/cloud/styles.module.scss";
@@ -17,7 +18,9 @@ class SectionOne extends Component {
     render() {
         return (
             <section className={styles.sectionGeneric}>
-                <Globe />
+                <Container fluid={true} className={styles.MapContainer}>
+                    <Map />
+                </Container>
             </section>
         );
     }

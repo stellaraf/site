@@ -65,6 +65,21 @@ $st-fonts-headings: $st-font-headings, -apple-system, BlinkMacSystemFont,
 
 // Bootstrap Overrides
 
+//// Grid
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+) !default;
+
+$break-xs: map-get($grid-breakpoints, xs);
+$break-sm: map-get($grid-breakpoints, sm);
+$break-md: map-get($grid-breakpoints, md);
+$break-lg: map-get($grid-breakpoints, lg);
+$break-xl: map-get($grid-breakpoints, xl);
+
 //// Color
 $theme-colors: $st-colors;
 $white: $st-white;

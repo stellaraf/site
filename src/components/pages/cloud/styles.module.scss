@@ -26,3 +26,20 @@
     flex-direction: column;
     flex-grow: 1;
 }
+
+@media (min-width: $break-sm) {
+    .MapContainer {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+// @media (min-width: $break-md) { ... }
+
+@media (min-width: $break-lg) {
+    .MapContainer {
+        padding-left: 10% !important;
+        padding-right: 10% !important;
+    }
+}
+// @media (min-width: $break-xl) { ... }

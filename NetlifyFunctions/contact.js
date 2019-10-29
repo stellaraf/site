@@ -166,101 +166,21 @@ async function submitFormData(formData, callback) {
 
 async function handleFormSubmit(event, context, callback) {
     console.info(event);
-    // if (API_CONTACT_FORM_URL === undefined || API_CONTACT_FORM_URL === null) {
-    //     callback(null, {
-    //         statusCode: CODES.SERVER_ERROR,
-    //         body: JSON.stringify({
-    //             status: "failure",
-    //             content: "Unable to read API URL from environment variables"
-    //         })
-    //     });
-    // }
     // Serialize submitted form data
     try {
         const [data, headers] = checkEventData(event, callback);
-        // const data = JSON.parse(event.body);
-        // const headers = event.headers;
-
-        // if (!("origin" in headers)) {
-        //     callback(null, {
-        //         statusCode: CODES.UNAUTHORIZED,
-        //         body: JSON.stringify({
-        //             status: "failure",
-        //             content: "Request did not originate from browser"
-        //         })
-        //     });
-        // }
-
-        // if (data === undefined || data === null || typeof data === "string") {
-        //     // If the data is serialized but is empty for some reason, return an error
-        //     callback(null, {
-        //         statusCode: CODES.SERVER_ERROR,
-        //         body: JSON.stringify({
-        //             status: "failure",
-        //             content: "No Data Received"
-        //         })
-        //     });
-        // }
         var metadataRaw = {
             clientIP: headers["client-ip"] || "Unknown",
             requestID: headers["x-bb-client-request-uuid"] || "Unknown",
             userAgent: headers["user-agent"] || "Unknown"
         };
         metadataRaw.userAgent = parseUserAgent(metadataRaw.userAgent);
-        // if (metadataRaw.userAgent !== "") {
-        //     const parsedUA = parser(metadataRaw.userAgent);
-        //     for (const key in parsedUA) {
-        //         if (typeof parsedUA[key] === "object") {
-        //             for (const block in parsedUA[key]) {
-        //                 if (typeof parsedUA[key][block] !== "string") {
-        //                     parsedUA[key][block] = String(parsedUA[key][block]);
-        //                 }
-        //             }
-        //         } else if (
-        //             typeof parsedUA[key] !== "string" ||
-        //             typeof parsedUA[key] !== "object"
-        //         ) {
-        //             parsedUA[key] = String(parsedUA[key]);
-        //         }
-        //     }
-        //     metadataRaw.userAgent = parsedUA;
-        // }
-        // var ipInfoRaw = {
-        //     ip: "Error",
-        //     asn: "Error",
-        //     ipVersion: "Error",
-        //     ipOwner: "Error",
-        //     asnOwner: "Error",
-        //     country: "Error",
-        //     state: "Error",
-        //     city: "Error"
-        // };
-        // request.get(
-        //     `${IP_INFO_URL}${metadataRaw.clientIP}`,
-        //     (err, httpResponse, body) => {
-        //         console.info(`Raw IP Info: ${body}`);
-        //         if (
-        //             (body !== undefined || body !== null) &&
-        //             body.success === true
-        //         ) {
-        //             ipInfoRaw = {
-        //                 ip: body.ip || "Unknown",
-        //                 asn: body.asn || "Unknown",
-        //                 ipVersion: body.type || "Unknown",
-        //                 ipOwner: body.org || "Unknown",
-        //                 asnOwner: body.isp || "Unknown",
-        //                 country: body.country || "Unknown",
-        //                 state: body.region || "Unknown",
-        //                 city: body.city || "Unknown"
-        //             };
-        //         }
-        //     }
-        // );
-        // console.info(`Constructed IP Info: ${ipInfoRaw}`);
+
         var ipInfo;
-        await getIPInfo(metadataRaw.clientIP).then(res => {
+        getIPInfo(metadataRaw.clientIP).then(res => {
             ipInfo = res;
         });
+
         const formDescription = `
         Form Data:
 
@@ -292,49 +212,6 @@ async function handleFormSubmit(event, context, callback) {
             LeadSource: "stellar.tech Contact Form",
             Description: formDescription
         };
-        // POST the data
-        // var content = "General Error",
-        //     statusMsg = "failure",
-        //     statusCode = CODES.SERVER_ERROR;
-        // request.post(
-        //     { url: API_CONTACT_FORM_URL, json: true, body: formData },
-        //     (err, httpResponse, body) => {
-        //         if (err) {
-        //             // If HTTP errors are received, return an error
-        //             content = String(err);
-        //             statusCode = CODES.NOT_IMPLEMENTED;
-        //             console.warn(content);
-        //         } else {
-        //             const response = body;
-        //             // If data submission is successful, verify that the Salesforce "success" field is set to "true"
-        //             if (response.success !== "true") {
-        //                 // If success field is "false", return an error
-        //                 console.warn(`[contactform.js] Creation Error`);
-        //                 content = response.errors.join(", ");
-        //                 statusCode = CODES.NOT_IMPLEMENTED;
-        //             } else {
-        //                 // if success field is "true", return a success message
-        //                 content = "Success!";
-        //                 statusMsg = "success";
-        //                 statusCode = CODES.CREATED;
-        //                 console.info(`[contactform.js] content: ${content}`);
-        //             }
-        //         }
-        //         console.log(
-        //             `[contactform.js]: Status Code: ${statusCode} Callback: ${{
-        //                 status: statusMsg,
-        //                 content: content
-        //             }}`
-        //         );
-        //         callback(null, {
-        //             statusCode: statusCode,
-        //             body: JSON.stringify({
-        //                 status: statusMsg,
-        //                 content: content
-        //             })
-        //         });
-        //     }
-        // );
         submitFormData(formData, callback).then((statusCode, callbackBody) => {
             console.log(`[contact.js] Status: ${String(statusCode)}`);
             console.log(`[contact.js] Callback Body: ${callbackBody}`);
@@ -346,7 +223,7 @@ async function handleFormSubmit(event, context, callback) {
     } catch (submissionError) {
         // If errors occur while submitting the data to Salesforce, return an error
         const content = String(submissionError);
-        console.error(`[contact.js]: Submission Error: ${content}`);
+        console.trace(`[contact.js]: Submission Error: ${content}`);
         callback(null, {
             statusCode: CODES.GATEWAY_TIMEOUT,
             body: JSON.stringify({ status: "failure", content: content })
