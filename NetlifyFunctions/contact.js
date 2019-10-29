@@ -3,8 +3,7 @@ Netlify function code for Salesforce Lead Submission
 */
 
 // Module Imports
-// const request = require("request");
-const axios = require("axios");
+const request = require("request");
 const parser = require("ua-parser-js");
 
 // Global Variables
@@ -88,89 +87,70 @@ function parseUserAgent(userAgentString) {
             }
         }
     }
-    console.log(`[contact.js] User Agent: ${JSON.stringify(parsedUA)}`);
+    console.info(`[contact.js] User Agent: ${JSON.stringify(parsedUA)}`);
     return parsedUA;
 }
 
-async function getIPInfo(ip) {
-    const ipInfoEndpoint = "http://free.ipwhois.io/json/" + ip;
-    axios
-        .get(ipInfoEndpoint)
-        .then(res => {
+function getIPInfo(ip) {
+    request.get("http://free.ipwhois.io/json/" + ip, (err, res, body) => {
+        if (err) {
+            console.warn(err);
+            let msg = "Error retrieving IP Info";
+            return {
+                ip: msg,
+                asn: msg,
+                ipVersion: msg,
+                ipOwner: msg,
+                asnOwner: msg,
+                country: msg,
+                state: msg,
+                city: msg
+            };
+        } else {
+            const data = JSON.parse(body);
             const ipInfo = {
-                ip: res.data.ip,
-                asn: res.data.asn,
-                ipVersion: res.data.type,
-                ipOwner: res.data.org,
-                asnOwner: res.data.isp,
-                country: res.data.country,
-                state: res.data.state,
-                city: res.data.city
+                ip: data.ip,
+                asn: data.asn,
+                ipVersion: data.type,
+                ipOwner: data.org,
+                asnOwner: data.isp,
+                country: data.country,
+                state: data.state,
+                city: data.city
             };
             console.info(`Constructed IP Info: ${JSON.stringify(ipInfo)}`);
             return ipInfo;
-        })
-        .catch(err => {
-            console.trace(err);
-            const emptyInfo = {
-                ip: "Unknown",
-                asn: "Unknown",
-                ipVersion: "Unknown",
-                ipOwner: "Unknown",
-                asnOwner: "Unknown",
-                country: "Unknown",
-                state: "Unknown",
-                city: "Unknown"
-            };
-            return emptyInfo;
-        });
+        }
+    });
 }
 
-async function submitFormData(formData) {
-    console.log(
+function submitFormData(formData) {
+    console.info(
         `[contact.js] Submitting form data: ${JSON.stringify(formData)}`
     );
-    axios
-        .post(API_CONTACT_FORM_URL, {
-            data: formData,
-            headers: { "Content-Type": "application/json" }
-        })
-        .then(res => {
-            if (res.data.success === "true") {
-                let callbackBody = JSON.stringify({
-                    status: "success",
-                    content: "Success!"
-                });
-                console.info(
-                    `[contact.js] Success, Response: ${JSON.stringify(
-                        res.data
-                    )}`
-                );
-                return callbackBody;
+    request.post(
+        { baseUrl: API_CONTACT_FORM_URL, json: true, body: formData },
+        (err, res, body) => {
+            if (err) {
+                throw new FormError(CODES.NOT_IMPLEMENTED, "failure", err);
             } else {
-                const errors = res.data.errors.join(", ");
-                console.error(
-                    `[contact.js] Failure, Response: ${JSON.stringify(
-                        res.data
-                    )}`
-                );
-                throw new FormError(CODES.BAD_REQUEST, "failure", errors);
+                if (body.success === "false") {
+                    const errors = body.errors.join(", ");
+                    throw new FormError(CODES.BAD_REQUEST, "failure", errors);
+                } else {
+                    console.info("Success Response:", JSON.stringify(body));
+                    const callbackBody = JSON.stringify({
+                        status: "success",
+                        content: "Success!"
+                    });
+                    return callbackBody;
+                }
             }
-        })
-        .catch(error => {
-            if (error instanceof FormError) {
-                throw error;
-            } else {
-                throw new FormError(
-                    CODES.NOT_IMPLEMENTED,
-                    "failure",
-                    String(error)
-                );
-            }
-        });
+        }
+    );
 }
 
-async function handleFormSubmit(event, context, callback) {
+function handleFormSubmit(event, context, callback) {
     console.info(event);
     // Serialize submitted form data
     try {
@@ -180,15 +160,10 @@ async function handleFormSubmit(event, context, callback) {
             requestID: headers["x-bb-client-request-uuid"] || "Unknown",
             userAgent: headers["user-agent"] || "Unknown"
         };
+        console.info(`[contact.js] Metadata: ${JSON.stringify(metadataRaw)}`);
+
         metadataRaw.userAgent = parseUserAgent(metadataRaw.userAgent);
-
-        console.log(`[contact.js] Metadata: ${JSON.stringify(metadataRaw)}`);
-
-        const ipInfo = await getIPInfo(metadataRaw.clientIP);
-
-        if (ipInfo === undefined) {
-            throw new Error("IP Info was not defined");
-        }
+        const ipInfo = getIPInfo(metadataRaw.clientIP);
 
         const formDescription = `
         Form Data:
@@ -221,13 +196,9 @@ async function handleFormSubmit(event, context, callback) {
             LeadSource: "stellar.tech Contact Form",
             Description: formDescription
         };
-        const callbackBody = await submitFormData(formData);
+        const callbackBody = submitFormData(formData);
 
-        if (callbackBody === undefined) {
-            throw new Error("Callback body was undefined");
-        }
-
-        console.log(`[contact.js] Callback Body: ${callbackBody}`);
+        console.info("Callback body:", callbackBody);
         callback(null, {
             statusCode: CODES.CREATED,
             body: callbackBody
