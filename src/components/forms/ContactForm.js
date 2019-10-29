@@ -3,8 +3,6 @@ import { Card, Col, Form } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Pulse from "react-reveal/Pulse";
-
-import { sleep } from "components/forms/util";
 import FormField from "components/forms/FormField";
 import FormButton from "components/forms/FormButton";
 import { SalesforceLead } from "components/forms/handlers";
