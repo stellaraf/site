@@ -137,12 +137,22 @@ function submitFormData(formData, callback) {
     };
     axios(axiosConfig)
         .then(response => {
-            const callbackBody = JSON.stringify({
-                status: "success",
-                content: "Success!"
-            });
-            console.info("[Salesforce Response]", response.data);
-            callback(callbackBody);
+            if (response.data.success === "true") {
+                callback(
+                    JSON.stringify({
+                        status: "success",
+                        content: "Success!"
+                    })
+                );
+            } else {
+                console.info("[Salesforce Response]", response.data);
+                callback(
+                    JSON.stringify({
+                        status: "failure",
+                        content: response.data.errors.join(", ")
+                    })
+                );
+            }
         })
         .catch(err => {
             throw new FormError(CODES.NOT_IMPLEMENTED, "failure", err);
