@@ -57,7 +57,7 @@ function checkEventData(event, callback) {
     }
 }
 
-async function parseUserAgent(userAgentString) {
+function parseUserAgent(userAgentString) {
     let parsedUA = parser(userAgentString);
     if (userAgentString !== "") {
         for (const key in parsedUA) {
@@ -75,6 +75,7 @@ async function parseUserAgent(userAgentString) {
             }
         }
     }
+    console.log(`[contact.js] User Agent: ${JSON.stringify(parsedUA)}`);
     return parsedUA;
 }
 
@@ -90,17 +91,25 @@ async function getIPInfo(ip) {
         city: "Unknown"
     };
     const ipInfoEndpoint = "http://free.ipwhois.io/json/" + ip;
-    const response = await axios.get(ipInfoEndpoint);
-    ipInfoRaw.ip = response.ip;
-    ipInfoRaw.asn = response.asn;
-    ipInfoRaw.ipVersion = response.ipVersion;
-    ipInfoRaw.ipOwner = response.org;
-    ipInfoRaw.asnOwner = response.isp;
-    ipInfoRaw.country = response.country;
-    ipInfoRaw.state = response.state;
-    ipInfoRaw.city = response.city;
-    console.info(`Constructed IP Info: ${JSON.stringify(ipInfoRaw)}`);
-    return ipInfoRaw;
+    axios
+        .get(ipInfoEndpoint)
+        .then(res => {
+            ipInfoRaw.ip = res.data.ip;
+            ipInfoRaw.asn = res.data.asn;
+            ipInfoRaw.ipVersion = res.data.type;
+            ipInfoRaw.ipOwner = res.data.org;
+            ipInfoRaw.asnOwner = res.data.isp;
+            ipInfoRaw.country = res.data.country;
+            ipInfoRaw.state = res.data.state;
+            ipInfoRaw.city = res.data.city;
+        })
+        .catch(err => {
+            console.error(err);
+        })
+        .finally(() => {
+            console.info(`Constructed IP Info: ${JSON.stringify(ipInfoRaw)}`);
+            return ipInfoRaw;
+        });
 }
 
 async function submitFormData(formData, callback) {
@@ -203,7 +212,7 @@ async function handleFormSubmit(event, context, callback) {
             requestID: headers["x-bb-client-request-uuid"] || "Unknown",
             userAgent: headers["user-agent"] || "Unknown"
         };
-        metadataRaw.userAgent = await parseUserAgent(metadataRaw.userAgent);
+        metadataRaw.userAgent = parseUserAgent(metadataRaw.userAgent);
         // if (metadataRaw.userAgent !== "") {
         //     const parsedUA = parser(metadataRaw.userAgent);
         //     for (const key in parsedUA) {
@@ -254,7 +263,10 @@ async function handleFormSubmit(event, context, callback) {
         //     }
         // );
         // console.info(`Constructed IP Info: ${ipInfoRaw}`);
-        const ipInfo = await getIPInfo(metadataRaw.clientIP);
+        var ipInfo;
+        await getIPInfo(metadataRaw.clientIP).then(res => {
+            ipInfo = res;
+        });
         const formDescription = `
         Form Data:
 
@@ -329,7 +341,7 @@ async function handleFormSubmit(event, context, callback) {
         //         });
         //     }
         // );
-        await submitFormData(formData, callback);
+        submitFormData(formData, callback);
     } catch (submissionError) {
         // If errors occur while submitting the data to Salesforce, return an error
         const content = String(submissionError);
