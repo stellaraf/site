@@ -6,10 +6,10 @@ Netlify function code for Salesforce Lead Submission
 const axios = require("axios");
 const parser = require("ua-parser-js");
 
+// Environment Variables
+const { FORM_API_ENDPOINT, FORM_IP_INFO_ENDPOINT } = process.env;
+
 // Global Variables
-const API_CONTACT_FORM_URL =
-    "https://webhook.site/d2d2dbd7-ba82-4ca9-8c19-85b90927156b";
-const IP_INFO_ENDPOINT = "http://free.ipwhois.io/json/";
 const CODES = {
     CREATED: 201,
     BAD_REQUEST: 400,
@@ -85,6 +85,8 @@ function parseUserAgent(userAgentString) {
                 typeof parsedUA[key] !== "object"
             ) {
                 parsedUA[key] = String(parsedUA[key]);
+            } else if (parsedUA[key] === undefined) {
+                parsedUA[key] = `${key} Unknown`;
             }
         }
     }
@@ -93,7 +95,7 @@ function parseUserAgent(userAgentString) {
 }
 
 function getIPInfo(ip, callback) {
-    const endpoint = IP_INFO_ENDPOINT + ip;
+    const endpoint = FORM_IP_INFO_ENDPOINT + ip;
     const unknownMsg = "Data Unavailable";
     const axiosConfig = { url: endpoint, method: "get" };
     axios(axiosConfig)
@@ -106,7 +108,7 @@ function getIPInfo(ip, callback) {
                 ipOwner: rawData.org || unknownMsg,
                 asnOwner: rawData.isp || unknownMsg,
                 country: rawData.country || unknownMsg,
-                state: rawData.state || unknownMsg,
+                state: rawData.region || unknownMsg,
                 city: rawData.city || unknownMsg
             };
             console.info("Constructed:", ipInfo);
@@ -131,7 +133,7 @@ function getIPInfo(ip, callback) {
 
 function submitFormData(formData, callback) {
     const axiosConfig = {
-        url: API_CONTACT_FORM_URL,
+        url: FORM_API_ENDPOINT,
         method: "post",
         data: formData
     };
