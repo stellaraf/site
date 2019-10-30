@@ -4,13 +4,16 @@ Netlify function code for Salesforce Lead Submission
 
 // Module Imports
 const axios = require("axios");
+const querystring = require("querystring");
 const parser = require("ua-parser-js");
 
 // Environment Variables
-const { FORM_API_ENDPOINT, FORM_IP_INFO_ENDPOINT } = process.env;
+const { FORM_API_ENDPOINT, FORM_IP_INFO_ENDPOINT, FORM_SF_OID } = process.env;
 
 // Global Variables
+const IP_DATA_UNKNOWN = "Data Unavailable";
 const CODES = {
+    OK: 200,
     CREATED: 201,
     BAD_REQUEST: 400,
     UNAUTHORIZED: 401,
@@ -20,7 +23,7 @@ const CODES = {
 };
 
 /**
- *
+ * Common exception for callbacks
  * @param {number} code HTTP status code
  * @param {"success"|"failure"} message Success/failure state
  * @param {string} content Details
@@ -32,6 +35,10 @@ function FormError(code, message, content) {
     this.content = content;
 }
 
+/**
+ * Serialize and validate submitted form data
+ * @param {Raw event object} event
+ */
 function checkEventData(event) {
     let eventData = [];
     try {
@@ -70,6 +77,10 @@ function checkEventData(event) {
     return eventData;
 }
 
+/**
+ * Parse & stringify user agent string
+ * @param {User agent string from even headers} userAgentString
+ */
 function parseUserAgent(userAgentString) {
     let parsedUA = parser(userAgentString);
     if (userAgentString !== "") {
@@ -94,22 +105,88 @@ function parseUserAgent(userAgentString) {
     return parsedUA;
 }
 
+/**
+ * Parse collected data and build new JSON object matching Salesforce fields
+ * @param {Contact form object} formData
+ * @param {Filtered headers & user agent object} requestData
+ * @param {IP geolocation data object} ipData
+ */
+function buildLeadData(formData, requestData, ipData) {
+    if (FORM_SF_OID === undefined) {
+        throw new FormError(
+            CODES.SERVER_ERROR,
+            "failure",
+            "No Salesforce OID was found"
+        );
+    }
+
+    const lead_ip_fields = ["country", "city", "state"];
+    let parsedForm = {};
+
+    // If Phone Number is not provided, set doNotCall field to true/1
+    if (formData.contactPhone === "") {
+        parsedForm.doNotCall = "1";
+    } else {
+        parsedForm.phone = formData.contactPhone;
+    }
+
+    // If an IP geolocation field was found, add it to the parsedForm object
+    lead_ip_fields.forEach((field, i) => {
+        if (ipData[field] !== IP_DATA_UNKNOWN) {
+            parsedForm[field] = ipData[field];
+        }
+    });
+
+    // If a subject was provided, assign it to the description field
+    if (formData.subject !== "") {
+        parsedForm.description = formData.subject;
+    }
+
+    // Parse single Name field to First and Last Name
+    const names = formData.contactName.split(" ");
+    parsedForm.last_name = names.slice(1).join(" ");
+    parsedForm.first_name = names[0];
+
+    parsedForm.email = formData.contactEmail;
+    parsedForm.lead_source = "Website";
+    parsedForm.oid = FORM_SF_OID;
+
+    parsedForm["00N3j00000FccT7"] = `
+    Message:
+    ${formData.contactMessage}
+    
+    Request Metadata:
+    Request ID: ${requestData.requestID}
+    IP Address: ${requestData.clientIP} (${ipData.ipOwner})
+    ASN: ${ipData.asn} (${ipData.asnOwner})
+    Device Type: ${requestData.userAgent.device.type}
+    Device: ${requestData.userAgent.device.vendor} ${requestData.userAgent.device.model}
+    OS: ${requestData.userAgent.os.name} ${requestData.userAgent.os.version}
+    Browser: ${requestData.userAgent.browser.name} Version ${requestData.userAgent.browser.version}
+    `;
+    console.info("Build Lead Data:", parsedForm);
+    return parsedForm;
+}
+/**
+ * Query ipwhois.io service to gather IP address info and add to form data
+ * @param {IP address from event headers} ip
+ * @param {Callback function} callback
+ */
 function getIPInfo(ip, callback) {
     const endpoint = FORM_IP_INFO_ENDPOINT + ip;
-    const unknownMsg = "Data Unavailable";
     const axiosConfig = { url: endpoint, method: "get" };
     axios(axiosConfig)
         .then(response => {
             const rawData = response.data;
             const ipInfo = {
-                ip: rawData.ip || unknownMsg,
-                asn: rawData.asn || unknownMsg,
-                ipVersion: rawData.type || unknownMsg,
-                ipOwner: rawData.org || unknownMsg,
-                asnOwner: rawData.isp || unknownMsg,
-                country: rawData.country || unknownMsg,
-                state: rawData.region || unknownMsg,
-                city: rawData.city || unknownMsg
+                ip: rawData.ip || IP_DATA_UNKNOWN,
+                asn: rawData.asn || IP_DATA_UNKNOWN,
+                ipVersion: rawData.type || IP_DATA_UNKNOWN,
+                ipOwner: rawData.org || IP_DATA_UNKNOWN,
+                asnOwner: rawData.isp || IP_DATA_UNKNOWN,
+                country: rawData.country || IP_DATA_UNKNOWN,
+                state: rawData.region || IP_DATA_UNKNOWN,
+                city: rawData.city || IP_DATA_UNKNOWN
             };
             console.info("Constructed:", ipInfo);
             callback(ipInfo);
@@ -117,29 +194,36 @@ function getIPInfo(ip, callback) {
         .catch(error => {
             console.trace(error);
             const ipInfo = {
-                ip: unknownMsg,
-                asn: unknownMsg,
-                ipVersion: unknownMsg,
-                ipOwner: unknownMsg,
-                asnOwner: unknownMsg,
-                country: unknownMsg,
-                state: unknownMsg,
-                city: unknownMsg
+                ip: IP_DATA_UNKNOWN,
+                asn: IP_DATA_UNKNOWN,
+                ipVersion: IP_DATA_UNKNOWN,
+                ipOwner: IP_DATA_UNKNOWN,
+                asnOwner: IP_DATA_UNKNOWN,
+                country: IP_DATA_UNKNOWN,
+                state: IP_DATA_UNKNOWN,
+                city: IP_DATA_UNKNOWN
             };
             console.info("Constructed via Error", ipInfo);
             callback(ipInfo);
         });
 }
 
+/**
+ * Send validated, parsed, and newly constructed data to Salesforce web to lead API
+ * @param {Constructed form data object} formData
+ * @param {Callback function} callback
+ */
 function submitFormData(formData, callback) {
+    const endpoint = [FORM_API_ENDPOINT, querystring.stringify(formData)].join(
+        "&"
+    );
     const axiosConfig = {
-        url: FORM_API_ENDPOINT,
-        method: "post",
-        data: formData
+        url: endpoint,
+        method: "post"
     };
     axios(axiosConfig)
         .then(response => {
-            if (response.data.success === "true") {
+            if (response.status === CODES.OK) {
                 callback(
                     JSON.stringify({
                         status: "success",
@@ -147,11 +231,15 @@ function submitFormData(formData, callback) {
                     })
                 );
             } else {
-                console.info("[Salesforce Response]", response.data);
+                console.info(
+                    "[Salesforce Response]",
+                    response.status,
+                    response.data
+                );
                 callback(
                     JSON.stringify({
                         status: "failure",
-                        content: response.data.errors.join(", ")
+                        content: `${response.status}: ${response.data}`
                     })
                 );
             }
@@ -161,6 +249,12 @@ function submitFormData(formData, callback) {
         });
 }
 
+/**
+ *
+ * @param {Event object from Netlify} event
+ * @param {Context object from Netlify} context
+ * @param {Callback function} callback
+ */
 function handleFormSubmit(event, context, callback) {
     console.info(event);
     // Serialize submitted form data
@@ -175,34 +269,7 @@ function handleFormSubmit(event, context, callback) {
         requestData.userAgent = parsedUserAgent;
 
         getIPInfo(requestData.clientIP, ipData => {
-            const formDescription = `
-            Form Data:
-            
-            Subject: ${data.contactSubject}
-            Message:
-            ${data.contactMessage}
-            
-            Request Metadata:
-            Request ID: ${requestData.requestID}
-            IP Address: ${requestData.clientIP} (${ipData.ipOwner})
-            ASN: ${ipData.asn} (${ipData.asnOwner})
-            Location: ${ipData.city}, ${ipData.state}, ${ipData.country}
-            Device Type: ${requestData.userAgent.device.type}
-            Device: ${requestData.userAgent.device.vendor} ${requestData.userAgent.device.model}
-            OS: ${requestData.userAgent.os.name} ${requestData.userAgent.os.version}
-            Browser: ${requestData.userAgent.browser.name} Version ${requestData.userAgent.browser.version}
-            `;
-
-            const names = data.contactName.split(" ");
-            const formData = {
-                Company: data.contactCompany,
-                LastName: names.slice(1).join(" ") || "",
-                FirstName: names[0] || "",
-                Email: data.contactEmail,
-                Phone: data.contactPhone,
-                LeadSource: "Contact Form",
-                Description: formDescription
-            };
+            const formData = buildLeadData(data, requestData, ipData);
             submitFormData(formData, callbackBody => {
                 console.info("Callback body:", callbackBody);
                 callback(null, {
@@ -234,6 +301,4 @@ function handleFormSubmit(event, context, callback) {
     }
 }
 
-// Handle the lambda invocation
 exports.handler = handleFormSubmit;
-//
