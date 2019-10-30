@@ -74,11 +74,23 @@ $grid-breakpoints: (
     xl: 1200px
 ) !default;
 
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px
+) !default;
+
 $break-xs: map-get($grid-breakpoints, xs);
 $break-sm: map-get($grid-breakpoints, sm);
 $break-md: map-get($grid-breakpoints, md);
 $break-lg: map-get($grid-breakpoints, lg);
 $break-xl: map-get($grid-breakpoints, xl);
+
+$container-max-width-sm: map-get($container-max-widths, sm);
+$container-max-width-md: map-get($container-max-widths, md);
+$container-max-width-lg: map-get($container-max-widths, lg);
+$container-max-width-xl: map-get($container-max-widths, xl);
 
 //// Color
 $theme-colors: $st-colors;
@@ -161,6 +173,13 @@ $main-card-margin-top: 3rem;
 $main-card-padding: 3rem;
 $main-card-title-color: $st-dark;
 $main-card-text-color: $st-gray;
+$loc-card-padding-x: 1.5rem;
+$loc-card-padding-y: 1.5rem;
+$loc-card-background: $st-primary;
+$loc-card-title-color: $st-white;
+$loc-card-text-color: $st-white;
+$loc-card-margin-x: 4rem;
+$loc-card-width: 280px;
 
 //// Footer
 // $footer-background: $bg2;

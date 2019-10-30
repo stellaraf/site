@@ -3,7 +3,7 @@
 .sectionOne {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex: 0 1 auto;
     margin-top: 3rem;
     margin-bottom: 4rem;
     text-align: center;
@@ -13,6 +13,8 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 .GlobeContainer {
@@ -50,3 +52,45 @@
     }
 }
 // @media (min-width: $break-xl) { ... }
+
+.locationCard {
+    text-align: left;
+    flex: 0 1 auto !important;
+    width: $loc-card-width;
+    background-color: $loc-card-background !important;
+    margin-left: $loc-card-margin-x !important;
+    margin-right: $loc-card-margin-x !important;
+}
+
+.locationCardTop {
+    display: flex;
+    justify-content: space-between;
+    padding: $loc-card-padding-x $loc-card-padding-y !important;
+}
+
+.locationCardBottom {
+    padding-right: $loc-card-padding-x !important;
+    padding-left: $loc-card-padding-x !important;
+    padding-bottom: $loc-card-padding-y !important;
+}
+
+.locationCardTitle {
+    display: flex;
+    align-self: center;
+    flex: 0 1 auto;
+    color: $loc-card-title-color;
+    vertical-align: middle;
+}
+
+.locationFlag {
+    flex: 1 0 auto;
+}
+
+.locationFlagBox {
+    display: flex;
+    flex: 0 1 auto;
+}
+
+.locationCardText {
+    color: $loc-card-text-color;
+}

@@ -30,7 +30,8 @@ class SectionCard extends Component {
                 bottom={this.props.bottom}
                 duration={this.props.duration}
                 delay={this.props.delay}
-                cascade={this.props.cascade}>
+                cascade={this.props.cascade}
+                className={styles.sectionCardReveal}>
                 <div>
                     <Card className={styles.sectionCard}>
                         <div className={styles.sectionCardTop}>
