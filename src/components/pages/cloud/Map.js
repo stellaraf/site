@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "components/pages/cloud/styles.module.scss";
 
 function Map({
     strokeColor = "none",
@@ -8,6 +9,7 @@ function Map({
 }) {
     return (
         <svg
+            id="cloud-world-map"
             viewBox="0 0 1170 594"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
