@@ -81,8 +81,6 @@ class Globe extends Component {
                     height: globeSize(parentDimensions.width)
                 }
             });
-            console.log(`Height: ${this.state.containerDimensions.width}`);
-            console.log(`Width: ${this.state.containerDimensions.width}`);
         };
     }
     render() {

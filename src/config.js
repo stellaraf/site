@@ -28,6 +28,19 @@ const contactFormConfig = {
     resetTimeout: 5000
 };
 
+const locationConfig = [
+    {
+        id: "phx01",
+        name: "Phoenix, AZ",
+        info: "Super cool flagship data center."
+    },
+    {
+        id: "hnl01",
+        name: "Honolulu, HI",
+        info: "The DR site you didn't know you needed."
+    }
+];
+
 const navConfig = [
     {
         title: "Cloud",
@@ -128,5 +141,6 @@ module.exports = {
     footerConfig,
     siteConfig,
     navConfig,
-    contactFormConfig
+    contactFormConfig,
+    locationConfig
 };
