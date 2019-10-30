@@ -148,6 +148,7 @@ function buildLeadData(formData, requestData, ipData) {
     parsedForm.first_name = names[0];
 
     parsedForm.email = formData.contactEmail;
+    parsedForm.company = formData.contactCompany;
     parsedForm.lead_source = "Website";
     parsedForm.oid = FORM_SF_OID;
 
