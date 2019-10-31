@@ -159,27 +159,34 @@ $nav-card-background: rgba(0, 0, 0, 0.2);
 $nav-card-color: $st-white;
 $nav-card-border-color: rgba($st-white, 0.125);
 $nav-card-title-color: $nav-card-color;
-$nav-collapse-margin: 2.5rem;
+$nav-collapse-margin-bottom: 2.5rem;
+$nav-collapse-margin-top: 0.5rem;
 $navbar-bottom-border: $border-width solid $nav-card-border-color;
 
-//// Section Card
+//// Cards
+// Section
 $section-card-background: $st-light;
 $section-card-title-color: $st-dark;
 $section-card-text-color: $st-dark;
 $section-card-icon-height: 70px;
 $section-card-padding-x: 1.5rem;
 $section-card-padding-y: 3rem;
+// Main
 $main-card-margin-top: 3rem;
 $main-card-padding: 3rem;
 $main-card-title-color: $st-dark;
 $main-card-text-color: $st-gray;
+// Location
 $loc-card-padding-x: 1.5rem;
 $loc-card-padding-y: 1.5rem;
 $loc-card-background: $st-primary;
 $loc-card-title-color: $st-white;
-$loc-card-text-color: $st-white;
-$loc-card-margin-x: 4rem;
+$loc-card-subtitle-color: rgba($loc-card-title-color, 0.3);
+$loc-card-text-color: $loc-card-title-color;
+$loc-card-margin-x: 3rem;
 $loc-card-width: 280px;
+$loc-card-height: 175px;
+$log-card-margin-sm-y: 15px;
 
 //// Footer
 // $footer-background: $bg2;

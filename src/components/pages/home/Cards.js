@@ -1,112 +1,77 @@
-import React, { Component } from "react";
+import React from "react";
 import { Card } from "react-bootstrap";
 import Slide from "react-reveal/Slide";
-import { IconNotFound } from "components/svg";
+import withReveal from "react-reveal/withReveal";
+import { getRevealProps } from "utils";
+import { Image } from "components/svg";
+import styled from "styled-components";
 import styles from "components/pages/home/styles.module.scss";
+// import theme from "styles/exports.module.scss";
 import classNames from "classnames";
 
-class SectionCard extends Component {
-    constructor(props) {
-        super();
-    }
-    static defaultProps = {
-        left: true,
-        right: false,
-        top: false,
-        bottom: false,
-        duration: 128,
-        delay: 0,
-        cascade: true,
-        icon: <IconNotFound />,
-        title: "Placeholder Title",
-        text: "Placeholder Text"
-    };
-    render() {
-        return (
-            <Slide
-                left={this.props.left}
-                right={this.props.right}
-                top={this.props.top}
-                bottom={this.props.bottom}
-                duration={this.props.duration}
-                delay={this.props.delay}
-                cascade={this.props.cascade}
-                className={styles.sectionCardReveal}>
-                <div>
-                    <Card className={styles.sectionCard}>
-                        <div className={styles.sectionCardTop}>
-                            {this.props.icon}
-                        </div>
-                        <div className={styles.sectionCardBottom}>
-                            {this.props.children || (
-                                <>
-                                    <h5 className={styles.sectionCardTitle}>
-                                        {this.props.title}
-                                    </h5>
-                                    <p className={styles.sectionCardText}>
-                                        {this.props.text}
-                                    </p>
-                                </>
-                            )}
-                        </div>
-                    </Card>
+const RevealWrapper = styled.div`
+    display: flex !important;
+    flex-grow: 1 !important;
+`;
+
+function SectionCard({
+    image,
+    title = "Placeholder Title",
+    text = "Placeholder Text",
+    children,
+    ...props
+}) {
+    const { revealProps, standardProps } = getRevealProps(props);
+    const CardWrapper = withReveal(RevealWrapper, <Slide {...revealProps} />);
+
+    return (
+        <CardWrapper {...standardProps}>
+            <Card className={styles.sectionCard}>
+                <div className={styles.sectionCardTop}>
+                    <Image name={image} />
                 </div>
-            </Slide>
-        );
-    }
+                <div className={styles.sectionCardBottom}>
+                    {children || (
+                        <>
+                            <h5 className={styles.sectionCardTitle}>{title}</h5>
+                            <p className={styles.sectionCardText}>{text}</p>
+                        </>
+                    )}
+                </div>
+            </Card>
+        </CardWrapper>
+    );
 }
 
-class HeroCard extends Component {
-    constructor(props) {
-        super();
-    }
-    static defaultProps = {
-        left: true,
-        right: false,
-        top: false,
-        bottom: false,
-        duration: 128,
-        delay: 0,
-        cascade: true,
-        align: "left",
-        title: "Placeholder Title",
-        titleClass: "h5",
-        text: "Placeholder Text"
-    };
-    render() {
-        return (
-            <Slide
-                left={this.props.left}
-                right={this.props.right}
-                top={this.props.top}
-                bottom={this.props.bottom}
-                duration={this.props.duration}
-                delay={this.props.delay}
-                cascade={this.props.cascade}>
-                <div>
-                    <Card
-                        className={styles.mainCard}
-                        style={{ textAlign: this.props.align }}>
-                        <Card.Body className={styles.mainCardBody}>
-                            <>
-                                <p
-                                    className={classNames(
-                                        this.props.titleClass,
-                                        styles.mainCardTitle
-                                    )}>
-                                    {this.props.title}
-                                </p>
-                                <p className={styles.mainCardText}>
-                                    {this.props.text}
-                                </p>
-                            </>
-                            {this.props.children}
-                        </Card.Body>
-                    </Card>
-                </div>
-            </Slide>
-        );
-    }
+function HeroCard({
+    align = "left",
+    title = "Title",
+    titleClass = "h5",
+    text = "Text",
+    children,
+    ...props
+}) {
+    const { revealProps, standardProps } = getRevealProps(props);
+    const CardWrapper = withReveal(RevealWrapper, <Slide {...revealProps} />);
+    return (
+        <CardWrapper {...standardProps}>
+            <Card className={styles.mainCard} style={{ textAlign: align }}>
+                <Card.Body className={styles.mainCardBody}>
+                    <>
+                        <p
+                            className={classNames(
+                                titleClass,
+                                styles.mainCardTitle
+                            )}>
+                            {title}
+                        </p>
+                        <p className={styles.mainCardText}>{text}</p>
+                    </>
+                    {children}
+                </Card.Body>
+            </Card>
+        </CardWrapper>
+    );
 }
 
 export { SectionCard, HeroCard };

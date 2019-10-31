@@ -1,16 +1,38 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import styled from "styled-components";
 import styles from "components/footer/styles.module.scss";
 import { footerConfig } from "config";
+import Logo from "components/svg/Logos";
 import Copyright from "components/footer/Copyright";
 import classNames from "classnames";
+
+const FooterRow = styled(Row)`
+    width: 100%;
+`;
+
+const LogoCol = styled(Col)`
+    display: flex;
+    justify-content: end;
+    flex-grow: 1 !important;
+    flex-shrink: 0 !important;
+    padding-right: 0 !important;
+`;
+
+const LinkCol = styled(Col)`
+    display: flex;
+    align-self: flex-start;
+    flex-grow: 0 !important;
+    flex-shrink: 1 !important;
+`;
 
 function FooterLink({ name, link }) {
     return (
         <li className={styles.footerLink}>
-            <a href={link} className={styles.footerLinkItem}>
-                {name}
-            </a>
+            <LinkContainer to={link}>
+                <a className={styles.footerLinkItem}>{name}</a>
+            </LinkContainer>
         </li>
     );
 }
@@ -37,13 +59,13 @@ function FooterSection({ title, links }) {
 
 function FooterCol({ sections }) {
     return sections.map((section, i) => (
-        <Col key={i}>
+        <LinkCol key={i}>
             <FooterSection
                 key={i}
                 title={section.title}
                 links={section.links}
             />
-        </Col>
+        </LinkCol>
     ));
 }
 
@@ -62,9 +84,12 @@ class Footer extends Component {
                         paddingBottom: "1rem"
                     }}>
                     <Container>
-                        <Row>
+                        <FooterRow>
                             <FooterCol sections={footerConfig.sections} />
-                        </Row>
+                            <LogoCol>
+                                <Logo.Typographic size={300} />
+                            </LogoCol>
+                        </FooterRow>
                         <Copyright />
                     </Container>
                 </nav>

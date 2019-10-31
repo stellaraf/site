@@ -56,10 +56,12 @@
 .locationCard {
     text-align: left;
     flex: 0 1 auto !important;
+    flex-direction: column;
     width: $loc-card-width;
+    height: 100%;
     background-color: $loc-card-background !important;
-    margin-left: $loc-card-margin-x !important;
-    margin-right: $loc-card-margin-x !important;
+    // margin-left: $loc-card-margin-x !important;
+    // margin-right: $loc-card-margin-x !important;
 }
 
 .locationCardTop {
@@ -84,6 +86,10 @@
 
 .locationFlag {
     flex: 1 0 auto;
+    clip-path: circle();
+    -webkit-clip-path: circle();
+    -moz-clip-path: circle();
+    -o-clip-path: circle();
 }
 
 .locationFlagBox {

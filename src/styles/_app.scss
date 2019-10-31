@@ -70,12 +70,20 @@ main {
     .heroCol:not(:first-child) {
         margin-top: $main-card-margin-top !important;
     }
+
+    .react-reveal {
+        margin-top: $log-card-margin-sm-y;
+    }
 }
 // Small Devices and Larger
 @include media-breakpoint-up(sm) {
     // Add size-appropriate vertical margin for info sections on small devices
     .infoSection {
         margin-top: ($break-sm / 4) !important;
+    }
+
+    .react-reveal {
+        margin-top: 3%;
     }
 }
 // Medium Devices and Larger
@@ -124,5 +132,6 @@ main {
 //// React-Slide Fixes
 .react-reveal {
     display: flex !important;
-    flex-grow: 1 !important;
+
+    /* flex-grow: 1 !important; */
 }

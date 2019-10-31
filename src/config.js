@@ -1,18 +1,3 @@
-// const theme = {
-//   global: {
-//     font: {
-//       family: "Roboto",
-//       size: "18px",
-//       height: "20px"
-//     },
-//     colors: {
-//       brand: "#266dd3",
-//       black: "#071013",
-//       white: "fcfcfc"
-//     }
-//   }
-// };
-
 const siteConfig = {
     legalName: "Stellar Technologies Inc.",
     givenName: "Stellar",
@@ -28,16 +13,53 @@ const contactFormConfig = {
     resetTimeout: 5000
 };
 
+const pageConfig = {
+    contact: {
+        title: "Contact",
+        subtitle: ""
+    },
+    cloud: {
+        title: "Cloud Presence",
+        subtitle: ""
+    }
+};
+
 const locationConfig = [
     {
         id: "phx01",
         name: "Phoenix, AZ",
-        info: "Super cool flagship data center."
+        subtitle: "",
+        info: "But it's a dry data center."
     },
     {
         id: "hnl01",
         name: "Honolulu, HI",
-        info: "The DR site you didn't know you needed."
+        subtitle: "",
+        info: "The data center you definitely need to audit."
+    },
+    {
+        id: "chi01",
+        name: "Chicago, IL",
+        subtitle: "",
+        info: "The windiest data center."
+    },
+    {
+        id: "atl01",
+        name: "Atlanta, GA",
+        subtitle: "On the 2020 Horizon",
+        info: "It may be hot outside, but not in this data center."
+    },
+    {
+        id: "sac01",
+        name: "Sacramento, CA",
+        subtitle: "On the 2020 Horizon",
+        info: "The cloud's most hipster data center."
+    },
+    {
+        id: "pdx01",
+        name: "Portland, OR",
+        subtitle: "On the 2020 Horizon",
+        info: "Put a bird on your data center."
     }
 ];
 
@@ -105,10 +127,37 @@ const navConfig = [
     }
 ];
 
-const heroConfig = {
+const homeConfig = {
     homeOne: {
         headings: ["Title", "tagline words"],
         text: ""
+    },
+    contactButton: {
+        text: "Talk to Us"
+    },
+    sections: {
+        sectionOne: [
+            {
+                title: "Placeholder 1",
+                text: "Cool stories 1",
+                image: "IconNotFound"
+            },
+            {
+                title: "Placeholder 2",
+                text: "Cool stories 2",
+                image: "IconNotFound"
+            },
+            {
+                title: "Placeholder 3",
+                text: "Cool stories 3",
+                image: "IconNotFound"
+            },
+            {
+                title: "Placeholder 4",
+                text: "Cool stories 4",
+                image: "IconNotFound"
+            }
+        ]
     }
 };
 
@@ -117,30 +166,31 @@ const footerConfig = {
         {
             title: "Company",
             links: [
-                { name: "Home", link: "#" },
-                { name: "About", link: "#" },
-                { name: "Careers", link: "#" },
-                { name: "Partners", link: "#" },
+                { name: "Home", link: "" },
+                { name: "About", link: "" },
+                { name: "Careers", link: "" },
+                { name: "Partners", link: "" },
                 { name: "Blog", link: "#" }
             ]
         },
         {
             title: "Cloud",
             links: [
-                { name: "Compute", link: "#" },
-                { name: "Backups", link: "#" },
-                { name: "Disaster Recovery", link: "#" },
-                { name: "Security", link: "#" }
+                { name: "Compute", link: "/cloud" },
+                { name: "Backups", link: "/cloud" },
+                { name: "Disaster Recovery", link: "/cloud" },
+                { name: "Security", link: "/cloud" }
             ]
         }
     ]
 };
 
 module.exports = {
-    heroConfig,
+    homeConfig,
     footerConfig,
     siteConfig,
     navConfig,
     contactFormConfig,
-    locationConfig
+    locationConfig,
+    pageConfig
 };

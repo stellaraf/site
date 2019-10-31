@@ -1,12 +1,22 @@
 import React, { Component } from "react";
-import { CardDeck, Container, Navbar } from "react-bootstrap";
+import { Button, CardDeck, Container, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FiMenu } from "react-icons/fi";
+import styled from "styled-components";
 import NavSection from "components/navbar/NavSection";
 import Logo from "components/svg/Logos";
-import { navConfig, siteConfig } from "config";
+import { navConfig, siteConfig, homeConfig } from "config";
 import styles from "components/navbar/styles.module.scss";
 import theme from "styles/exports.module.scss";
+
+const NavRow = styled(Container)`
+    display: flex;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    justify-content: end;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+`;
 
 class NavBar extends Component {
     constructor(props) {
@@ -16,6 +26,11 @@ class NavBar extends Component {
         this.state = this.navClosed;
         this.handleNavClick = () => {
             this.setState(this.navClosed);
+            this.setButtonState(false);
+        };
+        this.buttonActive = false;
+        this.setButtonState = () => {
+            this.buttonActive = false;
         };
     }
     render() {
@@ -58,18 +73,32 @@ class NavBar extends Component {
                         <Navbar.Collapse
                             id="main-nav"
                             className={styles.navCollapse}>
-                            {navConfig.map((menu, i) => {
-                                return (
-                                    <CardDeck
-                                        className={styles.menuRow}
-                                        key={i}>
-                                        <NavSection
-                                            menu={menu}
-                                            handleNavClick={this.handleNavClick}
-                                        />
-                                    </CardDeck>
-                                );
-                            })}
+                            <>
+                                <NavRow>
+                                    <LinkContainer to="/contact">
+                                        <Button
+                                            variant="outline-light"
+                                            onClick={this.handleNavClick}
+                                            active={this.buttonActive}>
+                                            {homeConfig.contactButton.text}
+                                        </Button>
+                                    </LinkContainer>
+                                </NavRow>
+                                {navConfig.map((menu, i) => {
+                                    return (
+                                        <CardDeck
+                                            className={styles.menuRow}
+                                            key={i}>
+                                            <NavSection
+                                                menu={menu}
+                                                handleNavClick={
+                                                    this.handleNavClick
+                                                }
+                                            />
+                                        </CardDeck>
+                                    );
+                                })}
+                            </>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
