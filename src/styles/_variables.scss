@@ -81,6 +81,8 @@ $container-max-widths: (
     xl: 1140px
 ) !default;
 
+$grid-gutter-width: 30px !default;
+
 $break-xs: map-get($grid-breakpoints, xs);
 $break-sm: map-get($grid-breakpoints, sm);
 $break-md: map-get($grid-breakpoints, md);
