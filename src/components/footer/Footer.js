@@ -27,6 +27,10 @@ const LinkCol = styled(Col)`
     flex-shrink: 1 !important;
 `;
 
+const FooterLogo = styled(Logo.Typographic)`
+    margin-left: auto;
+`;
+
 function FooterLink({ name, link }) {
     return (
         <li className={styles.footerLink}>
@@ -87,7 +91,7 @@ class Footer extends Component {
                         <FooterRow>
                             <FooterCol sections={footerConfig.sections} />
                             <LogoCol>
-                                <Logo.Typographic size={300} />
+                                <FooterLogo size={300} />
                             </LogoCol>
                         </FooterRow>
                         <Copyright />
