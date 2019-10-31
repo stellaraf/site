@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import styled from "styled-components";
+import classNames from "classnames";
+import theme from "styles/exports.module.scss";
 import styles from "components/footer/styles.module.scss";
 import { footerConfig } from "config";
 import Logo from "components/svg/Logos";
 import Copyright from "components/footer/Copyright";
-import classNames from "classnames";
 
 const FooterRow = styled(Row)`
     width: 100%;
@@ -25,6 +26,10 @@ const LinkCol = styled(Col)`
     align-self: flex-start;
     flex-grow: 0 !important;
     flex-shrink: 1 !important;
+    margin-right: ${theme.gridGutterWidth};
+    &:nth-child(n + 2) {
+        margin-left: ${theme.gridGutterWidth};
+    }
 `;
 
 const FooterLogo = styled(Logo.Typographic)`

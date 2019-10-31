@@ -20,6 +20,32 @@ const NavRow = styled(Container)`
 
 const ContactButton = styled(Button)`
     margin-left: auto;
+    border: ${theme.cardBorderWidth} solid ${theme.navCardBorderColor} !important;
+`;
+
+const NavSectionRow = styled(CardDeck)`
+    @media (min-width: ${theme.breakSm}) {
+        justify-content: center;
+        &:nth-child(n + 1) {
+            margin-top: 0;
+        }
+    }
+    @media (min-width: ${theme.breakMd}) {
+        justify-content: center;
+        &:nth-child(n + 1) {
+            margin-top: 0;
+        }
+    }
+    @media (min-width: ${theme.breakLg}) {
+        &:nth-child(n + 1) {
+            margin-top: ${theme.gridGutterWidth};
+        }
+    }
+    @media (min-width: ${theme.breakXl}) {
+        &:nth-child(n + 1) {
+            margin-top: ${theme.gridGutterWidth};
+        }
+    }
 `;
 
 class NavBar extends Component {
@@ -90,16 +116,14 @@ class NavBar extends Component {
                                 </NavRow>
                                 {navConfig.map((menu, i) => {
                                     return (
-                                        <CardDeck
-                                            className={styles.menuRow}
-                                            key={i}>
+                                        <NavSectionRow key={i}>
                                             <NavSection
                                                 menu={menu}
                                                 handleNavClick={
                                                     this.handleNavClick
                                                 }
                                             />
-                                        </CardDeck>
+                                        </NavSectionRow>
                                     );
                                 })}
                             </>
