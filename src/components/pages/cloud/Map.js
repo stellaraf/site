@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "components/pages/cloud/styles.module.scss";
+// import styles from "components/pages/cloud/styles.module.scss";
 
 function Map({
     strokeColor = "none",
