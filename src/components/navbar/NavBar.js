@@ -18,6 +18,10 @@ const NavRow = styled(Container)`
     margin-bottom: 1rem;
 `;
 
+const ContactButton = styled(Button)`
+    margin-left: auto;
+`;
+
 class NavBar extends Component {
     constructor(props) {
         super(props);
@@ -76,12 +80,12 @@ class NavBar extends Component {
                             <>
                                 <NavRow>
                                     <LinkContainer to="/contact">
-                                        <Button
+                                        <ContactButton
                                             variant="outline-light"
                                             onClick={this.handleNavClick}
                                             active={this.buttonActive}>
                                             {homeConfig.contactButton.text}
-                                        </Button>
+                                        </ContactButton>
                                     </LinkContainer>
                                 </NavRow>
                                 {navConfig.map((menu, i) => {
