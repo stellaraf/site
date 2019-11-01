@@ -12,3 +12,8 @@ publish = "public/"
 from = "/*"
 to = "index.html"
 status = 200
+
+[[redirects]]
+from = "/opengraph.png"
+to = "opengraph.png"
+status = 200
