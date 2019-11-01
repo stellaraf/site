@@ -5,7 +5,7 @@ import { FiMenu } from "react-icons/fi";
 import styled from "styled-components";
 import NavSection from "components/navbar/NavSection";
 import Logo from "components/svg/Logos";
-import { navConfig, siteConfig, homeConfig } from "config";
+import site from "config";
 import styles from "components/navbar/styles.module.scss";
 import theme from "styles/exports.module.scss";
 
@@ -51,6 +51,8 @@ const NavSectionRow = styled(CardDeck)`
 class NavBar extends Component {
     constructor(props) {
         super(props);
+        this.config = site.nav;
+        this.home = site.pages.home;
         this.navClosed = { expanded: false, bg: "bg1", variant: "bg1" };
         this.navOpen = { expanded: true, bg: "bg2", variant: "bg2" };
         this.state = this.navClosed;
@@ -89,14 +91,14 @@ class NavBar extends Component {
                         <Navbar.Brand href="#">
                             <LinkContainer to="/">
                                 <Logo.Iconographic
-                                    size={siteConfig.navIconSize}
+                                    size={site.global.navIconSize}
                                 />
                             </LinkContainer>
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="main-nav">
                             <FiMenu
                                 color={theme.stWhite}
-                                size={siteConfig.navIconSize}
+                                size={site.global.navIconSize}
                                 className={styles.toggleButtonIcon}
                             />
                         </Navbar.Toggle>
@@ -110,11 +112,11 @@ class NavBar extends Component {
                                             variant="outline-light"
                                             onClick={this.handleNavClick}
                                             active={this.buttonActive}>
-                                            {homeConfig.contactButton.text}
+                                            {this.home.contactButton.text}
                                         </ContactButton>
                                     </LinkContainer>
                                 </NavRow>
-                                {navConfig.map((menu, i) => {
+                                {this.config.map((menu, i) => {
                                     return (
                                         <NavSectionRow key={i}>
                                             <NavSection

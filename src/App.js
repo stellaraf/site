@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from "components/navbar";
 import Footer from "components/footer";
 import Overlay from "components/overlay";
-import { Home, Cloud, Contact } from "components/pages";
+import { Home, Cloud, Contact, Docs } from "components/pages";
 
 // Styles
 // import styles from "components/overlay/styles.module.scss";
@@ -22,6 +22,7 @@ class App extends Component {
                     <NavBar />
                     <main>
                         <Switch>
+                            <Route path="/docs" component={Docs} />
                             <Route path="/contact" component={Contact} />
                             <Route path="/cloud" component={Cloud} />
                             <Route path="/" component={Home} />

@@ -10,7 +10,7 @@ function Cloud() {
         <>
             <TitleBlock />
             <SectionOne />
-            <SectionTwo />
+            {/* <SectionTwo /> */}
         </>
     );
 }

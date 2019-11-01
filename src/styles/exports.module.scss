@@ -2,6 +2,7 @@
 
 :export {
     stPrimary: $st-primary;
+    stPrimaryAlt: $st-primary-alt;
     stSecondary: $st-secondary;
     stDanger: $st-danger;
     stWarning: $st-warning;
@@ -17,6 +18,8 @@
     stGradient: $st-gradient;
     stGradient1: $st-gradient-1;
     stGradient2: $st-gradient-2;
+    bodyColor: $body-color;
+    bodyBg: $body-bg;
     breakXs: $break-xs;
     breakSm: $break-sm;
     breakMd: $break-md;
@@ -44,4 +47,21 @@
     cardBorderWidth: $card-border-width;
     navCardBorderColor: $nav-card-border-color;
     gridGutterWidth: $grid-gutter-width;
+    display1Size: $display1-size;
+    display2Size: $display2-size;
+    display3Size: $display3-size;
+    display4Size: $display4-size;
+    subDisplay1Size: $subdisplay1-size;
+    subDisplay2Size: $subdisplay2-size;
+    subDisplay3Size: $subdisplay3-size;
+    subDisplay4Size: $subdisplay4-size;
+    displayWeight: $display-weight;
+    sideNavBackground: $sidenav-background;
+    sectionCardHeight: $section-card-height;
+    h1FontSize: $h1-font-size;
+    h2FontSize: $h2-font-size;
+    h3FontSize: $h3-font-size;
+    h4FontSize: $h4-font-size;
+    h5FontSize: $h5-font-size;
+    h6FontSize: $h6-font-size;
 }

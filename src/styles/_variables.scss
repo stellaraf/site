@@ -1,15 +1,16 @@
 // App Variables
 // $st-primary: #266dd3;
-$st-primary: #2e3191;
-$st-primary-alt: #2b004a;
-$st-secondary: #70707f;
+$st-primary: #2b3c8f;
+$st-primary-alt: #2a174a;
+$st-secondary: #b3e3f5;
 $st-success: #48a9a6;
 $st-danger: #ca2e55;
 $st-warning: #f49d37;
 $st-light: #f0f0f0;
-$st-dark: #0e1e25;
+$st-dark: #161318;
 $st-white: #e3e3e3;
-$st-gray: rgba($st-dark, 0.38);
+$st-gray: #70707f;
+// $st-gray: rgba($st-dark, 0.38);
 $st-grey: $st-gray;
 // $st-gray: #757780;
 // $st-background: #222c4c;
@@ -97,7 +98,8 @@ $container-max-width-xl: map-get($container-max-widths, xl);
 //// Color
 $theme-colors: $st-colors;
 $white: $st-white;
-$body-color: $st-dark;
+$body-bg: $st-background;
+$body-color: $st-white;
 
 //// Typography
 $font-family-sans-serif: $st-fonts-body;
@@ -113,7 +115,7 @@ $font-size-sm: $font-size-base * 0.875;
 // $font-weight-normal: 300;
 // $font-weight-bold: 600;
 // $font-weight-bolder: bolder;
-$font-weight-light: 400;
+$font-weight-light: 300;
 $font-weight-normal: 400;
 $font-weight-bold: 600;
 
@@ -136,10 +138,16 @@ $display2-size: 5.5rem;
 $display3-size: 4.5rem;
 $display4-size: 3.5rem;
 
-$display1-weight: 300;
-$display2-weight: 300;
-$display3-weight: 300;
-$display4-weight: 300;
+$subdisplay1-size: $display1-size * 0.4;
+$subdisplay2-size: $display2-size * 0.4;
+$subdisplay3-size: $display3-size * 0.4;
+$subdisplay4-size: $display4-size * 0.4;
+
+$display-weight: $font-weight-light;
+$display1-weight: $display-weight;
+$display2-weight: $display-weight;
+$display3-weight: $display-weight;
+$display4-weight: $display-weight;
 
 //// Borders
 $border-width: 1px;
@@ -167,12 +175,13 @@ $navbar-bottom-border: $border-width solid $nav-card-border-color;
 
 //// Cards
 // Section
-$section-card-background: $st-light;
-$section-card-title-color: $st-dark;
-$section-card-text-color: $st-dark;
+$section-card-background: rgba($st-dark, 0.3);
+$section-card-title-color: $st-white;
+$section-card-text-color: $st-white;
 $section-card-icon-height: 70px;
-$section-card-padding-x: 1.5rem;
+$section-card-padding-x: 1rem;
 $section-card-padding-y: 3rem;
+$section-card-height: 285px;
 // Main
 $main-card-margin-top: 3rem;
 $main-card-padding: 3rem;
@@ -181,7 +190,7 @@ $main-card-text-color: $st-gray;
 // Location
 $loc-card-padding-x: 1.5rem;
 $loc-card-padding-y: 1.5rem;
-$loc-card-background: $st-primary;
+$loc-card-background: rgba($st-dark, 0.3);
 $loc-card-title-color: $st-white;
 $loc-card-subtitle-color: rgba($loc-card-title-color, 0.3);
 $loc-card-text-color: $loc-card-title-color;
@@ -190,12 +199,12 @@ $loc-card-width: 280px;
 $loc-card-height: 175px;
 $log-card-margin-sm-y: 15px;
 
+// SideNav
+$sidenav-background: lighten(desaturate($st-dark, 100%), 4%);
+
 //// Footer
-// $footer-background: $bg2;
-// $footer-background: transparent;
-// $footer-background: $st-dark;
 $footer-background: transparent;
-$footer-color: $st-white;
+$footer-color: rgba($st-white, 0.4);
 $footer-heading-size: $font-size-base;
 $footer-link-size: $font-size-base * 0.8;
 

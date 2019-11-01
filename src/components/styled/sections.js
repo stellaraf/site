@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import styled from "styled-components";
 import theme from "styles/exports.module.scss";
 import Map from "components/pages/cloud/Map";
-
+import { Diagonal } from "components/svg";
 const svgString = encodeURIComponent(renderToStaticMarkup(<Map />));
 const dataUri = `url("data:image/svg+xml,${svgString}")`;
 
@@ -73,7 +73,6 @@ const HeroContainer = styled.div`
 
 const HeroSection = styled.section`
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     flex: 0 1 auto;
@@ -103,4 +102,107 @@ const HeroSection = styled.section`
     }
 `;
 
-export { HeroContainer, HeroSection, MapContainer };
+const InfoSectionContent = styled.div`
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50vh;
+    flex-grow: 1;
+`;
+
+const InfoSectionMain = styled.section`
+    width: 100vw;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: ${props => props.height};
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    align-self: center;
+    margin-top: ${props => props.angleHeight};
+    margin-bottom: ${props => props.angleHeight};
+    padding-right: 15px;
+    padding-left: 15px;
+    color: ${props => props.textColor};
+    background-color: ${props => props.backgroundColor};
+    @media (max-width: ${theme.breakLg}) {
+        max-width: none;
+        margin-top: 0;
+    }
+    @media (min-width: ${theme.breakSm}) {
+    }
+    @media (min-width: ${theme.breakMd}) {
+    }
+    @media (min-width: ${theme.breakLg}) {
+    }
+    @media (min-width: ${theme.breakXl}) {
+    }
+`;
+
+InfoSectionMain.defaultProps = {
+    height: "40vh",
+    "margin-top": "3rem",
+    "margin-bottom": "2rem",
+    color: theme.bodyColor,
+    "background-color": theme.bodyBg
+};
+
+const InfoSection = {
+    Main: InfoSectionMain,
+    Content: InfoSectionContent
+};
+
+function AngleSection({
+    height = "40vh",
+    angleHeight = "5vh",
+    backgroundColor = theme.bodyBg,
+    textColor = theme.bodyColor,
+    ...props
+}) {
+    const [heightInt, heightUnit] = height
+        .split(/(\d+)([a-zA-Z]+)/)
+        .filter(i => i);
+    const [angleHeightInt, angleHeightUnit] = angleHeight
+        .split(/(\d+)([a-zA-Z]+)/)
+        .filter(i => i);
+    const middleHeightInt = heightInt - angleHeightInt * 2;
+    const middleHeight = `${middleHeightInt}${heightUnit}`;
+    const middleMargin = `${~~(angleHeightInt * 1.2)}${angleHeightUnit}`;
+
+    let sectionStyle = {
+        height: middleHeight,
+        backgroundColor: backgroundColor,
+        textColor: textColor,
+        angleHeight: middleMargin
+    };
+    const topDiag = {
+        direction: "rightDown",
+        height: angleHeight,
+        color: sectionStyle.backgroundColor
+    };
+    const bottomDiag = {
+        direction: "leftUp",
+        height: angleHeight,
+        color: sectionStyle.backgroundColor
+    };
+    const ThisSection = styled(InfoSection.Main)`
+        overflow: visible;
+        padding-left: 0;
+        padding-right: 0;
+    `;
+    return (
+        <ThisSection {...sectionStyle}>
+            <Diagonal {...topDiag} />
+            <InfoSection.Content {...props}>
+                {props.children}
+            </InfoSection.Content>
+            <Diagonal {...bottomDiag} />
+        </ThisSection>
+    );
+}
+
+export { HeroContainer, HeroSection, MapContainer, InfoSection, AngleSection };
