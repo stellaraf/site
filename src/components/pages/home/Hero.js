@@ -1,25 +1,50 @@
 import React from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { HeroCard } from "components/pages/home/Cards";
+import { Col, Container, Row } from "react-bootstrap";
+import { Display } from "components/styled/text";
+import Logo from "components/svg/Logos";
 import classNames from "classnames";
 import styled from "styled-components";
 import styles from "components/pages/home/styles.module.scss";
-import { homeConfig } from "config";
+import theme from "styles/exports.module.scss";
+import site, { homeConfig } from "config";
 
-const heroColLeft = classNames("pr-md-5", "py-md-5", "text-white", "heroCol");
-const heroColRight = classNames("pl-md-5", "py-md-5", "heroCol");
+const heroColLeft = classNames("pr-md-5", "py-md-2", "text-white", "heroCol");
+const heroColRight = classNames("pl-md-5", "py-md-2", "heroCol");
+
+const config = site.pages.home;
+
+const Title = styled(Display.Title)`
+    width: 100%;
+    @media (max-width: ${theme.breakMd}) {
+        font-size: ${theme.h1FontSize};
+    }
+    @media (max-width: ${theme.breakLg}) {
+    }
+    @media (min-width: ${theme.breakSm}) {
+    }
+    @media (min-width: ${theme.breakMd}) {
+    }
+    @media (min-width: ${theme.breakLg}) {
+    }
+    @media (min-width: ${theme.breakXl}) {
+    }
+`;
+const Subtitle = styled(Display.Subtitle)`
+    margin-left: 1vw;
+    color: ${theme.stSecondary};
+`;
+
+const BigLogo = styled(Logo.Typographic)`
+    margin-left: auto;
+`;
 
 function HeroHeading({ headings }) {
     return (
         <>
-            <h1 className={styles.heroHeadingFirst}>{headings[0]}</h1>
-            {headings.slice(1).map((heading, i) => {
-                return (
-                    <h2 key={i} className={styles.heroHeadingRemaining}>
-                        {heading}
-                    </h2>
-                );
-            })}
+            <Title size={2}>{config.headings.title}</Title>
+            {config.headings.subtitle ? (
+                <Subtitle>{config.headings.subtitle}</Subtitle>
+            ) : null}
         </>
     );
 }
@@ -45,6 +70,9 @@ function Hero() {
                         <p className={"lead"}>{homeConfig.homeOne.text}</p>
                     </Col>
                     <Col className={heroColRight}>
+                        <BigLogo size={600} />
+                    </Col>
+                    {/* <Col className={heroColRight}>
                         <HeroCardWrapper>
                             <HeroCard
                                 title="Main Card Title"
@@ -66,7 +94,7 @@ function Hero() {
                                 </Button>
                             </HeroCard>
                         </HeroCardWrapper>
-                    </Col>
+                    </Col> */}
                 </Row>
                 <Row></Row>
             </Container>

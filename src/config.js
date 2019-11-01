@@ -1,3 +1,232 @@
+const commonNavItems = [
+    {
+        title: "Cloud",
+        items: [
+            { name: "Compute", link: "/cloud#iaas" },
+            { name: "Backups", link: "/cloud#baas" },
+            { name: "Disaster Recovery", link: "/cloud#draas" },
+            { name: "Security", link: "/cloud#ngfw" }
+        ]
+    },
+    {
+        title: "Dedicated IT",
+        items: [
+            { name: "End User Support", link: "#" },
+            { name: "Infrastructure Management", link: "#" },
+            { name: "Asset Monitoring", link: "#" },
+            { name: "Automation", link: "#" }
+        ]
+    },
+    {
+        title: "Design & Deployment",
+        items: [
+            { name: "Infrastructure Deployment", link: "#" },
+            { name: "Network Design", link: "#" },
+            { name: "DevOps", link: "#" }
+        ]
+    }
+];
+
+export default {
+    global: {
+        legalName: "Stellar Technologies Inc.",
+        givenName: "Stellar",
+        salesforceInstanceName: "stellartech",
+        navIconSize: 40
+    },
+    contactForm: {
+        message: {
+            success: "Thank you!",
+            failure: "Something went wrong. Please email us: sales@stellar.tech"
+        },
+        resetTimeout: 5000
+    },
+    pages: {
+        contact: {
+            title: "Contact",
+            subtitle: ""
+        },
+        cloud: {
+            title: "Orion",
+            subtitle: "The Enterprise Native Cloud by Stellar",
+            sections: {
+                one: {
+                    title: "Your applications, orbiting your workforce",
+                    text:
+                        "Our strategically located data centers allow enterprises to substantially reduce latency between end-users and business applications."
+                },
+                two: {
+                    title: "100% Uptime Guarantee",
+                    subtitle: "Everyone knows time is money.",
+                    text: `We're <i>that</i> confident in the Orion platform. If we fail to deliver on our Service Level Agreement, we'll credit back the amount of time services were unavailable.`
+                }
+            }
+        },
+        home: {
+            headings: {
+                title: "Introducing...",
+                subtitle: "",
+                text: ""
+            },
+            contactButton: {
+                text: "Talk to Us"
+            },
+            sections: {
+                sectionOne: [
+                    {
+                        title: "Virtual Private Data Center",
+                        text: "Custom, Scalable Application Hosting",
+                        image: "server",
+                        link: "/cloud"
+                    },
+                    {
+                        title: "Dedicated Services",
+                        text: "Your 24/7 Technology Team",
+                        image: "status-update",
+                        link: "/cloud"
+                    },
+                    {
+                        title: "Design & Deployment",
+                        text: "On-Demand IT Special Forces",
+                        image: "maintenance",
+                        link: "/cloud"
+                    }
+                ]
+            }
+        },
+        docs: {
+            title: "Resources & Documentation",
+            subtitle: "",
+            sections: [
+                {
+                    name: "Resources",
+                    items: [
+                        {
+                            name: "Service Level Agreement",
+                            id: "docs-sla",
+                            link: "/docs/sla"
+                        },
+                        {
+                            name: "Change Control",
+                            id: "docs-changecontrol",
+                            link: "/docs/change-control"
+                        }
+                    ]
+                },
+                {
+                    name: "Other",
+                    items: [
+                        {
+                            name: "Other 1",
+                            id: "docs-other1",
+                            link: "/docs/other1"
+                        },
+                        {
+                            name: "Other 2",
+                            id: "docs-other2",
+                            link: "/docs/other2"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    locations: [
+        {
+            id: "phx01",
+            name: "Phoenix, AZ",
+            subtitle: "",
+            info: "But it's a dry data center."
+        },
+        {
+            id: "hnl01",
+            name: "Honolulu, HI",
+            subtitle: "",
+            info: "The data center you definitely need to audit."
+        },
+        {
+            id: "chi01",
+            name: "Chicago, IL",
+            subtitle: "",
+            info: "The windiest data center."
+        },
+        {
+            id: "atl01",
+            name: "Atlanta, GA",
+            subtitle: "On the 2020 Horizon",
+            info: "It may be hot outside, but not in this data center."
+        },
+        {
+            id: "sac01",
+            name: "Sacramento, CA",
+            subtitle: "On the 2020 Horizon",
+            info: "The cloud's most hipster data center."
+        },
+        {
+            id: "pdx01",
+            name: "Portland, OR",
+            subtitle: "On the 2020 Horizon",
+            info: "Put a bird on your data center."
+        }
+    ],
+    nav: [
+        {
+            title: "Cloud",
+            id: "st-menu-cloud",
+            sections: commonNavItems
+        }
+        // {
+        //     title: "Services",
+        //     id: "st-menu-services",
+        //     style: {},
+        //     sections: [
+        //         {
+        //             title: "Managed IT",
+        //             style: {},
+        //             items: [
+        //                 { name: "Managed IT 1", link: "#" },
+        //                 { name: "Managed IT 2", link: "#" },
+        //                 { name: "Managed IT 3", link: "#" }
+        //             ]
+        //         },
+        //         {
+        //             title: "Systems Architecture & Deployment",
+        //             style: {},
+        //             items: [
+        //                 { name: "Projects 1", link: "#" },
+        //                 { name: "Projects 2", link: "#" },
+        //                 { name: "Projects 3", link: "#" }
+        //             ]
+        //         },
+        //         {
+        //             title: "Infrastructure Automation",
+        //             style: {},
+        //             items: [
+        //                 { name: "Projects 1", link: "#" },
+        //                 { name: "Projects 2", link: "#" },
+        //                 { name: "Projects 3", link: "#" }
+        //             ]
+        //         }
+        //     ]
+        // }
+    ],
+    footer: {
+        sections: [
+            {
+                title: "Company",
+                items: [
+                    { name: "Home", link: "" },
+                    { name: "About", link: "" },
+                    { name: "Careers", link: "" },
+                    { name: "Partners", link: "" },
+                    { name: "Blog", link: "#" }
+                ]
+            },
+            ...commonNavItems
+        ]
+    }
+};
+
 const siteConfig = {
     legalName: "Stellar Technologies Inc.",
     givenName: "Stellar",
@@ -19,8 +248,8 @@ const pageConfig = {
         subtitle: ""
     },
     cloud: {
-        title: "Cloud Presence",
-        subtitle: ""
+        title: "Orion",
+        subtitle: "The Enterprise Native Cloud by Stellar"
     }
 };
 
@@ -185,7 +414,7 @@ const footerConfig = {
     ]
 };
 
-module.exports = {
+export {
     homeConfig,
     footerConfig,
     siteConfig,

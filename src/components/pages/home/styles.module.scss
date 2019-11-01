@@ -37,6 +37,25 @@
     text-align: center;
     flex-grow: 1;
     background-color: $section-card-background !important;
+    max-height: $section-card-height !important;
+    height: 100%;
+}
+
+.sectionCardText::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: auto;
+    content: "";
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.sectionCardText:hover {
+    text-decoration: none !important;
+    color: unset !important;
 }
 
 .sectionCardTop {

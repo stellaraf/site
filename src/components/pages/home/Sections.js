@@ -3,44 +3,71 @@ import { CardDeck, Container } from "react-bootstrap";
 import { SectionCard } from "components/pages/home/Cards";
 import { getDelay } from "utils";
 import { FullWidthCard } from "components/styled/cards";
-import styles from "components/pages/home/styles.module.scss";
-import classNames from "classnames";
-import { homeConfig } from "config";
+import theme from "styles/exports.module.scss";
+import styled from "styled-components";
+import site from "config";
+
+const CardContainer = styled(Container)`
+    @media (min-width: ${theme.breakSm}) {
+    }
+    @media (min-width: ${theme.breakMd}) {
+    }
+    @media (min-width: ${theme.breakLg}) {
+    }
+    @media (min-width: ${theme.breakXl}) {
+    }
+`;
+
+const CardRow = styled(CardDeck)`
+    justify-content: space-between;
+    align-items: start;
+`;
+
+const SectionOneWrapper = styled.section`
+    height: 40vh;
+    display: flex;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    flex-direction: column;
+`;
 
 function SectionOneRow() {
-    const cards = homeConfig.sections.sectionOne;
+    const cards = site.pages.home.sections.sectionOne;
     const revealProps = {
         left: true,
         duration: 128,
         cascade: true
     };
     const sectionDelay = i => getDelay(i, cards.length);
-    const NewCard = FullWidthCard(cards.length);
     return (
-        <CardDeck className={styles.sectionCardRow}>
-            {cards.map((section, i) => (
-                <NewCard key={i}>
-                    <SectionCard
-                        title={section.title}
-                        text={section.text}
-                        image={section.image}
-                        delay={sectionDelay(i)}
-                        {...revealProps}
-                    />
-                </NewCard>
-            ))}
-        </CardDeck>
+        <CardRow>
+            {cards.map((section, i) => {
+                let CardWrapper = FullWidthCard(cards.length, i);
+                return (
+                    <CardWrapper key={i}>
+                        <SectionCard
+                            title={section.title}
+                            text={section.text}
+                            image={section.image}
+                            link={section.link}
+                            delay={sectionDelay(i)}
+                            {...revealProps}
+                        />
+                    </CardWrapper>
+                );
+            })}
+        </CardRow>
     );
 }
 
 function SectionOne(props) {
     console.log(props.size);
     return (
-        <section className={classNames(styles.heroSection, "infoSection")}>
+        <SectionOneWrapper className="infoSection">
             <Container>
                 <SectionOneRow />
             </Container>
-        </section>
+        </SectionOneWrapper>
     );
 }
 
