@@ -87,15 +87,15 @@ const HeroSection = styled.section`
     }
     @media (min-width: ${theme.breakSm}) {
         // max-width: ${theme.containerMaxWidthSm};
-        height: 100vh;
+        min-height: 100vh;
     }
     @media (min-width: ${theme.breakMd}) {
         // max-width: ${theme.containerMaxWidthMd};
-        height: 80vh;
+        min-height: 80vh;
     }
     @media (min-width: ${theme.breakLg}) {
         // max-width: ${theme.containerMaxWidthLg};
-        height: 50vh;
+        min-height: 50vh;
     }
     @media (min-width: ${theme.breakXl}) {
         max-width: ${theme.containerMaxWidthXl};
@@ -109,7 +109,7 @@ const InfoSectionContent = styled.div`
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
-    height: 50vh;
+    min-height: 50vh;
     flex-grow: 1;
 `;
 
@@ -118,7 +118,7 @@ const InfoSectionMain = styled.section`
     max-width: 100%;
     position: relative;
     overflow: hidden;
-    height: ${props => props.height};
+    min-height: ${props => props.height};
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
@@ -144,7 +144,7 @@ const InfoSectionMain = styled.section`
 `;
 
 InfoSectionMain.defaultProps = {
-    height: "40vh",
+    "min-height": "40vh",
     "margin-top": "3rem",
     "margin-bottom": "2rem",
     color: theme.bodyColor,

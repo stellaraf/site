@@ -8,6 +8,7 @@ const allRevealProps = new Set();
 
 // For each react-reveal action type, get the proptypes and add each to the allRevealProps set.
 revealComponents.forEach(comp => {
+    // eslint-disable-next-line
     const compProps = Object.keys(ReactReveal[comp].propTypes);
     compProps.forEach(p => allRevealProps.add(p));
 });

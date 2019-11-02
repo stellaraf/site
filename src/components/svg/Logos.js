@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { siteConfig } from "config";
+import site from "config";
 import theme from "styles/exports.module.scss";
 
 /* 
@@ -14,15 +14,6 @@ const cleanTitle = title => {
         .replace(/\d/g, "")
         .toLowerCase();
     return newTitle;
-};
-
-const iconHeight = width => {
-    let height = (22.26726 / 24) * width;
-    return height;
-};
-
-const typoHeight = (ogWidth, ogHeight, newWidth) => {
-    return (ogHeight / ogWidth) * newWidth;
 };
 
 const Iconographic = props => {
@@ -77,7 +68,7 @@ Iconographic.propTypes = {
 Iconographic.defaultProps = {
     color: theme.stWhite,
     size: 24,
-    title: siteConfig.givenName
+    title: site.global.givenName
 };
 
 const TypographicMain = ({ color }) => (
@@ -186,14 +177,12 @@ const TypographicTagline = ({ color }) => (
 
 const Typographic = props => {
     const { color, size, title, tagline, ...otherProps } = props;
-    const ogSize = { width: 400, height: 200 };
     return (
         <svg
             id={`logo-type-${cleanTitle(title)}`}
             data-name={`logo-type-${cleanTitle(title)}`}
             xmlns="http://www.w3.org/2000/svg"
             width={size}
-            height={typoHeight(ogSize.width, ogSize.height, size)}
             preserveAspectRatio="xMinYMin meet"
             viewBox="0 0 400 200"
             {...otherProps}>
@@ -214,7 +203,7 @@ Typographic.propTypes = {
 Typographic.defaultProps = {
     color: theme.stWhite,
     size: 400,
-    title: siteConfig.givenName,
+    title: site.global.givenName,
     tagline: false
 };
 

@@ -9,12 +9,12 @@
     list-style: none;
 }
 
-.footerLinkTitle,
 .footerLinkItem {
     color: $footer-color;
 }
 
 .footerLinkTitle {
+    color: $st-white;
     font-size: $footer-heading-size;
 }
 

@@ -1,14 +1,8 @@
 import React from "react";
-import { Card, Container, ListGroup, Nav, Row, Col } from "react-bootstrap";
-import {
-    LinkContainer,
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from "react-router-bootstrap";
-import { importMDX } from "mdx.macro";
+import { Card, Container, ListGroup, Row, Col } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+// import { importMDX } from "mdx.macro";
 import styled from "styled-components";
-import { HeroSection } from "components/styled/sections";
 import { Display } from "components/styled/text";
 import site from "config";
 import theme from "styles/exports.module.scss";
@@ -23,7 +17,6 @@ function SideNav() {
         border-color: ${theme.navCardBorderColor} !important;
         font-size: ${theme.fontSizeSm};
     `;
-    const NavLink = styled(LinkContainer)``;
     const NavBox = styled(Card)`
         border-color: ${theme.navCardBorderColor} !important;
         ${NavTheme}
@@ -66,26 +59,16 @@ function SideNav() {
     );
 }
 
-function Sla() {
-    const Content = React.lazy(() =>
-        importMDX("../../../content/docs/sla.mdx")
-    );
-    return (
-        <React.Suspense fallback={<div>Loading...</div>}>
-            <Content />
-        </React.Suspense>
-    );
-}
-
-function DocContent() {
-    return (
-        <Switch>
-            <Route path="/docs/sla">
-                <Sla />
-            </Route>
-        </Switch>
-    );
-}
+// function Sla() {
+//     const Content = React.lazy(() =>
+//         importMDX("../../../content/docs/sla.mdx")
+//     );
+//     return (
+//         <React.Suspense fallback={<div>Loading...</div>}>
+//             <Content />
+//         </React.Suspense>
+//     );
+// }
 
 function Docs() {
     const PageContainer = styled(Container)`

@@ -3,20 +3,8 @@ import { CardDeck, Container } from "react-bootstrap";
 import { SectionCard } from "components/pages/home/Cards";
 import { getDelay } from "utils";
 import { FullWidthCard } from "components/styled/cards";
-import theme from "styles/exports.module.scss";
 import styled from "styled-components";
 import site from "config";
-
-const CardContainer = styled(Container)`
-    @media (min-width: ${theme.breakSm}) {
-    }
-    @media (min-width: ${theme.breakMd}) {
-    }
-    @media (min-width: ${theme.breakLg}) {
-    }
-    @media (min-width: ${theme.breakXl}) {
-    }
-`;
 
 const CardRow = styled(CardDeck)`
     justify-content: space-between;
@@ -24,7 +12,7 @@ const CardRow = styled(CardDeck)`
 `;
 
 const SectionOneWrapper = styled.section`
-    height: 40vh;
+    min-height: 40vh;
     display: flex;
     margin-top: 5vh;
     margin-bottom: 5vh;
