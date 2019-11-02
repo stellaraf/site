@@ -8,8 +8,6 @@
     "classnames": "^2.2.6",
     "eases": "^1.0.8",
     "formik": "^2.0.1",
-    "js-yaml": "^3.13.1",
-    "mdx.macro": "^0.2.9",
     "node-sass": "^4.12.0",
     "parse-unit": "^1.0.1",
     "prop-types": "^15.7.2",
@@ -34,6 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "stats": "react-scripts build \"--stats\" && webpack-bundle-analyzer build/bundle-stats.json",
     "lint:sass": "stylelint *.scss *.sass --fix"
   },
   "eslintConfig": {
@@ -108,6 +107,7 @@
     "stylelint": "^11.1.1",
     "stylelint-config-prettier": "^6.0.0",
     "stylelint-config-standard": "^19.0.0",
-    "stylelint-prettier": "^1.1.1"
+    "stylelint-prettier": "^1.1.1",
+    "webpack-cli": "^3.3.10"
   }
 }

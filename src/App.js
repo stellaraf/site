@@ -6,16 +6,21 @@ import {
     Route,
     useLocation
 } from "react-router-dom";
-// import styled from "styled-components";
 
 // App Imports
+import asyncComponent from "components/AsyncComponent";
 import NavBar from "components/navbar";
 import Footer from "components/footer";
 import Overlay from "components/overlay";
-import { Home, Cloud, Contact, Docs } from "components/pages";
 
 // Styles
 import "styles/main.scss";
+// import { Home, Cloud, Contact } from "components/pages";
+
+// Async Imports
+const Home = asyncComponent(() => import("components/pages/home"));
+const Cloud = asyncComponent(() => import("components/pages/cloud"));
+const Contact = asyncComponent(() => import("components/pages/contact"));
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -25,7 +30,7 @@ function ScrollToTop() {
     return null;
 }
 
-function App() {
+function App({ childProps }) {
     return (
         <Router>
             <ScrollToTop />
@@ -33,10 +38,24 @@ function App() {
                 <NavBar />
                 <main>
                     <Switch>
-                        <Route path="/docs" component={Docs} />
-                        <Route path="/contact" component={Contact} />
-                        <Route path="/cloud" component={Cloud} />
-                        <Route path="/" component={Home} />
+                        <Route
+                            exact
+                            props={childProps}
+                            path="/contact"
+                            component={Contact}
+                        />
+                        <Route
+                            exact
+                            props={childProps}
+                            path="/cloud"
+                            component={Cloud}
+                        />
+                        <Route
+                            exact
+                            props={childProps}
+                            path="/"
+                            component={Home}
+                        />
                     </Switch>
                 </main>
             </Overlay>
