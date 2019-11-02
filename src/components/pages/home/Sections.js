@@ -49,7 +49,6 @@ function SectionOneRow() {
 }
 
 function SectionOne(props) {
-    console.log(props.size);
     return (
         <SectionOneWrapper className="infoSection">
             <Container>

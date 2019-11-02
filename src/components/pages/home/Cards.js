@@ -1,22 +1,28 @@
 import React from "react";
+import asyncComponent from "components/AsyncComponent";
 import { Card } from "react-bootstrap";
 import Slide from "react-reveal/Slide";
 import withReveal from "react-reveal/withReveal";
 import { LinkContainer } from "react-router-bootstrap";
-import Undraw from "react-undraw";
+import UndrawServer from "react-undraw/dist/illustrations/UndrawServer";
+import UndrawMaintenance from "react-undraw/dist/illustrations/UndrawMaintenance";
+import UndrawStatusUpdate from "react-undraw/dist/illustrations/UndrawStatusUpdate";
 import { getRevealProps } from "utils";
 import styled from "styled-components";
 import styles from "components/pages/home/styles.module.scss";
-// import theme from "styles/exports.module.scss";
 import classNames from "classnames";
 import theme from "styles/exports.module.scss";
-
-Undraw.setDefaultProps({ primaryColor: theme.stSecondary });
 
 const RevealWrapper = styled.div`
     display: flex !important;
     flex-grow: 1 !important;
 `;
+const undrawProps = { primaryColor: theme.stSecondary, height: "90px" };
+const undrawMap = {
+    server: <UndrawServer {...undrawProps} />,
+    "status-update": <UndrawStatusUpdate {...undrawProps} />,
+    maintenance: <UndrawMaintenance {...undrawProps} />
+};
 
 function SectionCard({
     image,
@@ -27,17 +33,10 @@ function SectionCard({
 }) {
     const { revealProps, standardProps } = getRevealProps(props);
     const CardWrapper = withReveal(RevealWrapper, <Slide {...revealProps} />);
-    const iconProps = {
-        name: image,
-        height: "90px",
-        primaryColor: theme.stSecondary
-    };
     return (
         <CardWrapper {...standardProps}>
             <Card className={styles.sectionCard}>
-                <div className={styles.sectionCardTop}>
-                    <Undraw {...iconProps} />
-                </div>
+                <div className={styles.sectionCardTop}>{undrawMap[image]}</div>
                 <div className={styles.sectionCardBottom}>
                     <h5 className={styles.sectionCardTitle}>{title}</h5>
                     <LinkContainer to={link}>
