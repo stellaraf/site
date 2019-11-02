@@ -50,17 +50,17 @@ function HeroHeading({ headings }) {
 }
 
 function Hero() {
-    const heroCardReveal = {
-        right: true,
-        cascade: true,
-        duration: 128
-    };
-    const HeroCardWrapper = styled.div`
-        flex: 0 0 auto;
-        max-width: 100%;
-        position: relative;
-        width: 100%;
-    `;
+    // const heroCardReveal = {
+    //     right: true,
+    //     cascade: true,
+    //     duration: 128
+    // };
+    // const HeroCardWrapper = styled.div`
+    //     flex: 0 0 auto;
+    //     max-width: 100%;
+    //     position: relative;
+    //     width: 100%;
+    // `;
     return (
         <section className={styles.heroSection}>
             <Container>

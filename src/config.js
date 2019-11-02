@@ -11,18 +11,19 @@ const commonNavItems = [
     {
         title: "Dedicated IT",
         items: [
-            { name: "End User Support", link: "#" },
-            { name: "Infrastructure Management", link: "#" },
-            { name: "Asset Monitoring", link: "#" },
-            { name: "Automation", link: "#" }
+            { name: "End User Support", link: "/" },
+            { name: "Infrastructure Management", link: "/" },
+            { name: "Asset Monitoring", link: "/" },
+            { name: "Automation", link: "/" }
         ]
     },
     {
         title: "Design & Deployment",
         items: [
-            { name: "Infrastructure Deployment", link: "#" },
-            { name: "Network Design", link: "#" },
-            { name: "DevOps", link: "#" }
+            { name: "Infrastructure Deployment", link: "/" },
+            { name: "Network Design", link: "/" },
+            { name: "DevOps", link: "/" },
+            { name: "Migrations", link: "/" }
         ]
     }
 ];
@@ -175,51 +176,17 @@ export default {
             id: "st-menu-cloud",
             sections: commonNavItems
         }
-        // {
-        //     title: "Services",
-        //     id: "st-menu-services",
-        //     style: {},
-        //     sections: [
-        //         {
-        //             title: "Managed IT",
-        //             style: {},
-        //             items: [
-        //                 { name: "Managed IT 1", link: "#" },
-        //                 { name: "Managed IT 2", link: "#" },
-        //                 { name: "Managed IT 3", link: "#" }
-        //             ]
-        //         },
-        //         {
-        //             title: "Systems Architecture & Deployment",
-        //             style: {},
-        //             items: [
-        //                 { name: "Projects 1", link: "#" },
-        //                 { name: "Projects 2", link: "#" },
-        //                 { name: "Projects 3", link: "#" }
-        //             ]
-        //         },
-        //         {
-        //             title: "Infrastructure Automation",
-        //             style: {},
-        //             items: [
-        //                 { name: "Projects 1", link: "#" },
-        //                 { name: "Projects 2", link: "#" },
-        //                 { name: "Projects 3", link: "#" }
-        //             ]
-        //         }
-        //     ]
-        // }
     ],
     footer: {
         sections: [
             {
                 title: "Company",
                 items: [
-                    { name: "Home", link: "" },
-                    { name: "About", link: "" },
-                    { name: "Careers", link: "" },
-                    { name: "Partners", link: "" },
-                    { name: "Blog", link: "#" }
+                    { name: "Home", link: "/" },
+                    { name: "About", link: "/" },
+                    { name: "Careers", link: "/" },
+                    { name: "Partners", link: "/" },
+                    { name: "Blog", link: "/" }
                 ]
             },
             ...commonNavItems

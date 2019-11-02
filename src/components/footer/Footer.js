@@ -35,16 +35,20 @@ const LinkCol = styled(Col)`
     flex-shrink: 1 !important;
     margin-left: ${theme.gridGutterWidth};
     margin-right: ${theme.gridGutterWidth};
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     @media (max-width: ${theme.breakLg}) {
     }
     @media (min-width: ${theme.breakSm}) {
     }
     @media (min-width: ${theme.breakMd}) {
         &:first-of-type {
+            padding-left: 15px !important;
             margin-left: 0;
             margin-right: ${theme.gridGutterWidth};
         }
         &:last-of-type {
+            padding-right: 15px !important;
             margin-right: 0;
             margin-left: ${theme.gridGutterWidth};
         }
@@ -78,7 +82,9 @@ function FooterLink({ name, link }) {
     return (
         <li className={styles.footerLink}>
             <LinkContainer to={link}>
-                <a className={styles.footerLinkItem}>{name}</a>
+                <a href={link} className={styles.footerLinkItem}>
+                    {name}
+                </a>
             </LinkContainer>
         </li>
     );
@@ -106,7 +112,7 @@ function FooterSection({ title, items }) {
 
 function FooterCol({ sections }) {
     return sections.map((section, i) => (
-        <LinkCol key={i} sm={2}>
+        <LinkCol key={i} md={2} sm={6}>
             <FooterSection
                 key={i}
                 title={section.title}

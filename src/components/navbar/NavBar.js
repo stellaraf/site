@@ -88,7 +88,7 @@ class NavBar extends Component {
                         }
                     }}>
                     <Container>
-                        <Navbar.Brand href="#">
+                        <Navbar.Brand href="/">
                             <LinkContainer to="/">
                                 <Logo.Iconographic
                                     size={site.global.navIconSize}
