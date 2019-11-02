@@ -1,6 +1,17 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# stellar.tech website
 
-## Available Scripts
+This repository contains the source code for [stellar.tech](https://stellar.tech), the website for Stellar Technologies Inc.
+
+## Branches
+
+| Branch    | Function                                                                                       |
+|-----------|------------------------------------------------------------------------------------------------|
+| `master`  | Production, commits auto build to production @ [stellar.tech](https://stellar.tech).           |
+| `develop` | Development, commits auto build to development environment @ [stellar.af](https://stellar.af). |
+
+# Technical Details
+
+This project was created with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
 
@@ -27,42 +38,20 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+## React Links
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [React documentation](https://reactjs.org/).
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [Code splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [Analyzing the Bundle Size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-## Learn More
+- [Making a Progressive Web App](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Advanced Configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- [`yarn build` fails to minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
