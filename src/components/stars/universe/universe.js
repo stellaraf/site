@@ -4,12 +4,13 @@ import { MeteorShower } from "components/stars/universe/meteor-shower";
 import * as basicScroll from "components/stars/universe/basicScroll";
 import buildCoords from "components/stars/universe/random-coords";
 import { TwinkleStars } from "components/stars/universe/twinkle-stars";
+import site from "config";
 
 function calcStars() {
     const winHeight = window.innerHeight;
     const winWidth = window.innerWidth;
     const winHighest = Math.max(winWidth, winHeight);
-    return ~~(winHighest / 6);
+    return ~~(winHighest / site.stars.factor);
 }
 
 const numStars = calcStars();
