@@ -158,6 +158,8 @@ $border-radius-sm: 0.4rem;
 
 //// Buttons
 $input-btn-focus-box-shadow: none;
+$input-btn-padding-y: 0.375rem !default;
+$input-btn-padding-x: 0.75rem !default;
 
 // App Styles
 
@@ -198,6 +200,21 @@ $loc-card-margin-x: 3rem;
 $loc-card-width: 280px;
 $loc-card-height: 175px;
 $log-card-margin-sm-y: 15px;
+// Next Page
+$next-card-background: $st-primary;
+$next-card-color: $st-white;
+$next-card-width: 340px;
+$next-card-height: 175px;
+$next-card-background-hover: darken($next-card-background, 2%);
+$next-card-subtitle-color: rgba($next-card-color, 0.3);
+$next-card-border-color: darken($next-card-background, 5%);
+$next-card-padding-x: 1rem;
+$next-card-padding-y: 1rem;
+
+// Feature Sections
+$feature-card-height: 285px;
+$feature-card-height-sm: 260px;
+$feature-card-border-color: rgba($st-dark, 0.2);
 
 // SideNav
 $sidenav-background: lighten(desaturate($st-dark, 100%), 4%);

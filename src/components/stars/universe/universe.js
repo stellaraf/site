@@ -1,16 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-
-import { STAR_COORDS } from "components/stars/universe/star-coords";
 import { MeteorShower } from "components/stars/universe/meteor-shower";
-import { TwinkleStars } from "components/stars/universe/twinkle-stars";
 import * as basicScroll from "components/stars/universe/basicScroll";
+import buildCoords from "components/stars/universe/random-coords";
+import { TwinkleStars } from "components/stars/universe/twinkle-stars";
 
-// import { STAR_COORDS } from "./star-coords";
-// import styled from "styled-components";
-// import { MeteorShower } from "./meteor-shower";
-// import { TwinkleStars } from "./twinkle-stars";
-// import * as basicScroll from "./basicScroll";
+function calcStars() {
+    const winHeight = window.innerHeight;
+    const winWidth = window.innerWidth;
+    const winHighest = Math.max(winWidth, winHeight);
+    return ~~(winHighest / 6);
+}
+
+const numStars = calcStars();
 
 const Layout = styled.div`
     position: fixed;
@@ -78,7 +80,7 @@ class Universe extends React.Component {
                     height="100%"
                     preserveAspectRatio="xMinYMin slice">
                     <TwinkleStars
-                        stars={STAR_COORDS.slice(0, 20)}
+                        stars={buildCoords(numStars)}
                         debug={this.state.debug}
                     />
                     <MeteorShower debug={this.state.debug} />

@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import theme from "styles/exports.module.scss";
-import { Diagonal } from "components/svg";
+import { DiagonalSection } from "components/svg";
+import DiagonalLine from "components/svg/DiagonalLine";
 // import { renderToStaticMarkup } from "react-dom/server";
 // import Map from "components/pages/cloud/Map";
 // const svgString = encodeURIComponent(renderToStaticMarkup(<Map />));
@@ -109,7 +110,7 @@ const InfoSectionContent = styled.div`
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
-    min-height: 50vh;
+    min-height: 25vh;
     flex-grow: 1;
 `;
 
@@ -144,7 +145,7 @@ const InfoSectionMain = styled.section`
 `;
 
 InfoSectionMain.defaultProps = {
-    "min-height": "40vh",
+    "min-height": "25vh",
     "margin-top": "3rem",
     "margin-bottom": "2rem",
     color: theme.bodyColor,
@@ -157,8 +158,10 @@ const InfoSection = {
 };
 
 function AngleSection({
-    height = "40vh",
+    height = "25vh",
     angleHeight = "5vh",
+    directionTop = "rightDown",
+    directionBottom = "leftUp",
     backgroundColor = theme.bodyBg,
     textColor = theme.bodyColor,
     ...props
@@ -180,12 +183,12 @@ function AngleSection({
         angleHeight: middleMargin
     };
     const topDiag = {
-        direction: "rightDown",
+        direction: directionTop,
         height: angleHeight,
         color: sectionStyle.backgroundColor
     };
     const bottomDiag = {
-        direction: "leftUp",
+        direction: directionBottom,
         height: angleHeight,
         color: sectionStyle.backgroundColor
     };
@@ -196,13 +199,58 @@ function AngleSection({
     `;
     return (
         <ThisSection {...sectionStyle}>
-            <Diagonal {...topDiag} />
+            <DiagonalSection {...topDiag} />
             <InfoSection.Content {...props}>
                 {props.children}
             </InfoSection.Content>
-            <Diagonal {...bottomDiag} />
+            <DiagonalSection {...bottomDiag} />
         </ThisSection>
     );
 }
 
-export { HeroContainer, HeroSection, InfoSection, AngleSection };
+function LineSection({
+    height = "25vh",
+    angleHeight = "5vh",
+    color = theme.stWhite,
+    textColor = theme.bodyColor,
+    direction = "leftDown",
+    strokeWidth = "2",
+    ...props
+}) {
+    const [heightInt, heightUnit] = height
+        .split(/(\d+)([a-zA-Z]+)/)
+        .filter(i => i);
+    const [angleHeightInt, angleHeightUnit] = angleHeight
+        .split(/(\d+)([a-zA-Z]+)/)
+        .filter(i => i);
+    const middleHeightInt = heightInt - angleHeightInt * 2;
+    const middleHeight = `${middleHeightInt}${heightUnit}`;
+    const middleMargin = `${~~(angleHeightInt * 1.2)}${angleHeightUnit}`;
+
+    let sectionStyle = {
+        height: middleHeight,
+        textColor: textColor,
+        angleHeight: middleMargin
+    };
+    const lineParams = {
+        direction: direction,
+        height: angleHeight,
+        color: color,
+        strokeWidth: strokeWidth
+    };
+    const ThisSection = styled(InfoSection.Main)`
+        overflow: visible;
+        padding-left: 0;
+        padding-right: 0;
+    `;
+    return (
+        <ThisSection {...sectionStyle}>
+            <DiagonalLine {...lineParams} />
+            <InfoSection.Content {...props}>
+                {props.children}
+            </InfoSection.Content>
+        </ThisSection>
+    );
+}
+
+export { HeroContainer, HeroSection, InfoSection, AngleSection, LineSection };

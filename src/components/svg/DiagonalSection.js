@@ -16,6 +16,7 @@ function Diagonal({
     offset,
     height = "5vh",
     color,
+    strokeWidth,
     viewBox = "0 0 100 100",
     ...restProps
 }) {
@@ -77,7 +78,7 @@ function Diagonal({
             <polygon
                 fill={color}
                 stroke={color}
-                strokeWidth="2"
+                strokeWidth={strokeWidth}
                 points={shapePoints}
             />
         </Triangle>

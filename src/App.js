@@ -11,16 +11,15 @@ import {
 import asyncComponent from "components/AsyncComponent";
 import NavBar from "components/navbar";
 import Footer from "components/footer";
-import Overlay from "components/overlay";
 
 // Styles
 import "styles/main.scss";
-// import { Home, Cloud, Contact } from "components/pages";
 
 // Async Imports
 const Home = asyncComponent(() => import("components/pages/home"));
 const Cloud = asyncComponent(() => import("components/pages/cloud"));
 const Contact = asyncComponent(() => import("components/pages/contact"));
+const Overlay = asyncComponent(() => import("components/overlay/Overlay"));
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -34,32 +33,26 @@ function App({ childProps }) {
     return (
         <Router>
             <ScrollToTop />
-            <Overlay>
-                <NavBar />
-                <main>
-                    <Switch>
-                        <Route
-                            exact
-                            props={childProps}
-                            path="/contact"
-                            component={Contact}
-                        />
-                        <Route
-                            exact
-                            props={childProps}
-                            path="/cloud"
-                            component={Cloud}
-                        />
-                        <Route
-                            exact
-                            props={childProps}
-                            path="/"
-                            component={Home}
-                        />
-                    </Switch>
-                </main>
-            </Overlay>
+            <NavBar />
+            <main>
+                <Switch>
+                    <Route
+                        exact
+                        props={childProps}
+                        path="/contact"
+                        component={Contact}
+                    />
+                    <Route
+                        exact
+                        props={childProps}
+                        path="/cloud"
+                        component={Cloud}
+                    />
+                    <Route exact props={childProps} path="/" component={Home} />
+                </Switch>
+            </main>
             <Footer />
+            <Overlay />
         </Router>
     );
 }

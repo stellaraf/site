@@ -2,31 +2,17 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Display } from "components/styled/text";
 import Logo from "components/svg/Logos";
-import classNames from "classnames";
 import styled from "styled-components";
-import styles from "components/pages/home/styles.module.scss";
 import theme from "styles/exports.module.scss";
 import site, { homeConfig } from "config";
-
-const heroColLeft = classNames("pr-md-5", "py-md-2", "text-white", "heroCol");
-const heroColRight = classNames("pl-md-5", "py-md-2", "heroCol");
+import bp from "utils/breakpoints";
 
 const config = site.pages.home;
 
 const Title = styled(Display.Title)`
     width: 100%;
-    @media (max-width: ${theme.breakMd}) {
+    ${bp.down("md")} {
         font-size: ${theme.h1FontSize};
-    }
-    @media (max-width: ${theme.breakLg}) {
-    }
-    @media (min-width: ${theme.breakSm}) {
-    }
-    @media (min-width: ${theme.breakMd}) {
-    }
-    @media (min-width: ${theme.breakLg}) {
-    }
-    @media (min-width: ${theme.breakXl}) {
     }
 `;
 const Subtitle = styled(Display.Subtitle)`
@@ -48,6 +34,13 @@ function HeroHeading({ headings }) {
         </>
     );
 }
+const HomeHeroSection = styled.section`
+    display: flex;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    flex-direction: column;
+    min-height: 30vh;
+`;
 
 function Hero() {
     // const heroCardReveal = {
@@ -62,14 +55,13 @@ function Hero() {
     //     width: 100%;
     // `;
     return (
-        <section className={styles.heroSection}>
+        <HomeHeroSection>
             <Container>
                 <Row className={"heroRow"}>
-                    <Col className={heroColLeft}>
+                    <Col>
                         <HeroHeading {...homeConfig.homeOne} />
-                        <p className={"lead"}>{homeConfig.homeOne.text}</p>
                     </Col>
-                    <Col className={heroColRight}>
+                    <Col>
                         <BigLogo size={600} />
                     </Col>
                     {/* <Col className={heroColRight}>
@@ -96,9 +88,9 @@ function Hero() {
                         </HeroCardWrapper>
                     </Col> */}
                 </Row>
-                <Row></Row>
+                {/* <Row></Row> */}
             </Container>
-        </section>
+        </HomeHeroSection>
     );
 }
 
