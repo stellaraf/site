@@ -1,6 +1,6 @@
 import React from "react";
 import IconNotFound from "components/svg/IconNotFound";
-import Diagonal from "components/svg/Diagonal";
+import DiagonalSection from "components/svg/DiagonalSection";
 
 const imageMap = {
     IconNotFound: IconNotFound
@@ -11,4 +11,4 @@ function Image({ name }) {
     return <ThisImage />;
 }
 
-export { Image, Diagonal };
+export { Image, DiagonalSection };

@@ -4,11 +4,18 @@ import Fade from "react-reveal/Fade";
 import withReveal from "react-reveal/withReveal";
 import styled from "styled-components";
 import { getDelay, buildCardRows, getRevealProps } from "utils";
-import { HeroSection, AngleSection } from "components/styled/sections";
+import {
+    HeroSection,
+    AngleSection,
+    InfoSection,
+    LineSection
+} from "components/styled/sections";
+import bp from "utils/breakpoints";
 import { Display } from "components/styled/text";
 import { LocationCard } from "components/pages/cloud/Cards";
 import site, { locationConfig } from "config";
 import theme from "styles/exports.module.scss";
+import { NextCard } from "components/cards";
 
 const config = site.pages.cloud;
 
@@ -179,4 +186,45 @@ function SectionTwo() {
     );
 }
 
-export { SectionOne, SectionTwo, TitleBlock };
+const NextPageRow = styled(CardDeck)`
+    justify-content: space-between;
+    align-items: end;
+    ${bp.up("sm")} {
+        justify-content: center;
+        &:nth-child(n + 1) {
+            margin-top: 0;
+        }
+    }
+    ${bp.up("md")} {
+        justify-content: center;
+        &:nth-child(n + 1) {
+            margin-top: 0;
+        }
+    }
+    ${bp.up("lg")} {
+        justify-content: space-between;
+        &:nth-child(n + 1) {
+            margin-top: 3rem;
+        }
+    }
+    ${bp.up("xl")} {
+        justify-content: space-between;
+        &:nth-child(n + 1) {
+            margin-top: 3rem;
+        }
+    }
+`;
+
+function NextPage() {
+    return (
+        <InfoSection.Main>
+            <InfoSection.Content>
+                <NextPageRow>
+                    <NextCard page="docs" />
+                </NextPageRow>
+            </InfoSection.Content>
+        </InfoSection.Main>
+    );
+}
+
+export { SectionOne, SectionTwo, TitleBlock, NextPage };

@@ -1,3 +1,3 @@
-import Overlay from "components/overlay/Overlay";
+import { Overlay, LazyOverlay } from "components/overlay/Overlay";
 
-export default Overlay;
+export { Overlay, LazyOverlay };

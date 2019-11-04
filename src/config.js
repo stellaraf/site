@@ -35,6 +35,13 @@ export default {
         salesforceInstanceName: "stellartech",
         navIconSize: 40
     },
+    stars: {
+        min: 1,
+        max: 2000,
+        depth: 4,
+        baseSize: 0.5,
+        numStars: 2000
+    },
     contactForm: {
         message: {
             success: "Thank you!",
@@ -44,10 +51,15 @@ export default {
     },
     pages: {
         contact: {
+            includeNext: false,
+            link: "/contact",
             title: "Contact",
             subtitle: ""
         },
         cloud: {
+            includeNext: true,
+            nextLead: "Temp Lead",
+            link: "/cloud",
             title: "Orion",
             subtitle: "The Enterprise Native Cloud by Stellar",
             sections: {
@@ -64,6 +76,8 @@ export default {
             }
         },
         home: {
+            includeNext: false,
+            link: "/home",
             headings: {
                 title: "Introducing...",
                 subtitle: "",
@@ -77,27 +91,30 @@ export default {
                     {
                         title: "Virtual Private Data Center",
                         text: "Custom, Scalable Application Hosting",
-                        image: "server",
+                        image: "DataStructure",
                         link: "/cloud"
                     },
                     {
                         title: "Dedicated Services",
                         text: "Your 24/7 Technology Team",
-                        image: "status-update",
+                        image: "CloudComputing",
                         link: "/cloud"
                     },
                     {
                         title: "Design & Deployment",
                         text: "On-Demand IT Special Forces",
-                        image: "maintenance",
+                        image: "Diagram",
                         link: "/cloud"
                     }
                 ]
             }
         },
         docs: {
+            includeNext: true,
+            nextLead: "Temp Lead",
+            link: "/docs",
             title: "Resources & Documentation",
-            subtitle: "",
+            subtitle: "SLAs & SOPs",
             sections: [
                 {
                     name: "Resources",

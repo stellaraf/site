@@ -25,6 +25,7 @@
     breakMd: $break-md;
     breakLg: $break-lg;
     breakXl: $break-xl;
+    borderRadius: $border-radius;
     containerMaxWidthSm: $container-max-width-sm;
     containerMaxWidthMd: $container-max-width-md;
     containerMaxWidthLg: $container-max-width-lg;
@@ -46,6 +47,7 @@
     locCardMarginSmY: $log-card-margin-sm-y;
     cardBorderWidth: $card-border-width;
     navCardBorderColor: $nav-card-border-color;
+    navCardBackground: $nav-card-background;
     gridGutterWidth: $grid-gutter-width;
     display1Size: $display1-size;
     display2Size: $display2-size;
@@ -64,4 +66,19 @@
     h4FontSize: $h4-font-size;
     h5FontSize: $h5-font-size;
     h6FontSize: $h6-font-size;
+    featureCardHeight: $feature-card-height;
+    featureCardHeightSm: $feature-card-height-sm;
+    sectionCardTextColor: $section-card-text-color;
+    featureCardBorderColor: $feature-card-border-color;
+    inputBtnPaddingY: $input-btn-padding-y;
+    inputBtnPaddingX: $input-btn-padding-x;
+    nextCardBackground: $next-card-background;
+    nextCardColor: $next-card-color;
+    nextCardWidth: $next-card-width;
+    nextCardHeight: $next-card-height;
+    nextCardSubtitleColor: $next-card-subtitle-color;
+    nextCardBackgroundHover: $next-card-background-hover;
+    nextCardBorderColor: $next-card-border-color;
+    nextCardPaddingX: $next-card-padding-x;
+    nextCardPaddingY: $next-card-padding-y;
 }
