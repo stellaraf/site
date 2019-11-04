@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import theme from "styles/exports.module.scss";
+import bp from "utils/breakpoints";
 import { DiagonalSection } from "components/svg";
 import DiagonalLine from "components/svg/DiagonalLine";
 // import { renderToStaticMarkup } from "react-dom/server";
@@ -197,6 +198,7 @@ function AngleSection({
         padding-left: 0;
         padding-right: 0;
     `;
+
     return (
         <ThisSection {...sectionStyle}>
             <DiagonalSection {...topDiag} />
@@ -239,16 +241,21 @@ function LineSection({
         strokeWidth: strokeWidth
     };
     const ThisSection = styled(InfoSection.Main)`
+        margin-top: ${angleHeight};
+        margin-bottom: ${angleHeight};
         overflow: visible;
         padding-left: 0;
         padding-right: 0;
     `;
+    const InnerSection = styled(InfoSection.Content)`
+        ${bp.down("md")} {
+            padding-top: ${angleHeight};
+        }
+    `;
     return (
         <ThisSection {...sectionStyle}>
             <DiagonalLine {...lineParams} />
-            <InfoSection.Content {...props}>
-                {props.children}
-            </InfoSection.Content>
+            <InnerSection {...props}>{props.children}</InnerSection>
         </ThisSection>
     );
 }

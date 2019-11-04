@@ -27,9 +27,6 @@ const Next = {
         color: ${theme.nextCardColor} !important;
         border-color: ${theme.nextCardBorder};
         border: 1px solid transparent !important;
-        ${bp.down("md")} {
-            min-height: ${theme.featureCardHeightSm};
-        }
         &:hover {
             background-color: ${theme.nextCardBackgroundHover} !important;
             transition: color 0.15s ease-in-out,
