@@ -16,7 +16,7 @@ function Diagonal({
     offset,
     height = "5vh",
     color,
-    strokeWidth,
+    strokeWidth = "2",
     viewBox = "0 0 100 100",
     ...restProps
 }) {
@@ -24,7 +24,8 @@ function Diagonal({
     const pointMap = {
         // Starting from the fat side
         rightUp: "100 0, 100 100, 0 0",
-        rightDown: "100 0, 100 100, 0 100",
+        // rightDown: "100 0, 100 100, 0 100",
+        rightDown: "102 2, 102 102, -2 102",
         leftDown: "0 0, 0 100, 100 100",
         leftUp: "0 0, 0 100, 100 0"
     };

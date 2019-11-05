@@ -15,13 +15,24 @@ function calcStars() {
 
 const numStars = calcStars();
 
+// const Layout = styled.div`
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     z-index: -1;
+
+//     pointer-events: none;
+// `;
+
 const Layout = styled.div`
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
     z-index: -1;
+    max-height: 35vh;
 
     pointer-events: none;
 `;
@@ -78,7 +89,8 @@ class Universe extends React.Component {
                 <svg
                     viewBox="0 0 2000 1000"
                     width="100%"
-                    height="100%"
+                    // height="100%"
+                    height="45vh"
                     preserveAspectRatio="xMinYMin slice">
                     <TwinkleStars
                         stars={buildCoords(numStars)}

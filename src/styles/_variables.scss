@@ -192,7 +192,7 @@ $main-card-text-color: $st-gray;
 // Location
 $loc-card-padding-x: 1.5rem;
 $loc-card-padding-y: 1.5rem;
-$loc-card-background: rgba($st-dark, 0.3);
+$loc-card-background: $st-primary;
 $loc-card-title-color: $st-white;
 $loc-card-subtitle-color: rgba($loc-card-title-color, 0.3);
 $loc-card-text-color: $loc-card-title-color;
@@ -201,20 +201,20 @@ $loc-card-width: 280px;
 $loc-card-height: 175px;
 $log-card-margin-sm-y: 15px;
 // Next Page
-$next-card-background: $st-primary;
-$next-card-color: $st-white;
+$next-card-background: transparent;
+$next-card-color: $st-dark;
 $next-card-width: 340px;
 $next-card-height: 175px;
-$next-card-background-hover: darken($next-card-background, 2%);
+$next-card-background-hover: rgba($st-dark, 0.05);
 $next-card-subtitle-color: rgba($next-card-color, 0.3);
-$next-card-border-color: darken($next-card-background, 5%);
+$next-card-border-color: $st-dark;
 $next-card-padding-x: 1rem;
 $next-card-padding-y: 1rem;
 
 // Feature Sections
 $feature-card-height: 285px;
 $feature-card-height-sm: 260px;
-$feature-card-border-color: rgba($st-dark, 0.2);
+$feature-card-border-color: darken($st-white, 2%);
 
 // SideNav
 $sidenav-background: lighten(desaturate($st-dark, 100%), 4%);

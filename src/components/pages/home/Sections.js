@@ -80,6 +80,8 @@ const StyledCard = styled(Card)`
     min-height: ${theme.featureCardHeight};
     height: 100%;
     border: none !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
     ${bp.down("md")} {
         min-height: ${theme.featureCardHeightSm};
     }
@@ -102,6 +104,7 @@ const FeatureTop = styled.div`
 `;
 
 const FeatureBottom = styled.div`
+    color: ${props => props.color};
     padding-right: ${theme.sectionCardPaddingX} !important;
     padding-left: ${theme.sectionCardPaddingX} !important;
     padding-bottom: ${theme.sectionCardPaddingY} !important;
@@ -111,11 +114,15 @@ const FeatureCardRow = styled(CardDeck)`
     width: 100%;
 `;
 
+const FeatureCardTitle = styled.h5`
+    color: ${props => props.color};
+`;
+
 const FeatureCardText = styled.a`
-    color: ${theme.sectionCardTextColor} !important;
+    color: ${props => props.color} !important;
     &:hover {
         text-decoration: none !important;
-        color: unset !important;
+        color: ${props => props.color} !important;
     }
 
     &::after {
@@ -145,12 +152,16 @@ function FeatureCard({
         <CardWrapper {...standardProps}>
             <StyledCard>
                 <FeatureTop>
-                    <Icon color={theme.stSecondary} />
+                    <Icon color={theme.stPrimary} />
                 </FeatureTop>
                 <FeatureBottom>
-                    <h5>{title}</h5>
+                    <FeatureCardTitle color={theme.stDark}>
+                        {title}
+                    </FeatureCardTitle>
                     <LinkContainer to={link}>
-                        <FeatureCardText href="/">{text}</FeatureCardText>
+                        <FeatureCardText color={theme.stDark} href="/">
+                            {text}
+                        </FeatureCardText>
                     </LinkContainer>
                 </FeatureBottom>
             </StyledCard>
@@ -173,7 +184,7 @@ function NewSectionOne(props) {
     };
     const sectionDelay = i => getDelay(i, cards.length);
     return (
-        <AngleSection backgroundColor={theme.navCardBackground}>
+        <AngleSection backgroundColor={theme.stWhite}>
             <SectionContainer>
                 <FeatureCardRow>
                     {cards.map((section, i) => {

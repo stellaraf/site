@@ -19,7 +19,7 @@ import "styles/main.scss";
 const Home = asyncComponent(() => import("components/pages/home"));
 const Cloud = asyncComponent(() => import("components/pages/cloud"));
 const Contact = asyncComponent(() => import("components/pages/contact"));
-const Overlay = asyncComponent(() => import("components/overlay/Overlay"));
+const Stars = asyncComponent(() => import("components/stars/particles"));
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -52,7 +52,7 @@ function App({ childProps }) {
                 </Switch>
             </main>
             <Footer />
-            <Overlay />
+            <Stars />
         </Router>
     );
 }

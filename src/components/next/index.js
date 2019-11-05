@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { Card, CardDeck, Container } from "react-bootstrap";
+import { Card, CardDeck, Container, Col, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useLocation } from "react-router";
 import { FiArrowRight } from "react-icons/fi";
 
-import { LineSection } from "components/styled/sections";
+import { AngleSection, LineSection } from "components/styled/sections";
 import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
 import site from "config";
@@ -25,8 +25,7 @@ const Next = {
         height: ${theme.nextCardHeight};
         background-color: ${theme.nextCardBackground} !important;
         color: ${theme.nextCardColor} !important;
-        border-color: ${theme.nextCardBorder};
-        border: 1px solid transparent !important;
+        border: 1px solid ${theme.nextCardBorderColor} !important;
         &:hover {
             background-color: ${theme.nextCardBackgroundHover} !important;
             transition: color 0.15s ease-in-out,
@@ -171,6 +170,7 @@ function NextCard({
 const SectionContainer = styled(Container)`
     min-height: 25vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
 `;
 
@@ -188,27 +188,69 @@ const getNextPages = location => {
     return pages;
 };
 
+// function NextSection(props) {
+//     const location = useLocation();
+//     const nextPages = getNextPages(location.pathname);
+//     return (
+//         <LineSection direction="leftUp" color={theme.stSecondary}>
+//             <SectionContainer>
+//                 <NextCardRow>
+//                     {nextPages.map((page, i) => {
+//                         return (
+//                             <NextCard
+//                                 key={i}
+//                                 title={page.title}
+//                                 subtitle={page.subtitle}
+//                                 lead={page.nextLead}
+//                                 link={page.link}
+//                             />
+//                         );
+//                     })}
+//                 </NextCardRow>
+//             </SectionContainer>
+//         </LineSection>
+//     );
+// }
+
+const NextTitle = styled.h3`
+    color: ${props => props.color};
+    margin-top: 1vh;
+    margin-bottom: 3vh;
+`;
+
 function NextSection(props) {
     const location = useLocation();
     const nextPages = getNextPages(location.pathname);
     return (
-        <LineSection direction="leftUp" color={theme.stSecondary}>
+        <AngleSection
+            directionTop="leftDown"
+            directionBottom="rightUp"
+            backgroundColor={theme.stSecondary}>
             <SectionContainer>
-                <NextCardRow>
-                    {nextPages.map((page, i) => {
-                        return (
-                            <NextCard
-                                key={i}
-                                title={page.title}
-                                subtitle={page.subtitle}
-                                lead={page.nextLead}
-                                link={page.link}
-                            />
-                        );
-                    })}
-                </NextCardRow>
+                <Row>
+                    <Col sm={12}>
+                        <NextTitle color={theme.stDark}>
+                            Ready for more?
+                        </NextTitle>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={12} md={4}>
+                        {nextPages.map((page, i) => {
+                            return (
+                                <NextCard
+                                    key={i}
+                                    title={page.title}
+                                    subtitle={page.subtitle}
+                                    lead={page.nextLead}
+                                    link={page.link}
+                                />
+                            );
+                        })}
+                    </Col>
+                </Row>
             </SectionContainer>
-        </LineSection>
+        </AngleSection>
     );
 }
 
