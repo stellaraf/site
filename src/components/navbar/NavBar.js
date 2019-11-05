@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Button, CardDeck, Container, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { FiMenu } from "react-icons/fi";
 import styled from "styled-components";
 import NavSection from "components/navbar/NavSection";
+import Hamburger from "components/navbar/Hamburger";
 import Logo from "components/svg/Logos";
 import site from "config";
 import styles from "components/navbar/styles.module.scss";
@@ -48,93 +48,95 @@ const NavSectionRow = styled(CardDeck)`
     }
 `;
 
-class NavBar extends Component {
-    constructor(props) {
-        super(props);
-        this.config = site.nav;
-        this.home = site.pages.home;
-        this.navClosed = { expanded: false, bg: "bg1", variant: "bg1" };
-        this.navOpen = { expanded: true, bg: "bg2", variant: "bg2" };
-        this.state = this.navClosed;
-        this.handleNavClick = () => {
-            this.setState(this.navClosed);
-            this.setButtonState(false);
-        };
-        this.buttonActive = false;
-        this.setButtonState = () => {
-            this.buttonActive = false;
-        };
-    }
-    render() {
-        return (
-            <>
-                <Navbar
-                    className={
-                        // Show bottom border if navbar is open
-                        this.state.expanded
-                            ? styles.navDropdownOpen
-                            : styles.navDropdown
-                    }
-                    id={"navbar"}
-                    expand="false"
-                    expanded={this.state.expanded}
-                    bg={this.state.bg}
-                    variant={this.state.variant}
-                    onToggle={e => {
-                        if (e === true) {
-                            this.setState(this.navOpen);
-                        } else {
-                            this.setState(this.navClosed);
-                        }
-                    }}>
-                    <Container>
-                        <Navbar.Brand href="/">
-                            <LinkContainer to="/">
-                                <Logo.Iconographic
-                                    size={site.global.navIconSize}
-                                />
-                            </LinkContainer>
-                        </Navbar.Brand>
-                        <Navbar.Toggle aria-controls="main-nav">
-                            <FiMenu
-                                color={theme.stWhite}
-                                size={site.global.navIconSize}
-                                className={styles.toggleButtonIcon}
-                            />
-                        </Navbar.Toggle>
-                        <Navbar.Collapse
-                            id="main-nav"
-                            className={styles.navCollapse}>
-                            <>
-                                <NavRow>
-                                    <LinkContainer to="/contact">
-                                        <ContactButton
-                                            variant="outline-light"
-                                            onClick={this.handleNavClick}
-                                            active={this.buttonActive}>
-                                            {this.home.contactButton.text}
-                                        </ContactButton>
-                                    </LinkContainer>
-                                </NavRow>
-                                {this.config.map((menu, i) => {
-                                    return (
-                                        <NavSectionRow key={i}>
-                                            <NavSection
-                                                menu={menu}
-                                                handleNavClick={
-                                                    this.handleNavClick
-                                                }
-                                            />
-                                        </NavSectionRow>
-                                    );
-                                })}
-                            </>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-            </>
-        );
-    }
-}
+const StyledNav = styled(Navbar)`
+    background-image: ${props => props.background};
+    border-bottom: ${props => props.border};
+`;
 
+function NavBar() {
+    const config = site.nav;
+    const home = site.pages.home;
+    const [isOpen, setOpen] = useState(false);
+    const [backgroundImage, setBackgroundImage] = useState("none");
+    const [navBorder, setNavBorder] = useState("none");
+    const [buttonActive, setButtonActive] = useState(false);
+    const handleToggle = event => {
+        if (event) {
+            console.log("Seen open");
+            setOpen(true);
+            setBackgroundImage(theme.stGradientDown);
+            setNavBorder(theme.navbarBottomBorder);
+        } else {
+            console.log("Seen closed");
+            setButtonActive(false);
+            setOpen(false);
+            setBackgroundImage("none");
+            setNavBorder("none");
+        }
+    };
+    const handleNavClick = () => handleToggle(false);
+    const handleBrandClick = () => {
+        if (isOpen) {
+            handleNavClick();
+        }
+    };
+    return (
+        <>
+            <StyledNav
+                id="navbar"
+                expand="false"
+                expanded={isOpen}
+                bg="transparent"
+                background={backgroundImage}
+                border={navBorder}
+                variant="transparent"
+                onToggle={handleToggle}>
+                <Container>
+                    <Navbar.Brand href="/">
+                        <LinkContainer to="/" onClick={handleBrandClick}>
+                            <Logo.Iconographic size={site.global.navIconSize} />
+                        </LinkContainer>
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="navbar">
+                        <Hamburger
+                            isOpen={isOpen}
+                            colorOpen={theme.stSecondary}
+                            colorClosed={theme.stWhite}
+                        />
+                    </Navbar.Toggle>
+                    <Navbar.Collapse
+                        id="main-nav"
+                        className={styles.navCollapse}>
+                        <>
+                            <NavRow>
+                                <LinkContainer
+                                    exact
+                                    onClick={handleNavClick}
+                                    isActive={buttonActive}
+                                    activeClassName={null}
+                                    to="/contact">
+                                    <ContactButton
+                                        href="/contact"
+                                        variant="outline-light">
+                                        {home.contactButton.text}
+                                    </ContactButton>
+                                </LinkContainer>
+                            </NavRow>
+                            {config.map((menu, i) => {
+                                return (
+                                    <NavSectionRow key={i}>
+                                        <NavSection
+                                            menu={menu}
+                                            handleNavClick={handleNavClick}
+                                        />
+                                    </NavSectionRow>
+                                );
+                            })}
+                        </>
+                    </Navbar.Collapse>
+                </Container>
+            </StyledNav>
+        </>
+    );
+}
 export default NavBar;

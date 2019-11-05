@@ -1,35 +1,60 @@
-import React, { Component } from "react";
+import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Card, ListGroup } from "react-bootstrap";
-import styles from "components/navbar/styles.module.scss";
+import theme from "styles/exports.module.scss";
+import styled from "styled-components";
 
-class NavSection extends Component {
-    render(props) {
-        return this.props.menu.sections.map((section, i) => {
-            return (
-                <Card className={styles.menuSection} key={i}>
-                    <Card.Header className={styles.menuHeader}>
-                        <p className={styles.menuTitle}>{section.title}</p>
-                    </Card.Header>
-                    <Card.Body className={styles.menuBody}>
-                        <ListGroup variant="flush">
-                            {section.items.map((item, i) => {
-                                return (
-                                    <LinkContainer to={item.link} key={i}>
-                                        <ListGroup.Item
-                                            action
-                                            className={styles.menuList}
-                                            onClick={this.props.handleNavClick}>
-                                            {item.name}
-                                        </ListGroup.Item>
-                                    </LinkContainer>
-                                );
-                            })}
-                        </ListGroup>
-                    </Card.Body>
-                </Card>
-            );
-        });
+const Section = {
+    Wrapper: styled(Card)`
+        background-color: transparent !important;
+        border-color: ${theme.navCardBorderColor} !important ;
+    `,
+    Header: styled(Card.Header)`
+        background-color: transparent !important;
+        border-bottom: ${theme.cardBorderWidth} solid
+            ${theme.navCardBorderColor} !important;
+    `,
+    Title: styled.p`
+        margin-bottom: unset !important;
+        color: ${theme.navCardTitleColor} !important;
+    `,
+    Body: styled(Card.Body)``
+};
+
+const NavItem = styled(ListGroup.Item)`
+    background-color: transparent !important;
+    color: ${theme.navCardColor} !important;
+    border: none !important;
+    &:hover,
+    &:active {
+        background-color: ${theme.navCardBackground} !important;
+        color: ${theme.navCardColor} !important;
+        border-radius: ${theme.borderRadius} !important;
     }
+`;
+
+function NavSection({ menu, handleNavClick }) {
+    return menu.sections.map((section, i) => {
+        return (
+            <Section.Wrapper key={i}>
+                <Section.Header>
+                    <Section.Title>{section.title}</Section.Title>
+                </Section.Header>
+                <Section.Body>
+                    <ListGroup variant="flush">
+                        {section.items.map((item, i) => {
+                            return (
+                                <LinkContainer to={item.link} key={i}>
+                                    <NavItem action onClick={handleNavClick}>
+                                        {item.name}
+                                    </NavItem>
+                                </LinkContainer>
+                            );
+                        })}
+                    </ListGroup>
+                </Section.Body>
+            </Section.Wrapper>
+        );
+    });
 }
 export default NavSection;
