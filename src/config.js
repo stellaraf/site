@@ -40,7 +40,7 @@ export default {
         max: 2000,
         depth: 4,
         baseSize: 0.5,
-        factor: 8
+        factor: 12
     },
     contactForm: {
         message: {
