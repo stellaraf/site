@@ -25,6 +25,12 @@ $st-gradient-3: $st-dark;
 // $st-gradient-colors: $st-gradient-1, $st-gradient-2, $st-gradient-3;
 $st-gradient-colors: $st-gradient-2, $st-gradient-3;
 $st-gradient: linear-gradient(to bottom, $st-gradient-colors);
+$st-gradient-down: linear-gradient(
+    to bottom,
+    $st-primary,
+    $st-primary-alt,
+    $st-dark
+);
 
 // $bg1: $st-background;
 // $bg2: lighten($st-background, 6%);
@@ -46,9 +52,7 @@ $st-colors: (
     "danger": $st-danger,
     "warning": $st-warning,
     "light": $st-light,
-    "dark": $st-dark,
-    "gradient1": $st-gradient-1,
-    "gradient2": $st-gradient-2
+    "dark": $st-dark
 );
 
 $st-font-body: "Open Sans";
@@ -65,6 +69,8 @@ $st-fonts-headings: $st-font-headings, -apple-system, BlinkMacSystemFont,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
 // Bootstrap Overrides
+
+$transition-collapse: height 0.35s ease, background-image 0.35s ease;
 
 //// Grid
 $grid-breakpoints: (
@@ -173,7 +179,7 @@ $nav-card-border-color: rgba($st-white, 0.125);
 $nav-card-title-color: $nav-card-color;
 $nav-collapse-margin-bottom: 2.5rem;
 $nav-collapse-margin-top: 0.5rem;
-$navbar-bottom-border: $border-width solid $nav-card-border-color;
+$navbar-bottom-border: $border-width solid $st-secondary;
 
 //// Cards
 // Section
