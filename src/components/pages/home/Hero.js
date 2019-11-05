@@ -43,17 +43,6 @@ const HomeHeroSection = styled.section`
 `;
 
 function Hero() {
-    // const heroCardReveal = {
-    //     right: true,
-    //     cascade: true,
-    //     duration: 128
-    // };
-    // const HeroCardWrapper = styled.div`
-    //     flex: 0 0 auto;
-    //     max-width: 100%;
-    //     position: relative;
-    //     width: 100%;
-    // `;
     return (
         <HomeHeroSection>
             <Container>
@@ -62,33 +51,9 @@ function Hero() {
                         <HeroHeading {...homeConfig.homeOne} />
                     </Col>
                     <Col>
-                        <BigLogo size={600} />
+                        <BigLogo color={"white"} size={600} />
                     </Col>
-                    {/* <Col className={heroColRight}>
-                        <HeroCardWrapper>
-                            <HeroCard
-                                title="Main Card Title"
-                                titleClass="h2"
-                                text="Cool Stories"
-                                align="right"
-                                {...heroCardReveal}>
-                                <Button
-                                    href="#"
-                                    variant="primary"
-                                    className={styles.heroButton}>
-                                    Button 1
-                                </Button>
-                                <Button
-                                    href="#"
-                                    variant="outline-primary"
-                                    className={styles.heroButton}>
-                                    Button 2
-                                </Button>
-                            </HeroCard>
-                        </HeroCardWrapper>
-                    </Col> */}
                 </Row>
-                {/* <Row></Row> */}
             </Container>
         </HomeHeroSection>
     );

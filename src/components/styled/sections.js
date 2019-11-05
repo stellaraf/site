@@ -198,13 +198,17 @@ function AngleSection({
         padding-left: 0;
         padding-right: 0;
     `;
+    const InnerSection = styled(InfoSection.Content)`
+        ${bp.down("md")} {
+            padding-top: ${angleHeight};
+            padding-bottom: ${angleHeight};
+        }
+    `;
 
     return (
         <ThisSection {...sectionStyle}>
             <DiagonalSection {...topDiag} />
-            <InfoSection.Content {...props}>
-                {props.children}
-            </InfoSection.Content>
+            <InnerSection {...props}>{props.children}</InnerSection>
             <DiagonalSection {...bottomDiag} />
         </ThisSection>
     );

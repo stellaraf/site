@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { ContactForm } from "components/forms";
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
-import { pageConfig } from "config";
+import site from "config";
 import styles from "components/pages/contact/styles.module.scss";
 
-const config = pageConfig.contact;
+const config = site.pages.contact;
 
 function TitleBlock() {
     const Section = styled.section`
