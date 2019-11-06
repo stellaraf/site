@@ -88,15 +88,12 @@ const HeroSection = styled.section`
         margin-top: 0;
     }
     @media (min-width: ${theme.breakSm}) {
-        // max-width: ${theme.containerMaxWidthSm};
         min-height: 100vh;
     }
     @media (min-width: ${theme.breakMd}) {
-        // max-width: ${theme.containerMaxWidthMd};
         min-height: 80vh;
     }
     @media (min-width: ${theme.breakLg}) {
-        // max-width: ${theme.containerMaxWidthLg};
         min-height: 50vh;
     }
     @media (min-width: ${theme.breakXl}) {
@@ -115,7 +112,7 @@ const InfoSectionContent = styled.div`
     flex-grow: 1;
 `;
 
-const InfoSectionMain = styled.section`
+const InfoSectionMain = styled.div`
     width: 100vw;
     max-width: 100%;
     position: relative;
@@ -161,6 +158,8 @@ const InfoSection = {
 function AngleSection({
     height = "25vh",
     angleHeight = "5vh",
+    side,
+    offset,
     directionTop = "rightDown",
     directionBottom = "leftUp",
     backgroundColor = theme.bodyBg,
@@ -177,39 +176,67 @@ function AngleSection({
     const middleHeight = `${middleHeightInt}${heightUnit}`;
     const middleMargin = `${~~(angleHeightInt * 1.2)}${angleHeightUnit}`;
 
+    const borderMap = {
+        rightDown: {
+            color: `transparent ${backgroundColor} transparent transparent`,
+            width: `${angleHeight} 100vw 0 0`
+        },
+        leftUp: {
+            color: `${backgroundColor} transparent transparent`,
+            width: `${angleHeight} 100vw 0 0`
+        },
+        leftDown: {
+            color: `transparent transparent ${backgroundColor} transparent`,
+            width: `0 100vw ${angleHeight} 0`
+        },
+        rightUp: {
+            color: `transparent ${backgroundColor} transparent transparent`,
+            width: `0 100vw ${angleHeight} 0`
+        }
+    };
+
     let sectionStyle = {
         height: middleHeight,
         backgroundColor: backgroundColor,
         textColor: textColor,
         angleHeight: middleMargin
     };
-    const topDiag = {
-        direction: directionTop,
-        height: angleHeight,
-        color: sectionStyle.backgroundColor
-    };
-    const bottomDiag = {
-        direction: directionBottom,
-        height: angleHeight,
-        color: sectionStyle.backgroundColor
-    };
     const ThisSection = styled(InfoSection.Main)`
         overflow: visible;
         padding-left: 0;
         padding-right: 0;
     `;
+
     const InnerSection = styled(InfoSection.Content)`
+        background-color: none !important;
         ${bp.down("md")} {
             padding-top: ${angleHeight};
             padding-bottom: ${angleHeight};
+        }
+        ::before,
+        ::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        ::before {
+            top: -${angleHeight};
+            border-width: ${borderMap[directionTop].width};
+            border-color: ${borderMap[directionTop].color};
+        }
+        ::after {
+            bottom: -${angleHeight};
+            border-width: ${borderMap[directionBottom].width};
+            border-color: ${borderMap[directionBottom].color};
         }
     `;
 
     return (
         <ThisSection {...sectionStyle}>
-            <DiagonalSection {...topDiag} />
             <InnerSection {...props}>{props.children}</InnerSection>
-            <DiagonalSection {...bottomDiag} />
         </ThisSection>
     );
 }

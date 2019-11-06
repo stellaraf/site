@@ -174,9 +174,10 @@ $hero-btn-margin-x: 0.5rem;
 
 //// Navigation
 $nav-card-background: rgba(0, 0, 0, 0.2);
-$nav-card-color: $st-white;
+$nav-card-color: rgba($st-white, 0.5);
 $nav-card-border-color: rgba($st-white, 0.125);
-$nav-card-title-color: $nav-card-color;
+$nav-card-title-color: $st-white;
+$nav-card-header-background: rgba($st-white, 0.05);
 $nav-collapse-margin-bottom: 2.5rem;
 $nav-collapse-margin-top: 0.5rem;
 $navbar-bottom-border: $border-width solid $st-secondary;

@@ -24,8 +24,8 @@ function Diagonal({
     const pointMap = {
         // Starting from the fat side
         rightUp: "100 0, 100 100, 0 0",
-        // rightDown: "100 0, 100 100, 0 100",
-        rightDown: "102 2, 102 102, -2 102",
+        rightDown: "100 0, 100 100, 0 100",
+        // rightDown: "102 2, 102 102, -2 102",
         leftDown: "0 0, 0 100, 100 100",
         leftUp: "0 0, 0 100, 100 0"
     };
@@ -69,6 +69,14 @@ function Diagonal({
         height: ${height};
         ${offsetStyle}
     `;
+
+    const Test = styled.div`
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: ${height} 100vw 0 0;
+        border-color: transparent ${color} transparent transparent;
+    `;
     return (
         <Triangle
             className={`${shapeSide}-angle`}
@@ -78,8 +86,8 @@ function Diagonal({
             {...restProps}>
             <polygon
                 fill={color}
-                stroke={color}
-                strokeWidth={strokeWidth}
+                // stroke={color}
+                // strokeWidth={strokeWidth}
                 points={shapePoints}
             />
         </Triangle>

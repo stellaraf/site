@@ -247,7 +247,7 @@ export default {
                     mode: "push"
                 },
                 onhover: {
-                    enable: false,
+                    enable: true,
                     mode: "grab"
                 }
             },

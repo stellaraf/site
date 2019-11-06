@@ -5,6 +5,7 @@ const MenuWrapper = styled.div`
     width: ${props => props.wrapperWidth}px;
     height: ${props => props.wrapperHeight}px;
     position: relative;
+    z-index: 3 !important;
 `;
 const BaseLine = styled.span`
     display: block;
