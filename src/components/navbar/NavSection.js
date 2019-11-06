@@ -10,7 +10,7 @@ const Section = {
         border-color: ${theme.navCardBorderColor} !important ;
     `,
     Header: styled(Card.Header)`
-        background-color: transparent !important;
+        background-color: ${theme.navCardHeaderBackground} !important;
         border-bottom: ${theme.cardBorderWidth} solid
             ${theme.navCardBorderColor} !important;
     `,
@@ -24,6 +24,7 @@ const Section = {
 const NavItem = styled(ListGroup.Item)`
     background-color: transparent !important;
     color: ${theme.navCardColor} !important;
+    font-size: ${theme.fontSizeSm} !important;
     border: none !important;
     &:hover,
     &:active {
