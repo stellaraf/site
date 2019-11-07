@@ -7,8 +7,7 @@ import { getDelay, buildCardRows, getRevealProps } from "utils";
 import {
     HeroSection,
     AngleSection,
-    InfoSection,
-    LineSection
+    InfoSection
 } from "components/styled/sections";
 import bp from "utils/breakpoints";
 import { Display } from "components/styled/text";
@@ -53,11 +52,11 @@ function TitleBlock() {
         display: flex;
         flex-direction: column;
         flex: 0 1 auto;
-        margin-top: 3rem;
+        margin-top: 96px;
         margin-bottom: 4rem;
         text-align: center;
-        @media (max-width: ${theme.breakMd}) {
-            margin-top: 2rem;
+        ${bp.down("md")} {
+            margin-top: 96px;
             margin-bottom: 1rem;
         }
     `;

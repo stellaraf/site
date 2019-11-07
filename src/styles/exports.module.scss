@@ -61,6 +61,7 @@
     displayWeight: $display-weight;
     sideNavBackground: $sidenav-background;
     sectionCardHeight: $section-card-height;
+    sectionCardBackground: $section-card-background;
     h1FontSize: $h1-font-size;
     h2FontSize: $h2-font-size;
     h3FontSize: $h3-font-size;
@@ -86,4 +87,9 @@
     navCardTitleColor: $nav-card-title-color;
     navCardColor: $nav-card-color;
     navCardHeaderBackground: $nav-card-header-background;
+    navLinkPaddingY: $nav-link-padding-y;
+    navLinkPaddingX: $nav-link-padding-x;
+    navLinkColor: $nav-link-color;
+    hamburgerLinkHoverBackground: $hamburger-link-hover-background;
+    hamburgerLinkBorder: $hamburger-link-border;
 }

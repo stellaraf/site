@@ -50,6 +50,11 @@ main {
     margin: $spinner-border-width;
 }
 
+.contact-form,
+.contact-form * {
+    z-index: 50;
+}
+
 //// Responsive Size-Specific Classes
 
 // Small Devices and Smaller

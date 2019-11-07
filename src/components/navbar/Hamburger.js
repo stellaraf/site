@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const MenuWrapper = styled.div`
-    width: ${props => props.wrapperWidth}px;
-    height: ${props => props.wrapperHeight}px;
+const MenuWrapper = styled(({ width, height, visible, ...props }) => (
+    <div {...props} />
+))`
+    width: ${props => props.width}px;
+    height: ${props => props.height}px;
+    ${props => (props.visible ? null : "display: none")};
     position: relative;
     z-index: 3 !important;
 `;
@@ -33,16 +36,29 @@ const Line = {
 
 function Hamburger({
     isOpen = false,
+    visible = true,
+    hidden,
     width = 40,
     height = 30,
     lineSize = 2,
     colorClosed = "#ffffff",
     colorOpen = "#ff0000",
-    animationDuration = 0.4
+    animationDuration = 0.4,
+    id = "nav-hb",
+    as
 }) {
     const color = isOpen ? colorOpen : colorClosed;
     const halfHeight = Math.round(height / 2);
-
+    let isVisible = visible;
+    if (hidden !== undefined) {
+        isVisible = !visible;
+    }
+    let WrappingComponent;
+    if (as !== undefined) {
+        WrappingComponent = as;
+    } else {
+        WrappingComponent = MenuWrapper;
+    }
     const getTransformValue = (basePos, rotate) => {
         const height = isOpen ? `${halfHeight}px` : `${basePos}px`;
         const rotation = isOpen ? `${rotate}deg` : "0";
@@ -54,7 +70,11 @@ function Hamburger({
         animationDuration: animationDuration
     };
     return (
-        <MenuWrapper wrapperHeight={height} wrapperWidth={width}>
+        <WrappingComponent
+            visible={isVisible}
+            width={height}
+            height={width}
+            id={id}>
             <Line.Edge
                 transform={getTransformValue("0", "45")}
                 {...baseLineProps}
@@ -69,7 +89,7 @@ function Hamburger({
                 transform={getTransformValue(height, "-45")}
                 {...baseLineProps}
             />
-        </MenuWrapper>
+        </WrappingComponent>
     );
 }
 export default Hamburger;

@@ -7,6 +7,15 @@ import theme from "styles/exports.module.scss";
 import styles from "components/footer/styles.module.scss";
 import site from "config";
 import Logo from "components/svg/Logos";
+import bp from "utils/breakpoints";
+import { FaLinkedin, FaTwitter, FaFacebook, FaGithub } from "react-icons/fa";
+
+const socialIcons = {
+    LinkedIn: FaLinkedin,
+    Twitter: FaTwitter,
+    Facebook: FaFacebook,
+    Github: FaGithub
+};
 
 const FooterRow = styled(Row)`
     justify-items: center;
@@ -68,7 +77,7 @@ const FooterHr = styled(Container)`
 `;
 
 const CopyrightText = styled.p`
-    text-align: center;
+    text-align: left;
     font-size: fontSizeSm;
     margin-bottom: 0;
     color: ${theme.stGray};
@@ -76,6 +85,10 @@ const CopyrightText = styled.p`
 
 const FooterLogo = styled(Logo.Typographic)`
     margin-left: auto;
+    ${bp.down("md")} {
+        margin-left: 0;
+        margin-right: auto;
+    }
 `;
 
 function FooterLink({ name, link }) {
@@ -122,6 +135,30 @@ function FooterCol({ sections }) {
     ));
 }
 
+const StyledSocialList = styled.ul`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    padding-inline-start: 0 !important;
+`;
+function SocialIcon({ iconName, link }) {
+    const ThisIcon = styled(iconName)`
+        margin-right: 1rem;
+        color: ${theme.stWhite};
+        &:hover {
+            color: ${theme.stSecondary};
+        }
+    `;
+    return (
+        <li>
+            <a href={link} target="_blank" rel="noopener noreferrer">
+                <ThisIcon />
+            </a>
+        </li>
+    );
+}
+
 function Footer() {
     return (
         <nav
@@ -141,11 +178,30 @@ function Footer() {
                 <FooterHr fluid={true}>
                     <LogoRow>
                         <LogoCol sm={6}>
-                            <CopyrightText>
-                                {`Copyright © ${new Date().getFullYear()} ${
-                                    site.global.legalName
-                                }`}
-                            </CopyrightText>
+                            <Row>
+                                <Col sm={12}>
+                                    <StyledSocialList>
+                                        {site.social.map((platform, i) => {
+                                            const MatchedIcon =
+                                                socialIcons[platform.name];
+                                            return (
+                                                <SocialIcon
+                                                    key={i}
+                                                    iconName={MatchedIcon}
+                                                    link={platform.link}
+                                                />
+                                            );
+                                        })}
+                                    </StyledSocialList>
+                                </Col>
+                                <Col>
+                                    <CopyrightText>
+                                        {`Copyright © ${new Date().getFullYear()} ${
+                                            site.global.legalName
+                                        }`}
+                                    </CopyrightText>
+                                </Col>
+                            </Row>
                         </LogoCol>
                         <LogoCol sm={6}>
                             <FooterLogo size={300} tagline />

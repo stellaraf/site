@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import { Card, CardDeck, Container, Col, Row } from "react-bootstrap";
+import { Card, Container, Col, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useLocation } from "react-router";
 import { FiArrowRight } from "react-icons/fi";
 
-import { AngleSection, LineSection } from "components/styled/sections";
-import bp from "utils/breakpoints";
+import { AngleSection } from "components/styled/sections";
+// import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
 import site from "config";
 
-const RevealWrapper = styled.div`
-    display: flex !important;
-    flex-grow: 1 !important;
-`;
+// const RevealWrapper = styled.div`
+//     display: flex !important;
+//     flex-grow: 1 !important;
+// `;
 
 const Next = {
     Wrapper: styled(Card)`
@@ -86,62 +86,62 @@ const Next = {
     `
 };
 
-const StyledCard = styled(Card)`
-    background-color: ${theme.nextCardBackground} !important;
-    color: ${theme.nextCardColor} !important;
-    text-align: center;
-    flex-grow: 1;
-    justify-content: center;
-    min-height: ${theme.nextCardHeight};
-    height: 100%;
-    max-width: ${theme.nextCardWidth};
-    width: 100%;
-    border-color: ${theme.nextCardBorder};
-    border: 1px solid transparent !important;
-    ${bp.down("md")} {
-        min-height: ${theme.featureCardHeightSm};
-    }
-    &:hover {
-        background-color: ${theme.nextCardBackgroundHover} !important;
-        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-            border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-`;
+// const StyledCard = styled(Card)`
+//     background-color: ${theme.nextCardBackground} !important;
+//     color: ${theme.nextCardColor} !important;
+//     text-align: center;
+//     flex-grow: 1;
+//     justify-content: center;
+//     min-height: ${theme.nextCardHeight};
+//     height: 100%;
+//     max-width: ${theme.nextCardWidth};
+//     width: 100%;
+//     border-color: ${theme.nextCardBorder};
+//     border: 1px solid transparent !important;
+//     ${bp.down("md")} {
+//         min-height: ${theme.featureCardHeightSm};
+//     }
+//     &:hover {
+//         background-color: ${theme.nextCardBackgroundHover} !important;
+//         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+//             border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+//     }
+// `;
 
-const NextTop = styled.div`
-    padding: ${theme.nextCardPaddingY} ${theme.nextCardPaddingX} !important;
-`;
+// const NextTop = styled.div`
+//     padding: ${theme.nextCardPaddingY} ${theme.nextCardPaddingX} !important;
+// `;
 
-const NextBottom = styled.div`
-    padding-right: ${theme.nextCardPaddingX} !important;
-    padding-left: ${theme.nextCardPaddingX} !important;
-    padding-bottom: ${theme.nextCardPaddingY} !important;
-`;
+// const NextBottom = styled.div`
+//     padding-right: ${theme.nextCardPaddingX} !important;
+//     padding-left: ${theme.nextCardPaddingX} !important;
+//     padding-bottom: ${theme.nextCardPaddingY} !important;
+// `;
 
-const NextCardRow = styled(CardDeck)`
-    justify-content: center !important;
-    width: 100%;
-`;
+// const NextCardRow = styled(CardDeck)`
+//     justify-content: center !important;
+//     width: 100%;
+// `;
 
-const NextCardText = styled.a`
-    color: ${theme.nextCardColor} !important;
-    &:hover {
-        text-decoration: none !important;
-        color: unset !important;
-    }
+// const NextCardText = styled.a`
+//     color: ${theme.nextCardColor} !important;
+//     &:hover {
+//         text-decoration: none !important;
+//         color: unset !important;
+//     }
 
-    &::after {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 1;
-        pointer-events: auto;
-        content: "";
-        background-color: rgba(0, 0, 0, 0);
-    }
-`;
+//     &::after {
+//         position: absolute;
+//         top: 0;
+//         right: 0;
+//         bottom: 0;
+//         left: 0;
+//         z-index: 1;
+//         pointer-events: auto;
+//         content: "";
+//         background-color: rgba(0, 0, 0, 0);
+//     }
+// `;
 
 function NextCard({
     title = "Placeholder Title",

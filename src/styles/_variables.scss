@@ -167,6 +167,9 @@ $input-btn-focus-box-shadow: none;
 $input-btn-padding-y: 0.375rem !default;
 $input-btn-padding-x: 0.75rem !default;
 
+$nav-link-padding-y: 0.5rem !default;
+$nav-link-padding-x: 1rem !default;
+
 // App Styles
 
 //// Spacing
@@ -181,6 +184,10 @@ $nav-card-header-background: rgba($st-white, 0.05);
 $nav-collapse-margin-bottom: 2.5rem;
 $nav-collapse-margin-top: 0.5rem;
 $navbar-bottom-border: $border-width solid $st-secondary;
+$nav-link-color: rgba($st-white, 0.75);
+
+$hamburger-link-border: lighten(desaturate($st-dark, 100%), 10%);
+$hamburger-link-hover-background: rgba($hamburger-link-border, 0.2);
 
 //// Cards
 // Section
