@@ -305,7 +305,11 @@ const MobileHamburgerWrapper = styled(Container)`
     color: ${theme.stWhite};
     padding-top: 10vh;
     min-height: 100vh;
+    overflow-y: hidden;
     z-index: 2;
+    body {
+        position: fixed !important;
+    }
 `;
 const MobileHamburgerGroup = styled(ListGroup)`
     margin-top: 1.5rem;
