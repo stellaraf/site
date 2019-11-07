@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import theme from "styles/exports.module.scss";
 import bp from "utils/breakpoints";
-import { DiagonalSection } from "components/svg";
 import DiagonalLine from "components/svg/DiagonalLine";
 // import { renderToStaticMarkup } from "react-dom/server";
 // import Map from "components/pages/cloud/Map";

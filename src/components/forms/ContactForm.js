@@ -165,7 +165,7 @@ function RawForm() {
 function ContactForm() {
     return (
         <Pulse duration={300}>
-            <Card>
+            <Card className="contact-form">
                 <Card.Body>
                     <RawForm />
                 </Card.Body>

@@ -28,7 +28,7 @@ const commonNavItems = [
     }
 ];
 
-export default {
+const site = {
     global: {
         legalName: "Stellar Technologies Inc.",
         givenName: "Stellar",
@@ -42,6 +42,17 @@ export default {
         baseSize: 0.5,
         factor: 12
     },
+    notfound: {
+        title: "Not Found",
+        subtitle: "might be adrift in space...",
+        buttonText: "Back"
+    },
+    social: [
+        { name: "Facebook", link: "https://www.facebook.com" },
+        { name: "LinkedIn", link: "https://linkedin.com/company/stellaraf" },
+        { name: "Github", link: "https://github.com/stellaraf" },
+        { name: "Twitter", link: "https://twitter.com/stellar_tech" }
+    ],
     contactForm: {
         message: {
             success: "Thank you!",
@@ -78,6 +89,7 @@ export default {
         home: {
             includeNext: false,
             link: "/home",
+            title: "Home",
             headings: {
                 title: "Introducing...",
                 subtitle: "",
@@ -194,6 +206,26 @@ export default {
             sections: commonNavItems
         }
     ],
+    newNav: {
+        left: [
+            {
+                title: "Cloud",
+                link: "/cloud"
+            },
+            {
+                title: "Services",
+                link: "/services"
+            },
+            {
+                title: "Architecture",
+                link: "/architecture"
+            }
+        ],
+        right: [
+            { title: "About", link: "/about" },
+            { title: "Docs", link: "/docs" }
+        ]
+    },
     footer: {
         sections: [
             {
@@ -454,6 +486,16 @@ const footerConfig = {
     ]
 };
 
+const pagesArray = () => {
+    let pa = [];
+    for (let k in site.pages) {
+        pa.push(site.pages[k]);
+    }
+    return pa;
+};
+
+site.pagesArray = pagesArray();
+
 export {
     homeConfig,
     footerConfig,
@@ -463,3 +505,4 @@ export {
     locationConfig,
     pageConfig
 };
+export default site;

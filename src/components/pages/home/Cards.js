@@ -1,5 +1,4 @@
 import React from "react";
-import asyncComponent from "components/AsyncComponent";
 import { Card } from "react-bootstrap";
 import Slide from "react-reveal/Slide";
 import withReveal from "react-reveal/withReveal";

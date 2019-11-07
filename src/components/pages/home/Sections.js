@@ -1,5 +1,5 @@
 import React from "react";
-import { CardDeck, Card, Container, Button } from "react-bootstrap";
+import { CardDeck, Card, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Icons from "components/svg/Icons";
 import { SectionCard } from "components/pages/home/Cards";
@@ -91,13 +91,13 @@ const StyledCard = styled(Card)`
     }
 `;
 
-const FeatureIcon = styled.div`
-    display: inline-block;
-    text-align: center;
-    padding: inputBtnPaddingY inputBtnPaddingX;
-    background-color: ${props => props.color};
-    border-radius: ${theme.borderRadius};
-`;
+// const FeatureIcon = styled.div`
+//     display: inline-block;
+//     text-align: center;
+//     padding: inputBtnPaddingY inputBtnPaddingX;
+//     background-color: ${props => props.color};
+//     border-radius: ${theme.borderRadius};
+// `;
 
 const FeatureTop = styled.div`
     padding: ${theme.sectionCardPaddingY} ${theme.sectionCardPaddingX} !important;
