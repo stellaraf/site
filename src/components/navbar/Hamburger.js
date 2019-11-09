@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const MenuWrapper = styled(({ width, height, visible, ...props }) => (
-    <div {...props} />
-))`
+const MenuWrapper = styled(({ width, height, visible, ...props }) => <div {...props} />)`
     width: ${props => props.width}px;
     height: ${props => props.height}px;
     ${props => (props.visible ? null : "display: none")};
@@ -19,7 +17,7 @@ const BaseLine = styled.span`
     transition-duration: ${props => props.animationDuration}s;
     transform-origin: center;
     position: absolute;
-    margin-top: -${props => Math.round(props.lineSize / 2)};
+    margin-top: -${props => Math.round(props.lineSize / 2)}px;
 `;
 
 const Line = {
@@ -64,31 +62,23 @@ function Hamburger({
         const rotation = isOpen ? `${rotate}deg` : "0";
         return `translate3d(0,${height},0) rotate(${rotation})`;
     };
-    const baseLineProps = {
+
+    const common = {
         lineSize: lineSize,
         lineColor: color,
         animationDuration: animationDuration
     };
+
     return (
-        <WrappingComponent
-            visible={isVisible}
-            width={height}
-            height={width}
-            id={id}>
-            <Line.Edge
-                transform={getTransformValue("0", "45")}
-                {...baseLineProps}
-            />
+        <WrappingComponent id={id} visible={isVisible} width={height} height={width}>
+            <Line.Edge transform={getTransformValue("0", "45")} {...common} />
             <Line.Middle
                 animationDuration={animationDuration}
                 opacity={isOpen ? 0 : 1}
                 distanceTop={halfHeight}
-                {...baseLineProps}
+                {...common}
             />
-            <Line.Edge
-                transform={getTransformValue(height, "-45")}
-                {...baseLineProps}
-            />
+            <Line.Edge transform={getTransformValue(height, "-45")} {...common} />
         </WrappingComponent>
     );
 }
