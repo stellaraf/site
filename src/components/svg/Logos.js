@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import site from "config";
 import theme from "styles/exports.module.scss";
 
@@ -16,8 +15,12 @@ const cleanTitle = title => {
     return newTitle;
 };
 
-const Iconographic = props => {
-    const { color, size, title, ...otherProps } = props;
+function Iconographic({
+    color = theme.stWhite,
+    size = 24,
+    title = site.global.givenName,
+    ...otherProps
+}) {
     return (
         <svg
             id={`logo-icon-${cleanTitle(title)}`}
@@ -57,19 +60,7 @@ const Iconographic = props => {
             </g>
         </svg>
     );
-};
-
-Iconographic.propTypes = {
-    color: PropTypes.string,
-    size: PropTypes.number,
-    title: PropTypes.string
-};
-
-Iconographic.defaultProps = {
-    color: theme.stWhite,
-    size: 24,
-    title: site.global.givenName
-};
+}
 
 const TypographicMain = ({ color, reserved }) => (
     <g>
@@ -179,8 +170,14 @@ const TypographicTagline = ({ color }) => (
     </g>
 );
 
-const Typographic = props => {
-    const { color, size, title, tagline, reserved, ...otherProps } = props;
+function Typographic({
+    color = theme.stWhite,
+    size = 400,
+    title = site.global.givenName,
+    tagline = false,
+    reserved = false,
+    ...otherProps
+}) {
     return (
         <svg
             id={`logo-type-${cleanTitle(title)}`}
@@ -195,23 +192,7 @@ const Typographic = props => {
             {tagline ? <TypographicTagline color={color} /> : null}
         </svg>
     );
-};
-
-Typographic.propTypes = {
-    color: PropTypes.string,
-    reserved: PropTypes.bool,
-    size: PropTypes.number,
-    title: PropTypes.string,
-    tagline: PropTypes.bool
-};
-
-Typographic.defaultProps = {
-    color: theme.stWhite,
-    reserved: false,
-    size: 400,
-    title: site.global.givenName,
-    tagline: false
-};
+}
 
 const Logo = { Iconographic: Iconographic, Typographic: Typographic };
 

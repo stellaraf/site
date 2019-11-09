@@ -1,35 +1,32 @@
 import styled from "styled-components";
-import theme from "styles/exports.module.scss";
+import bp from "utils/breakpoints";
 
 const ThisCard = styled.div`
-max-width: 100%;
-flex: 0 0 100%;
-position: relative;
-width: 100%;
-margin-top: ${props => props.marginTop};
-
-& nth-of-type(n + ${props => props.actualPerRow + 1}) {
-    margin-top: 2vh;
-}
-@media (min-width: ${theme.breakSm}) {
-    flex: 0 0 100%;
     max-width: 100%;
-}
-@media (min-width: ${theme.breakMd}) {
-    flex: 0 0 ${props => props.cardWidth * 2}%;
-    max-width: ${props => props.cardWidth * 2}%;
-    /* &: nth-of-type(n + ${props => props.actualPerRow / 2 + 1}) {
+    flex: 0 0 100%;
+    position: relative;
+    width: 100%;
+    margin-top: ${props => props.marginTop};
+
+    &:nth-of-type(n + ${props => props.actualPerRow + 1}) {
         margin-top: 2vh;
-    } */
-}
-@media (min-width: ${theme.breakLg}) {
-    flex: 0 0 ${props => props.cardWidth}%;
-    max-width: ${props => props.cardWidth}%;
-}
-@media (min-width: ${theme.breakXl}) {
-    flex: 0 0 ${props => props.cardWidth}%;
-    max-width: ${props => props.cardWidth}%;
-}
+    }
+    ${bp.up("sm")} {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    ${bp.up("md")} {
+        flex: 0 0 ${props => props.cardWidth * 2}%;
+        max-width: ${props => props.cardWidth * 2}%;
+    }
+    ${bp.up("lg")} {
+        flex: 0 0 ${props => props.cardWidth}%;
+        max-width: ${props => props.cardWidth}%;
+    }
+    ${bp.up("xl")} {
+        flex: 0 0 ${props => props.cardWidth}%;
+        max-width: ${props => props.cardWidth}%;
+    }
 `;
 
 /**

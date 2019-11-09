@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useScrollPosition } from "@n8tb1t/use-scroll-position";
-// import { Display } from "components/styled/text";
+import { useWindowScroll } from "react-use";
+import site from "config";
 import Logo from "components/svg/Logos";
+// import { Display } from "components/styled/text";
 import styled from "styled-components";
 // import theme from "styles/exports.module.scss";
 // import site from "config";
 // import bp from "utils/breakpoints";
+
+const easing = t => 1 + --t * t * t * t * t;
 
 // const config = site.pages.home;
 
@@ -29,15 +32,31 @@ const BigLogo = styled.div`
     transform-origin: center top;
 `;
 
+// const LogoBlock = styled.div`
+//     position: absolute;
+//     display: flex;
+//     top: ${props => props.topPos}vh;
+//     transition: all 1s cubic-bezier(0, 1, 0.5, 1);
+//     align-items: center;
+//     justify-content: center;
+//     pointer-events: auto;
+//     width: 100%;
+// `;
+
 const LogoBlock = styled.div`
-    position: absolute;
     display: flex;
-    top: ${props => props.topPos}vh;
-    transition: all 1s cubic-bezier(0, 1, 0.5, 1);
     align-items: center;
     justify-content: center;
     pointer-events: auto;
     width: 100%;
+    height: 86px;
+    background-color: transparent !important;
+
+    /* &.logo.hidden {
+        pointer-events: none;
+        visibility: hidden;
+        display: none;
+    } */
 `;
 
 const HeroCol = styled(Col)`
@@ -64,25 +83,34 @@ const HomeHeroSection = styled.section`
 `;
 
 function Hero() {
-    const [logoPos, setlogoPos] = React.useState(15);
-    const hideLogoPos = -100;
-    useScrollPosition(({ prevPos, currPos }) => {
-        currPos.y <= hideLogoPos ? setlogoPos(0) : setlogoPos(15);
-    });
+    const logoBreak = site.global.logoTransitionScroll;
+    // State
+    const [readyToScroll, setReadyToScroll] = useState(false);
+    const { y } = useWindowScroll();
+
+    // Hooks
+    useEffect(() => {
+        y >= logoBreak && setReadyToScroll(true);
+        y > 0 && y < logoBreak && setReadyToScroll(false);
+    }, [logoBreak, y]);
     return (
         <HomeHeroSection>
             <Container>
-                {/* <Row>
+                <Row>
                     <HeroCol>
-                        <LogoBlock topPos={logoPos}>
-                            <Logo.Typographic
-                                color={"white"}
-                                width={400}
-                                height={200}
-                            />
+                        <LogoBlock
+                            className={readyToScroll ? "logo hidden" : "logo"}
+                            style={{
+                                opacity: `${Math.max(easing(1 - y / logoBreak), 0)}`,
+                                transform: `scale(${Math.max(easing(1 - y / logoBreak), 0) * 0.325 +
+                                    0.625}) translate3d(0, 0, 0)`,
+                                transformOrigin: "top",
+                                top: Math.max(logoBreak - y, 2)
+                            }}>
+                            <Logo.Typographic color={"white"} width={400} height={200} />
                         </LogoBlock>
                     </HeroCol>
-                </Row> */}
+                </Row>
             </Container>
         </HomeHeroSection>
     );

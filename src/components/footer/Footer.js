@@ -1,12 +1,10 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import classNames from "classnames";
 import theme from "styles/exports.module.scss";
-import styles from "components/footer/styles.module.scss";
 import site from "config";
-import Logo from "components/svg/Logos";
+// import Logo from "components/svg/Logos";
 import bp from "utils/breakpoints";
 import { FaLinkedin, FaTwitter, FaFacebook, FaGithub } from "react-icons/fa";
 
@@ -28,7 +26,7 @@ const LogoRow = styled(FooterRow)`
     margin-right: 0 !important;
 `;
 
-const LogoCol = styled(Col)`
+const LogoCol = styled(props => <Col {...props} />)`
     display: flex;
     justify-content: space-between;
     flex-grow: 1 !important;
@@ -37,7 +35,7 @@ const LogoCol = styled(Col)`
     padding-left: 0 !important;
 `;
 
-const LinkCol = styled(Col)`
+const LinkCol = styled(props => <Col {...props} />)`
     display: flex;
     align-self: flex-start;
     flex-grow: 0 !important;
@@ -46,11 +44,7 @@ const LinkCol = styled(Col)`
     margin-right: ${theme.gridGutterWidth};
     padding-left: 0 !important;
     padding-right: 0 !important;
-    @media (max-width: ${theme.breakLg}) {
-    }
-    @media (min-width: ${theme.breakSm}) {
-    }
-    @media (min-width: ${theme.breakMd}) {
+    ${bp.up("md")} {
         &:first-of-type {
             padding-left: 15px !important;
             margin-left: 0;
@@ -61,10 +55,6 @@ const LinkCol = styled(Col)`
             margin-right: 0;
             margin-left: ${theme.gridGutterWidth};
         }
-    }
-    @media (min-width: ${theme.breakLg}) {
-    }
-    @media (min-width: ${theme.breakXl}) {
     }
 `;
 
@@ -77,49 +67,55 @@ const FooterHr = styled(Container)`
 `;
 
 const CopyrightText = styled.p`
-    text-align: left;
-    font-size: fontSizeSm;
+    font-size: ${theme.fontSizeSm};
     margin-bottom: 0;
     color: ${theme.stGray};
-`;
-
-const FooterLogo = styled(Logo.Typographic)`
-    margin-left: auto;
+    width: 100%;
     ${bp.down("md")} {
-        margin-left: 0;
-        margin-right: auto;
+        text-align: center;
+    }
+    ${bp.up("md")} {
+        text-align: right;
     }
 `;
 
-function FooterLink({ name, link }) {
-    return (
-        <li className={styles.footerLink}>
-            <LinkContainer to={link}>
-                <a href={link} className={styles.footerLinkItem}>
-                    {name}
-                </a>
-            </LinkContainer>
-        </li>
-    );
-}
+const FooterList = styled.ul`
+    list-style: none;
+    padding-left: 0;
+    padding-right: 0;
+`;
 
-function FooterHeading({ title }) {
-    return (
-        <li className={styles.footerLink}>
-            <p className={styles.footerLinkTitle}>{title}</p>
-        </li>
-    );
-}
+const FooterTitle = styled.p`
+    color: ${theme.stWhite};
+    font-size: ${theme.footerHeadingSize};
+`;
+
+const FooterLink = styled(({ href, ...props }) => (
+    <Link to={href || ""} {...props} />
+))`
+    font-size: ${theme.footerLinkSize};
+    color: ${theme.footerColor};
+    :hover,
+    :focus,
+    :active {
+        color: ${theme.footerColor};
+    }
+`;
 
 function FooterSection({ title, items }) {
-    const footerLinks = items.map((item, i) => {
-        return <FooterLink key={i} link={item.link} name={item.name} />;
-    });
     return (
-        <ul style={{ paddingRight: 0, paddingLeft: 0 }}>
-            <FooterHeading title={title} />
-            {footerLinks}
-        </ul>
+        <FooterList>
+            <li>
+                <FooterTitle>{title}</FooterTitle>
+            </li>
+            {items.map((item, i) => {
+                return (
+                    <li key={i}>
+                        <FooterLink href={item.link}>{item.name}</FooterLink>
+                    </li>
+                );
+            })}
+        </FooterList>
     );
 }
 
@@ -141,6 +137,13 @@ const StyledSocialList = styled.ul`
     align-items: center;
     list-style: none;
     padding-inline-start: 0 !important;
+    width: 100%;
+    ${bp.down("md")} {
+        justify-content: center;
+    }
+    ${bp.up("md")} {
+        justify-content: start;
+    }
 `;
 function SocialIcon({ iconName, link }) {
     const ThisIcon = styled(iconName)`
@@ -159,14 +162,15 @@ function SocialIcon({ iconName, link }) {
     );
 }
 
+const FooterWrapper = styled.nav`
+    background-color: ${theme.footerBackground};
+    color: ${theme.footerColor};
+`;
+
 function Footer() {
     return (
-        <nav
-            className={classNames(
-                "navbar",
-                "navbar-footer",
-                styles.footerStyle
-            )}
+        <FooterWrapper
+            className="navbar navbar-footer"
             style={{
                 paddingTop: "3rem",
                 paddingBottom: "1rem"
@@ -177,39 +181,32 @@ function Footer() {
                 </FooterRow>
                 <FooterHr fluid={true}>
                     <LogoRow>
-                        <LogoCol sm={6}>
-                            <Row>
-                                <Col sm={12}>
-                                    <StyledSocialList>
-                                        {site.social.map((platform, i) => {
-                                            const MatchedIcon =
-                                                socialIcons[platform.name];
-                                            return (
-                                                <SocialIcon
-                                                    key={i}
-                                                    iconName={MatchedIcon}
-                                                    link={platform.link}
-                                                />
-                                            );
-                                        })}
-                                    </StyledSocialList>
-                                </Col>
-                                <Col>
-                                    <CopyrightText>
-                                        {`Copyright © ${new Date().getFullYear()} ${
-                                            site.global.legalName
-                                        }`}
-                                    </CopyrightText>
-                                </Col>
-                            </Row>
+                        <LogoCol sm={12} md={6}>
+                            <StyledSocialList>
+                                {site.social.map((platform, i) => {
+                                    const MatchedIcon =
+                                        socialIcons[platform.name];
+                                    return (
+                                        <SocialIcon
+                                            key={i}
+                                            iconName={MatchedIcon}
+                                            link={platform.link}
+                                        />
+                                    );
+                                })}
+                            </StyledSocialList>
                         </LogoCol>
-                        <LogoCol sm={6}>
-                            <FooterLogo size={300} tagline />
+                        <LogoCol sm={12} md={6}>
+                            <CopyrightText>
+                                {`Copyright © ${new Date().getFullYear()} ${
+                                    site.global.legalName
+                                }`}
+                            </CopyrightText>
                         </LogoCol>
                     </LogoRow>
                 </FooterHr>
             </Container>
-        </nav>
+        </FooterWrapper>
     );
 }
 
