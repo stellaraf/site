@@ -207,7 +207,7 @@ function AngleSection({
     `;
 
     const InnerSection = styled(InfoSection.Content)`
-        background-color: none !important;
+        background-color: transparent !important;
         ${bp.down("md")} {
             padding-top: ${angleHeight};
             padding-bottom: ${angleHeight};

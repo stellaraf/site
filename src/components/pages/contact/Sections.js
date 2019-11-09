@@ -3,7 +3,6 @@ import { ContactForm } from "components/forms";
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import site from "config";
-import bp from "utils/breakpoints";
 import styles from "components/pages/contact/styles.module.scss";
 
 const config = site.pages.contact;

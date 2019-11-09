@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button, Container, Navbar, ListGroup } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
+import { useWindowScroll } from "react-use";
+import useWhyDidYouUpdate from "hooks/useWhyDidYouUpdate";
 import Hamburger from "components/navbar/Hamburger";
 import styled from "styled-components";
 import Logo from "components/svg/Logos";
@@ -8,125 +10,90 @@ import bp, { query } from "utils/breakpoints";
 import site from "config";
 import theme from "styles/exports.module.scss";
 
-const NavRow = styled(Container)`
-    position: relative;
-    display: flex;
-    flex: 1;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-`;
-
 const LinkBlock = styled.div`
     display: flex;
+    flex: 1 0 0;
     align-items: center;
     pointer-events: auto;
-`;
-
-const LogoBlock = styled(({ top, right, scale, position, ...props }) => (
-    <Link to={props.to || ""} {...props} />
-))`
-    top: ${props => props.top}vh;
-    transition: all 100ms linear 0ms;
-    // transform: scale(${props => props.scale}) translate3d(0px, -20px, 0px);
-    transform: scale(${props => props.scale}) translate3d(0px, 0px, 0px);
-    transform-origin: center top;
-    position: ${props => props.position};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: auto;
-    // width: 100%;
-    ${props =>
-        props.position === "absolute" ? `right: ${props.right}vw` : null}
-    ${props => !props.to && `pointer-events: none;`}
-    ${props => (props.position === "absolute" ? "width: 100%;" : null)}
+    justify-content: ${props => (props.side === "right" ? "flex-end" : "flex-start")};
 `;
 
 const ContactButton = styled(Button)`
-    margin-left: auto;
     border: ${theme.cardBorderWidth} solid ${theme.navCardBorderColor} !important;
     white-space: nowrap;
+    color: ${theme.navLinkColor} !important;
+    :hover {
+        color: ${theme.stDark} !important;
+    }
+`;
+
+const NavWrapper = styled.div`
+    position: fixed !important;
+    height: 86px;
+    top: 0;
+    width: 100%;
+    z-index: 1000 !important;
+    background-color: transparent !important;
 `;
 
 const DesktopNav = styled(({ position, background, top, ...props }) => (
-    <Navbar id="navbar" variant="transparent" {...props} />
+    <Navbar variant="transparent" {...props} />
 ))`
-    display: flex !important;
-    flex: 1 !important;
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
-    align-items: center !important;
+    padding: 0 1rem !;
     margin-bottom: 10vh;
-    position: ${props => props.position} !important;
-    background-color: ${props => props.background} !important;
+    background-color: "transparent" !important;
     border-bottom: ${theme.navbarBottomBorder};
-    ${props => props.position === "fixed" && `width: 100%;`}
-    ${props => props.top && `top: ${props.top} !important;`}
-    ${props => props.position === "fixed" && `z-index: 1000 !important;`}
+    transition: background-color 0.5s ease 0.2s;
+
+    &.sticky {
+        background-color: ${theme.stDark} !important;
+    }
 
     ${bp.down("md")} {
-        flex: 1 0 100% !important;
         justify-content: flex-start !important;
         font-size: ${theme.fontSizeSm};
-        ${props => props.position === "fixed" && "height: 120px;"}
         align-items: flex-end !important;
     }
 `;
 
-const MobileNav = styled(({ position, background, top, ...props }) => (
-    <Navbar id="navbar-m" variant="transparent" {...props} />
-))`
-    display: flex !important;
-    flex: 1 !important;
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    margin-bottom: 10vh;
-    position: ${props => props.position} !important;
-    background-color: ${props => props.background} !important;
-    border-bottom: ${theme.navbarBottomBorder};
-    ${props => props.position === "fixed" && `width: 100%;`}
-    ${props => props.top && `top: ${props.top} !important;`}
-    ${props => props.position === "fixed" && `z-index: 1000 !important;`}
+const DesktopLogoBlock = styled.div`
+    opacity: 0;
+    width: 100%;
+    display: flex;
+    flex: 0 1 0;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    height: 86px;
+    transform: translate3d(-5%, 50%, 0);
+    transform-origin: bottom;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    background-color: transparent !important;
 
-    ${bp.down("md")} {
-        flex: 1 0 100% !important;
-        justify-content: flex-start !important;
-        font-size: ${theme.fontSizeSm};
-        // ${props => props.position === "fixed" && "height: 120px;"}
-        align-items: flex-end !important;
+    &.logo.in-nav {
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
     }
 `;
-
-// const StyledNav = styled(({ background, position, top, border, ...props }) => (
-//     <Navbar {...props} />
-// ))`
-//     margin-bottom: 10vh;
-//     position: ${props => props.position} !important;
-//     background-color: ${props => props.background} !important;
-//     border-bottom: ${props => props.border};
-//     ${props => props.position === "fixed" && `width: 100%;`}
-//     ${props => props.top && `top: ${props.top} !important;`}
-//     ${props => props.position === "fixed" && `z-index: 1000 !important;`}
-// `;
 
 const NavLink = styled(({ isLocation, ...props }) => <Link {...props} />)`
     position: relative;
     display: inline-block;
-    padding: ${theme.navLinkPaddingX};
-    margin-right: 2rem;
+    padding: ${theme.navLinkPaddingX} 0.5rem ${theme.navLinkPaddingX} 0.5rem;
+    margin-right: 1rem;
     text-decoration: none;
-    color: ${({ isLocation }) =>
-        isLocation ? theme.stSecondary : theme.navLinkColor};
+    color: ${({ isLocation }) => (isLocation ? theme.stSecondary : theme.navLinkColor)};
     font-weight: ${({ isLocation }) =>
         isLocation ? theme.fontWeightBold : theme.fontWeightNormal};
     transition: color 0.5s, font-weight 0.5s;
-
+    ${bp.up("lg")} {
+        margin-right: 2rem;
+        padding: ${theme.navLinkPaddingX};
+    }
     &:hover {
-        color: ${({ isLocation }) =>
-            isLocation ? theme.stSecondary : theme.stWhite} !important;
+        color: ${({ isLocation }) => (isLocation ? theme.stSecondary : theme.stWhite)} !important;
     }
 
     ::before {
@@ -145,97 +112,43 @@ const NavLink = styled(({ isLocation, ...props }) => <Link {...props} />)`
     }
 `;
 
-// const NavWrapper = styled.div`
-//     position: relative;
-//     margin-bottom: 5vh;
-// `;
-
-const navHero = {
-    desktop: {
-        navbar: {
-            position: "relative",
-            background: "transparent"
-        },
-        logo: {
-            top: 15,
-            scale: 1,
-            position: "absolute"
-        }
-    },
-    mobile: {
-        navbar: {
-            position: "relative",
-            background: "transparent",
-            itemsVisible: true
-        },
-        logo: {
-            top: 15,
-            scale: 1,
-            position: "absolute"
-        }
-    }
-};
-const navBar = {
-    desktop: {
-        navbar: {
-            position: "fixed",
-            top: "0",
-            background: theme.stDark
-        },
-        logo: {
-            top: 0,
-            scale: 0.4,
-            position: "absolute",
-            to: { pathname: "/", state: { heroLogo: true } }
-        }
-    },
-    mobile: {
-        navbar: {
-            position: "fixed",
-            top: "0",
-            background: theme.stDark,
-            itemsVisible: false
-        },
-        logo: {
-            top: 0,
-            right: 25,
-            scale: 0.4,
-            position: "absolute",
-            to: { pathname: "/", state: { heroLogo: true } }
-        }
-    }
-};
-
 function NavItems({ side, location }) {
     let navItems = [];
     let navConfig = site.newNav[side];
     navConfig.map((item, i) => {
         navItems.push(
-            <NavLink
-                key={i}
-                isLocation={location === item.link ? true : false}
-                to={item.link}>
+            <NavLink key={i} isLocation={location === item.link ? true : false} to={item.link}>
                 {item.title}
             </NavLink>
         );
+        return null;
     });
     return navItems;
 }
 
-const MobileHamburger = styled(({ visible, ...props }) => (
-    <Navbar.Toggle {...props} />
-))`
-    position: absolute !important;
-    top: 1vh;
-    right: 5vw;
-    z-index: 100;
-    // border: none;
-    // background-color: transparent;
-    ${props => (props.visible ? null : "display: none")};
-    &:focus {
-        outline: none;
-    }
-`;
+function DesktopNavBar({ doScroll, pathName }) {
+    // Render
+    return (
+        <NavWrapper>
+            <DesktopNav id="navbar-d" className={doScroll ? "sticky" : null}>
+                <LinkBlock side="left">
+                    <NavItems side="left" location={pathName} />
+                </LinkBlock>
+                <DesktopLogoBlock className={doScroll ? "logo in-nav" : "logo"}>
+                    <Link to="/">
+                        <Logo.Typographic color={"white"} width={160} height={160} />
+                    </Link>
+                </DesktopLogoBlock>
+                <LinkBlock side="right">
+                    <NavItems side="right" location={pathName} />
+                    <ContactButton href="/contact" variant="outline-light">
+                        {site.pages.contact.title}
+                    </ContactButton>
+                </LinkBlock>
+            </DesktopNav>
+        </NavWrapper>
+    );
+}
 
 const MobileNavRow = styled.div`
     display: flex;
@@ -247,7 +160,6 @@ const MobileNavRow = styled.div`
     justify-content: space-between;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    ${props => (props.visible ? null : "visibility: hidden;")};
 `;
 
 const MobileNavLink = styled(({ isLocation, ...props }) => <Link {...props} />)`
@@ -255,15 +167,13 @@ const MobileNavLink = styled(({ isLocation, ...props }) => <Link {...props} />)`
     display: inline-block;
     padding: ${theme.navLinkPaddingX};
     text-decoration: none;
-    color: ${({ isLocation }) =>
-        isLocation ? theme.stSecondary : theme.navLinkColor};
+    color: ${({ isLocation }) => (isLocation ? theme.stSecondary : theme.navLinkColor)};
     font-weight: ${({ isLocation }) =>
         isLocation ? theme.fontWeightBold : theme.fontWeightNormal};
     transition: color 0.5s, font-weight 0.5s;
 
     &:hover {
-        color: ${({ isLocation }) =>
-            isLocation ? theme.stSecondary : theme.stWhite} !important;
+        color: ${({ isLocation }) => (isLocation ? theme.stSecondary : theme.stWhite)} !important;
     }
 
     ::before {
@@ -275,25 +185,26 @@ const MobileNavLink = styled(({ isLocation, ...props }) => <Link {...props} />)`
         content: "";
         opacity: ${({ isLocation }) => (isLocation ? 1 : 0)};
         transition: width 0.5s, opacity 0.5s, transform 0.5s;
-        transform: translateY(-10px);
     }
     ${bp.down("md")} {
         padding: 0.5rem;
     }
 `;
 
-function MobileNavItems({ side, location }) {
+function MobileNavItems({ side, location, className }) {
     let navItems = [];
     let navConfig = site.newNav[side];
     navConfig.map((item, i) => {
         navItems.push(
             <MobileNavLink
                 key={i}
+                className={className}
                 isLocation={location === item.link ? true : false}
                 to={item.link}>
                 {item.title}
             </MobileNavLink>
         );
+        return null;
     });
     return navItems;
 }
@@ -303,13 +214,11 @@ const MobileHamburgerWrapper = styled(Container)`
     position: relative;
     background-color: ${theme.stDark};
     color: ${theme.stWhite};
-    padding-top: 10vh;
+    padding-top: 1.5rem !important;
     min-height: 100vh;
     overflow-y: hidden;
     z-index: 2;
-    body {
-        position: fixed !important;
-    }
+    border-top: ${theme.navbarBottomBorder};
 `;
 const MobileHamburgerGroup = styled(ListGroup)`
     margin-top: 1.5rem;
@@ -320,6 +229,7 @@ const MobileHamburgerGroup = styled(ListGroup)`
     }
     .list-group-item:last-child {
         border-bottom: none;
+        border-top: 1px solid ${theme.hamburgerLinkBorder} !important;
     }
     .list-group-item:not(:first-child):not(:last-child) {
         border-top: 1px solid ${theme.hamburgerLinkBorder} !important;
@@ -338,14 +248,11 @@ const MobileHamburgerGroup = styled(ListGroup)`
         border-color: none;
     }
 `;
-const MobileHamburgerItem = styled(
-    ({ isLocation, to, className, ...props }) => (
-        <Link className={className} to={to} active={isLocation} {...props} />
-    )
-)`
+const MobileHamburgerItem = styled(({ isLocation, to, className, ...props }) => (
+    <Link className={className} to={to} active={isLocation.toString()} {...props} />
+))`
     color: ${props => (props.isLocation ? theme.stSecondary : theme.stWhite)};
-    font-weight: ${props =>
-        props.isLocation ? theme.fontWeightBold : theme.fontWeightNormal};
+    font-weight: ${props => (props.isLocation ? theme.fontWeightBold : theme.fontWeightNormal)};
     font-size: ${theme.fontSizeLg};
     text-decoration: none;
     :hover {
@@ -353,25 +260,12 @@ const MobileHamburgerItem = styled(
         text-decoration: none !important;
     }
 `;
-const MobileHamburgerBorder = styled.span`
-    display: block;
-    height: 1px;
-    min-width: 120vw;
-    width: 100%;
-    top: 86px;
-    left: -10vw;
-    background-color: ${theme.stSecondary};
-    position: absolute;
-    margin-top: 3px;
-    margin-bottom: 2vh;
-    overflow: hidden;
-`;
 
 function MobileHamburgerItems({ location, closeNav }) {
     let navConfig = site.newNav.left.concat(site.newNav.right);
     return (
-        <MobileHamburgerWrapper fluid={true}>
-            <MobileHamburgerBorder />
+        <MobileHamburgerWrapper>
+            {/* <MobileHamburgerBorder /> */}
             <ContactButton href="/contact" variant="outline-light" block>
                 {site.pages.contact.title}
             </ContactButton>
@@ -379,9 +273,7 @@ function MobileHamburgerItems({ location, closeNav }) {
                 {navConfig.map((item, i) => {
                     return (
                         <MobileHamburgerItem
-                            className={`list-group-item ${
-                                location === item.link ? "active" : ""
-                            }`}
+                            className={`list-group-item ${location === item.link ? "active" : ""}`}
                             key={i}
                             to={item.link}
                             isLocation={location === item.link ? true : false}
@@ -395,112 +287,148 @@ function MobileHamburgerItems({ location, closeNav }) {
     );
 }
 
-function DesktopNavBar() {
-    let { pathname: activeNav } = useLocation();
-    const isHome = activeNav === "/" ? true : false;
-    const initialNavState = isHome ? navHero : navBar;
-    const [navMode, setNav] = useState(initialNavState);
-    const [scrollPosition, setScrollPosition] = useState(0);
-    const LOGO_TOP = 100;
+const MobileNav = styled(({ position, background, top, itemsVisible, expanded, ...props }) => (
+    <Navbar variant="transparent" expanded={expanded} {...props} />
+))`
+    display: flex !important;
+    flex: 1 0 100% !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 !important;
+    font-size: ${theme.fontSizeSm};
+    border-bottom: ${theme.navbarBottomBorder};
+    background-color: transparent !important;
 
-    const handleScroll = () =>
-        window.scrollY !== 0 && setScrollPosition(window.scrollY);
+    &.sticky {
+        background-color: ${theme.stDark} !important;
+    }
+`;
 
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
+const MobileLogoBlock = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    height: 86px;
+    transition: all 0.2s ease;
+    transform: translate3d(2%, 8%, 0);
+    transform-origin: bottom;
 
-    useEffect(() => {
-        isHome && scrollPosition <= LOGO_TOP ? setNav(navHero) : setNav(navBar);
-    }, [isHome, scrollPosition]);
-    return (
-        <DesktopNav {...navMode.desktop.navbar}>
-            <LinkBlock>
-                <NavItems side="left" location={activeNav} />
-            </LinkBlock>
-            <LogoBlock {...navMode.desktop.logo}>
-                <Logo.Typographic color={"white"} width={400} height={200} />
-            </LogoBlock>
-            <LinkBlock>
-                <NavItems side="right" location={activeNav} />
-                <ContactButton href="/contact" variant="outline-light">
-                    {site.pages.contact.title}
-                </ContactButton>
-            </LinkBlock>
-        </DesktopNav>
-    );
-}
+    &.logo-m.in-nav {
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+    }
+`;
 
-function MobileNavBar() {
+const HamburgerToggle = styled(Navbar.Toggle)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.2s ease;
+    transform-origin: right;
+`;
+
+const MobileHamburger = styled(Navbar.Collapse)`
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+`;
+
+function MobileNavBar({ mobileNavOpen, pathName, doScroll }) {
     // Variables
-    let { pathname: activeNav } = useLocation();
-    const LOGO_TOP = 100;
-    const isHome = activeNav === "/" ? true : false;
-    const initialNavState = isHome ? navHero : navBar;
+
+    // State
     const [isOpen, setOpen] = useState(false);
-    const [navMode, setNav] = useState(initialNavState);
-    const [scrollPosition, setScrollPosition] = useState(0);
 
     // Functions
-    const handleToggle = event => (event ? setOpen(true) : setOpen(false));
+    const handleToggle = event => {
+        if (event) {
+            setOpen(true);
+            mobileNavOpen(true);
+        } else {
+            setOpen(false);
+            mobileNavOpen(false);
+        }
+    };
     const handleNavClick = () => handleToggle(false);
-    const handleBrandClick = () => isOpen && handleNavClick();
-    const handleScroll = () =>
-        window.scrollY !== 0 && setScrollPosition(window.scrollY);
-
-    // Hooks
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-    useEffect(() => {
-        isHome && !isOpen && scrollPosition <= LOGO_TOP
-            ? setNav(navHero)
-            : setNav(navBar);
-    }, [isHome, isOpen, scrollPosition]);
 
     // Render
     return (
-        <MobileNav
-            expand="false"
-            expanded={isOpen}
-            onToggle={handleToggle}
-            {...navMode.mobile.navbar}>
-            <LogoBlock {...navMode.mobile.logo}>
-                <Logo.Typographic color={"white"} width={400} height={200} />
-            </LogoBlock>
-            <MobileHamburger visible={!navMode.mobile.navbar.itemsVisible}>
-                <Hamburger
-                    isOpen={isOpen}
-                    colorOpen={theme.stSecondary}
-                    colorClosed={theme.stWhite}
-                />
-            </MobileHamburger>
-            <Navbar.Collapse>
-                <MobileHamburgerItems
-                    location={activeNav}
-                    closeNav={handleNavClick}
-                />
-            </Navbar.Collapse>
-            {!isOpen && (
-                <MobileNavRow visible={navMode.mobile.navbar.itemsVisible}>
-                    <MobileNavItems side="left" location={activeNav} />
+        <NavWrapper>
+            <MobileNav
+                id="navbar-m"
+                expand="false"
+                expanded={isOpen}
+                onToggle={handleToggle}
+                className={doScroll ? "sticky" : null}>
+                <MobileNavRow>
+                    <MobileLogoBlock className={doScroll ? "logo-m in-nav" : "logo-m hidden"}>
+                        <Link to="/" onClick={isOpen ? handleNavClick : null}>
+                            <Logo.Typographic color={"white"} width={160} height={86} />
+                        </Link>
+                    </MobileLogoBlock>
+                    <HamburgerToggle
+                        className={doScroll ? "nav-m-toggle" : "nav-m-toggle hidden"}
+                        aria-controls="navbar-m">
+                        <Hamburger
+                            isOpen={isOpen}
+                            colorOpen={theme.stSecondary}
+                            colorClosed={theme.stWhite}
+                        />
+                    </HamburgerToggle>
+                    {!isOpen && (
+                        <MobileNavItems
+                            className={doScroll ? "nav-m-item hidden" : "nav-m-item"}
+                            side="left"
+                            location={pathName}
+                        />
+                    )}
                 </MobileNavRow>
-            )}
-        </MobileNav>
+                <MobileHamburger>
+                    <MobileHamburgerItems location={pathName} closeNav={handleNavClick} />
+                </MobileHamburger>
+            </MobileNav>
+        </NavWrapper>
     );
 }
 
-function NavBarEntry() {
+function NavBarEntry({ setMobileNav }) {
+    useWhyDidYouUpdate("NavBarEntry", { setMobileNav });
+    // Variables
+    const logoBreak = site.global.logoTransitionScroll;
+    const { pathname: pathName } = useLocation();
+    const isHome = pathName === "/" ? true : false;
+
+    // State
+    const [readyToScroll, setReadyToScroll] = useState(false);
+    const { y } = useWindowScroll();
+
+    // Hooks
+    useEffect(() => {
+        isHome && y >= logoBreak && setReadyToScroll(true);
+        isHome && y < logoBreak && setReadyToScroll(false);
+        !isHome && setReadyToScroll(true);
+    }, [isHome, logoBreak, y]);
+
+    // Render
     if (query.atMost("sm")) {
-        return <MobileNavBar />;
+        return (
+            <MobileNavBar
+                mobileNavOpen={setMobileNav}
+                pathName={pathName}
+                doScroll={readyToScroll}
+            />
+        );
     } else {
-        return <DesktopNavBar />;
+        setMobileNav(false);
+        return <DesktopNavBar doScroll={readyToScroll} pathName={pathName} />;
     }
 }
 

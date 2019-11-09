@@ -33,7 +33,8 @@ const site = {
         legalName: "Stellar Technologies Inc.",
         givenName: "Stellar",
         salesforceInstanceName: "stellartech",
-        navIconSize: 40
+        navIconSize: 40,
+        logoTransitionScroll: 120
     },
     stars: {
         min: 1,
@@ -221,10 +222,7 @@ const site = {
                 link: "/architecture"
             }
         ],
-        right: [
-            { title: "About", link: "/about" },
-            { title: "Docs", link: "/docs" }
-        ]
+        right: [{ title: "About", link: "/about" }, { title: "Docs", link: "/docs" }]
     },
     footer: {
         sections: [

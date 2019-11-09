@@ -66,7 +66,7 @@ const Loc = {
 
 function LocationCard({ location, title, subtitle, text, flag, ...props }) {
     const { revealProps, standardProps } = getRevealProps(props);
-    const Wrapper = withReveal(Loc.Wrapper, <Slide {...revealProps} />);
+    const Wrapper = withReveal(Loc.Wrapper, <Slide cascade {...revealProps} />);
     return (
         <Wrapper {...standardProps}>
             <Loc.Top>

@@ -97,7 +97,10 @@ function SectionOneTitle(props) {
         margin-top: 3%;
         font-size: ${theme.fontSizeLg};
     `;
-    const Wrapper = withReveal(TitleContainer, <Fade {...revealProps} />);
+    const Wrapper = withReveal(
+        TitleContainer,
+        <Fade cascade {...revealProps} />
+    );
     return (
         <Wrapper fluid={true} {...standardProps}>
             <Title>{section.title}</Title>
@@ -108,15 +111,9 @@ function SectionOneTitle(props) {
 
 function SectionOne() {
     const cardRows = buildCardRows(locationConfig, 3);
-    const revealProps = {
-        bottom: true,
-        duration: 2000,
-        cascade: true
-    };
-
     return (
         <HeroSection>
-            <SectionOneTitle duration={2000} delay={128} cascade />
+            <SectionOneTitle duration={2000} delay={128} />
             {cardRows.map((row, i) => {
                 const rowDelay = i =>
                     getDelay(i, row.length, {
@@ -134,7 +131,8 @@ function SectionOne() {
                                     text={loc.info}
                                     key={i}
                                     delay={rowDelay(i)}
-                                    {...revealProps}
+                                    bottom
+                                    duration={2000}
                                 />
                             );
                         })}

@@ -111,6 +111,8 @@ const FeatureBottom = styled.div`
 `;
 
 const FeatureCardRow = styled(CardDeck)`
+    display: flex;
+    justify-content: center;
     width: 100%;
 `;
 
