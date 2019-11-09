@@ -20,25 +20,16 @@ const Stars = asyncComponent(() => import("components/stars/particles"));
 const NotFound = asyncComponent(() => import("components/pages/notfound"));
 
 class App extends React.Component {
+    // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
-        this.state = {
-            mobileNavOpen: false,
-            readyToScroll: false
-        };
-        this.handleMobileNav = this.handleMobileNav.bind(this);
     }
-
-    handleMobileNav(v) {
-        v !== this.state.mobileNavOpen && this.setState({ mobileNavOpen: v });
-    }
-
     render() {
         return (
             <Router>
                 <ScrollToTopOnMount />
-                <GlobalStyle mobileNavOpen={this.state.mobileNavOpen} />
-                <NavBar setMobileNav={this.handleMobileNav} />
+                <GlobalStyle />
+                <NavBar />
                 <main>
                     <Switch>
                         <Route exact props={this.props} path="/contact" component={Contact} />

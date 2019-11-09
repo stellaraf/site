@@ -7,7 +7,6 @@ import Logo from "components/svg/Logos";
 import styled from "styled-components";
 // import theme from "styles/exports.module.scss";
 // import site from "config";
-// import bp from "utils/breakpoints";
 
 const easing = t => 1 + --t * t * t * t * t;
 
@@ -24,13 +23,13 @@ const easing = t => 1 + --t * t * t * t * t;
 //     color: ${theme.stSecondary};
 // `;
 
-const BigLogo = styled.div`
-    display: flex;
-    top: ${props => props.topPos}vh;
-    transition: all 1s cubic-bezier(0, 1, 0.5, 1);
-    transform: scale(0.95) translate3d(0px, 0px, 0px);
-    transform-origin: center top;
-`;
+// const BigLogo = styled.div`
+//     display: flex;
+//     top: ${props => props.topPos}vh;
+//     transition: all 1s cubic-bezier(0, 1, 0.5, 1);
+//     transform: scale(0.95) translate3d(0px, 0px, 0px);
+//     transform-origin: center top;
+// `;
 
 // const LogoBlock = styled.div`
 //     position: absolute;

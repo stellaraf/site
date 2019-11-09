@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Container, Navbar, ListGroup } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import { useWindowScroll } from "react-use";
+import { useWindowScroll, useLockBodyScroll } from "react-use";
 import useWhyDidYouUpdate from "hooks/useWhyDidYouUpdate";
 import Hamburger from "components/navbar/Hamburger";
 import styled from "styled-components";
@@ -245,7 +245,7 @@ const MobileHamburgerGroup = styled(ListGroup)`
     .list-group-item:active,
     .list-group-item.active {
         background-color: ${theme.hamburgerLinkHoverBackground} !important;
-        border-color: none;
+        border-color: unset;
     }
 `;
 const MobileHamburgerItem = styled(({ isLocation, to, className, ...props }) => (
@@ -341,23 +341,11 @@ const MobileHamburger = styled(Navbar.Collapse)`
     padding-right: 0 !important;
 `;
 
-function MobileNavBar({ mobileNavOpen, pathName, doScroll }) {
-    // Variables
+function MobileNavBar({ navOpen, setNavOpen, pathName, doScroll }) {
+    useWhyDidYouUpdate("MobileNavBar", { navOpen, setNavOpen, pathName, doScroll });
 
-    // State
-    const [isOpen, setOpen] = useState(false);
-
-    // Functions
-    const handleToggle = event => {
-        if (event) {
-            setOpen(true);
-            mobileNavOpen(true);
-        } else {
-            setOpen(false);
-            mobileNavOpen(false);
-        }
-    };
-    const handleNavClick = () => handleToggle(false);
+    const handleNavClose = () => setNavOpen(false);
+    const handleNavClick = e => setNavOpen(e);
 
     // Render
     return (
@@ -365,12 +353,21 @@ function MobileNavBar({ mobileNavOpen, pathName, doScroll }) {
             <MobileNav
                 id="navbar-m"
                 expand="false"
-                expanded={isOpen}
-                onToggle={handleToggle}
+                expanded={navOpen}
+                onToggle={handleNavClick}
                 className={doScroll ? "sticky" : null}>
                 <MobileNavRow>
-                    <MobileLogoBlock className={doScroll ? "logo-m in-nav" : "logo-m hidden"}>
-                        <Link to="/" onClick={isOpen ? handleNavClick : null}>
+                    <MobileLogoBlock
+                        className={
+                            doScroll && !navOpen
+                                ? "logo-m in-nav"
+                                : !doScroll && navOpen
+                                ? "logo-m in-nav"
+                                : doScroll && navOpen
+                                ? "logo-m in-nav"
+                                : "logo-m hidden"
+                        }>
+                        <Link to="/" onClick={navOpen ? handleNavClose : null}>
                             <Logo.Typographic color={"white"} width={160} height={86} />
                         </Link>
                     </MobileLogoBlock>
@@ -378,12 +375,12 @@ function MobileNavBar({ mobileNavOpen, pathName, doScroll }) {
                         className={doScroll ? "nav-m-toggle" : "nav-m-toggle hidden"}
                         aria-controls="navbar-m">
                         <Hamburger
-                            isOpen={isOpen}
+                            isOpen={navOpen}
                             colorOpen={theme.stSecondary}
                             colorClosed={theme.stWhite}
                         />
                     </HamburgerToggle>
-                    {!isOpen && (
+                    {!navOpen && (
                         <MobileNavItems
                             className={doScroll ? "nav-m-item hidden" : "nav-m-item"}
                             side="left"
@@ -392,15 +389,15 @@ function MobileNavBar({ mobileNavOpen, pathName, doScroll }) {
                     )}
                 </MobileNavRow>
                 <MobileHamburger>
-                    <MobileHamburgerItems location={pathName} closeNav={handleNavClick} />
+                    <MobileHamburgerItems location={pathName} closeNav={handleNavClose} />
                 </MobileHamburger>
             </MobileNav>
         </NavWrapper>
     );
 }
 
-function NavBarEntry({ setMobileNav }) {
-    useWhyDidYouUpdate("NavBarEntry", { setMobileNav });
+function NavBarEntry() {
+    useWhyDidYouUpdate("NavBarEntry");
     // Variables
     const logoBreak = site.global.logoTransitionScroll;
     const { pathname: pathName } = useLocation();
@@ -408,6 +405,7 @@ function NavBarEntry({ setMobileNav }) {
 
     // State
     const [readyToScroll, setReadyToScroll] = useState(false);
+    const [isOpen, setOpen] = useState(false);
     const { y } = useWindowScroll();
 
     // Hooks
@@ -415,19 +413,20 @@ function NavBarEntry({ setMobileNav }) {
         isHome && y >= logoBreak && setReadyToScroll(true);
         isHome && y < logoBreak && setReadyToScroll(false);
         !isHome && setReadyToScroll(true);
-    }, [isHome, logoBreak, y]);
+    }, [isHome, isOpen, logoBreak, y]);
 
+    useLockBodyScroll(isOpen);
     // Render
     if (query.atMost("sm")) {
         return (
             <MobileNavBar
-                mobileNavOpen={setMobileNav}
+                navOpen={isOpen}
+                setNavOpen={setOpen}
                 pathName={pathName}
                 doScroll={readyToScroll}
             />
         );
     } else {
-        setMobileNav(false);
         return <DesktopNavBar doScroll={readyToScroll} pathName={pathName} />;
     }
 }
