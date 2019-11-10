@@ -1,39 +1,62 @@
 import React from "react";
 import styled from "styled-components";
 import { Card, Container, Col, Row } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
+import { FiArrowRight, FiChevronRight } from "react-icons/fi";
 import { useLocation } from "react-router";
-import { FiArrowRight } from "react-icons/fi";
 
 import { AngleSection } from "components/styled/sections";
 // import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
 import site from "config";
 
-// const RevealWrapper = styled.div`
-//     display: flex !important;
-//     flex-grow: 1 !important;
-// `;
-
-const Next = {
-    Wrapper: styled(Card)`
-        display: block !important;
-        text-align: left;
-        flex: 0 1 auto !important;
-        flex-direction: column;
-        width: ${theme.nextCardWidth};
-        height: ${theme.nextCardHeight};
-        background-color: ${theme.nextCardBackground} !important;
-        color: ${theme.nextCardColor} !important;
-        border: 1px solid ${theme.nextCardBorderColor} !important;
-        &:hover {
-            background-color: ${theme.nextCardBackgroundHover} !important;
-            transition: color 0.15s ease-in-out,
-                background-color 0.15s ease-in-out,
-                border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+const getNextPages = location => {
+    const allPages = site.pages;
+    const pages = [];
+    for (let page in allPages) {
+        if (allPages[page]["includeNext"] && allPages[page]["link"] !== location) {
+            pages.push(allPages[page]);
         }
-    `,
-    Top: styled.div`
+    }
+    return pages;
+};
+
+const StyledCard = styled(Card)`
+    display: block !important;
+    position: relative;
+    text-align: left;
+    flex: 0 1 auto !important;
+    flex-direction: column;
+    width: ${theme.nextCardWidth};
+    height: ${theme.nextCardHeight};
+    background-color: ${theme.nextCardBackground} !important;
+    color: ${theme.nextCardColor} !important;
+    border: 1px solid ${theme.nextCardBorderColor} !important;
+    &:hover {
+        background-color: ${theme.nextCardBackgroundHover} !important;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+            border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    & > .next-card-text {
+        display: block;
+        padding-left: 6%;
+        padding-bottom: 6%;
+        padding-top: 6%;
+        padding-right: 32px;
+        height: 100%;
+    }
+
+    & > .next-card-icon {
+        position: absolute;
+        width: 32px;
+        top: 0;
+        right: 0;
+        padding-top: 71.5px;
+        padding-bottom: 71.5px;
+    }
+
+    & > .next-card-top {
         display: block;
         justify-content: space-between;
         padding-right: 6%;
@@ -42,8 +65,9 @@ const Next = {
         padding-top: 5%;
         max-height: 35%;
         height: 100%;
-    `,
-    Bottom: styled.div`
+    }
+
+    & > .next-card-bottom {
         display: block;
         padding-top: 6%;
         padding-right: 6%;
@@ -51,14 +75,16 @@ const Next = {
         padding-bottom: 5%;
         max-height: 65%;
         height: 100%;
-    `,
-    Title: styled.h5`
+    }
+
+    & h5.next-card-title {
         margin-bottom: 0.5rem;
         flex: 1 0 auto;
         color: ${theme.nextCardColor};
         width: 100%;
-    `,
-    Subtitle: styled.a`
+    }
+
+    & a.next-card-subtitle {
         font-weight: ${theme.fontWeightBold};
         font-size: ${theme.fontSizeSm};
         width: 100%;
@@ -78,70 +104,14 @@ const Next = {
             content: "";
             background-color: rgba(0, 0, 0, 0);
         }
-    `,
-    Lead: styled.p`
+    }
+
+    & p.next-card-lead {
         flex: 1 0 auto;
         color: ${theme.nextCardColor};
         width: 100%;
-    `
-};
-
-// const StyledCard = styled(Card)`
-//     background-color: ${theme.nextCardBackground} !important;
-//     color: ${theme.nextCardColor} !important;
-//     text-align: center;
-//     flex-grow: 1;
-//     justify-content: center;
-//     min-height: ${theme.nextCardHeight};
-//     height: 100%;
-//     max-width: ${theme.nextCardWidth};
-//     width: 100%;
-//     border-color: ${theme.nextCardBorder};
-//     border: 1px solid transparent !important;
-//     ${bp.down("md")} {
-//         min-height: ${theme.featureCardHeightSm};
-//     }
-//     &:hover {
-//         background-color: ${theme.nextCardBackgroundHover} !important;
-//         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-//             border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-//     }
-// `;
-
-// const NextTop = styled.div`
-//     padding: ${theme.nextCardPaddingY} ${theme.nextCardPaddingX} !important;
-// `;
-
-// const NextBottom = styled.div`
-//     padding-right: ${theme.nextCardPaddingX} !important;
-//     padding-left: ${theme.nextCardPaddingX} !important;
-//     padding-bottom: ${theme.nextCardPaddingY} !important;
-// `;
-
-// const NextCardRow = styled(CardDeck)`
-//     justify-content: center !important;
-//     width: 100%;
-// `;
-
-// const NextCardText = styled.a`
-//     color: ${theme.nextCardColor} !important;
-//     &:hover {
-//         text-decoration: none !important;
-//         color: unset !important;
-//     }
-
-//     &::after {
-//         position: absolute;
-//         top: 0;
-//         right: 0;
-//         bottom: 0;
-//         left: 0;
-//         z-index: 1;
-//         pointer-events: auto;
-//         content: "";
-//         background-color: rgba(0, 0, 0, 0);
-//     }
-// `;
+    }
+`;
 
 function NextCard({
     title = "Placeholder Title",
@@ -150,72 +120,56 @@ function NextCard({
     link = "/"
 }) {
     return (
-        <Next.Wrapper>
-            <Next.Top>
-                <Next.Lead>
-                    {lead}
-                    <FiArrowRight style={{ marginLeft: "0.5rem" }} />
-                </Next.Lead>
-            </Next.Top>
-            <Next.Bottom>
-                <Next.Title>{title}</Next.Title>
-                <LinkContainer to={link}>
-                    <Next.Subtitle href={link}>{subtitle}</Next.Subtitle>
-                </LinkContainer>
-            </Next.Bottom>
-        </Next.Wrapper>
+        <StyledCard>
+            <div className="next-card-text">
+                <p className="next-card-lead">{lead}</p>
+                <h5 className="next-card-title">{title}</h5>
+                <Link className="next-card-subtitle" to={link}>
+                    {subtitle}
+                </Link>
+            </div>
+            <div className="next-card-icon">
+                <FiChevronRight style={{ width: "32px", height: "32px" }} color={theme.stDark} />
+            </div>
+        </StyledCard>
     );
 }
+
+// function NextCard({
+//     title = "Placeholder Title",
+//     subtitle = "Placeholder Text",
+//     lead = "Placeholder Lead",
+//     link = "/"
+// }) {
+//     return (
+//         <StyledCard>
+//             <div className="next-card-top">
+//                 <p className="next-card-lead">
+//                     {lead}
+//                     <FiArrowRight style={{ marginLeft: "0.5rem" }} />
+//                 </p>
+//             </div>
+//             <div className="next-card-bottom">
+//                 <h5 className="next-card-title">{title}</h5>
+//                 <Link className="next-card-subtitle" to={link}>
+//                     {subtitle}
+//                 </Link>
+//             </div>
+//         </StyledCard>
+//     );
+// }
 
 const SectionContainer = styled(Container)`
     min-height: 25vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-`;
 
-const getNextPages = location => {
-    const allPages = site.pages;
-    const pages = [];
-    for (let page in allPages) {
-        if (
-            allPages[page]["includeNext"] &&
-            allPages[page]["link"] !== location
-        ) {
-            pages.push(allPages[page]);
-        }
+    & h3.next-section-title {
+        color: ${theme.stDark};
+        margin-top: 1vh;
+        margin-bottom: 3vh;
     }
-    return pages;
-};
-
-// function NextSection(props) {
-//     const location = useLocation();
-//     const nextPages = getNextPages(location.pathname);
-//     return (
-//         <LineSection direction="leftUp" color={theme.stSecondary}>
-//             <SectionContainer>
-//                 <NextCardRow>
-//                     {nextPages.map((page, i) => {
-//                         return (
-//                             <NextCard
-//                                 key={i}
-//                                 title={page.title}
-//                                 subtitle={page.subtitle}
-//                                 lead={page.nextLead}
-//                                 link={page.link}
-//                             />
-//                         );
-//                     })}
-//                 </NextCardRow>
-//             </SectionContainer>
-//         </LineSection>
-//     );
-// }
-
-const NextTitle = styled.h3`
-    color: ${props => props.color};
-    margin-top: 1vh;
-    margin-bottom: 3vh;
 `;
 
 function NextSection(props) {
@@ -229,25 +183,22 @@ function NextSection(props) {
             <SectionContainer>
                 <Row>
                     <Col sm={12}>
-                        <NextTitle color={theme.stDark}>
-                            Ready for more?
-                        </NextTitle>
+                        <h3 className="next-section-title">{site.global.nextSectionTitle}</h3>
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm={12} md={4}>
-                        {nextPages.map((page, i) => {
-                            return (
+                    {nextPages.map((page, i) => {
+                        return (
+                            <Col sm={12} md={6} key={i}>
                                 <NextCard
-                                    key={i}
                                     title={page.title}
                                     subtitle={page.subtitle}
                                     lead={page.nextLead}
                                     link={page.link}
                                 />
-                            );
-                        })}
-                    </Col>
+                            </Col>
+                        );
+                    })}
                 </Row>
             </SectionContainer>
         </AngleSection>

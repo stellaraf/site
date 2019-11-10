@@ -16,6 +16,9 @@ import "styles/main.scss";
 const Home = asyncComponent(() => import("components/pages/home"));
 const Cloud = asyncComponent(() => import("components/pages/cloud"));
 const Contact = asyncComponent(() => import("components/pages/contact"));
+const Services = asyncComponent(() => import("components/pages/services"));
+const About = asyncComponent(() => import("components/pages/about"));
+const Consulting = asyncComponent(() => import("components/pages/consulting"));
 const Stars = asyncComponent(() => import("components/stars/particles"));
 const NotFound = asyncComponent(() => import("components/pages/notfound"));
 
@@ -32,7 +35,10 @@ class App extends React.Component {
                 <NavBar />
                 <main>
                     <Switch>
+                        <Route exact props={this.props} path="/consulting" component={Consulting} />
+                        <Route exact props={this.props} path="/services" component={Services} />
                         <Route exact props={this.props} path="/contact" component={Contact} />
+                        <Route exact props={this.props} path="/about" component={About} />
                         <Route exact props={this.props} path="/cloud" component={Cloud} />
                         <Route exact props={this.props} path="/" component={Home} />
                         <Route path="*" component={NotFound} />
