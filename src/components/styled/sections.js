@@ -116,38 +116,22 @@ const InfoSectionMain = styled.div`
     max-width: 100%;
     position: relative;
     overflow: hidden;
-    min-height: ${props => props.height};
+    min-height: ${props => props.sectionHeight || "25vh"};
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
     align-self: center;
-    margin-top: ${props => props.angleHeight};
-    margin-bottom: ${props => props.angleHeight};
+    margin-top: ${props => props.marginTop};
+    margin-bottom: ${props => props.marginBottom};
     padding-right: 15px;
     padding-left: 15px;
-    color: ${props => props.textColor};
-    background-color: ${props => props.backgroundColor};
-    @media (max-width: ${theme.breakLg}) {
+    color: ${props => props.textColor || theme.bodyColor};
+    background-color: ${props => props.backgroundColor || theme.bodyBg};
+    ${bp.down("lg")} {
         max-width: none;
         margin-top: 0;
     }
-    @media (min-width: ${theme.breakSm}) {
-    }
-    @media (min-width: ${theme.breakMd}) {
-    }
-    @media (min-width: ${theme.breakLg}) {
-    }
-    @media (min-width: ${theme.breakXl}) {
-    }
 `;
-
-InfoSectionMain.defaultProps = {
-    "min-height": "25vh",
-    "margin-top": "3rem",
-    "margin-bottom": "2rem",
-    color: theme.bodyColor,
-    "background-color": theme.bodyBg
-};
 
 const InfoSection = {
     Main: InfoSectionMain,
@@ -157,6 +141,8 @@ const InfoSection = {
 function AngleSection({
     height = "25vh",
     angleHeight = "5vh",
+    marginTop,
+    marginBottom,
     side,
     offset,
     directionTop = "rightDown",
@@ -165,15 +151,13 @@ function AngleSection({
     textColor = theme.bodyColor,
     ...props
 }) {
-    const [heightInt, heightUnit] = height
-        .split(/(\d+)([a-zA-Z]+)/)
-        .filter(i => i);
-    const [angleHeightInt, angleHeightUnit] = angleHeight
-        .split(/(\d+)([a-zA-Z]+)/)
-        .filter(i => i);
+    const [heightInt, heightUnit] = height.split(/(\d+)([a-zA-Z]+)/).filter(i => i);
+    const [angleHeightInt, angleHeightUnit] = angleHeight.split(/(\d+)([a-zA-Z]+)/).filter(i => i);
+
     const middleHeightInt = heightInt - angleHeightInt * 2;
     const middleHeight = `${middleHeightInt}${heightUnit}`;
     const middleMargin = `${~~(angleHeightInt * 1.2)}${angleHeightUnit}`;
+    const groupMargin = `${angleHeightInt / 2}${angleHeightUnit}`;
 
     const borderMap = {
         rightDown: {
@@ -191,11 +175,17 @@ function AngleSection({
         rightUp: {
             color: `transparent ${backgroundColor} transparent transparent`,
             width: `0 100vw ${angleHeight} 0`
+        },
+        flat: {
+            color: "transparent",
+            width: "100vw"
         }
     };
 
     let sectionStyle = {
-        height: middleHeight,
+        marginTop: marginTop || angleHeight,
+        marginBottom: marginBottom || angleHeight,
+        sectionHeight: middleHeight,
         backgroundColor: backgroundColor,
         textColor: textColor,
         angleHeight: middleMargin
@@ -204,6 +194,19 @@ function AngleSection({
         overflow: visible;
         padding-left: 0;
         padding-right: 0;
+
+        &:first-of-type:not(:last-of-type) {
+            margin-bottom: ${groupMargin};
+        }
+
+        &:last-of-type:not(first-of-type) {
+            margin-top: ${groupMargin};
+        }
+
+        &:not(:first-of-type):not(:last-of-type) {
+            margin-bottom: ${groupMargin};
+            margin-top: ${groupMargin};
+        }
     `;
 
     const InnerSection = styled(InfoSection.Content)`
@@ -234,8 +237,8 @@ function AngleSection({
     `;
 
     return (
-        <ThisSection {...sectionStyle}>
-            <InnerSection {...props}>{props.children}</InnerSection>
+        <ThisSection {...sectionStyle} {...props}>
+            <InnerSection>{props.children}</InnerSection>
         </ThisSection>
     );
 }
@@ -243,23 +246,23 @@ function AngleSection({
 function LineSection({
     height = "25vh",
     angleHeight = "5vh",
+    marginTop,
+    marginBottom,
     color = theme.stWhite,
     textColor = theme.bodyColor,
     direction = "leftDown",
     strokeWidth = "2",
     ...props
 }) {
-    const [heightInt, heightUnit] = height
-        .split(/(\d+)([a-zA-Z]+)/)
-        .filter(i => i);
-    const [angleHeightInt, angleHeightUnit] = angleHeight
-        .split(/(\d+)([a-zA-Z]+)/)
-        .filter(i => i);
+    const [heightInt, heightUnit] = height.split(/(\d+)([a-zA-Z]+)/).filter(i => i);
+    const [angleHeightInt, angleHeightUnit] = angleHeight.split(/(\d+)([a-zA-Z]+)/).filter(i => i);
     const middleHeightInt = heightInt - angleHeightInt * 2;
     const middleHeight = `${middleHeightInt}${heightUnit}`;
     const middleMargin = `${~~(angleHeightInt * 1.2)}${angleHeightUnit}`;
 
     let sectionStyle = {
+        marginTop: marginTop || angleHeight,
+        marginBottom: marginBottom || angleHeight,
         height: middleHeight,
         textColor: textColor,
         angleHeight: middleMargin

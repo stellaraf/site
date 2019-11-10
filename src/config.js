@@ -11,19 +11,19 @@ const commonNavItems = [
     {
         title: "Dedicated IT",
         items: [
-            { name: "End User Support", link: "/" },
-            { name: "Infrastructure Management", link: "/" },
-            { name: "Asset Monitoring", link: "/" },
-            { name: "Automation", link: "/" }
+            { name: "End User Support", link: "/services" },
+            { name: "Infrastructure Management", link: "/services" },
+            { name: "Asset Monitoring", link: "/services" },
+            { name: "Automation", link: "/services" }
         ]
     },
     {
         title: "Design & Deployment",
         items: [
-            { name: "Infrastructure Deployment", link: "/" },
-            { name: "Network Design", link: "/" },
-            { name: "DevOps", link: "/" },
-            { name: "Migrations", link: "/" }
+            { name: "Infrastructure Deployment", link: "/consulting" },
+            { name: "Network Design", link: "/consulting" },
+            { name: "DevOps", link: "/consulting" },
+            { name: "Migrations", link: "/consulting" }
         ]
     }
 ];
@@ -34,7 +34,8 @@ const site = {
         givenName: "Stellar",
         salesforceInstanceName: "stellartech",
         navIconSize: 40,
-        logoTransitionScroll: 120
+        logoTransitionScroll: 120,
+        nextSectionTitle: "Ready for more?"
     },
     stars: {
         min: 1,
@@ -49,7 +50,7 @@ const site = {
         buttonText: "Back"
     },
     social: [
-        { name: "Facebook", link: "https://www.facebook.com" },
+        { name: "Facebook", link: "https://www.facebook.com/stellar_tech" },
         { name: "LinkedIn", link: "https://linkedin.com/company/stellaraf" },
         { name: "Github", link: "https://github.com/stellaraf" },
         { name: "Twitter", link: "https://twitter.com/stellar_tech" }
@@ -62,6 +63,12 @@ const site = {
         resetTimeout: 5000
     },
     pages: {
+        about: {
+            includeNext: false,
+            link: "/about",
+            title: "What makes us so stellar?",
+            subtitle: "...a little about us."
+        },
         contact: {
             includeNext: false,
             link: "/contact",
@@ -70,7 +77,7 @@ const site = {
         },
         cloud: {
             includeNext: true,
-            nextLead: "Temp Lead",
+            nextLead: "Gravitate to the upper echelon of cloud",
             link: "/cloud",
             title: "Orion",
             subtitle: "The Enterprise Native Cloud by Stellar",
@@ -87,6 +94,20 @@ const site = {
                 }
             }
         },
+        services: {
+            includeNext: true,
+            nextLead: "Let our stellar engineers become your Stellar IT Team",
+            link: "/services",
+            title: "Dedicated IT Services",
+            subtitle: "Your 24/7 Technology Team"
+        },
+        consulting: {
+            includeNext: true,
+            nextLead: "Burst to our supreme infrastructure team",
+            link: "/consulting",
+            title: "Infrastructure Consulting",
+            subtitle: "On-Demand IT Special Forces"
+        },
         home: {
             includeNext: false,
             link: "/home",
@@ -94,7 +115,7 @@ const site = {
             headings: {
                 title: "Introducing...",
                 subtitle: "",
-                text: ""
+                text: "Text about what we do, how cool we are, and how we are Stellar AF"
             },
             contactButton: {
                 text: "Talk to Us"
@@ -102,29 +123,34 @@ const site = {
             sections: {
                 sectionOne: [
                     {
-                        title: "Virtual Private Data Center",
-                        text: "Custom, Scalable Application Hosting",
-                        image: "DataStructure",
-                        link: "/cloud"
+                        title: "Orion",
+                        subtitle: "The Enterprise Native Cloud Platform",
+                        link: "/cloud",
+                        text: null
                     },
                     {
                         title: "Dedicated Services",
-                        text: "Your 24/7 Technology Team",
-                        image: "CloudComputing",
-                        link: "/cloud"
+                        subtitle: "Your 24/7 Technology Team",
+                        link: "/services",
+                        text: `As a skilled team of engineers who have supported businesses and technologies of all types for decades at a global scale, we're experts at meeting the demands of operating business technology.
+                        
+                        With our bespoke, dedicated IT services, your business is able to offload IT burdens based on its specific needs — be it end user IT support, infrastructure management, system monitoring, or the entire IT environment.
+                        `
                     },
                     {
-                        title: "Design & Deployment",
-                        text: "On-Demand IT Special Forces",
-                        image: "Diagram",
-                        link: "/cloud"
+                        title: "Infrastructure Consulting",
+                        subtitle: "On-Demand IT Special Forces",
+                        link: "/consulting",
+                        text: `Many organizations have business requirements that demand the use of complex IT technologies, but not all of them can afford to keep engineers with the necessary skillsets on staff at all times.
+                        
+                        That's where we come in — our ridiculously talented infrastructure engineers are dangerously good at designing, building, and implementing complex IT systems when the need arises. 
+                        `
                     }
                 ]
             }
         },
         docs: {
-            includeNext: true,
-            nextLead: "Temp Lead",
+            includeNext: false,
             link: "/docs",
             title: "Resources & Documentation",
             subtitle: "SLAs & SOPs",
@@ -210,7 +236,7 @@ const site = {
     newNav: {
         left: [
             {
-                title: "Cloud",
+                title: "Platform",
                 link: "/cloud"
             },
             {
@@ -218,8 +244,8 @@ const site = {
                 link: "/services"
             },
             {
-                title: "Architecture",
-                link: "/architecture"
+                title: "Consulting",
+                link: "/consulting"
             }
         ],
         right: [{ title: "About", link: "/about" }, { title: "Docs", link: "/docs" }]
@@ -230,9 +256,9 @@ const site = {
                 title: "Company",
                 items: [
                     { name: "Home", link: "/" },
-                    { name: "About", link: "/" },
-                    { name: "Careers", link: "/" },
-                    { name: "Partners", link: "/" }
+                    { name: "About", link: "/about" },
+                    { name: "Careers", link: "/about" },
+                    { name: "Partners", link: "/about" }
                 ]
             },
             ...commonNavItems
