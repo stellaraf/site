@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, CardDeck, Card, Container, Col, Row } from "react-bootstrap";
+import { Button, Card, Container, Col, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Icons from "components/svg/Icons";
 // import { SectionCard } from "components/pages/home/Cards";
-import { AngleSection, LineSection } from "components/styled/sections";
+import { AngleSection } from "components/styled/sections";
 import { FiChevronRight } from "react-icons/fi";
 // import { getDelay } from "utils";
 // import { FullWidthCard } from "components/styled/cards";
@@ -112,11 +112,11 @@ const FeatureBottom = styled.div`
     padding-bottom: ${theme.sectionCardPaddingY} !important;
 `;
 
-const FeatureCardRow = styled(CardDeck)`
-    display: flex;
-    justify-content: center;
-    width: 100%;
-`;
+// const FeatureCardRow = styled(CardDeck)`
+//     display: flex;
+//     justify-content: center;
+//     width: 100%;
+// `;
 
 const FeatureCardTitle = styled.h5`
     color: ${props => props.color};

@@ -1,3 +1,5 @@
+import theme from "styles/exports.module.scss";
+
 const commonNavItems = [
     {
         title: "Cloud",
@@ -67,7 +69,7 @@ const site = {
             includeNext: false,
             link: "/about",
             title: "What makes us so stellar?",
-            subtitle: "...a little about us."
+            subtitle: "We're glad you asked..."
         },
         contact: {
             includeNext: false,
@@ -87,16 +89,55 @@ const site = {
                     text:
                         "Our strategically located data centers allow enterprises to substantially reduce latency between end-users and business applications."
                 },
-                two: {
-                    title: "100% Uptime Guarantee",
-                    subtitle: "Everyone knows time is money.",
-                    text: `We're <i>that</i> confident in the Orion platform. If we fail to deliver on our Service Level Agreement, we'll credit back the amount of time services were unavailable.`
-                }
+                info: [
+                    {
+                        title: "100% Uptime Guarantee",
+                        subtitle: "Because time is money.",
+                        text: `We're _that_ confident in the Orion platform. If we fail to deliver on our <Link to="/docs/sla">Service Level Agreement</Link>, we'll credit back the amount of time services were unavailable.`
+                    },
+                    {
+                        title: "Infrastructure as a Service",
+                        subtitle: "Virtual Private Data Center at the speed of light",
+                        content: [
+                            {
+                                title: "Compute",
+                                text: `The Orion compute infrastructure is built to sustain the most intense workloads your business can demand.<br/><br/>
+                                As an engineer-led team with some of the highest performance standards in the universe, we don't mess around when it comes to our infrastructure.<br/><br/>
+                                Our servers are packed with high-performance <Intel className="inline-icon" height={32} color={${theme.stWhite}} /> CPUs, the fastest RAM money can buy, and dedicated 100 Gbps networking.`
+                            },
+                            {
+                                title: "Storage",
+                                text: `As one of the fastest moving cloud platforms on the planet, we're obsessed with guaranteeing insanely fast I/O performance.<br/><br/>
+                                Orion production workloads uncompromisingly run on 100% dedicated SSD <PureStorage className="inline-icon" height={28} color={${theme.stWhite}}/> arrays backed by 160 Gbps of storage networking capacity per array.
+                            `
+                            },
+                            {
+                                title: "Platform",
+                                text: `The Orion platform is completely powered by <VMware className="inline-icon" height={12} color={${theme.stWhite}}/>, so you can rest easy knowing your critical infrastructure is running on the most reliable hypervisor in existence.<br/><br/>
+                                Orion natively supports virtually any operating system in existence, and can be easily populated with your own custom ISO builds if needed.`
+                            },
+                            {
+                                title: "Connectivity",
+                                text: `Powering the Orion platform is our transpacific & transcontinental private network, interconnected by redundant 10 Gbps long haul transport paths, enabling enterprises to spin up and scale resources without worrying about latency.<br/><br/>
+                                With every Orion virtual private data center we include access to our highly redundant internet edge with 100 Mbps of symmetrical bandwidth (no data caps!) for free.
+                                `
+                            }
+                        ]
+                    },
+                    {
+                        title: "Data Protection",
+                        subtitle: "We've got you covered",
+                        content: [
+                            { title: "Backups as a Service", text: "BaaS Text" },
+                            { title: "Disaster Recovery as a Service", text: "DRaaS Text" }
+                        ]
+                    }
+                ]
             }
         },
         services: {
             includeNext: true,
-            nextLead: "Let our stellar engineers become your Stellar IT Team",
+            nextLead: "Make our stellar engineers your Stellar IT Team",
             link: "/services",
             title: "Dedicated IT Services",
             subtitle: "Your 24/7 Technology Team"
@@ -258,7 +299,7 @@ const site = {
                     { name: "Home", link: "/" },
                     { name: "About", link: "/about" },
                     { name: "Careers", link: "/about" },
-                    { name: "Partners", link: "/about" }
+                    { name: "Channel", link: "/channel" }
                 ]
             },
             ...commonNavItems
