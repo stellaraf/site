@@ -33,6 +33,42 @@ $st-gradient-down: linear-gradient(
     $st-dark
 );
 
+@function make-gradient($startColor: $color-black, $direction: "to bottom") {
+    $scrimCoordinates: (
+        0: 1,
+        19: 0.738,
+        34: 0.541,
+        47: 0.382,
+        56.5: 0.278,
+        65: 0.194,
+        73: 0.126,
+        80.2: 0.075,
+        86.1: 0.042,
+        91: 0.021,
+        95.2: 0.008,
+        98.2: 0.002,
+        100: 0
+    );
+    $hue: hue($startColor);
+    $saturation: saturation($startColor);
+    $lightness: lightness($startColor);
+    $stops: ();
+    @each $colorStop, $alphaValue in $scrimCoordinates {
+        $stop: hsla($hue, $saturation, $lightness, $alphaValue)
+            percentage($colorStop/100);
+        $stops: append($stops, $stop, comma);
+    }
+    @return linear-gradient(unquote($direction), $stops);
+}
+
+$st-section-gradient-1: make-gradient($st-dark),
+    make-gradient($st-primary, "to top right"),
+    make-gradient($st-primary-alt, "to top left");
+
+$st-section-gradient-2: make-gradient($st-primary, "to bottom right"),
+    make-gradient($st-primary-alt, "to bottom left"),
+    make-gradient($st-dark, "to top");
+
 // $bg1: $st-background;
 // $bg2: lighten($st-background, 6%);
 // $bg3: darken($st-background, 4%);
@@ -218,13 +254,13 @@ $log-card-margin-sm-y: 15px;
 // Next Page
 $next-card-background: transparent;
 $next-card-color: $st-dark;
-$next-card-width: 340px;
+$next-card-width: 360px;
 $next-card-height: 175px;
 $next-card-background-hover: rgba($st-dark, 0.05);
 $next-card-subtitle-color: rgba($next-card-color, 0.3);
 $next-card-border-color: $st-dark;
-$next-card-padding-x: 1rem;
-$next-card-padding-y: 1rem;
+$next-card-padding-x: 2%;
+$next-card-padding-y: 2%;
 
 // Feature Sections
 $feature-card-height: 285px;

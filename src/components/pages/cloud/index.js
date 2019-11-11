@@ -2,7 +2,7 @@ import React from "react";
 import {
     SectionOne,
     // eslint-disable-next-line
-    SectionTwo,
+    InfoSections,
     TitleBlock
 } from "components/pages/cloud/Sections";
 import NextSection from "components/next";
@@ -12,7 +12,8 @@ function Cloud() {
         <>
             <TitleBlock />
             <SectionOne />
-            <NextSection />
+            <InfoSections />
+            <NextSection directionBottom="leftUp" directionTop="rightDown" />
         </>
     );
 }

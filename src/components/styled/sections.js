@@ -196,16 +196,16 @@ function AngleSection({
         padding-right: 0;
 
         &:first-of-type:not(:last-of-type) {
-            margin-bottom: ${groupMargin};
+            margin-bottom: ${marginBottom || groupMargin};
         }
 
         &:last-of-type:not(first-of-type) {
-            margin-top: ${groupMargin};
+            margin-top: ${marginTop || groupMargin};
         }
 
         &:not(:first-of-type):not(:last-of-type) {
-            margin-bottom: ${groupMargin};
-            margin-top: ${groupMargin};
+            margin-bottom: ${marginBottom || groupMargin};
+            margin-top: ${marginTop || groupMargin};
         }
     `;
 

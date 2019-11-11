@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 function DataStructure({ color = "#ffffff", size = "90px", alt = "DataStructure" }) {
     return (

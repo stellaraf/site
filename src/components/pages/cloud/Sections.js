@@ -1,20 +1,36 @@
 import React from "react";
-import { Container, CardDeck } from "react-bootstrap";
+import { Button, Container, CardDeck, Col, Row } from "react-bootstrap";
 import Fade from "react-reveal/Fade";
 import withReveal from "react-reveal/withReveal";
 import styled from "styled-components";
+import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
+import MarkdownToJSX from "markdown-to-jsx";
+import { Intel, VMware, PureStorage } from "components/svg/VendorLogos";
+import { FiChevronRight } from "react-icons/fi";
 import { getDelay, buildCardRows, getRevealProps } from "utils";
-import {
-    HeroSection,
-    AngleSection,
-    InfoSection
-} from "components/styled/sections";
+import { HeroSection, AngleSection } from "components/styled/sections";
 import bp from "utils/breakpoints";
 import { Display } from "components/styled/text";
 import { LocationCard } from "components/pages/cloud/Cards";
 import site, { locationConfig } from "config";
 import theme from "styles/exports.module.scss";
-import { NextCard } from "components/cards";
+
+const Markdown = props => (
+    <MarkdownToJSX
+        options={{
+            overrides: {
+                forceBlock: true,
+                Link: { component: Link },
+                Intel: { component: Intel },
+                VMware: { component: VMware },
+                PureStorage: { component: PureStorage }
+            }
+        }}
+        {...props}>
+        {props.children}
+    </MarkdownToJSX>
+);
 
 const config = site.pages.cloud;
 
@@ -97,10 +113,7 @@ function SectionOneTitle(props) {
         margin-top: 3%;
         font-size: ${theme.fontSizeLg};
     `;
-    const Wrapper = withReveal(
-        TitleContainer,
-        <Fade cascade {...revealProps} />
-    );
+    const Wrapper = withReveal(TitleContainer, <Fade cascade {...revealProps} />);
     return (
         <Wrapper fluid={true} {...standardProps}>
             <Title>{section.title}</Title>
@@ -143,85 +156,217 @@ function SectionOne() {
     );
 }
 
-const SectionTwoText = `
-    text-align: center;
-    color: ${theme.stDark};
-`;
-const SectionTwoTitle = styled.h1`
-    ${SectionTwoText}
-    margin-top: 3vh;
-`;
+const LearnMore = props => (
+    <LinkContainer to={props.href} className="learn-more">
+        <Button variant="outline-light">
+            <FiChevronRight style={{ marginBottom: "0.1em" }} /> Learn More
+        </Button>
+    </LinkContainer>
+);
 
-const SectionTwoSubTitle = styled.h4`
-    ${SectionTwoText}
-    font-weight: ${theme.fontWeightNormal};
-`;
+const SectionWrapper = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: column;
 
-const ContentWrapper = styled.p`
-    ${SectionTwoText}
-    margin-top: 3vh;
+    & div.abstractdots {
+        /* position: absolute;
+        top: 50%;
+        right: 0;
+        height: 20vh;
+        width: 60vw;
+        background-color: ${theme.stWhite};
+        border-left-color: ${theme.stWhite};
+        border-top-left-radius: 20%;
+        border-left-width: 20vw; */
+    }
 `;
 
 const SectionContainer = styled(Container)`
-    height: 50vh;
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    max-width: 80%;
+
+    & div {
+        z-index: 100;
+    }
+
+    & .section-title {
+        margin-top: 1vh;
+        margin-bottom: 2vh;
+        color: ${theme.stWhite};
+    }
+
+    & .section-subtitle {
+        margin-bottom: 3vh;
+        color: ${theme.stWhiteDark};
+        font-weight: ${theme.fontWeightNormal};
+    }
+
+    & .section-text {
+        margin-top: 1vh;
+        margin-bottom: 3vh;
+        font-size: ${theme.fontSizeLg};
+        color: ${theme.stWhite};
+        white-space: pre-line;
+
+        a {
+            color: ${theme.stWhite};
+
+            :hover {
+                color: ${theme.stSecondary};
+            }
+        }
+    }
+
+    & .content-row {
+        width: 100%;
+        .content-col {
+            margin-top: 10vh;
+            ${bp.up("md")} {
+                &:nth-child(odd) {
+                    text-align: left;
+                    justify-content: left;
+                }
+
+                &:nth-child(even) {
+                    text-align: right;
+                    justify-content: right;
+                }
+                &:last-of-type {
+                    margin-bottom: 10vh;
+                }
+            }
+
+            ${bp.down("md")} {
+                text-align: left;
+                justify-content: left;
+            }
+            .content-title {
+            }
+            .content-text {
+                margin-top: 1vh;
+                font-size: ${theme.fontSizeSm};
+                line-height: 1.5;
+
+                .inline-icon {
+                    margin-left: 0.25rem;
+                    margin-right: 0.25rem;
+                }
+            }
+        }
+    }
 `;
-
-function SectionTwo() {
-    let section = config.sections.two;
-    const ContentHtml = () => {
-        return { __html: section.text };
-    };
-
-    return (
-        <AngleSection backgroundColor={theme.stWhite} textColor={theme.stDark}>
-            <SectionContainer>
-                <SectionTwoTitle>{section.title}</SectionTwoTitle>
-                <SectionTwoSubTitle>{section.subtitle}</SectionTwoSubTitle>
-                <ContentWrapper dangerouslySetInnerHTML={ContentHtml()} />
-            </SectionContainer>
-        </AngleSection>
-    );
+class InfoSections extends React.Component {
+    constructor(props) {
+        super(props);
+        this.info = site.pages.cloud.sections.info;
+    }
+    render() {
+        return (
+            <SectionWrapper>
+                <AngleSection
+                    backgroundColor="transparent"
+                    directionTop="flat"
+                    directionBottom="flat"
+                    marginBottom="0"
+                    style={{
+                        backgroundImage: theme.stSectionGradient1
+                    }}>
+                    <SectionContainer fluid>
+                        <Row>
+                            <Col className="section-title-col">
+                                <h1 className="section-title">{this.info[0].title}</h1>
+                                <h4 className="section-subtitle">{this.info[0].subtitle}</h4>
+                                <p>
+                                    <Markdown className="section-text">
+                                        {this.info[0].text}
+                                    </Markdown>
+                                </p>
+                                <LearnMore href="/docs/sla" />
+                            </Col>
+                        </Row>
+                    </SectionContainer>
+                </AngleSection>
+                <AngleSection
+                    backgroundColor="transparent"
+                    directionTop="flat"
+                    directionBottom="flat"
+                    marginTop="0"
+                    style={{
+                        borderTop: theme.navbarBottomBorder,
+                        backgroundImage: theme.stSectionGradient2
+                    }}>
+                    <SectionContainer fluid>
+                        <Row>
+                            <Col className="section-title-col">
+                                <h1 className="section-title">{this.info[1].title}</h1>
+                                <h4 className="section-subtitle">{this.info[1].subtitle}</h4>
+                            </Col>
+                        </Row>
+                        <Row className="content-row">
+                            <Col sm={12} md={8} className="content-col">
+                                <h5 className="content-title">{this.info[1].content[0].title}</h5>
+                                <Markdown className="content-text">
+                                    {this.info[1].content[0].text}
+                                </Markdown>
+                            </Col>
+                            <Col sm={12} md={{ span: 8, offset: 4 }} className="content-col">
+                                <h5 className="content-title">{this.info[1].content[1].title}</h5>
+                                <Markdown className="content-text">
+                                    {this.info[1].content[1].text}
+                                </Markdown>
+                            </Col>
+                            <Col sm={12} md={8} className="content-col">
+                                <h5 className="content-title">{this.info[1].content[2].title}</h5>
+                                <Markdown className="content-text">
+                                    {this.info[1].content[2].text}
+                                </Markdown>
+                            </Col>
+                            <Col sm={12} md={{ span: 8, offset: 4 }} className="content-col">
+                                <h5 className="content-title">{this.info[1].content[3].title}</h5>
+                                <Markdown className="content-text">
+                                    {this.info[1].content[3].text}
+                                </Markdown>
+                            </Col>
+                        </Row>
+                    </SectionContainer>
+                </AngleSection>
+                <AngleSection
+                    backgroundColor={theme.stDark}
+                    directionTop="rightDown"
+                    directionBottom="leftUp">
+                    <SectionContainer fluid>
+                        <Row>
+                            <Col className="section-title-col">
+                                <h1 className="section-title">{this.info[2].title}</h1>
+                                <h4 className="section-subtitle">{this.info[2].subtitle}</h4>
+                            </Col>
+                        </Row>
+                        <Row className="content-row">
+                            <Col sm={12} md={8} className="content-col">
+                                <h5 className="content-title">{this.info[2].content[0].title}</h5>
+                                <Markdown className="content-text">
+                                    {this.info[2].content[0].text}
+                                </Markdown>
+                            </Col>
+                            <Col sm={12} md={{ span: 8, offset: 4 }} className="content-col">
+                                <h5 className="content-title">{this.info[2].content[1].title}</h5>
+                                <Markdown className="content-text">
+                                    {this.info[2].content[1].text}
+                                </Markdown>
+                            </Col>
+                        </Row>
+                    </SectionContainer>
+                </AngleSection>
+            </SectionWrapper>
+        );
+    }
 }
 
-const NextPageRow = styled(CardDeck)`
-    justify-content: space-between;
-    align-items: end;
-    ${bp.up("sm")} {
-        justify-content: center;
-        &:nth-child(n + 1) {
-            margin-top: 0;
-        }
-    }
-    ${bp.up("md")} {
-        justify-content: center;
-        &:nth-child(n + 1) {
-            margin-top: 0;
-        }
-    }
-    ${bp.up("lg")} {
-        justify-content: space-between;
-        &:nth-child(n + 1) {
-            margin-top: 3rem;
-        }
-    }
-    ${bp.up("xl")} {
-        justify-content: space-between;
-        &:nth-child(n + 1) {
-            margin-top: 3rem;
-        }
-    }
-`;
-
-function NextPage() {
-    return (
-        <InfoSection.Main>
-            <InfoSection.Content>
-                <NextPageRow>
-                    <NextCard page="docs" />
-                </NextPageRow>
-            </InfoSection.Content>
-        </InfoSection.Main>
-    );
-}
-
-export { SectionOne, SectionTwo, TitleBlock, NextPage };
+export { SectionOne, InfoSections, TitleBlock };

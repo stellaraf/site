@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Card, Container, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { FiArrowRight, FiChevronRight } from "react-icons/fi";
+import { FiChevronRight } from "react-icons/fi";
 import { useLocation } from "react-router";
 
 import { AngleSection } from "components/styled/sections";
@@ -32,6 +32,7 @@ const StyledCard = styled(Card)`
     background-color: ${theme.nextCardBackground} !important;
     color: ${theme.nextCardColor} !important;
     border: 1px solid ${theme.nextCardBorderColor} !important;
+
     &:hover {
         background-color: ${theme.nextCardBackgroundHover} !important;
         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
@@ -40,9 +41,9 @@ const StyledCard = styled(Card)`
 
     & > .next-card-text {
         display: block;
-        padding-left: 6%;
-        padding-bottom: 6%;
-        padding-top: 6%;
+        padding-left: 5%;
+        padding-bottom: 10%;
+        padding-top: 10%;
         padding-right: 32px;
         height: 100%;
     }
@@ -109,6 +110,7 @@ const StyledCard = styled(Card)`
     & p.next-card-lead {
         flex: 1 0 auto;
         color: ${theme.nextCardColor};
+        font-size: ${theme.fontSizeSm};
         width: 100%;
     }
 `;
@@ -172,14 +174,18 @@ const SectionContainer = styled(Container)`
     }
 `;
 
-function NextSection(props) {
+function NextSection({
+    directionTop = "leftDown",
+    directionBottom = "rightUp",
+    backgroundColor = theme.stSecondary
+}) {
     const location = useLocation();
     const nextPages = getNextPages(location.pathname);
     return (
         <AngleSection
-            directionTop="leftDown"
-            directionBottom="rightUp"
-            backgroundColor={theme.stSecondary}>
+            directionTop={directionTop}
+            directionBottom={directionBottom}
+            backgroundColor={backgroundColor}>
             <SectionContainer>
                 <Row>
                     <Col sm={12}>
