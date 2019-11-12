@@ -96,7 +96,7 @@ const HeroSection = styled.section`
         min-height: 50vh;
     }
     @media (min-width: ${theme.breakXl}) {
-        max-width: ${theme.containerMaxWidthXl};
+        /* max-width: ${theme.containerMaxWidthXl}; */
     }
 `;
 
