@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import { SectionOne, TitleBlock } from "components/pages/contact/Sections";
+import React from "react";
+import { ContactSection, TitleBlock, SupportSection } from "components/pages/contact/Sections";
 
-class Contact extends Component {
+class Contact extends React.Component {
     render() {
         return (
             <>
                 <TitleBlock />
-                <SectionOne />
+                <SupportSection />
+                <ContactSection />
             </>
         );
     }
