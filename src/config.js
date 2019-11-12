@@ -75,7 +75,18 @@ const site = {
             includeNext: false,
             link: "/contact",
             title: "Talk to Us",
-            subtitle: ""
+            subtitle: "We'd love to talk to you!",
+            sections: {
+                support: {
+                    title: "Need Help?",
+                    subtitle: "Already a Stellar customer? Let us know how we can help!",
+                    text: ``
+                },
+                contactForm: {
+                    title: "Interested in Learning More?",
+                    subtitle: "Tell us how to reach you and we'll contact you as soon as possible."
+                }
+            }
         },
         cloud: {
             includeNext: true,
