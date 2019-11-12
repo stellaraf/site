@@ -4,7 +4,7 @@ import { Card, Container, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FiChevronRight } from "react-icons/fi";
 import { useLocation } from "react-router";
-
+import bp from "utils/breakpoints";
 import { AngleSection } from "components/styled/sections";
 // import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
@@ -171,6 +171,12 @@ const SectionContainer = styled(Container)`
         color: ${theme.stDark};
         margin-top: 1vh;
         margin-bottom: 3vh;
+    }
+
+    ${bp.down("sm")} {
+        & .row :not(:first-child) {
+            margin-top: 3vh;
+        }
     }
 `;
 

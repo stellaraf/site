@@ -92,12 +92,12 @@ const site = {
                 info: [
                     {
                         title: "100% Uptime Guarantee",
-                        subtitle: "Because time is money.",
+                        subtitle: "Time is money & talk is cheap",
                         text: `We're _that_ confident in the Orion platform. If we fail to deliver on our <Link to="/docs/sla">Service Level Agreement</Link>, we'll credit back the amount of time services were unavailable.`
                     },
                     {
                         title: "Infrastructure as a Service",
-                        subtitle: "Virtual Private Data Center at the speed of light",
+                        subtitle: "Your Virtual Private Data Center at the Highest Altitude",
                         content: [
                             {
                                 title: "Compute",
@@ -117,19 +117,71 @@ const site = {
                                 Orion natively supports virtually any operating system in existence, and can be easily populated with your own custom ISO builds if needed.`
                             },
                             {
-                                title: "Connectivity",
-                                text: `Powering the Orion platform is our transpacific & transcontinental private network, interconnected by redundant 10 Gbps long haul transport paths, enabling enterprises to spin up and scale resources without worrying about latency.<br/><br/>
-                                With every Orion virtual private data center we include access to our highly redundant internet edge with 100 Mbps of symmetrical bandwidth (no data caps!) for free.
-                                `
+                                title: "Security",
+                                text: `Keeping invaders away from your cloud resources is critically important. With the Orion premium next-generation firewall service powered by <PaloAltoNetworks color={${theme.stWhite}} height={40} /> your cloud resources can take advantage of full application layer visibility and control, known and unknown threat prevention, malware prevention, and inbound and outbound SSL decryption.`
                             }
+                            // {
+                            //     title: "Connectivity",
+                            //     text: `Powering the Orion platform is our transpacific & transcontinental private network, interconnected by redundant 10 Gbps long haul transport paths, enabling enterprises to spin up and scale resources without worrying about latency.<br/><br/>
+                            //     With every Orion virtual private data center we include access to our highly redundant internet edge with 100 Mbps of symmetrical bandwidth (no data caps!) for free.
+                            //     `
+                            // }
                         ]
                     },
                     {
                         title: "Data Protection",
                         subtitle: "We've got you covered",
                         content: [
-                            { title: "Backups as a Service", text: "BaaS Text" },
-                            { title: "Disaster Recovery as a Service", text: "DRaaS Text" }
+                            {
+                                title: "Backups as a Service",
+                                text: `At Stellar, one of the core components to our engineering culture is the concept notion that backups are Priority 1. Having a comprehensive data protection strategy that properly safeguards critical business data is literally _the_ most important objective a technology-driven organization can have.<br/><br/>
+                                With the power of the Orion cloud platform, we offer one of the most robust, customizable, and _fastest_ backup platforms in the world, powered by <Veeam className="inline-icon" height={12} color={${theme.stWhite}}/>.
+                                With our atomically low RPOs & RTOs, enterprises can rest assured that their critical data is not only protected, but easily recoverable when diaster strikes.`
+                            },
+                            {
+                                title: "Disaster Recovery as a Service",
+                                text: `Disaster recovery takes data protection beyond basic file recovery. With Orion's DRaaS platform, our team of data protection engineers can restore your entire IT infrastructure environment in minutes, should an inevitable disaster occur.`
+                            }
+                        ],
+                        infoPopup: {
+                            title: "Ever wondered about the difference between backups & DR?",
+                            text: `Let's clear it up!<br/><br/>
+                            **Backups**: Snapshots of raw data, like files, moved off of your primary servers so that it can be recovered in the event that the data is lost due to accidental deletion, sudden hardware failure, etc.<br/><br/>
+                            **Disaster Recovery**: Constant replication of production server _state_ to an offsite location, so that applications can be brought online at a moment's notice with minimal data loss. A disaster recovery strategy is a wholistic plan of action centered around how a business is to technologically operate in the event of a major disaster.`
+                        }
+                    },
+                    {
+                        title: "Virtual Desktop Infrastructure",
+                        subtitle: "The smart, secure way to never dealing with PCs again",
+                        content: [
+                            {
+                                title: "High Performance Desktops for Everyone",
+                                text: "Placeholder"
+                            },
+                            { title: "Truly Secure Mobile Workforce", text: "Placeholder" }
+                        ]
+                    },
+                    {
+                        title: "Network Connectivity",
+                        subtitle: "Travel on your Cloud Journey at the Speed of Light",
+                        content: [
+                            {
+                                title: "Backbone",
+                                text: `Behind the Orion platform is our transcontinental & transpacific core network. Each of our strategically located data centers is redundantly interconnected with the rest of the Orion ecosystem via 10 Gbps transport paths, ensuring always-on availability and uncompromising speed.`
+                            },
+                            {
+                                title: "Upstream Interconnection",
+                                text: `We're as choosy with our transit carriers as we are with our CPUs — this means we only partner with the best Tier 1 carriers, and leverage local peering whenever possible to guarantee the lowest latency to Orion for our end users.`
+                            },
+                            {
+                                title: "Features",
+                                text: `Our internet services come fully featured with cutting edge technologies and transit features:`
+                            },
+                            {
+                                title: "Private Extensions",
+                                text: `To make sure Orion is a true extension of the enterprise, we support private connectivity of virtually any type. Whether it's an MPLS circuit from your existing global carrier, a point to point connection, or your own physical VPN endpoint, we'll make it happen.<br/><br/>
+                                To simplify connectivity even further, we offer a premium SD-WAN cloud extension service which can automatically combine any of existing bandwidth with per-packet load balancing, perform end-to-end QoS prioritization, and guarantee always-on cloud connectivity.`
+                            }
                         ]
                     }
                 ]

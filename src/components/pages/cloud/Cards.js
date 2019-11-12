@@ -1,16 +1,18 @@
 import React from "react";
-import { Card } from "react-bootstrap";
-import Slide from "react-reveal/Slide";
-import withReveal from "react-reveal/withReveal";
-import styled from "styled-components";
-
+import { Card, Col } from "react-bootstrap";
+import styled, { keyframes } from "styled-components";
+import { slideInRight } from "react-animations";
 import Flag from "components/pages/cloud/Flags";
-import { getRevealProps } from "utils";
 import theme from "styles/exports.module.scss";
-// import styles from "components/pages/cloud/styles.module.scss";
 
-const Loc = {
-    Wrapper: styled(Card)`
+const slideInRightAnimation = keyframes`${slideInRight}`;
+
+const LocCard = styled(Col)`
+    display: flex;
+    justify-content: center;
+    animation: ${props => props.delay}ms ${slideInRightAnimation};
+
+    & .card {
         display: block !important;
         text-align: left;
         flex: 0 1 auto !important;
@@ -18,8 +20,11 @@ const Loc = {
         width: ${theme.locCardWidth};
         height: ${theme.locCardHeight};
         background-color: ${theme.locCardBackground} !important;
-    `,
-    Top: styled.div`
+        box-shadow: rgba(0, 0, 0, 0.5) 0px, 5px, 30px, 0px;
+        margin-top: 3vh;
+    }
+
+    & .card .loc-card-top {
         display: block;
         justify-content: space-between;
         padding-right: 6%;
@@ -28,16 +33,18 @@ const Loc = {
         padding-top: 5%;
         max-height: 60%;
         height: 100%;
-    `,
-    Bottom: styled.div`
+    }
+
+    & .card .loc-card-bottom {
         display: flex;
         padding-right: 6%;
         padding-left: 6%;
         padding-bottom: 5%;
         max-height: 40%;
         height: 100%;
-    `,
-    Title: styled.h5`
+    }
+
+    & .card .loc-card-top h5.loc-card-title {
         display: flex;
         align-self: center;
         align-items: center;
@@ -46,42 +53,120 @@ const Loc = {
         color: ${theme.locCardTitleColor};
         vertical-align: middle;
         width: 100%;
-    `,
-    Subtitle: styled.p`
+    }
+
+    & .card .loc-card-top .loc-card-subtitle {
         display: block;
         font-weight: ${theme.fontWeightBold};
         font-size: ${theme.fontSizeSm};
         width: 100%;
         color: ${theme.locCardSubtitleColor};
-    `,
-    Text: styled.p`
+    }
+
+    & .card .loc-card-bottom .loc-card-text {
         font-size: ${theme.fontSizeSm};
         font-weight: ${theme.fontWeightLight};
         color: ${theme.locCardTextColor};
         margin-top: auto;
         margin-bottom: 0.5rem;
         align-self: end;
-    `
-};
+    }
+`;
 
-function LocationCard({ location, title, subtitle, text, flag, ...props }) {
-    const { revealProps, standardProps } = getRevealProps(props);
-    const Wrapper = withReveal(Loc.Wrapper, <Slide cascade {...revealProps} />);
+function NewLocationCard({ location, title, subtitle, text, flag, ...props }) {
     return (
-        <Wrapper {...standardProps}>
-            <Loc.Top>
-                <Loc.Title>
-                    {title}
-                    <Flag name={location} />
-                </Loc.Title>
-                <Loc.Subtitle>{subtitle}</Loc.Subtitle>
-            </Loc.Top>
-            <Loc.Bottom>
-                {props.children || <Loc.Text>{text}</Loc.Text>}
-            </Loc.Bottom>
-        </Wrapper>
+        <LocCard {...props}>
+            <Card>
+                <div className="loc-card-top">
+                    <h5 className="loc-card-title">
+                        {title}
+                        <Flag name={location} />
+                    </h5>
+                    <p className="loc-card-subtitle">{subtitle}</p>
+                </div>
+                <div className="loc-card-bottom">
+                    {props.children || <p className="loc-card-text">{text}</p>}
+                </div>
+            </Card>
+        </LocCard>
     );
 }
+
+export { NewLocationCard };
+
+// const Loc = {
+//     Wrapper: styled(Card)`
+//         display: block !important;
+//         text-align: left;
+//         flex: 0 1 auto !important;
+//         flex-direction: column;
+//         width: ${theme.locCardWidth};
+//         height: ${theme.locCardHeight};
+//         background-color: ${theme.locCardBackground} !important;
+//         box-shadow: rgba(0, 0, 0, 0.5) 0px, 5px, 30px, 0px;
+//         margin-top: 3vh;
+//     `,
+//     Top: styled.div`
+//         display: block;
+//         justify-content: space-between;
+//         padding-right: 6%;
+//         padding-left: 6%;
+//         padding-bottom: 10%;
+//         padding-top: 5%;
+//         max-height: 60%;
+//         height: 100%;
+//     `,
+//     Bottom: styled.div`
+//         display: flex;
+//         padding-right: 6%;
+//         padding-left: 6%;
+//         padding-bottom: 5%;
+//         max-height: 40%;
+//         height: 100%;
+//     `,
+//     Title: styled.h5`
+//         display: flex;
+//         align-self: center;
+//         align-items: center;
+//         margin-bottom: -0.5rem;
+//         flex: 1 0 auto;
+//         color: ${theme.locCardTitleColor};
+//         vertical-align: middle;
+//         width: 100%;
+//     `,
+//     Subtitle: styled.p`
+//         display: block;
+//         font-weight: ${theme.fontWeightBold};
+//         font-size: ${theme.fontSizeSm};
+//         width: 100%;
+//         color: ${theme.locCardSubtitleColor};
+//     `,
+//     Text: styled.p`
+//         font-size: ${theme.fontSizeSm};
+//         font-weight: ${theme.fontWeightLight};
+//         color: ${theme.locCardTextColor};
+//         margin-top: auto;
+//         margin-bottom: 0.5rem;
+//         align-self: end;
+//     `
+// };
+
+// function LocationCard({ location, title, subtitle, text, flag, ...props }) {
+//     const { revealProps, standardProps } = getRevealProps(props);
+//     const Wrapper = withReveal(Loc.Wrapper, <Slide cascade {...revealProps} />);
+//     return (
+//         <Wrapper {...standardProps}>
+//             <Loc.Top>
+//                 <Loc.Title>
+//                     {title}
+//                     <Flag name={location} />
+//                 </Loc.Title>
+//                 <Loc.Subtitle>{subtitle}</Loc.Subtitle>
+//             </Loc.Top>
+//             <Loc.Bottom>{props.children || <Loc.Text>{text}</Loc.Text>}</Loc.Bottom>
+//         </Wrapper>
+//     );
+// }
 
 /* 
 Function w/CSS Modules
@@ -178,4 +263,3 @@ Class w/CSS Modules & Inner Refs
 //         );
 //     }
 // }
-export { LocationCard };

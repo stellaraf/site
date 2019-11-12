@@ -50,6 +50,7 @@ const DesktopNav = styled(({ position, background, top, ...props }) => (
     }
     &.sticky {
         background-color: ${theme.stDark};
+        box-shadow: ${theme.contentCardShadow};
     }
 
     ${bp.down("md")} {
@@ -81,7 +82,7 @@ const NavBarLogo = styled.div`
     }
 `;
 
-const NavLink = styled(({ isLocation, ...props }) => <Link {...props} />)`
+const NavLink = styled(({ isLocation, active, ...props }) => <Link {...props} />)`
     position: relative;
     display: inline-block;
     padding: ${theme.navLinkPaddingX} 0.5rem ${theme.navLinkPaddingX} 0.5rem;
@@ -95,9 +96,14 @@ const NavLink = styled(({ isLocation, ...props }) => <Link {...props} />)`
         margin-right: 2rem;
         padding: ${theme.navLinkPaddingX};
     }
-    &:hover {
+    &:hover:not(.active-nav-link) {
         color: ${({ isLocation }) => (isLocation ? theme.stSecondary : theme.stWhite)} !important;
         border-top: 1px solid ${theme.stWhite};
+        text-decoration: none;
+    }
+
+    &.active-nav-link:hover {
+        color: ${({ isLocation }) => (isLocation ? theme.stSecondary : theme.stWhite)} !important;
         text-decoration: none;
     }
 
@@ -122,7 +128,11 @@ function NavItems({ side, location }) {
     let navConfig = site.newNav[side];
     navConfig.map((item, i) => {
         navItems.push(
-            <NavLink key={i} isLocation={location === item.link ? true : false} to={item.link}>
+            <NavLink
+                key={i}
+                isLocation={location === item.link ? true : false}
+                to={item.link}
+                className={location === item.link ? "active-nav-link" : null}>
                 {item.title}
             </NavLink>
         );
