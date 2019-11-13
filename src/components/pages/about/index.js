@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PageTitle from "hooks/PageTitle";
 import { Display } from "components/styled/text";
 import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
@@ -38,6 +39,7 @@ export default class extends React.Component {
     render() {
         return (
             <>
+                <PageTitle page="What Makes Us so Stellar?" />
                 <TitleSection>
                     <Display.Title>{this.page.title}</Display.Title>
                     <Display.Subtitle>{this.page.subtitle}</Display.Subtitle>

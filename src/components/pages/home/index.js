@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PageTitle from "hooks/PageTitle";
 import Hero from "components/pages/home/Hero";
 import { Sections } from "components/pages/home/Sections";
 
@@ -18,6 +19,7 @@ class Home extends Component {
     render() {
         return (
             <>
+                <PageTitle page="Stellar" override />
                 <Hero scrollToSections={this.scrollToSections} />
                 <Sections styledRef={this.sectionsRef} />
             </>

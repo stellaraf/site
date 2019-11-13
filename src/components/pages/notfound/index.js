@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useLocation, useHistory } from "react-router-dom";
 import { Container, Button } from "react-bootstrap";
 import { FiArrowLeft } from "react-icons/fi";
+import PageTitle from "hooks/PageTitle";
 import theme from "styles/exports.module.scss";
 import site from "config";
 import bp from "utils/breakpoints";
@@ -47,16 +48,19 @@ export default function() {
         history.goBack();
     };
     return (
-        <NotFoundContainer>
-            <Title>{site.notfound.title}</Title>
-            <Subtitle>
-                <Path>{invalidPath}</Path>
-                {` ${site.notfound.subtitle}`}
-            </Subtitle>
-            <BackButton variant="outline-light" onClick={handleClick}>
-                <BackArrow />
-                {site.notfound.buttonText}
-            </BackButton>
-        </NotFoundContainer>
+        <>
+            <PageTitle page="Not Found" override />
+            <NotFoundContainer>
+                <Title>{site.notfound.title}</Title>
+                <Subtitle>
+                    <Path>{invalidPath}</Path>
+                    {` ${site.notfound.subtitle}`}
+                </Subtitle>
+                <BackButton variant="outline-light" onClick={handleClick}>
+                    <BackArrow />
+                    {site.notfound.buttonText}
+                </BackButton>
+            </NotFoundContainer>
+        </>
     );
 }

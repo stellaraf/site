@@ -131,12 +131,6 @@ const site = {
                                 title: "Security",
                                 text: `Keeping invaders away from your cloud resources is critically important. With the Orion premium next-generation firewall service powered by <PaloAltoNetworks color={${theme.stWhite}} height={40} /> your cloud resources can take advantage of full application layer visibility and control, known and unknown threat prevention, malware prevention, and inbound and outbound SSL decryption.`
                             }
-                            // {
-                            //     title: "Connectivity",
-                            //     text: `Powering the Orion platform is our transpacific & transcontinental private network, interconnected by redundant 10 Gbps long haul transport paths, enabling enterprises to spin up and scale resources without worrying about latency.<br/><br/>
-                            //     With every Orion virtual private data center we include access to our highly redundant internet edge with 100 Mbps of symmetrical bandwidth (no data caps!) for free.
-                            //     `
-                            // }
                         ]
                     },
                     {
@@ -167,9 +161,13 @@ const site = {
                         content: [
                             {
                                 title: "High Performance Desktops for Everyone",
-                                text: "Placeholder"
+                                text: `With Orion VDI, end users can take full advantage of our blazing fast platform in their every day workloads, while you focus on adding value to your business instead of worrying about which PCs need upgrading this year.<br/><br/>
+                                    Upgrading a user's CPU, RAM, or disk space is just ten seconds of your time, and user workflows never miss a beat!`
                             },
-                            { title: "Truly Secure Mobile Workforce", text: "Placeholder" }
+                            {
+                                title: "Truly Secure Mobile Workforce",
+                                text: `Worried about your mobile users getting compromised while getting their work done at a coffee shop? With VDI, user desktops never leave your secure cloud perimeter, so there's no need to worry about disk encryption, man-in-the-middle attacks, or data loss.`
+                            }
                         ]
                     },
                     {
@@ -203,14 +201,50 @@ const site = {
             nextLead: "Make our stellar engineers your Stellar IT Team",
             link: "/services",
             title: "Dedicated IT Services",
-            subtitle: "Your 24/7 Technology Team"
+            subtitle: "Your 24/7 Technology Team",
+            sections: [
+                {
+                    title: "Help Desk as a Service",
+                    subtitle: "Consistent, always available & professional support",
+                    content: [
+                        {
+                            title: "Proactive & Reactive Support",
+                            text: `Our stellar service desk team can seamlessly become your in-house IT team, directly supporting your users. From day one of your stellar experience, our team continuously monitors, discovers, and documents your entire IT environment, so there's always stunning clarity about how your systems are running.`
+                        },
+                        {
+                            title: "Technology Optimization",
+                            text: `Our remote monitoring and management tools bring visibility, control, and automation in your IT environment to a new level. With our advanced system tooling, workstations and servers are automatically patched on your terms and your custom stack of applications are automatically deployed and kept up to date.`
+                        }
+                    ]
+                },
+                {
+                    title: "Managed Infrastructure",
+                    subtitle: "Let our experts about your servers and network devices",
+                    content: [
+                        {
+                            title: "Trusted Advisors",
+                            text: `As your trusted technology advisor, we come alongside your business and help direct the velocity of technology in the organization. Because we're constantly in-tune with the digital landscape, we always know when it's time to evaluate new technologies.<br/><br/>
+                            Our infrastructure team has extensive experience with complex Active Directory environments, Windows Server, Linux, every hypervisor under the sun, advanced networking & routing, and network security. By leveraging our stellar team of engineers, you can guarantee the right infrastructure is in place for your business needs _and_ ensure it always runs smoothly.`
+                        },
+                        {
+                            title: "24x7 Performance & Uptime Monitoring",
+                            text: `Our advanced monitoring tools work around the clock to ensure critical server and network elements are not only online, but not at risk of degradation. We continuously capture and analyze CPU, RAM, disk, and network utilzation and automatically create tickets for our engineers to investigate when performance deviations occur.`
+                        }
+                    ]
+                }
+            ]
         },
         consulting: {
             includeNext: true,
             nextLead: "Burst to our supreme infrastructure team",
             link: "/consulting",
             title: "Infrastructure Consulting",
-            subtitle: "On-Demand IT Special Forces"
+            subtitle: "On-Demand IT Special Forces",
+            sections: [
+                { title: "Systems Engineering", subtitle: "" },
+                { title: "Networking Architecture", subtitle: "" },
+                { title: "DevOps & Infrastructure App Development", subtitle: "" }
+            ]
         },
         home: {
             includeNext: false,
@@ -316,19 +350,19 @@ const site = {
             name: "Atlanta, GA",
             subtitle: "On the 2020 Horizon",
             info: "It may be hot outside, but not in this data center."
-        },
-        {
-            id: "sac01",
-            name: "Sacramento, CA",
-            subtitle: "On the 2020 Horizon",
-            info: "The cloud's most hipster data center."
-        },
-        {
-            id: "pdx01",
-            name: "Portland, OR",
-            subtitle: "On the 2020 Horizon",
-            info: "Put a bird on your data center."
         }
+        // {
+        //     id: "sac01",
+        //     name: "Sacramento, CA",
+        //     subtitle: "On the 2020 Horizon",
+        //     info: "The cloud's most hipster data center."
+        // },
+        // {
+        //     id: "pdx01",
+        //     name: "Portland, OR",
+        //     subtitle: "On the 2020 Horizon",
+        //     info: "Put a bird on your data center."
+        // }
     ],
     nav: [
         {

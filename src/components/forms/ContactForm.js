@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { Card, Col, Form } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import Pulse from "react-reveal/Pulse";
 import FormField from "components/forms/FormField";
 import FormButton from "components/forms/FormButton";
 import { SalesforceLead } from "components/forms/handlers";
 import { contactFormConfig } from "config";
 import styles from "components/forms/styles.module.scss";
+import styled, { keyframes } from "styled-components";
+import { pulse } from "react-animations";
+
+const pulseAnimation = keyframes`${pulse}`;
 
 const phoneRegExp = /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,3})|(\(?\d{2,3}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext| x | ext | ext.| ext. )\d{1,5}){0,1}$/;
 
@@ -55,14 +58,7 @@ function RawForm() {
                 contactSubject: "",
                 contactMessage: ""
             }}>
-            {({
-                handleBlur,
-                handleChange,
-                handleReset,
-                handleSubmit,
-                values,
-                status
-            }) => (
+            {({ handleBlur, handleChange, handleReset, handleSubmit, values, status }) => (
                 <Form noValidate onSubmit={handleSubmit}>
                     <Form.Row>
                         <FormField
@@ -162,15 +158,22 @@ function RawForm() {
     );
 }
 
+const FormCard = styled(Card)`
+    animation: 0.5s ${pulseAnimation};
+
+    .invalid-feedback {
+        text-align: left;
+        margin-left: 0.25rem;
+    }
+`;
+
 function ContactForm() {
     return (
-        <Pulse duration={300}>
-            <Card className="contact-form">
-                <Card.Body>
-                    <RawForm />
-                </Card.Body>
-            </Card>
-        </Pulse>
+        <FormCard className="contact-form">
+            <Card.Body>
+                <RawForm />
+            </Card.Body>
+        </FormCard>
     );
 }
 export default ContactForm;

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import theme from "styles/exports.module.scss";
 import site from "config";
-// import Logo from "components/svg/Logos";
 import bp from "utils/breakpoints";
 import { FaLinkedin, FaTwitter, FaFacebook, FaGithub } from "react-icons/fa";
 
@@ -90,9 +89,7 @@ const FooterTitle = styled.p`
     font-size: ${theme.footerHeadingSize};
 `;
 
-const FooterLink = styled(({ href, ...props }) => (
-    <Link to={href || ""} {...props} />
-))`
+const FooterLink = styled(({ href, ...props }) => <Link to={href || ""} {...props} />)`
     font-size: ${theme.footerLinkSize};
     color: ${theme.footerColor};
     :hover,
@@ -122,11 +119,7 @@ function FooterSection({ title, items }) {
 function FooterCol({ sections }) {
     return sections.map((section, i) => (
         <LinkCol key={i} md={2} sm={6}>
-            <FooterSection
-                key={i}
-                title={section.title}
-                items={section.items}
-            />
+            <FooterSection key={i} title={section.title} items={section.items} />
         </LinkCol>
     ));
 }
@@ -184,8 +177,7 @@ function Footer() {
                         <LogoCol sm={12} md={6}>
                             <StyledSocialList>
                                 {site.social.map((platform, i) => {
-                                    const MatchedIcon =
-                                        socialIcons[platform.name];
+                                    const MatchedIcon = socialIcons[platform.name];
                                     return (
                                         <SocialIcon
                                             key={i}
@@ -198,9 +190,7 @@ function Footer() {
                         </LogoCol>
                         <LogoCol sm={12} md={6}>
                             <CopyrightText>
-                                {`Copyright © ${new Date().getFullYear()} ${
-                                    site.global.legalName
-                                }`}
+                                {`Copyright © ${new Date().getFullYear()} ${site.global.legalName}`}
                             </CopyrightText>
                         </LogoCol>
                     </LogoRow>

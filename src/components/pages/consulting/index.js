@@ -1,10 +1,16 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { fadeIn } from "react-animations";
+import { Link } from "react-router-dom";
+import PageTitle from "hooks/PageTitle";
 import { Display } from "components/styled/text";
 import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
 import site from "config";
 import NextSection from "components/next";
+import { InfoSections } from "components/pages/consulting/Sections";
+
+const fadeInAnimation = keyframes`${fadeIn}`;
 
 const TitleSection = styled.section`
     display: flex;
@@ -13,6 +19,7 @@ const TitleSection = styled.section`
     margin-top: 96px;
     margin-bottom: 4rem;
     text-align: center;
+    animation: 1s ${fadeInAnimation};
     ${bp.down("md")} {
         margin-top: 96px;
         margin-bottom: 1rem;
@@ -29,6 +36,18 @@ const TitleSection = styled.section`
             }
         }
     }
+    & p.title-text {
+        margin-top: 5vh;
+        font-size: ${theme.fontSizeLg};
+    }
+    & a {
+        color: ${theme.stWhite};
+        text-decoration: none;
+
+        :hover {
+            color: ${theme.stSecondary};
+        }
+    }
 `;
 
 export default class extends React.Component {
@@ -39,11 +58,19 @@ export default class extends React.Component {
     render() {
         return (
             <>
+                <PageTitle page="Infrastructure Consulting" />
                 <TitleSection>
                     <Display.Title>{this.page.title}</Display.Title>
                     <Display.Subtitle>{this.page.subtitle}</Display.Subtitle>
+                    <p className="title-text">
+                        As engineers with enough expertise to{" "}
+                        <Link to="/cloud">build our own cloud</Link>, we know a thing or two about
+                        how to build IT infrastructure.{<br />} Here are some of the areas we're
+                        dangerously good at.
+                    </p>
                 </TitleSection>
-                <NextSection />
+                <InfoSections />
+                <NextSection marginTop="0" />
             </>
         );
     }
