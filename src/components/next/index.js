@@ -6,7 +6,6 @@ import { FiChevronRight } from "react-icons/fi";
 import { useLocation } from "react-router";
 import bp from "utils/breakpoints";
 import { AngleSection } from "components/styled/sections";
-// import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
 import site from "config";
 
@@ -137,30 +136,6 @@ function NextCard({
     );
 }
 
-// function NextCard({
-//     title = "Placeholder Title",
-//     subtitle = "Placeholder Text",
-//     lead = "Placeholder Lead",
-//     link = "/"
-// }) {
-//     return (
-//         <StyledCard>
-//             <div className="next-card-top">
-//                 <p className="next-card-lead">
-//                     {lead}
-//                     <FiArrowRight style={{ marginLeft: "0.5rem" }} />
-//                 </p>
-//             </div>
-//             <div className="next-card-bottom">
-//                 <h5 className="next-card-title">{title}</h5>
-//                 <Link className="next-card-subtitle" to={link}>
-//                     {subtitle}
-//                 </Link>
-//             </div>
-//         </StyledCard>
-//     );
-// }
-
 const SectionContainer = styled(Container)`
     min-height: 25vh;
     display: flex;
@@ -183,7 +158,9 @@ const SectionContainer = styled(Container)`
 function NextSection({
     directionTop = "leftDown",
     directionBottom = "rightUp",
-    backgroundColor = theme.stSecondary
+    backgroundColor = theme.stSecondary,
+    marginTop,
+    marginBottom
 }) {
     const location = useLocation();
     const nextPages = getNextPages(location.pathname);
@@ -191,7 +168,9 @@ function NextSection({
         <AngleSection
             directionTop={directionTop}
             directionBottom={directionBottom}
-            backgroundColor={backgroundColor}>
+            backgroundColor={backgroundColor}
+            marginTop={marginTop}
+            marginBottom={marginBottom}>
             <SectionContainer>
                 <Row>
                     <Col sm={12}>

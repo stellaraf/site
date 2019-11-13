@@ -23,7 +23,7 @@ import { HeroSection, AngleSection } from "components/styled/sections";
 import Icons from "components/svg/Icons";
 import bp from "utils/breakpoints";
 import { Display } from "components/styled/text";
-import { NewLocationCard } from "components/pages/cloud/Cards";
+import { LocationCard } from "components/pages/cloud/Cards";
 import site from "config";
 import theme from "styles/exports.module.scss";
 
@@ -47,35 +47,6 @@ const Markdown = props => (
 
 const config = site.pages.cloud;
 
-// const LocationRow = styled(CardDeck)`
-//     justify-content: space-between;
-//     align-items: center;
-//     @media (min-width: ${theme.breakSm}) {
-//         justify-content: center;
-//         &:nth-child(n + 1) {
-//             margin-top: 0;
-//         }
-//     }
-//     @media (min-width: ${theme.breakMd}) {
-//         justify-content: center;
-//         &:nth-child(n + 1) {
-//             margin-top: 0;
-//         }
-//     }
-//     @media (min-width: ${theme.breakLg}) {
-//         justify-content: space-between;
-//         &:nth-child(n + 1) {
-//             margin-top: 3rem;
-//         }
-//     }
-//     @media (min-width: ${theme.breakXl}) {
-//         justify-content: space-between;
-//         &:nth-child(n + 1) {
-//             margin-top: 3rem;
-//         }
-//     }
-// `;
-
 const pulseAnimation = keyframes`${pulse}`;
 const fadeInAnimation = keyframes`${fadeIn}`;
 const fadeInRightAnimation = keyframes`${fadeInRight}`;
@@ -93,16 +64,13 @@ const TitleSection = styled.section`
     }
     & h1 {
         font-size: ${theme.display2Size};
-        ${bp.up("lg")} {
-            font-size: ${theme.display4Size};
-        }
         ${bp.down("sm")} {
             font-size: ${theme.display4Size};
         }
         ${bp.down("md")} {
             font-size: ${theme.display3Size};
         }
-        ${bp.down("lg")} {
+        ${bp.up("lg")} {
             font-size: ${theme.display2Size};
         }
     }
@@ -172,28 +140,6 @@ const SectionOneTitle = styled.div`
     }
 `;
 
-// const LocationSection = styled.div`
-//     position: relative;
-//     overflow: hidden;
-//     padding: 50px, 0px;
-//     & ul.location-list {
-//         display: flex;
-//         flex-direction: row;
-//         justify-content: space-between;
-//         align-items: center;
-//         padding: 0px;
-//         margin: 0px;
-//         transition: transform 300ms ease-in-out 0s;
-//         list-style: none;
-//     }
-
-//     & ul.location-list li.location-item {
-//         cursor: pointer;
-//         user-select: none;
-//         list-style: none;
-//     }
-// `;
-
 const rowDelay = i =>
     getDelay(i, site.locations.length, {
         maxDelay: 1500,
@@ -202,7 +148,6 @@ const rowDelay = i =>
 
 function SectionOne(props) {
     const section = config.sections.one;
-    // const cardRows = buildCardRows(locationConfig, 3);
     return (
         <HeroSection style={{ position: "relative" }}>
             <Row>
@@ -216,7 +161,7 @@ function SectionOne(props) {
             <Row className="justify-content-center">
                 {site.locations.map((loc, i) => {
                     return (
-                        <NewLocationCard
+                        <LocationCard
                             location={loc.id}
                             title={loc.name}
                             subtitle={loc.subtitle}
@@ -229,32 +174,6 @@ function SectionOne(props) {
                     );
                 })}
             </Row>
-            {/* {cardRows.map((row, i) => {
-                const rowDelay = i =>
-                    getDelay(i, row.length, {
-                        maxDelay: 128,
-                        slowFirst: false
-                    });
-                return (
-                    <LocationRow key={i}>
-                        {row.map((loc, i) => {
-                            return (
-                                <LocationCard
-                                    location={loc.id}
-                                    title={loc.name}
-                                    subtitle={loc.subtitle}
-                                    text={loc.info}
-                                    key={i}
-                                    delay={rowDelay(i)}
-                                    bottom
-                                    duration={2000}
-                                />
-                            );
-                        })}
-                    </LocationRow>
-                );
-            })} */}
-            {/* <ScrollArrow scrollToSections={props.scrollToSections} /> */}
         </HeroSection>
     );
 }
@@ -336,18 +255,6 @@ const SectionWrapper = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
-
-    & div.abstractdots {
-        /* position: absolute;
-        top: 50%;
-        right: 0;
-        height: 20vh;
-        width: 60vw;
-        background-color: ${theme.stWhite};
-        border-left-color: ${theme.stWhite};
-        border-top-left-radius: 20%;
-        border-left-width: 20vw; */
-    }
 `;
 
 const SectionContainer = styled(Container)`
@@ -446,14 +353,14 @@ const SectionContainer = styled(Container)`
 
         & .section-title-col {
             text-align: left;
-            
+
             ${bp.up("md")} {
                 padding-left: 55px;
                 padding-right: 55px;
             }
-            
+
             ${bp.down("md")} {
-                padding-left; 0px;
+                padding-left: 0px;
                 padding-right: 0px;
             }
         }

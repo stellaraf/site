@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import site from "config";
 import theme from "styles/exports.module.scss";
 
@@ -129,10 +130,7 @@ const TypographicMain = ({ color, reserved }) => (
 const TypographicTagline = ({ color }) => (
     <g>
         <path d="M7.27,177.2H6V160H0v-1.2H13.24V160h-6Z" fill={color} />
-        <path
-            d="M41.41,177.2h-10V158.83h10V160H32.64v7h8.28v1.18H32.64V176h8.77Z"
-            fill={color}
-        />
+        <path d="M41.41,177.2h-10V158.83h10V160H32.64v7h8.28v1.18H32.64V176h8.77Z" fill={color} />
         <path
             d="M68.81,159.72a6.94,6.94,0,0,0-5.44,2.21,8.72,8.72,0,0,0-2,6.06,9.07,9.07,0,0,0,1.87,6.11,6.69,6.69,0,0,0,5.36,2.17,14.32,14.32,0,0,0,4.25-.59v1.13a13.83,13.83,0,0,1-4.55.65,7.73,7.73,0,0,1-6.1-2.51A10.15,10.15,0,0,1,60,168,11,11,0,0,1,61.05,163a7.67,7.67,0,0,1,3-3.3,9.07,9.07,0,0,1,4.63-1.16,11.14,11.14,0,0,1,4.82,1L73,160.72A9.32,9.32,0,0,0,68.81,159.72Z"
             fill={color}
@@ -159,10 +157,7 @@ const TypographicTagline = ({ color }) => (
             fill={color}
         />
         <path d="M293,177.2V158.83h1.28V177.2Z" fill={color} />
-        <path
-            d="M324.92,177.2h-10V158.83h10V160h-8.76v7h8.27v1.18h-8.27V176h8.76Z"
-            fill={color}
-        />
+        <path d="M324.92,177.2h-10V158.83h10V160h-8.76v7h8.27v1.18h-8.27V176h8.76Z" fill={color} />
         <path
             d="M354.63,172.47a4.43,4.43,0,0,1-1.69,3.64,7,7,0,0,1-4.5,1.35,13.89,13.89,0,0,1-5.16-.75v-1.28a13.07,13.07,0,0,0,5.06.84,5.68,5.68,0,0,0,3.59-1,3.31,3.31,0,0,0,1.33-2.73,3.14,3.14,0,0,0-.44-1.72,3.93,3.93,0,0,0-1.44-1.25,16.84,16.84,0,0,0-2.91-1.22,10,10,0,0,1-3.89-2.1,4.47,4.47,0,0,1,.54-6.36,6.38,6.38,0,0,1,4.15-1.3,12.25,12.25,0,0,1,4.87,1l-.47,1.11a11.26,11.26,0,0,0-4.37-1,5.15,5.15,0,0,0-3.25.95,3.07,3.07,0,0,0-1.2,2.56,3.3,3.3,0,0,0,.37,1.67,3.34,3.34,0,0,0,1.21,1.18,16.9,16.9,0,0,0,2.89,1.25,14.92,14.92,0,0,1,3.23,1.44,4.58,4.58,0,0,1,1.58,1.58A4.35,4.35,0,0,1,354.63,172.47Z"
             fill={color}
@@ -172,7 +167,10 @@ const TypographicTagline = ({ color }) => (
 
 function Typographic({
     color = theme.stWhite,
-    size = 400,
+    size,
+    width,
+    height,
+    style,
     title = site.global.givenName,
     tagline = false,
     reserved = false,
@@ -183,8 +181,10 @@ function Typographic({
             id={`logo-type-${cleanTitle(title)}`}
             data-name={`logo-type-${cleanTitle(title)}`}
             xmlns="http://www.w3.org/2000/svg"
-            width={size}
+            width={width || size}
+            height={height}
             preserveAspectRatio="xMinYMin meet"
+            style={style}
             viewBox="0 0 400 200"
             {...otherProps}>
             <title>{title}</title>
@@ -196,4 +196,22 @@ function Typographic({
 
 const Logo = { Iconographic: Iconographic, Typographic: Typographic };
 
+const LogoContainer = styled.div`
+    position: relative;
+    height: ${props => props.height}px;
+    width: ${props => props.width}px;
+    display: inline-block;
+    overflow: hidden;
+`;
+
+const ContainedLogo = ({ width, height, variant = "Typographic", ...props }) => {
+    const LogoVariant = Logo[variant];
+    return (
+        <LogoContainer width={width} height={height}>
+            <LogoVariant style={{ position: "absolute" }} viewBox="0 0 400 150" {...props} />
+        </LogoContainer>
+    );
+};
+
 export default Logo;
+export { ContainedLogo };

@@ -1,32 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import { ContactForm } from "components/forms";
-import { Link } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import styled, { keyframes } from "styled-components";
 import { fadeIn } from "react-animations";
-import MarkdownToJSX from "markdown-to-jsx";
 import { AngleSection } from "components/styled/sections";
 import { FiMail, FiPhone } from "react-icons/fi";
 import { Display } from "components/styled/text";
 import site from "config";
 import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
-import styles from "components/pages/contact/styles.module.scss";
 
 const fadeInAnimation = keyframes`${fadeIn}`;
-
-const Markdown = props => (
-    <MarkdownToJSX
-        options={{
-            overrides: {
-                forceBlock: true,
-                Link: { component: Link }
-            }
-        }}
-        {...props}>
-        {props.children}
-    </MarkdownToJSX>
-);
 
 const TitleSection = styled.section`
     display: flex;
@@ -62,37 +46,6 @@ function TitleBlock() {
         </TitleSection>
     );
 }
-
-// const Section = styled.section`
-//     display: flex;
-//     flex-direction: column;
-//     flex-grow: 1;
-//     margin-top: 96px;
-//     margin-bottom: 4rem;
-//     text-align: center;
-// `;
-// function TitleBlock() {
-//     const Title = styled.h1``;
-//     const Subtitle = styled.p``;
-//     return (
-//         <Section>
-//             <Title>{config.title}</Title>
-//             <Subtitle>{config.subtitle}</Subtitle>
-//         </Section>
-//     );
-// }
-
-// class SectionOne extends Component {
-//     render() {
-//         return (
-//             <section className={styles.sectionGeneric}>
-//                 <Container className="contact-form">
-//                     <ContactForm />
-//                 </Container>
-//             </section>
-//         );
-//     }
-// }
 
 const SectionContainer = styled(Container)`
     position: relative;
@@ -134,6 +87,7 @@ const SectionContainer = styled(Container)`
         margin-bottom: 2vh;
         color: ${theme.stWhite};
         pointer-events: none;
+        animation: 0.5s ${fadeInAnimation};
     }
 
     & .section-subtitle {

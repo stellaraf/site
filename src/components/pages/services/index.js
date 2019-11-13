@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { Display } from "components/styled/text";
+import PageTitle from "hooks/PageTitle";
 import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
 import site from "config";
 import NextSection from "components/next";
+import { InfoSections } from "components/pages/services/Sections";
 
 const TitleSection = styled.section`
     display: flex;
@@ -39,11 +41,13 @@ export default class extends React.Component {
     render() {
         return (
             <>
+                <PageTitle page="Dedicated IT Services" />
                 <TitleSection>
                     <Display.Title>{this.page.title}</Display.Title>
                     <Display.Subtitle>{this.page.subtitle}</Display.Subtitle>
                 </TitleSection>
-                <NextSection />
+                <InfoSections />
+                <NextSection directionBottom="leftUp" directionTop="rightDown" marginTop="0" />
             </>
         );
     }

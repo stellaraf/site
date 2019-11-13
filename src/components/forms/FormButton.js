@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Spinner } from "react-bootstrap";
-import Slide from "react-reveal/Slide";
 import { FiAlertTriangle, FiCheck } from "react-icons/fi";
 import styles from "components/forms/styles.module.scss";
 
@@ -23,9 +22,7 @@ function FormButton({ status, message }) {
                 <FiAlertTriangle size={16} className={styles.formBtnStatus} />
                 <span className={styles.formBtnStatusText}>Error</span>
             </Button>
-            <Slide bottom duration={300}>
-                <p className={styles.formError}>{message}</p>
-            </Slide>
+            <p className={styles.formError}>{message}</p>
         </>
     );
     const contentSuccess = () => (
@@ -34,9 +31,7 @@ function FormButton({ status, message }) {
                 <FiCheck size={16} className={styles.formBtnStatus} />
                 <span className={styles.formBtnStatusText}>Submitted</span>
             </Button>
-            <Slide bottom duration={300}>
-                <p className={styles.formSuccess}>{message}</p>
-            </Slide>
+            <p className={styles.formSuccess}>{message}</p>
         </>
     );
     const contentReady = () => <Button type={"submit"}>Submit</Button>;

@@ -1,10 +1,6 @@
 import React from "react";
-import {
-    SectionOne,
-    // eslint-disable-next-line
-    InfoSections,
-    TitleBlock
-} from "components/pages/cloud/Sections";
+import PageTitle from "hooks/PageTitle";
+import { SectionOne, InfoSections, TitleBlock } from "components/pages/cloud/Sections";
 import NextSection from "components/next";
 
 class Cloud extends React.Component {
@@ -23,6 +19,7 @@ class Cloud extends React.Component {
     render() {
         return (
             <>
+                <PageTitle page="Orion: The Enterprise Native Cloud Platform from Stellar" />
                 <TitleBlock />
                 <SectionOne scrollToSections={() => this.scrollToRef(this.refOne)} />
                 <InfoSections refOne={this.refOne} />
