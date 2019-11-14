@@ -15,8 +15,32 @@ import {
     Veeam,
     RedHat,
     Debian,
-    Ubuntu
+    Ubuntu,
+    Cisco,
+    Juniper,
+    Extreme,
+    HPE,
+    Cumulus,
+    Arista,
+    DellEMC,
+    Python,
+    NodeJS,
+    ReactJS
 } from "components/svg/VendorLogos";
+import {
+    DiCss3,
+    DiBootstrap,
+    DiJs,
+    DiJavasript1,
+    DiPython,
+    DiNodejsSmall,
+    DiReact,
+    DiRedhat,
+    DiUbuntu,
+    DiMongodb,
+    DiDebian,
+    DiGit
+} from "react-icons/di";
 import { AngleSection } from "components/styled/sections";
 import bp from "utils/breakpoints";
 import site from "config";
@@ -59,9 +83,6 @@ const SectionContainer = styled(Container)`
     max-width: 80%;
 
     & .card-columns {
-        // display: flex;
-
-
         & .card {
             color: ${theme.contentCardColor};
             background-color: ${theme.contentCardBackground};
@@ -70,10 +91,6 @@ const SectionContainer = styled(Container)`
                 margin-right: 0px;
                 margin-left: 0px;
             }
-            /* ${bp.up("md")} {
-                margin-right: 40px;
-                margin-left: 40px;
-            } */
 
             & .card-header {
                 display: flex;
@@ -211,10 +228,13 @@ const SectionContainer = styled(Container)`
 
     & .section-title {
         margin-top: 10vh;
-        margin-bottom: 2vh;
+        margin-bottom: 5vh;
         color: ${theme.stWhite};
         pointer-events: none;
-        font-family: ${theme.stFontsMono};
+
+        &.font-mono {
+            font-family: ${theme.stFontsMono};
+        }
     }
 
     & .section-subtitle {
@@ -439,24 +459,24 @@ class InfoSections extends React.Component {
                                 </Card.Body>
                                 <Card.Footer>
                                     <div className="brand-container">
-                                        <RedHat
+                                        <DiRedhat
                                             className="brand-icon"
                                             color={theme.stWhite}
-                                            height={32}
+                                            size={32}
                                         />
                                     </div>
                                     <div className="brand-container">
-                                        <Debian
+                                        <DiDebian
                                             className="brand-icon"
                                             color={theme.stWhite}
-                                            height={32}
+                                            size={32}
                                         />
                                     </div>
                                     <div className="brand-container">
-                                        <Ubuntu
+                                        <DiUbuntu
                                             className="brand-icon"
                                             color={theme.stWhite}
-                                            height={32}
+                                            size={32}
                                         />
                                     </div>
                                 </Card.Footer>
@@ -475,6 +495,125 @@ class InfoSections extends React.Component {
                                 <h4 className="section-subtitle">{this.config[1].subtitle}</h4>
                             </Col>
                         </Row>
+                        <CardColumns>
+                            <Card>
+                                <Card.Header>
+                                    <h5 className="content-title">Campus</h5>
+                                </Card.Header>
+                                <Card.Body>
+                                    Our network engineering team has deployed or maintained some of
+                                    the largest campus networks in the world, with just about every
+                                    serious campus networking vendor there is.
+                                    <br />
+                                    <br /> Whether it's a single office building or a sprawl of
+                                    distributed university buildings, we have the expertise to
+                                    architect and build your campus network the right way.
+                                </Card.Body>
+                                <Card.Footer>
+                                    <div className="brand-container">
+                                        <Cisco
+                                            className="brand-icon"
+                                            color={theme.stWhite}
+                                            height={32}
+                                        />
+                                    </div>
+                                    <div className="brand-container">
+                                        <Juniper
+                                            className="brand-icon"
+                                            color={theme.stWhite}
+                                            height={32}
+                                        />
+                                    </div>
+                                    <div className="brand-container">
+                                        <Extreme
+                                            className="brand-icon"
+                                            color={theme.stWhite}
+                                            height={32}
+                                        />
+                                    </div>
+                                    <div className="brand-container">
+                                        <HPE
+                                            className="brand-icon"
+                                            color={theme.stWhite}
+                                            height={32}
+                                        />
+                                    </div>
+                                </Card.Footer>
+                            </Card>
+                            <Card>
+                                <Card.Header>
+                                    <h5 className="content-title">WAN</h5>
+                                </Card.Header>
+                                <Card.Body>
+                                    We've built massive and successful SD-WANs, implemented layer 2
+                                    metro WANs, migrated global L3VPNs, and even build our own MPLS
+                                    network to power the{" "}
+                                    <Link to="/cloud">Orion cloud platform</Link>. <br />
+                                    <br />
+                                    We're also masterfully adept with critical WAN technologies,
+                                    such as BGP, MPLS, LDP, IS-IS, OSPF, QoS, and most importantly,
+                                    how to <b>not</b> extend layer 2 over the WAN.
+                                </Card.Body>
+                            </Card>
+                            <Card>
+                                <Card.Header>
+                                    <h5 className="content-title">Data Center</h5>
+                                </Card.Header>
+                                <Card.Body>
+                                    We know a thing or two about designing data center
+                                    networks...it's kind of <Link to="/cloud">what we do</Link>. We
+                                    regularly ghost-engineer for other major cloud providers who
+                                    just don't have the expertise we do when it comes to advanced
+                                    data center networking technologies.
+                                    <br />
+                                    <br /> From dual top of rack switch micro data centers to
+                                    massive EVPN deployments, we'll help you make it stellar.
+                                </Card.Body>
+                                <Card.Footer>
+                                    <div className="brand-container">
+                                        <Cumulus
+                                            className="brand-icon"
+                                            color={theme.stWhite}
+                                            height={32}
+                                        />
+                                    </div>
+                                    <div className="brand-container">
+                                        <Arista
+                                            className="brand-icon"
+                                            color={theme.stWhite}
+                                            height={24}
+                                        />
+                                    </div>
+                                    <div className="brand-container">
+                                        <DellEMC
+                                            className="brand-icon"
+                                            color={theme.stWhite}
+                                            height={24}
+                                        />
+                                    </div>
+                                </Card.Footer>
+                            </Card>
+                            <Card>
+                                <Card.Header>
+                                    <h5 className="content-title">Transit & Peering</h5>
+                                </Card.Header>
+                                <Card.Body>
+                                    As a cloud provider that operates its own AS and transit edge,
+                                    with engineers on staff that have worked on data center,
+                                    carrier, and enterprise networks of all sizes, we're very
+                                    familiar with the public interconnect landscape. We've been
+                                    known to moonlight for community-run IXPs, we've assisted
+                                    organizations with overhauling their legacy transit networks,
+                                    and regularly help growing enterprises and cloud providers move
+                                    from provider aggregate to independent address space.
+                                    <br />
+                                    <br />
+                                    We're also <em>extremely</em> passionate about IPv6 deployment,
+                                    and have implemented dual stack IPv4 & IPv6 networks, as well as
+                                    deployed NAT64 & DNS64, and NPTv6 when the need arises.
+                                </Card.Body>
+                            </Card>
+                        </CardColumns>
                     </SectionContainer>
                 </AngleSection>
                 <AngleSection
@@ -484,10 +623,75 @@ class InfoSections extends React.Component {
                     <SectionContainer fluid>
                         <Row className="section-title-row">
                             <Col sm={12} className="section-title-col">
-                                <h1 className="section-title">{this.config[2].title}</h1>
+                                <h1 className="section-title font-mono">{this.config[2].title}</h1>
                                 <h4 className="section-subtitle">{this.config[2].subtitle}</h4>
                             </Col>
                         </Row>
+                        <CardColumns>
+                            <Card className="content-bg-dark">
+                                <Card.Header>
+                                    <h5 className="content-title">Infrastructure Automation</h5>
+                                </Card.Header>
+                                <Card.Body>
+                                    Need to automate infrastructure tasks to regain precious
+                                    manhours, but ironically don't have the time to give yourself
+                                    more time? We can help!
+                                    <br />
+                                    <br /> We've successfully built infrastructure automation
+                                    systems for both simple and complex requirements to automate the
+                                    boring tasks and remove human error from infrastructure
+                                    deployment.
+                                </Card.Body>
+                                <Card.Footer>
+                                    <div className="brand-container">
+                                        <DiPython
+                                            className="brand-icon"
+                                            color={theme.stWhite}
+                                            size={32}
+                                        />
+                                    </div>
+                                    <div className="brand-container">
+                                        <DiNodejsSmall
+                                            className="brand-icon"
+                                            color={theme.stWhite}
+                                            size={32}
+                                        />
+                                    </div>
+                                </Card.Footer>
+                            </Card>
+                            <Card className="content-bg-dark">
+                                <Card.Header>
+                                    <h5 className="content-title">API Construction</h5>
+                                </Card.Header>
+                                <Card.Body>
+                                    If you already have a solid app, but need help getting a fully
+                                    documented REST API off the ground to add even more value to
+                                    your app, we can build it!
+                                </Card.Body>
+                            </Card>
+                            <Card className="content-bg-dark">
+                                <Card.Header>
+                                    <h5 className="content-title">Front End</h5>
+                                </Card.Header>
+                                <Card.Body>
+                                    Already have your back end code perfected but the GUI looks like
+                                    a low-effort Geocities blog? Please, let us help you. From basic
+                                    CSS framework implementation to a full ReactJS PWA, you can
+                                    worry about your backend business logic, and we can worry about
+                                    your <code>div</code>s, your flexboxes, and your custom{" "}
+                                    <code>useState</code> hooks for you.
+                                </Card.Body>
+                                <Card.Footer>
+                                    <div className="brand-container">
+                                        <DiReact
+                                            color={theme.stWhite}
+                                            size={32}
+                                            className="brand-icon"
+                                        />
+                                    </div>
+                                </Card.Footer>
+                            </Card>
+                        </CardColumns>
                     </SectionContainer>
                 </AngleSection>
             </SectionWrapper>
