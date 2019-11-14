@@ -8,6 +8,7 @@ import NavBar from "components/navbar";
 import Footer from "components/footer";
 import GlobalStyle from "components/styled/global";
 import ScrollToTopOnMount from "hooks/ScrollToTopOnMount";
+import ScrollToTop from "components/ScrollToTop";
 
 // Styles
 import "styles/main.scss";
@@ -44,6 +45,7 @@ class App extends React.Component {
                         <Route path="*" component={NotFound} />
                     </Switch>
                 </main>
+                <ScrollToTop />
                 <Footer />
                 <Stars />
             </Router>

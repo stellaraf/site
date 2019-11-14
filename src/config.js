@@ -1,31 +1,28 @@
+/* eslint-disable max-len */
 import theme from "styles/exports.module.scss";
 
 const commonNavItems = [
     {
         title: "Cloud",
         items: [
-            { name: "Compute", link: "/cloud#iaas" },
-            { name: "Backups", link: "/cloud#baas" },
-            { name: "Disaster Recovery", link: "/cloud#draas" },
-            { name: "Security", link: "/cloud#ngfw" }
+            { name: "Infrastructure as a Service", link: "/cloud#iaas" },
+            { name: "Data Protection", link: "/cloud#backups" },
+            { name: "Virtual Desktop Infrastructure", link: "/cloud#vdi" }
         ]
     },
     {
         title: "Dedicated IT",
         items: [
-            { name: "End User Support", link: "/services" },
-            { name: "Infrastructure Management", link: "/services" },
-            { name: "Asset Monitoring", link: "/services" },
-            { name: "Automation", link: "/services" }
+            { name: "Help Desk as a Service", link: "/services" },
+            { name: "Managed Infrastructure", link: "/services" }
         ]
     },
     {
         title: "Design & Deployment",
         items: [
-            { name: "Infrastructure Deployment", link: "/consulting" },
-            { name: "Network Design", link: "/consulting" },
-            { name: "DevOps", link: "/consulting" },
-            { name: "Migrations", link: "/consulting" }
+            { name: "Systems Engineering", link: "/consulting" },
+            { name: "Network Architecture", link: "/consulting" },
+            { name: "DevOps & Automation", link: "/consulting" }
         ]
     }
 ];
@@ -253,7 +250,7 @@ const site = {
             headings: {
                 title: "Introducing...",
                 subtitle: "",
-                text: "Text about what we do, how cool we are, and how we are Stellar AF"
+                text: "Fueling your digital velocity"
             },
             contactButton: {
                 text: "Talk to Us"
@@ -374,7 +371,7 @@ const site = {
     newNav: {
         left: [
             {
-                title: "Platform",
+                title: "Cloud",
                 link: "/cloud"
             },
             {
@@ -395,8 +392,7 @@ const site = {
                 items: [
                     { name: "Home", link: "/" },
                     { name: "About", link: "/about" },
-                    { name: "Careers", link: "/about" },
-                    { name: "Channel", link: "/channel" }
+                    { name: "Careers", link: "/" }
                 ]
             },
             ...commonNavItems

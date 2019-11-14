@@ -80,7 +80,6 @@
       "selector-pseudo-class-no-unknown": true,
       "no-unknown-animations": true,
       "property-case": null,
-      "property-no-unknown": false,
       "at-rule-no-unknown": null
     },
     "extends": [

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { fadeIn } from "react-animations";
 import { FiChevronDown } from "react-icons/fi";
 import { AngleSection } from "components/styled/sections";
 import { useWindowScroll } from "react-use";
 import site from "config";
-import Logo from "components/svg/Logos";
+import { LogoFull } from "components/Logo";
 import styled, { keyframes } from "styled-components";
 import { pulse } from "react-animations";
 import theme from "styles/exports.module.scss";
+
+const fadeInAnimation = keyframes`${fadeIn}`;
 
 const easing = t => 1 + --t * t * t * t * t;
 
@@ -50,24 +53,34 @@ const HomeHeroSection = styled(AngleSection)`
     flex-direction: column;
     min-height: 30vh;
     position: relative;
+    background-image: url("/assets/earthrise-1920-1080.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: lighten;
 
     & .row {
         justify-content: center;
     }
 
     & .hero-text-container {
-        margin-top: 5vh;
+        margin-top: 4vh;
     }
 
     & .hero-text {
         text-align: center;
         line-height: 1.2;
-        font-size: ${theme.fontSizeLg};
+        font-size: ${theme.subDisplay3Size};
+        font-weight: ${theme.fontWeightLight};
+        color: white;
+        text-shadow: 4px 2px 15px ${theme.stDark};
+        letter-spacing: 0.05rem;
     }
 
     & .scroll-indicator {
         position: absolute;
         left: 50%;
+        right: 50%;
         bottom: 0;
         z-index: 100;
     }
@@ -97,39 +110,40 @@ function Hero(props) {
         y > 0 && y < logoBreak && setReadyToScroll(false);
     }, [logoBreak, y]);
     return (
-        <HomeHeroSection
-            height="90vh"
-            backgroundColor={theme.stPrimary}
-            directionTop="flat"
-            marginTop="0">
-            <Container>
-                <Row>
-                    <HeroCol sm={12}>
-                        <LogoBlock
-                            className={readyToScroll ? "logo hidden" : "logo"}
-                            style={{
-                                opacity: `${Math.max(easing(1 - y / logoBreak), 0)}`,
-                                transform: `scale(${Math.max(easing(1 - y / logoBreak), 0) * 0.325 +
-                                    0.625}) translate3d(0, 0, 0)`,
-                                transformOrigin: "top",
-                                top: Math.max(logoBreak - y, 2)
-                            }}>
-                            <Logo.Typographic color={"white"} width={400} height={200} />
-                        </LogoBlock>
-                    </HeroCol>
-                </Row>
-                <Row>
-                    <Col className={"hero-text-container"} sm={12} lg={8}>
-                        <p className={"hero-text"}>{site.pages.home.headings.text}</p>
-                    </Col>
-                </Row>
-            </Container>
-            <ScrollIndicator className={"scroll-indicator"}>
-                <button className="scroll-button" onClick={props.scrollToSections}>
-                    <BouncingArrow size="3rem" color={theme.navLinkColor} />
-                </button>
-            </ScrollIndicator>
-        </HomeHeroSection>
+        <>
+            <HomeHeroSection
+                height="90vh"
+                backgroundColor={theme.stPrimary}
+                directionTop="flat"
+                marginTop="0">
+                <Container>
+                    <Row>
+                        <HeroCol sm={12}>
+                            <LogoBlock
+                                className={readyToScroll ? "logo hidden" : "logo"}
+                                style={{
+                                    opacity: `${Math.max(easing(1 - y / logoBreak), 0)}`,
+                                    transform: `scale(${Math.max(easing(1 - y / logoBreak), 0) *
+                                        0.325 +
+                                        0.625}) translate3d(0, 0, 0)`,
+                                    transformOrigin: "top",
+                                    top: Math.max(logoBreak - y, 2)
+                                }}>
+                                <LogoFull color="white" width={400} />
+                            </LogoBlock>
+                        </HeroCol>
+                        <HeroCol className={"hero-text-container"} sm={12}>
+                            <p className={"hero-text"}>{site.pages.home.headings.text}</p>
+                        </HeroCol>
+                    </Row>
+                </Container>
+                <ScrollIndicator className={"scroll-indicator"}>
+                    <button className="scroll-button" onClick={props.scrollToSections}>
+                        <BouncingArrow size="3rem" color={theme.navLinkColor} />
+                    </button>
+                </ScrollIndicator>
+            </HomeHeroSection>
+        </>
     );
 }
 
