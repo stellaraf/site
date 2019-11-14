@@ -79,6 +79,7 @@ const SectionContainer = styled(Container)`
             color: ${theme.contentCardColor};
             background-color: ${theme.contentCardBackground};
             box-shadow: ${theme.contentCardShadow};
+            transform: translateZ(0);
             ${bp.down("md")} {
                 margin-right: 0px;
                 margin-left: 0px;
@@ -226,6 +227,9 @@ const SectionContainer = styled(Container)`
 
         &.font-mono {
             font-family: ${theme.stFontsMono};
+            ${bp.down("sm")} {
+                font-size: 2rem;
+            }
         }
     }
 
@@ -553,7 +557,7 @@ class InfoSections extends React.Component {
                                 </Card.Header>
                                 <Card.Body>
                                     We know a thing or two about designing data center
-                                    networks...it's kind of <Link to="/cloud">what we do</Link>. We
+                                    networks...it's <Link to="/cloud">what we do</Link>. We
                                     regularly ghost-engineer for other major cloud providers who
                                     just don't have the expertise we do when it comes to advanced
                                     data center networking technologies.
