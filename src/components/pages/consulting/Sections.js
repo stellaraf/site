@@ -30,14 +30,12 @@ import {
 import {
     DiCss3,
     DiBootstrap,
-    DiJs,
-    DiJavasript1,
+    DiJsBadge,
     DiPython,
     DiNodejsSmall,
     DiReact,
     DiRedhat,
     DiUbuntu,
-    DiMongodb,
     DiDebian,
     DiGit
 } from "react-icons/di";
@@ -651,6 +649,13 @@ class InfoSections extends React.Component {
                                         />
                                     </div>
                                     <div className="brand-container">
+                                        <DiGit
+                                            color={theme.stWhite}
+                                            size={32}
+                                            className="brand-icon"
+                                        />
+                                    </div>
+                                    <div className="brand-container">
                                         <DiNodejsSmall
                                             className="brand-icon"
                                             color={theme.stWhite}
@@ -682,6 +687,27 @@ class InfoSections extends React.Component {
                                     <code>useState</code> hooks for you.
                                 </Card.Body>
                                 <Card.Footer>
+                                    <div className="brand-container">
+                                        <DiJsBadge
+                                            color={theme.stWhite}
+                                            size={32}
+                                            className="brand-icon"
+                                        />
+                                    </div>
+                                    <div className="brand-container">
+                                        <DiBootstrap
+                                            color={theme.stWhite}
+                                            size={32}
+                                            className="brand-icon"
+                                        />
+                                    </div>
+                                    <div className="brand-container">
+                                        <DiCss3
+                                            color={theme.stWhite}
+                                            size={32}
+                                            className="brand-icon"
+                                        />
+                                    </div>
                                     <div className="brand-container">
                                         <DiReact
                                             color={theme.stWhite}
