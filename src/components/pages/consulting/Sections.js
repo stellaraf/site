@@ -13,19 +13,13 @@ import {
     Office365,
     Zerto,
     Veeam,
-    RedHat,
-    Debian,
-    Ubuntu,
     Cisco,
     Juniper,
     Extreme,
     HPE,
     Cumulus,
     Arista,
-    DellEMC,
-    Python,
-    NodeJS,
-    ReactJS
+    DellEMC
 } from "components/svg/VendorLogos";
 import {
     DiCss3,
