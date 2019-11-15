@@ -90,7 +90,7 @@ const site = {
             nextLead: "Gravitate to the upper echelon of cloud",
             link: "/cloud",
             title: "Orion",
-            subtitle: "The Enterprise Native Cloud by Stellar",
+            subtitle: "The Enterprise Native Cloud",
             sections: {
                 one: {
                     title: "Your applications, orbiting your workforce",
@@ -323,48 +323,46 @@ const site = {
             ]
         }
     },
-    locations: [
-        {
-            id: "phx01",
+    locations: {
+        phx01: {
             name: "Phoenix, AZ",
             subtitle: "",
             // info: "But it's a dry data center."
             info: "Our flagship, in the lowest risk climate."
         },
-        {
-            id: "hnl01",
+
+        hnl01: {
             name: "Honolulu, HI",
             subtitle: "",
             // info: "The data center you definitely need to audit."
             info: "The fastest cloud on the island."
         },
-        {
-            id: "chi01",
+
+        chi01: {
             name: "Chicago, IL",
             subtitle: "",
             // info: "The windiest data center."
-            info: ""
+            info: "Bringing the enterprise-native cloud to the heart of the midwest."
         },
-        {
-            id: "atl01",
+        atl01: {
             name: "Atlanta, GA",
             subtitle: "On the 2020 Horizon",
             // info: "It may be hot outside, but not in this data center."
-            info: ""
+            info: "Coming soon!"
+        },
+        sac01: {
+            name: "Sacramento, CA",
+            subtitle: "On the 2020 Horizon",
+            // info: "The cloud's most hipster data center."
+            info: "Coming soon!"
         }
-        // {
-        //     id: "sac01",
-        //     name: "Sacramento, CA",
-        //     subtitle: "On the 2020 Horizon",
-        //     info: "The cloud's most hipster data center."
-        // },
-        // {
-        //     id: "pdx01",
-        //     name: "Portland, OR",
-        //     subtitle: "On the 2020 Horizon",
-        //     info: "Put a bird on your data center."
-        // }
-    ],
+    },
+    // {
+    //     id: "pdx01",
+    //     name: "Portland, OR",
+    //     subtitle: "On the 2020 Horizon",
+    //     info: "Put a bird on your data center."
+    // }
     nav: [
         {
             title: "Cloud",
@@ -387,7 +385,10 @@ const site = {
                 link: "/consulting"
             }
         ],
-        right: [{ title: "About", link: "/about" }, { title: "Docs", link: "/docs" }]
+        right: [
+            { title: "About", link: "/about" },
+            { title: "Docs", link: "/docs" }
+        ]
     },
     footer: {
         sections: [
