@@ -1,5 +1,6 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { fadeIn } from "react-animations";
 import { Display } from "components/styled/text";
 import PageTitle from "hooks/PageTitle";
 import bp from "utils/breakpoints";
@@ -8,6 +9,8 @@ import site from "config";
 import NextSection from "components/next";
 import { InfoSections } from "components/pages/services/Sections";
 
+const fadeInAnimation = keyframes`${fadeIn}`;
+
 const TitleSection = styled.section`
     display: flex;
     flex-direction: column;
@@ -15,15 +18,19 @@ const TitleSection = styled.section`
     margin-top: 96px;
     margin-bottom: 4rem;
     text-align: center;
-    ${bp.down("md")} {
+    animation: 1s ${fadeInAnimation};
+    ${bp.down("sm")} {
+        margin-left: auto;
+        margin-right: auto;
         margin-top: 96px;
-        margin-bottom: 1rem;
+        margin-bottom: 5vh;
+        max-width: 90%;
 
         & > h1 {
             ${bp.up("lg")} {
                 font-size: ${theme.display2Size};
             }
-            ${bp.down("md")} {
+            ${bp.down("lg")} {
                 font-size: ${theme.display3Size};
             }
             ${bp.down("sm")} {

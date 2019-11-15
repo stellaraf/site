@@ -22,7 +22,10 @@ const TitleSection = styled.section`
     animation: 1s ${fadeInAnimation};
     ${bp.down("md")} {
         margin-top: 96px;
-        margin-bottom: 1rem;
+        margin-bottom: 5vh;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 90%;
 
         & > h1 {
             ${bp.up("lg")} {

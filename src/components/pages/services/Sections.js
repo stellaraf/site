@@ -74,10 +74,21 @@ const SectionContainer = styled(Container)`
     text-align: center;
     justify-content: center;
     max-width: 80%;
+    && {
+        ${bp.down("sm")} {
+            padding-left: 0px;
+            padding-right: 0px;
+            max-width: 90%;
+        }
+    }
 
     & .content-card-row {
         justify-content: space-around;
         margin-top: 10vh;
+
+        ${bp.down("sm")} {
+            margin-top: 5vh;
+        }
 
         & .content-card-col {
             display: flex;
@@ -145,6 +156,9 @@ const SectionContainer = styled(Container)`
         }
         &:last-of-type {
             margin-bottom: 20vh;
+            ${bp.down("sm")} {
+                margin-bottom: 10vh;
+            }
         }
     }
     .content-card-row .content-card-col:not(:first-child):not(:last-child) {
@@ -170,6 +184,7 @@ const SectionContainer = styled(Container)`
             ${bp.down("md")} {
                 padding-left: 0px;
                 padding-right: 0px;
+                max-width: 90%;
             }
         }
 
