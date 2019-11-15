@@ -13,6 +13,8 @@ $st-gray: #70707f;
 // $st-gray: rgba($st-dark, 0.38);
 $st-grey: $st-gray;
 $st-white-dark: rgba($st-white, 0.5);
+$st-dark-light: rgba($st-dark, 0.5);
+$st-primary-light: rgba($st-primary, 0.8);
 // $st-gray: #757780;
 // $st-background: #222c4c;
 // $st-background-alt: #58a4b0;
@@ -67,7 +69,7 @@ $st-section-gradient-2: make-gradient($st-dark, "to top"),
 // $bg3: darken($st-background, 4%);
 // $map-fill: transparent;
 // $map-stroke: #d6d6da;
-$map-fill: transparent;
+$map-fill: $st-primary-light;
 $map-stroke: $st-gray;
 $globe-stroke: rgba($st-light, 0.1);
 $map-text: $st-white;

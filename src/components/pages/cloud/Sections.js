@@ -21,11 +21,12 @@ import { GoLocation } from "react-icons/go";
 import { getDelay } from "utils";
 import { HeroSection, AngleSection } from "components/styled/sections";
 import Icons from "components/svg/Icons";
-import bp from "utils/breakpoints";
+import bp, { query } from "utils/breakpoints";
 import { Display } from "components/styled/text";
 import { LocationCard } from "components/pages/cloud/Cards";
 import site from "config";
 import theme from "styles/exports.module.scss";
+import USMap from "components/svg/USMap";
 
 const Markdown = props => (
     <MarkdownToJSX
@@ -50,6 +51,18 @@ const config = site.pages.cloud;
 const pulseAnimation = keyframes`${pulse}`;
 const fadeInAnimation = keyframes`${fadeIn}`;
 const fadeInRightAnimation = keyframes`${fadeInRight}`;
+
+const floatAnimation = keyframes`
+    0% {
+        transform: translatey(0px);
+    }
+    50% {
+        transform: translatey(-1px);
+    }
+    100% {
+        transform: translatey(0px);
+    }
+`;
 
 const TitleSection = styled.section`
     display: flex;
@@ -133,8 +146,6 @@ const SectionOneContainer = styled.div`
     flex-direction: column;
     flex: 0 1 auto;
     align-self: center;
-    margin-top: 3rem;
-    margin-bottom: 4rem;
     padding-right: 15px;
     padding-left: 15px;
     position: relative;
@@ -143,15 +154,79 @@ const SectionOneContainer = styled.div`
         margin-top: 0;
     }
     ${bp.down("sm")} {
-        min-height: 90vh;
+        min-height: 35vh;
     }
     ${bp.up("sm")} {
         min-height: 35vh;
     }
 
+    & .map-col {
+        ${bp.down("sm")} {
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+    }
+
+    & .map-overlay-text {
+        ${bp.up("sm")} {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            top: 40%;
+            width: 50%;
+        }
+        ${bp.down("sm")} {
+            margin-top: 2vh;
+        }
+        color: ${theme.stWhite};
+        text-align: center;
+        animation: 2s ${fadeInAnimation};
+
+        & h2,
+        p {
+            text-shadow: 0px 0px 10px ${theme.stDark};
+        }
+
+        & p.section-text {
+            font-size: ${theme.fontSizeLg};
+            white-space: pre-line;
+
+            ${bp.down("sm")} {
+                font-size: ${theme.fontSizeBase};
+            }
+        }
+    }
+
+    & .map-container {
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        ${bp.down("sm")} {
+            max-width: 100%;
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+        ${bp.up("md")} {
+            max-width: 80%;
+        }
+
+        & .map-us-pin {
+            animation: 1s ${fadeInAnimation};
+            animation: 1s ${floatAnimation} infinite 1.25s;
+        }
+
+        & #map-us-mainland {
+            animation: 1s ${fadeInAnimation};
+        }
+        & #map-us-hawaii {
+            animation: 2s ${fadeInAnimation};
+        }
+    }
+
     & .section-title-col {
         text-align: center;
-        animation: 1s ${fadeInAnimation};
 
         & p.section-text {
             margin-top: 1vh;
@@ -169,17 +244,94 @@ const rowDelay = i =>
         slowFirst: false
     });
 
+const StyledLocPopup = styled(Popover)`
+    && {
+        background-color: ${theme.contentCardBackground};
+        color: ${theme.stWhite};
+        max-width: 600px;
+
+        & .arrow {
+            ::after {
+                ${props => `border-${props.side}-color: ${theme.contentCardBackground};`}
+            }
+        }
+
+        & .popover-header[class] {
+            background-color: ${theme.contentCardBackground};
+            font-size: ${theme.fontSizeBase};
+            font-weight: ${theme.fontWeightBold};
+            border-bottom: unset;
+            ::before {
+                border-bottom: 1px solid ${theme.contentCardBackground};
+            }
+        }
+
+        & .popover-body[class] {
+            font-size: ${theme.fontSizeSm};
+            font-weight: ${theme.fontWeightLight};
+            & .loc-subtitle {
+                color: ${theme.stGray};
+            }
+        }
+    }
+`;
+const LocPopup = (loc, side) => {
+    const locMap = site.locations;
+    return (
+        <StyledLocPopup side={side}>
+            <Popover.Title>{locMap[loc].name}</Popover.Title>
+            <Popover.Content>
+                {/* locMap[loc].subtitle && <p className="loc-subtitle">{locMap[loc].subtitle}</p> */}
+                <Markdown>{locMap[loc].info}</Markdown>
+            </Popover.Content>
+        </StyledLocPopup>
+    );
+};
+
+const mapBlock = (
+    <USMap
+        pinFill={theme.stSecondary}
+        gradient1color1={theme.stPrimary}
+        gradient1color2={theme.stPrimaryAlt}
+        gradient2color1={theme.stPrimaryAlt}
+        gradient2color2={theme.stPrimary}
+        mapFill="url(#map-us-gradient-1)"
+        mapFillHawaii="url(#map-us-gradient-2)"
+        showTooltip={LocPopup}
+    />
+);
+
+const titleBlock = (
+    <div className="map-overlay-text">
+        <h2>{config.sections.one.title}</h2>
+        <p className="section-text">{config.sections.one.text}</p>
+    </div>
+);
+
 function SectionOne() {
     const section = config.sections.one;
     return (
         <SectionOneContainer>
             <Row>
+                <Col sm={12} className="map-col">
+                    <Container className="map-container" fluid>
+                        {query.atLeast("md") && titleBlock}
+                        {mapBlock}
+                    </Container>
+                </Col>
+                {query.atMost("sm") && (
+                    <Col className="map-col-title" sm={12}>
+                        {titleBlock}
+                    </Col>
+                )}
+            </Row>
+            {/*<Row>
                 <Col sm={12} className="section-title-col">
                     <h3>{section.title}</h3>
                     <p className="section-text">{section.text}</p>
                 </Col>
-            </Row>
-            <Row className="justify-content-center">
+            </Row>*/}
+            {/* <Row className="justify-content-center">
                 {site.locations.map((loc, i) => {
                     return (
                         <LocationCard
@@ -194,7 +346,7 @@ function SectionOne() {
                         />
                     );
                 })}
-            </Row>
+            </Row> */}
         </SectionOneContainer>
     );
 }
