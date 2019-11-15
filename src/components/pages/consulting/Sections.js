@@ -19,7 +19,8 @@ import {
     HPE,
     Cumulus,
     Arista,
-    DellEMC
+    DellEMC,
+    MicrosoftExchange
 } from "components/svg/VendorLogos";
 import {
     DiCss3,
@@ -82,11 +83,14 @@ const SectionContainer = styled(Container)`
     }
 
     & .card-columns {
+        column-gap: 2rem;
+        grid-column-gap: 2rem;
         & .card {
             color: ${theme.contentCardColor};
             background-color: ${theme.contentCardBackground};
             box-shadow: ${theme.contentCardShadow};
             transform: translateZ(0);
+            margin-bottom: 2rem;
             ${bp.down("md")} {
                 margin-right: 0px;
                 margin-left: 0px;
@@ -425,6 +429,26 @@ class InfoSections extends React.Component {
                             </Card>
                             <Card>
                                 <Card.Header>
+                                    <h5 className="content-title">Exchange</h5>
+                                </Card.Header>
+                                <Card.Body>
+                                    If your organization is still working with Microsoft Exchange
+                                    due to cost, niche features, or lack of time to migrate, we can
+                                    help! Our engineering team has decades of experience with
+                                    Exchange, spanning all versions through to today.
+                                </Card.Body>
+                                <Card.Footer>
+                                    <div className="brand-container">
+                                        <MicrosoftExchange
+                                            className="brand-icon"
+                                            height={48}
+                                            color={theme.stWhite}
+                                        />
+                                    </div>
+                                </Card.Footer>
+                            </Card>
+                            <Card>
+                                <Card.Header>
                                     <h5 className="content-title">Business Continuity</h5>
                                 </Card.Header>
                                 <Card.Body>
@@ -520,7 +544,7 @@ class InfoSections extends React.Component {
                                     distributed university buildings, we have the expertise to
                                     architect and build your campus network the right way.
                                 </Card.Body>
-                                <Card.Footer>
+                                <Card.Footer id="consulting-card-network-campus-footer">
                                     <div className="brand-container">
                                         <Cisco
                                             className="brand-icon"

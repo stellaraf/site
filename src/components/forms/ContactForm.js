@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import FormField from "components/forms/FormField";
 import FormButton from "components/forms/FormButton";
 import { SalesforceLead } from "components/forms/handlers";
-import { contactFormConfig } from "config";
+import site from "config";
 import styles from "components/forms/styles.module.scss";
 import styled, { keyframes } from "styled-components";
 import { pulse } from "react-animations";
@@ -45,10 +45,10 @@ function RawForm() {
                 actions.setStatus("loading");
                 SalesforceLead(values, response => {
                     actions.setStatus(response.status);
-                    setSubmitMsg(contactFormConfig.message[response.status]);
+                    setSubmitMsg(site.contactForm.message[response.status]);
                     actions.setSubmitting(false);
                 });
-                setTimeout(actions.resetForm, contactFormConfig.resetTimeout);
+                setTimeout(actions.resetForm, site.contactForm.resetTimeout);
             }}
             initialValues={{
                 contactName: "",
