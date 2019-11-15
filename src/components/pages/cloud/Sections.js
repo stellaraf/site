@@ -127,16 +127,39 @@ const ScrollArrow = props => (
     </ScrollIndicator>
 );
 
-const SectionOneTitle = styled.div`
-    text-align: center;
-    animation: 1s ${fadeInAnimation};
+const SectionOneContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 auto;
+    align-self: center;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    padding-right: 15px;
+    padding-left: 15px;
+    position: relative;
+    ${bp.down("lg")} {
+        max-width: none;
+        margin-top: 0;
+    }
+    ${bp.down("sm")} {
+        min-height: 90vh;
+    }
+    ${bp.up("sm")} {
+        min-height: 35vh;
+    }
 
-    p.section-text {
-        margin-top: 1vh;
-        margin-bottom: 3vh;
-        font-size: ${theme.fontSizeLg};
-        color: ${theme.stWhite};
-        white-space: pre-line;
+    & .section-title-col {
+        text-align: center;
+        animation: 1s ${fadeInAnimation};
+
+        & p.section-text {
+            margin-top: 1vh;
+            margin-bottom: 3vh;
+            font-size: ${theme.fontSizeLg};
+            color: ${theme.stWhite};
+            white-space: pre-line;
+        }
     }
 `;
 
@@ -146,16 +169,14 @@ const rowDelay = i =>
         slowFirst: false
     });
 
-function SectionOne(props) {
+function SectionOne() {
     const section = config.sections.one;
     return (
-        <HeroSection style={{ position: "relative" }}>
+        <SectionOneContainer>
             <Row>
-                <Col sm={12}>
-                    <SectionOneTitle>
-                        <h3>{section.title}</h3>
-                        <p className="section-text">{section.text}</p>
-                    </SectionOneTitle>
+                <Col sm={12} className="section-title-col">
+                    <h3>{section.title}</h3>
+                    <p className="section-text">{section.text}</p>
                 </Col>
             </Row>
             <Row className="justify-content-center">
@@ -174,7 +195,7 @@ function SectionOne(props) {
                     );
                 })}
             </Row>
-        </HeroSection>
+        </SectionOneContainer>
     );
 }
 
@@ -266,6 +287,13 @@ const SectionContainer = styled(Container)`
     text-align: center;
     justify-content: center;
     max-width: 80%;
+    && {
+        ${bp.down("sm")} {
+            padding-left: 0px;
+            padding-right: 0px;
+            max-width: 90%;
+        }
+    }
 
     & .content-card-row {
         justify-content: space-around;
@@ -337,6 +365,9 @@ const SectionContainer = styled(Container)`
         }
         &:last-of-type {
             margin-bottom: 20vh;
+            ${bp.down("sm")} {
+                margin-bottom: 10vh;
+            }
         }
     }
     .content-card-row .content-card-col:not(:first-child):not(:last-child) {
@@ -351,6 +382,11 @@ const SectionContainer = styled(Container)`
     & .section-full-row {
         width: 100%;
 
+        & .section-full-content-col {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
         & .section-title-col {
             text-align: left;
 
@@ -362,6 +398,7 @@ const SectionContainer = styled(Container)`
             ${bp.down("md")} {
                 padding-left: 0px;
                 padding-right: 0px;
+                max-width: 90%;
             }
         }
 
@@ -612,7 +649,7 @@ class InfoSections extends React.Component {
                     directionBottom="leftUp">
                     <SectionContainer fluid>
                         <Row className="section-full-row">
-                            <Col sm={12} md={6}>
+                            <Col sm={12} md={6} className="section-full-content-col">
                                 <Row className="content-card-row">
                                     <Col sm={12} className="section-title-col">
                                         <h1 className="section-title">{this.info[2].title}</h1>
@@ -682,7 +719,10 @@ class InfoSections extends React.Component {
                                 className="section-title-col section-full-image-col">
                                 <img alt={this.info[3].title} src="/assets/vdiicon.svg" />
                             </Col>
-                            <Col sm={12} md={{ span: 7, offset: 1 }}>
+                            <Col
+                                sm={12}
+                                md={{ span: 7, offset: 1 }}
+                                className="section-full-content-col">
                                 <Row className="content-card-row">
                                     <Col sm={12} className="section-title-col">
                                         <h1 className="section-title">{this.info[3].title}</h1>

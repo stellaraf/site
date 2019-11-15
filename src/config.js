@@ -328,25 +328,29 @@ const site = {
             id: "phx01",
             name: "Phoenix, AZ",
             subtitle: "",
-            info: "But it's a dry data center."
+            // info: "But it's a dry data center."
+            info: "Our flagship, in the lowest risk climate."
         },
         {
             id: "hnl01",
             name: "Honolulu, HI",
             subtitle: "",
-            info: "The data center you definitely need to audit."
+            // info: "The data center you definitely need to audit."
+            info: "The fastest cloud on the island."
         },
         {
             id: "chi01",
             name: "Chicago, IL",
             subtitle: "",
-            info: "The windiest data center."
+            // info: "The windiest data center."
+            info: ""
         },
         {
             id: "atl01",
             name: "Atlanta, GA",
             subtitle: "On the 2020 Horizon",
-            info: "It may be hot outside, but not in this data center."
+            // info: "It may be hot outside, but not in this data center."
+            info: ""
         }
         // {
         //     id: "sac01",

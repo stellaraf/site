@@ -225,20 +225,20 @@ function AngleSection({
             border-style: solid;
         }
         ::before {
-            top: -${angleHeight};
+            top: calc(-${angleHeight} + 1px);
             border-width: ${borderMap[directionTop].width};
             border-color: ${borderMap[directionTop].color};
         }
         ::after {
-            bottom: -${angleHeight};
+            bottom: calc(-${angleHeight} + 1px);
             border-width: ${borderMap[directionBottom].width};
             border-color: ${borderMap[directionBottom].color};
         }
     `;
 
     return (
-        <ThisSection {...sectionStyle} {...props}>
-            <InnerSection>{props.children}</InnerSection>
+        <ThisSection className="angle-section-outer" {...sectionStyle} {...props}>
+            <InnerSection className="angle-section-inner">{props.children}</InnerSection>
         </ThisSection>
     );
 }

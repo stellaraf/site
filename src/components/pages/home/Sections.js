@@ -145,6 +145,11 @@ const SectionContainer = styled(Container)`
     text-align: center;
     justify-content: center;
     max-width: 80%;
+    ${bp.down("sm")} {
+        max-width: 90%;
+        padding-right: 0px;
+        padding-left: 0px;
+    }
 
     & .section-row {
         justify-content: center;

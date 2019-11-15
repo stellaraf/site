@@ -73,6 +73,13 @@ const SectionContainer = styled(Container)`
     text-align: center;
     justify-content: center;
     max-width: 80%;
+    && {
+        ${bp.down("sm")} {
+            padding-left: 0px;
+            padding-right: 0px;
+            max-width: 90%;
+        }
+    }
 
     & .card-columns {
         & .card {
@@ -148,6 +155,9 @@ const SectionContainer = styled(Container)`
     }
     &:last-of-type {
         margin-bottom: 20vh;
+        ${bp.down("sm")} {
+            margin-bottom: 10vh;
+        }
     }
     .content-card-row .content-card-col:not(:first-child):not(:last-child) {
         margin-top: 5vh;
@@ -172,6 +182,7 @@ const SectionContainer = styled(Container)`
             ${bp.down("md")} {
                 padding-left: 0px;
                 padding-right: 0px;
+                max-width: 90%;
             }
         }
 
@@ -224,6 +235,10 @@ const SectionContainer = styled(Container)`
         margin-bottom: 5vh;
         color: ${theme.stWhite};
         pointer-events: none;
+
+        ${bp.down("sm")} {
+            margin-top: 5vh;
+        }
 
         &.font-mono {
             font-family: ${theme.stFontsMono};
