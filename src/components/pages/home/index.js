@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import PageTitle from "hooks/PageTitle";
+import { Helmet } from "react-helmet";
 import Hero from "components/pages/home/Hero";
 import { Sections } from "components/pages/home/Sections";
+import site from "config";
 
 class Home extends Component {
     constructor(props) {
@@ -19,7 +20,13 @@ class Home extends Component {
     render() {
         return (
             <>
-                <PageTitle page="Stellar" override />
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>Stellar</title>
+                    <link rel="canonical" href="https://stellar.tech/" />
+                    <meta name="keywords" content={site.pages.home.tags} />
+                    <meta name="robots" content="index,follow" />
+                </Helmet>
                 <Hero scrollToSections={this.scrollToSections} />
                 <Sections styledRef={this.sectionsRef} />
             </>

@@ -1,7 +1,8 @@
 import React from "react";
-import PageTitle from "hooks/PageTitle";
+import { Helmet } from "react-helmet";
 import { SectionOne, InfoSections, TitleBlock } from "components/pages/cloud/Sections";
 import NextSection from "components/next";
+import site from "config";
 
 class Cloud extends React.Component {
     constructor(props) {
@@ -19,7 +20,13 @@ class Cloud extends React.Component {
     render() {
         return (
             <>
-                <PageTitle page="Orion: The Enterprise Native Cloud Platform from Stellar" />
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>Orion: The Enterprise Native Cloud</title>
+                    <link rel="canonical" href="https://stellar.tech/cloud" />
+                    <meta name="keywords" content={site.pages.cloud.tags} />
+                    <meta name="robots" content="index,follow" />
+                </Helmet>
                 <TitleBlock />
                 <SectionOne scrollToSections={() => this.scrollToRef(this.refOne)} />
                 <InfoSections refOne={this.refOne} />

@@ -27,6 +27,18 @@ const commonNavItems = [
     }
 ];
 
+const defaultTags = [
+    "stellar",
+    "stellar cloud",
+    "stellar technologies",
+    "stellar technologies inc",
+    "cloud",
+    "technology",
+    "networking",
+    "storage",
+    "servers"
+];
+
 const site = {
     global: {
         legalName: "Stellar Technologies Inc.",
@@ -102,7 +114,8 @@ const site = {
                         { name: "LinkedIn", link: "https://linkedin.com/in/dave-barrett-a634a3a1" }
                     ]
                 }
-            ]
+            ],
+            tags: ["wayne johnson", "matt love", "dave barrett", "management", "mission", "social"]
         },
         contact: {
             includeNext: false,
@@ -227,7 +240,28 @@ const site = {
                         ]
                     }
                 ]
-            }
+            },
+            tags: [
+                "vmware",
+                "cloud",
+                "iaas",
+                "vdiaas",
+                "baas",
+                "draas",
+                "vdi",
+                "virtual desktop",
+                "backups",
+                "disaster recovery",
+                "cloud storage",
+                "sla",
+                "ipv6",
+                "hawaii",
+                "island",
+                "compute",
+                "api",
+                "vcloud",
+                ...defaultTags
+            ]
         },
         services: {
             includeNext: true,
@@ -265,6 +299,14 @@ const site = {
                         }
                     ]
                 }
+            ],
+            tags: [
+                "managed services",
+                "help desk",
+                "24/7",
+                "24x7",
+                "infrastructure",
+                ...defaultTags
             ]
         },
         consulting: {
@@ -277,6 +319,22 @@ const site = {
                 { title: "Systems Engineering", subtitle: "" },
                 { title: "Networking Architecture", subtitle: "" },
                 { title: "DevOps & Infrastructure App Development", subtitle: "" }
+            ],
+            tags: [
+                "vmware",
+                "cisco",
+                "hpe",
+                "extreme",
+                "pure storage",
+                "ipv6",
+                "bgp",
+                "active directory",
+                "exchange",
+                "microsoft",
+                "virtual",
+                "consulting",
+                "professional services",
+                ...defaultTags
             ]
         },
         home: {
@@ -318,7 +376,8 @@ const site = {
                         `
                     }
                 ]
-            }
+            },
+            tags: defaultTags
         },
         docs: {
             includeNext: false,
