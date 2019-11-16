@@ -34,8 +34,17 @@ const NavBarContent = styled.div`
     padding-right: 15px;
     align-content: center;
     justify-content: space-between;
-    /* margin-top: 1rem;
-    margin-bottom: 1rem; */
+`;
+
+const ExtLink = styled.a`
+    color: ${props => (props.isLocation ? theme.stSecondary : theme.stWhite)};
+    font-weight: ${props => (props.isLocation ? theme.fontWeightBold : theme.fontWeightNormal)};
+    font-size: ${theme.fontSizeLg};
+    text-decoration: none;
+    :hover {
+        color: inherit;
+        text-decoration: none !important;
+    }
 `;
 
 const NavBarLink = styled(({ isLocation, ...props }) => <Link {...props} />)`
@@ -158,6 +167,13 @@ function NavMenuContent({ location, closeNav }) {
                         </NavMenuItem>
                     );
                 })}
+                <ExtLink
+                    className="list-group-item"
+                    href="https://docs.oscloud.io"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Docs
+                </ExtLink>
             </NavMenuGroup>
         </NavMenuWrapper>
     );
@@ -243,7 +259,6 @@ export default function MobileNavBar({ navOpen, setNavOpen, pathName, doScroll }
                 expand="false"
                 expanded={navOpen}
                 onToggle={handleNavClick}
-                // className={doScroll ? "sticky" : null}
                 className={
                     doScroll && !isHome
                         ? "sticky"

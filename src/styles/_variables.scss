@@ -23,14 +23,39 @@ $st-gradient-1: #2e3191;
 // $st-gradient-2: #2b004a;
 $st-gradient-2: #0d0e59;
 $st-gradient-3: $st-dark;
-// $st-gradient-3: #000000;
 
-// $st-gradient-colors: $st-gradient-1, $st-gradient-2, $st-gradient-3;
 $st-gradient-colors: $st-gradient-2, $st-gradient-3;
 $st-gradient: linear-gradient(to bottom, $st-gradient-colors);
 $st-gradient-down: linear-gradient(to bottom, $st-primary, $st-primary-alt, $st-dark);
 
+$st-gradient-image: linear-gradient(
+        rgba(43, 60, 143, 1) 0%,
+        rgba(43, 60, 143, 1) 10%,
+        rgba(43, 60, 143, 0.9) 20%,
+        rgba(43, 60, 143, 0.8) 30%,
+        rgba(43, 60, 143, 0.7) 40%,
+        rgba(43, 60, 143, 0.65) 45%,
+        rgba(43, 60, 143, 0.6) 50%,
+        rgba(43, 60, 143, 0.65) 55%,
+        rgba(43, 60, 143, 0.7) 60%,
+        rgba(43, 60, 143, 0.8) 70%,
+        rgba(43, 60, 143, 0.9) 80%,
+        rgba(43, 60, 143, 1) 90%,
+        rgba(43, 60, 143, 1) 100%
+    ),
+    url("/assets/earthrise-1920-1080.jpg");
+
 $st-dark-transparent: rgba($st-dark, 0.5);
+$st-white-transparent: rgba($st-white, 0.5);
+
+@function make-subtle($color) {
+    $dark-color: darken($color, 50%);
+    @return rgba($dark-color, 0.5);
+}
+
+$st-primary-subtle: make-subtle($st-primary);
+$st-primary-alt-subtle: make-subtle($st-primary-alt);
+$st-gray-subtle: make-subtle($st-gray);
 
 @function make-gradient($startColor: $color-black, $direction: "to bottom") {
     $scrimCoordinates: (

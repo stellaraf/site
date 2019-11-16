@@ -1,106 +1,14 @@
 import React from "react";
-import { Button, Card, Container, Col, Row } from "react-bootstrap";
+import { Button, Container, Col, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Icons from "components/svg/Icons";
 import { AngleSection } from "components/styled/sections";
 import { FiChevronRight } from "react-icons/fi";
-// import { getRevealProps } from "utils";
 import bp from "utils/breakpoints";
-// import withReveal from "react-reveal/withReveal";
-// import Slide from "react-reveal/Slide";
 import styled from "styled-components";
 import site from "config";
 import theme from "styles/exports.module.scss";
 import { VMware } from "components/svg/VendorLogos";
-
-// const RevealWrapper = styled.div`
-//     display: flex !important;
-//     flex-grow: 1 !important;
-// `;
-
-// const StyledCard = styled(Card)`
-//     background-color: transparent !important;
-//     color: ${props => props.color};
-//     text-align: center;
-//     flex-grow: 1;
-//     justify-content: center;
-//     min-height: ${theme.featureCardHeight};
-//     height: 100%;
-//     border: none !important;
-//     margin-left: 10px !important;
-//     margin-right: 10px !important;
-//     ${bp.down("md")} {
-//         min-height: ${theme.featureCardHeightSm};
-//     }
-//     &:hover {
-//         background-color: ${theme.featureCardBorderColor} !important;
-//         border: 1px solid ${theme.featureCardBorderColor} !important;
-//     }
-// `;
-
-// const FeatureTop = styled.div`
-//     padding: ${theme.sectionCardPaddingY} ${theme.sectionCardPaddingX} !important;
-// `;
-
-// const FeatureBottom = styled.div`
-//     color: ${props => props.color};
-//     padding-right: ${theme.sectionCardPaddingX} !important;
-//     padding-left: ${theme.sectionCardPaddingX} !important;
-//     padding-bottom: ${theme.sectionCardPaddingY} !important;
-// `;
-
-// const FeatureCardTitle = styled.h5`
-//     color: ${props => props.color};
-// `;
-
-// const FeatureCardText = styled.a`
-//     color: ${props => props.color} !important;
-//     &:hover {
-//         text-decoration: none !important;
-//         color: ${props => props.color} !important;
-//     }
-
-//     &::after {
-//         position: absolute;
-//         top: 0;
-//         right: 0;
-//         bottom: 0;
-//         left: 0;
-//         z-index: 1;
-//         pointer-events: auto;
-//         content: "";
-//         background-color: rgba(0, 0, 0, 0);
-//     }
-// `;
-
-// function FeatureCard({
-//     image,
-//     title = "Placeholder Title",
-//     text = "Placeholder Text",
-//     link,
-//     ...props
-// }) {
-//     const { revealProps, standardProps } = getRevealProps(props);
-//     const CardWrapper = withReveal(RevealWrapper, <Slide {...revealProps} />);
-//     const Icon = Icons[image] || "div";
-//     return (
-//         <CardWrapper {...standardProps}>
-//             <StyledCard>
-//                 <FeatureTop>
-//                     <Icon color={theme.stPrimary} />
-//                 </FeatureTop>
-//                 <FeatureBottom>
-//                     <FeatureCardTitle color={theme.stDark}>{title}</FeatureCardTitle>
-//                     <LinkContainer to={link}>
-//                         <FeatureCardText color={theme.stDark} href="/">
-//                             {text}
-//                         </FeatureCardText>
-//                     </LinkContainer>
-//                 </FeatureBottom>
-//             </StyledCard>
-//         </CardWrapper>
-//     );
-// }
 
 const LearnMore = props => (
     <LinkContainer to={props.href} className="learn-more">

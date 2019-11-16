@@ -49,10 +49,10 @@ const site = {
         buttonText: "Back"
     },
     social: [
-        { name: "Facebook", link: "https://www.facebook.com/stellar_tech" },
+        // { name: "Facebook", link: "https://www.facebook.com/stellar_tech" },
         { name: "LinkedIn", link: "https://linkedin.com/company/stellaraf" },
         { name: "Github", link: "https://github.com/stellaraf" },
-        { name: "Twitter", link: "https://twitter.com/stellar_tech" }
+        { name: "Twitter", link: "https://twitter.com/stellartechinc" }
     ],
     contactForm: {
         message: {
@@ -66,7 +66,43 @@ const site = {
             includeNext: false,
             link: "/about",
             title: "What makes us so stellar?",
-            subtitle: "We're glad you asked..."
+            subtitle: "We're glad you asked...",
+            profile: {
+                heading:
+                    "Our mission is to make migrating to the cloud easier for enterprises than ever before.",
+                text: `The cloud isn't just for people with massive development teams that can re-architect enterprise apps to a make moving to a big name public cloud cost-effective. At Stellar, we want to bring the power of cloud computing to everyone, and help our customers worry less about IT infrastructure.`
+            },
+            leadership: [
+                {
+                    name: "Wayne Johnson",
+                    title: "CEO",
+                    bio:
+                        "As a do-it-all engineer with over 10+ years of IT battlefield of experience, Wayne started Stellar in 2014 with the vision of offering superior IT customer service while being a trusted partner to organizations of any size. With his recent transition into the roll of CEO of Stellar, and with the help of his prior experience as CTO, he's leveraging his unparalleled expertise to direct Stellar into the one of the best Cloud & IT services companies in the world.",
+                    photo: "exec-wjohnson.jpg",
+                    social: [{ name: "LinkedIn", link: "https://linkedin.com/in/wwjohnson" }]
+                },
+                {
+                    name: "Matt Love",
+                    title: "Head of Infrastructure",
+                    bio:
+                        "A career-long network engineer, Matt came to Stellar to build bigger and badder networks. He's since picked up new skills in front-end and back-end development, and now leads both the cloud infrastructure & development teams at Stellar.",
+                    photo: "exec-mlove.jpg",
+                    social: [
+                        { name: "LinkedIn", link: "https://linkedin.com/in/matt-love" },
+                        { name: "Github", link: "https://github.com/checktheroads" }
+                    ]
+                },
+                {
+                    name: "Dave Barrett",
+                    title: "Principal Engineer",
+                    bio:
+                        "With decades of experience in IT, Dave came to Stellar eager to help more customers migrate to the cloud. After joining the cloud infrastructure team, he is now senior-most engineer in the company and oversees the company's technical operations.",
+                    photo: "exec-dbarrett.jpg",
+                    social: [
+                        { name: "LinkedIn", link: "https://linkedin.com/in/dave-barrett-a634a3a1" }
+                    ]
+                }
+            ]
         },
         contact: {
             includeNext: false,
@@ -386,8 +422,8 @@ const site = {
             }
         ],
         right: [
-            { title: "About", link: "/about" },
-            { title: "Docs", link: "/docs" }
+            { title: "About", link: "/about" }
+            // { title: "Docs", link: "https://docs.oscloud.io" }
         ]
     },
     footer: {
