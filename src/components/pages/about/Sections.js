@@ -272,7 +272,7 @@ export default class extends React.Component {
                                         </Card.Header>
                                         <Card.Body>
                                             As much as we love Linux, Windows isn't going anywhere
-                                            it today's enterprise technology landscape. That's why
+                                            in today's enterprise technology landscape. That's why
                                             we provide pre-built Windows Server images for all
                                             Microsoft-supported versions.
                                         </Card.Body>

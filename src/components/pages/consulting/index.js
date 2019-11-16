@@ -61,7 +61,6 @@ export default class extends React.Component {
     render() {
         return (
             <>
-                import {Helmet} from "react-helmet";
                 <Helmet>
                     <meta charSet="utf-8" />
                     <title>{site.pages.consulting.title}</title>
