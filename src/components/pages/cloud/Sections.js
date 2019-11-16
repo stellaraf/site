@@ -11,19 +11,17 @@ import {
 } from "react-bootstrap";
 import styled, { keyframes } from "styled-components";
 import { pulse, fadeIn, fadeInRight } from "react-animations";
-import { LinkContainer } from "react-router-bootstrap";
+// import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import MarkdownToJSX from "markdown-to-jsx";
 import { Intel, VMware, PureStorage, Veeam, PaloAltoNetworks } from "components/svg/VendorLogos";
-import { FiChevronDown, FiChevronRight, FiInfo } from "react-icons/fi";
+import { FiChevronRight, FiInfo } from "react-icons/fi";
 import { IoIosGitNetwork } from "react-icons/io";
 import { GoLocation } from "react-icons/go";
-import { getDelay } from "utils";
-import { HeroSection, AngleSection } from "components/styled/sections";
+import { AngleSection } from "components/styled/sections";
 import Icons from "components/svg/Icons";
 import bp, { query } from "utils/breakpoints";
 import { Display } from "components/styled/text";
-import { LocationCard } from "components/pages/cloud/Cards";
 import site from "config";
 import theme from "styles/exports.module.scss";
 import USMap from "components/svg/USMap";
@@ -101,44 +99,6 @@ function TitleBlock() {
         </TitleSection>
     );
 }
-
-const ScrollIndicator = styled.div`
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
-    justify-content: center;
-    align-content: flex-end;
-    position: absolute;
-    left: 50%;
-    right: 100%;
-    bottom: 0;
-    z-index: 100;
-`;
-
-const ScrollButton = styled.button`
-    display: inline-block;
-    vertical-align: middle;
-    text-align: center;
-    user-select: none;
-    background-color: transparent;
-    border: none;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-`;
-
-const BouncingArrow = styled(FiChevronDown)`
-    animation: 1s ${pulseAnimation} infinite;
-`;
-
-const ScrollArrow = props => (
-    <ScrollIndicator>
-        <ScrollButton onClick={props.scrollToSections}>
-            <BouncingArrow size="3rem" color={theme.stWhite} />
-        </ScrollButton>
-    </ScrollIndicator>
-);
 
 const SectionOneContainer = styled.div`
     width: 100%;
@@ -238,12 +198,6 @@ const SectionOneContainer = styled.div`
     }
 `;
 
-const rowDelay = i =>
-    getDelay(i, site.locations.length, {
-        maxDelay: 1500,
-        slowFirst: false
-    });
-
 const StyledLocPopup = styled(Popover)`
     && {
         background-color: ${theme.contentCardBackground};
@@ -309,7 +263,6 @@ const titleBlock = (
 );
 
 function SectionOne() {
-    const section = config.sections.one;
     return (
         <SectionOneContainer>
             <Row>
@@ -325,38 +278,20 @@ function SectionOne() {
                     </Col>
                 )}
             </Row>
-            {/*<Row>
-                <Col sm={12} className="section-title-col">
-                    <h3>{section.title}</h3>
-                    <p className="section-text">{section.text}</p>
-                </Col>
-            </Row>*/}
-            {/* <Row className="justify-content-center">
-                {site.locations.map((loc, i) => {
-                    return (
-                        <LocationCard
-                            location={loc.id}
-                            title={loc.name}
-                            subtitle={loc.subtitle}
-                            text={loc.info}
-                            key={i}
-                            sm={12}
-                            md="auto"
-                            delay={rowDelay(i)}
-                        />
-                    );
-                })}
-            </Row> */}
         </SectionOneContainer>
     );
 }
 
 const LearnMore = props => (
-    <LinkContainer to={props.href} className="learn-more">
-        <Button variant="outline-light">
-            <FiChevronRight style={{ marginBottom: "0.1em" }} /> Learn More
-        </Button>
-    </LinkContainer>
+    // <LinkContainer to={props.href} className="learn-more">
+    <Button
+        variant="outline-light"
+        className="learn-more"
+        href="https://docs.oscloud.io/resources/sla/"
+        target="_blank">
+        <FiChevronRight style={{ marginBottom: "0.1em" }} /> Learn More
+    </Button>
+    // </LinkContainer>
 );
 
 const StyledInfoPopup = styled(Popover)`
@@ -585,6 +520,11 @@ const SectionContainer = styled(Container)`
             user-select: none;
         }
 
+        & button.btn {
+            pointer-events: auto;
+            z-index: 1000;
+        }
+
         img {
             max-height: 30vh;
         }
@@ -681,6 +621,13 @@ const SectionContainer = styled(Container)`
             line-height: 1.5;
         }
     }
+
+    & .learn-more {
+        width: fit-content;
+        margin-right: auto;
+        margin-left: auto;
+        pointer-events: auto;
+    }
 `;
 class InfoSections extends React.Component {
     constructor(props) {
@@ -699,7 +646,7 @@ class InfoSections extends React.Component {
                         backgroundImage: theme.stSectionGradient1
                     }}>
                     <SectionContainer fluid>
-                        <Row>
+                        <Row className="section-title-row">
                             <Col className="section-title-col">
                                 <h1 className="section-title">{this.info[0].title}</h1>
                                 <h4 className="section-subtitle">{this.info[0].subtitle}</h4>

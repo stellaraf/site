@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { fadeIn } from "react-animations";
 import { FiChevronDown } from "react-icons/fi";
 import { AngleSection } from "components/styled/sections";
 import { useWindowScroll } from "react-use";
@@ -9,8 +8,6 @@ import { LogoFull } from "components/Logo";
 import styled, { keyframes } from "styled-components";
 import { pulse } from "react-animations";
 import theme from "styles/exports.module.scss";
-
-const fadeInAnimation = keyframes`${fadeIn}`;
 
 const easing = t => 1 + --t * t * t * t * t;
 
@@ -53,11 +50,6 @@ const HomeHeroSection = styled(AngleSection)`
     flex-direction: column;
     min-height: 30vh;
     position: relative;
-    background-image: url("/assets/earthrise-1920-1080.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    background-blend-mode: lighten;
 
     & .row {
         justify-content: center;
@@ -115,7 +107,13 @@ function Hero(props) {
                 height="90vh"
                 backgroundColor={theme.stPrimary}
                 directionTop="flat"
-                marginTop="0">
+                marginTop="0"
+                style={{
+                    backgroundImage: theme.stGradientImage,
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                    backgroundSize: "cover"
+                }}>
                 <Container>
                     <Row>
                         <HeroCol sm={12}>

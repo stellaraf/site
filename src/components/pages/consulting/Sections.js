@@ -1,10 +1,7 @@
 import React from "react";
 import { CardColumns, Card, Container, Col, Row } from "react-bootstrap";
-import styled, { keyframes } from "styled-components";
-import { pulse, fadeIn, fadeInRight } from "react-animations";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
-import MarkdownToJSX from "markdown-to-jsx";
-import { FiChevronRight } from "react-icons/fi";
 import {
     VMware,
     Microsoft,
@@ -38,26 +35,6 @@ import { AngleSection } from "components/styled/sections";
 import bp from "utils/breakpoints";
 import site from "config";
 import theme from "styles/exports.module.scss";
-
-const Markdown = props => (
-    <MarkdownToJSX
-        options={{
-            overrides: {
-                forceBlock: true,
-                Link: { component: Link },
-                FiChevronRight: { component: FiChevronRight }
-            }
-        }}
-        {...props}>
-        {props.children}
-    </MarkdownToJSX>
-);
-
-const config = site.pages.cloud;
-
-const pulseAnimation = keyframes`${pulse}`;
-const fadeInAnimation = keyframes`${fadeIn}`;
-const fadeInRightAnimation = keyframes`${fadeInRight}`;
 
 const SectionWrapper = styled.div`
     position: relative;

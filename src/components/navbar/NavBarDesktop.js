@@ -82,6 +82,46 @@ const NavBarLogo = styled.div`
     }
 `;
 
+const ExtLink = styled.a`
+    position: relative;
+    display: inline-block;
+    padding: ${theme.navLinkPaddingX} 0.5rem ${theme.navLinkPaddingX} 0.5rem;
+    margin-right: 1rem;
+    text-decoration: none;
+    color: ${props => (props.isLocation ? theme.stSecondary : theme.navLinkColor)};
+    font-weight: ${props => (props.isLocation ? theme.fontWeightBold : theme.fontWeightNormal)};
+    transition: color 0.5s, font-weight 0.5s;
+    ${bp.up("lg")} {
+        margin-right: 2rem;
+        padding: ${theme.navLinkPaddingX};
+    }
+    &:hover:not(.active-nav-link) {
+        color: ${props => (props.isLocation ? theme.stSecondary : theme.stWhite)} !important;
+        border-top: 1px solid ${theme.stWhite};
+        text-decoration: none;
+    }
+
+    &.active-nav-link:hover {
+        color: ${props => (props.isLocation ? theme.stSecondary : theme.stWhite)} !important;
+        text-decoration: none;
+    }
+
+    ::before {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: ${props => (props.isLocation ? "2px" : 0)};
+        background: ${theme.stSecondary};
+        content: "";
+        opacity: ${props => (props.isLocation ? 1 : 0)};
+        transition: width 0.5s, opacity 0.5s, transform 0.5s;
+        transform: translateY(-10px);
+    }
+    ${bp.down("md")} {
+        padding: 0.5rem;
+    }
+`;
+
 const NavLink = styled(({ isLocation, active, ...props }) => <Link {...props} />)`
     position: relative;
     display: inline-block;
@@ -167,6 +207,12 @@ export default function DesktopNavBar({ doScroll, pathName }) {
                 </NavBarLogo>
                 <NavItemGroup side="right">
                     <NavItems side="right" location={pathName} />
+                    <ExtLink
+                        href="https://docs.oscloud.io"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        Docs
+                    </ExtLink>
                     <ContactButton href="/contact" variant="outline-light">
                         {site.pages.contact.title}
                     </ContactButton>

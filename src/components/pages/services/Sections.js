@@ -1,7 +1,6 @@
 import React from "react";
-import { Container, Card, Col, Popover, Row } from "react-bootstrap";
-import styled, { keyframes } from "styled-components";
-import { pulse, fadeIn, fadeInRight } from "react-animations";
+import { Container, Card, Col, Row } from "react-bootstrap";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import MarkdownToJSX from "markdown-to-jsx";
 import Logo from "components/svg/Logos";
@@ -23,41 +22,6 @@ const Markdown = props => (
         {props.children}
     </MarkdownToJSX>
 );
-
-const config = site.pages.cloud;
-
-const pulseAnimation = keyframes`${pulse}`;
-const fadeInAnimation = keyframes`${fadeIn}`;
-const fadeInRightAnimation = keyframes`${fadeInRight}`;
-
-const StyledInfoPopup = styled(Popover)`
-    && {
-        background-color: ${theme.contentCardBackground};
-        color: ${theme.stWhite};
-        max-width: 600px;
-
-        & .arrow {
-            ::after {
-                border-bottom-color: ${theme.contentCardBackground};
-            }
-        }
-
-        & .popover-header[class] {
-            background-color: ${theme.contentCardBackground};
-            font-size: ${theme.fontSizeSm};
-            font-weight: ${theme.fontWeightNormal};
-            border-bottom: unset;
-            ::before {
-                border-bottom: 1px solid ${theme.contentCardBackground};
-            }
-        }
-
-        & .popover-body[class] {
-            font-size: ${theme.fontSizeSm};
-            font-weight: ${theme.fontWeightLight};
-        }
-    }
-`;
 
 const SectionWrapper = styled.div`
     position: relative;
