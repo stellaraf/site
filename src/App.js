@@ -1,6 +1,7 @@
 // Third Party Imports
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ReactGA from "react-ga";
 
 // App Imports
 import asyncComponent from "components/AsyncComponent";
@@ -23,12 +24,15 @@ const Consulting = asyncComponent(() => import("components/pages/consulting"));
 const Stars = asyncComponent(() => import("components/stars/particles"));
 const NotFound = asyncComponent(() => import("components/pages/notfound"));
 
+ReactGA.initialize("UA-152723479-1");
+
 class App extends React.Component {
     // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
     }
     render() {
+        ReactGA.pageview(window.location.pathname + window.location.search);
         return (
             <Router>
                 <ScrollToTopOnMount />

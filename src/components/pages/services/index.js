@@ -2,12 +2,12 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import { fadeIn } from "react-animations";
 import { Display } from "components/styled/text";
-import PageTitle from "hooks/PageTitle";
 import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
 import site from "config";
 import NextSection from "components/next";
 import { InfoSections } from "components/pages/services/Sections";
+import { Helmet } from "react-helmet";
 
 const fadeInAnimation = keyframes`${fadeIn}`;
 
@@ -48,7 +48,13 @@ export default class extends React.Component {
     render() {
         return (
             <>
-                <PageTitle page="Dedicated IT Services" />
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>{site.pages.services.tags}</title>
+                    <link rel="canonical" href="https://stellar.tech/services" />
+                    <meta name="keywords" content={site.pages.services.tags} />
+                    <meta name="robots" content="index,follow" />
+                </Helmet>
                 <TitleSection>
                     <Display.Title>{this.page.title}</Display.Title>
                     <Display.Subtitle>{this.page.subtitle}</Display.Subtitle>
