@@ -82,14 +82,14 @@ const site = {
             profile: {
                 heading:
                     "Our mission is to make migrating to the cloud easier for enterprises than ever before.",
-                text: `The cloud isn't just for people with massive development teams that can re-architect enterprise apps to a make moving to a big name public cloud cost-effective. At Stellar, we want to bring the power of cloud computing to everyone, and help our customers worry less about IT infrastructure.`
+                text: `The cloud isn't just for people with massive development teams that can re-architect enterprise apps to make moving to a big name public cloud cost-effective. At Stellar, we want to bring the power of cloud computing to everyone, and help our customers worry less about IT infrastructure.`
             },
             leadership: [
                 {
                     name: "Wayne Johnson",
                     title: "CEO",
                     bio:
-                        "As a do-it-all engineer with over 10+ years of IT battlefield of experience, Wayne started Stellar in 2014 with the vision of offering superior IT customer service while being a trusted partner to organizations of any size. With his recent transition into the roll of CEO of Stellar, and with the help of his prior experience as CTO, he's leveraging his unparalleled expertise to direct Stellar into the one of the best Cloud & IT services companies in the world.",
+                        "As a do-it-all engineer with over 10+ years of IT battlefield experience, Wayne started Stellar in 2014 with the vision of offering superior IT customer service while being a trusted partner to organizations of any size. With his recent transition into the role of CEO of Stellar, and with the help of his prior experience as CTO, he's leveraging his unparalleled expertise to direct Stellar into the one of the best Cloud & IT services companies in the world.",
                     photo: "exec-wjohnson.jpg",
                     social: [{ name: "LinkedIn", link: "https://linkedin.com/in/wwjohnson" }]
                 },
@@ -203,7 +203,7 @@ const site = {
                     },
                     {
                         title: "Virtual Desktop Infrastructure",
-                        subtitle: "The smart, secure way to never dealing with PCs again",
+                        subtitle: "The smart, secure way to never deal with PCs again",
                         content: [
                             {
                                 title: "High Performance Desktops for Everyone",
@@ -230,12 +230,12 @@ const site = {
                             },
                             {
                                 title: "Features",
-                                text: `Our internet services come fully featured with cutting edge technologies and transit features:`
+                                text: `Our internet services come fully loaded with cutting edge technologies and IP transit features:`
                             },
                             {
                                 title: "Private Extensions",
-                                text: `To make sure Orion is a true extension of the enterprise, we support private connectivity of virtually any type. Whether it's an MPLS circuit from your existing global carrier, a point to point connection, or your own physical VPN endpoint, we'll make it happen.<br/><br/>
-                                To simplify connectivity even further, we offer a premium SD-WAN cloud extension service which can automatically combine any of existing bandwidth with per-packet load balancing, perform end-to-end QoS prioritization, and guarantee always-on cloud connectivity.`
+                                text: `To make sure Orion is a true extension of the enterprise, we support private connectivity of virtually any type. Whether it's an MPLS circuit from your existing global carrier, a metro ethernet link, or your own physical VPN endpoint, we'll make it happen.<br/><br/>
+                                To simplify connectivity even further, we offer a premium SD-WAN cloud extension service which can automatically combine any existing bandwidth mediums with per-packet load balancing, perform end-to-end QoS prioritization, and guarantee always-on cloud connectivity.`
                             }
                         ]
                     }
@@ -286,11 +286,11 @@ const site = {
                 },
                 {
                     title: "Managed Infrastructure",
-                    subtitle: "Let our experts about your servers and network devices",
+                    subtitle: "Let our experts manage your servers and network devices for you",
                     content: [
                         {
                             title: "Trusted Advisors",
-                            text: `As your trusted technology advisor, we come alongside your business and help direct the velocity of technology in the organization. Because we're constantly in-tune with the digital landscape, we always know when it's time to evaluate new technologies.<br/><br/>
+                            text: `As your trusted technology advisor, we come alongside your business and help direct the velocity of technology in the organization. Because we're constantly in tune with the digital landscape, we always know when it's time to evaluate new technologies.<br/><br/>
                             Our infrastructure team has extensive experience with complex Active Directory environments, Windows Server, Microsoft Exchange, Linux, every hypervisor under the sun, advanced networking & routing, and network security. By leveraging our stellar team of engineers, you can guarantee the right infrastructure is in place for your business needs _and_ ensure it always runs smoothly.`
                         },
                         {
