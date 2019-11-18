@@ -32,6 +32,7 @@ const ScrollButton = styled(Button)`
 
 const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    window.document.activeElement.blur();
 };
 
 export default function() {
