@@ -132,7 +132,19 @@ const site = {
                     title: "Interested in Learning More?",
                     subtitle: "Tell us how to reach you and we'll contact you as soon as possible."
                 }
-            }
+            },
+            tags: [
+                "contact",
+                "phone number",
+                "support",
+                "help desk",
+                "sales",
+                "contact",
+                "help",
+                "assistance",
+                "information",
+                ...defaultTags
+            ]
         },
         cloud: {
             includeNext: true,
@@ -242,6 +254,8 @@ const site = {
                 ]
             },
             tags: [
+                "orion",
+                "high performance compute",
                 "vmware",
                 "cloud",
                 "iaas",

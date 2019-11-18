@@ -83,6 +83,9 @@ $st-gray-subtle: make-subtle($st-gray);
     }
     @return linear-gradient(unquote($direction), $stops);
 }
+
+$st-page-gradient: linear-gradient(to top right, $st-primary, $st-primary-alt, $st-dark);
+
 $st-section-gradient-1: make-gradient($st-dark), make-gradient($st-primary, "to top right"),
     make-gradient($st-primary-alt, "to top left");
 
