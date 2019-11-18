@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { fadeIn } from "react-animations";
-import { Helmet } from "react-helmet";
 import { Display } from "components/styled/text";
 import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
@@ -44,13 +43,6 @@ export default class extends React.Component {
     render() {
         return (
             <>
-                <Helmet>
-                    <meta charSet="utf-8" />
-                    <title>{site.pages.about.title}</title>
-                    <link rel="canonical" href="https://stellar.tech/about" />
-                    <meta name="keywords" content={site.pages.about.tags} />
-                    <meta name="robots" content="index,follow" />
-                </Helmet>
                 <TitleSection>
                     <Display.Title>{this.page.title}</Display.Title>
                     <Display.Subtitle>{this.page.subtitle}</Display.Subtitle>

@@ -1,28 +1,31 @@
 // Third Party Imports
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ReactGA from "react-ga";
+import { Helmet } from "react-helmet";
 
 // App Imports
-import asyncComponent from "components/AsyncComponent";
+import site from "config";
+import SuspensePage from "components/pages/SuspensePage";
 import NavBar from "components/navbar";
 import Footer from "components/footer";
 import GlobalStyle from "components/styled/global";
 import ScrollToTopOnMount from "hooks/ScrollToTopOnMount";
 import ScrollToTop from "components/ScrollToTop";
+import { TwitterMeta, OpenGraphMeta } from "utils/helmetHelpers";
 
 // Styles
 import "styles/main.scss";
 
 // Async Imports
-const Home = asyncComponent(() => import("components/pages/home"));
-const Cloud = asyncComponent(() => import("components/pages/cloud"));
-const Contact = asyncComponent(() => import("components/pages/contact"));
-const Services = asyncComponent(() => import("components/pages/services"));
-const About = asyncComponent(() => import("components/pages/about"));
-const Consulting = asyncComponent(() => import("components/pages/consulting"));
-const Stars = asyncComponent(() => import("components/stars/particles"));
-const NotFound = asyncComponent(() => import("components/pages/notfound"));
+const Home = lazy(() => import("components/pages/home"));
+const Cloud = lazy(() => import("components/pages/cloud"));
+const Contact = lazy(() => import("components/pages/contact"));
+const Services = lazy(() => import("components/pages/services"));
+const About = lazy(() => import("components/pages/about"));
+const Consulting = lazy(() => import("components/pages/consulting"));
+const Stars = lazy(() => import("components/stars/particles"));
+const NotFound = lazy(() => import("components/pages/NotFound"));
 
 ReactGA.initialize("UA-152723479-1");
 
@@ -35,23 +38,102 @@ class App extends React.Component {
         ReactGA.pageview(window.location.pathname + window.location.search);
         return (
             <Router>
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <link rel="canonical" href="https://stellar.tech/" />
+                    <meta
+                        name="rights"
+                        content={`Copyright © ${new Date().getFullYear()} Stellar Technologies Inc.`}
+                    />
+                </Helmet>
                 <ScrollToTopOnMount />
                 <GlobalStyle />
-                <NavBar />
-                <main>
-                    <Switch>
-                        <Route exact props={this.props} path="/consulting" component={Consulting} />
-                        <Route exact props={this.props} path="/services" component={Services} />
-                        <Route exact props={this.props} path="/contact" component={Contact} />
-                        <Route exact props={this.props} path="/about" component={About} />
-                        <Route exact props={this.props} path="/cloud" component={Cloud} />
-                        <Route exact props={this.props} path="/" component={Home} />
-                        <Route path="*" component={NotFound} />
-                    </Switch>
-                </main>
-                <ScrollToTop />
-                <Footer />
-                <Stars />
+                <Suspense fallback={<SuspensePage />}>
+                    <NavBar />
+                    <main>
+                        <Switch>
+                            <Route exact props={this.props} path="/consulting">
+                                <Helmet>
+                                    <title>{site.pages.consulting.title}</title>
+                                    <link rel="canonical" href="https://stellar.tech/consulting" />
+                                    <meta name="keywords" content={site.pages.consulting.tags} />
+                                </Helmet>
+                                <TwitterMeta page="consulting" />
+                                <OpenGraphMeta page="consulting" />
+                                <Consulting />
+                            </Route>
+                            <Route exact props={this.props} path="/services">
+                                <Helmet>
+                                    <title>{site.pages.services.title}</title>
+                                    <link rel="canonical" href="https://stellar.tech/services" />
+                                    <meta name="keywords" content={site.pages.services.tags} />
+                                </Helmet>
+                                <TwitterMeta page="services" />
+                                <OpenGraphMeta page="services" />
+                                <Services />
+                            </Route>
+                            <Route exact props={this.props} path="/contact">
+                                <Helmet>
+                                    <title>Contact Stellar</title>
+                                    <link rel="canonical" href="https://stellar.tech/contact" />
+                                    <meta name="keywords" content={site.pages.contact.tags} />
+                                </Helmet>
+                                <TwitterMeta page="contact" />
+                                <OpenGraphMeta page="contact" />
+                                <Contact />
+                            </Route>
+                            <Route exact props={this.props} path="/about">
+                                <Helmet>
+                                    <title>{site.pages.about.title}</title>
+                                    <link rel="canonical" href="https://stellar.tech/about" />
+                                    <meta name="keywords" content={site.pages.about.tags} />
+                                </Helmet>
+                                <TwitterMeta page="about" />
+                                <OpenGraphMeta page="about" />
+                                <About />
+                            </Route>
+                            <Route exact props={this.props} path="/cloud">
+                                <Helmet>
+                                    <title>Orion: The Enterprise Native Cloud</title>
+                                    <link rel="canonical" href="https://stellar.tech/cloud" />
+                                    <meta name="keywords" content={site.pages.cloud.tags} />
+                                </Helmet>
+                                <TwitterMeta page="cloud" />
+                                <OpenGraphMeta page="cloud" />
+                                <Cloud />
+                            </Route>
+                            <Route exact props={this.props} path="/">
+                                <Helmet>
+                                    <title>Stellar</title>
+                                    <meta name="keywords" content={site.pages.home.tags} />
+                                    <meta name="twitter:card" content="summary_large_image" />
+                                    <meta name="twitter:site" content="@StellarTechInc" />
+                                    <meta name="twitter:title" content="Stellar" />
+                                    <meta
+                                        name="twitter:description"
+                                        content="Fueling your digital velocity"
+                                    />
+                                    <meta name="twitter:image" content="/opengraph.png" />
+                                    <meta name="og:title" content="Stellar" />
+                                    <meta
+                                        name="og:description"
+                                        content="Fueling your digital velocity"
+                                    />
+                                    <meta name="og:url" content="https://stellar.tech/" />
+                                    <meta
+                                        name="og:image"
+                                        content="https://stellar.tech/opengraph.png"
+                                    />
+                                </Helmet>
+                                <Home />
+                            </Route>
+                            <Route path="*" component={NotFound} />
+                        </Switch>
+                    </main>
+                    <ScrollToTop />
+                    <Footer />
+                    <Stars />
+                </Suspense>
             </Router>
         );
     }
