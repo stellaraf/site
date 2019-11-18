@@ -4,11 +4,17 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import theme from "styles/exports.module.scss";
 
 const SuspensePage = styled.div`
-    position: fixed;
-    height: 105vh;
-    width: 105vw;
     overflow: hidden;
     background-image: ${theme.stPageGradient};
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 105%;
+    width: 105%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 `;
 
 const spinningAnimation = keyframes`
@@ -21,10 +27,6 @@ const spinningAnimation = keyframes`
 `;
 
 const LoaderWrapper = styled.div`
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     animation: 1s ${spinningAnimation} infinite linear;
 `;
 
