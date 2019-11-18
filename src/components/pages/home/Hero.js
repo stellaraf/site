@@ -50,6 +50,7 @@ const HomeHeroSection = styled(AngleSection)`
     flex-direction: column;
     min-height: 30vh;
     position: relative;
+    -webkit-backface-visibility: hidden;
 
     & .row {
         justify-content: center;
@@ -112,7 +113,8 @@ function Hero(props) {
                     backgroundImage: theme.stGradientImage,
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
-                    backgroundSize: "cover"
+                    backgroundSize: "cover",
+                    WebkitBackfaceVisibility: "hidden"
                 }}>
                 <Container>
                     <Row>
