@@ -3,6 +3,7 @@ import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ReactGA from "react-ga";
 import { Helmet } from "react-helmet";
+import smoothscroll from "smoothscroll-polyfill";
 
 // App Imports
 import site from "config";
@@ -28,6 +29,7 @@ const Stars = lazy(() => import("components/stars/particles"));
 const NotFound = lazy(() => import("components/pages/NotFound"));
 
 ReactGA.initialize("UA-152723479-1");
+smoothscroll.polyfill();
 
 class App extends React.Component {
     // eslint-disable-next-line no-useless-constructor
