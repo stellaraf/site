@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import styled, { keyframes } from "styled-components";
 import { fadeIn } from "react-animations";
 import { Link } from "react-router-dom";
@@ -61,13 +60,6 @@ export default class extends React.Component {
     render() {
         return (
             <>
-                <Helmet>
-                    <meta charSet="utf-8" />
-                    <title>{site.pages.consulting.title}</title>
-                    <link rel="canonical" href="https://stellar.tech/consulting" />
-                    <meta name="keywords" content={site.pages.consulting.tags} />
-                    <meta name="robots" content="index,follow" />
-                </Helmet>
                 <TitleSection>
                     <Display.Title>{this.page.title}</Display.Title>
                     <Display.Subtitle>{this.page.subtitle}</Display.Subtitle>
