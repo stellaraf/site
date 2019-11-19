@@ -99,21 +99,21 @@ const SectionContainer = styled(Container)`
     }
 
     & .align-left {
-        text-align: justify;
+        text-align: left;
         justify-content: left;
         ${bp.down("sm")} {
             text-align: left;
         }
     }
     & .align-center {
-        text-align: justify;
+        text-align: center;
         justify-content: center;
         ${bp.down("sm")} {
             text-align: left;
         }
     }
     & .align-right {
-        text-align: justify;
+        text-align: right;
         justify-content: right;
         ${bp.down("sm")} {
             text-align: left;
