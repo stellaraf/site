@@ -137,10 +137,11 @@ function NextCard({
 }
 
 const SectionContainer = styled(Container)`
-    min-height: 25vh;
+    min-height: calc(${theme.nextCardHeight} + 30vh);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
     & h3.next-section-title {
         color: ${theme.stDark};

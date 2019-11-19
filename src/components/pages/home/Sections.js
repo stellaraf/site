@@ -99,21 +99,21 @@ const SectionContainer = styled(Container)`
     }
 
     & .align-left {
-        text-align: justify;
+        text-align: left;
         justify-content: left;
         ${bp.down("sm")} {
             text-align: left;
         }
     }
     & .align-center {
-        text-align: justify;
+        text-align: center;
         justify-content: center;
         ${bp.down("sm")} {
             text-align: left;
         }
     }
     & .align-right {
-        text-align: justify;
+        text-align: right;
         justify-content: right;
         ${bp.down("sm")} {
             text-align: left;
@@ -205,7 +205,8 @@ class Sections extends React.Component {
                 <AngleSection
                     directionTop={"rightDown"}
                     directionBottom={"leftUp"}
-                    backgroundColor={theme.stDark}>
+                    backgroundColor={theme.stDark}
+                    marginBottom="10vh">
                     <SectionContainer fluid>
                         <Row className="section-row">
                             <Col className="section-graphic" md={{ span: 3, offset: 1 }}>

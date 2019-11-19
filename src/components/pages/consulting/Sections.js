@@ -1,5 +1,5 @@
 import React from "react";
-import { CardColumns, Card, Container, Col, Row } from "react-bootstrap";
+import { Card, Container, Col, Row } from "react-bootstrap";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import {
@@ -32,6 +32,7 @@ import {
     DiGit
 } from "react-icons/di";
 import { AngleSection } from "components/styled/sections";
+import MasonryCards from "components/MasonryCards";
 import bp from "utils/breakpoints";
 import site from "config";
 import theme from "styles/exports.module.scss";
@@ -62,69 +63,61 @@ const SectionContainer = styled(Container)`
     & .card-columns {
         column-gap: 2rem;
         grid-column-gap: 2rem;
-        & .card {
+    }
+
+    & .masonry-card {
+        color: ${theme.contentCardColor};
+        background-color: ${theme.contentCardBackground};
+        box-shadow: ${theme.contentCardShadow};
+        transform: translateZ(0);
+        margin-bottom: 2rem;
+        ${bp.down("md")} {
+            margin-right: 0px;
+            margin-left: 0px;
+        }
+
+        & .card-header {
+            display: flex;
             color: ${theme.contentCardColor};
-            background-color: ${theme.contentCardBackground};
-            box-shadow: ${theme.contentCardShadow};
-            transform: translateZ(0);
-            margin-bottom: 2rem;
-            ${bp.down("md")} {
-                margin-right: 0px;
-                margin-left: 0px;
+            background-color: unset;
+            border-bottom: none;
+            padding-top: 2rem;
+            justify-content: center;
+            .content-title {
+                margin-bottom: unset;
             }
+        }
 
-            & .card-header {
-                display: flex;
-                color: ${theme.contentCardColor};
-                background-color: unset;
-                border-bottom: none;
-                padding-top: 2rem;
-                justify-content: center;
-                .content-title {
-                    margin-bottom: unset;
-                }
-            }
-
-            & .card-body {
-                a {
-                    color: ${theme.stWhite};
-                    text-decoration: none;
-                    :hover {
-                        color: ${theme.stSecondary};
-                    }
-                }
-            }
-            & .card-footer {
-                display: flex;
-                color: ${theme.contentCardColor};
-                background-color: unset;
-                border-top: none;
-                justify-content: space-evenly;
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-            & .list-group {
-                margin-top: 1rem;
-                & .list-group-item {
-                    background-color: transparent;
-                    color: ${theme.stWhite};
-                    font-size: ${theme.fontSizeSm};
-
-                    & .feature-icon {
-                        display: inline-block;
-                        margin-right: 1rem;
-                        margin-left: -1rem;
-                    }
+        & .card-body {
+            a {
+                color: ${theme.stWhite};
+                text-decoration: none;
+                :hover {
+                    color: ${theme.stSecondary};
                 }
             }
         }
-        & .content-bg-dark {
-            background-color: ${theme.contentCardBackgroundDark};
-            color: ${theme.contentCardColorDark};
-            box-shadow: ${theme.contentCardShadowDark};
+        & .card-footer {
+            display: flex;
+            color: ${theme.contentCardColor};
+            background-color: unset;
+            border-top: none;
+            justify-content: space-evenly;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        & .list-group {
+            margin-top: 1rem;
+            & .list-group-item {
+                background-color: transparent;
+                color: ${theme.stWhite};
+                font-size: ${theme.fontSizeSm};
 
-            & .card-header h5 {
-                color: ${theme.contentCardColorDark};
+                & .feature-icon {
+                    display: inline-block;
+                    margin-right: 1rem;
+                    margin-left: -1rem;
+                }
             }
         }
 
@@ -132,6 +125,15 @@ const SectionContainer = styled(Container)`
             &:not(:first-of-type) {
                 margin-top: 3vh;
             }
+        }
+    }
+    & .card.content-bg-dark {
+        background-color: ${theme.contentCardBackgroundDark};
+        color: ${theme.contentCardColorDark};
+        box-shadow: ${theme.contentCardShadowDark};
+
+        & .card-header h5 {
+            color: ${theme.contentCardColorDark};
         }
     }
     &:last-of-type {
@@ -320,6 +322,46 @@ const SectionContainer = styled(Container)`
             user-select: none;
         }
     }
+
+    & .my-masonry-grid {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        margin-left: -30px;
+        width: auto;
+        align-items: center;
+        flex-flow: column wrap;
+    }
+    & .my-masonry-grid_column {
+        padding-left: 30px;
+        background-clip: padding-box;
+    }
+
+    & .masonry-card {
+        margin-bottom: 30px;
+
+        & *[class][class] {
+            align-self: center;
+        }
+    }
+
+    & .masonry-row {
+        justify-content: center;
+        ${bp.up("xl")} {
+            & :nth-of-type(n + 0) {
+                align-self: flex-end;
+            }
+            & :nth-of-type(n + 4) {
+                align-self: flex-start;
+            }
+            & :nth-of-type(n + 8) {
+                align-self: flex-end;
+            }
+            & :nth-of-type(n + 8) {
+                align-self: flex-start;
+            }
+        }
+    }
 `;
 
 class InfoSections extends React.Component {
@@ -341,8 +383,8 @@ class InfoSections extends React.Component {
                                 <h4 className="section-subtitle">{this.config[0].subtitle}</h4>
                             </Col>
                         </Row>
-                        <CardColumns>
-                            <Card>
+                        <MasonryCards>
+                            <Card className="masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">Virtualization</h5>
                                 </Card.Header>
@@ -381,7 +423,7 @@ class InfoSections extends React.Component {
                                     </div>
                                 </Card.Footer>
                             </Card>
-                            <Card>
+                            <Card className="masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">Storage</h5>
                                 </Card.Header>
@@ -391,7 +433,7 @@ class InfoSections extends React.Component {
                                     on the planet.
                                 </Card.Body>
                             </Card>
-                            <Card>
+                            <Card className="masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">Office 365</h5>
                                 </Card.Header>
@@ -404,7 +446,7 @@ class InfoSections extends React.Component {
                                     <Office365 height={48} color={theme.stWhite} />
                                 </Card.Footer>
                             </Card>
-                            <Card>
+                            <Card className="masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">Exchange</h5>
                                 </Card.Header>
@@ -424,7 +466,7 @@ class InfoSections extends React.Component {
                                     </div>
                                 </Card.Footer>
                             </Card>
-                            <Card>
+                            <Card className="masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">Business Continuity</h5>
                                 </Card.Header>
@@ -452,7 +494,7 @@ class InfoSections extends React.Component {
                                     </div>
                                 </Card.Footer>
                             </Card>
-                            <Card>
+                            <Card className="masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">Active Directory</h5>
                                 </Card.Header>
@@ -461,7 +503,7 @@ class InfoSections extends React.Component {
                                     them whole again.
                                 </Card.Body>
                             </Card>
-                            <Card>
+                            <Card className="masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">Linux</h5>
                                 </Card.Header>
@@ -493,7 +535,7 @@ class InfoSections extends React.Component {
                                     </div>
                                 </Card.Footer>
                             </Card>
-                        </CardColumns>
+                        </MasonryCards>
                     </SectionContainer>
                 </AngleSection>
                 <AngleSection
@@ -507,8 +549,8 @@ class InfoSections extends React.Component {
                                 <h4 className="section-subtitle">{this.config[1].subtitle}</h4>
                             </Col>
                         </Row>
-                        <CardColumns>
-                            <Card>
+                        <MasonryCards>
+                            <Card className="masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">Campus</h5>
                                 </Card.Header>
@@ -552,7 +594,7 @@ class InfoSections extends React.Component {
                                     </div>
                                 </Card.Footer>
                             </Card>
-                            <Card>
+                            <Card className="masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">WAN</h5>
                                 </Card.Header>
@@ -567,7 +609,7 @@ class InfoSections extends React.Component {
                                     how to <b>not</b> extend layer 2 over the WAN.
                                 </Card.Body>
                             </Card>
-                            <Card>
+                            <Card className="masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">Data Center</h5>
                                 </Card.Header>
@@ -605,7 +647,7 @@ class InfoSections extends React.Component {
                                     </div>
                                 </Card.Footer>
                             </Card>
-                            <Card>
+                            <Card className="masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">Transit & Peering</h5>
                                 </Card.Header>
@@ -625,7 +667,7 @@ class InfoSections extends React.Component {
                                     deployed NAT64 & DNS64, and NPTv6 when the need arises.
                                 </Card.Body>
                             </Card>
-                        </CardColumns>
+                        </MasonryCards>
                     </SectionContainer>
                 </AngleSection>
                 <AngleSection
@@ -639,8 +681,8 @@ class InfoSections extends React.Component {
                                 <h4 className="section-subtitle">{this.config[2].subtitle}</h4>
                             </Col>
                         </Row>
-                        <CardColumns>
-                            <Card className="content-bg-dark">
+                        <MasonryCards>
+                            <Card className="content-bg-dark masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">Infrastructure Automation</h5>
                                 </Card.Header>
@@ -678,7 +720,7 @@ class InfoSections extends React.Component {
                                     </div>
                                 </Card.Footer>
                             </Card>
-                            <Card className="content-bg-dark">
+                            <Card className="content-bg-dark masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">API Construction</h5>
                                 </Card.Header>
@@ -688,7 +730,7 @@ class InfoSections extends React.Component {
                                     your app, we can build it!
                                 </Card.Body>
                             </Card>
-                            <Card className="content-bg-dark">
+                            <Card className="content-bg-dark masonry-card">
                                 <Card.Header>
                                     <h5 className="content-title">Front End</h5>
                                 </Card.Header>
@@ -731,7 +773,7 @@ class InfoSections extends React.Component {
                                     </div>
                                 </Card.Footer>
                             </Card>
-                        </CardColumns>
+                        </MasonryCards>
                     </SectionContainer>
                 </AngleSection>
             </SectionWrapper>
