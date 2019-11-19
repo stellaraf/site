@@ -558,6 +558,10 @@ const SectionContainer = styled(Container)`
         color: ${theme.stWhite};
         white-space: pre-line;
 
+        ${bp.down("xl")} {
+            font-size: ${theme.fontSizeBase};
+        }
+
         a {
             color: ${theme.stWhite};
 
