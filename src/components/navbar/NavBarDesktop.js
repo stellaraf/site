@@ -208,7 +208,7 @@ export default function DesktopNavBar({ doScroll, pathName }) {
                 <NavItemGroup side="right">
                     <NavItems side="right" location={pathName} />
                     <ExtLink
-                        href="https://docs.oscloud.io"
+                        href="https://docs.stellar.tech"
                         target="_blank"
                         rel="noopener noreferrer">
                         Docs
