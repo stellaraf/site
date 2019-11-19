@@ -287,7 +287,7 @@ const LearnMore = props => (
     <Button
         variant="outline-light"
         className="learn-more"
-        href="https://docs.oscloud.io/resources/sla/"
+        href="https://docs.stellar.tech/docs/resources/sla"
         target="_blank">
         <FiChevronRight style={{ marginBottom: "0.1em" }} /> Learn More
     </Button>
@@ -659,7 +659,7 @@ class InfoSections extends React.Component {
                                         {this.info[0].text}
                                     </Markdown>
                                 </p>
-                                <LearnMore href="/docs/sla" />
+                                <LearnMore />
                             </Col>
                         </Row>
                     </SectionContainer>
