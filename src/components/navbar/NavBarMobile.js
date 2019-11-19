@@ -169,7 +169,7 @@ function NavMenuContent({ location, closeNav }) {
                 })}
                 <ExtLink
                     className="list-group-item"
-                    href="https://docs.oscloud.io"
+                    href="https://docs.stellar.tech"
                     target="_blank"
                     rel="noopener noreferrer">
                     Docs
