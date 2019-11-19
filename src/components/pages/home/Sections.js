@@ -205,7 +205,8 @@ class Sections extends React.Component {
                 <AngleSection
                     directionTop={"rightDown"}
                     directionBottom={"leftUp"}
-                    backgroundColor={theme.stDark}>
+                    backgroundColor={theme.stDark}
+                    marginBottom="10vh">
                     <SectionContainer fluid>
                         <Row className="section-row">
                             <Col className="section-graphic" md={{ span: 3, offset: 1 }}>
