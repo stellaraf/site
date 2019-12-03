@@ -42,6 +42,7 @@ class App extends React.Component {
         return (
             <React.Fragment>
                 <Helmet>
+                    <title>{site.global.givenName}</title>
                     <meta charSet="utf-8" />
                     <meta name="description" content={site.global.description} />
                     <link rel="canonical" href="https://stellar.tech/" />
@@ -76,14 +77,17 @@ class App extends React.Component {
                                 <About />
                             </Route>
                             <Route path="/cloud">
-                                <Helmet>
-                                    <title>Orion: The Enterprise Native Cloud</title>
-                                </Helmet>
                                 <MetaTags page="cloud" />
+                                <Helmet>
+                                    <title>{`Orion: The Enterprise Native Cloud | ${site.global.shortName}`}</title>
+                                </Helmet>
                                 <Cloud />
                             </Route>
                             <Route path="/">
                                 <MetaTags page="home" />
+                                <Helmet>
+                                    <title>{site.pages.home.title}</title>
+                                </Helmet>
                                 <Home />
                             </Route>
                             <Route path="/:rest*" component={NotFound} />
