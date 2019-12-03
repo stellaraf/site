@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Container, Col, Row } from "react-bootstrap";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import {
     VMware,
     Microsoft,
@@ -471,10 +471,10 @@ class InfoSections extends React.Component {
                                     <h5 className="content-title">Business Continuity</h5>
                                 </Card.Header>
                                 <Card.Body>
-                                    If the <Link to="/cloud">Orion backup & DR platform</Link> isn't
-                                    the right fit for your organization, we can still help you with
-                                    your business continuity planning. As a{" "}
-                                    <Link to="/services">managed IT provider</Link>, we regularly
+                                    If the <Link href="/cloud">Orion backup & DR platform</Link>{" "}
+                                    isn't the right fit for your organization, we can still help you
+                                    with your business continuity planning. As a{" "}
+                                    <Link href="/services">managed IT provider</Link>, we regularly
                                     work with a wide variety of backup & DR platforms.
                                 </Card.Body>
                                 <Card.Footer>
@@ -602,7 +602,7 @@ class InfoSections extends React.Component {
                                     We've built massive and successful SD-WANs, implemented layer 2
                                     metro WANs, migrated global L3VPNs, and even build our own MPLS
                                     network to power the{" "}
-                                    <Link to="/cloud">Orion cloud platform</Link>. <br />
+                                    <Link href="/cloud">Orion cloud platform</Link>. <br />
                                     <br />
                                     We're also masterfully adept with critical WAN technologies,
                                     such as BGP, MPLS, LDP, IS-IS, OSPF, QoS, and most importantly,
@@ -615,7 +615,7 @@ class InfoSections extends React.Component {
                                 </Card.Header>
                                 <Card.Body>
                                     We know a thing or two about designing data center
-                                    networks...it's <Link to="/cloud">what we do</Link>. We
+                                    networks...it's <Link href="/cloud">what we do</Link>. We
                                     regularly ghost-engineer for other major cloud providers who
                                     just don't have the expertise we do when it comes to advanced
                                     data center networking technologies.

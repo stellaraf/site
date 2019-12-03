@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Container, Navbar, ListGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import Hamburger from "components/navbar/Hamburger";
 import styled from "styled-components";
 import Logo from "components/svg/Logos";
@@ -85,7 +85,7 @@ function NavBarItems({ side, location, className }) {
                 key={i}
                 className={className}
                 isLocation={location === item.link ? true : false}
-                to={item.link}>
+                href={item.link}>
                 {item.title}
             </NavBarLink>
         );
@@ -133,8 +133,8 @@ const NavMenuGroup = styled(ListGroup)`
         border-color: unset;
     }
 `;
-const NavMenuItem = styled(({ isLocation, to, className, ...props }) => (
-    <Link className={className} to={to} active={isLocation.toString()} {...props} />
+const NavMenuItem = styled(({ isLocation, href, className, ...props }) => (
+    <Link className={className} href={href} active={isLocation.toString()} {...props} />
 ))`
     color: ${props => (props.isLocation ? theme.stSecondary : theme.stWhite)};
     font-weight: ${props => (props.isLocation ? theme.fontWeightBold : theme.fontWeightNormal)};
@@ -160,7 +160,7 @@ function NavMenuContent({ location, closeNav }) {
                         <NavMenuItem
                             className={`list-group-item ${location === item.link ? "active" : ""}`}
                             key={i}
-                            to={item.link}
+                            href={item.link}
                             isLocation={location === item.link ? true : false}
                             onClick={closeNav}>
                             {item.title}
@@ -279,7 +279,7 @@ export default function MobileNavBar({ navOpen, setNavOpen, pathName, doScroll }
                                 ? "logo-m in-nav"
                                 : "logo-m hidden"
                         }>
-                        <Link to="/" onClick={navOpen ? handleNavClose : null}>
+                        <Link href="/" onClick={navOpen ? handleNavClose : null}>
                             <Logo.Typographic color={"white"} width={160} height={86} />
                         </Link>
                     </NavBarLogo>

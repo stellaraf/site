@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Container, ListGroup, Row, Col } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+// import { LinkContainer } from "react-router-bootstrap";
 // import { importMDX } from "mdx.macro";
 import styled from "styled-components";
 import { Display } from "components/styled/text";

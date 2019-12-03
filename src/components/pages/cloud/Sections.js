@@ -11,8 +11,7 @@ import {
 } from "react-bootstrap";
 import styled, { keyframes } from "styled-components";
 import { pulse, fadeIn, fadeInRight } from "react-animations";
-// import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import MarkdownToJSX from "markdown-to-jsx";
 import { Intel, VMware, PureStorage, Veeam, PaloAltoNetworks } from "components/svg/VendorLogos";
 import { FiChevronRight, FiInfo } from "react-icons/fi";
@@ -283,7 +282,6 @@ function SectionOne() {
 }
 
 const LearnMore = props => (
-    // <LinkContainer to={props.href} className="learn-more">
     <Button
         variant="outline-light"
         className="learn-more"
@@ -291,7 +289,6 @@ const LearnMore = props => (
         target="_blank">
         <FiChevronRight style={{ marginBottom: "0.1em" }} /> Learn More
     </Button>
-    // </LinkContainer>
 );
 
 const StyledInfoPopup = styled(Popover)`

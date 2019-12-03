@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Container, Col, Row } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "wouter";
 import Icons from "components/svg/Icons";
 import { AngleSection } from "components/styled/sections";
 import { FiChevronRight } from "react-icons/fi";
@@ -11,11 +11,11 @@ import theme from "styles/exports.module.scss";
 import { VMware } from "components/svg/VendorLogos";
 
 const LearnMore = props => (
-    <LinkContainer to={props.href} className="learn-more">
+    <Link href={props.href} className="learn-more">
         <Button variant="outline-light">
             <FiChevronRight style={{ marginBottom: "0.1em" }} /> Learn More
         </Button>
-    </LinkContainer>
+    </Link>
 );
 
 const SectionIconWrapper = styled.div`

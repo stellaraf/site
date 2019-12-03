@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import styled from "styled-components";
 import theme from "styles/exports.module.scss";
 import site from "config";
@@ -89,7 +89,7 @@ const FooterTitle = styled.p`
     font-size: ${theme.footerHeadingSize};
 `;
 
-const FooterLink = styled(({ href, ...props }) => <Link to={href || ""} {...props} />)`
+const FooterLink = styled(({ href, ...props }) => <Link href={href || ""} {...props} />)`
     font-size: ${theme.footerLinkSize};
     color: ${theme.footerColor};
     :hover,

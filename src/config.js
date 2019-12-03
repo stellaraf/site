@@ -162,7 +162,7 @@ const site = {
                     {
                         title: "100% Uptime Guarantee",
                         subtitle: "Time is money & talk is cheap",
-                        text: `We're _that_ confident in the Orion platform. If we fail to deliver on our <Link to="/docs/sla">Service Level Agreement</Link>, we'll credit back the amount of time services were unavailable.`
+                        text: `We're _that_ confident in the Orion platform. If we fail to deliver on our <Link href="https://docs.stellar.tech/docs/resources/sla">Service Level Agreement</Link>, we'll credit back the amount of time services were unavailable.`
                     },
                     {
                         title: "Infrastructure as a Service",

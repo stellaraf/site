@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Card, Col, Row } from "react-bootstrap";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import MarkdownToJSX from "markdown-to-jsx";
 import Logo from "components/svg/Logos";
 import { AngleSection } from "components/styled/sections";

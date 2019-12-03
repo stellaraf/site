@@ -1,6 +1,7 @@
 // Third Party Imports
 import React, { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Route, Switch } from "wouter";
 import ReactGA from "react-ga";
 import { Helmet } from "react-helmet";
 import smoothscroll from "smoothscroll-polyfill";
@@ -39,7 +40,7 @@ class App extends React.Component {
     render() {
         ReactGA.pageview(window.location.pathname + window.location.search);
         return (
-            <Router>
+            <React.Fragment>
                 <Helmet>
                     <meta charSet="utf-8" />
                     <link rel="canonical" href="https://stellar.tech/" />
@@ -54,7 +55,7 @@ class App extends React.Component {
                     <NavBar />
                     <main>
                         <Switch>
-                            <Route exact props={this.props} path="/consulting">
+                            <Route path="/consulting">
                                 <Helmet>
                                     <title>{site.pages.consulting.title}</title>
                                     <link rel="canonical" href="https://stellar.tech/consulting" />
@@ -64,7 +65,7 @@ class App extends React.Component {
                                 <OpenGraphMeta page="consulting" />
                                 <Consulting />
                             </Route>
-                            <Route exact props={this.props} path="/services">
+                            <Route path="/services">
                                 <Helmet>
                                     <title>{site.pages.services.title}</title>
                                     <link rel="canonical" href="https://stellar.tech/services" />
@@ -74,7 +75,7 @@ class App extends React.Component {
                                 <OpenGraphMeta page="services" />
                                 <Services />
                             </Route>
-                            <Route exact props={this.props} path="/contact">
+                            <Route path="/contact">
                                 <Helmet>
                                     <title>Contact Stellar</title>
                                     <link rel="canonical" href="https://stellar.tech/contact" />
@@ -84,7 +85,7 @@ class App extends React.Component {
                                 <OpenGraphMeta page="contact" />
                                 <Contact />
                             </Route>
-                            <Route exact props={this.props} path="/about">
+                            <Route path="/about">
                                 <Helmet>
                                     <title>{site.pages.about.title}</title>
                                     <link rel="canonical" href="https://stellar.tech/about" />
@@ -94,7 +95,7 @@ class App extends React.Component {
                                 <OpenGraphMeta page="about" />
                                 <About />
                             </Route>
-                            <Route exact props={this.props} path="/cloud">
+                            <Route path="/cloud">
                                 <Helmet>
                                     <title>Orion: The Enterprise Native Cloud</title>
                                     <link rel="canonical" href="https://stellar.tech/cloud" />
@@ -104,7 +105,7 @@ class App extends React.Component {
                                 <OpenGraphMeta page="cloud" />
                                 <Cloud />
                             </Route>
-                            <Route exact props={this.props} path="/">
+                            <Route path="/">
                                 <Helmet>
                                     <title>Stellar</title>
                                     <meta name="keywords" content={site.pages.home.tags} />
@@ -136,7 +137,7 @@ class App extends React.Component {
                     <Footer />
                     <Stars />
                 </Suspense>
-            </Router>
+            </React.Fragment>
         );
     }
 }
