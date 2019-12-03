@@ -45,9 +45,11 @@ export default function() {
     return (
         <ScrollButton
             className={visible ? "visible" : null}
-            href="#"
             size="lg"
-            onClick={scrollToTop}>
+            onClick={scrollToTop}
+            type="button"
+            title="Scroll to Top"
+            aria-label="Scroll to Top">
             <FiChevronUp />
         </ScrollButton>
     );

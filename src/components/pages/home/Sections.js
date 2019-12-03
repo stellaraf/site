@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Container, Col, Row } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "wouter";
 import Icons from "components/svg/Icons";
 import { AngleSection } from "components/styled/sections";
 import { FiChevronRight } from "react-icons/fi";
@@ -11,11 +11,11 @@ import theme from "styles/exports.module.scss";
 import { VMware } from "components/svg/VendorLogos";
 
 const LearnMore = props => (
-    <LinkContainer to={props.href} className="learn-more">
+    <Link href={props.href} className="learn-more">
         <Button variant="outline-light">
-            <FiChevronRight style={{ marginBottom: "0.1em" }} /> Learn More
+            <FiChevronRight style={{ marginBottom: "0.1em" }} /> {props.text || "Learn More"}
         </Button>
-    </LinkContainer>
+    </Link>
 );
 
 const SectionIconWrapper = styled.div`
@@ -72,6 +72,7 @@ const SectionContainer = styled(Container)`
     & .section-subtitle {
         margin-bottom: 3vh;
         color: ${theme.stWhiteDark};
+        font-size: ${theme.h4FontSize};
     }
 
     & .section-text {
@@ -155,9 +156,9 @@ class Sections extends React.Component {
                             </Col>
                             <Col className="align-left" sm={12} md={{ span: 7, offset: 1 }}>
                                 <h1 className={"section-title"}>{this.info.sectionOne[0].title}</h1>
-                                <h4 className={"section-subtitle"}>
+                                <h2 className={"section-subtitle"}>
                                     {this.info.sectionOne[0].subtitle}
-                                </h4>
+                                </h2>
                                 <span ref={this.props.styledRef} />
                                 <p className={"section-text"}>
                                     We're not just knowledgeable about cloud technologies, we've
@@ -171,7 +172,10 @@ class Sections extends React.Component {
                                     />
                                     , the Orion platform fits right in the enterprise ecosystem.
                                 </p>
-                                <LearnMore href={this.info.sectionOne[0].link} />
+                                <LearnMore
+                                    href={this.info.sectionOne[0].link}
+                                    text={this.info.sectionOne[0].buttonText}
+                                />
                             </Col>
                         </Row>
                     </SectionContainer>
@@ -184,11 +188,14 @@ class Sections extends React.Component {
                         <Row className="section-row">
                             <Col className="align-right" sm={12} md={{ span: 7, offset: 1 }}>
                                 <h1 className={"section-title"}>{this.info.sectionOne[1].title}</h1>
-                                <h4 className={"section-subtitle"}>
+                                <h2 className={"section-subtitle"}>
                                     {this.info.sectionOne[1].subtitle}
-                                </h4>
+                                </h2>
                                 <p className="section-text">{this.info.sectionOne[1].text}</p>
-                                <LearnMore href={this.info.sectionOne[1].link} />
+                                <LearnMore
+                                    href={this.info.sectionOne[1].link}
+                                    text={this.info.sectionOne[1].buttonText}
+                                />
                             </Col>
                             <Col className="section-graphic" md={{ span: 3, offset: 1 }}>
                                 <SectionIconWrapper>
@@ -220,11 +227,14 @@ class Sections extends React.Component {
                             </Col>
                             <Col className="align-left" sm={12} md={{ span: 7, offset: 1 }}>
                                 <h1 className={"section-title"}>{this.info.sectionOne[2].title}</h1>
-                                <h4 className={"section-subtitle"}>
+                                <h2 className={"section-subtitle"}>
                                     {this.info.sectionOne[2].subtitle}
-                                </h4>
+                                </h2>
                                 <p className={"section-text"}>{this.info.sectionOne[2].text}</p>
-                                <LearnMore href={this.info.sectionOne[2].link} />
+                                <LearnMore
+                                    href={this.info.sectionOne[2].link}
+                                    text={this.info.sectionOne[2].buttonText}
+                                />
                             </Col>
                         </Row>
                     </SectionContainer>

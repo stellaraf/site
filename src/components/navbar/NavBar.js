@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "wouter";
 import { useWindowScroll, useLockBodyScroll } from "react-use";
 import DesktopNav from "components/navbar/NavBarDesktop";
 import MobileNav from "components/navbar/NavBarMobile";
@@ -9,8 +9,8 @@ import site from "config";
 export default function NavBarEntry() {
     // Variables
     const logoBreak = site.global.logoTransitionScroll;
-    const { pathname: pathName } = useLocation();
-    const isHome = pathName === "/" ? true : false;
+    const [location] = useLocation();
+    const isHome = location === "/" ? true : false;
 
     // State
     const [readyToScroll, setReadyToScroll] = useState(false);
@@ -31,11 +31,11 @@ export default function NavBarEntry() {
             <MobileNav
                 navOpen={isOpen}
                 setNavOpen={setOpen}
-                pathName={pathName}
+                pathName={location}
                 doScroll={readyToScroll}
             />
         );
     } else {
-        return <DesktopNav doScroll={readyToScroll} pathName={pathName} />;
+        return <DesktopNav doScroll={readyToScroll} pathName={location} />;
     }
 }

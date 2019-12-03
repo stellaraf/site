@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import styled from "styled-components";
 import Logo from "components/svg/Logos";
 import bp from "utils/breakpoints";
@@ -12,7 +12,6 @@ const NavItemGroup = styled.div`
     flex: 1 0 0;
     align-items: center;
     pointer-events: auto;
-    // justify-content: ${props => (props.side === "right" ? "flex-end" : "flex-start")};
     justify-content: center;
 `;
 
@@ -171,7 +170,7 @@ function NavItems({ side, location }) {
             <NavLink
                 key={i}
                 isLocation={location === item.link ? true : false}
-                to={item.link}
+                href={item.link}
                 className={location === item.link ? "active-nav-link" : null}>
                 {item.title}
             </NavLink>
@@ -201,7 +200,7 @@ export default function DesktopNavBar({ doScroll, pathName }) {
                     <NavItems side="left" location={pathName} />
                 </NavItemGroup>
                 <NavBarLogo className={doScroll ? "logo in-nav" : "logo"}>
-                    <Link to="/">
+                    <Link href="/">
                         <Logo.Typographic color={"white"} width={160} height={160} />
                     </Link>
                 </NavBarLogo>

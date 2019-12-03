@@ -1,6 +1,6 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Link } from "wouter";
 import styled from "styled-components";
 import theme from "styles/exports.module.scss";
 import site from "config";
@@ -39,20 +39,16 @@ const LinkCol = styled(props => <Col {...props} />)`
     align-self: flex-start;
     flex-grow: 0 !important;
     flex-shrink: 1 !important;
-    margin-left: ${theme.gridGutterWidth};
-    margin-right: ${theme.gridGutterWidth};
     padding-left: 0 !important;
     padding-right: 0 !important;
     ${bp.up("md")} {
         &:first-of-type {
             padding-left: 15px !important;
             margin-left: 0;
-            margin-right: ${theme.gridGutterWidth};
         }
         &:last-of-type {
             padding-right: 15px !important;
             margin-right: 0;
-            margin-left: ${theme.gridGutterWidth};
         }
     }
 `;
@@ -87,17 +83,30 @@ const FooterList = styled.ul`
 const FooterTitle = styled.p`
     color: ${theme.stWhite};
     font-size: ${theme.footerHeadingSize};
+    padding: ${theme.inputBtnPaddingY} ${theme.inputBtnPaddingX};
 `;
 
-const FooterLink = styled(({ href, ...props }) => <Link to={href || ""} {...props} />)`
-    font-size: ${theme.footerLinkSize};
-    color: ${theme.footerColor};
-    :hover,
-    :focus,
-    :active {
+const StyledFooterButton = styled(Button)`
+    && {
         color: ${theme.footerColor};
+        font-weight: ${theme.fontWeightNormal};
+        text-align: left;
+        font-size: ${theme.fontSizeSm};
+        :hover,
+        :focus,
+        :active {
+            color: ${theme.footerColor};
+        }
     }
 `;
+
+function FooterLink({ href, children, ...props }) {
+    return (
+        <Link href={href || ""} {...props}>
+            <StyledFooterButton variant="link">{children}</StyledFooterButton>
+        </Link>
+    );
+}
 
 function FooterSection({ title, items }) {
     return (
@@ -107,7 +116,7 @@ function FooterSection({ title, items }) {
             </li>
             {items.map((item, i) => {
                 return (
-                    <li key={i}>
+                    <li key={i} className="footer-link">
                         <FooterLink href={item.link}>{item.name}</FooterLink>
                     </li>
                 );
@@ -118,7 +127,7 @@ function FooterSection({ title, items }) {
 
 function FooterCol({ sections }) {
     return sections.map((section, i) => (
-        <LinkCol key={i} md={2} sm={6}>
+        <LinkCol key={i} md={3} sm={6}>
             <FooterSection key={i} title={section.title} items={section.items} />
         </LinkCol>
     ));
@@ -138,19 +147,25 @@ const StyledSocialList = styled.ul`
         justify-content: start;
     }
 `;
-function SocialIcon({ iconName, link }) {
-    const ThisIcon = styled(iconName)`
-        margin-right: 1rem;
+function SocialIcon({ platform, link }) {
+    const ThisIcon = styled(socialIcons[platform])`
         color: ${theme.stWhite};
         &:hover {
             color: ${theme.stSecondary};
         }
     `;
+    const anchorLabel = `Go to ${site.global.givenName} ${platform}`;
     return (
         <li>
-            <a href={link} target="_blank" rel="noopener noreferrer">
+            <Button
+                href={link}
+                variant="link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={anchorLabel}
+                title={anchorLabel}>
                 <ThisIcon />
-            </a>
+            </Button>
         </li>
     );
 }
@@ -183,6 +198,7 @@ function Footer() {
                                             key={i}
                                             iconName={MatchedIcon}
                                             link={platform.link}
+                                            platform={platform.name}
                                         />
                                     );
                                 })}

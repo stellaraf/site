@@ -42,11 +42,14 @@ const defaultTags = [
 const site = {
     global: {
         legalName: "Stellar Technologies Inc.",
-        givenName: "Stellar",
+        givenName: "Stellar Technologies",
+        shortName: "Stellar",
+        description:
+            "The Stellar mission is to make migrating to the cloud easier for enterprises than ever before.",
         salesforceInstanceName: "stellartech",
         navIconSize: 40,
         logoTransitionScroll: 120,
-        nextSectionTitle: "Ready for more?"
+        nextSectionTitle: "Ready to learn more?"
     },
     stars: {
         min: 1,
@@ -162,7 +165,7 @@ const site = {
                     {
                         title: "100% Uptime Guarantee",
                         subtitle: "Time is money & talk is cheap",
-                        text: `We're _that_ confident in the Orion platform. If we fail to deliver on our <Link to="/docs/sla">Service Level Agreement</Link>, we'll credit back the amount of time services were unavailable.`
+                        text: `We're _that_ confident in the Orion platform. If we fail to deliver on our <Link href="https://docs.stellar.tech/docs/resources/sla">Service Level Agreement</Link>, we'll credit back the amount of time services were unavailable.`
                     },
                     {
                         title: "Infrastructure as a Service",
@@ -353,8 +356,8 @@ const site = {
         },
         home: {
             includeNext: false,
-            link: "/home",
-            title: "Home",
+            link: "/",
+            title: "Stellar Technologies",
             headings: {
                 title: "Introducing...",
                 subtitle: "",
@@ -369,12 +372,14 @@ const site = {
                         title: "Orion",
                         subtitle: "The Enterprise Native Cloud Platform",
                         link: "/cloud",
+                        buttonText: "Gravitate to Orion",
                         text: null
                     },
                     {
                         title: "Dedicated Services",
                         subtitle: "Your 24/7 Technology Team",
                         link: "/services",
+                        buttonText: "Upgrade your IT Team",
                         text: `As a skilled team of engineers who have supported businesses and technologies of all types for decades at a global scale, we're experts at meeting the demands of operating business technology.
                         
                         With our bespoke, dedicated IT services, your business is able to offload IT burdens based on its specific needs — be it end user IT support, infrastructure management, system monitoring, or the entire IT environment.
@@ -384,6 +389,7 @@ const site = {
                         title: "Infrastructure Consulting",
                         subtitle: "On-Demand IT Special Forces",
                         link: "/consulting",
+                        buttonText: "Call in the Experts",
                         text: `Many organizations have business requirements that demand the use of complex IT technologies, but not all of them can afford to keep engineers with the necessary skillsets on staff at all times.
                         
                         That's where we come in — our ridiculously talented infrastructure engineers are dangerously good at designing, building, and implementing complex IT systems when the need arises. 

@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { fadeIn } from "react-animations";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import { Display } from "components/styled/text";
 import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
@@ -65,7 +65,7 @@ export default class extends React.Component {
                     <Display.Subtitle>{this.page.subtitle}</Display.Subtitle>
                     <p className="title-text">
                         As engineers with enough expertise to{" "}
-                        <Link to="/cloud">build our own cloud</Link>, we know a thing or two about
+                        <Link href="/cloud">build our own cloud</Link>, we know a thing or two about
                         how to build IT infrastructure.{<br />} Here are some of the areas we're
                         dangerously good at.
                     </p>

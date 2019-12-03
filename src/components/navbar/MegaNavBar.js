@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, CardDeck, Container, Navbar } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+// import { LinkContainer } from "react-router-bootstrap";
 import styled from "styled-components";
 import NavSection from "components/navbar/NavSection";
 import Hamburger from "components/navbar/Hamburger";
@@ -104,9 +104,7 @@ function NavBar() {
                             colorClosed={theme.stWhite}
                         />
                     </Navbar.Toggle>
-                    <Navbar.Collapse
-                        id="main-nav"
-                        className={styles.navCollapse}>
+                    <Navbar.Collapse id="main-nav" className={styles.navCollapse}>
                         <>
                             <NavRow>
                                 <LinkContainer
@@ -115,9 +113,7 @@ function NavBar() {
                                     isActive={buttonActive}
                                     activeClassName={null}
                                     to="/contact">
-                                    <ContactButton
-                                        href="/contact"
-                                        variant="outline-light">
+                                    <ContactButton href="/contact" variant="outline-light">
                                         {home.contactButton.text}
                                     </ContactButton>
                                 </LinkContainer>
@@ -125,10 +121,7 @@ function NavBar() {
                             {config.map((menu, i) => {
                                 return (
                                     <NavSectionRow key={i}>
-                                        <NavSection
-                                            menu={menu}
-                                            handleNavClick={handleNavClick}
-                                        />
+                                        <NavSection menu={menu} handleNavClick={handleNavClick} />
                                     </NavSectionRow>
                                 );
                             })}

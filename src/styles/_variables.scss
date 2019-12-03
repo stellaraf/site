@@ -176,11 +176,6 @@ $font-size-base: 1rem;
 $font-size-lg: $font-size-base * 1.25;
 $font-size-sm: $font-size-base * 0.875;
 
-// $font-weight-lighter: lighter;
-// $font-weight-light: 200;
-// $font-weight-normal: 300;
-// $font-weight-bold: 600;
-// $font-weight-bolder: bolder;
 $font-weight-light: 300;
 $font-weight-normal: 400;
 $font-weight-bold: 600;
@@ -306,6 +301,7 @@ $footer-background: transparent;
 $footer-color: rgba($st-white, 0.4);
 $footer-heading-size: $font-size-base;
 $footer-link-size: $font-size-base * 0.8;
+$footer-col-margin: 15px;
 
 //// Forms
 $form-group-margin-bottom: 1rem !default;

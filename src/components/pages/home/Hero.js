@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { FiChevronDown } from "react-icons/fi";
 import { AngleSection } from "components/styled/sections";
 import { useWindowScroll } from "react-use";
@@ -36,6 +36,23 @@ const ScrollIndicator = styled.div`
     margin-top: auto;
     justify-content: center;
     align-content: flex-end;
+`;
+
+const ScrollButton = styled(Button)`
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    user-select: none;
+    background-color: transparent;
+    border: none;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+
+    &:hover {
+        background-color: transparent;
+        border-color: none;
+    }
 `;
 
 const BouncingArrow = styled(FiChevronDown)`
@@ -76,18 +93,6 @@ const HomeHeroSection = styled(AngleSection)`
         right: 50%;
         bottom: 0;
         z-index: 100;
-    }
-
-    & button.scroll-button {
-        display: inline-block;
-        vertical-align: middle;
-        text-align: center;
-        user-select: none;
-        background-color: transparent;
-        border: none;
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        line-height: 1.5;
     }
 `;
 
@@ -138,9 +143,12 @@ function Hero(props) {
                     </Row>
                 </Container>
                 <ScrollIndicator className={"scroll-indicator"}>
-                    <button className="scroll-button" onClick={props.scrollToSections}>
+                    <ScrollButton
+                        variant="link"
+                        title="Scroll to Info"
+                        onClick={props.scrollToSections}>
                         <BouncingArrow size="3rem" color={theme.navLinkColor} />
-                    </button>
+                    </ScrollButton>
                 </ScrollIndicator>
             </HomeHeroSection>
         </>

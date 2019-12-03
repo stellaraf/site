@@ -1,6 +1,7 @@
 // Third Party Imports
 import React, { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Route, Switch } from "wouter";
 import ReactGA from "react-ga";
 import { Helmet } from "react-helmet";
 import smoothscroll from "smoothscroll-polyfill";
@@ -13,7 +14,7 @@ import Footer from "components/footer";
 import GlobalStyle from "components/styled/global";
 import ScrollToTopOnMount from "hooks/ScrollToTopOnMount";
 import ScrollToTop from "components/ScrollToTop";
-import { TwitterMeta, OpenGraphMeta } from "utils/helmetHelpers";
+import MetaTags from "utils/helmetHelpers";
 
 // Styles
 import "styles/main.scss";
@@ -39,9 +40,11 @@ class App extends React.Component {
     render() {
         ReactGA.pageview(window.location.pathname + window.location.search);
         return (
-            <Router>
+            <React.Fragment>
                 <Helmet>
+                    <title>{site.global.givenName}</title>
                     <meta charSet="utf-8" />
+                    <meta name="description" content={site.global.description} />
                     <link rel="canonical" href="https://stellar.tech/" />
                     <meta
                         name="rights"
@@ -54,89 +57,47 @@ class App extends React.Component {
                     <NavBar />
                     <main>
                         <Switch>
-                            <Route exact props={this.props} path="/consulting">
-                                <Helmet>
-                                    <title>{site.pages.consulting.title}</title>
-                                    <link rel="canonical" href="https://stellar.tech/consulting" />
-                                    <meta name="keywords" content={site.pages.consulting.tags} />
-                                </Helmet>
-                                <TwitterMeta page="consulting" />
-                                <OpenGraphMeta page="consulting" />
+                            <Route path="/consulting">
+                                <MetaTags page="consulting" />
                                 <Consulting />
                             </Route>
-                            <Route exact props={this.props} path="/services">
-                                <Helmet>
-                                    <title>{site.pages.services.title}</title>
-                                    <link rel="canonical" href="https://stellar.tech/services" />
-                                    <meta name="keywords" content={site.pages.services.tags} />
-                                </Helmet>
-                                <TwitterMeta page="services" />
-                                <OpenGraphMeta page="services" />
+                            <Route path="/services">
+                                <MetaTags page="services" />
                                 <Services />
                             </Route>
-                            <Route exact props={this.props} path="/contact">
+                            <Route path="/contact">
                                 <Helmet>
                                     <title>Contact Stellar</title>
-                                    <link rel="canonical" href="https://stellar.tech/contact" />
-                                    <meta name="keywords" content={site.pages.contact.tags} />
                                 </Helmet>
-                                <TwitterMeta page="contact" />
-                                <OpenGraphMeta page="contact" />
+                                <MetaTags page="contact" />
                                 <Contact />
                             </Route>
-                            <Route exact props={this.props} path="/about">
-                                <Helmet>
-                                    <title>{site.pages.about.title}</title>
-                                    <link rel="canonical" href="https://stellar.tech/about" />
-                                    <meta name="keywords" content={site.pages.about.tags} />
-                                </Helmet>
-                                <TwitterMeta page="about" />
-                                <OpenGraphMeta page="about" />
+                            <Route path="/about">
+                                <MetaTags page="about" />
                                 <About />
                             </Route>
-                            <Route exact props={this.props} path="/cloud">
+                            <Route path="/cloud">
+                                <MetaTags page="cloud" />
                                 <Helmet>
-                                    <title>Orion: The Enterprise Native Cloud</title>
-                                    <link rel="canonical" href="https://stellar.tech/cloud" />
-                                    <meta name="keywords" content={site.pages.cloud.tags} />
+                                    <title>{`Orion: The Enterprise Native Cloud | ${site.global.shortName}`}</title>
                                 </Helmet>
-                                <TwitterMeta page="cloud" />
-                                <OpenGraphMeta page="cloud" />
                                 <Cloud />
                             </Route>
-                            <Route exact props={this.props} path="/">
+                            <Route path="/">
+                                <MetaTags page="home" />
                                 <Helmet>
-                                    <title>Stellar</title>
-                                    <meta name="keywords" content={site.pages.home.tags} />
-                                    <meta name="twitter:card" content="summary_large_image" />
-                                    <meta name="twitter:site" content="@StellarTechInc" />
-                                    <meta name="twitter:title" content="Stellar" />
-                                    <meta
-                                        name="twitter:description"
-                                        content="Fueling your digital velocity"
-                                    />
-                                    <meta name="twitter:image" content="/opengraph.png" />
-                                    <meta name="og:title" content="Stellar" />
-                                    <meta
-                                        name="og:description"
-                                        content="Fueling your digital velocity"
-                                    />
-                                    <meta name="og:url" content="https://stellar.tech/" />
-                                    <meta
-                                        name="og:image"
-                                        content="https://stellar.tech/opengraph.png"
-                                    />
+                                    <title>{site.pages.home.title}</title>
                                 </Helmet>
                                 <Home />
                             </Route>
-                            <Route path="*" component={NotFound} />
+                            <Route path="/:rest*" component={NotFound} />
                         </Switch>
                     </main>
                     <ScrollToTop />
                     <Footer />
                     <Stars />
                 </Suspense>
-            </Router>
+            </React.Fragment>
         );
     }
 }
