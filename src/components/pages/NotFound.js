@@ -42,14 +42,9 @@ const BackArrow = styled(FiArrowLeft)`
 `;
 
 export default function() {
-    const [location, setLocation] = useLocation();
-    // const { pathname: invalidPath } = useLocation();
-    // const history = useHistory();
-    // const handleClick = () => {
-    //     history.goBack();
-    // };
+    const [location] = useLocation();
     const handleClick = () => {
-        setLocation(-1);
+        window.history.go(-1);
     };
     return (
         <>
