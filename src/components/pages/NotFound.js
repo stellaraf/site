@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation } from "wouter";
 import { Container, Button } from "react-bootstrap";
 import { FiArrowLeft } from "react-icons/fi";
 import PageTitle from "hooks/PageTitle";
@@ -42,10 +42,14 @@ const BackArrow = styled(FiArrowLeft)`
 `;
 
 export default function() {
-    const { pathname: invalidPath } = useLocation();
-    const history = useHistory();
+    const [location, setLocation] = useLocation();
+    // const { pathname: invalidPath } = useLocation();
+    // const history = useHistory();
+    // const handleClick = () => {
+    //     history.goBack();
+    // };
     const handleClick = () => {
-        history.goBack();
+        setLocation(-1);
     };
     return (
         <>
@@ -53,7 +57,7 @@ export default function() {
             <NotFoundContainer>
                 <Title>{site.notfound.title}</Title>
                 <Subtitle>
-                    <Path>{invalidPath}</Path>
+                    <Path>{location}</Path>
                     {` ${site.notfound.subtitle}`}
                 </Subtitle>
                 <BackButton variant="outline-light" onClick={handleClick}>

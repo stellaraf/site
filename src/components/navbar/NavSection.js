@@ -1,5 +1,5 @@
 import React from "react";
-import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "wouter";
 import { Card, ListGroup } from "react-bootstrap";
 import theme from "styles/exports.module.scss";
 import styled from "styled-components";
@@ -11,8 +11,7 @@ const Section = {
     `,
     Header: styled(Card.Header)`
         background-color: ${theme.navCardHeaderBackground} !important;
-        border-bottom: ${theme.cardBorderWidth} solid
-            ${theme.navCardBorderColor} !important;
+        border-bottom: ${theme.cardBorderWidth} solid ${theme.navCardBorderColor} !important;
     `,
     Title: styled.p`
         margin-bottom: unset !important;
@@ -45,11 +44,11 @@ function NavSection({ menu, handleNavClick }) {
                     <ListGroup variant="flush">
                         {section.items.map((item, i) => {
                             return (
-                                <LinkContainer to={item.link} key={i}>
+                                <Link href={item.link} key={i}>
                                     <NavItem action onClick={handleNavClick}>
                                         {item.name}
                                     </NavItem>
-                                </LinkContainer>
+                                </Link>
                             );
                         })}
                     </ListGroup>

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Card, Container, Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import { FiChevronRight } from "react-icons/fi";
-import { useLocation } from "react-router";
+import { useLocation } from "wouter";
 import bp from "utils/breakpoints";
 import { AngleSection } from "components/styled/sections";
 import theme from "styles/exports.module.scss";
@@ -125,7 +125,7 @@ function NextCard({
             <div className="next-card-text">
                 <p className="next-card-lead">{lead}</p>
                 <h5 className="next-card-title">{title}</h5>
-                <Link className="next-card-subtitle" to={link}>
+                <Link className="next-card-subtitle" href={link}>
                     {subtitle}
                 </Link>
             </div>
@@ -163,8 +163,8 @@ function NextSection({
     marginTop,
     marginBottom
 }) {
-    const location = useLocation();
-    const nextPages = getNextPages(location.pathname);
+    const [location] = useLocation();
+    const nextPages = getNextPages(location);
     return (
         <AngleSection
             directionTop={directionTop}
