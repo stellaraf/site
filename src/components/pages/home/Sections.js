@@ -13,7 +13,7 @@ import { VMware } from "components/svg/VendorLogos";
 const LearnMore = props => (
     <Link href={props.href} className="learn-more">
         <Button variant="outline-light">
-            <FiChevronRight style={{ marginBottom: "0.1em" }} /> Learn More
+            <FiChevronRight style={{ marginBottom: "0.1em" }} /> {props.text || "Learn More"}
         </Button>
     </Link>
 );
@@ -171,7 +171,10 @@ class Sections extends React.Component {
                                     />
                                     , the Orion platform fits right in the enterprise ecosystem.
                                 </p>
-                                <LearnMore href={this.info.sectionOne[0].link} />
+                                <LearnMore
+                                    href={this.info.sectionOne[0].link}
+                                    text={this.info.sectionOne[0].buttonText}
+                                />
                             </Col>
                         </Row>
                     </SectionContainer>
@@ -188,7 +191,10 @@ class Sections extends React.Component {
                                     {this.info.sectionOne[1].subtitle}
                                 </h4>
                                 <p className="section-text">{this.info.sectionOne[1].text}</p>
-                                <LearnMore href={this.info.sectionOne[1].link} />
+                                <LearnMore
+                                    href={this.info.sectionOne[1].link}
+                                    text={this.info.sectionOne[1].buttonText}
+                                />
                             </Col>
                             <Col className="section-graphic" md={{ span: 3, offset: 1 }}>
                                 <SectionIconWrapper>
@@ -224,7 +230,10 @@ class Sections extends React.Component {
                                     {this.info.sectionOne[2].subtitle}
                                 </h4>
                                 <p className={"section-text"}>{this.info.sectionOne[2].text}</p>
-                                <LearnMore href={this.info.sectionOne[2].link} />
+                                <LearnMore
+                                    href={this.info.sectionOne[2].link}
+                                    text={this.info.sectionOne[2].buttonText}
+                                />
                             </Col>
                         </Row>
                     </SectionContainer>

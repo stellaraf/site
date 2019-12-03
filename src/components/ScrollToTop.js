@@ -45,9 +45,9 @@ export default function() {
     return (
         <ScrollButton
             className={visible ? "visible" : null}
-            href="#"
             size="lg"
-            onClick={scrollToTop}>
+            onClick={scrollToTop}
+            type="button">
             <FiChevronUp />
         </ScrollButton>
     );

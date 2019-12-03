@@ -370,12 +370,14 @@ const site = {
                         title: "Orion",
                         subtitle: "The Enterprise Native Cloud Platform",
                         link: "/cloud",
+                        buttonText: "Gravitate to Orion",
                         text: null
                     },
                     {
                         title: "Dedicated Services",
                         subtitle: "Your 24/7 Technology Team",
                         link: "/services",
+                        buttonText: "Upgrade your IT Team",
                         text: `As a skilled team of engineers who have supported businesses and technologies of all types for decades at a global scale, we're experts at meeting the demands of operating business technology.
                         
                         With our bespoke, dedicated IT services, your business is able to offload IT burdens based on its specific needs — be it end user IT support, infrastructure management, system monitoring, or the entire IT environment.
@@ -385,6 +387,7 @@ const site = {
                         title: "Infrastructure Consulting",
                         subtitle: "On-Demand IT Special Forces",
                         link: "/consulting",
+                        buttonText: "Call in the Experts",
                         text: `Many organizations have business requirements that demand the use of complex IT technologies, but not all of them can afford to keep engineers with the necessary skillsets on staff at all times.
                         
                         That's where we come in — our ridiculously talented infrastructure engineers are dangerously good at designing, building, and implementing complex IT systems when the need arises. 
