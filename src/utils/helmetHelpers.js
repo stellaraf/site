@@ -1,24 +1,30 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import site from "config";
+import useURL from "hooks/useURL";
 
-const TwitterMeta = ({ page }) => (
-    <Helmet>
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@StellarTechInc" />
-        <meta name="twitter:title" content={site.pages[page].title} />
-        <meta name="twitter:description" content={site.pages[page].subtitle} />
-        <meta name="twitter:image" content="/opengraph.png" />
-    </Helmet>
-);
+const createPath = (host, loc) => `${host.protocol}//${host.host}${loc}`;
 
-const OpenGraphMeta = ({ page }) => (
-    <Helmet>
-        <meta name="og:title" content={site.pages[page].title} />
-        <meta name="og:description" content={site.pages[page].subtitle} />
-        <meta name="og:url" content={`https://stellar.tech/${page}`} />
-        <meta name="og:image" content="https://stellar.tech/opengraph.png" />
-    </Helmet>
-);
-
-export { TwitterMeta, OpenGraphMeta };
+export default function MetaTags({ page }) {
+    const [host] = useURL();
+    return (
+        <Helmet>
+            <meta name="title" content={site.pages[page].title} />
+            <meta
+                name="description"
+                content={site.pages[page].description || site.global.description}
+            />
+            <meta name="keywords" content={site.pages[page].tags} />
+            <link rel="canonical" href={createPath(host, site.pages[page].link)} />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:site" content="@StellarTechInc" />
+            <meta name="twitter:title" content={site.pages[page].title} />
+            <meta name="twitter:description" content={site.pages[page].subtitle} />
+            <meta name="twitter:image" content={createPath(host, "/opengraph.png")} />
+            <meta name="og:title" content={site.pages[page].title} />
+            <meta name="og:description" content={site.pages[page].subtitle} />
+            <meta name="og:url" content={createPath(host, site.pages[page].link)} />
+            <meta name="og:image" content={createPath(host, "/opengraph.png")} />
+        </Helmet>
+    );
+}

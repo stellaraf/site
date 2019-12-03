@@ -43,6 +43,7 @@ const site = {
     global: {
         legalName: "Stellar Technologies Inc.",
         givenName: "Stellar",
+        description: "Stellar is ",
         salesforceInstanceName: "stellartech",
         navIconSize: 40,
         logoTransitionScroll: 120,
@@ -353,8 +354,8 @@ const site = {
         },
         home: {
             includeNext: false,
-            link: "/home",
-            title: "Home",
+            link: "/",
+            title: "Stellar",
             headings: {
                 title: "Introducing...",
                 subtitle: "",
