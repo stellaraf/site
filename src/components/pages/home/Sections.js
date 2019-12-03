@@ -72,6 +72,7 @@ const SectionContainer = styled(Container)`
     & .section-subtitle {
         margin-bottom: 3vh;
         color: ${theme.stWhiteDark};
+        font-size: ${theme.h4FontSize};
     }
 
     & .section-text {
@@ -155,9 +156,9 @@ class Sections extends React.Component {
                             </Col>
                             <Col className="align-left" sm={12} md={{ span: 7, offset: 1 }}>
                                 <h1 className={"section-title"}>{this.info.sectionOne[0].title}</h1>
-                                <h4 className={"section-subtitle"}>
+                                <h2 className={"section-subtitle"}>
                                     {this.info.sectionOne[0].subtitle}
-                                </h4>
+                                </h2>
                                 <span ref={this.props.styledRef} />
                                 <p className={"section-text"}>
                                     We're not just knowledgeable about cloud technologies, we've
@@ -187,9 +188,9 @@ class Sections extends React.Component {
                         <Row className="section-row">
                             <Col className="align-right" sm={12} md={{ span: 7, offset: 1 }}>
                                 <h1 className={"section-title"}>{this.info.sectionOne[1].title}</h1>
-                                <h4 className={"section-subtitle"}>
+                                <h2 className={"section-subtitle"}>
                                     {this.info.sectionOne[1].subtitle}
-                                </h4>
+                                </h2>
                                 <p className="section-text">{this.info.sectionOne[1].text}</p>
                                 <LearnMore
                                     href={this.info.sectionOne[1].link}
@@ -226,9 +227,9 @@ class Sections extends React.Component {
                             </Col>
                             <Col className="align-left" sm={12} md={{ span: 7, offset: 1 }}>
                                 <h1 className={"section-title"}>{this.info.sectionOne[2].title}</h1>
-                                <h4 className={"section-subtitle"}>
+                                <h2 className={"section-subtitle"}>
                                     {this.info.sectionOne[2].subtitle}
-                                </h4>
+                                </h2>
                                 <p className={"section-text"}>{this.info.sectionOne[2].text}</p>
                                 <LearnMore
                                     href={this.info.sectionOne[2].link}
