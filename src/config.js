@@ -42,12 +42,14 @@ const defaultTags = [
 const site = {
     global: {
         legalName: "Stellar Technologies Inc.",
-        givenName: "Stellar",
-        description: "Stellar is ",
+        givenName: "Stellar Technologies",
+        shortName: "Stellar",
+        description:
+            "The Stellar mission is to make migrating to the cloud easier for enterprises than ever before.",
         salesforceInstanceName: "stellartech",
         navIconSize: 40,
         logoTransitionScroll: 120,
-        nextSectionTitle: "Ready for more?"
+        nextSectionTitle: "Ready to learn more?"
     },
     stars: {
         min: 1,
@@ -355,7 +357,7 @@ const site = {
         home: {
             includeNext: false,
             link: "/",
-            title: "Stellar",
+            title: "Stellar Technologies",
             headings: {
                 title: "Introducing...",
                 subtitle: "",

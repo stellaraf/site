@@ -9,6 +9,7 @@ export default function MetaTags({ page }) {
     const [host] = useURL();
     return (
         <Helmet>
+            <title>{`${site.pages[page].title} | ${site.global.shortName}`}</title>
             <meta name="title" content={site.pages[page].title} />
             <meta
                 name="description"
