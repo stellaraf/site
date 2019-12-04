@@ -180,7 +180,7 @@ const site = {
                             {
                                 title: "Storage",
                                 text: `As one of the fastest moving cloud platforms on the planet, we're obsessed with guaranteeing insanely fast I/O performance.<br/><br/>
-                                Orion production workloads uncompromisingly run on 100% dedicated SSD <PureStorage className="inline-icon" height={28} color={${theme.stWhite}}/> arrays backed by 160 Gbps of storage networking capacity per array.
+                                Orion production workloads uncompromisingly run on 100% dedicated SSD storage arrays backed by 160 Gbps of storage networking capacity per array.
                             `
                             },
                             {
