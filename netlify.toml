@@ -17,3 +17,8 @@ status = 200
 from = "/opengraph.png"
 to = "opengraph.png"
 status = 200
+
+[[redirects]]
+from = "/sla"
+to = "https://docs.stellar.tech/docs/resources/sla"
+stats = 301
