@@ -9,9 +9,9 @@ port = 3000
 publish = "public/"
 
 [[redirects]]
-from = "/*"
-to = "index.html"
-status = 200
+from = "/sla"
+to = "https://docs.stellar.tech/docs/resources/sla"
+stats = 301
 
 [[redirects]]
 from = "/opengraph.png"
@@ -19,6 +19,6 @@ to = "opengraph.png"
 status = 200
 
 [[redirects]]
-from = "/sla"
-to = "https://docs.stellar.tech/docs/resources/sla"
-stats = 301
+from = "/*"
+to = "index.html"
+status = 200
