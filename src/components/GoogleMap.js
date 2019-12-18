@@ -223,6 +223,8 @@ export default function({
         const infoWindow = new maps.InfoWindow({
             content: infoWindowHtml(title, text, locUrl)
         });
+
+        infoWindow.open(map, marker);
         marker.addListener("click", () => {
             infoWindow.open(map, marker);
         });
