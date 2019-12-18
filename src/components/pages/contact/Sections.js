@@ -6,6 +6,7 @@ import { fadeIn } from "react-animations";
 import { AngleSection } from "components/styled/sections";
 import { FiMail, FiPhone } from "react-icons/fi";
 import { Display } from "components/styled/text";
+import GoogleMap from "components/GoogleMap";
 import site from "config";
 import bp from "utils/breakpoints";
 import theme from "styles/exports.module.scss";
@@ -135,7 +136,8 @@ class SupportSection extends React.Component {
             <AngleSection
                 backgroundColor={theme.stPrimary}
                 directionTop="leftDown"
-                directionBottom="rightUp">
+                directionBottom="rightUp"
+            >
                 <SectionContainer fluid>
                     <Row className="section-title-row">
                         <Col className="section-title-col">
@@ -261,7 +263,8 @@ class ContactSection extends React.Component {
             <AngleSection
                 backgroundColor={theme.stPrimaryAlt}
                 directionTop="leftDown"
-                directionBottom="rightUp">
+                directionBottom="rightUp"
+            >
                 <ContactContainer fluid>
                     <Row className="section-title-row">
                         <Col className="section-title-col">
@@ -280,4 +283,39 @@ class ContactSection extends React.Component {
     }
 }
 
-export { TitleBlock, SupportSection, ContactSection };
+class LocationSection extends React.Component {
+    constructor(props) {
+        super(props);
+        this.config = site.pages.contact.sections.locationInfo;
+    }
+    render() {
+        return (
+            <AngleSection
+                backgroundColor={theme.stDark}
+                directionTop="leftDown"
+                directionBottom="rightUp"
+            >
+                <ContactContainer fluid>
+                    <Row className="section-title-row">
+                        <Col className="section-title-col">
+                            <h1 className="section-title">{this.config.title}</h1>
+                            <h4 className="section-subtitle">{this.config.subtitle}</h4>
+                        </Col>
+                    </Row>
+                    <Row className="section-title-row">
+                        <Col className="contact-col" sm={12}>
+                            <GoogleMap
+                                longitude={this.config.longitude}
+                                latitude={this.config.latitude}
+                                title={this.config.popover.title}
+                                text={this.config.popover.text}
+                            />
+                        </Col>
+                    </Row>
+                </ContactContainer>
+            </AngleSection>
+        );
+    }
+}
+
+export { TitleBlock, SupportSection, ContactSection, LocationSection };
