@@ -1,5 +1,10 @@
 import React from "react";
-import { ContactSection, TitleBlock, SupportSection } from "components/pages/contact/Sections";
+import {
+    ContactSection,
+    TitleBlock,
+    SupportSection,
+    LocationSection
+} from "components/pages/contact/Sections";
 
 class Contact extends React.Component {
     render() {
@@ -8,6 +13,7 @@ class Contact extends React.Component {
                 <TitleBlock />
                 <SupportSection />
                 <ContactSection />
+                <LocationSection />
             </>
         );
     }
