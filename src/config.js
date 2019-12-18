@@ -29,9 +29,13 @@ const commonNavItems = [
 
 const defaultTags = [
     "stellar",
+    "stellar tech",
     "stellar cloud",
     "stellar technologies",
     "stellar technologies inc",
+    "phoenix",
+    "phoenix, az",
+    "hawaii",
     "cloud",
     "technology",
     "networking",
@@ -64,10 +68,10 @@ const site = {
         buttonText: "Back"
     },
     social: [
-        // { name: "Facebook", link: "https://www.facebook.com/stellar_tech" },
+        { name: "Facebook", link: "https://www.facebook.com/teamstellartech" },
         { name: "LinkedIn", link: "https://linkedin.com/company/stellaraf" },
-        { name: "Github", link: "https://github.com/stellaraf" },
-        { name: "Twitter", link: "https://twitter.com/stellartechinc" }
+        { name: "Twitter", link: "https://twitter.com/stellartechinc" },
+        { name: "Github", link: "https://github.com/stellaraf" }
     ],
     contactForm: {
         message: {
@@ -93,7 +97,7 @@ const site = {
                     title: "CEO",
                     bio:
                         "As a do-it-all engineer with over 10+ years of IT battlefield experience, Wayne started Stellar in 2014 with the vision of offering superior IT customer service while being a trusted partner to organizations of any size. With his recent transition into the role of CEO of Stellar, and with the help of his prior experience as CTO, he's leveraging his unparalleled expertise to direct Stellar into the one of the best Cloud & IT services companies in the world.",
-                    photo: "exec-wjohnson.jpg",
+                    photo: "wjohnson.jpg",
                     social: [{ name: "LinkedIn", link: "https://linkedin.com/in/wwjohnson" }]
                 },
                 {
@@ -101,7 +105,7 @@ const site = {
                     title: "Head of Infrastructure",
                     bio:
                         "A career-long network engineer, Matt came to Stellar to build bigger and badder networks. He's since picked up new skills in front-end and back-end development, and now leads both the cloud infrastructure & development teams at Stellar.",
-                    photo: "exec-mlove.jpg",
+                    photo: "mlove.jpg",
                     social: [
                         { name: "LinkedIn", link: "https://linkedin.com/in/matt-love" },
                         { name: "Github", link: "https://github.com/checktheroads" }
@@ -112,13 +116,23 @@ const site = {
                     title: "Principal Engineer",
                     bio:
                         "With decades of experience in IT, Dave came to Stellar eager to help more customers migrate to the cloud. After joining the cloud infrastructure team, he is now senior-most engineer in the company and oversees the company's technical operations.",
-                    photo: "exec-dbarrett.jpg",
+                    photo: "dbarrett.jpg",
                     social: [
                         { name: "LinkedIn", link: "https://linkedin.com/in/dave-barrett-a634a3a1" }
                     ]
                 }
             ],
-            tags: ["wayne johnson", "matt love", "dave barrett", "management", "mission", "social"]
+            tags: [
+                "wayne johnson",
+                "matt love",
+                "dave barrett",
+                "management",
+                "mission",
+                "social",
+                "stellar technologies ceo",
+                "stellar technologies leadership",
+                "stellar technologies management"
+            ]
         },
         contact: {
             includeNext: false,
@@ -206,7 +220,7 @@ const site = {
                             },
                             {
                                 title: "Disaster Recovery as a Service",
-                                text: `Disaster recovery takes data protection beyond basic file recovery. With Orion's DRaaS platform, our team of data protection engineers can restore your entire IT infrastructure environment in minutes, should an inevitable disaster occur.`
+                                text: `Disaster recovery takes data protection beyond basic file recovery. With Orion's DRaaS platform, powered by <VMware className="inline-icon" height={12} color={${theme.stWhite}}/> and <Veeam className="inline-icon" height={12} color={${theme.stWhite}}/> , our team of data protection engineers can fail over your entire IT infrastructure environment in minutes, should an inevitable disaster occur.`
                             }
                         ],
                         infoPopup: {
@@ -258,6 +272,8 @@ const site = {
             },
             tags: [
                 "orion",
+                "orion cloud",
+                "stellar orion",
                 "high performance compute",
                 "vmware",
                 "cloud",
@@ -272,11 +288,16 @@ const site = {
                 "cloud storage",
                 "sla",
                 "ipv6",
-                "hawaii",
                 "island",
                 "compute",
                 "api",
                 "vcloud",
+                "veeam",
+                "backups as a service",
+                "dr as a service",
+                "disaster recovery as a service",
+                "infrastructure as a service",
+                "virtual desktop infrastructure",
                 ...defaultTags
             ]
         },
@@ -340,9 +361,15 @@ const site = {
             tags: [
                 "vmware",
                 "cisco",
+                "juniper",
+                "architecture",
+                "network engineer",
                 "hpe",
+                "nutanix",
                 "extreme",
                 "pure storage",
+                "nimble",
+                "nimble storage",
                 "ipv6",
                 "bgp",
                 "active directory",
@@ -351,6 +378,33 @@ const site = {
                 "virtual",
                 "consulting",
                 "professional services",
+                "private cloud",
+                "expert",
+                "experts",
+                "aruba",
+                "meraki",
+                "silver-peak",
+                "silver peak",
+                "cisco meraki",
+                "fortinet",
+                "fortigate",
+                "palo alto",
+                "panw",
+                "palo alto networks",
+                "palo alto firewall",
+                "router",
+                "routing",
+                "switching",
+                "data center",
+                "service provider networking",
+                "python",
+                "django",
+                "flask",
+                "devops",
+                "network automation",
+                "vmware automation",
+                "front end development",
+                "reactjs",
                 ...defaultTags
             ]
         },
