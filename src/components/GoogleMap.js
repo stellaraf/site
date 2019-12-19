@@ -177,7 +177,18 @@ const mapOptions = mode => {
 
 const mapUrl = (isApple, addr) => {
     const addrfmt = encodeURI(addr.replace(/\n/g, ", "));
-    return `${isApple ? "maps" : "https"}://maps.google.com/maps/search/?api=1&query=${addrfmt}`;
+    let url = `https://maps.google.com/maps/search/?api=1&query=${addrfmt}`;
+    switch (isApple) {
+        case true:
+            url = `https://maps.apple.com/?q=${addrfmt}`;
+            break;
+        case false:
+            url = `https://maps.google.com/maps/search/?api=1&query=${addrfmt}`;
+            break;
+        default:
+            break;
+    }
+    return url;
 };
 
 const MapContainer = styled.div`
