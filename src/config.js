@@ -94,7 +94,7 @@ const site = {
             leadership: [
                 {
                     name: "Wayne Johnson",
-                    title: "CEO",
+                    title: "Chief Executive Officer",
                     bio:
                         "As a do-it-all engineer with over 10+ years of IT battlefield experience, Wayne started Stellar in 2014 with the vision of offering superior IT customer service while being a trusted partner to organizations of any size. With his recent transition into the role of CEO of Stellar, and with the help of his prior experience as CTO, he's leveraging his unparalleled expertise to direct Stellar into the one of the best Cloud & IT services companies in the world.",
                     photo: "wjohnson.jpg",
@@ -102,7 +102,7 @@ const site = {
                 },
                 {
                     name: "Matt Love",
-                    title: "Head of Infrastructure",
+                    title: "Chief Architect",
                     bio:
                         "A career-long network engineer, Matt came to Stellar to build bigger and badder networks. He's since picked up new skills in front-end and back-end development, and now leads both the cloud infrastructure & development teams at Stellar.",
                     photo: "mlove.jpg",
@@ -113,7 +113,7 @@ const site = {
                 },
                 {
                     name: "Dave Barrett",
-                    title: "Principal Engineer",
+                    title: "Chief Technology Officer",
                     bio:
                         "With decades of experience in IT, Dave came to Stellar eager to help more customers migrate to the cloud. After joining the cloud infrastructure team, he is now senior-most engineer in the company and oversees the company's technical operations.",
                     photo: "dbarrett.jpg",
