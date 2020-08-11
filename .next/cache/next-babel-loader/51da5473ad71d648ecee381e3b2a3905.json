@@ -1,1 +1,0 @@
-{"ast":null,"code":"import Home from \"../src/components/pages/home\";\nexport default Home;","map":{"version":3,"sources":["/Users/ml/dev/stellar/site/pages/index.js"],"names":["Home"],"mappings":"AAAA,OAAOA,IAAP,MAAiB,8BAAjB;AAEA,eAAeA,IAAf","sourcesContent":["import Home from \"../src/components/pages/home\";\n\nexport default Home;\n"]},"metadata":{},"sourceType":"module"}
