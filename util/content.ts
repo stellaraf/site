@@ -1,26 +1,39 @@
 import { createClient, EntryCollection, ContentTypeLink, RichTextContent } from 'contentful';
 
-interface PageAttrs {
+interface ContentRef {
+  sys: ContentTypeLink;
+}
+
+export interface PageAttrs {
   id: string;
   slug: string;
   title: string;
   subtitle?: string;
 }
 
-interface ContentRef {
-  sys: ContentTypeLink;
+export interface Paragraph {
+  title: string;
+  body: RichTextContent;
 }
 
-interface PageContent {
+export interface PageContent {
   page: ContentRef;
   sortWeight: number;
   title: string;
   subtitle?: string;
   body: RichTextContent | null;
-  paragraphs: ContentRef[];
+  paragraphs: Paragraph[];
   button: boolean;
   buttonText?: string;
   buttonLink?: string;
+}
+
+export interface GeoPoint {
+  coordinates: { lon: number; lat: number };
+  active: boolean;
+  displayName: string;
+  id: string;
+  description: string;
 }
 
 const client = createClient({
@@ -46,6 +59,15 @@ export const contentQuery = async (
     console.error(err);
     throw err;
   }
+};
+
+export const getGeoPoints = async (): Promise<GeoPoint[]> => {
+  let geoPoints = [];
+  const data = await contentQuery('orionLocation');
+  if (data.total !== 0) {
+    geoPoints = data.items.map(p => p.fields);
+  }
+  return geoPoints;
 };
 
 /**
