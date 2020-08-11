@@ -1,4 +1,4 @@
-import { createClient, EntryCollection, ContentTypeLink } from 'contentful';
+import { createClient, EntryCollection, ContentTypeLink, RichTextContent } from 'contentful';
 
 interface PageAttrs {
   id: string;
@@ -16,6 +16,7 @@ interface PageContent {
   sortWeight: number;
   title: string;
   subtitle?: string;
+  body: RichTextContent | null;
   paragraphs: ContentRef[];
   button: boolean;
   buttonText?: string;
@@ -85,30 +86,35 @@ export const getPageContent = async (pageId: string): Promise<PageContent[]> => 
     const includes = data.includes ?? {};
 
     const getRefValue = (val: any): any => {
-      let item = val;
-      if (item.constructor.name === 'Object') {
+      let item = val ?? null;
+      if (item === null || typeof item === 'undefined') {
+        return null;
+      } else if (item.constructor.name === 'Object') {
         item = Object(val);
         if ('sys' in item && item.sys.type in includes) {
           for (let ref of includes[item.sys.type] ?? []) {
             if (ref?.sys?.id === item.sys.id) {
-              return { id: item.sys.id, ...item.fields };
+              return { id: item.sys.id, ...ref.fields };
             }
           }
+        } else {
+          return item;
         }
       } else if (item.constructor.name === 'Array') {
-        return item.map(i => getRefValue(i));
+        item = Array.from(val);
+        return item.map((i: any) => getRefValue(i));
       } else {
         return item;
       }
     };
 
     for (let i of items) {
+      let item = Object();
       for (let [k, v] of Object.entries(i.fields)) {
-        pageContent.push({ [k]: getRefValue(v) });
+        item[k] = getRefValue(v);
       }
+      pageContent.push(item);
     }
-
-    // pageContent = data.items.map(i => i.fields);
   }
   return pageContent;
 };
