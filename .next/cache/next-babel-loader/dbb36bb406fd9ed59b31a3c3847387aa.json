@@ -1,1 +1,0 @@
-{"ast":null,"code":"export { SiteLayout } from \"./SiteLayout\";","map":{"version":3,"sources":["/Users/ml/dev/stellar/site/layouts/index.js"],"names":["SiteLayout"],"mappings":"AAAA,SAASA,UAAT,QAA2B,cAA3B","sourcesContent":["export { SiteLayout } from \"./SiteLayout\";\n"]},"metadata":{},"sourceType":"module"}

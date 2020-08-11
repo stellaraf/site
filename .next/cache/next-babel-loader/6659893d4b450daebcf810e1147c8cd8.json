@@ -1,1 +1,0 @@
-{"ast":null,"code":"import * as React from \"react\";","map":{"version":3,"sources":["/Users/ml/dev/stellar/site/components/Hero.js"],"names":["React"],"mappings":"AAAA,OAAO,KAAKA,KAAZ,MAAuB,OAAvB","sourcesContent":["import * as React from \"react\";\n"]},"metadata":{},"sourceType":"module"}
