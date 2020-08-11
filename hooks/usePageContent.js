@@ -57,7 +57,7 @@ export const usePageContent = rawContent => {
       buttonText: rawButtonText,
       paragraphs,
     } = rawContent ?? {};
-    let body = null;
+    let body = bodyObj ?? null;
     let subsections = null;
 
     obj.title = <Title>{rawTitle}</Title>;
