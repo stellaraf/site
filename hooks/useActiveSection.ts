@@ -1,22 +1,22 @@
+import { MutableRefObject } from 'react';
+import { BoxProps } from '@chakra-ui/core';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { isEqual } from 'lodash';
 
+type Sections = [MutableRefObject<HTMLElement>, BoxProps];
+
 /**
  * Set state based on the currently active section on a page
- * @param {*} currentState State Object
- * @param {function} callback Set State Function
- * @param {*} defaultState State to Set by Default
- * @param {[]} deps Array of Dependencies
- * @param {[]} sections Array of Section Refs
  */
 export const useActiveSection = (
-  currentState,
-  callback,
-  defaultState,
-  [...deps],
-  [...sections],
+  currentState: BoxProps,
+  callback: (s: BoxProps) => any,
+  defaultState: BoxProps,
+  [...deps]: any,
+  [...sections]: Sections[],
 ) => {
   const last = sections.length - 1;
+
   const effect = ({ currPos }) => {
     const { y } = currPos;
     let toSet = defaultState;
