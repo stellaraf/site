@@ -1,3 +1,8 @@
+# Next JS
+.next
+.env
+.env.build
+
 # Netlify
 .netlify/
 
