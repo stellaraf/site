@@ -2,6 +2,24 @@ import * as React from 'react';
 import { Box, Grid, Heading, Text } from '@chakra-ui/core';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import type { RichTextContent } from 'contentful';
+import type { PageContent } from '../util';
+
+interface SubsectionProps {
+  title: string;
+  body: RichTextContent;
+}
+
+interface RenderedPageContent {
+  error: string | null;
+  title: React.FC;
+  subtitle: React.FC;
+  body: React.FC | null;
+  buttonText?: string;
+  buttonLink?: string;
+  showButton: boolean;
+  subsections: React.FC;
+}
 
 const renderRichText = txt =>
   documentToReactComponents(txt, {
@@ -13,7 +31,7 @@ const renderRichText = txt =>
 const Title = props => <Heading as="h3" fontSize="4xl" {...props} />;
 const Subtitle = props => <Heading as="h4" fontSize="xl" fontWeight="light" {...props} />;
 const Body = props => (
-  <Text
+  <Box
     my={16}
     maxW={[null, null, '60%']}
     whiteSpace="pre-line"
@@ -23,30 +41,24 @@ const Body = props => (
   />
 );
 
-const Subsections = ({ props, children }) => {
-  return (
-    <Grid templateColumns="repeat(2, 1fr)" gap={16} my={16} maxW={[null, null, '80%']} {...props}>
-      {children}
-    </Grid>
-  );
-};
+const Subsections = props => (
+  <Grid templateColumns="repeat(2, 1fr)" gap={16} my={16} maxW={[null, null, '80%']} {...props} />
+);
 
-const Subsection = ({ title, body }) => {
-  return (
-    <Box>
-      <Heading as="h4" fontSize="lg" mb={4}>
-        {title}
-      </Heading>
-      <Box whiteSpace="pre-line" fontSize="lg" textAlign="justify">
-        {renderRichText(body)}
-      </Box>
+const Subsection = ({ title, body }: SubsectionProps) => (
+  <Box>
+    <Heading as="h4" fontSize="lg" mb={4}>
+      {title}
+    </Heading>
+    <Box whiteSpace="pre-line" fontSize="lg" textAlign="justify">
+      {renderRichText(body)}
     </Box>
-  );
-};
+  </Box>
+);
 
-export const usePageContent = rawContent => {
-  let obj = {};
-  let error;
+export const usePageContent = (rawContent: PageContent): RenderedPageContent => {
+  let obj = Object();
+  let error = null;
   try {
     const {
       title: rawTitle,
@@ -57,7 +69,6 @@ export const usePageContent = rawContent => {
       buttonText: rawButtonText,
       paragraphs,
     } = rawContent ?? {};
-    let body = bodyObj ?? null;
     let subsections = null;
 
     obj.title = <Title>{rawTitle}</Title>;
@@ -66,7 +77,9 @@ export const usePageContent = rawContent => {
     obj.buttonLink = rawButtonLink;
 
     if (bodyObj) {
-      body = <Body>{renderRichText(bodyObj)}</Body>;
+      obj.body = <Body>{renderRichText(bodyObj)}</Body>;
+    } else {
+      obj.body = null;
     }
     if (paragraphs?.length ?? 0 !== 0) {
       subsections = (
@@ -78,7 +91,6 @@ export const usePageContent = rawContent => {
       );
     }
     obj.showButton = showButton;
-    obj.body = body;
     obj.subsections = subsections;
   } catch (err) {
     console.error(err);

@@ -6,7 +6,54 @@ import {
   saturate,
   desaturate,
 } from 'color2k';
-import { theme as chakraTheme } from '@chakra-ui/core';
+import { theme as chakraTheme, DefaultTheme, ColorHues } from '@chakra-ui/core';
+
+interface DefaultColors {
+  transparent: string;
+  current: string;
+  black: string;
+  white: string;
+  whiteAlpha: ColorHues;
+  blackAlpha: ColorHues;
+  gray: ColorHues;
+  red: ColorHues;
+  orange: ColorHues;
+  yellow: ColorHues;
+  green: ColorHues;
+  teal: ColorHues;
+  blue: ColorHues;
+  cyan: ColorHues;
+  purple: ColorHues;
+  pink: ColorHues;
+  linkedin: ColorHues;
+  facebook: ColorHues;
+  messenger: ColorHues;
+  whatsapp: ColorHues;
+  twitter: ColorHues;
+  telegram: ColorHues;
+}
+
+interface ThemeColors {
+  primary: ColorHues;
+  secondary: ColorHues;
+  tertiary: ColorHues;
+  dark: ColorHues;
+  light: ColorHues;
+  original: { [key: string]: string };
+}
+
+type ChakraTheme = Omit<DefaultTheme, 'colors'>;
+type CustomColors = DefaultColors & ThemeColors;
+
+export interface CustomTheme extends ChakraTheme {
+  colors: CustomColors;
+}
+
+interface ThemeFonts {
+  body: string;
+  heading: string;
+  mono: string;
+}
 
 export const isLight = color => readableColorIsBlack(color);
 export const isDark = color => !readableColorIsBlack(color);
@@ -95,8 +142,8 @@ const defaultMonoFonts = [
   'monospace',
 ];
 
-const generatePalette = palette => {
-  const generatedPalette = {};
+const generatePalette = (palette: any): CustomColors => {
+  const generatedPalette = Object();
   Object.keys(palette).map(color => {
     if (!['black', 'white'].includes(color)) {
       generatedPalette[color] = generateColors(palette[color]);
@@ -108,13 +155,13 @@ const generatePalette = palette => {
   return generatedPalette;
 };
 
-const formatFont = font => {
+const formatFont = (font: string): string => {
   const fontList = font.split(' ');
   const fontFmt = fontList.length >= 2 ? `'${fontList.join(' ')}'` : fontList.join(' ');
   return fontFmt;
 };
 
-const importFonts = userFonts => {
+const importFonts = (userFonts: any): ThemeFonts => {
   const [body, mono] = [defaultBodyFonts, defaultMonoFonts];
   const bodyFmt = formatFont(userFonts.body);
   const monoFmt = formatFont(userFonts.mono);
@@ -131,7 +178,7 @@ const importFonts = userFonts => {
   };
 };
 
-const importColors = (userColors = {}) => {
+const importColors = (userColors: any = {}): CustomColors => {
   const generatedColors = generatePalette(userColors);
   return {
     transparent: 'transparent',
@@ -141,7 +188,7 @@ const importColors = (userColors = {}) => {
   };
 };
 
-export const makeTheme = userTheme => ({
+export const makeTheme = (userTheme: any): CustomTheme => ({
   ...chakraTheme,
   colors: importColors(userTheme.colors),
   fonts: importFonts(userTheme.fonts),
