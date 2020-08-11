@@ -1,15 +1,22 @@
 import * as React from 'react';
-import { useEffect, useRef, forwardRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { GetStaticProps } from 'next';
 import { useRecoilState } from 'recoil';
 import { Box, Flex, Heading } from '@chakra-ui/core';
-import { getPage, getPageContent, contentQuery } from '../util';
-import { useColorMode, useTheme } from '../context';
+import { getPage, getPageContent } from '../util';
+import { useColorMode } from '../context';
+import { ContentSection } from '../components';
+import { useActiveSection } from '../hooks';
+import { _headerStyle } from '../state/atoms';
+import { headerBg, sect1BtnText, gradient, variants, useSectionStyle } from '../styles';
+
+const SLUG = 'services';
 
 export default function Services({ pageData, pageContent }) {
-  const sections = pageContent?.items ?? [];
   const { colorMode } = useColorMode();
   const [headerStyle, setHeaderStyle] = useRecoilState(_headerStyle);
   const heroRef = useRef();
+  const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
   const sectionRefs = sections.map(() => {
     return useRef();
   });
@@ -25,7 +32,7 @@ export default function Services({ pageData, pageContent }) {
     [headerStyle, colorMode],
     sectionRefs.map((ref, i) => {
       const idx = i % variants.length;
-      const style = useSectionStyle(idx);
+      const style = useSectionStyle(idx, colorMode);
       return [ref, { bg: style.bg, color: style.text }];
     }),
   );
@@ -46,33 +53,20 @@ export default function Services({ pageData, pageContent }) {
         </Flex>
       </Box>
       {sectionRefs.map((ref, i) => {
-        return (
-          <Section
-            ref={ref}
-            items={sections[i]}
-            referenceItems={content.includes}
-            index={i % variants.length}
-            key={i}
-          />
-        );
+        return <ContentSection ref={ref} items={sections[i]} index={i % variants.length} key={i} />;
       })}
     </>
   );
 }
 
-export async function getStaticProps() {
-  let geoData = {};
-  let geoPoints = {};
-  let pageData = {};
-  let pageContent = {};
+export const getStaticProps: GetStaticProps = async () => {
+  let pageData = Object();
+  let pageContent = Array();
   try {
-    const geoRes = await fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json');
-    geoData = await geoRes.json();
-    geoPoints = await contentQuery('orionLocation');
     pageData = await getPage(SLUG);
     pageContent = await getPageContent(pageData?.id ?? null);
   } catch (err) {
     console.error(err);
   }
-  return { props: { geoData, geoPoints, pageData, pageContent } };
-}
+  return { props: { pageData, pageContent } };
+};
