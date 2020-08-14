@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { GetStaticProps } from 'next';
 import { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { Box, Flex, Heading } from '@chakra-ui/core';
-import { getPage, getPageContent, getGeoPoints, GeoPoint, PageAttrs, PageContent } from '../util';
+import { getPage, getPageContent, getGeoPoints } from '../util';
 import { useColorMode, useTheme } from '../context';
+import { Button, ContentSection, SEO } from '../components';
 import { USMap } from '../components/USMap';
-import { Button, ContentSection } from '../components';
 import { useActiveSection } from '../hooks';
 import { _headerStyle } from '../state/atoms';
 import {
@@ -18,16 +17,17 @@ import {
   useSectionStyle,
 } from '../styles';
 
+import type { GetStaticProps } from 'next';
+import type { GeoPoint, PageProps } from '../util';
+
 const SLUG = 'cloud';
 
-interface PageProps {
+interface CloudProps extends PageProps {
   geoData: object;
   geoPoints: GeoPoint[];
-  pageData: PageAttrs;
-  pageContent: PageContent[];
 }
 
-export default function Cloud({ geoData, geoPoints, pageData, pageContent }: PageProps) {
+export default function Cloud({ geoData, geoPoints, pageData, pageContent }: CloudProps) {
   const { colorMode } = useColorMode();
   const { colors } = useTheme();
   const mapColor = { dark: colors.whiteAlpha[200], light: colors.blackAlpha[200] };
@@ -38,6 +38,8 @@ export default function Cloud({ geoData, geoPoints, pageData, pageContent }: Pag
   const sectionRefs = sections.map(() => {
     return useRef();
   });
+
+  const { title, subtitle } = pageData;
 
   useEffect(() => {
     setHeaderStyle({ bg: headerBg[colorMode], color: sect1BtnText[colorMode] });
@@ -56,15 +58,16 @@ export default function Cloud({ geoData, geoPoints, pageData, pageContent }: Pag
   );
   return (
     <>
+      <SEO title={title} description={subtitle} />
       <Box ref={heroRef} w="100%" minH="80vh" background={gradient[colorMode]} px={24} pt={32}>
         <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
           <Flex textAlign="center" flexDir="column" alignItems="center">
             <Heading as="h1" fontSize="6xl" fontWeight="light">
-              {pageData.title}
+              {title}
             </Heading>
-            {pageData.subtitle && (
+            {subtitle && (
               <Heading as="h2" fontSize="3xl" fontWeight="light">
-                {pageData.subtitle}
+                {subtitle}
               </Heading>
             )}
             <Heading as="h3" mt={8} fontSize="lg" fontWeight="normal" maxW={[null, null, '75%']}>
@@ -102,7 +105,7 @@ export const getStaticProps: GetStaticProps = async () => {
   let pageData = Object();
   let pageContent = Array();
   try {
-    const geoRes = await fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json');
+    const geoRes = await fetch('https://us-map-geo-points.stellar.workers.dev');
     geoData = await geoRes.json();
     geoPoints = await getGeoPoints();
     pageData = await getPage(SLUG);

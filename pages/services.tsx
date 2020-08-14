@@ -3,16 +3,16 @@ import { useEffect, useRef } from 'react';
 import { GetStaticProps } from 'next';
 import { useRecoilState } from 'recoil';
 import { Box, Flex, Heading } from '@chakra-ui/core';
-import { getPage, getPageContent } from '../util';
+import { getPage, getPageContent, PageProps } from '../util';
 import { useColorMode } from '../context';
-import { ContentSection } from '../components';
+import { ContentSection, SEO } from '../components';
 import { useActiveSection } from '../hooks';
 import { _headerStyle } from '../state/atoms';
 import { headerBg, sect1BtnText, gradient, variants, useSectionStyle } from '../styles';
 
 const SLUG = 'services';
 
-export default function Services({ pageData, pageContent }) {
+export default function Services({ pageData, pageContent }: PageProps) {
   const { colorMode } = useColorMode();
   const [headerStyle, setHeaderStyle] = useRecoilState(_headerStyle);
   const heroRef = useRef();
@@ -20,6 +20,7 @@ export default function Services({ pageData, pageContent }) {
   const sectionRefs = sections.map(() => {
     return useRef();
   });
+  const { title, subtitle } = pageData;
 
   useEffect(() => {
     setHeaderStyle({ bg: headerBg[colorMode], color: sect1BtnText[colorMode] });
@@ -38,15 +39,16 @@ export default function Services({ pageData, pageContent }) {
   );
   return (
     <>
+      <SEO title={title} description={subtitle} />
       <Box ref={heroRef} w="100%" minH="80vh" background={gradient[colorMode]} px={24} pt={32}>
         <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
           <Flex textAlign="center" flexDir="column" alignItems="center">
             <Heading as="h1" fontSize="6xl" fontWeight="light">
-              {pageData.title}
+              {title}
             </Heading>
-            {pageData.subtitle && (
+            {subtitle && (
               <Heading as="h2" fontSize="3xl" fontWeight="light">
-                {pageData.subtitle}
+                {subtitle}
               </Heading>
             )}
           </Flex>

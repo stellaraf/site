@@ -1,4 +1,6 @@
-import { createClient, EntryCollection, ContentTypeLink, RichTextContent } from 'contentful';
+import { createClient } from 'contentful';
+import type { EntryCollection, ContentTypeLink, RichTextContent } from 'contentful';
+import type { Document } from '@contentful/rich-text-types';
 
 interface ContentRef {
   sys: ContentTypeLink;
@@ -13,7 +15,7 @@ export interface PageAttrs {
 
 export interface Paragraph {
   title: string;
-  body: RichTextContent;
+  body: Document;
 }
 
 export interface PageContent {
@@ -21,7 +23,7 @@ export interface PageContent {
   sortWeight: number;
   title: string;
   subtitle?: string;
-  body: RichTextContent | null;
+  body: Document | null;
   paragraphs: Paragraph[];
   button: boolean;
   buttonText?: string;
@@ -34,6 +36,11 @@ export interface GeoPoint {
   displayName: string;
   id: string;
   description: string;
+}
+
+export interface PageProps {
+  pageData: PageAttrs;
+  pageContent: PageContent[];
 }
 
 const client = createClient({
