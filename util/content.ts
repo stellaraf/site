@@ -30,6 +30,26 @@ export interface PageContent {
   buttonLink?: string;
 }
 
+export interface HomeSection {
+  title: string;
+  subtitle: string;
+  body: Document | null;
+  showButton: boolean;
+  buttonText: string;
+  buttonLink: string;
+  sortWeight: number;
+}
+
+export interface HeroCard {
+  title: string;
+  body: Document | null;
+}
+
+export interface HomepageContent {
+  sections: HomeSection[];
+  heroCards: HeroCard[];
+}
+
 export interface GeoPoint {
   coordinates: { lon: number; lat: number };
   active: boolean;
@@ -102,6 +122,48 @@ export const getPage = async (pageSlug: string): Promise<PageAttrs> => {
 };
 
 /**
+ * Match a reference with its `includes` entry, and replace the reference
+ * with the real entry.
+ */
+const getRefValue = (val: any, includes: any = {}): any => {
+  let item = val ?? null;
+  if (item === null || typeof item === 'undefined') {
+    return null;
+  } else if (item.constructor.name === 'Object') {
+    item = Object(val);
+    if ('sys' in item && item.sys.type in includes) {
+      for (let ref of includes[item.sys.type] ?? []) {
+        if (ref?.sys?.id === item.sys.id) {
+          return { id: item.sys.id, ...ref.fields };
+        }
+      }
+    } else {
+      return item;
+    }
+  } else if (item.constructor.name === 'Array') {
+    item = Array.from(val);
+    return item.map((i: any) => getRefValue(i, includes));
+  } else {
+    return item;
+  }
+};
+
+export const getHomePage = async (): Promise<HomepageContent> => {
+  let pageContent = Object();
+  const data = await contentQuery('homepage');
+
+  if (data.total !== 0) {
+    const item = data.items?.[0] ?? Object();
+    const includes = data.includes ?? {};
+
+    for (let [k, v] of Object.entries(item.fields)) {
+      pageContent[k] = getRefValue(v, includes);
+    }
+  }
+  return pageContent;
+};
+
+/**
  * Get content for a specific page by its sys.id
  */
 export const getPageContent = async (pageId: string): Promise<PageContent[]> => {
@@ -114,33 +176,10 @@ export const getPageContent = async (pageId: string): Promise<PageContent[]> => 
     const items = data.items;
     const includes = data.includes ?? {};
 
-    const getRefValue = (val: any): any => {
-      let item = val ?? null;
-      if (item === null || typeof item === 'undefined') {
-        return null;
-      } else if (item.constructor.name === 'Object') {
-        item = Object(val);
-        if ('sys' in item && item.sys.type in includes) {
-          for (let ref of includes[item.sys.type] ?? []) {
-            if (ref?.sys?.id === item.sys.id) {
-              return { id: item.sys.id, ...ref.fields };
-            }
-          }
-        } else {
-          return item;
-        }
-      } else if (item.constructor.name === 'Array') {
-        item = Array.from(val);
-        return item.map((i: any) => getRefValue(i));
-      } else {
-        return item;
-      }
-    };
-
     for (let i of items) {
       let item = Object();
       for (let [k, v] of Object.entries(i.fields)) {
-        item[k] = getRefValue(v);
+        item[k] = getRefValue(v, includes);
       }
       pageContent.push(item);
     }

@@ -1,39 +1,38 @@
 import * as React from 'react';
-import { useEffect, useRef } from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { Box, Flex, Heading, Text } from '@chakra-ui/core';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
-import { useConfig, useColorMode, useTheme } from '../context';
-import { VMware } from '../components/Icons';
-import { Logo } from '../components/Logo';
-import { Br, Button } from '../components';
-import { useActiveSection } from '../hooks';
-import { showHeaderLogo, _headerStyle } from '../state/atoms';
+import { useConfig, useColorMode, useTheme } from 'site/context';
+import { Logo } from 'site/components/Logo';
+import { HeroCards } from 'site/components/HeroCard';
+import { Button } from 'site/components/Button';
+import { useActiveSection, useRender } from 'site/hooks';
+import { showHeaderLogo, _headerStyle } from 'site/state/atoms';
+import { gradient, headerBg, sect1BtnText, useSectionStyle, variants } from 'site/styles';
+import { getHomePage } from 'site/util/content';
 
-const headerBg = { dark: 'transparent', light: 'original.light' };
+import type { HomepageContent, HomeSection } from 'site/util/content';
+import type { GetStaticProps } from 'next';
+
+interface HomeProps {
+  pageContent: HomepageContent;
+}
+interface SectionProps {
+  section: HomeSection;
+  index: number;
+  [k: string]: any;
+}
+
+type Ref = React.MutableRefObject<HTMLElement>;
+
 const heroText = { dark: 'white', light: 'original.primary' };
 const cardBg = { dark: 'whiteAlpha.100', light: 'white' };
 const cardColor = { dark: 'white', light: 'original.dark' };
-const sect1Bg = { dark: 'original.dark', light: 'original.light' };
-const sect1Text = { dark: 'original.light', light: 'original.dark' };
-const sect1BtnText = { dark: 'original.light', light: 'original.dark' };
-const sect2Bg = { dark: 'original.dark', light: 'original.tertiary' };
-const sect2Text = { dark: 'original.light', light: 'original.dark' };
-const sect3Bg = { dark: 'original.dark', light: 'original.primary' };
-const sect3Text = { dark: 'original.light', light: 'original.light' };
 const sectBorder = {
   dark: { borderBottomColor: 'original.tertiary', borderBottomWidth: '1px' },
   light: {},
 };
-const gradientLight = { backgroundColor: 'original.light' };
-
-const gradientDark = {
-  background: 'rgb(22, 19, 24)',
-  background:
-    'linear-gradient(180deg, rgba(43, 60, 143, 1) 0%, rgba(42, 23, 74, 1) 50%, rgba(22, 19, 24, 1) 100%)',
-};
-
-const gradient = { dark: gradientDark, light: gradientLight };
 
 const Card = ({ title = 'Title', content = 'Content', icon, ...props }) => {
   const { colorMode } = useColorMode();
@@ -59,7 +58,62 @@ const Card = ({ title = 'Title', content = 'Content', icon, ...props }) => {
   );
 };
 
-const Home = () => {
+const Section = forwardRef(({ section, index, ...props }: SectionProps, ref: Ref) => {
+  const { colorMode } = useColorMode();
+  const { title, subtitle, body, showButton, buttonText, buttonLink } = section;
+  const renderedBody = useRender(body);
+  const style = useSectionStyle(index, colorMode);
+  const padding = Object();
+  if (index === 0) {
+    padding.pt = '320px';
+    padding.pb = 24;
+  } else {
+    padding.py = 16;
+  }
+  return (
+    <Box
+      ref={ref}
+      as="section"
+      overflow="hidden"
+      bg={style.bg}
+      color={style.text}
+      {...padding}
+      {...sectBorder[colorMode]}
+      {...props}>
+      <Flex h="100%" overflow="hidden" px={24} py={16} alignItems="center" flexDir="column">
+        <Heading as="h3" fontSize="4xl">
+          {title}
+        </Heading>
+        <Heading as="h4" fontSize="xl" fontWeight="light">
+          {subtitle}
+        </Heading>
+        <Box
+          my={16}
+          maxW={[null, null, '60%']}
+          whiteSpace="pre-line"
+          fontSize="lg"
+          textAlign="justify">
+          {renderedBody}
+        </Box>
+        {showButton && (
+          <Button
+            href={buttonLink}
+            leftIcon="chevron-right"
+            color={style.btnText}
+            variant={style.btnVariant}
+            borderColor={style.btnBorder}
+            _hover={{
+              backgroundColor: style.btnHoverBg,
+            }}>
+            {buttonText}
+          </Button>
+        )}
+      </Flex>
+    </Box>
+  );
+});
+
+export default function Home({ pageContent }: HomeProps) {
   const { colorMode } = useColorMode();
   const { siteSlogan } = useConfig();
   const { colors } = useTheme();
@@ -67,10 +121,12 @@ const Home = () => {
   const [headerStyle, setHeaderStyle] = useRecoilState(_headerStyle);
   const [headerLogo, setHeaderLogo] = useRecoilState(showHeaderLogo);
   const logoRef = useRef();
+
   const heroRef = useRef();
-  const sect1Ref = useRef();
-  const sect2Ref = useRef();
-  const sect3Ref = useRef();
+  const sections = pageContent.sections.sort((a, b) => a.sortWeight - b.sortWeight);
+  const sectionRefs = sections.map(() => {
+    return useRef();
+  });
 
   useEffect(() => {
     setHeaderStyle({ bg: headerBg[colorMode], color: sect1BtnText[colorMode] });
@@ -92,11 +148,11 @@ const Home = () => {
     setHeaderStyle,
     { bg: headerBg[colorMode], color: sect1BtnText[colorMode] },
     [headerStyle, colorMode],
-    [
-      [sect1Ref, { bg: sect1Bg[colorMode], color: sect1Text[colorMode] }],
-      [sect2Ref, { bg: sect2Bg[colorMode], color: sect2Text[colorMode] }],
-      [sect3Ref, { bg: sect3Bg[colorMode], color: sect3Text[colorMode] }],
-    ],
+    sectionRefs.map((ref, i) => {
+      const idx = i % variants.length;
+      const style = useSectionStyle(idx, colorMode);
+      return [ref, { bg: style.bg, color: style.text }];
+    }),
   );
   return (
     <>
@@ -121,141 +177,23 @@ const Home = () => {
         </Flex>
         <Flex pos="relative" mt={32} h="160px">
           <Flex justifyContent="center" pos="absolute" w="100%" h="sm">
-            <Card />
+            <HeroCards content={pageContent.heroCards} />
           </Flex>
         </Flex>
       </Box>
-      <Box
-        ref={sect1Ref}
-        as="section"
-        pt="320px"
-        pb={24}
-        overflow="hidden"
-        bg={sect1Bg[colorMode]}
-        color={sect1Text[colorMode]}
-        {...sectBorder[colorMode]}>
-        <Flex h="100%" overflow="hidden" px={24} py={16} alignItems="center" flexDir="column">
-          <Heading as="h3" fontSize="4xl">
-            Orion
-          </Heading>
-          <Heading as="h4" fontSize="xl" fontWeight="light">
-            The Enterprise Native Cloud Platform
-          </Heading>
-          <Text
-            my={16}
-            maxW={[null, null, '60%']}
-            whiteSpace="pre-line"
-            fontSize="lg"
-            textAlign="justify">
-            We're not just knowledgeable about cloud technologies, we've actually built our own
-            cloud. Enterprises need tight control over their technology, so we decided to built the
-            most customizable cloud platform on the planet. Powered by{' '}
-            <VMware height={14} mx={1} display="inline" />, the Orion platform fits right in the
-            enterprise ecosystem.
-          </Text>
-          <Button
-            href="/cloud"
-            leftIcon="chevron-right"
-            color={sect1BtnText[colorMode]}
-            variant={colorMode === 'light' ? 'outline' : 'solid'}
-            borderColor={colorMode === 'light' ? 'black' : undefined}
-            _hover={{
-              backgroundColor: colorMode === 'light' ? 'blackAlpha.50' : 'whiteAlpha.500',
-            }}>
-            Gravitate to Orion
-          </Button>
-        </Flex>
-      </Box>
-      <Box ref={sect2Ref} as="section" py={24} overflow="hidden" bg={sect2Bg[colorMode]}>
-        <Flex
-          h="100%"
-          overflow="hidden"
-          px={24}
-          py={16}
-          alignItems="center"
-          flexDir="column"
-          color={sect2Text[colorMode]}
-          {...sectBorder[colorMode]}>
-          <Heading as="h3" fontSize="4xl">
-            Dedicated Services
-          </Heading>
-          <Heading as="h4" fontSize="xl" fontWeight="light">
-            Your 24/7 Technology Team
-          </Heading>
-          <Text
-            my={16}
-            maxW={[null, null, '60%']}
-            whiteSpace="pre-line"
-            fontSize="lg"
-            textAlign="justify">
-            As a skilled team of engineers who have supported businesses and technologies of all
-            types for decades at a global scale, we're experts at meeting the demands of operating
-            business technology. <Br />
-            With our bespoke, dedicated IT services, your business is able to offload IT burdens
-            based on its specific needs — be it end user IT support, infrastructure management,
-            system monitoring, or the entire IT environment.
-          </Text>
-          <Button
-            href="/services"
-            leftIcon="chevron-right"
-            variant={colorMode === 'light' ? 'outline' : 'solid'}
-            borderColor={colorMode === 'light' ? 'black' : undefined}
-            color={colorMode === 'light' ? 'black' : 'white'}
-            _hover={{
-              backgroundColor: 'whiteAlpha.500',
-            }}>
-            Upgrade your IT Team
-          </Button>
-        </Flex>
-      </Box>
-      <Box
-        ref={sect3Ref}
-        as="section"
-        py={24}
-        overflow="hidden"
-        bg={sect3Bg[colorMode]}
-        {...sectBorder[colorMode]}>
-        <Flex
-          h="100%"
-          overflow="hidden"
-          px={24}
-          py={16}
-          alignItems="center"
-          flexDir="column"
-          color={sect3Text[colorMode]}>
-          <Heading as="h3" fontSize="4xl">
-            Infrastructure Consulting
-          </Heading>
-          <Heading as="h4" fontSize="xl" fontWeight="light">
-            On-Demand IT Special Forces
-          </Heading>
-          <Text
-            my={16}
-            maxW={[null, null, '60%']}
-            whiteSpace="pre-line"
-            fontSize="lg"
-            textAlign="justify">
-            Many organizations have business requirements that demand the use of complex IT
-            technologies, but not all of them can afford to keep engineers with the necessary
-            skillsets on staff at all times.
-            <Br /> That's where we come in — our ridiculously talented infrastructure engineers are
-            dangerously good at designing, building, and implementing complex IT systems when the
-            need arises.
-          </Text>
-          <Button
-            href="/consulting"
-            leftIcon="chevron-right"
-            variant={colorMode === 'light' ? 'outline' : 'solid'}
-            color="white"
-            _hover={{
-              backgroundColor: colorMode === 'light' ? 'whiteAlpha.300' : 'whiteAlpha.500',
-            }}>
-            Call in the Experts
-          </Button>
-        </Flex>
-      </Box>
+      {sectionRefs.map((ref, i) => {
+        return <Section ref={ref} section={sections[i]} index={i} key={i} />;
+      })}
     </>
   );
-};
+}
 
-export default Home;
+export const getStaticProps: GetStaticProps = async () => {
+  let pageContent = Object();
+  try {
+    pageContent = await getHomePage();
+  } catch (err) {
+    console.error(err);
+  }
+  return { props: { pageContent } };
+};
