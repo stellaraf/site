@@ -1,7 +1,7 @@
-import * as React from "react";
-import { createContext, useContext, useMemo } from "react";
-import { useMediaLayout } from "use-media";
-import { useTheme } from "./Theme";
+import * as React from 'react';
+import { createContext, useContext, useMemo } from 'react';
+import { useMediaLayout } from 'use-media';
+import { useTheme } from './Theme';
 
 const MediaContext = createContext(null);
 
@@ -15,16 +15,16 @@ export const MediaProvider = ({ children }) => {
   let mediaSize = false;
   switch (true) {
     case isSm:
-      mediaSize = "sm";
+      mediaSize = 'sm';
       break;
     case isMd:
-      mediaSize = "md";
+      mediaSize = 'md';
       break;
     case isLg:
-      mediaSize = "lg";
+      mediaSize = 'lg';
       break;
     case isXl:
-      mediaSize = "xl";
+      mediaSize = 'xl';
       break;
   }
   const value = useMemo(
@@ -33,13 +33,11 @@ export const MediaProvider = ({ children }) => {
       isMd,
       isLg,
       isXl,
-      mediaSize
+      mediaSize,
     }),
-    [mediaSize]
+    [mediaSize],
   );
-  return (
-    <MediaContext.Provider value={value}>{children}</MediaContext.Provider>
-  );
+  return <MediaContext.Provider value={value}>{children}</MediaContext.Provider>;
 };
 
 export const useMedia = () => useContext(MediaContext);
