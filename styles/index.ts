@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 export const heroBtn1Variant = { dark: 'light', light: 'primary' };
 
 export const headerBg = { dark: 'transparent', light: 'original.light' };
@@ -68,6 +69,8 @@ export const variants = [
       text: 'original.light',
       btnText: 'original.light',
       ...commonLight,
+      btnBorder: 'original.light',
+      btnHoverBg: 'whiteAlpha.50',
     },
   },
   {
@@ -82,9 +85,15 @@ export const variants = [
       text: 'original.light',
       btnText: 'original.light',
       ...commonLight,
+      btnBorder: 'original.light',
     },
   },
 ];
-export const useSectionStyle = (idx: number, colorMode: 'light' | 'dark') => {
+
+const getVariant = (idx, colorMode) => {
   return variants[idx][colorMode];
+};
+
+export const useSectionStyle = (idx: number, colorMode: 'light' | 'dark') => {
+  return useMemo(() => getVariant(idx, colorMode), [idx]);
 };
