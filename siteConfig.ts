@@ -58,6 +58,27 @@ export const theme = {
   },
 };
 
+export const titleOverrides = [
+  'IPv4',
+  'IPv6',
+  'ASN',
+  'RPKI',
+  'ROA',
+  'IRR',
+  'IOS',
+  'FRR',
+  'ARP',
+  'MTU',
+  'MAC',
+  'ASNs',
+  'BGP',
+  'PCs',
+  'VDI',
+  'IaaS',
+  'BaaS',
+  'IP',
+];
+
 export const nav = {
   left: [
     {
@@ -138,9 +159,27 @@ const stars = {
   retina_detect: true,
 };
 
+export const social = {
+  twitter: {
+    handle: '@StellarTechInc',
+  },
+};
+
+export const orgName = 'Stellar Technologies';
+
+export const siteTitle = 'Stellar';
+export const siteDescription =
+  "We're on a mission to make migrating to the cloud easier for enterprises than ever before.";
+export const siteSlogan = 'Fueling your digital velocity';
+
 export default {
-  siteSlogan: 'Fueling your digital velocity',
-  theme: theme,
-  nav: nav,
-  stars: stars,
+  orgName,
+  siteTitle,
+  siteDescription,
+  siteSlogan,
+  social,
+  theme,
+  nav,
+  stars,
+  titleOverrides,
 };

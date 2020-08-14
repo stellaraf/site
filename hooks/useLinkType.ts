@@ -1,7 +1,7 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from 'react';
 
 export const useLinkType = href => {
-  if (href[0] === "/") {
+  if (href[0] === '/') {
     href = href.substring(1);
   }
 
@@ -12,12 +12,12 @@ export const useLinkType = href => {
     if (linkTarget.match(/(http|https|mailto)\:\/\/.*/g)) {
       !external && setExternal(true);
     } else {
-      let prefix = "/";
-      if (!linkTarget.includes(".mdx") && linkTarget.includes("#")) {
-        prefix = "";
+      let prefix = '/';
+      if (!linkTarget.includes('.mdx') && linkTarget.includes('#')) {
+        prefix = '';
       }
-      let parts = linkTarget.split(".mdx");
-      setTarget([prefix, ...parts].join(""));
+      let parts = linkTarget.split('.mdx');
+      setTarget([prefix, ...parts].join(''));
     }
   }, [href]);
 

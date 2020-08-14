@@ -1,9 +1,9 @@
-import * as React from "react";
-import NextLink from "next/link";
-import { Button as ChakraButton } from "@chakra-ui/core";
-import { useLinkType } from "../hooks";
+import * as React from 'react';
+import NextLink from 'next/link';
+import { Button as ChakraButton } from '@chakra-ui/core';
+import { useLinkType } from '../hooks';
 
-export const Button = ({ href = "/", ...props }) => {
+export const Button = ({ href = '/', ...props }) => {
   const { isExternal, target } = useLinkType(href);
   const Wrapper = isExternal ? React.Fragment : NextLink;
   const wrapperProps = isExternal ? {} : { href: target, passHref: true };
