@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { Box, Grid, Heading, Text } from '@chakra-ui/core';
-import { BLOCKS } from '@contentful/rich-text-types';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import type { RichTextContent } from 'contentful';
-import type { PageContent } from '../util';
+import { Box, Grid, Heading } from '@chakra-ui/core';
+import { titleMe } from 'site/util/title';
+import { useRender } from 'site/hooks/useRender';
+import type { Document } from '@contentful/rich-text-types';
+import type { PageContent } from 'site/util/content';
 
 interface SubsectionProps {
   title: string;
-  body: RichTextContent;
+  body: Document;
 }
 
 interface RenderedPageContent {
@@ -20,13 +20,6 @@ interface RenderedPageContent {
   showButton: boolean;
   subsections: React.FC;
 }
-
-const renderRichText = txt =>
-  documentToReactComponents(txt, {
-    renderNode: {
-      [BLOCKS.PARAGRAPH]: (_, children) => <Text my={8}>{children}</Text>,
-    },
-  });
 
 const Title = props => <Heading as="h3" fontSize="4xl" {...props} />;
 const Subtitle = props => <Heading as="h4" fontSize="xl" fontWeight="light" {...props} />;
@@ -45,39 +38,44 @@ const Subsections = props => (
   <Grid templateColumns="repeat(2, 1fr)" gap={16} my={16} maxW={[null, null, '80%']} {...props} />
 );
 
-const Subsection = ({ title, body }: SubsectionProps) => (
-  <Box>
-    <Heading as="h4" fontSize="lg" mb={4}>
-      {title}
-    </Heading>
-    <Box whiteSpace="pre-line" fontSize="lg" textAlign="justify">
-      {renderRichText(body)}
+const Subsection = ({ title, body }: SubsectionProps) => {
+  const renderedBody = useRender(body);
+  return (
+    <Box>
+      <Heading as="h4" fontSize="lg" mb={4}>
+        {title}
+      </Heading>
+      <Box whiteSpace="pre-line" fontSize="lg" textAlign="justify">
+        {renderedBody}
+      </Box>
     </Box>
-  </Box>
-);
+  );
+};
 
 export const usePageContent = (rawContent: PageContent): RenderedPageContent => {
   let obj = Object();
   let error = null;
   try {
     const {
-      title: rawTitle,
-      subtitle: rawSubtitle,
-      body: bodyObj,
-      button: showButton,
-      buttonLink: rawButtonLink,
-      buttonText: rawButtonText,
+      title = '',
+      subtitle = '',
+      body = null,
+      button: showButton = false,
+      buttonLink = '',
+      buttonText = '',
       paragraphs,
     } = rawContent ?? {};
+
     let subsections = null;
 
-    obj.title = <Title>{rawTitle}</Title>;
-    obj.subtitle = <Subtitle>{rawSubtitle}</Subtitle>;
-    obj.buttonText = rawButtonText;
-    obj.buttonLink = rawButtonLink;
+    obj.title = <Title>{titleMe(title)}</Title>;
+    obj.subtitle = <Subtitle>{titleMe(subtitle)}</Subtitle>;
+    obj.buttonText = titleMe(buttonText);
+    obj.buttonLink = buttonLink;
 
-    if (bodyObj) {
-      obj.body = <Body>{renderRichText(bodyObj)}</Body>;
+    if (body) {
+      const renderedBody = useRender(body);
+      obj.body = <Body>{renderedBody}</Body>;
     } else {
       obj.body = null;
     }
@@ -85,7 +83,7 @@ export const usePageContent = (rawContent: PageContent): RenderedPageContent => 
       subsections = (
         <Subsections>
           {paragraphs.map((p, i) => (
-            <Subsection key={i} title={p.title} body={p.body} />
+            <Subsection key={i} title={titleMe(p.title)} body={p.body} />
           ))}
         </Subsections>
       );

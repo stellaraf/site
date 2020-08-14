@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { forwardRef } from 'react';
 import { Box, Flex } from '@chakra-ui/core';
-import { PageContent } from '../util';
-import { useColorMode } from '../context';
-import { Button } from '../components';
-import { usePageContent } from '../hooks';
-import { _headerStyle } from '../state/atoms';
-import { useSectionStyle } from '../styles';
+import { useColorMode } from 'site/context';
+import { Button } from 'site/components/Button';
+import { usePageContent } from 'site/hooks/usePageContent';
+import { _headerStyle } from 'site/state/atoms';
+import { useSectionStyle } from 'site/styles';
+
+import type { PageContent } from 'site/util/content';
 
 type Ref = React.MutableRefObject<HTMLElement>;
 
