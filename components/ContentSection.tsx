@@ -5,7 +5,7 @@ import { useColorMode } from 'site/context';
 import { Button } from 'site/components/Button';
 import { usePageContent } from 'site/hooks/usePageContent';
 import { _headerStyle } from 'site/state/atoms';
-import { useSectionStyle } from 'site/styles';
+import { useVariantStyle } from 'site/styles';
 
 import type { PageContent } from 'site/util/content';
 
@@ -22,32 +22,16 @@ export const ContentSection = forwardRef(({ items, index, ...props }: SectionPro
   const { title, subtitle, body, showButton, buttonText, buttonLink, subsections } = usePageContent(
     items,
   );
-  const style = useSectionStyle(index, colorMode);
+  const { buttonStyle, linkAccent, ...style } = useVariantStyle(index, colorMode);
   return (
-    <Box
-      ref={ref}
-      as="section"
-      p={24}
-      overflow="hidden"
-      bg={style.bg}
-      color={style.text}
-      {...style.border}
-      {...props}>
+    <Box ref={ref} as="section" p={24} overflow="hidden" {...style} {...props}>
       <Flex h="100%" overflow="hidden" px={24} alignItems="center" flexDir="column">
         {title}
         {subtitle}
         {body}
         {subsections}
         {showButton && (
-          <Button
-            href={buttonLink}
-            leftIcon="chevron-right"
-            color={style.btnText}
-            variant={style.btnVariant}
-            borderColor={style.btnBorder}
-            _hover={{
-              backgroundColor: style.btnHoverBg,
-            }}>
+          <Button href={buttonLink} leftIcon="chevron-right" {...buttonStyle}>
             {buttonText}
           </Button>
         )}

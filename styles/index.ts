@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-export const heroBtn1Variant = { dark: 'light', light: 'primary' };
 
+export const heroBtn1Variant = { dark: 'light', light: 'primary' };
 export const headerBg = { dark: 'transparent', light: 'original.light' };
 export const sect1BtnText = { dark: 'original.light', light: 'original.dark' };
 
@@ -12,89 +12,145 @@ export const gradient = {
   light: { backgroundColor: 'original.light' },
 };
 
-export const commonDark = {
-  btnBorder: undefined,
-  btnVariant: 'solid',
-  btnHoverBg: 'whiteAlpha.500',
-  border: { borderBottomColor: 'original.tertiary', borderBottomWidth: '1px' },
+const linkVariants = [
+  {
+    dark: {
+      _hover: { color: 'light.200' },
+      activeColor: 'original.tertiary',
+    },
+    light: { _hover: { color: 'blackAlpha.600' }, activeColor: 'blackAlpha.300' },
+  },
+  {
+    dark: {
+      _hover: { color: 'light.200' },
+      activeColor: 'original.tertiary',
+    },
+    light: { _hover: { color: 'blackAlpha.700' }, activeColor: 'blackAlpha.300' },
+  },
+  {
+    dark: {
+      _hover: { color: 'light.200' },
+      activeColor: 'original.tertiary',
+    },
+    light: { _hover: { color: 'primary.200' }, activeColor: 'primary.400' },
+  },
+  {
+    dark: {
+      _hover: { color: 'light.200' },
+      activeColor: 'original.tertiary',
+    },
+    light: { _hover: { color: 'whiteAlpha.100' }, activeColor: 'whiteAlpha.200' },
+  },
+];
+
+const btnCommonDark = {
+  border: undefined,
+  variant: 'solid',
+  _hover: {
+    backgroundColor: 'transparent',
+    borderColor: 'original.tertiary',
+    borderBottomWidth: '1px',
+  },
 };
 
-export const commonLight = {
-  btnVariant: 'outline',
-  btnBorder: 'black',
-  btnHoverBg: 'blackAlpha.50',
-  border: {},
+const btnCommonLight = {
+  variant: 'solid',
+  variantColor: 'gray',
 };
+
+export const btnVariants = [
+  { dark: { ...btnCommonDark }, light: { ...btnCommonLight } },
+  {
+    dark: { ...btnCommonDark },
+    light: {
+      ...btnCommonLight,
+      variant: 'outline',
+      borderColor: 'original.dark',
+      _hover: { backgroundColor: 'blackAlpha.50' },
+    },
+  },
+  {
+    dark: { ...btnCommonDark },
+    light: {
+      ...btnCommonLight,
+      variantColor: 'primary',
+      _hover: { backgroundColor: 'whiteAlpha.50', borderColor: 'light.50' },
+    },
+  },
+  {
+    dark: { ...btnCommonDark },
+    light: {
+      ...btnCommonLight,
+      backgroundColor: 'whiteAlpha.200',
+      _hover: { backgroundColor: 'whiteAlpha.300' },
+    },
+  },
+];
 
 export const variants = [
   {
     dark: {
       bg: 'original.dark',
-      text: 'original.light',
-      btnText: 'original.light',
-      ...commonDark,
-      otherProps: { pt: '320px' },
+      color: 'original.light',
     },
     light: {
       bg: 'original.light',
-      text: 'original.dark',
-      btnText: 'original.dark',
-      ...commonLight,
-      otherProps: { pt: '320px' },
+      color: 'original.dark',
     },
   },
   {
     dark: {
       bg: 'original.dark',
-      text: 'original.light',
-      btnText: 'original.light',
-      ...commonDark,
+      color: 'original.light',
     },
     light: {
       bg: 'original.tertiary',
-      text: 'original.dark',
-      btnText: 'original.dark',
-      ...commonLight,
+      color: 'original.dark',
     },
   },
   {
     dark: {
       bg: 'original.dark',
-      text: 'original.light',
-      btnText: 'original.light',
-      ...commonDark,
+      color: 'original.light',
     },
     light: {
       bg: 'original.primary',
-      text: 'original.light',
-      btnText: 'original.light',
-      ...commonLight,
-      btnBorder: 'original.light',
-      btnHoverBg: 'whiteAlpha.50',
+      color: 'original.light',
     },
   },
   {
     dark: {
       bg: 'original.dark',
-      text: 'original.light',
-      btnText: 'original.light',
-      ...commonDark,
+      color: 'original.light',
     },
     light: {
       bg: 'original.dark',
-      text: 'original.light',
-      btnText: 'original.light',
-      ...commonLight,
-      btnBorder: 'original.light',
+      color: 'original.light',
     },
   },
 ];
 
-const getVariant = (idx, colorMode) => {
-  return variants[idx][colorMode];
+export const useDefaultVariant = colorMode =>
+  useMemo(
+    () => ({
+      bg: { dark: 'transparent', light: 'original.light' }[colorMode],
+      color: { dark: 'original.light', light: 'original.dark' }[colorMode],
+      buttonStyle: { ...btnVariants[0][colorMode], borderColor: 'transparent' },
+      linkStyle: linkVariants[0][colorMode],
+    }),
+    [colorMode],
+  );
+
+const getVariant = (iter, idx, colorMode) => iter[idx][colorMode];
+
+const getStyles = (idx, colorMode) => {
+  return {
+    ...getVariant(variants, idx, colorMode),
+    buttonStyle: getVariant(btnVariants, idx, colorMode),
+    linkStyle: getVariant(linkVariants, idx, colorMode),
+  };
 };
 
-export const useSectionStyle = (index: number, colorMode: 'light' | 'dark') => {
-  const idx = index % variants.length;
-  return useMemo(() => getVariant(idx, colorMode), [idx, colorMode]);
+export const useVariantStyle = (index: number, colorMode: 'light' | 'dark') => {
+  return useMemo(() => getStyles(index % variants.length, colorMode), [index, colorMode]);
 };

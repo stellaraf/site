@@ -3,8 +3,7 @@ import { ThemeProvider } from './Theme';
 import { ConfigProvider } from './Config';
 import { MediaProvider } from './Media';
 import { ColorModeProvider } from './ColorMode';
-
-import type { GlobalConfig } from 'site/util/content';
+import type { GlobalConfig, CustomTheme } from 'site/util';
 
 export { useMedia } from './Media';
 export { useGlobalState } from './GlobalState';
@@ -14,12 +13,13 @@ export { useColorMode } from './ColorMode';
 
 interface ProviderProps {
   globalConfig: GlobalConfig;
+  theme: CustomTheme;
   children: any;
 }
 
-export const Provider = ({ globalConfig, children }: ProviderProps) => (
+export const Provider = ({ globalConfig, theme, children }: ProviderProps) => (
   <ConfigProvider globalConfig={globalConfig}>
-    <ThemeProvider>
+    <ThemeProvider theme={theme}>
       <ColorModeProvider>
         <MediaProvider>{children}</MediaProvider>
       </ColorModeProvider>

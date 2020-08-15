@@ -2,23 +2,16 @@ import * as React from 'react';
 import { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { Box, Flex, Heading } from '@chakra-ui/core';
-import { getPage, getPageContent, getGeoPoints } from '../util';
-import { useColorMode, useTheme } from '../context';
-import { Button, ContentSection, SEO } from '../components';
-import { USMap } from '../components/USMap';
-import { useActiveSection } from '../hooks';
-import { _headerStyle } from '../state/atoms';
-import {
-  heroBtn1Variant,
-  headerBg,
-  sect1BtnText,
-  gradient,
-  variants,
-  useSectionStyle,
-} from '../styles';
+import { getPage, getPageContent, getGeoPoints } from 'site/util';
+import { useColorMode, useTheme } from 'site/context';
+import { Button, ContentSection, SEO } from 'site/components';
+import { USMap } from 'site/components/USMap';
+import { useActiveSection } from 'site/hooks';
+import { _headerStyle } from 'site/state/atoms';
+import { heroBtn1Variant, gradient, useDefaultVariant, useVariantStyle } from 'site/styles';
 
 import type { GetStaticProps } from 'next';
-import type { GeoPoint, PageProps } from '../util';
+import type { GeoPoint, PageProps } from 'site/util';
 
 const SLUG = 'cloud';
 
@@ -40,20 +33,20 @@ export default function Cloud({ geoData, geoPoints, pageData, pageContent }: Clo
   });
 
   const { title, subtitle } = pageData;
+  const defaultVariant = useDefaultVariant(colorMode);
 
   useEffect(() => {
-    setHeaderStyle({ bg: headerBg[colorMode], color: sect1BtnText[colorMode] });
+    setHeaderStyle(defaultVariant);
   }, [colorMode]);
 
   useActiveSection(
     headerStyle,
     setHeaderStyle,
-    { bg: headerBg[colorMode], color: sect1BtnText[colorMode] },
+    defaultVariant,
     [headerStyle, colorMode],
     sectionRefs.map((ref, i) => {
-      const idx = i % variants.length;
-      const style = useSectionStyle(idx, colorMode);
-      return [ref, { bg: style.bg, color: style.text }];
+      const style = useVariantStyle(i, colorMode);
+      return [ref, style];
     }),
   );
   return (
@@ -78,7 +71,7 @@ export default function Cloud({ geoData, geoPoints, pageData, pageContent }: Clo
               <Button mx={4} href="#" boxShadow="md" variantColor={heroBtn1Variant[colorMode]}>
                 Find Your Edge Data Center
               </Button>
-              <Button mx={4} href="#" color={sect1BtnText[colorMode]} boxShadow="md">
+              <Button mx={4} href="#" color={defaultVariant.color} boxShadow="md">
                 Learn More
               </Button>
             </Flex>
@@ -93,7 +86,7 @@ export default function Cloud({ geoData, geoPoints, pageData, pageContent }: Clo
         />
       </Box>
       {sectionRefs.map((ref, i) => {
-        return <ContentSection ref={ref} items={sections[i]} index={i % variants.length} key={i} />;
+        return <ContentSection ref={ref} items={sections[i]} index={i} key={i} />;
       })}
     </>
   );
