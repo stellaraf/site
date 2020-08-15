@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { Heading, Box, Code as ChakraCode, Text, List, ListItem } from '@chakra-ui/core';
-import { useColorMode } from '../context';
-import { titleMe } from '../util';
+import { useColorMode } from 'site/context';
+import { useTitle } from 'site/hooks';
 import type { HeadingProps, BoxProps } from '@chakra-ui/core';
 
 const BaseHeading = ({ children, ...props }: HeadingProps) => {
+  const titleMe = useTitle();
   let title = children;
+
   if (typeof children === 'string') {
     title = titleMe(children);
   }
