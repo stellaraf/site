@@ -94,6 +94,7 @@ const getVariant = (idx, colorMode) => {
   return variants[idx][colorMode];
 };
 
-export const useSectionStyle = (idx: number, colorMode: 'light' | 'dark') => {
-  return useMemo(() => getVariant(idx, colorMode), [idx]);
+export const useSectionStyle = (index: number, colorMode: 'light' | 'dark') => {
+  const idx = index % variants.length;
+  return useMemo(() => getVariant(idx, colorMode), [idx, colorMode]);
 };
