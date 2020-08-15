@@ -7,14 +7,7 @@ import { Logo } from 'site/components/Logo';
 import { Button } from 'site/components/Button';
 import { Link } from 'site/components/Link';
 import { showHeaderLogo, _headerStyle } from 'site/state/atoms';
-import { useColorMode } from 'site/context';
 import navConfig from './config';
-
-const bg = { dark: 'original.dark', light: 'original.primary' };
-const accent = { dark: 'original.tertiary', light: 'blackAlpha.300' };
-const variant = { dark: 'tertiary', light: 'gray' };
-const text = { dark: 'light.200', light: 'blackAlpha.800' };
-const textHover = { dark: 'light.50', light: 'blackAlpha.600' };
 
 const Header = props => {
   const [headerStyle] = useRecoilState(_headerStyle);
@@ -72,7 +65,7 @@ const activeProps = {
 };
 
 const NavLink = ({ isActive, ...props }) => {
-  const { colorMode } = useColorMode();
+  const { activeColor, ...style } = props?.linkStyle ?? {};
   return (
     <Link
       p={4}
@@ -81,22 +74,22 @@ const NavLink = ({ isActive, ...props }) => {
       fontWeight="medium"
       transition="all 0.2s"
       _hover={{
-        color: textHover[colorMode],
         textDecoration: 'none',
         transform: `translateY(-2px)`,
       }}
-      _after={isActive ? { backgroundColor: accent[colorMode], ...activeProps } : null}
+      {...style}
+      _after={isActive ? { backgroundColor: activeColor, ...activeProps } : null}
       {...props}
     />
   );
 };
 
-const Items = ({ side }) => {
+const Items = ({ side, ...props }) => {
   const { pathname } = useRouter();
   const navItems = [];
   for (let i of navConfig[side]) {
     navItems.push(
-      <NavLink key={i.link} href={i.link} isActive={pathname === i.link}>
+      <NavLink key={i.link} href={i.link} isActive={pathname === i.link} {...props}>
         {i.title}
       </NavLink>,
     );
@@ -104,26 +97,11 @@ const Items = ({ side }) => {
   return navItems;
 };
 
-const btnBorder = { dark: 'original.tertiary', light: 'blackAlpha.800' };
-
-const ContactButton = props => {
-  const { colorMode } = useColorMode();
-  return (
-    <Button
-      href="/contact"
-      borderWidth="1px"
-      borderColor="transparent"
-      _hover={{
-        backgroundColor: 'transparent',
-        color: btnBorder[colorMode],
-        borderColor: btnBorder[colorMode],
-        borderWidth: '1px',
-      }}
-      {...props}>
-      Talk to Us
-    </Button>
-  );
-};
+const ContactButton = props => (
+  <Button href="/contact" borderWidth="1px" borderColor="transparent" {...props}>
+    Talk to Us
+  </Button>
+);
 
 const AnimatedLogo = ({ color, show, ...props }) => {
   const LogoShown = (
@@ -150,7 +128,6 @@ export const NavbarDesktop = props => {
       <Logo.Typographic color={headerStyle?.color} width={160} height={56} pb={4} />
     </Link>
   );
-
   return (
     <Header {...props}>
       <Navbar>
@@ -162,10 +139,12 @@ export const NavbarDesktop = props => {
           )}
         </Box>
         <ItemGroup>
-          <Items side="left" />
-          <Items side="right" />
-          <NavLink href="https://docs.stellar.tech">Docs</NavLink>
-          <ContactButton />
+          <Items side="left" linkStyle={headerStyle?.linkStyle} />
+          <Items side="right" linkStyle={headerStyle?.linkStyle} />
+          <NavLink href="https://docs.stellar.tech" linkStyle={headerStyle?.linkStyle}>
+            Docs
+          </NavLink>
+          <ContactButton {...headerStyle.buttonStyle} />
         </ItemGroup>
       </Navbar>
     </Header>

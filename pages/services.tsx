@@ -8,7 +8,7 @@ import { useColorMode } from '../context';
 import { ContentSection, SEO } from '../components';
 import { useActiveSection } from '../hooks';
 import { _headerStyle } from '../state/atoms';
-import { headerBg, sect1BtnText, gradient, variants, useSectionStyle } from '../styles';
+import { useDefaultVariant, gradient, useVariantStyle } from '../styles';
 
 const SLUG = 'services';
 
@@ -22,19 +22,20 @@ export default function Services({ pageData, pageContent }: PageProps) {
   });
   const { title, subtitle } = pageData;
 
+  const defaultVariant = useDefaultVariant(colorMode);
+
   useEffect(() => {
-    setHeaderStyle({ bg: headerBg[colorMode], color: sect1BtnText[colorMode] });
+    setHeaderStyle(defaultVariant);
   }, [colorMode]);
 
   useActiveSection(
     headerStyle,
     setHeaderStyle,
-    { bg: headerBg[colorMode], color: sect1BtnText[colorMode] },
+    defaultVariant,
     [headerStyle, colorMode],
     sectionRefs.map((ref, i) => {
-      const idx = i % variants.length;
-      const style = useSectionStyle(idx, colorMode);
-      return [ref, { bg: style.bg, color: style.text }];
+      const style = useVariantStyle(i, colorMode);
+      return [ref, style];
     }),
   );
   return (
@@ -55,7 +56,7 @@ export default function Services({ pageData, pageContent }: PageProps) {
         </Flex>
       </Box>
       {sectionRefs.map((ref, i) => {
-        return <ContentSection ref={ref} items={sections[i]} index={i % variants.length} key={i} />;
+        return <ContentSection ref={ref} items={sections[i]} index={i} key={i} />;
       })}
     </>
   );

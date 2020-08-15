@@ -9,7 +9,7 @@ import { Button } from 'site/components/Button';
 import { SEO } from 'site/components/Meta';
 import { useActiveSection, useRender } from 'site/hooks';
 import { _headerStyle } from 'site/state/atoms';
-import { gradient, headerBg, sect1BtnText, useSectionStyle } from 'site/styles';
+import { gradient, useDefaultVariant, useVariantStyle } from 'site/styles';
 import { getHomePage } from 'site/util/content';
 
 import type { HomepageContent, HomeSection, GlobalConfig } from 'site/util/content';
@@ -41,7 +41,7 @@ const Section = forwardRef(({ section, index, ...props }: SectionProps, ref: Ref
   const { colorMode } = useColorMode();
   const { title, subtitle, body, showButton, buttonText, buttonLink } = section;
   const renderedBody = useRender(body);
-  const style = useSectionStyle(index, colorMode);
+  const { buttonStyle, linkStyle, ...style } = useVariantStyle(index, colorMode);
   const padding = Object();
   if (index === 0) {
     padding.pt = '320px';
@@ -54,8 +54,7 @@ const Section = forwardRef(({ section, index, ...props }: SectionProps, ref: Ref
       ref={ref}
       as="section"
       overflow="hidden"
-      bg={style.bg}
-      color={style.text}
+      {...style}
       {...padding}
       {...sectBorder[colorMode]}
       {...props}>
@@ -75,15 +74,7 @@ const Section = forwardRef(({ section, index, ...props }: SectionProps, ref: Ref
           {renderedBody}
         </Box>
         {showButton && (
-          <Button
-            href={buttonLink}
-            leftIcon="chevron-right"
-            color={style.btnText}
-            variant={style.btnVariant}
-            borderColor={style.btnBorder}
-            _hover={{
-              backgroundColor: style.btnHoverBg,
-            }}>
+          <Button href={buttonLink} leftIcon="chevron-right" {...buttonStyle}>
             {buttonText}
           </Button>
         )}
@@ -94,7 +85,7 @@ const Section = forwardRef(({ section, index, ...props }: SectionProps, ref: Ref
 
 export default function Home({ pageContent }: HomeProps) {
   const { colorMode } = useColorMode();
-  const { siteSlogan, siteTitle } = useConfig();
+  const { siteSlogan, orgName } = useConfig();
   const { colors } = useTheme();
   const logo = { dark: 'white', light: colors.original.primary };
   const [headerStyle, setHeaderStyle] = useRecoilState(_headerStyle);
@@ -105,25 +96,26 @@ export default function Home({ pageContent }: HomeProps) {
   const sectionRefs = sections.map(() => {
     return useRef();
   });
+  const defaultVariant = useDefaultVariant(colorMode);
 
   useEffect(() => {
-    setHeaderStyle({ bg: headerBg[colorMode], color: sect1BtnText[colorMode] });
+    setHeaderStyle(defaultVariant);
   }, [colorMode]);
 
   useActiveSection(
     headerStyle,
     setHeaderStyle,
-    { bg: headerBg[colorMode], color: sect1BtnText[colorMode] },
+    defaultVariant,
     [headerStyle, colorMode],
     sectionRefs.map((ref, i) => {
-      const style = useSectionStyle(i, colorMode);
-      return [ref, { bg: style.bg, color: style.text }];
+      const style = useVariantStyle(i, colorMode);
+      return [ref, style];
     }),
   );
   return useMemo(
     () => (
       <>
-        <SEO title={siteTitle} titleTemplate="%s" />
+        <SEO title={orgName} titleTemplate="%s" />
         <Box
           ref={heroRef}
           w="100%"

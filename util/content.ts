@@ -82,7 +82,7 @@ export interface Fonts {
   black: number;
 }
 
-export interface GlobalConfig {
+export interface GlobalConfigPre {
   siteTitle: string;
   siteDescription: string;
   siteSlogan: string;
@@ -91,6 +91,8 @@ export interface GlobalConfig {
   titleOverrides: string[];
   theme: { themeName: string; colors: Colors; fonts: Fonts };
 }
+
+export type GlobalConfig = Omit<GlobalConfigPre, 'theme'>;
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE ?? '',
@@ -246,7 +248,7 @@ export const getHomePage = async (): Promise<HomepageContent> => {
   return pageContent;
 };
 
-export const getGlobalConfig = async (): Promise<GlobalConfig> => {
+export const getGlobalConfig = async (): Promise<GlobalConfigPre> => {
   const removeKeys = ['themeName'];
   let globalConfig = Object();
   const data = await contentQuery('globalConfiguration', { include: 4 });
