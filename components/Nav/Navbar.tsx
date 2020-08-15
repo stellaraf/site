@@ -3,11 +3,12 @@ import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import { Box, Flex } from '@chakra-ui/core';
 import { animated, useTransition } from 'react-spring';
-import { Logo } from '../Logo';
-import { Button } from '../Button';
-import { Link } from '../Link';
-import { showHeaderLogo, _headerStyle } from '../../state/atoms';
-import { useConfig, useColorMode } from '../../context';
+import { Logo } from 'site/components/Logo';
+import { Button } from 'site/components/Button';
+import { Link } from 'site/components/Link';
+import { showHeaderLogo, _headerStyle } from 'site/state/atoms';
+import { useColorMode } from 'site/context';
+import navConfig from './config';
 
 const bg = { dark: 'original.dark', light: 'original.primary' };
 const accent = { dark: 'original.tertiary', light: 'blackAlpha.300' };
@@ -93,14 +94,13 @@ const NavLink = ({ isActive, ...props }) => {
 const Items = ({ side }) => {
   const { pathname } = useRouter();
   const navItems = [];
-  const { nav } = useConfig();
-  nav[side].map(item => {
+  for (let i of navConfig[side]) {
     navItems.push(
-      <NavLink key={item.link} href={item.link} isActive={pathname === item.link}>
-        {item.title}
+      <NavLink key={i.link} href={i.link} isActive={pathname === i.link}>
+        {i.title}
       </NavLink>,
     );
-  });
+  }
   return navItems;
 };
 

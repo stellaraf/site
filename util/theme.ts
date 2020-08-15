@@ -6,7 +6,9 @@ import {
   saturate,
   desaturate,
 } from 'color2k';
-import { theme as chakraTheme, DefaultTheme, ColorHues } from '@chakra-ui/core';
+import { theme as chakraTheme } from '@chakra-ui/core';
+import type { DefaultTheme, ColorHues } from '@chakra-ui/core';
+import type { Fonts as ConfigFonts } from './content';
 
 interface DefaultColors {
   transparent: string;
@@ -54,6 +56,34 @@ interface ThemeFonts {
   heading: string;
   mono: string;
 }
+
+type FontWeights = DefaultTheme['fontWeights'];
+
+const radii = {
+  none: '0',
+  sm: '0.125rem',
+  md: '0.25rem',
+  lg: '0.5rem',
+  xl: '0.75rem',
+  full: '9999px',
+  '2xl': '1rem',
+  '3xl': '1.25rem',
+  '4xl': '1.5rem',
+  '5xl': '1.75rem',
+  '6xl': '2rem',
+};
+const fontSizes = {
+  xs: '0.75rem',
+  sm: '0.875rem',
+  md: '1rem',
+  lg: '1.125rem',
+  xl: '2rem',
+  '2xl': '2.5rem',
+  '3xl': '3rem',
+  '4xl': '4rem',
+  '5xl': '5rem',
+  '6xl': '6rem',
+};
 
 export const isLight = color => readableColorIsBlack(color);
 export const isDark = color => !readableColorIsBlack(color);
@@ -161,21 +191,25 @@ const formatFont = (font: string): string => {
   return fontFmt;
 };
 
-const importFonts = (userFonts: any): ThemeFonts => {
+const importFonts = (userFonts: ConfigFonts): [ThemeFonts, FontWeights] => {
   const [body, mono] = [defaultBodyFonts, defaultMonoFonts];
-  const bodyFmt = formatFont(userFonts.body);
-  const monoFmt = formatFont(userFonts.mono);
+  const { body: userBody, mono: userMono, ...fontWeights } = userFonts;
+  const bodyFmt = formatFont(userBody);
+  const monoFmt = formatFont(userMono);
   if (userFonts.body && !body.includes(bodyFmt)) {
     body.unshift(bodyFmt);
   }
   if (userFonts.mono && !mono.includes(monoFmt)) {
     mono.unshift(monoFmt);
   }
-  return {
-    body: body.join(', '),
-    heading: body.join(', '),
-    mono: mono.join(', '),
-  };
+  return [
+    {
+      body: body.join(', '),
+      heading: body.join(', '),
+      mono: mono.join(', '),
+    },
+    fontWeights,
+  ];
 };
 
 const importColors = (userColors: any = {}): CustomColors => {
@@ -188,11 +222,14 @@ const importColors = (userColors: any = {}): CustomColors => {
   };
 };
 
-export const makeTheme = (userTheme: any): CustomTheme => ({
-  ...chakraTheme,
-  colors: importColors(userTheme.colors),
-  fonts: importFonts(userTheme.fonts),
-  fontSizes: userTheme.fontSizes,
-  fontWeights: userTheme.fontWeights,
-  radii: userTheme.radii,
-});
+export const makeTheme = (userTheme: any): CustomTheme => {
+  const [fonts, fontWeights] = importFonts(userTheme.fonts);
+  return {
+    ...chakraTheme,
+    colors: importColors(userTheme.colors),
+    fonts,
+    fontWeights,
+    fontSizes,
+    radii,
+  };
+};

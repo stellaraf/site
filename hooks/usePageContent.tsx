@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Box, Grid, Heading } from '@chakra-ui/core';
-import { titleMe } from 'site/util/title';
-import { useRender } from 'site/hooks/useRender';
+import { useRender, useTitle } from 'site/hooks';
 import type { Document } from '@contentful/rich-text-types';
 import type { PageContent } from 'site/util/content';
 
@@ -55,6 +54,7 @@ const Subsection = ({ title, body }: SubsectionProps) => {
 export const usePageContent = (rawContent: PageContent): RenderedPageContent => {
   let obj = Object();
   let error = null;
+  const titleMe = useTitle();
   try {
     const {
       title = '',

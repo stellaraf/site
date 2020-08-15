@@ -1,19 +1,32 @@
 import * as React from 'react';
 import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
-import { BaseSEO } from '../components/Meta';
-import { Provider } from '../context';
-import { SiteLayout } from '../layouts';
+import { BaseSEO } from 'site/components/Meta';
+import { Provider } from 'site/context';
+import { SiteLayout } from 'site/layouts';
+import { getGlobalConfig } from 'site/util';
+import type { GlobalConfig } from 'site/util';
 
-const App = ({ Component, pageProps }: AppProps) => (
+export interface SiteProps extends AppProps {
+  appProps: GlobalConfig;
+}
+
+const Site = ({ Component, pageProps, appProps }: SiteProps) => (
   <RecoilRoot>
-    <Provider>
+    <Provider globalConfig={appProps}>
       <BaseSEO />
       <SiteLayout>
-        <Component {...pageProps} />
+        <Component {...pageProps} globalConfig={appProps} />
       </SiteLayout>
     </Provider>
   </RecoilRoot>
 );
 
-export default App;
+Site.getInitialProps = async () => {
+  let globalConfig = Object();
+  globalConfig = await getGlobalConfig();
+
+  return { appProps: globalConfig };
+};
+
+export default Site;

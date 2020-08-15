@@ -1,5 +1,5 @@
 import { createClient } from 'contentful';
-import type { EntryCollection, ContentTypeLink, RichTextContent } from 'contentful';
+import type { EntryCollection, ContentTypeLink } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 
 interface ContentRef {
@@ -61,6 +61,35 @@ export interface GeoPoint {
 export interface PageProps {
   pageData: PageAttrs;
   pageContent: PageContent[];
+}
+
+interface Colors {
+  themeName: string;
+  [k: string]: string;
+}
+export interface Fonts {
+  themeName: string;
+  body: string;
+  mono: string;
+  hairline: number;
+  thin: number;
+  light: number;
+  normal: number;
+  medium: number;
+  semibold: number;
+  bold: number;
+  extrabold: number;
+  black: number;
+}
+
+export interface GlobalConfig {
+  siteTitle: string;
+  siteDescription: string;
+  siteSlogan: string;
+  twitterHandle: string;
+  orgName: string;
+  titleOverrides: string[];
+  theme: { themeName: string; colors: Colors; fonts: Fonts };
 }
 
 const client = createClient({
@@ -133,19 +162,73 @@ const getRefValue = (val: any, includes: any = {}): any => {
     item = Object(val);
     if ('sys' in item && item.sys.type in includes) {
       for (let ref of includes[item.sys.type] ?? []) {
-        if (ref?.sys?.id === item.sys.id) {
-          return { id: item.sys.id, ...ref.fields };
+        if (ref?.sys?.id === item.sys?.id) {
+          item = { id: item.sys.id, ...ref.fields };
         }
       }
+    }
+  } else if (item.constructor.name === 'Array') {
+    item = Array.from(val);
+    return item.map((i: any) => getRefValue(i, includes));
+  }
+  if (item.constructor.name === 'Object') {
+    for (let [k1, v1] of Object.entries(item)) {
+      if (v1.constructor.name === 'Object') {
+        for (let [k2, v2] of Object.entries(v1)) {
+          item[k1][k2] = getRefValue(v2, includes);
+        }
+      }
+    }
+  }
+  return item;
+};
+
+const fetchRefValue = async (val: any): Promise<any> => {
+  let item = val ?? null;
+  if (item === null || typeof item === 'undefined') {
+    return null;
+  } else if (item.constructor.name === 'Object') {
+    item = Object(val);
+    if ('sys' in item) {
+      const fetched = await client.getEntry(item.sys.id);
+      return fetched.fields;
     } else {
       return item;
     }
   } else if (item.constructor.name === 'Array') {
     item = Array.from(val);
-    return item.map((i: any) => getRefValue(i, includes));
+    return Promise.all(item.map((i: any) => fetchRefValue(i)));
   } else {
     return item;
   }
+};
+
+const removeKey = (key: string, obj: Object): Object => {
+  for (let i in obj) {
+    if (i === key) {
+      delete obj[i];
+    } else if (typeof obj[i] === 'object') {
+      removeKey(key, obj[i]);
+    }
+  }
+  return obj;
+};
+
+const flattenObj = (item: Object): Object => {
+  let flattened = Object(item);
+  const flat = (i: Object) => {
+    let f = i;
+    for (let [k, v] of Object.entries(i)) {
+      f[k] = v.fields;
+    }
+    return f;
+  };
+  if ('fields' in Object.keys(flattened)) {
+    flattened = flat(flattened.fields);
+  } else {
+    flattened = flat(flattened);
+  }
+  return flattened;
 };
 
 export const getHomePage = async (): Promise<HomepageContent> => {
@@ -161,6 +244,22 @@ export const getHomePage = async (): Promise<HomepageContent> => {
     }
   }
   return pageContent;
+};
+
+export const getGlobalConfig = async (): Promise<GlobalConfig> => {
+  const removeKeys = ['themeName'];
+  let globalConfig = Object();
+  const data = await contentQuery('globalConfiguration', { include: 4 });
+  if (data.total !== 0) {
+    const parsed = await client.parseEntries(data);
+    globalConfig = parsed.items[0]?.fields;
+    globalConfig.theme = flattenObj(globalConfig.theme.fields);
+  }
+  for (let k of removeKeys) {
+    globalConfig = removeKey(k, globalConfig);
+  }
+  console.dir(globalConfig, { depth: null });
+  return globalConfig;
 };
 
 /**

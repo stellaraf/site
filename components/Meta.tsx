@@ -1,17 +1,16 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import { DefaultSeo, DefaultSeoProps, NextSeo, NextSeoProps } from 'next-seo';
-import { siteTitle, siteDescription, orgName, social } from '../siteConfig';
-
-const { twitter } = social;
+import { useConfig } from 'site/context';
 
 export const BaseSEO = (props: DefaultSeoProps) => {
+  const { siteTitle, twitterHandle, siteDescription, orgName } = useConfig();
   return (
     <DefaultSeo
       title={orgName}
       titleTemplate={`%s | ${siteTitle}`}
       description={siteDescription}
-      twitter={{ site: twitter.handle, cardType: 'summary' }}
+      twitter={{ site: twitterHandle, cardType: 'summary' }}
       openGraph={{
         title: orgName,
         description: siteDescription,
