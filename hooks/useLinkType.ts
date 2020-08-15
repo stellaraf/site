@@ -1,27 +1,31 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useMemo } from 'react';
 
-export const useLinkType = href => {
+interface LinkType {
+  isExternal: boolean;
+  target: string;
+}
+
+export const useLinkType = (href: string): LinkType => {
+  let linkTarget = href;
+  let external = false;
   if (href[0] === '/') {
-    href = href.substring(1);
+    linkTarget = href.substring(1);
   }
 
-  const [external, setExternal] = useState(false);
-  const [linkTarget, setTarget] = useState(href);
-
-  useEffect(() => {
-    if (linkTarget.match(/(http|https|mailto)\:\/\/.*/g)) {
-      !external && setExternal(true);
-    } else {
-      let prefix = '/';
-      if (!linkTarget.includes('.mdx') && linkTarget.includes('#')) {
-        prefix = '';
-      }
-      let parts = linkTarget.split('.mdx');
-      setTarget([prefix, ...parts].join(''));
+  if (linkTarget.match(/(http|https|mailto)\:\/\/.*/g)) {
+    if (!external) {
+      external = true;
     }
-  }, [href]);
+  } else {
+    let prefix = '/';
+    if (!linkTarget.includes('.mdx') && linkTarget.includes('#')) {
+      prefix = '';
+    }
+    let parts = linkTarget.split('.mdx');
+    linkTarget = [prefix, ...parts].join('');
+  }
 
-  const isExternal = useMemo(() => external);
-  const target = useMemo(() => linkTarget);
+  const isExternal = useMemo(() => external, [href]);
+  const target = useMemo(() => linkTarget, [href]);
   return { isExternal, target };
 };
