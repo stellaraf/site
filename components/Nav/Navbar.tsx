@@ -1,33 +1,28 @@
 import * as React from 'react';
-import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import { Box, Flex } from '@chakra-ui/core';
 import { animated, useTransition } from 'react-spring';
 import { Logo } from 'site/components/Logo';
 import { Button } from 'site/components/Button';
 import { Link } from 'site/components/Link';
-import { showHeaderLogo, _headerStyle } from 'site/state/atoms';
+import { useSyncedStyle, useHeaderLogo } from 'site/styles';
 import navConfig from './config';
 
-const Header = props => {
-  const [headerStyle] = useRecoilState(_headerStyle);
-  return (
-    <Box
-      as="header"
-      pos="fixed"
-      height={32}
-      top={0}
-      left={0}
-      right={0}
-      w="100%"
-      zIndex={1000}
-      transition={{ transition: 'all 200ms ease-in' }}
-      bg="transparent"
-      {...headerStyle}
-      {...props}
-    />
-  );
-};
+const Header = props => (
+  <Box
+    as="header"
+    pos="fixed"
+    height={32}
+    top={0}
+    left={0}
+    right={0}
+    w="100%"
+    zIndex={1000}
+    transition={{ transition: 'all 200ms ease-in' }}
+    bg="transparent"
+    {...props}
+  />
+);
 
 const Navbar = props => {
   return (
@@ -120,31 +115,29 @@ const AnimatedLogo = ({ color, show, ...props }) => {
 };
 
 export const NavbarDesktop = props => {
-  const [headerStyle] = useRecoilState(_headerStyle);
-  const [headerLogo] = useRecoilState(showHeaderLogo);
+  const syncedStyle = useSyncedStyle();
+  const headerLogo = useHeaderLogo();
   const { pathname } = useRouter();
-  const LogoShown = (
-    <Link href="/">
-      <Logo.Typographic color={headerStyle?.color} width={160} height={56} pb={4} />
-    </Link>
-  );
+  const { linkStyle, buttonStyle, ...style } = syncedStyle.value;
   return (
-    <Header {...props}>
+    <Header {...style} {...props}>
       <Navbar>
         <Box overflow="hidden" pos="absolute">
           {pathname === '/' ? (
-            <AnimatedLogo show={headerLogo} color={headerStyle?.color} />
+            <AnimatedLogo show={headerLogo.get()} color={style.color} />
           ) : (
-            LogoShown
+            <Link href="/">
+              <Logo.Typographic color={style.color} width={160} height={56} pb={4} />
+            </Link>
           )}
         </Box>
         <ItemGroup>
-          <Items side="left" linkStyle={headerStyle?.linkStyle} />
-          <Items side="right" linkStyle={headerStyle?.linkStyle} />
-          <NavLink href="https://docs.stellar.tech" linkStyle={headerStyle?.linkStyle}>
+          <Items side="left" linkStyle={linkStyle} />
+          <Items side="right" linkStyle={linkStyle} />
+          <NavLink href="https://docs.stellar.tech" linkStyle={linkStyle}>
             Docs
           </NavLink>
-          <ContactButton {...headerStyle.buttonStyle} />
+          <ContactButton {...buttonStyle} />
         </ItemGroup>
       </Navbar>
     </Header>

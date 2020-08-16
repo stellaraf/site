@@ -1,8 +1,29 @@
 import { useMemo } from 'react';
+import { createState, useState } from '@hookstate/core';
+import { Untracked } from '@hookstate/untracked';
+import type { BoxProps } from '@chakra-ui/core';
 
 export const heroBtn1Variant = { dark: 'light', light: 'primary' };
 export const headerBg = { dark: 'transparent', light: 'original.light' };
 export const sect1BtnText = { dark: 'original.light', light: 'original.dark' };
+
+interface LinkVariant extends BoxProps {
+  activeColor: string;
+}
+
+interface LinkStyles {
+  dark: LinkVariant;
+  light: LinkVariant;
+}
+
+interface StyleSet extends BoxProps {
+  dark: BoxProps;
+  light: BoxProps;
+  linkStyle: LinkStyles;
+  buttonStyle: { dark: BoxProps; light: BoxProps };
+}
+
+type SyncStyles = StyleSet[];
 
 export const gradient = {
   dark: {
@@ -130,16 +151,11 @@ export const variants = [
   },
 ];
 
-export const useDefaultVariant = colorMode =>
-  useMemo(
-    () => ({
-      bg: { dark: 'transparent', light: 'original.light' }[colorMode],
-      color: { dark: 'original.light', light: 'original.dark' }[colorMode],
-      buttonStyle: { ...btnVariants[0][colorMode], borderColor: 'transparent' },
-      linkStyle: linkVariants[0][colorMode],
-    }),
-    [colorMode],
-  );
+const syncedStyle = createState({});
+export const useSyncedStyle = () => useState(syncedStyle).attach(Untracked);
+
+const headerLogo = createState(false);
+export const useHeaderLogo = () => useState(headerLogo);
 
 const getVariant = (iter, idx, colorMode) => iter[idx][colorMode];
 
@@ -150,6 +166,17 @@ const getStyles = (idx, colorMode) => {
     linkStyle: getVariant(linkVariants, idx, colorMode),
   };
 };
+
+export const useDefaultVariant = colorMode =>
+  useMemo(
+    () => ({
+      bg: { dark: 'transparent', light: 'original.light' }[colorMode],
+      color: { dark: 'original.light', light: 'original.dark' }[colorMode],
+      buttonStyle: { ...btnVariants[0][colorMode], borderColor: 'transparent' },
+      linkStyle: linkVariants[0][colorMode],
+    }),
+    [colorMode],
+  );
 
 export const useVariantStyle = (index: number, colorMode: 'light' | 'dark') => {
   return useMemo(() => getStyles(index % variants.length, colorMode), [index, colorMode]);

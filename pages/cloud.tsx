@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { useEffect, useRef } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRef } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/core';
 import { getPage, getPageContent, getGeoPoints } from 'site/util';
 import { useColorMode, useTheme } from 'site/context';
 import { Button, ContentSection, SEO } from 'site/components';
 import { USMap } from 'site/components/USMap';
 import { useActiveSection } from 'site/hooks';
-import { _headerStyle } from 'site/state/atoms';
-import { heroBtn1Variant, gradient, useDefaultVariant, useVariantStyle } from 'site/styles';
+import { heroBtn1Variant, gradient, useDefaultVariant } from 'site/styles';
 
 import type { GetStaticProps } from 'next';
 import type { GeoPoint, PageProps } from 'site/util';
@@ -25,34 +23,18 @@ export default function Cloud({ geoData, geoPoints, pageData, pageContent }: Clo
   const { colors } = useTheme();
   const mapColor = { dark: colors.whiteAlpha[200], light: colors.blackAlpha[200] };
   const markerColor = { dark: colors.green[400], light: colors.primary[400] };
-  const [headerStyle, setHeaderStyle] = useRecoilState(_headerStyle);
-  const heroRef = useRef();
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
-  const sectionRefs = sections.map(() => {
-    return useRef();
-  });
+  const sectionRefs = sections.map(() => useRef());
 
   const { title, subtitle } = pageData;
   const defaultVariant = useDefaultVariant(colorMode);
 
-  useEffect(() => {
-    setHeaderStyle(defaultVariant);
-  }, [colorMode]);
+  useActiveSection(sectionRefs);
 
-  useActiveSection(
-    headerStyle,
-    setHeaderStyle,
-    defaultVariant,
-    [headerStyle, colorMode],
-    sectionRefs.map((ref, i) => {
-      const style = useVariantStyle(i, colorMode);
-      return [ref, style];
-    }),
-  );
   return (
     <>
       <SEO title={title} description={subtitle} />
-      <Box ref={heroRef} w="100%" minH="80vh" background={gradient[colorMode]} px={24} pt={32}>
+      <Box ref={useRef()} w="100%" minH="80vh" background={gradient[colorMode]} px={24} pt={32}>
         <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
           <Flex textAlign="center" flexDir="column" alignItems="center">
             <Heading as="h1" fontSize="6xl" fontWeight="light">
