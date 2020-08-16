@@ -6,7 +6,6 @@ import { ColorModeProvider } from './ColorMode';
 import type { GlobalConfig, CustomTheme } from 'site/util';
 
 export { useMedia } from './Media';
-export { useGlobalState } from './GlobalState';
 export { useConfig } from './Config';
 export { useTheme } from './Theme';
 export { useColorMode } from './ColorMode';

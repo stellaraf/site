@@ -2137,6 +2137,16 @@
   dependencies:
     "@hapi/hoek" "8.x.x"
 
+"@hookstate/core@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@hookstate/core/-/core-3.0.1.tgz#dc46ea71e3bf0ab5c2dc024029c9210ed12fbb84"
+  integrity sha512-buRie83l3FYPLCuaBE68puE3XS19r2O+jwC/kH2ikIW7ww8AavndR3MspzMMkNpq2zL8pZtIcpiWJBbn4Uq2Vw==
+
+"@hookstate/untracked@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@hookstate/untracked/-/untracked-3.0.0.tgz#fcf5005f89a68956c994ffb4b04cc3bd25d7cbf6"
+  integrity sha512-NctZVu0fEXc+komMmEpJ4OAD77P1P4uhXnU8e2Y1l+k0P+ZCE+enTDvgg9rp2WmViD7s8XA2+lS7wTkHGargmw==
+
 "@jest/console@^24.7.1", "@jest/console@^24.9.0":
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-24.9.0.tgz#79b1bc06fb74a8cfb01cbdedf945584b1b9707f0"
@@ -12303,11 +12313,6 @@ realpath-native@^1.1.0:
   integrity sha512-wlgPA6cCIIg9gKz0fgAPjnzh4yR/LnXovwuo9hvyGvx3h8nX4+/iLZplfUWasXpqD8BdnGnP5njOFjkUwPzvjA==
   dependencies:
     util.promisify "^1.0.0"
-
-recoil@0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.0.7.tgz#197066ac0a983e4728f5973033bbe5b40a277d40"
-  integrity sha512-U/0kniHLk131hKhAX35QGdghVf3+PSkLcFIFoNBNy+yv62qCLm3TE5c3v4x4WYzuKgw1fxU3GGhKHAUYdyRnTQ==
 
 recursive-readdir@2.2.2:
   version "2.2.2"
