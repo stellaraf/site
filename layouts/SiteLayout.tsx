@@ -1,7 +1,7 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 import { Box, StylesProvider, useMultiStyleConfig } from '@chakra-ui/core';
-import { NavbarDesktop } from 'site/components/Nav';
+import { HeaderDesktop } from 'site/components/Header';
 import { Controls } from 'site/components/Controls';
 import { Footer } from 'site/components/Footer';
 import { CalltoAction } from 'site/components/CallToAction';
@@ -25,7 +25,7 @@ export const SiteLayout = ({ children }) => {
   return (
     <Wrapper>
       <StylesProvider value={styles}>
-        <NavbarDesktop />
+        <HeaderDesktop />
         <Main>
           <Root>{children}</Root>
         </Main>

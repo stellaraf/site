@@ -7,14 +7,15 @@ import type { AnchorHTMLAttributes } from 'react';
 import type { ButtonProps, LinkProps } from '@chakra-ui/core';
 
 type ExternalButtonProps = ButtonProps & LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>;
+type ButtonLinkElement = HTMLButtonElement | HTMLAnchorElement;
 
-const BaseButton = forwardRef<HTMLAnchorElement, ExternalButtonProps>((props, ref) => {
+const BaseButton = forwardRef<ButtonLinkElement, ExternalButtonProps>((props, ref) => {
   return (
     <ChakraButton as="a" ref={ref} px={3} py={1} lineHeight={1.5} borderRadius="lg" {...props} />
   );
 });
 
-const ExternalButton = forwardRef<HTMLAnchorElement, ExternalButtonProps>((props, ref) => {
+const ExternalButton = forwardRef<ButtonLinkElement, ExternalButtonProps>((props, ref) => {
   const { href, ...rest } = props;
   return (
     <NextLink href={href} passHref>
@@ -23,11 +24,11 @@ const ExternalButton = forwardRef<HTMLAnchorElement, ExternalButtonProps>((props
   );
 });
 
-export const Button = forwardRef<HTMLAnchorElement, ExternalButtonProps>((props, ref) => {
+export const Button = forwardRef<ButtonLinkElement, ExternalButtonProps>((props, ref) => {
   const { href = '/', ...rest } = props;
   let label = null;
-  if (typeof props.children === 'string') {
-    label = props.children;
+  if (typeof rest.children === 'string') {
+    label = rest.children;
   }
   const { isExternal, target } = useLinkType(href);
   let Component = BaseButton;
