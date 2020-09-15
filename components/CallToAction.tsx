@@ -1,21 +1,17 @@
 import * as React from 'react';
-import { Box, Flex, Heading } from '@chakra-ui/core';
-import { useColorMode } from '../context';
+import { Box, Flex, Heading, useMultiStyleConfig } from '@chakra-ui/core';
+import type { BoxProps } from '@chakra-ui/core';
 
-const bg = { dark: 'whiteAlpha.50', light: 'gray.600' };
-const color = { dark: 'original.light', light: 'white' };
-
-export const CalltoAction = props => {
-  const { colorMode } = useColorMode();
+export const CalltoAction = (props: BoxProps) => {
+  const styles = useMultiStyleConfig('SyncedStyles', { variant: 0 });
   return (
     <Box
       className="__actions"
       py={24}
       px={24}
-      bg={bg[colorMode]}
       borderBottomWidth="1px"
       borderBottomColor="original.tertiary"
-      color={color[colorMode]}
+      sx={styles.box}
       {...props}>
       <Flex justifyContent="space-between">
         <Heading as="h5" fontSize="2xl">
