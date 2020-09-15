@@ -14,7 +14,6 @@
     "color2k": "^1.0.0-rc.5",
     "contentful": "^7.14.6",
     "d3-geo": "^1.12.1",
-    "deepmerge": "^4.2.2",
     "google-map-react": "^1.1.5",
     "next": "9.5.3",
     "next-seo": "^4.7.3",
