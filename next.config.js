@@ -1,1 +1,5 @@
-module.exports = () => ({ reactStrictMode: true, devIndicators: { autoPrerender: false } });
+module.exports = {
+  reactStrictMode: true,
+  devIndicators: { autoPrerender: false },
+  poweredByHeader: false,
+};
