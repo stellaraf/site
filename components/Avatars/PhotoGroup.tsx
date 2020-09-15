@@ -4,29 +4,9 @@ import { Box, Divider, Flex, Image, Collapse, Button, Text } from '@chakra-ui/co
 import { useRender } from 'site/hooks';
 import { useColorValue } from 'site/context';
 
-import type { Bio } from 'site/util';
-import type { BoxProps, FlexProps } from '@chakra-ui/core';
+import type { PhotoProps, PhotoGroupProps, WrapperProps } from './types';
 
-type BioGroup = [Bio, Bio, Bio];
-
-interface PhotoGroupProps extends BoxProps {
-  group: BioGroup;
-}
-
-interface PhotoProps extends BoxProps {
-  attrs: Bio;
-  onClick: (e: any) => void;
-}
-
-const groupBios = (bios: Bio[], size: number): BioGroup[] => {
-  let groups = [];
-  while (bios.length > 0) {
-    groups.push(bios.splice(0, size));
-  }
-  return groups;
-};
-
-const Wrapper = (props: FlexProps) => (
+const Wrapper = (props: WrapperProps) => (
   <Box>
     <Flex
       justifyContent="center"
@@ -40,6 +20,9 @@ const Wrapper = (props: FlexProps) => (
   </Box>
 );
 
+/**
+ * Single Avatar & Bio
+ */
 const Photo = (props: PhotoProps) => {
   const { attrs, onClick, ...rest } = props;
   const photoBorder = useColorValue('whiteAlpha.400', 'blackAlpha.400');
@@ -75,7 +58,10 @@ const Photo = (props: PhotoProps) => {
   );
 };
 
-const PhotoGroup = (props: PhotoGroupProps) => {
+/**
+ * Group of N Avatars/Bios.
+ */
+export const PhotoGroup = (props: PhotoGroupProps) => {
   const { group, ...rest } = props;
   const dividerColor = useColorValue('gray.400', 'original.tertiary');
   const contentNum = useState(0);
@@ -106,17 +92,6 @@ const PhotoGroup = (props: PhotoGroupProps) => {
         <Divider borderColor={dividerColor} />
         {renderedBio}
       </Collapse>
-    </>
-  );
-};
-
-export const Avatars = ({ bioList, ...props }) => {
-  const bioGroups = groupBios(bioList, 3);
-  return (
-    <>
-      {bioGroups.map((group, i) => (
-        <PhotoGroup key={i} group={group} {...props} />
-      ))}
     </>
   );
 };
