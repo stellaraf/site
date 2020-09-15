@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { forwardRef } from 'react';
-import { Box, Flex } from '@chakra-ui/core';
-import { useColorMode } from 'site/context';
+import { Box, Flex, useMultiStyleConfig } from '@chakra-ui/core';
+import BsChevronRight from '@meronex/icons/bs/BsChevronRight';
 import { Button } from 'site/components/Button';
 import { usePageContent } from 'site/hooks/usePageContent';
-import { _headerStyle } from 'site/state/atoms';
-import { useVariantStyle } from 'site/styles';
 
 import type { PageContent } from 'site/util/content';
 
@@ -18,20 +16,20 @@ interface SectionProps {
 }
 
 export const ContentSection = forwardRef(({ items, index, ...props }: SectionProps, ref: Ref) => {
-  const { colorMode } = useColorMode();
   const { title, subtitle, body, showButton, buttonText, buttonLink, subsections } = usePageContent(
     items,
   );
-  const { buttonStyle, linkAccent, ...style } = useVariantStyle(index, colorMode);
+  const styles = useMultiStyleConfig('SyncedStyles', { variant: index });
+
   return (
-    <Box ref={ref} as="section" p={24} overflow="hidden" {...style} {...props}>
-      <Flex h="100%" overflow="hidden" px={24} alignItems="center" flexDir="column">
+    <Box ref={ref} as="section" p={24} overflow="hidden" sx={styles.box} {...props}>
+      <Flex height="100%" overflow="hidden" px={24} align="center" direction="column">
         {title}
         {subtitle}
         {body}
         {subsections}
         {showButton && (
-          <Button href={buttonLink} leftIcon="chevron-right" {...buttonStyle}>
+          <Button href={buttonLink} leftIcon={<BsChevronRight />}>
             {buttonText}
           </Button>
         )}

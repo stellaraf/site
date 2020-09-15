@@ -6,9 +6,14 @@ import {
   saturate,
   desaturate,
 } from 'color2k';
-import { theme as chakraTheme } from '@chakra-ui/core';
-import type { DefaultTheme, ColorHues } from '@chakra-ui/core';
-import type { Fonts as ConfigFonts } from './content';
+import { extendTheme } from '@chakra-ui/core';
+import { mode } from '@chakra-ui/theme-tools';
+import { merge } from '@chakra-ui/utils';
+import { syncedStyles, heroButtons } from 'site/styles';
+import type { Theme as DefaultTheme } from '@chakra-ui/theme';
+import type { Styles } from '@chakra-ui/theme-tools';
+import type { ColorHues } from '@chakra-ui/theme/dist/types/foundations/colors';
+import type { Fonts as ConfigFonts } from 'site/util/content';
 
 interface DefaultColors {
   transparent: string;
@@ -44,11 +49,19 @@ interface ThemeColors {
   original: { [key: string]: string };
 }
 
-type ChakraTheme = Omit<DefaultTheme, 'colors'>;
+interface Breakpoints {
+  [n: number]: string;
+  sm: string;
+  md: string;
+  lg: string;
+  xl: string;
+}
+
 type CustomColors = DefaultColors & ThemeColors;
 
-export interface CustomTheme extends ChakraTheme {
+export interface CustomTheme extends Omit<DefaultTheme, 'colors' | 'breakpoints'> {
   colors: CustomColors;
+  breakpoints: Breakpoints;
 }
 
 interface ThemeFonts {
@@ -185,6 +198,34 @@ const generatePalette = (palette: any): CustomColors => {
   return generatedPalette;
 };
 
+const globalStyles = (props): Styles => {
+  const zIndexKeys = [
+    'a',
+    'p',
+    'ol',
+    'ul',
+    'li',
+    'span',
+    'button',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+  ].join(', ');
+  return {
+    [zIndexKeys]: {
+      zIndex: 1,
+    },
+    body: {
+      backgroundColor: mode('original.light', 'transparent')(props),
+      color: mode('original.dark', 'original.light')(props),
+      fontFamily: 'body',
+    },
+  };
+};
+
 const formatFont = (font: string): string => {
   const fontList = font.split(' ');
   const fontFmt = fontList.length >= 2 ? `'${fontList.join(' ')}'` : fontList.join(' ');
@@ -224,12 +265,16 @@ const importColors = (userColors: any = {}): CustomColors => {
 
 export const makeTheme = (userTheme: any): CustomTheme => {
   const [fonts, fontWeights] = importFonts(userTheme.fonts);
-  return {
-    ...chakraTheme,
+  const defaultTheme = extendTheme({
     colors: importColors(userTheme.colors),
     fonts,
     fontWeights,
     fontSizes,
     radii,
-  };
+    styles: { global: globalStyles },
+    components: { Button: heroButtons },
+  });
+  return merge(defaultTheme, {
+    components: { SyncedStyles: syncedStyles },
+  });
 };

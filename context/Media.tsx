@@ -1,33 +1,58 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { createContext, useContext, useMemo } from 'react';
-import { useMediaLayout } from 'use-media';
-import { useTheme } from './Theme';
+import { useMedia as useMediaEffect, useMediaLayout as useMediaLayoutEffect } from 'use-media';
+import { useTheme } from './UI';
+
+interface UseMedia {
+  isSm: boolean;
+  isMd: boolean;
+  isLg: boolean;
+  isXl: boolean;
+  mediaSize: string | null;
+}
 
 const MediaContext = createContext(null);
 
 export const MediaProvider = ({ children }) => {
+  let hook = useMediaLayoutEffect;
+
+  if (typeof window === 'undefined') {
+    hook = useMediaEffect;
+  }
+
+  const [mediaSize, setMediaSize] = useState(null);
+
   const { breakpoints } = useTheme();
   const { sm, md, lg, xl } = breakpoints;
-  const isSm = useMediaLayout({ maxWidth: md });
-  const isMd = useMediaLayout({ minWidth: md, maxWidth: lg });
-  const isLg = useMediaLayout({ minWidth: lg, maxWidth: xl });
-  const isXl = useMediaLayout({ minWidth: xl });
-  let mediaSize = false;
+
+  const isSm = hook({ maxWidth: md });
+  const isMd = hook({ minWidth: md, maxWidth: lg });
+  const isLg = hook({ minWidth: lg, maxWidth: xl });
+  const isXl = hook({ minWidth: xl });
+
+  const handleChange = (newValue: string): void => {
+    if (newValue !== mediaSize) {
+      setMediaSize(newValue);
+    }
+  };
+
   switch (true) {
     case isSm:
-      mediaSize = 'sm';
+      handleChange('sm');
       break;
     case isMd:
-      mediaSize = 'md';
+      handleChange('md');
       break;
     case isLg:
-      mediaSize = 'lg';
+      handleChange('lg');
       break;
     case isXl:
-      mediaSize = 'xl';
+      handleChange('xl');
       break;
   }
-  const value = useMemo(
+
+  const value: UseMedia = useMemo(
     () => ({
       isSm,
       isMd,
@@ -37,7 +62,8 @@ export const MediaProvider = ({ children }) => {
     }),
     [mediaSize],
   );
+
   return <MediaContext.Provider value={value}>{children}</MediaContext.Provider>;
 };
 
-export const useMedia = () => useContext(MediaContext);
+export const useMedia = (): UseMedia => useContext(MediaContext);

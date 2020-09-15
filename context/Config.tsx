@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { createContext, useContext, useMemo } from 'react';
-import type { GlobalConfig } from 'site/util/content';
+import type { ReactNode } from 'react';
+import type { GlobalConfig } from 'site/types';
 
 interface ConfigProviderProps {
   globalConfig: GlobalConfig;
-  children: any;
+  children?: ReactNode;
 }
 
 const ConfigContext = createContext(null);

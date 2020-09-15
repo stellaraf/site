@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { forwardRef, useRef } from 'react';
-import { Box, Flex, Heading } from '@chakra-ui/core';
-import { useConfig, useColorMode, useTheme } from 'site/context';
+import { Box, Flex, Heading, useMultiStyleConfig } from '@chakra-ui/core';
+import BsChevronRight from '@meronex/icons/bs/BsChevronRight';
+import { useConfig, useColorMode, useTheme, useColorValue } from 'site/context';
 import { Logo } from 'site/components/Logo';
 import { HeroCards } from 'site/components/HeroCard';
 import { Button } from 'site/components/Button';
 import { SEO } from 'site/components/Meta';
 import { useActiveSection, useRender, useNavLogo } from 'site/hooks';
-import { gradient, useVariantStyle } from 'site/styles';
+import { useGradient } from 'site/styles';
 import { getHomePage } from 'site/util/content';
 
 import type { HomepageContent, HomeSection, GlobalConfig } from 'site/util/content';
@@ -29,7 +30,6 @@ interface HomeStaticProps {
 
 type Ref = React.MutableRefObject<HTMLElement>;
 
-const heroText = { dark: 'white', light: 'original.primary' };
 const sectBorder = {
   dark: { borderBottomColor: 'original.tertiary', borderBottomWidth: '1px' },
   light: {},
@@ -39,7 +39,7 @@ const Section = forwardRef(({ section, index, ...props }: SectionProps, ref: Ref
   const { colorMode } = useColorMode();
   const { title, subtitle, body, showButton, buttonText, buttonLink } = section;
   const renderedBody = useRender(body);
-  const { buttonStyle, linkStyle, ...style } = useVariantStyle(index, colorMode);
+  const styles = useMultiStyleConfig('SyncedStyles', { variant: index });
   const padding = Object();
   if (index === 0) {
     padding.pt = '320px';
@@ -52,11 +52,11 @@ const Section = forwardRef(({ section, index, ...props }: SectionProps, ref: Ref
       ref={ref}
       as="section"
       overflow="hidden"
-      {...style}
+      sx={styles.box}
       {...padding}
       {...sectBorder[colorMode]}
       {...props}>
-      <Flex h="100%" overflow="hidden" px={24} py={16} alignItems="center" flexDir="column">
+      <Flex height="100%" overflow="hidden" px={24} py={16} alignItems="center" flexDir="column">
         <Heading as="h3" fontSize="4xl">
           {title}
         </Heading>
@@ -72,7 +72,7 @@ const Section = forwardRef(({ section, index, ...props }: SectionProps, ref: Ref
           {renderedBody}
         </Box>
         {showButton && (
-          <Button href={buttonLink} leftIcon="chevron-right" {...buttonStyle}>
+          <Button href={buttonLink} leftIcon={<BsChevronRight />} sx={styles.button}>
             {buttonText}
           </Button>
         )}
@@ -82,10 +82,10 @@ const Section = forwardRef(({ section, index, ...props }: SectionProps, ref: Ref
 });
 
 export default function Home({ pageContent }: HomeProps) {
-  const { colorMode } = useColorMode();
   const { siteSlogan, orgName } = useConfig();
   const { colors } = useTheme();
-  const logo = { dark: 'white', light: colors.original.primary };
+  const logo = useColorValue(colors.original.primary, 'white');
+  const heroText = useColorValue('original.primary', 'white');
   const sections = pageContent.sections.sort((a, b) => a.sortWeight - b.sortWeight);
   const sectionRefs = sections.map(() => useRef());
   const logoRef = useRef();
@@ -101,14 +101,14 @@ export default function Home({ pageContent }: HomeProps) {
         ref={useRef()}
         w="100%"
         minH="80vh"
-        background={gradient[colorMode]}
-        color={heroText[colorMode]}
+        background={useGradient()}
+        color={heroText}
         px={24}
         pt={32}
         zIndex={-2}>
         <Flex flexDir="column" alignItems="center">
           <Box overflowY="hidden">
-            <Logo.Typographic color={logo[colorMode]} width={512} ref={logoRef} />
+            <Logo.Typographic color={logo} width={512} ref={logoRef} />
           </Box>
           <Flex textAlign="center">
             <Heading as="h1" fontSize="2xl" fontWeight="light" mb={32}>

@@ -1,26 +1,31 @@
 import * as React from 'react';
 import { useRef } from 'react';
-import { GetStaticProps } from 'next';
 import { Box, Flex, Heading } from '@chakra-ui/core';
 import { getPage, getPageContent } from 'site/util';
 import { ContentSection, SEO } from 'site/components';
-import { useActiveSection } from 'site/hooks';
+import { useActiveSection, useRender } from 'site/hooks';
 import { useGradient } from 'site/styles';
+
+import type { GetStaticProps } from 'next';
 import type { PageProps } from 'site/util';
 
-const SLUG = 'services';
+const SLUG = 'consulting';
 
-export default function Services({ pageData, pageContent }: PageProps) {
-  const { title, subtitle } = pageData;
+interface ConsultingProps extends PageProps {}
+
+export default function Consulting({ pageData, pageContent }: ConsultingProps) {
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
   const sectionRefs = sections.map(() => useRef());
+
+  const { title, subtitle, body } = pageData;
+  const renderedBody = useRender(body);
 
   useActiveSection(sectionRefs);
 
   return (
     <>
       <SEO title={title} description={subtitle} />
-      <Box ref={useRef()} w="100%" minH="80vh" background={useGradient()} px={24} pt={32}>
+      <Box ref={useRef()} w="100%" minH="40vh" background={useGradient()} px={24} pt={32}>
         <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
           <Flex textAlign="center" flexDir="column" alignItems="center">
             <Heading as="h1" fontSize="6xl" fontWeight="light">
@@ -31,6 +36,9 @@ export default function Services({ pageData, pageContent }: PageProps) {
                 {subtitle}
               </Heading>
             )}
+            <Heading as="h3" mt={8} fontSize="lg" fontWeight="normal" maxW={[null, null, '75%']}>
+              {renderedBody}
+            </Heading>
           </Flex>
         </Flex>
       </Box>

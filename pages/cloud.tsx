@@ -2,11 +2,11 @@ import * as React from 'react';
 import { useRef } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/core';
 import { getPage, getPageContent, getGeoPoints } from 'site/util';
-import { useColorMode, useTheme } from 'site/context';
+import { useColorValue, useTheme } from 'site/context';
 import { Button, ContentSection, SEO } from 'site/components';
 import { USMap } from 'site/components/USMap';
-import { useActiveSection } from 'site/hooks';
-import { heroBtn1Variant, gradient, useDefaultVariant } from 'site/styles';
+import { useActiveSection, useRender } from 'site/hooks';
+import { useGradient } from 'site/styles';
 
 import type { GetStaticProps } from 'next';
 import type { GeoPoint, PageProps } from 'site/util';
@@ -19,22 +19,22 @@ interface CloudProps extends PageProps {
 }
 
 export default function Cloud({ geoData, geoPoints, pageData, pageContent }: CloudProps) {
-  const { colorMode } = useColorMode();
   const { colors } = useTheme();
-  const mapColor = { dark: colors.whiteAlpha[200], light: colors.blackAlpha[200] };
-  const markerColor = { dark: colors.green[400], light: colors.primary[400] };
+  const gradient = useGradient();
+  const mapColor = useColorValue(colors.blackAlpha[200], colors.whiteAlpha[200]);
+  const markerColor = useColorValue(colors.primary[400], colors.green[400]);
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
   const sectionRefs = sections.map(() => useRef());
 
-  const { title, subtitle } = pageData;
-  const defaultVariant = useDefaultVariant(colorMode);
+  const { title, subtitle, body } = pageData;
+  const renderedBody = useRender(body);
 
   useActiveSection(sectionRefs);
 
   return (
     <>
       <SEO title={title} description={subtitle} />
-      <Box ref={useRef()} w="100%" minH="80vh" background={gradient[colorMode]} px={24} pt={32}>
+      <Box ref={useRef()} w="100%" minH="80vh" background={gradient} px={24} pt={32}>
         <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
           <Flex textAlign="center" flexDir="column" alignItems="center">
             <Heading as="h1" fontSize="6xl" fontWeight="light">
@@ -46,14 +46,13 @@ export default function Cloud({ geoData, geoPoints, pageData, pageContent }: Clo
               </Heading>
             )}
             <Heading as="h3" mt={8} fontSize="lg" fontWeight="normal" maxW={[null, null, '75%']}>
-              Our strategically located data centers allow enterprises to substantially reduce
-              latency between end-users and business applications.
+              {renderedBody}
             </Heading>
             <Flex justifyContent="center" w="100%" flexWrap="wrap" mt={8}>
-              <Button mx={4} href="#" boxShadow="md" variantColor={heroBtn1Variant[colorMode]}>
+              <Button href="#" variant="heroPrimary">
                 Find Your Edge Data Center
               </Button>
-              <Button mx={4} href="#" color={defaultVariant.color} boxShadow="md">
+              <Button href="#" variant="heroSecondary">
                 Learn More
               </Button>
             </Flex>
@@ -63,8 +62,8 @@ export default function Cloud({ geoData, geoPoints, pageData, pageContent }: Clo
           maxW="75%"
           geoData={geoData}
           locations={geoPoints}
-          mapColor={mapColor[colorMode]}
-          markerColor={markerColor[colorMode]}
+          mapColor={mapColor}
+          markerColor={markerColor}
         />
       </Box>
       {sectionRefs.map((ref, i) => {

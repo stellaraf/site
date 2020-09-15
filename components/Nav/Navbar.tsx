@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
-import { Box, Flex } from '@chakra-ui/core';
+import { Box, Flex, useStyles } from '@chakra-ui/core';
 import { animated, useTransition } from 'react-spring';
+import deepmerge from 'deepmerge';
 import { Logo } from 'site/components/Logo';
 import { Button } from 'site/components/Button';
 import { Link } from 'site/components/Link';
-import { useSyncedStyle, useHeaderLogo } from 'site/styles';
+import { useHeaderLogo } from 'site/styles';
 import navConfig from './config';
 
 const Header = props => (
@@ -59,20 +60,11 @@ const activeProps = {
   transform: 'translateY(-10px)',
 };
 
-const NavLink = ({ isActive, ...props }) => {
-  const { activeColor, ...style } = props?.linkStyle ?? {};
+const NavLink = ({ isActive, styles, ...props }) => {
+  const { activeColor, ...sx } = styles ?? {};
   return (
     <Link
-      p={4}
-      mr={8}
-      pos="relative"
-      fontWeight="medium"
-      transition="all 0.2s"
-      _hover={{
-        textDecoration: 'none',
-        transform: `translateY(-2px)`,
-      }}
-      {...style}
+      sx={sx}
       _after={isActive ? { backgroundColor: activeColor, ...activeProps } : null}
       {...props}
     />
@@ -115,29 +107,28 @@ const AnimatedLogo = ({ color, show, ...props }) => {
 };
 
 export const NavbarDesktop = props => {
-  const syncedStyle = useSyncedStyle();
   const headerLogo = useHeaderLogo();
   const { pathname } = useRouter();
-  const { linkStyle, buttonStyle, ...style } = syncedStyle.value;
+  const styles = useStyles();
   return (
-    <Header {...style} {...props}>
+    <Header sx={deepmerge(styles.box, styles.header)} {...props}>
       <Navbar>
         <Box overflow="hidden" pos="absolute">
           {pathname === '/' ? (
-            <AnimatedLogo show={headerLogo.get()} color={style.color} />
+            <AnimatedLogo show={headerLogo.get()} />
           ) : (
             <Link href="/">
-              <Logo.Typographic color={style.color} width={160} height={56} pb={4} />
+              <Logo.Typographic width={160} height={56} pb={4} />
             </Link>
           )}
         </Box>
         <ItemGroup>
-          <Items side="left" linkStyle={linkStyle} />
-          <Items side="right" linkStyle={linkStyle} />
-          <NavLink href="https://docs.stellar.tech" linkStyle={linkStyle}>
+          <Items side="left" styles={styles.link} />
+          <Items side="right" styles={styles.link} />
+          <NavLink href="https://docs.stellar.tech" styles={styles.link}>
             Docs
           </NavLink>
-          <ContactButton {...buttonStyle} />
+          <ContactButton sx={styles.button} />
         </ItemGroup>
       </Navbar>
     </Header>

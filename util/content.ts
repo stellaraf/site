@@ -1,5 +1,5 @@
 import { createClient } from 'contentful';
-import type { EntryCollection, ContentTypeLink } from 'contentful';
+import type { Entry, EntryCollection, ContentTypeLink, Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 
 interface ContentRef {
@@ -11,6 +11,7 @@ export interface PageAttrs {
   slug: string;
   title: string;
   subtitle?: string;
+  body?: Document;
 }
 
 export interface Paragraph {
@@ -63,10 +64,31 @@ export interface PageProps {
   pageContent: PageContent[];
 }
 
+type Photo = Asset['fields']['file'];
+
+interface BioContent {
+  name: string;
+  title: string;
+  bio: Document;
+  photo: Asset;
+}
+
+export interface Bio extends Omit<BioContent, 'photo'> {
+  photo: Photo;
+}
+
+interface BioRaw {
+  name: string;
+  bios: Entry<BioContent>[];
+}
+
+export type BioEntry = Entry<BioRaw>;
+
 interface Colors {
   themeName: string;
   [k: string]: string;
 }
+
 export interface Fonts {
   themeName: string;
   body: string;
@@ -82,6 +104,12 @@ export interface Fonts {
   black: number;
 }
 
+interface ThemeEntry {
+  themeName: string;
+  colors: Colors;
+  fonts: Fonts;
+}
+
 export interface GlobalConfigPre {
   siteTitle: string;
   siteDescription: string;
@@ -89,10 +117,18 @@ export interface GlobalConfigPre {
   twitterHandle: string;
   orgName: string;
   titleOverrides: string[];
-  theme: { themeName: string; colors: Colors; fonts: Fonts };
+  bioList: Entry<BioContent>;
+  theme: Entry<ThemeEntry>;
 }
 
-export type GlobalConfig = Omit<GlobalConfigPre, 'theme'>;
+export interface GlobalConfig extends Omit<GlobalConfigPre, 'theme'> {
+  bioListId: string;
+  theme: { colors: Omit<Colors, 'themeName'>; fonts: Omit<Fonts, 'themeName'> };
+}
+
+const debug = (obj: any) => {
+  return console.dir(obj, { depth: null });
+};
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE ?? '',
@@ -113,6 +149,16 @@ export const contentQuery = async (
   try {
     const entries = await client.getEntries(queryParams);
     return entries;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export const getEntry = async (entryId: string, query: Object = Object()): Promise<Entry<any>> => {
+  try {
+    const entry = await client.getEntry(entryId, query);
+    return entry;
   } catch (err) {
     console.error(err);
     throw err;
@@ -205,19 +251,20 @@ const fetchRefValue = async (val: any): Promise<any> => {
   }
 };
 
-const removeKey = (key: string, obj: Object): Object => {
-  for (let i in obj) {
-    if (i === key) {
-      delete obj[i];
-    } else if (typeof obj[i] === 'object') {
-      removeKey(key, obj[i]);
+const removeKey = (oldObj, newObj, [...toRemove]) => {
+  for (let [k, v] of Object.entries(oldObj)) {
+    if (!toRemove.includes(k)) {
+      if (v.constructor.name === 'Object') {
+        v = removeKey(v, {}, toRemove);
+      }
+      newObj[k] = v;
     }
   }
-  return obj;
+  return newObj;
 };
 
-const flattenObj = (item: Object): Object => {
-  let flattened = Object(item);
+const flattenObj = (item: Object, [...del]: string[] = []): Object => {
+  let flattened = Object.keys(item).reduce(obj => removeKey(item, obj, del), {});
   const flat = (i: Object) => {
     let f = i;
     for (let [k, v] of Object.entries(i)) {
@@ -248,19 +295,19 @@ export const getHomePage = async (): Promise<HomepageContent> => {
   return pageContent;
 };
 
-export const getGlobalConfig = async (): Promise<GlobalConfigPre> => {
+export const getGlobalConfig = async (): Promise<GlobalConfig> => {
   const removeKeys = ['themeName'];
   let globalConfig = Object();
   const data = await contentQuery('globalConfiguration', { include: 4 });
   if (data.total !== 0) {
-    const parsed = await client.parseEntries(data);
-    globalConfig = parsed.items[0]?.fields;
-    globalConfig.theme = flattenObj(globalConfig.theme.fields);
+    const parsed: EntryCollection<GlobalConfigPre> = await client.parseEntries(data);
+    const { bioList, theme, ...rest } = parsed.items[0].fields;
+    Object.assign(globalConfig, {
+      theme: flattenObj(theme.fields, removeKeys),
+      bioListId: bioList.sys.id,
+      ...rest,
+    });
   }
-  for (let k of removeKeys) {
-    globalConfig = removeKey(k, globalConfig);
-  }
-  console.dir(globalConfig, { depth: null });
   return globalConfig;
 };
 
@@ -286,4 +333,10 @@ export const getPageContent = async (pageId: string): Promise<PageContent[]> => 
     }
   }
   return pageContent;
+};
+
+export const getBios = async (): Promise<BioEntry> => {
+  const { bioListId } = await getGlobalConfig();
+  const data: BioEntry = await getEntry(bioListId);
+  return data;
 };

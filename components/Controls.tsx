@@ -1,15 +1,9 @@
 import * as React from 'react';
-import { Box, Button, Stack } from '@chakra-ui/core';
-import { WiDaySunny } from 'react-icons/wi';
-import { BsMoon } from 'react-icons/bs';
-import { FaChevronUp } from 'react-icons/fa';
-import { useColorMode } from '../context';
-
-const bg = { dark: 'original.tertiary', light: 'original.secondary' };
-const color = { dark: 'original.dark', light: 'original.light' };
-
-const iconColor = { dark: 'yellow', light: 'red' };
-const icon = { dark: WiDaySunny, light: BsMoon };
+import { Box, Button, Stack, useStyles } from '@chakra-ui/core';
+import Sun from '@meronex/icons/md/MdWbSunny';
+import ChevronUp from '@meronex/icons/bs/BsChevronUp';
+import Moon from '@meronex/icons/bs/BsMoon';
+import { useColorMode, useColorValue } from 'site/context';
 
 const scrollToTop = () => {
   if (typeof window === 'undefined') {
@@ -20,8 +14,11 @@ const scrollToTop = () => {
 };
 
 export const Controls = props => {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const colorModeLabel = `Switch to ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`;
+  const { toggleColorMode } = useColorMode();
+  const styles = useStyles();
+  const colorModeIcon = useColorValue(Moon, Sun);
+  const switchTo = useColorValue('Dark', 'Light');
+  const colorModeLabel = `Switch to ${switchTo} Mode`;
   return (
     <Box
       display="flex"
@@ -35,8 +32,7 @@ export const Controls = props => {
       borderBottomLeftRadius="xl"
       h="6rem"
       py={4}
-      bg={bg[colorMode]}
-      color={color[colorMode]}
+      sx={styles.controls}
       zIndex={1}
       {...props}>
       <Stack pos="relative" flexDir="column">
@@ -48,7 +44,7 @@ export const Controls = props => {
           h="unset"
           title={colorModeLabel}
           aria-label={colorModeLabel}>
-          <Box as={icon[colorMode]} color={iconColor[colorMode]} />
+          <Box as={colorModeIcon} />
         </Button>
         <Button
           py={2}
@@ -58,7 +54,7 @@ export const Controls = props => {
           h="unset"
           aria-label="Scroll to Top"
           title="Scroll to Top">
-          <Box as={FaChevronUp} color={iconColor[colorMode]} />
+          <Box as={ChevronUp} />
         </Button>
       </Stack>
     </Box>

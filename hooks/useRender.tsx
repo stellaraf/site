@@ -45,8 +45,11 @@ const renderMark: RenderMark = {
   [MARKS.CODE]: (text: string) => <Code>{text}</Code>,
 };
 
-export const useRender = (renderable: Document) => {
+export const useRender = (renderable: Document, [...deps]: any[] = []) => {
+  if (deps.length === 0) {
+    deps = [renderable];
+  }
   return useMemo(() => documentToReactComponents(renderable, { renderNode, renderMark }), [
-    renderable,
+    ...deps,
   ]);
 };

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Document, {
+import NextDocument, {
   Html,
   Head,
   Main,
@@ -7,10 +7,11 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from 'next/document';
+import { ColorModeScript } from '@chakra-ui/core';
 
-class MyDocument extends Document {
+export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
-    const initialProps = await Document.getInitialProps(ctx);
+    const initialProps = await NextDocument.getInitialProps(ctx);
     return { ...initialProps };
   }
 
@@ -26,6 +27,7 @@ class MyDocument extends Document {
           />
         </Head>
         <body>
+          <ColorModeScript defaultColorMode="light" />
           <Main />
           <NextScript />
         </body>
@@ -33,5 +35,3 @@ class MyDocument extends Document {
     );
   }
 }
-
-export default MyDocument;

@@ -50,11 +50,11 @@ const TypographicMain = ({ color, reserved }) => {
         style={{
           transformBox: 'fill-box',
           transform: x
-            .interpolate({
+            .to({
               range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1],
               output: [0, 0.5, 1, 1.25, 1.5, 1, 0.75, 1],
             })
-            .interpolate(x => `scale(${x})`),
+            .to(x => `scale(${x})`),
         }}
         d="M317.71,123.76a10.12,10.12,0,0,1-7.07,7c3.42,1.38,6.12,5.37,7.07,10.45.94-5.08,3.64-9.07,7.07-10.45A10.08,10.08,0,0,1,317.71,123.76Z"
         fill={color}
