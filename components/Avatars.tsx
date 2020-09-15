@@ -2,10 +2,10 @@ import * as React from 'react';
 import { useState } from '@hookstate/core';
 import { Box, Divider, Flex, Image, Collapse, Button, Text } from '@chakra-ui/core';
 import { useRender } from 'site/hooks';
-import { useColorMode } from 'site/context';
+import { useColorValue } from 'site/context';
 
 import type { Bio } from 'site/util';
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps, FlexProps } from '@chakra-ui/core';
 
 type BioGroup = [Bio, Bio, Bio];
 
@@ -18,9 +18,6 @@ interface PhotoProps extends BoxProps {
   onClick: (e: any) => void;
 }
 
-const dividerColor = { dark: 'original.tertiary', light: 'gray.400' };
-const photoBorder = { dark: 'blackAlpha.400', light: 'whiteAlpha.400' };
-
 const groupBios = (bios: Bio[], size: number): BioGroup[] => {
   let groups = [];
   while (bios.length > 0) {
@@ -29,7 +26,7 @@ const groupBios = (bios: Bio[], size: number): BioGroup[] => {
   return groups;
 };
 
-const Wrapper = props => (
+const Wrapper = (props: FlexProps) => (
   <Box>
     <Flex
       justifyContent="center"
@@ -43,27 +40,29 @@ const Wrapper = props => (
   </Box>
 );
 
-const Photo = ({ attrs, onClick, ...props }: PhotoProps) => {
-  const { colorMode } = useColorMode();
-  const hovered = useState(false);
+const Photo = (props: PhotoProps) => {
+  const { attrs, onClick, ...rest } = props;
+  const photoBorder = useColorValue('whiteAlpha.400', 'blackAlpha.400');
   const { name, title, photo } = attrs;
   return (
-    <Wrapper {...props}>
+    <Wrapper {...rest}>
       <Button
         variant="unstyled"
         height="100%"
         onClick={onClick}
-        _hover={{ transform: 'scale(1.5)' }}>
+        overflow="hidden"
+        width={32}
+        rounded="full">
         <Image
           src={photo.url}
           alt={name}
-          size={32}
-          transition="transition .15s ease 0s"
           rounded="full"
-          overflow="hidden"
+          width="100%"
           borderWidth="1px"
           borderStyle="solid"
-          borderColor={photoBorder[colorMode]}
+          borderColor={photoBorder}
+          transition="transform .15s ease 0s"
+          _hover={{ transform: 'scale(1.25)' }}
         />
       </Button>
       <Text mt={4} fontSize="sm" fontWeight="medium" opacity={0.8}>
@@ -76,8 +75,9 @@ const Photo = ({ attrs, onClick, ...props }: PhotoProps) => {
   );
 };
 
-const PhotoGroup = ({ group, ...props }: PhotoGroupProps) => {
-  const { colorMode } = useColorMode();
+const PhotoGroup = (props: PhotoGroupProps) => {
+  const { group, ...rest } = props;
+  const dividerColor = useColorValue('gray.400', 'original.tertiary');
   const contentNum = useState(0);
   const show = useState(false);
   const handler = (num: number): void => {
@@ -97,13 +97,13 @@ const PhotoGroup = ({ group, ...props }: PhotoGroupProps) => {
         width="100%"
         height="100%"
         justifyContent="space-between"
-        {...props}>
+        {...rest}>
         {group.map((g, i) => (
           <Photo key={i} attrs={g} onClick={handlers[i]} />
         ))}
       </Flex>
       <Collapse isOpen={show.value} textAlign="center" px={8}>
-        <Divider borderColor={dividerColor[colorMode]} />
+        <Divider borderColor={dividerColor} />
         {renderedBio}
       </Collapse>
     </>
