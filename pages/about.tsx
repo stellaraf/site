@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { forwardRef, useMemo, useRef } from 'react';
-import { Box, Flex, Heading } from '@chakra-ui/core';
+import { forwardRef, useRef } from 'react';
+import { Box, Flex, Heading, useMultiStyleConfig } from '@chakra-ui/core';
 import { getPage, getPageContent, getBios } from 'site/util';
-import { useColorMode } from 'site/context';
 import { Avatars, SEO } from 'site/components';
 import { useActiveSection, useRender } from 'site/hooks';
-import { gradient } from 'site/styles';
+import { useGradient } from 'site/styles';
 
 import type { GetStaticProps } from 'next';
 import type { PageProps, Bio, BioEntry } from 'site/util';
@@ -31,9 +30,11 @@ const parseBios = (raw: BioEntry): Bio[] => {
   return bios;
 };
 
-const BioSection = forwardRef(({ bios, ...props }: BioSectionProps, ref) => {
+const BioSection = forwardRef<HTMLDivElement, BioSectionProps>((props, ref) => {
+  const { bios, ...rest } = props;
+  const styles = useMultiStyleConfig('SyncedStyles', { variant: 0 });
   return (
-    <Box ref={ref} as="section" p={24} overflow="hidden" {...props}>
+    <Box ref={ref} as="section" p={24} overflow="hidden" sx={styles.box} {...rest}>
       <Flex height="100%" px={24} alignItems="center" flexDir="column">
         <Heading as="h3" fontSize="4xl">
           Our Team
@@ -45,19 +46,17 @@ const BioSection = forwardRef(({ bios, ...props }: BioSectionProps, ref) => {
 });
 
 export default function About({ pageData, bios }: AboutProps) {
-  const { colorMode } = useColorMode();
   const bioRef = useRef();
-  const sectionRefs = [bioRef];
   const { title, subtitle, body } = pageData;
   const renderedBody = useRender(body);
   const parsedBios = parseBios(bios);
 
-  useActiveSection(sectionRefs);
+  useActiveSection([bioRef]);
 
   return (
     <>
       <SEO title={title} description={subtitle} />
-      <Box ref={useRef()} w="100%" minH="40vh" background={gradient[colorMode]} px={24} pt={32}>
+      <Box ref={useRef()} w="100%" minH="40vh" background={useGradient()} px={24} pt={32}>
         <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
           <Flex textAlign="center" flexDir="column" alignItems="center">
             <Heading as="h1" fontSize="6xl" fontWeight="light">
