@@ -5,24 +5,17 @@ import BsChevronRight from '@meronex/icons/bs/BsChevronRight';
 import { Button } from 'site/components/Button';
 import { usePageContent } from 'site/hooks/usePageContent';
 
-import type { PageContent } from 'site/util/content';
+import type { ContentSectionProps } from './types';
 
-type Ref = React.MutableRefObject<HTMLElement>;
-
-interface SectionProps {
-  items: PageContent;
-  index: number;
-  [k: string]: any;
-}
-
-export const ContentSection = forwardRef(({ items, index, ...props }: SectionProps, ref: Ref) => {
+export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((props, ref) => {
+  const { items, index, ...rest } = props;
   const { title, subtitle, body, showButton, buttonText, buttonLink, subsections } = usePageContent(
     items,
   );
   const styles = useMultiStyleConfig('SyncedStyles', { variant: index });
 
   return (
-    <Box ref={ref} as="section" p={24} overflow="hidden" sx={styles.box} {...props}>
+    <Box ref={ref} as="section" p={24} overflow="hidden" sx={styles.box} {...rest}>
       <Flex height="100%" overflow="hidden" px={24} align="center" direction="column">
         {title}
         {subtitle}
