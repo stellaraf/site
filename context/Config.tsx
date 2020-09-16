@@ -1,16 +1,12 @@
 import * as React from 'react';
 import { createContext, useContext, useMemo } from 'react';
-import type { ReactNode } from 'react';
-import type { GlobalConfig } from 'site/types';
 
-interface ConfigProviderProps {
-  globalConfig: GlobalConfig;
-  children?: ReactNode;
-}
+import type { GlobalConfig, ConfigProviderProps } from 'site/types';
 
 const ConfigContext = createContext(null);
 
-export const ConfigProvider = ({ globalConfig, children }: ConfigProviderProps) => {
+export const ConfigProvider = (props: ConfigProviderProps) => {
+  const { globalConfig, children } = props;
   const value = useMemo(() => globalConfig, [globalConfig]);
   return <ConfigContext.Provider value={value}>{children}</ConfigContext.Provider>;
 };

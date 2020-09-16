@@ -4,19 +4,14 @@ import { createContext, useContext, useMemo } from 'react';
 import { useMedia as useMediaEffect, useMediaLayout as useMediaLayoutEffect } from 'use-media';
 import { useTheme } from './UI';
 
-interface UseMedia {
-  isSm: boolean;
-  isMd: boolean;
-  isLg: boolean;
-  isXl: boolean;
-  mediaSize: string | null;
-}
+import type { MediaProviderProps, UseMedia } from 'site/types';
 
 const MediaContext = createContext(null);
 
-export const MediaProvider = ({ children }) => {
-  let hook = useMediaLayoutEffect;
+export const MediaProvider = (props: MediaProviderProps) => {
+  const { children } = props;
 
+  let hook = useMediaLayoutEffect;
   if (typeof window === 'undefined') {
     hook = useMediaEffect;
   }
