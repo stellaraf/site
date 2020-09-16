@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { useRouter } from 'next/router';
-import { DefaultSeo, DefaultSeoProps, NextSeo, NextSeoProps } from 'next-seo';
+import { DefaultSeo } from 'next-seo';
 import { useConfig } from 'site/context';
 
-export const BaseSEO = (props: DefaultSeoProps) => {
+import type { BaseSEOProps } from './types';
+
+export const BaseSEO = (props: BaseSEOProps) => {
   const { siteTitle, twitterHandle, siteDescription, orgName } = useConfig();
   return (
     <DefaultSeo
@@ -18,18 +19,6 @@ export const BaseSEO = (props: DefaultSeoProps) => {
         type: 'website',
         images: [{ url: '//opengraph.jpg', width: 1200, height: 630, alt: orgName }],
       }}
-      {...props}
-    />
-  );
-};
-
-export const SEO = ({ title, description, ...props }: NextSeoProps) => {
-  const { pathname } = useRouter();
-  return (
-    <NextSeo
-      title={title}
-      description={description}
-      openGraph={{ title: title, description: description, url: `/${pathname}` }}
       {...props}
     />
   );
