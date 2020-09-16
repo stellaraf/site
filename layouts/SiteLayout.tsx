@@ -1,25 +1,29 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 import { Box, StylesProvider, useMultiStyleConfig } from '@chakra-ui/core';
-import { HeaderDesktop } from 'site/components/Header';
-import { Controls } from 'site/components/Controls';
-import { Footer } from 'site/components/Footer';
-import { CalltoAction } from 'site/components/CallToAction';
+import smoothscroll from 'smoothscroll-polyfill';
+import { HeaderDesktop } from 'site/components';
+import { Controls } from 'site/components';
+import { Footer } from 'site/components';
+import { CalltoAction } from 'site/components';
 import { useSyncedStyleVariant } from 'site/styles';
 
-const Stars = dynamic(() => import('site/components/Stars').then(i => i.Stars));
+import type { BoxProps, SiteLayoutProps } from './types';
 
-import smoothscroll from 'smoothscroll-polyfill';
+const Stars = dynamic(() => import('site/components').then(i => i.Stars));
 
 if (typeof window !== 'undefined') {
   smoothscroll.polyfill();
 }
 
-const Wrapper = props => <Box id="__wrapper" minH="100vh" h="100%" zIndex={-1} {...props} />;
-const Main = props => <Box as="main" overflowX="hidden" {...props} />;
-const Root = props => <Box id="__content" h="100%" minH="50vh" {...props} />;
+const Wrapper = (props: BoxProps) => (
+  <Box id="__wrapper" minH="100vh" h="100%" zIndex={-1} {...props} />
+);
+const Main = (props: BoxProps) => <Box as="main" overflowX="hidden" {...props} />;
+const Root = (props: BoxProps) => <Box id="__content" h="100%" minH="50vh" {...props} />;
 
-export const SiteLayout = ({ children }) => {
+export const SiteLayout = (props: SiteLayoutProps) => {
+  const { children } = props;
   const variant = useSyncedStyleVariant();
   const styles = useMultiStyleConfig('SyncedStyles', { variant: variant.value });
   return (

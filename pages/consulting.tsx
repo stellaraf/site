@@ -6,14 +6,12 @@ import { ContentSection, SEO } from 'site/components';
 import { useActiveSection, useRender } from 'site/hooks';
 import { useGradient } from 'site/styles';
 
-import type { GetStaticProps } from 'next';
-import type { PageProps } from 'site/util';
+import type { PageProps, GetStaticProps } from 'site/types';
 
 const SLUG = 'consulting';
 
-interface ConsultingProps extends PageProps {}
-
-export default function Consulting({ pageData, pageContent }: ConsultingProps) {
+export default function Consulting(props: PageProps) {
+  const { pageData, pageContent } = props;
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
   const sectionRefs = sections.map(() => useRef());
 

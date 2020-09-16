@@ -7,18 +7,9 @@ import { useActiveSection, useRender } from 'site/hooks';
 import { useGradient } from 'site/styles';
 
 import type { GetStaticProps } from 'next';
-import type { PageProps, Bio, BioEntry } from 'site/util';
+import type { AboutProps, BioSectionProps, BioEntry, Bio } from 'site/types';
 
 const SLUG = 'about';
-
-interface AboutProps extends PageProps {
-  bios: BioEntry;
-}
-
-interface BioSectionProps {
-  bios: Bio[];
-  [k: string]: any;
-}
 
 const parseBios = (raw: BioEntry): Bio[] => {
   let bios = [];
@@ -45,7 +36,8 @@ const BioSection = forwardRef<HTMLDivElement, BioSectionProps>((props, ref) => {
   );
 });
 
-export default function About({ pageData, bios }: AboutProps) {
+export default function About(props: AboutProps) {
+  const { pageData, bios } = props;
   const bioRef = useRef();
   const { title, subtitle, body } = pageData;
   const renderedBody = useRender(body);
