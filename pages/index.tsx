@@ -91,7 +91,6 @@ export default function Home({ pageContent }: HomeProps) {
   const logoRef = useRef();
 
   useNavLogo(logoRef);
-
   useActiveSection(sectionRefs);
 
   return (
@@ -108,7 +107,7 @@ export default function Home({ pageContent }: HomeProps) {
         zIndex={-2}>
         <Flex flexDir="column" alignItems="center">
           <Box overflowY="hidden">
-            <Logo.Typographic color={logo} width={512} ref={logoRef} />
+            <Logo.Text color={logo} width={512} ref={logoRef} />
           </Box>
           <Flex textAlign="center">
             <Heading as="h1" fontSize="2xl" fontWeight="light" mb={32}>
