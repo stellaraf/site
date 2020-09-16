@@ -1,19 +1,26 @@
 import * as React from 'react';
 import { Box, Button, Stack, useStyles } from '@chakra-ui/core';
 import Sun from '@meronex/icons/md/MdWbSunny';
-import ChevronUp from '@meronex/icons/bs/BsChevronUp';
 import Moon from '@meronex/icons/bs/BsMoon';
+import ChevronUp from '@meronex/icons/bs/BsChevronUp';
 import { useColorMode, useColorValue } from 'site/context';
 
-const scrollToTop = () => {
+import type { ControlsProps } from './types';
+
+/**
+ * SSR-safely smooth-scroll to the top of the viewport.
+ */
+const scrollToTop = (): void => {
   if (typeof window === 'undefined') {
     return;
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  window.document.activeElement.blur();
+  if (window.document.activeElement instanceof HTMLElement) {
+    window.document.activeElement.blur();
+  }
 };
 
-export const Controls = props => {
+export const Controls = (props: ControlsProps) => {
   const { toggleColorMode } = useColorMode();
   const styles = useStyles();
   const colorModeIcon = useColorValue(Moon, Sun);
@@ -21,39 +28,39 @@ export const Controls = props => {
   const colorModeLabel = `Switch to ${switchTo} Mode`;
   return (
     <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
+      py={4}
+      right={0}
+      zIndex={1}
       pos="fixed"
+      width="2rem"
+      height="6rem"
       bottom="25px"
-      right="0"
-      w="2rem"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
       borderTopLeftRadius="xl"
       borderBottomLeftRadius="xl"
-      h="6rem"
-      py={4}
       sx={styles.controls}
-      zIndex={1}
       {...props}>
       <Stack pos="relative" flexDir="column">
         <Button
           py={2}
-          onClick={toggleColorMode}
-          variant="unstyled"
           minW="unset"
-          h="unset"
+          height="unset"
+          variant="unstyled"
           title={colorModeLabel}
+          onClick={toggleColorMode}
           aria-label={colorModeLabel}>
           <Box as={colorModeIcon} />
         </Button>
         <Button
           py={2}
-          onClick={scrollToTop}
-          variant="unstyled"
           minW="unset"
-          h="unset"
-          aria-label="Scroll to Top"
-          title="Scroll to Top">
+          height="unset"
+          variant="unstyled"
+          onClick={scrollToTop}
+          title="Scroll to Top"
+          aria-label="Scroll to Top">
           <Box as={ChevronUp} />
         </Button>
       </Stack>
