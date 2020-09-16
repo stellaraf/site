@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Box, Flex, useStyles } from '@chakra-ui/core';
 import { merge } from '@chakra-ui/utils';
 import { Logo } from 'site/components/Logo';
-import { Link } from 'site/components/Link';
+import { Link } from 'site/components';
 import { useHeaderLogo } from 'site/styles';
 import { NavLink, LinkGroup, ContactButton } from './Links';
 import { HeaderLogo } from './Logo';
@@ -56,7 +56,7 @@ export const HeaderDesktop = props => {
             <HeaderLogo show={headerLogo.value} />
           ) : (
             <Link href="/">
-              <Logo.Typographic width={160} height={56} pb={4} />
+              <Logo.Text width={160} height={56} pb={4} />
             </Link>
           )}
         </Box>
