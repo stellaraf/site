@@ -1,12 +1,7 @@
-import * as React from 'react';
 import { useMemo } from 'react';
-import { Box } from '@chakra-ui/core';
-import Particles from 'react-particles-js';
-import { useColorValue } from 'site/context';
-import type { ParticlesProps } from 'react-particles-js';
-import type { BoxProps } from '@chakra-ui/core';
+import type { ParticlesConfig } from './types';
 
-const useStarsConfig = () =>
+export const useStarsConfig = (): ParticlesConfig =>
   useMemo(
     () => ({
       particles: {
@@ -67,25 +62,3 @@ const useStarsConfig = () =>
     }),
     [],
   );
-
-export const Stars = (props: BoxProps) => {
-  const Base = (particleProps: ParticlesProps) => (
-    <Particles params={useStarsConfig()} {...particleProps} />
-  );
-  const starOpacity: number = useColorValue(0, 1);
-  return (
-    <Box
-      as={Base}
-      top={0}
-      left={0}
-      right={0}
-      bottom={0}
-      zIndex={0}
-      position="fixed"
-      className="__stars-container"
-      opacity={starOpacity ?? 0}
-      transition="opacity 500ms ease-in"
-      {...props}
-    />
-  );
-};
