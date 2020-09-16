@@ -12,8 +12,8 @@ const LogoText = forwardRef<HTMLDivElement, LogoProps>((props, ref) => {
   return (
     <Box ref={ref} {...rest}>
       <svg
-        height={`${height}`}
-        width={`${width ?? size}`}
+        height={height ? `${height}` : null}
+        width={width ? `${width}` : size ? `${size}` : null}
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMinYMin meet"
         viewBox={showReserved ? '0 0 400 150' : '0 0 380 150'}>
