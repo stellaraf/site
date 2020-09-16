@@ -10,67 +10,15 @@ import { extendTheme } from '@chakra-ui/core';
 import { mode } from '@chakra-ui/theme-tools';
 import { merge } from '@chakra-ui/utils';
 import { syncedStyles, heroButtons } from 'site/styles';
-import type { Theme as DefaultTheme } from '@chakra-ui/theme';
-import type { Styles } from '@chakra-ui/theme-tools';
-import type { ColorHues } from '@chakra-ui/theme/dist/types/foundations/colors';
-import type { Fonts as ConfigFonts } from 'site/util/content';
 
-interface DefaultColors {
-  transparent: string;
-  current: string;
-  black: string;
-  white: string;
-  whiteAlpha: ColorHues;
-  blackAlpha: ColorHues;
-  gray: ColorHues;
-  red: ColorHues;
-  orange: ColorHues;
-  yellow: ColorHues;
-  green: ColorHues;
-  teal: ColorHues;
-  blue: ColorHues;
-  cyan: ColorHues;
-  purple: ColorHues;
-  pink: ColorHues;
-  linkedin: ColorHues;
-  facebook: ColorHues;
-  messenger: ColorHues;
-  whatsapp: ColorHues;
-  twitter: ColorHues;
-  telegram: ColorHues;
-}
-
-interface ThemeColors {
-  primary: ColorHues;
-  secondary: ColorHues;
-  tertiary: ColorHues;
-  dark: ColorHues;
-  light: ColorHues;
-  original: { [key: string]: string };
-}
-
-interface Breakpoints {
-  [n: number]: string;
-  sm: string;
-  md: string;
-  lg: string;
-  xl: string;
-}
-
-type CustomColors = DefaultColors & ThemeColors;
-
-export interface CustomTheme extends Omit<DefaultTheme, 'colors' | 'breakpoints'> {
-  colors: CustomColors;
-  breakpoints: Breakpoints;
-}
-
-interface ThemeFonts {
-  body: string;
-  heading: string;
-  mono: string;
-}
-
-type FontWeights = DefaultTheme['fontWeights'];
+import type {
+  ConfigFonts,
+  CustomColors,
+  CustomTheme,
+  ThemeFonts,
+  FontWeights,
+  Styles,
+} from 'site/types';
 
 const radii = {
   none: '0',
@@ -98,8 +46,8 @@ const fontSizes = {
   '6xl': '6rem',
 };
 
-export const isLight = color => readableColorIsBlack(color);
-export const isDark = color => !readableColorIsBlack(color);
+export const isLight = (color: string) => readableColorIsBlack(color);
+export const isDark = (color: string) => !readableColorIsBlack(color);
 
 export const opposingColor = (theme, color) => {
   if (color.includes('.')) {
