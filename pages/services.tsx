@@ -6,11 +6,13 @@ import { getPage, getPageContent } from 'site/util';
 import { ContentSection, SEO } from 'site/components';
 import { useActiveSection } from 'site/hooks';
 import { useGradient } from 'site/styles';
-import type { PageProps } from 'site/util';
+
+import type { PageProps } from 'site/types';
 
 const SLUG = 'services';
 
-export default function Services({ pageData, pageContent }: PageProps) {
+export default function Services(props: PageProps) {
+  const { pageData, pageContent } = props;
   const { title, subtitle } = pageData;
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
   const sectionRefs = sections.map(() => useRef());

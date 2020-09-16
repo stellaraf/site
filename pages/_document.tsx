@@ -22,8 +22,8 @@ export default class Document extends NextDocument {
           <link rel="preconnect" href="https://www.google-analytics.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
-            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Open+Sans:wght@300;400;600;800&display=swap"
             rel="stylesheet"
+            href={`https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Open+Sans:wght@300;400;600;800&display=swap`}
           />
         </Head>
         <body>

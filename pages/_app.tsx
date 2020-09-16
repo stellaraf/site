@@ -1,25 +1,15 @@
 import * as React from 'react';
-import { useMemo } from 'react';
-import { BaseSEO } from 'site/components/Meta';
+import { BaseSEO } from 'site/components';
 import { Provider } from 'site/context';
 import { SiteLayout } from 'site/layouts';
-import { getGlobalConfig, makeTheme } from 'site/util';
-import type { ReactNode } from 'react';
-import type { NextPage } from 'next';
-import type { AppProps } from 'next/app';
-import type { GlobalConfig } from 'site/types';
+import { getGlobalConfig } from 'site/util';
 
-export interface SiteProps extends AppProps {
-  appProps: GlobalConfig;
-  children?: ReactNode;
-}
+import type { SiteProps, NextPage } from 'site/types';
 
-const Site: NextPage = ({ Component, pageProps, appProps }: SiteProps) => {
-  const { theme: themeConfig, ...globalConfig } = appProps;
-
-  const theme = useMemo(() => makeTheme(themeConfig), [themeConfig]);
+const Site: NextPage = (props: SiteProps) => {
+  const { Component, pageProps, appProps } = props;
   return (
-    <Provider globalConfig={globalConfig} theme={theme}>
+    <Provider appConfig={appProps}>
       <BaseSEO />
       <SiteLayout>
         <Component {...pageProps} />
@@ -28,7 +18,7 @@ const Site: NextPage = ({ Component, pageProps, appProps }: SiteProps) => {
   );
 };
 
-Site.getInitialProps = async ({ req }) => {
+Site.getInitialProps = async () => {
   let globalConfig = Object();
   globalConfig = await getGlobalConfig();
   return { appProps: globalConfig };

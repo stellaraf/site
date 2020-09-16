@@ -2,41 +2,23 @@ import * as React from 'react';
 import { forwardRef, useRef } from 'react';
 import { Box, Flex, Heading, useMultiStyleConfig } from '@chakra-ui/core';
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight';
-import { useConfig, useColorMode, useTheme, useColorValue } from 'site/context';
+import { useConfig, useTheme, useColorValue } from 'site/context';
 import { Logo } from 'site/components/Logo';
 import { HeroCards } from 'site/components/HeroCard';
 import { Button } from 'site/components/Button';
-import { SEO } from 'site/components/Meta';
+import { SEO } from 'site/components';
 import { useActiveSection, useRender, useNavLogo } from 'site/hooks';
 import { useGradient } from 'site/styles';
 import { getHomePage } from 'site/util/content';
 
-import type { HomepageContent, HomeSection, GlobalConfig } from 'site/util/content';
-import type { GetStaticProps } from 'next';
+import type { HomeProps, SectionProps, HomeStaticProps, GetStaticProps } from 'site/types';
 
-interface HomeProps {
-  pageContent: HomepageContent;
-  globalConfig: GlobalConfig;
-}
-interface SectionProps {
-  section: HomeSection;
-  index: number;
-  [k: string]: any;
-}
-
-interface HomeStaticProps {
-  props: { pageContent: HomeProps };
-}
-
-type Ref = React.MutableRefObject<HTMLElement>;
-
-const sectBorder = {
-  dark: { borderBottomColor: 'original.tertiary', borderBottomWidth: '1px' },
-  light: {},
-};
-
-const Section = forwardRef(({ section, index, ...props }: SectionProps, ref: Ref) => {
-  const { colorMode } = useColorMode();
+const Section = forwardRef<HTMLElement, SectionProps>((props, ref) => {
+  const { section, index, ...rest } = props;
+  const sectBorder = useColorValue(
+    {},
+    { borderBottomColor: 'original.tertiary', borderBottomWidth: '1px' },
+  );
   const { title, subtitle, body, showButton, buttonText, buttonLink } = section;
   const renderedBody = useRender(body);
   const styles = useMultiStyleConfig('SyncedStyles', { variant: index });
@@ -54,8 +36,8 @@ const Section = forwardRef(({ section, index, ...props }: SectionProps, ref: Ref
       overflow="hidden"
       sx={styles.box}
       {...padding}
-      {...sectBorder[colorMode]}
-      {...props}>
+      {...sectBorder}
+      {...rest}>
       <Flex height="100%" overflow="hidden" px={24} py={16} alignItems="center" flexDir="column">
         <Heading as="h3" fontSize="4xl">
           {title}
@@ -81,7 +63,8 @@ const Section = forwardRef(({ section, index, ...props }: SectionProps, ref: Ref
   );
 });
 
-export default function Home({ pageContent }: HomeProps) {
+export default function Home(props: HomeProps) {
+  const { pageContent } = props;
   const { siteSlogan, orgName } = useConfig();
   const { colors } = useTheme();
   const logo = useColorValue(colors.original.primary, 'white');

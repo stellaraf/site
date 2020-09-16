@@ -8,15 +8,9 @@ import { USMap } from 'site/components/USMap';
 import { useActiveSection, useRender } from 'site/hooks';
 import { useGradient } from 'site/styles';
 
-import type { GetStaticProps } from 'next';
-import type { GeoPoint, PageProps } from 'site/util';
+import type { CloudProps, GetStaticProps } from 'site/types';
 
 const SLUG = 'cloud';
-
-interface CloudProps extends PageProps {
-  geoData: object;
-  geoPoints: GeoPoint[];
-}
 
 export default function Cloud({ geoData, geoPoints, pageData, pageContent }: CloudProps) {
   const { colors } = useTheme();
