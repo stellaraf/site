@@ -9,7 +9,7 @@ export const HeaderLogo = (props: HeaderLogoProps) => {
   const { color = 'currentColor', show } = props;
   const LogoShown = (
     <Link href="/">
-      <Logo.Typographic color={color} width={160} height={56} pb={4} />
+      <Logo.Text color={color} width={160} height={56} pb={4} />
     </Link>
   );
   const transitions = useTransition([null, LogoShown][+show], {
