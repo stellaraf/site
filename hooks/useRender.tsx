@@ -3,8 +3,8 @@ import { useMemo } from 'react';
 import { Box, Divider } from '@chakra-ui/core';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Link } from 'site/components/Link';
-import { H1, H2, H3, H4, H5, H6, P, BlockQuote, Ul, Ol, Li, Code } from 'site/components/RichText';
+import { Link } from 'site/components';
+import { H1, H2, H3, H4, H5, H6, P, BlockQuote, Ul, Ol, Li, Code } from 'site/components';
 
 import type { RenderNode, RenderMark } from '@contentful/rich-text-react-renderer';
 import type { Document, Inline } from '@contentful/rich-text-types';
