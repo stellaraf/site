@@ -5,12 +5,43 @@ interface ContentRef {
   sys: ContentTypeLink;
 }
 
+export interface FooterLink {
+  title: string;
+  href: string;
+  parent?: string;
+}
+
+export interface FooterGroupEntry {
+  title: string;
+  sortWeight: number;
+}
+
+export interface FooterItem extends FooterLink {
+  footerGroup: FooterGroupEntry;
+}
+
+export interface FooterGroup {
+  title: string;
+  items: FooterLink[];
+}
+
 export interface PageAttrs {
   id: string;
   slug: string;
   title: string;
   subtitle?: string;
   body?: Document;
+  footerGroup?: ContentRef;
+  footerTitle?: string;
+}
+
+export interface PageParsed extends Omit<PageAttrs, 'footerGroup'> {
+  footerGroup: FooterGroupEntry;
+}
+
+export interface PageContentParsed extends Omit<PageContent, 'footerGroup' | 'page'> {
+  footerGroup: FooterGroupEntry;
+  page: PageAttrs;
 }
 
 export interface Paragraph {
@@ -28,6 +59,8 @@ export interface PageContent {
   button: boolean;
   buttonText?: string;
   buttonLink?: string;
+  footerGroup?: ContentRef;
+  footerTitle?: string;
 }
 
 export interface HomeSection {
@@ -130,4 +163,4 @@ export interface GlobalConfig extends Omit<GlobalConfigPre, 'theme'> {
   theme: ThemeConfig;
 }
 
-export type { EntryCollection } from 'contentful';
+export type { Entry, EntryCollection } from 'contentful';

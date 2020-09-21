@@ -1,4 +1,5 @@
 import { createClient } from 'contentful';
+import { slug } from './slug';
 
 import type {
   PageAttrs,
@@ -8,7 +9,11 @@ import type {
   BioEntry,
   GlobalConfigPre,
   GlobalConfig,
+  Entry,
   EntryCollection,
+  PageParsed,
+  PageContentParsed,
+  FooterItem,
 } from 'site/types';
 
 const debug = (obj: any) => {
@@ -136,22 +141,23 @@ const fetchRefValue = async (val: any): Promise<any> => {
   }
 };
 
-const removeKey = (oldObj, newObj, [...toRemove]) => {
+const removeKey = (oldObj: object, newObj: object, [...toRemove]: string[]): object => {
+  let outputObj = Object(newObj);
   for (let [k, v] of Object.entries(oldObj)) {
     if (!toRemove.includes(k)) {
       if (v.constructor.name === 'Object') {
         v = removeKey(v, {}, toRemove);
       }
-      newObj[k] = v;
+      outputObj[k] = v;
     }
   }
-  return newObj;
+  return outputObj;
 };
 
-const flattenObj = (item: Object, [...del]: string[] = []): Object => {
+const flattenObj = (item: object, [...del]: string[] = []): object => {
   let flattened = Object.keys(item).reduce(obj => removeKey(item, obj, del), {});
-  const flat = (i: Object) => {
-    let f = i;
+  const flat = (i: object): object => {
+    let f = Object(i);
     for (let [k, v] of Object.entries(i)) {
       f[k] = v.fields;
     }
@@ -196,10 +202,52 @@ export const getGlobalConfig = async (): Promise<GlobalConfig> => {
   return globalConfig;
 };
 
+function* parseEntryItems(items: Entry<PageAttrs | PageContent>[], includes): Generator<any> {
+  for (let i of items) {
+    let item = Object();
+    for (let [k, v] of Object.entries(i.fields)) {
+      item[k] = getRefValue(v, includes);
+    }
+    yield item;
+  }
+}
+
+function isPageAttrs(obj: any): obj is PageAttrs {
+  return 'slug' in obj;
+}
+
+function isPageContent(obj: any): obj is PageContent {
+  return 'paragraphs' in obj;
+}
+
+function* parseFooterItems(data: EntryCollection<PageAttrs | PageContent>): Generator<FooterItem> {
+  if (data.total !== 0) {
+    const items = data.items;
+    const includes = data.includes;
+    const entryItems: Generator<PageParsed | PageContentParsed> = parseEntryItems(items, includes);
+    for (let entryItem of entryItems) {
+      let footerItem = {
+        footerGroup: {
+          title: entryItem.footerGroup.title,
+          sortWeight: entryItem.footerGroup.sortWeight,
+        },
+        title: entryItem.footerTitle ?? entryItem.title,
+        href: '#',
+      };
+      if (entryItem.footerGroup && isPageAttrs(entryItem)) {
+        footerItem.href = `/${entryItem.slug}`;
+      } else if (entryItem.footerGroup && isPageContent(entryItem)) {
+        footerItem.href = slug(entryItem.title, entryItem.page.slug);
+      }
+      yield footerItem;
+    }
+  }
+}
+
 /**
  * Get content for a specific page by its sys.id
  */
-export const getPageContent = async (pageId: string): Promise<PageContent[]> => {
+export async function getPageContent(pageId: string): Promise<PageContent[]> {
   let pageContent = [];
   const data = await contentQuery('pageContent', {
     'fields.page.sys.id': pageId,
@@ -218,7 +266,17 @@ export const getPageContent = async (pageId: string): Promise<PageContent[]> => 
     }
   }
   return pageContent;
-};
+}
+
+export async function getFooterItems(): Promise<FooterItem[]> {
+  let footerItems = [];
+  const pageContentData = await contentQuery('pageContent', { 'fields.footerGroup[exists]': true });
+  const pageData = await contentQuery('page', { 'fields.footerGroup[exists]': true });
+  for (let data of [pageContentData, pageData]) {
+    footerItems.push(...parseFooterItems(data));
+  }
+  return footerItems;
+}
 
 export const getBios = async (): Promise<BioEntry> => {
   const { bioListId } = await getGlobalConfig();

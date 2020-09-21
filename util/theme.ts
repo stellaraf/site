@@ -154,6 +154,7 @@ const globalStyles = (props): Styles => {
     'ul',
     'li',
     'span',
+    'label',
     'button',
     'h1',
     'h2',

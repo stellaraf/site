@@ -23,7 +23,7 @@ const Main = (props: BoxProps) => <Box as="main" overflowX="hidden" {...props} /
 const Root = (props: BoxProps) => <Box id="__content" h="100%" minH="50vh" {...props} />;
 
 export const SiteLayout = (props: SiteLayoutProps) => {
-  const { children } = props;
+  const { children, footerGroups } = props;
   const variant = useSyncedStyleVariant();
   const styles = useMultiStyleConfig('SyncedStyles', { variant: variant.value });
   return (
@@ -34,7 +34,7 @@ export const SiteLayout = (props: SiteLayoutProps) => {
           <Root>{children}</Root>
         </Main>
         <CalltoAction />
-        <Footer />
+        <Footer groups={footerGroups} />
         <Controls />
         <Stars />
       </StylesProvider>
