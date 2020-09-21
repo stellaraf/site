@@ -26,6 +26,7 @@
     "react-simple-maps": "^2.1.2",
     "react-spring": "^9.0.0-rc.3",
     "site": "link:./",
+    "slugify": "^1.4.5",
     "smoothscroll-polyfill": "^0.4.4",
     "swr": "^0.2.3",
     "title": "^3.4.2",

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Box, Grid, Heading } from '@chakra-ui/core';
-import { useRender, useTitle } from 'site/hooks';
+import { useRender, useTitle, useSlug } from 'site/hooks';
 import type { Document } from '@contentful/rich-text-types';
-import type { PageContent } from 'site/util/content';
+import type { PageContent } from 'site/types';
 
 interface SubsectionProps {
   title: string;
@@ -20,7 +20,12 @@ interface RenderedPageContent {
   subsections: React.FC;
 }
 
-const Title = props => <Heading as="h3" fontSize="4xl" {...props} />;
+const Title = ({ id, ...props }) => (
+  <>
+    <Box id={id} as="span" pos="relative" top={-130} visibility="hidden" />
+    <Heading as="h3" fontSize="4xl" {...props} />
+  </>
+);
 const Subtitle = props => <Heading as="h4" fontSize="xl" fontWeight="light" {...props} />;
 const Body = props => (
   <Box
@@ -67,8 +72,9 @@ export const usePageContent = (rawContent: PageContent): RenderedPageContent => 
     } = rawContent ?? {};
 
     let subsections = null;
+    const slug = useSlug(title, [rawContent]);
 
-    obj.title = <Title>{titleMe(title)}</Title>;
+    obj.title = <Title id={slug}>{titleMe(title)}</Title>;
     obj.subtitle = <Subtitle>{titleMe(subtitle)}</Subtitle>;
     obj.buttonText = titleMe(buttonText);
     obj.buttonLink = buttonLink;
