@@ -23,3 +23,5 @@ export type Tuple<ElementT, LengthT extends number, OutputT extends any[] = []> 
 }[OutputT['length'] extends LengthT ? 0 : 1];
 
 export type { GetStaticProps } from 'next';
+
+export type Dict = Record<string, any>;

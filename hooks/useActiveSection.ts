@@ -15,7 +15,7 @@ export const useActiveSection = ([...sectionRefs]: Ref[]) => {
   const handleChange = newState => {
     variant.set(prev => {
       if (prev !== newState) {
-        return newState;
+        return newState % last;
       } else {
         return prev;
       }

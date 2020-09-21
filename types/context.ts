@@ -5,7 +5,6 @@ import type { CustomTheme } from './theme';
 /**
  * Root Provider Props
  */
-
 export interface ProviderProps {
   appConfig: GlobalConfig;
   children: ReactNode;
