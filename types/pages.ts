@@ -3,20 +3,19 @@ import type { AppProps } from 'next/app';
 import type { BoxProps } from '@chakra-ui/core';
 import type {
   HomepageContent,
-  HomeSection,
   GlobalConfig,
   GeoPoint,
   PageProps,
   Bio,
   BioEntry,
+  FooterItem,
 } from 'site/types';
 
 /**
  * _app (All Pages) Types
  */
-
 export interface SiteProps extends AppProps {
-  appProps: GlobalConfig;
+  appProps: { globalConfig: GlobalConfig; footerGroups: FooterItem[] };
   children?: ReactNode;
 }
 
@@ -30,12 +29,6 @@ export interface HomeProps {
 
 export interface HomeStaticProps {
   props: { pageContent: HomeProps };
-}
-
-export interface SectionProps {
-  section: HomeSection;
-  index: number;
-  [k: string]: any;
 }
 
 /**
@@ -60,5 +53,4 @@ export interface BioSectionProps extends BoxProps {
 /**
  * Passthrough Types
  */
-
 export type { NextPage } from 'next';

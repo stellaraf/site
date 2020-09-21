@@ -2,9 +2,8 @@ import * as React from 'react';
 import { forwardRef, useRef } from 'react';
 import { Box, Flex, Heading, useMultiStyleConfig } from '@chakra-ui/core';
 import { getPage, getPageContent, getBios } from 'site/util';
-import { Avatars, SEO } from 'site/components';
+import { Avatars, Hero, SEO } from 'site/components';
 import { useActiveSection, useRender } from 'site/hooks';
-import { useGradient } from 'site/styles';
 
 import type { GetStaticProps } from 'next';
 import type { AboutProps, BioSectionProps, BioEntry, Bio } from 'site/types';
@@ -40,6 +39,7 @@ export default function About(props: AboutProps) {
   const { pageData, bios } = props;
   const bioRef = useRef();
   const { title, subtitle, body } = pageData;
+  const headerRef = useRef();
   const renderedBody = useRender(body);
   const parsedBios = parseBios(bios);
 
@@ -48,23 +48,7 @@ export default function About(props: AboutProps) {
   return (
     <>
       <SEO title={title} description={subtitle} />
-      <Box ref={useRef()} w="100%" minH="40vh" background={useGradient()} px={24} pt={32}>
-        <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
-          <Flex textAlign="center" flexDir="column" alignItems="center">
-            <Heading as="h1" fontSize="6xl" fontWeight="light">
-              {title}
-            </Heading>
-            {subtitle && (
-              <Heading as="h2" fontSize="3xl" fontWeight="light">
-                {subtitle}
-              </Heading>
-            )}
-            <Box mt={8} fontSize="lg" fontWeight="normal" maxW={[null, null, '75%']}>
-              {renderedBody}
-            </Box>
-          </Flex>
-        </Flex>
-      </Box>
+      <Hero ref={headerRef} title={title} subtitle={subtitle} body={renderedBody} />
       <BioSection ref={bioRef} bios={parsedBios} />
     </>
   );

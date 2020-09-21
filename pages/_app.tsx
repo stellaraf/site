@@ -2,16 +2,17 @@ import * as React from 'react';
 import { BaseSEO } from 'site/components';
 import { Provider } from 'site/context';
 import { SiteLayout } from 'site/layouts';
-import { getGlobalConfig } from 'site/util';
+import { getGlobalConfig, getFooterItems } from 'site/util';
 
-import type { SiteProps, NextPage } from 'site/types';
+import type { SiteProps } from 'site/types';
 
-const Site: NextPage = (props: SiteProps) => {
+const Site = (props: SiteProps) => {
   const { Component, pageProps, appProps } = props;
+  const { globalConfig, footerGroups } = appProps;
   return (
-    <Provider appConfig={appProps}>
+    <Provider appConfig={globalConfig}>
       <BaseSEO />
-      <SiteLayout>
+      <SiteLayout footerGroups={footerGroups}>
         <Component {...pageProps} />
       </SiteLayout>
     </Provider>
@@ -20,8 +21,10 @@ const Site: NextPage = (props: SiteProps) => {
 
 Site.getInitialProps = async () => {
   let globalConfig = Object();
+  let footerGroups = Object();
   globalConfig = await getGlobalConfig();
-  return { appProps: globalConfig };
+  footerGroups = await getFooterItems();
+  return { appProps: { globalConfig, footerGroups } };
 };
 
 export default Site;
