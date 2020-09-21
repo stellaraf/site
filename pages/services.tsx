@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { useRef } from 'react';
 import { GetStaticProps } from 'next';
-import { Box, Flex, Heading } from '@chakra-ui/core';
 import { getPage, getPageContent } from 'site/util';
-import { ContentSection, SEO } from 'site/components';
+import { ContentSection, Hero, SEO } from 'site/components';
 import { useActiveSection } from 'site/hooks';
-import { useGradient } from 'site/styles';
 
 import type { PageProps } from 'site/types';
 
@@ -22,22 +20,16 @@ export default function Services(props: PageProps) {
   return (
     <>
       <SEO title={title} description={subtitle} />
-      <Box ref={useRef()} w="100%" minH="80vh" background={useGradient()} px={24} pt={32}>
-        <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
-          <Flex textAlign="center" flexDir="column" alignItems="center">
-            <Heading as="h1" fontSize="6xl" fontWeight="light">
-              {title}
-            </Heading>
-            {subtitle && (
-              <Heading as="h2" fontSize="3xl" fontWeight="light">
-                {subtitle}
-              </Heading>
-            )}
-          </Flex>
-        </Flex>
-      </Box>
+      <Hero title={title} subtitle={subtitle} />
       {sectionRefs.map((ref, i) => {
-        return <ContentSection ref={ref} items={sections[i]} index={i} key={i} />;
+        return (
+          <ContentSection
+            ref={ref}
+            items={sections[i]}
+            index={i % (sectionRefs.length - 1)}
+            key={i}
+          />
+        );
       })}
     </>
   );
