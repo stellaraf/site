@@ -9,20 +9,27 @@ export interface FooterLink {
   title: string;
   href: string;
   parent?: string;
+  sortWeight: number;
+}
+
+export interface ExternalFooterLink {
+  title: string;
+  href: string;
+  sortWeight?: number;
 }
 
 export interface FooterGroupEntry {
   title: string;
   sortWeight: number;
+  externalLinks?: ContentRef[];
+}
+
+export interface FooterGroup extends Omit<FooterGroupEntry, 'externalLinks'> {
+  externalLinks?: ExternalFooterLink[];
 }
 
 export interface FooterItem extends FooterLink {
   footerGroup: FooterGroupEntry;
-}
-
-export interface FooterGroup {
-  title: string;
-  items: FooterLink[];
 }
 
 export interface PageAttrs {
@@ -162,5 +169,7 @@ export interface GlobalConfig extends Omit<GlobalConfigPre, 'theme'> {
   bioListId: string;
   theme: ThemeConfig;
 }
+
+export type AnyEntry = Entry<PageAttrs | PageContent | FooterGroupEntry | BioRaw>;
 
 export type { Entry, EntryCollection } from 'contentful';

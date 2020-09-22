@@ -14,6 +14,9 @@ import type {
   PageParsed,
   PageContentParsed,
   FooterItem,
+  AnyEntry,
+  FooterGroup,
+  FooterGroupEntry,
 } from 'site/types';
 
 const debug = (obj: any) => {
@@ -202,7 +205,10 @@ export const getGlobalConfig = async (): Promise<GlobalConfig> => {
   return globalConfig;
 };
 
-function* parseEntryItems(items: Entry<PageAttrs | PageContent>[], includes): Generator<any> {
+/**
+ * Recursively parse the data from referenced entries.
+ */
+function* parseEntryItems(items: AnyEntry[], includes: EntryCollection<any>): Generator<any> {
   for (let i of items) {
     let item = Object();
     for (let [k, v] of Object.entries(i.fields)) {
@@ -224,22 +230,67 @@ function* parseFooterItems(data: EntryCollection<PageAttrs | PageContent>): Gene
   if (data.total !== 0) {
     const items = data.items;
     const includes = data.includes;
+
+    // Page OR Page Content if it has a footerGroup
     const entryItems: Generator<PageParsed | PageContentParsed> = parseEntryItems(items, includes);
+
     for (let entryItem of entryItems) {
+      // Single footer link
       let footerItem = {
+        // Reference to parent group
         footerGroup: {
           title: entryItem.footerGroup.title,
           sortWeight: entryItem.footerGroup.sortWeight,
         },
+        // Link attributes
         title: entryItem.footerTitle ?? entryItem.title,
         href: '#',
+        // Set a very high default sortWeight in case one is not set.
+        sortWeight: 255,
       };
+
       if (entryItem.footerGroup && isPageAttrs(entryItem)) {
         footerItem.href = `/${entryItem.slug}`;
+        // Sort Pages over Page Content.
+        footerItem.sortWeight = 10;
       } else if (entryItem.footerGroup && isPageContent(entryItem)) {
         footerItem.href = slug(entryItem.title, entryItem.page.slug);
+        // Add 1 to the sortWeight to account for the page.
+        footerItem.sortWeight = entryItem.sortWeight + 10;
       }
       yield footerItem;
+    }
+  }
+}
+
+/**
+ * Parse a FooterItem from external link models.
+ */
+function* parseExternalFooterLinks(data: EntryCollection<FooterGroupEntry>): Generator<FooterItem> {
+  if (data.total !== 0) {
+    const { items, includes } = data;
+
+    // All Footer Groups with external links referenced.
+    const entryItems: Generator<FooterGroup> = parseEntryItems(items, includes);
+
+    for (let entryItem of entryItems) {
+      if (entryItem.externalLinks) {
+        for (let externalLink of entryItem.externalLinks) {
+          // Single footer link
+          let footerItem = {
+            // Reference to parent group
+            footerGroup: {
+              title: entryItem.title,
+              sortWeight: entryItem.sortWeight,
+            },
+            // Link attributes
+            title: externalLink.title,
+            href: externalLink.href,
+            sortWeight: externalLink.sortWeight ?? 255,
+          };
+          yield footerItem;
+        }
+      }
     }
   }
 }
@@ -268,12 +319,28 @@ export async function getPageContent(pageId: string): Promise<PageContent[]> {
   return pageContent;
 }
 
+/**
+ * Get Pages & Page Content with footerGroups defined, and footerGroups with externalLinks defined,
+ * back reference each footer group & its items to build a single array of all footer links.
+ *
+ * Each footer link contains its parent's title & sortWeight as well as its own title, link, and
+ * sortWeight.
+ */
 export async function getFooterItems(): Promise<FooterItem[]> {
   let footerItems = [];
   const pageContentData = await contentQuery('pageContent', { 'fields.footerGroup[exists]': true });
   const pageData = await contentQuery('page', { 'fields.footerGroup[exists]': true });
+  const footerGroups = await contentQuery('footerGroup', {
+    'fields.externalLinks[exists]': true,
+  });
+  // Parse Page & PageContent references as they use the same model.
   for (let data of [pageContentData, pageData]) {
     footerItems.push(...parseFooterItems(data));
+  }
+  // Because externalLinks are attached to a different model, they must be parsed
+  // slightly differently.
+  for (let link of parseExternalFooterLinks(footerGroups)) {
+    footerItems.push(link);
   }
   return footerItems;
 }
