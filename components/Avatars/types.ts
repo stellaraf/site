@@ -1,4 +1,4 @@
-import type { Bio } from 'site/util';
+import type { Bio } from 'site/types';
 import type { BoxProps, FlexProps } from '@chakra-ui/core';
 
 /**
@@ -21,4 +21,4 @@ export interface AvatarsProps extends BoxProps {
   bioList: Bio[];
 }
 
-export type { Bio } from 'site/util';
+export type { Bio } from 'site/types';
