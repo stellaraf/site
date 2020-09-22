@@ -44,12 +44,7 @@ export default function Home(props: HomeProps) {
       </Box>
       {sectionRefs.map((ref, i) => {
         return (
-          <HomeSection
-            ref={ref}
-            section={sections[i]}
-            index={i % (sectionRefs.length - 1)}
-            key={i}
-          />
+          <HomeSection ref={ref} section={sections[i]} index={i % sectionRefs.length} key={i} />
         );
       })}
     </>

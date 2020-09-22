@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { forwardRef } from 'react';
 import { Box, Flex, useMultiStyleConfig } from '@chakra-ui/core';
-import BsChevronRight from '@meronex/icons/bs/BsChevronRight';
+import { BsChevronRight } from '@meronex/icons/bs';
 import { Button } from 'site/components/Button';
 import { usePageContent } from 'site/hooks/usePageContent';
 
@@ -22,7 +22,7 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
         {body}
         {subsections}
         {showButton && (
-          <Button href={buttonLink} leftIcon={<BsChevronRight />}>
+          <Button href={buttonLink} leftIcon={<BsChevronRight />} sx={styles.button}>
             {buttonText}
           </Button>
         )}
