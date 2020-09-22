@@ -12,6 +12,8 @@ export const SEO = (props: SEOProps) => {
       title={title}
       description={description}
       openGraph={{ title: title, description: description, url: `/${pathname}` }}
+      noindex
+      nofollow
       {...rest}
     />
   );
