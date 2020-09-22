@@ -1,5 +1,5 @@
 import type { IncomingMessage } from 'http';
-import type { ComponentProps, ElementType } from 'react';
+import type { ComponentProps, ElementType, RefObject } from 'react';
 
 export type Cookies = IncomingMessage['headers']['cookie'];
 
@@ -25,3 +25,5 @@ export type Tuple<ElementT, LengthT extends number, OutputT extends any[] = []> 
 export type { GetStaticProps } from 'next';
 
 export type Dict = Record<string, any>;
+
+export type ReactRef = RefObject<HTMLElement>;

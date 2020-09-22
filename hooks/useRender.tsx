@@ -6,6 +6,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Link } from 'site/components';
 import { H1, H2, H3, H4, H5, H6, P, BlockQuote, Ul, Ol, Li, Code } from 'site/components';
 
+import type { ReactNode } from 'react';
 import type { RenderNode, RenderMark } from '@contentful/rich-text-react-renderer';
 import type { Document, Inline } from '@contentful/rich-text-types';
 
@@ -45,11 +46,11 @@ const renderMark: RenderMark = {
   [MARKS.CODE]: (text: string) => <Code>{text}</Code>,
 };
 
-export const useRender = (renderable: Document, [...deps]: any[] = []) => {
+export function useRender(renderable: Document = Object(), deps: any[] = []): ReactNode {
   if (deps.length === 0) {
     deps = [renderable];
   }
   return useMemo(() => documentToReactComponents(renderable, { renderNode, renderMark }), [
     ...deps,
   ]);
-};
+}
