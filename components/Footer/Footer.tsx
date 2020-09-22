@@ -28,13 +28,15 @@ export const Footer = (props: FooterProps) => {
                 {title}
               </Text>
               <List>
-                {items.map((item, i) => (
-                  <ListItem key={i} my={2}>
-                    <Link href={item.href} fontSize="sm" color={linkColor}>
-                      {item.title}
-                    </Link>
-                  </ListItem>
-                ))}
+                {items
+                  .sort((a, b) => a.sortWeight - b.sortWeight)
+                  .map((item, i) => (
+                    <ListItem key={i} my={2}>
+                      <Link href={item.href} fontSize="sm" color={linkColor}>
+                        {item.title}
+                      </Link>
+                    </ListItem>
+                  ))}
               </List>
             </Box>
           );
