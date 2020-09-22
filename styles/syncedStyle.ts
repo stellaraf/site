@@ -143,6 +143,39 @@ const variantThree = (props: Dict) => ({
   )(props),
 });
 
+const variantFour = (props: Dict) => ({
+  button: mode(
+    {
+      backgroundColor: 'original.light',
+      color: 'original.secondary',
+      _hover: {
+        backgroundColor: 'whiteAlpha.100',
+        color: 'original.light',
+        borderColor: 'original.light',
+      },
+    },
+    {},
+  )(props),
+  header: mode({}, {})(props),
+  box: mode(
+    {
+      bg: 'original.secondary',
+      color: 'original.light',
+    },
+    {
+      bg: 'original.dark',
+      color: 'original.light',
+    },
+  )(props),
+  link: mode(
+    { _hover: { color: 'whiteAlpha.100' }, activeColor: 'whiteAlpha.200' },
+    {
+      _hover: { color: 'light.200' },
+      activeColor: 'original.tertiary',
+    },
+  )(props),
+});
+
 export const syncedStyles = {
   parts: ['button', 'header', 'controls', 'box', 'link'],
   baseStyle: variantBase,
@@ -151,6 +184,7 @@ export const syncedStyles = {
     1: variantOne,
     2: variantTwo,
     3: variantThree,
+    4: variantFour,
   },
   defaultProps: {
     variant: 0,

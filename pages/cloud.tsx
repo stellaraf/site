@@ -15,9 +15,9 @@ export default function Cloud({ geoData, geoPoints, pageData, pageContent }: Clo
   const { colors } = useTheme();
   const mapColor = useColorValue(colors.blackAlpha[200], colors.whiteAlpha[200]);
   const markerColor = useColorValue(colors.primary[400], colors.green[400]);
-  const heroRef = useRef();
+  const heroRef = useRef<HTMLDivElement>(null);
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
-  const sectionRefs = sections.map(() => useRef());
+  const sectionRefs = sections.map(() => useRef<HTMLElement>(null));
 
   const { title, subtitle, body } = pageData;
   const renderedBody = useRender(body);
@@ -46,12 +46,7 @@ export default function Cloud({ geoData, geoPoints, pageData, pageContent }: Clo
       </Hero>
       {sectionRefs.map((ref, i) => {
         return (
-          <ContentSection
-            ref={ref}
-            items={sections[i]}
-            index={i % (sectionRefs.length - 1)}
-            key={i}
-          />
+          <ContentSection ref={ref} items={sections[i]} index={i % sectionRefs.length} key={i} />
         );
       })}
     </>

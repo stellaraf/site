@@ -23,12 +23,7 @@ export default function Services(props: PageProps) {
       <Hero title={title} subtitle={subtitle} />
       {sectionRefs.map((ref, i) => {
         return (
-          <ContentSection
-            ref={ref}
-            items={sections[i]}
-            index={i % (sectionRefs.length - 1)}
-            key={i}
-          />
+          <ContentSection ref={ref} items={sections[i]} index={i % sectionRefs.length} key={i} />
         );
       })}
     </>
