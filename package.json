@@ -35,15 +35,9 @@
     "yup": "^0.27.0"
   },
   "scripts": {
-    "start": "react-scripts start",
     "dev": "next",
-    "next-build": "next build",
-    "next-start": "next start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "stats": "react-scripts build \"--stats\" && webpack-bundle-analyzer build/bundle-stats.json",
-    "lint:sass": "stylelint *.scss *.sass --fix"
+    "build": "next build",
+    "start": "next start"
   },
   "browserslist": {
     "production": [
