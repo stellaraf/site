@@ -1,22 +1,25 @@
 import * as React from 'react';
-import { animated, useTransition } from 'react-spring';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link, Logo } from 'site/components';
 
 import type { HeaderLogoProps } from './types';
 
 export const HeaderLogo = (props: HeaderLogoProps) => {
   const { color = 'currentColor', show } = props;
-  const LogoShown = (
-    <Link href="/">
-      <Logo.Text color={color} width={160} height={56} pb={4} />
-    </Link>
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          key="headerLogo"
+          initial={{ y: '100%' }}
+          animate={{ y: '0%' }}
+          exit={{ y: '100%' }}
+          transition={{ duration: 0.2 }}>
+          <Link href="/">
+            <Logo.Text color={color} width={160} height={56} pb={4} />
+          </Link>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
-  const transitions = useTransition([null, LogoShown][+show], {
-    key: item => (item === null ? 0 : 1),
-    from: { transform: 'translateY(100%)' },
-    enter: { transform: 'translateY(0%)' },
-    leave: { transform: 'translateY(100%)' },
-    config: { duration: 150 },
-  });
-  return transitions((values, item) => <animated.div style={values}>{item}</animated.div>);
 };
