@@ -3,21 +3,20 @@ import { Carousel } from 'site/components/Carousel';
 import { Flex, Heading } from '@chakra-ui/core';
 import { useRender, useTitle } from 'site/hooks';
 import { useColorValue } from 'site/context';
+
 import type { CardProps, CardContainerProps } from './types';
 
 const Card = (props: CardProps) => {
-  const { content, ...rest } = props;
+  const { content } = props;
   const { title, body } = content;
   const titleMe = useTitle();
   const renderedBody = useRender(body);
   return (
     <>
-      <Flex {...rest}>
-        <Heading as="h2" fontSize="xl">
-          {titleMe(title)}
-        </Heading>
-      </Flex>
-      <Flex ml={2}>{renderedBody}</Flex>
+      <Heading as="h2" fontSize="xl">
+        {titleMe(title)}
+      </Heading>
+      {renderedBody}
     </>
   );
 };

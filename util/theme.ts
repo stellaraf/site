@@ -53,16 +53,6 @@ export const isDark = (color: string) => !readableColorIsBlack(color);
 
 const alphaColors = (color: string) => {
   return {
-    // 50: transparentize(color, Number(1 - 0.04).toFixed(2)),
-    // 100: transparentize(color, Number(1 - 0.08).toFixed(2)),
-    // 200: transparentize(color, Number(1 - 0.12).toFixed(2)),
-    // 300: transparentize(color, Number(1 - 0.16).toFixed(2)),
-    // 400: transparentize(color, Number(1 - 0.24).toFixed(2)),
-    // 500: transparentize(color, Number(1 - 0.38).toFixed(2)),
-    // 600: transparentize(color, Number(1 - 0.48).toFixed(2)),
-    // 700: transparentize(color, Number(1 - 0.6).toFixed(2)),
-    // 800: transparentize(color, Number(1 - 0.8).toFixed(2)),
-    // 900: transparentize(color, Number(1 - 0.92).toFixed(2)),
     50: transparentize(color, Number((1 - 0.04).toFixed(2))),
     100: transparentize(color, Number((1 - 0.08).toFixed(2))),
     200: transparentize(color, Number((1 - 0.12).toFixed(2))),
@@ -147,7 +137,7 @@ const generatePalette = (palette: ThemeConfig['colors']): CustomColors => {
   return generatedPalette;
 };
 
-const globalStyles = (props: Dict): Styles => {
+const globalStyles = (props: Dict) => {
   const zIndexKeys = [
     'a',
     'p',
@@ -172,6 +162,18 @@ const globalStyles = (props: Dict): Styles => {
       backgroundColor: mode('original.light', 'transparent')(props),
       color: mode('original.dark', 'original.light')(props),
       fontFamily: 'body',
+    },
+    // See https://github.com/rcbyr/keen-slider/blob/master/src/keen-slider.scss
+    '.__slider_container': {
+      '&[data-keen-slider-v]': {
+        flexWrap: 'wrap',
+      },
+      '&[data-keen-slider-v] &__slider_slide': {
+        width: '100%',
+      },
+      '&[data-keen-slider-moves] *': {
+        pointerEvents: 'none',
+      },
     },
   };
 };
