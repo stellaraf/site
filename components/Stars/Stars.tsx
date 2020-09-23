@@ -59,10 +59,11 @@ const starsConfig: ParticleOptions = {
   detectRetina: true,
 };
 
+const Base = (particleProps: ParticlesProps) => (
+  <Particles options={starsConfig} {...particleProps} />
+);
+
 export const Stars = (props: WrapperProps) => {
-  const Base = (particleProps: ParticlesProps) => (
-    <Particles options={starsConfig} {...particleProps} />
-  );
   const starOpacity: number = useColorValue(0, 1);
   return (
     <Box
