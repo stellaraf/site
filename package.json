@@ -11,6 +11,7 @@
     "@hookstate/untracked": "^3.0.0",
     "@meronex/icons": "^4.0.0",
     "@n8tb1t/use-scroll-position": "^1.0.43",
+    "@types/node": "^14.11.2",
     "@types/react-simple-maps": "^1.0.3",
     "@types/smoothscroll-polyfill": "^0.3.1",
     "color2k": "^1.0.0-rc.5",
