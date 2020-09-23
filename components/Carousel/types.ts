@@ -1,6 +1,5 @@
 import type { BoxProps } from '@chakra-ui/core';
 import type { ReactNodeArray } from 'react';
-import type { TransitionFn } from 'react-spring';
 
 export interface CarouselProps extends BoxProps {
   interval?: number;
@@ -14,7 +13,6 @@ export type SetCurrent = (c: number) => void;
 export interface UseCarousel {
   total: number;
   current: number;
-  transition: TransitionFn;
   setCurrent: SetCurrent;
 }
 

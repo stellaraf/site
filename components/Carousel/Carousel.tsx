@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, forwardRef } from 'react';
 import { Box, Button, Flex } from '@chakra-ui/core';
-import { useTransition, animated } from 'react-spring';
+import { useSlider } from 'site/hooks';
 
+import type { FlexProps } from '@chakra-ui/core';
 import type { DotProps, CarouselProps, SetCurrent, UseCarousel } from './types';
 
 /**
@@ -38,11 +39,17 @@ const Dots = (props: DotProps) => {
   const { color, ...rest } = props;
   const { current, setCurrent, total } = useCarousel();
   return (
-    <Flex position="absolute" width="100%" bottom={0} alignItems="flex-end" justifyContent="center">
+    <Flex
+      position="absolute"
+      width="100%"
+      bottom={0}
+      alignItems="flex-end"
+      justifyContent="center"
+      zIndex={3}>
       {Array.apply(null, Array(total)).map((_, i) => {
         const handleClick = (): void => setCurrent(i);
         return (
-          <Button key={i} mx={1} minW="unset" variant="unstyled" onClick={handleClick}>
+          <Button key={i} mx={1} minW="unset" variant="unstyled" onClick={handleClick} h="unset">
             <Box
               width={2}
               height={2}
@@ -61,25 +68,64 @@ const Dots = (props: DotProps) => {
 };
 
 /**
+ * Bastardized Chakra/style props version of Keen-Slider's CSS so CSS doesn't have to be imported.
+ * See: https://github.com/rcbyr/keen-slider/blob/master/src/keen-slider.scss
+ */
+const SliderContainer = forwardRef<HTMLDivElement, FlexProps>((props, ref) => (
+  <Flex
+    ref={ref}
+    zIndex={1}
+    width="100%"
+    height="100%"
+    overflow="hidden"
+    position="absolute"
+    className="__slider_container"
+    css={{
+      touchAction: 'pan-y',
+      '-ms-touch-action': 'none',
+      '-khtml-user-select': 'none',
+      '-webkit-touch-callout': 'none',
+      '-webkit-tap-highlight-color': 'transparent',
+    }}
+    {...props}
+  />
+));
+
+/**
+ * Bastardized Chakra/style props version of Keen-Slider's CSS so CSS doesn't have to be imported.
+ * See: https://github.com/rcbyr/keen-slider/blob/master/src/keen-slider.scss
+ */
+const Slide = (props: FlexProps) => (
+  <Flex
+    width="100%"
+    minHeight="100%"
+    overflow="hidden"
+    position="relative"
+    display="inline-block"
+    className="__slider_slide"
+    {...props}
+  />
+);
+
+/**
  * Cycle through child elements with animation.
  */
 export const Carousel = (props: CarouselProps) => {
   const { interval = 4000, noDots = false, dotColor = 'black', children, ...rest } = props;
-  const [current, setCurrent] = useState(0);
-  const transition = useTransition(children[current], {
-    from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
-    enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-    leave: { opacity: 0, transform: 'translate3d(-50%,0,0)', display: 'none' },
-    onRest: () => cycle(current, children.length, interval, setCurrent),
-  });
+  const { slide, setSlide, containerRef } = useSlider();
   return (
-    <CarouselContext.Provider value={{ current, setCurrent, transition, total: children.length }}>
+    <CarouselContext.Provider
+      value={{
+        current: slide,
+        setCurrent: setSlide,
+        total: children.length,
+      }}>
       <Box width="100%" height="100%" position="relative" {...rest}>
-        <Box width="100%" height="100%" position="absolute">
-          {transition((style, item) => (
-            <animated.div style={style}>{item}</animated.div>
+        <SliderContainer ref={containerRef}>
+          {children.map((child, i) => (
+            <Slide key={i}>{child}</Slide>
           ))}
-        </Box>
+        </SliderContainer>
         {!noDots && <Dots color={dotColor} />}
       </Box>
     </CarouselContext.Provider>

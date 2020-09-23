@@ -27,3 +27,5 @@ export type { GetStaticProps } from 'next';
 export type Dict = Record<string, any>;
 
 export type ReactRef = MutableRefObject<HTMLElement>;
+
+export type DivRef = MutableRefObject<HTMLDivElement>;
