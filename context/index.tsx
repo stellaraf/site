@@ -21,3 +21,5 @@ export const Provider = (props: ProviderProps) => {
     </ConfigProvider>
   );
 };
+
+export * from './SyncedStyleProvider';
