@@ -24,3 +24,5 @@ export interface LinkGroupProps extends LinkProps {
 export interface PassedLinkProps extends SystemProps {
   sx: SystemStyleObject;
 }
+
+export type { BoxProps, FlexProps } from '@chakra-ui/core';

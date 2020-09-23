@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { PhotoGroup } from './PhotoGroup';
 
-import type { Tuple } from 'site/types';
 import type { Bio, AvatarsProps } from './types';
 
 /**
  * Transform an array of Bios into an array of Bio arrays, grouped by size argument.
  */
-function groupBios<T extends Bio[], S extends number>(bios: T, size: S): Tuple<T, S>[] {
+function groupBios(bios: Bio[], size: number): Bio[][] {
   let groups = [];
   while (bios.length > 0) {
     groups.push(bios.splice(0, size));

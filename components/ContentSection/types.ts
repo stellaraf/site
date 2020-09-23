@@ -1,4 +1,4 @@
-import type { PageContent } from 'site/util/content';
+import type { PageContent } from 'site/types';
 
 export interface ContentSectionProps {
   items: PageContent;

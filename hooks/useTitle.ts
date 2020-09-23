@@ -2,12 +2,14 @@ import { useCallback } from 'react';
 import zeitTitle from 'title';
 import { useConfig } from 'site/context';
 
-type TitleMe = (t: string) => string;
+import type { TitleMe } from 'site/types';
 
-export const useTitle = (...special: string[]): TitleMe => {
+/**
+ * Return a preconfigured callback function to convert titles to the proper case.
+ */
+export const useTitle = ([...overrides]: string[] = []): TitleMe => {
   const { titleOverrides } = useConfig();
-  return useCallback(text => zeitTitle(text, { special: [...titleOverrides, ...special] }), [
-    titleOverrides,
-    special,
-  ]);
+  const special = [...titleOverrides, ...overrides];
+  const callback = (text: string) => zeitTitle(text, { special });
+  return useCallback(callback, [...special]);
 };

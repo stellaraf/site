@@ -11,7 +11,7 @@ const BaseButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => (
 ));
 
 const ExternalButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => {
-  const { href, ...rest } = props;
+  const { href = '#', ...rest } = props;
   return (
     <NextLink href={href}>
       <BaseButton ref={ref} href={href} target="_blank" rel="noopener noreferrer" {...rest} />
@@ -20,10 +20,9 @@ const ExternalButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) =
 });
 
 export const Button = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => {
-  const { href = '/', ...rest } = props;
-  let label = null;
+  let { href = '#', ...rest } = props;
   if (typeof rest.children === 'string') {
-    label = rest.children;
+    rest = { ...rest, 'aria-label': rest.children };
   }
   const { isExternal, target } = useLinkType(href);
   let Component = BaseButton;
@@ -31,5 +30,5 @@ export const Button = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) =>
   if (isExternal) {
     Component = ExternalButton;
   }
-  return <Component href={target} aria-label={label} ref={ref} {...rest} />;
+  return <Component href={target} ref={ref} {...rest} />;
 });

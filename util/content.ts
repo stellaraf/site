@@ -1,5 +1,5 @@
 import { createClient } from 'contentful';
-import { slug } from './slug';
+import { slug } from './generic';
 
 import type {
   PageAttrs,
@@ -95,7 +95,7 @@ export const getPage = async (pageSlug: string): Promise<PageAttrs> => {
  * Match a reference with its `includes` entry, and replace the reference
  * with the real entry.
  */
-const getRefValue = (val: any, includes: any = {}): any => {
+const getRefValue = (val: any, includes: any = Object()): any => {
   let item = val ?? null;
   if (item === null || typeof item === 'undefined') {
     return null;
@@ -113,9 +113,9 @@ const getRefValue = (val: any, includes: any = {}): any => {
     return item.map((i: any) => getRefValue(i, includes));
   }
   if (item.constructor.name === 'Object') {
-    for (let [k1, v1] of Object.entries(item)) {
+    for (let [k1, v1] of Object.entries<any>(item)) {
       if (v1.constructor.name === 'Object') {
-        for (let [k2, v2] of Object.entries(v1)) {
+        for (let [k2, v2] of Object.entries<any>(v1)) {
           item[k1][k2] = getRefValue(v2, includes);
         }
       }
@@ -158,7 +158,7 @@ const removeKey = (oldObj: object, newObj: object, [...toRemove]: string[]): obj
 };
 
 const flattenObj = (item: object, [...del]: string[] = []): object => {
-  let flattened = Object.keys(item).reduce(obj => removeKey(item, obj, del), {});
+  let flattened = Object.keys(item).reduce(obj => removeKey(item, obj, del), Object());
   const flat = (i: object): object => {
     let f = Object(i);
     for (let [k, v] of Object.entries(i)) {
@@ -218,11 +218,11 @@ function* parseEntryItems(items: AnyEntry[], includes: EntryCollection<any>): Ge
   }
 }
 
-function isPageAttrs(obj: any): obj is PageAttrs {
+function isPageAttrs(obj: any): obj is PageParsed {
   return 'slug' in obj;
 }
 
-function isPageContent(obj: any): obj is PageContent {
+function isPageContent(obj: any): obj is PageContentParsed {
   return 'paragraphs' in obj;
 }
 

@@ -1,14 +1,11 @@
 import * as React from 'react';
-import { forwardRef } from 'react';
 import { Box } from '@chakra-ui/core';
 import { useSpring, animated } from 'react-spring';
 import { Marker } from 'react-simple-maps';
 import { useColorValue } from 'site/context';
 import type { MarkerProps } from './types';
 
-const Circle = props => <Box as="circle" {...props} />;
-
-export const MapMarker = forwardRef<HTMLElement, MarkerProps>((props, ref) => {
+export const MapMarker = (props: MarkerProps) => {
   const { color = 'currentColor', ...rest } = props;
   const fill = useColorValue('black', 'white');
   const animation = useSpring({
@@ -23,8 +20,8 @@ export const MapMarker = forwardRef<HTMLElement, MarkerProps>((props, ref) => {
   });
   return (
     <Marker {...rest}>
-      <Circle
-        ref={ref}
+      <Box
+        as="circle"
         r={4}
         fill={color}
         stroke="white"
@@ -35,4 +32,4 @@ export const MapMarker = forwardRef<HTMLElement, MarkerProps>((props, ref) => {
       <animated.circle r={4} fill={fill} style={animation} />
     </Marker>
   );
-});
+};

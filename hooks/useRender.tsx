@@ -10,7 +10,7 @@ import type { ReactNode } from 'react';
 import type { RenderNode, RenderMark } from '@contentful/rich-text-react-renderer';
 import type { Document, Inline } from '@contentful/rich-text-types';
 
-const inline = (type: string, node: Inline): React.ReactNode => {
+const inline = (_: string, node: Inline): ReactNode => {
   return (
     <span key={node.data.target.sys.id}>
       type: {node.nodeType} id: {node.data.target.sys.id}
@@ -33,24 +33,22 @@ const renderNode: RenderNode = {
   [BLOCKS.LIST_ITEM]: (_, children) => <Li>{children}</Li>,
   [BLOCKS.QUOTE]: (_, children) => <BlockQuote>{children}</BlockQuote>,
   [BLOCKS.HR]: () => <Divider />,
-  [INLINES.ASSET_HYPERLINK]: (node: Inline) => inline(INLINES.ASSET_HYPERLINK, node),
-  [INLINES.ENTRY_HYPERLINK]: (node: Inline) => inline(INLINES.ENTRY_HYPERLINK, node),
-  [INLINES.EMBEDDED_ENTRY]: (node: Inline) => inline(INLINES.EMBEDDED_ENTRY, node),
+  [INLINES.ASSET_HYPERLINK]: node => inline(INLINES.ASSET_HYPERLINK, node as Inline),
+  [INLINES.ENTRY_HYPERLINK]: node => inline(INLINES.ENTRY_HYPERLINK, node as Inline),
+  [INLINES.EMBEDDED_ENTRY]: node => inline(INLINES.EMBEDDED_ENTRY, node as Inline),
   [INLINES.HYPERLINK]: (node, children) => <Link href={node.data.uri}>{children}</Link>,
 };
 
 const renderMark: RenderMark = {
-  [MARKS.BOLD]: (text: string) => <strong>{text}</strong>,
-  [MARKS.ITALIC]: (text: string) => <em>{text}</em>,
-  [MARKS.UNDERLINE]: (text: string) => <u>{text}</u>,
-  [MARKS.CODE]: (text: string) => <Code>{text}</Code>,
+  [MARKS.BOLD]: text => <strong>{text}</strong>,
+  [MARKS.ITALIC]: text => <em>{text}</em>,
+  [MARKS.UNDERLINE]: text => <u>{text}</u>,
+  [MARKS.CODE]: text => <Code>{text}</Code>,
 };
 
-export function useRender(renderable: Document = Object(), deps: any[] = []): ReactNode {
+export function useRender(renderable: Document = Object(), [...deps]: any[] = []) {
   if (deps.length === 0) {
     deps = [renderable];
   }
-  return useMemo(() => documentToReactComponents(renderable, { renderNode, renderMark }), [
-    ...deps,
-  ]);
+  return useMemo(() => documentToReactComponents(renderable, { renderNode, renderMark }), deps);
 }

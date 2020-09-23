@@ -8,4 +8,5 @@ const DARK = {
 };
 const LIGHT = { backgroundColor: 'original.light' };
 
-export const useGradient = (): BoxProps => useColorValue(LIGHT, DARK);
+export const useGradient = (): Pick<BoxProps, 'background' | 'backgroundColor'> =>
+  useColorValue(LIGHT, DARK);

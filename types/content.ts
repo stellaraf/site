@@ -73,7 +73,7 @@ export interface PageContent {
 export interface HomeSection {
   title: string;
   subtitle: string;
-  body: Document | null;
+  body?: Document;
   showButton: boolean;
   buttonText: string;
   buttonLink: string;
@@ -82,7 +82,7 @@ export interface HomeSection {
 
 export interface HeroCard {
   title: string;
-  body: Document | null;
+  body: Document;
 }
 
 export interface HomepageContent {
@@ -143,7 +143,7 @@ export interface Fonts {
   black: number;
 }
 
-interface ThemeEntry {
+export interface ThemeEntry {
   themeName: string;
   colors: Colors;
   fonts: Fonts;

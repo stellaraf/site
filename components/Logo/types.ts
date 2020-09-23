@@ -7,7 +7,7 @@ export interface LogoMainProps {
 }
 
 export interface LogoProps extends BoxProps {
-  size: number;
-  showReserved: boolean;
-  showTagline: boolean;
+  size?: number;
+  showReserved?: boolean;
+  showTagline?: boolean;
 }

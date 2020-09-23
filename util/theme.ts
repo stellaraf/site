@@ -12,12 +12,14 @@ import { merge } from '@chakra-ui/utils';
 import { syncedStyles, heroButtons } from 'site/styles';
 
 import type {
-  ConfigFonts,
   CustomColors,
   CustomTheme,
-  ThemeFonts,
+  Dict,
+  Fonts,
   FontWeights,
   Styles,
+  ThemeConfig,
+  ThemeFonts,
 } from 'site/types';
 
 const radii = {
@@ -49,34 +51,33 @@ const fontSizes = {
 export const isLight = (color: string) => readableColorIsBlack(color);
 export const isDark = (color: string) => !readableColorIsBlack(color);
 
-export const opposingColor = (theme, color) => {
-  if (color.includes('.')) {
-    const colorParts = color.split('.');
-    if (colorParts.length !== 2) {
-      throw Error(`Color is improperly formatted. Got '${color}'`);
-    }
-    const [colorName, colorOpacity] = colorParts;
-    color = theme.colors[colorName][colorOpacity];
-  }
-  const opposing = isDark(color) ? theme.colors.white : theme.colors.black;
-  return opposing;
+const alphaColors = (color: string) => {
+  return {
+    // 50: transparentize(color, Number(1 - 0.04).toFixed(2)),
+    // 100: transparentize(color, Number(1 - 0.08).toFixed(2)),
+    // 200: transparentize(color, Number(1 - 0.12).toFixed(2)),
+    // 300: transparentize(color, Number(1 - 0.16).toFixed(2)),
+    // 400: transparentize(color, Number(1 - 0.24).toFixed(2)),
+    // 500: transparentize(color, Number(1 - 0.38).toFixed(2)),
+    // 600: transparentize(color, Number(1 - 0.48).toFixed(2)),
+    // 700: transparentize(color, Number(1 - 0.6).toFixed(2)),
+    // 800: transparentize(color, Number(1 - 0.8).toFixed(2)),
+    // 900: transparentize(color, Number(1 - 0.92).toFixed(2)),
+    50: transparentize(color, Number((1 - 0.04).toFixed(2))),
+    100: transparentize(color, Number((1 - 0.08).toFixed(2))),
+    200: transparentize(color, Number((1 - 0.12).toFixed(2))),
+    300: transparentize(color, Number((1 - 0.16).toFixed(2))),
+    400: transparentize(color, Number((1 - 0.24).toFixed(2))),
+    500: transparentize(color, Number((1 - 0.38).toFixed(2))),
+    600: transparentize(color, Number((1 - 0.48).toFixed(2))),
+    700: transparentize(color, Number((1 - 0.6).toFixed(2))),
+    800: transparentize(color, Number((1 - 0.8).toFixed(2))),
+    900: transparentize(color, Number((1 - 0.92).toFixed(2))),
+  };
 };
 
-const alphaColors = color => ({
-  50: transparentize(color, Number(1 - 0.04).toFixed(2)),
-  100: transparentize(color, Number(1 - 0.08).toFixed(2)),
-  200: transparentize(color, Number(1 - 0.12).toFixed(2)),
-  300: transparentize(color, Number(1 - 0.16).toFixed(2)),
-  400: transparentize(color, Number(1 - 0.24).toFixed(2)),
-  500: transparentize(color, Number(1 - 0.38).toFixed(2)),
-  600: transparentize(color, Number(1 - 0.48).toFixed(2)),
-  700: transparentize(color, Number(1 - 0.6).toFixed(2)),
-  800: transparentize(color, Number(1 - 0.8).toFixed(2)),
-  900: transparentize(color, Number(1 - 0.92).toFixed(2)),
-});
-
-const generateColors = colorInput => {
-  const colorMap = {};
+const generateColors = (colorInput: string) => {
+  const colorMap = Object();
 
   const lightnessMap = [0.95, 0.85, 0.75, 0.65, 0.55, 0.45, 0.35, 0.25, 0.15, 0.05];
   const saturationMap = [0.32, 0.16, 0.08, 0.04, 0, 0, 0.04, 0.08, 0.16, 0.32];
@@ -102,7 +103,7 @@ const generateColors = colorInput => {
         : desaturate(color, saturationDelta * -1);
     });
 
-  const getColorNumber = index => (index === 0 ? 50 : index * 100);
+  const getColorNumber = (index: number) => (index === 0 ? 50 : index * 100);
 
   colors.map((color, i) => {
     const colorIndex = getColorNumber(i);
@@ -133,7 +134,7 @@ const defaultMonoFonts = [
   'monospace',
 ];
 
-const generatePalette = (palette: any): CustomColors => {
+const generatePalette = (palette: ThemeConfig['colors']): CustomColors => {
   const generatedPalette = Object();
   Object.keys(palette).map(color => {
     if (!['black', 'white'].includes(color)) {
@@ -146,7 +147,7 @@ const generatePalette = (palette: any): CustomColors => {
   return generatedPalette;
 };
 
-const globalStyles = (props): Styles => {
+const globalStyles = (props: Dict): Styles => {
   const zIndexKeys = [
     'a',
     'p',
@@ -181,7 +182,7 @@ const formatFont = (font: string): string => {
   return fontFmt;
 };
 
-const importFonts = (userFonts: ConfigFonts): [ThemeFonts, FontWeights] => {
+const importFonts = (userFonts: Omit<Fonts, 'themeName'>): [ThemeFonts, FontWeights] => {
   const [body, mono] = [defaultBodyFonts, defaultMonoFonts];
   const { body: userBody, mono: userMono, ...fontWeights } = userFonts;
   const bodyFmt = formatFont(userBody);
@@ -202,17 +203,17 @@ const importFonts = (userFonts: ConfigFonts): [ThemeFonts, FontWeights] => {
   ];
 };
 
-const importColors = (userColors: any = {}): CustomColors => {
+const importColors = (userColors: ThemeConfig['colors']): CustomColors => {
   const generatedColors = generatePalette(userColors);
   return {
+    ...generatedColors,
     transparent: 'transparent',
     current: 'currentColor',
     original: userColors,
-    ...generatedColors,
   };
 };
 
-export const makeTheme = (userTheme: any): CustomTheme => {
+export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
   const [fonts, fontWeights] = importFonts(userTheme.fonts);
   const defaultTheme = extendTheme({
     colors: importColors(userTheme.colors),

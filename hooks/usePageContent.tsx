@@ -1,64 +1,18 @@
 import * as React from 'react';
-import { Box, Grid, Heading } from '@chakra-ui/core';
+import { useMemo } from 'react';
+import { Content } from 'site/components';
 import { useRender, useTitle, useSlug } from 'site/hooks';
-import type { Document } from '@contentful/rich-text-types';
-import type { PageContent } from 'site/types';
 
-interface SubsectionProps {
-  title: string;
-  body: Document;
-}
+import type { PageContent, UsePageContent } from 'site/types';
 
-interface RenderedPageContent {
-  error: string | null;
-  title: React.FC;
-  subtitle: React.FC;
-  body: React.FC | null;
-  buttonText?: string;
-  buttonLink?: string;
-  showButton: boolean;
-  subsections: React.FC;
-}
-
-const Title = ({ id, ...props }) => (
-  <>
-    <Box id={id} as="span" pos="relative" top={-130} visibility="hidden" />
-    <Heading as="h3" fontSize="4xl" {...props} />
-  </>
-);
-const Subtitle = props => <Heading as="h4" fontSize="xl" fontWeight="light" {...props} />;
-const Body = props => (
-  <Box
-    my={16}
-    maxW={[null, null, '60%']}
-    whiteSpace="pre-line"
-    fontSize="lg"
-    textAlign="justify"
-    {...props}
-  />
-);
-
-const Subsections = props => (
-  <Grid templateColumns="repeat(2, 1fr)" gap={16} my={16} maxW={[null, null, '80%']} {...props} />
-);
-
-const Subsection = ({ title, body }: SubsectionProps) => {
-  const renderedBody = useRender(body);
-  return (
-    <Box>
-      <Heading as="h4" fontSize="lg" mb={4}>
-        {title}
-      </Heading>
-      <Box whiteSpace="pre-line" fontSize="lg" textAlign="justify">
-        {renderedBody}
-      </Box>
-    </Box>
-  );
-};
-
-export const usePageContent = (rawContent: PageContent): RenderedPageContent => {
+/**
+ *
+ */
+export const usePageContent = (rawContent: PageContent, [...deps]: any[] = []): UsePageContent => {
+  if (deps.length === 0) {
+    deps = [rawContent];
+  }
   let obj = Object();
-  let error = null;
   const titleMe = useTitle();
   try {
     const {
@@ -74,31 +28,24 @@ export const usePageContent = (rawContent: PageContent): RenderedPageContent => 
     let subsections = null;
     const slug = useSlug(title, [rawContent]);
 
-    obj.title = <Title id={slug}>{titleMe(title)}</Title>;
-    obj.subtitle = <Subtitle>{titleMe(subtitle)}</Subtitle>;
+    obj.title = <Content.Title id={slug}>{titleMe(title)}</Content.Title>;
+    obj.subtitle = <Content.Subtitle>{titleMe(subtitle)}</Content.Subtitle>;
     obj.buttonText = titleMe(buttonText);
     obj.buttonLink = buttonLink;
 
     if (body) {
       const renderedBody = useRender(body);
-      obj.body = <Body>{renderedBody}</Body>;
+      obj.body = <Content.Body>{renderedBody}</Content.Body>;
     } else {
       obj.body = null;
     }
     if (paragraphs?.length ?? 0 !== 0) {
-      subsections = (
-        <Subsections>
-          {paragraphs.map((p, i) => (
-            <Subsection key={i} title={titleMe(p.title)} body={p.body} />
-          ))}
-        </Subsections>
-      );
+      subsections = <Content.SubSections sections={paragraphs} />;
     }
     obj.showButton = showButton;
     obj.subsections = subsections;
   } catch (err) {
     console.error(err);
-    error = err.message;
   }
-  return { error, ...obj };
+  return useMemo(() => obj, deps);
 };

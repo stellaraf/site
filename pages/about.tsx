@@ -1,24 +1,24 @@
 import * as React from 'react';
-import { forwardRef, useRef } from 'react';
+import { forwardRef } from 'react';
 import { Box, Flex, Heading, useMultiStyleConfig } from '@chakra-ui/core';
 import { getPage, getPageContent, getBios } from 'site/util';
 import { Avatars, Hero, SEO } from 'site/components';
-import { useActiveSection, useRender } from 'site/hooks';
+import { useActiveSection, useRender, useRef } from 'site/hooks';
 
 import type { GetStaticProps } from 'next';
 import type { AboutProps, BioSectionProps, BioEntry, Bio } from 'site/types';
 
 const SLUG = 'about';
 
-const parseBios = (raw: BioEntry): Bio[] => {
-  let bios = [];
+/**
+ * Extract relevant fields from Contentful response.
+ */
+function* parseBios(raw: BioEntry): Generator<Bio> {
   for (let b of raw.fields.bios) {
     const { photo, ...rest } = b.fields;
-    const { url, contentType } = photo.fields.file;
-    bios.push({ ...rest, photo: { url, contentType } });
+    yield { ...rest, photo: photo.fields.file };
   }
-  return bios;
-};
+}
 
 const BioSection = forwardRef<HTMLDivElement, BioSectionProps>((props, ref) => {
   const { bios, ...rest } = props;
@@ -37,11 +37,11 @@ const BioSection = forwardRef<HTMLDivElement, BioSectionProps>((props, ref) => {
 
 export default function About(props: AboutProps) {
   const { pageData, bios } = props;
-  const bioRef = useRef();
   const { title, subtitle, body } = pageData;
-  const headerRef = useRef();
+  const headerRef = useRef<HTMLDivElement>();
+  const bioRef = useRef<HTMLDivElement>();
+  const parsedBios = [...parseBios(bios)];
   const renderedBody = useRender(body);
-  const parsedBios = parseBios(bios);
 
   useActiveSection([bioRef]);
 

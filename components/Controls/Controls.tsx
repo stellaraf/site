@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Box, Button, Stack, useStyles } from '@chakra-ui/core';
-import Sun from '@meronex/icons/md/MdWbSunny';
-import Moon from '@meronex/icons/bs/BsMoon';
-import ChevronUp from '@meronex/icons/bs/BsChevronUp';
+import { MdWbSunny as Sun } from '@meronex/icons/md';
+import { BsMoon as Moon } from '@meronex/icons/bs';
+import { BsChevronUp as ChevronUp } from '@meronex/icons/bs';
 import { useColorMode, useColorValue } from 'site/context';
 
 import type { ControlsProps } from './types';

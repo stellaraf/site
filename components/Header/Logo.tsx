@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { animated, useTransition } from 'react-spring';
-import { Logo } from 'site/components/Logo';
-import { Link } from 'site/components/Link';
+import { Link, Logo } from 'site/components';
 
 import type { HeaderLogoProps } from './types';
 

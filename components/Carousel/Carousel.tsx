@@ -21,8 +21,15 @@ const cycle = (current: number, total: number, interval: number, callback: SetCu
   return setTimeout(() => callback(idx), interval);
 };
 
-const CarouselContext = createContext(null);
-const useCarousel = (): UseCarousel => useContext(CarouselContext);
+const CarouselContext = createContext<UseCarousel>(Object());
+
+const useCarousel = (): UseCarousel => {
+  const ctx = useContext(CarouselContext);
+  if (!ctx) {
+    throw Error('useCarousel must be inside a Provider with a value');
+  }
+  return ctx;
+};
 
 /**
  * Show a row of dots for each Hero Card. The currently active card's dot is filled.

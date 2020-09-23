@@ -3,7 +3,7 @@ import { Box, Flex, Heading, useMultiStyleConfig } from '@chakra-ui/core';
 
 import type { CTAProps } from './types';
 
-export const CalltoAction = (props: CTAProps) => {
+export const CallToAction = (props: CTAProps) => {
   const styles = useMultiStyleConfig('SyncedStyles', { variant: 0 });
   return (
     <Box

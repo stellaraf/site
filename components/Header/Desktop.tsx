@@ -2,13 +2,14 @@ import * as React from 'react';
 import { useRouter } from 'next/router';
 import { Box, Flex, useStyles } from '@chakra-ui/core';
 import { merge } from '@chakra-ui/utils';
-import { Logo } from 'site/components/Logo';
-import { Link } from 'site/components';
+import { Link, Logo } from 'site/components';
 import { useHeaderLogo } from 'site/styles';
 import { NavLink, LinkGroup, ContactButton } from './Links';
 import { HeaderLogo } from './Logo';
 
-const Header = props => (
+import type { BoxProps, FlexProps } from './types';
+
+const Header = (props: BoxProps) => (
   <Box
     top={0}
     left={0}
@@ -24,7 +25,7 @@ const Header = props => (
   />
 );
 
-const Navbar = props => {
+const Navbar = (props: BoxProps) => {
   return (
     <Flex
       py={8}
@@ -40,11 +41,11 @@ const Navbar = props => {
   );
 };
 
-const NavGroup = props => (
+const NavGroup = (props: FlexProps) => (
   <Flex flex="1 0 0" alignItems="center" pointerEvents="auto" justifyContent="center" {...props} />
 );
 
-export const HeaderDesktop = props => {
+export const HeaderDesktop = (props: BoxProps) => {
   const headerLogo = useHeaderLogo();
   const { pathname } = useRouter();
   const styles = useStyles();

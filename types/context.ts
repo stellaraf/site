@@ -13,8 +13,9 @@ export interface ProviderProps {
 /**
  * Config Provider Types
  */
+export type GlobalConfigContext = Omit<GlobalConfig, 'theme'>;
 export interface ConfigProviderProps {
-  globalConfig: Omit<GlobalConfig, 'theme'>;
+  globalConfig: GlobalConfigContext;
   children?: ReactNode;
 }
 

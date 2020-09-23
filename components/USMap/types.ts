@@ -1,14 +1,21 @@
-import type { GeoPoint } from 'site/util';
+import type { BoxProps } from '@chakra-ui/core';
+import type { MarkerProps as RSMMarkerProps } from 'react-simple-maps';
+import type { GeoPoint } from 'site/types';
 
-export interface MarkerProps {
-  color: string;
-  [k: string]: any;
+export interface MarkerProps extends RSMMarkerProps {
+  color?: string;
 }
 
-export interface MapProps {
+export type Locations = GeoPoint[];
+
+export interface LocationProps extends Omit<BoxProps, 'color'> {
+  color?: string;
+  loc: GeoPoint;
+}
+
+export interface MapProps extends BoxProps {
   geoData: object;
-  locations: GeoPoint[];
+  locations: Locations;
   mapColor: string;
-  markerColor: string;
-  [k: string]: any;
+  markerColor?: string;
 }
