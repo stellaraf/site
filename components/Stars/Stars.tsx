@@ -2,10 +2,11 @@ import * as React from 'react';
 import { Box } from '@chakra-ui/core';
 import Particles from 'react-tsparticles';
 import { useColorValue } from 'site/context';
+import { useKonamiState } from 'site/state';
 
 import type { ParticlesProps, WrapperProps, ParticleOptions } from './types';
 
-const starsConfig: ParticleOptions = {
+const DEFAULT_OPTIONS: ParticleOptions = {
   particles: {
     shape: { type: 'circle' },
     number: {
@@ -59,9 +60,36 @@ const starsConfig: ParticleOptions = {
   detectRetina: true,
 };
 
-const Base = (particleProps: ParticlesProps) => (
-  <Particles options={starsConfig} {...particleProps} />
-);
+const Base = (particleProps: ParticlesProps) => {
+  const konami = useKonamiState();
+  let options = DEFAULT_OPTIONS;
+  if (konami.value) {
+    options = {
+      ...DEFAULT_OPTIONS,
+      particles: {
+        ...DEFAULT_OPTIONS.particles,
+        twinkle: { particles: { enable: true } },
+        move: {
+          ...DEFAULT_OPTIONS?.particles?.move,
+          speed: 4,
+          direction: 'top-left',
+        },
+      },
+      interactivity: {
+        ...DEFAULT_OPTIONS.interactivity,
+        events: {
+          ...DEFAULT_OPTIONS.interactivity?.events,
+          onHover: {
+            ...DEFAULT_OPTIONS.interactivity?.events?.onHover,
+            parallax: { enable: true, force: 10, smooth: 10 },
+          },
+        },
+      },
+    };
+  }
+
+  return <Particles options={options} {...particleProps} />;
+};
 
 export const Stars = (props: WrapperProps) => {
   const starOpacity: number = useColorValue(0, 1);

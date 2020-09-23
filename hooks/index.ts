@@ -2,6 +2,7 @@ export * from './useActiveSection';
 export * from './useBreakpointString';
 export * from './useGradient';
 export * from './useLinkType';
+export * from './useMouseTrap';
 export * from './useNavLogo';
 export * from './usePageContent';
 export * from './useRef';
