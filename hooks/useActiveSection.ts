@@ -45,7 +45,6 @@ export const useActiveSection = (sectionRefs: ReactRef[]): void => {
 
   const effect = (props: ActiveSectionEffectProps) => {
     const { y } = props.currPos;
-    console.log(y);
     for (const [i, ref] of sectionRefs.entries()) {
       const refCurrent = ref.current;
 
