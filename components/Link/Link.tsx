@@ -2,7 +2,7 @@ import * as React from 'react';
 import { forwardRef } from 'react';
 import NextLink from 'next/link';
 import { Box, Link as ChakraLink } from '@chakra-ui/core';
-import ExternalIcon from '@meronex/icons/ei/EiExternalLink';
+import { EiExternalLink as ExternalIcon } from '@meronex/icons/ei';
 import { useLinkType } from 'site/hooks';
 
 import type { LinkIconProps, LinkProps } from './types';
@@ -28,7 +28,7 @@ const ExternalLink = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
  * routing.
  */
 const InternalLink = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
-  const { href, children, ...rest } = props;
+  const { href = '/', children, ...rest } = props;
   return (
     <NextLink href={href}>
       <ChakraLink ref={ref} href={href} {...rest}>
@@ -43,7 +43,7 @@ const InternalLink = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
  * optionally show an external link icon.
  */
 export const Link = (props: LinkProps) => {
-  const { href, showIcon = false, children, ...rest } = props;
+  const { href = '/', showIcon = false, children, ...rest } = props;
   const { isExternal, target } = useLinkType(href);
   let Component = InternalLink;
   if (isExternal) {

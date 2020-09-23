@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
-import { Button } from 'site/components/Button';
-import { Link } from 'site/components/Link';
+import { Button, Link } from 'site/components';
 import navConfig from './config';
+
+import type { ButtonProps } from 'site/components';
 import type { NavLinkProps, LinkGroupProps, PassedLinkProps } from './types';
 
 export const NavLink = (props: NavLinkProps) => {
@@ -46,7 +47,7 @@ export const LinkGroup = (props: LinkGroupProps) => {
   );
 };
 
-export const ContactButton = props => (
+export const ContactButton = (props: ButtonProps) => (
   <Button href="/contact" borderWidth="1px" borderColor="transparent" {...props}>
     Talk to Us
   </Button>

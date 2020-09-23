@@ -1,24 +1,14 @@
 import * as React from 'react';
-import { forwardRef } from 'react';
-import {
-  Box,
-  Link,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverArrow,
-  Portal,
-} from '@chakra-ui/core';
+import { Box } from '@chakra-ui/core';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
-import { MapMarker } from './Marker';
+import { Location } from './Location';
+
 import type { MapProps } from './types';
 
-export const USMap = forwardRef<HTMLDivElement, MapProps>((props, ref) => {
+export const USMap = (props: MapProps) => {
   const { geoData, locations, mapColor, markerColor, ...rest } = props;
   return (
-    <Box ref={ref} mx="auto" {...rest}>
+    <Box mx="auto" {...rest}>
       <ComposableMap projection="geoAlbersUsa" style={{ zIndex: 1, position: 'relative' }}>
         <Geographies geography={geoData}>
           {({ geographies }) => (
@@ -36,35 +26,14 @@ export const USMap = forwardRef<HTMLDivElement, MapProps>((props, ref) => {
                 />
               ))}
               {locations &&
-                locations.map(loc => {
-                  if (loc.active) {
-                    return (
-                      <Popover key={loc.id} trigger="hover" placement="top">
-                        <PopoverTrigger>
-                          <Link href="#">
-                            <MapMarker
-                              coordinates={[loc.coordinates.lon, loc.coordinates.lat]}
-                              color={markerColor}
-                            />
-                          </Link>
-                        </PopoverTrigger>
-                        <Portal>
-                          <PopoverContent zIndex={4} border={0}>
-                            <PopoverHeader pt={4} fontWeight="bold" border={0}>
-                              {loc.displayName}
-                            </PopoverHeader>
-                            <PopoverBody>{loc.description}</PopoverBody>
-                            <PopoverArrow />
-                          </PopoverContent>
-                        </Portal>
-                      </Popover>
-                    );
-                  }
-                })}
+                locations.map(
+                  loc =>
+                    loc.active && <Location key={loc.displayName} loc={loc} color={markerColor} />,
+                )}
             </>
           )}
         </Geographies>
       </ComposableMap>
     </Box>
   );
-});
+};

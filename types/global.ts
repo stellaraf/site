@@ -1,5 +1,5 @@
 import type { IncomingMessage } from 'http';
-import type { ComponentProps, ElementType, RefObject } from 'react';
+import type { ComponentProps, ElementType, MutableRefObject } from 'react';
 
 export type Cookies = IncomingMessage['headers']['cookie'];
 
@@ -26,4 +26,4 @@ export type { GetStaticProps } from 'next';
 
 export type Dict = Record<string, any>;
 
-export type ReactRef = RefObject<HTMLElement>;
+export type ReactRef = MutableRefObject<HTMLElement>;

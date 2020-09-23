@@ -1,13 +1,67 @@
 import * as React from 'react';
 import { Box } from '@chakra-ui/core';
-import Particles from 'react-particles-js';
+import Particles from 'react-tsparticles';
 import { useColorValue } from 'site/context';
-import { useStarsConfig } from './useStarsConfig';
-import type { ParticlesProps, WrapperProps } from './types';
+
+import type { ParticlesProps, WrapperProps, ParticleOptions } from './types';
+
+const starsConfig: ParticleOptions = {
+  particles: {
+    shape: { type: 'circle' },
+    number: {
+      value: 160,
+      density: {
+        enable: true,
+        value_area: 800,
+      },
+    },
+    links: {
+      enable: true,
+      opacity: 0.02,
+      distance: 48,
+    },
+    move: {
+      enable: true,
+      direction: 'none',
+      random: true,
+      speed: 0.25,
+    },
+    size: {
+      value: 1,
+      random: true,
+    },
+    opacity: {
+      anim: {
+        enable: true,
+        speed: 1,
+        opacity_min: 0.05,
+      },
+    },
+  },
+  interactivity: {
+    events: {
+      onClick: {
+        enable: true,
+        mode: 'push',
+      },
+      onHover: {
+        enable: true,
+        mode: 'connect',
+      },
+    },
+    modes: {
+      connect: { distance: 100, radius: 200, links: { opacity: 0.2 } },
+      push: {
+        quantity: 2,
+      },
+    },
+  },
+  detectRetina: true,
+};
 
 export const Stars = (props: WrapperProps) => {
   const Base = (particleProps: ParticlesProps) => (
-    <Particles params={useStarsConfig()} {...particleProps} />
+    <Particles options={starsConfig} {...particleProps} />
   );
   const starOpacity: number = useColorValue(0, 1);
   return (

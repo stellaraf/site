@@ -7,11 +7,17 @@ import { usePageContent } from 'site/hooks/usePageContent';
 
 import type { ContentSectionProps } from './types';
 
-export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((props, ref) => {
+export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((props, ref) => {
   const { items, index, ...rest } = props;
-  const { title, subtitle, body, showButton, buttonText, buttonLink, subsections } = usePageContent(
-    items,
-  );
+  const {
+    title,
+    subtitle,
+    body,
+    showButton,
+    buttonText,
+    buttonLink,
+    subsections,
+  } = usePageContent(items, [items.title]);
   const styles = useMultiStyleConfig('SyncedStyles', { variant: index });
 
   return (

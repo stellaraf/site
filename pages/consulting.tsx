@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { useRef } from 'react';
 import { getPage, getPageContent } from 'site/util';
 import { ContentSection, Hero, SEO } from 'site/components';
-import { useActiveSection, useRender } from 'site/hooks';
+import { useActiveSection, useRender, useRef } from 'site/hooks';
 
 import type { PageProps, GetStaticProps } from 'site/types';
 
@@ -11,8 +10,8 @@ const SLUG = 'consulting';
 export default function Consulting(props: PageProps) {
   const { pageData, pageContent } = props;
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
-  const heroRef = useRef();
-  const sectionRefs = sections.map(() => useRef());
+  const heroRef = useRef<HTMLDivElement>();
+  const sectionRefs = sections.map(() => useRef<HTMLElement>());
 
   const { title, subtitle, body } = pageData;
   const renderedBody = useRender(body);

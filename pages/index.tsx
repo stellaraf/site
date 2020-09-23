@@ -1,23 +1,25 @@
 import * as React from 'react';
-import { useRef } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/core';
 import { useConfig, useTheme, useColorValue } from 'site/context';
 import { HeroCards, HomeSection, Logo, SEO } from 'site/components';
-import { useActiveSection, useGradient, useNavLogo } from 'site/hooks';
+import { useActiveSection, useGradient, useNavLogo, useRef } from 'site/hooks';
 import { getHomePage } from 'site/util/content';
 
 import type { HomeProps, HomeStaticProps, GetStaticProps } from 'site/types';
 
 export default function Home(props: HomeProps) {
   const { pageContent } = props;
+
   const { siteSlogan, orgName } = useConfig();
   const { colors } = useTheme();
   const logo = useColorValue(colors.original.primary, 'white');
   const heroText = useColorValue('original.primary', 'white');
+
   const bg = useGradient();
+
   const sections = pageContent.sections.sort((a, b) => a.sortWeight - b.sortWeight);
-  const sectionRefs = sections.map(() => useRef());
-  const logoRef = useRef();
+  const sectionRefs = sections.map(() => useRef<HTMLDivElement>());
+  const logoRef = useRef<HTMLDivElement>();
 
   useNavLogo(logoRef);
   useActiveSection(sectionRefs);
@@ -25,7 +27,7 @@ export default function Home(props: HomeProps) {
   return (
     <>
       <SEO title={orgName} titleTemplate="%s" />
-      <Box ref={useRef()} w="100%" minH="80vh" bg={bg} color={heroText} px={24} pt={32} zIndex={-2}>
+      <Box ref={useRef()} w="100%" minH="80vh" color={heroText} px={24} pt={32} zIndex={-2} {...bg}>
         <Flex flexDir="column" alignItems="center">
           <Box overflowY="hidden">
             <Logo.Text color={logo} width={512} ref={logoRef} />

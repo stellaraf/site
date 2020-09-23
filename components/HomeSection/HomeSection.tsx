@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { forwardRef } from 'react';
 import { Box, Flex, Heading, useMultiStyleConfig } from '@chakra-ui/core';
-import BsChevronRight from '@meronex/icons/bs/BsChevronRight';
+import { BsChevronRight } from '@meronex/icons/bs';
+import { Button } from 'site/components';
 import { useColorValue } from 'site/context';
-import { Button } from 'site/components/Button';
 import { useRender } from 'site/hooks';
 
 import type { HomeSectionProps } from './types';
