@@ -43,3 +43,7 @@ export interface UseMedia {
 export interface MediaProviderProps {
   children: ReactNode;
 }
+
+export interface SyncedStyleProviderProps {
+  children: ReactNode;
+}

@@ -1,12 +1,11 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
-import { StylesProvider, useMultiStyleConfig } from '@chakra-ui/core';
 import smoothscroll from 'smoothscroll-polyfill';
 import { HeaderDesktop } from 'site/components';
 import { Controls } from 'site/components';
 import { Footer } from 'site/components';
 import { CallToAction } from 'site/components';
-import { useSyncedStyleVariant } from 'site/styles';
+import { SyncedStyleProvider } from 'site/context';
 import { Wrapper, Root, Main } from './common';
 
 import type { BoxProps, SiteLayoutProps } from './types';
@@ -19,11 +18,9 @@ if (typeof window !== 'undefined') {
 
 export const SiteLayout = (props: SiteLayoutProps) => {
   const { children, footerGroups } = props;
-  const variant = useSyncedStyleVariant();
-  const styles = useMultiStyleConfig('SyncedStyles', { variant: variant.value });
   return (
     <Wrapper>
-      <StylesProvider value={styles}>
+      <SyncedStyleProvider>
         <HeaderDesktop />
         <Main>
           <Root>{children}</Root>
@@ -31,8 +28,8 @@ export const SiteLayout = (props: SiteLayoutProps) => {
         <CallToAction />
         <Footer groups={footerGroups} />
         <Controls />
-        <Stars />
-      </StylesProvider>
+      </SyncedStyleProvider>
+      <Stars />
     </Wrapper>
   );
 };
