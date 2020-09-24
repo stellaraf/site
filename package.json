@@ -23,6 +23,7 @@
     "framer-motion": "^2.7.1",
     "google-map-react": "^1.1.5",
     "keen-slider": "^5.2.3",
+    "merge-anything": "^3.0.6",
     "mousetrap": "^1.6.5",
     "next": "9.5.3",
     "next-seo": "^4.7.3",

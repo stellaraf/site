@@ -1,78 +1,106 @@
 import * as React from 'react';
+import { useState } from 'react';
 import {
-  VStack,
-  IconButton,
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  CloseButton,
+  Flex,
   FormControl,
   FormErrorMessage,
-  Input,
-  InputGroup,
-  InputRightElement,
   Text,
+  useToast,
+  VStack,
 } from '@chakra-ui/core';
-import { FaArrowAltCircleRight as RightArrow } from '@meronex/icons/fa';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, FormProvider, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
-import * as yup from 'yup';
-import { useConfig, useColorValue } from 'site/context';
+import { useConfig } from 'site/context';
 import { useTitle } from 'site/hooks';
-import type { ISubscribe, ISubscribeInput } from './types';
+import { SubscribeField } from './SubscribeField';
+import { subscribeEmail, subscribeSchema } from './util';
 
-const subscribeSchema = yup.object().shape({
-  email: yup.string().email(),
-});
-
-const InputField = (props: ISubscribeInput) => {
-  const styles = useColorValue(
-    {
-      bg: 'whiteAlpha.100',
-      borderColor: 'whiteAlpha.50',
-      _hover: { borderColor: 'whiteAlpha.300' },
-    },
-    {},
-  );
-  return (
-    <InputGroup>
-      <Input placeholder="Email Address" {...styles} {...props} />
-      <InputRightElement>
-        <IconButton
-          type="submit"
-          p={2}
-          h="100%"
-          title="Subscribe"
-          aria-label="Subscribe"
-          variant="unstyled"
-          alignItems="center"
-          display="inline-flex"
-          color="original.light"
-          _hover={{ color: 'original.tertiary' }}
-          icon={<RightArrow />}
-        />
-      </InputRightElement>
-    </InputGroup>
-  );
-};
+import type { ISubscribe, ISubscribeFormData, ToastStatus } from './types';
 
 export const Subscribe = (props: ISubscribe) => {
-  const { subscribeTitle = '' } = useConfig();
+  const {
+    subscribeTitle = 'Subscribe to our newsletter',
+    subscribeSuccess = 'Thanks! Please check your email to confirm your subscription.',
+    subscribeDuration = 5,
+    subscribeGenericError = 'Something went wrong.',
+  } = useConfig();
   const titleMe = useTitle();
-  const { control, handleSubmit, errors } = useForm({ resolver: yupResolver(subscribeSchema) });
-  const onSubmit = (data: Object) => {
-    console.dir(data, { depth: null });
+  const toast = useToast();
+  const [toastMsg, setToastMsg] = useState<string>(subscribeGenericError);
+  const [toastStatus, setToastStatus] = useState<ToastStatus>('error');
+
+  const methods = useForm({ resolver: yupResolver(subscribeSchema) });
+
+  const onSubmit = async (data: ISubscribeFormData) => {
+    try {
+      const res = await subscribeEmail(data.email);
+      const json = await res.json();
+      if (json.error) {
+        methods.setError('email', json.error);
+        setToastMsg(json.error);
+      } else {
+        setToastMsg(subscribeSuccess);
+        setToastStatus('success');
+      }
+    } catch (err) {
+      console.error(err);
+      methods.setError('email', err.message);
+      setToastMsg(err.message);
+    }
+    if (methods.errors.email) {
+      setToastMsg(methods.errors.email.message);
+    }
+    toast({
+      status: toastStatus,
+      description: toastMsg,
+      duration: subscribeDuration * 1000,
+      isClosable: true,
+      position: 'bottom-right',
+      render: ({ id, onClose }) => (
+        <Alert
+          my={2}
+          mb={4}
+          pr={8}
+          id={`${id}`}
+          right={24}
+          width="auto"
+          fontSize="sm"
+          boxShadow="lg"
+          variant="solid"
+          textAlign="left"
+          alignItems="start"
+          borderRadius="md"
+          status={toastStatus}>
+          <AlertIcon />
+          <Flex flex="1">
+            <AlertDescription display="block">{toastMsg}</AlertDescription>
+          </Flex>
+          <CloseButton size="sm" onClick={onClose} position="absolute" right={1} top={1} />
+        </Alert>
+      ),
+    });
+    return;
   };
   return (
-    <VStack
-      as="form"
-      w="25%"
-      zIndex={1}
-      align="flex-end"
-      spacing={6}
-      onSubmit={handleSubmit(onSubmit)}
-      {...props}>
-      <Text>{titleMe(subscribeTitle)}</Text>
-      <FormControl isInvalid={errors.email}>
-        <Controller as={InputField} name="email" control={control} defaultValue="" />
-        <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-      </FormControl>
-    </VStack>
+    <FormProvider {...methods}>
+      <VStack
+        as="form"
+        w="25%"
+        zIndex={1}
+        align="flex-end"
+        spacing={6}
+        onSubmit={methods.handleSubmit(onSubmit)}
+        {...props}>
+        <Text>{titleMe(subscribeTitle)}</Text>
+        <FormControl isInvalid={methods.errors.email}>
+          <Controller as={SubscribeField} name="email" control={methods.control} defaultValue="" />
+          <FormErrorMessage>{methods.errors.email?.message}</FormErrorMessage>
+        </FormControl>
+      </VStack>
+    </FormProvider>
   );
 };
