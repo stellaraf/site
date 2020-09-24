@@ -11,7 +11,7 @@ import type { SiteProps } from 'site/types';
 const Site = (props: SiteProps) => {
   const konami = useKonamiState();
   useMouseTrap(
-    'up up down down left right left right b a enter',
+    'up up down down left right left right b a',
     () => {
       konami.set(p => !p);
     },
