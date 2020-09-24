@@ -1,4 +1,14 @@
-import type { BoxProps, FlexProps, StackProps, IconButtonProps, InputProps } from '@chakra-ui/core';
+import type {
+  BoxProps,
+  FlexProps,
+  StackProps,
+  IconButtonProps,
+  InputProps,
+  IToast,
+  AlertProps,
+  RenderProps,
+  ToastId,
+} from '@chakra-ui/core';
 import type { FooterItem } from 'site/types';
 
 export interface FooterProps extends BoxProps {
@@ -25,3 +35,20 @@ export type { BoxProps } from '@chakra-ui/core';
 export interface ISubscribe extends StackProps {}
 
 export interface ISubscribeInput extends InputProps {}
+
+export interface ISubscribeFormData {
+  email: string;
+}
+
+export type ToastStatus = IToast['status'];
+
+type RenderedAlert = Omit<RenderProps, 'id'> & Omit<AlertProps, 'id'>;
+
+export interface ISubscribeAlert extends RenderedAlert {
+  status: IToast['status'];
+  title?: string;
+  description?: string;
+  isClosable?: boolean;
+  variant?: string;
+  id: ToastId;
+}

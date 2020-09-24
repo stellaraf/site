@@ -15,7 +15,7 @@ export const Footer = (props: FooterProps) => {
   return (
     <Box as="footer" px={24} pt={24} pb={12} w="100%" bg={bg} color={color} {...rest}>
       <FooterLinks groups={groups} />
-      <HStack justify="space-between" align="flex-end" mb={4} mt={24}>
+      <HStack justify="space-between" align="flex-end" mb={12} mt={24}>
         <VStack align="flex-start" spacing={12}>
           {/* <Box
           w="10%"

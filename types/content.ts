@@ -162,6 +162,10 @@ export interface GlobalConfigPre {
   linkedInProfile?: string;
   githubOrg?: string;
   subscribeTitle?: string;
+  subscribePlaceholder?: string;
+  subscribeSuccess?: string;
+  subscribeGenericError?: string;
+  subscribeDuration?: number;
 }
 
 export interface ThemeConfig {
