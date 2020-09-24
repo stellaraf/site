@@ -7,6 +7,7 @@
     "@chakra-ui/theme": "^1.0.0-rc.3",
     "@color2k/compat": "^1.0.0-rc.5",
     "@contentful/rich-text-react-renderer": "^14.1.1",
+    "@hookform/resolvers": "^0.1.1",
     "@hookstate/core": "^3.0.1",
     "@hookstate/untracked": "^3.0.0",
     "@meronex/icons": "^4.0.0",
@@ -15,6 +16,7 @@
     "@types/node": "^14.11.2",
     "@types/react-simple-maps": "^1.0.3",
     "@types/smoothscroll-polyfill": "^0.3.1",
+    "@types/yup": "^0.29.7",
     "color2k": "^1.0.0-rc.5",
     "contentful": "^7.14.6",
     "d3-geo": "^1.12.1",
@@ -28,6 +30,7 @@
     "react-app-polyfill": "^1.0.4",
     "react-dom": "^16.13.1",
     "react-ga": "^2.7.0",
+    "react-hook-form": "^6.8.4",
     "react-simple-maps": "^2.1.2",
     "react-tsparticles": "^1.17.12",
     "site": "link:./",
@@ -37,7 +40,7 @@
     "title": "^3.4.2",
     "typescript": "^3.9.7",
     "use-media": "^1.4.0",
-    "yup": "^0.27.0"
+    "yup": "^0.29.3"
   },
   "scripts": {
     "dev": "next",

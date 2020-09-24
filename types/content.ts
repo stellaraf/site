@@ -153,11 +153,15 @@ export interface GlobalConfigPre {
   siteTitle: string;
   siteDescription: string;
   siteSlogan: string;
-  twitterHandle: string;
   orgName: string;
   titleOverrides: string[];
   bioList: Entry<BioContent>;
   theme: Entry<ThemeEntry>;
+  twitterHandle?: string;
+  facebookProfile?: string;
+  linkedInProfile?: string;
+  githubOrg?: string;
+  subscribeTitle?: string;
 }
 
 export interface ThemeConfig {
