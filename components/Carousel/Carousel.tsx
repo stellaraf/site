@@ -82,10 +82,10 @@ const SliderContainer = forwardRef<HTMLDivElement, FlexProps>((props, ref) => (
     className="__slider_container"
     css={{
       touchAction: 'pan-y',
-      '-ms-touch-action': 'none',
-      '-khtml-user-select': 'none',
-      '-webkit-touch-callout': 'none',
-      '-webkit-tap-highlight-color': 'transparent',
+      msTouchAction: 'none',
+      KhtmlUserSelect: 'none',
+      WebkitTouchCallout: 'none',
+      WebkitTapHighlightColor: 'transparent',
     }}
     {...props}
   />
