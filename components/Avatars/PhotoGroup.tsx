@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from '@hookstate/core';
-import { Box, Divider, Flex, Image, Collapse, Button, Text } from '@chakra-ui/core';
+import { Box, Divider, Flex, Image, Collapse, Button, Skeleton, Text } from '@chakra-ui/core';
 import { useRender } from 'site/hooks';
 import { useColorValue } from 'site/context';
 
@@ -27,6 +27,10 @@ const Photo = (props: PhotoProps) => {
   const { attrs, onClick, ...rest } = props;
   const photoBorder = useColorValue('whiteAlpha.400', 'blackAlpha.400');
   const { name, title, photo } = attrs;
+  const ready = useState(false);
+  const handleLoad = () => {
+    ready.set(true);
+  };
   return (
     <Wrapper {...rest}>
       <Button
@@ -36,17 +40,28 @@ const Photo = (props: PhotoProps) => {
         overflow="hidden"
         width={32}
         rounded="full">
-        <Image
-          src={photo.url}
-          alt={name}
+        <Skeleton
+          isLoaded={ready.value}
+          height={32}
+          width={32}
           rounded="full"
-          width="100%"
           borderWidth="1px"
           borderStyle="solid"
-          borderColor={photoBorder}
-          transition="transform .15s ease 0s"
-          _hover={{ transform: 'scale(1.25)' }}
-        />
+          borderColor={photoBorder}>
+          <Image
+            fallbackSrc="https://via.placeholder.com/150"
+            src={photo.url}
+            alt={name}
+            onLoad={handleLoad}
+            rounded="full"
+            width="100%"
+            borderWidth="1px"
+            borderStyle="solid"
+            borderColor={photoBorder}
+            transition="transform .15s ease 0s"
+            _hover={{ transform: 'scale(1.25)' }}
+          />
+        </Skeleton>
       </Button>
       <Text mt={4} fontSize="sm" fontWeight="medium" opacity={0.8}>
         {name}
