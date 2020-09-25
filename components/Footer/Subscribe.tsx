@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useState } from '@hookstate/core';
 import {
   Alert,
@@ -28,6 +29,7 @@ export const Subscribe = (props: ISubscribe) => {
     subscribeDuration = 5,
     subscribeGenericError = 'Something went wrong.',
   } = useConfig();
+  const mount = useState<boolean>(false);
   const titleMe = useTitle();
   const toast = useToast();
   const toastState = useState<ISubscribeToast>({ status: 'error', message: subscribeGenericError });
@@ -48,10 +50,12 @@ export const Subscribe = (props: ISubscribe) => {
 
   const onSubmit = async (data: ISubscribeFormData) => {
     try {
-      const res = await subscribeEmail(data.email);
       let json = null;
-      if (res) {
-        json = await res.json();
+      if (mount.get()) {
+        const res = await subscribeEmail(data.email);
+        if (res) {
+          json = await res.json();
+        }
       }
       if (json?.error) {
         handleError(json.error);
@@ -94,6 +98,11 @@ export const Subscribe = (props: ISubscribe) => {
     });
     return;
   };
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      mount.set(true);
+    }
+  }, []);
   return (
     <FormProvider {...methods}>
       <VStack
