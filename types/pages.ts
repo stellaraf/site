@@ -46,8 +46,13 @@ export interface AboutProps extends PageProps {
   bios: BioEntry;
 }
 
-export interface BioSectionProps extends BoxProps {
+export interface IBioSection extends BoxProps {
+  title: string;
   bios: Bio[];
+}
+
+export interface IMapSection extends BoxProps {
+  title: string;
 }
 
 /**
