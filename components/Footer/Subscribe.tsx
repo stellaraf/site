@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState } from '@hookstate/core';
 import {
   Alert,
   AlertDescription,
@@ -19,7 +19,7 @@ import { useTitle } from 'site/hooks';
 import { SubscribeField } from './SubscribeField';
 import { subscribeEmail, subscribeSchema } from './util';
 
-import type { ISubscribe, ISubscribeFormData, ToastStatus } from './types';
+import type { ISubscribe, ISubscribeFormData, ISubscribeToast } from './types';
 
 export const Subscribe = (props: ISubscribe) => {
   const {
@@ -30,58 +30,67 @@ export const Subscribe = (props: ISubscribe) => {
   } = useConfig();
   const titleMe = useTitle();
   const toast = useToast();
-  const [toastMsg, setToastMsg] = useState<string>(subscribeGenericError);
-  const [toastStatus, setToastStatus] = useState<ToastStatus>('error');
-
+  const toastState = useState<ISubscribeToast>({ status: 'error', message: subscribeGenericError });
   const methods = useForm({ resolver: yupResolver(subscribeSchema) });
+
+  const { setError, errors } = methods;
+  const emailError = errors.email?.message;
+
+  const handleError = (error: string) => {
+    console.error(error);
+    emailError !== error && setError('email', { type: 'manual', message: error });
+    toastState.set({ status: 'error', message: error });
+  };
+
+  const handleSuccess = (message: string) => {
+    toastState.set({ status: 'success', message });
+  };
 
   const onSubmit = async (data: ISubscribeFormData) => {
     try {
       const res = await subscribeEmail(data.email);
-      const json = await res.json();
-      if (json.error) {
-        methods.setError('email', json.error);
-        setToastMsg(json.error);
-      } else {
-        setToastMsg(subscribeSuccess);
-        setToastStatus('success');
+      let json = null;
+      if (res) {
+        json = await res.json();
+      }
+      if (json?.error) {
+        handleError(json.error);
+      }
+      if (json?.data) {
+        handleSuccess(subscribeSuccess);
       }
     } catch (err) {
       console.error(err);
-      methods.setError('email', err.message);
-      setToastMsg(err.message);
-    }
-    if (methods.errors.email) {
-      setToastMsg(methods.errors.email.message);
+      handleError(err.message);
     }
     toast({
-      status: toastStatus,
-      description: toastMsg,
       duration: subscribeDuration * 1000,
       isClosable: true,
       position: 'bottom-right',
-      render: ({ id, onClose }) => (
-        <Alert
-          my={2}
-          mb={4}
-          pr={8}
-          id={`${id}`}
-          right={24}
-          width="auto"
-          fontSize="sm"
-          boxShadow="lg"
-          variant="solid"
-          textAlign="left"
-          alignItems="start"
-          borderRadius="md"
-          status={toastStatus}>
-          <AlertIcon />
-          <Flex flex="1">
-            <AlertDescription display="block">{toastMsg}</AlertDescription>
-          </Flex>
-          <CloseButton size="sm" onClick={onClose} position="absolute" right={1} top={1} />
-        </Alert>
-      ),
+      render: ({ id, onClose }) => {
+        return (
+          <Alert
+            my={2}
+            mb={4}
+            pr={8}
+            id={`${id}`}
+            right={24}
+            width="auto"
+            fontSize="sm"
+            boxShadow="lg"
+            variant="solid"
+            textAlign="left"
+            alignItems="start"
+            borderRadius="md"
+            status={toastState.status.get()}>
+            <AlertIcon />
+            <Flex flex="1">
+              <AlertDescription display="block">{toastState.message.get()}</AlertDescription>
+            </Flex>
+            <CloseButton size="sm" onClick={onClose} position="absolute" right={1} top={1} />
+          </Alert>
+        );
+      },
     });
     return;
   };

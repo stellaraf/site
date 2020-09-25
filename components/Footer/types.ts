@@ -52,3 +52,8 @@ export interface ISubscribeAlert extends RenderedAlert {
   variant?: string;
   id: ToastId;
 }
+
+export interface ISubscribeToast {
+  status: IToast['status'];
+  message: string;
+}
