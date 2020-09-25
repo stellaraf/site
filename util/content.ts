@@ -86,7 +86,11 @@ export const getPage = async (pageSlug: string): Promise<PageAttrs> => {
   let page = { id: '', title: '', slug: '' };
   const data = await contentQuery('page', { 'fields.slug': pageSlug });
   if (data.total !== 0) {
-    page = { id: data.items[0].sys.id, ...Object(data.items[0].fields) };
+    const fields = Object(data.items[0].fields);
+    if (!fields.customProperties) {
+      fields.customProperties = {};
+    }
+    page = { id: data.items[0].sys.id, ...fields };
   }
   return page;
 };
