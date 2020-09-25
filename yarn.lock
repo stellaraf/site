@@ -1850,11 +1850,6 @@
   resolved "https://registry.yarnpkg.com/@hookstate/untracked/-/untracked-3.0.0.tgz#fcf5005f89a68956c994ffb4b04cc3bd25d7cbf6"
   integrity sha512-NctZVu0fEXc+komMmEpJ4OAD77P1P4uhXnU8e2Y1l+k0P+ZCE+enTDvgg9rp2WmViD7s8XA2+lS7wTkHGargmw==
 
-"@mapbox/point-geometry@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@mapbox/point-geometry/-/point-geometry-0.1.0.tgz#8a83f9335c7860effa2eeeca254332aa0aeed8f2"
-  integrity sha1-ioP5M1x4YO/6Lu7KJUMyqgru2PI=
-
 "@meronex/icons@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@meronex/icons/-/icons-4.0.0.tgz#26e089a8a4ec176a5b6778fd54fcdd25b4746c67"
@@ -1969,6 +1964,25 @@
     "@react-types/shared" "^3.2.0"
     clsx "^1.1.1"
 
+"@react-google-maps/api@^1.10.1":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/api/-/api-1.10.1.tgz#a1ebaac789771a8a8df66803edbc1f7b22dad4c6"
+  integrity sha512-hb8urUcwZw99Cu3yQnZWUbXjR1Ym/8C21kSX6B02I29l6DXNxDbJ5Jo/T5swhnizPKY7TNhR1oTctC/HY7SQWA==
+  dependencies:
+    "@react-google-maps/infobox" "1.10.0"
+    "@react-google-maps/marker-clusterer" "1.10.0"
+    invariant "2.2.4"
+
+"@react-google-maps/infobox@1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/infobox/-/infobox-1.10.0.tgz#b1982043bb2f3b31d3d9fb703635e04efb55c674"
+  integrity sha512-MhT2nMmjeG7TCxRv/JdylDyNd/n66ggSQQhTWVjJJTtdB/xqd0T8BHCkBWDN9uF0i0yCZzMFl2P2Y1zJ+xppBg==
+
+"@react-google-maps/marker-clusterer@1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/marker-clusterer/-/marker-clusterer-1.10.0.tgz#d7591332b11f951dd8b0c42b7495797677dc6a9e"
+  integrity sha512-3GLVgeXNStVcdiLMxzi3cBjr32ctlexLPPGQguwcYd6yPLaCcnVCwyzhV68KvL00xqOAD1c3aABV9EGgY8u6Qw==
+
 "@react-types/shared@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.2.0.tgz#531c320e6b8f01f614336c14cee50ecf9fca4a4d"
@@ -1997,6 +2011,11 @@
   version "7946.0.7"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.7.tgz#c8fa532b60a0042219cdf173ca21a975ef0666ad"
   integrity sha512-wE2v81i4C4Ol09RtsWFAqg3BUitWbHSpSlIo+bNdsCJijO9sjme+zm+73ZMCa/qMC8UEERxzGbvmr1cffo2SiQ==
+
+"@types/googlemaps@^3.39.13":
+  version "3.39.13"
+  resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.39.13.tgz#a2649ac618cb15bd04ad8700c41693c8c1f90e21"
+  integrity sha512-R/k5WKe8zQHo9oFRINuX/1haKYRkKEfItnBGrSjspbXXITakRdsj6daQIdL1+Pt84lnzduWurxNA5k0fgPMQUg==
 
 "@types/json-schema@^7.0.4":
   version "7.0.4"
@@ -4021,11 +4040,6 @@ event-target-shim@^5.0.0:
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
 
-eventemitter3@^1.1.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-1.2.0.tgz#1c86991d816ad1e504750e73874224ecf3bec508"
-  integrity sha1-HIaZHYFq0eUEdQ5zh0Ik7PO+xQg=
-
 events@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/events/-/events-3.0.0.tgz#9a0a0dfaf62893d92b875b8f2698ca4114973e88"
@@ -4427,16 +4441,6 @@ globals@^12.1.0:
   dependencies:
     type-fest "^0.8.1"
 
-google-map-react@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/google-map-react/-/google-map-react-1.1.5.tgz#ad88caa88085c6292dbb1f890c70ff75fbee3d47"
-  integrity sha512-VgqEIo1DGEvSa8aP6Iy7F41r3K+h0h8hLO2Rqv5hKGO4TE2fRErWvGDr5oVGPJWBaNrXe1rmNrw772AqLgjUsg==
-  dependencies:
-    "@mapbox/point-geometry" "^0.1.0"
-    eventemitter3 "^1.1.0"
-    prop-types "^15.5.6"
-    scriptjs "^2.5.7"
-
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.2.tgz#6f0952605d0140c1cfdb138ed005775b92d67b02"
@@ -4687,7 +4691,7 @@ inquirer@^7.0.0:
     strip-ansi "^6.0.0"
     through "^2.3.6"
 
-invariant@^2.2.2, invariant@^2.2.4:
+invariant@2.2.4, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -6160,7 +6164,7 @@ promise@8.0.3:
   dependencies:
     asap "~2.0.6"
 
-prop-types@15.7.2, prop-types@^15.5.6, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.7.2, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -6761,11 +6765,6 @@ schema-utils@^2.6.1, schema-utils@^2.6.6:
     "@types/json-schema" "^7.0.4"
     ajv "^6.12.2"
     ajv-keywords "^3.4.1"
-
-scriptjs@^2.5.7:
-  version "2.5.9"
-  resolved "https://registry.yarnpkg.com/scriptjs/-/scriptjs-2.5.9.tgz#343915cd2ec2ed9bfdde2b9875cd28f59394b35f"
-  integrity sha512-qGVDoreyYiP1pkQnbnFAUIS5AjenNwwQBdl7zeos9etl+hYKWahjRTfzAZZYBv5xNHx7vNKCmaLDQZ6Fr2AEXg==
 
 semver@7.0.0:
   version "7.0.0"
