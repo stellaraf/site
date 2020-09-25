@@ -40,6 +40,7 @@ export interface PageAttrs {
   body?: Document;
   footerGroup?: ContentRef;
   footerTitle?: string;
+  customProperties?: object;
 }
 
 export interface PageParsed extends Omit<PageAttrs, 'footerGroup'> {
@@ -101,6 +102,15 @@ export interface GeoPoint {
 export interface PageProps {
   pageData: PageAttrs;
   pageContent: PageContent[];
+}
+
+export interface IAboutPageAttrs extends PageAttrs {
+  customProperties: { employeesTitle: string; mapTitle: string };
+}
+
+export interface IAboutPage extends PageProps {
+  bios: BioEntry;
+  pageData: IAboutPageAttrs;
 }
 
 type Photo = Asset['fields']['file'];
@@ -166,6 +176,10 @@ export interface GlobalConfigPre {
   subscribeSuccess?: string;
   subscribeGenericError?: string;
   subscribeDuration?: number;
+  hqCoordinates?: { lon: number; lat: number };
+  hqMapInfo?: Document;
+  openMapsText?: string;
+  hqAddress?: string;
 }
 
 export interface ThemeConfig {

@@ -5,6 +5,7 @@ export * from './Content';
 export * from './ContentSection';
 export * from './Controls';
 export * from './Footer';
+export * from './GoogleMap';
 export * from './Header';
 export * from './Hero';
 export * from './HeroCard';
