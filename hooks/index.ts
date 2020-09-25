@@ -1,4 +1,5 @@
 export * from './useActiveSection';
+export * from './useApple';
 export * from './useBreakpointString';
 export * from './useGradient';
 export * from './useLinkType';
