@@ -1272,7 +1272,7 @@
   dependencies:
     "@chakra-ui/utils" "1.0.0-rc.5"
 
-"@chakra-ui/core@^1.0.0-rc.3":
+"@chakra-ui/core@^1.0.0-rc.5":
   version "1.0.0-rc.5"
   resolved "https://registry.yarnpkg.com/@chakra-ui/core/-/core-1.0.0-rc.5.tgz#16571a30702d68b7cdbef564bf2280437bb5b850"
   integrity sha512-s+z7vGomX3SnsoeFzW4yuuYPDnr52TDo1GETcTgzaUDfs2keQKXphzvFUxUFFY0VgHOejfXDyoNypPnAR6eqXw==
@@ -1630,7 +1630,7 @@
     "@types/tinycolor2" "1.4.2"
     tinycolor2 "1.4.1"
 
-"@chakra-ui/theme@1.0.0-rc.5", "@chakra-ui/theme@^1.0.0-rc.3":
+"@chakra-ui/theme@1.0.0-rc.5", "@chakra-ui/theme@^1.0.0-rc.5":
   version "1.0.0-rc.5"
   resolved "https://registry.yarnpkg.com/@chakra-ui/theme/-/theme-1.0.0-rc.5.tgz#fd275f770d190cdc52018fad6071fefa1360df65"
   integrity sha512-xSM4dp9fwp885IfqfyZ3yVrgYfIxxd/Sl6Az8HJsVHM9uWteyjzMIPf7Svtn4ft59XW79Vq6OqPyBWvsETinYg==
@@ -4444,6 +4444,11 @@ graceful-fs@^4.2.2:
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
   integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
+
+hamburger-react@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/hamburger-react/-/hamburger-react-2.2.0.tgz#71494756710a4f63699acbce899657d87c3f1f3a"
+  integrity sha512-7bRKPseNk2K1Upg4kP/yDcg28/wUCnGBVp1699qkyktCi2WjxQEaru9DKGZaqDJJYZzqdyLvLc9oHz3rBXm3PQ==
 
 has-flag@^2.0.0:
   version "2.0.0"

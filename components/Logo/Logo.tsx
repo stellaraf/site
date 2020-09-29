@@ -5,10 +5,18 @@ import { LogoMain } from './LogoMain';
 import { LogoIcon } from './LogoIcon';
 import { Tagline } from './Tagline';
 
-import type { LogoProps } from './types';
+import type { ILogo } from './types';
 
-const LogoText = forwardRef<HTMLDivElement, LogoProps>((props, ref) => {
-  const { size, width, height, showTagline = false, showReserved = false, ...rest } = props;
+const LogoText = forwardRef<HTMLDivElement, ILogo>((props, ref) => {
+  const {
+    size,
+    width,
+    height,
+    showTagline = false,
+    showReserved = false,
+    noAnimate = false,
+    ...rest
+  } = props;
   let sizeProps = {};
   if (height) {
     sizeProps = { ...sizeProps, height };
@@ -25,7 +33,7 @@ const LogoText = forwardRef<HTMLDivElement, LogoProps>((props, ref) => {
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMinYMin meet"
         viewBox={showReserved ? '0 0 400 150' : '0 0 380 150'}>
-        <LogoMain showReserved={showReserved} />
+        <LogoMain showReserved={showReserved} noAnimate={noAnimate} />
         {showTagline && <Tagline />}
       </svg>
     </Box>
