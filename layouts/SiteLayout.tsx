@@ -1,8 +1,8 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
-import smoothscroll from 'smoothscroll-polyfill';
+// import smoothscroll from 'smoothscroll-polyfill';
 import { useBreakpointValue } from '@chakra-ui/core';
-import { HeaderDesktop, HeaderMobile } from 'site/components';
+import { DHeader, MHeader } from 'site/components';
 import { Controls } from 'site/components';
 import { Footer } from 'site/components';
 import { CallToAction } from 'site/components';
@@ -13,9 +13,9 @@ import type { BoxProps, SiteLayoutProps } from './types';
 
 const Stars = dynamic<BoxProps>(() => import('site/components').then(i => i.Stars));
 
-if (typeof window !== 'undefined') {
-  smoothscroll.polyfill();
-}
+// if (typeof window !== 'undefined') {
+//   smoothscroll.polyfill();
+// }
 
 export const SiteLayout = (props: SiteLayoutProps) => {
   const { children, footerGroups } = props;
@@ -28,7 +28,7 @@ export const SiteLayout = (props: SiteLayoutProps) => {
   return (
     <Wrapper>
       <SyncedStyleProvider>
-        {isMobile ? <HeaderMobile /> : <HeaderDesktop />}
+        {isMobile ? <MHeader /> : <DHeader />}
         <Main>
           <Root>{children}</Root>
         </Main>
