@@ -1,4 +1,11 @@
-import type { LinkProps, SystemProps, SystemStyleObject } from '@chakra-ui/core';
+import type {
+  FlexProps,
+  SystemProps,
+  SystemStyleObject,
+  UseDisclosureReturn,
+} from '@chakra-ui/core';
+import type { ReactNode } from 'react';
+import type { LinkProps } from 'site/components';
 
 export interface HeaderLogoProps {
   color?: string;
@@ -25,4 +32,14 @@ export interface PassedLinkProps extends SystemProps {
   sx: SystemStyleObject;
 }
 
+export interface IMobileBaseHeader extends FlexProps {
+  isOpen: UseDisclosureReturn['isOpen'];
+  onToggle: UseDisclosureReturn['onToggle'];
+  burger: ReactNode;
+}
+
 export type { BoxProps, FlexProps } from '@chakra-ui/core';
+
+export interface IMobileNavLink extends LinkProps {
+  title: string;
+}

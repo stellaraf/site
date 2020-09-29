@@ -14,11 +14,11 @@ export const Hero = forwardRef<HTMLDivElement, HeroProps>((props, ref) => {
     <Box ref={ref} w="100%" minH="40vh" pt={32} {...bg} {...rStyles} {...rest}>
       <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
         <Flex textAlign="center" flexDir="column" alignItems="center">
-          <Heading as="h1" fontSize="6xl" fontWeight="light">
+          <Heading as="h1" fontSize={{ base: '4xl', lg: '6xl' }} fontWeight="light">
             {title}
           </Heading>
           {subtitle && (
-            <Heading as="h2" fontSize="3xl" fontWeight="light">
+            <Heading as="h2" fontSize={{ base: '1.5rem', lg: '3xl' }} fontWeight="light">
               {subtitle}
             </Heading>
           )}
