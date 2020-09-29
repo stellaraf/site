@@ -45,7 +45,7 @@ const NavGroup = (props: FlexProps) => (
   <Flex flex="1 0 0" alignItems="center" pointerEvents="auto" justifyContent="center" {...props} />
 );
 
-export const HeaderDesktop = (props: BoxProps) => {
+export const DHeader = (props: BoxProps) => {
   const headerLogo = useHeaderLogo();
   const { pathname } = useRouter();
   const styles = useStyles();
