@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Box, Flex, List, ListItem, Text } from '@chakra-ui/core';
+import { Box, List, ListItem, Text, SimpleGrid } from '@chakra-ui/core';
 import { Link } from 'site/components';
 import { useColorValue } from 'site/context';
 
 import type { IFooterLinks } from './types';
 
-export const FooterLinks = (props: IFooterLinks) => {
+export const DesktopLinks = (props: IFooterLinks) => {
   const { groups, ...rest } = props;
   const sorted = [
     ...new Set(
@@ -16,11 +16,11 @@ export const FooterLinks = (props: IFooterLinks) => {
   ];
   const linkColor = useColorValue('whiteAlpha.700', 'whiteAlpha.700');
   return (
-    <Flex justifyContent="space-between" {...rest}>
+    <SimpleGrid columns={{ base: 2, lg: 4 }} spacing={{ base: 8, lg: 16 }} {...rest}>
       {sorted.map((title, i) => {
         const items = groups.filter(g => g.footerGroup?.title === title);
         return (
-          <Box key={i} mr={8} zIndex={1}>
+          <Box key={i} zIndex={1}>
             <Text as="label" mb={8}>
               {title}
             </Text>
@@ -29,7 +29,7 @@ export const FooterLinks = (props: IFooterLinks) => {
                 .sort((a, b) => a.sortWeight - b.sortWeight)
                 .map((item, i) => (
                   <ListItem key={i} my={2}>
-                    <Link href={item.href} fontSize="sm" color={linkColor}>
+                    <Link href={item.href} fontSize={{ base: 'xs', lg: 'sm' }} color={linkColor}>
                       {item.title}
                     </Link>
                   </ListItem>
@@ -38,6 +38,6 @@ export const FooterLinks = (props: IFooterLinks) => {
           </Box>
         );
       })}
-    </Flex>
+    </SimpleGrid>
   );
 };

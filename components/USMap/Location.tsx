@@ -19,7 +19,7 @@ export const Location = (props: LocationProps) => {
   return (
     <Popover trigger="hover" placement="top">
       <PopoverTrigger>
-        <Link href="#">
+        <Link>
           <MapMarker coordinates={[coordinates.lon, coordinates.lat]} color={color} />
         </Link>
       </PopoverTrigger>

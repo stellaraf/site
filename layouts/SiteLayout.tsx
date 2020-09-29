@@ -1,7 +1,8 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 import smoothscroll from 'smoothscroll-polyfill';
-import { HeaderDesktop } from 'site/components';
+import { useBreakpointValue } from '@chakra-ui/core';
+import { HeaderDesktop, HeaderMobile } from 'site/components';
 import { Controls } from 'site/components';
 import { Footer } from 'site/components';
 import { CallToAction } from 'site/components';
@@ -18,10 +19,16 @@ if (typeof window !== 'undefined') {
 
 export const SiteLayout = (props: SiteLayoutProps) => {
   const { children, footerGroups } = props;
+  const isMobile = useBreakpointValue({
+    base: true,
+    md: true,
+    lg: false,
+    xl: false,
+  });
   return (
     <Wrapper>
       <SyncedStyleProvider>
-        <HeaderDesktop />
+        {isMobile ? <HeaderMobile /> : <HeaderDesktop />}
         <Main>
           <Root>{children}</Root>
         </Main>

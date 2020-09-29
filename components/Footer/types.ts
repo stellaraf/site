@@ -1,6 +1,5 @@
 import type {
   BoxProps,
-  FlexProps,
   StackProps,
   IconButtonProps,
   InputProps,
@@ -8,6 +7,7 @@ import type {
   AlertProps,
   RenderProps,
   ToastId,
+  SimpleGridProps,
 } from '@chakra-ui/core';
 import type { FooterItem } from 'site/types';
 
@@ -15,7 +15,7 @@ export interface FooterProps extends BoxProps {
   groups: FooterItem[];
 }
 
-export interface IFooterLinks extends FlexProps {
+export interface IFooterLinks extends SimpleGridProps {
   groups: FooterItem[];
 }
 
@@ -32,7 +32,10 @@ export interface ISocialLink extends Omit<IconButtonProps, 'href' | 'title' | 'a
 
 export type { BoxProps } from '@chakra-ui/core';
 
-export interface ISubscribe extends StackProps {}
+export interface ISubscribe extends StackProps {
+  alertProps?: AlertProps;
+  alertPosition?: IToast['position'];
+}
 
 export interface ISubscribeInput extends InputProps {}
 

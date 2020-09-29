@@ -4,6 +4,15 @@ import { mode } from '@chakra-ui/theme-tools';
 import type { Dict } from 'site/types';
 
 const variantBase = (props: Dict) => ({
+  header: mode({}, { borderBottomWidth: 0 })(props),
+  box: mode(
+    {},
+    {
+      borderBottomColor: 'original.tertiary',
+      borderBottomWidth: '1px',
+      borderBottomStyle: 'solid',
+    },
+  )(props),
   button: mode(
     {
       colorScheme: 'gray',

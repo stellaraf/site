@@ -4,9 +4,10 @@ import { Box, Flex, Heading, useMultiStyleConfig } from '@chakra-ui/core';
 import { getPage, getPageContent, getBios } from 'site/util';
 import { Avatars, Hero, GoogleMap, SEO } from 'site/components';
 import { useActiveSection, useRender, useRef, useTitle } from 'site/hooks';
+import { useResponsiveStyle } from 'site/styles';
 
 import type { GetStaticProps } from 'next';
-import type { IAboutPage, IBioSection, BioEntry, Bio, IMapSection } from 'site/types';
+import type { IAboutPage, IBioSection, BioEntry, Bio, IMapSection, ISection } from 'site/types';
 
 const SLUG = 'about';
 
@@ -20,18 +21,28 @@ function* parseBios(raw: BioEntry): Generator<Bio> {
   }
 }
 
+const Section = forwardRef<HTMLDivElement, ISection>((props, ref) => {
+  const { title, children, ...rest } = props;
+  const rStyles = useResponsiveStyle();
+  return (
+    <Box ref={ref} as="section" py={24} overflow="hidden" {...rest}>
+      <Flex height="100%" {...rStyles} alignItems="center" flexDir="column" {...rStyles}>
+        <Heading as="h3" fontSize="4xl">
+          {title}
+        </Heading>
+        {children}
+      </Flex>
+    </Box>
+  );
+});
+
 const BioSection = forwardRef<HTMLDivElement, IBioSection>((props, ref) => {
   const { bios, title, ...rest } = props;
   const styles = useMultiStyleConfig('SyncedStyles', { variant: 0 });
   return (
-    <Box ref={ref} as="section" p={24} overflow="hidden" sx={styles.box} {...rest}>
-      <Flex height="100%" px={24} alignItems="center" flexDir="column">
-        <Heading as="h3" fontSize="4xl">
-          {title}
-        </Heading>
-        <Avatars bioList={bios} />
-      </Flex>
-    </Box>
+    <Section ref={ref} title={title} sx={styles.box} {...rest}>
+      <Avatars bioList={bios} />
+    </Section>
   );
 });
 
@@ -39,14 +50,9 @@ const MapSection = forwardRef<HTMLDivElement, IMapSection>((props, ref) => {
   const { title, ...rest } = props;
   const styles = useMultiStyleConfig('SyncedStyles', { variant: 1 });
   return (
-    <Box ref={ref} as="section" p={24} overflow="hidden" sx={styles.box} {...rest}>
-      <Flex height="100%" alignItems="center" flexDir="column">
-        <Heading as="h3" mb={12} fontSize="4xl">
-          {title}
-        </Heading>
-        <GoogleMap />
-      </Flex>
-    </Box>
+    <Section ref={ref} title={title} sx={styles.box} {...rest}>
+      <GoogleMap />
+    </Section>
   );
 });
 

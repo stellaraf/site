@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Head from 'next/head';
 import { BaseSEO } from 'site/components';
 import { Provider } from 'site/context';
 import { useMouseTrap } from 'site/hooks';
@@ -20,12 +21,17 @@ const Site = (props: SiteProps) => {
   const { Component, pageProps, appProps } = props;
   const { globalConfig, footerGroups } = appProps;
   return (
-    <Provider appConfig={globalConfig}>
-      <BaseSEO />
-      <SiteLayout footerGroups={footerGroups}>
-        <Component {...pageProps} />
-      </SiteLayout>
-    </Provider>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width" />
+      </Head>
+      <Provider appConfig={globalConfig}>
+        <BaseSEO />
+        <SiteLayout footerGroups={footerGroups}>
+          <Component {...pageProps} />
+        </SiteLayout>
+      </Provider>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import type { Bio } from 'site/types';
-import type { BoxProps, FlexProps } from '@chakra-ui/core';
+import type { BoxProps, FlexProps, SimpleGridProps } from '@chakra-ui/core';
 
 /**
  * Array of n bios, grouped for layout reasons.
@@ -15,7 +15,19 @@ export interface PhotoProps extends BoxProps {
   onClick: (e: any) => void;
 }
 
-export interface WrapperProps extends FlexProps {}
+export interface IPhotoWrapper extends FlexProps {}
+
+export interface IGroupWrapper extends SimpleGridProps {}
+
+type Handler = (n: number) => void;
+
+export interface IPhotoGroup extends SimpleGridProps {
+  group: Bio[];
+  handlers: Handler[];
+  isOpen: boolean;
+  dividerColor: string;
+  current: number;
+}
 
 export interface AvatarsProps extends BoxProps {
   bioList: Bio[];

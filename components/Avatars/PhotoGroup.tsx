@@ -1,12 +1,28 @@
 import * as React from 'react';
 import { useState } from '@hookstate/core';
-import { Box, Divider, Flex, Image, Collapse, Button, Skeleton, Text } from '@chakra-ui/core';
-import { useRender } from 'site/hooks';
+import {
+  Box,
+  Divider,
+  Flex,
+  Image,
+  Collapse,
+  Button,
+  SimpleGrid,
+  Skeleton,
+  Text,
+} from '@chakra-ui/core';
+import { useRender, useMobile } from 'site/hooks';
 import { useColorValue } from 'site/context';
 
-import type { PhotoProps, PhotoGroupProps, WrapperProps } from './types';
+import type {
+  PhotoProps,
+  PhotoGroupProps,
+  IPhotoWrapper,
+  IGroupWrapper,
+  IPhotoGroup,
+} from './types';
 
-const Wrapper = (props: WrapperProps) => (
+const PhotoWrapper = (props: IPhotoWrapper) => (
   <Box>
     <Flex
       justifyContent="center"
@@ -32,7 +48,7 @@ const Photo = (props: PhotoProps) => {
     ready.set(true);
   };
   return (
-    <Wrapper {...rest}>
+    <PhotoWrapper {...rest}>
       <Button
         variant="unstyled"
         height="100%"
@@ -69,7 +85,56 @@ const Photo = (props: PhotoProps) => {
       <Text fontSize="xs" opacity="0.5">
         {title}
       </Text>
-    </Wrapper>
+    </PhotoWrapper>
+  );
+};
+
+const GroupWrapper = (props: IGroupWrapper) => {
+  return (
+    <SimpleGrid
+      my={12}
+      justifyContent="space-evenly"
+      columns={{ base: 1, lg: 3 }}
+      spacingX="80%"
+      spacingY={16}
+      {...props}
+    />
+  );
+};
+
+const PhotoGroupDesktop = (props: IPhotoGroup) => {
+  const { handlers, isOpen, group, dividerColor, children, ...rest } = props;
+  return (
+    <>
+      <GroupWrapper {...rest}>
+        {group.map((g, i) => (
+          <Photo key={i} attrs={g} onClick={handlers[i]} />
+        ))}
+      </GroupWrapper>
+      <Collapse isOpen={isOpen} textAlign="center" px={8}>
+        <Divider borderColor={dividerColor} />
+        {children}
+      </Collapse>
+    </>
+  );
+};
+
+const PhotoGroupMobile = (props: IPhotoGroup) => {
+  const { handlers, isOpen, current, group, dividerColor, children, ...rest } = props;
+  return (
+    <>
+      <GroupWrapper {...rest}>
+        {group.map((g, i) => (
+          <>
+            <Photo key={i} attrs={g} onClick={handlers[i]} />
+            <Collapse isOpen={isOpen && i === current} textAlign="center" px={8}>
+              <Divider borderColor={dividerColor} />
+              {children}
+            </Collapse>
+          </>
+        ))}
+      </GroupWrapper>
+    </>
   );
 };
 
@@ -89,24 +154,28 @@ export const PhotoGroup = (props: PhotoGroupProps) => {
   };
   const handlers = group.map((_, i) => (_: any) => handler(i));
   const renderedBio = useRender(group[contentNum.value].bio);
+  const isMobile = useMobile();
   return (
     <>
-      <Flex
-        my={12}
-        maxWidth="80%"
-        flex="1 1 33.3333%"
-        width="100%"
-        height="100%"
-        justifyContent="space-between"
-        {...rest}>
-        {group.map((g, i) => (
-          <Photo key={i} attrs={g} onClick={handlers[i]} />
-        ))}
-      </Flex>
-      <Collapse isOpen={show.value} textAlign="center" px={8}>
-        <Divider borderColor={dividerColor} />
-        {renderedBio}
-      </Collapse>
+      {isMobile ? (
+        <PhotoGroupMobile
+          handlers={handlers}
+          isOpen={show.value}
+          current={contentNum.value}
+          dividerColor={dividerColor}
+          group={group}>
+          {renderedBio}
+        </PhotoGroupMobile>
+      ) : (
+        <PhotoGroupDesktop
+          handlers={handlers}
+          isOpen={show.value}
+          current={contentNum.value}
+          dividerColor={dividerColor}
+          group={group}>
+          {renderedBio}
+        </PhotoGroupDesktop>
+      )}
     </>
   );
 };

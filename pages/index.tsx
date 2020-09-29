@@ -4,6 +4,7 @@ import { useConfig, useTheme, useColorValue } from 'site/context';
 import { HeroCards, HomeSection, Logo, SEO } from 'site/components';
 import { useActiveSection, useGradient, useNavLogo, useRef } from 'site/hooks';
 import { getHomePage } from 'site/util/content';
+import { useResponsiveStyle } from 'site/styles';
 
 import type { HomeProps, HomeStaticProps, GetStaticProps } from 'site/types';
 
@@ -14,6 +15,7 @@ export default function Home(props: HomeProps) {
   const { colors } = useTheme();
   const logo = useColorValue(colors.original.primary, 'white');
   const heroText = useColorValue('original.primary', 'white');
+  const rStyles = useResponsiveStyle();
 
   const bg = useGradient();
 
@@ -27,13 +29,25 @@ export default function Home(props: HomeProps) {
   return (
     <>
       <SEO title={orgName} titleTemplate="%s" />
-      <Box ref={useRef()} w="100%" minH="80vh" color={heroText} px={24} pt={32} zIndex={-2} {...bg}>
+      <Box
+        ref={useRef()}
+        w="100%"
+        minH="80vh"
+        color={heroText}
+        pt={32}
+        zIndex={-2}
+        {...rStyles}
+        {...bg}>
         <Flex flexDir="column" alignItems="center">
-          <Box overflowY="hidden">
-            <Logo.Text color={logo} width={512} ref={logoRef} />
+          <Box overflowY="hidden" width={['90%', '66%', '33%']}>
+            <Logo.Text color={logo} ref={logoRef} />
           </Box>
           <Flex textAlign="center">
-            <Heading as="h1" fontSize="2xl" fontWeight="light" mb={32}>
+            <Heading
+              as="h1"
+              fontSize={{ base: '1.5rem', md: 'xl', lg: '2xl' }}
+              fontWeight="light"
+              mb={32}>
               {siteSlogan}
             </Heading>
           </Flex>
