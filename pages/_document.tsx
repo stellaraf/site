@@ -7,7 +7,12 @@ import NextDocument, {
   DocumentContext,
   DocumentInitialProps,
 } from 'next/document';
+import smoothscroll from 'smoothscroll-polyfill';
 import { ColorModeScript } from '@chakra-ui/core';
+
+if (typeof window !== 'undefined') {
+  smoothscroll.polyfill();
+}
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
