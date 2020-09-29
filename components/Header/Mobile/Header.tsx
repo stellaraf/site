@@ -1,7 +1,5 @@
 import * as React from 'react';
 import {
-  Box,
-  Heading,
   Flex,
   Modal,
   ModalOverlay,
@@ -14,70 +12,19 @@ import {
   useStyles,
 } from '@chakra-ui/core';
 import { merge } from '@chakra-ui/utils';
-import { useRouter } from 'next/router';
 import { Spiral as Hamburger } from 'hamburger-react';
-import { FaArrowRight as RightArrow } from '@meronex/icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, Logo } from 'site/components';
+import { Logo } from 'site/components';
 import { useColorValue } from 'site/context';
-import navConfig from './config';
+import { Wrapper } from './Wrapper';
+import { NavLink } from './NavLink';
+import navConfig from '../config';
 
-import type { FlexProps, IMobileBaseHeader, IMobileNavLink } from './types';
-const headingHeight = 56;
+import type { IHeader } from './types';
 
-const BaseHeader = (props: IMobileBaseHeader) => {
-  const { isOpen, onToggle, burger, ...rest } = props;
-  const styles = useStyles();
-  const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
-  const { pathname } = useRouter();
-  return (
-    <Box
-      as="header"
-      pos="fixed"
-      top={0}
-      left={0}
-      right={0}
-      zIndex={1000}
-      bg="transparent"
-      transition={{ transition: 'all 200ms ease-in' }}
-      w="100%"
-      h={20}
-      sx={merge({}, styles.box, styles.header)}>
-      <Flex
-        px={8}
-        h="100%"
-        as="nav"
-        flexDir="row"
-        pos="relative"
-        flexWrap="nowrap"
-        alignItems="center"
-        borderBottomWidth="1px"
-        borderBottomStyle="solid"
-        borderBottomColor={borderColor}
-        justifyContent={pathname === '/' ? 'flex-end' : 'space-between'}
-        {...rest}>
-        {!isOpen && pathname !== '/' && (
-          <Link href="/">
-            <Logo.Text width="auto" height={headingHeight} mb={2} />
-          </Link>
-        )}
-        {!isOpen && burger}
-      </Flex>
-    </Box>
-  );
-};
+const HEADING_HEIGHT = 56;
 
-const NavLink = (props: IMobileNavLink) => {
-  const { href, title, ...rest } = props;
-  return (
-    <Link as={Heading} fontSize="2xl" href={href} _hover={{ textDecoration: 'unset' }} {...rest}>
-      {title}
-      <RightArrow style={{ display: 'inline', marginLeft: '1rem' }} size={24} />
-    </Link>
-  );
-};
-
-export const HeaderMobile = (props: FlexProps) => {
+export const MHeader = (props: IHeader) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const styles = useStyles();
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
@@ -88,13 +35,19 @@ export const HeaderMobile = (props: FlexProps) => {
       toggled={isOpen}
       toggle={onToggle}
       rounded
-      size={isOpen ? headingHeight : undefined}
+      size={isOpen ? HEADING_HEIGHT : undefined}
     />
   );
   const navItems = [...navConfig.left, ...navConfig.right];
   return (
     <>
-      <BaseHeader isOpen={isOpen} onToggle={onToggle} burger={burger} {...props} />
+      <Wrapper
+        isOpen={isOpen}
+        onToggle={onToggle}
+        burger={burger}
+        navHeaderHeight={HEADING_HEIGHT}
+        {...props}
+      />
       <AnimatePresence>
         {isOpen && (
           <Modal isOpen onClose={onClose} size="full">
@@ -127,7 +80,7 @@ export const HeaderMobile = (props: FlexProps) => {
                     <Flex align="center" justify="space-between">
                       <Logo.Text
                         width="auto"
-                        height={headingHeight}
+                        height={HEADING_HEIGHT}
                         mb={2}
                         noAnimate
                         color={logoColor}
@@ -138,11 +91,10 @@ export const HeaderMobile = (props: FlexProps) => {
                   <ModalBody>
                     <VStack align="flex-start" spacing={12}>
                       {navItems.map(i => (
-                        <NavLink href={i.link} title={i.title} onClick={onClose} />
+                        <NavLink href={i.link} title={i.title} key={i.title} onClick={onClose} />
                       ))}
                     </VStack>
                   </ModalBody>
-                  <ModalFooter>Footer</ModalFooter>
                 </ModalContent>
               </motion.div>
             </ModalOverlay>

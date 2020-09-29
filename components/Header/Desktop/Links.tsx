@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import { Button, Link } from 'site/components';
-import navConfig from './config';
+import navConfig from '../config';
 
 import type { ButtonProps } from 'site/components';
-import type { NavLinkProps, LinkGroupProps, PassedLinkProps } from './types';
+import type { INavLink, ILinkGroup, IPassedLink } from './types';
 
-export const NavLink = (props: NavLinkProps) => {
+export const NavLink = (props: INavLink) => {
   const { isActive = false, styles, ...rest } = props;
   const { activeColor, ...sx } = styles ?? {};
-  let linkProps: PassedLinkProps = { sx };
+  let linkProps: IPassedLink = { sx };
   if (isActive) {
     linkProps._after = {
       backgroundColor: activeColor,
@@ -33,7 +33,7 @@ export const NavLink = (props: NavLinkProps) => {
 /**
  * Group of header links, pinned to a specific side of the header.
  */
-export const LinkGroup = (props: LinkGroupProps) => {
+export const LinkGroup = (props: ILinkGroup) => {
   const { side, ...rest } = props;
   const { pathname } = useRouter();
   return (
