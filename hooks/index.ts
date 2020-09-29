@@ -3,6 +3,7 @@ export * from './useApple';
 export * from './useBreakpointString';
 export * from './useGradient';
 export * from './useLinkType';
+export * from './useMobile';
 export * from './useMouseTrap';
 export * from './useNavLogo';
 export * from './usePageContent';

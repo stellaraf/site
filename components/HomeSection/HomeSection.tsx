@@ -5,6 +5,7 @@ import { BsChevronRight } from '@meronex/icons/bs';
 import { Button } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useRender } from 'site/hooks';
+import { useResponsiveStyle } from 'site/styles';
 
 import type { HomeSectionProps } from './types';
 
@@ -17,6 +18,7 @@ export const HomeSection = forwardRef<HTMLElement, HomeSectionProps>((props, ref
   const { title, subtitle, body, showButton, buttonText, buttonLink } = section;
   const renderedBody = useRender(body);
   const styles = useMultiStyleConfig('SyncedStyles', { variant: index });
+  const rStyles = useResponsiveStyle();
   const padding = Object();
   if (index === 0) {
     padding.pt = '320px';
@@ -33,11 +35,18 @@ export const HomeSection = forwardRef<HTMLElement, HomeSectionProps>((props, ref
       {...padding}
       {...sectBorder}
       {...rest}>
-      <Flex height="100%" overflow="hidden" px={24} py={16} alignItems="center" flexDir="column">
-        <Heading as="h3" fontSize="4xl">
+      <Flex
+        height="100%"
+        overflow="hidden"
+        py={16}
+        alignItems="center"
+        flexDir="column"
+        textAlign={{ base: 'center', lg: 'justify' }}
+        {...rStyles}>
+        <Heading as="h3" fontSize={{ base: '3xl', lg: '4xl' }}>
           {title}
         </Heading>
-        <Heading as="h4" fontSize="xl" fontWeight="light">
+        <Heading as="h4" fontSize={{ base: '1.5rem', lg: 'xl' }} fontWeight="light">
           {subtitle}
         </Heading>
         <Box
@@ -45,7 +54,7 @@ export const HomeSection = forwardRef<HTMLElement, HomeSectionProps>((props, ref
           maxW={[null, null, '60%']}
           whiteSpace="pre-line"
           fontSize="lg"
-          textAlign="justify">
+          textAlign={{ base: 'left', lg: 'justify' }}>
           {renderedBody}
         </Box>
         {showButton && (

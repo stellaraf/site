@@ -8,13 +8,24 @@ export const Title = (props: TitleProps) => {
   return (
     <>
       <Box id={id} as="span" pos="relative" top={-130} visibility="hidden" />
-      <Heading as="h3" fontSize="4xl" {...rest} />
+      <Heading
+        as="h3"
+        fontSize={{ base: '3xl', lg: '4xl' }}
+        textAlign={{ base: 'center', lg: 'justify' }}
+        {...rest}
+      />
     </>
   );
 };
 
 export const Subtitle = (props: HeadingProps) => (
-  <Heading as="h4" fontSize="xl" fontWeight="light" {...props} />
+  <Heading
+    as="h4"
+    fontSize={{ base: '1.5rem', lg: 'xl' }}
+    fontWeight="light"
+    textAlign={{ base: 'center', lg: 'justify' }}
+    {...props}
+  />
 );
 
 export const Body = (props: BoxProps) => (
@@ -23,7 +34,7 @@ export const Body = (props: BoxProps) => (
     maxW={[null, null, '60%']}
     whiteSpace="pre-line"
     fontSize="lg"
-    textAlign="justify"
+    textAlign={{ base: 'left', lg: 'justify' }}
     {...props}
   />
 );

@@ -40,8 +40,9 @@ const MapContainer = (props: IMapContainer) => {
   const { bg, color, ...rest } = props;
   return (
     <Box
-      h="50vh"
+      h={{ base: '70vh', lg: '50vh' }}
       w="100%"
+      my={12}
       css={{
         '& *': { zIndex: 2 },
         [`& ${gm.iw.t}::after`]: { background: bg },
@@ -67,7 +68,7 @@ export const GoogleMap = () => {
   const renderedInfoContent = useRender(hqMapInfo);
   const bg = useColorValue(colors.original.light, colors.original.dark);
   const color = useColorValue(colors.original.dark, colors.original.light);
-  const mapOptions = useColorValue({ styles: null }, { styles: mapThemeDark });
+  const mapOptions = useColorValue({ styles: [] }, { styles: mapThemeDark });
   return (
     <MapContainer bg={bg} color={color}>
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GMAPS_KEY ?? ''}>

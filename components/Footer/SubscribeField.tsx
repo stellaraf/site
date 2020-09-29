@@ -11,9 +11,9 @@ import { useColorValue, useConfig } from 'site/context';
 import type { ISubscribeInput } from './types';
 
 const borderLight = ['whiteAlpha.50', 'green.100'];
-const borderDark = [null, 'green.100'];
+const borderDark = [undefined, 'green.100'];
 const hoverBorderLight = ['whiteAlpha.300', 'green.300'];
-const hoverBorderDark = [null, 'green.300'];
+const hoverBorderDark = [undefined, 'green.300'];
 
 export const SubscribeField = (props: ISubscribeInput) => {
   const {

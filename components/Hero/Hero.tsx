@@ -2,14 +2,16 @@ import * as React from 'react';
 import { forwardRef } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/core';
 import { useGradient } from 'site/hooks';
+import { useResponsiveStyle } from 'site/styles';
 
 import type { HeroProps } from './types';
 
 export const Hero = forwardRef<HTMLDivElement, HeroProps>((props, ref) => {
   const { title, subtitle, body, children, ...rest } = props;
   const bg = useGradient();
+  const rStyles = useResponsiveStyle();
   return (
-    <Box ref={ref} w="100%" minH="40vh" px={24} pt={32} {...bg} {...rest}>
+    <Box ref={ref} w="100%" minH="40vh" pt={32} {...bg} {...rStyles} {...rest}>
       <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
         <Flex textAlign="center" flexDir="column" alignItems="center">
           <Heading as="h1" fontSize="6xl" fontWeight="light">

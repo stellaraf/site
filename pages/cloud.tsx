@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Flex } from '@chakra-ui/core';
+import { Wrap } from '@chakra-ui/core';
 import { getPage, getPageContent, getGeoPoints } from 'site/util';
 import { useColorValue, useTheme } from 'site/context';
 import { Button, ContentSection, Hero, SEO } from 'site/components';
@@ -30,16 +30,16 @@ export default function Cloud(props: CloudProps) {
     <>
       <SEO title={title} description={subtitle} />
       <Hero ref={heroRef} title={title} subtitle={subtitle} body={renderedBody}>
-        <Flex justifyContent="center" w="100%" flexWrap="wrap" mt={8}>
+        <Wrap justify="center" w="100%" mt={8} align="center" spacing={4}>
           <Button href="#" variant="heroPrimary">
             Find Your Edge Data Center
           </Button>
           <Button href="#" variant="heroSecondary">
             Learn More
           </Button>
-        </Flex>
+        </Wrap>
         <USMap
-          maxW="75%"
+          maxW={{ base: '100%', lg: '75%' }}
           geoData={geoData}
           locations={geoPoints}
           mapColor={mapColor}

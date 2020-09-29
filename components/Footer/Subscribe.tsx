@@ -23,6 +23,7 @@ import { subscribeEmail, subscribeSchema } from './util';
 import type { ISubscribe, ISubscribeFormData, ISubscribeToast } from './types';
 
 export const Subscribe = (props: ISubscribe) => {
+  const { alertProps = {}, alertPosition = 'bottom-right', ...rest } = props;
   const {
     subscribeTitle = 'Subscribe to our newsletter',
     subscribeSuccess = 'Thanks! Please check your email to confirm your subscription.',
@@ -70,7 +71,7 @@ export const Subscribe = (props: ISubscribe) => {
     toast({
       duration: subscribeDuration * 1000,
       isClosable: true,
-      position: 'bottom-right',
+      position: alertPosition,
       render: ({ id, onClose }) => {
         return (
           <Alert
@@ -86,7 +87,8 @@ export const Subscribe = (props: ISubscribe) => {
             textAlign="left"
             alignItems="start"
             borderRadius="md"
-            status={toastState.status.get()}>
+            status={toastState.status.get()}
+            {...alertProps}>
             <AlertIcon />
             <Flex flex="1">
               <AlertDescription display="block">{toastState.message.get()}</AlertDescription>
@@ -112,7 +114,7 @@ export const Subscribe = (props: ISubscribe) => {
         align="flex-end"
         spacing={6}
         onSubmit={methods.handleSubmit(onSubmit)}
-        {...props}>
+        {...rest}>
         <Text>{titleMe(subscribeTitle)}</Text>
         <FormControl isInvalid={methods.errors.email}>
           <Controller as={SubscribeField} name="email" control={methods.control} defaultValue="" />

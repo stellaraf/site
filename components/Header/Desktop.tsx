@@ -50,8 +50,8 @@ export const HeaderDesktop = (props: BoxProps) => {
   const { pathname } = useRouter();
   const styles = useStyles();
   return (
-    <Header sx={merge({}, styles.box, styles.header)} {...props}>
-      <Navbar>
+    <Header sx={merge({}, styles.box, styles.header)}>
+      <Navbar {...props}>
         <Box overflow="hidden" pos="absolute">
           {pathname === '/' ? (
             <HeaderLogo show={headerLogo.value} />
