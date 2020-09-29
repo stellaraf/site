@@ -41,7 +41,7 @@ const BioSection = forwardRef<HTMLDivElement, IBioSection>((props, ref) => {
   const styles = useMultiStyleConfig('SyncedStyles', { variant: 0 });
   return (
     <Section ref={ref} title={title} sx={styles.box} {...rest}>
-      <Avatars bioList={bios} />
+      <Avatars bios={bios} />
     </Section>
   );
 });
