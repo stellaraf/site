@@ -58,13 +58,11 @@ export const Wrapper = (props: IBaseHeader) => {
         borderBottomWidth="1px"
         borderBottomStyle="solid"
         borderBottomColor={borderColor}
-        justifyContent={pathname === '/' ? 'flex-end' : 'space-between'}
+        justifyContent="space-between"
         {...rest}>
-        {showLogo.value && (
-          <Link href="/">
-            <Logo.Text width="auto" height={navHeaderHeight} mb={2} />
-          </Link>
-        )}
+        <Link href="/" opacity={showLogo.value ? 1 : 0}>
+          <Logo.Text width="auto" height={navHeaderHeight} mb={2} />
+        </Link>
         {!isOpen && burger}
       </Flex>
     </Box>

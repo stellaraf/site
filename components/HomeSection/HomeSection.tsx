@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { forwardRef } from 'react';
-import { Box, Flex, Heading, useMultiStyleConfig } from '@chakra-ui/core';
+import { Box, Flex, Heading } from '@chakra-ui/core';
 import { BsChevronRight } from '@meronex/icons/bs';
 import { Button } from 'site/components';
 import { useColorValue } from 'site/context';
@@ -9,7 +8,7 @@ import { useResponsiveStyle } from 'site/styles';
 
 import type { HomeSectionProps } from './types';
 
-export const HomeSection = forwardRef<HTMLElement, HomeSectionProps>((props, ref) => {
+export const HomeSection = (props: HomeSectionProps) => {
   const { section, index, ...rest } = props;
   const sectBorder = useColorValue(
     {},
@@ -17,7 +16,6 @@ export const HomeSection = forwardRef<HTMLElement, HomeSectionProps>((props, ref
   );
   const { title, subtitle, body, showButton, buttonText, buttonLink } = section;
   const renderedBody = useRender(body);
-  const styles = useMultiStyleConfig('SyncedStyles', { variant: index });
   const rStyles = useResponsiveStyle();
   const padding = Object();
   if (index === 0) {
@@ -27,14 +25,7 @@ export const HomeSection = forwardRef<HTMLElement, HomeSectionProps>((props, ref
     padding.py = 16;
   }
   return (
-    <Box
-      ref={ref}
-      as="section"
-      overflow="hidden"
-      // sx={styles.box}
-      {...padding}
-      {...sectBorder}
-      {...rest}>
+    <Box as="section" overflow="hidden" {...padding} {...sectBorder} {...rest}>
       <Flex
         height="100%"
         overflow="hidden"
@@ -58,7 +49,6 @@ export const HomeSection = forwardRef<HTMLElement, HomeSectionProps>((props, ref
           {renderedBody}
         </Box>
         {showButton && (
-          // <Button href={buttonLink} leftIcon={<BsChevronRight />} sx={styles.button}>
           <Button href={buttonLink} leftIcon={<BsChevronRight />}>
             {buttonText}
           </Button>
@@ -66,4 +56,4 @@ export const HomeSection = forwardRef<HTMLElement, HomeSectionProps>((props, ref
       </Flex>
     </Box>
   );
-});
+};

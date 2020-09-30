@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/core';
 import { useConfig, useTheme, useColorValue } from 'site/context';
 import { HeroCards, HomeSection, Logo, SEO } from 'site/components';
-import { useActiveSection, useGradient, useNavLogo, useRef } from 'site/hooks';
+import { useGradient, useNavLogo, useRef } from 'site/hooks';
 import { getHomePage } from 'site/util/content';
 import { useResponsiveStyle } from 'site/styles';
 
@@ -20,24 +20,14 @@ export default function Home(props: HomeProps) {
   const bg = useGradient();
 
   const sections = pageContent.sections.sort((a, b) => a.sortWeight - b.sortWeight);
-  const sectionRefs = sections.map(() => useRef<HTMLDivElement>());
   const logoRef = useRef<HTMLDivElement>();
 
   useNavLogo(logoRef);
-  // useActiveSection(sectionRefs);
 
   return (
     <>
       <SEO title={orgName} titleTemplate="%s" />
-      <Box
-        ref={useRef()}
-        w="100%"
-        minH="80vh"
-        color={heroText}
-        pt={32}
-        zIndex={-2}
-        {...rStyles}
-        {...bg}>
+      <Box w="100%" minH="80vh" color={heroText} pt={32} zIndex={-2} {...rStyles} {...bg}>
         <Flex flexDir="column" alignItems="center">
           <Box overflowY="hidden" width={['90%', '66%', '33%']}>
             <Logo.Text color={logo} ref={logoRef} />
@@ -58,10 +48,8 @@ export default function Home(props: HomeProps) {
           </Flex>
         </Flex>
       </Box>
-      {sectionRefs.map((ref, i) => {
-        return (
-          <HomeSection ref={ref} section={sections[i]} index={i % sectionRefs.length} key={i} />
-        );
+      {sections.map((sect, i) => {
+        return <HomeSection section={sect} index={i % sections.length} key={i} />;
       })}
     </>
   );

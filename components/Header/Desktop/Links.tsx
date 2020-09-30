@@ -7,15 +7,10 @@ import navConfig from '../config';
 import type { ButtonProps } from 'site/components';
 import type { INavLink, ILinkGroup, IPassedLink } from './types';
 
-/**
- *
- */
-
 export const NavLink = (props: INavLink) => {
   const { isActive = false, styles, ...rest } = props;
-  // const { activeColor, ...sx } = styles ?? {};
   const activeColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
-  // let linkProps: IPassedLink = { sx };
+
   let linkProps: IPassedLink = {};
   if (isActive) {
     linkProps._after = {
@@ -34,7 +29,6 @@ export const NavLink = (props: INavLink) => {
       transform: 'translateY(-10px)',
     };
   }
-  // return <Link {...linkProps} {...rest} />;
   return (
     <Link
       p={4}

@@ -4,7 +4,7 @@ import { getPage, getPageContent, getGeoPoints } from 'site/util';
 import { useColorValue, useTheme } from 'site/context';
 import { Button, ContentSection, Hero, SEO } from 'site/components';
 import { USMap } from 'site/components/USMap';
-import { useActiveSection, useRender, useRef } from 'site/hooks';
+import { useRender } from 'site/hooks';
 
 import type { CloudProps, GetStaticProps } from 'site/types';
 
@@ -12,24 +12,19 @@ const SLUG = 'cloud';
 
 export default function Cloud(props: CloudProps) {
   const { geoData, geoPoints, pageData, pageContent } = props;
+  const { title, subtitle, body } = pageData;
+  const renderedBody = useRender(body);
 
   const { colors } = useTheme();
   const mapColor = useColorValue(colors.blackAlpha[200], colors.whiteAlpha[200]);
   const markerColor = useColorValue(colors.primary[400], colors.green[400]);
 
-  const heroRef = useRef<HTMLDivElement>();
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
-  const sectionRefs = sections.map(() => useRef<HTMLElement>());
-
-  const { title, subtitle, body } = pageData;
-  const renderedBody = useRender(body);
-
-  // useActiveSection(sectionRefs);
 
   return (
     <>
       <SEO title={title} description={subtitle} />
-      <Hero ref={heroRef} title={title} subtitle={subtitle} body={renderedBody}>
+      <Hero title={title} subtitle={subtitle} body={renderedBody}>
         <Wrap justify="center" w="100%" mt={8} align="center" spacing={4}>
           <Button href="#" variant="heroPrimary">
             Find Your Edge Data Center
@@ -46,10 +41,8 @@ export default function Cloud(props: CloudProps) {
           markerColor={markerColor}
         />
       </Hero>
-      {sectionRefs.map((ref, i) => {
-        return (
-          <ContentSection ref={ref} items={sections[i]} index={i % sectionRefs.length} key={i} />
-        );
+      {sections.map((sect, i) => {
+        return <ContentSection items={sect} key={i} />;
       })}
     </>
   );

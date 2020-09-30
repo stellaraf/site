@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
-import { Box, Flex, useStyles } from '@chakra-ui/core';
-import { merge } from '@chakra-ui/utils';
+import { Box, Flex } from '@chakra-ui/core';
 import { Link, Logo } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useNavLogoState } from 'site/hooks';
@@ -49,12 +48,10 @@ const NavGroup = (props: FlexProps) => (
 export const DHeader = (props: BoxProps) => {
   const { pathname } = useRouter();
   const { value: showLogo } = useNavLogoState();
-  const styles = useStyles();
   const bg = useColorValue('original.light', 'transparent');
   const color = useColorValue('original.dark', 'original.light');
   const cssProps = useColorValue({}, { css: { backdropFilter: 'blur(10px)' } });
   return (
-    // <Header sx={merge({}, styles.box, styles.header)}>
     <Header bg={bg} color={color} {...cssProps}>
       <Navbar {...props}>
         <Box overflow="hidden" pos="absolute">
@@ -67,13 +64,9 @@ export const DHeader = (props: BoxProps) => {
           )}
         </Box>
         <NavGroup>
-          {/* <LinkGroup side="left" styles={styles.link} />
-          <LinkGroup side="right" styles={styles.link} />
-          <NavLink href="https://docs.stellar.tech" styles={styles.link}> */}
           <LinkGroup side="left" />
           <LinkGroup side="right" />
           <NavLink href="https://docs.stellar.tech">Docs</NavLink>
-          {/* <ContactButton sx={styles.button} /> */}
           <ContactButton />
         </NavGroup>
       </Navbar>

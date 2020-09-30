@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { forwardRef } from 'react';
-import { Box, Flex, useMultiStyleConfig } from '@chakra-ui/core';
+import { Box, Flex } from '@chakra-ui/core';
 import { BsChevronRight } from '@meronex/icons/bs';
 import { Button } from 'site/components/Button';
 import { usePageContent } from 'site/hooks';
@@ -19,10 +19,8 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
     buttonLink,
     subsections,
   } = usePageContent(items, [items.title]);
-  const styles = useMultiStyleConfig('SyncedStyles', { variant: index });
   const rStyles = useResponsiveStyle();
   return (
-    // <Box ref={ref} as="section" py={24} overflow="hidden" sx={styles.box} {...rest}>
     <Box ref={ref} as="section" py={24} overflow="hidden" {...rest}>
       <Flex height="100%" overflow="hidden" align="center" direction="column" {...rStyles}>
         {title}
@@ -30,7 +28,6 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
         {body}
         {subsections}
         {showButton && (
-          // <Button href={buttonLink} leftIcon={<BsChevronRight />} sx={styles.button}>
           <Button href={buttonLink} leftIcon={<BsChevronRight />}>
             {buttonText}
           </Button>
