@@ -24,7 +24,7 @@ export default function Home(props: HomeProps) {
   const logoRef = useRef<HTMLDivElement>();
 
   useNavLogo(logoRef);
-  useActiveSection(sectionRefs);
+  // useActiveSection(sectionRefs);
 
   return (
     <>

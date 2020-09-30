@@ -14,11 +14,11 @@ export const heroButtons = {
           _hover: { bg: 'primary.400' },
         },
         {
-          bg: 'teal.400',
+          bg: 'tertiary.400',
           color: 'white',
           boxShadow: 'md',
           mx: 4,
-          _hover: { bg: 'teal.300', color: 'white' },
+          _hover: { bg: 'tertiary.300', color: 'white' },
         },
       )(props),
     heroSecondary: (props: Dict) =>

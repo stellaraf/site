@@ -38,9 +38,10 @@ const Section = forwardRef<HTMLDivElement, ISection>((props, ref) => {
 
 const BioSection = forwardRef<HTMLDivElement, IBioSection>((props, ref) => {
   const { bios, title, ...rest } = props;
-  const styles = useMultiStyleConfig('SyncedStyles', { variant: 0 });
+  // const styles = useMultiStyleConfig('SyncedStyles', { variant: 0 });
   return (
-    <Section ref={ref} title={title} sx={styles.box} {...rest}>
+    // <Section ref={ref} title={title} sx={styles.box} {...rest}>
+    <Section ref={ref} title={title} {...rest}>
       <Avatars bios={bios} />
     </Section>
   );
@@ -48,9 +49,10 @@ const BioSection = forwardRef<HTMLDivElement, IBioSection>((props, ref) => {
 
 const MapSection = forwardRef<HTMLDivElement, IMapSection>((props, ref) => {
   const { title, ...rest } = props;
-  const styles = useMultiStyleConfig('SyncedStyles', { variant: 1 });
+  // const styles = useMultiStyleConfig('SyncedStyles', { variant: 1 });
   return (
-    <Section ref={ref} title={title} sx={styles.box} {...rest}>
+    // <Section ref={ref} title={title} sx={styles.box} {...rest}>
+    <Section ref={ref} title={title} {...rest}>
       <GoogleMap />
     </Section>
   );
@@ -67,7 +69,7 @@ export default function About(props: IAboutPage) {
   const renderedBody = useRender(body);
   const titleMe = useTitle();
 
-  useActiveSection([bioRef, mapsRef]);
+  // useActiveSection([bioRef, mapsRef]);
 
   return (
     <>

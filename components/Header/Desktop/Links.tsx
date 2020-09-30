@@ -1,15 +1,22 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import { Button, Link } from 'site/components';
+import { useColorValue } from 'site/context';
 import navConfig from '../config';
 
 import type { ButtonProps } from 'site/components';
 import type { INavLink, ILinkGroup, IPassedLink } from './types';
 
+/**
+ *
+ */
+
 export const NavLink = (props: INavLink) => {
   const { isActive = false, styles, ...rest } = props;
-  const { activeColor, ...sx } = styles ?? {};
-  let linkProps: IPassedLink = { sx };
+  // const { activeColor, ...sx } = styles ?? {};
+  const activeColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
+  // let linkProps: IPassedLink = { sx };
+  let linkProps: IPassedLink = {};
   if (isActive) {
     linkProps._after = {
       backgroundColor: activeColor,
@@ -27,7 +34,19 @@ export const NavLink = (props: INavLink) => {
       transform: 'translateY(-10px)',
     };
   }
-  return <Link {...linkProps} {...rest} />;
+  // return <Link {...linkProps} {...rest} />;
+  return (
+    <Link
+      p={4}
+      mr={8}
+      pos="relative"
+      fontWeight="medium"
+      transition="all 0.2s"
+      _hover={{ textDecoration: 'none', transform: 'translateY(-2px)', opacity: 0.8 }}
+      {...linkProps}
+      {...rest}
+    />
+  );
 };
 
 /**

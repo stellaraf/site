@@ -14,7 +14,7 @@ export default function Services(props: PageProps) {
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
   const sectionRefs = sections.map(() => useRef<HTMLDivElement>());
 
-  useActiveSection(sectionRefs);
+  // useActiveSection(sectionRefs);
 
   return (
     <>

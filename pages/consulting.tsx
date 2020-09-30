@@ -16,7 +16,7 @@ export default function Consulting(props: PageProps) {
   const { title, subtitle, body } = pageData;
   const renderedBody = useRender(body);
 
-  useActiveSection(sectionRefs);
+  // useActiveSection(sectionRefs);
 
   return (
     <>
