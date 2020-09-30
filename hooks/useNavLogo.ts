@@ -1,20 +1,27 @@
+import { createState, useState } from '@hookstate/core';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
-import { useHeaderLogo } from 'site/styles';
 import type { ReactRef } from 'site/types';
+
+const showNavLogoState = createState<boolean>(false);
+export const useNavLogoState = () => useState(showNavLogoState);
 
 /**
  * Show or hide the navbar logo based on scroll position.
  */
 export const useNavLogo = (logoRef: ReactRef): void => {
-  const show = useHeaderLogo();
+  const headerLogo = useNavLogoState();
+
   const effect = () => {
-    const { top } = logoRef.current.getBoundingClientRect();
-    if (top < 0 && !show.value) {
-      show.set(true);
-    }
-    if (top > 0 && show.value) {
-      show.set(false);
+    if (typeof logoRef.current.getBoundingClientRect === 'function') {
+      const { top } = logoRef.current.getBoundingClientRect();
+      if (top < 0 && !headerLogo.value) {
+        headerLogo.set(true);
+      }
+      if (top > 0 && headerLogo.value) {
+        headerLogo.set(false);
+      }
     }
   };
-  return useScrollPosition(effect, [logoRef]);
+
+  useScrollPosition(effect, [logoRef]);
 };

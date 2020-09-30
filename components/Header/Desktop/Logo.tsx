@@ -1,15 +1,17 @@
 import * as React from 'react';
+import { forwardRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, Logo } from 'site/components';
 
 import type { HeaderLogoProps } from './types';
 
-export const HeaderLogo = (props: HeaderLogoProps) => {
+export const HeaderLogo = forwardRef<HTMLDivElement, HeaderLogoProps>((props, ref) => {
   const { color = 'currentColor', show } = props;
   return (
     <AnimatePresence>
       {show && (
         <motion.div
+          ref={ref}
           key="headerLogo"
           initial={{ y: '100%' }}
           animate={{ y: '0%' }}
@@ -22,4 +24,4 @@ export const HeaderLogo = (props: HeaderLogoProps) => {
       )}
     </AnimatePresence>
   );
-};
+});

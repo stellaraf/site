@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Box, Flex, useStyles } from '@chakra-ui/core';
 import { merge } from '@chakra-ui/utils';
 import { Link, Logo } from 'site/components';
-import { useHeaderLogo } from 'site/styles';
+import { useNavLogoState } from 'site/hooks';
 import { NavLink, LinkGroup, ContactButton } from './Links';
 import { HeaderLogo } from './Logo';
 
@@ -46,15 +46,15 @@ const NavGroup = (props: FlexProps) => (
 );
 
 export const DHeader = (props: BoxProps) => {
-  const headerLogo = useHeaderLogo();
   const { pathname } = useRouter();
+  const { value: showLogo } = useNavLogoState();
   const styles = useStyles();
   return (
     <Header sx={merge({}, styles.box, styles.header)}>
       <Navbar {...props}>
         <Box overflow="hidden" pos="absolute">
           {pathname === '/' ? (
-            <HeaderLogo show={headerLogo.value} />
+            <HeaderLogo show={showLogo} />
           ) : (
             <Link href="/">
               <Logo.Text width={160} height={56} pb={4} />
