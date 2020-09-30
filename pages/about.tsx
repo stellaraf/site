@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { forwardRef } from 'react';
-import { Box, Flex, Heading, useMultiStyleConfig } from '@chakra-ui/core';
+import { Box, Flex, Heading } from '@chakra-ui/core';
 import { getPage, getPageContent, getBios } from 'site/util';
 import { Avatars, Hero, GoogleMap, SEO } from 'site/components';
-import { useActiveSection, useRender, useRef, useTitle } from 'site/hooks';
+import { useRender, useRef, useTitle } from 'site/hooks';
 import { useResponsiveStyle } from 'site/styles';
 
 import type { GetStaticProps } from 'next';
-import type { IAboutPage, IBioSection, BioEntry, Bio, IMapSection, ISection } from 'site/types';
+import type { IAboutPage, BioEntry, Bio, ISection } from 'site/types';
 
 const SLUG = 'about';
 
@@ -21,11 +20,11 @@ function* parseBios(raw: BioEntry): Generator<Bio> {
   }
 }
 
-const Section = forwardRef<HTMLDivElement, ISection>((props, ref) => {
+const Section = (props: ISection) => {
   const { title, children, ...rest } = props;
   const rStyles = useResponsiveStyle();
   return (
-    <Box ref={ref} as="section" py={24} overflow="hidden" {...rest}>
+    <Box as="section" py={24} overflow="hidden" {...rest}>
       <Flex height="100%" {...rStyles} alignItems="center" flexDir="column" {...rStyles}>
         <Heading as="h3" fontSize="4xl">
           {title}
@@ -34,49 +33,27 @@ const Section = forwardRef<HTMLDivElement, ISection>((props, ref) => {
       </Flex>
     </Box>
   );
-});
-
-const BioSection = forwardRef<HTMLDivElement, IBioSection>((props, ref) => {
-  const { bios, title, ...rest } = props;
-  // const styles = useMultiStyleConfig('SyncedStyles', { variant: 0 });
-  return (
-    // <Section ref={ref} title={title} sx={styles.box} {...rest}>
-    <Section ref={ref} title={title} {...rest}>
-      <Avatars bios={bios} />
-    </Section>
-  );
-});
-
-const MapSection = forwardRef<HTMLDivElement, IMapSection>((props, ref) => {
-  const { title, ...rest } = props;
-  // const styles = useMultiStyleConfig('SyncedStyles', { variant: 1 });
-  return (
-    // <Section ref={ref} title={title} sx={styles.box} {...rest}>
-    <Section ref={ref} title={title} {...rest}>
-      <GoogleMap />
-    </Section>
-  );
-});
+};
 
 export default function About(props: IAboutPage) {
   const { pageData, bios } = props;
   const { title, subtitle, body, customProperties } = pageData;
   const { employeesTitle = '', mapTitle = '' } = customProperties;
   const headerRef = useRef<HTMLDivElement>();
-  const bioRef = useRef<HTMLDivElement>();
-  const mapsRef = useRef<HTMLDivElement>();
   const parsedBios = [...parseBios(bios)];
   const renderedBody = useRender(body);
   const titleMe = useTitle();
-
-  // useActiveSection([bioRef, mapsRef]);
 
   return (
     <>
       <SEO title={title} description={subtitle} />
       <Hero ref={headerRef} title={title} subtitle={subtitle} body={renderedBody} />
-      <BioSection ref={bioRef} bios={parsedBios} title={titleMe(employeesTitle)} />
-      <MapSection ref={mapsRef} title={titleMe(mapTitle)} />
+      <Section title={titleMe(employeesTitle)}>
+        <Avatars bios={parsedBios} />
+      </Section>
+      <Section title={titleMe(mapTitle)}>
+        <GoogleMap />
+      </Section>
     </>
   );
 }

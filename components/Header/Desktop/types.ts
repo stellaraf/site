@@ -15,16 +15,12 @@ export type NavLinkStyles = NavLinkStyleAttrs & SystemStyleObject;
 
 export interface INavLink extends LinkProps {
   isActive?: boolean;
-  styles: NavLinkStyles;
 }
 
 export interface ILinkGroup extends LinkProps {
   side: 'left' | 'right';
-  styles: NavLinkStyles;
 }
 
-export interface IPassedLink extends SystemProps {
-  sx: SystemStyleObject;
-}
+export interface IPassedLink extends SystemProps {}
 
 export type { BoxProps, FlexProps } from '@chakra-ui/core';

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { GetStaticProps } from 'next';
 import { getPage, getPageContent } from 'site/util';
 import { ContentSection, Hero, SEO } from 'site/components';
-import { useActiveSection, useRef } from 'site/hooks';
 
 import type { PageProps } from 'site/types';
 
@@ -12,18 +11,13 @@ export default function Services(props: PageProps) {
   const { pageData, pageContent } = props;
   const { title, subtitle } = pageData;
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
-  const sectionRefs = sections.map(() => useRef<HTMLDivElement>());
-
-  // useActiveSection(sectionRefs);
 
   return (
     <>
       <SEO title={title} description={subtitle} />
       <Hero title={title} subtitle={subtitle} />
-      {sectionRefs.map((ref, i) => {
-        return (
-          <ContentSection ref={ref} items={sections[i]} index={i % sectionRefs.length} key={i} />
-        );
+      {sections.map((sect, i) => {
+        return <ContentSection items={sect} key={i} />;
       })}
     </>
   );

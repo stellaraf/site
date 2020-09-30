@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { getPage, getPageContent } from 'site/util';
 import { ContentSection, Hero, SEO } from 'site/components';
-import { useActiveSection, useRender, useRef } from 'site/hooks';
+import { useRender } from 'site/hooks';
 
 import type { PageProps, GetStaticProps } from 'site/types';
 
@@ -10,22 +10,16 @@ const SLUG = 'consulting';
 export default function Consulting(props: PageProps) {
   const { pageData, pageContent } = props;
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
-  const heroRef = useRef<HTMLDivElement>();
-  const sectionRefs = sections.map(() => useRef<HTMLElement>());
 
   const { title, subtitle, body } = pageData;
   const renderedBody = useRender(body);
 
-  // useActiveSection(sectionRefs);
-
   return (
     <>
       <SEO title={title} description={subtitle} />
-      <Hero ref={heroRef} title={title} subtitle={subtitle} body={renderedBody} />
-      {sectionRefs.map((ref, i) => {
-        return (
-          <ContentSection ref={ref} items={sections[i]} index={i % sectionRefs.length} key={i} />
-        );
+      <Hero title={title} subtitle={subtitle} body={renderedBody} />
+      {sections.map((sect, i) => {
+        return <ContentSection items={sect} key={i} />;
       })}
     </>
   );
