@@ -31,7 +31,7 @@ export const HomeSection = forwardRef<HTMLElement, HomeSectionProps>((props, ref
       ref={ref}
       as="section"
       overflow="hidden"
-      sx={styles.box}
+      // sx={styles.box}
       {...padding}
       {...sectBorder}
       {...rest}>
@@ -58,7 +58,8 @@ export const HomeSection = forwardRef<HTMLElement, HomeSectionProps>((props, ref
           {renderedBody}
         </Box>
         {showButton && (
-          <Button href={buttonLink} leftIcon={<BsChevronRight />} sx={styles.button}>
+          // <Button href={buttonLink} leftIcon={<BsChevronRight />} sx={styles.button}>
+          <Button href={buttonLink} leftIcon={<BsChevronRight />}>
             {buttonText}
           </Button>
         )}

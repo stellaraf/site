@@ -159,7 +159,7 @@ const globalStyles = (props: Dict) => {
       zIndex: 1,
     },
     body: {
-      backgroundColor: mode('original.light', 'transparent')(props),
+      backgroundColor: mode('original.light', 'original.dark')(props),
       color: mode('original.dark', 'original.light')(props),
       fontFamily: 'body',
     },
