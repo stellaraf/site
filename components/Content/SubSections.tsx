@@ -1,11 +1,13 @@
 import { Box, Heading, SimpleGrid } from '@chakra-ui/core';
 import { useRender, useTitle } from 'site/hooks';
+import { useColorValue } from 'site/context';
 import type { RenderedSubSectionProps, SubSectionGroupProps } from './types';
 
 const SubSection = (props: RenderedSubSectionProps) => {
   const { title, body } = props;
+  const boxProps = useColorValue({ bg: 'white', boxShadow: 'xl' }, {});
   return (
-    <Box>
+    <Box {...boxProps} p={8} borderRadius="md">
       <Heading as="h4" fontSize="lg" mb={4}>
         {title}
       </Heading>
@@ -19,6 +21,7 @@ const SubSection = (props: RenderedSubSectionProps) => {
 export const SubSections = (props: SubSectionGroupProps) => {
   const titleMe = useTitle();
   const { sections, ...rest } = props;
+
   return (
     <SimpleGrid
       columns={{ base: 1, lg: 2 }}

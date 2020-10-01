@@ -11,7 +11,7 @@ export const Title = (props: TitleProps) => {
       <Heading
         as="h3"
         fontSize={{ base: '3xl', lg: '4xl' }}
-        textAlign={{ base: 'center', lg: 'justify' }}
+        textAlign={{ base: 'center', xl: 'justify' }}
         {...rest}
       />
     </>
