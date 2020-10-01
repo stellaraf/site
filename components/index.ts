@@ -14,4 +14,5 @@ export * from './Link';
 export * from './Logo';
 export * from './Meta';
 export * from './RichText';
+export * from './SectionDivider';
 export * from './Stars';
