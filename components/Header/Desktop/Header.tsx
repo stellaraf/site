@@ -29,7 +29,7 @@ const Navbar = (props: BoxProps) => {
   return (
     <Flex
       py={8}
-      px={24}
+      px={{ lg: 16, xl: 24 }}
       as="nav"
       flexDir="row"
       pos="relative"
