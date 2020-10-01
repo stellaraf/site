@@ -1,1 +1,2 @@
-export * from './Controls';
+export * from './DControls';
+export * from './MControls';

@@ -5,6 +5,7 @@ import { DesktopLinks } from './DesktopLinks';
 import { MobileLinks } from './MobileLinks';
 import { Copyright } from './Copyright';
 import { Subscribe } from './Subscribe';
+import { MControls } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useMobile } from 'site/hooks';
 import { useResponsiveStyle } from 'site/styles';
@@ -25,7 +26,8 @@ const BottomDesktop = () => {
 
 const BottomMobile = () => {
   return (
-    <VStack justify="space-between" align="center" mb={8} mt={24} spacing={12}>
+    <VStack justify="space-between" align="center" mb={8} mt={12} spacing={12}>
+      <MControls />
       <Subscribe
         width="100%"
         align="center"

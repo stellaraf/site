@@ -10,6 +10,7 @@ import type { IBaseHeader } from './types';
 
 export const Wrapper = (props: IBaseHeader) => {
   const { isOpen, onToggle, burger, navHeaderHeight, ...rest } = props;
+  const bg = useColorValue('original.light', 'transparent');
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
   const { pathname } = useRouter();
   const { value: globalShowLogo } = useNavLogoState();
@@ -42,7 +43,7 @@ export const Wrapper = (props: IBaseHeader) => {
       left={0}
       right={0}
       zIndex={1000}
-      bg="transparent"
+      bg={bg}
       transition={{ transition: 'all 200ms ease-in' }}
       w="100%"
       h={20}

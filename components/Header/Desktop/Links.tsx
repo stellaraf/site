@@ -8,7 +8,7 @@ import type { ButtonProps } from 'site/components';
 import type { INavLink, ILinkGroup, IPassedLink } from './types';
 
 export const NavLink = (props: INavLink) => {
-  const { isActive = false, styles, ...rest } = props;
+  const { isActive = false, ...rest } = props;
   const activeColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
 
   let linkProps: IPassedLink = {};
@@ -31,8 +31,9 @@ export const NavLink = (props: INavLink) => {
   }
   return (
     <Link
-      p={4}
-      mr={8}
+      py={4}
+      px={{ lg: 2, xl: 4 }}
+      mr={{ lg: 4, xl: 8 }}
       pos="relative"
       fontWeight="medium"
       transition="all 0.2s"

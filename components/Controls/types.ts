@@ -1,3 +1,4 @@
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps, StackProps } from '@chakra-ui/core';
 
-export type ControlsProps = BoxProps;
+export interface IDControls extends BoxProps {}
+export interface IMControls extends StackProps {}

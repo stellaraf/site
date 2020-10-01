@@ -14,7 +14,7 @@ import {
 import { merge } from '@chakra-ui/utils';
 import { Spiral as Hamburger } from 'hamburger-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Logo } from 'site/components';
+import { Logo, MControls } from 'site/components';
 import { useColorValue } from 'site/context';
 import { Wrapper } from './Wrapper';
 import { NavLink } from './NavLink';
@@ -50,7 +50,7 @@ export const MHeader = (props: IHeader) => {
       />
       <AnimatePresence>
         {isOpen && (
-          <Modal isOpen onClose={onClose} size="full">
+          <Modal isOpen onClose={onClose} size="full" scrollBehavior="inside">
             <ModalOverlay bg="unset">
               <motion.div
                 key="modal.mobileHeader"
@@ -95,6 +95,9 @@ export const MHeader = (props: IHeader) => {
                       ))}
                     </VStack>
                   </ModalBody>
+                  <ModalFooter p={8}>
+                    <MControls />
+                  </ModalFooter>
                 </ModalContent>
               </motion.div>
             </ModalOverlay>

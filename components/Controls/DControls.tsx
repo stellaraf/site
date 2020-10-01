@@ -5,7 +5,7 @@ import { BsMoon as Moon } from '@meronex/icons/bs';
 import { BsChevronUp as ChevronUp } from '@meronex/icons/bs';
 import { useColorMode, useColorValue } from 'site/context';
 
-import type { ControlsProps } from './types';
+import type { IDControls } from './types';
 
 /**
  * SSR-safely smooth-scroll to the top of the viewport.
@@ -20,7 +20,7 @@ const scrollToTop = (): void => {
   }
 };
 
-export const Controls = (props: ControlsProps) => {
+export const DControls = (props: IDControls) => {
   const { toggleColorMode } = useColorMode();
   const styles = useStyles();
   const colorModeIcon = useColorValue(Moon, Sun);
