@@ -324,6 +324,25 @@ export async function getPageContent(pageId: string): Promise<PageContent[]> {
 }
 
 /**
+ * Retrieve & parse any content type.
+ */
+export async function getContent(contentType: string, filters: object = {}): Promise<Array<any>> {
+  let content = [];
+  const data = await contentQuery(contentType, filters);
+  if (data.total !== 0) {
+    const { items, includes = {} } = data;
+    for (let i of items) {
+      let item = Object();
+      for (let [k, v] of Object.entries(i.fields)) {
+        item[k] = getRefValue(v, includes);
+      }
+      content.push(item);
+    }
+  }
+  return content;
+}
+
+/**
  * Get Pages & Page Content with footerGroups defined, and footerGroups with externalLinks defined,
  * back reference each footer group & its items to build a single array of all footer links.
  *

@@ -1,5 +1,6 @@
 import type { Entry, ContentTypeLink, Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
+import type { ColorNames } from './theme';
 
 interface ContentRef {
   sys: ContentTypeLink;
@@ -193,5 +194,26 @@ export interface GlobalConfig extends Omit<GlobalConfigPre, 'theme'> {
 }
 
 export type AnyEntry = Entry<PageAttrs | PageContent | FooterGroupEntry | BioRaw>;
+
+export interface IContactCard {
+  title: string;
+  body: string;
+  buttonText: string;
+  color: ColorNames;
+  icon: 'Support' | 'Sales' | 'Docs';
+  sortWeight: number;
+}
+
+export interface IFormPlaceholders {
+  name: string;
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  phoneNumber: string;
+  companyName: string;
+  submitButton: string;
+  details: string;
+  interests: string;
+}
 
 export type { Entry, EntryCollection } from 'contentful';

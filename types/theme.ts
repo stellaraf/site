@@ -45,6 +45,8 @@ export interface Breakpoints {
 
 export type CustomColors = DefaultColors & ThemeColors;
 
+export type ColorNames = keyof CustomColors;
+
 export interface CustomTheme extends Omit<DefaultTheme, 'colors' | 'breakpoints'> {
   colors: CustomColors;
   breakpoints: Breakpoints;
