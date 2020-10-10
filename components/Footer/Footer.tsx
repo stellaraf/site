@@ -44,7 +44,7 @@ const BottomMobile = () => {
 
 export const Footer = (props: FooterProps) => {
   const { groups, ...rest } = props;
-  const bg = useColorValue('original.dark', 'original.dark');
+  const bg = useColorValue('primary.800', 'original.dark');
   const color = useColorValue('white', 'white');
   const rStyles = useResponsiveStyle();
   const isMobile = useMobile();

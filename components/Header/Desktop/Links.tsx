@@ -61,8 +61,20 @@ export const LinkGroup = (props: ILinkGroup) => {
   );
 };
 
-export const ContactButton = (props: ButtonProps) => (
-  <Button href="/contact" borderWidth="1px" borderColor="transparent" {...props}>
-    Talk to Us
-  </Button>
-);
+export const ContactButton = (props: ButtonProps) => {
+  const borderColor = useColorValue('original.secondary', 'white');
+  const hoverBg = useColorValue('secondary.50', 'whiteAlpha.100');
+  const color = useColorValue('secondary.600', 'white');
+  return (
+    <Button
+      href="/contact"
+      borderWidth="1px"
+      variant="outline"
+      borderColor={borderColor}
+      _hover={{ backgroundColor: hoverBg }}
+      color={color}
+      {...props}>
+      Talk to Us
+    </Button>
+  );
+};
