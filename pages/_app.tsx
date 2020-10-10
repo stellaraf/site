@@ -10,7 +10,11 @@ import { getGlobalConfig, getFooterItems } from 'site/util';
 import type { SiteProps } from 'site/types';
 
 const Site = (props: SiteProps) => {
+  const { Component, pageProps, appProps } = props;
+  const { globalConfig, footerGroups } = appProps;
+
   const konami = useKonamiState();
+
   useMouseTrap(
     'up up down down left right left right b a',
     () => {
@@ -18,8 +22,12 @@ const Site = (props: SiteProps) => {
     },
     'keyup',
   );
-  const { Component, pageProps, appProps } = props;
-  const { globalConfig, footerGroups } = appProps;
+
+  // if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+  //   const whyDidYouRender = require('@welldone-software/why-did-you-render');
+  //   whyDidYouRender(React, { trackAllPureComponents: true });
+  // }
+
   return (
     <>
       <Head>
