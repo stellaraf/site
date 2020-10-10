@@ -10,6 +10,7 @@ const DEFAULT_OPTIONS: ParticleOptions = {
   particles: {
     shape: { type: 'circle' },
     number: {
+      limit: 100,
       value: 160,
       density: {
         enable: true,

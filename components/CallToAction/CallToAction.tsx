@@ -11,7 +11,7 @@ export const CallToAction = (props: CTAProps) => {
   const rStyles = useResponsiveStyle();
   return (
     <>
-      <Box py={24} className="__actions" {...rStyles} {...props}>
+      <Box py={24} className="__actions" minH="30vh" {...rStyles} {...props}>
         <Flex justifyContent="space-between">
           <Heading as="h5" fontSize="2xl">
             Get Started

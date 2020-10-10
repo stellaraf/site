@@ -51,15 +51,16 @@ export const DHeader = (props: BoxProps) => {
   const bg = useColorValue('original.light', 'transparent');
   const color = useColorValue('original.dark', 'original.light');
   const cssProps = useColorValue({}, { css: { backdropFilter: 'blur(10px)' } });
+  const logoColor = useColorValue('original.primary', 'currentColor');
   return (
     <Header bg={bg} color={color} {...cssProps}>
       <Navbar {...props}>
         <Box overflow="hidden" pos="absolute">
           {pathname === '/' ? (
-            <HeaderLogo show={showLogo} />
+            <HeaderLogo show={showLogo} color={logoColor} />
           ) : (
             <Link href="/">
-              <Logo.Text width={160} height={56} pb={4} />
+              <Logo.Text width={160} height={56} pb={4} color={logoColor} />
             </Link>
           )}
         </Box>

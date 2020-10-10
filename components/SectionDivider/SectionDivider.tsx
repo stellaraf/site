@@ -9,7 +9,9 @@ export const SectionDivider = (props: BoxProps) => {
       pos="absolute"
       height="1px"
       width="100%"
+      overflow="hidden"
       bg="original.tertiary"
+      // transform="rotate(-3deg)"
       boxShadow="0 0 15px #4CC9F0, 0 0 25px #2b3c8f, 0 0 35px #2a174a"
       {...props}
     />

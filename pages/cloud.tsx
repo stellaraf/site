@@ -17,7 +17,7 @@ export default function Cloud(props: CloudProps) {
 
   const { colors } = useTheme();
   const mapColor = useColorValue(colors.blackAlpha[200], colors.whiteAlpha[200]);
-  const markerColor = useColorValue(colors.primary[400], colors.green[400]);
+  const markerColor = useColorValue(colors.primary[400], colors.tertiary[400]);
 
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 

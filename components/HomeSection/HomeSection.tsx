@@ -47,7 +47,7 @@ export const HomeSection = (props: HomeSectionProps) => {
             {renderedBody}
           </Box>
           {showButton && (
-            <Button href={buttonLink} leftIcon={<BsChevronRight />}>
+            <Button href={buttonLink} leftIcon={<BsChevronRight />} variant="heroPrimary">
               {buttonText}
             </Button>
           )}
