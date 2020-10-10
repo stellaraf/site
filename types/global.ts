@@ -1,5 +1,6 @@
 import type { IncomingMessage } from 'http';
 import type { ComponentProps, ElementType, MutableRefObject } from 'react';
+import type { MotionProps } from 'framer-motion';
 
 export type Cookies = IncomingMessage['headers']['cookie'];
 
@@ -29,3 +30,5 @@ export type Dict = Record<string, any>;
 export type ReactRef = MutableRefObject<HTMLElement>;
 
 export type DivRef = MutableRefObject<HTMLDivElement>;
+
+export type Animated<T> = Omit<T, keyof MotionProps> & Omit<MotionProps, keyof T>;

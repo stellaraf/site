@@ -1,6 +1,8 @@
+// export * from './TestSelect';
 export * from './Avatars';
 export * from './Button';
 export * from './CallToAction';
+export * from './ContactForm';
 export * from './Content';
 export * from './ContentSection';
 export * from './Controls';
@@ -15,4 +17,5 @@ export * from './Logo';
 export * from './Meta';
 export * from './RichText';
 export * from './SectionDivider';
+export * from './Select';
 export * from './Stars';

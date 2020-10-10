@@ -1,10 +1,5 @@
-/**
- * Generous email address validator
- */
-export const validateEmail = (value: string) => {
-  if (!value.match(/^\w+\@\w+\.\w+/m)) {
-    return `'${value}' is an invalid email address`;
-  } else {
-    return true;
-  }
-};
+import type { TestMessageParams } from 'yup';
+
+export const requiredMsg = (p: Partial<TestMessageParams>) => `${p.label} is required.`;
+export const invalidMsg = (p: Partial<TestMessageParams>) =>
+  `Must be a valid ${p.label?.toLowerCase()}`;

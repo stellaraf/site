@@ -5,10 +5,13 @@ import type {
   HomepageContent,
   GlobalConfig,
   GeoPoint,
+  PageAttrs,
   PageProps,
   Bio,
   BioEntry,
   FooterItem,
+  IContactCard,
+  IFormPlaceholders,
 } from 'site/types';
 
 /**
@@ -55,6 +58,20 @@ export interface IBioSection extends ISection {
 }
 
 export interface IMapSection extends ISection {}
+
+/**
+ * Contact Page Types
+ */
+
+interface IContactCustomProperties {
+  metaTitle: string;
+}
+
+export interface IContactPage extends Omit<PageProps, 'pageData'> {
+  pageData: PageAttrs & { customProperties: IContactCustomProperties };
+  contactCards: IContactCard[];
+  formPlaceholders: IFormPlaceholders;
+}
 
 /**
  * Passthrough Types
