@@ -23,21 +23,23 @@ const Card = (props: CardProps) => {
 
 export const HeroCards = (props: CardContainerProps) => {
   const { content, icon, ...rest } = props;
-  const bg = useColorValue('white', 'whiteAlpha.100');
-  const color = useColorValue('original.dark', 'white');
+  const styles = useColorValue(
+    { bg: 'white', color: 'original.dark' },
+    { bg: 'whiteAlpha.100', color: 'white', css: { backdropFilter: 'blur(2px)' } },
+  );
   return (
     <Flex
       p={8}
-      bg={bg}
       width="6xl"
       height="sm"
-      color={color}
       boxShadow="2xl"
       flexDir="column"
       borderRadius="md"
       position="relative"
+      zIndex={1}
+      {...styles}
       {...rest}>
-      <Carousel dotColor={color}>
+      <Carousel dotColor={styles.color}>
         {content.map((card, i) => (
           <Card content={card} key={i} />
         ))}

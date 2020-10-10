@@ -102,7 +102,7 @@ export const Subscribe = (props: ISubscribe) => {
   };
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      mount.set(true);
+      !mount.value && mount.set(true);
     }
   }, []);
   return (
