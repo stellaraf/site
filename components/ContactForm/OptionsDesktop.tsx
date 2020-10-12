@@ -29,7 +29,7 @@ const Sales = dynamic<IconType>(() =>
 
 // Make Chakra-UI components into Framer-Motion components for fewer components in the tree.
 const Container = (props: Animated<StackProps>) => <Stack as={motion.div} {...props} />;
-const AnimatedCard = (props: Animated<FlexProps>) => <Card as={motion.div} {...props} />;
+const AnimatedCard = (props: Animated<StackProps>) => <Card as={motion.div} {...props} />;
 const AnimatedCenter = (props: Animated<FlexProps>) => <Center as={motion.div} {...props} />;
 
 const iconMap = { Support, Sales, Docs };
@@ -38,12 +38,11 @@ export const OptionsDesktop = (props: IOptionsResponsive) => {
   const { cards, ...rest } = props;
   const ctx = useFormState();
   const titleMe = useTitle();
-  const { submitButton } = ctx.formPlaceholders.get();
 
   // Static desktop sizes for cards layout
   const cardSizes = { width: '20rem', minHeight: '28rem' };
   // Static desktop sizes for form layout
-  const formSizes = { width: '66rem', minHeight: '32rem', px: 8 };
+  const formSizes = { width: '66rem', minHeight: '32rem', height: '100%', px: 8 };
 
   const [layout, toggleLayout] = useCycle('cards', 'form');
 
@@ -90,10 +89,20 @@ export const OptionsDesktop = (props: IOptionsResponsive) => {
       {...rest}>
       <AnimatePresence>
         {cards.map((card, i) => {
-          const { icon: iconName, color: iconColor, buttonText, ...cardRest } = card;
+          const { icon: iconName, color: iconColor, buttonText, form, ...cardRest } = card;
+
+          /**
+           * Add the contact card's form config to the form context state so it can be consumed in
+           * the nested form component.
+           */
+          if (iconName !== 'Docs' && typeof form !== 'undefined') {
+            ctx.form.merge({ [iconName]: form });
+          }
+
           const iconBg = useColorValue(`${iconColor}.500`, `${iconColor}.300`);
           const isForm = layout === 'form' && ctx.selectedIndex.value === i;
           const iconProps = isForm ? { size: 12, ml: 4 } : {};
+
           /**
            * Send the same component to both sub-components (ContactOption/FormContainer). Since
            * it's the same component and wrapped by a framer component, it will be animated when
@@ -144,7 +153,7 @@ export const OptionsDesktop = (props: IOptionsResponsive) => {
               type="submit"
               colorScheme={iconColor}
               onClick={handleFormSubmit}>
-              {titleMe(submitButton)}
+              {titleMe(form?.buttonSubmit ?? 'Submit')}
             </ChakraButton>
           );
           return (
@@ -187,7 +196,6 @@ export const OptionsDesktop = (props: IOptionsResponsive) => {
                         icon={icon}
                         formRef={formRef}
                         accent={iconColor}
-                        iconName={iconName}
                         toggleLayout={toggleLayout}
                         {...cardRest}
                       />

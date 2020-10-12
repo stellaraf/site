@@ -38,11 +38,9 @@ const iconMap = { Support, Sales, Docs };
 export const OptionsMobile = (props: IOptionsResponsive) => {
   const { cards, ...rest } = props;
   const ctx = useFormState();
-  const { submitButton } = ctx.formPlaceholders.get();
   const titleMe = useTitle();
 
-  const cardSizes = { width: '20rem', minHeight: '24rem' };
-  const formSizes = { width: '20rem', minHeight: '48rem', px: 4 };
+  const formSizes = { minHeight: '48rem', height: '100%' };
 
   const [layout, toggleLayout] = useCycle('cards', 'form');
 
@@ -57,7 +55,11 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
       {...rest}>
       <AnimatePresence>
         {cards.map((card, i) => {
-          const { icon: iconName, color: iconColor, buttonText, ...cardRest } = card;
+          const { icon: iconName, color: iconColor, buttonText, form, ...cardRest } = card;
+
+          if (iconName !== 'Docs' && typeof form !== 'undefined') {
+            ctx.form.merge({ [iconName]: form });
+          }
 
           const isForm = layout === 'form' && ctx.selectedIndex.value === i;
           const iconBg = useColorValue(`original.${iconColor}`, `${iconColor}.300`);
@@ -105,7 +107,7 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
 
           const formButton = (
             <ChakraButton w="100%" type="submit" colorScheme={iconColor} onClick={handleFormSubmit}>
-              {titleMe(submitButton)}
+              {titleMe(form?.buttonSubmit ?? 'Submit')}
             </ChakraButton>
           );
 
@@ -118,8 +120,8 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
               // Animate component unmount by moving it offscreen-top.
               exit={{ opacity: 0, y: '-100%' }}
               key={`cardWrapper${i}`}>
-              <Card {...(isForm ? formSizes : cardSizes)}>
-                <CardBody>
+              <Card w="20rem" h="100%" px={isForm ? 4 : undefined}>
+                <CardBody {...(isForm && formSizes)}>
                   <AnimateSharedLayout>
                     {!isForm ? (
                       <ContactOption
@@ -134,7 +136,6 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
                         icon={icon}
                         formRef={formRef}
                         accent={iconColor}
-                        iconName={iconName}
                         toggleLayout={toggleLayout}
                         {...cardRest}
                       />

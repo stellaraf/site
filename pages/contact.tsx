@@ -10,7 +10,7 @@ import type { IContactPage, GetStaticProps } from 'site/types';
 const SLUG = 'contact';
 
 export default function Contact(props: IContactPage) {
-  const { pageData, contactCards, formPlaceholders } = props;
+  const { pageData, contactCards } = props;
   const cards = contactCards.sort((a, b) => a.sortWeight - b.sortWeight);
   const { title, subtitle, body, customProperties } = pageData;
   const renderedBody = useRender(body);
@@ -21,7 +21,7 @@ export default function Contact(props: IContactPage) {
       <Hero title={title} subtitle={subtitle} body={renderedBody} minH="80vh">
         <Box as="section" py={{ base: 16, lg: 32 }}>
           <Flex height="100%" align="center" direction="column" {...rStyles}>
-            <Options cards={cards} formPlaceholders={formPlaceholders} />
+            <Options cards={cards} />
           </Flex>
         </Box>
       </Hero>
@@ -33,17 +33,12 @@ export const getStaticProps: GetStaticProps = async () => {
   let pageData = Object();
   let pageContent = new Array();
   let contactCards = new Array();
-  let formPlaceholders = Object();
   try {
     pageData = await getPage(SLUG);
     pageContent = await getPageContent(pageData?.id ?? null);
-    contactCards = await getContent('contactCard');
-    const placeholders = await getContent('formPlaceholders', { 'fields.name': 'Default' });
-    if (placeholders.length !== 0) {
-      formPlaceholders = placeholders[0];
-    }
+    contactCards = await getContent('contactCard', { include: 4 });
   } catch (err) {
     console.error(err);
   }
-  return { props: { pageData, pageContent, contactCards, formPlaceholders } };
+  return { props: { pageData, pageContent, contactCards } };
 };
