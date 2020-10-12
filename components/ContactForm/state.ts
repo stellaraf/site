@@ -1,5 +1,4 @@
-import { createContext, useContext } from 'react';
-import { createState } from '@hookstate/core';
+import { createState, useState } from '@hookstate/core';
 import type { IFormState, FormState } from './types';
 
 export const formState = createState<IFormState>({
@@ -7,5 +6,5 @@ export const formState = createState<IFormState>({
   selectedName: null,
   form: Object(),
 });
-export const ContactFormContext = createContext<FormState>(formState);
-export const useFormState = (): FormState => useContext(ContactFormContext);
+
+export const useFormState = (): FormState => useState(formState);
