@@ -45,6 +45,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "typecheck": "tsc",
     "analyze": "ANALYZE=true next build"
   },
   "browserslist": {

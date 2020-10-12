@@ -8,13 +8,12 @@ import { OptionsMobile } from './OptionsMobile';
 import type { IOptions } from './types';
 
 export const Options = (props: IOptions) => {
-  const { formPlaceholders, ...rest } = props;
   const state = useState(formState);
   const isMobile = useMobile();
   const Component = isMobile ? OptionsMobile : OptionsDesktop;
   return (
     <ContactFormContext.Provider value={state}>
-      <Component {...rest} />
+      <Component {...props} />
     </ContactFormContext.Provider>
   );
 };
