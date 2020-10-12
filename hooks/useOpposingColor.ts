@@ -9,13 +9,8 @@ interface IOpposingOptions {
 
 export function useOpposingColor(color: string, options?: IOpposingOptions): string {
   const theme = useTheme();
-  let dark = theme.colors.original.dark;
-  let light = theme.colors.original.light;
-
-  if (typeof options !== 'undefined') {
-    dark = options.dark;
-    light = options.light;
-  }
+  const dark = options?.dark ?? theme.colors.original.dark;
+  const light = options?.light ?? theme.colors.original.light;
 
   if (typeof color === 'string' && color.match(/[a-zA-Z]+\.[a-zA-Z0-9]+/g)) {
     color = getColor(theme, color, color);

@@ -8,7 +8,10 @@ export const FieldGroup = (props: StackProps) => (
     my={6}
     px={1}
     direction={{ base: 'column', lg: 'row' }}
-    css={{ '&:first-of-type': { marginTop: '0.6rem' } }}
+    css={{
+      '&:first-of-type': { marginTop: '0.6rem' },
+      '&:last-of-type': { marginBottom: '0.6rem' },
+    }}
     {...props}
   />
 );

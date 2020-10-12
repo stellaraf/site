@@ -136,23 +136,29 @@ export const usePlaceholderStyle = (base: IStyles, state: IPlaceholder): IStyles
 
 export const useMultiValueStyle = (props: TMultiValue) => {
   const { theme, colorMode, colorScheme } = props;
-  const { colors, radii, shadows } = theme;
+  const { colors, radii, shadows, fontWeights } = theme;
   const backgroundColor = useColorValue(colors.original[colorScheme], colors[colorScheme][300]);
+
   const color = useOpposingColor(backgroundColor);
   const styles = {
     backgroundColor,
+    fontWeight: fontWeights.medium,
     boxShadow: colorMode === 'light' ? shadows.md : undefined,
     color: color,
     borderRadius: radii.md,
     margin: '0.2rem',
   };
-  return useCallback((base: IStyles, state: IMultiValue) => merge({}, base, styles), [colorMode]);
+  return useCallback((base: IStyles, state: IMultiValue) => merge({}, base, styles), [
+    backgroundColor,
+    color,
+  ]);
 };
 
 export const useMultiValueLabelStyle = (props: TMultiValue) => {
-  const { theme, colorMode } = props;
+  const { theme, colorMode, colorScheme } = props;
   const { space } = theme;
   const styles = {
+    borderRadius: 'unset',
     color: 'inherit',
     fontSize: '85%',
     textOverflow: 'ellipsis',
@@ -160,11 +166,14 @@ export const useMultiValueLabelStyle = (props: TMultiValue) => {
     paddingLeft: space[2],
     whiteSpace: 'nowrap',
   };
-  return useCallback((base: IStyles, state: IMultiValue) => merge({}, base, styles), [colorMode]);
+  return useCallback((base: IStyles, state: IMultiValue) => merge({}, base, styles), [
+    colorMode,
+    colorScheme,
+  ]);
 };
 
 export const useMultiValueRemoveStyle = (props: TMultiValue) => {
-  const { theme, colorMode } = props;
+  const { theme, colorMode, colorScheme } = props;
   const { space, radii } = theme;
   const styles = {
     borderTopRightRadius: radii.md,
@@ -176,7 +185,10 @@ export const useMultiValueRemoveStyle = (props: TMultiValue) => {
     transition: 'opacity 50ms ease-in 0s',
     '&:hover': { backgroundColor: 'unset', color: 'unset', opacity: 0.7 },
   };
-  return useCallback((base: IStyles, state: IMultiValue) => merge({}, base, styles), [colorMode]);
+  return useCallback((base: IStyles, state: IMultiValue) => merge({}, base, styles), [
+    colorMode,
+    colorScheme,
+  ]);
 };
 
 export const useRSTheme = (props: TMultiValue) => {
