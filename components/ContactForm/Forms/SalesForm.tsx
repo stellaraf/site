@@ -4,7 +4,6 @@ import { Flex } from '@chakra-ui/core';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
-import 'yup-phone';
 import { requiredMsg, invalidMsg, buildSelections } from 'site/util';
 import { FieldGroup, TextInput, TextArea, SelectField } from '../Fields';
 import { useFormState } from '../state';
