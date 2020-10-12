@@ -33,8 +33,18 @@
     // "noFallthroughCasesInSwitch": true,    /* Report errors for fallthrough cases in switch statement. */
     /* Module Resolution Options */
     // "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
-    // "baseUrl": "."                         /* Base directory to resolve non-absolute module names. */,
-    // "paths": {}                            /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */,
+    "baseUrl": "." /* Base directory to resolve non-absolute module names. */,
+    "paths": {
+      /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+      "site/components": ["components/index"],
+      "site/context": ["context/index"],
+      "site/hooks": ["hooks/index"],
+      "site/layouts": ["layouts/index"],
+      "site/state": ["state/index"],
+      "site/styles": ["styles/index"],
+      "site/types": ["types/index"],
+      "site/util": ["util/index"]
+    },
     "rootDirs": [
       "./types/compat" /* List of root folders whose combined content represents the structure of the project at runtime. */
     ],
