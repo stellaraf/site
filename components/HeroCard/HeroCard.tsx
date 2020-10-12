@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Carousel } from 'site/components/Carousel';
+import { Carousel } from 'site/components';
 import { Flex, Heading } from '@chakra-ui/core';
 import { useRender, useTitle } from 'site/hooks';
 import { useColorValue } from 'site/context';

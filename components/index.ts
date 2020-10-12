@@ -1,7 +1,7 @@
-// export * from './TestSelect';
 export * from './Avatars';
 export * from './Button';
 export * from './CallToAction';
+export * from './Carousel';
 export * from './ContactForm';
 export * from './Content';
 export * from './ContentSection';
@@ -19,3 +19,4 @@ export * from './RichText';
 export * from './SectionDivider';
 export * from './Select';
 export * from './Stars';
+export * from './USMap';

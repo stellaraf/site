@@ -4,7 +4,6 @@ import { Flex } from '@chakra-ui/core';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
-import 'yup-phone';
 import { requiredMsg, invalidMsg } from 'site/util';
 import { FieldGroup, TextInput, TextArea } from '../Fields';
 import { useFormState } from '../state';
@@ -33,7 +32,7 @@ export const SupportForm = forwardRef<FormHandlers, IForm<'Support'>>((props, re
       .email()
       .required(requiredMsg)
       .typeError(invalidMsg),
-    phoneNumber: yup.string().label(phoneNumber.displayName).phone().typeError(invalidMsg),
+    phoneNumber: yup.string().label(phoneNumber.displayName),
     companyName: yup.string().label(companyName.displayName).required(requiredMsg),
     details: yup
       .string()

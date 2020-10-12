@@ -1,12 +1,15 @@
 import * as React from 'react';
+import dynamic from 'next/dynamic';
 import { Wrap } from '@chakra-ui/core';
 import { getPage, getPageContent, getGeoPoints } from 'site/util';
 import { useColorValue, useTheme } from 'site/context';
 import { Button, ContentSection, Hero, SEO } from 'site/components';
-import { USMap } from 'site/components/USMap';
 import { useRender } from 'site/hooks';
 
 import type { CloudProps, GetStaticProps } from 'site/types';
+import type { MapProps } from 'site/components';
+
+const USMap = dynamic<MapProps>(() => import('site/components').then(i => i.USMap));
 
 const SLUG = 'cloud';
 
