@@ -5,39 +5,39 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
 import 'yup-phone';
-import { requiredMsg, invalidMsg } from 'site/util';
+import { requiredMsg, invalidMsg, buildSelections } from 'site/util';
 import { FieldGroup, TextInput, TextArea, SelectField } from '../Fields';
 import { useFormState } from '../state';
 
 import type { ISalesFormFields, IForm, FormHandlers } from './types';
 
-export const SalesForm = forwardRef<FormHandlers, IForm>((props, ref) => {
+export const SalesForm = forwardRef<FormHandlers, IForm<'Sales'>>((props, ref) => {
   const { onSubmit, accent } = props;
-  const { formPlaceholders } = useFormState();
+  const ctx = useFormState();
 
   const {
     firstName,
     lastName,
-    companyName,
     emailAddress,
     phoneNumber,
-    details,
+    companyName,
     interests,
-  } = formPlaceholders.get();
+    details,
+  } = ctx.form.Sales.get();
 
   const formSchema = yup.object().shape({
-    firstName: yup.string().label(firstName).required(requiredMsg),
-    lastName: yup.string().label(lastName).required(requiredMsg),
+    firstName: yup.string().label(firstName.displayName).required(requiredMsg),
+    lastName: yup.string().label(lastName.displayName).required(requiredMsg),
     emailAddress: yup
       .string()
-      .label(emailAddress)
+      .label(emailAddress.displayName)
       .email()
       .required(requiredMsg)
       .typeError(invalidMsg),
-    phoneNumber: yup.string().label(phoneNumber).typeError(invalidMsg),
-    companyName: yup.string().label(companyName).required(requiredMsg),
+    phoneNumber: yup.string().label(phoneNumber.displayName).typeError(invalidMsg),
+    companyName: yup.string().label(companyName.displayName).required(requiredMsg),
     interests: yup.array(yup.string()),
-    details: yup.string().label(details),
+    details: yup.string().label(details.displayName),
   });
 
   const form = useForm<ISalesFormFields>({ resolver: yupResolver(formSchema) });
@@ -54,43 +54,58 @@ export const SalesForm = forwardRef<FormHandlers, IForm>((props, ref) => {
     <Flex as="form" onSubmit={submitter} flexDir="column" w={{ base: '100%', lg: '75%' }}>
       <FormProvider {...form}>
         <FieldGroup>
-          <TextInput ctl={control} id="firstName" placeholder={firstName} required />
-          <TextInput ctl={control} id="lastName" placeholder={lastName} required />
-          <TextInput ctl={control} id="companyName" placeholder={companyName} />
+          <TextInput
+            ctl={control}
+            id={firstName.id}
+            placeholder={firstName.displayName}
+            required={firstName.required}
+          />
+          <TextInput
+            ctl={control}
+            id={lastName.id}
+            placeholder={lastName.displayName}
+            required={lastName.required}
+          />
+          <TextInput
+            ctl={control}
+            id={companyName.id}
+            placeholder={companyName.displayName}
+            required={companyName.required}
+          />
         </FieldGroup>
         <FieldGroup>
-          <TextInput ctl={control} id="emailAddress" placeholder={emailAddress} required />
-          <TextInput ctl={control} id="phoneNumber" placeholder={phoneNumber} />
+          <TextInput
+            ctl={control}
+            id={emailAddress.id}
+            placeholder={emailAddress.displayName}
+            required={emailAddress.required}
+          />
+          <TextInput
+            ctl={control}
+            id={phoneNumber.id}
+            placeholder={phoneNumber.displayName}
+            required={phoneNumber.required}
+          />
         </FieldGroup>
 
         <FieldGroup>
           <SelectField
-            id="interests"
-            placeholder={interests}
-            multi
+            id={interests.id}
+            placeholder={interests.displayName}
+            multi={interests.multiple}
             menuPortalTarget={document.body}
             width="100%"
             colorScheme={accent}
-            opts={[
-              { value: 'thing1', label: 'Thing 1' },
-              { value: 'thing2', label: 'Thing 2' },
-              {
-                label: 'Group 1',
-                options: [
-                  { value: 'subthing1-1', label: 'Sub Thing 1-1' },
-                  { value: 'subthing1-2', label: 'Sub Thing 1-2' },
-                ],
-              },
-              {
-                label: 'Group 2',
-                options: [
-                  { value: 'subthing2-1', label: 'Sub Thing 2-1' },
-                  { value: 'subthing2-2', label: 'Sub Thing 2-2' },
-                ],
-              },
-            ]}
+            opts={interests.options.map(buildSelections)}
           />
-          <TextArea ctl={control} id="details" placeholder={details} required />
+        </FieldGroup>
+        <FieldGroup>
+          <TextArea
+            ctl={control}
+            id={details.id}
+            placeholder={details.displayName}
+            required={details.required}
+          />
         </FieldGroup>
       </FormProvider>
     </Flex>

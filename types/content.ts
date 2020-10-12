@@ -1,6 +1,7 @@
 import type { Entry, ContentTypeLink, Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 import type { ColorNames } from './theme';
+import type { FormModels } from './forms';
 
 interface ContentRef {
   sys: ContentTypeLink;
@@ -202,6 +203,7 @@ export interface IContactCard {
   color: ColorNames;
   icon: 'Support' | 'Sales' | 'Docs';
   sortWeight: number;
+  form?: FormModels<'Support' | 'Sales'>;
 }
 
 export interface IFormPlaceholders {
@@ -214,6 +216,7 @@ export interface IFormPlaceholders {
   submitButton: string;
   details: string;
   interests: string;
+  subject: string;
 }
 
 export type { Entry, EntryCollection } from 'contentful';

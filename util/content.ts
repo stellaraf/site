@@ -105,10 +105,12 @@ const getRefValue = (val: any, includes: any = Object()): any => {
     return null;
   } else if (item.constructor.name === 'Object') {
     item = Object(val);
-    if ('sys' in item && item.sys.type in includes) {
-      for (let ref of includes[item.sys.type] ?? []) {
-        if (ref?.sys?.id === item.sys?.id) {
-          item = { id: item.sys.id, ...ref.fields };
+    if ('sys' in item) {
+      if (item.sys.type in includes) {
+        for (let ref of includes[item.sys.type] ?? []) {
+          if (ref?.sys?.id === item.sys?.id) {
+            item = { id: item.sys.id, ...ref.fields };
+          }
         }
       }
     }
@@ -119,9 +121,7 @@ const getRefValue = (val: any, includes: any = Object()): any => {
   if (item.constructor.name === 'Object') {
     for (let [k1, v1] of Object.entries<any>(item)) {
       if (v1.constructor.name === 'Object') {
-        for (let [k2, v2] of Object.entries<any>(v1)) {
-          item[k1][k2] = getRefValue(v2, includes);
-        }
+        item[k1] = getRefValue(v1, includes);
       }
     }
   }
@@ -331,11 +331,7 @@ export async function getContent(contentType: string, filters: object = {}): Pro
   const data = await contentQuery(contentType, filters);
   if (data.total !== 0) {
     const { items, includes = {} } = data;
-    for (let i of items) {
-      let item = Object();
-      for (let [k, v] of Object.entries(i.fields)) {
-        item[k] = getRefValue(v, includes);
-      }
+    for (let item of parseEntryItems(items, includes)) {
       content.push(item);
     }
   }
@@ -373,3 +369,11 @@ export const getBios = async (): Promise<BioEntry> => {
   const data: BioEntry = await getEntry(bioListId);
   return data;
 };
+
+/**
+ * Build an object usable by a select element from a single display name string.
+ */
+export function buildSelections(opt: string): { value: string; label: string } {
+  const value = opt.toLowerCase().replaceAll(/[^A-Za-z0-9-_]/g, '_');
+  return { value, label: opt };
+}
