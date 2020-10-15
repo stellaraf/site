@@ -2,20 +2,31 @@ import * as React from 'react';
 import { Flex, Center, Heading, IconButton, Grid, Text } from '@chakra-ui/core';
 import { BisLeftArrow as Back } from '@meronex/icons/bi';
 import { useTitle } from 'site/hooks';
-import { useFormState } from './state';
-import { SalesForm, SupportForm } from './Forms';
+import { useFormState } from '../state';
+import { SalesForm, SupportForm } from '../Forms';
+import { submitForm } from '../submitters';
+import { Success } from '../Success';
 
-import type { IFormContainer } from './types';
 import type { MouseEvent } from 'react';
+import type { IDesktopForm } from './types';
+import type { TFormTypes, TFormFields } from '../Forms/types';
 
-export const FormContainer = (props: IFormContainer) => {
-  const { title, body, icon, accent = 'primary', toggleLayout, formRef } = props;
+export const DesktopForm = (props: IDesktopForm) => {
+  const { title, body, icon, accent = 'primary', toggleLayout, formRef, onSubmit } = props;
   const titleMe = useTitle();
   const ctx = useFormState();
   const goBack = (e: MouseEvent) => {
-    e.preventDefault();
     ctx.selectedIndex.value !== null && ctx.merge({ selectedName: null, selectedIndex: null });
-    toggleLayout();
+    ctx.showSuccess.get() && ctx.showSuccess.set(false);
+    toggleLayout(0);
+  };
+  const handleSubmit = async <F extends TFormTypes, D extends TFormFields<F>>(form: F, data: D) => {
+    const response = await submitForm(form, data);
+    console.dir(response);
+    if (typeof onSubmit === 'function') {
+      onSubmit();
+    }
+    !ctx.showSuccess.get() && ctx.showSuccess.set(true);
   };
   return (
     <Grid
@@ -38,10 +49,18 @@ export const FormContainer = (props: IFormContainer) => {
         {body}
       </Center>
       <Center width="100%" gridArea="form" alignItems={{ base: 'flex-start', lg: 'center' }}>
-        {ctx.selectedName.value === 'Support' ? (
-          <SupportForm ref={formRef} accent={accent} onSubmit={console.table} />
-        ) : ctx.selectedName.value === 'Sales' ? (
-          <SalesForm ref={formRef} accent={accent} onSubmit={console.table} />
+        {!ctx.showSuccess.value && ctx.selectedName.value === 'Support' ? (
+          <SupportForm ref={formRef} accent={accent} onSubmit={handleSubmit} />
+        ) : !ctx.showSuccess.value && ctx.selectedName.value === 'Sales' ? (
+          <SalesForm ref={formRef} accent={accent} onSubmit={handleSubmit} />
+        ) : ctx.showSuccess.value ? (
+          <Success>
+            {ctx.selectedName.value === 'Support'
+              ? ctx.form.Support.successMessage.value
+              : ctx.selectedName.value === 'Sales'
+              ? ctx.form.Sales.successMessage.value
+              : null}
+          </Success>
         ) : null}
       </Center>
     </Grid>

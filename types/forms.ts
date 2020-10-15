@@ -1,5 +1,3 @@
-import type { Entry } from 'contentful';
-
 export interface IFormFieldBase {
   name: string;
   id: string;
@@ -28,6 +26,7 @@ export interface IFormModelSupport {
   subject: IFormFieldText;
   details: IFormFieldTextArea;
   buttonSubmit: string;
+  successMessage: string;
 }
 
 export interface IFormModelSales {
@@ -40,6 +39,7 @@ export interface IFormModelSales {
   interests: IFormFieldSelect;
   details: IFormFieldTextArea;
   buttonSubmit: string;
+  successMessage: string;
 }
 
 interface IFormModels {

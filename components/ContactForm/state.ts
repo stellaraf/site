@@ -5,6 +5,7 @@ export const formState = createState<IFormState>({
   selectedIndex: null,
   selectedName: null,
   form: Object(),
+  showSuccess: false,
 });
 
 export const useFormState = (): FormState => useState(formState);

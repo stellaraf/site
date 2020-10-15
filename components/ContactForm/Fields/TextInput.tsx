@@ -7,12 +7,10 @@ import type { ITextField, ITextInput } from './types';
 const Field = (props: ITextField) => {
   const { name, required = false, ...rest } = props;
   const { formState } = useFormContext();
-  const { isSubmitting, isSubmitSuccessful, errors } = formState;
+  const { errors } = formState;
   return (
     <FormControl id={name} isInvalid={errors?.[name]} isRequired={required}>
-      <InputGroup>
-        <Input {...rest} />
-      </InputGroup>
+      <Input {...rest} />
       <FormErrorMessage children={errors?.[name] && errors[name].message} />
     </FormControl>
   );

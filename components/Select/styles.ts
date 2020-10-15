@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { merge } from '@chakra-ui/utils';
-import { useOpposingColor } from 'site/hooks';
+import { useOpposingColor, useMobile } from 'site/hooks';
 import { useColorValue } from 'site/context';
 import { useSelectContext } from './Select';
 
@@ -48,7 +48,7 @@ export const useControlStyle = (base: IStyles, state: IControl): IStyles => {
     },
     '&.invalid': { borderColor: invalidBorder, boxShadow: `0 0 0 1px ${invalidBorder}` },
   };
-  return useMemo(() => merge({}, base, styles), [colorMode]);
+  return useMemo(() => merge({}, base, styles), [colorMode, isFocused]);
 };
 
 export const useMenuStyle = (base: IStyles, state: IMenu): IStyles => {
@@ -194,4 +194,12 @@ export const useMultiValueRemoveStyle = (props: TMultiValue) => {
 export const useRSTheme = (props: TMultiValue) => {
   const { theme } = props;
   return useCallback((t: RSTheme): RSTheme => ({ ...t, borderRadius: theme.radii.md }), []);
+};
+
+export const useMenuPortal = (props: TMultiValue) => {
+  const isMobile = useMobile();
+  const styles = {
+    zIndex: isMobile ? 1500 : 1,
+  };
+  return useCallback((base: IStyles, state: IMultiValue) => merge({}, base, styles), [isMobile]);
 };

@@ -15,7 +15,7 @@ export interface IContactOption extends Omit<ContactOption, 'icon' | 'color' | '
   index?: number;
   accent?: keyof CustomColors;
   formRef?: MutableRefObject<FormHandlers>;
-  toggleLayout: (i?: number) => void;
+  toggleLayout?: (i?: number) => void;
 }
 
 export interface ICardBody extends BoxProps {
@@ -32,6 +32,7 @@ export interface IFormState {
   selectedName: TIconName | null;
   selectedIndex: number | null;
   form: { Support: FormModels<'Support'>; Sales: FormModels<'Sales'> };
+  showSuccess: boolean;
 }
 
 export type FormState = State<IFormState>;
@@ -47,13 +48,4 @@ export interface IOptions extends StackProps {
 
 export interface IOptionsResponsive extends StackProps {
   cards: IContactCard[];
-}
-
-export interface IFormContainer {
-  title: string;
-  body: string;
-  icon: JSX.Element;
-  accent: keyof CustomColors;
-  toggleLayout: (i?: number) => void;
-  formRef: MutableRefObject<FormHandlers>;
 }
