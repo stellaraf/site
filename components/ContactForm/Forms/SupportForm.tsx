@@ -42,7 +42,12 @@ export const SupportForm = forwardRef<FormHandlers, IForm<'Support'>>((props, re
 
   const form = useForm<ISupportFormFields>({ resolver: yupResolver(formSchema) });
   const { handleSubmit, control } = form;
-  const submitter = handleSubmit(onSubmit);
+
+  const submitForm = async (data: ISupportFormFields) => {
+    await onSubmit('Support', data);
+  };
+
+  const submitter = handleSubmit(submitForm);
 
   useImperativeHandle(ref, () => ({
     submit() {

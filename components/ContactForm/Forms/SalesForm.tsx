@@ -40,8 +40,11 @@ export const SalesForm = forwardRef<FormHandlers, IForm<'Sales'>>((props, ref) =
   });
 
   const form = useForm<ISalesFormFields>({ resolver: yupResolver(formSchema) });
-  const { handleSubmit, control } = form;
-  const submitter = handleSubmit(onSubmit);
+  const { handleSubmit, control, formState } = form;
+  const submitForm = async (data: ISalesFormFields) => {
+    await onSubmit('Sales', data);
+  };
+  const submitter = handleSubmit(submitForm);
 
   useImperativeHandle(ref, () => ({
     submit() {

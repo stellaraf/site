@@ -10,7 +10,7 @@ import type { ISelectField } from './types';
 export const SelectField = (props: ISelectField) => {
   const { opts, id: name, required = false, multi, onSelect: _, ...rest } = props;
   const { formState, setValue, register } = useFormContext();
-  const { isSubmitting, isSubmitSuccessful, errors } = formState;
+  const { errors } = formState;
   errors?.[name] && console.table(errors);
   const handleSelect = (values: ISelectOption[]): void => {
     const labels = [];
@@ -24,6 +24,7 @@ export const SelectField = (props: ISelectField) => {
   useEffect(() => {
     register(name);
   }, [register]);
+
   return (
     <FormControl id={name} isInvalid={errors?.[name]} isRequired={required}>
       <CustomSelect

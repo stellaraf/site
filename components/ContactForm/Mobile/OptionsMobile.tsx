@@ -1,23 +1,23 @@
 import * as React from 'react';
 import { useRef } from 'react';
 import dynamic from 'next/dynamic';
-import { Button as ChakraButton, Center, Stack } from '@chakra-ui/core';
+import { Button as ChakraButton, Center, Stack, useDisclosure } from '@chakra-ui/core';
 import { motion, AnimatePresence, AnimateSharedLayout, useCycle } from 'framer-motion';
 import { Button } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useTitle } from 'site/hooks';
-import { Card, CardBody } from './Card';
-import { ContactOption } from './ContactOption';
-import { FormContainer } from './FormContainer';
-import { Icon } from './Icon';
-import { useFormState } from './state';
+import { Card, CardBody } from '../Card';
+import { ContactOption } from '../ContactOption';
+import { Icon } from '../Icon';
+import { useFormState } from '../state';
+import { MobileForm } from './MobileForm';
 
 import type { MouseEvent } from 'react';
 import type { StackProps, FlexProps } from '@chakra-ui/core';
 import type { IconType } from '@meronex/icons';
 import type { Animated } from 'site/types';
-import type { IOptionsResponsive } from './types';
-import type { FormHandlers } from './Forms/types';
+import type { IOptionsResponsive } from '../types';
+import type { FormHandlers } from '../Forms/types';
 
 const Docs = dynamic<IconType>(() => import('@meronex/icons/cg').then(i => i.CgNotes));
 const Support = dynamic<IconType>(() => import('@meronex/icons/bs').then(i => i.BsPeopleFill));
@@ -42,7 +42,8 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
 
   const formSizes = { minHeight: '48rem', height: '100%' };
 
-  const [layout, toggleLayout] = useCycle('cards', 'form');
+  const [layout, toggleLayout] = useCycle('cards', 'form', 'success');
+  const { isOpen, onToggle, onClose } = useDisclosure();
 
   return (
     <Container
@@ -50,7 +51,7 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
       zIndex={1}
       spacing={12}
       align="stretch"
-      animate={layout}
+      // animate={layout}
       direction="column"
       {...rest}>
       <AnimatePresence>
@@ -61,7 +62,10 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
             ctx.form.merge({ [iconName]: form });
           }
 
-          const isForm = layout === 'form' && ctx.selectedIndex.value === i;
+          // const isForm = layout === 'form' && ctx.selectedIndex.value === i;
+          // const isSuccess = layout === 'success' && ctx.selectedIndex.value === i;
+          const isForm = isOpen && ctx.selectedIndex.value === i;
+
           const iconBg = useColorValue(`original.${iconColor}`, `${iconColor}.300`);
           const iconProps = isForm ? { size: 12, ml: 4 } : {};
           const icon = (
@@ -75,7 +79,7 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
               e.preventDefault();
               ctx.selectedName.value !== iconName &&
                 ctx.merge({ selectedName: iconName, selectedIndex: i });
-              toggleLayout();
+              onToggle();
             }
           };
 
@@ -123,27 +127,23 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
               <Card w="20rem" h="100%" px={isForm ? 4 : undefined}>
                 <CardBody {...(isForm && formSizes)}>
                   <AnimateSharedLayout>
-                    {!isForm ? (
-                      <ContactOption
-                        index={i}
-                        icon={icon}
-                        iconName={iconName}
-                        toggleLayout={toggleLayout}
-                        {...cardRest}
-                      />
-                    ) : (
-                      <FormContainer
+                    {isForm ? (
+                      <MobileForm
+                        onClose={onClose}
+                        button={formButton}
                         icon={icon}
                         formRef={formRef}
                         accent={iconColor}
-                        toggleLayout={toggleLayout}
+                        onToggle={onToggle}
                         {...cardRest}
                       />
+                    ) : (
+                      <ContactOption index={i} icon={icon} iconName={iconName} {...cardRest} />
                     )}
                   </AnimateSharedLayout>
                 </CardBody>
                 <AnimatedCenter layoutId={`button${i}`} width="100%">
-                  {isForm ? formButton : cardsButton}
+                  {cardsButton}
                 </AnimatedCenter>
               </Card>
             </motion.div>

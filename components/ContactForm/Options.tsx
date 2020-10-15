@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMobile } from 'site/hooks';
-import { OptionsDesktop } from './OptionsDesktop';
-import { OptionsMobile } from './OptionsMobile';
+import { OptionsDesktop } from './Desktop';
+import { OptionsMobile } from './Mobile';
 
 import type { IOptions } from './types';
 

@@ -9,6 +9,7 @@ import {
   useControlStyle,
   useIndicatorSeparatorStyle,
   useMenuListStyle,
+  useMenuPortal,
   useMenuStyle,
   useMultiValueLabelStyle,
   useMultiValueRemoveStyle,
@@ -46,6 +47,7 @@ export const Select = (props: ISelect) => {
   const multiValue = useMultiValueStyle({ theme, colorMode, colorScheme });
   const multiValueLabel = useMultiValueLabelStyle({ theme, colorMode, colorScheme });
   const multiValueRemove = useMultiValueRemoveStyle({ theme, colorMode, colorScheme });
+  const menuPortal = useMenuPortal({ theme, colorMode, colorScheme });
   const rsTheme = useRSTheme({ theme, colorMode, colorScheme });
   return (
     <SelectContext.Provider value={selectContext}>
@@ -65,13 +67,14 @@ export const Select = (props: ISelect) => {
         components={{ DropdownIndicator: IndicatorIcon, ClearIndicator: ClearIcon }}
         styles={{
           control: useControlStyle,
+          indicatorSeparator: useIndicatorSeparatorStyle,
           menu: useMenuStyle,
           menuList: useMenuListStyle,
-          option: useOptionStyle,
+          menuPortal,
           multiValue,
           multiValueLabel,
           multiValueRemove,
-          indicatorSeparator: useIndicatorSeparatorStyle,
+          option: useOptionStyle,
           placeholder: usePlaceholderStyle,
         }}
         {...rest}

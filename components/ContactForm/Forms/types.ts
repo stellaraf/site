@@ -16,16 +16,30 @@ export interface ISalesFormFields extends IFormFieldsBase {
   interests: string[];
 }
 
+export type TFormTypes = 'Sales' | 'Support';
+
+interface IFormFields {
+  Support: ISupportFormFields;
+  Sales: ISalesFormFields;
+}
+
+export type TFormFields<T extends TFormTypes> = IFormFields[T];
+
 interface FormFields {
   Support: ISupportFormFields;
   Sales: ISalesFormFields;
 }
 
-export interface IForm<T extends 'Sales' | 'Support'> extends Omit<FlexProps, 'onSubmit'> {
-  onSubmit: (d: FormFields[T]) => any;
+export interface IForm<T extends TFormTypes> extends Omit<FlexProps, 'onSubmit'> {
+  onSubmit: (f: T, d: FormFields[T]) => any;
   accent: keyof CustomColors;
 }
 
 export interface FormHandlers {
   submit: () => void;
 }
+
+export type TFormResponse = {
+  success: boolean;
+  message: string;
+};

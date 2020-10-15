@@ -6,19 +6,19 @@ import { motion, AnimatePresence, AnimateSharedLayout, useCycle } from 'framer-m
 import { Button } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useTitle } from 'site/hooks';
-import { Card, CardBody } from './Card';
-import { ContactOption } from './ContactOption';
-import { FormContainer } from './FormContainer';
-import { Icon } from './Icon';
-import { useFormState } from './state';
+import { Card, CardBody } from '../Card';
+import { ContactOption } from '../ContactOption';
+import { DesktopForm } from './DesktopForm';
+import { Icon } from '../Icon';
+import { useFormState } from '../state';
 
 import type { MouseEvent } from 'react';
 import type { StackProps, FlexProps } from '@chakra-ui/core';
 import type { IconType } from '@meronex/icons';
 import type { Variants } from 'framer-motion';
 import type { Animated } from 'site/types';
-import type { IOptionsResponsive, IMotionItems } from './types';
-import type { FormHandlers } from './Forms/types';
+import type { IOptionsResponsive, IMotionItems } from '../types';
+import type { FormHandlers } from '../Forms/types';
 
 // Use Next.js async importing for performance.
 const Docs = dynamic<IconType>(() => import('@meronex/icons/cg').then(i => i.CgNotes));
@@ -192,7 +192,7 @@ export const OptionsDesktop = (props: IOptionsResponsive) => {
                         {...cardRest}
                       />
                     ) : (
-                      <FormContainer
+                      <DesktopForm
                         icon={icon}
                         formRef={formRef}
                         accent={iconColor}
@@ -207,8 +207,15 @@ export const OptionsDesktop = (props: IOptionsResponsive) => {
                  * Wrapping it in animation makes it appear to move around with the card as states
                  * change.
                  */}
-                <AnimatedCenter layoutId={`button${i}`} width="100%">
-                  {layout === 'form' ? formButton : cardsButton}
+                <AnimatedCenter
+                  layoutId={`button${i}`}
+                  width="100%"
+                  exit={{ scale: 0.5, opacity: 0 }}>
+                  {layout === 'form' && !ctx.showSuccess.value
+                    ? formButton
+                    : ctx.showSuccess.value
+                    ? null
+                    : cardsButton}
                 </AnimatedCenter>
               </AnimatedCard>
             </motion.div>
