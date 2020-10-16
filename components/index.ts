@@ -13,6 +13,7 @@ export * from './Hero';
 export * from './HeroCard';
 export * from './HomeSection';
 export * from './Link';
+export * from './Loader';
 export * from './Logo';
 export * from './Meta';
 export * from './RichText';
