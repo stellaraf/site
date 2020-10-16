@@ -109,7 +109,7 @@ const getRefValue = (val: any, includes: any = Object()): any => {
       if (item.sys.type in includes) {
         for (let ref of includes[item.sys.type] ?? []) {
           if (ref?.sys?.id === item.sys?.id) {
-            item = { id: item.sys.id, ...ref.fields };
+            item = { id: item.sys.id, updatedAt: item.sys.updatedAt, ...ref.fields };
           }
         }
       }
@@ -317,6 +317,7 @@ export async function getPageContent(pageId: string): Promise<PageContent[]> {
       for (let [k, v] of Object.entries(i.fields)) {
         item[k] = getRefValue(v, includes);
       }
+      item.updatedAt = i.sys.updatedAt;
       pageContent.push(item);
     }
   }

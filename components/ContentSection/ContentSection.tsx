@@ -19,6 +19,8 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
     buttonText,
     buttonLink,
     subsections,
+    showUpdatedDate,
+    updatedAt,
   } = usePageContent(items, [items.title]);
   const rStyles = useResponsiveStyle();
   const showBorder = useColorValue(false, true);
@@ -35,6 +37,7 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
               {buttonText}
             </Button>
           )}
+          {showUpdatedDate && updatedAt}
         </Flex>
       </Box>
       {showBorder && <SectionDivider />}

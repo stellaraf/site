@@ -66,11 +66,13 @@ export interface PageContent {
   subtitle?: string;
   body: Document | null;
   paragraphs: Paragraph[];
+  updatedAt: string;
   button: boolean;
   buttonText?: string;
   buttonLink?: string;
   footerGroup?: ContentRef;
   footerTitle?: string;
+  showUpdatedDate?: boolean;
 }
 
 export interface HomeSection {

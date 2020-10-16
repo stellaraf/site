@@ -20,6 +20,8 @@ export interface UsePageContent {
   buttonLink?: string;
   showButton: boolean;
   subsections: React.FC;
+  showUpdatedDate: boolean;
+  updatedAt: React.FC;
 }
 
 export type TitleMe = (t: string) => string;
