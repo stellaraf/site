@@ -28,8 +28,8 @@ export const usePageContent = (rawContent: PageContent, [...deps]: any[] = []): 
     let subsections = null;
     const slug = useSlug(title, [rawContent]);
 
-    obj.title = <Content.Title id={slug}>{titleMe(title)}</Content.Title>;
-    obj.subtitle = <Content.Subtitle>{titleMe(subtitle)}</Content.Subtitle>;
+    obj.title = <Content.Title id={slug}>{title}</Content.Title>;
+    obj.subtitle = <Content.Subtitle>{subtitle}</Content.Subtitle>;
     obj.buttonText = titleMe(buttonText);
     obj.buttonLink = buttonLink;
 
