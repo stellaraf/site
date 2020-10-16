@@ -16,9 +16,9 @@ export const Root = (props: Animated<BoxProps>) => {
         minH="50vh"
         as={motion.div}
         key={route}
-        initial={{ scale: 0.5, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.5, opacity: 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         {...props}
       />
     </AnimatePresence>
