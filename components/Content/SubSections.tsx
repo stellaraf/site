@@ -5,7 +5,10 @@ import type { RenderedSubSectionProps, SubSectionGroupProps } from './types';
 
 const SubSection = (props: RenderedSubSectionProps) => {
   const { title, body } = props;
-  const boxProps = useColorValue({ bg: 'white', boxShadow: 'xl' }, {});
+  const boxProps = useColorValue(
+    { bg: 'white', boxShadow: 'xl' },
+    { bg: 'whiteAlpha.50', css: { backdropFilter: 'blur(2px)' } },
+  );
   return (
     <Box {...boxProps} p={8} borderRadius="md">
       <Heading as="h4" fontSize="lg" mb={4}>

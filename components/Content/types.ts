@@ -1,10 +1,14 @@
-import type { BoxProps, GridProps, HeadingProps } from '@chakra-ui/core';
+import type { GridProps, HeadingProps } from '@chakra-ui/core';
 export type { BoxProps, GridProps, HeadingProps } from '@chakra-ui/core';
 import type { Document } from '@contentful/rich-text-types';
 import type { ReactNode } from 'react';
 
 export interface TitleProps extends HeadingProps {
   id: string;
+  children: string;
+}
+export interface ISubtitle extends HeadingProps {
+  children: string;
 }
 
 export interface SubSectionProps {

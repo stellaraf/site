@@ -31,7 +31,7 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
           {body}
           {subsections}
           {showButton && (
-            <Button href={buttonLink} leftIcon={<BsChevronRight />}>
+            <Button my={8} href={buttonLink} leftIcon={<BsChevronRight />}>
               {buttonText}
             </Button>
           )}
