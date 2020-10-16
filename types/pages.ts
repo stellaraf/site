@@ -17,10 +17,12 @@ import type {
 /**
  * _app (All Pages) Types
  */
-export interface SiteProps extends AppProps {
+export interface AppInitialProps {
   appProps: { globalConfig: GlobalConfig; footerGroups: FooterItem[] };
   children?: ReactNode;
 }
+
+export type SiteProps = AppInitialProps & AppProps;
 
 /**
  * Home Page Types
