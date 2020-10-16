@@ -8,12 +8,13 @@ import type { IPhoto, IPhotoWrapper } from './types';
 const PhotoWrapper = (props: IPhotoWrapper) => (
   <Box>
     <Flex
-      justifyContent="center"
-      alignItems="center"
-      flexDir="column"
-      minWidth={1}
+      minWidth={40}
       maxWidth="100%"
+      flexDir="column"
+      textAlign="center"
+      alignItems="center"
       position="relative"
+      justifyContent="center"
       {...props}
     />
   </Box>
