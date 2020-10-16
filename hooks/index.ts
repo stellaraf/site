@@ -2,6 +2,7 @@ export * from './useActiveSection';
 export * from './useApple';
 export * from './useBool';
 export * from './useBreakpointString';
+export * from './useGoogleAnalytics';
 export * from './useGradient';
 export * from './useLinkType';
 export * from './useMobile';

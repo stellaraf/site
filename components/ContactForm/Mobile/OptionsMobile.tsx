@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useRef } from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { Button as ChakraButton, Center, Stack, useDisclosure } from '@chakra-ui/core';
 import { motion, AnimatePresence, AnimateSharedLayout, useCycle } from 'framer-motion';
 import { Button } from 'site/components';
 import { useColorValue } from 'site/context';
-import { useTitle } from 'site/hooks';
+import { useGoogleAnalytics, useTitle } from 'site/hooks';
 import { Card, CardBody } from '../Card';
 import { ContactOption } from '../ContactOption';
 import { Icon } from '../Icon';
@@ -39,21 +40,15 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
   const { cards, ...rest } = props;
   const ctx = useFormState();
   const titleMe = useTitle();
+  const { pathname } = useRouter();
+  const { trackModal } = useGoogleAnalytics();
 
   const formSizes = { minHeight: '48rem', height: '100%' };
 
-  const [layout, toggleLayout] = useCycle('cards', 'form', 'success');
   const { isOpen, onToggle, onClose } = useDisclosure();
 
   return (
-    <Container
-      minH="3xl"
-      zIndex={1}
-      spacing={12}
-      align="stretch"
-      // animate={layout}
-      direction="column"
-      {...rest}>
+    <Container minH="3xl" zIndex={1} spacing={12} align="stretch" direction="column" {...rest}>
       <AnimatePresence>
         {cards.map((card, i) => {
           const { icon: iconName, color: iconColor, buttonText, form, ...cardRest } = card;
@@ -62,8 +57,6 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
             ctx.form.merge({ [iconName]: form });
           }
 
-          // const isForm = layout === 'form' && ctx.selectedIndex.value === i;
-          // const isSuccess = layout === 'success' && ctx.selectedIndex.value === i;
           const isForm = isOpen && ctx.selectedIndex.value === i;
 
           const iconBg = useColorValue(`original.${iconColor}`, `${iconColor}.300`);
@@ -80,6 +73,7 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
               ctx.selectedName.value !== iconName &&
                 ctx.merge({ selectedName: iconName, selectedIndex: i });
               onToggle();
+              trackModal(`${pathname}/form-${iconName.toLowerCase()}`);
             }
           };
 

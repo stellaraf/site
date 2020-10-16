@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useRef } from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { Center, Stack, Button as ChakraButton } from '@chakra-ui/core';
 import { motion, AnimatePresence, AnimateSharedLayout, useCycle } from 'framer-motion';
 import { Button } from 'site/components';
 import { useColorValue } from 'site/context';
-import { useTitle } from 'site/hooks';
+import { useGoogleAnalytics, useTitle } from 'site/hooks';
 import { Card, CardBody } from '../Card';
 import { ContactOption } from '../ContactOption';
 import { DesktopForm } from './DesktopForm';
@@ -38,6 +39,8 @@ export const OptionsDesktop = (props: IOptionsResponsive) => {
   const { cards, ...rest } = props;
   const ctx = useFormState();
   const titleMe = useTitle();
+  const { pathname } = useRouter();
+  const { trackModal } = useGoogleAnalytics();
 
   // Static desktop sizes for cards layout
   const cardSizes = { width: '20rem', minHeight: '28rem' };
@@ -125,6 +128,7 @@ export const OptionsDesktop = (props: IOptionsResponsive) => {
               ctx.selectedName.value !== iconName &&
                 ctx.merge({ selectedName: iconName, selectedIndex: i });
               toggleLayout();
+              trackModal(`${pathname}/form-${iconName.toLowerCase()}`);
             }
           };
           /**

@@ -16,7 +16,7 @@ import {
 import { useForm, FormProvider, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import { useConfig } from 'site/context';
-import { useTitle } from 'site/hooks';
+import { useGoogleAnalytics, useTitle } from 'site/hooks';
 import { SubscribeField } from './SubscribeField';
 import { subscribeEmail, subscribeSchema } from './util';
 
@@ -35,7 +35,7 @@ export const Subscribe = (props: ISubscribe) => {
   const toast = useToast();
   const toastState = useState<ISubscribeToast>({ status: 'error', message: subscribeGenericError });
   const methods = useForm({ resolver: yupResolver(subscribeSchema) });
-
+  const { trackEvent } = useGoogleAnalytics();
   const { setError, errors } = methods;
   const emailError = errors.email?.message;
 
@@ -43,10 +43,12 @@ export const Subscribe = (props: ISubscribe) => {
     console.error(error);
     emailError !== error && setError('email', { type: 'manual', message: error });
     toastState.set({ status: 'error', message: error });
+    trackEvent({ category: 'User', action: 'Error Subscribing to Newsletter' });
   };
 
   const handleSuccess = (message: string) => {
     toastState.set({ status: 'success', message });
+    trackEvent({ category: 'User', action: 'Subscribed to Newsletter' });
   };
 
   const onSubmit = async (data: ISubscribeFormData) => {
