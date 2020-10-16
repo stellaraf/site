@@ -76,6 +76,12 @@ export interface IContactPage extends Omit<PageProps, 'pageData'> {
 }
 
 /**
+ * Legal Page Types (Dynamic)
+ */
+
+export interface ILegalPage extends PageProps {}
+
+/**
  * Passthrough Types
  */
 export type { NextPage } from 'next';
