@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Box, Heading } from '@chakra-ui/core';
+import { Label } from 'site/components';
+import { useColorValue } from 'site/context';
 import { useTitle } from 'site/hooks';
 
 import type { BoxProps, TitleProps, ISubtitle } from './types';
@@ -44,6 +46,16 @@ export const Body = (props: BoxProps) => (
     whiteSpace="pre-line"
     fontSize="lg"
     textAlign={{ base: 'left', lg: 'justify' }}
+    zIndex={1}
     {...props}
   />
 );
+
+export const UpdatedAt = (props: BoxProps) => {
+  const { children, ...rest } = props;
+  const leftColor = useColorValue('gray.300', 'gray.500');
+  const rightColor = useColorValue('gray.100', 'gray.300');
+  return (
+    <Label right="Last Updated" left={children} leftColor={leftColor} rightColor={rightColor} />
+  );
+};

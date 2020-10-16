@@ -1,4 +1,4 @@
-import { Title, Subtitle, Body } from './Text';
+import { Title, Subtitle, Body, UpdatedAt } from './Text';
 import { SubSections } from './SubSections';
 
 export const Content = {
@@ -6,4 +6,5 @@ export const Content = {
   Subtitle,
   Body,
   SubSections,
+  UpdatedAt,
 };

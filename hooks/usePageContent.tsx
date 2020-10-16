@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMemo } from 'react';
 import { Content } from 'site/components';
-import { useRender, useTitle, useSlug } from 'site/hooks';
+import { useDate, useRender, useTitle, useSlug } from 'site/hooks';
 
 import type { PageContent, UsePageContent } from 'site/types';
 
@@ -23,15 +23,19 @@ export const usePageContent = (rawContent: PageContent, [...deps]: any[] = []): 
       buttonLink = '',
       buttonText = '',
       paragraphs,
+      updatedAt,
+      showUpdatedDate = false,
     } = rawContent ?? {};
 
     let subsections = null;
     const slug = useSlug(title, [rawContent]);
+    const updated = useDate(updatedAt);
 
     obj.title = <Content.Title id={slug}>{title}</Content.Title>;
     obj.subtitle = <Content.Subtitle>{subtitle}</Content.Subtitle>;
     obj.buttonText = titleMe(buttonText);
     obj.buttonLink = buttonLink;
+    obj.updatedAt = <Content.UpdatedAt>{updated}</Content.UpdatedAt>;
 
     if (body) {
       const renderedBody = useRender(body);
@@ -43,6 +47,7 @@ export const usePageContent = (rawContent: PageContent, [...deps]: any[] = []): 
       subsections = <Content.SubSections sections={paragraphs} />;
     }
     obj.showButton = showButton;
+    obj.showUpdatedDate = showUpdatedDate;
     obj.subsections = subsections;
   } catch (err) {
     console.error(err);
