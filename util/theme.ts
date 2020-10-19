@@ -162,6 +162,10 @@ const globalStyles = (props: Dict) => {
       backgroundColor: mode('original.light', 'original.dark')(props),
       color: mode('original.dark', 'original.light')(props),
       fontFamily: 'body',
+      '*::selection': mode(
+        { backgroundColor: 'secondary.200', color: 'black' },
+        { backgroundColor: 'tertiary.100', color: 'white' },
+      )(props),
     },
     // See https://github.com/rcbyr/keen-slider/blob/master/src/keen-slider.scss
     '.__slider_container': {
