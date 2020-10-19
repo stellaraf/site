@@ -22,6 +22,7 @@ export interface UsePageContent {
   subsections: React.FC;
   showUpdatedDate: boolean;
   updatedAt: React.FC;
+  image: React.FC | null;
 }
 
 export type TitleMe = (t: string) => string;

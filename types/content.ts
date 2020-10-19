@@ -7,6 +7,8 @@ interface ContentRef {
   sys: ContentTypeLink;
 }
 
+type AssetFields = Asset['fields'];
+
 export interface FooterLink {
   title: string;
   href: string;
@@ -57,6 +59,10 @@ export interface PageContentParsed extends Omit<PageContent, 'footerGroup' | 'pa
 export interface Paragraph {
   title: string;
   body: Document;
+  icon?: AssetFields;
+  iconColor?: ColorNames;
+  buttonText?: string;
+  buttonLink?: string;
 }
 
 export interface PageContent {
@@ -73,6 +79,7 @@ export interface PageContent {
   footerGroup?: ContentRef;
   footerTitle?: string;
   showUpdatedDate?: boolean;
+  image?: AssetFields;
 }
 
 export interface HomeSection {
@@ -83,6 +90,7 @@ export interface HomeSection {
   buttonText: string;
   buttonLink: string;
   sortWeight: number;
+  image: AssetFields;
 }
 
 export interface HeroCard {

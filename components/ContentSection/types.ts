@@ -5,3 +5,5 @@ export interface ContentSectionProps {
   index: number;
   [k: string]: any;
 }
+export type TSideValues = 'right' | 'left';
+export type TSides = ['right', 'left'];
