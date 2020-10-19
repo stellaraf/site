@@ -18,7 +18,7 @@ export const CallToAction = (props: CTAProps) => {
           </Heading>
         </Flex>
       </Box>
-      {showBorder && <SectionDivider />}
+      {showBorder && <SectionDivider straight />}
     </>
   );
 };
