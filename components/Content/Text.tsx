@@ -4,7 +4,7 @@ import { Label } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useTitle } from 'site/hooks';
 
-import type { BoxProps, TitleProps, ISubtitle } from './types';
+import type { IContentBody, IUpdatedAt, TitleProps, ISubtitle } from './types';
 
 export const Title = (props: TitleProps) => {
   const titleMe = useTitle();
@@ -39,7 +39,7 @@ export const Subtitle = (props: ISubtitle) => {
   );
 };
 
-export const Body = (props: BoxProps) => (
+export const Body = (props: IContentBody) => (
   <Box
     my={16}
     maxW={[null, null, '60%']}
@@ -51,8 +51,8 @@ export const Body = (props: BoxProps) => (
   />
 );
 
-export const UpdatedAt = (props: BoxProps) => {
-  const { children, ...rest } = props;
+export const UpdatedAt = (props: IUpdatedAt) => {
+  const { children } = props;
   const leftColor = useColorValue('gray.300', 'gray.500');
   const rightColor = useColorValue('gray.100', 'gray.300');
   return (

@@ -45,7 +45,7 @@ export default function Cloud(props: CloudProps) {
         />
       </Hero>
       {sections.map((sect, i) => {
-        return <ContentSection items={sect} key={i} />;
+        return <ContentSection items={sect} index={i} key={i} />;
       })}
     </>
   );

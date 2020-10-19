@@ -25,6 +25,7 @@ export const usePageContent = (rawContent: PageContent, [...deps]: any[] = []): 
       paragraphs,
       updatedAt,
       showUpdatedDate = false,
+      image,
     } = rawContent ?? {};
 
     let subsections = null;
@@ -45,6 +46,11 @@ export const usePageContent = (rawContent: PageContent, [...deps]: any[] = []): 
     }
     if (paragraphs?.length ?? 0 !== 0) {
       subsections = <Content.SubSections sections={paragraphs} />;
+    }
+    if (typeof image !== 'undefined') {
+      obj.image = <Content.Image src={image.file.url} />;
+    } else {
+      obj.image = null;
     }
     obj.showButton = showButton;
     obj.showUpdatedDate = showUpdatedDate;
