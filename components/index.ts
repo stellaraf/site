@@ -22,3 +22,4 @@ export * from './SectionDivider';
 export * from './Select';
 export * from './Stars';
 export * from './USMap';
+export * from './Icon';

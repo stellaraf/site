@@ -4,13 +4,12 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { Center, Stack, Button as ChakraButton } from '@chakra-ui/core';
 import { motion, AnimatePresence, AnimateSharedLayout, useCycle } from 'framer-motion';
-import { Button } from 'site/components';
+import { Button, Icon } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useGoogleAnalytics, useTitle } from 'site/hooks';
 import { Card, CardBody } from '../Card';
 import { ContactOption } from '../ContactOption';
 import { DesktopForm } from './DesktopForm';
-import { Icon } from '../Icon';
 import { useFormState } from '../state';
 
 import type { MouseEvent } from 'react';
