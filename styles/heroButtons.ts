@@ -11,7 +11,7 @@ export const heroButtons = {
           bg:
             'linear-gradient(45deg,rgba(41,21,214,1) 0%,rgba(145,0,250,1) 51%,rgba(41,21,214,1) 100%)',
           color: 'white',
-          boxShadow: 'md',
+          boxShadow: 'lg',
           transition: 'all 0.2s',
           backgroundSize: '200% auto',
           mx: 4,
@@ -34,7 +34,7 @@ export const heroButtons = {
       )(props),
     heroSecondary: (props: Dict) =>
       mode(
-        { bg: 'light.50', color: 'black', boxShadow: 'md', mx: 4, _hover: { bg: 'blackAlpha.50' } },
+        { bg: 'light.50', color: 'black', boxShadow: 'lg', mx: 4, _hover: { bg: 'blackAlpha.50' } },
         {
           bg: 'transparent',
           borderColor: 'white',

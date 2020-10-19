@@ -27,7 +27,7 @@ export default function Home(props: HomeProps) {
   return (
     <>
       <SEO title={orgName} titleTemplate="%s" />
-      <Box w="100%" minH="80vh" color={heroText} pt={32} zIndex={-2} {...rStyles} {...bg}>
+      <Box w="100%" h="100vh" color={heroText} pt={32} zIndex={-2} {...rStyles} {...bg}>
         <Flex flexDir="column" alignItems="center">
           <Box overflowY="hidden" width={['90%', '66%', '33%']}>
             <Logo.Text color={logo} ref={logoRef} />
