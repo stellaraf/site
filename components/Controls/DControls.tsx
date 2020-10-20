@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, Stack, useStyles } from '@chakra-ui/core';
+import { Box, Button, Stack, VStack } from '@chakra-ui/core';
 import { MdWbSunny as Sun } from '@meronex/icons/md';
 import { BsMoon as Moon } from '@meronex/icons/bs';
 import { BsChevronUp as ChevronUp } from '@meronex/icons/bs';
@@ -22,48 +22,57 @@ const scrollToTop = (): void => {
 
 export const DControls = (props: IDControls) => {
   const { toggleColorMode } = useColorMode();
-  const styles = useStyles();
   const colorModeIcon = useColorValue(Moon, Sun);
+  const bg = useColorValue('white', 'blackAlpha.300');
+  const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
+  const hoverColor = useColorValue('original.secondary', 'tertiary.300');
   const switchTo = useColorValue('Dark', 'Light');
   const colorModeLabel = `Switch to ${switchTo} Mode`;
   return (
     <Box
       py={4}
+      bg={bg}
       right={0}
-      zIndex={1}
+      zIndex={5}
       pos="fixed"
       width="2rem"
       height="6rem"
       bottom="25px"
       display="flex"
+      boxShadow="md"
       alignItems="center"
+      borderTopWidth="1px"
+      borderLeftWidth="1px"
       justifyContent="center"
+      borderBottomWidth="1px"
       borderTopLeftRadius="xl"
+      borderColor={borderColor}
       borderBottomLeftRadius="xl"
-      sx={styles.controls}
+      css={{ backdropFilter: 'blur(20px)' }}
       {...props}>
-      <Stack pos="relative" flexDir="column">
+      <VStack pos="relative" spacing={6}>
+        ?
         <Button
-          py={2}
           minW="unset"
           height="unset"
           variant="unstyled"
           title={colorModeLabel}
           onClick={toggleColorMode}
-          aria-label={colorModeLabel}>
+          aria-label={colorModeLabel}
+          _hover={{ color: hoverColor }}>
           <Box as={colorModeIcon} />
         </Button>
         <Button
-          py={2}
           minW="unset"
           height="unset"
           variant="unstyled"
           onClick={scrollToTop}
           title="Scroll to Top"
-          aria-label="Scroll to Top">
+          aria-label="Scroll to Top"
+          _hover={{ color: hoverColor }}>
           <Box as={ChevronUp} />
         </Button>
-      </Stack>
+      </VStack>
     </Box>
   );
 };

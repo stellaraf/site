@@ -1,17 +1,21 @@
 import * as React from 'react';
+import dynamic from 'next/dynamic';
 import { HStack, IconButton } from '@chakra-ui/core';
-import {
-  FaTwitter as TwitterIcon,
-  FaFacebook as FacebookIcon,
-  FaLinkedinIn as LinkedInIcon,
-  FaGithub as GithubIcon,
-} from '@meronex/icons/fa';
-import { useConfig } from 'site/context';
+import { useConfig, useColorValue } from 'site/context';
 
+import type { IconBaseProps } from '@meronex/icons';
 import type { ISocialLink, ISocialLinks } from './types';
+
+const Twitter = dynamic<IconBaseProps>(() => import('@meronex/icons/fa').then(i => i.FaTwitter));
+const Facebook = dynamic<IconBaseProps>(() => import('@meronex/icons/fa').then(i => i.FaFacebook));
+const GitHub = dynamic<IconBaseProps>(() => import('@meronex/icons/fa').then(i => i.FaGithub));
+const LinkedIn = dynamic<IconBaseProps>(() =>
+  import('@meronex/icons/fa').then(i => i.FaLinkedinIn),
+);
 
 const SocialLink = (props: ISocialLink) => {
   const { label, ...rest } = props;
+  const color = useColorValue('original.tertiary', 'tertiary.300');
   return (
     <IconButton
       p={2}
@@ -25,7 +29,7 @@ const SocialLink = (props: ISocialLink) => {
       display="inline-flex"
       color="original.light"
       rel="noopener noreferrer"
-      _hover={{ color: 'original.tertiary' }}
+      _hover={{ color }}
       {...rest}
     />
   );
@@ -43,22 +47,22 @@ export const SocialLinks = (props: ISocialLinks) => {
       <SocialLink
         href={`https://linked.com/company/${linkedInProfile}`}
         label="LinkedIn"
-        icon={<LinkedInIcon size="1.5em" />}
+        icon={<LinkedIn size="1.5em" />}
       />
       <SocialLink
         href={`https://twitter.com/${twitterHandle}`}
         label="Twitter"
-        icon={<TwitterIcon size="1.5em" />}
+        icon={<Twitter size="1.5em" />}
       />
       <SocialLink
         href={`https://facebook.com/${facebookProfile}`}
         label="Facebook"
-        icon={<FacebookIcon size="1.5em" />}
+        icon={<Facebook size="1.5em" />}
       />
       <SocialLink
         href={`https://github.com/${githubOrg}`}
         label="GitHub"
-        icon={<GithubIcon size="1.5em" />}
+        icon={<GitHub size="1.5em" />}
       />
     </HStack>
   );
