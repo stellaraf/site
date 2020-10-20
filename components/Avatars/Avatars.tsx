@@ -13,7 +13,7 @@ const GroupWrapper = (props: IGroupWrapper) => {
       my={12}
       justifyContent="space-evenly"
       columns={{ base: 1, lg: 3 }}
-      spacingX="80%"
+      spacingX={{ lg: '25%', xl: '80%' }}
       spacingY={16}
       {...props}
     />

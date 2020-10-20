@@ -13,8 +13,8 @@ function getSide(idx: number): TSideValues {
 
 export const HomeSection = (props: HomeSectionProps) => {
   const { section, index, ...rest } = props;
+  const { title, subtitle, body, buttonText, buttonLink, image } = section;
   const showBorder = useColorValue(false, true);
-  const { title, subtitle, body, showButton, buttonText, buttonLink, image } = section;
   const renderedBody = useRender(body);
   const padding = Object();
   if (index === 0) {
@@ -29,8 +29,8 @@ export const HomeSection = (props: HomeSectionProps) => {
       <Box
         as="section"
         overflow="hidden"
-        my={{ base: 4, lg: 32 }}
-        px={{ base: 4, lg: 64 }}
+        my={{ base: 4, lg: 16, xl: 32 }}
+        px={{ base: 4, lg: 16, xl: 64 }}
         {...padding}
         {...rest}>
         <HomeBlock

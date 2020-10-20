@@ -14,9 +14,9 @@ export const Icon = (props: IIcon) => {
       <Box css={{ mask: `url(${icon}) no-repeat center` }} backgroundColor={color} boxSize="50%" />
     );
   } else if (typeof icon === 'undefined') {
-    component = <ChakraIcon boxSize="100%" />;
+    component = <ChakraIcon boxSize="50%" />;
   } else {
-    component = <ChakraIcon as={icon} boxSize="100%" />;
+    component = <ChakraIcon as={icon} boxSize="50%" />;
   }
 
   return (

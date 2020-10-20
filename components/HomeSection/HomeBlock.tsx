@@ -21,7 +21,7 @@ export const HomeBlock = (props: IHomeBlock) => {
 
   return (
     <Grid
-      gridColumnGap={48}
+      gridColumnGap={{ base: 0, lg: 16, xl: 48 }}
       width="100%"
       gridTemplateColumns={{ base: '1fr', lg: columns[side] }}
       gridTemplateRows={{ base: '0.33fr 1fr 0.1fr', lg: '0.5fr 1fr 0.1fr' }}

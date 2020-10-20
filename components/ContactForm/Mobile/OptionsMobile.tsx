@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { Button as ChakraButton, Center, Stack, useDisclosure } from '@chakra-ui/core';
 import { motion, AnimatePresence, AnimateSharedLayout, useCycle } from 'framer-motion';
 import { Button, Icon } from 'site/components';
-import { useColorValue } from 'site/context';
 import { useGoogleAnalytics, useTitle } from 'site/hooks';
 import { Card, CardBody } from '../Card';
 import { ContactOption } from '../ContactOption';
@@ -58,11 +57,10 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
 
           const isForm = isOpen && ctx.selectedIndex.value === i;
 
-          const iconBg = useColorValue(`original.${iconColor}`, `${iconColor}.300`);
           const iconProps = isForm ? { size: 12, ml: 4 } : {};
           const icon = (
             <motion.div layoutId={iconName}>
-              <Icon icon={iconMap[iconName]} color={iconBg} {...iconProps} />
+              <Icon icon={iconMap[iconName]} color={iconColor} {...iconProps} />
             </motion.div>
           );
 
