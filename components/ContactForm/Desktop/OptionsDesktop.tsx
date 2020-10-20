@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { Center, Stack, Button as ChakraButton } from '@chakra-ui/core';
 import { motion, AnimatePresence, AnimateSharedLayout, useCycle } from 'framer-motion';
 import { Button, Icon } from 'site/components';
-import { useColorValue } from 'site/context';
 import { useGoogleAnalytics, useTitle } from 'site/hooks';
 import { Card, CardBody } from '../Card';
 import { ContactOption } from '../ContactOption';
@@ -84,7 +83,7 @@ export const OptionsDesktop = (props: IOptionsResponsive) => {
     <Container
       minH="lg"
       zIndex={1}
-      spacing={12}
+      spacing={layout === 'cards' ? 12 : 0}
       align="stretch"
       direction="row"
       animate={layout}
@@ -101,7 +100,6 @@ export const OptionsDesktop = (props: IOptionsResponsive) => {
             ctx.form.merge({ [iconName]: form });
           }
 
-          const iconBg = useColorValue(`${iconColor}.500`, `${iconColor}.300`);
           const isForm = layout === 'form' && ctx.selectedIndex.value === i;
           const iconProps = isForm ? { size: 12, ml: 4 } : {};
 
@@ -112,7 +110,7 @@ export const OptionsDesktop = (props: IOptionsResponsive) => {
            * */
           const icon = (
             <motion.div layoutId={iconName}>
-              <Icon icon={iconMap[iconName]} color={iconBg} {...iconProps} />
+              <Icon icon={iconMap[iconName]} color={iconColor} {...iconProps} />
             </motion.div>
           );
           /**

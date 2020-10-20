@@ -9,10 +9,6 @@ import { useResponsiveStyle } from 'site/styles';
 
 import type { ContentSectionProps, TSides, TSideValues } from './types';
 
-function _hasImage(image: React.FC | null) {
-  return image !== null;
-}
-
 function getSide(idx: number): TSideValues {
   const sides: TSides = ['right', 'left'];
   return sides[idx % 2];
@@ -40,9 +36,9 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
   const titleBlock = (
     <Flex
       key="title"
-      mr={hasImage ? 16 : undefined}
+      mr={hasImage ? 16 : 'unset'}
       direction="column"
-      align={hasImage ? 'flex-start' : 'center'}>
+      textAlign={isMobile ? 'center' : !hasImage ? 'center' : side === 'right' ? 'left' : 'right'}>
       {title}
       {subtitle}
     </Flex>
@@ -57,16 +53,18 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
   }
   return (
     <>
-      <Box ref={ref} as="section" py={24} overflow="hidden" {...rStyles} {...rest}>
+      <Box
+        ref={ref}
+        as="section"
+        my={{ base: 4, lg: 16, xl: 32 }}
+        px={{ base: 4, lg: 16, xl: 64 }}
+        overflow="hidden"
+        {...rStyles}
+        {...rest}>
         <Flex h="100%" alignItems="center" justify="center" flexWrap="nowrap">
           {layout}
         </Flex>
-        <Flex
-          height="100%"
-          overflow="hidden"
-          align="center"
-          direction="column"
-          px={{ base: 0, lg: 32 }}>
+        <Flex height="100%" overflow="hidden" align="center" direction="column">
           {body}
           {subsections}
           {showButton && (
