@@ -12,11 +12,7 @@ export const Title = (props: TitleProps) => {
   return (
     <>
       <Box id={id} as="span" pos="relative" top={-130} visibility="hidden" />
-      <Heading
-        as="h3"
-        fontSize={{ base: '3xl', lg: '4xl' }}
-        textAlign={{ base: 'center', xl: 'justify' }}
-        {...rest}>
+      <Heading as="h3" fontSize={{ base: '3xl', lg: '4xl' }} {...rest}>
         {titleMe(children)}
       </Heading>
     </>
@@ -27,13 +23,7 @@ export const Subtitle = (props: ISubtitle) => {
   const titleMe = useTitle();
   const { children, ...rest } = props;
   return (
-    <Heading
-      as="h4"
-      fontSize={{ base: '1.5rem', lg: 'xl' }}
-      fontWeight="light"
-      textAlign={{ base: 'center', lg: 'justify' }}
-      mt={8}
-      {...rest}>
+    <Heading as="h4" fontSize={{ base: '1.5rem', lg: 'xl' }} fontWeight="light" mt={8} {...rest}>
       {titleMe(children)}
     </Heading>
   );
@@ -45,7 +35,6 @@ export const Body = (props: IContentBody) => (
     maxW={[null, null, '60%']}
     whiteSpace="pre-line"
     fontSize="lg"
-    textAlign={{ base: 'left', lg: 'justify' }}
     zIndex={1}
     {...props}
   />
