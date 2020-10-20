@@ -36,6 +36,7 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
   const rStyles = useResponsiveStyle();
   const showBorder = useColorValue(false, true);
   const hasImage = useMemo(() => image !== null && !isMobile, [items.title]);
+  const side = useMemo(() => getSide(index), [index]);
   const titleBlock = (
     <Flex
       key="title"
@@ -50,7 +51,7 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
   if (isMobile) {
     layout = [titleBlock];
   } else {
-    if (getSide(index) === 'right') {
+    if (side === 'right') {
       layout = [image, titleBlock];
     }
   }
@@ -76,7 +77,7 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
           {showUpdatedDate && updatedAt}
         </Flex>
       </Box>
-      {showBorder && <SectionDivider />}
+      {showBorder && <SectionDivider left={side === 'left'} right={side === 'right'} />}
     </>
   );
 });
