@@ -1,7 +1,8 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
+import { useBreakpointValue } from '@chakra-ui/core';
 import { DHeader, MHeader } from 'site/components';
-import { DControls } from 'site/components';
+import { Banner, DControls } from 'site/components';
 import { Footer } from 'site/components';
 import { CallToAction } from 'site/components';
 import { SyncedStyleProvider } from 'site/context';
@@ -15,6 +16,15 @@ const Stars = dynamic<BoxProps>(() => import('site/components').then(i => i.Star
 export const SiteLayout = (props: SiteLayoutProps) => {
   const { children, footerGroups } = props;
   const isMobile = useMobile();
+  const bp = useBreakpointValue({ base: 'Base', md: 'Medium', lg: 'Large', xl: 'X-Large' });
+  if (process.env.NODE_ENV === 'development') {
+    console.log(
+      `%cBreakpoint%c${bp}`,
+      'background: pink; color: black; padding: 0.5rem; font-size: 0.75rem;',
+      'background: black; color: pink; padding: 0.5rem; font-size: 0.75rem; font-weight: bold;',
+    );
+  }
+
   return (
     <Wrapper>
       <SyncedStyleProvider>
@@ -27,6 +37,7 @@ export const SiteLayout = (props: SiteLayoutProps) => {
         {!isMobile && <DControls />}
       </SyncedStyleProvider>
       <Stars />
+      <Banner />
     </Wrapper>
   );
 };

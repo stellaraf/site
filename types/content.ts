@@ -192,6 +192,7 @@ export interface GlobalConfigPre {
   hqMapInfo?: Document;
   openMapsText?: string;
   hqAddress?: string;
+  privacyBanner: Document;
 }
 
 export interface ThemeConfig {
