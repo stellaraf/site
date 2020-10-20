@@ -35,7 +35,7 @@ export const DesktopLinks = (props: IFooterLinks) => {
                       href={item.href}
                       fontSize={{ base: 'xs', lg: 'sm' }}
                       opacity={0.6}
-                      _hover={{ textDecoration: 'none' }}>
+                      _hover={{ textDecoration: 'none', opacity: 0.9 }}>
                       {item.title}
                     </Link>
                   </ListItem>
