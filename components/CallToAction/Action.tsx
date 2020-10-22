@@ -19,7 +19,7 @@ export const Action = (props: IActions) => {
   const renderedBody = useRender(callToActionBody ?? body ?? page.body);
   const slug = useSlug(title, [title]);
   return (
-    <NextLink href={`${page.slug}#${slug}`}>
+    <NextLink href={`${page.slug}#${slug}`} scroll={false}>
       <Button
         p={0}
         rounded="lg"
