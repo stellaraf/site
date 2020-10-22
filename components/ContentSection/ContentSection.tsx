@@ -6,12 +6,35 @@ import { usePageContent, useMobile } from 'site/hooks';
 import { useColorValue } from 'site/context';
 import { useResponsiveStyle } from 'site/styles';
 
-import type { ContentSectionProps, TSides, TSideValues } from './types';
+import type { ContentSectionProps, TSides, TSideValues, ITitleLayout } from './types';
 
 function getSide(idx: number): TSideValues {
   const sides: TSides = ['right', 'left'];
   return sides[idx % 2];
 }
+
+const TitleLayout = (props: ITitleLayout) => {
+  const { titleBlock, image, side, isMobile } = props;
+  if (isMobile) {
+    return titleBlock;
+  } else {
+    if (side === 'right') {
+      return (
+        <>
+          {image}
+          {titleBlock}
+        </>
+      );
+    } else {
+      return (
+        <>
+          {titleBlock}
+          {image}
+        </>
+      );
+    }
+  }
+};
 
 export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((props, ref) => {
   const { items, index, ...rest } = props;
@@ -32,24 +55,25 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
   const showBorder = useColorValue(false, true);
   const hasImage = useMemo(() => image !== null && !isMobile, [items.title, index]);
   const side = useMemo(() => getSide(index), [index]);
+  let titleMargin = {};
+  if (image !== null && !isMobile) {
+    if (side === 'right') {
+      titleMargin = { ml: 16 };
+    } else if (side === 'left') {
+      titleMargin = { mr: 16 };
+    }
+  }
   const titleBlock = (
     <Flex
       key={items.title}
-      mr={image !== null && !isMobile ? 16 : 'unset'}
+      {...titleMargin}
       direction="column"
       textAlign={isMobile ? 'center' : !hasImage ? 'center' : side === 'right' ? 'left' : 'right'}>
       {title}
       {subtitle}
     </Flex>
   );
-  let layout = [titleBlock, image];
-  if (isMobile) {
-    layout = [titleBlock];
-  } else {
-    if (side === 'right') {
-      layout = [image, titleBlock];
-    }
-  }
+
   return (
     <>
       <Box
@@ -61,7 +85,7 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
         {...rStyles}
         {...rest}>
         <Flex h="100%" alignItems="center" justify="center" flexWrap="nowrap">
-          {layout}
+          <TitleLayout titleBlock={titleBlock} image={image} isMobile={isMobile} side={side} />
         </Flex>
         <Flex height="100%" align="center" direction="column">
           {body}
