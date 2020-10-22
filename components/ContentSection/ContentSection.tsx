@@ -35,7 +35,7 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
   const titleBlock = (
     <Flex
       key={items.title}
-      mr={hasImage ? 16 : 'unset'}
+      mr={image !== null && !isMobile ? 16 : 'unset'}
       direction="column"
       textAlign={isMobile ? 'center' : !hasImage ? 'center' : side === 'right' ? 'left' : 'right'}>
       {title}
@@ -63,7 +63,7 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
         <Flex h="100%" alignItems="center" justify="center" flexWrap="nowrap">
           {layout}
         </Flex>
-        <Flex height="100%" overflow="hidden" align="center" direction="column">
+        <Flex height="100%" align="center" direction="column">
           {body}
           {subsections}
           {showButton && (
