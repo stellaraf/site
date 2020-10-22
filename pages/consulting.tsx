@@ -19,7 +19,7 @@ export default function Consulting(props: PageProps) {
       <SEO title={title} description={subtitle} />
       <Hero title={title} subtitle={subtitle} body={renderedBody} />
       {sections.map((sect, i) => {
-        return <ContentSection items={sect} key={i} />;
+        return <ContentSection items={sect} key={i} index={i} />;
       })}
     </>
   );
