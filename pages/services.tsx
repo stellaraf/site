@@ -17,7 +17,7 @@ export default function Services(props: PageProps) {
       <SEO title={title} description={subtitle} />
       <Hero title={title} subtitle={subtitle} />
       {sections.map((sect, i) => {
-        return <ContentSection items={sect} key={i} />;
+        return <ContentSection items={sect} key={i} index={i} />;
       })}
     </>
   );
