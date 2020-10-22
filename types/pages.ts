@@ -13,6 +13,7 @@ import type {
   IContactCard,
   IFormPlaceholders,
   IFormModelTrial,
+  IActions,
 } from 'site/types';
 
 import type { Asset } from 'contentful';
@@ -22,7 +23,7 @@ import type { Document } from '@contentful/rich-text-types';
  * _app (All Pages) Types
  */
 export interface AppInitialProps {
-  appProps: { globalConfig: GlobalConfig; footerGroups: FooterItem[] };
+  appProps: { globalConfig: GlobalConfig; footerGroups: FooterItem[]; actions: IActions[] };
   children?: ReactNode;
 }
 

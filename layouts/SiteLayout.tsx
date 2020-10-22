@@ -14,7 +14,7 @@ import type { BoxProps, SiteLayoutProps } from './types';
 const Stars = dynamic<BoxProps>(() => import('site/components').then(i => i.Stars));
 
 export const SiteLayout = (props: SiteLayoutProps) => {
-  const { children, footerGroups } = props;
+  const { children, footerGroups, actions } = props;
   const isMobile = useMobile();
   const bp = useBreakpointValue({ base: 'Base', md: 'Medium', lg: 'Large', xl: 'X-Large' });
   if (process.env.NODE_ENV === 'development') {
@@ -32,7 +32,7 @@ export const SiteLayout = (props: SiteLayoutProps) => {
         <Main>
           <Root>{children}</Root>
         </Main>
-        <CallToAction />
+        <CallToAction actions={actions} />
         <Footer groups={footerGroups} />
         {!isMobile && <DControls />}
       </SyncedStyleProvider>

@@ -6,13 +6,13 @@ import { Provider } from 'site/context';
 import { useMouseTrap, useGoogleAnalytics } from 'site/hooks';
 import { SiteLayout } from 'site/layouts';
 import { useKonamiState } from 'site/state';
-import { getGlobalConfig, getFooterItems } from 'site/util';
+import { getGlobalConfig, getFooterItems, getActions } from 'site/util';
 
 import type { SiteProps } from 'site/types';
 
 const Site = (props: SiteProps) => {
   const { Component, pageProps, appProps, router } = props;
-  const { globalConfig, footerGroups } = appProps;
+  const { globalConfig, footerGroups, actions } = appProps;
 
   const konami = useKonamiState();
   const { initializeAnalytics, trackPage } = useGoogleAnalytics();
@@ -44,7 +44,7 @@ const Site = (props: SiteProps) => {
       </Head>
       <Provider appConfig={globalConfig}>
         <BaseSEO />
-        <SiteLayout footerGroups={footerGroups}>
+        <SiteLayout footerGroups={footerGroups} actions={actions}>
           <Component {...pageProps} />
         </SiteLayout>
       </Provider>
@@ -55,9 +55,12 @@ const Site = (props: SiteProps) => {
 Site.getInitialProps = async () => {
   let globalConfig = Object();
   let footerGroups = Object();
+  let actions = new Array();
+
   globalConfig = await getGlobalConfig();
   footerGroups = await getFooterItems();
-  return { appProps: { globalConfig, footerGroups } };
+  actions = await getActions();
+  return { appProps: { globalConfig, footerGroups, actions } };
 };
 
 export default Site;

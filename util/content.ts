@@ -17,6 +17,7 @@ import type {
   AnyEntry,
   FooterGroup,
   FooterGroupEntry,
+  IActions,
 } from 'site/types';
 
 const debug = (obj: any) => {
@@ -377,4 +378,45 @@ export const getBios = async (): Promise<BioEntry> => {
 export function buildSelections(opt: string): { value: string; label: string } {
   const value = opt.toLowerCase().replaceAll(/[^A-Za-z0-9-_]/g, '_');
   return { value, label: opt };
+}
+
+/**
+ * Build an array of each page's basic attributes.
+ */
+export async function getPageInfo() {
+  let pageInfo = [];
+  const pages: EntryCollection<PageAttrs> = await contentQuery('page');
+  for (let { fields } of pages.items) {
+    const { title, subtitle, slug, footerTitle } = fields;
+    pageInfo.push({ title, subtitle, slug, footerTitle });
+  }
+  return pageInfo;
+}
+
+export async function getActions(): Promise<IActions[]> {
+  let actions = [];
+  const data: PageContentParsed[] = await getContent('pageContent', {
+    'fields.showInCallToAction': true,
+  });
+  for (let item of data) {
+    const {
+      page,
+      body,
+      title,
+      subtitle,
+      callToActionIcon,
+      callToActionBody,
+      callToActionIconColor,
+    } = item;
+    actions.push({
+      page,
+      body,
+      title,
+      subtitle,
+      callToActionIcon,
+      callToActionBody,
+      callToActionIconColor,
+    });
+  }
+  return actions;
 }
