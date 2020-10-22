@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { forwardRef, useMemo } from 'react';
 import { Box, Flex } from '@chakra-ui/core';
 import { BsChevronRight } from '@meronex/icons/bs';
@@ -31,11 +30,11 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
   const isMobile = useMobile();
   const rStyles = useResponsiveStyle();
   const showBorder = useColorValue(false, true);
-  const hasImage = useMemo(() => image !== null && !isMobile, [items.title]);
+  const hasImage = useMemo(() => image !== null && !isMobile, [items.title, index]);
   const side = useMemo(() => getSide(index), [index]);
   const titleBlock = (
     <Flex
-      key="title"
+      key={items.title}
       mr={hasImage ? 16 : 'unset'}
       direction="column"
       textAlign={isMobile ? 'center' : !hasImage ? 'center' : side === 'right' ? 'left' : 'right'}>

@@ -45,9 +45,9 @@ export const DControls = (props: IDControls) => {
       borderLeftWidth="1px"
       justifyContent="center"
       borderBottomWidth="1px"
-      borderTopLeftRadius="xl"
+      borderTopLeftRadius="lg"
       borderColor={borderColor}
-      borderBottomLeftRadius="xl"
+      borderBottomLeftRadius="lg"
       css={{ backdropFilter: 'blur(20px)' }}
       {...props}>
       <VStack pos="relative" spacing={6}>

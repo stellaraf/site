@@ -23,7 +23,7 @@ export type Tuple<ElementT, LengthT extends number, OutputT extends any[] = []> 
   1: Tuple<ElementT, LengthT, PushFront<OutputT, ElementT>>;
 }[OutputT['length'] extends LengthT ? 0 : 1];
 
-export type { GetStaticProps } from 'next';
+export type { GetStaticProps, GetStaticPaths, NextPageContext } from 'next';
 
 export type Dict = Record<string, any>;
 
