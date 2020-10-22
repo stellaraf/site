@@ -12,7 +12,11 @@ import type {
   FooterItem,
   IContactCard,
   IFormPlaceholders,
+  IFormModelTrial,
 } from 'site/types';
+
+import type { Asset } from 'contentful';
+import type { Document } from '@contentful/rich-text-types';
 
 /**
  * _app (All Pages) Types
@@ -80,6 +84,20 @@ export interface IContactPage extends Omit<PageProps, 'pageData'> {
  */
 
 export interface ILegalPage extends PageProps {}
+
+export interface IVendorPage {
+  pageData: {
+    name: string;
+    logo: Asset['fields'];
+    logoColorLightMode: string;
+    logoColorDarkMode: string;
+    title: string;
+    subtitle: string;
+    body?: Document;
+    trialForm?: IFormModelTrial;
+    partnerLogo?: Asset['fields'];
+  };
+}
 
 /**
  * Passthrough Types
