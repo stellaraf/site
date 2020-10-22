@@ -6,7 +6,7 @@ import type { IImage } from './types';
 export const Image = (props: IImage) => {
   const { src, boxSize = 'xl', ...rest } = props;
   return (
-    <Box key={src} boxSize={boxSize} {...rest}>
+    <Box boxSize={boxSize} {...rest}>
       <ChakraImage src={src} boxSize={boxSize} />
     </Box>
   );
