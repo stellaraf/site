@@ -46,7 +46,7 @@ const renderMark: RenderMark = {
   [MARKS.CODE]: text => <Code>{text}</Code>,
 };
 
-export function useRender(renderable?: Document, [...deps]: any[] = []) {
+export function useRender(renderable?: Document | null, [...deps]: any[] = []) {
   if (!renderable) {
     return null;
   }

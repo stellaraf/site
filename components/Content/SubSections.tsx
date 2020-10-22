@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useCallback } from 'react';
 import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/core';
 import { Button, Icon } from 'site/components';
@@ -33,7 +32,7 @@ const SubSection = (props: RenderedSubSectionProps) => {
           </Heading>
           {icon && <Icon size={12} icon={icon} color={iconColor} />}
         </Flex>
-        <Box whiteSpace="pre-line" fontSize="lg" textAlign={{ base: 'left', lg: 'justify' }}>
+        <Box whiteSpace="pre-line" fontSize="lg" textAlign={{ base: 'left', xl: 'justify' }}>
           {body}
         </Box>
       </Flex>
