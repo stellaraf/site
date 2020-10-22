@@ -48,3 +48,22 @@ interface IFormModels {
 }
 
 export type FormModels<T extends 'Support' | 'Sales'> = IFormModels[T];
+
+export interface IFormModelTrial {
+  name: string;
+  firstName: IFormFieldText;
+  lastName: IFormFieldText;
+  emailAddress: IFormFieldText;
+  phoneNumber: IFormFieldText;
+  companyName: IFormFieldText;
+  buttonSubmit: string;
+  successMessage: string;
+}
+
+export interface IFormDataTrial {
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  phoneNumber?: string;
+  companyName: string;
+}
