@@ -1,10 +1,6 @@
-import * as React from 'react';
 import dynamic from 'next/dynamic';
 import { useBreakpointValue } from '@chakra-ui/core';
-import { DHeader, MHeader } from 'site/components';
-import { Banner, DControls } from 'site/components';
-import { Footer } from 'site/components';
-import { CallToAction } from 'site/components';
+import { Banner, CallToAction, DControls, DHeader, Footer, MHeader } from 'site/components';
 import { SyncedStyleProvider } from 'site/context';
 import { useMobile } from 'site/hooks';
 import { Wrapper, Root, Main } from './common';
