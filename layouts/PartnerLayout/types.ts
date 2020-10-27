@@ -1,14 +1,14 @@
 import type { InputProps } from '@chakra-ui/core';
 import type { State } from '@hookstate/core';
 import type { Control } from 'react-hook-form';
-import type { IVendorPage, IFormModelTrial, IFormDataTrial } from 'site/types';
+import type { IPartnerPage, IFormModelTrial, IFormDataTrial } from 'site/types';
 
-export type ILayoutVendor = IVendorPage['pageData'];
+export type IPartnerLayout = IPartnerPage['pageData'];
 
-export type TVendorForm = State<IFormModelTrial>;
+export type TTrialForm = State<IFormModelTrial>;
 
-export type IVendorContext = Omit<ILayoutVendor, 'trialForm'> & {
-  vendorForm: TVendorForm;
+export type IPartnerContext = Omit<IPartnerLayout, 'trialForm'> & {
+  trialForm: TTrialForm;
 };
 
 export interface ITextField extends InputProps {

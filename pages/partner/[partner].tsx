@@ -1,33 +1,33 @@
 import { getContent } from 'site/util';
 import { SEO } from 'site/components';
-import { VendorLayout } from 'site/layouts';
+import { PartnerLayout } from 'site/layouts';
 
-import type { GetStaticProps, GetStaticPaths, IVendorPage } from 'site/types';
+import type { GetStaticProps, GetStaticPaths, IPartnerPage } from 'site/types';
 import type { GetStaticPropsContext } from 'next';
 
 type UrlQuery = {
-  vendor: string;
+  partner: string;
 };
 
-export default function VendorPage(props: IVendorPage) {
+export default function PartnerPage(props: IPartnerPage) {
   const { pageData } = props;
   const { title, subtitle } = pageData;
 
   return (
     <>
       <SEO title={title} description={subtitle} />
-      <VendorLayout {...pageData} />
+      <PartnerLayout {...pageData} />
     </>
   );
 }
 
-export const getStaticProps: GetStaticProps<IVendorPage, UrlQuery> = async (
+export const getStaticProps: GetStaticProps<IPartnerPage, UrlQuery> = async (
   ctx: GetStaticPropsContext<UrlQuery>,
 ) => {
-  const vendor = ctx.params?.vendor;
+  const partner = ctx.params?.partner;
   let pageData = Object();
   try {
-    const matches = await getContent('vendorPage', { 'fields.name[match]': vendor, include: 4 });
+    const matches = await getContent('partnerPage', { 'fields.name[match]': partner, include: 4 });
     pageData = matches[0] ?? {};
   } catch (err) {
     console.error(err);
@@ -36,6 +36,6 @@ export const getStaticProps: GetStaticProps<IVendorPage, UrlQuery> = async (
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [{ params: { vendor: 'vmware' } }, { params: { vendor: 'veeam' } }],
+  paths: [{ params: { partner: 'vmware' } }, { params: { partner: 'veeam' } }],
   fallback: false,
 });
