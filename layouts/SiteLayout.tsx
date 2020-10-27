@@ -17,7 +17,7 @@ export const SiteLayout = (props: SiteLayoutProps) => {
   const { children, footerGroups, actions } = props;
   const isMobile = useMobile();
   const bp = useBreakpointValue({ base: 'Base', md: 'Medium', lg: 'Large', xl: 'X-Large' });
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development' && typeof bp !== 'undefined') {
     console.log(
       `%cBreakpoint%c${bp}`,
       'background: pink; color: black; padding: 0.5rem; font-size: 0.75rem;',

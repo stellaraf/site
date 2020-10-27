@@ -1,11 +1,10 @@
-import * as React from 'react';
 import { useMemo } from 'react';
 import { ChakraProvider, useTheme as useChakraTheme } from '@chakra-ui/core';
 import { makeTheme } from 'site/util';
 
-import type { UseTheme, UIProviderProps } from 'site/types';
+import type { TUseTheme, IUIProvider } from './types';
 
-export const UIProvider = (props: UIProviderProps) => {
+export const UIProvider = (props: IUIProvider) => {
   const { theme, children } = props;
   const generatedTheme = useMemo(() => makeTheme(theme), [theme]);
   return (
@@ -14,7 +13,7 @@ export const UIProvider = (props: UIProviderProps) => {
     </ChakraProvider>
   );
 };
-export const useTheme: UseTheme = useChakraTheme;
+export const useTheme: TUseTheme = useChakraTheme;
 
 export { useColorMode } from '@chakra-ui/core';
 export { useColorModeValue as useColorValue } from '@chakra-ui/core';
