@@ -5,8 +5,6 @@ import type {
   PageAttrs,
   PageContent,
   HomepageContent,
-  GeoPoint,
-  BioEntry,
   GlobalConfigPre,
   GlobalConfig,
   Entry,
@@ -205,10 +203,9 @@ export const getGlobalConfig = async (): Promise<GlobalConfig> => {
   const data = await contentQuery('globalConfiguration', { include: 4 });
   if (data.total !== 0) {
     const parsed: EntryCollection<GlobalConfigPre> = await client.parseEntries(data);
-    const { bioList, theme, ...rest } = parsed.items[0].fields;
+    const { theme, ...rest } = parsed.items[0].fields;
     Object.assign(globalConfig, {
       theme: flattenObj(theme.fields, removeKeys),
-      bioListId: bioList.sys.id,
       ...rest,
     });
   }
@@ -370,12 +367,6 @@ export async function getFooterItems(): Promise<FooterItem[]> {
   }
   return footerItems;
 }
-
-export const getBios = async (): Promise<BioEntry> => {
-  const { bioListId } = await getGlobalConfig();
-  const data: BioEntry = await getEntry(bioListId);
-  return data;
-};
 
 /**
  * Build an object usable by a select element from a single display name string.

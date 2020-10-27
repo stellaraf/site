@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useState } from '@hookstate/core';
 import { Box, Flex, Image, Button, Skeleton, Text, useBreakpointValue } from '@chakra-ui/core';
 import { useColorValue } from 'site/context';
@@ -51,7 +50,7 @@ export const Photo = (props: IPhoto) => {
           borderColor={photoBorder}>
           <Image
             fallbackSrc="https://via.placeholder.com/150"
-            src={photo.url}
+            src={photo.file.url}
             alt={name}
             onLoad={handleLoad}
             rounded="full"

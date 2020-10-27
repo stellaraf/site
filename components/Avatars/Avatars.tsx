@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useState } from '@hookstate/core';
 import { Divider, Collapse, SimpleGrid } from '@chakra-ui/core';
 import { useRender, useMobile } from 'site/hooks';
@@ -73,6 +72,10 @@ export const Avatars = (props: IAvatars) => {
   const handlers = bios.map((_, i) => (_: any) => handler(i));
   const renderedBio = useRender(bios[contentNum.value].bio);
   const isMobile = useMobile();
+
+  // Sort bios alphabetically first, then by sortWeight.
+  const sortedBios = bios.sort().sort((a, b) => a.sortWeight - b.sortWeight);
+
   return (
     <>
       {isMobile ? (
@@ -81,7 +84,7 @@ export const Avatars = (props: IAvatars) => {
           isOpen={show.value}
           current={contentNum.value}
           dividerColor={dividerColor}
-          group={bios}
+          group={sortedBios}
           {...rest}>
           {renderedBio}
         </AvatarsMobile>
@@ -91,7 +94,7 @@ export const Avatars = (props: IAvatars) => {
           isOpen={show.value}
           current={contentNum.value}
           dividerColor={dividerColor}
-          group={bios}
+          group={sortedBios}
           {...rest}>
           {renderedBio}
         </AvatarsDesktop>
