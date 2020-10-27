@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/core';
 import { useConfig, useTheme, useColorValue } from 'site/context';
 import { HeroCards, HomeSection, Logo, SEO } from 'site/components';

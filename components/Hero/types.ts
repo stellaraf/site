@@ -1,11 +1,9 @@
 import type { BoxProps } from '@chakra-ui/core';
 import type { ReactNode } from 'react';
-// import type {PageAttrs} from "site/types"
+import type { Document } from '@contentful/rich-text-types';
 
-// export type HeroProps = Pick<PageAttrs,
-
-export interface HeroProps extends BoxProps {
+export interface IHero extends BoxProps {
   title: string;
   subtitle?: string;
-  body?: ReactNode;
+  body: Document | null;
 }

@@ -1,9 +1,8 @@
-import * as React from 'react';
 import { Box, Flex, Button as ChakraButton, Heading, VStack } from '@chakra-ui/core';
 import { ImPhone as Phone } from '@meronex/icons/im';
 import { getPage, getPageContent, getContent } from 'site/util';
 import { Content, Hero, Options, SEO } from 'site/components';
-import { useRender, useSlug } from 'site/hooks';
+import { useSlug } from 'site/hooks';
 import { useResponsiveStyle } from 'site/styles';
 
 import type { IContactPage, GetStaticProps } from 'site/types';
@@ -13,15 +12,15 @@ const SLUG = 'contact';
 export default function Contact(props: IContactPage) {
   const { pageData, contactCards, pageContent } = props;
   const cards = contactCards.sort((a, b) => a.sortWeight - b.sortWeight);
-  const { title, subtitle, body, customProperties } = pageData;
-  const renderedBody = useRender(body);
+  const { title, subtitle, body = null, customProperties } = pageData;
+
   const rStyles = useResponsiveStyle();
   const content = pageContent[0];
   const slug = useSlug(content.title, [content.title]);
   return (
     <>
       <SEO title={customProperties?.metaTitle ?? title} description={subtitle} />
-      <Hero title={title} subtitle={subtitle} body={renderedBody} minH="40vh">
+      <Hero title={title} subtitle={subtitle} body={body} minH="40vh">
         <Box as="section" py={{ base: 16, lg: 32 }}>
           <Flex height="100%" align="center" direction="column" {...rStyles}>
             <Options cards={cards} />
