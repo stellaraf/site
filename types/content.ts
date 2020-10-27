@@ -131,29 +131,17 @@ export interface IAboutPageAttrs extends PageAttrs {
 }
 
 export interface IAboutPage extends PageProps {
-  bios: BioEntry;
+  bios: Bio[];
   pageData: IAboutPageAttrs;
 }
 
-type Photo = Asset['fields']['file'];
-
-interface BioContent {
+export interface Bio {
   name: string;
   title: string;
   bio: Document;
-  photo: Asset;
+  photo: Asset['fields'];
+  sortWeight: number;
 }
-
-export interface Bio extends Omit<BioContent, 'photo'> {
-  photo: Photo;
-}
-
-interface BioRaw {
-  name: string;
-  bios: Entry<BioContent>[];
-}
-
-export type BioEntry = Entry<BioRaw>;
 
 interface Colors {
   themeName: string;
@@ -187,7 +175,6 @@ export interface GlobalConfigPre {
   siteSlogan: string;
   orgName: string;
   titleOverrides: string[];
-  bioList: Entry<BioContent>;
   theme: Entry<ThemeEntry>;
   twitterHandle?: string;
   facebookProfile?: string;
@@ -213,11 +200,10 @@ export interface ThemeConfig {
 }
 
 export interface GlobalConfig extends Omit<GlobalConfigPre, 'theme'> {
-  bioListId: string;
   theme: ThemeConfig;
 }
 
-export type AnyEntry = Entry<PageAttrs | PageContent | FooterGroupEntry | BioRaw>;
+export type AnyEntry = Entry<PageAttrs | PageContent | FooterGroupEntry>;
 
 export interface IContactCard {
   title: string;
