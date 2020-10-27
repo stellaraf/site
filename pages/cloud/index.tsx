@@ -3,7 +3,7 @@ import { Button, Wrap, useToken } from '@chakra-ui/core';
 import { getPage, getPageContent, getGeoPoints } from 'site/util';
 import { useColorValue } from 'site/context';
 import { ContentSection, Hero, SEO, useDataCenter } from 'site/components';
-import { useRender, useAlert } from 'site/hooks';
+import { useAlert } from 'site/hooks';
 import { useCloudLocations } from 'site/state';
 
 import type { CloudProps, GetStaticProps } from 'site/types';
@@ -20,8 +20,7 @@ export default function Cloud(props: CloudProps) {
   if (geoPoints.length === 0) {
     throw new Error('Unable to get Cloud Location Data');
   }
-  const { title, subtitle, body } = pageData;
-  const renderedBody = useRender(body);
+  const { title, subtitle, body = null } = pageData;
   const showAlert = useAlert();
 
   const mapColor = useColorValue(
@@ -43,7 +42,7 @@ export default function Cloud(props: CloudProps) {
   return (
     <>
       <SEO title={title} description={subtitle} />
-      <Hero title={title} subtitle={subtitle} body={renderedBody}>
+      <Hero title={title} subtitle={subtitle} body={body}>
         <Wrap justify="center" w="100%" mt={8} align="center" spacing={4}>
           <Button variant="heroPrimary" isLoading={isFetching} onClick={execute}>
             Find Your Edge Data Center
