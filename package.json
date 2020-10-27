@@ -9,6 +9,8 @@
     "@contentful/rich-text-react-renderer": "^14.1.1",
     "@hookform/resolvers": "^0.1.1",
     "@hookstate/core": "^3.0.1",
+    "@hookstate/initial": "^3.0.0",
+    "@hookstate/touched": "^3.0.0",
     "@hookstate/untracked": "^3.0.0",
     "@meronex/icons": "^4.0.0",
     "@n8tb1t/use-scroll-position": "^1.0.43",
@@ -41,7 +43,7 @@
     "yup-phone": "^1.2.8"
   },
   "scripts": {
-    "dev": "next",
+    "dev": "NODE_OPTIONS=--max-old-space-size=8192 next dev",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc",

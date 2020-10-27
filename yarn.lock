@@ -1854,6 +1854,16 @@
   resolved "https://registry.yarnpkg.com/@hookstate/core/-/core-3.0.1.tgz#dc46ea71e3bf0ab5c2dc024029c9210ed12fbb84"
   integrity sha512-buRie83l3FYPLCuaBE68puE3XS19r2O+jwC/kH2ikIW7ww8AavndR3MspzMMkNpq2zL8pZtIcpiWJBbn4Uq2Vw==
 
+"@hookstate/initial@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@hookstate/initial/-/initial-3.0.0.tgz#5cec55eb8b57c866da576cf086721619f4d6bb9f"
+  integrity sha512-dApcFrN8ttTmnk3hYArqgHAmfCbf/RU7C4d2eLWwyGo8kUr6zTrJXv45mguihLz0B9OUegp72EOP5iPVQx66mQ==
+
+"@hookstate/touched@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@hookstate/touched/-/touched-3.0.0.tgz#caae14430b74e79a5929985c4c25c237804e81fa"
+  integrity sha512-5/lN5wB4EEd80goUD953HE6t4Uy2ohrVZ30nkpQ5m2mTjCYJEKai9nUxMw23L4eFi6ZgB0w0UytAh3IUKOZ+1g==
+
 "@hookstate/untracked@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@hookstate/untracked/-/untracked-3.0.0.tgz#fcf5005f89a68956c994ffb4b04cc3bd25d7cbf6"
