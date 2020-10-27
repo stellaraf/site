@@ -7,7 +7,6 @@ import type {
   PageAttrs,
   PageProps,
   Bio,
-  BioEntry,
   FooterItem,
   IContactCard,
   IFormPlaceholders,
@@ -52,9 +51,6 @@ export interface CloudProps extends PageProps {
 /**
  * About Page Types
  */
-export interface AboutProps extends PageProps {
-  bios: BioEntry;
-}
 
 export interface ISection extends BoxProps {
   title: string;
@@ -87,6 +83,24 @@ export interface IContactPage extends Omit<PageProps, 'pageData'> {
 export interface ILegalPage extends PageProps {}
 
 export interface IVendorPage {
+  pageData: {
+    name: string;
+    logo: Asset['fields'];
+    logoColorLightMode: string;
+    logoColorDarkMode: string;
+    title: string;
+    subtitle: string;
+    body?: Document;
+    trialForm?: IFormModelTrial;
+    partnerLogo?: Asset['fields'];
+  };
+}
+
+/**
+ * Cloud Product Pages
+ */
+
+export interface IPartnerPage {
   pageData: {
     name: string;
     logo: Asset['fields'];

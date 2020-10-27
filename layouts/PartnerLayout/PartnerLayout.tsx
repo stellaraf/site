@@ -18,13 +18,13 @@ import { useGradient, useMobile, useRender, useTitle } from 'site/hooks';
 import { useResponsiveStyle } from 'site/styles';
 import { Form } from './Form';
 
-import type { ILayoutVendor, IVendorContext, IFormModelTrial, TFormRef } from './types';
+import type { IPartnerLayout, IPartnerContext, IFormModelTrial, TFormRef } from './types';
 
-const VendorContext = createContext<IVendorContext>(Object());
-export const useVendor = () => useContext(VendorContext);
+const PartnerContext = createContext<IPartnerContext>(Object());
+export const usePartnerCtx = () => useContext(PartnerContext);
 
 const TextContent = () => {
-  const { title, subtitle, body } = useVendor();
+  const { title, subtitle, body } = usePartnerCtx();
   const renderedBody = useRender(body);
   const titleMe = useTitle();
   return (
@@ -61,8 +61,8 @@ const TextContent = () => {
   );
 };
 
-const VendorLogo = () => {
-  const { name, logo, logoColorDarkMode, logoColorLightMode } = useVendor();
+const PartnerLogo = () => {
+  const { name, logo, logoColorDarkMode, logoColorLightMode } = usePartnerCtx();
   const color = useColorValue(logoColorLightMode, logoColorDarkMode);
   const isMobile = useMobile();
   return (
@@ -90,7 +90,7 @@ const VendorLogo = () => {
 const FormCard = () => {
   const formRef = useRef<TFormRef>(Object());
   const handleFormSubmit = () => formRef.current.submit();
-  const { vendorForm } = useVendor();
+  const { trialForm } = usePartnerCtx();
   return (
     <Card minHeight="lg" height="min-content" w={{ base: '20rem', md: '80%', lg: '100%' }}>
       <CardBody>
@@ -102,7 +102,7 @@ const FormCard = () => {
             variant="outline"
             colorScheme="primary"
             onClick={handleFormSubmit}>
-            {vendorForm.buttonSubmit.value}
+            {trialForm.buttonSubmit.value}
           </Button>
         </Center>
       </CardBody>
@@ -118,7 +118,7 @@ const MVendorLayout = () => {
       <VStack spacing={8}>
         <TextContent />
         <FormCard />
-        <VendorLogo />
+        <PartnerLogo />
       </VStack>
     </Box>
   );
@@ -136,7 +136,7 @@ const DVendorLayout = () => {
         gridTemplateAreas={`"content form"`}>
         <VStack alignItems="flex-start" gridArea="content">
           <TextContent />
-          <VendorLogo />
+          <PartnerLogo />
         </VStack>
         <VStack alignItems="flex-end" gridArea="form" maxHeight="80%">
           <FormCard />
@@ -146,13 +146,13 @@ const DVendorLayout = () => {
   );
 };
 
-export const VendorLayout = (props: ILayoutVendor) => {
+export const PartnerLayout = (props: IPartnerLayout) => {
   const { trialForm, ...rest } = props;
   const formState = createState<IFormModelTrial>(props.trialForm ?? Object());
   const largeLayout = useBreakpointValue({ base: false, md: false, lg: false, xl: true });
   return (
-    <VendorContext.Provider value={{ vendorForm: formState, ...rest }}>
+    <PartnerContext.Provider value={{ trialForm: formState, ...rest }}>
       {largeLayout ? <DVendorLayout /> : <MVendorLayout />}
-    </VendorContext.Provider>
+    </PartnerContext.Provider>
   );
 };

@@ -6,17 +6,17 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
 import { FieldGroup, TextInput } from 'site/components';
 import { requiredMsg, invalidMsg } from 'site/util';
-import { useVendor } from './VendorLayout';
+import { usePartnerCtx } from './PartnerLayout';
 import { submitForm } from './submitForm';
 
 import type { IForm, IFormHandlers, IFormDataTrial } from './types';
 
 export const Form = forwardRef<IFormHandlers, IForm>((_, ref) => {
-  const { name, vendorForm } = useVendor();
+  const { name, trialForm } = usePartnerCtx();
 
-  const vendorFormState = useState(vendorForm);
+  const trialFormState = useState(trialForm);
 
-  const { firstName, lastName, emailAddress, phoneNumber, companyName } = vendorFormState.get();
+  const { firstName, lastName, emailAddress, phoneNumber, companyName } = trialFormState.get();
 
   const formSchema = yup.object().shape({
     firstName: yup.string().label(firstName.displayName).required(requiredMsg),
