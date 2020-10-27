@@ -78,7 +78,7 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
     <>
       <Box
         ref={ref}
-        as="section"
+        as="article"
         my={{ base: 4, lg: 16, xl: 32 }}
         px={{ base: 4, lg: 16, xl: 64 }}
         overflow="hidden"
