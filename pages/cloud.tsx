@@ -1,47 +1,60 @@
-import * as React from 'react';
 import dynamic from 'next/dynamic';
-import { Wrap } from '@chakra-ui/core';
+import { Button, Wrap, useToken } from '@chakra-ui/core';
 import { getPage, getPageContent, getGeoPoints } from 'site/util';
-import { useColorValue, useTheme } from 'site/context';
-import { Button, ContentSection, Hero, SEO } from 'site/components';
-import { useRender } from 'site/hooks';
+import { useColorValue } from 'site/context';
+import { ContentSection, Hero, SEO, useDataCenter } from 'site/components';
+import { useRender, useAlert } from 'site/hooks';
+import { useCloudLocations } from 'site/state';
 
 import type { CloudProps, GetStaticProps } from 'site/types';
-import type { MapProps } from 'site/components';
 
-const USMap = dynamic<MapProps>(() => import('site/components').then(i => i.USMap));
+import type { IUSMap } from 'site/components';
+
+const USMap = dynamic<IUSMap>(() => import('site/components').then(i => i.USMap));
 
 const SLUG = 'cloud';
 
 export default function Cloud(props: CloudProps) {
   const { geoData, geoPoints, pageData, pageContent } = props;
+
+  if (geoPoints.length === 0) {
+    throw new Error('Unable to get Cloud Location Data');
+  }
   const { title, subtitle, body } = pageData;
   const renderedBody = useRender(body);
+  const showAlert = useAlert();
 
-  const { colors } = useTheme();
-  const mapColor = useColorValue(colors.blackAlpha[200], colors.whiteAlpha[200]);
-  const markerColor = useColorValue(colors.primary[400], colors.tertiary[400]);
-
+  const mapColor = useColorValue(
+    useToken('colors', 'blackAlpha.200'),
+    useToken('colors', 'whiteAlpha.200'),
+  );
+  const markerColor = useColorValue(
+    useToken('colors', 'primary.400'),
+    useToken('colors', 'original.tertiary'),
+  );
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 
+  // Initialize test result state
+  useCloudLocations(geoPoints);
+  const { execute, isError, error, isFetching } = useDataCenter(geoPoints);
+
+  // This will render twice in development due to react strict mode.
+  isError && showAlert({ status: 'error', message: `${error}` });
   return (
     <>
       <SEO title={title} description={subtitle} />
       <Hero title={title} subtitle={subtitle} body={renderedBody}>
         <Wrap justify="center" w="100%" mt={8} align="center" spacing={4}>
-          <Button href="#" variant="heroPrimary">
+          <Button variant="heroPrimary" isLoading={isFetching} onClick={execute}>
             Find Your Edge Data Center
-          </Button>
-          <Button href="#" variant="heroSecondary">
-            Learn More
           </Button>
         </Wrap>
         <USMap
-          maxW={{ base: '100%', lg: '75%' }}
           geoData={geoData}
-          locations={geoPoints}
           mapColor={mapColor}
+          locations={geoPoints}
           markerColor={markerColor}
+          maxW={{ base: '100%', lg: '75%' }}
         />
       </Hero>
       {sections.map((sect, i) => {

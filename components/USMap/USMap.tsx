@@ -1,12 +1,12 @@
-import * as React from 'react';
 import { Box } from '@chakra-ui/core';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
+import { AnimateSharedLayout } from 'framer-motion';
 import { Location } from './Location';
 
-import type { MapProps } from './types';
+import type { IUSMap } from './types';
 
-export const USMap = (props: MapProps) => {
-  const { geoData, locations, mapColor, markerColor, ...rest } = props;
+export const USMap = (props: IUSMap) => {
+  const { geoData, mapColor, markerColor, locations, ...rest } = props;
   return (
     <Box mx="auto" {...rest}>
       <ComposableMap projection="geoAlbersUsa" style={{ zIndex: 1, position: 'relative' }}>
@@ -25,11 +25,16 @@ export const USMap = (props: MapProps) => {
                   }}
                 />
               ))}
-              {locations &&
-                locations.map(
-                  loc =>
-                    loc.active && <Location key={loc.displayName} loc={loc} color={markerColor} />,
-                )}
+              {locations && (
+                <AnimateSharedLayout>
+                  {locations.map(
+                    loc =>
+                      loc.active && (
+                        <Location key={loc.displayName} loc={loc} color={markerColor} />
+                      ),
+                  )}
+                </AnimateSharedLayout>
+              )}
             </>
           )}
         </Geographies>

@@ -18,6 +18,7 @@ import type {
   FooterGroup,
   FooterGroupEntry,
   IActions,
+  IMeasuredGeoPoint,
 } from 'site/types';
 
 const debug = (obj: any) => {
@@ -59,11 +60,15 @@ export const getEntry = async (entryId: string, query: Object = Object()): Promi
   }
 };
 
-export const getGeoPoints = async (): Promise<GeoPoint[]> => {
-  let geoPoints = [];
+export const getGeoPoints = async (): Promise<IMeasuredGeoPoint[]> => {
+  let geoPoints = [] as IMeasuredGeoPoint[];
   const data = await contentQuery('orionLocation');
   if (data.total !== 0) {
-    geoPoints = data.items.map(p => p.fields);
+    /**
+     * Add default values for cloud locations - this ensures type safety but also signals to
+     * components if the location has been checked.
+     */
+    geoPoints = data.items.map(p => ({ ...p.fields, elapsed: 65535, best: false }));
   }
   return geoPoints;
 };

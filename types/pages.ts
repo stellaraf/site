@@ -4,7 +4,6 @@ import type { BoxProps } from '@chakra-ui/core';
 import type {
   HomepageContent,
   GlobalConfig,
-  GeoPoint,
   PageAttrs,
   PageProps,
   Bio,
@@ -14,6 +13,7 @@ import type {
   IFormPlaceholders,
   IFormModelTrial,
   IActions,
+  IMeasuredGeoPoint,
 } from 'site/types';
 
 import type { Asset } from 'contentful';
@@ -46,7 +46,7 @@ export interface HomeStaticProps {
  */
 export interface CloudProps extends PageProps {
   geoData: object;
-  geoPoints: GeoPoint[];
+  geoPoints: IMeasuredGeoPoint[];
 }
 
 /**
