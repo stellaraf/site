@@ -113,6 +113,12 @@ export interface GeoPoint {
   displayName: string;
   id: string;
   description: string;
+  testUrl: string;
+}
+
+export interface IMeasuredGeoPoint extends GeoPoint {
+  elapsed: number;
+  best: boolean;
 }
 
 export interface PageProps {

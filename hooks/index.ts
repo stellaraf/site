@@ -1,7 +1,9 @@
 export * from './useActiveSection';
+export * from './useAlert';
 export * from './useApple';
 export * from './useBool';
 export * from './useBreakpointString';
+export * from './useConnectionTest';
 export * from './useDate';
 export * from './useGoogleAnalytics';
 export * from './useGradient';
@@ -16,3 +18,4 @@ export * from './useRender';
 export * from './useSlider';
 export * from './useSlug';
 export * from './useTitle';
+export * from './useWebsocket';
