@@ -36,6 +36,14 @@ export interface FooterItem extends FooterLink {
   footerGroup: FooterGroupEntry;
 }
 
+export interface IGetStartedEntry {
+  title: string;
+  subtitle?: string;
+  body?: Document;
+  buttonText?: string;
+  buttonLink?: string;
+}
+
 export interface PageAttrs {
   id: string;
   slug: string;
@@ -45,6 +53,7 @@ export interface PageAttrs {
   footerGroup?: ContentRef;
   footerTitle?: string;
   customProperties?: object;
+  getStarted?: Entry<IGetStartedEntry>;
 }
 
 export interface PageParsed extends Omit<PageAttrs, 'footerGroup'> {

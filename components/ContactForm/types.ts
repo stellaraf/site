@@ -1,9 +1,10 @@
 import type { ComponentType, MutableRefObject } from 'react';
+import type { ParsedUrlQuery } from 'querystring';
 import type { State } from '@hookstate/core';
 import type { BoxProps, FlexProps, StackProps } from '@chakra-ui/core';
 import type { IconType } from '@meronex/icons';
 import type { IContactCard, CustomColors, FormModels } from 'site/types';
-import type { FormHandlers } from './Forms/types';
+import type { FormHandlers, TFormTypes } from './Forms/types';
 
 type ContactOption = IContactCard & FlexProps;
 
@@ -49,3 +50,9 @@ export interface IOptions extends StackProps {
 export interface IOptionsResponsive extends StackProps {
   cards: IContactCard[];
 }
+
+export type TSupportedFormQuery = {
+  form: TFormTypes;
+};
+
+export type TContactQuery = TSupportedFormQuery | ParsedUrlQuery;

@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { Center, Stack, Button as ChakraButton } from '@chakra-ui/core';
@@ -16,7 +15,12 @@ import type { StackProps, FlexProps } from '@chakra-ui/core';
 import type { IconType } from '@meronex/icons';
 import type { Variants } from 'framer-motion';
 import type { Animated } from 'site/types';
-import type { IOptionsResponsive, IMotionItems } from '../types';
+import type {
+  IOptionsResponsive,
+  IMotionItems,
+  TSupportedFormQuery,
+  TContactQuery,
+} from '../types';
 import type { FormHandlers } from '../Forms/types';
 
 // Use Next.js async importing for performance.
@@ -33,11 +37,24 @@ const AnimatedCenter = (props: Animated<FlexProps>) => <Center as={motion.div} {
 
 const iconMap = { Support, Sales, Docs };
 
+/**
+ * Type guard to determine if the URL query references a valid form.
+ */
+function queryIsForm(query: TContactQuery): query is TSupportedFormQuery {
+  let result = false;
+  if ('form' in query) {
+    if (query.form === 'support' || query.form === 'sales') {
+      result = true;
+    }
+  }
+  return result;
+}
+
 export const OptionsDesktop = (props: IOptionsResponsive) => {
   const { cards, ...rest } = props;
   const ctx = useFormState();
   const titleMe = useTitle();
-  const { pathname } = useRouter();
+  const { pathname, query } = useRouter();
   const { trackModal } = useGoogleAnalytics();
 
   // Static desktop sizes for cards layout
@@ -78,6 +95,20 @@ export const OptionsDesktop = (props: IOptionsResponsive) => {
       };
     },
   };
+
+  /**
+   * If valid query parameters are passed in the URL, e.g. /contact?form=sales or
+   * /contact?form=support, automatically load the corresponding form.
+   */
+  useEffect(() => {
+    if (queryIsForm(query)) {
+      const selectedIndex = cards.map(c => c.title.toLowerCase()).indexOf(query.form);
+      const selectedName = cards[selectedIndex].title as TSupportedFormQuery['form'];
+      ctx.selectedName.value !== selectedName && ctx.merge({ selectedName, selectedIndex });
+      toggleLayout(1);
+      trackModal(`${pathname}/form-${selectedName.toLowerCase()}`);
+    }
+  }, [query]);
 
   return (
     <Container

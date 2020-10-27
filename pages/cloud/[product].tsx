@@ -1,5 +1,5 @@
 import { getPage, getPageContent } from 'site/util';
-import { ContentSection, Hero, SEO } from 'site/components';
+import { ContentSection, Hero, SEO, GetStarted } from 'site/components';
 
 import type { PageProps, GetStaticProps, GetStaticPaths } from 'site/types';
 import type { GetStaticPropsContext } from 'next';
@@ -12,7 +12,7 @@ export default function CloudPage(props: PageProps) {
   const { pageData, pageContent } = props;
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 
-  const { title, subtitle, body = null } = pageData;
+  const { title, subtitle, body = null, getStarted } = pageData;
 
   return (
     <>
@@ -21,6 +21,7 @@ export default function CloudPage(props: PageProps) {
       {sections.map((sect, i) => {
         return <ContentSection items={sect} key={i} index={i} />;
       })}
+      {getStarted && <GetStarted {...getStarted.fields} />}
     </>
   );
 }
