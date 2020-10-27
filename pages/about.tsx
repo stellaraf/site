@@ -1,6 +1,6 @@
 import { Box, Flex, Heading } from '@chakra-ui/core';
 import { getPage, getPageContent, getContent } from 'site/util';
-import { Avatars, Hero, GoogleMap, SEO } from 'site/components';
+import { Avatars, Hero, GoogleMap, SEO, GetStarted } from 'site/components';
 import { useRef, useTitle } from 'site/hooks';
 import { useResponsiveStyle } from 'site/styles';
 
@@ -26,7 +26,7 @@ const Section = (props: ISection) => {
 
 export default function About(props: IAboutPage) {
   const { pageData, bios } = props;
-  const { title, subtitle, body = null, customProperties } = pageData;
+  const { title, subtitle, body = null, customProperties, getStarted } = pageData;
   const { employeesTitle = '', mapTitle = '' } = customProperties;
   const headerRef = useRef<HTMLDivElement>();
   const titleMe = useTitle();
@@ -41,6 +41,7 @@ export default function About(props: IAboutPage) {
       <Section title={titleMe(mapTitle)}>
         <GoogleMap />
       </Section>
+      {getStarted && <GetStarted {...getStarted.fields} />}
     </>
   );
 }

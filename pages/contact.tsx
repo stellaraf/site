@@ -1,7 +1,7 @@
 import { Box, Flex, Button as ChakraButton, Heading, VStack } from '@chakra-ui/core';
 import { ImPhone as Phone } from '@meronex/icons/im';
 import { getPage, getPageContent, getContent } from 'site/util';
-import { Content, Hero, Options, SEO } from 'site/components';
+import { Content, Hero, Options, SEO, GetStarted } from 'site/components';
 import { useSlug } from 'site/hooks';
 import { useResponsiveStyle } from 'site/styles';
 
@@ -12,7 +12,7 @@ const SLUG = 'contact';
 export default function Contact(props: IContactPage) {
   const { pageData, contactCards, pageContent } = props;
   const cards = contactCards.sort((a, b) => a.sortWeight - b.sortWeight);
-  const { title, subtitle, body = null, customProperties } = pageData;
+  const { title, subtitle, body = null, customProperties, getStarted } = pageData;
 
   const rStyles = useResponsiveStyle();
   const content = pageContent[0];
@@ -49,6 +49,7 @@ export default function Contact(props: IContactPage) {
           </VStack>
         </Flex>
       </Box>
+      {getStarted && <GetStarted {...getStarted.fields} />}
     </>
   );
 }
