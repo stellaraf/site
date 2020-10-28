@@ -1,8 +1,9 @@
 import { Box, useToken } from '@chakra-ui/core';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import { useInterpolatedColors } from './useInterpolatedColors';
 
-import type { IRipple, IRipplePattern } from './types';
+import type { IRipple } from './types';
 
 const paths = [
   'M312.353 156.242c19.444 172.827 97.195 281.181 233.245 325.063 204.079 65.822 614.175 92.15 861.678 234.937 247.496 142.783 687.059 32.401 631.647-212.66C1983.512 258.52 1920.412-119.2 1103.201-119.2c-544.813 0-808.423 91.812-790.845 275.442h-.003z',
@@ -19,39 +20,46 @@ const paths = [
   'M696.478 44.528c-29.897 70.982-21.714 115.485 24.545 133.508 69.39 27.034 232.052 37.848 302.407 96.492 70.353 58.643 275.083 13.308 306.04-87.343C1360.428 86.535 1417.306-68.6 1081.666-68.6c-223.763 0-352.156 37.708-385.187 113.128h-.001z',
 ];
 
-const RipplePattern = (props: IRipplePattern) => {
-  const { start, stop } = props;
-  const getColor = useInterpolatedColors(start, stop);
-  const stopColor = useToken('colors', stop);
-  return (
-    <Box as={motion.svg} width={1200} height={580} viewBox="0 0 1200 580">
-      <motion.path
-        layoutId="ripplePath"
-        d="M734.567 34.372c-28.692 61.724-23.266 100.422 16.275 116.094 59.313 23.508 200.347 32.911 259.299 83.906 58.95 50.994 238.697 11.572 269.438-75.95C1310.32 70.9 1365.669-64 1073.808-64c-194.576 0-307.654 32.79-339.24 98.372h-.001z"
-        fill={stopColor}
-      />
-      {paths.map((path, idx) => {
-        const colorPercentage = (1 / paths.length) * idx;
-        return (
-          <motion.path
-            d={path}
-            fill={getColor(colorPercentage)}
-            transition={{ delay: 0.05 * (idx + 0.05) }}
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            style={{ position: 'relative', zIndex: idx }}
-          />
-        );
-      })}
-    </Box>
-  );
-};
+const reversePaths = paths.slice(0).reverse();
 
 export const Ripple = (props: IRipple) => {
   const { start = 'original.secondary', stop = 'original.primary', ...rest } = props;
+
+  const getColor = useInterpolatedColors(start, stop);
+  const stopColor = useToken('colors', stop);
+  const [ref, inView] = useInView();
   return (
-    <Box pos="absolute" boxSize="auto" top={0} right={0} {...rest}>
-      <RipplePattern start={start} stop={stop} />
+    <Box pos="absolute" boxSize="auto" top={0} right={0} ref={ref} {...rest}>
+      <AnimatePresence>
+        {inView && (
+          <Box as={motion.svg} width={1200} height={580} viewBox="0 0 1200 580">
+            <motion.path
+              d="M734.567 34.372c-28.692 61.724-23.266 100.422 16.275 116.094 59.313 23.508 200.347 32.911 259.299 83.906 58.95 50.994 238.697 11.572 269.438-75.95C1310.32 70.9 1365.669-64 1073.808-64c-194.576 0-307.654 32.79-339.24 98.372h-.001z"
+              fill={stopColor}
+              transition={{ delay: 0.05 }}
+              initial={{ opacity: 0, x: '100%' }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: '100%' }}
+            />
+            {paths.map((path, colorIdx) => {
+              const animationIdx = reversePaths.indexOf(path);
+              const colorPercentage = (1 / paths.length) * colorIdx;
+              return (
+                <motion.path
+                  key={`ripple${animationIdx}`}
+                  d={path}
+                  fill={getColor(colorPercentage)}
+                  transition={{ delay: 0.05 * (animationIdx + 0.05) }}
+                  initial={{ opacity: 0, x: '100%' }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: '100%' }}
+                  style={{ position: 'relative', zIndex: animationIdx }}
+                />
+              );
+            })}
+          </Box>
+        )}
+      </AnimatePresence>
     </Box>
   );
 };
