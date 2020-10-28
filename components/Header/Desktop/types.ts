@@ -1,6 +1,6 @@
 import type { SystemProps, SystemStyleObject } from '@chakra-ui/core';
 
-import type { LinkProps } from 'site/components';
+import type { ILink } from 'site/components';
 
 export interface HeaderLogoProps {
   color?: string;
@@ -13,11 +13,11 @@ type NavLinkStyleAttrs = {
 
 export type NavLinkStyles = NavLinkStyleAttrs & SystemStyleObject;
 
-export interface INavLink extends LinkProps {
+export interface INavLink extends ILink {
   isActive?: boolean;
 }
 
-export interface ILinkGroup extends LinkProps {
+export interface ILinkGroup extends ILink {
   side: 'left' | 'right';
 }
 

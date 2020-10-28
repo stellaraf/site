@@ -50,6 +50,7 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
     updatedAt,
     image,
   } = usePageContent(items, [items.title]);
+
   const isMobile = useMobile();
   const rStyles = useResponsiveStyle();
   const showBorder = useColorValue(false, true);

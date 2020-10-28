@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Box, Code as ChakraCode, Text } from '@chakra-ui/core';
 import { useColorValue } from 'site/context';
 

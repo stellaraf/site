@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useMemo } from 'react';
 import { Box, Divider } from '@chakra-ui/core';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
