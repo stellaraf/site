@@ -1,14 +1,11 @@
-import { createContext, useContext, useRef } from 'react';
+import { createContext, useContext } from 'react';
 import { createState } from '@hookstate/core';
 import {
   Box,
-  Button,
-  Center,
   Flex,
   VStack,
   Grid,
   Heading,
-  Text,
   VisuallyHidden,
   useBreakpointValue,
 } from '@chakra-ui/core';
@@ -18,7 +15,7 @@ import { useGradient, useMobile, useRender, useTitle } from 'site/hooks';
 import { useResponsiveStyle } from 'site/styles';
 import { Form } from './Form';
 
-import type { IPartnerLayout, IPartnerContext, IFormModelTrial, TFormRef } from './types';
+import type { IPartnerLayout, IPartnerContext, IFormModelTrial } from './types';
 
 const PartnerContext = createContext<IPartnerContext>(Object());
 export const usePartnerCtx = () => useContext(PartnerContext);
@@ -88,23 +85,10 @@ const PartnerLogo = () => {
 };
 
 const FormCard = () => {
-  const formRef = useRef<TFormRef>(Object());
-  const handleFormSubmit = () => formRef.current.submit();
-  const { trialForm } = usePartnerCtx();
   return (
     <Card minHeight="lg" height="min-content" w={{ base: '20rem', md: '80%', lg: '100%' }}>
       <CardBody>
-        <Form ref={formRef} />
-        <Center px={2} mt={4} w="100%">
-          <Button
-            w="100%"
-            type="submit"
-            variant="outline"
-            colorScheme="primary"
-            onClick={handleFormSubmit}>
-            {trialForm.buttonSubmit.value}
-          </Button>
-        </Center>
+        <Form />
       </CardBody>
     </Card>
   );

@@ -202,6 +202,7 @@ export interface GlobalConfigPre {
   callToActionTitle: string;
   callsToActionShown: 1 | 2 | 3 | 4 | 5 | 6;
   homePageVideo?: string;
+  errorMessage: Document;
 }
 
 export interface ThemeConfig {
