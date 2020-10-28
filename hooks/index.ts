@@ -19,3 +19,4 @@ export * from './useSlider';
 export * from './useSlug';
 export * from './useTitle';
 export * from './useWebsocket';
+export * from './useGlow';
