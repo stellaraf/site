@@ -16,16 +16,16 @@ export const Screen = (props: IScreen) => {
   };
   return (
     <Box
-      w="75%"
-      minHeight="2xl"
+      width={{ base: '100%', lg: '75%' }}
+      minHeight={{ base: 48, lg: '2xl' }}
       zIndex={1}
       pos="relative"
       bg={borderColor}
       cursor="pointer"
       overflow="hidden"
       borderStyle="solid"
-      borderRadius="2rem"
-      borderWidth="0.8rem"
+      borderRadius={{ base: '1rem', lg: '2rem' }}
+      borderWidth={{ base: '0.2rem', lg: '0.8rem' }}
       borderColor={borderColor}
       boxShadow="xl"
       {...rest}>
