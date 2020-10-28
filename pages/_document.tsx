@@ -32,7 +32,7 @@ export default class Document extends NextDocument {
           />
         </Head>
         <body>
-          <ColorModeScript initialColorMode="dark" />
+          <ColorModeScript initialColorMode="system" />
           <Main />
           <NextScript />
         </body>
