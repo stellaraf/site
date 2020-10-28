@@ -27,6 +27,7 @@ export type TUseTheme = () => CustomTheme;
 export interface IUIProvider {
   theme: ThemeConfig;
   children?: ReactNode;
+  cookies?: string;
 }
 
 export interface ISyncedStyleProvider {

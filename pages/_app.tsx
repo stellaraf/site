@@ -14,16 +14,7 @@ const Site = (props: SiteProps) => {
   const { Component, pageProps, appProps, router } = props;
   const { globalConfig, footerGroups, actions } = appProps;
 
-  const konami = useKonamiState();
   const { initializeAnalytics, trackPage } = useGoogleAnalytics();
-
-  useMouseTrap(
-    'up up down down left right left right b a',
-    () => {
-      konami.set(p => !p);
-    },
-    'keyup',
-  );
 
   if (typeof process.env.NEXT_PUBLIC_GANALYTICS === 'string') {
     initializeAnalytics(process.env.NEXT_PUBLIC_GANALYTICS);
@@ -32,10 +23,14 @@ const Site = (props: SiteProps) => {
     router.events.on('routeChangeComplete', trackPage);
   }, []);
 
-  // if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  //   const whyDidYouRender = require('@welldone-software/why-did-you-render');
-  //   whyDidYouRender(React, { trackAllPureComponents: true });
-  // }
+  const konami = useKonamiState();
+  useMouseTrap(
+    'up up down down left right left right b a',
+    () => {
+      konami.set(p => !p);
+    },
+    'keyup',
+  );
 
   return (
     <>
@@ -64,3 +59,5 @@ Site.getInitialProps = async () => {
 };
 
 export default Site;
+
+export { getServerSideProps } from 'site/context';
