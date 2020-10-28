@@ -4,9 +4,9 @@ import { all } from 'site/util';
 export async function submitForm(vendor: string, data: IFormDataTrial): Promise<TFormResponse> {
   let response = { success: false, message: 'Something went wrong.' };
 
-  const envUrl = process.env.NEXT_PUBLIC_FORM_TRIAL_URL ?? '';
-  const envHeader = process.env.NEXT_PUBLIC_FORM_TRIAL_HEADER ?? '';
-  const envKey = process.env.NEXT_PUBLIC_FORM_TRIAL_KEY ?? '';
+  const envUrl = process.env.NEXT_PUBLIC_FORM_SALES_URL ?? '';
+  const envHeader = process.env.NEXT_PUBLIC_FORM_SALES_HEADER ?? '';
+  const envKey = process.env.NEXT_PUBLIC_FORM_SALES_KEY ?? '';
 
   if (all(envUrl, envHeader, envKey)) {
     try {

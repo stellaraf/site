@@ -1,17 +1,17 @@
-import { forwardRef, useImperativeHandle } from 'react';
 import { useState } from '@hookstate/core';
-import { Flex } from '@chakra-ui/core';
+import { Button, Center, Flex } from '@chakra-ui/core';
 import { FormProvider, useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
+import * as yup from 'yup';
 import { FieldGroup, TextInput } from 'site/components';
+import { useAlert } from 'site/hooks';
 import { requiredMsg, invalidMsg } from 'site/util';
 import { usePartnerCtx } from './PartnerLayout';
 import { submitForm } from './submitForm';
 
-import type { IForm, IFormHandlers, IFormDataTrial } from './types';
+import type { IFormDataTrial } from './types';
 
-export const Form = forwardRef<IFormHandlers, IForm>((_, ref) => {
+export const Form = () => {
   const { name, trialForm } = usePartnerCtx();
 
   const trialFormState = useState(trialForm);
@@ -30,64 +30,77 @@ export const Form = forwardRef<IFormHandlers, IForm>((_, ref) => {
     phoneNumber: yup.string().label(phoneNumber.displayName).typeError(invalidMsg),
     companyName: yup.string().label(companyName.displayName).required(requiredMsg),
   });
+  const showAlert = useAlert();
 
   const form = useForm<IFormDataTrial>({ resolver: yupResolver(formSchema) });
-  const { handleSubmit, control } = form;
+  const { handleSubmit, control, formState } = form;
 
   const submit = async (data: IFormDataTrial) => {
-    await submitForm(name, data);
+    const response = await submitForm(name, { ...data, interests: [`${name} Trial`], details: '' });
+
+    if (!response.success) {
+      showAlert({ message: response.message, status: 'error' });
+    } else if (response.success) {
+      showAlert({ message: trialForm.successMessage.value, status: 'success' });
+    }
   };
 
   const submitter = handleSubmit(submit);
 
-  useImperativeHandle(ref, () => ({
-    submit() {
-      submitter();
-    },
-  }));
-
   return (
-    <Flex as="form" onSubmit={submitter} flexDir="column" w="100%">
-      <FormProvider {...form}>
-        <FieldGroup>
-          <TextInput
-            ctl={control}
-            id={firstName.id}
-            placeholder={firstName.displayName}
-            required={firstName.required}
-          />
-          <TextInput
-            ctl={control}
-            id={lastName.id}
-            placeholder={lastName.displayName}
-            required={lastName.required}
-          />
-        </FieldGroup>
-        <FieldGroup>
-          <TextInput
-            ctl={control}
-            id={companyName.id}
-            placeholder={companyName.displayName}
-            required={companyName.required}
-          />
-        </FieldGroup>
-        <FieldGroup>
-          <TextInput
-            ctl={control}
-            id={emailAddress.id}
-            placeholder={emailAddress.displayName}
-            required={emailAddress.required}
-          />
-        </FieldGroup>
-        <FieldGroup>
-          <TextInput
-            ctl={control}
-            id={phoneNumber.id}
-            placeholder={phoneNumber.displayName}
-            required={phoneNumber.required}
-          />
-        </FieldGroup>
-      </FormProvider>
-    </Flex>
+    <>
+      <Flex as="form" onSubmit={submitter} flexDir="column" w="100%">
+        <FormProvider {...form}>
+          <FieldGroup>
+            <TextInput
+              ctl={control}
+              id={firstName.id}
+              placeholder={firstName.displayName}
+              required={firstName.required}
+            />
+            <TextInput
+              ctl={control}
+              id={lastName.id}
+              placeholder={lastName.displayName}
+              required={lastName.required}
+            />
+          </FieldGroup>
+          <FieldGroup>
+            <TextInput
+              ctl={control}
+              id={companyName.id}
+              placeholder={companyName.displayName}
+              required={companyName.required}
+            />
+          </FieldGroup>
+          <FieldGroup>
+            <TextInput
+              ctl={control}
+              id={emailAddress.id}
+              placeholder={emailAddress.displayName}
+              required={emailAddress.required}
+            />
+          </FieldGroup>
+          <FieldGroup>
+            <TextInput
+              ctl={control}
+              id={phoneNumber.id}
+              placeholder={phoneNumber.displayName}
+              required={phoneNumber.required}
+            />
+          </FieldGroup>
+          <Center px={2} mt={4} w="100%">
+            <Button
+              isLoading={formState.isSubmitting}
+              w="100%"
+              type="submit"
+              variant="outline"
+              colorScheme="primary">
+              {trialForm.buttonSubmit.value}
+            </Button>
+          </Center>
+        </FormProvider>
+      </Flex>
+    </>
   );
-});
+};

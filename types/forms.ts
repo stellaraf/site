@@ -66,4 +66,6 @@ export interface IFormDataTrial {
   emailAddress: string;
   phoneNumber?: string;
   companyName: string;
+  interests: string[];
+  details: string;
 }
