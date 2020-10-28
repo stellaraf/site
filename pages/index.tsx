@@ -1,6 +1,6 @@
 import { Box, Flex, Heading } from '@chakra-ui/core';
 import { useConfig, useTheme, useColorValue } from 'site/context';
-import { HeroCards, HomeSection, Logo, SEO } from 'site/components';
+import { HeroCards, HomeSection, Logo, SEO, Screen } from 'site/components';
 import { useGradient, useNavLogo, useRef } from 'site/hooks';
 import { getHomePage } from 'site/util';
 import { useResponsiveStyle } from 'site/styles';
@@ -10,7 +10,7 @@ import type { HomeProps, HomeStaticProps, GetStaticProps } from 'site/types';
 export default function Home(props: HomeProps) {
   const { pageContent } = props;
 
-  const { siteSlogan, orgName } = useConfig();
+  const { siteSlogan, orgName, homePageVideo } = useConfig();
   const { colors } = useTheme();
   const logo = useColorValue(colors.original.primary, 'white');
   const heroText = useColorValue('original.primary', 'white');
@@ -41,11 +41,14 @@ export default function Home(props: HomeProps) {
             </Heading>
           </Flex>
         </Flex>
-        <Flex pos="relative" mt={32} h="160px">
+        <Flex justifyContent="center" w="100%">
+          {homePageVideo && <Screen url={homePageVideo} />}
+        </Flex>
+        {/* <Flex pos="relative" mt={32} h="160px">
           <Flex justifyContent="center" pos="absolute" w="100%" h="sm">
             <HeroCards content={pageContent.heroCards} />
           </Flex>
-        </Flex>
+        </Flex> */}
       </Box>
       {sections.map((sect, i) => {
         return <HomeSection section={sect} index={i % sections.length} key={i} />;

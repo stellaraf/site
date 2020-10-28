@@ -201,6 +201,7 @@ export interface GlobalConfigPre {
   privacyBanner: Document;
   callToActionTitle: string;
   callsToActionShown: 1 | 2 | 3 | 4 | 5 | 6;
+  homePageVideo?: string;
 }
 
 export interface ThemeConfig {

@@ -25,6 +25,7 @@ export * from './Logo';
 export * from './Meta';
 export * from './RichText';
 export * from './Ripple';
+export * from './Screen';
 export * from './SectionDivider';
 export * from './Select';
 export * from './Stars';
