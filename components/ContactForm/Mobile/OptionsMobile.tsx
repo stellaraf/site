@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { Button as ChakraButton, Center, Stack, useDisclosure } from '@chakra-ui/core';
@@ -15,7 +14,7 @@ import type { MouseEvent } from 'react';
 import type { StackProps, FlexProps } from '@chakra-ui/core';
 import type { IconType } from '@meronex/icons';
 import type { Animated } from 'site/types';
-import type { IOptionsResponsive } from '../types';
+import type { IOptionsResponsive, TContactQuery, TSupportedFormQuery } from '../types';
 import type { FormHandlers } from '../Forms/types';
 
 const Docs = dynamic<IconType>(() => import('@meronex/icons/cg').then(i => i.CgNotes));
@@ -30,6 +29,19 @@ const AnimatedCenter = (props: Animated<FlexProps>) => <Center as={motion.div} {
 const iconMap = { Support, Sales, Docs };
 
 /**
+ * Type guard to determine if the URL query references a valid form.
+ */
+function queryIsForm(query: TContactQuery): query is TSupportedFormQuery {
+  let result = false;
+  if ('form' in query) {
+    if (query.form === 'support' || query.form === 'sales') {
+      result = true;
+    }
+  }
+  return result;
+}
+
+/**
  * See the OptionsDesktop component for more detailed information. The OptionsMobile component
  * is meant to be a little more simple and its layout is more vertical than horizontal, but the
  * rest of the logic is largely the same. Differences are notated below.
@@ -38,12 +50,26 @@ export const OptionsMobile = (props: IOptionsResponsive) => {
   const { cards, ...rest } = props;
   const ctx = useFormState();
   const titleMe = useTitle();
-  const { pathname } = useRouter();
+  const { pathname, query } = useRouter();
   const { trackModal } = useGoogleAnalytics();
 
   const formSizes = { minHeight: '48rem', height: '100%' };
 
   const { isOpen, onToggle, onClose } = useDisclosure();
+
+  /**
+   * If valid query parameters are passed in the URL, e.g. /contact?form=sales or
+   * /contact?form=support, automatically load the corresponding form.
+   */
+  useEffect(() => {
+    if (queryIsForm(query)) {
+      const selectedIndex = cards.map(c => c.title.toLowerCase()).indexOf(query.form);
+      const selectedName = cards[selectedIndex].title as TSupportedFormQuery['form'];
+      ctx.selectedName.value !== selectedName && ctx.merge({ selectedName, selectedIndex });
+      onToggle();
+      trackModal(`${pathname}/form-${selectedName.toLowerCase()}`);
+    }
+  }, [query]);
 
   return (
     <Container minH="3xl" zIndex={1} spacing={12} align="stretch" direction="column" {...rest}>
