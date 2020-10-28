@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Center, Heading, VStack, Divider, useToken } from '@chakra-ui/core';
 import { Button, Ripple } from 'site/components';
 import { useColorValue } from 'site/context';
-import { useTitle, useRender, useOpposingColor } from 'site/hooks';
+import { useTitle, useRender, useOpposingColor, useIsDark } from 'site/hooks';
 import { useResponsiveStyle } from 'site/styles';
 
 import type { IGetStarted } from './types';
@@ -15,6 +15,7 @@ export const GetStarted = (props: IGetStarted) => {
   const bg = useColorValue('original.secondary', 'secondary.300');
   const rippleStart = useColorValue('secondary.200', 'secondary.700');
   const color = useOpposingColor(bg);
+  const isDark = useIsDark(bg);
   const one = useToken('colors', 'secondary.300');
   const two = useToken('colors', 'secondary.400');
   const three = useToken('colors', 'secondary.600');
@@ -59,7 +60,12 @@ export const GetStarted = (props: IGetStarted) => {
         {body && <Divider bg={color} />}
         {body && renderedBody}
         {hasButton && (
-          <Button variant="outline" colorScheme={color} href={buttonLink}>
+          <Button
+            color={color}
+            variant="outline"
+            href={buttonLink}
+            borderColor={color}
+            _hover={{ backgroundColor: isDark ? 'blackAlpha.100' : 'whiteAlpha.100' }}>
             {titleMe(buttonText!)}
           </Button>
         )}
