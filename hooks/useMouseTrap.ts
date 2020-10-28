@@ -1,5 +1,5 @@
-import mousetrap from 'mousetrap';
 import { useEffect } from 'react';
+import mousetrap from 'mousetrap';
 
 interface ExtendedKeyboardEvent extends KeyboardEvent {
   returnValue: boolean; // IE returnValue
@@ -20,15 +20,11 @@ export function useMouseTrap(
     }
   };
 
-  /**
-   * Unbind after mount.
-   */
-  const unbind = () => {
-    mousetrap.unbind(keys);
-  };
-
   useEffect(() => {
     mousetrap.bind(keys, binder, eventType);
-    return unbind;
-  }, [keys]);
+    return () => {
+      // Unbind after mount.
+      mousetrap.unbind(keys);
+    };
+  }, []);
 }

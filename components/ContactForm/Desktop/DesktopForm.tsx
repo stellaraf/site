@@ -21,8 +21,7 @@ export const DesktopForm = (props: IDesktopForm) => {
     toggleLayout(0);
   };
   const handleSubmit = async <F extends TFormTypes, D extends TFormFields<F>>(form: F, data: D) => {
-    const response = await submitForm(form, data);
-    console.dir(response);
+    await submitForm(form, data);
     if (typeof onSubmit === 'function') {
       onSubmit();
     }

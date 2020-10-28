@@ -1,6 +1,6 @@
 import type { FlexProps, UseDisclosureReturn } from '@chakra-ui/core';
 import type { ReactNode } from 'react';
-import type { LinkProps } from 'site/components';
+import type { ILink } from 'site/components';
 
 export interface IBaseHeader extends FlexProps {
   isOpen: UseDisclosureReturn['isOpen'];
@@ -9,7 +9,7 @@ export interface IBaseHeader extends FlexProps {
   navHeaderHeight: number;
 }
 
-export interface INavLink extends LinkProps {
+export interface INavLink extends ILink {
   title: string;
 }
 
