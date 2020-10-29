@@ -1,4 +1,4 @@
-import type { SystemProps, SystemStyleObject } from '@chakra-ui/core';
+import type { LinkProps, SystemStyleObject } from '@chakra-ui/core';
 
 import type { ILink } from 'site/components';
 
@@ -21,6 +21,6 @@ export interface ILinkGroup extends ILink {
   side: 'left' | 'right';
 }
 
-export interface IPassedLink extends SystemProps {}
+export interface IPassedLink extends LinkProps {}
 
 export type { BoxProps, FlexProps } from '@chakra-ui/core';

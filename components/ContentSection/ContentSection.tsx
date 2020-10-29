@@ -36,7 +36,7 @@ const TitleLayout = (props: ITitleLayout) => {
   }
 };
 
-export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((props, ref) => {
+export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((props, ref) => {
   const { items, index, ...rest } = props;
   const {
     title,
@@ -80,9 +80,9 @@ export const ContentSection = forwardRef<HTMLElement, ContentSectionProps>((prop
       <Box
         ref={ref}
         as="article"
+        overflow="hidden"
         my={{ base: 4, lg: 16, xl: 32 }}
         px={{ base: 4, lg: 16, xl: 64 }}
-        overflow="hidden"
         {...rStyles}
         {...rest}>
         <Flex h="100%" alignItems="center" justify="center" flexWrap="nowrap">

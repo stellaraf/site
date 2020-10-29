@@ -8,7 +8,7 @@ import {
 } from 'color2k';
 import { extendTheme } from '@chakra-ui/core';
 import { mode } from '@chakra-ui/theme-tools';
-import { merge } from '@chakra-ui/utils';
+import { mergeWith } from '@chakra-ui/utils';
 import { syncedStyles, heroButtons } from 'site/styles';
 
 import type {
@@ -219,6 +219,27 @@ const importColors = (userColors: ThemeConfig['colors']): CustomColors => {
   };
 };
 
+const headingOverrides = {
+  '4xl': {
+    lineHeight: 1,
+  },
+  '3xl': {
+    lineHeight: 1,
+  },
+  '2xl': {
+    lineHeight: [1.5, null, 1],
+  },
+  xl: {
+    lineHeight: [1.5, null, 1.5],
+  },
+  lg: {
+    lineHeight: [1.25, null, 1.25],
+  },
+  md: { lineHeight: 1.25 },
+  sm: { lineHeight: 1 },
+  xs: { lineHeight: 1 },
+};
+
 export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
   const [fonts, fontWeights] = importFonts(userTheme.fonts);
   const defaultTheme = extendTheme({
@@ -228,9 +249,9 @@ export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
     fontSizes,
     radii,
     styles: { global: globalStyles },
-    components: { Button: heroButtons },
+    components: { Button: heroButtons, Heading: { sizes: headingOverrides } },
   });
-  return merge(defaultTheme, {
+  return mergeWith(defaultTheme, {
     components: { SyncedStyles: syncedStyles },
   });
 };

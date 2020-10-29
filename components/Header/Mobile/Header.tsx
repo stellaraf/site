@@ -1,4 +1,3 @@
-import * as React from 'react';
 import dynamic from 'next/dynamic';
 import {
   Box,
@@ -14,7 +13,7 @@ import {
   useDisclosure,
   useStyles,
 } from '@chakra-ui/core';
-import { merge } from '@chakra-ui/utils';
+import { mergeWith } from '@chakra-ui/utils';
 import { Spiral as Hamburger } from 'hamburger-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button, Logo, MControls } from 'site/components';
@@ -93,7 +92,7 @@ export const MHeader = (props: IHeader) => {
                   borderColor={borderColor}
                   borderStyle="solid"
                   boxShadow="lg"
-                  sx={merge({}, styles.box, styles.header, {
+                  sx={mergeWith({}, styles.box, styles.header, {
                     backdropFilter: 'blur(20px)',
                     backgroundColor: bg,
                   })}>

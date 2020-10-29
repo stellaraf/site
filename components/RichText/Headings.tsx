@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { Heading } from '@chakra-ui/core';
 import { useTitle } from 'site/hooks';
-import type { BaseHeadingProps, HeadingProps } from './types';
+import type { BaseHeadingProps, HeadingProps, THeadingLevels } from './types';
 
 const BaseHeading = (props: BaseHeadingProps) => {
   const { level, children, ...rest } = props;
@@ -11,8 +10,10 @@ const BaseHeading = (props: BaseHeadingProps) => {
   if (typeof children === 'string') {
     title = titleMe(children);
   }
+  const headingLevel = `h${level}` as THeadingLevels;
+
   return (
-    <Heading as={`h${level}`} mb={2} mt={12} {...rest}>
+    <Heading as={headingLevel} mb={2} mt={12} {...rest}>
       {title}
     </Heading>
   );

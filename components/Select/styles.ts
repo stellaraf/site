@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { merge } from '@chakra-ui/utils';
+import { mergeWith } from '@chakra-ui/utils';
 import { useOpposingColor, useMobile } from 'site/hooks';
 import { useColorValue } from 'site/context';
 import { useSelectContext } from './Select';
@@ -48,7 +48,7 @@ export const useControlStyle = (base: IStyles, state: IControl): IStyles => {
     },
     '&.invalid': { borderColor: invalidBorder, boxShadow: `0 0 0 1px ${invalidBorder}` },
   };
-  return useMemo(() => merge({}, base, styles), [colorMode, isFocused]);
+  return useMemo(() => mergeWith({}, base, styles), [colorMode, isFocused]);
 };
 
 export const useMenuStyle = (base: IStyles, state: IMenu): IStyles => {
@@ -70,7 +70,7 @@ export const useMenuStyle = (base: IStyles, state: IMenu): IStyles => {
     backgroundColor,
     boxShadow,
   };
-  return useMemo(() => merge({}, base, styles), [colorMode, isOpen]);
+  return useMemo(() => mergeWith({}, base, styles), [colorMode, isOpen]);
 };
 
 export const useMenuListStyle = (base: IStyles, state: IMenuList): IStyles => {
@@ -89,7 +89,7 @@ export const useMenuListStyle = (base: IStyles, state: IMenuList): IStyles => {
     '&::-webkit-scrollbar-thumb:hover': { backgroundColor: scrollHover },
     '-ms-overflow-style': { display: 'none' },
   };
-  return useMemo(() => merge({}, base, styles), [colorMode, isOpen]);
+  return useMemo(() => mergeWith({}, base, styles), [colorMode, isOpen]);
 };
 
 export const useOptionStyle = (base: IStyles, state: IOption): IStyles => {
@@ -117,7 +117,7 @@ export const useOptionStyle = (base: IStyles, state: IOption): IStyles => {
     '&:active': { backgroundColor: activeBg, color: activeColor },
     '&:disabled': { opacity: 0.4, cursor: 'not-allowed' },
   };
-  return useMemo(() => merge({}, base, styles), [colorMode, isFocused, isOpen]);
+  return useMemo(() => mergeWith({}, base, styles), [colorMode, isFocused, isOpen]);
 };
 
 export const useIndicatorSeparatorStyle = (base: IStyles, state: IIndicator): IStyles => {
@@ -125,13 +125,13 @@ export const useIndicatorSeparatorStyle = (base: IStyles, state: IIndicator): IS
   const { gray, whiteAlpha } = theme.colors;
   const border = useColorValue(gray[200], whiteAlpha[200]);
   const styles = { backgroundColor: border, transition: 'all 0.2s' };
-  return useMemo(() => merge({}, base, styles), [colorMode]);
+  return useMemo(() => mergeWith({}, base, styles), [colorMode]);
 };
 
 export const usePlaceholderStyle = (base: IStyles, state: IPlaceholder): IStyles => {
   const { theme, colorMode } = useSelectContext();
   const color = useColorValue(theme.colors.gray[400], theme.colors.whiteAlpha[400]);
-  return useMemo(() => merge({}, base, { color }), [colorMode]);
+  return useMemo(() => mergeWith({}, base, { color }), [colorMode]);
 };
 
 export const useMultiValueStyle = (props: TMultiValue) => {
@@ -148,7 +148,7 @@ export const useMultiValueStyle = (props: TMultiValue) => {
     borderRadius: radii.md,
     margin: '0.2rem',
   };
-  return useCallback((base: IStyles, state: IMultiValue) => merge({}, base, styles), [
+  return useCallback((base: IStyles, state: IMultiValue) => mergeWith({}, base, styles), [
     backgroundColor,
     color,
   ]);
@@ -166,7 +166,7 @@ export const useMultiValueLabelStyle = (props: TMultiValue) => {
     paddingLeft: space[2],
     whiteSpace: 'nowrap',
   };
-  return useCallback((base: IStyles, state: IMultiValue) => merge({}, base, styles), [
+  return useCallback((base: IStyles, state: IMultiValue) => mergeWith({}, base, styles), [
     colorMode,
     colorScheme,
   ]);
@@ -185,7 +185,7 @@ export const useMultiValueRemoveStyle = (props: TMultiValue) => {
     transition: 'opacity 50ms ease-in 0s',
     '&:hover': { backgroundColor: 'unset', color: 'unset', opacity: 0.7 },
   };
-  return useCallback((base: IStyles, state: IMultiValue) => merge({}, base, styles), [
+  return useCallback((base: IStyles, state: IMultiValue) => mergeWith({}, base, styles), [
     colorMode,
     colorScheme,
   ]);
@@ -201,5 +201,7 @@ export const useMenuPortal = (props: TMultiValue) => {
   const styles = {
     zIndex: isMobile ? 1500 : 1,
   };
-  return useCallback((base: IStyles, state: IMultiValue) => merge({}, base, styles), [isMobile]);
+  return useCallback((base: IStyles, state: IMultiValue) => mergeWith({}, base, styles), [
+    isMobile,
+  ]);
 };

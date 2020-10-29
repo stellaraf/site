@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useState } from 'react';
 import {
   Center,
@@ -12,7 +11,7 @@ import {
   ModalBody,
   useStyles,
 } from '@chakra-ui/core';
-import { merge } from '@chakra-ui/utils';
+import { mergeWith } from '@chakra-ui/utils';
 import { BisLeftArrow as Back } from '@meronex/icons/bi';
 import { motion } from 'framer-motion';
 import { useColorValue } from 'site/context';
@@ -81,7 +80,7 @@ export const MobileForm = (props: IMobileForm) => {
             borderStyle="solid"
             boxShadow="lg"
             maxH="82vh"
-            sx={merge({}, styles.box, styles.header, {
+            sx={mergeWith({}, styles.box, styles.header, {
               backdropFilter: 'blur(20px)',
               backgroundColor: bg,
             })}>

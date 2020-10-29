@@ -1,19 +1,18 @@
-import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Box, Skeleton } from '@chakra-ui/core';
 import { useColorValue } from 'site/context';
 
-const ReactPlayer = dynamic(() => import('react-player'));
+const ReactPlayer = dynamic(() => import('react-player'), {
+  loading: () => (
+    <Skeleton boxSize="100%" startColor="original.gray" endColor="original.tertiary" />
+  ),
+});
 
 import type { IScreen } from './types';
 
 export const Screen = (props: IScreen) => {
   const { url, ...rest } = props;
-  const [loaded, setLoaded] = useState(false);
   const borderColor = useColorValue('original.dark', 'original.dark');
-  const handleReady = () => {
-    !loaded && setLoaded(true);
-  };
   return (
     <Box
       width={{ base: '100%', lg: '75%' }}
@@ -29,31 +28,24 @@ export const Screen = (props: IScreen) => {
       borderColor={borderColor}
       boxShadow="xl"
       {...rest}>
-      <Skeleton
-        boxSize="100%"
-        isLoaded={loaded}
-        startColor="original.gray"
-        endColor="original.tertiary">
-        <ReactPlayer
-          loop
-          muted
-          playing
-          controls
-          onReady={handleReady}
-          url={url}
-          volume={0}
-          width="100%"
-          height="100%"
-          style={{ borderRadius: '1.6rem' }}
-          config={{
-            file: {
-              attributes: {
-                controlsList: ['nodownload', 'nofullscreen'],
-              },
+      <ReactPlayer
+        loop
+        muted
+        playing
+        controls
+        url={url}
+        volume={0}
+        width="100%"
+        height="100%"
+        style={{ borderRadius: '1.6rem' }}
+        config={{
+          file: {
+            attributes: {
+              controlsList: ['nodownload', 'nofullscreen'],
             },
-          }}
-        />
-      </Skeleton>
+          },
+        }}
+      />
     </Box>
   );
 };
