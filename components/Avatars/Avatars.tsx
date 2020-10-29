@@ -1,5 +1,5 @@
 import { useState } from '@hookstate/core';
-import { Divider, Collapse, SimpleGrid } from '@chakra-ui/core';
+import { Box, Divider, Collapse, SimpleGrid } from '@chakra-ui/core';
 import { useRender, useMobile } from 'site/hooks';
 import { useColorValue } from 'site/context';
 import { Photo } from './Photo';
@@ -28,9 +28,11 @@ const AvatarsDesktop = (props: IAvatarGroup) => {
           <Photo key={i} attrs={g} onClick={handlers[i]} />
         ))}
       </GroupWrapper>
-      <Collapse isOpen={isOpen} textAlign="center" px={8}>
-        <Divider borderColor={dividerColor} />
-        {children}
+      <Collapse in={isOpen}>
+        <Box textAlign="center" px={8}>
+          <Divider borderColor={dividerColor} />
+          {children}
+        </Box>
       </Collapse>
     </>
   );
@@ -44,9 +46,11 @@ const AvatarsMobile = (props: IAvatarGroup) => {
         {group.map((g, i) => (
           <>
             <Photo key={i} attrs={g} onClick={handlers[i]} />
-            <Collapse isOpen={isOpen && i === current} textAlign="center" px={8}>
-              <Divider borderColor={dividerColor} />
-              {children}
+            <Collapse in={isOpen && i === current}>
+              <Box textAlign="center" px={8}>
+                <Divider borderColor={dividerColor} />
+                {children}
+              </Box>
             </Collapse>
           </>
         ))}

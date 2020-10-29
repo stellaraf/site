@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useRouter } from 'next/router';
-import { Center, Heading, VStack, Wrap } from '@chakra-ui/core';
+import { Center, Heading, VStack, Wrap, WrapItem } from '@chakra-ui/core';
 import { useInView } from 'react-intersection-observer';
 import { AnimatedBox, SectionDivider } from 'site/components';
 import { useConfig, useColorValue } from 'site/context';
@@ -39,16 +39,18 @@ export const _CallToActionContainer = (props: ICallToActionMemo) => {
         <Wrap direction={{ base: 'column', lg: 'row' }} spacing={8} justify="center" ref={ref}>
           {inView &&
             actions.map((action, i) => (
-              <AnimatedBox
-                zIndex={1}
-                animate={{ x: 0 }}
-                key={`action${i}`}
-                initial={{ x: '100%' }}
-                whileTap={{ y: '-3%' }}
-                whileHover={{ y: '-5%' }}
-                transition={{ delay: i * 0.1 }}>
-                <Action {...action} />
-              </AnimatedBox>
+              <WrapItem key={`action${i}`}>
+                <AnimatedBox
+                  zIndex={1}
+                  animate={{ x: 0 }}
+                  key={`action${i}`}
+                  initial={{ x: '100%' }}
+                  whileTap={{ y: '-3%' }}
+                  whileHover={{ y: '-5%' }}
+                  transition={{ delay: i * 0.1 }}>
+                  <Action {...action} />
+                </AnimatedBox>
+              </WrapItem>
             ))}
         </Wrap>
       </VStack>

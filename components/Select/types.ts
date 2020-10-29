@@ -9,30 +9,35 @@ import type {
   Theme,
   PlaceholderProps,
 } from 'react-select';
+import type { BoxProps } from '@chakra-ui/core';
 import type { CustomColors, CustomTheme } from 'site/types';
 
 export interface ISelectState {
   [k: string]: string[];
 }
 
-export interface ISelectOption {
+export type TSelectOption = {
   label: string;
   value: string;
-}
+};
 
-export interface ISelectOptionGroup {
+export type TSelectOptionGroup = {
   label: string;
-  options: ISelectOption[];
-}
+  options: TSelectOption[];
+};
 
-export type TOptions = Array<ISelectOptionGroup | ISelectOption>;
+export type TOptions = Array<TSelectOptionGroup | TSelectOption>;
 
-export interface ISelect extends Omit<IReactSelect, 'isMulti' | 'onSelect'> {
+export type TBoxAsReactSelect = Omit<IReactSelect, 'isMulti' | 'onSelect' | 'onChange'> &
+  Omit<BoxProps, 'onChange' | 'onSelect'>;
+
+export interface ISelect extends TBoxAsReactSelect {
   options: TOptions;
   name: string;
   required?: boolean;
   multi?: boolean;
-  onSelect?: (v: ISelectOption[]) => void;
+  onSelect?: (v: TSelectOption[]) => void;
+  onChange?: (c: TSelectOption | TSelectOption[]) => void;
   colorScheme?: keyof CustomColors;
 }
 

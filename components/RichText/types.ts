@@ -22,3 +22,5 @@ export type ParagraphProps = TextProps;
 export interface BaseHeadingProps extends ChakraHeadingProps {
   level: 1 | 2 | 3 | 4 | 5 | 6;
 }
+
+export type THeadingLevels = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';

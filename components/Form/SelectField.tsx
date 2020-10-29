@@ -3,7 +3,7 @@ import { FormControl, FormErrorMessage } from '@chakra-ui/core';
 import { useFormContext } from 'react-hook-form';
 import { Select as CustomSelect } from 'site/components';
 
-import type { ISelectOption } from 'site/components';
+import type { TSelectOption } from 'site/components';
 import type { ISelectField } from './types';
 
 export const SelectField = (props: ISelectField) => {
@@ -11,7 +11,7 @@ export const SelectField = (props: ISelectField) => {
   const { formState, setValue, register } = useFormContext();
   const { errors } = formState;
   errors?.[name] && console.table(errors);
-  const handleSelect = (values: ISelectOption[]): void => {
+  const handleSelect = (values: TSelectOption[]): void => {
     const labels = [];
     for (let v of values) {
       if (v?.label) {

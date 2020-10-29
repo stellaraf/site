@@ -3,8 +3,8 @@
   "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "@chakra-ui/core": "^1.0.0-rc.5",
-    "@chakra-ui/theme": "^1.0.0-rc.5",
+    "@chakra-ui/core": "1.0.0-rc.7",
+    "@chakra-ui/theme": "1.0.0-rc.7",
     "@color2k/compat": "^1.0.0-rc.5",
     "@contentful/rich-text-react-renderer": "^14.1.1",
     "@hookform/resolvers": "^0.1.1",

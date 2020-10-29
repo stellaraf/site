@@ -19,10 +19,12 @@ import {
   useRSTheme,
 } from './styles';
 
-import type { ISelect, ISelectOption, ISelectContext } from './types';
+import type { ISelect, TSelectOption, ISelectContext, TBoxAsReactSelect } from './types';
 
 const SelectContext = createContext<ISelectContext>(Object());
 export const useSelectContext = () => useContext(SelectContext);
+
+const ReactSelectAsBox = (props: TBoxAsReactSelect) => <Box as={ReactSelect} {...props} />;
 
 export const Select = (props: ISelect) => {
   const { ctl, options, multi, onSelect, colorScheme = 'gray', ...rest } = props;
@@ -36,7 +38,7 @@ export const Select = (props: ISelect) => {
     isOpen,
   ]);
 
-  const handleChange = (changed: ISelectOption | ISelectOption[]) => {
+  const handleChange = (changed: TSelectOption | TSelectOption[]) => {
     if (!Array.isArray(changed)) {
       changed = [changed];
     }
@@ -51,7 +53,7 @@ export const Select = (props: ISelect) => {
   const rsTheme = useRSTheme({ theme, colorMode, colorScheme });
   return (
     <SelectContext.Provider value={selectContext}>
-      <Box
+      <ReactSelectAsBox
         as={ReactSelect}
         options={options}
         isMulti={multi}
