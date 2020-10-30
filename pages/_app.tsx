@@ -55,6 +55,7 @@ Site.getInitialProps = async () => {
   globalConfig = await getGlobalConfig();
   footerGroups = await getFooterItems();
   actions = await getActions();
+
   return { appProps: { globalConfig, footerGroups, actions } };
 };
 

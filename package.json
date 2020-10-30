@@ -20,6 +20,7 @@
     "contentful": "^7.14.6",
     "d3-geo": "^1.12.1",
     "dayjs": "^1.9.3",
+    "favicons": "^6.2.0",
     "framer-motion": "^2.7.1",
     "hamburger-react": "^2.2.0",
     "keen-slider": "^5.2.3",
@@ -49,7 +50,8 @@
   },
   "scripts": {
     "dev": "NODE_OPTIONS=--max-old-space-size=8192 next dev",
-    "build": "next build",
+    "dev:favicons": "FAVICONS=true NODE_OPTIONS=--max-old-space-size=8192 next dev",
+    "build": "FAVICONS=true next build",
     "start": "next start",
     "typecheck": "tsc",
     "analyze": "cross-env ANALYZE=true next build",
@@ -70,6 +72,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^9.5.5",
+    "@types/favicons": "^5.5.0",
     "@types/googlemaps": "^3.39.13",
     "@types/mousetrap": "^1.6.3",
     "@types/node": "^14.11.2",

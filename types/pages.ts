@@ -22,7 +22,11 @@ import type { Document } from '@contentful/rich-text-types';
  * _app (All Pages) Types
  */
 export interface AppInitialProps {
-  appProps: { globalConfig: GlobalConfig; footerGroups: FooterItem[]; actions: IActions[] };
+  appProps: {
+    globalConfig: GlobalConfig;
+    footerGroups: FooterItem[];
+    actions: IActions[];
+  };
   children?: ReactNode;
 }
 
