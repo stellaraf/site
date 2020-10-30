@@ -148,7 +148,7 @@ export interface Bio {
   name: string;
   title: string;
   bio: Document;
-  photo: Asset['fields'];
+  photo?: Asset['fields'];
   sortWeight: number;
 }
 

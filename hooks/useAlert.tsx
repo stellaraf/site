@@ -1,19 +1,31 @@
-import { Alert, AlertDescription, AlertIcon, CloseButton, Flex, useToast } from '@chakra-ui/core';
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  CloseButton,
+  Flex,
+  useToast,
+  useBreakpointValue,
+} from '@chakra-ui/core';
 import { useConfig } from 'site/context';
 import { useRender } from 'site/hooks';
 
-import type { IUseAlert } from './types';
+import type { IUseAlert, TToastPositions } from './types';
 
 export function useAlert() {
   const toast = useToast();
   const { errorMessage = null } = useConfig();
   const rendered = useRender(errorMessage);
+  const defaultPosition = useBreakpointValue<TToastPositions>({
+    base: 'bottom',
+    lg: 'bottom-right',
+  });
 
   const showToast = (opts: IUseAlert) => {
     const {
       status = 'info',
       message = '',
-      position = 'bottom-right',
+      position = defaultPosition ?? 'bottom',
       onClose: customOnClose,
       duration = 5000,
     } = opts;
@@ -28,7 +40,7 @@ export function useAlert() {
           my={2}
           mb={4}
           pr={8}
-          right={24}
+          right={{ base: 0, lg: 24 }}
           id={`${id}`}
           width="auto"
           fontSize="sm"
