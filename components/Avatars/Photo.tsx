@@ -4,7 +4,7 @@ import { useColorValue } from 'site/context';
 
 import type { IPhoto, IPhotoWrapper } from './types';
 
-const PhotoWrapper = (props: IPhotoWrapper) => (
+export const PhotoWrapper = (props: IPhotoWrapper) => (
   <Box>
     <Flex
       minWidth={40}

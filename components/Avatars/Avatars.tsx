@@ -1,61 +1,21 @@
 import { useState } from '@hookstate/core';
-import { Box, Divider, Collapse, SimpleGrid } from '@chakra-ui/core';
-import { useRender, useMobile } from 'site/hooks';
-import { useColorValue } from 'site/context';
+import { SimpleGrid, useDisclosure } from '@chakra-ui/core';
+import { useRender } from 'site/hooks';
 import { Photo } from './Photo';
+import { Detail } from './Detail';
 
-import type { IGroupWrapper, IAvatarGroup, IAvatars } from './types';
+import type { IGroupWrapper, IAvatars } from './types';
 
 const GroupWrapper = (props: IGroupWrapper) => {
   return (
     <SimpleGrid
       my={12}
       justifyContent="space-evenly"
-      columns={{ base: 1, lg: 3 }}
-      spacingX={{ lg: '25%', xl: '80%' }}
+      columns={{ base: 1, lg: 4 }}
+      spacingX={{ lg: '25%', xl: '25%' }}
       spacingY={16}
       {...props}
     />
-  );
-};
-
-const AvatarsDesktop = (props: IAvatarGroup) => {
-  const { handlers, isOpen, group, dividerColor, children, ...rest } = props;
-  return (
-    <>
-      <GroupWrapper {...rest}>
-        {group.map((g, i) => (
-          <Photo key={i} attrs={g} onClick={handlers[i]} />
-        ))}
-      </GroupWrapper>
-      <Collapse in={isOpen}>
-        <Box textAlign="center" px={8}>
-          <Divider borderColor={dividerColor} />
-          {children}
-        </Box>
-      </Collapse>
-    </>
-  );
-};
-
-const AvatarsMobile = (props: IAvatarGroup) => {
-  const { handlers, isOpen, current, group, dividerColor, children, ...rest } = props;
-  return (
-    <>
-      <GroupWrapper {...rest}>
-        {group.map((g, i) => (
-          <>
-            <Photo key={i} attrs={g} onClick={handlers[i]} />
-            <Collapse in={isOpen && i === current}>
-              <Box textAlign="center" px={8}>
-                <Divider borderColor={dividerColor} />
-                {children}
-              </Box>
-            </Collapse>
-          </>
-        ))}
-      </GroupWrapper>
-    </>
   );
 };
 
@@ -64,45 +24,35 @@ const AvatarsMobile = (props: IAvatarGroup) => {
  */
 export const Avatars = (props: IAvatars) => {
   const { bios, ...rest } = props;
-  const dividerColor = useColorValue('gray.400', 'original.tertiary');
   const contentNum = useState(0);
-  const show = useState(false);
+  const disclosure = useDisclosure();
+
   const handler = (num: number): void => {
-    const currentShow = show.get();
-    !currentShow && show.set(true);
-    currentShow && num === contentNum.value && show.set(false);
     contentNum.set(num);
+    disclosure.onOpen();
   };
   const handlers = bios.map((_, i) => (_: any) => handler(i));
   const renderedBio = useRender(bios[contentNum.value].bio);
-  const isMobile = useMobile();
 
   // Sort bios alphabetically first, then by sortWeight.
-  const sortedBios = bios.sort().sort((a, b) => a.sortWeight - b.sortWeight);
+  const sortedBios = bios
+    .sort((a, b) => (a.name > b.name ? 1 : -1))
+    .sort((a, b) => a.sortWeight - b.sortWeight);
 
   return (
     <>
-      {isMobile ? (
-        <AvatarsMobile
-          handlers={handlers}
-          isOpen={show.value}
-          current={contentNum.value}
-          dividerColor={dividerColor}
-          group={sortedBios}
-          {...rest}>
-          {renderedBio}
-        </AvatarsMobile>
-      ) : (
-        <AvatarsDesktop
-          handlers={handlers}
-          isOpen={show.value}
-          current={contentNum.value}
-          dividerColor={dividerColor}
-          group={sortedBios}
-          {...rest}>
-          {renderedBio}
-        </AvatarsDesktop>
-      )}
+      <Detail
+        body={renderedBio}
+        name={bios[contentNum.value].name}
+        title={bios[contentNum.value].title}
+        photo={bios[contentNum.value].photo}
+        {...disclosure}
+      />
+      <GroupWrapper {...rest}>
+        {sortedBios.map((g, i) => (
+          <Photo key={i} attrs={g} onClick={handlers[i]} />
+        ))}
+      </GroupWrapper>
     </>
   );
 };
