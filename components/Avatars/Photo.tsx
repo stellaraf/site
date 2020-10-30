@@ -50,11 +50,13 @@ export const Photo = (props: IPhoto) => {
           borderColor={photoBorder}>
           <Image
             fallbackSrc="https://via.placeholder.com/150"
-            src={photo.file.url}
+            src={photo?.file.url ?? 'https://via.placeholder.com/150'}
             alt={name}
             onLoad={handleLoad}
             rounded="full"
             width="100%"
+            minHeight={32}
+            objectFit="cover"
             borderWidth="1px"
             borderStyle="solid"
             borderColor={photoBorder}
