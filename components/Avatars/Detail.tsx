@@ -1,80 +1,90 @@
-import {
-  Divider,
-  Heading,
-  Image,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  VStack,
-  Wrap,
-  WrapItem,
-} from '@chakra-ui/core';
+import { memo } from 'react';
+import { Divider, Heading, Image, VStack, Wrap, WrapItem } from '@chakra-ui/core';
+import { ModalWrapper } from 'site/components';
 import { useColorValue } from 'site/context';
 import { PhotoWrapper } from './Photo';
+import { useRender, useScaledText } from 'site/hooks';
+import { useAvatar } from './Avatars';
+import { useCurrent } from './state';
 
-import type { IDetail } from './types';
+import type { IDetail, IHeader } from './types';
+
+const _Header = (props: IHeader) => {
+  const { name, title, photo } = props;
+  const [containerRef, headingRef, shouldResize] = useScaledText<HTMLDivElement>([name]);
+  const border = useColorValue('blackAlpha.300', 'whiteAlpha.300');
+
+  console.log('component says', shouldResize);
+  return (
+    <Wrap justify={{ base: 'center', lg: 'space-between' }} align="center" ref={containerRef}>
+      <WrapItem>
+        <PhotoWrapper minWidth="unset" boxSize={32}>
+          <Image
+            alt={name}
+            rounded="full"
+            boxSize="100%"
+            objectFit="cover"
+            borderWidth="1px"
+            borderStyle="solid"
+            borderColor={border}
+            transition="transform .15s ease 0s"
+            fallbackSrc="https://via.placeholder.com/150"
+            src={photo?.file.url ?? 'https://via.placeholder.com/150'}
+          />
+        </PhotoWrapper>
+      </WrapItem>
+      <WrapItem>
+        <VStack align={{ base: 'center', lg: 'flex-end' }}>
+          <Heading as="h2" fontSize={shouldResize ? 'lg' : 'xl'} ref={headingRef}>
+            {name}
+          </Heading>
+          <Divider bg={border} />
+          <Heading as="h3" fontSize="lg" fontWeight="light">
+            {title}
+          </Heading>
+        </VStack>
+      </WrapItem>
+    </Wrap>
+  );
+};
+
+const Header = memo(_Header, (prev, next) => prev.name === next.name);
 
 export const Detail = (props: IDetail) => {
-  const { isOpen, onClose, name, title, body, photo } = props;
-  const bg = useColorValue('original.light', 'blackAlpha.300');
-  const border = useColorValue('blackAlpha.300', 'whiteAlpha.300');
+  const { isOpen, onClose } = props;
+  const { bios } = useAvatar();
+  const current = useCurrent();
+  const body = useRender(bios[current.value].bio, [current.value]);
   return (
-    <Modal
-      size="xl"
+    <ModalWrapper
       isCentered
+      size="full"
+      body={body}
       isOpen={isOpen}
       onClose={onClose}
       blockScrollOnMount={false}
-      motionPreset="slideInBottom">
-      <ModalOverlay>
-        <ModalContent
-          bg={bg}
-          boxShadow="lg"
-          borderRadius="lg"
-          borderWidth="1px"
-          borderStyle="solid"
-          borderColor={border}
-          css={{ backdropFilter: 'blur(20px)' }}>
-          <ModalHeader p={12}>
-            <Wrap justify={{ base: 'center', lg: 'space-between' }}>
-              <WrapItem>
-                <PhotoWrapper minWidth="unset" boxSize={32}>
-                  <Image
-                    fallbackSrc="https://via.placeholder.com/150"
-                    src={photo?.file.url ?? 'https://via.placeholder.com/150'}
-                    alt={name}
-                    rounded="full"
-                    boxSize="100%"
-                    objectFit="cover"
-                    borderWidth="1px"
-                    borderStyle="solid"
-                    borderColor={border}
-                    transition="transform .15s ease 0s"
-                  />
-                </PhotoWrapper>
-              </WrapItem>
-              <WrapItem>
-                <VStack align={{ base: 'center', lg: 'flex-end' }}>
-                  <Heading as="h2" fontSize="xl">
-                    {name}
-                  </Heading>
-                  <Divider bg={border} />
-                  <Heading as="h3" fontSize="lg" fontWeight="light">
-                    {title}
-                  </Heading>
-                </VStack>
-              </WrapItem>
-            </Wrap>
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody css={{ '& p': { marginBottom: 0, marginTop: 0 } }}>{body}</ModalBody>
-          <ModalFooter mb={4}></ModalFooter>
-        </ModalContent>
-      </ModalOverlay>
-    </Modal>
+      header={<Header {...bios[current.value]} />}
+      headerProps={{ py: 'unset', pb: 2, px: 'unset' }}
+      containerProps={{
+        pl: 8,
+        py: 8,
+        pr: 12,
+        maxWidth: '2xl',
+        height: 'unset',
+        minWidth: { lg: 'xl' },
+      }}
+      bodyProps={{
+        pt: 2,
+        py: 'unset',
+        px: 'unset',
+        textAlign: { base: 'left', lg: 'right' },
+        css: {
+          '& p': {
+            marginTop: 0,
+            marginBottom: 0,
+          },
+        },
+      }}
+    />
   );
 };
