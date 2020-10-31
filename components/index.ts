@@ -1,4 +1,4 @@
-export * from './AnimatedBox';
+export * from './Animated';
 export * from './Avatars';
 export * from './Banner';
 export * from './Button';
@@ -23,6 +23,7 @@ export * from './Link';
 export * from './Loader';
 export * from './Logo';
 export * from './Meta';
+export * from './ModalWrapper';
 export * from './RichText';
 export * from './Ripple';
 export * from './Screen';
