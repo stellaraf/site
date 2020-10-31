@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useState } from '@hookstate/core';
 import { Box, Flex } from '@chakra-ui/core';
 import { useRouter } from 'next/router';
@@ -9,7 +8,7 @@ import { useNavLogoState } from 'site/hooks';
 import type { IBaseHeader } from './types';
 
 export const Wrapper = (props: IBaseHeader) => {
-  const { isOpen, onToggle, burger, navHeaderHeight, ...rest } = props;
+  const { isOpen, onToggle, navHeaderHeight, children, ...rest } = props;
   const bg = useColorValue('original.light', 'transparent');
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
   const { pathname } = useRouter();
@@ -64,7 +63,7 @@ export const Wrapper = (props: IBaseHeader) => {
         <Link href="/" opacity={showLogo.value ? 1 : 0}>
           <Logo.Text width="auto" height={navHeaderHeight} mb={2} />
         </Link>
-        {!isOpen && burger}
+        {!isOpen && children}
       </Flex>
     </Box>
   );
