@@ -1,10 +1,12 @@
-import { useState } from '@hookstate/core';
+import { createContext, useContext } from 'react';
 import { SimpleGrid, useDisclosure } from '@chakra-ui/core';
-import { useRender } from 'site/hooks';
 import { Photo } from './Photo';
 import { Detail } from './Detail';
 
-import type { IGroupWrapper, IAvatars } from './types';
+import type { IGroupWrapper, IAvatars, IAvatarContext } from './types';
+
+const AvatarContext = createContext<IAvatarContext>(Object());
+export const useAvatar = () => useContext(AvatarContext);
 
 const GroupWrapper = (props: IGroupWrapper) => {
   return (
@@ -24,15 +26,7 @@ const GroupWrapper = (props: IGroupWrapper) => {
  */
 export const Avatars = (props: IAvatars) => {
   const { bios, ...rest } = props;
-  const contentNum = useState(0);
-  const disclosure = useDisclosure();
-
-  const handler = (num: number): void => {
-    contentNum.set(num);
-    disclosure.onOpen();
-  };
-  const handlers = bios.map((_, i) => (_: any) => handler(i));
-  const renderedBio = useRender(bios[contentNum.value].bio);
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   // Sort bios alphabetically first, then by sortWeight.
   const sortedBios = bios
@@ -40,19 +34,13 @@ export const Avatars = (props: IAvatars) => {
     .sort((a, b) => a.sortWeight - b.sortWeight);
 
   return (
-    <>
-      <Detail
-        body={renderedBio}
-        name={bios[contentNum.value].name}
-        title={bios[contentNum.value].title}
-        photo={bios[contentNum.value].photo}
-        {...disclosure}
-      />
+    <AvatarContext.Provider value={{ bios: sortedBios }}>
+      <Detail isOpen={isOpen} onClose={onClose} />
       <GroupWrapper {...rest}>
         {sortedBios.map((g, i) => (
-          <Photo key={i} attrs={g} onClick={handlers[i]} />
+          <Photo key={g.name} index={i} onOpen={onOpen} />
         ))}
       </GroupWrapper>
-    </>
+    </AvatarContext.Provider>
   );
 };
