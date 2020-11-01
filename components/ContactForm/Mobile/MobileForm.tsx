@@ -50,6 +50,7 @@ export const MobileForm = (props: IMobileForm) => {
       scrollInside
       hideCloseButton
       onClose={onClose}
+      bodyProps={{ overflow: 'unset' }}
       containerProps={{ overflow: 'auto' }}
       body={
         <Grid
