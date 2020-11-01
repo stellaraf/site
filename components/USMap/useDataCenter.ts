@@ -1,27 +1,15 @@
-import { useQuery, queryCache } from 'react-query';
-import { Initial } from '@hookstate/initial';
-import { Touched } from '@hookstate/touched';
-import { all } from 'site/util';
+import { useQuery } from 'react-query';
+import { all, fetchWithTimeout } from 'site/util';
 import { useCloudLocations } from 'site/state';
 
-import type { Locations } from './types';
-
-interface CancellablePromise<T> extends Promise<T> {
-  cancel: () => void;
-}
-
-interface TFetcher {
-  id: string;
-  url: string;
-  signal: AbortSignal;
-  debug?: boolean;
-}
+import type { Locations } from 'site/types';
+import type { CancellablePromise, TFetcher } from './types';
 
 /**
  * Track the latency of an HTTP connection.
  */
 async function fetcher(args: TFetcher): Promise<number> {
-  const { id, url, signal, debug = false } = args;
+  const { id, url, controller, debug = false, timeout } = args;
   let duration = 65535;
   const log = (...args: any) => debug && console.log(...args);
   // Start monitoring.
@@ -29,8 +17,16 @@ async function fetcher(args: TFetcher): Promise<number> {
   try {
     // Initiate the request.
     log(`Initiating request to ${url}`);
-    await fetch(url, { body: JSON.stringify({ id }), method: 'POST', signal });
-
+    const res = await fetchWithTimeout(
+      url,
+      {
+        body: JSON.stringify({ id }),
+        method: 'POST',
+        signal: controller.signal,
+      },
+      timeout,
+      controller,
+    );
     // Stop monitoring.
     performance.mark(`end ${id}`);
 
@@ -44,32 +40,69 @@ async function fetcher(args: TFetcher): Promise<number> {
      * Reduce the measured latency by 20% to try and translate TCP latency to ICMP latency, which
      * users are more familiar with. This almost certainly needs adjusting.
      */
-    duration = measurement.duration / 5;
+    if (res.ok) {
+      duration = measurement.duration;
+    } else {
+      /**
+       * If the response state is not "ok", it means the server responded with an error, but it
+       * responded nonetheless. In this case, we consider it to be inactive.
+       */
+      duration = 65534;
+    }
+
+    // Consider the endpoint unreachable if its response took longer than the timeout.
+    if (duration > timeout) {
+      duration = 65533;
+    }
   } catch (err) {
     /**
-     * Since this isn't a "real" HTTP request, we don't really care if it errors out, so long
-     * as there was a response received to measure.
-     *
-     * However, we don't want to measure or care about AbortErrors, which are raised by the
-     * AbortController/signal when we intentionally cancel the request.
+     * Since this isn't a "real" HTTP request, we don't really care if it errors out, so long as
+     * there was a response received to measure. If an error was thrown (i.e. why we're in this
+     * catch block), we don't really care
      */
-    if (err.name !== 'AbortError') {
+    if (duration !== 65535) {
+      /**
+       * In the catch block, if the duration is not 65535 (the initial value), this means a check
+       * of the endpoint was tried, its duration was set, and an error occurred _afterwards_. This
+       * indicates a functioning endpoint with some other error having occurred, so we'll measure
+       * it anyway and display a console message just in case.
+       */
       performance.mark(`error ${id}`);
       performance.measure(id, `start ${id}`, `error ${id}`);
       const [measurement] = performance.getEntriesByName(id);
-      console.error(err);
-      duration = measurement.duration / 5;
+
+      duration = measurement.duration;
+
+      console.warn(err);
+    } else {
+      /**
+       * In the catch block, if the duration is still 65535, this means a check of the endpoint
+       * was tried, but didn't even go so far as to respond with an error or timeout. This
+       * indicates either a problem in this code or some other strange issue. For display
+       * purposes, we consider the endpoint unreachable and show an error message in the console.
+       */
+      console.group(`Location ${id} at Test URL ${url} encountered an error`);
+      console.trace(err);
+      console.groupEnd();
+      duration = 65533;
     }
   }
   log(`Completed measurement to ${url} -`, duration);
-  // return duration;
-  return duration * (Math.random() * 10);
+  return duration;
 }
 
+/**
+ * Hook to query each data center location and measure its response time in milliseconds.
+ *
+ * Possible error states, indicated by extremely high latency times:
+ *   65533: Error/Unreachable (displayed as "UNREACHABLE" in the UI)
+ *   65534: Inactive (displayed as "INACTIVE" in the UI)
+ *   65535: Not checked (no latency or error shown in the UI)
+ */
 export function useDataCenter(locations: Locations) {
   const tests = useCloudLocations();
-  tests.attach(Initial);
-  tests.attach(Touched);
+
+  const getQueryKey = () => [new Date().toString(), ...locations.map(l => l.id)];
 
   async function queryAll(this: CancellablePromise<boolean>) {
     /**
@@ -77,7 +110,6 @@ export function useDataCenter(locations: Locations) {
      * is cancelled when each the cancel() method is called by react-query.
      */
     const controller = new AbortController();
-    const { signal } = controller;
 
     /**
      * Add a cancel method to this function, see:
@@ -91,20 +123,24 @@ export function useDataCenter(locations: Locations) {
      * Perform the query for each location & merge its new elapsed value with the current state.
      */
     for (const [idx, loc] of tests.entries()) {
-      const elapsed = await fetcher({
-        id: loc.id.value,
-        url: loc.testUrl.value,
-        signal,
-      });
-      tests[idx].merge({ elapsed });
+      if (!loc.active.value) {
+        tests[idx].merge({ elapsed: 65534, done: true });
+      } else if (loc.active.value) {
+        const elapsed = await fetcher({
+          id: loc.id.value,
+          url: loc.testUrl.value,
+          controller,
+          timeout: loc.timeout.value,
+        });
+        tests[idx].merge({ elapsed, done: true });
+      }
     }
 
     /**
-     * Use the @hookstate/untouched plugin to determine if the location objects have been touched.
-     * An untouched state would indicate that the location is still set to the default 65535 value
-     * and still needs to be fetched.
+     * Use the 'done' property to determine if the location objects have been checked or otherwise
+     * considered to be completed (i.e., has errored or is marked inactive).
      */
-    const isDone = all(...locations.map((_, idx) => Touched(tests[idx].elapsed).touched()));
+    const isDone = all(...locations.map((_, idx) => tests[idx].done.value));
 
     /**
      * Only if all locations have been checked, determine which of the locations has the lowest
@@ -116,11 +152,11 @@ export function useDataCenter(locations: Locations) {
       );
 
       /**
-       * Only if the elapsed value is not still the default 65535 and if the location is not
-       * already the best, fully export the best location's object as the return value of this
-       * hook.
+       * Only if the elapsed value has been checked, is active, has not errored, and if the
+       * location is not already the best, fully export the best location's object as the return
+       * value of this hook.
        */
-      if (thisBest.elapsed.value !== 65535 && !thisBest.best.value) {
+      if (thisBest.elapsed.value < 65533 && !thisBest.best.value) {
         const bestIdx = tests.map(loc => loc.id.value).indexOf(thisBest.id.value);
         tests[bestIdx].merge({ best: true });
         best = JSON.parse(JSON.stringify(thisBest.value));
@@ -128,11 +164,13 @@ export function useDataCenter(locations: Locations) {
     }
     return best;
   }
-  const queryKey = locations.map(l => l.id).join('_');
+
+  const queryKey = getQueryKey();
+
   const { refetch, ...otherQuery } = useQuery(queryKey, queryAll, {
     enabled: false, // Don't automatically query.
     retry: false, // Don't automatically retry on failures.
-    cacheTime: 900_000, // Cache the data for 15 minutes.
+    cacheTime: 30000, // Cache the data for 30 seconds.
   });
 
   /**
@@ -140,8 +178,7 @@ export function useDataCenter(locations: Locations) {
    * reset the 'best' properties to false, clear the cached response, and then refetch.
    */
   const execute = () => {
-    tests.map(test => test.best.set(false));
-    queryCache.invalidateQueries(queryKey);
+    tests.map(test => test.merge({ best: false, elapsed: 65535, done: false }));
     refetch();
   };
   return { execute, ...otherQuery };
