@@ -6,6 +6,5 @@ export interface IBanner extends Animated<FlexProps> {}
 
 export interface IBannerContent {
   body: ReactNode;
-  color: string;
   onClick: () => void;
 }
