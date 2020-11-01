@@ -34,7 +34,7 @@ export default function Cloud(props: CloudProps) {
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 
   // Initialize test result state
-  useCloudLocations(geoPoints);
+  useCloudLocations(geoPoints.map(g => ({ ...g, done: false })));
   const { execute, isError, error, isFetching } = useDataCenter(geoPoints);
 
   // This will render twice in development due to react strict mode.
