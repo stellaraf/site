@@ -41,7 +41,7 @@ async function fetcher(args: TFetcher): Promise<number> {
      * users are more familiar with. This almost certainly needs adjusting.
      */
     if (res.ok) {
-      duration = measurement.duration;
+      duration = measurement.duration / 5;
     } else {
       /**
        * If the response state is not "ok", it means the server responded with an error, but it
@@ -71,7 +71,7 @@ async function fetcher(args: TFetcher): Promise<number> {
       performance.measure(id, `start ${id}`, `error ${id}`);
       const [measurement] = performance.getEntriesByName(id);
 
-      duration = measurement.duration;
+      duration = measurement.duration / 5;
 
       console.warn(err);
     } else {
