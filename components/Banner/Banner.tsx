@@ -58,6 +58,7 @@ const DBannerContent = (props: IBannerContent) => {
       boxSize="100%"
       borderTopRadius="lg"
       borderTop="1px solid"
+      justify="space-between"
       borderTopColor={borderColor}>
       <Flex
         p={4}
@@ -69,15 +70,17 @@ const DBannerContent = (props: IBannerContent) => {
         fontSize="md">
         {body}
       </Flex>
-      <IconButton
-        icon={<Check />}
-        onClick={onClick}
-        variant="unstyled"
-        alignItems="center"
-        aria-label="Consent"
-        display="inline-flex"
-        _hover={{ opacity: 0.8 }}
-      />
+      <Flex>
+        <IconButton
+          icon={<Check />}
+          onClick={onClick}
+          variant="unstyled"
+          alignItems="center"
+          aria-label="Consent"
+          display="inline-flex"
+          _hover={{ opacity: 0.8 }}
+        />
+      </Flex>
     </Flex>
   );
 };
