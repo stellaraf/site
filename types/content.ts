@@ -123,6 +123,7 @@ export interface GeoPoint {
   id: string;
   description: string;
   testUrl: string;
+  timeout: number;
 }
 
 export interface IMeasuredGeoPoint extends GeoPoint {

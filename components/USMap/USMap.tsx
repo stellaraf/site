@@ -27,12 +27,9 @@ export const USMap = (props: IUSMap) => {
               ))}
               {locations && (
                 <AnimateSharedLayout>
-                  {locations.map(
-                    loc =>
-                      loc.active && (
-                        <Location key={loc.displayName} loc={loc} color={markerColor} />
-                      ),
-                  )}
+                  {locations.map(loc => (
+                    <Location key={loc.displayName} loc={loc} color={markerColor} />
+                  ))}
                 </AnimateSharedLayout>
               )}
             </>

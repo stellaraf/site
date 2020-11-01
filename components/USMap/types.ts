@@ -1,17 +1,16 @@
 import type { BoxProps, UseDisclosureReturn } from '@chakra-ui/core';
 import type { MarkerProps } from 'react-simple-maps';
-import type { GeoPoint, IMeasuredGeoPoint } from 'site/types';
+import { State } from '@hookstate/core';
+import type { ITestLocation, Locations, IMeasuredGeoPoint } from 'site/types';
 
 export interface IMapMarker extends MarkerProps {
   color?: string;
   best?: boolean;
 }
 
-export type Locations = GeoPoint[];
-
 export interface LocationProps extends Omit<BoxProps, 'color'> {
   color?: string;
-  loc: GeoPoint;
+  loc: Locations[number];
 }
 
 export interface IUSMap extends BoxProps {
@@ -26,19 +25,22 @@ export interface IFinder extends UseDisclosureReturn {
 }
 
 export interface ILocation {
-  location: GeoPoint;
+  location: Locations[number];
   index: number;
 }
 
-export interface ITestLocation extends GeoPoint {
-  elapsed: number;
-  best: boolean;
+export interface ILatency {
+  locState: State<ITestLocation>;
 }
 
-export type TOptionalLocation = ITestLocation | null;
+export interface CancellablePromise<T> extends Promise<T> {
+  cancel: () => void;
+}
 
-export type ITestResult = ITestLocation[];
-
-export interface ILatency {
-  elapsed: ITestLocation['elapsed'];
+export interface TFetcher {
+  id: string;
+  url: string;
+  controller: AbortController;
+  debug?: boolean;
+  timeout: number;
 }
