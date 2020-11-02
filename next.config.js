@@ -1,6 +1,5 @@
-const generateFavicons = require('./generateFavicons');
-
 if (process.env.FAVICONS === 'true') {
+  const generateFavicons = require('./generateFavicons');
   generateFavicons();
 }
 

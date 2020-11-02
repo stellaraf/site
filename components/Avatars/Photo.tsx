@@ -49,9 +49,9 @@ export const Photo = (props: IPhoto) => {
           borderStyle="solid"
           alt={bios[index].name}
           borderColor={photoBorder}
+          src={bios[index].photo.file.url}
           transition="transform .15s ease 0s"
           fallbackSrc="https://via.placeholder.com/150"
-          src={bios[index].photo?.file.url ?? 'https://via.placeholder.com/150'}
         />
       </Button>
       <Text mt={4} fontSize="sm" fontWeight="medium" opacity={0.8}>

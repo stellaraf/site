@@ -1,57 +1,32 @@
-# stellar.tech website
+<div align="center">
+  <br/>
+  <img src="https://res.cloudinary.com/stellaraf/image/upload/v1604277355/stellar-logo-gradient.svg" width=300 />
+  <br/>
+  <h3>stellar.tech Website Source Code</h3>
+  <br/>
+</div>
 
-This repository contains the source code for [stellar.tech](https://stellar.tech), the website for Stellar Technologies Inc.
+This repository contains the source code for [stellar.tech](https://stellar.tech), the website for **Stellar Technologies Inc.**
 
-## Branches
+# Branches
 
-| Branch    | Function                                                                                       |
-|-----------|------------------------------------------------------------------------------------------------|
-| `master`  | Production, commits auto build to production @ [stellar.tech](https://stellar.tech).           |
-| `develop` | Development, commits auto build to development environment @ [stellar.af](https://stellar.af). |
+| Branch   | Function                                                                                                           |
+| -------- | ------------------------------------------------------------------------------------------------------------------ |
+| `master` | Production, commits auto build to production @ [stellar.tech](https://stellar.tech).                               |
+| `next`   | Development, commits auto build to development environment @ [preview.stellar.tech](https://preview.stellar.tech). |
 
-# Technical Details
+# Project
 
-This project was created with [Create React App](https://github.com/facebook/create-react-app).
+This project was developed with the following major libraries:
 
-In the project directory, you can run:
+- [ReactJS](https://github.com/facebook/react)
+- [Next.js](https://nextjs.org/)
+- [Chakra UI](https://github.com/chakra-ui/chakra-ui/)
 
-### `yarn start`
+## Development
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To start the dev server, run `yarn dev` from the project directory, and the development server will be available at [http://localhost:3000](http://localhost:3000)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Production
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## React Links
-
-- [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-- [React documentation](https://reactjs.org/).
-
-- [Code splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-- [Analyzing the Bundle Size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-- [Making a Progressive Web App](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-- [Advanced Configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-- [Deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-- [`yarn build` fails to minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To create a production build, run `yarn build` from the project directory. Then, start the production web server with `yarn start`.
