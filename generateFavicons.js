@@ -55,10 +55,8 @@ module.exports = function () {
           images.add(image.name);
         }
         for (let file of response.files) {
-          if (mode === 'light') {
-            fs.writeFileSync(`./public/${file.name}`, file.contents);
-            console.log('Writing', file.name);
-          }
+          fs.writeFileSync(`./public/logos/${mode}/${file.name}`, file.contents);
+          console.log(`[${mode.toUpperCase()}]`, 'Writing', file.name);
         }
       } catch (err) {
         console.error(err);
