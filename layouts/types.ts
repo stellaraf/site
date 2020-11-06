@@ -6,5 +6,3 @@ export interface SiteLayoutProps {
   actions: IActions[];
   children: ReactNode;
 }
-
-export type { BoxProps } from '@chakra-ui/core';

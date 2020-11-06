@@ -1,8 +1,8 @@
 import { getPage, getPageContent } from 'site/util';
 import { ContentSection, Hero, SEO, GetStarted } from 'site/components';
 
-import type { PageProps, GetStaticProps, GetStaticPaths } from 'site/types';
-import type { GetStaticPropsContext } from 'next';
+import type { GetStaticPaths, GetStaticProps } from 'next';
+import type { PageProps } from 'site/types';
 
 type UrlQuery = {
   page: string;
@@ -26,9 +26,7 @@ export default function DynamicPage(props: PageProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async (
-  ctx: GetStaticPropsContext<UrlQuery>,
-) => {
+export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const page = ctx.params?.page ?? 'notfound';
   let pageData = Object();
   let pageContent = Array();
@@ -41,7 +39,7 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async (
   return { props: { pageData, pageContent } };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => ({
+export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
   paths: [{ params: { page: 'consulting' } }, { params: { page: 'services' } }],
   fallback: false,
 });

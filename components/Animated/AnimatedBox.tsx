@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 
 import type { MotionProps } from 'framer-motion';
 import type { BoxProps } from '@chakra-ui/core';
-import type { Animated } from 'site/types';
 
 interface IAnimatedBox extends Animated<BoxProps> {
   transition: MotionProps['transition'];

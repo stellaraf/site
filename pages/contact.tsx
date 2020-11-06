@@ -5,9 +5,7 @@ import { Content, Hero, Options, SEO, GetStarted } from 'site/components';
 import { useSlug } from 'site/hooks';
 import { useResponsiveStyle } from 'site/styles';
 
-import type { IContactPage, GetStaticProps } from 'site/types';
-
-const SLUG = 'contact';
+import type { GetStaticProps } from 'next';
 
 export default function Contact(props: IContactPage) {
   const { pageData, contactCards, pageContent } = props;
@@ -54,12 +52,12 @@ export default function Contact(props: IContactPage) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<IContactPage> = async () => {
   let pageData = Object();
   let pageContent = new Array();
   let contactCards = new Array();
   try {
-    pageData = await getPage(SLUG);
+    pageData = await getPage('contact');
     pageContent = await getPageContent(pageData?.id ?? null);
     contactCards = await getContent('contactCard', { include: 4 });
   } catch (err) {

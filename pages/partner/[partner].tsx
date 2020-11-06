@@ -2,8 +2,7 @@ import { getContent } from 'site/util';
 import { SEO } from 'site/components';
 import { PartnerLayout } from 'site/layouts';
 
-import type { GetStaticProps, GetStaticPaths, IPartnerPage } from 'site/types';
-import type { GetStaticPropsContext } from 'next';
+import type { GetStaticProps, GetStaticPaths } from 'next';
 
 type UrlQuery = {
   partner: string;
@@ -21,9 +20,7 @@ export default function PartnerPage(props: IPartnerPage) {
   );
 }
 
-export const getStaticProps: GetStaticProps<IPartnerPage, UrlQuery> = async (
-  ctx: GetStaticPropsContext<UrlQuery>,
-) => {
+export const getStaticProps: GetStaticProps<IPartnerPage, UrlQuery> = async ctx => {
   const partner = ctx.params?.partner;
   let pageData = Object();
   try {
@@ -35,7 +32,7 @@ export const getStaticProps: GetStaticProps<IPartnerPage, UrlQuery> = async (
   return { props: { pageData } };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => ({
+export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
   paths: [{ params: { partner: 'vmware' } }, { params: { partner: 'veeam' } }],
   fallback: false,
 });

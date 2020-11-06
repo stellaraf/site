@@ -8,6 +8,34 @@ import { useLinkType } from 'site/hooks';
 
 import type { ILinkIcon, ILink } from './types';
 
+const BaseLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => {
+  const borderColor = useColorValue(
+    useToken('colors', 'original.secondary'),
+    useToken('colors', 'secondary.300'),
+  );
+  return (
+    <ChakraLink
+      ref={ref}
+      css={{
+        '&': {
+          '--link-color': borderColor,
+        },
+        'p > &, td > &': {
+          borderBottomWidth: '1px',
+          borderBottomColor: 'var(--link-color)',
+          color: 'inherit',
+          transition: 'all 0.2s ease-in-out',
+          '&:hover': {
+            textDecoration: 'none',
+            color: 'var(--link-color)',
+          },
+        },
+      }}
+      {...props}
+    />
+  );
+});
+
 /**
  * External Icon.
  */
@@ -21,7 +49,7 @@ const LinkIcon = (props: ILinkIcon) => (
  * Anchor link with proper external attributes set.
  */
 const ExternalLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => (
-  <ChakraLink isExternal ref={ref} {...props} />
+  <BaseLink isExternal ref={ref} {...props} />
 ));
 
 /**
@@ -42,35 +70,12 @@ const InternalLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => {
   if (router === null) {
     nextLinkProps = { prefetch: false };
   }
-  // const borderColor = useColorValue('original.secondary', 'secondary.300');
-  const borderColor = useColorValue(
-    useToken('colors', 'original.secondary'),
-    useToken('colors', 'secondary.300'),
-  );
 
   return (
     <NextLink href={href} {...nextLinkProps}>
-      <ChakraLink
-        ref={ref}
-        href={href}
-        css={{
-          '&': {
-            '--link-color': borderColor,
-          },
-          'p > &': {
-            borderBottomWidth: '1px',
-            borderBottomColor: 'var(--link-color)',
-            color: 'inherit',
-            transition: 'all 0.2s ease-in-out',
-            '&:hover': {
-              textDecoration: 'none',
-              color: 'var(--link-color)',
-            },
-          },
-        }}
-        {...rest}>
+      <BaseLink ref={ref} href={href} {...rest}>
         {children}
-      </ChakraLink>
+      </BaseLink>
     </NextLink>
   );
 });

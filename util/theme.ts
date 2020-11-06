@@ -12,14 +12,14 @@ import { mergeWith } from '@chakra-ui/utils';
 import { syncedStyles, heroButtons } from 'site/styles';
 
 import type {
-  CustomColors,
-  CustomTheme,
-  Dict,
   Fonts,
-  FontWeights,
-  Styles,
-  ThemeConfig,
   ThemeFonts,
+  CustomTheme,
+  FontWeights,
+  ThemeConfig,
+  CustomColors,
+  InitialTheme,
+  ChangeableColors,
 } from 'site/types';
 
 const radii = {
@@ -47,6 +47,24 @@ const fontSizes = {
   '5xl': '5rem',
   '6xl': '6rem',
 };
+
+const themeColorKeys = [
+  'secondary',
+  'tertiary',
+  'primary',
+  'orange',
+  'yellow',
+  'purple',
+  'green',
+  'light',
+  'gray',
+  'teal',
+  'blue',
+  'cyan',
+  'pink',
+  'dark',
+  'red',
+];
 
 export const isLight = (color: string) => readableColorIsBlack(color);
 export const isDark = (color: string) => !readableColorIsBlack(color);
@@ -132,6 +150,30 @@ const generatePalette = (palette: ThemeConfig['colors']): CustomColors => {
     } else {
       generatedPalette[color] = palette[color];
       generatedPalette[`${color}Alpha`] = alphaColors(palette[color]);
+      generatedPalette.blackSolid = {
+        50: '#444444',
+        100: '#3c3c3c',
+        200: '#353535',
+        300: '#2d2d2d',
+        400: '#262626',
+        500: '#1e1e1e',
+        600: '#171717',
+        700: '#0f0f0f',
+        800: '#080808',
+        900: '#000000',
+      };
+      generatedPalette.whiteSolid = {
+        50: '#ffffff',
+        100: '#f7f7f7',
+        200: '#f0f0f0',
+        300: '#e8e8e8',
+        400: '#e1e1e1',
+        500: '#d9d9d9',
+        600: '#d2d2d2',
+        700: '#cacaca',
+        800: '#c3c3c3',
+        900: '#bbbbbb',
+      };
     }
   });
   return generatedPalette;
@@ -158,6 +200,7 @@ const globalStyles = (props: Dict) => {
     [zIndexKeys]: {
       zIndex: 1,
     },
+    html: { scrollBehavior: 'smooth' },
     body: {
       backgroundColor: mode('original.light', 'original.dark')(props),
       color: mode('original.dark', 'original.light')(props),
@@ -209,13 +252,25 @@ const importFonts = (userFonts: Omit<Fonts, 'themeName'>): [ThemeFonts, FontWeig
   ];
 };
 
+function isColorKey(key: string): key is keyof ChangeableColors {
+  return themeColorKeys.includes(key);
+}
+
 const importColors = (userColors: ThemeConfig['colors']): CustomColors => {
   const generatedColors = generatePalette(userColors);
+  let original = {} as InitialTheme;
+
+  for (let [k, v] of Object.entries(userColors)) {
+    if (isColorKey(k)) {
+      original[k] = v;
+    }
+  }
+
   return {
     ...generatedColors,
     transparent: 'transparent',
     current: 'currentColor',
-    original: userColors,
+    original,
   };
 };
 

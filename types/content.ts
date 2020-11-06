@@ -1,6 +1,6 @@
 import type { Entry, ContentTypeLink, Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
-import type { ColorNames } from './theme';
+import type { ColorNames, InitialTheme } from './theme';
 import type { FormModels } from './forms';
 
 interface ContentRef {
@@ -153,10 +153,10 @@ export interface Bio {
   sortWeight: number;
 }
 
-interface Colors {
+type Colors = {
   themeName: string;
   [k: string]: string;
-}
+};
 
 export interface Fonts {
   themeName: string;
@@ -251,5 +251,69 @@ export interface IActions
     | 'callToActionBody'
     | 'callToActionIconColor'
   > {}
+
+export interface IDocsGroupEntry {
+  slug: string;
+  title: string;
+  subtitle?: string;
+  summary: Document;
+  sortWeight?: number;
+  footerTitle?: string;
+  footerGroup?: FooterGroupEntry;
+  showInCallToAction: boolean;
+  callToActionBody?: Document;
+  callToActionIcon?: AssetFields;
+  callToActionIconColor?: ColorNames;
+}
+
+export interface IDocsGroup extends IDocsGroupEntry {
+  items: IDocsArticle[];
+}
+
+export interface IDocsArticle {
+  title: string;
+  slug: string;
+  description: string;
+  docsGroup?: IDocsGroupEntry;
+  updatedAt: string;
+  showUpdatedDate: boolean;
+  body: Document;
+}
+
+export type TArticleButton = {
+  text: string;
+  link: string;
+};
+
+export type TAdmonitionTypes = 'Note' | 'Tip' | 'Information' | 'Warning' | 'Critical';
+
+export type TAdmonition = {
+  title?: string;
+  body: Document;
+  type?: TAdmonitionTypes;
+};
+
+export type TCustomBlocks =
+  | TArticleButton
+  | TMarkdownBlock
+  | TAdmonition
+  | TTableEntry
+  | TExpandable;
+
+export type TTableEntry = {
+  name: string;
+  data: { tableData: string[][]; useColumnHeader: boolean; useRowHeader: boolean };
+};
+
+export type TExpandable = {
+  title: string;
+  body: Document;
+  useDefaultTitle: boolean;
+};
+
+export type TMarkdownBlock = {
+  title: string;
+  body: string;
+};
 
 export type { Entry, EntryCollection } from 'contentful';

@@ -1,12 +1,8 @@
 import { getPage, getPageContent } from 'site/util';
 import { ContentSection, Hero, SEO, GetStarted } from 'site/components';
 
-import type { PageProps, GetStaticProps, GetStaticPaths } from 'site/types';
-import type { GetStaticPropsContext } from 'next';
-
-type UrlQuery = {
-  product: string;
-};
+import type { PageProps } from 'site/types';
+import type { GetStaticProps, GetStaticPaths } from 'next';
 
 export default function CloudPage(props: PageProps) {
   const { pageData, pageContent } = props;
@@ -26,9 +22,11 @@ export default function CloudPage(props: PageProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async (
-  ctx: GetStaticPropsContext<UrlQuery>,
-) => {
+type UrlQuery = {
+  product: string;
+};
+
+export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const product = ctx.params?.product ?? 'notfound';
   let pageData = Object();
   let pageContent = Array();
@@ -41,7 +39,7 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async (
   return { props: { pageData, pageContent } };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => ({
+export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
   paths: [],
   fallback: false,
 });

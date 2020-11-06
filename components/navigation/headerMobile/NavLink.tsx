@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Heading, Icon } from '@chakra-ui/core';
 import { FaArrowRight as RightArrow } from '@meronex/icons/fa';
 import { Link } from 'site/components';

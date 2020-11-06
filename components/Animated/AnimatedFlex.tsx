@@ -4,10 +4,9 @@ import { motion } from 'framer-motion';
 
 import type { MotionProps } from 'framer-motion';
 import type { FlexProps } from '@chakra-ui/core';
-import type { Animated } from 'site/types';
 
 interface IAnimatedBox extends Animated<FlexProps> {
-  transition: MotionProps['transition'];
+  transition?: MotionProps['transition'];
 }
 
 export const AnimatedFlex = forwardRef<HTMLDivElement, IAnimatedBox>((props, ref) => {

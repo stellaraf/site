@@ -13,7 +13,6 @@ import { MobileForm } from './MobileForm';
 import type { MouseEvent } from 'react';
 import type { StackProps, FlexProps } from '@chakra-ui/core';
 import type { IconType } from '@meronex/icons';
-import type { Animated } from 'site/types';
 import type { IOptionsResponsive, TContactQuery, TSupportedFormQuery } from '../types';
 import type { FormHandlers } from '../Forms/types';
 

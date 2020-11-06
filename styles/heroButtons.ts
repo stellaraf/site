@@ -1,7 +1,5 @@
 import { mode } from '@chakra-ui/theme-tools';
 
-import type { Dict } from 'site/types';
-
 const common = { px: 3, py: 1, lineHeight: 1.5, borderRadius: 'lg' };
 
 export const heroButtons = {

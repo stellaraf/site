@@ -14,7 +14,6 @@ const _Header = (props: IHeader) => {
   const [containerRef, headingRef, shouldResize] = useScaledText<HTMLDivElement>([name]);
   const border = useColorValue('blackAlpha.300', 'whiteAlpha.300');
 
-  console.log('component says', shouldResize);
   return (
     <Wrap justify={{ base: 'center', lg: 'space-between' }} align="center" ref={containerRef}>
       <WrapItem>

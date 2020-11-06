@@ -2,25 +2,31 @@ import { createClient } from 'contentful';
 import { slug } from './generic';
 
 import type {
+  Entry,
+  IActions,
   PageAttrs,
+  PageParsed,
+  FooterItem,
+  IDocsGroup,
   PageContent,
+  FooterGroup,
+  GlobalConfig,
+  IDocsArticle,
   HomepageContent,
   GlobalConfigPre,
-  GlobalConfig,
-  Entry,
   EntryCollection,
-  PageParsed,
-  PageContentParsed,
-  FooterItem,
-  AnyEntry,
-  FooterGroup,
+  IDocsGroupEntry,
   FooterGroupEntry,
-  IActions,
+  PageContentParsed,
   IMeasuredGeoPoint,
 } from 'site/types';
 
-const debug = (obj: any) => {
-  return console.dir(obj, { depth: null });
+const debug = (item: any, exclude: string[] = []) => {
+  if (item.constructor.name === 'Object') {
+    let excluded = Object.keys(item).reduce(obj => removeKey(item, obj, exclude), Object());
+    return console.dir(excluded, { depth: null });
+  }
+  return console.dir(item, { depth: null });
 };
 
 const client = createClient({
@@ -31,22 +37,22 @@ const client = createClient({
 /**
  * Query Contentful for a specific content_type
  */
-export const contentQuery = async (
+export async function contentQuery<T extends unknown>(
   contentType: string,
   query?: object,
-): Promise<EntryCollection<any>> => {
+): Promise<EntryCollection<T>> {
   let queryParams = { content_type: contentType };
   if (query) {
     queryParams = { ...queryParams, ...query };
   }
   try {
-    const entries = await client.getEntries(queryParams);
+    const entries = await client.getEntries<T>(queryParams);
     return entries;
   } catch (err) {
     console.error(err);
     throw err;
   }
-};
+}
 
 export const getEntry = async (entryId: string, query: Object = Object()): Promise<Entry<any>> => {
   try {
@@ -60,7 +66,7 @@ export const getEntry = async (entryId: string, query: Object = Object()): Promi
 
 export const getGeoPoints = async (): Promise<IMeasuredGeoPoint[]> => {
   let geoPoints = [] as IMeasuredGeoPoint[];
-  const data = await contentQuery('orionLocation');
+  const data = await contentQuery<IMeasuredGeoPoint>('orionLocation');
   if (data.total !== 0) {
     /**
      * Add default values for cloud locations - this ensures type safety but also signals to
@@ -110,10 +116,22 @@ const getRefValue = (val: any, includes: any = Object()): any => {
   } else if (item.constructor.name === 'Object') {
     item = Object(val);
     if ('sys' in item) {
+      let __type = '';
       if (item.sys.type in includes) {
         for (let ref of includes[item.sys.type] ?? []) {
           if (ref?.sys?.id === item.sys?.id) {
-            item = { id: item.sys.id, updatedAt: item.sys.updatedAt, ...ref.fields };
+            if ('contentType' in ref.sys) {
+              __type = ref.sys.contentType.sys.id;
+            } else if (ref.sys.type === 'Asset') {
+              __type = ref.fields.file.contentType;
+            }
+
+            item = {
+              __type,
+              id: item.sys.id,
+              updatedAt: item.sys.updatedAt,
+              ...ref.fields,
+            };
           }
         }
       }
@@ -123,9 +141,9 @@ const getRefValue = (val: any, includes: any = Object()): any => {
     return item.map((i: any) => getRefValue(i, includes));
   }
   if (item.constructor.name === 'Object') {
-    for (let [k1, v1] of Object.entries<any>(item)) {
-      if (v1.constructor.name === 'Object') {
-        item[k1] = getRefValue(v1, includes);
+    for (let [k, v] of Object.entries<any>(item)) {
+      if (v.constructor.name === 'Object') {
+        item[k] = getRefValue(v, includes);
       }
     }
   }
@@ -184,7 +202,7 @@ const flattenObj = (item: object, [...del]: string[] = []): object => {
 
 export const getHomePage = async (): Promise<HomepageContent> => {
   let pageContent = Object();
-  const data = await contentQuery('homepage');
+  const data = await contentQuery<HomepageContent>('homepage');
 
   if (data.total !== 0) {
     const item = data.items?.[0] ?? Object();
@@ -215,9 +233,13 @@ export const getGlobalConfig = async (): Promise<GlobalConfig> => {
 /**
  * Recursively parse the data from referenced entries.
  */
-function* parseEntryItems(items: AnyEntry[], includes: EntryCollection<any>): Generator<any> {
+function* parseEntryItems<E>(items: Entry<E>[], includes: EntryCollection<any>): Generator<E> {
   for (let i of items) {
     let item = Object();
+
+    if ('sys' in i && 'contentType' in i.sys && 'sys' in i.sys.contentType) {
+      item.__type = i.sys.contentType.sys.id;
+    }
     for (let [k, v] of Object.entries(i.fields)) {
       item[k] = getRefValue(v, includes);
     }
@@ -233,39 +255,56 @@ function isPageContent(obj: any): obj is PageContentParsed {
   return 'paragraphs' in obj;
 }
 
-function* parseFooterItems(data: EntryCollection<PageAttrs | PageContent>): Generator<FooterItem> {
+function isDocsGroups(obj: any): obj is IDocsGroup {
+  const type = obj.__type ?? '';
+  return type === 'docsGroup';
+}
+
+function* parseFooterItems(
+  data: EntryCollection<PageAttrs | PageContent | IDocsGroupEntry>,
+): Generator<FooterItem> {
   if (data.total !== 0) {
     const items = data.items;
     const includes = data.includes;
 
     // Page OR Page Content if it has a footerGroup
-    const entryItems: Generator<PageParsed | PageContentParsed> = parseEntryItems(items, includes);
+    const entryItems = parseEntryItems(items, includes) as Generator<
+      PageParsed | PageContentParsed | IDocsGroup
+    >;
 
     for (let entryItem of entryItems) {
       // Single footer link
-      let footerItem = {
-        // Reference to parent group
-        footerGroup: {
-          title: entryItem.footerGroup.title,
-          sortWeight: entryItem.footerGroup.sortWeight,
-        },
-        // Link attributes
-        title: entryItem.footerTitle ?? entryItem.title,
-        href: '#',
-        // Set a very high default sortWeight in case one is not set.
-        sortWeight: 255,
-      };
-
-      if (entryItem.footerGroup && isPageAttrs(entryItem)) {
-        footerItem.href = `/${entryItem.slug}`;
-        // Sort Pages over Page Content.
-        footerItem.sortWeight = 10;
-      } else if (entryItem.footerGroup && isPageContent(entryItem)) {
-        footerItem.href = slug(entryItem.title, entryItem.page.slug);
-        // Add 1 to the sortWeight to account for the page.
-        footerItem.sortWeight = entryItem.sortWeight + 10;
+      if (typeof entryItem.footerGroup !== 'undefined') {
+        let footerItem = {
+          // Reference to parent group
+          footerGroup: {
+            title: entryItem.footerGroup.title,
+            sortWeight: entryItem.footerGroup.sortWeight,
+          },
+          // Link attributes
+          title: entryItem.footerTitle ?? entryItem.title,
+          href: '#',
+          // Set a very high default sortWeight in case one is not set.
+          sortWeight: 255,
+        };
+        if (entryItem.footerGroup && isDocsGroups(entryItem)) {
+          if (entryItem.slug !== 'docs') {
+            footerItem.href = `/docs/${entryItem.slug}`;
+          } else {
+            footerItem.href = `/${entryItem.slug}`;
+          }
+          footerItem.sortWeight = 10;
+        } else if (entryItem.footerGroup && isPageAttrs(entryItem)) {
+          footerItem.href = `/${entryItem.slug}`;
+          // Sort Pages over Page Content.
+          footerItem.sortWeight = 10;
+        } else if (entryItem.footerGroup && isPageContent(entryItem)) {
+          footerItem.href = slug(entryItem.title, entryItem.page.slug);
+          // Add 1 to the sortWeight to account for the page.
+          footerItem.sortWeight = entryItem.sortWeight + 10;
+        }
+        yield footerItem;
       }
-      yield footerItem;
     }
   }
 }
@@ -278,7 +317,7 @@ function* parseExternalFooterLinks(data: EntryCollection<FooterGroupEntry>): Gen
     const { items, includes } = data;
 
     // All Footer Groups with external links referenced.
-    const entryItems: Generator<FooterGroup> = parseEntryItems(items, includes);
+    const entryItems = parseEntryItems(items, includes) as Generator<FooterGroup>;
 
     for (let entryItem of entryItems) {
       if (entryItem.externalLinks) {
@@ -307,7 +346,7 @@ function* parseExternalFooterLinks(data: EntryCollection<FooterGroupEntry>): Gen
  */
 export async function getPageContent(pageId: string): Promise<PageContent[]> {
   let pageContent = [];
-  const data = await contentQuery('pageContent', {
+  const data = await contentQuery<PageContent>('pageContent', {
     'fields.page.sys.id': pageId,
   });
 
@@ -330,9 +369,12 @@ export async function getPageContent(pageId: string): Promise<PageContent[]> {
 /**
  * Retrieve & parse any content type.
  */
-export async function getContent(contentType: string, filters: object = {}): Promise<Array<any>> {
+export async function getContent<T extends unknown>(
+  contentType: string,
+  filters: object = {},
+): Promise<Array<T>> {
   let content = [];
-  const data = await contentQuery(contentType, filters);
+  const data = await contentQuery<T>(contentType, filters);
   if (data.total !== 0) {
     const { items, includes = {} } = data;
     for (let item of parseEntryItems(items, includes)) {
@@ -351,13 +393,18 @@ export async function getContent(contentType: string, filters: object = {}): Pro
  */
 export async function getFooterItems(): Promise<FooterItem[]> {
   let footerItems = [];
-  const pageContentData = await contentQuery('pageContent', { 'fields.footerGroup[exists]': true });
-  const pageData = await contentQuery('page', { 'fields.footerGroup[exists]': true });
-  const footerGroups = await contentQuery('footerGroup', {
+  const pageContentData = await contentQuery<PageContent>('pageContent', {
+    'fields.footerGroup[exists]': true,
+  });
+  const pageData = await contentQuery<PageAttrs>('page', { 'fields.footerGroup[exists]': true });
+  const docsGroups = await contentQuery<IDocsGroup>('docsGroup', {
+    'fields.footerGroup[exists]': true,
+  });
+  const footerGroups = await contentQuery<FooterGroupEntry>('footerGroup', {
     'fields.externalLinks[exists]': true,
   });
   // Parse Page & PageContent references as they use the same model.
-  for (let data of [pageContentData, pageData]) {
+  for (let data of [pageContentData, pageData, docsGroups]) {
     footerItems.push(...parseFooterItems(data));
   }
   // Because externalLinks are attached to a different model, they must be parsed
@@ -365,6 +412,7 @@ export async function getFooterItems(): Promise<FooterItem[]> {
   for (let link of parseExternalFooterLinks(footerGroups)) {
     footerItems.push(link);
   }
+
   return footerItems;
 }
 
@@ -415,4 +463,22 @@ export async function getActions(): Promise<IActions[]> {
     });
   }
   return actions;
+}
+
+export async function getDocsGroups(): Promise<IDocsGroup[]> {
+  let docsGroups = [] as IDocsGroup[];
+  let groups = await contentQuery<IDocsGroupEntry>('docsGroup');
+  let articles = await contentQuery<IDocsArticle>('docsArticle');
+  docsGroups = [...parseEntryItems<IDocsGroupEntry>(groups.items, groups.includes)].map(d => ({
+    ...d,
+    items: [] as IDocsArticle[],
+  }));
+  for (const article of parseEntryItems<IDocsArticle>(articles.items, articles.includes)) {
+    for (const group of docsGroups) {
+      if (article.docsGroup?.title === group.title) {
+        group.items.push(article);
+      }
+    }
+  }
+  return docsGroups;
 }

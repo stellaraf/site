@@ -17,5 +17,8 @@ export default {
       link: '/consulting',
     },
   ],
-  right: [{ title: 'About', link: '/about' }],
+  right: [
+    { title: 'About', link: '/about' },
+    { title: 'Docs', link: '/docs' },
+  ],
 };

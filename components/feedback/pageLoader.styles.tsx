@@ -1,5 +1,6 @@
 import Head from 'next/head';
-export const LoaderStyles = () => (
+
+export const PageLoaderStyles = () => (
   <Head>
     <style>
       {`

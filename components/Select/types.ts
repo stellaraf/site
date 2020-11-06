@@ -10,7 +10,7 @@ import type {
   PlaceholderProps,
 } from 'react-select';
 import type { BoxProps } from '@chakra-ui/core';
-import type { CustomColors, CustomTheme } from 'site/types';
+import type { ColorNames, CustomTheme } from 'site/types';
 
 export interface ISelectState {
   [k: string]: string[];
@@ -38,11 +38,11 @@ export interface ISelect extends TBoxAsReactSelect {
   multi?: boolean;
   onSelect?: (v: TSelectOption[]) => void;
   onChange?: (c: TSelectOption | TSelectOption[]) => void;
-  colorScheme?: keyof CustomColors;
+  colorScheme?: ColorNames;
 }
 
 export interface ISelectContext {
-  colorScheme: keyof CustomColors;
+  colorScheme: ColorNames;
   theme: CustomTheme;
   colorMode: 'light' | 'dark';
   isOpen: boolean;

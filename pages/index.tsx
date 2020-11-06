@@ -5,7 +5,7 @@ import { useGradient, useNavLogo, useRef } from 'site/hooks';
 import { getHomePage } from 'site/util';
 import { useResponsiveStyle } from 'site/styles';
 
-import type { HomeProps, HomeStaticProps, GetStaticProps } from 'site/types';
+import type { GetStaticProps } from 'next';
 
 export default function Home(props: HomeProps) {
   const { pageContent } = props;
@@ -57,7 +57,7 @@ export default function Home(props: HomeProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (): Promise<HomeStaticProps> => {
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   let pageContent = Object();
   try {
     pageContent = await getHomePage();

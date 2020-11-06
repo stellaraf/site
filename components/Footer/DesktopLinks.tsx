@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Box, List, ListItem, Text, SimpleGrid } from '@chakra-ui/core';
 import { Link } from 'site/components';
 
@@ -14,7 +13,7 @@ export const DesktopLinks = (props: IFooterLinks) => {
     ),
   ];
   return (
-    <SimpleGrid columns={{ base: 2, lg: 4 }} spacing={{ base: 8, lg: 16 }} {...rest}>
+    <SimpleGrid columns={{ base: 2, lg: sorted.length }} spacing={{ base: 8, lg: 16 }} {...rest}>
       {sorted.map((title, i) => {
         const items = groups.filter(g => g.footerGroup?.title === title);
         return (

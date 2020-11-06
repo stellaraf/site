@@ -1,6 +1,5 @@
 import { createState, useState } from '@hookstate/core';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
-import type { ReactRef } from 'site/types';
 
 const showNavLogoState = createState<boolean>(false);
 export const useNavLogoState = () => useState(showNavLogoState);

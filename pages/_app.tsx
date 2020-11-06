@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { BaseSEO } from 'site/components';
@@ -6,13 +5,13 @@ import { Provider } from 'site/context';
 import { useMouseTrap, useGoogleAnalytics } from 'site/hooks';
 import { SiteLayout } from 'site/layouts';
 import { useKonamiState } from 'site/state';
-import { getGlobalConfig, getFooterItems, getActions } from 'site/util';
+import { getGlobalConfig, getFooterItems, getActions, getDocsGroups } from 'site/util';
 
-import type { SiteProps } from 'site/types';
+import type { IDocsGroup } from 'site/types';
 
 const Site = (props: SiteProps) => {
   const { Component, pageProps, appProps, router } = props;
-  const { globalConfig, footerGroups, actions } = appProps;
+  const { globalConfig, footerGroups, actions, docsGroups } = appProps;
 
   const { initializeAnalytics, trackPage } = useGoogleAnalytics();
 
@@ -37,7 +36,7 @@ const Site = (props: SiteProps) => {
       <Head>
         <meta name="viewport" content="width=device-width" />
       </Head>
-      <Provider appConfig={globalConfig}>
+      <Provider appConfig={globalConfig} docsGroups={docsGroups}>
         <BaseSEO />
         <SiteLayout footerGroups={footerGroups} actions={actions}>
           <Component {...pageProps} />
@@ -51,12 +50,14 @@ Site.getInitialProps = async () => {
   let globalConfig = Object();
   let footerGroups = Object();
   let actions = new Array();
+  let docsGroups = [] as IDocsGroup[];
 
   globalConfig = await getGlobalConfig();
   footerGroups = await getFooterItems();
   actions = await getActions();
+  docsGroups = await getDocsGroups();
 
-  return { appProps: { globalConfig, footerGroups, actions } };
+  return { appProps: { globalConfig, footerGroups, actions, docsGroups } };
 };
 
 export default Site;

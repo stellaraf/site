@@ -1,10 +1,9 @@
-import * as React from 'react';
 import { useRouter } from 'next/router';
 import { Box, Flex } from '@chakra-ui/core';
 import { Link, Logo } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useNavLogoState } from 'site/hooks';
-import { NavLink, LinkGroup, ContactButton } from './Links';
+import { LinkGroup, ContactButton } from './Links';
 import { HeaderLogo } from './Logo';
 
 import type { BoxProps, FlexProps } from './types';
@@ -67,7 +66,6 @@ export const DHeader = (props: BoxProps) => {
         <NavGroup>
           <LinkGroup side="left" />
           <LinkGroup side="right" />
-          <NavLink href="https://docs.stellar.tech">Docs</NavLink>
           <ContactButton />
         </NavGroup>
       </Navbar>
