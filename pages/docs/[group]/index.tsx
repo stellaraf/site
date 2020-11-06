@@ -51,7 +51,7 @@ export default function DocsGroupMain(props: IDocsGroupMain) {
     );
   }
 
-  const { title, subtitle } = props.pageData;
+  const { title, subtitle } = props.pageData ?? {};
   return (
     <>
       <SEO title={title} description={subtitle} />
