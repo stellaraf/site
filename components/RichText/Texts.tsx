@@ -1,7 +1,7 @@
-import { Box, Code as ChakraCode, Text } from '@chakra-ui/core';
+import { Box, Code as ChakraCode, Text, useStyles, useStyleConfig } from '@chakra-ui/core';
 import { useColorValue } from 'site/context';
 
-import type { BlockQuoteProps, CodeProps, ParagraphProps } from './types';
+import type { BlockQuoteProps, CodeProps, ParagraphProps, IInline, ICodeBlock } from './types';
 
 export const P = (props: ParagraphProps) => <Text my={8} {...props} />;
 
@@ -29,6 +29,40 @@ export const BlockQuote = (props: BlockQuoteProps) => {
 };
 
 export const Code = (props: CodeProps) => {
-  const scheme = useColorValue('blackAlpha', 'red');
-  return <ChakraCode fontSize="sm" colorScheme={scheme} {...props} />;
+  const scheme = useColorValue('gray', 'tertiary');
+  const sx = useStyles();
+  return <ChakraCode fontSize="sm" colorScheme={scheme} px={1} sx={sx} {...props} />;
+};
+
+export const Inline = (props: IInline) => {
+  const { node, ...rest } = props;
+  return (
+    <span key={node.data.target.sys.id} {...rest}>
+      type: {node.nodeType} id: {node.data.target.sys.id}
+    </span>
+  );
+};
+
+export const CodeBlock = (props: ICodeBlock) => {
+  const colorScheme = useColorValue('gray', 'tertiary');
+  const { borderRadius, px, ...sx } = useStyles();
+  const { bg, color } = useStyleConfig('Code', { colorScheme });
+
+  return (
+    <Box
+      sx={{ bg, color, ...sx }}
+      p={3}
+      mt={5}
+      as="pre"
+      border="1px"
+      rounded="md"
+      fontSize="sm"
+      fontFamily="mono"
+      width="max-content"
+      borderColor="inherit"
+      whiteSpace="pre-wrap"
+      css={{ '& > code': { background: 'unset', color: 'unset', padding: 0 } }}
+      {...props}
+    />
+  );
 };

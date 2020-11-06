@@ -1,21 +1,28 @@
 import type { ReactNode } from 'react';
-import type { CustomTheme, GlobalConfig, ThemeConfig } from 'site/types';
+import type { CustomTheme, GlobalConfig, ThemeConfig, IDocsGroup } from 'site/types';
 
 /**
  * Root Provider Props
  */
 export interface IProvider {
   appConfig: GlobalConfig;
+  docsGroups: IDocsGroup[];
   children: ReactNode;
 }
 
 /**
  * Config Provider Types
  */
-export interface IGlobalConfigCtx extends Omit<GlobalConfig, 'theme'> {}
+
+type TGlobalConfig = Omit<GlobalConfig, 'theme'>;
+
+export interface IGlobalConfigCtx extends TGlobalConfig {
+  docsGroups: IDocsGroup[];
+}
 
 export interface IConfigProvider {
-  globalConfig: IGlobalConfigCtx;
+  globalConfig: TGlobalConfig;
+  docsGroups: IDocsGroup[];
   children?: ReactNode;
 }
 
@@ -32,4 +39,11 @@ export interface IUIProvider {
 
 export interface ISyncedStyleProvider {
   children: ReactNode;
+}
+
+/**
+ * Docs Layout Provider
+ */
+export interface IDocsCtx {
+  groups: IDocsGroup[];
 }

@@ -8,7 +8,6 @@ import type {
   ModalProps,
   UseModalProps,
 } from '@chakra-ui/core';
-import { Animated } from 'site/types';
 
 export interface IModalWrapper
   extends UseModalProps,

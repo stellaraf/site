@@ -1,7 +1,7 @@
 import type { InputProps } from '@chakra-ui/core';
 import type { State } from '@hookstate/core';
-import type { Control, UseFormMethods } from 'react-hook-form';
-import type { IPartnerPage, IFormModelTrial, IFormDataTrial } from 'site/types';
+import type { Control } from 'react-hook-form';
+import type { IFormModelTrial, IFormDataTrial } from 'site/types';
 
 export type IPartnerLayout = IPartnerPage['pageData'];
 

@@ -1,7 +1,7 @@
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { useColorMode } from 'site/context';
 import { useSyncedStyleVariant } from 'site/styles';
-import type { ActiveSectionEffectProps, ReactRef } from 'site/types';
+import type { ActiveSectionEffectProps } from 'site/types';
 
 /**
  * Set state based on the currently active section on a page

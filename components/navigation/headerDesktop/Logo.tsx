@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { forwardRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, Logo } from 'site/components';

@@ -6,8 +6,7 @@ import { ContentSection, Hero, SEO, useDataCenter, GetStarted } from 'site/compo
 import { useAlert } from 'site/hooks';
 import { useCloudLocations } from 'site/state';
 
-import type { CloudProps, GetStaticProps } from 'site/types';
-
+import type { GetStaticProps } from 'next';
 import type { IUSMap } from 'site/components';
 
 const USMap = dynamic<IUSMap>(() => import('site/components').then(i => i.USMap));
@@ -64,7 +63,7 @@ export default function Cloud(props: CloudProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<CloudProps> = async () => {
   let geoData = Object();
   let geoPoints = Array();
   let pageData = Object();

@@ -7,10 +7,10 @@ export { useTheme } from './UI';
 export { useColorMode, useColorValue } from './UI';
 
 export const Provider = (props: IProvider) => {
-  const { children, appConfig } = props;
+  const { children, appConfig, docsGroups } = props;
   const { theme, ...globalConfig } = appConfig;
   return (
-    <ConfigProvider globalConfig={globalConfig}>
+    <ConfigProvider globalConfig={globalConfig} docsGroups={docsGroups}>
       <UIProvider theme={theme}>{children}</UIProvider>
     </ConfigProvider>
   );

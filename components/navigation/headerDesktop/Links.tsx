@@ -1,6 +1,7 @@
-import * as React from 'react';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { Button, Link } from 'site/components';
+import { Link as ChakraLink } from '@chakra-ui/core';
+import { Button } from 'site/components';
 import { useColorValue } from 'site/context';
 import navConfig from '../config';
 
@@ -30,17 +31,19 @@ export const NavLink = (props: INavLink) => {
     };
   }
   return (
-    <Link
-      py={4}
-      px={{ lg: 2, xl: 4 }}
-      mr={{ lg: 4, xl: 8 }}
-      pos="relative"
-      fontWeight="medium"
-      transition="all 0.2s"
-      _hover={{ textDecoration: 'none', transform: 'translateY(-2px)', opacity: 0.8 }}
-      {...linkProps}
-      {...rest}
-    />
+    <NextLink href={props.href ?? '/'}>
+      <ChakraLink
+        py={4}
+        px={{ lg: 2, xl: 4 }}
+        mr={{ lg: 4, xl: 8 }}
+        pos="relative"
+        fontWeight="medium"
+        transition="all 0.2s"
+        _hover={{ textDecoration: 'none', transform: 'translateY(-2px)', opacity: 0.8 }}
+        {...linkProps}
+        {...rest}
+      />
+    </NextLink>
   );
 };
 

@@ -1,23 +1,30 @@
 import { useMemo } from 'react';
-import { Box, Divider } from '@chakra-ui/core';
+import { Divider } from '@chakra-ui/core';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Link } from 'site/components';
-import { H1, H2, H3, H4, H5, H6, P, BlockQuote, Ul, Ol, Li, Code } from 'site/components';
+import {
+  P,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
+  Ul,
+  Ol,
+  Li,
+  Link,
+  Code,
+  Asset,
+  Inline,
+  BlockQuote,
+  CustomBlock,
+} from 'site/components';
 
-import type { ReactNode } from 'react';
+import type { Document, Block } from '@contentful/rich-text-types';
 import type { RenderNode, RenderMark } from '@contentful/rich-text-react-renderer';
-import type { Document, Inline } from '@contentful/rich-text-types';
 
-const inline = (_: string, node: Inline): ReactNode => {
-  return (
-    <span key={node.data.target.sys.id}>
-      type: {node.nodeType} id: {node.data.target.sys.id}
-    </span>
-  );
-};
-
-const renderNode: RenderNode = {
+const renderNode = {
   [BLOCKS.PARAGRAPH]: (_, children) => <P>{children}</P>,
   [BLOCKS.DOCUMENT]: (_, children) => children,
   [BLOCKS.HEADING_1]: (_, children) => <H1>{children}</H1>,
@@ -26,31 +33,51 @@ const renderNode: RenderNode = {
   [BLOCKS.HEADING_4]: (_, children) => <H4>{children}</H4>,
   [BLOCKS.HEADING_5]: (_, children) => <H5>{children}</H5>,
   [BLOCKS.HEADING_6]: (_, children) => <H6>{children}</H6>,
-  [BLOCKS.EMBEDDED_ENTRY]: (_, children) => <Box>{children}</Box>,
+  [BLOCKS.EMBEDDED_ENTRY]: block => <CustomBlock {...block} />,
+  [BLOCKS.EMBEDDED_ASSET]: node => <Asset {...node.data.target.fields} />,
   [BLOCKS.UL_LIST]: (_, children) => <Ul>{children}</Ul>,
   [BLOCKS.OL_LIST]: (_, children) => <Ol>{children}</Ol>,
   [BLOCKS.LIST_ITEM]: (_, children) => <Li>{children}</Li>,
   [BLOCKS.QUOTE]: (_, children) => <BlockQuote>{children}</BlockQuote>,
   [BLOCKS.HR]: () => <Divider />,
-  [INLINES.ASSET_HYPERLINK]: node => inline(INLINES.ASSET_HYPERLINK, node as Inline),
-  [INLINES.ENTRY_HYPERLINK]: node => inline(INLINES.ENTRY_HYPERLINK, node as Inline),
-  [INLINES.EMBEDDED_ENTRY]: node => inline(INLINES.EMBEDDED_ENTRY, node as Inline),
+  [INLINES.ASSET_HYPERLINK]: node => <Inline type={INLINES.ASSET_HYPERLINK} node={node} />,
+  [INLINES.ENTRY_HYPERLINK]: node => <Inline type={INLINES.ENTRY_HYPERLINK} node={node} />,
+  [INLINES.EMBEDDED_ENTRY]: node => <Inline type={INLINES.EMBEDDED_ENTRY} node={node} />,
   [INLINES.HYPERLINK]: (node, children) => <Link href={node.data.uri}>{children}</Link>,
-};
+} as RenderNode;
 
-const renderMark: RenderMark = {
+const renderMark = {
   [MARKS.BOLD]: text => <strong>{text}</strong>,
   [MARKS.ITALIC]: text => <em>{text}</em>,
   [MARKS.UNDERLINE]: text => <u>{text}</u>,
   [MARKS.CODE]: text => <Code>{text}</Code>,
-};
+} as RenderMark;
 
-export function useRender(renderable?: Document | null, [...deps]: any[] = []) {
+export function useRender(renderable?: Document | null, deps: any[] = [], exclude: string[] = []) {
   if (!renderable) {
     return null;
   }
   if (deps.length === 0) {
     deps = [renderable];
+  }
+  if (exclude.length !== 0) {
+    for (let ex of exclude) {
+      const pattern = new RegExp(ex, 'gi');
+      if ('content' in renderable && renderable.content.constructor.name === 'Array') {
+        for (const [idx, content] of Object.entries(renderable.content)) {
+          let contentType = null;
+          const entryType = content.data?.target?.sys?.type as string | null;
+          if (entryType === 'Entry') {
+            contentType = content.data?.target?.sys?.contentType?.sys?.id as string | null;
+          } else if (entryType === 'Asset') {
+            contentType = content.data?.target?.fields?.file?.contentType as string | null;
+          }
+          if ((typeof contentType === 'string' && contentType.match(pattern)?.length) ?? 0 !== 0) {
+            renderable?.content?.splice(Number(idx));
+          }
+        }
+      }
+    }
   }
   return useMemo(() => documentToReactComponents(renderable, { renderNode, renderMark }), deps);
 }

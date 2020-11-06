@@ -14,7 +14,6 @@ import type { MouseEvent } from 'react';
 import type { StackProps, FlexProps } from '@chakra-ui/core';
 import type { IconType } from '@meronex/icons';
 import type { Variants } from 'framer-motion';
-import type { Animated } from 'site/types';
 import type {
   IOptionsResponsive,
   IMotionItems,

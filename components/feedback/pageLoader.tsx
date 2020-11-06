@@ -1,9 +1,8 @@
-import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { LoaderStyles } from './LoaderStyles';
+import { PageLoaderStyles } from './pageLoader.styles';
 
-export const Loader = () => {
+export const PageLoader = () => {
   const router = useRouter();
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -22,7 +21,7 @@ export const Loader = () => {
   }, []);
   return (
     <>
-      <LoaderStyles />
+      <PageLoaderStyles />
       <div className="grid" style={{ opacity: +show, zIndex: show ? 5000 : 0 }}>
         <div className="center">
           <svg

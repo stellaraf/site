@@ -11,4 +11,7 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   devIndicators: { autoPrerender: false },
   poweredByHeader: false,
+  images: {
+    domains: ['images.ctfassets.net'],
+  },
 });

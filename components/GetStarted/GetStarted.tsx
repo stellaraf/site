@@ -26,47 +26,45 @@ export const GetStarted = (props: IGetStarted) => {
   );
   const my = useColorValue({ base: 4, lg: 16, xl: 64 }, { base: 32, xl: 64 });
   return (
-    <>
-      <Center
-        bg={isDarkMode ? glow.backgroundColor : bg}
-        py={16}
-        my={my}
-        w="100%"
-        minH="xs"
-        as="section"
-        pos="relative"
-        overflow="hidden"
-        transition="box-shadow, background 0.2s ease-in-out"
-        px={{ base: 4, lg: 16, xl: 64 }}
-        boxShadow={isDarkMode ? glow.boxShadow : undefined}
-        {...rStyles}
-        {...rest}>
-        {!isDarkMode && <Ripple start={rippleStart} stop={bg} />}
-        <VStack spacing={{ base: 4, lg: 8 }} color={color}>
-          <VStack>
-            <Heading as="h2" fontSize="2xl">
-              {titleMe(title)}
+    <Center
+      bg={isDarkMode ? glow.backgroundColor : bg}
+      py={16}
+      my={my}
+      w="100%"
+      minH="xs"
+      as="section"
+      pos="relative"
+      overflow="hidden"
+      transition="box-shadow, background 0.2s ease-in-out"
+      px={{ base: 4, lg: 16, xl: 64 }}
+      boxShadow={isDarkMode ? glow.boxShadow : undefined}
+      {...rStyles}
+      {...rest}>
+      {!isDarkMode && <Ripple start={rippleStart} stop={bg} />}
+      <VStack spacing={{ base: 4, lg: 8 }} color={color}>
+        <VStack>
+          <Heading as="h2" fontSize="2xl">
+            {titleMe(title)}
+          </Heading>
+          {subtitle && (
+            <Heading as="h3" fontSize="lg" fontWeight="light">
+              {titleMe(subtitle)}
             </Heading>
-            {subtitle && (
-              <Heading as="h3" fontSize="lg" fontWeight="light">
-                {titleMe(subtitle)}
-              </Heading>
-            )}
-          </VStack>
-          {body && <Divider bg={color} />}
-          {body && renderedBody}
-          {hasButton && (
-            <Button
-              color={color}
-              variant="outline"
-              href={buttonLink}
-              borderColor={color}
-              _hover={{ backgroundColor: isDark ? 'blackAlpha.100' : 'whiteAlpha.100' }}>
-              {titleMe(buttonText!)}
-            </Button>
           )}
         </VStack>
-      </Center>
-    </>
+        {body && <Divider bg={color} />}
+        {body && renderedBody}
+        {hasButton && (
+          <Button
+            color={color}
+            variant="outline"
+            href={buttonLink}
+            borderColor={color}
+            _hover={{ backgroundColor: isDark ? 'blackAlpha.100' : 'whiteAlpha.100' }}>
+            {titleMe(buttonText!)}
+          </Button>
+        )}
+      </VStack>
+    </Center>
   );
 };

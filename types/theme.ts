@@ -1,13 +1,22 @@
 import type { Theme as DefaultTheme } from '@chakra-ui/theme';
 import type { ColorHues } from '@chakra-ui/theme/dist/types/foundations/colors';
 
-export interface DefaultColors {
+type NonChangeableColors = {
   transparent: string;
   current: string;
   black: string;
   white: string;
   whiteAlpha: ColorHues;
   blackAlpha: ColorHues;
+  linkedin: ColorHues;
+  facebook: ColorHues;
+  messenger: ColorHues;
+  whatsapp: ColorHues;
+  twitter: ColorHues;
+  telegram: ColorHues;
+};
+
+export type DefaultColors = {
   gray: ColorHues;
   red: ColorHues;
   orange: ColorHues;
@@ -18,22 +27,23 @@ export interface DefaultColors {
   cyan: ColorHues;
   purple: ColorHues;
   pink: ColorHues;
-  linkedin: ColorHues;
-  facebook: ColorHues;
-  messenger: ColorHues;
-  whatsapp: ColorHues;
-  twitter: ColorHues;
-  telegram: ColorHues;
-}
+};
 
-export interface ThemeColors {
+type ExtraColors = {
   primary: ColorHues;
   secondary: ColorHues;
   tertiary: ColorHues;
   dark: ColorHues;
   light: ColorHues;
-  original: { [key: string]: string };
-}
+  blackSolid: ColorHues;
+  whiteSolid: ColorHues;
+};
+
+export type InitialTheme = { [key in ColorNames]: string };
+
+export type OriginalColors = {
+  original: InitialTheme;
+};
 
 export interface Breakpoints {
   [n: number]: string;
@@ -43,9 +53,11 @@ export interface Breakpoints {
   xl: string;
 }
 
-export type CustomColors = DefaultColors & ThemeColors;
+export type ChangeableColors = DefaultColors & ExtraColors;
 
-export type ColorNames = keyof CustomColors;
+export type CustomColors = NonChangeableColors & DefaultColors & ExtraColors & OriginalColors;
+
+export type ColorNames = keyof (DefaultColors & ExtraColors);
 
 export interface CustomTheme extends Omit<DefaultTheme, 'colors' | 'breakpoints'> {
   colors: CustomColors;

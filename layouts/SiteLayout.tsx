@@ -13,7 +13,8 @@ import { SyncedStyleProvider } from 'site/context';
 import { useMobile } from 'site/hooks';
 import { Wrapper, Root, Main } from './common';
 
-import type { BoxProps, SiteLayoutProps } from './types';
+import type { BoxProps } from '@chakra-ui/core';
+import type { SiteLayoutProps } from './types';
 
 const Stars = dynamic<BoxProps>(() => import('site/components').then(i => i.Stars));
 

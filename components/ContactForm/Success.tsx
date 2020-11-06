@@ -1,11 +1,9 @@
-import * as React from 'react';
 import { VStack, Icon, Heading } from '@chakra-ui/core';
 import { motion } from 'framer-motion';
 import { FaCheckCircle as Check } from '@meronex/icons/fa';
 import { useColorValue } from 'site/context';
 
 import type { StackProps } from '@chakra-ui/core';
-import type { Animated } from 'site/types';
 
 const AnimatedVStack = (props: Animated<StackProps>) => <VStack as={motion.div} {...props} />;
 

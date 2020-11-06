@@ -5,7 +5,7 @@ import { useRef, useTitle } from 'site/hooks';
 import { useResponsiveStyle } from 'site/styles';
 
 import type { GetStaticProps } from 'next';
-import type { IAboutPage, ISection } from 'site/types';
+import type { IAboutPage } from 'site/types';
 
 const SLUG = 'about';
 

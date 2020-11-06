@@ -1,15 +1,13 @@
-import * as React from 'react';
 import { Box } from '@chakra-ui/core';
 import { getPage, getPageContent } from 'site/util';
 import { SEO, ContentSection } from 'site/components';
 import { useTitle } from 'site/hooks';
 
-import type { GetStaticProps, GetStaticPaths, NextPageContext } from 'next';
-import type { ILegalPage } from 'site/types';
+import type { GetStaticProps, GetStaticPaths } from 'next';
 
-interface Ctx extends NextPageContext {
-  params: { page: string };
-}
+type UrlQuery = {
+  page: string;
+};
 
 export default function LegalPage(props: ILegalPage) {
   const { pageData, pageContent } = props;
@@ -27,8 +25,8 @@ export default function LegalPage(props: ILegalPage) {
     </>
   );
 }
-export async function getStaticProps<S extends GetStaticProps, ILegalPage>(ctx: Ctx) {
-  const { page } = ctx.params;
+export const getStaticProps: GetStaticProps<ILegalPage, UrlQuery> = async ctx => {
+  const page = ctx.params?.page ?? '';
   let pageData = Object();
   let pageContent = Array();
   try {
@@ -39,7 +37,7 @@ export async function getStaticProps<S extends GetStaticProps, ILegalPage>(ctx: 
     throw err;
   }
   return { props: { pageData, pageContent } };
-}
+};
 
 export const getStaticPaths: GetStaticPaths = async () => ({
   paths: [{ params: { page: 'privacy' } }],
