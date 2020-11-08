@@ -6,4 +6,6 @@ export interface ILabel extends Omit<FlexProps, 'left' | 'right'> {
   right: ReactNode;
   leftColor: string;
   rightColor: string;
+  rightProps?: FlexProps;
+  leftProps?: FlexProps;
 }

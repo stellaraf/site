@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/core';
 import { useColorValue } from 'site/context';
 import { useOpposingColor, useRender, useTitle } from 'site/hooks';
+import { validProps } from 'site/util';
 
 const Note = dynamic<MeronexIcon>(() => import('@meronex/icons/go').then(i => i.GoNote));
 const Tip = dynamic<MeronexIcon>(() => import('@meronex/icons/go').then(i => i.GoLightBulb));
@@ -33,10 +34,11 @@ const iconMap = {
 const AdmonitionContainer = (props: BoxProps) => {
   return (
     <Box
-      my={{ base: 4, lg: 12 }}
       borderRadius="lg"
+      width="fit-content"
       p={{ base: 4, lg: 6 }}
       mx={{ base: 4, lg: 8 }}
+      my={{ base: 4, lg: 12 }}
       {...props}
     />
   );
@@ -114,7 +116,7 @@ export const Admonition = (props: TAdmonition) => {
   const color = useOpposingColor(bg);
 
   return (
-    <AdmonitionContainer bg={bg} color={color} {...rest}>
+    <AdmonitionContainer bg={bg} color={color} {...validProps(rest)}>
       <HStack isInline align="center" mb={6}>
         <AdmonitionIcon type={type} />
         {title && (

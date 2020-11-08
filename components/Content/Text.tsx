@@ -4,6 +4,7 @@ import { Label } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useTitle } from 'site/hooks';
 
+import type { FlexProps } from '@chakra-ui/core';
 import type { IContentBody, IUpdatedAt, TitleProps, ISubtitle } from './types';
 
 export const Title = forwardRef<HTMLHeadingElement, TitleProps>((props, ref) => {
@@ -32,7 +33,7 @@ export const Subtitle = (props: ISubtitle) => {
 export const Body = (props: IContentBody) => (
   <Box
     my={{ base: 8, lg: 16 }}
-    maxW={[null, null, '60%']}
+    maxW={{ lg: '60%' }}
     whiteSpace="pre-line"
     fontSize="lg"
     zIndex={1}
@@ -42,9 +43,21 @@ export const Body = (props: IContentBody) => (
 
 export const UpdatedAt = (props: IUpdatedAt) => {
   const { children } = props;
-  const leftColor = useColorValue('gray.300', 'gray.500');
-  const rightColor = useColorValue('gray.100', 'gray.300');
-  return (
-    <Label right="Last Updated" left={children} leftColor={leftColor} rightColor={rightColor} />
+
+  const label = useColorValue(
+    { leftColor: 'white', rightColor: 'whiteAlpha.300' },
+    {
+      leftColor: 'transparent',
+      rightColor: 'transparent',
+      border: '1px solid',
+      borderColor: 'whiteAlpha.300',
+      borderRadius: 'md',
+      rightProps: {
+        borderLeft: '1px solid',
+        borderLeftColor: 'whiteAlpha.300',
+      } as FlexProps,
+    },
   );
+
+  return <Label right="Last Updated" left={children} {...label} />;
 };

@@ -8,6 +8,7 @@ import {
 } from 'color2k';
 import { extendTheme } from '@chakra-ui/core';
 import { mode } from '@chakra-ui/theme-tools';
+import { propNames } from '@chakra-ui/styled-system';
 import { mergeWith } from '@chakra-ui/utils';
 import { syncedStyles, heroButtons } from 'site/styles';
 
@@ -310,3 +311,31 @@ export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
     components: { SyncedStyles: syncedStyles },
   });
 };
+
+export function validProps(props: Dict) {
+  let checked = {} as Dict;
+  const allPropNames = new Set([
+    ...propNames,
+    'focusBorderColor',
+    'errorBorderColor',
+    'isTruncated',
+    'layerStyle',
+    'textStyle',
+    'noOfLines',
+    'children',
+    'apply',
+    '__css',
+    'css',
+    'key',
+    'as',
+    'sx',
+  ]);
+  for (let [k, v] of Object.entries(props)) {
+    if (typeof v === 'function') {
+      checked[k] = v;
+    } else if (allPropNames.has(k)) {
+      checked[k] = v;
+    }
+  }
+  return checked;
+}

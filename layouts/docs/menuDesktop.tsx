@@ -24,8 +24,6 @@ const DMenuItem = (props: IDocsArticle) => {
   }
   return (
     <AnimatedFlex
-      px={3}
-      py={1}
       width="100%"
       align="center"
       borderRadius="md"
@@ -33,10 +31,13 @@ const DMenuItem = (props: IDocsArticle) => {
       layoutId="menuItem"
       bg={isCurrent ? bg : undefined}>
       <Link
+        px={3}
+        py={1}
         href={href}
         width="100%"
         opacity={isCurrent ? 1 : 0.8}
         transition="all 0.2s ease 0s"
+        css={{ '&:focus': { borderRadius: useToken('radii', 'lg') } }}
         _hover={{
           textDecoration: 'none',
           opacity: 1,
@@ -56,9 +57,9 @@ export const DMenuGroup = (props: IDocsGroup) => {
   return (
     <AccordionItem
       border="none"
-      _last={{ borderBottomWidth: { base: 1, lg: 0 } }}
+      borderTopWidth={{ base: 0 }}
       borderBottomWidth={{ base: 1, lg: 0 }}
-      borderTopWidth={{ base: 0 }}>
+      _last={{ borderBottomWidth: { base: 1, lg: 0 } }}>
       <AccordionButton
         _hover={{ backgroundColor, borderRadius: 'lg' }}
         css={{ '&:focus': { borderRadius } }}>

@@ -1,9 +1,18 @@
-import { Box, Code as ChakraCode, Text, useStyles, useStyleConfig } from '@chakra-ui/core';
+import {
+  Box,
+  Code as ChakraCode,
+  Text,
+  useStyles,
+  useStyleConfig,
+  useToken,
+} from '@chakra-ui/core';
 import { useColorValue } from 'site/context';
 
 import type { BlockQuoteProps, CodeProps, ParagraphProps, IInline, ICodeBlock } from './types';
 
-export const P = (props: ParagraphProps) => <Text my={8} {...props} />;
+export const P = (props: ParagraphProps) => (
+  <Text my={8} css={{ '&:first-of-type': { marginTop: useToken('space', 2) } }} {...props} />
+);
 
 export const BlockQuote = (props: BlockQuoteProps) => {
   const bg = useColorValue('blackAlpha.100', 'whiteAlpha.100');
@@ -58,7 +67,6 @@ export const CodeBlock = (props: ICodeBlock) => {
       rounded="md"
       fontSize="sm"
       fontFamily="mono"
-      width="max-content"
       borderColor="inherit"
       whiteSpace="pre-wrap"
       css={{ '& > code': { background: 'unset', color: 'unset', padding: 0 } }}
