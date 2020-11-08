@@ -182,20 +182,25 @@ const generatePalette = (palette: ThemeConfig['colors']): CustomColors => {
 
 const globalStyles = (props: Dict) => {
   const zIndexKeys = [
-    'a',
-    'p',
+    'button',
+    'label',
+    'table',
+    'tbody',
+    'thead',
+    'span',
     'ol',
     'ul',
     'li',
-    'span',
-    'label',
-    'button',
     'h1',
     'h2',
     'h3',
     'h4',
     'h5',
     'h6',
+    'td',
+    'th',
+    'a',
+    'p',
   ].join(', ');
   return {
     [zIndexKeys]: {

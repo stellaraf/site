@@ -29,7 +29,7 @@ const MMenuItem = (props: IDocsArticle) => {
 
   return (
     <ListItem my={2} pl={4} bg={isCurrent ? bg : undefined}>
-      <Link href={href} width="100%" fontSize="xs" opacity={isCurrent ? 1 : 0.8}>
+      <Link href={href} width="100%" fontSize="sm" opacity={isCurrent ? 1 : 0.8}>
         {title}
       </Link>
     </ListItem>
@@ -47,7 +47,7 @@ export const MMenuGroup = (props: IDocsGroup) => {
             w="100%"
             textAlign="left"
             textTransform="uppercase"
-            fontSize="sm"
+            fontSize="md"
             fontWeight="medium">
             {title}
           </Box>

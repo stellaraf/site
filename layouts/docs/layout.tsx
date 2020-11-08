@@ -19,34 +19,10 @@ const MLayout = (props: IResponsiveLayout) => {
           ))}
         </Accordion>
       </MSubNav>
-      <VStack spacing={8}>{children}</VStack>
+      {/* <VStack spacing={8} align="flex-start"> */}
+      {children}
+      {/* </VStack> */}
     </Box>
-  );
-};
-
-const DNav = () => {
-  const { docsGroups } = useConfig();
-  const borderColor = useColorValue('blackAlpha.200', 'whiteAlpha.200');
-  return (
-    <Flex
-      p={4}
-      as="aside"
-      zIndex={1}
-      minHeight="80vh"
-      height="100%"
-      width={{ lg: '260px', xl: '300px' }}
-      borderRightWidth="1px"
-      position="sticky"
-      flexDir="column"
-      top={0}
-      flexShrink={0}
-      borderColor={borderColor}>
-      <Accordion allowMultiple allowToggle defaultIndex={[...Array(docsGroups.length).keys()]}>
-        {docsGroups.map(group => (
-          <DMenuGroup key={group.title} {...group} />
-        ))}
-      </Accordion>
-    </Flex>
   );
 };
 
@@ -64,6 +40,32 @@ const DLayout = (props: IResponsiveLayout) => {
         </Box>
       </Flex>
     </Box>
+  );
+};
+
+const DNav = () => {
+  const { docsGroups } = useConfig();
+  const borderColor = useColorValue('blackAlpha.200', 'whiteAlpha.200');
+  return (
+    <Flex
+      p={4}
+      top={0}
+      as="aside"
+      zIndex={1}
+      height="100%"
+      flexShrink={0}
+      minHeight="80vh"
+      flexDir="column"
+      position="sticky"
+      borderRightWidth="1px"
+      borderColor={borderColor}
+      width={{ lg: '260px', xl: '300px' }}>
+      <Accordion allowMultiple allowToggle defaultIndex={[...Array(docsGroups.length).keys()]}>
+        {docsGroups.map(group => (
+          <DMenuGroup key={group.title} {...group} />
+        ))}
+      </Accordion>
+    </Flex>
   );
 };
 

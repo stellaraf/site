@@ -39,13 +39,13 @@ export const Table = (props: ITableMain) => {
   return (
     <Box
       mt={4}
+      zIndex={1}
       minWidth="50%"
-      overflow="auto"
+      overflowX="auto"
       borderWidth="1px"
       borderRadius="lg"
       borderColor={border}
-      width={{ base: '100%', lg: 'fit-content' }}
-      overflowX="auto">
+      width={{ base: '100%', lg: 'fit-content' }}>
       <Box as="table" textAlign="left" width="100%" {...props} />
     </Box>
   );

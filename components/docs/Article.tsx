@@ -14,15 +14,11 @@ export const DocsArticle = (props: IDocsArticle) => {
 
   return (
     <Box as="article" overflow="auto" {...validProps(rest)}>
-      <Flex h="100%" alignItems="center" justify="flex-start" flexWrap="nowrap">
-        <Flex direction="column" textAlign="center" align="flex-start">
-          <Content.Title id={generatedSlug}>{title}</Content.Title>
-          {showUpdatedDate && <Content.UpdatedAt>{updated}</Content.UpdatedAt>}
-        </Flex>
+      <Flex direction="column" align="flex-start">
+        <Content.Title id={generatedSlug}>{title}</Content.Title>
+        {showUpdatedDate && <Content.UpdatedAt>{updated}</Content.UpdatedAt>}
       </Flex>
-      <Flex height="100%" align="center" direction="column">
-        <Content.Body maxW="unset">{renderedBody}</Content.Body>
-      </Flex>
+      <Content.Body maxW="unset">{renderedBody}</Content.Body>
     </Box>
   );
 };
