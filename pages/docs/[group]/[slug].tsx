@@ -17,12 +17,21 @@ export default function DocsArticlePage(props: IDocsArticlePage) {
       </DocsLayout>
     );
   }
+  if (isFallback) {
+    return (
+      <DocsLayout>
+        <ContentLoader />
+      </DocsLayout>
+    );
+  }
 
   const { title, description } = article ?? {};
   return (
     <>
       <SEO title={title} description={description} />
-      <DocsLayout>{!isFallback ? <DocsArticle {...article} /> : <ContentLoader />}</DocsLayout>
+      <DocsLayout>
+        <DocsArticle {...article} />
+      </DocsLayout>
     </>
   );
 }

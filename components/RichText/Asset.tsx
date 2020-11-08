@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import NextImage from 'next/image';
-import { Box, Skeleton, useDisclosure } from '@chakra-ui/core';
-import { ModalWrapper } from 'site/components';
+import { Skeleton, useDisclosure } from '@chakra-ui/core';
+import { Backdrop, ModalWrapper } from 'site/components';
 import { useColorValue } from 'site/context';
 
 const ReactPlayer = dynamic(() => import('react-player'), {
@@ -43,23 +43,9 @@ const ImageAsset = (props: IAssetFields) => {
           textAlign: { base: 'left', lg: 'right' },
         }}
       />
-      <Box
-        zIndex={1}
-        pos="relative"
-        boxShadow="xl"
-        bg={color}
-        cursor="pointer"
-        overflow="hidden"
-        borderStyle="solid"
-        borderColor={color}
-        mx="auto"
-        width={{ base: '100%', lg: '50%' }}
-        borderRadius={{ base: '1rem', lg: '2rem' }}
-        borderWidth={{ base: '0.2rem', lg: '0.8rem' }}
-        onClick={onOpen}
-        {...rest}>
+      <Backdrop onClick={onOpen} {...rest}>
         {image}
-      </Box>
+      </Backdrop>
     </>
   );
 };
@@ -67,20 +53,7 @@ const ImageAsset = (props: IAssetFields) => {
 const VideoAsset = (props: IAssetFields) => {
   const { color, title, url, details, fileName, contentType, ...rest } = props;
   return (
-    <Box
-      zIndex={1}
-      pos="relative"
-      boxShadow="xl"
-      bg={color}
-      cursor="pointer"
-      overflow="hidden"
-      borderStyle="solid"
-      borderColor={color}
-      mx="auto"
-      width={{ base: '100%', lg: '50%' }}
-      borderRadius={{ base: '1rem', lg: '2rem' }}
-      borderWidth={{ base: '0.2rem', lg: '0.8rem' }}
-      {...rest}>
+    <Backdrop {...rest}>
       <ReactPlayer
         controls
         url={url}
@@ -95,7 +68,7 @@ const VideoAsset = (props: IAssetFields) => {
           },
         }}
       />
-    </Box>
+    </Backdrop>
   );
 };
 

@@ -8,7 +8,12 @@ export const Groups = () => {
   const { docsGroups } = useConfig();
   const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '-100px' });
   return (
-    <Wrap direction={{ base: 'column', lg: 'row' }} spacing={8} justify="center" ref={ref}>
+    <Wrap
+      direction={{ base: 'column', lg: 'row' }}
+      spacing={8}
+      justify="center"
+      width="full"
+      ref={ref}>
       {inView &&
         docsGroups.map((group, i) => (
           <WrapItem key={`docsGroup${i}`}>

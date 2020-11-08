@@ -31,20 +31,20 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
         className="chakra-modal__content-container st-override-modal">
         <AnimatePresence>
           <AnimatedBox
-            boxSize="100%"
             exit={{ scale: 0 }}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.2, stiffness: 50, type: 'spring' }}
-            width="100%"
+            boxSize="100%"
             boxShadow="lg"
+            overflow="auto"
             borderRadius="lg"
             borderWidth="1px"
             borderStyle="solid"
             position="relative"
-            borderColor={borderColor}
             backgroundColor={bg}
             __css={styles.dialog}
+            borderColor={borderColor}
             css={{ backdropFilter: 'blur(20px)' }}
             {...dialogProps}>
             <Flex

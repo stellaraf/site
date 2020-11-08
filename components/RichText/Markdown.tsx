@@ -44,8 +44,9 @@ export const Table = (props: ITableMain) => {
       borderWidth="1px"
       borderRadius="lg"
       borderColor={border}
-      width={{ base: '100%', lg: 'max-content' }}>
-      <Box as="table" textAlign="left" width="100%" overflowX="hidden" {...props} />
+      width={{ base: '100%', lg: 'fit-content' }}
+      overflowX="auto">
+      <Box as="table" textAlign="left" width="100%" {...props} />
     </Box>
   );
 };

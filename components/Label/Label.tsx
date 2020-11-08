@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Flex } from '@chakra-ui/core';
 import { useOpposingColor } from 'site/hooks';
 
@@ -8,58 +7,63 @@ export const Label = (props: ILabel) => {
   const {
     left,
     right,
+    leftProps = {},
+    rightProps = {},
     leftColor: leftBg = 'primary.500',
     rightColor: rightBg = 'secondary.500',
     ...rest
   } = props;
+
   const leftColor = useOpposingColor(leftBg);
   const rightColor = useOpposingColor(rightBg);
 
   return (
     <Flex
+      my={2}
+      boxShadow="md"
       flexWrap="nowrap"
       alignItems="center"
+      mx={{ base: 1, md: 2 }}
       justifyContent="flex-start"
-      mx={[1, 2, 2, 2]}
-      my={2}
+      zIndex={1}
       {...rest}>
       <Flex
-        display="inline-flex"
-        justifyContent="center"
-        lineHeight="1.5"
-        px={[1, 3, 3, 3]}
-        whiteSpace="nowrap"
-        mb={2}
         mr={0}
         py={1}
         bg={leftBg}
+        lineHeight="1.5"
         color={leftColor}
-        borderBottomLeftRadius={4}
-        borderTopLeftRadius={4}
-        borderBottomRightRadius={0}
-        borderTopRightRadius={0}
         fontWeight="bold"
-        fontSize={['xs', 'sm', 'sm', 'sm']}>
+        whiteSpace="nowrap"
+        display="inline-flex"
+        px={{ base: 2, md: 3 }}
+        justifyContent="center"
+        borderTopLeftRadius={4}
+        borderTopRightRadius={0}
+        borderBottomLeftRadius={4}
+        borderBottomRightRadius={0}
+        fontSize={{ base: 'xs', md: 'sm' }}
+        {...leftProps}>
         {left}
       </Flex>
       <Flex
-        display="inline-flex"
-        justifyContent="center"
-        lineHeight="1.5"
-        fontWeight="medium"
-        px={3}
         py={1}
-        whiteSpace="nowrap"
-        mb={2}
         ml={0}
         mr={0}
         bg={rightBg}
+        lineHeight="1.5"
         color={rightColor}
-        borderBottomRightRadius={4}
+        fontWeight="medium"
+        whiteSpace="nowrap"
+        display="inline-flex"
+        px={{ base: 2, md: 3 }}
+        justifyContent="center"
+        borderTopLeftRadius={0}
         borderTopRightRadius={4}
         borderBottomLeftRadius={0}
-        borderTopLeftRadius={0}
-        fontSize={['xs', 'sm', 'sm', 'sm']}>
+        borderBottomRightRadius={4}
+        fontSize={{ base: 'xs', md: 'sm' }}
+        {...rightProps}>
         {right}
       </Flex>
     </Flex>

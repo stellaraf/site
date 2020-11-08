@@ -1,4 +1,4 @@
-import { Heading } from '@chakra-ui/core';
+import { Heading, useStyleConfig, useToken } from '@chakra-ui/core';
 import { useTitle } from 'site/hooks';
 import type { BaseHeadingProps, HeadingProps, THeadingLevels } from './types';
 
@@ -11,9 +11,11 @@ const BaseHeading = (props: BaseHeadingProps) => {
     title = titleMe(children);
   }
   const headingLevel = `h${level}` as THeadingLevels;
-
+  const sx = useStyleConfig('Heading', props);
+  const headingSize = (sx?.fontSize as string | string[]) ?? 'md';
+  const fontSize = useToken('fontSizes', headingSize);
   return (
-    <Heading as={headingLevel} mb={2} mt={12} {...rest}>
+    <Heading as={headingLevel} mb={2} mt={12} css={{ '& > code': { fontSize } }} {...rest}>
       {title}
     </Heading>
   );

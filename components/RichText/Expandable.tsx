@@ -18,7 +18,10 @@ export const Expandable = (props: TExpandable) => {
   const hoverBorder = useColorValue('blackAlpha.400', 'whiteAlpha.400');
   return (
     <Accordion allowToggle>
-      <AccordionItem _hover={{ borderColor: hoverBorder }} transition="border-color 0.2s ease">
+      <AccordionItem
+        _hover={{ borderColor: hoverBorder }}
+        transition="border-color 0.2s ease"
+        maxW={{ lg: '60%' }}>
         <AccordionButton css={{ '&:focus': { borderRadius: useToken('radii', 'md') } }}>
           <Box flex={1} textAlign="left">
             {useDefaultTitle ? 'Expand...' : title}
