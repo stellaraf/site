@@ -96,7 +96,7 @@ export const Banner = (props: IBanner) => {
         <AnimatedFlex
           left={0}
           bottom={0}
-          zIndex={1}
+          zIndex={100}
           width="100%"
           align="center"
           minHeight="4rem"
