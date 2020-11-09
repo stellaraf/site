@@ -7,7 +7,7 @@ import {
   desaturate,
 } from 'color2k';
 import { extendTheme } from '@chakra-ui/core';
-import { mode } from '@chakra-ui/theme-tools';
+import { mode, getColor } from '@chakra-ui/theme-tools';
 import { propNames } from '@chakra-ui/styled-system';
 import { mergeWith } from '@chakra-ui/utils';
 import { syncedStyles, heroButtons } from 'site/styles';
@@ -228,6 +228,15 @@ const globalStyles = (props: Dict) => {
         pointerEvents: 'none',
       },
     },
+    ':root': Object.assign(
+      {},
+      ...themeColorKeys.map(c => ({
+        [`--${c}`]: mode(
+          getColor(props.theme, `original.${c}`),
+          getColor(props.theme, `${c}.300`),
+        )(props),
+      })),
+    ),
   };
 };
 

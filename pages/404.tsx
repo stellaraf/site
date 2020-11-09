@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useRouter } from 'next/router';
 import { Box, Flex, Heading } from '@chakra-ui/core';
 import { SEO } from 'site/components';
@@ -14,7 +13,7 @@ const NotFound = () => {
   const { asPath } = useRouter();
   return (
     <>
-      <SEO title="Not Found" />
+      <SEO title="Not Found" noindex nofollow />
       <Flex
         w="100%"
         h="100vh"

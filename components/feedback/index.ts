@@ -1,3 +1,3 @@
 export * from './contentLoader';
-export * from './fallbackError';
+export * from './error';
 export * from './pageLoader';

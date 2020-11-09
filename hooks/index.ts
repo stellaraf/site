@@ -8,6 +8,7 @@ export * from './useDate';
 export * from './useGlow';
 export * from './useGoogleAnalytics';
 export * from './useGradient';
+export * from './useImageSrc';
 export * from './useLinkType';
 export * from './useMobile';
 export * from './useMouseTrap';

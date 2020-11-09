@@ -40,6 +40,6 @@ export const getStaticProps: GetStaticProps<ILegalPage, UrlQuery> = async ctx =>
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [{ params: { page: 'privacy' } }],
+  paths: [{ params: { page: 'privacy' } }, { params: { page: 'msa' } }],
   fallback: false,
 });
