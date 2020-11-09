@@ -19,9 +19,7 @@ const MLayout = (props: IResponsiveLayout) => {
           ))}
         </Accordion>
       </MSubNav>
-      {/* <VStack spacing={8} align="flex-start"> */}
       {children}
-      {/* </VStack> */}
     </Box>
   );
 };

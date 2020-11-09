@@ -1,12 +1,13 @@
 import { merge } from 'merge-anything';
 
-export async function post(url: string, data: object, config: object = {}) {
+export async function post(url: string, data: object, config: RequestInit = {}) {
   const defaultConfig = {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     crossDomain: true,
-  };
-  const merged = merge(defaultConfig, config, { body: JSON.stringify(data) });
+  } as RequestInit;
+
+  const merged = merge(defaultConfig, config, { body: JSON.stringify(data) }) as RequestInit;
   return await fetch(url, merged);
 }
 
@@ -35,4 +36,14 @@ export async function fetchWithTimeout(
     controller.abort();
   }, time);
   return await fetch(uri, config);
+}
+
+export async function getJson<R = {}>(url: string, config: RequestInit = {}): Promise<R> {
+  const defaultConfig = {
+    method: 'GET',
+    crossDomain: true,
+  };
+  const merged = merge(defaultConfig, config) as RequestInit;
+  const res = await fetch(url, merged);
+  return await res.json();
 }

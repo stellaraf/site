@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import type { Entry, ContentTypeLink, Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 import type { ColorNames, InitialTheme } from './theme';
@@ -278,6 +279,7 @@ export interface IDocsArticle {
   updatedAt: string;
   showUpdatedDate: boolean;
   body: Document;
+  children?: ReactNode;
 }
 
 export type TArticleButton = {

@@ -17,18 +17,19 @@ import type { IDocsGroup, IDocsArticle } from 'site/types';
 const MMenuItem = (props: IDocsArticle) => {
   const { title, slug, docsGroup } = props;
 
-  const bg = useColorValue('blackAlpha.200', 'whiteAlpha.200');
-
-  const { pathname } = useRouter();
-  const isCurrent = pathname === slug;
+  const { asPath } = useRouter();
+  const thisSlug = asPath.split('/').slice(-1)[0];
+  const isCurrent = thisSlug === slug;
 
   let href = `/docs/${slug}`;
   if (typeof docsGroup !== 'undefined') {
     href = `/docs/${docsGroup.slug}/${slug}`;
   }
 
+  const color = useColorValue('original.primary', 'secondary.200');
+
   return (
-    <ListItem my={2} pl={4} bg={isCurrent ? bg : undefined}>
+    <ListItem my={2} pl={4} color={isCurrent ? color : undefined}>
       <Link href={href} width="100%" fontSize="sm" opacity={isCurrent ? 1 : 0.8}>
         {title}
       </Link>
@@ -38,7 +39,9 @@ const MMenuItem = (props: IDocsArticle) => {
 
 export const MMenuGroup = (props: IDocsGroup) => {
   const { title, items } = props;
+
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
+
   return (
     <>
       <AccordionItem border="none">

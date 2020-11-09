@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { SEO, DocsArticle, FallbackError, ContentLoader } from 'site/components';
+import { SEO, DocsArticle, Error, ContentLoader } from 'site/components';
 import { DocsLayout } from 'site/layouts';
 import { getContent } from 'site/util';
 
@@ -12,9 +12,12 @@ export default function DocsArticlePage(props: IDocsArticlePage) {
 
   if (!isFallback && !article) {
     return (
-      <DocsLayout>
-        <FallbackError />
-      </DocsLayout>
+      <>
+        <SEO title="Error" noindex nofollow />
+        <DocsLayout>
+          <Error />
+        </DocsLayout>
+      </>
     );
   }
   if (isFallback) {

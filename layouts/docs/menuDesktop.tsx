@@ -15,13 +15,18 @@ import type { IDocsGroup, IDocsArticle } from 'site/types';
 
 const DMenuItem = (props: IDocsArticle) => {
   const { title, slug, docsGroup } = props;
-  const { pathname } = useRouter();
-  const isCurrent = pathname === slug;
-  const bg = useColorValue('blackAlpha.200', 'whiteAlpha.200');
+
+  const { asPath } = useRouter();
+  const thisSlug = asPath.split('/').slice(-1)[0];
+  const isCurrent = thisSlug === slug;
+
   let href = `/docs/${slug}`;
   if (typeof docsGroup !== 'undefined') {
     href = `/docs/${docsGroup.slug}/${slug}`;
   }
+
+  const color = useColorValue('original.primary', 'secondary.200');
+
   return (
     <AnimatedFlex
       width="100%"
@@ -29,7 +34,7 @@ const DMenuItem = (props: IDocsArticle) => {
       borderRadius="md"
       userSelect="none"
       layoutId="menuItem"
-      bg={isCurrent ? bg : undefined}>
+      color={isCurrent ? color : 'currentColor'}>
       <Link
         px={3}
         py={1}
@@ -51,8 +56,11 @@ const DMenuItem = (props: IDocsArticle) => {
 
 export const DMenuGroup = (props: IDocsGroup) => {
   const { title, items } = props;
+
   const backgroundColor = useColorValue('blackAlpha.100', 'whiteAlpha.100');
   const borderRadius = useToken('radii', 'lg');
+
+  const sorted = items.sort((a, b) => (a.title > b.title ? 1 : -1));
 
   return (
     <AccordionItem
@@ -68,9 +76,9 @@ export const DMenuGroup = (props: IDocsGroup) => {
         </Box>
         <AccordionIcon />
       </AccordionButton>
-      <AccordionPanel pb={4}>
+      <AccordionPanel pb={4} px={0}>
         <VStack align="flex-start" pl={4}>
-          {items.map(item => (
+          {sorted.map(item => (
             <DMenuItem key={item.title} {...item} />
           ))}
         </VStack>

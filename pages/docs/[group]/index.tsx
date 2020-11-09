@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { Flex, Heading } from '@chakra-ui/core';
-import { ContentLoader, FallbackError, SEO } from 'site/components';
+import { ContentLoader, Error, SEO } from 'site/components';
 import { useTitle, useRender, useScaledText } from 'site/hooks';
 import { DocsLayout } from 'site/layouts';
 import { getDocsGroups } from 'site/util';
@@ -45,9 +45,12 @@ export default function DocsGroupMain(props: IDocsGroupMain) {
 
   if (!isFallback && !pageData) {
     return (
-      <DocsLayout>
-        <FallbackError />
-      </DocsLayout>
+      <>
+        <SEO title="Error" noindex nofollow />
+        <DocsLayout>
+          <Error />
+        </DocsLayout>
+      </>
     );
   }
 
