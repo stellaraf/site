@@ -24,26 +24,24 @@ export const MapMarker = (props: IMapMarker) => {
   const fill = useColorValue('black', 'white');
   const radius = useBreakpointValue({ base: 12, lg: 4 });
   const bestColor = useColorValue('original.tertiary', 'original.red');
-
   return (
-    <Marker {...rest}>
-      <motion.circle
-        r={radius}
-        fill="transparent"
-        strokeWidth={0.25}
-        stroke={bestOutline}
-        layoutId="bestLocation"
-        variants={bestVariants}
-        style={{ position: 'absolute' }}
-        animate={best ? 'best' : 'notBest'}
-        initial={{ opacity: 0, scale: 15, display: 'none' }}
-        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-      />
-      <PopoverTrigger>
-        <Link>
+    <PopoverTrigger>
+      <Link>
+        <Marker {...rest}>
+          <motion.circle
+            r={radius}
+            fill="transparent"
+            strokeWidth={0.25}
+            stroke={bestOutline}
+            layoutId="bestLocation"
+            variants={bestVariants}
+            style={{ position: 'absolute' }}
+            animate={best ? 'best' : 'notBest'}
+            initial={{ opacity: 0, scale: 15, display: 'none' }}
+            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+          />
           <Box
             r={radius}
-            zIndex={2}
             as="circle"
             stroke="white"
             boxShadow="sm"
@@ -53,11 +51,12 @@ export const MapMarker = (props: IMapMarker) => {
           <motion.circle
             r={radius}
             fill={fill}
+            style={{ position: 'absolute' }}
             animate={{ scale: [1, 4], opacity: [0.2, 0] }}
             transition={{ duration: 1, loop: Infinity, repeatDelay: 0.5 }}
           />
-        </Link>
-      </PopoverTrigger>
-    </Marker>
+        </Marker>
+      </Link>
+    </PopoverTrigger>
   );
 };

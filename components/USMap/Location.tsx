@@ -63,7 +63,6 @@ export const Location = (props: LocationProps) => {
           bg={bg}
           zIndex={4}
           border={0}
-          mb={8}
           css={{ backdropFilter: 'blur(2px)' }}
           {...rest}>
           <PopoverHeader pt={4} fontWeight="bold" border={0}>

@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import { Box, Button, Heading } from '@chakra-ui/core';
+import { Box, Flex, Button, Heading, HStack } from '@chakra-ui/core';
 import { Card, CardBody, Icon } from 'site/components';
 import { useRender, useSlug, useTitle } from 'site/hooks';
 
@@ -36,23 +36,24 @@ export const Action = (props: IActions) => {
         flexDirection="column">
         <Card width={{ base: '20rem', md: '18rem', xl: 'sm' }} maxHeight={64} zIndex={1}>
           <CardBody spacing={4} textAlign="left" alignItems="flex-start">
-            {typeof callToActionIcon !== 'undefined' && (
-              <Icon
-                size={12}
-                position="absolute"
-                alignSelf="flex-end"
-                color={callToActionIconColor}
-                icon={callToActionIcon.file.url}
-              />
-            )}
-            <Heading fontSize={{ base: 'sm', md: 'md' }} maxW="80%" whiteSpace="pre-wrap">
-              {titleMe(title)}
-            </Heading>
-            <Heading as="h4" fontSize="sm" fontWeight="light" maxW="80%" whiteSpace="pre-wrap">
+            <Flex align="center" justify="space-between" width="100%">
+              <Heading fontSize={{ base: 'md', md: 'md' }} maxW="80%" whiteSpace="pre-wrap">
+                {titleMe(title)}
+              </Heading>
+              {typeof callToActionIcon !== 'undefined' && (
+                <Icon
+                  size={12}
+                  ml={2}
+                  color={callToActionIconColor}
+                  icon={callToActionIcon.file.url}
+                />
+              )}
+            </Flex>
+            <Heading as="h4" fontSize="sm" fontWeight="light" whiteSpace="pre-wrap">
               {subtitle}
             </Heading>
             <Box
-              fontSize="xs"
+              fontSize="sm"
               fontWeight="normal"
               whiteSpace="pre-line"
               css={{

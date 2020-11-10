@@ -23,6 +23,7 @@ export const DesktopLinks = (props: IFooterLinks) => {
             </Text>
             <List>
               {items
+                .sort((a, b) => (a.title > b.title ? 1 : -1))
                 .sort((a, b) => a.sortWeight - b.sortWeight)
                 .map((item, i) => (
                   <ListItem

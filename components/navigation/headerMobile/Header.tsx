@@ -66,7 +66,7 @@ export const MHeader = (props: IHeader) => {
           </Flex>
         }
         body={
-          <VStack align="flex-start" spacing={12}>
+          <VStack align="flex-start" spacing={6}>
             {navItems.map(i => (
               <NavLink href={i.link} title={i.title} key={i.title} onClick={onClose} />
             ))}

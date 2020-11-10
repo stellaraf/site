@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   Accordion,
   AccordionButton,
@@ -15,7 +14,7 @@ import { useColorValue } from 'site/context';
 import type { IFooterLinks } from './types';
 
 export const MobileLinks = (props: IFooterLinks) => {
-  const { groups, ...rest } = props;
+  const { groups } = props;
   const sorted = [
     ...new Set(
       groups
@@ -44,6 +43,7 @@ export const MobileLinks = (props: IFooterLinks) => {
             <AccordionPanel pb={4}>
               <List>
                 {items
+                  .sort((a, b) => (a.title > b.title ? 1 : -1))
                   .sort((a, b) => a.sortWeight - b.sortWeight)
                   .map((item, i) => (
                     <ListItem key={i} my={2} pl={2}>
