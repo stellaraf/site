@@ -27,11 +27,10 @@ export default function Contact(props: IContactPage) {
       </Hero>
       <Box as="section" overflow="hidden">
         <Flex height="100%" overflow="hidden" align="center" direction="column" {...rStyles}>
-          <VStack spacing={4}>
+          <VStack spacing={4} textAlign="center">
             <Content.Title id={slug}>{content.title}</Content.Title>
             {content.subtitle && <Content.Subtitle>{content.subtitle}</Content.Subtitle>}
           </VStack>
-
           <VStack spacing={4} my={12}>
             <ChakraButton
               as="a"

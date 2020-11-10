@@ -13,13 +13,15 @@ export const DocsArticle = (props: IDocsArticle) => {
   const generatedSlug = useSlug(slug, [title]);
 
   return (
-    <Box as="article" overflow="auto" zIndex={1} {...validProps(rest)}>
+    <Box as="article" zIndex={1} {...validProps(rest)}>
       <Flex direction="column" align="flex-start">
         <Content.Title id={generatedSlug}>{title}</Content.Title>
         {showUpdatedDate && <Content.UpdatedAt>{updated}</Content.UpdatedAt>}
       </Flex>
-      <Content.Body maxW="unset">{renderedBody}</Content.Body>
-      {typeof children !== 'undefined' && children}
+      <Flex direction="column" align="flex-start">
+        <Content.Body maxW="unset">{renderedBody}</Content.Body>
+        {typeof children !== 'undefined' && children}
+      </Flex>
     </Box>
   );
 };
