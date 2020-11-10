@@ -46,7 +46,7 @@ export const IPRanges = () => {
                   ['ipv6', 'Plain Text (IPv6 Only)'],
                   ['urls', 'Plain Text (URLs Only)'],
                 ].map(([href, title]) => (
-                  <WrapItem>
+                  <WrapItem key={title}>
                     <Link href={`${URL}/${href}`}>
                       <Tag px={3} py={2} colorScheme={tagColorScheme}>
                         {title}

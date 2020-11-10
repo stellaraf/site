@@ -20,6 +20,7 @@ import type {
   PageContentParsed,
   IMeasuredGeoPoint,
 } from 'site/types';
+import type { CreateClientParams } from 'contentful';
 
 const debug = (item: any, exclude: string[] = []) => {
   if (item.constructor.name === 'Object') {
@@ -29,16 +30,24 @@ const debug = (item: any, exclude: string[] = []) => {
   return console.dir(item, { depth: null });
 };
 
-const client = createClient({
-  space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE ?? '',
-  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN ?? '',
-});
+const client = (preview: boolean = false) => {
+  const options = {
+    space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE ?? '',
+    accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN ?? '',
+  } as CreateClientParams;
+  if (preview) {
+    options.host = 'preview.contentful.com';
+    options.accessToken = process.env.CONTENTFUL_PREVIEW_TOKEN ?? '';
+  }
+  return createClient(options);
+};
 
 /**
  * Query Contentful for a specific content_type
  */
 export async function contentQuery<T extends unknown>(
   contentType: string,
+  preview: boolean = false,
   query?: object,
 ): Promise<EntryCollection<T>> {
   let queryParams = { content_type: contentType };
@@ -46,7 +55,7 @@ export async function contentQuery<T extends unknown>(
     queryParams = { ...queryParams, ...query };
   }
   try {
-    const entries = await client.getEntries<T>(queryParams);
+    const entries = await client(preview).getEntries<T>(queryParams);
     return entries;
   } catch (err) {
     console.error(err);
@@ -54,15 +63,17 @@ export async function contentQuery<T extends unknown>(
   }
 }
 
-export const getEntry = async (entryId: string, query: Object = Object()): Promise<Entry<any>> => {
+export async function getEntry<T extends unknown>(
+  entryId: string,
+  query: Object = Object(),
+): Promise<Entry<T>> {
   try {
-    const entry = await client.getEntry(entryId, query);
-    return entry;
+    return await client().getEntry<T>(entryId, query);
   } catch (err) {
     console.error(err);
     throw err;
   }
-};
+}
 
 export const getGeoPoints = async (): Promise<IMeasuredGeoPoint[]> => {
   let geoPoints = [] as IMeasuredGeoPoint[];
@@ -92,9 +103,9 @@ export const getPages = async (): Promise<PageAttrs[]> => {
 /**
  * Get Page by slug
  */
-export const getPage = async (pageSlug: string): Promise<PageAttrs> => {
+export const getPage = async (pageSlug: string, preview: boolean): Promise<PageAttrs> => {
   let page = { id: '', title: '', slug: '' };
-  const data = await contentQuery('page', { 'fields.slug': pageSlug });
+  const data = await contentQuery('page', preview, { 'fields.slug': pageSlug });
   if (data.total !== 0) {
     const fields = Object(data.items[0].fields);
     if (!fields.customProperties) {
@@ -157,7 +168,7 @@ const fetchRefValue = async (val: any): Promise<any> => {
   } else if (item.constructor.name === 'Object') {
     item = Object(val);
     if ('sys' in item) {
-      const fetched = await client.getEntry(item.sys.id);
+      const fetched = await client().getEntry(item.sys.id);
       return fetched.fields;
     } else {
       return item;
@@ -215,12 +226,12 @@ export const getHomePage = async (): Promise<HomepageContent> => {
   return pageContent;
 };
 
-export const getGlobalConfig = async (): Promise<GlobalConfig> => {
+export const getGlobalConfig = async (preview: boolean = false): Promise<GlobalConfig> => {
   const removeKeys = ['themeName'];
   let globalConfig = Object();
-  const data = await contentQuery('globalConfiguration', { include: 4 });
+  const data = await contentQuery('globalConfiguration', preview, { include: 4 });
   if (data.total !== 0) {
-    const parsed: EntryCollection<GlobalConfigPre> = await client.parseEntries(data);
+    const parsed: EntryCollection<GlobalConfigPre> = await client().parseEntries(data);
     const { theme, ...rest } = parsed.items[0].fields;
     Object.assign(globalConfig, {
       theme: flattenObj(theme.fields, removeKeys),
@@ -344,9 +355,12 @@ function* parseExternalFooterLinks(data: EntryCollection<FooterGroupEntry>): Gen
 /**
  * Get content for a specific page by its sys.id
  */
-export async function getPageContent(pageId: string): Promise<PageContent[]> {
+export async function getPageContent(
+  pageId: string,
+  preview: boolean = false,
+): Promise<PageContent[]> {
   let pageContent = [];
-  const data = await contentQuery<PageContent>('pageContent', {
+  const data = await contentQuery<PageContent>('pageContent', preview, {
     'fields.page.sys.id': pageId,
   });
 
@@ -371,10 +385,11 @@ export async function getPageContent(pageId: string): Promise<PageContent[]> {
  */
 export async function getContent<T extends unknown>(
   contentType: string,
+  preview: boolean = false,
   filters: object = {},
 ): Promise<Array<T>> {
   let content = [];
-  const data = await contentQuery<T>(contentType, filters);
+  const data = await contentQuery<T>(contentType, preview, filters);
   if (data.total !== 0) {
     const { items, includes = {} } = data;
     for (let item of parseEntryItems(items, includes)) {
@@ -391,16 +406,18 @@ export async function getContent<T extends unknown>(
  * Each footer link contains its parent's title & sortWeight as well as its own title, link, and
  * sortWeight.
  */
-export async function getFooterItems(): Promise<FooterItem[]> {
+export async function getFooterItems(preview: boolean = false): Promise<FooterItem[]> {
   let footerItems = [];
-  const pageContentData = await contentQuery<PageContent>('pageContent', {
+  const pageContentData = await contentQuery<PageContent>('pageContent', preview, {
     'fields.footerGroup[exists]': true,
   });
-  const pageData = await contentQuery<PageAttrs>('page', { 'fields.footerGroup[exists]': true });
-  const docsGroups = await contentQuery<IDocsGroup>('docsGroup', {
+  const pageData = await contentQuery<PageAttrs>('page', preview, {
     'fields.footerGroup[exists]': true,
   });
-  const footerGroups = await contentQuery<FooterGroupEntry>('footerGroup', {
+  const docsGroups = await contentQuery<IDocsGroup>('docsGroup', preview, {
+    'fields.footerGroup[exists]': true,
+  });
+  const footerGroups = await contentQuery<FooterGroupEntry>('footerGroup', preview, {
     'fields.externalLinks[exists]': true,
   });
   // Parse Page & PageContent references as they use the same model.
@@ -437,9 +454,9 @@ export async function getPageInfo() {
   return pageInfo;
 }
 
-export async function getActions(): Promise<IActions[]> {
+export async function getActions(preview: boolean = false): Promise<IActions[]> {
   let actions = [];
-  const data: PageContentParsed[] = await getContent('pageContent', {
+  const data: PageContentParsed[] = await getContent('pageContent', preview, {
     'fields.showInCallToAction': true,
   });
   for (let item of data) {
