@@ -22,7 +22,7 @@ export default function PartnerPage(props: IPartnerPage) {
 
 export const getStaticProps: GetStaticProps<IPartnerPage, UrlQuery> = async ctx => {
   const partner = ctx.params?.partner;
-  const preview = ctx.preview ?? false;
+  const preview = ctx?.preview ?? false;
   let pageData = Object();
   try {
     const matches = await getContent('partnerPage', preview, {

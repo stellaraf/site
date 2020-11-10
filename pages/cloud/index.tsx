@@ -62,7 +62,7 @@ export default function Cloud(props: CloudProps) {
 }
 
 export const getStaticProps: GetStaticProps<CloudProps> = async ctx => {
-  const preview = ctx.preview ?? false;
+  const preview = ctx?.preview ?? false;
   let geoData = Object();
   let geoPoints = Array();
   let pageData = Object();

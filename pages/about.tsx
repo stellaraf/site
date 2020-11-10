@@ -47,7 +47,7 @@ export default function About(props: IAboutPage) {
 }
 
 export const getStaticProps: GetStaticProps<IAboutPage> = async ctx => {
-  const preview = ctx.preview ?? false;
+  const preview = ctx?.preview ?? false;
   let pageData = Object();
   let pageContent = Array();
   let bios = new Array();
