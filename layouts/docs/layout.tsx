@@ -31,7 +31,7 @@ const DLayout = (props: IResponsiveLayout) => {
     <Box w="100%" minH="40vh" pt={32} {...rest}>
       <Flex flexWrap="nowrap" pos="relative">
         <DNav />
-        <Box>
+        <Box w="100%">
           <VStack spacing={20} my={{ lg: 16 }} px={{ lg: 4, xl: 16 }}>
             {children}
           </VStack>
