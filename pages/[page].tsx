@@ -28,15 +28,17 @@ export default function DynamicPage(props: PageProps) {
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const page = ctx.params?.page ?? 'notfound';
+  const preview = ctx.preview ?? false;
   let pageData = Object();
   let pageContent = Array();
+
   try {
-    pageData = await getPage(page);
+    pageData = await getPage(page, preview);
     pageContent = await getPageContent(pageData?.id ?? null);
   } catch (err) {
     console.error(err);
   }
-  return { props: { pageData, pageContent } };
+  return { props: { pageData, pageContent, preview } };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({

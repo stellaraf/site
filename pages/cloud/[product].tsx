@@ -28,15 +28,16 @@ type UrlQuery = {
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const product = ctx.params?.product ?? 'notfound';
+  const preview = ctx.preview ?? false;
   let pageData = Object();
   let pageContent = Array();
   try {
-    pageData = await getPage(`cloud/${product}`);
-    pageContent = await getPageContent(pageData?.id ?? null);
+    pageData = await getPage(`cloud/${product}`, preview);
+    pageContent = await getPageContent(pageData?.id ?? null, preview);
   } catch (err) {
     console.error(err);
   }
-  return { props: { pageData, pageContent } };
+  return { props: { pageData, pageContent, preview } };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({

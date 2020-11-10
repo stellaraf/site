@@ -22,9 +22,13 @@ export default function PartnerPage(props: IPartnerPage) {
 
 export const getStaticProps: GetStaticProps<IPartnerPage, UrlQuery> = async ctx => {
   const partner = ctx.params?.partner;
+  const preview = ctx.preview ?? false;
   let pageData = Object();
   try {
-    const matches = await getContent('partnerPage', { 'fields.name[match]': partner, include: 4 });
+    const matches = await getContent('partnerPage', preview, {
+      'fields.name[match]': partner,
+      include: 4,
+    });
     pageData = matches[0] ?? {};
   } catch (err) {
     console.error(err);

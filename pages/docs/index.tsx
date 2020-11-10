@@ -56,10 +56,11 @@ export default function Docs(props: IDocsMain) {
   );
 }
 
-export const getStaticProps: GetStaticProps<IDocsMain> = async () => {
+export const getStaticProps: GetStaticProps<IDocsMain> = async ctx => {
+  const preview = ctx.preview ?? false;
   let pageData = Object();
   try {
-    pageData = await getPage('docs');
+    pageData = await getPage('docs', preview);
   } catch (err) {
     console.error();
     throw err;

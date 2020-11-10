@@ -46,17 +46,18 @@ export default function About(props: IAboutPage) {
   );
 }
 
-export const getStaticProps: GetStaticProps<IAboutPage> = async () => {
+export const getStaticProps: GetStaticProps<IAboutPage> = async ctx => {
+  const preview = ctx.preview ?? false;
   let pageData = Object();
   let pageContent = Array();
   let bios = new Array();
   try {
-    pageData = await getPage(SLUG);
-    pageContent = await getPageContent(pageData?.id ?? null);
-    bios = await getContent('bio');
+    pageData = await getPage(SLUG, preview);
+    pageContent = await getPageContent(pageData?.id ?? null, preview);
+    bios = await getContent('bio', preview);
   } catch (err) {
     console.error(err);
     throw err;
   }
-  return { props: { pageData, pageContent, bios } };
+  return { props: { pageData, pageContent, bios, preview } };
 };

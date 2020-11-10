@@ -27,16 +27,17 @@ export default function LegalPage(props: ILegalPage) {
 }
 export const getStaticProps: GetStaticProps<ILegalPage, UrlQuery> = async ctx => {
   const page = ctx.params?.page ?? '';
+  const preview = ctx.preview ?? false;
   let pageData = Object();
   let pageContent = Array();
   try {
-    pageData = await getPage(`legal/${page}`);
-    pageContent = await getPageContent(pageData.id);
+    pageData = await getPage(`legal/${page}`, preview);
+    pageContent = await getPageContent(pageData.id, preview);
   } catch (err) {
     console.error(err);
     throw err;
   }
-  return { props: { pageData, pageContent } };
+  return { props: { pageData, pageContent, preview } };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({
