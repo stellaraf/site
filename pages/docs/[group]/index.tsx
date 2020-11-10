@@ -69,6 +69,7 @@ type UrlQuery = {
 
 export const getStaticProps: GetStaticProps<IDocsGroupMain, UrlQuery> = async ctx => {
   const group = ctx.params?.group ?? '';
+  const preview = ctx?.preview ?? false;
   let pageData = {} as IDocsGroup;
   let docsGroups = [];
   let notFound = false;
@@ -79,7 +80,7 @@ export const getStaticProps: GetStaticProps<IDocsGroupMain, UrlQuery> = async ct
     console.error(err);
     notFound = true;
   }
-  return { props: { pageData, notFound } };
+  return { props: { pageData, notFound, preview } };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({

@@ -52,16 +52,17 @@ export default function Contact(props: IContactPage) {
   );
 }
 
-export const getStaticProps: GetStaticProps<IContactPage> = async () => {
+export const getStaticProps: GetStaticProps<IContactPage> = async ctx => {
+  const preview = ctx?.preview ?? false;
   let pageData = Object();
   let pageContent = new Array();
   let contactCards = new Array();
   try {
-    pageData = await getPage('contact');
-    pageContent = await getPageContent(pageData?.id ?? null);
-    contactCards = await getContent('contactCard', { include: 4 });
+    pageData = await getPage('contact', preview);
+    pageContent = await getPageContent(pageData?.id ?? null, preview);
+    contactCards = await getContent('contactCard', preview, { include: 4 });
   } catch (err) {
     console.error(err);
   }
-  return { props: { pageData, pageContent, contactCards } };
+  return { props: { pageData, pageContent, contactCards, preview } };
 };

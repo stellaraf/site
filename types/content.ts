@@ -135,6 +135,7 @@ export interface IMeasuredGeoPoint extends GeoPoint {
 export interface PageProps {
   pageData: PageAttrs;
   pageContent: PageContent[];
+  preview: boolean;
 }
 
 export interface IAboutPageAttrs extends PageAttrs {

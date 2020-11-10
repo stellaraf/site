@@ -5,4 +5,5 @@ export interface SiteLayoutProps {
   footerGroups: FooterItem[];
   actions: IActions[];
   children: ReactNode;
+  preview: boolean;
 }

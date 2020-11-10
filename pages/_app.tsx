@@ -38,7 +38,10 @@ const Site = (props: SiteProps) => {
       </Head>
       <Provider appConfig={globalConfig} docsGroups={docsGroups}>
         <BaseSEO />
-        <SiteLayout footerGroups={footerGroups} actions={actions}>
+        <SiteLayout
+          footerGroups={footerGroups}
+          actions={actions}
+          preview={pageProps?.preview ?? false}>
           <Component {...pageProps} />
         </SiteLayout>
       </Provider>

@@ -24,10 +24,11 @@ type UrlQuery = {
   group?: string;
 };
 
-export const getStaticProps: GetStaticProps<IDocsArticlePage, UrlQuery> = async () => {
+export const getStaticProps: GetStaticProps<IDocsArticlePage, UrlQuery> = async ctx => {
+  const preview = ctx?.preview ?? false;
   let article = {} as IDocsArticle;
   try {
-    const res = await getContent<IDocsArticle>('docsArticle', {
+    const res = await getContent<IDocsArticle>('docsArticle', preview, {
       'fields.slug': 'ip-ranges',
       include: 4,
     });

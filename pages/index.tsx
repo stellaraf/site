@@ -57,12 +57,13 @@ export default function Home(props: HomeProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+export const getStaticProps: GetStaticProps<HomeProps> = async ctx => {
+  const preview = ctx?.preview ?? false;
   let pageContent = Object();
   try {
     pageContent = await getHomePage();
   } catch (err) {
     console.error(err);
   }
-  return { props: { pageContent } };
+  return { props: { pageContent, preview } };
 };

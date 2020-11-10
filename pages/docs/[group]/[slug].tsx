@@ -46,16 +46,20 @@ type UrlQuery = {
 
 export const getStaticProps: GetStaticProps<IDocsArticlePage, UrlQuery> = async ctx => {
   const slug = ctx.params?.slug ?? '';
+  const preview = ctx?.preview ?? false;
   let article = {} as IDocsArticle;
   let notFound = false;
   try {
-    const res = await getContent<IDocsArticle>('docsArticle', { 'fields.slug': slug, include: 4 });
+    const res = await getContent<IDocsArticle>('docsArticle', preview, {
+      'fields.slug': slug,
+      include: 4,
+    });
     article = res[0];
   } catch (err) {
     console.error(err);
     notFound = true;
   }
-  return { props: { article }, notFound };
+  return { props: { article, preview }, notFound };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({

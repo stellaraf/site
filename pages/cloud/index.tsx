@@ -11,8 +11,6 @@ import type { IUSMap } from 'site/components';
 
 const USMap = dynamic<IUSMap>(() => import('site/components').then(i => i.USMap));
 
-const SLUG = 'cloud';
-
 export default function Cloud(props: CloudProps) {
   const { geoData, geoPoints, pageData, pageContent } = props;
 
@@ -63,7 +61,8 @@ export default function Cloud(props: CloudProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps<CloudProps> = async () => {
+export const getStaticProps: GetStaticProps<CloudProps> = async ctx => {
+  const preview = ctx?.preview ?? false;
   let geoData = Object();
   let geoPoints = Array();
   let pageData = Object();
@@ -72,10 +71,10 @@ export const getStaticProps: GetStaticProps<CloudProps> = async () => {
     const geoRes = await fetch('https://us-map-geo-points.stellar.workers.dev');
     geoData = await geoRes.json();
     geoPoints = await getGeoPoints();
-    pageData = await getPage(SLUG);
-    pageContent = await getPageContent(pageData?.id ?? null);
+    pageData = await getPage('cloud', preview);
+    pageContent = await getPageContent(pageData?.id ?? null, preview);
   } catch (err) {
     console.error(err);
   }
-  return { props: { geoData, geoPoints, pageData, pageContent } };
+  return { props: { geoData, geoPoints, pageData, pageContent, preview } };
 };
