@@ -15,7 +15,6 @@ export const GroupCard = (props: IDocsGroup) => {
     callToActionIconColor = 'primary',
   } = props;
   const titleMe = useTitle();
-  console.dir(summary, { depth: null });
   const body = useRender(summary, [], ['articleButton', 'image']);
   return (
     <NextLink href={`/docs/${slug}`} scroll={false}>
