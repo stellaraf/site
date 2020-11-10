@@ -25,7 +25,7 @@ type UrlQuery = {
 };
 
 export const getStaticProps: GetStaticProps<IDocsArticlePage, UrlQuery> = async ctx => {
-  const preview = ctx.preview ?? false;
+  const preview = ctx?.preview ?? false;
   let article = {} as IDocsArticle;
   try {
     const res = await getContent<IDocsArticle>('docsArticle', preview, {

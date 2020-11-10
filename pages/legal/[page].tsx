@@ -27,7 +27,7 @@ export default function LegalPage(props: ILegalPage) {
 }
 export const getStaticProps: GetStaticProps<ILegalPage, UrlQuery> = async ctx => {
   const page = ctx.params?.page ?? '';
-  const preview = ctx.preview ?? false;
+  const preview = ctx?.preview ?? false;
   let pageData = Object();
   let pageContent = Array();
   try {

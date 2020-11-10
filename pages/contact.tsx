@@ -53,7 +53,7 @@ export default function Contact(props: IContactPage) {
 }
 
 export const getStaticProps: GetStaticProps<IContactPage> = async ctx => {
-  const preview = ctx.preview ?? false;
+  const preview = ctx?.preview ?? false;
   let pageData = Object();
   let pageContent = new Array();
   let contactCards = new Array();

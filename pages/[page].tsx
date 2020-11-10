@@ -28,7 +28,7 @@ export default function DynamicPage(props: PageProps) {
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const page = ctx.params?.page ?? 'notfound';
-  const preview = ctx.preview ?? false;
+  const preview = ctx?.preview ?? false;
   let pageData = Object();
   let pageContent = Array();
 

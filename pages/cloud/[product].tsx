@@ -28,7 +28,7 @@ type UrlQuery = {
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const product = ctx.params?.product ?? 'notfound';
-  const preview = ctx.preview ?? false;
+  const preview = ctx?.preview ?? false;
   let pageData = Object();
   let pageContent = Array();
   try {

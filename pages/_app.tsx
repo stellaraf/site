@@ -41,7 +41,7 @@ const Site = (props: SiteProps) => {
         <SiteLayout
           footerGroups={footerGroups}
           actions={actions}
-          preview={pageProps.preview ?? false}>
+          preview={pageProps?.preview ?? false}>
           <Component {...pageProps} />
         </SiteLayout>
       </Provider>
