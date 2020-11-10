@@ -54,12 +54,14 @@ const renderMark = {
 } as RenderMark;
 
 export function useRender(renderable?: Document | null, deps: any[] = [], exclude: string[] = []) {
-  if (!renderable) {
-    return null;
-  }
   if (deps.length === 0) {
     deps = [renderable];
   }
+
+  if (!renderable) {
+    return useMemo(() => null, deps);
+  }
+
   if (exclude.length !== 0) {
     for (let ex of exclude) {
       const pattern = new RegExp(ex, 'gi');
