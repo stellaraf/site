@@ -1,5 +1,5 @@
 import { forwardRef, useMemo } from 'react';
-import { Box, Flex } from '@chakra-ui/core';
+import { Box, Flex } from '@chakra-ui/react';
 import { BsChevronRight } from '@meronex/icons/bs';
 import { Button, SectionDivider } from 'site/components';
 import { usePageContent, useMobile } from 'site/hooks';

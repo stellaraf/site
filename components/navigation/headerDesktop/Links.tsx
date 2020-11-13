@@ -1,6 +1,6 @@
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { Link as ChakraLink } from '@chakra-ui/core';
+import { Link as ChakraLink } from '@chakra-ui/react';
 import { Button } from 'site/components';
 import { useColorValue } from 'site/context';
 import navConfig from '../config';

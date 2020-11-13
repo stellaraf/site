@@ -1,4 +1,4 @@
-import { Flex, useStyles, useModalContext } from '@chakra-ui/core';
+import { Flex, useStyles, useModalContext } from '@chakra-ui/react';
 
 import type { IContentContainer } from './types';
 

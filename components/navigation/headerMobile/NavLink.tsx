@@ -1,4 +1,4 @@
-import { Heading, Icon } from '@chakra-ui/core';
+import { Heading, Icon } from '@chakra-ui/react';
 import { FaArrowRight as RightArrow } from '@meronex/icons/fa';
 import { Link } from 'site/components';
 

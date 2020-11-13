@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Flex, Center, Heading, IconButton, Grid, Text } from '@chakra-ui/core';
+import { Flex, Center, Heading, IconButton, Grid } from '@chakra-ui/react';
 import { BisLeftArrow as Back } from '@meronex/icons/bi';
 import { useTitle } from 'site/hooks';
 import { useFormState } from '../state';

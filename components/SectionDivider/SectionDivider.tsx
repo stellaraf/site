@@ -1,4 +1,4 @@
-import { Box, useToken } from '@chakra-ui/core';
+import { Box, useToken } from '@chakra-ui/react';
 
 import type { ISectionDivider } from './types';
 

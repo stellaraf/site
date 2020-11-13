@@ -1,6 +1,8 @@
-import { Box, Flex, SkeletonText, Skeleton } from '@chakra-ui/core';
+import { Box, Flex, SkeletonText, Skeleton } from '@chakra-ui/react';
 import { Content } from 'site/components';
 import { validProps } from 'site/util';
+
+import type { IContentLoader } from './types';
 
 export const ContentLoader = (props: IContentLoader) => {
   return (

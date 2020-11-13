@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { Flex, ModalFocusScope, useModalContext, useStyles } from '@chakra-ui/core';
+import { Flex, ModalFocusScope, useModalContext, useStyles } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import { AnimatedBox } from 'site/components';
 import { useColorValue } from 'site/context';

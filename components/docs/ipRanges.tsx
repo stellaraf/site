@@ -1,8 +1,10 @@
-import { Box, Tag, Heading, SimpleGrid, Skeleton, Wrap, WrapItem } from '@chakra-ui/core';
+import { Box, Tag, Heading, SimpleGrid, Skeleton, Wrap, WrapItem } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { CodeBlock, Link, If, Error } from 'site/components';
 import { useColorValue } from 'site/context';
 import { getJson } from 'site/util';
+
+import type { IPRangeResponse } from './types';
 
 const URL = 'https://ip.stellar.tech';
 

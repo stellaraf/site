@@ -1,4 +1,4 @@
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps } from '@chakra-ui/react';
 import type { IActions } from 'site/types';
 
 export interface ICallToAction extends BoxProps {

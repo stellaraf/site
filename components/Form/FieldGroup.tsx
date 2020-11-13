@@ -1,5 +1,5 @@
-import { Stack } from '@chakra-ui/core';
-import type { StackProps } from '@chakra-ui/core';
+import { Stack } from '@chakra-ui/react';
+import type { StackProps } from '@chakra-ui/react';
 
 export const FieldGroup = (props: StackProps) => (
   <Stack

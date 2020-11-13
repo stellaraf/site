@@ -1,4 +1,4 @@
-import type { BoxProps, GridProps, HeadingProps } from '@chakra-ui/core';
+import type { BoxProps, GridProps, HeadingProps } from '@chakra-ui/react';
 import type { Paragraph } from 'site/types';
 
 export interface TitleProps extends HeadingProps {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useToken } from '@chakra-ui/core';
+import { useToken } from '@chakra-ui/react';
 import { getColor, isLight } from '@chakra-ui/theme-tools';
 import { useTheme } from 'site/context';
 

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useMobile } from 'site/hooks';
 import { OptionsDesktop } from './Desktop';
 import { OptionsMobile } from './Mobile';

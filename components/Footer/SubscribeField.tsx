@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { IconButton, Input, InputGroup, InputRightElement } from '@chakra-ui/core';
+import { IconButton, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import {
   FaArrowAltCircleRight as RightArrow,
   FaCheckCircle as Check,

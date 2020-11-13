@@ -1,4 +1,4 @@
-import type { BoxProps, UseDisclosureReturn } from '@chakra-ui/core';
+import type { BoxProps, UseDisclosureReturn } from '@chakra-ui/react';
 import type { MarkerProps } from 'react-simple-maps';
 import { State } from '@hookstate/core';
 import type { ITestLocation, Locations, IMeasuredGeoPoint } from 'site/types';

@@ -1,4 +1,4 @@
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps } from '@chakra-ui/react';
 import type { IGetStartedEntry } from 'site/types';
 
 type TGetStartedCombined = IGetStartedEntry & BoxProps;

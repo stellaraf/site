@@ -1,4 +1,4 @@
-import { Flex, Image, Button, Text, useBreakpointValue } from '@chakra-ui/core';
+import { Flex, Image, Button, Text, useBreakpointValue } from '@chakra-ui/react';
 import { useColorValue } from 'site/context';
 import { useAvatar } from './Avatars';
 import { useCurrent } from './state';

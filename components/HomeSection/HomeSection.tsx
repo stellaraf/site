@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { SectionDivider } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useRender } from 'site/hooks';

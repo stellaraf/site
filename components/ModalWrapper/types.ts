@@ -7,7 +7,7 @@ import type {
   BoxProps,
   ModalProps,
   UseModalProps,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 
 export interface IModalWrapper
   extends UseModalProps,

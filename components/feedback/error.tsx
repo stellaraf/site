@@ -1,6 +1,8 @@
-import { Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/core';
+import { Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/react';
 import { useConfig } from 'site/context';
 import { useRender } from 'site/hooks';
+
+import type { IError } from './types';
 
 export const Error = (props: IError) => {
   const { title, description, children, ...rest } = props;

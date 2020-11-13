@@ -1,4 +1,4 @@
-import { Box, Link, PopoverTrigger, useBreakpointValue, useToken } from '@chakra-ui/core';
+import { Box, Link, PopoverTrigger, useBreakpointValue, useToken } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { Marker } from 'react-simple-maps';
 import { useColorValue } from 'site/context';

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { IToast, UseToastOptions } from '@chakra-ui/core';
+import type { IToast, UseToastOptions } from '@chakra-ui/react';
 
 export type TToastPositions = UseToastOptions['position'];
 

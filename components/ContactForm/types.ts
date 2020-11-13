@@ -1,7 +1,7 @@
 import type { ComponentType, MutableRefObject } from 'react';
 import type { ParsedUrlQuery } from 'querystring';
 import type { State } from '@hookstate/core';
-import type { BoxProps, FlexProps, StackProps } from '@chakra-ui/core';
+import type { BoxProps, FlexProps, StackProps } from '@chakra-ui/react';
 import type { IconType } from '@meronex/icons';
 import type { IContactCard, CustomColors, FormModels } from 'site/types';
 import type { FormHandlers, TFormTypes } from './Forms/types';

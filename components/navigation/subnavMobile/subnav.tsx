@@ -8,8 +8,10 @@ import {
   useDisclosure,
   DrawerOverlay,
   DrawerContent,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { useColorValue } from 'site/context';
+
+import type { IDots, IMSubNav } from './types';
 
 const Dots = (props: IDots) => {
   const color = useColorValue(useToken('colors', 'primary.200'), useToken('colors', 'dark.700'));

@@ -1,4 +1,4 @@
-import { Flex, Wrap, WrapItem } from '@chakra-ui/core';
+import { Flex, Wrap, WrapItem } from '@chakra-ui/react';
 import { useInView } from 'react-intersection-observer';
 import { AnimatedBox } from 'site/components';
 import { useConfig } from 'site/context';

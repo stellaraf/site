@@ -1,6 +1,6 @@
 import type { MutableRefObject } from 'react';
 import type { CustomColors } from 'site/types';
-import type { UseDisclosureReturn } from '@chakra-ui/core';
+import type { UseDisclosureReturn } from '@chakra-ui/react';
 import type { FormHandlers } from '../Forms/types';
 
 export interface IMobileForm {

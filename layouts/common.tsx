@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps } from '@chakra-ui/react';
 
 export const Root = (props: Animated<BoxProps>) => {
   const { route } = useRouter();

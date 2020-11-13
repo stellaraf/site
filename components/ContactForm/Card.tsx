@@ -1,10 +1,9 @@
-import * as React from 'react';
 import { forwardRef } from 'react';
-import { VStack } from '@chakra-ui/core';
+import { VStack } from '@chakra-ui/react';
 import { useColorValue } from 'site/context';
 
 import type { ICardBody } from './types';
-import type { StackProps } from '@chakra-ui/core';
+import type { StackProps } from '@chakra-ui/react';
 
 export const CardBody = (props: ICardBody) => {
   const { spacing = 8, ...rest } = props;

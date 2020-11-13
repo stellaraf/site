@@ -1,4 +1,4 @@
-import type { LinkProps, SystemStyleObject } from '@chakra-ui/core';
+import type { LinkProps, SystemStyleObject } from '@chakra-ui/react';
 
 import type { ILink } from 'site/components';
 
@@ -23,4 +23,4 @@ export interface ILinkGroup extends ILink {
 
 export interface IPassedLink extends LinkProps {}
 
-export type { BoxProps, FlexProps } from '@chakra-ui/core';
+export type { BoxProps, FlexProps } from '@chakra-ui/react';

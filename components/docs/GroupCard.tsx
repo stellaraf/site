@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import { Box, Button, Heading, Divider } from '@chakra-ui/core';
+import { Box, Button, Heading, Divider } from '@chakra-ui/react';
 import { Card, CardBody, Icon } from 'site/components';
 import { useRender, useTitle } from 'site/hooks';
 

@@ -1,4 +1,4 @@
-import { Heading, useStyleConfig, useToken } from '@chakra-ui/core';
+import { Heading, useStyleConfig, useToken } from '@chakra-ui/react';
 import { useTitle } from 'site/hooks';
 import type { BaseHeadingProps, HeadingProps, THeadingLevels } from './types';
 

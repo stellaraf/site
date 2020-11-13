@@ -8,7 +8,7 @@ import {
   Heading,
   VisuallyHidden,
   useBreakpointValue,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { Card, CardBody } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useGradient, useMobile, useRender, useTitle } from 'site/hooks';

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useToken } from '@chakra-ui/core';
+import { useToken } from '@chakra-ui/react';
 
 import { useConfig, useColorMode, useColorValue } from 'site/context';
 

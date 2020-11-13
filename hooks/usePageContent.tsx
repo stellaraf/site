@@ -1,13 +1,9 @@
-import * as React from 'react';
 import { useMemo } from 'react';
 import { Content } from 'site/components';
 import { useDate, useRender, useTitle, useSlug } from 'site/hooks';
 
 import type { PageContent, UsePageContent } from 'site/types';
 
-/**
- *
- */
 export const usePageContent = (rawContent: PageContent, [...deps]: any[] = []): UsePageContent => {
   if (deps.length === 0) {
     deps = [rawContent];
