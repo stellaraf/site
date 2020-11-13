@@ -5,7 +5,7 @@ import {
   useStyles,
   useStyleConfig,
   useToken,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { useColorValue } from 'site/context';
 
 import type { BlockQuoteProps, CodeProps, ParagraphProps, IInline, ICodeBlock } from './types';
@@ -46,9 +46,9 @@ export const Code = (props: CodeProps) => {
 export const Inline = (props: IInline) => {
   const { node, ...rest } = props;
   return (
-    <span key={node.data.target.sys.id} {...rest}>
+    <Box as="span" key={node.data.target.sys.id} {...rest}>
       type: {node.nodeType} id: {node.data.target.sys.id}
-    </span>
+    </Box>
   );
 };
 

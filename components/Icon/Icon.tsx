@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Box, Flex, Icon as ChakraIcon, Image } from '@chakra-ui/core';
+import { Box, Flex, Icon as ChakraIcon } from '@chakra-ui/react';
 import { useOpposingColor } from 'site/hooks';
 import { useColorValue } from 'site/context';
 import type { IIcon } from './types';
@@ -22,6 +21,7 @@ export const Icon = (props: IIcon) => {
   return (
     <Flex
       bg={bg}
+      width={size}
       minWidth={size}
       height={size}
       align="center"
