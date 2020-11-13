@@ -6,14 +6,12 @@
   <br/>
 </div>
 
-This repository contains the source code for [stellar.tech](https://stellar.tech), the website for **Stellar Technologies Inc.**
-
 # Branches
 
-| Branch   | Function                                                                                                           |
-| -------- | ------------------------------------------------------------------------------------------------------------------ |
-| `master` | Production, commits auto build to production @ [stellar.tech](https://stellar.tech).                               |
-| `next`   | Development, commits auto build to development environment @ [preview.stellar.tech](https://preview.stellar.tech). |
+| Branch | Function                                                                                                           |
+| ------ | ------------------------------------------------------------------------------------------------------------------ |
+| `main` | Production, commits auto build to production @ [stellar.tech](https://stellar.tech).                               |
+| `next` | Development, commits auto build to development environment @ [preview.stellar.tech](https://preview.stellar.tech). |
 
 # Project
 
