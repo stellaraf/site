@@ -1,4 +1,4 @@
-import type { FlexProps, UseDisclosureReturn } from '@chakra-ui/core';
+import type { FlexProps, UseDisclosureReturn } from '@chakra-ui/react';
 import type { ILink } from 'site/components';
 
 export interface IBaseHeader extends FlexProps {

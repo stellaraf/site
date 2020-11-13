@@ -1,4 +1,4 @@
-import { Box, List, ListItem, Text, SimpleGrid } from '@chakra-ui/core';
+import { Box, List, ListItem, Text, SimpleGrid } from '@chakra-ui/react';
 import { Link } from 'site/components';
 
 import type { IFooterLinks } from './types';

@@ -1,10 +1,10 @@
 import { forwardRef } from 'react';
-import { Box, Heading } from '@chakra-ui/core';
+import { Box, Heading } from '@chakra-ui/react';
 import { Label } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useTitle } from 'site/hooks';
 
-import type { FlexProps } from '@chakra-ui/core';
+import type { FlexProps } from '@chakra-ui/react';
 import type { IContentBody, IUpdatedAt, TitleProps, ISubtitle } from './types';
 
 export const Title = forwardRef<HTMLHeadingElement, TitleProps>((props, ref) => {

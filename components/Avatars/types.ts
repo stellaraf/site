@@ -1,5 +1,5 @@
 import type { Bio } from 'site/types';
-import type { FlexProps, SimpleGridProps, UseDisclosureReturn } from '@chakra-ui/core';
+import type { FlexProps, SimpleGridProps, UseDisclosureReturn } from '@chakra-ui/react';
 
 export interface IPhoto extends FlexProps {
   index: number;

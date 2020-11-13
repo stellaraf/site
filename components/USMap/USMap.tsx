@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { AnimateSharedLayout } from 'framer-motion';
 import { Location } from './Location';

@@ -1,6 +1,8 @@
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { useColorValue } from 'site/context';
 import { validProps } from 'site/util';
+
+import type { IBackdrop } from './types';
 
 export const Backdrop = (props: IBackdrop) => {
   const color = useColorValue('original.dark', 'original.light');

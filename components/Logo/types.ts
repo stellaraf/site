@@ -1,4 +1,4 @@
-import type { BoxProps, IconProps } from '@chakra-ui/core';
+import type { BoxProps, IconProps } from '@chakra-ui/react';
 
 export type LogoIconProps = IconProps;
 

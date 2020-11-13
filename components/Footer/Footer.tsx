@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Box, HStack, VStack } from '@chakra-ui/core';
+import { Box, HStack, VStack } from '@chakra-ui/react';
 import { SocialLinks } from './SocialLinks';
 import { DesktopLinks } from './DesktopLinks';
 import { MobileLinks } from './MobileLinks';

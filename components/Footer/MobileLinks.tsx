@@ -7,7 +7,7 @@ import {
   Box,
   List,
   ListItem,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { Link } from 'site/components';
 import { useColorValue } from 'site/context';
 

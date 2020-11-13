@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { forwardRef } from 'react';
 import NextLink from 'next/link';
-import { Button as ChakraButton } from '@chakra-ui/core';
+import { Button as ChakraButton } from '@chakra-ui/react';
 import { useLinkType } from 'site/hooks';
 
 import type { ButtonProps, ButtonLinkElement } from './types';

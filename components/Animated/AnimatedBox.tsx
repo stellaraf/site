@@ -1,9 +1,9 @@
 import { forwardRef } from 'react';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
 import type { MotionProps } from 'framer-motion';
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps } from '@chakra-ui/react';
 
 interface IAnimatedBox extends Animated<BoxProps> {
   transition: MotionProps['transition'];

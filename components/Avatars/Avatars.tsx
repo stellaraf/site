@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { SimpleGrid, useDisclosure } from '@chakra-ui/core';
+import { SimpleGrid, useDisclosure } from '@chakra-ui/react';
 import { Photo } from './Photo';
 import { Detail } from './Detail';
 

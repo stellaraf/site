@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import { Button } from '@chakra-ui/core';
+import { Button } from '@chakra-ui/react';
 
 export const Preview = () => {
   return (

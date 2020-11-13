@@ -4,7 +4,7 @@ import {
   useTheme as useChakraTheme,
   cookieStorageManager,
   localStorageManager,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { makeTheme } from 'site/util';
 
 import type { GetServerSideProps } from 'next';
@@ -37,5 +37,5 @@ export const getServerSideProps: GetServerSideProps<TColorModeCtx> = async ctx =
   };
 };
 
-export { useColorMode } from '@chakra-ui/core';
-export { useColorModeValue as useColorValue } from '@chakra-ui/core';
+export { useColorMode } from '@chakra-ui/react';
+export { useColorModeValue as useColorValue } from '@chakra-ui/react';

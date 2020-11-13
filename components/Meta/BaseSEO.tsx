@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { DefaultSeo } from 'next-seo';
 import { useConfig } from 'site/context';
 

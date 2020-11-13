@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/core';
+import { Flex } from '@chakra-ui/react';
 import { useOpposingColor } from 'site/hooks';
 
 import type { ILabel } from './types';

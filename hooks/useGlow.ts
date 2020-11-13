@@ -1,7 +1,7 @@
-import { useToken } from '@chakra-ui/core';
+import { useToken } from '@chakra-ui/react';
 import { getScale } from 'color2k';
 
-import type { ChakraProps } from '@chakra-ui/core';
+import type { ChakraProps } from '@chakra-ui/react';
 
 interface IGlowOptions {
   /**

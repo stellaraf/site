@@ -1,4 +1,4 @@
-import { StylesProvider, useMultiStyleConfig } from '@chakra-ui/core';
+import { StylesProvider, useMultiStyleConfig } from '@chakra-ui/react';
 import { useSyncedStyleVariant } from 'site/styles';
 import type { ISyncedStyleProvider } from './types';
 

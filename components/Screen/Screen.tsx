@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { Box, Skeleton } from '@chakra-ui/core';
+import { Box, Skeleton } from '@chakra-ui/react';
 import { useColorValue } from 'site/context';
 
 const ReactPlayer = dynamic(() => import('react-player'), {

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Box, Flex, Heading } from '@chakra-ui/core';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 import { SEO } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useGradient } from 'site/hooks';

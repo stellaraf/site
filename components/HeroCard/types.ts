@@ -1,4 +1,4 @@
-import type { FlexProps } from '@chakra-ui/core';
+import type { FlexProps } from '@chakra-ui/react';
 import type { Document } from '@contentful/rich-text-types';
 
 export interface CardContent {

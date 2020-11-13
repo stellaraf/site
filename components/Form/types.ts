@@ -1,4 +1,4 @@
-import type { InputProps, TextareaProps } from '@chakra-ui/core';
+import type { InputProps, TextareaProps } from '@chakra-ui/react';
 import type { Control } from 'react-hook-form';
 import type { ISelect, TOptions } from 'site/components';
 

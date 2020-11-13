@@ -1,4 +1,4 @@
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps } from '@chakra-ui/react';
 
 export interface IScreen extends BoxProps {
   url: string;

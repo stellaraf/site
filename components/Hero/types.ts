@@ -1,4 +1,4 @@
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
 import type { Document } from '@contentful/rich-text-types';
 

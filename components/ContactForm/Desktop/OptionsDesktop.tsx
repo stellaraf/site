@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { Center, Stack, Button as ChakraButton } from '@chakra-ui/core';
+import { Center, Stack, Button as ChakraButton } from '@chakra-ui/react';
 import { motion, AnimatePresence, AnimateSharedLayout, useCycle } from 'framer-motion';
 import { Button, Icon } from 'site/components';
 import { useGoogleAnalytics, useTitle } from 'site/hooks';
@@ -11,7 +11,7 @@ import { DesktopForm } from './DesktopForm';
 import { useFormState } from '../state';
 
 import type { MouseEvent } from 'react';
-import type { StackProps, FlexProps } from '@chakra-ui/core';
+import type { StackProps, FlexProps } from '@chakra-ui/react';
 import type { IconType } from '@meronex/icons';
 import type { Variants } from 'framer-motion';
 import type {

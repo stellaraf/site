@@ -1,4 +1,4 @@
-import { Box, Center, Grid, Image, Heading } from '@chakra-ui/core';
+import { Box, Center, Grid, Image, Heading } from '@chakra-ui/react';
 import { useInView } from 'react-intersection-observer';
 import { Button } from 'site/components';
 import type { IHomeBlock } from './types';

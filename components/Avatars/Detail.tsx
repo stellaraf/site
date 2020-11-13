@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Divider, Heading, Image, VStack, Wrap, WrapItem } from '@chakra-ui/core';
+import { Divider, Heading, Image, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { ModalWrapper } from 'site/components';
 import { useColorValue } from 'site/context';
 import { PhotoWrapper } from './Photo';

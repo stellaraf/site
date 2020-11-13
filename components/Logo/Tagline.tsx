@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 export const Tagline = () => (
   <g>
     <path d="M7.27,177.2H6V160H0v-1.2H13.24V160h-6Z" fill="currentColor" />

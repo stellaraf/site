@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { BoxProps, GridProps } from '@chakra-ui/core';
+import type { BoxProps, GridProps } from '@chakra-ui/react';
 import type { HomeSection } from 'site/types';
 
 export interface HomeSectionProps extends BoxProps {
