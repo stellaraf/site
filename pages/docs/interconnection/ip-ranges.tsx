@@ -3,7 +3,7 @@ import { DocsLayout } from 'site/layouts';
 import { getContent } from 'site/util';
 
 import type { GetStaticProps } from 'next';
-import type { IDocsArticle } from 'site/types';
+import type { IDocsArticle, IDocsArticlePage } from 'site/types';
 
 export default function DocsArticlePage(props: IDocsArticlePage) {
   const { title, description } = props.article;

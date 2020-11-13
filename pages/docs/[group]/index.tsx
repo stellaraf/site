@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
-import { Flex, Heading } from '@chakra-ui/core';
+import { Flex, Heading } from '@chakra-ui/react';
 import { ContentLoader, Error, SEO } from 'site/components';
 import { useTitle, useRender, useScaledText } from 'site/hooks';
 import { DocsLayout } from 'site/layouts';
 import { getDocsGroups } from 'site/util';
 
 import type { GetStaticProps, GetStaticPaths } from 'next';
-import type { IDocsGroup } from 'site/types';
+import type { IDocsGroup, IDocsGroupMain } from 'site/types';
 
 const Content = (props: IDocsGroup) => {
   const { title, subtitle, summary } = props;

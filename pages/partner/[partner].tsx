@@ -3,6 +3,7 @@ import { SEO } from 'site/components';
 import { PartnerLayout } from 'site/layouts';
 
 import type { GetStaticProps, GetStaticPaths } from 'next';
+import type { IPartnerPage } from 'site/types';
 
 type UrlQuery = {
   partner: string;
