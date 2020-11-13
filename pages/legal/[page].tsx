@@ -1,9 +1,10 @@
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { getPage, getPageContent } from 'site/util';
 import { SEO, ContentSection } from 'site/components';
 import { useTitle } from 'site/hooks';
 
 import type { GetStaticProps, GetStaticPaths } from 'next';
+import type { ILegalPage } from 'site/types';
 
 type UrlQuery = {
   page: string;

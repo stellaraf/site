@@ -1,4 +1,4 @@
-import { Box, useToken } from '@chakra-ui/core';
+import { Box, useToken } from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useInterpolatedColors } from './useInterpolatedColors';

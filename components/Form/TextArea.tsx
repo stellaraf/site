@@ -1,4 +1,4 @@
-import { FormControl, Textarea } from '@chakra-ui/core';
+import { FormControl, Textarea } from '@chakra-ui/react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import type { ITextAreaField, ITextArea } from './types';

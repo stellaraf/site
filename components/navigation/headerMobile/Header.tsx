@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { Box, Flex, HStack, VStack, useDisclosure } from '@chakra-ui/core';
+import { Box, Flex, HStack, VStack, useDisclosure } from '@chakra-ui/react';
 import { Spiral as Hamburger } from 'hamburger-react';
 import { Button, Logo, MControls, ModalWrapper } from 'site/components';
 import { useColorValue } from 'site/context';

@@ -1,5 +1,7 @@
 import { getContent } from 'site/util';
+
 import type { NextApiHandler } from 'next';
+import type { IPartnerPage } from 'site/types';
 
 const previewHandler: NextApiHandler = async (request, response) => {
   if (request.query.secret !== process.env.PREVIEW_SECRET) {

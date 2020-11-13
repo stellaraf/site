@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import { Box, Flex, Button, Heading, HStack } from '@chakra-ui/core';
+import { Box, Flex, Button, Heading, HStack } from '@chakra-ui/react';
 import { Card, CardBody, Icon } from 'site/components';
 import { useRender, useSlug, useTitle } from 'site/hooks';
 

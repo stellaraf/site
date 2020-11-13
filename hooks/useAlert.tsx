@@ -6,7 +6,7 @@ import {
   Flex,
   useToast,
   useBreakpointValue,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { useConfig } from 'site/context';
 import { useRender } from 'site/hooks';
 

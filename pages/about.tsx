@@ -1,11 +1,11 @@
-import { Box, Flex, Heading } from '@chakra-ui/core';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 import { getPage, getPageContent, getContent } from 'site/util';
 import { Avatars, Hero, GoogleMap, SEO, GetStarted } from 'site/components';
 import { useTitle } from 'site/hooks';
 import { useResponsiveStyle } from 'site/styles';
 
 import type { GetStaticProps } from 'next';
-import type { IAboutPage } from 'site/types';
+import type { IAboutPage, ISection } from 'site/types';
 
 const SLUG = 'about';
 

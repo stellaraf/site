@@ -8,7 +8,7 @@ import {
   PopoverHeader,
   Portal,
   Tag,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { useState } from '@hookstate/core';
 import { useColorValue } from 'site/context';
 import { If } from 'site/components';

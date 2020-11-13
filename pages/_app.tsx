@@ -7,9 +7,9 @@ import { SiteLayout } from 'site/layouts';
 import { useKonamiState } from 'site/state';
 import { getGlobalConfig, getFooterItems, getActions, getDocsGroups } from 'site/util';
 
-import type { IDocsGroup } from 'site/types';
+import type { IDocsGroup, TSite } from 'site/types';
 
-const Site = (props: SiteProps) => {
+const Site = (props: TSite) => {
   const { Component, pageProps, appProps, router } = props;
   const { globalConfig, footerGroups, actions, docsGroups } = appProps;
 

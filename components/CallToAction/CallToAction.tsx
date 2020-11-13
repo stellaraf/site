@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useRouter } from 'next/router';
-import { Center, Heading, VStack, Wrap, WrapItem } from '@chakra-ui/core';
+import { Center, Heading, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { useInView } from 'react-intersection-observer';
 import { AnimatedBox, SectionDivider } from 'site/components';
 import { useConfig, useColorValue } from 'site/context';

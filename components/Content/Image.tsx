@@ -1,4 +1,4 @@
-import { Box, Image as ChakraImage } from '@chakra-ui/core';
+import { Box, Image as ChakraImage } from '@chakra-ui/react';
 import { useInView } from 'react-intersection-observer';
 
 import type { IImage } from './types';

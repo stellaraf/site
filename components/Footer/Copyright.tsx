@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { useConfig } from 'site/context';
 import type { BoxProps } from './types';
 

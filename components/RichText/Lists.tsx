@@ -1,4 +1,4 @@
-import { List, ListItem } from '@chakra-ui/core';
+import { List, ListItem } from '@chakra-ui/react';
 
 import type { UlProps, OlProps, LiProps } from './types';
 

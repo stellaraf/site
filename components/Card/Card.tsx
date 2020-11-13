@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { VStack } from '@chakra-ui/core';
+import { VStack } from '@chakra-ui/react';
 import { useColorValue } from 'site/context';
 
 import type { ICard } from './types';

@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
-import { Flex, Heading, Spinner } from '@chakra-ui/core';
+import { Flex, Heading, Spinner } from '@chakra-ui/react';
 import { Groups, SEO } from 'site/components';
 import { useRender, useScaledText, useTitle } from 'site/hooks';
 import { DocsLayout } from 'site/layouts';
 import { getPage } from 'site/util';
 
 import type { GetStaticProps } from 'next';
-import type { PageAttrs } from 'site/types';
+import type { IDocsMain, PageAttrs } from 'site/types';
 
 const TextContent = (props: PageAttrs) => {
   const { title, subtitle, body = null } = props;

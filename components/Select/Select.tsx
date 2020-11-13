@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { createContext, useContext, useMemo, useState } from 'react';
 import ReactSelect from 'react-select';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { useTheme, useColorMode } from 'site/context';
 import { IndicatorIcon } from './IndicatorIcon';
 import { ClearIcon } from './ClearIcon';

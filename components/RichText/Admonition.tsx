@@ -7,7 +7,7 @@ import {
   StylesProvider,
   useMultiStyleConfig,
   useToken,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { useColorValue } from 'site/context';
 import { useOpposingColor, useRender, useTitle } from 'site/hooks';
 import { validProps } from 'site/util';
@@ -20,7 +20,7 @@ const Information = dynamic<MeronexIcon>(() =>
   import('@meronex/icons/bi').then(i => i.BiInfoCircle),
 );
 
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps } from '@chakra-ui/react';
 import type { TAdmonition } from 'site/types';
 
 const iconMap = {

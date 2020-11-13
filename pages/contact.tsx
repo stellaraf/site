@@ -1,4 +1,4 @@
-import { Box, Flex, Button as ChakraButton, Heading, VStack } from '@chakra-ui/core';
+import { Box, Flex, Button as ChakraButton, Heading, VStack } from '@chakra-ui/react';
 import { ImPhone as Phone } from '@meronex/icons/im';
 import { getPage, getPageContent, getContent } from 'site/util';
 import { Content, Hero, Options, SEO, GetStarted } from 'site/components';
@@ -6,6 +6,7 @@ import { useSlug } from 'site/hooks';
 import { useResponsiveStyle } from 'site/styles';
 
 import type { GetStaticProps } from 'next';
+import type { IContactPage } from 'site/types';
 
 export default function Contact(props: IContactPage) {
   const { pageData, contactCards, pageContent } = props;

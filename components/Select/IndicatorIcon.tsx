@@ -1,6 +1,5 @@
-import * as React from 'react';
 import { memo } from 'react';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { FaChevronDown as ChevronDown } from '@meronex/icons/fa';
 import { motion } from 'framer-motion';
 import { useColorValue } from 'site/context';

@@ -6,7 +6,7 @@ import {
   saturate,
   desaturate,
 } from 'color2k';
-import { extendTheme } from '@chakra-ui/core';
+import { extendTheme } from '@chakra-ui/react';
 import { mode, getColor } from '@chakra-ui/theme-tools';
 import { propNames } from '@chakra-ui/styled-system';
 import { mergeWith } from '@chakra-ui/utils';

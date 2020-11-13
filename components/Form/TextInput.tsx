@@ -1,4 +1,4 @@
-import { FormControl, FormErrorMessage, Input } from '@chakra-ui/core';
+import { FormControl, FormErrorMessage, Input } from '@chakra-ui/react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import type { ITextField, ITextInput } from './types';

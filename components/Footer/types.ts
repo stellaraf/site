@@ -8,7 +8,7 @@ import type {
   RenderProps,
   ToastId,
   SimpleGridProps,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import type { FooterItem } from 'site/types';
 
 export interface FooterProps extends BoxProps {
@@ -30,7 +30,7 @@ export interface ISocialLink extends Omit<IconButtonProps, 'href' | 'title' | 'a
   href: string;
 }
 
-export type { BoxProps } from '@chakra-ui/core';
+export type { BoxProps } from '@chakra-ui/react';
 
 export interface ISubscribe extends StackProps {
   alertProps?: AlertProps;

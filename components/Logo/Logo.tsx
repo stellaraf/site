@@ -1,6 +1,5 @@
-import * as React from 'react';
 import { forwardRef } from 'react';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { LogoMain } from './LogoMain';
 import { LogoIcon } from './LogoIcon';
 import { Tagline } from './Tagline';

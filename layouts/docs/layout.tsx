@@ -1,4 +1,4 @@
-import { Accordion, Box, Flex, VStack, useBreakpointValue } from '@chakra-ui/core';
+import { Accordion, Box, Flex, VStack, useBreakpointValue } from '@chakra-ui/react';
 import { If, MSubNav } from 'site/components';
 import { useColorValue, useConfig } from 'site/context';
 import { useResponsiveStyle } from 'site/styles';

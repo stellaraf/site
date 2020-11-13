@@ -1,6 +1,5 @@
-import * as React from 'react';
 import dynamic from 'next/dynamic';
-import { HStack, IconButton } from '@chakra-ui/core';
+import { HStack, IconButton } from '@chakra-ui/react';
 import { useConfig, useColorValue } from 'site/context';
 
 import type { IconBaseProps } from '@meronex/icons';

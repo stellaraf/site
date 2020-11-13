@@ -5,7 +5,7 @@ import type {
   TextProps,
   CodeProps as ChakraCodeProps,
   HeadingProps as ChakraHeadingProps,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { INLINES } from '@contentful/rich-text-types';
 
 import type { Asset } from 'contentful';

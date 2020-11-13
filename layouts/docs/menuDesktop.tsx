@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionPanel,
   AccordionButton,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { useColorValue } from 'site/context';
 import { AnimatedFlex, Link } from 'site/components';
 

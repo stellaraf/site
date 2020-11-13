@@ -1,6 +1,5 @@
-import * as React from 'react';
 import { memo } from 'react';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { FaTimes as Clear } from '@meronex/icons/fa';
 import { useColorValue } from 'site/context';
 

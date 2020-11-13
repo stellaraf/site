@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { Button, Wrap, useToken } from '@chakra-ui/core';
+import { Button, Wrap, useToken } from '@chakra-ui/react';
 import { getPage, getPageContent, getGeoPoints } from 'site/util';
 import { useColorValue } from 'site/context';
 import { ContentSection, Hero, SEO, useDataCenter, GetStarted } from 'site/components';
@@ -8,16 +8,18 @@ import { useCloudLocations } from 'site/state';
 
 import type { GetStaticProps } from 'next';
 import type { IUSMap } from 'site/components';
+import type { ICloud } from 'site/types';
 
 const USMap = dynamic<IUSMap>(() => import('site/components').then(i => i.USMap));
 
-export default function Cloud(props: CloudProps) {
+export default function Cloud(props: ICloud) {
   const { geoData, geoPoints, pageData, pageContent } = props;
 
   if (geoPoints.length === 0) {
     throw new Error('Unable to get Cloud Location Data');
   }
   const { title, subtitle, body = null, getStarted } = pageData;
+
   const showAlert = useAlert();
 
   const mapColor = useColorValue(
@@ -61,7 +63,7 @@ export default function Cloud(props: CloudProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps<CloudProps> = async ctx => {
+export const getStaticProps: GetStaticProps<ICloud> = async ctx => {
   const preview = ctx?.preview ?? false;
   let geoData = Object();
   let geoPoints = Array();

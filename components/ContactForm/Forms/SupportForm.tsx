@@ -1,6 +1,5 @@
-import * as React from 'react';
 import { forwardRef, useImperativeHandle } from 'react';
-import { Flex } from '@chakra-ui/core';
+import { Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';

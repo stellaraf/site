@@ -1,7 +1,7 @@
 import { parseToRgba } from 'color2k';
 import { useColorValue, useTheme } from 'site/context';
 
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps } from '@chakra-ui/react';
 
 export const useGradient = (
   direction: number = 180,

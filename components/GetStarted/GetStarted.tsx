@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Center, Heading, VStack, Divider } from '@chakra-ui/core';
+import { Center, Heading, VStack, Divider } from '@chakra-ui/react';
 import { Button, Ripple } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useTitle, useRender, useOpposingColor, useIsDark, useGlow } from 'site/hooks';

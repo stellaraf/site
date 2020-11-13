@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { GoogleMap as GoogleMapApi, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import { Link } from 'site/components';
 import { useConfig, useColorValue, useTheme } from 'site/context';

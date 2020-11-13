@@ -9,7 +9,7 @@ import type {
   Theme,
   PlaceholderProps,
 } from 'react-select';
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps } from '@chakra-ui/react';
 import type { ColorNames, CustomTheme } from 'site/types';
 
 export interface ISelectState {

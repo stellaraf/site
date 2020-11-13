@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { Button, Flex, IconButton, VStack } from '@chakra-ui/core';
+import { Button, Flex, IconButton, VStack } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import { useLocalStorage } from 'react-use';
 import { AnimatedFlex } from 'site/components';

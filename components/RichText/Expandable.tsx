@@ -6,7 +6,7 @@ import {
   AccordionPanel,
   AccordionIcon,
   useToken,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { useColorValue } from 'site/context';
 import { useRender } from 'site/hooks';
 
@@ -22,7 +22,7 @@ export const Expandable = (props: TExpandable) => {
         _hover={{ borderColor: hoverBorder }}
         transition="border-color 0.2s ease"
         maxW={{ lg: '60%' }}>
-        <AccordionButton css={{ '&:focus': { borderRadius: useToken('radii', 'md') } }}>
+        <AccordionButton mx={1} css={{ '&:focus': { borderRadius: useToken('radii', 'md') } }}>
           <Box flex={1} textAlign="left">
             {useDefaultTitle ? 'Expand...' : title}
           </Box>

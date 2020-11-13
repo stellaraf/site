@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { FormControl, FormErrorMessage } from '@chakra-ui/core';
+import { FormControl, FormErrorMessage } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
 import { Select as CustomSelect } from 'site/components';
 

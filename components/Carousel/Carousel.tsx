@@ -1,9 +1,8 @@
-import * as React from 'react';
 import { createContext, useContext, forwardRef } from 'react';
-import { Box, Button, Flex } from '@chakra-ui/core';
+import { Box, Button, Flex } from '@chakra-ui/react';
 import { useSlider } from 'site/hooks';
 
-import type { FlexProps } from '@chakra-ui/core';
+import type { FlexProps } from '@chakra-ui/react';
 import type { DotProps, CarouselProps, SetCurrent, UseCarousel } from './types';
 
 /**

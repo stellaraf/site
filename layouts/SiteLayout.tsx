@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useBreakpointValue } from '@chakra-ui/core';
+import { useBreakpointValue } from '@chakra-ui/react';
 import {
   Banner,
   Footer,
@@ -14,7 +14,7 @@ import { SyncedStyleProvider } from 'site/context';
 import { useMobile } from 'site/hooks';
 import { Wrapper, Root, Main } from './common';
 
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps } from '@chakra-ui/react';
 import type { SiteLayoutProps } from './types';
 
 const Stars = dynamic<BoxProps>(() => import('site/components').then(i => i.Stars));

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Box, Flex } from '@chakra-ui/core';
+import { Box, Flex } from '@chakra-ui/react';
 import { Link, Logo } from 'site/components';
 import { useColorValue } from 'site/context';
 import { useNavLogoState } from 'site/hooks';

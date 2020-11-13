@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import NextImage from 'next/image';
-import { Image as ChakraImage, Skeleton, useDisclosure } from '@chakra-ui/core';
+import { Image as ChakraImage, Skeleton, useDisclosure } from '@chakra-ui/react';
 import { Backdrop, ModalWrapper } from 'site/components';
 import { useColorValue } from 'site/context';
 

@@ -1,8 +1,8 @@
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { useColorValue } from 'site/context';
 import { Markdown } from './Markdown';
 
-import type { BoxProps } from '@chakra-ui/core';
+import type { BoxProps } from '@chakra-ui/react';
 import type { TTableEntry } from 'site/types';
 import type { ITd, ITableCell } from './types';
 

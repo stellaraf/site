@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query';
 import { all, fetchWithTimeout } from 'site/util';
 import { useCloudLocations } from 'site/state';
+import { useGoogleAnalytics } from 'site/hooks';
 
 import type { Locations } from 'site/types';
 import type { CancellablePromise, TFetcher } from './types';
@@ -101,6 +102,7 @@ async function fetcher(args: TFetcher): Promise<number> {
  */
 export function useDataCenter(locations: Locations) {
   const tests = useCloudLocations();
+  const { trackEvent } = useGoogleAnalytics();
 
   const getQueryKey = () => [new Date().toString(), ...locations.map(l => l.id)];
 
@@ -178,6 +180,7 @@ export function useDataCenter(locations: Locations) {
    * reset the 'best' properties to false, clear the cached response, and then refetch.
    */
   const execute = () => {
+    trackEvent({ category: 'User', action: 'Data Center Locator' });
     tests.map(test => test.merge({ best: false, elapsed: 65535, done: false }));
     refetch();
   };

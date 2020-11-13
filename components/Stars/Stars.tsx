@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import Particles from 'react-tsparticles';
 import { useColorValue } from 'site/context';
 import { useKonamiState } from 'site/state';

@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { HStack, Box, Button, Stack } from '@chakra-ui/core';
+import { HStack, Box, Button } from '@chakra-ui/react';
 import { MdWbSunny as Sun } from '@meronex/icons/md';
 import { BsMoon as Moon } from '@meronex/icons/bs';
 import { useColorMode, useColorValue } from 'site/context';

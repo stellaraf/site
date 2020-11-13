@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { Box, Link as ChakraLink, useToken } from '@chakra-ui/core';
+import { Box, Link as ChakraLink, useToken } from '@chakra-ui/react';
 import { EiExternalLink as ExternalIcon } from '@meronex/icons/ei';
 import { useColorValue } from 'site/context';
 import { useLinkType } from 'site/hooks';

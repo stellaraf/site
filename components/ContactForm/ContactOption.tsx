@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Heading, Text } from '@chakra-ui/core';
+import { Heading, Text } from '@chakra-ui/react';
 import { useTitle } from 'site/hooks';
 
 import type { IContactOption } from './types';
