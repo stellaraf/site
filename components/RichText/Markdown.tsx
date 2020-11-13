@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { Link } from 'site/components';
 import { useColorValue } from 'site/context';
 import { H1, H2, H3, H4, H5, H6 } from './Headings';
@@ -37,16 +37,17 @@ export const Th = (props: ITableHeader) => {
 export const Table = (props: ITableMain) => {
   const border = useColorValue('gray.100', 'whiteAlpha.100');
   return (
-    <Box
-      mt={4}
-      zIndex={1}
-      minWidth="50%"
-      overflowX="auto"
-      borderWidth="1px"
-      borderRadius="lg"
-      borderColor={border}
-      width={{ base: '100%', lg: 'fit-content' }}>
-      <Box as="table" textAlign="left" width="100%" {...props} />
+    <Box overflowX="auto" width={{ base: '100%', lg: 'fit-content' }}>
+      <Box
+        mt={4}
+        zIndex={1}
+        minWidth="50%"
+        borderWidth="1px"
+        borderRadius="lg"
+        borderColor={border}
+        width="100%">
+        <Box as="table" textAlign="left" width="100%" {...props} />
+      </Box>
     </Box>
   );
 };

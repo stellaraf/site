@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Center, Flex, IconButton, Heading, Grid } from '@chakra-ui/core';
+import { Center, Flex, IconButton, Heading, Grid } from '@chakra-ui/react';
 import { BisLeftArrow as Back } from '@meronex/icons/bi';
 import { ModalWrapper } from 'site/components';
 import { useTitle } from 'site/hooks';
@@ -51,7 +51,7 @@ export const MobileForm = (props: IMobileForm) => {
       hideCloseButton
       onClose={onClose}
       bodyProps={{ overflow: 'unset' }}
-      containerProps={{ overflow: 'auto' }}
+      containerProps={{ overflow: 'auto', mt: 0 }}
       body={
         <Grid
           boxSize="100%"
