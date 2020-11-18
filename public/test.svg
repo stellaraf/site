@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xl="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" viewBox="24 212 668.4516 224.25" width="668.4516" height="224.25">
+	<defs>
+		<marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -3 7 6" markerWidth="7" markerHeight="6" color="var(--dark)">
+			<g>
+				<path d="M 4.8 0 L 0 -1.8 L 0 1.8 Z" fill="currentColor" stroke="currentColor" stroke-width="1" />
+			</g>
+		</marker>
+		<font-face font-family="Open Sans" font-size="16" panose-1="2 11 7 6 3 8 4 2 2 4" units-per-em="1000" underline-position="-75.19531" underline-thickness="49.80469" slope="0" x-height="540.03906" cap-height="713.8672" ascent="1068.8477" descent="-292.96875" font-weight="600">
+			<font-face-src>
+				<font-face-name name="OpenSans-Semibold" />
+			</font-face-src>
+		</font-face>
+		<font-face font-family="Open Sans" font-size="14" panose-1="2 11 7 6 3 8 4 2 2 4" units-per-em="1000" underline-position="-75.19531" underline-thickness="49.80469" slope="0" x-height="540.03906" cap-height="713.8672" ascent="1068.8477" descent="-292.96875" font-weight="600">
+			<font-face-src>
+				<font-face-name name="OpenSans-Semibold" />
+			</font-face-src>
+		</font-face>
+		<font-face font-family="Open Sans" font-size="10" panose-1="2 11 3 6 3 5 4 2 2 4" units-per-em="1000" underline-position="-75.19531" underline-thickness="49.80469" slope="0" x-height="530.7617" cap-height="713.8672" ascent="1068.8477" descent="-292.96875" font-weight="300">
+			<font-face-src>
+				<font-face-name name="OpenSans-Light" />
+			</font-face-src>
+		</font-face>
+		<font-face font-family="Open Sans" font-size="12" panose-1="2 11 7 6 3 8 4 2 2 4" units-per-em="1000" underline-position="-75.19531" underline-thickness="49.80469" slope="0" x-height="540.03906" cap-height="713.8672" ascent="1068.8477" descent="-292.96875" font-weight="600">
+			<font-face-src>
+				<font-face-name name="OpenSans-Semibold" />
+			</font-face-src>
+		</font-face>
+	</defs>
+	<g stroke-opacity="1" stroke="none" stroke-dasharray="none" fill="none" fill-opacity="1">
+		<g>
+			<g>
+				<line x1="93.5" y1="297.5" x2="672.9516" y2="297.5" marker-end="url(#FilledArrow_Marker)" stroke="var(--dark)" stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" />
+			</g>
+			<g>
+				<circle cx="389.6758" cy="298" r="42.7500683103061" fill="var(--red)" />
+			</g>
+			<g>
+				<circle cx="203.5" cy="298" r="25.5000407464984" fill="var(--green)" />
+			</g>
+			<g>
+				<circle cx="575.85156" cy="298" r="25.5000407464983" fill="var(--green)" />
+			</g>
+			<g>
+				<path d="M 202.39453 352 L 202.39453 385.25 C 202.39453 389.6683 205.97625 393.25 210.39453 393.25 L 368 393.25 C 372.4183 393.25 376 389.6683 376 385.25 L 376 353" stroke="blue" stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" />
+			</g>
+			<g>
+				<path d="M 403.39453 352 L 403.39453 385.25 C 403.39453 389.6683 406.97625 393.25 411.39453 393.25 L 569 393.25 C 573.4183 393.25 577 389.6683 577 385.25 L 577 353" stroke="blue" stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" />
+			</g>
+			<g>
+				<text transform="translate(29 287)" fill="var(--dark)">
+					<tspan font-family="Open Sans" font-size="16" font-weight="600" fill="var(--dark)" x="0" y="17">
+						TIME
+					</tspan>
+				</text>
+			</g>
+			<g>
+				<text transform="translate(205.36816 398.25)" fill="var(--dark)">
+					<tspan font-family="Open Sans" font-size="14" font-weight="600" fill="var(--dark)" x="0" y="15">
+						Recovery Point Objective
+					</tspan>
+					<tspan font-family="Open Sans" font-size="10" font-weight="300" fill="var(--dark)" x="46.09961" y="30">
+						Data Restoration
+					</tspan>
+				</text>
+			</g>
+			<g>
+				<text transform="translate(407.4585 398.25)" fill="var(--dark)">
+					<tspan font-family="Open Sans" font-size="14" font-weight="600" fill="var(--dark)" x="0" y="15">
+						Recovery Time Objective
+					</tspan>
+					<tspan font-family="Open Sans" font-size="10" font-weight="300" fill="var(--dark)" x="46.623047" y="30">
+						Time to Recover
+					</tspan>
+				</text>
+			</g>
+			<g>
+				<text transform="translate(317.82617 217)" fill="var(--dark)">
+					<tspan font-family="Open Sans" font-size="16" font-weight="600" fill="var(--dark)" x="0" y="17">
+						DISRUPTIVE EVENT
+					</tspan>
+				</text>
+			</g>
+			<g>
+				<text transform="translate(137.27148 240)" fill="var(--dark)">
+					<tspan font-family="Open Sans" font-size="12" font-weight="600" fill="var(--dark)" x="0" y="13">
+						DATA RECOVERY POINT
+					</tspan>
+				</text>
+			</g>
+			<g>
+				<text transform="translate(518.4971 240)" fill="var(--dark)">
+					<tspan font-family="Open Sans" font-size="12" font-weight="600" fill="var(--dark)" x="0" y="13">
+						SYSTEMS RESTORED
+					</tspan>
+				</text>
+			</g>
+			<g>
+				<path d="M 219.3274 287.11488 C 219.593 287.37982 219.74228 287.73956 219.74228 288.1147 C 219.74228 288.48986 219.593 288.8496 219.3274 289.11454 L 199.5568 308.8851 C 199.29187 309.15073 198.93214 309.3 198.55698 309.3 C 198.18183 309.3 197.8221 309.15073 197.55716 308.8851 L 187.67187 298.99983 C 187.11968 298.44764 187.11968 297.55236 187.67187 297.00017 C 188.22406 296.448 189.11933 296.448 189.67152 297.00017 L 198.55698 305.88846 L 217.32774 287.11488 C 217.59268 286.84927 217.95241 286.7 218.32757 286.7 C 218.70272 286.7 219.06246 286.84927 219.3274 287.11488 Z" fill="var(--blue)" />
+			</g>
+			<g>
+				<path d="M 591.67896 287.11488 C 591.94456 287.37982 592.09384 287.73956 592.09384 288.1147 C 592.09384 288.48986 591.94456 288.8496 591.67896 289.11454 L 571.9084 308.8851 C 571.64344 309.15073 571.2837 309.3 570.90855 309.3 C 570.5334 309.3 570.17366 309.15073 569.9087 308.8851 L 560.0234 298.99983 C 559.47124 298.44764 559.47124 297.55236 560.0234 297.00017 C 560.5756 296.448 561.4709 296.448 562.0231 297.00017 L 570.90855 305.88846 L 589.6793 287.11488 C 589.94424 286.84927 590.304 286.7 590.6791 286.7 C 591.0543 286.7 591.414 286.84927 591.67896 287.11488 Z" fill="var(--blue)" />
+			</g>
+			<g>
+				<path d="M 409.6646 278.01187 C 410.15234 278.49838 410.42646 279.15898 410.42646 279.8479 C 410.42646 280.5368 410.15234 281.1974 409.6646 281.6839 L 373.359 317.9895 C 372.345 319.0035 370.70098 319.0035 369.68697 317.9895 C 368.67296 316.9755 368.67296 315.33145 369.68697 314.31744 L 405.99255 278.01187 C 406.47906 277.52412 407.13966 277.25 407.82857 277.25 C 408.5175 277.25 409.1781 277.52412 409.6646 278.01187 Z" fill="var(--blue)" />
+			</g>
+			<g>
+				<path d="M 369.68697 278.01187 C 369.1992 278.49838 368.9251 279.15898 368.9251 279.8479 C 368.9251 280.5368 369.1992 281.1974 369.68697 281.6839 L 405.99255 317.9895 C 407.00655 319.0035 408.6506 319.0035 409.6646 317.9895 C 410.6786 316.9755 410.6786 315.33145 409.6646 314.31744 L 373.359 278.01187 C 372.8725 277.52412 372.2119 277.25 371.523 277.25 C 370.8341 277.25 370.1735 277.52412 369.68697 278.01187 Z" fill="var(--blue)" />
+			</g>
+		</g>
+	</g>
+</svg>
