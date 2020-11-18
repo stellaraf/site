@@ -1,0 +1,8 @@
+@import "~styles/_variables.scss";
+
+.overlayBackground {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    background: $st-background;
+}

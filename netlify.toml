@@ -1,0 +1,14 @@
+[build]
+command = "yarn build"
+publish = "build/"
+functions = "NetlifyFunctions/"
+
+[dev]
+command = "yarn start"
+port = 3000
+publish = "public/"
+
+[[redirects]]
+from = "/*"
+to = "index.html"
+status = 200

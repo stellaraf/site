@@ -1,0 +1,28 @@
+@import "~styles/_variables.scss";
+
+.sectionOne {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.sectionGeneric {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.GlobeContainer {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.GlobeSvg {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}

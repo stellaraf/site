@@ -1,0 +1,35 @@
+{
+  "short_name": "Stellar",
+  "name": "Stellar Technologies Inc.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "32x32 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+  },
+  {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+  }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#2e3191",
+  "background_color": "#0e1e25"
+}

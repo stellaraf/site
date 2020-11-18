@@ -1,0 +1,102 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "classnames": "^2.2.6",
+    "eases": "^1.0.8",
+    "formik": "^2.0.1",
+    "node-sass": "^4.12.0",
+    "parse-unit": "^1.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.10.2",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-dom": "^16.10.2",
+    "react-icons": "^3.8.0",
+    "react-reveal": "^1.2.2",
+    "react-router-bootstrap": "^0.25.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "react-simple-maps": "^1.0.0-beta.0",
+    "react-spring": "^8.0.27",
+    "request": "^2.88.0",
+    "styled-components": "^4.4.0",
+    "ua-parser-js": "^0.7.20",
+    "yup": "^0.27.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint:sass": "stylelint *.scss *.sass --fix"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "stylelint": {
+    "plugins": [
+      "stylelint-prettier"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        true,
+        {
+          "singleQuote": false,
+          "useTabs": false,
+          "tabWidth": 4
+        }
+      ],
+      "color-no-invalid-hex": true,
+      "max-empty-lines": 2,
+      "color-hex-case": "lower",
+      "color-hex-length": "long",
+      "declaration-block-no-duplicate-properties": true,
+      "declaration-block-no-redundant-longhand-properties": true,
+      "declaration-block-no-shorthand-property-overrides": true,
+      "font-family-name-quotes": "always-where-recommended",
+      "font-family-no-duplicate-names": true,
+      "font-family-no-missing-generic-family-keyword": true,
+      "font-weight-notation": "numeric",
+      "indentation": 4,
+      "linebreaks": "unix",
+      "no-empty-first-line": true,
+      "number-leading-zero": "always",
+      "string-quotes": "double",
+      "shorthand-property-no-redundant-values": true,
+      "selector-pseudo-class-no-unknown": true,
+      "no-unknown-animations": true,
+      "property-case": null,
+      "property-no-unknown": true,
+      "at-rule-no-unknown": null
+    },
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "eslint-config-react-app": "^5.0.2",
+    "prettier": "^1.18.2",
+    "sass-lint": "^1.13.1",
+    "stylelint": "^11.1.1",
+    "stylelint-config-prettier": "^6.0.0",
+    "stylelint-config-standard": "^19.0.0",
+    "stylelint-prettier": "^1.1.1"
+  }
+}

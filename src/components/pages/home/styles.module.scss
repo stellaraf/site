@@ -1,0 +1,74 @@
+@import "~styles/_variables.scss";
+
+.heroSection {
+    display: flex;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    flex-direction: column;
+}
+
+.heroButton:first-of-type {
+    margin-right: $hero-btn-margin-x;
+    margin-left: 0 !important;
+}
+
+.heroButton:last-of-type {
+    margin-left: $hero-btn-margin-x;
+    margin-right: 0 !important;
+}
+
+.heroButton:not(:first-of-type),
+.heroButton:not(:last-of-type) {
+    margin-left: $hero-btn-margin-x;
+    margin-right: $hero-btn-margin-x;
+}
+
+.heroHeadingFirst {
+    color: $headings-color;
+    font-size: $display3-size;
+    width: 100%;
+}
+
+.heroHeadingRemaining {
+    color: darken($headings-color, 40%);
+}
+
+.sectionCard {
+    text-align: center;
+    flex-grow: 1;
+    background-color: $section-card-background !important;
+}
+
+.sectionCardTop {
+    padding: $section-card-padding-y $section-card-padding-x !important;
+}
+
+.sectionCardBottom {
+    padding-right: $section-card-padding-x !important;
+    padding-left: $section-card-padding-x !important;
+    padding-bottom: $section-card-padding-y !important;
+}
+
+.sectionCardTitle {
+    color: $section-card-title-color;
+}
+
+.sectionCardText {
+    color: $section-card-text-color;
+}
+
+.mainCard {
+    flex-grow: 1;
+}
+
+.mainCardBody {
+    padding: $main-card-padding !important;
+}
+
+.mainCardTitle {
+    color: $main-card-title-color !important;
+}
+
+.mainCardText {
+    color: $main-card-text-color !important;
+}
