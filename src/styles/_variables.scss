@@ -1,0 +1,312 @@
+// App Variables
+// $st-primary: #266dd3;
+$st-primary: #2b3c8f;
+$st-primary-alt: #2a174a;
+$st-secondary: #b3e3f5;
+$st-success: #48a9a6;
+$st-danger: #ca2e55;
+$st-warning: #f49d37;
+$st-light: #f0f0f0;
+$st-dark: #161318;
+$st-white: #e3e3e3;
+$st-gray: #70707f;
+// $st-gray: rgba($st-dark, 0.38);
+$st-grey: $st-gray;
+$st-white-dark: rgba($st-white, 0.5);
+$st-dark-light: rgba($st-dark, 0.5);
+$st-primary-light: rgba($st-primary, 0.8);
+// $st-gray: #757780;
+// $st-background: #222c4c;
+// $st-background-alt: #58a4b0;
+
+$st-gradient-1: #2e3191;
+// $st-gradient-2: #2b004a;
+$st-gradient-2: #0d0e59;
+$st-gradient-3: $st-dark;
+
+$st-gradient-colors: $st-gradient-2, $st-gradient-3;
+$st-gradient: linear-gradient(to bottom, $st-gradient-colors);
+$st-gradient-down: linear-gradient(to bottom, $st-primary, $st-primary-alt, $st-dark);
+
+$st-gradient-image: linear-gradient(
+        rgba(43, 60, 143, 1) 0%,
+        rgba(43, 60, 143, 1) 10%,
+        rgba(43, 60, 143, 0.9) 20%,
+        rgba(43, 60, 143, 0.8) 30%,
+        rgba(43, 60, 143, 0.7) 40%,
+        rgba(43, 60, 143, 0.65) 45%,
+        rgba(43, 60, 143, 0.6) 50%,
+        rgba(43, 60, 143, 0.65) 55%,
+        rgba(43, 60, 143, 0.7) 60%,
+        rgba(43, 60, 143, 0.8) 70%,
+        rgba(43, 60, 143, 0.9) 80%,
+        rgba(43, 60, 143, 1) 90%,
+        rgba(43, 60, 143, 1) 100%
+    ),
+    url("/assets/earthrise-1920-1080.jpg");
+
+$st-dark-transparent: rgba($st-dark, 0.5);
+$st-white-transparent: rgba($st-white, 0.5);
+
+@function make-subtle($color) {
+    $dark-color: darken($color, 50%);
+    @return rgba($dark-color, 0.5);
+}
+
+$st-primary-subtle: make-subtle($st-primary);
+$st-primary-alt-subtle: make-subtle($st-primary-alt);
+$st-gray-subtle: make-subtle($st-gray);
+
+@function make-gradient($startColor: $color-black, $direction: "to bottom") {
+    $scrimCoordinates: (
+        0: 1,
+        19: 0.738,
+        34: 0.541,
+        47: 0.382,
+        56.5: 0.278,
+        65: 0.194,
+        73: 0.126,
+        80.2: 0.075,
+        86.1: 0.042,
+        91: 0.021,
+        95.2: 0.008,
+        98.2: 0.002,
+        100: 0
+    );
+    $hue: hue($startColor);
+    $saturation: saturation($startColor);
+    $lightness: lightness($startColor);
+    $stops: ();
+    @each $colorStop, $alphaValue in $scrimCoordinates {
+        $stop: hsla($hue, $saturation, $lightness, $alphaValue) percentage($colorStop/100);
+        $stops: append($stops, $stop, comma);
+    }
+    @return linear-gradient(unquote($direction), $stops);
+}
+
+$st-page-gradient: linear-gradient(to top right, $st-primary, $st-primary-alt, $st-dark);
+
+$st-section-gradient-1: make-gradient($st-dark), make-gradient($st-primary, "to top right"),
+    make-gradient($st-primary-alt, "to top left");
+
+$st-section-gradient-2: make-gradient($st-dark, "to top"),
+    make-gradient($st-primary, "to bottom right"), make-gradient($st-primary-alt, "to bottom left");
+
+// $bg1: $st-background;
+// $bg2: lighten($st-background, 6%);
+// $bg3: darken($st-background, 4%);
+// $map-fill: transparent;
+// $map-stroke: #d6d6da;
+$map-fill: $st-primary-light;
+$map-stroke: $st-gray;
+$globe-stroke: rgba($st-light, 0.1);
+$map-text: $st-white;
+// $map-fill: #eaeaec;
+// $map-stroke: #d6d6da;
+
+$st-background: $st-dark;
+
+$st-colors: (
+    "primary": $st-primary,
+    "secondary": $st-secondary,
+    "danger": $st-danger,
+    "warning": $st-warning,
+    "light": $st-light,
+    "dark": $st-dark
+);
+
+$st-font-body: "Open Sans";
+$st-font-headings: "Open Sans";
+$st-font-mono: "Fira Code";
+
+$st-fonts-body: $st-font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+$st-fonts-mono: $st-font-mono, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+$st-fonts-headings: $st-font-headings, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+
+// Bootstrap Overrides
+
+$transition-collapse: height 0.35s ease, background-image 0.35s ease;
+
+//// Grid
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+) !default;
+
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px
+) !default;
+
+$grid-gutter-width: 30px !default;
+
+$break-xs: map-get($grid-breakpoints, xs);
+$break-sm: map-get($grid-breakpoints, sm);
+$break-md: map-get($grid-breakpoints, md);
+$break-lg: map-get($grid-breakpoints, lg);
+$break-xl: map-get($grid-breakpoints, xl);
+
+$container-max-width-sm: map-get($container-max-widths, sm);
+$container-max-width-md: map-get($container-max-widths, md);
+$container-max-width-lg: map-get($container-max-widths, lg);
+$container-max-width-xl: map-get($container-max-widths, xl);
+
+//// Color
+$theme-colors: $st-colors;
+$white: $st-white;
+$body-bg: $st-background;
+$body-color: $st-white;
+
+//// Typography
+$font-family-sans-serif: $st-fonts-body;
+$font-family-monospace: $st-fonts-mono;
+$font-headings: $st-fonts-headings;
+
+$font-size-base: 1rem;
+$font-size-lg: $font-size-base * 1.25;
+$font-size-sm: $font-size-base * 0.875;
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-bold: 600;
+
+$font-weight-base: $font-weight-normal;
+$line-height-base: 1.5;
+
+$h1-font-size: $font-size-base * 2.5;
+$h2-font-size: $font-size-base * 2;
+$h3-font-size: $font-size-base * 1.75;
+$h4-font-size: $font-size-base * 1.5;
+$h5-font-size: $font-size-base * 1.25;
+$h6-font-size: $font-size-base;
+
+$headings-font-family: $font-headings;
+$headings-font-weight: 800;
+$headings-color: $st-white;
+
+$display1-size: 6rem;
+$display2-size: 5.5rem;
+$display3-size: 4.5rem;
+$display4-size: 3.5rem;
+
+$subdisplay1-size: $display1-size * 0.4;
+$subdisplay2-size: $display2-size * 0.4;
+$subdisplay3-size: $display3-size * 0.4;
+$subdisplay4-size: $display4-size * 0.4;
+
+$display-weight: $font-weight-light;
+$display1-weight: $display-weight;
+$display2-weight: $display-weight;
+$display3-weight: $display-weight;
+$display4-weight: $display-weight;
+
+//// Borders
+$border-width: 1px;
+$card-border-width: $border-width;
+$border-radius: 0.5rem;
+$border-radius-lg: 0.7rem;
+$border-radius-sm: 0.4rem;
+
+//// Buttons
+$input-btn-focus-box-shadow: none;
+$input-btn-padding-y: 0.375rem !default;
+$input-btn-padding-x: 0.75rem !default;
+
+$nav-link-padding-y: 0.5rem !default;
+$nav-link-padding-x: 1rem !default;
+
+// App Styles
+
+//// Spacing
+$hero-btn-margin-x: 0.5rem;
+
+//// Navigation
+$nav-card-background: rgba(0, 0, 0, 0.2);
+$nav-card-color: rgba($st-white, 0.5);
+$nav-card-border-color: rgba($st-white, 0.125);
+$nav-card-title-color: $st-white;
+$nav-card-header-background: rgba($st-white, 0.05);
+$nav-collapse-margin-bottom: 2.5rem;
+$nav-collapse-margin-top: 0.5rem;
+$navbar-bottom-border: $border-width solid $st-secondary;
+$nav-link-color: rgba($st-white, 0.75);
+
+$hamburger-link-border: lighten(desaturate($st-dark, 100%), 10%);
+$hamburger-link-hover-background: rgba($hamburger-link-border, 0.2);
+
+//// Cards
+$content-card-background: rgba($st-dark, 0.5);
+// $content-card-background-primary: rgba(lighten($st-secondary, 15%), 0.5);
+$content-card-background-dark: rgba(106, 106, 150, 0.2);
+$content-card-color-dark: $st-white;
+$content-card-color: $st-white;
+$content-card-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+$content-card-shadow-dark: 0 30px 60px rgba(0, 0, 0, 0.25);
+
+// Section
+$section-card-background: rgba($st-dark, 0.3);
+$section-card-title-color: $st-white;
+$section-card-text-color: $st-white;
+$section-card-icon-height: 70px;
+$section-card-padding-x: 1rem;
+$section-card-padding-y: 1rem;
+$section-card-height: 285px;
+// Main
+$main-card-margin-top: 3rem;
+$main-card-padding: 3rem;
+$main-card-title-color: $st-dark;
+$main-card-text-color: $st-gray;
+// Location
+$loc-card-padding-x: 1.5rem;
+$loc-card-padding-y: 1.5rem;
+$loc-card-background: $st-primary;
+$loc-card-title-color: $st-white;
+$loc-card-subtitle-color: rgba($loc-card-title-color, 0.3);
+$loc-card-text-color: $loc-card-title-color;
+$loc-card-margin-x: 3rem;
+$loc-card-width: 280px;
+$loc-card-height: 175px;
+$log-card-margin-sm-y: 15px;
+// Next Page
+$next-card-background: transparent;
+$next-card-color: $st-dark;
+$next-card-width: 360px;
+$next-card-height: 175px;
+$next-card-background-hover: rgba($st-dark, 0.05);
+$next-card-subtitle-color: rgba($next-card-color, 0.3);
+$next-card-border-color: $st-dark;
+$next-card-padding-x: 2%;
+$next-card-padding-y: 2%;
+
+// Feature Sections
+$feature-card-height: 285px;
+$feature-card-height-sm: 260px;
+$feature-card-border-color: darken($st-white, 2%);
+
+// SideNav
+$sidenav-background: lighten(desaturate($st-dark, 100%), 4%);
+
+//// Footer
+$footer-background: transparent;
+$footer-color: rgba($st-white, 0.4);
+$footer-heading-size: $font-size-base;
+$footer-link-size: $font-size-base * 0.8;
+$footer-col-margin: 15px;
+
+//// Forms
+$form-group-margin-bottom: 1rem !default;
+$input-placeholder-color: $st-gray;
+
+//// Spinner
+$spinner-border-width: 0.2em;
+$spinner-border-width-sm: 0.1em;

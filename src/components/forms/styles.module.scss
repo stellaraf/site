@@ -1,0 +1,55 @@
+@import "~styles/_variables";
+
+.contactFormField {
+    margin-bottom: 1rem;
+}
+
+.contactTitle {
+    color: $st-dark !important;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    text-align: center;
+}
+
+.contactMessageCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactMessageForm {
+    height: 100% !important;
+}
+
+.contactLabel {
+    font-weight: $font-weight-bold;
+}
+
+.formLabel {
+    font-weight: $font-weight-bold;
+}
+
+.formField {
+    margin-bottom: 1rem;
+}
+
+.formBtnStatusText {
+    margin: $spinner-border-width 0 $spinner-border-width $spinner-border-width;
+}
+.formBtnStatus {
+    margin: $spinner-border-width;
+}
+
+.formMessage {
+    margin: $form-group-margin-bottom 0 0 0.1rem !important;
+    font-size: $font-size-sm;
+    line-height: 1;
+}
+
+.formError {
+    composes: formMessage;
+    color: $st-danger;
+}
+.formSuccess {
+    composes: formMessage;
+    color: $st-success;
+}

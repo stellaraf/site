@@ -1,0 +1,24 @@
+[build]
+command = "yarn build"
+publish = "build/"
+functions = "NetlifyFunctions/"
+
+[dev]
+command = "yarn start"
+port = 3000
+publish = "public/"
+
+[[redirects]]
+from = "/sla"
+to = "https://docs.stellar.tech/docs/resources/sla"
+stats = 301
+
+[[redirects]]
+from = "/opengraph.png"
+to = "opengraph.png"
+status = 200
+
+[[redirects]]
+from = "/*"
+to = "index.html"
+status = 200
