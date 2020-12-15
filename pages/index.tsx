@@ -10,7 +10,7 @@ import type { IHome } from 'site/types';
 
 export default function Home(props: IHome) {
   const { pageContent } = props;
-
+  const { sections: homeSections, mainVideo } = pageContent;
   const { siteSlogan, orgName, homePageVideo } = useConfig();
   const logo = useColorTokenValue('primary.500', 'white');
   const heroText = useColorValue('primary.500', 'white');
@@ -18,7 +18,7 @@ export default function Home(props: IHome) {
 
   const bg = useGradient();
 
-  const sections = pageContent.sections.sort((a, b) => a.sortWeight - b.sortWeight);
+  const sections = homeSections.sort((a, b) => a.sortWeight - b.sortWeight);
   const logoRef = useRef<HTMLDivElement>();
 
   useNavLogo(logoRef);
@@ -42,7 +42,11 @@ export default function Home(props: IHome) {
           </Flex>
         </Flex>
         <Flex justifyContent="center" w="100%">
-          {homePageVideo && <Screen url={homePageVideo} />}
+          {typeof mainVideo !== 'undefined' ? (
+            <Screen url={mainVideo.file.url} />
+          ) : typeof homePageVideo !== 'undefined' ? (
+            <Screen url={homePageVideo} />
+          ) : null}
         </Flex>
         {/* <Flex pos="relative" mt={32} h="160px">
           <Flex justifyContent="center" pos="absolute" w="100%" h="sm">

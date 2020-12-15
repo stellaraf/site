@@ -26,8 +26,9 @@ const uncontrolledProps = {
 } as ReactPlayerProps;
 
 export const Video = (props: IVideo) => {
-  const { url, enableControls = false, ...rest } = props;
-  const { config = {}, style = {} } = rest;
+  const { enableControls = false, ...rest } = props;
+
+  let { config = {}, style = {}, url } = rest;
 
   const customConfig = {
     file: {
@@ -41,7 +42,9 @@ export const Video = (props: IVideo) => {
   const customStyle = { borderRadius: '1.6rem', ...style } as ReactPlayerProps['style'];
 
   const playerProps = useBooleanValue(enableControls, controlledProps, uncontrolledProps);
-
+  if (url.match(/^\/\/.*$/)?.length ?? 0 !== 0) {
+    url = 'https:' + url;
+  }
   return (
     <ReactPlayer
       url={url}
@@ -50,7 +53,6 @@ export const Video = (props: IVideo) => {
       style={customStyle}
       config={customConfig}
       {...playerProps}
-      {...rest}
     />
   );
 };

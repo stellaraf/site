@@ -115,6 +115,7 @@ export interface HeroCard {
 export interface HomepageContent {
   sections: HomeSection[];
   heroCards: HeroCard[];
+  mainVideo?: Asset['fields'];
 }
 
 export interface GeoPoint {
