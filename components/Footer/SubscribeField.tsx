@@ -44,7 +44,7 @@ export const SubscribeField = (props: ISubscribeInput) => {
   );
 
   const icon = errors.email ? <Error /> : isSubmitSuccessful ? <Check /> : <RightArrow />;
-  const color = errors.email ? 'red.300' : isSubmitSuccessful ? 'green.300' : 'original.light';
+  const color = errors.email ? 'red.300' : isSubmitSuccessful ? 'green.300' : 'light.500';
 
   return (
     <InputGroup>
@@ -61,7 +61,7 @@ export const SubscribeField = (props: ISubscribeInput) => {
           alignItems="center"
           display="inline-flex"
           color={color}
-          _hover={{ color: 'original.tertiary' }}
+          _hover={{ color: 'tertiary.500' }}
           icon={icon}
         />
       </InputRightElement>

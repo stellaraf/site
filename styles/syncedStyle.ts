@@ -6,7 +6,7 @@ const variantBase = (props: Dict) => ({
   box: mode(
     {},
     {
-      borderBottomColor: 'original.tertiary',
+      borderBottomColor: 'tertiary.500',
       borderBottomWidth: '1px',
       borderBottomStyle: 'solid',
     },
@@ -25,7 +25,7 @@ const variantBase = (props: Dict) => ({
       variant: 'solid',
       _hover: {
         backgroundColor: 'whiteAlpha.50',
-        borderColor: 'original.tertiary',
+        borderColor: 'tertiary.500',
         borderWidth: '1px',
       },
     },
@@ -49,19 +49,19 @@ const variantZed = (props: Dict) => ({
   header: mode({}, { bg: 'transparent', backdropFilter: 'blur(5px)' })(props),
   box: mode(
     {
-      bg: 'original.light',
-      color: 'original.dark',
+      bg: 'light.500',
+      color: 'dark.500',
     },
     {
-      bg: 'original.dark',
-      color: 'original.light',
+      bg: 'dark.500',
+      color: 'light.500',
     },
   )(props),
   link: mode(
     { _hover: { color: 'blackAlpha.600' }, activeColor: 'blackAlpha.300' },
     {
       _hover: { color: 'light.200' },
-      activeColor: 'original.tertiary',
+      activeColor: 'tertiary.500',
     },
   )(props),
 });
@@ -71,20 +71,20 @@ const variantOne = (props: Dict) => ({
     {
       border: '1px',
       backgroundColor: 'transparent',
-      borderColor: 'original.dark',
-      _hover: { backgroundColor: 'blackAlpha.50', borderColor: 'original.dark' },
+      borderColor: 'dark.500',
+      _hover: { backgroundColor: 'blackAlpha.50', borderColor: 'dark.500' },
     },
     {},
   )(props),
   header: mode({}, {})(props),
   box: mode(
     {
-      bg: 'original.tertiary',
-      color: 'original.dark',
+      bg: 'tertiary.500',
+      color: 'dark.500',
     },
     {
-      bg: 'original.dark',
-      color: 'original.light',
+      bg: 'dark.500',
+      color: 'light.500',
     },
   )(props),
 
@@ -92,7 +92,7 @@ const variantOne = (props: Dict) => ({
     { _hover: { color: 'blackAlpha.700' }, activeColor: 'blackAlpha.300' },
     {
       _hover: { color: 'light.200' },
-      activeColor: 'original.tertiary',
+      activeColor: 'tertiary.500',
     },
   )(props),
 });
@@ -108,19 +108,19 @@ const variantTwo = (props: Dict) => ({
   header: mode({}, {})(props),
   box: mode(
     {
-      bg: 'original.primary',
-      color: 'original.light',
+      bg: 'primary.500',
+      color: 'light.500',
     },
     {
-      bg: 'original.dark',
-      color: 'original.light',
+      bg: 'dark.500',
+      color: 'light.500',
     },
   )(props),
   link: mode(
     { _hover: { color: 'primary.200' }, activeColor: 'primary.400' },
     {
       _hover: { color: 'light.200' },
-      activeColor: 'original.tertiary',
+      activeColor: 'tertiary.500',
     },
   )(props),
 });
@@ -133,19 +133,19 @@ const variantThree = (props: Dict) => ({
   header: mode({}, {})(props),
   box: mode(
     {
-      bg: 'original.dark',
-      color: 'original.light',
+      bg: 'dark.500',
+      color: 'light.500',
     },
     {
-      bg: 'original.dark',
-      color: 'original.light',
+      bg: 'dark.500',
+      color: 'light.500',
     },
   )(props),
   link: mode(
     { _hover: { color: 'whiteAlpha.100' }, activeColor: 'whiteAlpha.200' },
     {
       _hover: { color: 'light.200' },
-      activeColor: 'original.tertiary',
+      activeColor: 'tertiary.500',
     },
   )(props),
 });
@@ -153,12 +153,12 @@ const variantThree = (props: Dict) => ({
 const variantFour = (props: Dict) => ({
   button: mode(
     {
-      backgroundColor: 'original.light',
-      color: 'original.secondary',
+      backgroundColor: 'light.500',
+      color: 'secondary.500',
       _hover: {
         backgroundColor: 'whiteAlpha.100',
-        color: 'original.light',
-        borderColor: 'original.light',
+        color: 'light.500',
+        borderColor: 'light.500',
       },
     },
     {},
@@ -166,19 +166,19 @@ const variantFour = (props: Dict) => ({
   header: mode({}, {})(props),
   box: mode(
     {
-      bg: 'original.secondary',
-      color: 'original.light',
+      bg: 'secondary.500',
+      color: 'light.500',
     },
     {
-      bg: 'original.dark',
-      color: 'original.light',
+      bg: 'dark.500',
+      color: 'light.500',
     },
   )(props),
   link: mode(
     { _hover: { color: 'whiteAlpha.100' }, activeColor: 'whiteAlpha.200' },
     {
       _hover: { color: 'light.200' },
-      activeColor: 'original.tertiary',
+      activeColor: 'tertiary.500',
     },
   )(props),
 });

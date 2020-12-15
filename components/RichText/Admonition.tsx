@@ -60,11 +60,11 @@ export const Admonition = (props: TAdmonition) => {
   const renderedBody = useRender(body);
   const bg = useColorValue(
     {
-      Information: 'original.primary',
-      Note: 'original.gray',
-      Tip: 'original.green',
-      Warning: 'original.yellow',
-      Critical: 'original.red',
+      Information: 'primary.500',
+      Note: 'gray.500',
+      Tip: 'green.500',
+      Warning: 'yellow.500',
+      Critical: 'red.500',
     },
     {
       Information: 'primary.300',
@@ -78,13 +78,13 @@ export const Admonition = (props: TAdmonition) => {
   const linkColor = useColorValue(
     {
       Note: undefined,
-      Information: 'original.red',
-      Tip: 'original.primary',
-      Warning: 'original.primary',
-      Critical: 'original.primary',
+      Information: 'red.500',
+      Tip: 'primary.500',
+      Warning: 'primary.500',
+      Critical: 'primary.500',
     },
     {
-      Note: 'original.secondary',
+      Note: 'secondary.500',
       Information: 'tertiary.300',
       Tip: 'primary.300',
       Warning: 'primary.300',

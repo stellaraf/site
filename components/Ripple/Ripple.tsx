@@ -23,7 +23,7 @@ const paths = [
 const reversePaths = paths.slice(0).reverse();
 
 export const Ripple = (props: IRipple) => {
-  const { start = 'original.secondary', stop = 'original.primary', ...rest } = props;
+  const { start = 'secondary.500', stop = 'primary.500', ...rest } = props;
 
   const getColor = useInterpolatedColors(start, stop);
   const stopColor = useToken('colors', stop);

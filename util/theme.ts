@@ -19,7 +19,6 @@ import type {
   FontWeights,
   ThemeConfig,
   CustomColors,
-  InitialTheme,
   ChangeableColors,
 } from 'site/types';
 
@@ -116,7 +115,11 @@ const generateColors = (colorInput: string) => {
 
   colors.map((color, i) => {
     const colorIndex = getColorNumber(i);
-    colorMap[colorIndex] = color;
+    if (colorIndex === 500) {
+      colorMap[500] = colorInput;
+    } else {
+      colorMap[colorIndex] = color;
+    }
   });
   return colorMap;
 };
@@ -208,8 +211,8 @@ const globalStyles = (props: Dict) => {
     },
     html: { scrollBehavior: 'smooth' },
     body: {
-      backgroundColor: mode('original.light', 'original.dark')(props),
-      color: mode('original.dark', 'original.light')(props),
+      backgroundColor: mode('light.500', 'dark.500')(props),
+      color: mode('dark.500', 'light.500')(props),
       fontFamily: 'body',
       '*::selection': mode(
         { backgroundColor: 'secondary.200', color: 'black' },
@@ -232,7 +235,7 @@ const globalStyles = (props: Dict) => {
       {},
       ...themeColorKeys.map(c => ({
         [`--${c}`]: mode(
-          getColor(props.theme, `original.${c}`),
+          getColor(props.theme, `${c}.500`),
           getColor(props.theme, `${c}.300`),
         )(props),
       })),
@@ -273,19 +276,11 @@ function isColorKey(key: string): key is keyof ChangeableColors {
 
 const importColors = (userColors: ThemeConfig['colors']): CustomColors => {
   const generatedColors = generatePalette(userColors);
-  let original = {} as InitialTheme;
-
-  for (let [k, v] of Object.entries(userColors)) {
-    if (isColorKey(k)) {
-      original[k] = v;
-    }
-  }
 
   return {
     ...generatedColors,
     transparent: 'transparent',
     current: 'currentColor',
-    original,
   };
 };
 

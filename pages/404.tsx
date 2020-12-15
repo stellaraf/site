@@ -7,7 +7,7 @@ import { useResponsiveStyle } from 'site/styles';
 
 const NotFound = () => {
   const heroText = useColorValue('black', 'white');
-  const pathText = useColorValue('original.red', 'red.300');
+  const pathText = useColorValue('red.500', 'red.300');
   const rStyles = useResponsiveStyle();
   const bg = useGradient();
   const { asPath } = useRouter();

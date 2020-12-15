@@ -11,11 +11,11 @@ export const GetStarted = (props: IGetStarted) => {
   const { title, subtitle, body = null, buttonLink, buttonText, ...rest } = props;
   const rStyles = useResponsiveStyle();
   const isDarkMode = useColorValue(false, true);
-  const bg = useColorValue('original.secondary', 'original.purple');
+  const bg = useColorValue('secondary.500', 'purple.500');
   const rippleStart = useColorValue('secondary.200', 'secondary.700');
   const color = useOpposingColor(bg);
   const isDark = useIsDark(bg);
-  const glow = useGlow('original.purple', 'purple.800');
+  const glow = useGlow('purple.500', 'purple.800');
 
   const titleMe = useTitle();
   const renderedBody = useRender(body);

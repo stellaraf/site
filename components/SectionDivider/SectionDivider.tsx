@@ -20,7 +20,7 @@ export const SectionDivider = (props: ISectionDivider) => {
       opacity={0.9}
       width="150%"
       overflow="hidden"
-      bg="original.tertiary"
+      bg="tertiary.500"
       {...transform}
       boxShadow={`0 0 10px 1px ${one}, 0 0 20px 2px ${two}, 0 0 30px 4px ${three}`}
       {...rest}

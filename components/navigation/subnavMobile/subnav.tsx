@@ -32,7 +32,7 @@ const Dots = (props: IDots) => {
 
 export const MSubNav = (props: IMSubNav) => {
   const { children, ...rest } = props;
-  const bg = useColorValue('original.light', 'blackAlpha.300');
+  const bg = useColorValue('light.500', 'blackAlpha.300');
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
   const colorScheme = useColorValue('primary', 'dark');
   const { isOpen, onToggle, onClose } = useDisclosure();

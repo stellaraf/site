@@ -26,8 +26,8 @@ export function useOpposingColor(color: string, options?: IOpposingOptions): str
   const [opposingColor, setOpposingColor] = useState<string>('inherit');
   const isBlack = useIsDark(color);
 
-  const dark = useToken('colors', options?.dark ?? 'original.dark');
-  const light = useToken('colors', options?.light ?? 'original.light');
+  const dark = useToken('colors', options?.dark ?? 'dark.500');
+  const light = useToken('colors', options?.light ?? 'light.500');
 
   isBlack && opposingColor !== dark && setOpposingColor(dark);
   !isBlack && opposingColor !== light && setOpposingColor(light);

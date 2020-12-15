@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { GoogleMap as GoogleMapApi, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import { Link } from 'site/components';
-import { useConfig, useColorValue, useTheme } from 'site/context';
+import { useConfig, useColorValue, useColorTokenValue } from 'site/context';
 import { useRender } from 'site/hooks';
 import { gm, useMapUrl } from './util';
 import { mapThemeDark } from './mapStyles';
@@ -62,12 +62,14 @@ export const GoogleMap = () => {
     orgName,
     hqAddress = '',
   } = useConfig();
-  const { colors } = useTheme();
   const { lat, lon: lng } = hqCoordinates;
+
   const renderedInfoContent = useRender(hqMapInfo);
-  const bg = useColorValue(colors.original.light, colors.original.dark);
-  const color = useColorValue(colors.original.dark, colors.original.light);
+
+  const bg = useColorTokenValue('light.500', 'dark.500');
+  const color = useColorTokenValue('dark.500', 'dark.500');
   const mapOptions = useColorValue({ styles: [] }, { styles: mapThemeDark });
+
   return (
     <MapContainer bg={bg} color={color}>
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GMAPS_KEY ?? ''}>

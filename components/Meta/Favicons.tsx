@@ -1,15 +1,12 @@
 import Head from 'next/head';
-import { useToken } from '@chakra-ui/react';
 
-import { useConfig, useColorMode, useColorValue } from 'site/context';
+import { useConfig, useColorMode, useColorTokenValue, useColorValue } from 'site/context';
 
 export const Favicons = () => {
   const { colorMode } = useColorMode();
   const { orgName } = useConfig();
-  const theme = useColorValue(
-    useToken('colors', 'original.primary'),
-    useToken('colors', 'original.secondary'),
-  );
+  const theme = useColorTokenValue('primary.500', 'secondary.500');
+
   return (
     <Head>
       <link rel="shortcut icon" href={`/logos/${colorMode}/favicon.ico`} />

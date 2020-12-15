@@ -81,7 +81,7 @@ export const LinkGroup = (props: ILinkGroup) => {
 export const ContactButton = (props: ButtonProps) => {
   const color = useColorValue('secondary.600', 'white');
   const hoverBg = useColorValue('secondary.50', 'whiteAlpha.100');
-  const borderColor = useColorValue('original.secondary', 'white');
+  const borderColor = useColorValue('secondary.500', 'white');
   return (
     <Button
       color={color}

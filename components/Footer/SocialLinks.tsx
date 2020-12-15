@@ -14,7 +14,7 @@ const LinkedIn = dynamic<IconBaseProps>(() =>
 
 const SocialLink = (props: ISocialLink) => {
   const { label, ...rest } = props;
-  const color = useColorValue('original.tertiary', 'tertiary.300');
+  const color = useColorValue('tertiary.500', 'tertiary.300');
   return (
     <IconButton
       p={2}
@@ -26,7 +26,7 @@ const SocialLink = (props: ISocialLink) => {
       variant="unstyled"
       alignItems="center"
       display="inline-flex"
-      color="original.light"
+      color="light.500"
       rel="noopener noreferrer"
       _hover={{ color }}
       {...rest}

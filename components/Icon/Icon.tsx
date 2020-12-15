@@ -5,7 +5,7 @@ import type { IIcon } from './types';
 
 export const Icon = (props: IIcon) => {
   const { color: bgColor = 'primary', icon, size = 20, ...rest } = props;
-  const bg = useColorValue(`original.${bgColor}`, `${bgColor}.300`);
+  const bg = useColorValue(`${bgColor}.500`, `${bgColor}.300`);
   const color = useOpposingColor(bg);
   let component = null;
   if (typeof icon === 'string') {

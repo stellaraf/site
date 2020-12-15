@@ -16,7 +16,7 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
   const containerProps = getDialogContainerProps();
   const dialogProps = getDialogProps(rest, ref) as any;
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
-  const bg = useColorValue('original.light', 'blackAlpha.300');
+  const bg = useColorValue('light.500', 'blackAlpha.300');
   return (
     <ModalFocusScope>
       <Flex

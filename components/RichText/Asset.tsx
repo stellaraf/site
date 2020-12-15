@@ -5,9 +5,7 @@ import { Backdrop, ModalWrapper } from 'site/components';
 import { useColorValue } from 'site/context';
 
 const ReactPlayer = dynamic(() => import('react-player'), {
-  loading: () => (
-    <Skeleton boxSize="100%" startColor="original.gray" endColor="original.tertiary" />
-  ),
+  loading: () => <Skeleton boxSize="100%" startColor="gray.500" endColor="tertiary.500" />,
 });
 
 import type { TAsset, IAssetFields } from './types';
@@ -21,7 +19,7 @@ const ImageAsset = (props: IAssetFields) => {
    * Override the background/border colors if SVG. Since SVG's won't have a background, it looks
    * better to make the background match the color mode.
    */
-  let bg = useColorValue('original.dark', 'original.light');
+  let bg = useColorValue('dark.500', 'light.500');
   let svgBg = useColorValue('white', 'black');
 
   // next/image doesn't support SVGs, as of 10.0.1 testing. Use native element for SVGs.
@@ -98,7 +96,7 @@ const VideoAsset = (props: IAssetFields) => {
 export const Asset = (props: TAsset) => {
   const { title, file } = props;
   const { contentType } = file;
-  const borderColor = useColorValue('original.dark', 'original.light');
+  const borderColor = useColorValue('dark.500', 'light.500');
 
   let asset = null;
   if (contentType.match(/image/gi)?.length ?? 0 !== 0) {

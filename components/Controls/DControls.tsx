@@ -24,7 +24,7 @@ export const DControls = (props: IDControls) => {
   const colorModeIcon = useColorValue(Moon, Sun);
   const bg = useColorValue('white', 'blackAlpha.300');
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
-  const hoverColor = useColorValue('original.secondary', 'tertiary.300');
+  const hoverColor = useColorValue('secondary.500', 'tertiary.300');
   const switchTo = useColorValue('Dark', 'Light');
   const colorModeLabel = `Switch to ${switchTo} Mode`;
   return (

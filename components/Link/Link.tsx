@@ -10,7 +10,7 @@ import type { ILinkIcon, ILink } from './types';
 
 const BaseLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => {
   const borderColor = useColorValue(
-    useToken('colors', 'original.secondary'),
+    useToken('colors', 'secondary.500'),
     useToken('colors', 'secondary.300'),
   );
   return (

@@ -23,7 +23,7 @@ const Card = (props: CardProps) => {
 export const HeroCards = (props: CardContainerProps) => {
   const { content, icon, ...rest } = props;
   const styles = useColorValue(
-    { bg: 'white', color: 'original.dark' },
+    { bg: 'white', color: 'dark.500' },
     { bg: 'whiteAlpha.100', color: 'white', css: { backdropFilter: 'blur(2px)' } },
   );
   return (

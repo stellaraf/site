@@ -31,7 +31,7 @@ const ContactButton = (props: ButtonProps) => (
 
 export const MHeader = (props: IHeader) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
-  const logoColor = useColorValue('original.primary', 'white');
+  const logoColor = useColorValue('primary.500', 'white');
   const navItems = [...navConfig.left, ...navConfig.right];
 
   return (

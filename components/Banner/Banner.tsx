@@ -13,7 +13,7 @@ const Check = dynamic<IconBaseProps>(() => import('@meronex/icons/fa').then(i =>
 
 const MBannerContent = (props: IBannerContent) => {
   const { body, onClick } = props;
-  const bg = useColorValue('original.secondary', 'secondary.200');
+  const bg = useColorValue('secondary.500', 'secondary.200');
   const color = useOpposingColor(bg);
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
   return (
@@ -46,7 +46,7 @@ const MBannerContent = (props: IBannerContent) => {
 
 const DBannerContent = (props: IBannerContent) => {
   const { body, onClick } = props;
-  const bg = useColorValue('original.secondary', 'secondary.200');
+  const bg = useColorValue('secondary.500', 'secondary.200');
   const color = useOpposingColor(bg);
   const selectionColor = useOpposingColor(color);
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');

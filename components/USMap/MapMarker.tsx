@@ -1,7 +1,7 @@
-import { Box, Link, PopoverTrigger, useBreakpointValue, useToken } from '@chakra-ui/react';
+import { Box, Link, PopoverTrigger, useBreakpointValue } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { Marker } from 'react-simple-maps';
-import { useColorValue } from 'site/context';
+import { useColorValue, useColorTokenValue } from 'site/context';
 
 import type { Variants } from 'framer-motion';
 import type { IMapMarker } from './types';
@@ -17,13 +17,10 @@ const bestVariants = {
 
 export const MapMarker = (props: IMapMarker) => {
   const { color = 'currentColor', best = false, ...rest } = props;
-  const bestOutline = useColorValue(
-    useToken('colors', 'original.secondary'),
-    useToken('colors', 'original.tertiary'),
-  );
+  const bestOutline = useColorTokenValue('secondary.500', 'tertiary.500');
   const fill = useColorValue('black', 'white');
   const radius = useBreakpointValue({ base: 12, lg: 4 });
-  const bestColor = useColorValue('original.tertiary', 'original.red');
+  const bestColor = useColorValue('tertiary.500', 'red.500');
   return (
     <PopoverTrigger>
       <Link>

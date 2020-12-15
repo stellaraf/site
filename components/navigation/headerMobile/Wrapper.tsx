@@ -9,7 +9,7 @@ import type { IBaseHeader } from './types';
 
 export const Wrapper = (props: IBaseHeader) => {
   const { isOpen, onToggle, navHeaderHeight, children, ...rest } = props;
-  const bg = useColorValue('original.light', 'transparent');
+  const bg = useColorValue('light.500', 'transparent');
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
   const { pathname } = useRouter();
   const { value: globalShowLogo } = useNavLogoState();

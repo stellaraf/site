@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
-import { Button, Wrap, useToken } from '@chakra-ui/react';
+import { Button, Wrap } from '@chakra-ui/react';
 import { getPage, getPageContent, getGeoPoints } from 'site/util';
-import { useColorValue } from 'site/context';
+import { useColorTokenValue } from 'site/context';
 import { ContentSection, Hero, SEO, useDataCenter, GetStarted } from 'site/components';
 import { useAlert } from 'site/hooks';
 import { useCloudLocations } from 'site/state';
@@ -22,14 +22,9 @@ export default function Cloud(props: ICloud) {
 
   const showAlert = useAlert();
 
-  const mapColor = useColorValue(
-    useToken('colors', 'blackAlpha.200'),
-    useToken('colors', 'whiteAlpha.200'),
-  );
-  const markerColor = useColorValue(
-    useToken('colors', 'primary.400'),
-    useToken('colors', 'original.tertiary'),
-  );
+  const mapColor = useColorTokenValue('blackAlpha.200', 'whiteAlpha.200');
+  const markerColor = useColorTokenValue('primary.400', 'tertiary.500');
+
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 
   // Initialize test result state

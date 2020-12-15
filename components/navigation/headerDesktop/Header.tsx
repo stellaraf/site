@@ -47,10 +47,10 @@ const NavGroup = (props: FlexProps) => (
 export const DHeader = (props: BoxProps) => {
   const { pathname } = useRouter();
   const { value: showLogo } = useNavLogoState();
-  const bg = useColorValue('original.light', 'transparent');
-  const color = useColorValue('original.dark', 'original.light');
+  const bg = useColorValue('light.500', 'transparent');
+  const color = useColorValue('dark.500', 'light.500');
   const cssProps = useColorValue({}, { css: { backdropFilter: 'blur(10px)' } });
-  const logoColor = useColorValue('original.primary', 'currentColor');
+  const logoColor = useColorValue('primary.500', 'currentColor');
   return (
     <Header bg={bg} color={color} {...cssProps}>
       <Navbar {...props}>

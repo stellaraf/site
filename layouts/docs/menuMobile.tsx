@@ -26,7 +26,7 @@ const MMenuItem = (props: IDocsArticle) => {
     href = `/docs/${docsGroup.slug}/${slug}`;
   }
 
-  const color = useColorValue('original.primary', 'secondary.200');
+  const color = useColorValue('primary.500', 'secondary.200');
 
   return (
     <ListItem my={2} pl={4} color={isCurrent ? color : undefined}>

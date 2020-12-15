@@ -5,7 +5,7 @@ import { validProps } from 'site/util';
 import type { IBackdrop } from './types';
 
 export const Backdrop = (props: IBackdrop) => {
-  const color = useColorValue('original.dark', 'original.light');
+  const color = useColorValue('dark.500', 'light.500');
   return (
     <Box
       mx="auto"

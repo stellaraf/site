@@ -4,6 +4,8 @@ import {
   useTheme as useChakraTheme,
   cookieStorageManager,
   localStorageManager,
+  useToken,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { makeTheme } from 'site/util';
 
@@ -36,6 +38,13 @@ export const getServerSideProps: GetServerSideProps<TColorModeCtx> = async ctx =
     },
   };
 };
+
+/**
+ * Get a color token value based on color-mode.
+ */
+export function useColorTokenValue(light: string, dark: string): string {
+  return useColorModeValue(useToken('colors', light), useToken('colors', dark));
+}
 
 export { useColorMode } from '@chakra-ui/react';
 export { useColorModeValue as useColorValue } from '@chakra-ui/react';

@@ -99,7 +99,7 @@ export const useOptionStyle = (base: IStyles, state: IOption): IStyles => {
   const focusedBg = useColorValue(colors.blackAlpha[100], colors.whiteAlpha[100]);
   const hoverBg = useColorValue(colors[colorScheme][100], colors[colorScheme][200]);
   const hoverColor = useOpposingColor(hoverBg);
-  const activeBg = useColorValue(colors.original[colorScheme], colors[colorScheme][300]);
+  const activeBg = useColorValue(colors[colorScheme][500], colors[colorScheme][300]);
   const activeColor = useOpposingColor(activeBg);
   const styles = {
     backgroundColor: isFocused ? focusedBg : 'transparent',
@@ -137,7 +137,7 @@ export const usePlaceholderStyle = (base: IStyles, state: IPlaceholder): IStyles
 export const useMultiValueStyle = (props: TMultiValue) => {
   const { theme, colorMode, colorScheme } = props;
   const { colors, radii, shadows, fontWeights } = theme;
-  const backgroundColor = useColorValue(colors.original[colorScheme], colors[colorScheme][300]);
+  const backgroundColor = useColorValue(colors[colorScheme][500], colors[colorScheme][300]);
 
   const color = useOpposingColor(backgroundColor);
   const styles = {
