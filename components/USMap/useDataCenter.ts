@@ -4,7 +4,7 @@ import { useCloudLocations } from 'site/state';
 import { useGoogleAnalytics } from 'site/hooks';
 
 import type { Locations } from 'site/types';
-import type { CancellablePromise, TFetcher } from './types';
+import type { TFetcher } from './types';
 
 /**
  * Track the latency of an HTTP connection.
@@ -21,9 +21,9 @@ async function fetcher(args: TFetcher): Promise<number> {
     const res = await fetchWithTimeout(
       url,
       {
-        body: JSON.stringify({ id }),
         method: 'POST',
         signal: controller.signal,
+        body: JSON.stringify({ id }),
       },
       timeout,
       controller,
@@ -59,7 +59,7 @@ async function fetcher(args: TFetcher): Promise<number> {
     /**
      * Since this isn't a "real" HTTP request, we don't really care if it errors out, so long as
      * there was a response received to measure. If an error was thrown (i.e. why we're in this
-     * catch block), we don't really care
+     * catch block), we don't really care.
      */
     if (duration !== 65535) {
       /**
@@ -83,6 +83,8 @@ async function fetcher(args: TFetcher): Promise<number> {
        * purposes, we consider the endpoint unreachable and show an error message in the console.
        */
       console.group(`Location ${id} at Test URL ${url} encountered an error`);
+      console.log('Timeout:', timeout);
+      console.log('Duration:', duration);
       console.trace(err);
       console.groupEnd();
       duration = 65533;
@@ -106,19 +108,7 @@ export function useDataCenter(locations: Locations) {
 
   const getQueryKey = () => [new Date().toString(), ...locations.map(l => l.id)];
 
-  async function queryAll(this: CancellablePromise<boolean>) {
-    /**
-     * AbortController & signal are used to cancel async tasks; in this case, the fetch(). The fetch
-     * is cancelled when each the cancel() method is called by react-query.
-     */
-    const controller = new AbortController();
-
-    /**
-     * Add a cancel method to this function, see:
-     * https://react-query.tanstack.com/docs/guides/query-cancellation
-     */
-    this.cancel = () => controller.abort();
-
+  async function queryAll() {
     let best = null;
 
     /**
@@ -128,6 +118,14 @@ export function useDataCenter(locations: Locations) {
       if (!loc.active.value) {
         tests[idx].merge({ elapsed: 65534, done: true });
       } else if (loc.active.value) {
+        /**
+         * AbortController & signal are used to cancel async tasks; in this case, the fetch(). The
+         * fetch is cancelled when each the cancel() method is called by react-query. There needs
+         * to be a controller per location, so that each are individually cancellable. Otherwise,
+         * if one query times out, they will all be cancelled.
+         */
+        const controller = new AbortController();
+
         const elapsed = await fetcher({
           id: loc.id.value,
           url: loc.testUrl.value,

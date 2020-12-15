@@ -33,10 +33,6 @@ export interface ILatency {
   locState: State<ITestLocation>;
 }
 
-export interface CancellablePromise<T> extends Promise<T> {
-  cancel: () => void;
-}
-
 export interface TFetcher {
   id: string;
   url: string;

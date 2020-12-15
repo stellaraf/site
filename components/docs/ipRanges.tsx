@@ -8,8 +8,12 @@ import type { IPRangeResponse } from './types';
 
 const URL = 'https://ip.stellar.tech';
 
+const getIPs = async (): Promise<IPRangeResponse> => {
+  return await getJson(URL);
+};
+
 export const IPRanges = () => {
-  const { data, error, isLoading, isError } = useQuery<IPRangeResponse>(`${URL}/json`, getJson);
+  const { data, error, isLoading, isError } = useQuery<IPRangeResponse>(`${URL}/json`, getIPs);
   const tagColorScheme = useColorValue('gray', 'tertiary');
   isError && console.error(error);
   return (
