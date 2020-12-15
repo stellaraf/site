@@ -9,7 +9,7 @@ export const Groups = () => {
   const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '-100px' });
   return (
     <Flex align="center" justify="center" m={4}>
-      <Wrap spacing={8} ref={ref}>
+      <Wrap spacing={8} ref={ref} justify="center">
         {inView &&
           docsGroups.map((group, i) => (
             <WrapItem key={`docsGroup${i}`}>

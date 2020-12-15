@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { useBreakpointValue } from '@chakra-ui/react';
+import { AnimatePresence } from 'framer-motion';
 import {
   Banner,
   Footer,
@@ -35,19 +36,21 @@ export const SiteLayout = (props: SiteLayoutProps) => {
     <>
       <Favicons />
       {preview && <Preview />}
-      <Wrapper>
-        <SyncedStyleProvider>
-          {isMobile ? <MHeader /> : <DHeader />}
-          <Main>
-            <Root>{children}</Root>
-          </Main>
-          <CallToAction actions={actions} />
-          <Footer groups={footerGroups} />
-          {!isMobile && <DControls />}
-        </SyncedStyleProvider>
-        <Stars />
-        <Banner />
-      </Wrapper>
+      <AnimatePresence exitBeforeEnter>
+        <Wrapper>
+          <SyncedStyleProvider>
+            {isMobile ? <MHeader /> : <DHeader />}
+            <Main>
+              <Root>{children}</Root>
+            </Main>
+            <CallToAction actions={actions} />
+            <Footer groups={footerGroups} />
+            {!isMobile && <DControls />}
+          </SyncedStyleProvider>
+          <Stars />
+          <Banner />
+        </Wrapper>
+      </AnimatePresence>
     </>
   );
 };
