@@ -6,7 +6,7 @@ import { validProps } from 'site/util';
 import type { IDocsArticle } from 'site/types';
 
 export const DocsArticle = (props: IDocsArticle) => {
-  const { title, slug, body, showUpdatedDate, docsGroup, updatedAt, children, ...rest } = props;
+  const { slug, body, title, children, docsGroup, updatedAt, showUpdatedDate, ...rest } = props;
 
   const updated = useDate(updatedAt);
   const renderedBody = useRender(body);

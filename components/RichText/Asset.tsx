@@ -1,12 +1,7 @@
-import dynamic from 'next/dynamic';
 import NextImage from 'next/image';
-import { Image as ChakraImage, Skeleton, useDisclosure } from '@chakra-ui/react';
-import { Backdrop, ModalWrapper } from 'site/components';
+import { Image as ChakraImage, useDisclosure } from '@chakra-ui/react';
+import { Backdrop, ModalWrapper, Video } from 'site/components';
 import { useColorValue } from 'site/context';
-
-const ReactPlayer = dynamic(() => import('react-player'), {
-  loading: () => <Skeleton boxSize="100%" startColor="gray.500" endColor="tertiary.500" />,
-});
 
 import type { TAsset, IAssetFields } from './types';
 
@@ -73,22 +68,10 @@ const ImageAsset = (props: IAssetFields) => {
 
 const VideoAsset = (props: IAssetFields) => {
   const { color, title, url, details, fileName, contentType, ...rest } = props;
+
   return (
     <Backdrop {...rest}>
-      <ReactPlayer
-        controls
-        url={url}
-        width="100%"
-        height="100%"
-        style={{ borderRadius: '1.6rem' }}
-        config={{
-          file: {
-            attributes: {
-              controlsList: ['nodownload', 'nofullscreen'],
-            },
-          },
-        }}
-      />
+      <Video url={url} enableControls />
     </Backdrop>
   );
 };

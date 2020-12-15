@@ -34,3 +34,4 @@ export * from './Select';
 export * from './Stars';
 export * from './USMap';
 export * from './Util';
+export * from './video';

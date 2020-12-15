@@ -1,5 +1,4 @@
 import type { BoxProps } from '@chakra-ui/react';
+import type { IVideo } from 'site/components';
 
-export interface IScreen extends BoxProps {
-  url: string;
-}
+export type IScreen = IVideo & BoxProps;

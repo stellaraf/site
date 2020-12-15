@@ -1,14 +1,11 @@
-import dynamic from 'next/dynamic';
-import { Box, Skeleton } from '@chakra-ui/react';
-
-const ReactPlayer = dynamic(() => import('react-player'), {
-  loading: () => <Skeleton boxSize="100%" startColor="gray.500" endColor="tertiary.500" />,
-});
+import { Box } from '@chakra-ui/react';
+import { Video } from 'site/components';
 
 import type { IScreen } from './types';
 
 export const Screen = (props: IScreen) => {
-  const { url, ...rest } = props;
+  const { url, enableControls = false, ...rest } = props;
+
   return (
     <Box
       width={{ base: '100%', lg: '75%' }}
@@ -24,24 +21,7 @@ export const Screen = (props: IScreen) => {
       borderColor="dark.500"
       boxShadow="xl"
       {...rest}>
-      <ReactPlayer
-        loop
-        muted
-        playing
-        controls
-        url={url}
-        volume={0}
-        width="100%"
-        height="100%"
-        style={{ borderRadius: '1.6rem' }}
-        config={{
-          file: {
-            attributes: {
-              controlsList: ['nodownload', 'nofullscreen'],
-            },
-          },
-        }}
-      />
+      <Video url={url} enableControls={enableControls} />
     </Box>
   );
 };
