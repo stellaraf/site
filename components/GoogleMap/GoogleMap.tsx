@@ -67,7 +67,7 @@ export const GoogleMap = () => {
   const renderedInfoContent = useRender(hqMapInfo);
 
   const bg = useColorTokenValue('light.500', 'dark.500');
-  const color = useColorTokenValue('dark.500', 'dark.500');
+  const color = useColorTokenValue('dark.500', 'light.500');
   const mapOptions = useColorValue({ styles: [] }, { styles: mapThemeDark });
 
   return (
