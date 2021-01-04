@@ -1,6 +1,6 @@
-import type { LinkProps, SystemStyleObject } from '@chakra-ui/react';
+import type { BoxProps, LinkProps, SystemStyleObject } from '@chakra-ui/react';
 
-import type { ILink } from 'site/components';
+import type { ILink } from '~/components';
 
 export interface HeaderLogoProps {
   color?: string;
@@ -23,4 +23,4 @@ export interface ILinkGroup extends ILink {
 
 export interface IPassedLink extends LinkProps {}
 
-export type { BoxProps, FlexProps } from '@chakra-ui/react';
+export interface IDHeader extends BoxProps {}

@@ -46,5 +46,5 @@ export function useColorTokenValue(light: string, dark: string): string {
   return useColorModeValue(useToken('colors', light), useToken('colors', dark));
 }
 
-export { useColorMode } from '@chakra-ui/react';
+export { useColorMode, useToken } from '@chakra-ui/react';
 export { useColorModeValue as useColorValue } from '@chakra-ui/react';

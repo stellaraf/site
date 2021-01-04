@@ -1,7 +1,3 @@
-namespace React {
-  type MutableRefObject = import('react').MutableRefObject;
-}
-
 namespace Framer {
   type MotionProps = import('framer-motion').MotionProps;
 }
@@ -10,10 +6,10 @@ namespace Meronex {
   type IconType = import('@meronex/icons').IconType;
 }
 
-type Dict<T extends any = any> = Record<string, T>;
+type Dict<T extends unknown = unknown> = Record<string, T>;
 
 type ReactRef = React.MutableRefObject<HTMLElement>;
 
-type Animated<T> = Omit<T, keyof Framer.MotionProps> & Omit<Framer.MotionProps, keyof T>;
+type Animated<T> = Omit<T, 'transition'> & Framer.MotionProps;
 
-type MeronexIcon = Meronex.IconType;
+type MeronexIcon = import('@meronex/icons').IconBaseProps;

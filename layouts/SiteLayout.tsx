@@ -10,20 +10,22 @@ import {
   Favicons,
   DControls,
   CallToAction,
-} from 'site/components';
-import { SyncedStyleProvider } from 'site/context';
-import { useMobile } from 'site/hooks';
+} from '~/components';
+import { SyncedStyleProvider } from '~/context';
+import { useMobile } from '~/hooks';
 import { Wrapper, Root, Main } from './common';
 
 import type { BoxProps } from '@chakra-ui/react';
-import type { SiteLayoutProps } from './types';
+import type { ISiteLayout } from './types';
 
-const Stars = dynamic<BoxProps>(() => import('site/components').then(i => i.Stars));
+const Stars = dynamic<BoxProps>(() => import('~/components').then(i => i.Stars));
 
-export const SiteLayout = (props: SiteLayoutProps) => {
+export const SiteLayout: React.FC<ISiteLayout> = (props: ISiteLayout) => {
   const { children, footerGroups, actions, preview } = props;
   const isMobile = useMobile();
+
   const bp = useBreakpointValue({ base: 'Base', md: 'Medium', lg: 'Large', xl: 'X-Large' });
+
   if (process.env.NODE_ENV === 'development' && typeof bp !== 'undefined') {
     console.log(
       `%cBreakpoint%c${bp}`,

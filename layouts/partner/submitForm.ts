@@ -1,5 +1,5 @@
 import type { TFormResponse, IFormDataTrial } from './types';
-import { all } from 'site/util';
+import { all } from '~/util';
 
 export async function submitForm(vendor: string, data: IFormDataTrial): Promise<TFormResponse> {
   let response = { success: false, message: 'Something went wrong.' };

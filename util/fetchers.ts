@@ -1,6 +1,6 @@
 import { merge } from 'merge-anything';
 
-export async function post(url: string, data: object, config: RequestInit = {}) {
+export async function post(url: string, data: Dict, config: RequestInit = {}): Promise<Response> {
   const defaultConfig = {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
@@ -21,7 +21,7 @@ export async function fetchWithTimeout(
   options: RequestInit = {},
   time: number = 7500,
   controller: AbortController,
-) {
+): Promise<Response> {
   /**
    * Lets set up our `AbortController`, and create a request options object that includes the
    * controller's `signal` to pass to `fetch`.

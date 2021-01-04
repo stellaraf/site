@@ -4,7 +4,7 @@ import { useRender } from 'site/hooks';
 
 import type { IError } from './types';
 
-export const Error = (props: IError) => {
+export const Error: React.FC<IError> = (props: IError) => {
   const { title, description, children, ...rest } = props;
   const { errorMessage } = useConfig();
   const renderedError = useRender(errorMessage);
@@ -20,7 +20,8 @@ export const Error = (props: IError) => {
       justifyContent="center"
       maxW={{ base: '100%', lg: '75%', xl: '50%' }}
       {...rest}
-      status="error">
+      status="error"
+    >
       <AlertIcon boxSize={16} mr={0} />
       <AlertTitle mt={4} mb={1} fontSize="lg">
         {title ?? 'Something Went Wrong'}
@@ -30,7 +31,8 @@ export const Error = (props: IError) => {
         css={{
           '& > p': { marginTop: 0, marginBottom: 0 },
           '& > p > a': { '--link-color': 'currentColor' },
-        }}>
+        }}
+      >
         {detail}
       </AlertDescription>
     </Alert>

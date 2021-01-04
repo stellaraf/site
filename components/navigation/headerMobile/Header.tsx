@@ -1,17 +1,16 @@
 import dynamic from 'next/dynamic';
 import { Box, Flex, HStack, VStack, useDisclosure } from '@chakra-ui/react';
 import { Spiral as Hamburger } from 'hamburger-react';
-import { Button, Logo, MControls, ModalWrapper } from 'site/components';
-import { useColorValue } from 'site/context';
+import { Button, Logo, MControls, ModalWrapper } from '~/components';
+import { useColorValue } from '~/context';
 import { Wrapper } from './Wrapper';
 import { NavLink } from './NavLink';
 import navConfig from '../config';
 
-import type { IconType } from '@meronex/icons';
-import type { ButtonProps } from 'site/components';
+import type { ButtonProps } from '~/components';
 import type { IHeader } from './types';
 
-const Heart = dynamic<IconType>(() => import('@meronex/icons/fa').then(i => i.FaHeart));
+const Heart = dynamic<MeronexIcon>(() => import('@meronex/icons/fa').then(i => i.FaHeart));
 
 const HEADING_HEIGHT = 56;
 
@@ -24,12 +23,13 @@ const ContactButton = (props: ButtonProps) => (
     borderWidth="1px"
     colorScheme="primary"
     leftIcon={<Box as={Heart} />}
-    {...props}>
+    {...props}
+  >
     Talk to Us
   </Button>
 );
 
-export const MHeader = (props: IHeader) => {
+export const MHeader: React.FC<IHeader> = (props: IHeader) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const logoColor = useColorValue('primary.500', 'white');
   const navItems = [...navConfig.left, ...navConfig.right];
@@ -48,10 +48,10 @@ export const MHeader = (props: IHeader) => {
         noOverlay
         size="full"
         scrollInside
-        isCentered={false}
         isOpen={isOpen}
         hideCloseButton
         onClose={onClose}
+        isCentered={false}
         header={
           <Flex align="center" justify="space-between">
             <Logo.Text width="auto" height={HEADING_HEIGHT} mb={2} noAnimate color={logoColor} />

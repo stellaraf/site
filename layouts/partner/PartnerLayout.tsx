@@ -1,4 +1,3 @@
-import { createContext, useContext } from 'react';
 import { createState } from '@hookstate/core';
 import {
   Box,
@@ -9,18 +8,16 @@ import {
   VisuallyHidden,
   useBreakpointValue,
 } from '@chakra-ui/react';
-import { Card, CardBody } from 'site/components';
-import { useColorValue } from 'site/context';
-import { useGradient, useMobile, useRender, useTitle } from 'site/hooks';
-import { useResponsiveStyle } from 'site/styles';
+import { Card, CardBody } from '~/components';
+import { useColorValue } from '~/context';
+import { useGradient, useMobile, useRender, useTitle } from '~/hooks';
+import { useResponsiveStyle } from '~/styles';
+import { PartnerContextProvider, usePartnerCtx } from './context';
 import { Form } from './Form';
 
-import type { IPartnerLayout, IPartnerContext, IFormModelTrial } from './types';
+import type { IPartnerLayout, IFormModelTrial } from './types';
 
-const PartnerContext = createContext<IPartnerContext>(Object());
-export const usePartnerCtx = () => useContext(PartnerContext);
-
-const TextContent = () => {
+const TextContent: React.FC = () => {
   const { title, subtitle, body } = usePartnerCtx();
   const renderedBody = useRender(body);
   const titleMe = useTitle();
@@ -30,7 +27,8 @@ const TextContent = () => {
         as="h1"
         fontWeight="light"
         fontSize={{ base: '4xl', lg: '5xl' }}
-        textAlign={{ base: 'center', lg: 'left' }}>
+        textAlign={{ base: 'center', lg: 'left' }}
+      >
         {titleMe(title)}
       </Heading>
       {subtitle && (
@@ -38,7 +36,8 @@ const TextContent = () => {
           as="h2"
           fontWeight="light"
           fontSize={{ base: '1.5rem', lg: 'xl' }}
-          textAlign={{ base: 'center', lg: 'left' }}>
+          textAlign={{ base: 'center', lg: 'left' }}
+        >
           {titleMe(subtitle)}
         </Heading>
       )}
@@ -50,7 +49,8 @@ const TextContent = () => {
           fontWeight="normal"
           display="inline-flex"
           maxW={{ base: 'none', md: 'none', xl: '75%' }}
-          alignSelf={{ base: 'center', lg: 'flex-start' }}>
+          alignSelf={{ base: 'center', lg: 'flex-start' }}
+        >
           {renderedBody}
         </Box>
       )}
@@ -58,7 +58,7 @@ const TextContent = () => {
   );
 };
 
-const PartnerLogo = () => {
+const PartnerLogo: React.FC = () => {
   const { name, logo, logoColorDarkMode, logoColorLightMode } = usePartnerCtx();
   const color = useColorValue(logoColorLightMode, logoColorDarkMode);
   const isMobile = useMobile();
@@ -84,7 +84,7 @@ const PartnerLogo = () => {
   );
 };
 
-const FormCard = () => {
+const FormCard: React.FC = () => {
   return (
     <Card minHeight="lg" height="min-content" w={{ base: '20rem', md: '80%', lg: '100%' }}>
       <CardBody>
@@ -94,7 +94,7 @@ const FormCard = () => {
   );
 };
 
-const MVendorLayout = () => {
+const MVendorLayout: React.FC = () => {
   const bg = useGradient();
   const rStyles = useResponsiveStyle();
   return (
@@ -108,7 +108,7 @@ const MVendorLayout = () => {
   );
 };
 
-const DVendorLayout = () => {
+const DVendorLayout: React.FC = () => {
   const bg = useGradient();
   const rStyles = useResponsiveStyle();
   return (
@@ -117,7 +117,8 @@ const DVendorLayout = () => {
         mt={16}
         gridTemplateRows="1fr"
         gridTemplateColumns="1fr 0.33fr"
-        gridTemplateAreas={`"content form"`}>
+        gridTemplateAreas={`"content form"`}
+      >
         <VStack alignItems="flex-start" gridArea="content">
           <TextContent />
           <PartnerLogo />
@@ -130,13 +131,16 @@ const DVendorLayout = () => {
   );
 };
 
-export const PartnerLayout = (props: IPartnerLayout) => {
+export const PartnerLayout: React.FC<IPartnerLayout> = (props: IPartnerLayout) => {
   const { trialForm, ...rest } = props;
-  const formState = createState<IFormModelTrial>(props.trialForm ?? Object());
+
+  const initialState = props.trialForm ?? ({} as IFormModelTrial);
+  const formState = createState<IFormModelTrial>(initialState);
   const largeLayout = useBreakpointValue({ base: false, md: false, lg: false, xl: true });
+
   return (
-    <PartnerContext.Provider value={{ trialForm: formState, ...rest }}>
+    <PartnerContextProvider value={{ trialForm: formState, ...rest }}>
       {largeLayout ? <DVendorLayout /> : <MVendorLayout />}
-    </PartnerContext.Provider>
+    </PartnerContextProvider>
   );
 };

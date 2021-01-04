@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-export const PageLoaderStyles = () => (
+export const PageLoaderStyles: React.FC = () => (
   <Head>
     <style>
       {`

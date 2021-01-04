@@ -1,6 +1,7 @@
 import {
   Box,
   Icon,
+  chakra,
   Button,
   Drawer,
   useToken,
@@ -9,11 +10,23 @@ import {
   DrawerOverlay,
   DrawerContent,
 } from '@chakra-ui/react';
-import { useColorValue } from 'site/context';
+import { useColorValue } from '~/context';
 
 import type { IDots, IMSubNav } from './types';
 
-const Dots = (props: IDots) => {
+const Nav = chakra('nav', {
+  baseStyle: {
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 4,
+    width: 'full',
+    position: 'fixed',
+    height: { base: 20, lg: 16 },
+  },
+});
+
+const Dots: React.FC<IDots> = (props: IDots) => {
   const color = useColorValue(useToken('colors', 'primary.200'), useToken('colors', 'dark.700'));
   return (
     <Icon
@@ -22,7 +35,8 @@ const Dots = (props: IDots) => {
       strokeWidth={0}
       viewBox="0 0 1024 512"
       stroke={color ?? 'currentColor'}
-      {...props}>
+      {...props}
+    >
       <circle fill={color || 'currentColor'} cx={256} cy={256} r={80} />
       <circle fill={color || 'currentColor'} cx={512} cy={256} r={80} />
       <circle fill={color || 'currentColor'} cx={768} cy={256} r={80} />
@@ -30,29 +44,23 @@ const Dots = (props: IDots) => {
   );
 };
 
-export const MSubNav = (props: IMSubNav) => {
+export const MSubNav: React.FC<IMSubNav> = (props: IMSubNav) => {
   const { children, ...rest } = props;
+  const { isOpen, onToggle, onClose } = useDisclosure();
+
   const bg = useColorValue('light.500', 'blackAlpha.300');
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
   const colorScheme = useColorValue('primary', 'dark');
-  const { isOpen, onToggle, onClose } = useDisclosure();
+
   return (
-    <Box
-      as="nav"
-      left={0}
-      right={0}
-      bottom={0}
-      zIndex={4}
-      pos="fixed"
-      width="full"
-      height={{ base: 20, lg: 16 }}
-      {...rest}>
+    <Nav {...rest}>
       <Box mx="auto" mt={4} width="max-content">
         <Button
           onClick={onToggle}
           borderRadius="1rem"
           colorScheme={colorScheme}
-          aria-label="Open Sub-Navigation">
+          aria-label="Open Sub-Navigation"
+        >
           <Dots />
         </Button>
         <Drawer size="xs" isOpen={isOpen} placement="bottom" onClose={onClose}>
@@ -64,13 +72,14 @@ export const MSubNav = (props: IMSubNav) => {
             borderTopWidth="1px"
             borderTopStyle="solid"
             borderTopColor={borderColor}
-            css={{ backdropFilter: 'blur(20px)' }}>
+            css={{ backdropFilter: 'blur(20px)' }}
+          >
             <DrawerBody p={0} mt={2}>
               {children}
             </DrawerBody>
           </DrawerContent>
         </Drawer>
       </Box>
-    </Box>
+    </Nav>
   );
 };

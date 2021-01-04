@@ -27,12 +27,10 @@ export type TFormRef = {
   submit(): void;
 };
 
-export interface IForm {}
-
 export type TFormResponse = {
   success: boolean;
   message: string;
 };
 
-export type { IFormDataTrial, IFormModelTrial } from 'site/types';
-export type { IFormHandlers } from 'site/components';
+export type { IFormDataTrial, IFormModelTrial } from '~/types';
+export type { IFormHandlers } from '~/components';

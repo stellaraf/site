@@ -8,12 +8,12 @@ import {
   AccordionPanel,
   AccordionButton,
 } from '@chakra-ui/react';
-import { useColorValue } from 'site/context';
-import { AnimatedFlex, Link } from 'site/components';
+import { useColorValue } from '~/context';
+import { AnimatedDiv, Link } from '~/components';
 
 import type { IDocsGroup, IDocsArticle } from 'site/types';
 
-const DMenuItem = (props: IDocsArticle) => {
+const DMenuItem: React.FC<IDocsArticle> = (props: IDocsArticle) => {
   const { title, slug, docsGroup } = props;
 
   const { asPath } = useRouter();
@@ -28,13 +28,14 @@ const DMenuItem = (props: IDocsArticle) => {
   const color = useColorValue('primary.500', 'secondary.200');
 
   return (
-    <AnimatedFlex
+    <AnimatedDiv
       width="100%"
       align="center"
       borderRadius="md"
       userSelect="none"
       layoutId="menuItem"
-      color={isCurrent ? color : 'currentColor'}>
+      color={isCurrent ? color : 'currentColor'}
+    >
       <Link
         px={3}
         py={1}
@@ -47,14 +48,15 @@ const DMenuItem = (props: IDocsArticle) => {
           textDecoration: 'none',
           opacity: 1,
           transform: isCurrent ? undefined : 'translateX(2px)',
-        }}>
+        }}
+      >
         {title}
       </Link>
-    </AnimatedFlex>
+    </AnimatedDiv>
   );
 };
 
-export const DMenuGroup = (props: IDocsGroup) => {
+export const DMenuGroup: React.FC<IDocsGroup> = (props: IDocsGroup) => {
   const { title, items } = props;
 
   const backgroundColor = useColorValue('blackAlpha.100', 'whiteAlpha.100');
@@ -67,10 +69,12 @@ export const DMenuGroup = (props: IDocsGroup) => {
       border="none"
       borderTopWidth={{ base: 0 }}
       borderBottomWidth={{ base: 1, lg: 0 }}
-      _last={{ borderBottomWidth: { base: 1, lg: 0 } }}>
+      _last={{ borderBottomWidth: { base: 1, lg: 0 } }}
+    >
       <AccordionButton
         _hover={{ backgroundColor, borderRadius: 'lg' }}
-        css={{ '&:focus': { borderRadius } }}>
+        css={{ '&:focus': { borderRadius } }}
+      >
         <Box flex={1} textAlign="left" fontSize="sm" fontWeight="medium" textTransform="uppercase">
           {title}
         </Box>

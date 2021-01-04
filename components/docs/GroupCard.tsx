@@ -1,11 +1,11 @@
 import NextLink from 'next/link';
 import { Box, Button, Heading, Divider } from '@chakra-ui/react';
-import { Card, CardBody, Icon } from 'site/components';
-import { useRender, useTitle } from 'site/hooks';
+import { Card, CardBody, Icon } from '~/components';
+import { useRender, useTitle } from '~/hooks';
 
-import type { IDocsGroup } from 'site/types';
+import type { IDocsGroup } from '~/types';
 
-export const GroupCard = (props: IDocsGroup) => {
+export const GroupCard: React.FC<IDocsGroup> = (props: IDocsGroup) => {
   const {
     slug,
     title,
@@ -14,8 +14,10 @@ export const GroupCard = (props: IDocsGroup) => {
     callToActionIcon,
     callToActionIconColor = 'primary',
   } = props;
+
   const titleMe = useTitle();
   const body = useRender(summary, [], ['articleButton', 'image']);
+
   return (
     <NextLink href={`/docs/${slug}`} scroll={false}>
       <Button
@@ -31,7 +33,8 @@ export const GroupCard = (props: IDocsGroup) => {
         lineHeight="unset"
         borderColor="unset"
         verticalAlign="unset"
-        flexDirection="column">
+        flexDirection="column"
+      >
         <Card width={{ base: '20rem', md: '18rem', xl: 'lg' }} maxHeight={80} zIndex={1}>
           <CardBody spacing={4} textAlign="left" alignItems="flex-start">
             {typeof callToActionIcon !== 'undefined' && (
@@ -51,7 +54,8 @@ export const GroupCard = (props: IDocsGroup) => {
               maxW="90%"
               fontWeight="light"
               whiteSpace="pre-wrap"
-              fontSize={{ base: 'sm', md: 'md' }}>
+              fontSize={{ base: 'sm', md: 'md' }}
+            >
               {subtitle}
             </Heading>
             <Divider />
@@ -61,7 +65,8 @@ export const GroupCard = (props: IDocsGroup) => {
               whiteSpace="pre-line"
               css={{
                 '& p': { marginTop: 'unset', marginBottom: 'unset', textOverflow: 'ellipsis' },
-              }}>
+              }}
+            >
               {body}
             </Box>
           </CardBody>

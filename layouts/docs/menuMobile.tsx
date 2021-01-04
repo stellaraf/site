@@ -9,12 +9,12 @@ import {
   AccordionPanel,
   AccordionButton,
 } from '@chakra-ui/react';
-import { useColorValue } from 'site/context';
-import { Link } from 'site/components';
+import { useColorValue } from '~/context';
+import { Link } from '~/components';
 
-import type { IDocsGroup, IDocsArticle } from 'site/types';
+import type { IDocsGroup, IDocsArticle } from '~/types';
 
-const MMenuItem = (props: IDocsArticle) => {
+const MMenuItem: React.FC<IDocsArticle> = (props: IDocsArticle) => {
   const { title, slug, docsGroup } = props;
 
   const { asPath } = useRouter();
@@ -37,7 +37,7 @@ const MMenuItem = (props: IDocsArticle) => {
   );
 };
 
-export const MMenuGroup = (props: IDocsGroup) => {
+export const MMenuGroup: React.FC<IDocsGroup> = (props: IDocsGroup) => {
   const { title, items } = props;
 
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
@@ -51,7 +51,8 @@ export const MMenuGroup = (props: IDocsGroup) => {
             textAlign="left"
             textTransform="uppercase"
             fontSize="md"
-            fontWeight="medium">
+            fontWeight="medium"
+          >
             {title}
           </Box>
           <AccordionIcon />

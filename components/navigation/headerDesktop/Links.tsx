@@ -1,18 +1,18 @@
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { Link as ChakraLink } from '@chakra-ui/react';
-import { Button } from 'site/components';
-import { useColorValue } from 'site/context';
+import { Button } from '~/components';
+import { useColorValue } from '~/context';
 import navConfig from '../config';
 
 import type { ButtonProps } from 'site/components';
 import type { INavLink, ILinkGroup, IPassedLink } from './types';
 
-export const NavLink = (props: INavLink) => {
+export const NavLink: React.FC<INavLink> = (props: INavLink) => {
   const { isActive = false, ...rest } = props;
   const activeColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
 
-  let linkProps: IPassedLink = {};
+  const linkProps = {} as IPassedLink;
   if (isActive) {
     linkProps._after = {
       left: 0,
@@ -50,7 +50,7 @@ export const NavLink = (props: INavLink) => {
 /**
  * Group of header links, pinned to a specific side of the header.
  */
-export const LinkGroup = (props: ILinkGroup) => {
+export const LinkGroup: React.FC<ILinkGroup> = (props: ILinkGroup) => {
   const { side, ...rest } = props;
   const { asPath } = useRouter();
 
@@ -78,7 +78,7 @@ export const LinkGroup = (props: ILinkGroup) => {
   );
 };
 
-export const ContactButton = (props: ButtonProps) => {
+export const ContactButton: React.FC<ButtonProps> = (props: ButtonProps) => {
   const color = useColorValue('secondary.600', 'white');
   const hoverBg = useColorValue('secondary.50', 'whiteAlpha.100');
   const borderColor = useColorValue('secondary.500', 'white');
@@ -90,7 +90,8 @@ export const ContactButton = (props: ButtonProps) => {
       variant="outline"
       borderColor={borderColor}
       _hover={{ backgroundColor: hoverBg }}
-      {...props}>
+      {...props}
+    >
       Talk to Us
     </Button>
   );

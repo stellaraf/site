@@ -1,11 +1,16 @@
-import { Box, Flex } from '@chakra-ui/react';
-import { Content } from 'site/components';
-import { useSlug, useDate, useRender } from 'site/hooks';
-import { validProps } from 'site/util';
+import { chakra, Box, Flex } from '@chakra-ui/react';
+import { Content } from '~/components';
+import { useSlug, useDate, useRender } from '~/hooks';
+import { shouldForwardProp } from '~/util';
 
 import type { IDocsArticle } from 'site/types';
 
-export const DocsArticle = (props: IDocsArticle) => {
+const Article = chakra('article', {
+  shouldForwardProp,
+  baseStyle: { overflow: 'auto', zIndex: 1 },
+});
+
+export const DocsArticle: React.FC<IDocsArticle> = (props: IDocsArticle) => {
   const { slug, body, title, children, docsGroup, updatedAt, showUpdatedDate, ...rest } = props;
 
   const updated = useDate(updatedAt);
@@ -13,7 +18,7 @@ export const DocsArticle = (props: IDocsArticle) => {
   const generatedSlug = useSlug(slug, [title]);
 
   return (
-    <Box as="article" overflow="auto" zIndex={1} {...validProps(rest)}>
+    <Article {...rest}>
       <Flex direction="column" align="flex-start">
         <Content.Title id={generatedSlug}>{title}</Content.Title>
         {showUpdatedDate && <Content.UpdatedAt>{updated}</Content.UpdatedAt>}
@@ -22,6 +27,6 @@ export const DocsArticle = (props: IDocsArticle) => {
         <Content.Body maxW="unset">{renderedBody}</Content.Body>
         {typeof children !== 'undefined' && children}
       </Box>
-    </Box>
+    </Article>
   );
 };

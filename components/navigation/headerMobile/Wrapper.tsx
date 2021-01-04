@@ -1,13 +1,13 @@
-import { useState } from '@hookstate/core';
+import { useEffect, useState } from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { Link, Logo } from 'site/components';
-import { useColorValue } from 'site/context';
-import { useNavLogoState } from 'site/hooks';
+import { Link, Logo } from '~/components';
+import { useColorValue } from '~/context';
+import { useNavLogoState } from '~/hooks';
 
 import type { IBaseHeader } from './types';
 
-export const Wrapper = (props: IBaseHeader) => {
+export const Wrapper: React.FC<IBaseHeader> = (props: IBaseHeader) => {
   const { isOpen, onToggle, navHeaderHeight, children, ...rest } = props;
   const bg = useColorValue('light.500', 'transparent');
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
@@ -20,33 +20,43 @@ export const Wrapper = (props: IBaseHeader) => {
    *   b) or on any other page
    *   c) and if the mobile nav is NOT open
    */
-  const showLogo = useState(false);
+  const [showLogo, setShowLogo] = useState(false);
+
   if (pathname === '/') {
     // Homepage: mobile nav closed, hero hidden, not already shown, then SHOW
-    !isOpen && globalShowLogo && !showLogo.value && showLogo.set(true);
+    !isOpen && globalShowLogo && !showLogo && setShowLogo(true);
     // Homepage: mobile nav closed, hero shown, already shown, then HIDE
-    !isOpen && !globalShowLogo && showLogo.value && showLogo.set(false);
+    !isOpen && !globalShowLogo && showLogo && setShowLogo(false);
     // Homepage: mobile nav open, hero shown, already shown, then HIDE
-    isOpen && showLogo.value && showLogo.set(false);
+    isOpen && showLogo && setShowLogo(false);
   } else if (pathname !== '/') {
     // Non-homepage: mobile nav closed, not already shown, then SHOW
-    !isOpen && !showLogo.value && showLogo.set(true);
+    !isOpen && !showLogo && setShowLogo(true);
     // Non-homepage: mobile nav open, already shown, then HIDE
-    isOpen && showLogo.value && showLogo.set(false);
+    isOpen && showLogo && setShowLogo(false);
   }
+
+  useEffect(
+    () => () => {
+      setShowLogo(false);
+    },
+    [],
+  );
+
   return (
     <Box
+      h={20}
+      top={0}
+      bg={bg}
+      left={0}
+      w="100%"
+      right={0}
       as="header"
       pos="fixed"
-      top={0}
-      left={0}
-      right={0}
       zIndex={1000}
-      bg={bg}
+      css={{ backdropFilter: 'blur(10px)' }}
       transition={{ transition: 'all 200ms ease-in' }}
-      w="100%"
-      h={20}
-      css={{ backdropFilter: 'blur(10px)' }}>
+    >
       <Flex
         px={8}
         h="100%"
@@ -59,7 +69,8 @@ export const Wrapper = (props: IBaseHeader) => {
         borderBottomStyle="solid"
         borderBottomColor={borderColor}
         justifyContent="space-between"
-        {...rest}>
+        {...rest}
+      >
         <Link href="/" opacity={showLogo.value ? 1 : 0}>
           <Logo.Text width="auto" height={navHeaderHeight} mb={2} />
         </Link>

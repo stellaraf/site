@@ -1,17 +1,19 @@
-import { Accordion, Box, Flex, VStack, useBreakpointValue } from '@chakra-ui/react';
-import { If, MSubNav } from 'site/components';
-import { useColorValue, useConfig } from 'site/context';
-import { useResponsiveStyle } from 'site/styles';
+import { Accordion, chakra, Box, Flex, VStack, useBreakpointValue } from '@chakra-ui/react';
+import { If, MSubNav } from '~/components';
+import { useColorValue, useConfig } from '~/context';
+import { useResponsiveStyle } from '~/styles';
 import { DMenuGroup } from './menuDesktop';
 import { MMenuGroup } from './menuMobile';
 
 import type { IDocsLayout, IResponsiveLayout } from './types';
 
-const MLayout = (props: IResponsiveLayout) => {
+const LayoutContainer = chakra('div', { baseStyle: { w: '100%', minH: '40vh', pt: 32 } });
+
+const MLayout: React.FC<IResponsiveLayout> = (props: IResponsiveLayout) => {
   const { children, ...rest } = props;
   const { docsGroups } = useConfig();
   return (
-    <Box w="100%" minH="40vh" pt={32} {...rest}>
+    <LayoutContainer {...rest}>
       <MSubNav>
         <Accordion allowMultiple allowToggle>
           {docsGroups.map(group => (
@@ -20,15 +22,15 @@ const MLayout = (props: IResponsiveLayout) => {
         </Accordion>
       </MSubNav>
       {children}
-    </Box>
+    </LayoutContainer>
   );
 };
 
-const DLayout = (props: IResponsiveLayout) => {
+const DLayout: React.FC<IResponsiveLayout> = (props: IResponsiveLayout) => {
   const { children, ...rest } = props;
 
   return (
-    <Box w="100%" minH="40vh" pt={32} {...rest}>
+    <LayoutContainer {...rest}>
       <Flex flexWrap="nowrap" pos="relative">
         <DNav />
         <Box w="100%">
@@ -37,11 +39,11 @@ const DLayout = (props: IResponsiveLayout) => {
           </VStack>
         </Box>
       </Flex>
-    </Box>
+    </LayoutContainer>
   );
 };
 
-const DNav = () => {
+const DNav: React.FC = () => {
   const { docsGroups } = useConfig();
   const borderColor = useColorValue('blackAlpha.200', 'whiteAlpha.200');
   return (
@@ -57,7 +59,8 @@ const DNav = () => {
       position="sticky"
       borderRightWidth="1px"
       borderColor={borderColor}
-      width={{ lg: '260px', xl: '300px' }}>
+      width={{ lg: '260px', xl: '300px' }}
+    >
       <Accordion allowMultiple allowToggle defaultIndex={[...Array(docsGroups.length).keys()]}>
         {docsGroups.map(group => (
           <DMenuGroup key={group.title} {...group} />
@@ -67,10 +70,12 @@ const DNav = () => {
   );
 };
 
-export const DocsLayout = (props: IDocsLayout) => {
+export const DocsLayout: React.FC<IDocsLayout> = (props: IDocsLayout) => {
   const { children, ...rest } = props;
+
   const largeLayout = useBreakpointValue({ base: false, md: false, lg: true, xl: true });
   const rStyles = useResponsiveStyle();
+
   return (
     <>
       <If condition={largeLayout === true}>

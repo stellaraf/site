@@ -3,15 +3,15 @@ import { Button, Center, Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import * as yup from 'yup';
-import { FieldGroup, TextInput } from 'site/components';
-import { useAlert } from 'site/hooks';
-import { requiredMsg, invalidMsg } from 'site/util';
-import { usePartnerCtx } from './PartnerLayout';
+import { FieldGroup, TextInput } from '~/components';
+import { useAlert } from '~/hooks';
+import { requiredMsg, invalidMsg } from '~/util';
+import { usePartnerCtx } from './context';
 import { submitForm } from './submitForm';
 
 import type { IFormDataTrial } from './types';
 
-export const Form = () => {
+export const Form: React.FC = () => {
   const { name, trialForm } = usePartnerCtx();
 
   const trialFormState = useState(trialForm);
@@ -30,12 +30,13 @@ export const Form = () => {
     phoneNumber: yup.string().label(phoneNumber.displayName).typeError(invalidMsg),
     companyName: yup.string().label(companyName.displayName).required(requiredMsg),
   });
+
   const showAlert = useAlert();
 
   const form = useForm<IFormDataTrial>({ resolver: yupResolver(formSchema) });
   const { handleSubmit, control, formState } = form;
 
-  const submit = async (data: IFormDataTrial) => {
+  async function submit(data: IFormDataTrial): Promise<void> {
     const response = await submitForm(name, { ...data, interests: [`${name} Trial`], details: '' });
 
     if (!response.success) {
@@ -43,7 +44,7 @@ export const Form = () => {
     } else if (response.success) {
       showAlert({ message: trialForm.successMessage.value, status: 'success' });
     }
-  };
+  }
 
   const submitter = handleSubmit(submit);
 
@@ -55,47 +56,48 @@ export const Form = () => {
             <TextInput
               ctl={control}
               id={firstName.id}
-              placeholder={firstName.displayName}
               required={firstName.required}
+              placeholder={firstName.displayName}
             />
             <TextInput
               ctl={control}
               id={lastName.id}
-              placeholder={lastName.displayName}
               required={lastName.required}
+              placeholder={lastName.displayName}
             />
           </FieldGroup>
           <FieldGroup>
             <TextInput
               ctl={control}
               id={companyName.id}
-              placeholder={companyName.displayName}
               required={companyName.required}
+              placeholder={companyName.displayName}
             />
           </FieldGroup>
           <FieldGroup>
             <TextInput
               ctl={control}
               id={emailAddress.id}
-              placeholder={emailAddress.displayName}
               required={emailAddress.required}
+              placeholder={emailAddress.displayName}
             />
           </FieldGroup>
           <FieldGroup>
             <TextInput
               ctl={control}
               id={phoneNumber.id}
-              placeholder={phoneNumber.displayName}
               required={phoneNumber.required}
+              placeholder={phoneNumber.displayName}
             />
           </FieldGroup>
           <Center px={2} mt={4} w="100%">
             <Button
-              isLoading={formState.isSubmitting}
               w="100%"
               type="submit"
               variant="outline"
-              colorScheme="primary">
+              colorScheme="primary"
+              isLoading={formState.isSubmitting}
+            >
               {trialForm.buttonSubmit.value}
             </Button>
           </Center>
