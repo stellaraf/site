@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useColorMode } from 'site/context';
+import { useColorMode } from '~/context';
 
 export function useImageSrc(initialUrl: string): string {
   const initialSrc = useMemo(() => initialUrl, [initialUrl]);
@@ -8,7 +8,7 @@ export function useImageSrc(initialUrl: string): string {
   if (typeof window === 'undefined') {
     return initialUrl;
   }
-  if (!fileName.match(/\S+\-\-(light|dark)/gi)) {
+  if (!fileName.match(/\S+--(light|dark)/gi)) {
     return initialSrc;
   }
   const [baseFile] = fileName.split('--');

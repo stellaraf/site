@@ -1,15 +1,23 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
-import { BaseSEO } from 'site/components';
-import { Provider } from 'site/context';
-import { useMouseTrap, useGoogleAnalytics } from 'site/hooks';
-import { SiteLayout } from 'site/layouts';
-import { useKonamiState } from 'site/state';
-import { getGlobalConfig, getFooterItems, getActions, getDocsGroups } from 'site/util';
+import { BaseSEO } from '~/components';
+import { Provider } from '~/context';
+import { useMouseTrap, useGoogleAnalytics } from '~/hooks';
+import { SiteLayout } from '~/layouts';
+import { useKonamiState } from '~/state';
+import { getGlobalConfig, getFooterItems, getActions, getDocsGroups } from '~/util';
 
-import type { IDocsGroup, TSite } from 'site/types';
+import type {
+  TSite,
+  NextApp,
+  IActions,
+  IDocsGroup,
+  FooterItem,
+  GlobalConfig,
+  GetInitialPropsReturn,
+} from '~/types';
 
-const Site = (props: TSite) => {
+const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
   const { Component, pageProps, appProps, router } = props;
   const { globalConfig, footerGroups, actions, docsGroups } = appProps;
 
@@ -18,11 +26,13 @@ const Site = (props: TSite) => {
   if (typeof process.env.NEXT_PUBLIC_GANALYTICS === 'string') {
     initializeAnalytics(process.env.NEXT_PUBLIC_GANALYTICS);
   }
+
   useEffect(() => {
     router.events.on('routeChangeComplete', trackPage);
   }, []);
 
   const konami = useKonamiState();
+
   useMouseTrap(
     'up up down down left right left right b a',
     () => {
@@ -39,9 +49,10 @@ const Site = (props: TSite) => {
       <Provider appConfig={globalConfig} docsGroups={docsGroups}>
         <BaseSEO />
         <SiteLayout
-          footerGroups={footerGroups}
           actions={actions}
-          preview={pageProps?.preview ?? false}>
+          footerGroups={footerGroups}
+          preview={pageProps?.preview ?? false}
+        >
           <Component {...pageProps} />
         </SiteLayout>
       </Provider>
@@ -50,9 +61,9 @@ const Site = (props: TSite) => {
 };
 
 Site.getInitialProps = async () => {
-  let globalConfig = Object();
-  let footerGroups = Object();
-  let actions = new Array();
+  let globalConfig = {} as GlobalConfig;
+  let footerGroups = {} as FooterItem[];
+  let actions = [] as IActions[];
   let docsGroups = [] as IDocsGroup[];
 
   globalConfig = await getGlobalConfig();
@@ -63,6 +74,6 @@ Site.getInitialProps = async () => {
   return { appProps: { globalConfig, footerGroups, actions, docsGroups } };
 };
 
-export default Site;
+export { getServerSideProps } from '~/context';
 
-export { getServerSideProps } from 'site/context';
+export default Site;

@@ -71,7 +71,7 @@ export const Wrapper: React.FC<IBaseHeader> = (props: IBaseHeader) => {
         justifyContent="space-between"
         {...rest}
       >
-        <Link href="/" opacity={showLogo.value ? 1 : 0}>
+        <Link href="/" opacity={showLogo ? 1 : 0}>
           <Logo.Text width="auto" height={navHeaderHeight} mb={2} />
         </Link>
         {!isOpen && children}

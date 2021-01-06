@@ -1,7 +1,7 @@
 import slugify from 'slugify';
 
-export function all(...iter: any[]) {
-  for (let i of iter) {
+export function all<T extends unknown>(...iter: T[]): boolean {
+  for (const i of iter) {
     if (!i) {
       return false;
     }

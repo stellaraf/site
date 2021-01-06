@@ -1,6 +1,6 @@
-import { getContent } from 'site/util';
+import { getContent } from '~/util';
 import type { NextApiHandler } from 'next';
-import type { IDocsArticle } from 'site/types';
+import type { IDocsArticle } from '~/types';
 
 const previewHandler: NextApiHandler = async (request, response) => {
   if (request.query.secret !== process.env.PREVIEW_SECRET || !request.query.slug) {

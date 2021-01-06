@@ -1,12 +1,17 @@
 import { useRouter } from 'next/router';
-import { SEO, DocsArticle, Error, ContentLoader } from 'site/components';
-import { DocsLayout } from 'site/layouts';
-import { getContent } from 'site/util';
+import { SEO, DocsArticle, Error, ContentLoader } from '~/components';
+import { DocsLayout } from '~/layouts';
+import { getContent } from '~/util';
 
 import type { GetStaticProps, GetStaticPaths } from 'next';
-import type { IDocsArticle, IDocsArticlePage } from 'site/types';
+import type { IDocsArticle, IDocsArticlePage } from '~/types';
 
-export default function DocsArticlePage(props: IDocsArticlePage) {
+type UrlQuery = {
+  slug: string;
+  group?: string;
+};
+
+const DocsArticlePage: React.FC<IDocsArticlePage> = (props: IDocsArticlePage) => {
   const { article } = props;
   const { isFallback } = useRouter();
 
@@ -37,11 +42,6 @@ export default function DocsArticlePage(props: IDocsArticlePage) {
       </DocsLayout>
     </>
   );
-}
-
-type UrlQuery = {
-  slug: string;
-  group?: string;
 };
 
 export const getStaticProps: GetStaticProps<IDocsArticlePage, UrlQuery> = async ctx => {
@@ -70,3 +70,5 @@ export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
   ],
   fallback: true,
 });
+
+export default DocsArticlePage;

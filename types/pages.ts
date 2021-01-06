@@ -1,8 +1,7 @@
-import type { AppProps } from 'next/app';
+import type { AppProps, AppInitialProps, AppContext } from 'next/app';
 import type { BoxProps } from '@chakra-ui/react';
 import type { Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
-
 import type {
   IMeasuredGeoPoint,
   HomepageContent,
@@ -16,22 +15,21 @@ import type {
   PageProps,
   IActions,
   Bio,
-} from 'site/types';
+} from '~/types';
 
-/**
- * _app (All Pages) Types
- */
-export interface AppInitialProps {
-  appProps: {
-    globalConfig: GlobalConfig;
-    footerGroups: FooterItem[];
-    actions: IActions[];
-    docsGroups: IDocsGroup[];
-  };
-  children?: React.ReactNode;
+export type GetInitialPropsReturn<InitialProps> = AppProps &
+  AppInitialProps & { appProps: InitialProps };
+
+export type NextApp<P> = React.FC<GetInitialPropsReturn<P>> & {
+  getInitialProps(ctx?: AppContext): Promise<{ appProps: P }>;
+};
+
+export interface TSite {
+  globalConfig: GlobalConfig;
+  footerGroups: FooterItem[];
+  actions: IActions[];
+  docsGroups: IDocsGroup[];
 }
-
-export type TSite = AppInitialProps & AppProps;
 
 /**
  * Home Page Types
@@ -44,7 +42,7 @@ export interface IHome {
  * Cloud Page Types
  */
 export interface ICloud extends PageProps {
-  geoData: object;
+  geoData: Dict;
   geoPoints: IMeasuredGeoPoint[];
 }
 

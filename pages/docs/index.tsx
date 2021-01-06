@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
 import { Flex, Heading, Spinner } from '@chakra-ui/react';
-import { Groups, SEO } from 'site/components';
-import { useRender, useScaledText, useTitle } from 'site/hooks';
-import { DocsLayout } from 'site/layouts';
-import { getPage } from 'site/util';
+import { Groups, SEO } from '~/components';
+import { useRender, useScaledText, useTitle } from '~/hooks';
+import { DocsLayout } from '~/layouts';
+import { getPage } from '~/util';
 
 import type { GetStaticProps } from 'next';
 import type { IDocsMain, PageAttrs } from 'site/types';
 
-const TextContent = (props: PageAttrs) => {
+const TextContent: React.FC<PageAttrs> = (props: PageAttrs) => {
   const { title, subtitle, body = null } = props;
   const titleMe = useTitle();
   const renderedBody = useRender(body);
@@ -20,7 +20,8 @@ const TextContent = (props: PageAttrs) => {
           as="h1"
           fontSize={{ base: shouldResize ? '2xl' : '4xl', lg: '6xl' }}
           fontWeight="light"
-          ref={headingRef}>
+          ref={headingRef}
+        >
           {titleMe(title)}
         </Heading>
         {subtitle && (
@@ -34,7 +35,7 @@ const TextContent = (props: PageAttrs) => {
   );
 };
 
-export default function Docs(props: IDocsMain) {
+const Docs: React.FC<IDocsMain> = (props: IDocsMain) => {
   const { isFallback } = useRouter();
   if (isFallback) {
     return (
@@ -54,7 +55,7 @@ export default function Docs(props: IDocsMain) {
       </DocsLayout>
     </>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps<IDocsMain> = async ctx => {
   const preview = ctx?.preview ?? false;
@@ -67,3 +68,5 @@ export const getStaticProps: GetStaticProps<IDocsMain> = async ctx => {
   }
   return { props: { pageData } };
 };
+
+export default Docs;

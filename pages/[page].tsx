@@ -1,14 +1,14 @@
-import { getPage, getPageContent } from 'site/util';
-import { ContentSection, Hero, SEO, GetStarted } from 'site/components';
+import { getPage, getPageContent } from '~/util';
+import { ContentSection, Hero, SEO, GetStarted } from '~/components';
 
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import type { PageProps } from 'site/types';
+import type { PageAttrs, PageProps, PageContent } from '~/types';
 
 type UrlQuery = {
   page: string;
 };
 
-export default function DynamicPage(props: PageProps) {
+const DynamicPage: React.FC<PageProps> = (props: PageProps) => {
   const { pageData, pageContent } = props;
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 
@@ -24,13 +24,13 @@ export default function DynamicPage(props: PageProps) {
       {getStarted && <GetStarted {...getStarted.fields} />}
     </>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const page = ctx.params?.page ?? 'notfound';
   const preview = ctx?.preview ?? false;
-  let pageData = Object();
-  let pageContent = Array();
+  let pageData = {} as PageAttrs;
+  let pageContent = [] as PageContent[];
 
   try {
     pageData = await getPage(page, preview);
@@ -45,3 +45,5 @@ export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
   paths: [{ params: { page: 'consulting' } }, { params: { page: 'services' } }],
   fallback: false,
 });
+
+export default DynamicPage;

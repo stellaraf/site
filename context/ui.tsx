@@ -1,26 +1,29 @@
 import { useMemo } from 'react';
 import {
-  ChakraProvider,
-  useTheme as useChakraTheme,
-  cookieStorageManager,
-  localStorageManager,
   useToken,
+  ChakraProvider,
   useColorModeValue,
+  localStorageManager,
+  cookieStorageManager,
+  useTheme as useChakraTheme,
 } from '@chakra-ui/react';
-import { makeTheme } from 'site/util';
+import { makeTheme } from '~/util';
 
 import type { GetServerSideProps } from 'next';
-import type { TUseTheme, IUIProvider } from './types';
+import type { TUseTheme, IUIProvider, TColorModeCtx } from './types';
 
-type TColorModeCtx = {
-  cookies: string;
-};
-
-export const UIProvider = (props: IUIProvider) => {
+export const UIProvider: React.FC<IUIProvider> = (props: IUIProvider) => {
   const { theme, children, cookies } = props;
+
   const generatedTheme = useMemo(() => makeTheme(theme), [theme]);
-  const colorModeManager =
-    typeof cookies === 'string' ? cookieStorageManager(cookies) : localStorageManager;
+
+  const colorModeManager = useMemo(() => {
+    if (typeof cookies === 'string') {
+      return cookieStorageManager(cookies);
+    } else {
+      return localStorageManager;
+    }
+  }, [cookies]);
 
   return (
     <ChakraProvider resetCSS theme={generatedTheme} colorModeManager={colorModeManager}>
@@ -28,7 +31,6 @@ export const UIProvider = (props: IUIProvider) => {
     </ChakraProvider>
   );
 };
-export const useTheme: TUseTheme = useChakraTheme;
 
 export const getServerSideProps: GetServerSideProps<TColorModeCtx> = async ctx => {
   return {
@@ -38,6 +40,8 @@ export const getServerSideProps: GetServerSideProps<TColorModeCtx> = async ctx =
     },
   };
 };
+
+export const useTheme: TUseTheme = useChakraTheme;
 
 /**
  * Get a color token value based on color-mode.

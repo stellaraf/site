@@ -1,14 +1,21 @@
+import { useRef } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/react';
-import { useConfig, useColorValue, useColorTokenValue } from 'site/context';
-import { HeroCards, HomeSection, Logo, SEO, Screen } from 'site/components';
-import { useGradient, useNavLogo, useRef } from 'site/hooks';
-import { getHomePage } from 'site/util';
-import { useResponsiveStyle } from 'site/styles';
+import { useConfig, useColorValue, useColorTokenValue } from '~/context';
+import {
+  // HeroCards,
+  HomeSection,
+  Logo,
+  SEO,
+  Screen,
+} from '~/components';
+import { useGradient, useNavLogo } from '~/hooks';
+import { useResponsiveStyle } from '~/styles';
+import { getHomePage } from '~/util';
 
 import type { GetStaticProps } from 'next';
-import type { IHome } from 'site/types';
+import type { IHome, HomepageContent } from '~/types';
 
-export default function Home(props: IHome) {
+const Home: React.FC<IHome> = (props: IHome) => {
   const { pageContent } = props;
   const { sections: homeSections, mainVideo } = pageContent;
   const { siteSlogan, orgName, homePageVideo } = useConfig();
@@ -19,7 +26,7 @@ export default function Home(props: IHome) {
   const bg = useGradient();
 
   const sections = homeSections.sort((a, b) => a.sortWeight - b.sortWeight);
-  const logoRef = useRef<HTMLDivElement>();
+  const logoRef = useRef<HTMLDivElement>({} as HTMLDivElement);
 
   useNavLogo(logoRef);
 
@@ -36,7 +43,8 @@ export default function Home(props: IHome) {
               as="h1"
               fontSize={{ base: '1.5rem', md: 'xl', lg: '2xl' }}
               fontWeight="light"
-              mb={32}>
+              mb={32}
+            >
               {siteSlogan}
             </Heading>
           </Flex>
@@ -59,11 +67,11 @@ export default function Home(props: IHome) {
       })}
     </>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps<IHome> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let pageContent = Object();
+  let pageContent = {} as HomepageContent;
   try {
     pageContent = await getHomePage();
   } catch (err) {
@@ -71,3 +79,5 @@ export const getStaticProps: GetStaticProps<IHome> = async ctx => {
   }
   return { props: { pageContent, preview } };
 };
+
+export default Home;

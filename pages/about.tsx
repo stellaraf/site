@@ -1,15 +1,13 @@
 import { Box, Flex, Heading } from '@chakra-ui/react';
-import { getPage, getPageContent, getContent } from 'site/util';
-import { Avatars, Hero, GoogleMap, SEO, GetStarted } from 'site/components';
-import { useTitle } from 'site/hooks';
-import { useResponsiveStyle } from 'site/styles';
+import { getPage, getPageContent, getContent } from '~/util';
+import { Avatars, Hero, GoogleMap, SEO, GetStarted } from '~/components';
+import { useTitle } from '~/hooks';
+import { useResponsiveStyle } from '~/styles';
 
 import type { GetStaticProps } from 'next';
-import type { IAboutPage, ISection } from 'site/types';
+import type { Bio, IAboutPage, ISection, IAboutPageAttrs, PageContent } from '~/types';
 
-const SLUG = 'about';
-
-const Section = (props: ISection) => {
+const Section: React.FC<ISection> = (props: ISection) => {
   const { title, children, ...rest } = props;
   const rStyles = useResponsiveStyle();
   const titleMe = useTitle();
@@ -25,7 +23,7 @@ const Section = (props: ISection) => {
   );
 };
 
-export default function About(props: IAboutPage) {
+const About: React.FC<IAboutPage> = (props: IAboutPage) => {
   const { pageData, bios } = props;
   const { title, subtitle, body = null, customProperties, getStarted } = pageData;
   const { employeesTitle = '', mapTitle = '' } = customProperties;
@@ -43,20 +41,22 @@ export default function About(props: IAboutPage) {
       {getStarted && <GetStarted {...getStarted.fields} />}
     </>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps<IAboutPage> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let pageData = Object();
-  let pageContent = Array();
-  let bios = new Array();
+  let pageData = {} as IAboutPageAttrs;
+  let pageContent = [] as PageContent[];
+  let bios = [] as Bio[];
   try {
-    pageData = await getPage(SLUG, preview);
+    pageData = await getPage<IAboutPageAttrs>('about', preview);
     pageContent = await getPageContent(pageData?.id ?? null, preview);
-    bios = await getContent('bio', preview);
+    bios = await getContent<Bio>('bio', preview);
   } catch (err) {
     console.error(err);
     throw err;
   }
   return { props: { pageData, pageContent, bios, preview } };
 };
+
+export default About;

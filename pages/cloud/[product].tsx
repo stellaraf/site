@@ -1,10 +1,14 @@
-import { getPage, getPageContent } from 'site/util';
-import { ContentSection, Hero, SEO, GetStarted } from 'site/components';
+import { getPage, getPageContent } from '~/util';
+import { ContentSection, Hero, SEO, GetStarted } from '~/components';
 
-import type { PageProps } from 'site/types';
 import type { GetStaticProps, GetStaticPaths } from 'next';
+import type { PageAttrs, PageProps, PageContent } from '~/types';
 
-export default function CloudPage(props: PageProps) {
+type UrlQuery = {
+  product: string;
+};
+
+const CloudPage: React.FC<PageProps> = (props: PageProps) => {
   const { pageData, pageContent } = props;
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 
@@ -20,17 +24,13 @@ export default function CloudPage(props: PageProps) {
       {getStarted && <GetStarted {...getStarted.fields} />}
     </>
   );
-}
-
-type UrlQuery = {
-  product: string;
 };
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const product = ctx.params?.product ?? 'notfound';
   const preview = ctx?.preview ?? false;
-  let pageData = Object();
-  let pageContent = Array();
+  let pageData = {} as PageAttrs;
+  let pageContent = [] as PageContent[];
   try {
     pageData = await getPage(`cloud/${product}`, preview);
     pageContent = await getPageContent(pageData?.id ?? null, preview);
@@ -44,3 +44,5 @@ export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
   paths: [],
   fallback: false,
 });
+
+export default CloudPage;

@@ -1,4 +1,5 @@
-import { getPage } from 'site/util';
+import { getPage } from '~/util';
+
 import type { NextApiHandler } from 'next';
 
 const previewHandler: NextApiHandler = async (request, response) => {

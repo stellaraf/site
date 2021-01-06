@@ -1,10 +1,8 @@
 import * as ReactGA from 'react-ga';
-import type { EventArgs, InitializeOptions } from 'react-ga';
 
-type RGA = typeof ReactGA;
-type Effect = (ga: RGA) => void;
+import type { UseGoogleAnalytics } from './types';
 
-function useAnalytics(effect: Effect): void {
+function useAnalytics(effect: UseGoogleAnalytics.Effect): void {
   if (typeof window !== 'undefined' && typeof process.env.NEXT_PUBLIC_GANALYTICS === 'string') {
     if (typeof effect === 'function') {
       effect(ReactGA);
@@ -12,7 +10,7 @@ function useAnalytics(effect: Effect): void {
   }
 }
 
-function trackEvent(e: EventArgs) {
+function trackEvent(e: UseGoogleAnalytics.EventArgs) {
   useAnalytics(ga => {
     if (process.env.NODE_ENV === 'production') {
       ga.event(e);
@@ -55,17 +53,17 @@ function trackModal(path: string) {
 }
 
 function initializeAnalytics(trackingId: string) {
-  let initializeOpts: InitializeOptions = {
-    titleCase: false,
-  };
+  const initializeOpts = { titleCase: false } as UseGoogleAnalytics.InitializeOptions;
+
   if (process.env.NEXT_PUBLIC_GANALYTICS_DEBUG === '1') {
     initializeOpts.debug = true;
   }
+
   useAnalytics(ga => {
     ga.initialize(trackingId, initializeOpts);
   });
 }
 
-export function useGoogleAnalytics() {
+export function useGoogleAnalytics(): UseGoogleAnalytics.Return {
   return { trackEvent, trackModal, trackPage, initializeAnalytics, ga: ReactGA };
 }

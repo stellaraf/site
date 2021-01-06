@@ -21,16 +21,16 @@ import {
   CustomBlock,
 } from 'site/components';
 
-import type { ReactNode } from 'react';
 import type { Document } from '@contentful/rich-text-types';
 import type { RenderNode, RenderMark } from '@contentful/rich-text-react-renderer';
 
 type Keys = BLOCKS | INLINES;
 
 type OverrideProps = {
-  [k in Keys]?: Record<string, any>;
+  [k in Keys]?: Dict;
 };
 
+/* eslint react/display-name: 0 */
 const renderMark = {
   [MARKS.BOLD]: text => <strong>{text}</strong>,
   [MARKS.ITALIC]: text => <em>{text}</em>,
@@ -62,10 +62,10 @@ const overrides = {
 
 export function useRender(
   renderable?: Document | null,
-  deps: any[] = [],
+  deps: unknown[] = [],
   exclude: string[] = [],
   props?: OverrideProps,
-): ReactNode | null {
+): React.ReactNode | null {
   if (deps.length === 0) {
     deps = [renderable];
   }
@@ -75,7 +75,7 @@ export function useRender(
   }
 
   if (exclude.length !== 0) {
-    for (let ex of exclude) {
+    for (const ex of exclude) {
       const pattern = new RegExp(ex, 'gi');
       if ('content' in renderable && renderable.content.constructor.name === 'Array') {
         for (const [idx, content] of Object.entries(renderable.content)) {

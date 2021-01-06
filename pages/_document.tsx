@@ -14,7 +14,7 @@ export default class Document extends NextDocument {
 
     return { ...initialProps };
   }
-  render() {
+  render(): JSX.Element {
     return (
       <Html lang="en">
         <Head>

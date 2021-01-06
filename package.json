@@ -54,15 +54,18 @@
     "dev:favicons": "FAVICONS=true NODE_OPTIONS=--max-old-space-size=8192 next dev",
     "build": "FAVICONS=true next build",
     "start": "next start",
-    "typecheck": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier -c -w .",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
-    "lint": "jshint .",
     "validate": "npm ls"
   },
   "pre-commit": [
-    "typecheck"
+    "typecheck",
+    "format",
+    "lint"
   ],
   "browserslist": {
     "production": [

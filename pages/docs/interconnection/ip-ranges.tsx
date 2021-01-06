@@ -1,11 +1,16 @@
-import { SEO, DocsArticle, IPRanges } from 'site/components';
-import { DocsLayout } from 'site/layouts';
-import { getContent } from 'site/util';
+import { SEO, DocsArticle, IPRanges } from '~/components';
+import { DocsLayout } from '~/layouts';
+import { getContent } from '~/util';
 
 import type { GetStaticProps } from 'next';
-import type { IDocsArticle, IDocsArticlePage } from 'site/types';
+import type { IDocsArticle, IDocsArticlePage } from '~/types';
 
-export default function DocsArticlePage(props: IDocsArticlePage) {
+type UrlQuery = {
+  slug: string;
+  group?: string;
+};
+
+const DocsArticlePage: React.FC<IDocsArticlePage> = (props: IDocsArticlePage) => {
   const { title, description } = props.article;
   return (
     <>
@@ -17,11 +22,6 @@ export default function DocsArticlePage(props: IDocsArticlePage) {
       </DocsLayout>
     </>
   );
-}
-
-type UrlQuery = {
-  slug: string;
-  group?: string;
 };
 
 export const getStaticProps: GetStaticProps<IDocsArticlePage, UrlQuery> = async ctx => {
@@ -38,3 +38,5 @@ export const getStaticProps: GetStaticProps<IDocsArticlePage, UrlQuery> = async 
   }
   return { props: { article } };
 };
+
+export default DocsArticlePage;

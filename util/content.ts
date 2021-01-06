@@ -19,12 +19,13 @@ import type {
   FooterGroupEntry,
   PageContentParsed,
   IMeasuredGeoPoint,
-} from 'site/types';
+} from '~/types';
+
 import type { CreateClientParams } from 'contentful';
 
 const debug = (item: any, exclude: string[] = []) => {
   if (item.constructor.name === 'Object') {
-    let excluded = Object.keys(item).reduce(obj => removeKey(item, obj, exclude), Object());
+    const excluded = Object.keys(item).reduce(obj => removeKey(item, obj, exclude), Object());
     return console.dir(excluded, { depth: null });
   }
   return console.dir(item, { depth: null });
@@ -48,7 +49,7 @@ const client = (preview: boolean = false) => {
 export async function contentQuery<T extends unknown>(
   contentType: string,
   preview: boolean = false,
-  query?: object,
+  query?: Dict,
 ): Promise<EntryCollection<T>> {
   let queryParams = { content_type: contentType };
   if (query) {
@@ -65,7 +66,7 @@ export async function contentQuery<T extends unknown>(
 
 export async function getEntry<T extends unknown>(
   entryId: string,
-  query: Object = Object(),
+  query: Dict = {},
 ): Promise<Entry<T>> {
   try {
     return await client().getEntry<T>(entryId, query);
@@ -103,8 +104,8 @@ export const getPages = async (): Promise<PageAttrs[]> => {
 /**
  * Get Page by slug
  */
-export const getPage = async (pageSlug: string, preview: boolean): Promise<PageAttrs> => {
-  let page = { id: '', title: '', slug: '' };
+export async function getPage<T extends PageAttrs>(pageSlug: string, preview: boolean): Promise<T> {
+  let page = { id: '', title: '', slug: '' } as T;
   const data = await contentQuery('page', preview, { 'fields.slug': pageSlug });
   if (data.total !== 0) {
     const fields = Object(data.items[0].fields);
@@ -114,7 +115,7 @@ export const getPage = async (pageSlug: string, preview: boolean): Promise<PageA
     page = { id: data.items[0].sys.id, ...fields };
   }
   return page;
-};
+}
 
 /**
  * Match a reference with its `includes` entry, and replace the reference
@@ -129,7 +130,7 @@ const getRefValue = (val: any, includes: any = Object()): any => {
     if ('sys' in item) {
       let __type = '';
       if (item.sys.type in includes) {
-        for (let ref of includes[item.sys.type] ?? []) {
+        for (const ref of includes[item.sys.type] ?? []) {
           if (ref?.sys?.id === item.sys?.id) {
             if ('contentType' in ref.sys) {
               __type = ref.sys.contentType.sys.id;
@@ -152,7 +153,7 @@ const getRefValue = (val: any, includes: any = Object()): any => {
     return item.map((i: any) => getRefValue(i, includes));
   }
   if (item.constructor.name === 'Object') {
-    for (let [k, v] of Object.entries<any>(item)) {
+    for (const [k, v] of Object.entries<any>(item)) {
       if (v.constructor.name === 'Object') {
         item[k] = getRefValue(v, includes);
       }
@@ -182,7 +183,7 @@ const fetchRefValue = async (val: any): Promise<any> => {
 };
 
 const removeKey = (oldObj: object, newObj: object, [...toRemove]: string[]): object => {
-  let outputObj = Object(newObj);
+  const outputObj = Object(newObj);
   for (let [k, v] of Object.entries(oldObj)) {
     if (!toRemove.includes(k)) {
       if (v.constructor.name === 'Object') {
@@ -212,14 +213,14 @@ const flattenObj = (item: object, [...del]: string[] = []): object => {
 };
 
 export const getHomePage = async (): Promise<HomepageContent> => {
-  let pageContent = Object();
+  const pageContent = Object();
   const data = await contentQuery<HomepageContent>('homepage');
 
   if (data.total !== 0) {
     const item = data.items?.[0] ?? Object();
     const includes = data.includes ?? {};
 
-    for (let [k, v] of Object.entries(item.fields)) {
+    for (const [k, v] of Object.entries(item.fields)) {
       pageContent[k] = getRefValue(v, includes);
     }
   }
@@ -228,7 +229,7 @@ export const getHomePage = async (): Promise<HomepageContent> => {
 
 export const getGlobalConfig = async (preview: boolean = false): Promise<GlobalConfig> => {
   const removeKeys = ['themeName'];
-  let globalConfig = Object();
+  const globalConfig = Object();
   const data = await contentQuery('globalConfiguration', preview, { include: 4 });
   if (data.total !== 0) {
     const parsed: EntryCollection<GlobalConfigPre> = await client().parseEntries(data);
@@ -245,8 +246,8 @@ export const getGlobalConfig = async (preview: boolean = false): Promise<GlobalC
  * Recursively parse the data from referenced entries.
  */
 function* parseEntryItems<E>(items: Entry<E>[], includes: EntryCollection<any>): Generator<E> {
-  for (let i of items) {
-    let item = Object();
+  for (const i of items) {
+    const item = Object();
 
     if ('sys' in i && 'contentType' in i.sys && 'sys' in i.sys.contentType) {
       item.__type = i.sys.contentType.sys.id;
@@ -283,10 +284,10 @@ function* parseFooterItems(
       PageParsed | PageContentParsed | IDocsGroup
     >;
 
-    for (let entryItem of entryItems) {
+    for (const entryItem of entryItems) {
       // Single footer link
       if (typeof entryItem.footerGroup !== 'undefined') {
-        let footerItem = {
+        const footerItem = {
           // Reference to parent group
           footerGroup: {
             title: entryItem.footerGroup.title,
@@ -330,11 +331,11 @@ function* parseExternalFooterLinks(data: EntryCollection<FooterGroupEntry>): Gen
     // All Footer Groups with external links referenced.
     const entryItems = parseEntryItems(items, includes) as Generator<FooterGroup>;
 
-    for (let entryItem of entryItems) {
+    for (const entryItem of entryItems) {
       if (entryItem.externalLinks) {
-        for (let externalLink of entryItem.externalLinks) {
+        for (const externalLink of entryItem.externalLinks) {
           // Single footer link
-          let footerItem = {
+          const footerItem = {
             // Reference to parent group
             footerGroup: {
               title: entryItem.title,
@@ -359,7 +360,7 @@ export async function getPageContent(
   pageId: string,
   preview: boolean = false,
 ): Promise<PageContent[]> {
-  let pageContent = [];
+  const pageContent = [];
   const data = await contentQuery<PageContent>('pageContent', preview, {
     'fields.page.sys.id': pageId,
   });
@@ -368,9 +369,9 @@ export async function getPageContent(
     const items = data.items;
     const includes = data.includes ?? {};
 
-    for (let i of items) {
-      let item = Object();
-      for (let [k, v] of Object.entries(i.fields)) {
+    for (const i of items) {
+      const item = Object();
+      for (const [k, v] of Object.entries(i.fields)) {
         item[k] = getRefValue(v, includes);
       }
       item.updatedAt = i.sys.updatedAt;
@@ -388,11 +389,11 @@ export async function getContent<T extends unknown>(
   preview: boolean = false,
   filters: object = {},
 ): Promise<Array<T>> {
-  let content = [];
+  const content = [];
   const data = await contentQuery<T>(contentType, preview, filters);
   if (data.total !== 0) {
     const { items, includes = {} } = data;
-    for (let item of parseEntryItems(items, includes)) {
+    for (const item of parseEntryItems(items, includes)) {
       content.push(item);
     }
   }
@@ -407,7 +408,7 @@ export async function getContent<T extends unknown>(
  * sortWeight.
  */
 export async function getFooterItems(preview: boolean = false): Promise<FooterItem[]> {
-  let footerItems = [];
+  const footerItems = [];
   const pageContentData = await contentQuery<PageContent>('pageContent', preview, {
     'fields.footerGroup[exists]': true,
   });
@@ -421,12 +422,12 @@ export async function getFooterItems(preview: boolean = false): Promise<FooterIt
     'fields.externalLinks[exists]': true,
   });
   // Parse Page & PageContent references as they use the same model.
-  for (let data of [pageContentData, pageData, docsGroups]) {
+  for (const data of [pageContentData, pageData, docsGroups]) {
     footerItems.push(...parseFooterItems(data));
   }
   // Because externalLinks are attached to a different model, they must be parsed
   // slightly differently.
-  for (let link of parseExternalFooterLinks(footerGroups)) {
+  for (const link of parseExternalFooterLinks(footerGroups)) {
     footerItems.push(link);
   }
 
@@ -445,9 +446,9 @@ export function buildSelections(opt: string): { value: string; label: string } {
  * Build an array of each page's basic attributes.
  */
 export async function getPageInfo() {
-  let pageInfo = [];
+  const pageInfo = [];
   const pages: EntryCollection<PageAttrs> = await contentQuery('page');
-  for (let { fields } of pages.items) {
+  for (const { fields } of pages.items) {
     const { title, subtitle, slug, footerTitle } = fields;
     pageInfo.push({ title, subtitle, slug, footerTitle });
   }
@@ -455,11 +456,11 @@ export async function getPageInfo() {
 }
 
 export async function getActions(preview: boolean = false): Promise<IActions[]> {
-  let actions = [];
+  const actions = [];
   const data: PageContentParsed[] = await getContent('pageContent', preview, {
     'fields.showInCallToAction': true,
   });
-  for (let item of data) {
+  for (const item of data) {
     const {
       page,
       body,
@@ -484,8 +485,8 @@ export async function getActions(preview: boolean = false): Promise<IActions[]> 
 
 export async function getDocsGroups(): Promise<IDocsGroup[]> {
   let docsGroups = [] as IDocsGroup[];
-  let groups = await contentQuery<IDocsGroupEntry>('docsGroup');
-  let articles = await contentQuery<IDocsArticle>('docsArticle');
+  const groups = await contentQuery<IDocsGroupEntry>('docsGroup');
+  const articles = await contentQuery<IDocsArticle>('docsArticle');
   docsGroups = [...parseEntryItems<IDocsGroupEntry>(groups.items, groups.includes)].map(d => ({
     ...d,
     items: [] as IDocsArticle[],

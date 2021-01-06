@@ -12,10 +12,10 @@ const GroupWrapper: React.FC<IGroupWrapper> = (props: IGroupWrapper) => {
   return (
     <SimpleGrid
       my={12}
-      justifyContent="space-evenly"
-      columns={{ base: 1, lg: 4 }}
-      spacingX={{ lg: '25%', xl: '25%' }}
       spacingY={16}
+      columns={{ base: 1, lg: 4 }}
+      justifyContent="space-evenly"
+      spacingX={{ lg: '25%', xl: '25%' }}
       {...props}
     />
   );

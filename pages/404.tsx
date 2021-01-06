@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { Box, Flex, Heading } from '@chakra-ui/react';
-import { SEO } from 'site/components';
-import { useColorValue } from 'site/context';
-import { useGradient } from 'site/hooks';
-import { useResponsiveStyle } from 'site/styles';
+import { SEO } from '~/components';
+import { useColorValue } from '~/context';
+import { useGradient } from '~/hooks';
+import { useResponsiveStyle } from '~/styles';
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
   const heroText = useColorValue('black', 'white');
   const pathText = useColorValue('red.500', 'red.300');
   const rStyles = useResponsiveStyle();
@@ -23,12 +23,14 @@ const NotFound = () => {
         align="center"
         justify="center"
         {...rStyles}
-        {...bg}>
+        {...bg}
+      >
         <Heading
           as="h1"
           fontSize={{ base: '1.5rem', md: 'xl', lg: '2xl' }}
           fontWeight="light"
-          mb={32}>
+          mb={32}
+        >
           <Box as="span" color={pathText}>{`${asPath} `}</Box>
           is not a thing...yet.
         </Heading>

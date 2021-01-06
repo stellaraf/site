@@ -1,14 +1,18 @@
 import { useRouter } from 'next/router';
 import { Flex, Heading } from '@chakra-ui/react';
-import { ContentLoader, Error, SEO } from 'site/components';
-import { useTitle, useRender, useScaledText } from 'site/hooks';
-import { DocsLayout } from 'site/layouts';
-import { getDocsGroups } from 'site/util';
+import { ContentLoader, Error, SEO } from '~/components';
+import { useTitle, useRender, useScaledText } from '~/hooks';
+import { DocsLayout } from '~/layouts';
+import { getDocsGroups } from '~/util';
 
 import type { GetStaticProps, GetStaticPaths } from 'next';
-import type { IDocsGroup, IDocsGroupMain } from 'site/types';
+import type { IDocsGroup, IDocsGroupMain } from '~/types';
 
-const Content = (props: IDocsGroup) => {
+type UrlQuery = {
+  group: string;
+};
+
+const Content: React.FC<IDocsGroup> = (props: IDocsGroup) => {
   const { title, subtitle, summary } = props;
   const titleMe = useTitle();
   const body = useRender(summary);
@@ -21,7 +25,8 @@ const Content = (props: IDocsGroup) => {
           as="h1"
           fontSize={{ base: shouldResize ? '3xl' : '4xl', lg: '6xl' }}
           fontWeight="light"
-          ref={headingRef}>
+          ref={headingRef}
+        >
           {titleMe(title)}
         </Heading>
         {subtitle && (
@@ -29,7 +34,8 @@ const Content = (props: IDocsGroup) => {
             as="h2"
             fontWeight="light"
             fontSize={{ base: '1.5rem', lg: 'xl' }}
-            textAlign={{ base: 'center', lg: 'left' }}>
+            textAlign={{ base: 'center', lg: 'left' }}
+          >
             {titleMe(subtitle)}
           </Heading>
         )}
@@ -39,7 +45,7 @@ const Content = (props: IDocsGroup) => {
   );
 };
 
-export default function DocsGroupMain(props: IDocsGroupMain) {
+const DocsGroupMain: React.FC<IDocsGroupMain> = (props: IDocsGroupMain) => {
   const { pageData } = props;
   const { isFallback } = useRouter();
 
@@ -61,17 +67,13 @@ export default function DocsGroupMain(props: IDocsGroupMain) {
       <DocsLayout>{!isFallback ? <Content {...pageData} /> : <ContentLoader />}</DocsLayout>
     </>
   );
-}
-
-type UrlQuery = {
-  group: string;
 };
 
 export const getStaticProps: GetStaticProps<IDocsGroupMain, UrlQuery> = async ctx => {
   const group = ctx.params?.group ?? '';
   const preview = ctx?.preview ?? false;
   let pageData = {} as IDocsGroup;
-  let docsGroups = [];
+  let docsGroups = [] as IDocsGroup[];
   let notFound = false;
   try {
     docsGroups = await getDocsGroups();
@@ -87,3 +89,5 @@ export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
   paths: [{ params: { group: 'interconnection' } }, { params: { group: 'orion' } }],
   fallback: true,
 });
+
+export default DocsGroupMain;

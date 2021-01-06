@@ -1,9 +1,6 @@
 import { useMemo } from 'react';
 
-interface LinkType {
-  isExternal: boolean;
-  target: string;
-}
+import type { LinkType } from './types';
 
 export const useLinkType = (href: string): LinkType => {
   let linkTarget = href;
@@ -21,7 +18,7 @@ export const useLinkType = (href: string): LinkType => {
     if (!linkTarget.includes('.mdx') && linkTarget.includes('#')) {
       prefix = '';
     }
-    let parts = linkTarget.split('.mdx');
+    const parts = linkTarget.split('.mdx');
     linkTarget = [prefix, ...parts].join('');
   }
 

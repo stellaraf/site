@@ -1,8 +1,10 @@
 import { createState, useState } from '@hookstate/core';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
+import type { State } from '@hookstate/core';
+
 const showNavLogoState = createState<boolean>(false);
-export const useNavLogoState = () => useState(showNavLogoState);
+export const useNavLogoState = (): State<boolean> => useState(showNavLogoState);
 
 /**
  * Show or hide the navbar logo based on scroll position.

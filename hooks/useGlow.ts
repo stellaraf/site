@@ -1,44 +1,16 @@
 import { useToken } from '@chakra-ui/react';
 import { getScale } from 'color2k';
 
-import type { ChakraProps } from '@chakra-ui/react';
-
-interface IGlowOptions {
-  /**
-   * Number of shadows.
-   */
-  shadows?: number;
-  /**
-   * Pixels for each shadow.
-   */
-  increment?: number;
-}
-
-/**
- * First or inner-most color.
- */
-type TStart = string;
-
-/**
- * Last or outer-most color.
- */
-type TStop = string;
-
-interface IUseGlowReturn {
-  /**
-   * Background Color as string.
-   */
-  backgroundColor: ChakraProps['backgroundColor'];
-  /**
-   * Box Shadow as string.
-   */
-  boxShadow: ChakraProps['boxShadow'];
-}
+import type { UseGlow } from './types';
 
 /**
  * Generate boxShadow & starting backgroundColor for a glow effect between two colors.
  */
-export function useGlow(start: TStart, stop: TStop, options?: IGlowOptions): IUseGlowReturn {
+export function useGlow(
+  start: UseGlow.Start,
+  stop: UseGlow.Stop,
+  options?: UseGlow.Options,
+): UseGlow.Return {
   const { shadows = 4, increment = 20 } = options ?? {};
 
   // Get real colors from Chakra UI theme tokens.
@@ -51,7 +23,7 @@ export function useGlow(start: TStart, stop: TStop, options?: IGlowOptions): IUs
   /**
    * Get the color for step `index`.
    */
-  function getColor(index: number) {
+  function getColor(index: number): string {
     /**
      * `getScale()` returns a callback that takes a number between 0 and 1 as its argument. This
      * number is the percentage between start (0) and end (1) that should be interpolated based on
@@ -62,7 +34,7 @@ export function useGlow(start: TStart, stop: TStop, options?: IGlowOptions): IUs
   /**
    * Generate a boxShadow string based on the shadow's position.
    */
-  function createShadow(index: number) {
+  function createShadow(index: number): string {
     const px = `${increment * (index + 1)}px`;
     const color = getColor(index);
     return `0 0 ${px} ${px} ${color}`;

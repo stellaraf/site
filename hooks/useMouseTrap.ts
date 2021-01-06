@@ -4,7 +4,7 @@ import mousetrap from 'mousetrap';
 interface ExtendedKeyboardEvent extends KeyboardEvent {
   returnValue: boolean; // IE returnValue
 }
-type BindCallback = (e: ExtendedKeyboardEvent, c: string) => any;
+type BindCallback = (e: ExtendedKeyboardEvent, c: string) => void;
 
 export function useMouseTrap(
   keys: string | string[],

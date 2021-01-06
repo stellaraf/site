@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
-import { useBreakpointString } from 'site/hooks';
+import { useBreakpointString } from '~/hooks';
+
 import type KeenSlider from 'keen-slider';
 import type { TOptionsEvents } from 'keen-slider';
-import type { UseSlider, UseSliderOptions } from 'site/types';
+import type { UseSlider, UseSliderOptions } from '~/types';
 
 export function useSlider(options: UseSliderOptions = {}): UseSlider {
   const { sm, md, lg, xl } = useBreakpointString();
@@ -75,34 +76,35 @@ export function useSlider(options: UseSliderOptions = {}): UseSlider {
   /**
    * Default keen-slider options.
    */
-  const defaultOptions: TOptionsEvents = {
+  const defaultOptions = {
     loop: true,
     duration: 1000,
     dragStart: pause,
     dragEnd: unpause,
     slides: '.__slider_slide',
     slideChanged: handleSlideChange,
-  };
+  } as TOptionsEvents;
 
   /**
    * Use overridden breakpoint options or defaults.
    */
-  const breakpointOptions: TOptionsEvents['breakpoints'] = {
+  const breakpointOptions = {
     [sm]: optionsSm ?? {},
     [md]: optionsMd ?? {},
     [lg]: optionsLg ?? { controls: false },
     [xl]: optionsXl ?? { controls: false },
-  };
+  } as TOptionsEvents['breakpoints'];
 
   /**
    * Merge default options with overrides.
    */
-  const sliderOptions: TOptionsEvents = {
+  const sliderOptions = {
     ...defaultOptions,
     breakpoints: breakpointOptions,
     ...ksOverrides,
-  };
+  } as TOptionsEvents;
 
+  /* eslint @typescript-eslint/no-explicit-any: 0 */
   const timerRef = useRef<any>();
   const [containerRef, slider] = useKeenSlider<HTMLDivElement>(sliderOptions);
 
@@ -132,14 +134,14 @@ export function useSlider(options: UseSliderOptions = {}): UseSlider {
   }, [paused, slider]);
 
   return {
-    slide: currentSlide,
+    pause,
+    slider,
+    unpause,
     setSlide,
     nextSlide,
+    containerRef,
     previousSlide,
     isPaused: paused,
-    pause,
-    unpause,
-    slider,
-    containerRef,
+    slide: currentSlide,
   };
 }

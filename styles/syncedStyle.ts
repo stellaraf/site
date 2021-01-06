@@ -1,7 +1,10 @@
 import { createState, useState } from '@hookstate/core';
 import { mode } from '@chakra-ui/theme-tools';
 
-const variantBase = (props: Dict) => ({
+import type { StyleObjectOrFn } from '@chakra-ui/react';
+import type { State } from '@hookstate/core';
+
+const variantBase = (props: Dict): StyleObjectOrFn => ({
   header: mode({}, { borderBottomWidth: 0 })(props),
   box: mode(
     {},
@@ -44,7 +47,7 @@ const variantBase = (props: Dict) => ({
   )(props),
 });
 
-const variantZed = (props: Dict) => ({
+const variantZed = (props: Dict): StyleObjectOrFn => ({
   button: {},
   header: mode({}, { bg: 'transparent', backdropFilter: 'blur(5px)' })(props),
   box: mode(
@@ -66,7 +69,7 @@ const variantZed = (props: Dict) => ({
   )(props),
 });
 
-const variantOne = (props: Dict) => ({
+const variantOne = (props: Dict): StyleObjectOrFn => ({
   button: mode(
     {
       border: '1px',
@@ -97,7 +100,7 @@ const variantOne = (props: Dict) => ({
   )(props),
 });
 
-const variantTwo = (props: Dict) => ({
+const variantTwo = (props: Dict): StyleObjectOrFn => ({
   button: mode(
     {
       backgroundColor: 'whiteAlpha.200',
@@ -125,7 +128,7 @@ const variantTwo = (props: Dict) => ({
   )(props),
 });
 
-const variantThree = (props: Dict) => ({
+const variantThree = (props: Dict): StyleObjectOrFn => ({
   button: mode(
     { backgroundColor: 'whiteAlpha.200', _hover: { backgroundColor: 'whiteAlpha.300' } },
     {},
@@ -150,7 +153,7 @@ const variantThree = (props: Dict) => ({
   )(props),
 });
 
-const variantFour = (props: Dict) => ({
+const variantFour = (props: Dict): StyleObjectOrFn => ({
   button: mode(
     {
       backgroundColor: 'light.500',
@@ -198,5 +201,5 @@ export const syncedStyles = {
   },
 };
 
-const syncedStyleVariant = createState(0);
-export const useSyncedStyleVariant = () => useState(syncedStyleVariant);
+const syncedStyleVariant = createState<number>(0);
+export const useSyncedStyleVariant = (): State<number> => useState(syncedStyleVariant);

@@ -1,14 +1,16 @@
+import dynamic from 'next/dynamic';
 import { Box, Flex, Button as ChakraButton, Heading, VStack } from '@chakra-ui/react';
-import { ImPhone as Phone } from '@meronex/icons/im';
-import { getPage, getPageContent, getContent } from 'site/util';
-import { Content, Hero, Options, SEO, GetStarted } from 'site/components';
-import { useSlug } from 'site/hooks';
-import { useResponsiveStyle } from 'site/styles';
+import { getPage, getPageContent, getContent } from '~/util';
+import { Content, Hero, Options, SEO, GetStarted } from '~/components';
+import { useSlug } from '~/hooks';
+import { useResponsiveStyle } from '~/styles';
 
 import type { GetStaticProps } from 'next';
-import type { IContactPage } from 'site/types';
+import type { IContactPage, PageContent, IContactCard } from '~/types';
 
-export default function Contact(props: IContactPage) {
+const Phone = dynamic<MeronexIcon>(() => import('@meronex/icons/im').then(i => i.ImPhone));
+
+const Contact: React.FC<IContactPage> = (props: IContactPage) => {
   const { pageData, contactCards, pageContent } = props;
   const cards = contactCards.sort((a, b) => a.sortWeight - b.sortWeight);
   const { title, subtitle, body = null, customProperties, getStarted } = pageData;
@@ -16,6 +18,7 @@ export default function Contact(props: IContactPage) {
   const rStyles = useResponsiveStyle();
   const content = pageContent[0];
   const slug = useSlug(content.title, [content.title]);
+
   return (
     <>
       <SEO title={customProperties?.metaTitle ?? title} description={subtitle} />
@@ -38,7 +41,8 @@ export default function Contact(props: IContactPage) {
               boxSize="3rem"
               href={content.buttonLink}
               rounded="full"
-              colorScheme="green">
+              colorScheme="green"
+            >
               <Phone />
             </ChakraButton>
             <Heading as="h4" fontSize="xl" fontWeight="medium">
@@ -50,19 +54,23 @@ export default function Contact(props: IContactPage) {
       {getStarted && <GetStarted {...getStarted.fields} />}
     </>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps<IContactPage> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let pageData = Object();
-  let pageContent = new Array();
-  let contactCards = new Array();
+  let pageData = {} as IContactPage['pageData'];
+  let pageContent = [] as PageContent[];
+  let contactCards = [] as IContactCard[];
+
   try {
     pageData = await getPage('contact', preview);
     pageContent = await getPageContent(pageData?.id ?? null, preview);
-    contactCards = await getContent('contactCard', preview, { include: 4 });
+    contactCards = await getContent<IContactCard>('contactCard', preview, { include: 4 });
   } catch (err) {
     console.error(err);
   }
+
   return { props: { pageData, pageContent, contactCards, preview } };
 };
+
+export default Contact;

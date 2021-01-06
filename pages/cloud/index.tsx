@@ -1,18 +1,18 @@
 import dynamic from 'next/dynamic';
 import { Button, Wrap } from '@chakra-ui/react';
-import { getPage, getPageContent, getGeoPoints } from 'site/util';
-import { useColorTokenValue } from 'site/context';
-import { ContentSection, Hero, SEO, useDataCenter, GetStarted } from 'site/components';
-import { useAlert } from 'site/hooks';
-import { useCloudLocations } from 'site/state';
+import { getPage, getPageContent, getGeoPoints } from '~/util';
+import { ContentSection, Hero, SEO, useDataCenter, GetStarted } from '~/components';
+import { useColorTokenValue } from '~/context';
+import { useAlert } from '~/hooks';
+import { useCloudLocations } from '~/state';
 
 import type { GetStaticProps } from 'next';
 import type { IUSMap } from 'site/components';
-import type { ICloud } from 'site/types';
+import type { ICloud, IMeasuredGeoPoint, PageAttrs, PageContent } from '~/types';
 
 const USMap = dynamic<IUSMap>(() => import('site/components').then(i => i.USMap));
 
-export default function Cloud(props: ICloud) {
+const Cloud: React.FC<ICloud> = (props: ICloud) => {
   const { geoData, geoPoints, pageData, pageContent } = props;
 
   if (geoPoints.length === 0) {
@@ -56,14 +56,14 @@ export default function Cloud(props: ICloud) {
       {getStarted && <GetStarted {...getStarted.fields} />}
     </>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps<ICloud> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let geoData = Object();
-  let geoPoints = Array();
-  let pageData = Object();
-  let pageContent = Array();
+  let geoData = {} as Dict;
+  let geoPoints = [] as IMeasuredGeoPoint[];
+  let pageData = {} as PageAttrs;
+  let pageContent = [] as PageContent[];
   try {
     const geoRes = await fetch('https://us-map-geo-points.stellar.workers.dev');
     geoData = await geoRes.json();
@@ -75,3 +75,5 @@ export const getStaticProps: GetStaticProps<ICloud> = async ctx => {
   }
   return { props: { geoData, geoPoints, pageData, pageContent, preview } };
 };
+
+export default Cloud;

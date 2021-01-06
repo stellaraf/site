@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-export function useBooleanValue<T extends any = any, F extends any = any>(
+export function useBooleanValue<T extends unknown = unknown, F extends unknown = unknown>(
   track: boolean,
   ifTrue: T,
   ifFalse: F,

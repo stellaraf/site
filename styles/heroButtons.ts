@@ -1,6 +1,8 @@
 import { mode } from '@chakra-ui/theme-tools';
 
-const common = { px: 3, py: 1, lineHeight: 1.5, borderRadius: 'lg' };
+import type { StyleObjectOrFn } from '@chakra-ui/react';
+
+const common = { px: 3, py: 1, lineHeight: 1.5, borderRadius: 'lg' } as StyleObjectOrFn;
 
 export const heroButtons = {
   variants: {
@@ -51,4 +53,4 @@ export const heroButtons = {
         },
       )(props),
   },
-};
+} as Dict<StyleObjectOrFn>;

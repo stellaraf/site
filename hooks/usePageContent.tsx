@@ -8,8 +8,10 @@ export const usePageContent = (rawContent: PageContent, [...deps]: any[] = []): 
   if (deps.length === 0) {
     deps = [rawContent];
   }
-  let obj = Object();
+
+  const obj = {} as UsePageContent;
   const titleMe = useTitle();
+
   try {
     const {
       title = '',

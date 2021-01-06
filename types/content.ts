@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import type { Entry, ContentTypeLink, Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
-import type { ColorNames, InitialTheme } from './theme';
+import type { ColorNames } from './theme';
 import type { FormModels } from './forms';
 
 interface ContentRef {
@@ -53,7 +53,7 @@ export interface PageAttrs {
   body?: Document;
   footerGroup?: ContentRef;
   footerTitle?: string;
-  customProperties?: object;
+  customProperties?: Dict;
   getStarted?: Entry<IGetStartedEntry>;
 }
 

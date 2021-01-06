@@ -13,16 +13,16 @@ export interface ActiveSectionEffectProps {
 
 export interface UsePageContent {
   error: string | null;
-  title: React.FC;
-  subtitle: React.FC;
-  body: React.FC | null;
+  title: JSX.Element;
+  subtitle: JSX.Element;
+  body: JSX.Element | null;
   buttonText?: string;
   buttonLink?: string;
   showButton: boolean;
-  subsections: React.FC;
+  subsections: JSX.Element | null;
   showUpdatedDate: boolean;
-  updatedAt: React.FC;
-  image: React.FC | null;
+  updatedAt: JSX.Element;
+  image: JSX.Element | null;
 }
 
 export type TitleMe = (t: string) => string;

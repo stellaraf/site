@@ -1,6 +1,7 @@
-import { getEntry } from 'site/util';
+import { getEntry } from '~/util';
+
 import type { NextApiHandler } from 'next';
-import type { PageAttrs } from 'site/types';
+import type { PageAttrs } from '~/types';
 
 const previewHandler: NextApiHandler = async (request, response) => {
   if (request.query.secret !== process.env.PREVIEW_SECRET || !request.query.pageId) {

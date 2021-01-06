@@ -47,3 +47,7 @@ export interface ISyncedStyleProvider {
 export interface IDocsCtx {
   groups: IDocsGroup[];
 }
+
+export type TColorModeCtx = {
+  cookies: string;
+};

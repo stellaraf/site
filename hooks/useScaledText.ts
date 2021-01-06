@@ -8,7 +8,7 @@ import type { UseMeasureRef as UM } from 'react-use/esm/useMeasure';
  */
 type DC = HTMLElement;
 type DT = HTMLHeadingElement;
-type A = any;
+type A = unknown;
 type B = boolean;
 
 /**

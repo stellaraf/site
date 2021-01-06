@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useToken } from '@chakra-ui/react';
 import { getColor, isLight } from '@chakra-ui/theme-tools';
-import { useTheme } from 'site/context';
+import { useTheme } from '~/context';
 
 interface IOpposingOptions {
   light?: string;
   dark?: string;
 }
 
-export function useIsDark(color: string) {
+export function useIsDark(color: string): boolean {
   const theme = useTheme();
   if (typeof color === 'string' && color.match(/[a-zA-Z]+\.[a-zA-Z0-9]+/g)) {
     color = getColor(theme, color, color);

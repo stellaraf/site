@@ -8,10 +8,10 @@ import {
 } from 'color2k';
 import { extendTheme } from '@chakra-ui/react';
 import { mode, getColor } from '@chakra-ui/theme-tools';
-import { propNames } from '@chakra-ui/styled-system';
 import { mergeWith } from '@chakra-ui/utils';
-import { syncedStyles, heroButtons } from 'site/styles';
+import { syncedStyles, heroButtons } from '~/styles';
 
+import type { GlobalStyleProps } from '@chakra-ui/theme-tools';
 import type {
   Fonts,
   ThemeFonts,
@@ -19,7 +19,6 @@ import type {
   FontWeights,
   ThemeConfig,
   CustomColors,
-  ChangeableColors,
 } from 'site/types';
 
 const radii = {
@@ -66,8 +65,8 @@ const themeColorKeys = [
   'red',
 ];
 
-export const isLight = (color: string) => readableColorIsBlack(color);
-export const isDark = (color: string) => !readableColorIsBlack(color);
+export const isLight = (color: string): boolean => readableColorIsBlack(color);
+export const isDark = (color: string): boolean => !readableColorIsBlack(color);
 
 const alphaColors = (color: string) => {
   return {
@@ -183,7 +182,7 @@ const generatePalette = (palette: ThemeConfig['colors']): CustomColors => {
   return generatedPalette;
 };
 
-const globalStyles = (props: Dict) => {
+const globalStyles = (props: GlobalStyleProps) => {
   const zIndexKeys = [
     'button',
     'label',
@@ -270,10 +269,6 @@ const importFonts = (userFonts: Omit<Fonts, 'themeName'>): [ThemeFonts, FontWeig
   ];
 };
 
-function isColorKey(key: string): key is keyof ChangeableColors {
-  return themeColorKeys.includes(key);
-}
-
 const importColors = (userColors: ThemeConfig['colors']): CustomColors => {
   const generatedColors = generatePalette(userColors);
 
@@ -320,31 +315,3 @@ export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
     components: { SyncedStyles: syncedStyles },
   });
 };
-
-export function validProps(props: Dict) {
-  let checked = {} as Dict;
-  const allPropNames = new Set([
-    ...propNames,
-    'focusBorderColor',
-    'errorBorderColor',
-    'isTruncated',
-    'layerStyle',
-    'textStyle',
-    'noOfLines',
-    'children',
-    'apply',
-    '__css',
-    'css',
-    'key',
-    'as',
-    'sx',
-  ]);
-  for (let [k, v] of Object.entries(props)) {
-    if (typeof v === 'function') {
-      checked[k] = v;
-    } else if (allPropNames.has(k)) {
-      checked[k] = v;
-    }
-  }
-  return checked;
-}
