@@ -1,5 +1,5 @@
 import type { BoxProps } from '@chakra-ui/react';
-import type { PageContent } from 'site/types';
+import type { PageContent } from '~/types';
 
 export interface IContentSection extends BoxProps {
   items: PageContent;
@@ -10,7 +10,7 @@ export type TSides = ['right', 'left'];
 
 export interface ITitleLayout {
   titleBlock: JSX.Element;
-  image: React.FC | null;
+  image: JSX.Element | null;
   isMobile: boolean;
   side: TSideValues;
 }

@@ -50,7 +50,7 @@ export const Photo: React.FC<IPhoto> = (props: IPhoto) => {
           borderStyle="solid"
           alt={bios[index].name}
           borderColor={photoBorder}
-          src={bios[index].photo.file.url}
+          src={bios[index].photo.fields.file.url}
           transition="transform .15s ease 0s"
           fallbackSrc="https://via.placeholder.com/150"
         />

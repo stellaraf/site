@@ -1,8 +1,9 @@
 import { ReactNode } from 'react';
+
 import type { Entry, ContentTypeLink, Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 import type { ColorNames } from './theme';
-import type { FormModels } from './forms';
+import type { FormModel, FormModelEntry } from './forms';
 
 interface ContentRef {
   sys: ContentTypeLink;
@@ -45,7 +46,7 @@ export interface IGetStartedEntry {
   buttonLink?: string;
 }
 
-export interface PageAttrs {
+export type PageAttrs = {
   id: string;
   slug: string;
   title: string;
@@ -55,7 +56,7 @@ export interface PageAttrs {
   footerTitle?: string;
   customProperties?: Dict;
   getStarted?: Entry<IGetStartedEntry>;
-}
+};
 
 export interface PageParsed extends Omit<PageAttrs, 'footerGroup'> {
   footerGroup: FooterGroupEntry;
@@ -69,29 +70,29 @@ export interface PageContentParsed extends Omit<PageContent, 'footerGroup' | 'pa
 export interface Paragraph {
   title: string;
   body: Document;
-  icon?: AssetFields;
+  icon?: Asset;
   iconColor?: ColorNames;
   buttonText?: string;
   buttonLink?: string;
 }
 
 export interface PageContent {
-  page: ContentRef;
+  page: Entry<PageAttrs>;
   sortWeight: number;
   title: string;
   subtitle?: string;
   body: Document | null;
-  paragraphs: Paragraph[];
+  paragraphs: Entry<Paragraph>[];
   updatedAt: string;
   button: boolean;
   buttonText?: string;
   buttonLink?: string;
-  footerGroup?: ContentRef;
+  footerGroup?: Entry<FooterGroupEntry>;
   footerTitle?: string;
   showUpdatedDate?: boolean;
-  image?: AssetFields;
+  image?: Asset;
   showInCallToAction: boolean;
-  callToActionIcon?: AssetFields;
+  callToActionIcon?: Asset;
   callToActionIconColor?: ColorNames;
   callToActionBody: Document | null;
 }
@@ -104,18 +105,12 @@ export interface HomeSection {
   buttonText: string;
   buttonLink: string;
   sortWeight: number;
-  image: AssetFields;
+  image: Asset;
 }
 
 export interface HeroCard {
   title: string;
   body: Document;
-}
-
-export interface HomepageContent {
-  sections: HomeSection[];
-  heroCards: HeroCard[];
-  mainVideo?: Asset['fields'];
 }
 
 export interface GeoPoint {
@@ -133,26 +128,27 @@ export interface IMeasuredGeoPoint extends GeoPoint {
   best: boolean;
 }
 
-export interface PageProps {
-  pageData: PageAttrs;
+export type Page<P extends Dict = Dict> = {
+  pageData: PageAttrs & P;
   pageContent: PageContent[];
   preview: boolean;
-}
+};
 
-export interface IAboutPageAttrs extends PageAttrs {
-  customProperties: { employeesTitle: string; mapTitle: string };
-}
+export type PageEntry<P extends Page = Page> = Omit<P, 'pageData'> & {
+  pageData: Entry<P['pageData']>;
+};
 
-export interface IAboutPage extends PageProps {
-  bios: Bio[];
-  pageData: IAboutPageAttrs;
+export interface PageProps {
+  pageData: PageEntry;
+  pageContent: PageContent[];
+  preview: boolean;
 }
 
 export interface Bio {
   name: string;
   title: string;
   bio: Document;
-  photo: Asset['fields'];
+  photo: Asset;
   sortWeight: number;
 }
 
@@ -227,7 +223,11 @@ export interface IContactCard {
   color: ColorNames;
   icon: 'Support' | 'Sales' | 'Docs';
   sortWeight: number;
-  form?: FormModels<'Support' | 'Sales'>;
+  form?: FormModel<'Support' | 'Sales'>;
+}
+
+export interface IContactCardEntry extends Omit<IContactCard, 'form'> {
+  form?: FormModelEntry<'Support' | 'Sales'>;
 }
 
 export interface IFormPlaceholders {

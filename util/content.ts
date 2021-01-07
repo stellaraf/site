@@ -104,7 +104,10 @@ export const getPages = async (): Promise<PageAttrs[]> => {
 /**
  * Get Page by slug
  */
-export async function getPage<T extends PageAttrs>(pageSlug: string, preview: boolean): Promise<T> {
+export async function __getPage<T extends PageAttrs>(
+  pageSlug: string,
+  preview: boolean,
+): Promise<T> {
   let page = { id: '', title: '', slug: '' } as T;
   const data = await contentQuery('page', preview, { 'fields.slug': pageSlug });
   if (data.total !== 0) {
@@ -356,7 +359,7 @@ function* parseExternalFooterLinks(data: EntryCollection<FooterGroupEntry>): Gen
 /**
  * Get content for a specific page by its sys.id
  */
-export async function getPageContent(
+export async function __getPageContent(
   pageId: string,
   preview: boolean = false,
 ): Promise<PageContent[]> {

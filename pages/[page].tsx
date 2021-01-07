@@ -1,18 +1,18 @@
-import { getPage, getPageContent } from '~/util';
+import { getPageId, getPage, getPageContent } from '~/util';
 import { ContentSection, Hero, SEO, GetStarted } from '~/components';
 
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import type { PageAttrs, PageProps, PageContent } from '~/types';
+import type { PageEntry, PageContent } from '~/types';
 
 type UrlQuery = {
   page: string;
 };
 
-const DynamicPage: React.FC<PageProps> = (props: PageProps) => {
+const DynamicPage: React.FC<PageEntry> = (props: PageEntry) => {
   const { pageData, pageContent } = props;
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 
-  const { title, subtitle, body = null, getStarted } = pageData;
+  const { title, subtitle, body = null, getStarted } = pageData.fields;
 
   return (
     <>
@@ -26,17 +26,19 @@ const DynamicPage: React.FC<PageProps> = (props: PageProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
+export const getStaticProps: GetStaticProps<PageEntry, UrlQuery> = async ctx => {
   const page = ctx.params?.page ?? 'notfound';
   const preview = ctx?.preview ?? false;
-  let pageData = {} as PageAttrs;
+  let pageData = {} as PageEntry['pageData'];
   let pageContent = [] as PageContent[];
 
   try {
-    pageData = await getPage(page, preview);
-    pageContent = await getPageContent(pageData?.id ?? null);
+    const pageId = await getPageId(page, preview);
+    pageData = await getPage(pageId, preview);
+    pageContent = await getPageContent(pageId, preview);
   } catch (err) {
     console.error(err);
+    throw err;
   }
   return { props: { pageData, pageContent, preview } };
 };

@@ -12,7 +12,7 @@ import type { ISalesFormFields, IForm, FormHandlers } from './types';
 export const SalesForm = forwardRef<FormHandlers, IForm<'Sales'>>((props, ref) => {
   const { onSubmit, accent } = props;
   const ctx = useFormState();
-
+  console.dir(ctx.form.Sales.get(), { depth: null });
   const {
     firstName,
     lastName,

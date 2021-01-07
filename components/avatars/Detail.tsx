@@ -28,7 +28,7 @@ const _Header: React.FC<IHeader> = (props: IHeader) => {
             borderColor={border}
             transition="transform .15s ease 0s"
             fallbackSrc="https://via.placeholder.com/150"
-            src={photo?.file.url ?? 'https://via.placeholder.com/150'}
+            src={photo?.fields.file.url ?? 'https://via.placeholder.com/150'}
           />
         </PhotoWrapper>
       </WrapItem>

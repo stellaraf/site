@@ -1,19 +1,20 @@
 import dynamic from 'next/dynamic';
 import { Box, Flex, Button as ChakraButton, Heading, VStack } from '@chakra-ui/react';
-import { getPage, getPageContent, getContent } from '~/util';
 import { Content, Hero, Options, SEO, GetStarted } from '~/components';
 import { useSlug } from '~/hooks';
 import { useResponsiveStyle } from '~/styles';
+import { getPage, getPageContent, getPageId, getContactCards } from '~/util';
 
 import type { GetStaticProps } from 'next';
-import type { IContactPage, PageContent, IContactCard } from '~/types';
+import type { PageEntry, IContactPage, PageContent } from '~/types';
 
 const Phone = dynamic<MeronexIcon>(() => import('@meronex/icons/im').then(i => i.ImPhone));
 
-const Contact: React.FC<IContactPage> = (props: IContactPage) => {
+const Contact: React.FC<PageEntry<IContactPage>> = (props: PageEntry<IContactPage>) => {
   const { pageData, contactCards, pageContent } = props;
+
   const cards = contactCards.sort((a, b) => a.sortWeight - b.sortWeight);
-  const { title, subtitle, body = null, customProperties, getStarted } = pageData;
+  const { title, subtitle, body = null, customProperties, getStarted } = pageData.fields;
 
   const rStyles = useResponsiveStyle();
   const content = pageContent[0];
@@ -56,16 +57,17 @@ const Contact: React.FC<IContactPage> = (props: IContactPage) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<IContactPage> = async ctx => {
+export const getStaticProps: GetStaticProps<PageEntry<IContactPage>> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let pageData = {} as IContactPage['pageData'];
+  let pageData = {} as PageEntry<IContactPage>['pageData'];
   let pageContent = [] as PageContent[];
-  let contactCards = [] as IContactCard[];
+
+  const contactCards = await getContactCards(preview);
 
   try {
-    pageData = await getPage('contact', preview);
-    pageContent = await getPageContent(pageData?.id ?? null, preview);
-    contactCards = await getContent<IContactCard>('contactCard', preview, { include: 4 });
+    const pageId = await getPageId('contact', preview);
+    pageData = await getPage<IContactPage['pageData']>(pageId, preview);
+    pageContent = await getPageContent(pageId, preview);
   } catch (err) {
     console.error(err);
   }

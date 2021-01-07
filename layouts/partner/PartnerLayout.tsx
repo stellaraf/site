@@ -72,7 +72,7 @@ const PartnerLogo: React.FC = () => {
           display="inline-block"
           boxSize="100%"
           css={{
-            maskImage: `url(${logo.file.url})`,
+            maskImage: `url(${logo.fields.file.url})`,
             maskRepeat: 'no-repeat',
             maskPosition: isMobile ? 'center' : 'left',
           }}

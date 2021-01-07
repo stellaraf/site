@@ -1,24 +1,24 @@
 import dynamic from 'next/dynamic';
 import { Button, Wrap } from '@chakra-ui/react';
-import { getPage, getPageContent, getGeoPoints } from '~/util';
+import { getPage, getPageContent, getGeoPoints, getPageId } from '~/util';
 import { ContentSection, Hero, SEO, useDataCenter, GetStarted } from '~/components';
 import { useColorTokenValue } from '~/context';
 import { useAlert } from '~/hooks';
 import { useCloudLocations } from '~/state';
 
 import type { GetStaticProps } from 'next';
-import type { IUSMap } from 'site/components';
-import type { ICloud, IMeasuredGeoPoint, PageAttrs, PageContent } from '~/types';
+import type { IUSMap } from '~/components';
+import type { ICloud, IMeasuredGeoPoint, PageContent, PageEntry } from '~/types';
 
 const USMap = dynamic<IUSMap>(() => import('site/components').then(i => i.USMap));
 
-const Cloud: React.FC<ICloud> = (props: ICloud) => {
+const Cloud: React.FC<PageEntry<ICloud>> = (props: PageEntry<ICloud>) => {
   const { geoData, geoPoints, pageData, pageContent } = props;
 
   if (geoPoints.length === 0) {
     throw new Error('Unable to get Cloud Location Data');
   }
-  const { title, subtitle, body = null, getStarted } = pageData;
+  const { title, subtitle, body = null, getStarted } = pageData.fields;
 
   const showAlert = useAlert();
 
@@ -58,18 +58,20 @@ const Cloud: React.FC<ICloud> = (props: ICloud) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<ICloud> = async ctx => {
+export const getStaticProps: GetStaticProps<PageEntry<ICloud>> = async ctx => {
   const preview = ctx?.preview ?? false;
   let geoData = {} as Dict;
   let geoPoints = [] as IMeasuredGeoPoint[];
-  let pageData = {} as PageAttrs;
+  let pageData = {} as PageEntry<ICloud>['pageData'];
   let pageContent = [] as PageContent[];
+
   try {
+    const pageId = await getPageId('cloud', preview);
     const geoRes = await fetch('https://us-map-geo-points.stellar.workers.dev');
     geoData = await geoRes.json();
     geoPoints = await getGeoPoints();
-    pageData = await getPage('cloud', preview);
-    pageContent = await getPageContent(pageData?.id ?? null, preview);
+    pageData = await getPage(pageId, preview);
+    pageContent = await getPageContent(pageId, preview);
   } catch (err) {
     console.error(err);
   }

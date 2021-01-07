@@ -10,13 +10,14 @@ import {
 } from '~/components';
 import { useGradient, useNavLogo } from '~/hooks';
 import { useResponsiveStyle } from '~/styles';
-import { getHomePage } from '~/util';
+import { getParsedContent } from '~/util';
 
 import type { GetStaticProps } from 'next';
-import type { IHome, HomepageContent } from '~/types';
+import type { THome, THomePageContent } from '~/types';
 
-const Home: React.FC<IHome> = (props: IHome) => {
+const Home: React.FC<THome> = (props: THome) => {
   const { pageContent } = props;
+
   const { sections: homeSections, mainVideo } = pageContent;
   const { siteSlogan, orgName, homePageVideo } = useConfig();
   const logo = useColorTokenValue('primary.500', 'white');
@@ -25,7 +26,7 @@ const Home: React.FC<IHome> = (props: IHome) => {
 
   const bg = useGradient();
 
-  const sections = homeSections.sort((a, b) => a.sortWeight - b.sortWeight);
+  const sections = homeSections.sort((a, b) => a.fields.sortWeight - b.fields.sortWeight);
   const logoRef = useRef<HTMLDivElement>({} as HTMLDivElement);
 
   useNavLogo(logoRef);
@@ -51,7 +52,7 @@ const Home: React.FC<IHome> = (props: IHome) => {
         </Flex>
         <Flex justifyContent="center" w="100%">
           {typeof mainVideo !== 'undefined' ? (
-            <Screen url={mainVideo.file.url} />
+            <Screen url={mainVideo.fields.file.url} />
           ) : typeof homePageVideo !== 'undefined' ? (
             <Screen url={homePageVideo} />
           ) : null}
@@ -63,17 +64,17 @@ const Home: React.FC<IHome> = (props: IHome) => {
         </Flex> */}
       </Box>
       {sections.map((sect, i) => {
-        return <HomeSection section={sect} index={i % sections.length} key={i} />;
+        return <HomeSection section={sect.fields} index={i % sections.length} key={i} />;
       })}
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<IHome> = async ctx => {
+export const getStaticProps: GetStaticProps<THome> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let pageContent = {} as HomepageContent;
+  let pageContent = {} as THomePageContent;
   try {
-    pageContent = await getHomePage();
+    [pageContent] = await getParsedContent<THomePageContent>('homepage', preview, { include: 4 });
   } catch (err) {
     console.error(err);
   }

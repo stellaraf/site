@@ -1,6 +1,6 @@
-import { getContent } from '~/util';
 import { SEO } from '~/components';
 import { PartnerLayout } from '~/layouts';
+import { getPartnerPage } from '~/util';
 
 import type { GetStaticProps, GetStaticPaths } from 'next';
 import type { IPartnerPage } from '~/types';
@@ -24,16 +24,12 @@ const PartnerPage: React.FC<IPartnerPage> = (props: IPartnerPage) => {
 export const getStaticProps: GetStaticProps<IPartnerPage, UrlQuery> = async ctx => {
   const partner = ctx.params?.partner;
   const preview = ctx?.preview ?? false;
-  let pageData = {} as IPartnerPage['pageData'];
-  try {
-    const matches = await getContent<IPartnerPage['pageData']>('partnerPage', preview, {
-      'fields.name[match]': partner,
-      include: 4,
-    });
-    pageData = matches[0] ?? {};
-  } catch (err) {
-    console.error(err);
+  if (typeof partner === 'undefined') {
+    throw new Error('No partner specified.');
   }
+
+  const pageData = await getPartnerPage(partner, preview);
+
   return { props: { pageData } };
 };
 

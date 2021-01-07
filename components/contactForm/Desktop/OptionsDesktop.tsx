@@ -14,6 +14,7 @@ import { DesktopForm } from './DesktopForm';
 import type { MouseEvent } from 'react';
 import type { IconType } from '@meronex/icons';
 import type { Variants } from 'framer-motion';
+import type { IContactCard } from '~/types';
 import type { IOptionsResponsive, IMotionItems, TSupportedFormQuery } from '../types';
 import type { FormHandlers } from '../Forms/types';
 
@@ -101,7 +102,7 @@ export const OptionsDesktop: React.FC<IOptionsResponsive> = (props: IOptionsResp
       animate={layout}
     >
       <AnimatePresence>
-        {cards.map((card, i) => {
+        {cards.map((card: IContactCard, i) => {
           const { icon: iconName, color: iconColor, buttonText, form, ...cardRest } = card;
 
           /**

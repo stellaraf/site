@@ -1,0 +1,3003 @@
+{
+  "sys": { "type": "Array" },
+  "total": 5,
+  "skip": 0,
+  "limit": 100,
+  "items": [
+    {
+      "sys": {
+        "space": {
+          "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+        },
+        "id": "69mkcbh7N6Gb3aAfMxFlfH",
+        "type": "Entry",
+        "createdAt": "2020-07-03T02:15:56.982Z",
+        "updatedAt": "2020-11-07T20:00:06.788Z",
+        "environment": {
+          "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+        },
+        "revision": 11,
+        "contentType": {
+          "sys": { "type": "Link", "linkType": "ContentType", "id": "pageContent" }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "page": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "6nqad4KTXsT6htC3io0ZX8",
+            "type": "Entry",
+            "createdAt": "2020-08-05T18:19:31.684Z",
+            "updatedAt": "2020-10-27T17:50:24.311Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 6,
+            "contentType": {
+              "sys": { "type": "Link", "linkType": "ContentType", "id": "page" }
+            },
+            "locale": "en-US"
+          },
+          "fields": {
+            "slug": "cloud",
+            "title": "Orion",
+            "subtitle": "The Enterprise Native Cloud",
+            "body": {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "Our strategically located data centers allow enterprises to substantially reduce latency between end-users and business applications.",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "document"
+            },
+            "footerGroup": {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "xr6odvyglivu"
+                  }
+                },
+                "id": "36Z3aflbvsFXyAjuFK7aJA",
+                "type": "Entry",
+                "createdAt": "2020-09-17T15:51:33.875Z",
+                "updatedAt": "2020-09-21T22:06:39.170Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 4,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "footerGroup"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": { "title": "Cloud", "sortWeight": 20 }
+            },
+            "getStarted": {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "62RrVTcOpqOiGfD4kvh9Tm"
+              }
+            }
+          }
+        },
+        "title": "Orion Cloud Desktops",
+        "subtitle": "The smart, secure way to never deal with PCs again",
+        "image": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "5XH0dUugc3n947mEm6Je3U",
+            "type": "Asset",
+            "createdAt": "2020-10-19T22:48:38.254Z",
+            "updatedAt": "2020-10-19T22:48:38.254Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 1,
+            "locale": "en-US"
+          },
+          "fields": {
+            "title": "Icon VDI",
+            "file": {
+              "url": "//images.ctfassets.net/xr6odvyglivu/5XH0dUugc3n947mEm6Je3U/27d57a1ffa7b7c529b14c41b580b378d/vdiicon.svg",
+              "details": { "size": 105423, "image": { "width": 411, "height": 377 } },
+              "fileName": "vdiicon.svg",
+              "contentType": "image/svg+xml"
+            }
+          }
+        },
+        "showUpdatedDate": false,
+        "paragraphs": [
+          {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "3CllXNffZ883mMqTCMZbY6",
+              "type": "Entry",
+              "createdAt": "2020-07-03T02:14:56.348Z",
+              "updatedAt": "2020-10-19T23:15:52.616Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 4,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "pageSectionParagraph"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "High Performance Desktops for Everyone",
+              "body": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "With Orion VDI, end users can take full advantage of our blazing fast platform in their every day workloads, while you focus on adding value to your business instead of worrying about which PCs need upgrading this year.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Upgrading a user's CPU, RAM, or disk space is just ten seconds of your time, and user workflows never miss a beat!",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "icon": {
+                "sys": {
+                  "space": {
+                    "sys": {
+                      "type": "Link",
+                      "linkType": "Space",
+                      "id": "xr6odvyglivu"
+                    }
+                  },
+                  "id": "6JB0OjaSKSwQzUnmuMAhwo",
+                  "type": "Asset",
+                  "createdAt": "2020-10-19T23:12:28.468Z",
+                  "updatedAt": "2020-10-19T23:12:28.468Z",
+                  "environment": {
+                    "sys": {
+                      "id": "master",
+                      "type": "Link",
+                      "linkType": "Environment"
+                    }
+                  },
+                  "revision": 1,
+                  "locale": "en-US"
+                },
+                "fields": {
+                  "title": "Icon Rocket",
+                  "file": {
+                    "url": "//images.ctfassets.net/xr6odvyglivu/6JB0OjaSKSwQzUnmuMAhwo/47bfd05695d2e8814e52f3ee7ea20e96/rocket-launch.svg",
+                    "details": {
+                      "size": 1001,
+                      "image": { "width": 24, "height": 24 }
+                    },
+                    "fileName": "rocket-launch.svg",
+                    "contentType": "image/svg+xml"
+                  }
+                }
+              },
+              "iconColor": "tertiary"
+            }
+          },
+          {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "410yBG5d1hLxmMr6fGDbUh",
+              "type": "Entry",
+              "createdAt": "2020-07-03T02:15:22.236Z",
+              "updatedAt": "2020-10-19T23:15:27.276Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 2,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "pageSectionParagraph"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Truly Secure Mobile Workforce",
+              "body": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Worried about your mobile users getting compromised while getting their work done at a coffee shop? With VDI, user desktops never leave your secure cloud perimeter, so there's no need to worry about disk encryption, man-in-the-middle attacks, or data loss.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "icon": {
+                "sys": {
+                  "space": {
+                    "sys": {
+                      "type": "Link",
+                      "linkType": "Space",
+                      "id": "xr6odvyglivu"
+                    }
+                  },
+                  "id": "52vqzQ5TyXj89OmR5xv7E3",
+                  "type": "Asset",
+                  "createdAt": "2020-10-19T23:15:14.102Z",
+                  "updatedAt": "2020-10-19T23:15:14.102Z",
+                  "environment": {
+                    "sys": {
+                      "id": "master",
+                      "type": "Link",
+                      "linkType": "Environment"
+                    }
+                  },
+                  "revision": 1,
+                  "locale": "en-US"
+                },
+                "fields": {
+                  "title": "Icon Coffee Cup",
+                  "file": {
+                    "url": "//images.ctfassets.net/xr6odvyglivu/52vqzQ5TyXj89OmR5xv7E3/a77e9a69fc85f72c32ef2e0a703192ce/coffee-cup.svg",
+                    "details": {
+                      "size": 1234,
+                      "image": { "width": 512, "height": 512 }
+                    },
+                    "fileName": "coffee-cup.svg",
+                    "contentType": "image/svg+xml"
+                  }
+                }
+              },
+              "iconColor": "secondary"
+            }
+          }
+        ],
+        "button": true,
+        "buttonText": "Try it out!",
+        "buttonLink": "/cloud/daas",
+        "sortWeight": 4,
+        "footerGroup": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "36Z3aflbvsFXyAjuFK7aJA",
+            "type": "Entry",
+            "createdAt": "2020-09-17T15:51:33.875Z",
+            "updatedAt": "2020-09-21T22:06:39.170Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 4,
+            "contentType": {
+              "sys": {
+                "type": "Link",
+                "linkType": "ContentType",
+                "id": "footerGroup"
+              }
+            },
+            "locale": "en-US"
+          },
+          "fields": { "title": "Cloud", "sortWeight": 20 }
+        },
+        "showInCallToAction": true,
+        "callToActionIcon": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "52vqzQ5TyXj89OmR5xv7E3",
+            "type": "Asset",
+            "createdAt": "2020-10-19T23:15:14.102Z",
+            "updatedAt": "2020-10-19T23:15:14.102Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 1,
+            "locale": "en-US"
+          },
+          "fields": {
+            "title": "Icon Coffee Cup",
+            "file": {
+              "url": "//images.ctfassets.net/xr6odvyglivu/52vqzQ5TyXj89OmR5xv7E3/a77e9a69fc85f72c32ef2e0a703192ce/coffee-cup.svg",
+              "details": { "size": 1234, "image": { "width": 512, "height": 512 } },
+              "fileName": "coffee-cup.svg",
+              "contentType": "image/svg+xml"
+            }
+          }
+        },
+        "callToActionIconColor": "secondary"
+      }
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+        },
+        "id": "6xIqMcGN7Tyg1NSDqNMZh1",
+        "type": "Entry",
+        "createdAt": "2020-07-02T21:10:42.004Z",
+        "updatedAt": "2020-10-28T22:21:36.295Z",
+        "environment": {
+          "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+        },
+        "revision": 11,
+        "contentType": {
+          "sys": { "type": "Link", "linkType": "ContentType", "id": "pageContent" }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "page": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "6nqad4KTXsT6htC3io0ZX8",
+            "type": "Entry",
+            "createdAt": "2020-08-05T18:19:31.684Z",
+            "updatedAt": "2020-10-27T17:50:24.311Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 6,
+            "contentType": {
+              "sys": { "type": "Link", "linkType": "ContentType", "id": "page" }
+            },
+            "locale": "en-US"
+          },
+          "fields": {
+            "slug": "cloud",
+            "title": "Orion",
+            "subtitle": "The Enterprise Native Cloud",
+            "body": {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "Our strategically located data centers allow enterprises to substantially reduce latency between end-users and business applications.",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "document"
+            },
+            "footerGroup": {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "xr6odvyglivu"
+                  }
+                },
+                "id": "36Z3aflbvsFXyAjuFK7aJA",
+                "type": "Entry",
+                "createdAt": "2020-09-17T15:51:33.875Z",
+                "updatedAt": "2020-09-21T22:06:39.170Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 4,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "footerGroup"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": { "title": "Cloud", "sortWeight": 20 }
+            },
+            "getStarted": {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "62RrVTcOpqOiGfD4kvh9Tm"
+              }
+            }
+          }
+        },
+        "title": "100% Uptime Guarantee",
+        "subtitle": "Time is money & talk is cheap",
+        "body": {
+          "nodeType": "document",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "paragraph",
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "We're ",
+                  "marks": [],
+                  "data": {}
+                },
+                {
+                  "nodeType": "text",
+                  "value": "that",
+                  "marks": [{ "type": "italic" }],
+                  "data": {}
+                },
+                {
+                  "nodeType": "text",
+                  "value": " confident in the Orion platform. If we fail to deliver on our ",
+                  "marks": [],
+                  "data": {}
+                },
+                {
+                  "nodeType": "hyperlink",
+                  "content": [
+                    {
+                      "nodeType": "text",
+                      "value": "Service Level Agreement",
+                      "marks": [],
+                      "data": {}
+                    }
+                  ],
+                  "data": { "uri": "/docs/sla" }
+                },
+                {
+                  "nodeType": "text",
+                  "value": ", we'll credit back the amount of time services were unavailable.",
+                  "marks": [],
+                  "data": {}
+                }
+              ],
+              "data": {}
+            }
+          ]
+        },
+        "showUpdatedDate": false,
+        "button": true,
+        "buttonText": "Learn More",
+        "buttonLink": "https://info.stellar.tech/docs/resources/sla",
+        "sortWeight": 1,
+        "showInCallToAction": true,
+        "callToActionIcon": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "1XjJCub7lTwPFeYgUFEhVV",
+            "type": "Asset",
+            "createdAt": "2020-10-22T17:46:37.568Z",
+            "updatedAt": "2020-10-22T17:46:37.568Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 1,
+            "locale": "en-US"
+          },
+          "fields": {
+            "title": "Icon - Power",
+            "file": {
+              "url": "//images.ctfassets.net/xr6odvyglivu/1XjJCub7lTwPFeYgUFEhVV/a91e46fb3bf5fbea9a4225f8785b9d2c/power.svg",
+              "details": { "size": 468, "image": { "width": 512, "height": 512 } },
+              "fileName": "power.svg",
+              "contentType": "image/svg+xml"
+            }
+          }
+        },
+        "callToActionIconColor": "green"
+      }
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+        },
+        "id": "3VI4ftmKo4rJwC1wp4FpNY",
+        "type": "Entry",
+        "createdAt": "2020-07-03T02:19:51.337Z",
+        "updatedAt": "2020-10-22T17:56:28.333Z",
+        "environment": {
+          "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+        },
+        "revision": 8,
+        "contentType": {
+          "sys": { "type": "Link", "linkType": "ContentType", "id": "pageContent" }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "page": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "6nqad4KTXsT6htC3io0ZX8",
+            "type": "Entry",
+            "createdAt": "2020-08-05T18:19:31.684Z",
+            "updatedAt": "2020-10-27T17:50:24.311Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 6,
+            "contentType": {
+              "sys": { "type": "Link", "linkType": "ContentType", "id": "page" }
+            },
+            "locale": "en-US"
+          },
+          "fields": {
+            "slug": "cloud",
+            "title": "Orion",
+            "subtitle": "The Enterprise Native Cloud",
+            "body": {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "Our strategically located data centers allow enterprises to substantially reduce latency between end-users and business applications.",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "document"
+            },
+            "footerGroup": {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "xr6odvyglivu"
+                  }
+                },
+                "id": "36Z3aflbvsFXyAjuFK7aJA",
+                "type": "Entry",
+                "createdAt": "2020-09-17T15:51:33.875Z",
+                "updatedAt": "2020-09-21T22:06:39.170Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 4,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "footerGroup"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": { "title": "Cloud", "sortWeight": 20 }
+            },
+            "getStarted": {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "62RrVTcOpqOiGfD4kvh9Tm"
+              }
+            }
+          }
+        },
+        "title": "Network Connectivity",
+        "subtitle": "Travel on your Cloud Journey at the Speed of Light",
+        "showUpdatedDate": false,
+        "paragraphs": [
+          {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "4aVbAjidWTp7DW5CB5OWYx",
+              "type": "Entry",
+              "createdAt": "2020-07-03T02:17:12.753Z",
+              "updatedAt": "2020-07-03T02:17:12.753Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 1,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "pageSectionParagraph"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Backbone",
+              "body": {
+                "nodeType": "document",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "Behind the Orion platform is our transcontinental & transpacific core network. Each of our strategically located data centers is redundantly interconnected with the rest of the Orion ecosystem via 10 Gbps transport paths, ensuring always-on availability and uncompromising speed.",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ],
+                    "data": {}
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "5bRgV3EXRLRiK1T41mIYoZ",
+              "type": "Entry",
+              "createdAt": "2020-07-03T02:17:37.620Z",
+              "updatedAt": "2020-07-03T02:17:37.620Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 1,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "pageSectionParagraph"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Upstream Interconnection",
+              "body": {
+                "nodeType": "document",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "We're as choosy with our transit carriers as we are with our CPUs — this means we only partner with the best Tier 1 carriers, and leverage local peering whenever possible to guarantee the lowest latency to Orion for our end users.",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ],
+                    "data": {}
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "SQFw2oZy82bj6Uqwo0fpb",
+              "type": "Entry",
+              "createdAt": "2020-07-03T02:18:22.588Z",
+              "updatedAt": "2020-07-03T02:18:22.588Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 1,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "pageSectionParagraph"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Private Extensions",
+              "body": {
+                "nodeType": "document",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "To make sure Orion is a true extension of the enterprise, we support private connectivity of virtually any type. Whether it's an MPLS circuit from your existing global carrier, a metro ethernet link, or your own physical VPN endpoint, we'll make it happen.",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ],
+                    "data": {}
+                  },
+                  {
+                    "nodeType": "paragraph",
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "To simplify connectivity even further, we offer a premium SD-WAN cloud extension service which can automatically combine any existing bandwidth mediums with per-packet load balancing, perform end-to-end QoS prioritization, and guarantee always-on cloud connectivity.",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ],
+                    "data": {}
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "button": true,
+        "buttonText": "More About Interconnection",
+        "buttonLink": "https://info.stellar.tech/docs/interconnection/routing-policy",
+        "sortWeight": 5,
+        "footerGroup": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "36Z3aflbvsFXyAjuFK7aJA",
+            "type": "Entry",
+            "createdAt": "2020-09-17T15:51:33.875Z",
+            "updatedAt": "2020-09-21T22:06:39.170Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 4,
+            "contentType": {
+              "sys": {
+                "type": "Link",
+                "linkType": "ContentType",
+                "id": "footerGroup"
+              }
+            },
+            "locale": "en-US"
+          },
+          "fields": { "title": "Cloud", "sortWeight": 20 }
+        },
+        "showInCallToAction": true,
+        "callToActionIcon": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "6JB0OjaSKSwQzUnmuMAhwo",
+            "type": "Asset",
+            "createdAt": "2020-10-19T23:12:28.468Z",
+            "updatedAt": "2020-10-19T23:12:28.468Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 1,
+            "locale": "en-US"
+          },
+          "fields": {
+            "title": "Icon Rocket",
+            "file": {
+              "url": "//images.ctfassets.net/xr6odvyglivu/6JB0OjaSKSwQzUnmuMAhwo/47bfd05695d2e8814e52f3ee7ea20e96/rocket-launch.svg",
+              "details": { "size": 1001, "image": { "width": 24, "height": 24 } },
+              "fileName": "rocket-launch.svg",
+              "contentType": "image/svg+xml"
+            }
+          }
+        },
+        "callToActionIconColor": "tertiary"
+      }
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+        },
+        "id": "2LUCeVidf3EaU5EQJQTGXr",
+        "type": "Entry",
+        "createdAt": "2020-07-03T02:02:57.128Z",
+        "updatedAt": "2020-10-22T17:56:07.098Z",
+        "environment": {
+          "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+        },
+        "revision": 6,
+        "contentType": {
+          "sys": { "type": "Link", "linkType": "ContentType", "id": "pageContent" }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "page": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "6nqad4KTXsT6htC3io0ZX8",
+            "type": "Entry",
+            "createdAt": "2020-08-05T18:19:31.684Z",
+            "updatedAt": "2020-10-27T17:50:24.311Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 6,
+            "contentType": {
+              "sys": { "type": "Link", "linkType": "ContentType", "id": "page" }
+            },
+            "locale": "en-US"
+          },
+          "fields": {
+            "slug": "cloud",
+            "title": "Orion",
+            "subtitle": "The Enterprise Native Cloud",
+            "body": {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "Our strategically located data centers allow enterprises to substantially reduce latency between end-users and business applications.",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "document"
+            },
+            "footerGroup": {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "xr6odvyglivu"
+                  }
+                },
+                "id": "36Z3aflbvsFXyAjuFK7aJA",
+                "type": "Entry",
+                "createdAt": "2020-09-17T15:51:33.875Z",
+                "updatedAt": "2020-09-21T22:06:39.170Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 4,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "footerGroup"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": { "title": "Cloud", "sortWeight": 20 }
+            },
+            "getStarted": {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "62RrVTcOpqOiGfD4kvh9Tm"
+              }
+            }
+          }
+        },
+        "title": "Data Protection",
+        "subtitle": "We've got you covered",
+        "image": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "Y7wjLgeIcznIMn5UsYtkh",
+            "type": "Asset",
+            "createdAt": "2020-10-19T22:38:29.126Z",
+            "updatedAt": "2020-10-19T22:38:29.127Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 1,
+            "locale": "en-US"
+          },
+          "fields": {
+            "title": "Icon Data Protection",
+            "file": {
+              "url": "//images.ctfassets.net/xr6odvyglivu/Y7wjLgeIcznIMn5UsYtkh/4864efe6749ac6ec2dd095edf8bbdb85/baasdraasicon.svg",
+              "details": { "size": 23034, "image": { "width": 205, "height": 269 } },
+              "fileName": "baasdraasicon.svg",
+              "contentType": "image/svg+xml"
+            }
+          }
+        },
+        "showUpdatedDate": false,
+        "paragraphs": [
+          {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "1CsDcxOwE7d43FN8x60rWM",
+              "type": "Entry",
+              "createdAt": "2020-07-03T02:01:38.654Z",
+              "updatedAt": "2020-10-27T17:24:54.608Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 4,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "pageSectionParagraph"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Backups as a Service",
+              "body": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "At Stellar, one of the core components to our engineering culture is the concept that backups are Priority 1. Having a comprehensive data protection strategy that properly safeguards critical business data is literally ",
+                        "nodeType": "text"
+                      },
+                      {
+                        "data": {},
+                        "marks": [{ "type": "italic" }],
+                        "value": "the",
+                        "nodeType": "text"
+                      },
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": " most important objective a technology-driven organization can have.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "With the power of the Orion cloud platform, we offer one of the most robust, customizable, and ",
+                        "nodeType": "text"
+                      },
+                      {
+                        "data": {},
+                        "marks": [{ "type": "bold" }],
+                        "value": "fastest",
+                        "nodeType": "text"
+                      },
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": " backup platforms in the world, powered by Veeam. With our atomically low RPOs & RTOs, enterprises can rest assured that their critical data is not only protected, but easily recoverable when disaster strikes.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "icon": {
+                "sys": {
+                  "space": {
+                    "sys": {
+                      "type": "Link",
+                      "linkType": "Space",
+                      "id": "xr6odvyglivu"
+                    }
+                  },
+                  "id": "3rwU4Km6CI5QNrvpMSlCSF",
+                  "type": "Asset",
+                  "createdAt": "2020-10-19T22:56:21.259Z",
+                  "updatedAt": "2020-10-19T22:56:21.259Z",
+                  "environment": {
+                    "sys": {
+                      "id": "master",
+                      "type": "Link",
+                      "linkType": "Environment"
+                    }
+                  },
+                  "revision": 1,
+                  "locale": "en-US"
+                },
+                "fields": {
+                  "title": "Icon Backups",
+                  "file": {
+                    "url": "//images.ctfassets.net/xr6odvyglivu/3rwU4Km6CI5QNrvpMSlCSF/1f1bf9cb8749195a59412e886e101579/settings_backup_restore-24px.svg",
+                    "details": {
+                      "size": 356,
+                      "image": { "width": 24, "height": 24 }
+                    },
+                    "fileName": "settings_backup_restore-24px.svg",
+                    "contentType": "image/svg+xml"
+                  }
+                }
+              },
+              "iconColor": "primary",
+              "buttonText": "Request a Free Trial",
+              "buttonLink": "/partner/veeam"
+            }
+          },
+          {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "2i7tDRJ40x5nwHiw7UM6aW",
+              "type": "Entry",
+              "createdAt": "2020-07-03T02:02:18.261Z",
+              "updatedAt": "2020-10-27T17:24:35.549Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 3,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "pageSectionParagraph"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Disaster Recovery as a Service",
+              "body": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Disaster recovery takes data protection beyond basic file recovery. With Orion's DRaaS platform, powered by VMware and Veeam, our team of data protection engineers can fail over your entire IT infrastructure environment in minutes, should an inevitable disaster occur.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "icon": {
+                "sys": {
+                  "space": {
+                    "sys": {
+                      "type": "Link",
+                      "linkType": "Space",
+                      "id": "xr6odvyglivu"
+                    }
+                  },
+                  "id": "372DCbvLFK1GXKSwsRKJkC",
+                  "type": "Asset",
+                  "createdAt": "2020-10-19T23:02:58.104Z",
+                  "updatedAt": "2020-10-19T23:02:58.104Z",
+                  "environment": {
+                    "sys": {
+                      "id": "master",
+                      "type": "Link",
+                      "linkType": "Environment"
+                    }
+                  },
+                  "revision": 1,
+                  "locale": "en-US"
+                },
+                "fields": {
+                  "title": "Icon Fire Extinguisher",
+                  "file": {
+                    "url": "//images.ctfassets.net/xr6odvyglivu/372DCbvLFK1GXKSwsRKJkC/cd6ec6188123dea72cdf586ca8294002/fire-extinguisher-solid.svg",
+                    "details": {
+                      "size": 882,
+                      "image": { "width": 448, "height": 512 }
+                    },
+                    "fileName": "fire-extinguisher-solid.svg",
+                    "contentType": "image/svg+xml"
+                  }
+                }
+              },
+              "iconColor": "red",
+              "buttonText": "Request a free trial",
+              "buttonLink": "/partner/veeam"
+            }
+          }
+        ],
+        "button": false,
+        "sortWeight": 3,
+        "footerGroup": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "36Z3aflbvsFXyAjuFK7aJA",
+            "type": "Entry",
+            "createdAt": "2020-09-17T15:51:33.875Z",
+            "updatedAt": "2020-09-21T22:06:39.170Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 4,
+            "contentType": {
+              "sys": {
+                "type": "Link",
+                "linkType": "ContentType",
+                "id": "footerGroup"
+              }
+            },
+            "locale": "en-US"
+          },
+          "fields": { "title": "Cloud", "sortWeight": 20 }
+        },
+        "showInCallToAction": true,
+        "callToActionIcon": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "3rwU4Km6CI5QNrvpMSlCSF",
+            "type": "Asset",
+            "createdAt": "2020-10-19T22:56:21.259Z",
+            "updatedAt": "2020-10-19T22:56:21.259Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 1,
+            "locale": "en-US"
+          },
+          "fields": {
+            "title": "Icon Backups",
+            "file": {
+              "url": "//images.ctfassets.net/xr6odvyglivu/3rwU4Km6CI5QNrvpMSlCSF/1f1bf9cb8749195a59412e886e101579/settings_backup_restore-24px.svg",
+              "details": { "size": 356, "image": { "width": 24, "height": 24 } },
+              "fileName": "settings_backup_restore-24px.svg",
+              "contentType": "image/svg+xml"
+            }
+          }
+        },
+        "callToActionIconColor": "secondary"
+      }
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+        },
+        "id": "1ZPhc8x6ffEjsGh6PY75zN",
+        "type": "Entry",
+        "createdAt": "2020-07-03T00:37:21.484Z",
+        "updatedAt": "2020-10-22T17:55:52.592Z",
+        "environment": {
+          "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+        },
+        "revision": 11,
+        "contentType": {
+          "sys": { "type": "Link", "linkType": "ContentType", "id": "pageContent" }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "page": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "6nqad4KTXsT6htC3io0ZX8",
+            "type": "Entry",
+            "createdAt": "2020-08-05T18:19:31.684Z",
+            "updatedAt": "2020-10-27T17:50:24.311Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 6,
+            "contentType": {
+              "sys": { "type": "Link", "linkType": "ContentType", "id": "page" }
+            },
+            "locale": "en-US"
+          },
+          "fields": {
+            "slug": "cloud",
+            "title": "Orion",
+            "subtitle": "The Enterprise Native Cloud",
+            "body": {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "Our strategically located data centers allow enterprises to substantially reduce latency between end-users and business applications.",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "paragraph"
+                }
+              ],
+              "nodeType": "document"
+            },
+            "footerGroup": {
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "xr6odvyglivu"
+                  }
+                },
+                "id": "36Z3aflbvsFXyAjuFK7aJA",
+                "type": "Entry",
+                "createdAt": "2020-09-17T15:51:33.875Z",
+                "updatedAt": "2020-09-21T22:06:39.170Z",
+                "environment": {
+                  "sys": {
+                    "id": "master",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 4,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "footerGroup"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": { "title": "Cloud", "sortWeight": 20 }
+            },
+            "getStarted": {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "62RrVTcOpqOiGfD4kvh9Tm"
+              }
+            }
+          }
+        },
+        "title": "Infrastructure as a Service",
+        "subtitle": "Your Virtual Private Data Center at the Highest Altitude",
+        "image": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "1YBEty55ZwvkCCivEaq9Df",
+            "type": "Asset",
+            "createdAt": "2020-10-19T17:09:30.718Z",
+            "updatedAt": "2020-10-19T17:09:30.718Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 1,
+            "locale": "en-US"
+          },
+          "fields": {
+            "title": "Compute",
+            "file": {
+              "url": "//images.ctfassets.net/xr6odvyglivu/1YBEty55ZwvkCCivEaq9Df/2bd919dc7af7b6b1ee6aeb8d84f698ac/computeicon.svg",
+              "details": { "size": 934880, "image": { "width": 451, "height": 414 } },
+              "fileName": "computeicon.svg",
+              "contentType": "image/svg+xml"
+            }
+          }
+        },
+        "showUpdatedDate": false,
+        "paragraphs": [
+          {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "3UsITyIqdWQ2Cnslz4e1Be",
+              "type": "Entry",
+              "createdAt": "2020-07-03T00:58:08.123Z",
+              "updatedAt": "2020-10-27T17:24:45.507Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 4,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "pageSectionParagraph"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Compute",
+              "body": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "The Orion compute infrastructure is built to sustain the most intense workloads your business can demand. As an engineer-led team with some of the highest performance standards in the universe, we don't mess around when it comes to our infrastructure.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Our servers are packed with high-performance Intel CPUs, the fastest RAM money can buy, and dedicated 100 Gbps networking.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "icon": {
+                "sys": {
+                  "space": {
+                    "sys": {
+                      "type": "Link",
+                      "linkType": "Space",
+                      "id": "xr6odvyglivu"
+                    }
+                  },
+                  "id": "2EFKSGbbR8ewdgkphrjVnp",
+                  "type": "Asset",
+                  "createdAt": "2020-10-19T20:35:15.473Z",
+                  "updatedAt": "2020-10-19T20:35:15.473Z",
+                  "environment": {
+                    "sys": {
+                      "id": "master",
+                      "type": "Link",
+                      "linkType": "Environment"
+                    }
+                  },
+                  "revision": 1,
+                  "locale": "en-US"
+                },
+                "fields": {
+                  "title": "Icon Server",
+                  "file": {
+                    "url": "//images.ctfassets.net/xr6odvyglivu/2EFKSGbbR8ewdgkphrjVnp/ed604073a7f71a92dce67b49de5b6635/server-solid.svg",
+                    "details": {
+                      "size": 1092,
+                      "image": { "width": 512, "height": 512 }
+                    },
+                    "fileName": "server-solid.svg",
+                    "contentType": "image/svg+xml"
+                  }
+                }
+              },
+              "buttonText": "Request a Free Trial",
+              "buttonLink": "/partner/vmware"
+            }
+          },
+          {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "482eonLHqL83QOXTkXS1Zl",
+              "type": "Entry",
+              "createdAt": "2020-07-03T01:00:19.209Z",
+              "updatedAt": "2020-10-19T20:56:51.294Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 2,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "pageSectionParagraph"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Storage",
+              "body": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "As one of the fastest moving cloud platforms on the planet, we're obsessed with guaranteeing insanely fast I/O performance.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Orion production workloads uncompromisingly run on 100% dedicated SSD storage arrays backed by 160 Gbps of storage networking capacity per array. Our servers are packed with high-performance Intel CPUs, the fastest RAM money can buy, and dedicated 100 Gbps networking.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "icon": {
+                "sys": {
+                  "space": {
+                    "sys": {
+                      "type": "Link",
+                      "linkType": "Space",
+                      "id": "xr6odvyglivu"
+                    }
+                  },
+                  "id": "2g1MVukf8vxFSNIm26Zz2",
+                  "type": "Asset",
+                  "createdAt": "2020-10-19T20:56:43.693Z",
+                  "updatedAt": "2020-10-19T20:56:43.693Z",
+                  "environment": {
+                    "sys": {
+                      "id": "master",
+                      "type": "Link",
+                      "linkType": "Environment"
+                    }
+                  },
+                  "revision": 1,
+                  "locale": "en-US"
+                },
+                "fields": {
+                  "title": "Icon Storage",
+                  "file": {
+                    "url": "//images.ctfassets.net/xr6odvyglivu/2g1MVukf8vxFSNIm26Zz2/5e016a11a3bedfbf0f7be3d71d43dd70/bolt-solid.svg",
+                    "details": {
+                      "size": 437,
+                      "image": { "width": 320, "height": 512 }
+                    },
+                    "fileName": "bolt-solid.svg",
+                    "contentType": "image/svg+xml"
+                  }
+                }
+              },
+              "iconColor": "secondary"
+            }
+          },
+          {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "tnPYRRrDu1WqdeyIYcGi3",
+              "type": "Entry",
+              "createdAt": "2020-07-03T01:00:43.125Z",
+              "updatedAt": "2020-10-19T21:00:37.990Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 2,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "pageSectionParagraph"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Platform",
+              "body": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "The Orion platform is completely powered by VMware, so you can rest easy knowing your critical infrastructure is running on the most reliable hypervisor in existence. ",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Orion natively supports virtually any operating system in existence, and can be easily populated with your own custom ISO builds if needed.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "icon": {
+                "sys": {
+                  "space": {
+                    "sys": {
+                      "type": "Link",
+                      "linkType": "Space",
+                      "id": "xr6odvyglivu"
+                    }
+                  },
+                  "id": "2V9ynByurDg5YwdylziyPi",
+                  "type": "Asset",
+                  "createdAt": "2020-10-19T21:00:20.596Z",
+                  "updatedAt": "2020-10-19T21:03:23.139Z",
+                  "environment": {
+                    "sys": {
+                      "id": "master",
+                      "type": "Link",
+                      "linkType": "Environment"
+                    }
+                  },
+                  "revision": 2,
+                  "locale": "en-US"
+                },
+                "fields": {
+                  "title": "Icon Platform",
+                  "file": {
+                    "url": "//images.ctfassets.net/xr6odvyglivu/2V9ynByurDg5YwdylziyPi/c88a034b2a5935d5c4d574e87b5242d9/platform.svg",
+                    "details": {
+                      "size": 886,
+                      "image": { "width": 512, "height": 512 }
+                    },
+                    "fileName": "platform.svg",
+                    "contentType": "image/svg+xml"
+                  }
+                }
+              },
+              "iconColor": "tertiary"
+            }
+          },
+          {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "A19fLqHBGqm9oKUYjiktp",
+              "type": "Entry",
+              "createdAt": "2020-07-03T01:01:08.325Z",
+              "updatedAt": "2020-10-19T21:03:13.161Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 2,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "pageSectionParagraph"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Security",
+              "body": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Keeping invaders away from your cloud resources is critically important. With the Orion premium next-generation firewall service powered by Palo Alto Networks, your cloud resources can take advantage of full application layer visibility and control, known and unknown threat prevention, malware prevention, and inbound and outbound SSL decryption.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "icon": {
+                "sys": {
+                  "space": {
+                    "sys": {
+                      "type": "Link",
+                      "linkType": "Space",
+                      "id": "xr6odvyglivu"
+                    }
+                  },
+                  "id": "1Qjx6ZiVNuogLqAxiiSD89",
+                  "type": "Asset",
+                  "createdAt": "2020-10-19T21:03:05.006Z",
+                  "updatedAt": "2020-10-19T21:03:05.006Z",
+                  "environment": {
+                    "sys": {
+                      "id": "master",
+                      "type": "Link",
+                      "linkType": "Environment"
+                    }
+                  },
+                  "revision": 1,
+                  "locale": "en-US"
+                },
+                "fields": {
+                  "title": "Icon Shield",
+                  "file": {
+                    "url": "//images.ctfassets.net/xr6odvyglivu/1Qjx6ZiVNuogLqAxiiSD89/e80d3cbab16824d4d5e5e0a24c768ed1/bx-check-shield.svg",
+                    "details": {
+                      "size": 553,
+                      "image": { "width": 24, "height": 24 }
+                    },
+                    "fileName": "bx-check-shield.svg",
+                    "contentType": "image/svg+xml"
+                  }
+                }
+              },
+              "iconColor": "green"
+            }
+          }
+        ],
+        "button": false,
+        "sortWeight": 2,
+        "footerGroup": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "36Z3aflbvsFXyAjuFK7aJA",
+            "type": "Entry",
+            "createdAt": "2020-09-17T15:51:33.875Z",
+            "updatedAt": "2020-09-21T22:06:39.170Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 4,
+            "contentType": {
+              "sys": {
+                "type": "Link",
+                "linkType": "ContentType",
+                "id": "footerGroup"
+              }
+            },
+            "locale": "en-US"
+          },
+          "fields": { "title": "Cloud", "sortWeight": 20 }
+        },
+        "showInCallToAction": true,
+        "callToActionIcon": {
+          "sys": {
+            "space": {
+              "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+            },
+            "id": "2EFKSGbbR8ewdgkphrjVnp",
+            "type": "Asset",
+            "createdAt": "2020-10-19T20:35:15.473Z",
+            "updatedAt": "2020-10-19T20:35:15.473Z",
+            "environment": {
+              "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+            },
+            "revision": 1,
+            "locale": "en-US"
+          },
+          "fields": {
+            "title": "Icon Server",
+            "file": {
+              "url": "//images.ctfassets.net/xr6odvyglivu/2EFKSGbbR8ewdgkphrjVnp/ed604073a7f71a92dce67b49de5b6635/server-solid.svg",
+              "details": { "size": 1092, "image": { "width": 512, "height": 512 } },
+              "fileName": "server-solid.svg",
+              "contentType": "image/svg+xml"
+            }
+          }
+        },
+        "callToActionIconColor": "primary"
+      }
+    }
+  ],
+  "includes": {
+    "Entry": [
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "1CsDcxOwE7d43FN8x60rWM",
+          "type": "Entry",
+          "createdAt": "2020-07-03T02:01:38.654Z",
+          "updatedAt": "2020-10-27T17:24:54.608Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 4,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "pageSectionParagraph"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Backups as a Service",
+          "body": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "At Stellar, one of the core components to our engineering culture is the concept that backups are Priority 1. Having a comprehensive data protection strategy that properly safeguards critical business data is literally ",
+                    "nodeType": "text"
+                  },
+                  {
+                    "data": {},
+                    "marks": [{ "type": "italic" }],
+                    "value": "the",
+                    "nodeType": "text"
+                  },
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": " most important objective a technology-driven organization can have.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "With the power of the Orion cloud platform, we offer one of the most robust, customizable, and ",
+                    "nodeType": "text"
+                  },
+                  {
+                    "data": {},
+                    "marks": [{ "type": "bold" }],
+                    "value": "fastest",
+                    "nodeType": "text"
+                  },
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": " backup platforms in the world, powered by Veeam. With our atomically low RPOs & RTOs, enterprises can rest assured that their critical data is not only protected, but easily recoverable when disaster strikes.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "icon": {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "3rwU4Km6CI5QNrvpMSlCSF",
+              "type": "Asset",
+              "createdAt": "2020-10-19T22:56:21.259Z",
+              "updatedAt": "2020-10-19T22:56:21.259Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 1,
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Icon Backups",
+              "file": {
+                "url": "//images.ctfassets.net/xr6odvyglivu/3rwU4Km6CI5QNrvpMSlCSF/1f1bf9cb8749195a59412e886e101579/settings_backup_restore-24px.svg",
+                "details": { "size": 356, "image": { "width": 24, "height": 24 } },
+                "fileName": "settings_backup_restore-24px.svg",
+                "contentType": "image/svg+xml"
+              }
+            }
+          },
+          "iconColor": "primary",
+          "buttonText": "Request a Free Trial",
+          "buttonLink": "/partner/veeam"
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "2i7tDRJ40x5nwHiw7UM6aW",
+          "type": "Entry",
+          "createdAt": "2020-07-03T02:02:18.261Z",
+          "updatedAt": "2020-10-27T17:24:35.549Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 3,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "pageSectionParagraph"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Disaster Recovery as a Service",
+          "body": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Disaster recovery takes data protection beyond basic file recovery. With Orion's DRaaS platform, powered by VMware and Veeam, our team of data protection engineers can fail over your entire IT infrastructure environment in minutes, should an inevitable disaster occur.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "icon": {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "372DCbvLFK1GXKSwsRKJkC",
+              "type": "Asset",
+              "createdAt": "2020-10-19T23:02:58.104Z",
+              "updatedAt": "2020-10-19T23:02:58.104Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 1,
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Icon Fire Extinguisher",
+              "file": {
+                "url": "//images.ctfassets.net/xr6odvyglivu/372DCbvLFK1GXKSwsRKJkC/cd6ec6188123dea72cdf586ca8294002/fire-extinguisher-solid.svg",
+                "details": {
+                  "size": 882,
+                  "image": { "width": 448, "height": 512 }
+                },
+                "fileName": "fire-extinguisher-solid.svg",
+                "contentType": "image/svg+xml"
+              }
+            }
+          },
+          "iconColor": "red",
+          "buttonText": "Request a free trial",
+          "buttonLink": "/partner/veeam"
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "36Z3aflbvsFXyAjuFK7aJA",
+          "type": "Entry",
+          "createdAt": "2020-09-17T15:51:33.875Z",
+          "updatedAt": "2020-09-21T22:06:39.170Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 4,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "footerGroup"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": { "title": "Cloud", "sortWeight": 20 }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "3CllXNffZ883mMqTCMZbY6",
+          "type": "Entry",
+          "createdAt": "2020-07-03T02:14:56.348Z",
+          "updatedAt": "2020-10-19T23:15:52.616Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 4,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "pageSectionParagraph"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "High Performance Desktops for Everyone",
+          "body": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "With Orion VDI, end users can take full advantage of our blazing fast platform in their every day workloads, while you focus on adding value to your business instead of worrying about which PCs need upgrading this year.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Upgrading a user's CPU, RAM, or disk space is just ten seconds of your time, and user workflows never miss a beat!",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "icon": {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "6JB0OjaSKSwQzUnmuMAhwo",
+              "type": "Asset",
+              "createdAt": "2020-10-19T23:12:28.468Z",
+              "updatedAt": "2020-10-19T23:12:28.468Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 1,
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Icon Rocket",
+              "file": {
+                "url": "//images.ctfassets.net/xr6odvyglivu/6JB0OjaSKSwQzUnmuMAhwo/47bfd05695d2e8814e52f3ee7ea20e96/rocket-launch.svg",
+                "details": { "size": 1001, "image": { "width": 24, "height": 24 } },
+                "fileName": "rocket-launch.svg",
+                "contentType": "image/svg+xml"
+              }
+            }
+          },
+          "iconColor": "tertiary"
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "3UsITyIqdWQ2Cnslz4e1Be",
+          "type": "Entry",
+          "createdAt": "2020-07-03T00:58:08.123Z",
+          "updatedAt": "2020-10-27T17:24:45.507Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 4,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "pageSectionParagraph"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Compute",
+          "body": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "The Orion compute infrastructure is built to sustain the most intense workloads your business can demand. As an engineer-led team with some of the highest performance standards in the universe, we don't mess around when it comes to our infrastructure.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Our servers are packed with high-performance Intel CPUs, the fastest RAM money can buy, and dedicated 100 Gbps networking.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "icon": {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "2EFKSGbbR8ewdgkphrjVnp",
+              "type": "Asset",
+              "createdAt": "2020-10-19T20:35:15.473Z",
+              "updatedAt": "2020-10-19T20:35:15.473Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 1,
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Icon Server",
+              "file": {
+                "url": "//images.ctfassets.net/xr6odvyglivu/2EFKSGbbR8ewdgkphrjVnp/ed604073a7f71a92dce67b49de5b6635/server-solid.svg",
+                "details": {
+                  "size": 1092,
+                  "image": { "width": 512, "height": 512 }
+                },
+                "fileName": "server-solid.svg",
+                "contentType": "image/svg+xml"
+              }
+            }
+          },
+          "buttonText": "Request a Free Trial",
+          "buttonLink": "/partner/vmware"
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "410yBG5d1hLxmMr6fGDbUh",
+          "type": "Entry",
+          "createdAt": "2020-07-03T02:15:22.236Z",
+          "updatedAt": "2020-10-19T23:15:27.276Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "pageSectionParagraph"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Truly Secure Mobile Workforce",
+          "body": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Worried about your mobile users getting compromised while getting their work done at a coffee shop? With VDI, user desktops never leave your secure cloud perimeter, so there's no need to worry about disk encryption, man-in-the-middle attacks, or data loss.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "icon": {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "52vqzQ5TyXj89OmR5xv7E3",
+              "type": "Asset",
+              "createdAt": "2020-10-19T23:15:14.102Z",
+              "updatedAt": "2020-10-19T23:15:14.102Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 1,
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Icon Coffee Cup",
+              "file": {
+                "url": "//images.ctfassets.net/xr6odvyglivu/52vqzQ5TyXj89OmR5xv7E3/a77e9a69fc85f72c32ef2e0a703192ce/coffee-cup.svg",
+                "details": {
+                  "size": 1234,
+                  "image": { "width": 512, "height": 512 }
+                },
+                "fileName": "coffee-cup.svg",
+                "contentType": "image/svg+xml"
+              }
+            }
+          },
+          "iconColor": "secondary"
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "482eonLHqL83QOXTkXS1Zl",
+          "type": "Entry",
+          "createdAt": "2020-07-03T01:00:19.209Z",
+          "updatedAt": "2020-10-19T20:56:51.294Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "pageSectionParagraph"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Storage",
+          "body": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "As one of the fastest moving cloud platforms on the planet, we're obsessed with guaranteeing insanely fast I/O performance.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Orion production workloads uncompromisingly run on 100% dedicated SSD storage arrays backed by 160 Gbps of storage networking capacity per array. Our servers are packed with high-performance Intel CPUs, the fastest RAM money can buy, and dedicated 100 Gbps networking.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "icon": {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "2g1MVukf8vxFSNIm26Zz2",
+              "type": "Asset",
+              "createdAt": "2020-10-19T20:56:43.693Z",
+              "updatedAt": "2020-10-19T20:56:43.693Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 1,
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Icon Storage",
+              "file": {
+                "url": "//images.ctfassets.net/xr6odvyglivu/2g1MVukf8vxFSNIm26Zz2/5e016a11a3bedfbf0f7be3d71d43dd70/bolt-solid.svg",
+                "details": {
+                  "size": 437,
+                  "image": { "width": 320, "height": 512 }
+                },
+                "fileName": "bolt-solid.svg",
+                "contentType": "image/svg+xml"
+              }
+            }
+          },
+          "iconColor": "secondary"
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "4aVbAjidWTp7DW5CB5OWYx",
+          "type": "Entry",
+          "createdAt": "2020-07-03T02:17:12.753Z",
+          "updatedAt": "2020-07-03T02:17:12.753Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "pageSectionParagraph"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Backbone",
+          "body": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Behind the Orion platform is our transcontinental & transpacific core network. Each of our strategically located data centers is redundantly interconnected with the rest of the Orion ecosystem via 10 Gbps transport paths, ensuring always-on availability and uncompromising speed.",
+                    "marks": [],
+                    "data": {}
+                  }
+                ],
+                "data": {}
+              }
+            ]
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "5bRgV3EXRLRiK1T41mIYoZ",
+          "type": "Entry",
+          "createdAt": "2020-07-03T02:17:37.620Z",
+          "updatedAt": "2020-07-03T02:17:37.620Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "pageSectionParagraph"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Upstream Interconnection",
+          "body": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "We're as choosy with our transit carriers as we are with our CPUs — this means we only partner with the best Tier 1 carriers, and leverage local peering whenever possible to guarantee the lowest latency to Orion for our end users.",
+                    "marks": [],
+                    "data": {}
+                  }
+                ],
+                "data": {}
+              }
+            ]
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "6nqad4KTXsT6htC3io0ZX8",
+          "type": "Entry",
+          "createdAt": "2020-08-05T18:19:31.684Z",
+          "updatedAt": "2020-10-27T17:50:24.311Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 6,
+          "contentType": {
+            "sys": { "type": "Link", "linkType": "ContentType", "id": "page" }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "slug": "cloud",
+          "title": "Orion",
+          "subtitle": "The Enterprise Native Cloud",
+          "body": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Our strategically located data centers allow enterprises to substantially reduce latency between end-users and business applications.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "footerGroup": {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "36Z3aflbvsFXyAjuFK7aJA",
+              "type": "Entry",
+              "createdAt": "2020-09-17T15:51:33.875Z",
+              "updatedAt": "2020-09-21T22:06:39.170Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 4,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "footerGroup"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": { "title": "Cloud", "sortWeight": 20 }
+          },
+          "getStarted": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "62RrVTcOpqOiGfD4kvh9Tm"
+            }
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "A19fLqHBGqm9oKUYjiktp",
+          "type": "Entry",
+          "createdAt": "2020-07-03T01:01:08.325Z",
+          "updatedAt": "2020-10-19T21:03:13.161Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "pageSectionParagraph"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Security",
+          "body": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Keeping invaders away from your cloud resources is critically important. With the Orion premium next-generation firewall service powered by Palo Alto Networks, your cloud resources can take advantage of full application layer visibility and control, known and unknown threat prevention, malware prevention, and inbound and outbound SSL decryption.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "icon": {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "1Qjx6ZiVNuogLqAxiiSD89",
+              "type": "Asset",
+              "createdAt": "2020-10-19T21:03:05.006Z",
+              "updatedAt": "2020-10-19T21:03:05.006Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 1,
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Icon Shield",
+              "file": {
+                "url": "//images.ctfassets.net/xr6odvyglivu/1Qjx6ZiVNuogLqAxiiSD89/e80d3cbab16824d4d5e5e0a24c768ed1/bx-check-shield.svg",
+                "details": { "size": 553, "image": { "width": 24, "height": 24 } },
+                "fileName": "bx-check-shield.svg",
+                "contentType": "image/svg+xml"
+              }
+            }
+          },
+          "iconColor": "green"
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "SQFw2oZy82bj6Uqwo0fpb",
+          "type": "Entry",
+          "createdAt": "2020-07-03T02:18:22.588Z",
+          "updatedAt": "2020-07-03T02:18:22.588Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "pageSectionParagraph"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Private Extensions",
+          "body": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "To make sure Orion is a true extension of the enterprise, we support private connectivity of virtually any type. Whether it's an MPLS circuit from your existing global carrier, a metro ethernet link, or your own physical VPN endpoint, we'll make it happen.",
+                    "marks": [],
+                    "data": {}
+                  }
+                ],
+                "data": {}
+              },
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "To simplify connectivity even further, we offer a premium SD-WAN cloud extension service which can automatically combine any existing bandwidth mediums with per-packet load balancing, perform end-to-end QoS prioritization, and guarantee always-on cloud connectivity.",
+                    "marks": [],
+                    "data": {}
+                  }
+                ],
+                "data": {}
+              }
+            ]
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "tnPYRRrDu1WqdeyIYcGi3",
+          "type": "Entry",
+          "createdAt": "2020-07-03T01:00:43.125Z",
+          "updatedAt": "2020-10-19T21:00:37.990Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "pageSectionParagraph"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Platform",
+          "body": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "The Orion platform is completely powered by VMware, so you can rest easy knowing your critical infrastructure is running on the most reliable hypervisor in existence. ",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Orion natively supports virtually any operating system in existence, and can be easily populated with your own custom ISO builds if needed.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "icon": {
+            "sys": {
+              "space": {
+                "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+              },
+              "id": "2V9ynByurDg5YwdylziyPi",
+              "type": "Asset",
+              "createdAt": "2020-10-19T21:00:20.596Z",
+              "updatedAt": "2020-10-19T21:03:23.139Z",
+              "environment": {
+                "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+              },
+              "revision": 2,
+              "locale": "en-US"
+            },
+            "fields": {
+              "title": "Icon Platform",
+              "file": {
+                "url": "//images.ctfassets.net/xr6odvyglivu/2V9ynByurDg5YwdylziyPi/c88a034b2a5935d5c4d574e87b5242d9/platform.svg",
+                "details": {
+                  "size": 886,
+                  "image": { "width": 512, "height": 512 }
+                },
+                "fileName": "platform.svg",
+                "contentType": "image/svg+xml"
+              }
+            }
+          },
+          "iconColor": "tertiary"
+        }
+      }
+    ],
+    "Asset": [
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "1Qjx6ZiVNuogLqAxiiSD89",
+          "type": "Asset",
+          "createdAt": "2020-10-19T21:03:05.006Z",
+          "updatedAt": "2020-10-19T21:03:05.006Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Icon Shield",
+          "file": {
+            "url": "//images.ctfassets.net/xr6odvyglivu/1Qjx6ZiVNuogLqAxiiSD89/e80d3cbab16824d4d5e5e0a24c768ed1/bx-check-shield.svg",
+            "details": { "size": 553, "image": { "width": 24, "height": 24 } },
+            "fileName": "bx-check-shield.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "1XjJCub7lTwPFeYgUFEhVV",
+          "type": "Asset",
+          "createdAt": "2020-10-22T17:46:37.568Z",
+          "updatedAt": "2020-10-22T17:46:37.568Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Icon - Power",
+          "file": {
+            "url": "//images.ctfassets.net/xr6odvyglivu/1XjJCub7lTwPFeYgUFEhVV/a91e46fb3bf5fbea9a4225f8785b9d2c/power.svg",
+            "details": { "size": 468, "image": { "width": 512, "height": 512 } },
+            "fileName": "power.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "1YBEty55ZwvkCCivEaq9Df",
+          "type": "Asset",
+          "createdAt": "2020-10-19T17:09:30.718Z",
+          "updatedAt": "2020-10-19T17:09:30.718Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Compute",
+          "file": {
+            "url": "//images.ctfassets.net/xr6odvyglivu/1YBEty55ZwvkCCivEaq9Df/2bd919dc7af7b6b1ee6aeb8d84f698ac/computeicon.svg",
+            "details": { "size": 934880, "image": { "width": 451, "height": 414 } },
+            "fileName": "computeicon.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "2EFKSGbbR8ewdgkphrjVnp",
+          "type": "Asset",
+          "createdAt": "2020-10-19T20:35:15.473Z",
+          "updatedAt": "2020-10-19T20:35:15.473Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Icon Server",
+          "file": {
+            "url": "//images.ctfassets.net/xr6odvyglivu/2EFKSGbbR8ewdgkphrjVnp/ed604073a7f71a92dce67b49de5b6635/server-solid.svg",
+            "details": { "size": 1092, "image": { "width": 512, "height": 512 } },
+            "fileName": "server-solid.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "2V9ynByurDg5YwdylziyPi",
+          "type": "Asset",
+          "createdAt": "2020-10-19T21:00:20.596Z",
+          "updatedAt": "2020-10-19T21:03:23.139Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 2,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Icon Platform",
+          "file": {
+            "url": "//images.ctfassets.net/xr6odvyglivu/2V9ynByurDg5YwdylziyPi/c88a034b2a5935d5c4d574e87b5242d9/platform.svg",
+            "details": { "size": 886, "image": { "width": 512, "height": 512 } },
+            "fileName": "platform.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "2g1MVukf8vxFSNIm26Zz2",
+          "type": "Asset",
+          "createdAt": "2020-10-19T20:56:43.693Z",
+          "updatedAt": "2020-10-19T20:56:43.693Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Icon Storage",
+          "file": {
+            "url": "//images.ctfassets.net/xr6odvyglivu/2g1MVukf8vxFSNIm26Zz2/5e016a11a3bedfbf0f7be3d71d43dd70/bolt-solid.svg",
+            "details": { "size": 437, "image": { "width": 320, "height": 512 } },
+            "fileName": "bolt-solid.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "372DCbvLFK1GXKSwsRKJkC",
+          "type": "Asset",
+          "createdAt": "2020-10-19T23:02:58.104Z",
+          "updatedAt": "2020-10-19T23:02:58.104Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Icon Fire Extinguisher",
+          "file": {
+            "url": "//images.ctfassets.net/xr6odvyglivu/372DCbvLFK1GXKSwsRKJkC/cd6ec6188123dea72cdf586ca8294002/fire-extinguisher-solid.svg",
+            "details": { "size": 882, "image": { "width": 448, "height": 512 } },
+            "fileName": "fire-extinguisher-solid.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "3rwU4Km6CI5QNrvpMSlCSF",
+          "type": "Asset",
+          "createdAt": "2020-10-19T22:56:21.259Z",
+          "updatedAt": "2020-10-19T22:56:21.259Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Icon Backups",
+          "file": {
+            "url": "//images.ctfassets.net/xr6odvyglivu/3rwU4Km6CI5QNrvpMSlCSF/1f1bf9cb8749195a59412e886e101579/settings_backup_restore-24px.svg",
+            "details": { "size": 356, "image": { "width": 24, "height": 24 } },
+            "fileName": "settings_backup_restore-24px.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "52vqzQ5TyXj89OmR5xv7E3",
+          "type": "Asset",
+          "createdAt": "2020-10-19T23:15:14.102Z",
+          "updatedAt": "2020-10-19T23:15:14.102Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Icon Coffee Cup",
+          "file": {
+            "url": "//images.ctfassets.net/xr6odvyglivu/52vqzQ5TyXj89OmR5xv7E3/a77e9a69fc85f72c32ef2e0a703192ce/coffee-cup.svg",
+            "details": { "size": 1234, "image": { "width": 512, "height": 512 } },
+            "fileName": "coffee-cup.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "5XH0dUugc3n947mEm6Je3U",
+          "type": "Asset",
+          "createdAt": "2020-10-19T22:48:38.254Z",
+          "updatedAt": "2020-10-19T22:48:38.254Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Icon VDI",
+          "file": {
+            "url": "//images.ctfassets.net/xr6odvyglivu/5XH0dUugc3n947mEm6Je3U/27d57a1ffa7b7c529b14c41b580b378d/vdiicon.svg",
+            "details": { "size": 105423, "image": { "width": 411, "height": 377 } },
+            "fileName": "vdiicon.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "6JB0OjaSKSwQzUnmuMAhwo",
+          "type": "Asset",
+          "createdAt": "2020-10-19T23:12:28.468Z",
+          "updatedAt": "2020-10-19T23:12:28.468Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Icon Rocket",
+          "file": {
+            "url": "//images.ctfassets.net/xr6odvyglivu/6JB0OjaSKSwQzUnmuMAhwo/47bfd05695d2e8814e52f3ee7ea20e96/rocket-launch.svg",
+            "details": { "size": 1001, "image": { "width": 24, "height": 24 } },
+            "fileName": "rocket-launch.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": { "type": "Link", "linkType": "Space", "id": "xr6odvyglivu" }
+          },
+          "id": "Y7wjLgeIcznIMn5UsYtkh",
+          "type": "Asset",
+          "createdAt": "2020-10-19T22:38:29.126Z",
+          "updatedAt": "2020-10-19T22:38:29.127Z",
+          "environment": {
+            "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Icon Data Protection",
+          "file": {
+            "url": "//images.ctfassets.net/xr6odvyglivu/Y7wjLgeIcznIMn5UsYtkh/4864efe6749ac6ec2dd095edf8bbdb85/baasdraasicon.svg",
+            "details": { "size": 23034, "image": { "width": 205, "height": 269 } },
+            "fileName": "baasdraasicon.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      }
+    ]
+  }
+}

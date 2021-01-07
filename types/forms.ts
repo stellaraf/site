@@ -1,3 +1,5 @@
+import { ParsedEntry } from './contentful';
+
 export interface IFormFieldBase {
   name: string;
   id: string;
@@ -16,40 +18,62 @@ export interface IFormFieldSelect extends IFormFieldBase {
   options: string[];
 }
 
-export interface IFormModelSupport {
+export type IFormModel = {
   name: string;
   firstName: IFormFieldText;
   lastName: IFormFieldText;
   emailAddress: IFormFieldText;
   phoneNumber: IFormFieldText;
   companyName: IFormFieldText;
+  details: IFormFieldTextArea;
+  buttonSubmit: string;
+  successMessage: string;
+};
+
+export type IFormModelEntry = {
+  name: string;
+  firstName: ParsedEntry<IFormFieldText>;
+  lastName: ParsedEntry<IFormFieldText>;
+  emailAddress: ParsedEntry<IFormFieldText>;
+  phoneNumber: ParsedEntry<IFormFieldText>;
+  companyName: IFormFieldText;
+  details: ParsedEntry<IFormFieldTextArea>;
+  buttonSubmit: string;
+  successMessage: string;
+};
+
+export type IFormModelSupport = IFormModel & {
   subject: IFormFieldText;
-  details: IFormFieldTextArea;
-  buttonSubmit: string;
-  successMessage: string;
-}
+};
 
-export interface IFormModelSales {
-  name: string;
-  firstName: IFormFieldText;
-  lastName: IFormFieldText;
-  emailAddress: IFormFieldText;
-  phoneNumber: IFormFieldText;
-  companyName: IFormFieldText;
+export type IFormModelSales = IFormModel & {
   interests: IFormFieldSelect;
-  details: IFormFieldTextArea;
-  buttonSubmit: string;
-  successMessage: string;
-}
+};
 
-interface IFormModels {
+export type IFormModelSupportEntry = IFormModelEntry & {
+  subject: ParsedEntry<IFormFieldText>;
+};
+
+export type IFormModelSalesEntry = IFormModelEntry & {
+  interests: ParsedEntry<IFormFieldSelect>;
+};
+
+type IFormModels = {
   Support: IFormModelSupport;
   Sales: IFormModelSales;
-}
+};
 
-export type FormModels<T extends 'Support' | 'Sales'> = IFormModels[T];
+type IFormModelsEntry = {
+  Support: IFormModelSupportEntry;
+  Sales: IFormModelSalesEntry;
+};
 
-export interface IFormModelTrial {
+export type FormTypes = 'Support' | 'Sales';
+
+export type FormModel<T extends FormTypes> = IFormModels[T];
+export type FormModelEntry<T extends FormTypes> = ParsedEntry<IFormModelsEntry[T]>;
+
+export type IFormModelTrial = {
   name: string;
   firstName: IFormFieldText;
   lastName: IFormFieldText;
@@ -58,7 +82,7 @@ export interface IFormModelTrial {
   companyName: IFormFieldText;
   buttonSubmit: string;
   successMessage: string;
-}
+};
 
 export interface IFormDataTrial {
   firstName: string;

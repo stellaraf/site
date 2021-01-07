@@ -4,7 +4,7 @@ import { useDate, useRender, useTitle, useSlug } from 'site/hooks';
 
 import type { PageContent, UsePageContent } from 'site/types';
 
-export const usePageContent = (rawContent: PageContent, [...deps]: any[] = []): UsePageContent => {
+export const usePageContent = (rawContent: PageContent, deps: unknown[] = []): UsePageContent => {
   if (deps.length === 0) {
     deps = [rawContent];
   }
@@ -42,11 +42,11 @@ export const usePageContent = (rawContent: PageContent, [...deps]: any[] = []): 
     } else {
       obj.body = null;
     }
-    if (paragraphs?.length ?? 0 !== 0) {
+    if (typeof paragraphs !== 'undefined' && paragraphs?.length !== 0) {
       subsections = <Content.SubSections sections={paragraphs} />;
     }
     if (typeof image !== 'undefined') {
-      obj.image = <Content.Image src={image.file.url} />;
+      obj.image = <Content.Image src={image.fields.file.url} />;
     } else {
       obj.image = null;
     }

@@ -3,7 +3,7 @@ import type { ParsedUrlQuery } from 'querystring';
 import type { State } from '@hookstate/core';
 import type { BoxProps, FlexProps, StackProps } from '@chakra-ui/react';
 import type { IconType } from '@meronex/icons';
-import type { IContactCard, CustomColors, FormModels } from '~/types';
+import type { IContactCard, CustomColors, FormModel } from '~/types';
 import type { FormHandlers, TFormTypes } from './Forms/types';
 
 type ContactOption = IContactCard & FlexProps;
@@ -32,7 +32,7 @@ export interface IIcon extends Omit<FlexProps, 'color'> {
 export interface IFormState {
   selectedName: TIconName | null;
   selectedIndex: number | null;
-  form: { Support: FormModels<'Support'>; Sales: FormModels<'Sales'> };
+  form: { Support: FormModel<'Support'>; Sales: FormModel<'Sales'> };
   showSuccess: boolean;
 }
 

@@ -55,8 +55,8 @@ export const SubSections: React.FC<ISubSectionGroup> = (props: ISubSectionGroup)
   return (
     <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={16} my={16} {...rest}>
       {sections.map((s, i) => {
-        const { icon, ...otherProps } = s;
-        return <SubSection key={i} icon={icon?.file.url} {...otherProps} />;
+        const { icon, ...otherProps } = s.fields;
+        return <SubSection key={i} icon={icon?.fields?.file?.url} {...otherProps} />;
       })}
     </SimpleGrid>
   );

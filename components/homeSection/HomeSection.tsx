@@ -3,6 +3,7 @@ import { SectionDivider } from '~/components';
 import { useColorValue } from '~/context';
 import { useRender } from '~/hooks';
 import { HomeBlock } from './HomeBlock';
+
 import type { IHomeSection, TSides, TSideValues } from './types';
 
 function getSide(idx: number): TSideValues {
@@ -42,7 +43,7 @@ export const HomeSection: React.FC<IHomeSection> = (props: IHomeSection) => {
           body={renderedBody}
           buttonText={buttonText}
           buttonLink={buttonLink}
-          imageUrl={image.file.url}
+          imageUrl={image.fields.file.url}
           side={side}
         />
       </Box>

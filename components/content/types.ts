@@ -1,5 +1,5 @@
 import type { BoxProps, GridProps, HeadingProps } from '@chakra-ui/react';
-import type { Paragraph } from 'site/types';
+import type { PageContent, Paragraph } from '~/types';
 
 export interface TitleProps extends HeadingProps {
   id: string;
@@ -18,7 +18,7 @@ export interface ISubSection extends Omit<Paragraph, 'icon'> {
 }
 
 export interface ISubSectionGroup extends GridProps {
-  sections: Paragraph[];
+  sections: PageContent['paragraphs'];
 }
 
 export interface IImage extends BoxProps {

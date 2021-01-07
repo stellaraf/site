@@ -4,7 +4,8 @@ import type { Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 import type {
   IMeasuredGeoPoint,
-  HomepageContent,
+  HomeSection,
+  HeroCard,
   IFormModelTrial,
   GlobalConfig,
   IContactCard,
@@ -12,8 +13,9 @@ import type {
   IDocsGroup,
   FooterItem,
   PageAttrs,
-  PageProps,
   IActions,
+  Entry,
+  Page,
   Bio,
 } from '~/types';
 
@@ -34,14 +36,20 @@ export interface TSite {
 /**
  * Home Page Types
  */
-export interface IHome {
-  pageContent: HomepageContent;
+export interface THome {
+  pageContent: THomePageContent;
+}
+
+export interface THomePageContent {
+  sections: Entry<HomeSection>[];
+  heroCards: Entry<HeroCard>[];
+  mainVideo?: Asset;
 }
 
 /**
  * Cloud Page Types
  */
-export interface ICloud extends PageProps {
+export interface ICloud extends Page {
   geoData: Dict;
   geoPoints: IMeasuredGeoPoint[];
 }
@@ -68,16 +76,22 @@ interface IContactCustomProperties {
   metaTitle: string;
 }
 
-export interface IContactPage extends Omit<PageProps, 'pageData'> {
-  pageData: PageAttrs & { customProperties: IContactCustomProperties };
+export interface IContactPage extends Page<{ customProperties: IContactCustomProperties }> {
   contactCards: IContactCard[];
+}
+
+/**
+ * About Page Types
+ */
+export interface IAboutPage
+  extends Page<{ customProperties: { employeesTitle: string; mapTitle: string } }> {
+  bios: Bio[];
 }
 
 /**
  * Legal Page Types (Dynamic)
  */
-
-export interface ILegalPage extends PageProps {}
+export interface ILegalPage extends Page {}
 
 export interface IVendorPage {
   pageData: {
@@ -96,19 +110,34 @@ export interface IVendorPage {
 /**
  * Cloud Product Pages
  */
+interface IPartnerPageDataBase {
+  name: string;
+  logo: Asset;
+  logoColorLightMode: string;
+  logoColorDarkMode: string;
+  title: string;
+  subtitle: string;
+  body?: Document;
+  partnerLogo?: Asset;
+}
+
+/**
+ * Partner Page Types
+ */
+interface IPartnerPageDataEntry extends IPartnerPageDataBase {
+  trialForm?: Entry<IFormModelTrial>;
+}
+
+interface IPartnerPageData extends IPartnerPageDataBase {
+  trialForm?: IFormModelTrial;
+}
+
+export interface IPartnerPageEntry {
+  pageData: IPartnerPageDataEntry;
+}
 
 export interface IPartnerPage {
-  pageData: {
-    name: string;
-    logo: Asset['fields'];
-    logoColorLightMode: string;
-    logoColorDarkMode: string;
-    title: string;
-    subtitle: string;
-    body?: Document;
-    trialForm?: IFormModelTrial;
-    partnerLogo?: Asset['fields'];
-  };
+  pageData: IPartnerPageData;
 }
 
 /**

@@ -19,4 +19,3 @@ export * from './useScaledText';
 export * from './useSlider';
 export * from './useSlug';
 export * from './useTitle';
-export * from './useWebsocket';
