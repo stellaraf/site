@@ -1,6 +1,6 @@
 {
   "name": "@stellaraf/site",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^1.1.1",
@@ -25,6 +25,8 @@
     "framer-motion": "^3.2.0",
     "hamburger-react": "^2.2.0",
     "keen-slider": "^5.2.3",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.isequal": "^4.5.0",
     "markdown-to-jsx": "^7.0.1",
     "merge-anything": "^3.0.6",
     "mousetrap": "^1.6.5",
