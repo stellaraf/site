@@ -31,7 +31,6 @@ export const getStaticProps: GetStaticProps<IDocsArticlePage, UrlQuery> = async 
     const res = await getParsedContent<IDocsArticlePage['article']>('docsArticle', preview, {
       'fields.slug': 'ip-ranges',
     });
-    console.dir(res, { depth: null });
     article = res[0];
   } catch (err) {
     console.error(err);
