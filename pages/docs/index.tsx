@@ -3,12 +3,12 @@ import { Flex, Heading, Spinner } from '@chakra-ui/react';
 import { Groups, SEO } from '~/components';
 import { useRender, useScaledText, useTitle } from '~/hooks';
 import { DocsLayout } from '~/layouts';
-import { getPage } from '~/util';
+import { getPage, getPageId } from '~/util';
 
 import type { GetStaticProps } from 'next';
-import type { IDocsMain, PageAttrs } from 'site/types';
+import type { PageEntry, IDocsMain } from 'site/types';
 
-const TextContent: React.FC<PageAttrs> = (props: PageAttrs) => {
+const TextContent: React.FC<IDocsMain['pageData']> = (props: IDocsMain['pageData']) => {
   const { title, subtitle, body = null } = props;
   const titleMe = useTitle();
   const renderedBody = useRender(body);
@@ -35,7 +35,7 @@ const TextContent: React.FC<PageAttrs> = (props: PageAttrs) => {
   );
 };
 
-const Docs: React.FC<IDocsMain> = (props: IDocsMain) => {
+const Docs: React.FC<PageEntry<IDocsMain>> = (props: PageEntry<IDocsMain>) => {
   const { isFallback } = useRouter();
   if (isFallback) {
     return (
@@ -45,28 +45,30 @@ const Docs: React.FC<IDocsMain> = (props: IDocsMain) => {
     );
   }
   const { pageData } = props;
-  const { title, subtitle } = pageData;
+  const { title, subtitle } = pageData.fields;
   return (
     <>
       <SEO title={title} description={subtitle} />
       <DocsLayout>
-        <TextContent {...pageData} />
+        <TextContent {...pageData.fields} />
         <Groups />
       </DocsLayout>
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<IDocsMain> = async ctx => {
+export const getStaticProps: GetStaticProps<PageEntry<IDocsMain>> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let pageData = Object();
+  let pageData = {} as PageEntry<IDocsMain>['pageData'];
+
   try {
-    pageData = await getPage('docs', preview);
+    const pageId = await getPageId('docs', preview);
+    pageData = await getPage<IDocsMain['pageData']>(pageId, preview);
   } catch (err) {
-    console.error();
+    console.error(err);
     throw err;
   }
-  return { props: { pageData } };
+  return { props: { pageData, preview } };
 };
 
 export default Docs;

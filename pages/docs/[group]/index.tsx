@@ -61,6 +61,7 @@ const DocsGroupMain: React.FC<IDocsGroupMain> = (props: IDocsGroupMain) => {
   }
 
   const { title, subtitle } = props.pageData ?? {};
+
   return (
     <>
       <SEO title={title} description={subtitle} />
@@ -72,11 +73,12 @@ const DocsGroupMain: React.FC<IDocsGroupMain> = (props: IDocsGroupMain) => {
 export const getStaticProps: GetStaticProps<IDocsGroupMain, UrlQuery> = async ctx => {
   const group = ctx.params?.group ?? '';
   const preview = ctx?.preview ?? false;
-  let pageData = {} as IDocsGroup;
+  let pageData = {} as IDocsGroupMain['pageData'];
   let docsGroups = [] as IDocsGroup[];
   let notFound = false;
+
   try {
-    docsGroups = await getDocsGroups();
+    docsGroups = await getDocsGroups(preview);
     pageData = docsGroups.reduce((prev, next) => (prev.slug === group ? prev : next));
   } catch (err) {
     console.error(err);

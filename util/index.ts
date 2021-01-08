@@ -1,4 +1,3 @@
-export * from './content';
 export * from './contentful';
 export * from './fetchers';
 export * from './generic';

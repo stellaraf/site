@@ -2,13 +2,13 @@ import { ContentSection, Hero, SEO, GetStarted } from '~/components';
 import { getPage, getPageContent, getPageId } from '~/util';
 
 import type { GetStaticProps, GetStaticPaths } from 'next';
-import type { Page, PageEntry, PageContent } from '~/types';
+import type { PageWithContent, PageEntry, PageContent } from '~/types';
 
 type UrlQuery = {
   product: string;
 };
 
-const CloudPage: React.FC<PageEntry<Page>> = (props: PageEntry<Page>) => {
+const CloudPage: React.FC<PageEntry<PageWithContent>> = (props: PageEntry<PageWithContent>) => {
   const { pageData, pageContent } = props;
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 
@@ -26,15 +26,15 @@ const CloudPage: React.FC<PageEntry<Page>> = (props: PageEntry<Page>) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<PageEntry<Page>, UrlQuery> = async ctx => {
+export const getStaticProps: GetStaticProps<PageEntry<PageWithContent>, UrlQuery> = async ctx => {
   const product = ctx.params?.product ?? 'notfound';
   const preview = ctx?.preview ?? false;
-  let pageData = {} as PageEntry['pageData'];
+  let pageData = {} as PageEntry<PageWithContent>['pageData'];
   let pageContent = [] as PageContent[];
 
   try {
     const pageId = await getPageId(`cloud/${product}`, preview);
-    pageData = await getPage<Page['pageData']>(pageId, preview);
+    pageData = await getPage(pageId, preview);
     pageContent = await getPageContent(pageId, preview);
   } catch (err) {
     console.error(err);

@@ -4,13 +4,15 @@ import { CodeBlock, Link, If, Error } from '~/components';
 import { useColorValue } from '~/context';
 import { getJson } from '~/util';
 
+import type { QueryFunction } from 'react-query';
 import type { IPRangeResponse } from './types';
 
 const URL = 'https://ip.stellar.tech';
 
-async function getIPs(): Promise<IPRangeResponse> {
-  return await getJson(URL);
-}
+const getIPs: QueryFunction<IPRangeResponse> = async ctx => {
+  const { queryKey } = ctx;
+  return await getJson<IPRangeResponse>(queryKey);
+};
 
 export const IPRanges: React.FC = () => {
   const { data, error, isLoading, isError } = useQuery<IPRangeResponse>(`${URL}/json`, getIPs);

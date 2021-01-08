@@ -11,6 +11,17 @@ export async function post(url: string, data: Dict, config: RequestInit = {}): P
   return await fetch(url, merged);
 }
 
+export async function get(url: string, config: RequestInit = {}): Promise<Response> {
+  const defaultConfig = {
+    method: 'GET',
+    crossDomain: true,
+    mode: 'cors',
+  } as RequestInit;
+
+  const merged = merge(defaultConfig, config) as RequestInit;
+  return await fetch(url, merged);
+}
+
 /**
  * Fetch Wrapper that incorporates a timeout via a passed AbortController instance.
  *
@@ -38,11 +49,15 @@ export async function fetchWithTimeout(
   return await fetch(uri, config);
 }
 
-export async function getJson<R = {}>(url: string, config: RequestInit = {}): Promise<R> {
+export async function getJson<R extends Dict = Dict>(
+  url: string,
+  config: RequestInit = {},
+): Promise<R> {
   const defaultConfig = {
-    method: 'GET',
     crossDomain: true,
-  };
+    method: 'GET',
+    mode: 'cors',
+  } as RequestInit;
   const merged = merge(defaultConfig, config) as RequestInit;
   const res = await fetch(url, merged);
   return await res.json();

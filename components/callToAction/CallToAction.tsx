@@ -21,7 +21,7 @@ export const _CallToActionContainer: React.FC<ICallToActionMemo> = (props: ICall
 
   // Only filter out actions if we're NOT on the home page.
   const exclusions = currentPath !== '/' ? [currentPath.replace('/', '')] : undefined;
-  const filteredActions = rawActions.filter(p => filterActions(p.page.slug, exclusions));
+  const filteredActions = rawActions.filter(p => filterActions(p.page.fields.slug, exclusions));
 
   // Randomize & limit the actions shown.
   const actions = randomActions(callsToActionShown, filteredActions);

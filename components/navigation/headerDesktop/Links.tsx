@@ -1,6 +1,6 @@
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { Link as ChakraLink } from '@chakra-ui/react';
+import { Link as ChakraLink, useToken } from '@chakra-ui/react';
 import { Button } from '~/components';
 import { useColorValue } from '~/context';
 import navConfig from '../config';
@@ -11,6 +11,7 @@ import type { INavLink, ILinkGroup, IPassedLink } from './types';
 export const NavLink: React.FC<INavLink> = (props: INavLink) => {
   const { isActive = false, ...rest } = props;
   const activeColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
+  const borderRadius = useToken('radii', 'lg');
 
   const linkProps = {} as IPassedLink;
   if (isActive) {
@@ -39,6 +40,7 @@ export const NavLink: React.FC<INavLink> = (props: INavLink) => {
         px={{ lg: 2, xl: 4 }}
         mr={{ lg: 4, xl: 8 }}
         transition="all 0.2s"
+        css={{ '&:focus': { borderRadius } }}
         _hover={{ textDecoration: 'none', transform: 'translateY(-2px)', opacity: 0.8 }}
         {...linkProps}
         {...rest}

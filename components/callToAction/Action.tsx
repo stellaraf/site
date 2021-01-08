@@ -3,9 +3,9 @@ import { Box, Flex, Button, Heading } from '@chakra-ui/react';
 import { Card, CardBody, Icon } from '~/components';
 import { useRender, useSlug, useTitle } from '~/hooks';
 
-import type { IActions } from './types';
+import type { TActions } from '~/types';
 
-export const Action: React.FC<IActions> = (props: IActions) => {
+export const Action: React.FC<TActions> = (props: TActions) => {
   const {
     body,
     page,
@@ -15,11 +15,13 @@ export const Action: React.FC<IActions> = (props: IActions) => {
     callToActionBody,
     callToActionIconColor,
   } = props;
+
   const titleMe = useTitle();
-  const renderedBody = useRender(callToActionBody ?? body ?? page.body);
+  const renderedBody = useRender(callToActionBody ?? body ?? page.fields.body);
   const slug = useSlug(title, [title]);
+
   return (
-    <NextLink href={`${page.slug}#${slug}`} scroll={false}>
+    <NextLink href={`${page.fields.slug}#${slug}`} scroll={false}>
       <Button
         p={0}
         rounded="lg"
@@ -46,7 +48,7 @@ export const Action: React.FC<IActions> = (props: IActions) => {
                   size={12}
                   ml={2}
                   color={callToActionIconColor}
-                  icon={callToActionIcon.file.url}
+                  icon={callToActionIcon.fields.file.url}
                 />
               )}
             </Flex>

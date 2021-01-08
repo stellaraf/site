@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import {
   Box,
   VStack,
@@ -10,20 +9,13 @@ import {
 } from '@chakra-ui/react';
 import { useColorValue } from '~/context';
 import { AnimatedDiv, Link } from '~/components';
+import { useDocsHref } from './useDocsHref';
 
-import type { IDocsGroup, IDocsArticle } from 'site/types';
+import type { IDocsGroup, IDocsArticle } from '~/types';
 
 const DMenuItem: React.FC<IDocsArticle> = (props: IDocsArticle) => {
-  const { title, slug, docsGroup } = props;
-
-  const { asPath } = useRouter();
-  const thisSlug = asPath.split('/').slice(-1)[0];
-  const isCurrent = thisSlug === slug;
-
-  let href = `/docs/${slug}`;
-  if (typeof docsGroup !== 'undefined') {
-    href = `/docs/${docsGroup.slug}/${slug}`;
-  }
+  const { title } = props;
+  const { href, isCurrent } = useDocsHref(props);
 
   const color = useColorValue('primary.500', 'secondary.200');
 
@@ -43,12 +35,12 @@ const DMenuItem: React.FC<IDocsArticle> = (props: IDocsArticle) => {
         width="100%"
         opacity={isCurrent ? 1 : 0.8}
         transition="all 0.2s ease 0s"
-        css={{ '&:focus': { borderRadius: useToken('radii', 'lg') } }}
         _hover={{
           textDecoration: 'none',
           opacity: 1,
           transform: isCurrent ? undefined : 'translateX(2px)',
         }}
+        css={{ '&:focus': { borderRadius: useToken('radii', 'lg') } }}
       >
         {title}
       </Link>

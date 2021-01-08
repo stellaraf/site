@@ -7,15 +7,7 @@ import { SiteLayout } from '~/layouts';
 import { useKonamiState } from '~/state';
 import { getGlobalConfig, getFooterItems, getActions, getDocsGroups } from '~/util';
 
-import type {
-  TSite,
-  NextApp,
-  IActions,
-  IDocsGroup,
-  FooterItem,
-  GlobalConfig,
-  GetInitialPropsReturn,
-} from '~/types';
+import type { TSite, NextApp, GetInitialPropsReturn } from '~/types';
 
 const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
   const { Component, pageProps, appProps, router } = props;
@@ -61,17 +53,18 @@ const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
 };
 
 Site.getInitialProps = async () => {
-  let globalConfig = {} as GlobalConfig;
-  let footerGroups = {} as FooterItem[];
-  let actions = [] as IActions[];
-  let docsGroups = [] as IDocsGroup[];
+  try {
+    const globalConfig = await getGlobalConfig();
+    const footerGroups = await getFooterItems();
+    const actions = await getActions();
+    const docsGroups = await getDocsGroups();
 
-  globalConfig = await getGlobalConfig();
-  footerGroups = await getFooterItems();
-  actions = await getActions();
-  docsGroups = await getDocsGroups();
-
-  return { appProps: { globalConfig, footerGroups, actions, docsGroups } };
+    return { appProps: { globalConfig, footerGroups, actions, docsGroups } };
+  } catch (err) {
+    console.error(err);
+    console.dir(err.details?.errors ?? {});
+    throw new Error(`Error while loading app configuration: ${err.message}`);
+  }
 };
 
 export { getServerSideProps } from '~/context';

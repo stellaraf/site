@@ -2,13 +2,13 @@ import { getPageId, getPage, getPageContent } from '~/util';
 import { ContentSection, Hero, SEO, GetStarted } from '~/components';
 
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import type { PageEntry, PageContent } from '~/types';
+import type { PageWithContent, PageEntry, PageContent } from '~/types';
 
 type UrlQuery = {
   page: string;
 };
 
-const DynamicPage: React.FC<PageEntry> = (props: PageEntry) => {
+const DynamicPage: React.FC<PageEntry<PageWithContent>> = (props: PageEntry<PageWithContent>) => {
   const { pageData, pageContent } = props;
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 
@@ -26,10 +26,10 @@ const DynamicPage: React.FC<PageEntry> = (props: PageEntry) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<PageEntry, UrlQuery> = async ctx => {
+export const getStaticProps: GetStaticProps<PageEntry<PageWithContent>, UrlQuery> = async ctx => {
   const page = ctx.params?.page ?? 'notfound';
   const preview = ctx?.preview ?? false;
-  let pageData = {} as PageEntry['pageData'];
+  let pageData = {} as PageEntry<PageWithContent>['pageData'];
   let pageContent = [] as PageContent[];
 
   try {

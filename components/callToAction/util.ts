@@ -1,4 +1,4 @@
-import type { IActions } from './types';
+import type { TActions } from '~/types';
 /**
  * Remove actions from the array if they are contained within the list of exclusions.
  */
@@ -15,6 +15,6 @@ export function filterActions(slug: string, exclusions: string[] = []): boolean 
 /**
  * Randomize the actions & limit the number of actions returned based on the limit argument.
  */
-export function randomActions(limit: number, actions: IActions[]): IActions[] {
+export function randomActions(limit: number, actions: TActions[]): TActions[] {
   return actions.sort(() => Math.random() - Math.random()).slice(0, limit);
 }

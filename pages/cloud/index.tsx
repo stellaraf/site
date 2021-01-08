@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import { Button, Wrap } from '@chakra-ui/react';
-import { getPage, getPageContent, getGeoPoints, getPageId } from '~/util';
+import { getPage, getPageContent, getOrionLocations, getPageId } from '~/util';
 import { ContentSection, Hero, SEO, useDataCenter, GetStarted } from '~/components';
 import { useColorTokenValue } from '~/context';
 import { useAlert } from '~/hooks';
@@ -69,7 +69,7 @@ export const getStaticProps: GetStaticProps<PageEntry<ICloud>> = async ctx => {
     const pageId = await getPageId('cloud', preview);
     const geoRes = await fetch('https://us-map-geo-points.stellar.workers.dev');
     geoData = await geoRes.json();
-    geoPoints = await getGeoPoints();
+    geoPoints = await getOrionLocations();
     pageData = await getPage(pageId, preview);
     pageContent = await getPageContent(pageId, preview);
   } catch (err) {

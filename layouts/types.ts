@@ -1,8 +1,8 @@
-import type { FooterItem, IActions } from '~/types';
+import type { FooterItem, TActions } from '~/types';
 
 export interface ISiteLayout {
   footerGroups: FooterItem[];
-  actions: IActions[];
+  actions: TActions[];
   children: React.ReactNode;
   preview: boolean;
 }

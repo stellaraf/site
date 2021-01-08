@@ -20,3 +20,11 @@ export function slug(original: string, parent: string = '', prefix: string = '#'
   }
   return result;
 }
+
+/**
+ * Build an object usable by a select element from a single display name string.
+ */
+export function buildSelections(opt: string): { value: string; label: string } {
+  const value = opt.toLowerCase().replaceAll(/[^A-Za-z0-9-_]/g, '_');
+  return { value, label: opt };
+}

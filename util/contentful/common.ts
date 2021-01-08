@@ -1,7 +1,7 @@
 import { createClient } from 'contentful';
 import { merge } from 'merge-anything';
 
-import type { CreateClientParams, ContentfulClientApi, EntryCollection } from 'contentful';
+import type { CreateClientParams, ContentfulClientApi, EntryCollection, Entry } from 'contentful';
 
 export function client(preview: boolean = false): ContentfulClientApi {
   const options = {
@@ -48,7 +48,10 @@ export async function getParsedContent<T extends unknown>(
   preview: boolean = false,
   query: Dict = {},
 ): Promise<T[]> {
-  const queryParams = merge({ content_type: contentType, include: 4 }, query);
+  const queryParams = merge(
+    { content_type: contentType, include: 4, select: 'sys.id,fields' },
+    query,
+  );
 
   try {
     const thisClient = client(preview);
@@ -59,4 +62,14 @@ export async function getParsedContent<T extends unknown>(
     console.error(err);
     throw err;
   }
+}
+
+/**
+ * Get an entry by its ID.
+ */
+export async function getEntry<T extends unknown>(
+  entryId: string,
+  query: Dict = {},
+): Promise<Entry<T>> {
+  return await client().getEntry<T>(entryId, query);
 }

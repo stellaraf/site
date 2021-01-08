@@ -13,9 +13,9 @@ import type {
   IDocsGroup,
   FooterItem,
   PageAttrs,
-  IActions,
+  TActions,
+  PageContent,
   Entry,
-  Page,
   Bio,
 } from '~/types';
 
@@ -26,10 +26,23 @@ export type NextApp<P> = React.FC<GetInitialPropsReturn<P>> & {
   getInitialProps(ctx?: AppContext): Promise<{ appProps: P }>;
 };
 
+export type Page<P extends Dict = Dict> = {
+  pageData: P;
+  preview: boolean;
+};
+
+export type PageWithContent<P extends Dict = Dict> = Page<PageAttrs & P> & {
+  pageContent: PageContent[];
+};
+
+export type PageEntry<P extends Page = Page> = Omit<P, 'pageData'> & {
+  pageData: Entry<P['pageData']>;
+};
+
 export interface TSite {
   globalConfig: GlobalConfig;
   footerGroups: FooterItem[];
-  actions: IActions[];
+  actions: TActions[];
   docsGroups: IDocsGroup[];
 }
 
@@ -49,7 +62,7 @@ export interface THomePageContent {
 /**
  * Cloud Page Types
  */
-export interface ICloud extends Page {
+export interface ICloud extends PageWithContent {
   geoData: Dict;
   geoPoints: IMeasuredGeoPoint[];
 }
@@ -76,7 +89,8 @@ interface IContactCustomProperties {
   metaTitle: string;
 }
 
-export interface IContactPage extends Page<{ customProperties: IContactCustomProperties }> {
+export interface IContactPage
+  extends PageWithContent<{ customProperties: IContactCustomProperties }> {
   contactCards: IContactCard[];
 }
 
@@ -84,14 +98,14 @@ export interface IContactPage extends Page<{ customProperties: IContactCustomPro
  * About Page Types
  */
 export interface IAboutPage
-  extends Page<{ customProperties: { employeesTitle: string; mapTitle: string } }> {
+  extends PageWithContent<{ customProperties: { employeesTitle: string; mapTitle: string } }> {
   bios: Bio[];
 }
 
 /**
  * Legal Page Types (Dynamic)
  */
-export interface ILegalPage extends Page {}
+export interface ILegalPage extends PageWithContent {}
 
 export interface IVendorPage {
   pageData: {
@@ -147,13 +161,9 @@ export interface IDocs {
   docsGroups: IDocsGroup[];
 }
 
-export interface IDocsGroupMain {
-  pageData: IDocsGroup;
-}
+export interface IDocsGroupMain extends Page<IDocsGroup> {}
 
-export interface IDocsMain {
-  pageData: PageAttrs;
-}
+export interface IDocsMain extends Page<PageAttrs> {}
 
 export interface IDocsArticlePage {
   article: IDocsArticle;

@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import {
   Box,
   List,
@@ -11,20 +10,13 @@ import {
 } from '@chakra-ui/react';
 import { useColorValue } from '~/context';
 import { Link } from '~/components';
+import { useDocsHref } from './useDocsHref';
 
 import type { IDocsGroup, IDocsArticle } from '~/types';
 
 const MMenuItem: React.FC<IDocsArticle> = (props: IDocsArticle) => {
-  const { title, slug, docsGroup } = props;
-
-  const { asPath } = useRouter();
-  const thisSlug = asPath.split('/').slice(-1)[0];
-  const isCurrent = thisSlug === slug;
-
-  let href = `/docs/${slug}`;
-  if (typeof docsGroup !== 'undefined') {
-    href = `/docs/${docsGroup.slug}/${slug}`;
-  }
+  const { title } = props;
+  const { href, isCurrent } = useDocsHref(props);
 
   const color = useColorValue('primary.500', 'secondary.200');
 

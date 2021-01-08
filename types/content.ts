@@ -1,15 +1,12 @@
-import { ReactNode } from 'react';
-
 import type { Entry, ContentTypeLink, Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 import type { ColorNames } from './theme';
 import type { FormModel, FormModelEntry } from './forms';
+import type { PageEntry } from './pages';
 
 interface ContentRef {
   sys: ContentTypeLink;
 }
-
-type AssetFields = Asset['fields'];
 
 export interface FooterLink {
   title: string;
@@ -27,7 +24,7 @@ export interface ExternalFooterLink {
 export interface FooterGroupEntry {
   title: string;
   sortWeight: number;
-  externalLinks?: ContentRef[];
+  externalLinks?: Entry<ExternalFooterLink>[];
 }
 
 export interface FooterGroup extends Omit<FooterGroupEntry, 'externalLinks'> {
@@ -36,6 +33,11 @@ export interface FooterGroup extends Omit<FooterGroupEntry, 'externalLinks'> {
 
 export interface FooterItem extends FooterLink {
   footerGroup: FooterGroupEntry;
+}
+
+export interface FooterItemEntry extends Pick<PageAttrs, 'title' | 'slug' | 'footerTitle'> {
+  sortWeight?: number;
+  footerGroup: Entry<FooterGroupEntry>;
 }
 
 export interface IGetStartedEntry {
@@ -52,7 +54,7 @@ export type PageAttrs = {
   title: string;
   subtitle?: string;
   body?: Document;
-  footerGroup?: ContentRef;
+  footerGroup?: Entry<FooterGroupEntry>;
   footerTitle?: string;
   customProperties?: Dict;
   getStarted?: Entry<IGetStartedEntry>;
@@ -76,7 +78,7 @@ export interface Paragraph {
   buttonLink?: string;
 }
 
-export interface PageContent {
+export type PageContent = {
   page: Entry<PageAttrs>;
   sortWeight: number;
   title: string;
@@ -95,7 +97,7 @@ export interface PageContent {
   callToActionIcon?: Asset;
   callToActionIconColor?: ColorNames;
   callToActionBody: Document | null;
-}
+};
 
 export interface HomeSection {
   title: string;
@@ -127,16 +129,6 @@ export interface IMeasuredGeoPoint extends GeoPoint {
   elapsed: number;
   best: boolean;
 }
-
-export type Page<P extends Dict = Dict> = {
-  pageData: PageAttrs & P;
-  pageContent: PageContent[];
-  preview: boolean;
-};
-
-export type PageEntry<P extends Page = Page> = Omit<P, 'pageData'> & {
-  pageData: Entry<P['pageData']>;
-};
 
 export interface PageProps {
   pageData: PageEntry;
@@ -174,11 +166,11 @@ export interface Fonts {
 
 export interface ThemeEntry {
   themeName: string;
-  colors: Colors;
-  fonts: Fonts;
+  colors: Entry<Colors>;
+  fonts: Entry<Fonts>;
 }
 
-export interface GlobalConfigPre {
+export interface GlobalConfigEntry {
   siteTitle: string;
   siteDescription: string;
   siteSlogan: string;
@@ -205,12 +197,12 @@ export interface GlobalConfigPre {
   errorMessage: Document;
 }
 
-export interface ThemeConfig {
+export type ThemeConfig = {
   colors: Omit<Colors, 'themeName'>;
   fonts: Omit<Fonts, 'themeName'>;
-}
+};
 
-export interface GlobalConfig extends Omit<GlobalConfigPre, 'theme'> {
+export interface GlobalConfig extends Omit<GlobalConfigEntry, 'theme'> {
   theme: ThemeConfig;
 }
 
@@ -255,33 +247,44 @@ export interface IActions
     | 'callToActionIconColor'
   > {}
 
-export interface IDocsGroupEntry {
+export type TActions = Pick<
+  PageContent,
+  | 'body'
+  | 'page'
+  | 'title'
+  | 'subtitle'
+  | 'callToActionBody'
+  | 'callToActionIcon'
+  | 'callToActionIconColor'
+> & { showInCallToAction: true };
+
+export type IDocsGroupEntry = {
   slug: string;
   title: string;
   subtitle?: string;
   summary: Document;
   sortWeight?: number;
   footerTitle?: string;
-  footerGroup?: FooterGroupEntry;
+  footerGroup?: Entry<FooterGroupEntry>;
   showInCallToAction: boolean;
   callToActionBody?: Document;
-  callToActionIcon?: AssetFields;
+  callToActionIcon?: Asset;
   callToActionIconColor?: ColorNames;
-}
+};
 
-export interface IDocsGroup extends IDocsGroupEntry {
+export type IDocsGroup = IDocsGroupEntry & {
   items: IDocsArticle[];
-}
+};
 
 export interface IDocsArticle {
   title: string;
   slug: string;
   description: string;
-  docsGroup?: IDocsGroupEntry;
+  docsGroup?: Entry<IDocsGroupEntry>;
   updatedAt: string;
   showUpdatedDate: boolean;
   body: Document;
-  children?: ReactNode;
+  children?: React.ReactNode;
 }
 
 export type TArticleButton = {

@@ -1,4 +1,4 @@
-import { Box, List, ListItem, Text, SimpleGrid } from '@chakra-ui/react';
+import { Box, List, ListItem, Text, SimpleGrid, useToken } from '@chakra-ui/react';
 import { Link } from '~/components';
 
 import type { IFooterLinks } from './types';
@@ -12,6 +12,7 @@ export const DesktopLinks: React.FC<IFooterLinks> = (props: IFooterLinks) => {
         .map(g => g.footerGroup?.title),
     ),
   ];
+  const borderRadius = useToken('radii', 'lg');
   return (
     <SimpleGrid columns={{ base: 2, lg: sorted.length }} spacing={{ base: 8, lg: 16 }} {...rest}>
       {sorted.map((title, i) => {
@@ -33,9 +34,11 @@ export const DesktopLinks: React.FC<IFooterLinks> = (props: IFooterLinks) => {
                     _hover={{ transform: 'translateX(2px)' }}
                   >
                     <Link
+                      p={1}
+                      opacity={0.6}
                       href={item.href}
                       fontSize={{ base: 'xs', lg: 'sm' }}
-                      opacity={0.6}
+                      css={{ '&:focus': { borderRadius } }}
                       _hover={{ textDecoration: 'none', opacity: 0.9 }}
                     >
                       {item.title}
