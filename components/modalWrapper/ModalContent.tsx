@@ -11,7 +11,7 @@ import type { IModalContent } from './types';
  * Replaces ModalContent Component.
  */
 export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, ref) => {
-  const { children, ...rest } = props;
+  const { children, contentProps, ...rest } = props;
 
   const { getDialogProps, getDialogContainerProps } = useModalContext();
   const containerProps = getDialogContainerProps();
@@ -51,7 +51,12 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
             css={{ backdropFilter: 'blur(20px)' }}
             {...dialogProps}
           >
-            <Flex as="section" flexDir="column" className="chakra-modal__content st-override-modal">
+            <Flex
+              as="section"
+              flexDir="column"
+              className="chakra-modal__content st-override-modal"
+              {...contentProps}
+            >
               {children}
             </Flex>
           </AnimatedDiv>

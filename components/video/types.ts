@@ -1,6 +1,6 @@
 import type { ReactPlayerProps } from 'react-player';
 
-export interface IVideo extends Pick<ReactPlayerProps, 'style' | 'config'> {
+export interface IVideo extends ReactPlayerProps {
   url: string;
   enableControls?: boolean;
 }

@@ -8,6 +8,7 @@ import {
   Preview,
   MHeader,
   Favicons,
+  RickRoll,
   DControls,
   CallToAction,
 } from '~/components';
@@ -51,6 +52,7 @@ export const SiteLayout: React.FC<ISiteLayout> = (props: ISiteLayout) => {
           </SyncedStyleProvider>
           <Stars />
           <Banner />
+          <RickRoll />
         </Wrapper>
       </AnimatePresence>
     </>

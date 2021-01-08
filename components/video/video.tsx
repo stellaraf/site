@@ -1,12 +1,17 @@
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@chakra-ui/react';
-import { useBooleanValue } from 'site/hooks';
+import { useBooleanValue } from '~/hooks';
 
+import type { LoadableBaseOptions } from 'next/dynamic';
 import type { ReactPlayerProps } from 'react-player';
 import type { IVideo } from './types';
 
+const Loader: LoadableBaseOptions['loading'] = () => (
+  <Skeleton boxSize="100%" startColor="gray.500" endColor="tertiary.500" />
+);
+
 const ReactPlayer = dynamic(() => import('react-player'), {
-  loading: () => <Skeleton boxSize="100%" startColor="gray.500" endColor="tertiary.500" />,
+  loading: Loader,
 });
 
 const controlledProps = {
@@ -25,10 +30,15 @@ const uncontrolledProps = {
   controls: false,
 } as ReactPlayerProps;
 
-export const Video = (props: IVideo) => {
+export const Video: React.FC<IVideo> = (props: IVideo) => {
   const { enableControls = false, ...rest } = props;
 
-  let { config = {}, style = {}, url } = rest;
+  const { config = {}, style = {}, url: _, ...other } = rest;
+
+  let { url } = rest;
+  if (url.match(/^\/\/.*$/)?.length ?? 0 !== 0) {
+    url = 'https:' + url;
+  }
 
   const customConfig = {
     file: {
@@ -42,9 +52,7 @@ export const Video = (props: IVideo) => {
   const customStyle = { borderRadius: '1.6rem', ...style } as ReactPlayerProps['style'];
 
   const playerProps = useBooleanValue(enableControls, controlledProps, uncontrolledProps);
-  if (url.match(/^\/\/.*$/)?.length ?? 0 !== 0) {
-    url = 'https:' + url;
-  }
+
   return (
     <ReactPlayer
       url={url}
@@ -53,6 +61,7 @@ export const Video = (props: IVideo) => {
       style={customStyle}
       config={customConfig}
       {...playerProps}
+      {...other}
     />
   );
 };

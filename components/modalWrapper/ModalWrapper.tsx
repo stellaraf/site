@@ -15,6 +15,7 @@ export const ModalWrapper: React.FC<IModalWrapper> = (props: IModalWrapper) => {
     bodyProps = {},
     headerProps = {},
     footerProps = {},
+    contentProps = {},
     containerProps = {},
     // Overridden Modal Props for easier handling
     scrollInside = false,
@@ -53,7 +54,7 @@ export const ModalWrapper: React.FC<IModalWrapper> = (props: IModalWrapper) => {
       scrollBehavior={scrollInside ? 'inside' : 'outside'}
     >
       <Overlay {...rest} {...(noOverlay ? { bg: 'unset' } : {})}>
-        <ModalContent {...containerProps}>
+        <ModalContent contentProps={contentProps} {...containerProps}>
           <If condition={typeof header !== 'undefined'}>
             <ModalHeader {...headerProps}>{header}</ModalHeader>
           </If>

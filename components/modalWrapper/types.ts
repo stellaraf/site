@@ -42,6 +42,10 @@ export interface IModalWrapper
    */
   containerProps?: Animated<FlexProps>;
   /**
+   * Custom props applied to the direct child of <ModalBody />
+   */
+  contentProps?: FlexProps;
+  /**
    * Show backdrop/overlay.
    */
   noOverlay?: boolean;
@@ -61,4 +65,6 @@ export interface IModalWrapper
 
 export interface IContentContainer extends FlexProps {}
 
-export interface IModalContent extends Animated<FlexProps> {}
+export interface IModalContent extends Animated<FlexProps> {
+  contentProps?: IModalWrapper['contentProps'];
+}

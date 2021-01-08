@@ -30,6 +30,7 @@ export * from './ripple';
 export * from './screen';
 export * from './sectionDivider';
 export * from './select';
+export * from './special';
 export * from './stars';
 export * from './usMap';
 export * from './util';
