@@ -5,7 +5,7 @@
   <h3>stellar.tech Website Source Code</h3>
   <br/>
 
-[![Frontend Tests](https://img.shields.io/github/workflow/status/stellaraf/site/Tests?label=Tests&style=for-the-badge)](https://github.com/stellaraf/site/actions?query=workflow%3A%Tests%22)
+[![Frontend Tests](https://img.shields.io/github/workflow/status/stellaraf/site/Tests?label=Tests&style=for-the-badge)](https://github.com/stellaraf/site/actions?query=workflow%3A%Frontend+Testing%22)
 
 </div>
 
