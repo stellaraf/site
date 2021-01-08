@@ -10,13 +10,13 @@ import {
   PopoverContent,
 } from '@chakra-ui/react';
 import { useState } from '@hookstate/core';
-import { useColorValue } from '~/context';
 import { If } from '~/components';
+import { useColorValue } from '~/context';
+import { useCloudLocations } from '~/hooks';
 import { MapMarker } from './MapMarker';
-import { useCloudLocations } from 'site/state';
 
 import type { State } from '@hookstate/core';
-import type { ITestResults, ITestLocation } from 'site/types';
+import type { ITestResults, ITestLocation } from '~/types';
 import type { LocationProps, ILatency } from './types';
 
 function currentLocation(locations: State<ITestResults>, locId: string): State<ITestLocation> {

@@ -1,7 +1,7 @@
 import { chakra } from '@chakra-ui/react';
 import Particles from 'react-tsparticles';
 import { useColorValue } from '~/context';
-import { useKonamiState } from '~/state';
+import { useKonami } from '~/hooks';
 
 import type { ParticlesProps, IWrapper, ParticleOptions } from './types';
 
@@ -61,9 +61,9 @@ const DEFAULT_OPTIONS = {
 } as ParticleOptions;
 
 const Base = (particleProps: ParticlesProps) => {
-  const konami = useKonamiState();
+  const konami = useKonami();
   let options = DEFAULT_OPTIONS;
-  if (konami.value) {
+  if (konami) {
     options = {
       ...DEFAULT_OPTIONS,
       particles: {

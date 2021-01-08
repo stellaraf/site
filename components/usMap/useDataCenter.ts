@@ -1,7 +1,6 @@
 import { useQuery } from 'react-query';
-import { all, fetchWithTimeout } from 'site/util';
-import { useCloudLocations } from '~/state';
-import { useGoogleAnalytics } from '~/hooks';
+import { useGoogleAnalytics, useCloudLocations } from '~/hooks';
+import { all, fetchWithTimeout } from '~/util';
 
 import type { Locations, ITestLocation } from '~/types';
 import type { TFetcher, UseDataCenterReturn } from './types';
@@ -12,7 +11,9 @@ import type { TFetcher, UseDataCenterReturn } from './types';
 async function fetcher(args: TFetcher): Promise<number> {
   const { id, url, controller, debug = false, timeout } = args;
   let duration = 65535;
-  const log = (...args: any) => debug && console.log(...args);
+
+  const log = (...args: unknown[]) => debug && console.log(...args);
+
   // Start monitoring.
   performance.mark(`start ${id}`);
   try {

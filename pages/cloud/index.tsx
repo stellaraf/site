@@ -3,14 +3,13 @@ import { Button, Wrap } from '@chakra-ui/react';
 import { getPage, getPageContent, getOrionLocations, getPageId } from '~/util';
 import { ContentSection, Hero, SEO, useDataCenter, GetStarted } from '~/components';
 import { useColorTokenValue } from '~/context';
-import { useAlert } from '~/hooks';
-import { useCloudLocations } from '~/state';
+import { useAlert, useCloudLocations } from '~/hooks';
 
 import type { GetStaticProps } from 'next';
 import type { IUSMap } from '~/components';
 import type { ICloud, IMeasuredGeoPoint, PageContent, PageEntry } from '~/types';
 
-const USMap = dynamic<IUSMap>(() => import('site/components').then(i => i.USMap));
+const USMap = dynamic<IUSMap>(() => import('~/components').then(i => i.USMap));
 
 const Cloud: React.FC<PageEntry<ICloud>> = (props: PageEntry<ICloud>) => {
   const { geoData, geoPoints, pageData, pageContent } = props;

@@ -3,7 +3,7 @@ import { Initial } from '@hookstate/initial';
 import { Touched } from '@hookstate/touched';
 
 import type { State } from '@hookstate/core';
-import type { ITestResults } from 'site/types';
+import type { ITestResults } from '~/types';
 
 const testState = createState<ITestResults>(Object());
 testState.attach(Initial);
