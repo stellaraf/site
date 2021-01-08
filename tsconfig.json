@@ -6,22 +6,13 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "site/components": ["components/index"],
-      "site/context": ["context/index"],
-      "site/hooks": ["hooks/index"],
-      "site/layouts": ["layouts/index"],
-      "site/state": ["state/index"],
-      "site/styles": ["styles/index"],
-      "site/types": ["types/index"],
-      "site/util": ["util/index"],
-      "~/components": ["components/index"],
-      "~/context": ["context/index"],
-      "~/hooks": ["hooks/index"],
-      "~/layouts": ["layouts/index"],
-      "~/state": ["state/index"],
-      "~/styles": ["styles/index"],
-      "~/types": ["types/index"],
-      "~/util": ["util/index"]
+      "~/components": ["./components/index"],
+      "~/context": ["./context/index"],
+      "~/hooks": ["./hooks/index"],
+      "~/layouts": ["./layouts/index"],
+      "~/styles": ["./styles/index"],
+      "~/types": ["./types/index"],
+      "~/util": ["./util/index"]
     },
     "rootDirs": ["./types/compat"],
     "esModuleInterop": true,
@@ -35,13 +26,13 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", ".next", "dist", "public"],
   "include": [
     "generateFavicons.js",
     "next.config.js",
     "next-env.d.ts",
-    "**/*.ts",
     "**/*.tsx",
+    "**/*.ts",
     "./types/*.d.ts"
   ]
 }
