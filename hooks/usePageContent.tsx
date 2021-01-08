@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { Content } from 'site/components';
-import { useDate, useRender, useTitle, useSlug } from 'site/hooks';
+import { Content } from '~/components';
+import { useDate, useRender, useTitle, useSlug } from '~/hooks';
 
-import type { PageContent, UsePageContent } from 'site/types';
+import type { PageContent, UsePageContent } from '~/types';
 
 export const usePageContent = (rawContent: PageContent, deps: unknown[] = []): UsePageContent => {
   if (deps.length === 0) {

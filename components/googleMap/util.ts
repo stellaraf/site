@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useApple } from 'site/hooks';
+import { useApple } from '~/hooks';
 
 /**
  * Render an Apple Maps link if the device is an Apple device.

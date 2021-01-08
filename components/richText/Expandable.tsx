@@ -10,7 +10,7 @@ import {
 import { useColorValue } from '~/context';
 import { useRender } from '~/hooks';
 
-import type { TExpandable } from 'site/types';
+import type { TExpandable } from '~/types';
 
 export const Expandable: React.FC<TExpandable> = (props: TExpandable) => {
   const { title, body, useDefaultTitle } = props;

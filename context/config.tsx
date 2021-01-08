@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from 'react';
 
-import type { IDocsGroup } from 'site/types';
+import type { IDocsGroup } from '~/types';
 import type { IGlobalConfigCtx, IConfigProvider } from './types';
 
 function sortByWeight(prev: IDocsGroup, next: IDocsGroup) {

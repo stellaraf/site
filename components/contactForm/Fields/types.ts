@@ -1,6 +1,6 @@
 import type { InputProps, TextareaProps } from '@chakra-ui/react';
 import type { Control } from 'react-hook-form';
-import type { ISelect, TOptions } from 'site/components';
+import type { ISelect, TOptions } from '~/components';
 
 export interface ITextField extends InputProps {
   name: string;

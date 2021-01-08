@@ -1,10 +1,10 @@
 import {
-  parseToHsla,
-  transparentize,
-  readableColorIsBlack,
   hsla,
   saturate,
   desaturate,
+  parseToHsla,
+  transparentize,
+  readableColorIsBlack,
 } from 'color2k';
 import { extendTheme } from '@chakra-ui/react';
 import { mode, getColor } from '@chakra-ui/theme-tools';
@@ -19,7 +19,7 @@ import type {
   FontWeights,
   ThemeConfig,
   CustomColors,
-} from 'site/types';
+} from '~/types';
 
 const radii = {
   none: '0',

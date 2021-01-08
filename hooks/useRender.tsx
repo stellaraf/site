@@ -19,7 +19,7 @@ import {
   Inline,
   BlockQuote,
   CustomBlock,
-} from 'site/components';
+} from '~/components';
 
 import type { Document } from '@contentful/rich-text-types';
 import type { RenderNode, RenderMark } from '@contentful/rich-text-react-renderer';

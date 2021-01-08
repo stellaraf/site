@@ -5,7 +5,7 @@ import { Button, SectionDivider } from '~/components';
 import { usePageContent, useMobile } from '~/hooks';
 import { useColorValue } from '~/context';
 import { forwardRef } from '~/util';
-import { useResponsiveStyle } from 'site/styles';
+import { useResponsiveStyle } from '~/styles';
 
 import type { IContentSection, TSides, TSideValues, ITitleLayout } from './types';
 

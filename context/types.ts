@@ -1,5 +1,4 @@
-import type { ReactNode } from 'react';
-import type { CustomTheme, GlobalConfig, ThemeConfig, IDocsGroup } from 'site/types';
+import type { CustomTheme, GlobalConfig, ThemeConfig, IDocsGroup } from '~/types';
 
 /**
  * Root Provider Props
@@ -7,7 +6,7 @@ import type { CustomTheme, GlobalConfig, ThemeConfig, IDocsGroup } from 'site/ty
 export interface IProvider {
   appConfig: GlobalConfig;
   docsGroups: IDocsGroup[];
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 /**
@@ -23,7 +22,7 @@ export interface IGlobalConfigCtx extends TGlobalConfig {
 export interface IConfigProvider {
   globalConfig: TGlobalConfig;
   docsGroups: IDocsGroup[];
-  children?: ReactNode;
+  children?: React.ReactNode;
 }
 
 /**
@@ -33,12 +32,12 @@ export type TUseTheme = () => CustomTheme;
 
 export interface IUIProvider {
   theme: ThemeConfig;
-  children?: ReactNode;
+  children?: React.ReactNode;
   cookies?: string;
 }
 
 export interface ISyncedStyleProvider {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 /**

@@ -9,8 +9,9 @@ import type {
   Theme,
   PlaceholderProps,
 } from 'react-select';
+
 import type { BoxProps } from '@chakra-ui/react';
-import type { ColorNames } from 'site/types';
+import type { ColorNames } from '~/types';
 
 export interface ISelectState {
   [k: string]: string[];

@@ -1,7 +1,7 @@
 import { chakra } from '@chakra-ui/react';
-import { Video } from 'site/components';
+import { Video } from '~/components';
 
-import type { IScreen } from './types';
+import type { TScreen } from './types';
 
 const Container = chakra('div', {
   baseStyle: {
@@ -20,7 +20,7 @@ const Container = chakra('div', {
   },
 });
 
-export const Screen: React.FC<IScreen> = (props: IScreen) => {
+export const Screen: React.FC<TScreen> = (props: TScreen) => {
   const { url, enableControls = false, ...rest } = props;
 
   return (

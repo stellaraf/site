@@ -1,15 +1,15 @@
 import type {
+  IToast,
+  ToastId,
   BoxProps,
   StackProps,
-  IconButtonProps,
   InputProps,
-  IToast,
   AlertProps,
   RenderProps,
-  ToastId,
+  IconButtonProps,
   SimpleGridProps,
 } from '@chakra-ui/react';
-import type { FooterItem } from 'site/types';
+import type { FooterItem } from '~/types';
 
 export interface IFooter extends BoxProps {
   groups: FooterItem[];

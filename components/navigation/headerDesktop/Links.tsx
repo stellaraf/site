@@ -5,7 +5,7 @@ import { Button } from '~/components';
 import { useColorValue } from '~/context';
 import navConfig from '../config';
 
-import type { ButtonProps } from 'site/components';
+import type { ButtonProps } from '~/components';
 import type { INavLink, ILinkGroup, IPassedLink } from './types';
 
 export const NavLink: React.FC<INavLink> = (props: INavLink) => {

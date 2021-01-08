@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react';
-import { Button, Icon } from 'site/components';
-import { useRender, useTitle } from 'site/hooks';
-import { useColorValue } from 'site/context';
+import { Button, Icon } from '~/components';
+import { useRender, useTitle } from '~/hooks';
+import { useColorValue } from '~/context';
 
 import type { ISubSection, ISubSectionGroup } from './types';
 

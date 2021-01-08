@@ -1,5 +1,5 @@
 import type { FlexProps } from '@chakra-ui/react';
-import type { CustomColors } from 'site/types';
+import type { CustomColors } from '~/types';
 
 interface IFormFieldsBase {
   firstName: string;

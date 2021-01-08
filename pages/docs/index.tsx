@@ -6,7 +6,7 @@ import { DocsLayout } from '~/layouts';
 import { getPage, getPageId } from '~/util';
 
 import type { GetStaticProps } from 'next';
-import type { PageEntry, IDocsMain } from 'site/types';
+import type { PageEntry, IDocsMain } from '~/types';
 
 const TextContent: React.FC<IDocsMain['pageData']> = (props: IDocsMain['pageData']) => {
   const { title, subtitle, body = null } = props;

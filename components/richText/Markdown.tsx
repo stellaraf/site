@@ -9,7 +9,7 @@ import { Ul, Ol, Li } from './Lists';
 const MarkdownToJSX = dynamic(() => import('markdown-to-jsx'));
 
 import type { MarkdownToJSX as TMarkdownToJSX } from 'markdown-to-jsx';
-import type { TMarkdownBlock } from 'site/types';
+import type { TMarkdownBlock } from '~/types';
 import type { IMarkdown, ITd, ITableHeader, ITableMain } from './types';
 
 export const Td: React.FC<ITd> = (props: ITd) => {

@@ -3,7 +3,7 @@ import { Content } from '~/components';
 import { useSlug, useDate, useRender } from '~/hooks';
 import { shouldForwardProp } from '~/util';
 
-import type { IDocsArticle } from 'site/types';
+import type { IDocsArticle } from '~/types';
 
 const Article = chakra('article', {
   shouldForwardProp,
