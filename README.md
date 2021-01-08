@@ -6,7 +6,8 @@
   <br/>
 
 [![Tests](https://img.shields.io/github/workflow/status/stellaraf/site/Tests?label=Tests&style=for-the-badge)](https://github.com/stellaraf/site/actions?query=workflow%3A%Tests%22)
-[![Build](https://img.shields.io/github/workflow/status/stellaraf/site/Build?label=Build&style=for-the-badge)](https://github.com/stellaraf/site/actions?query=workflow%3A%Build%22)
+
+[![Deployment](https://img.shields.io/github/workflow/status/stellaraf/site/Deploy?label=Deployment&style=for-the-badge)](https://github.com/stellaraf/site/actions?query=workflow%3A%Deploy%22)
 
 </div>
 

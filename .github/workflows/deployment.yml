@@ -1,0 +1,21 @@
+name: Deploy
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    name: Deploy
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [14.x]
+        os: [ubuntu-20.04]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Webhook
+        uses: joelwmale/webhook-action@master
+        with:
+          url: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+          headers: '{"repository": "joelwmale/webhook-action"}'
