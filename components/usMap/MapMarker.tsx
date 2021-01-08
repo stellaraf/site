@@ -50,7 +50,7 @@ export const MapMarker: React.FC<IMapMarker> = (props: IMapMarker) => {
           <motion.circle
             r={radius}
             fill={fill}
-            style={{ position: 'absolute' }}
+            style={{ position: 'absolute', userSelect: 'none' }}
             animate={{ scale: [1, 4], opacity: [0.2, 0] }}
             transition={{ duration: 1, loop: Infinity, repeatDelay: 0.5 }}
           />

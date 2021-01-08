@@ -1,6 +1,6 @@
 import type { IIf } from './types';
 
-export const If = (props: IIf) => {
-  const { condition, render, children, ...rest } = props;
-  return condition ? (render ? render(rest) : children) : null;
+export const If: React.FC<IIf> = (props: IIf) => {
+  const { condition, render, children } = props;
+  return condition ? (render ? render() : children) : null;
 };

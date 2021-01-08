@@ -1,5 +1,5 @@
 export interface IIf {
   condition: boolean;
-  render?: (rest: any) => JSX.Element;
-  [k: string]: any;
+  render?: () => JSX.Element;
+  children: React.ReactElement;
 }

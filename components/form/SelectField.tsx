@@ -10,16 +10,18 @@ export const SelectField: React.FC<ISelectField> = (props: ISelectField) => {
   const { opts, id: name, required = false, multi, onSelect: _, ...rest } = props;
   const { formState, setValue, register } = useFormContext();
   const { errors } = formState;
+
   errors?.[name] && console.table(errors);
-  const handleSelect = (values: TSelectOption[]): void => {
+
+  function handleSelect(values: TSelectOption[]): void {
     const labels = [];
-    for (let v of values) {
+    for (const v of values) {
       if (v?.label) {
         labels.push(v.label);
       }
     }
     setValue(name, labels);
-  };
+  }
 
   useEffect(() => {
     register(name);

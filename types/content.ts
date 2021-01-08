@@ -1,12 +1,8 @@
-import type { Entry, ContentTypeLink, Asset } from 'contentful';
+import type { Entry, Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 import type { ColorNames } from './theme';
 import type { FormModel, FormModelEntry } from './forms';
 import type { PageEntry } from './pages';
-
-interface ContentRef {
-  sys: ContentTypeLink;
-}
 
 export interface FooterLink {
   title: string;

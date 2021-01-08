@@ -9,7 +9,7 @@ export const useLinkType = (href: string): LinkType => {
     linkTarget = href.substring(1);
   }
 
-  if (linkTarget.match(/(http|https|mailto)\:\/{0,2}.*/g)) {
+  if (linkTarget.match(/(http|https|mailto):\/{0,2}.*/g)) {
     if (!external) {
       external = true;
     }
