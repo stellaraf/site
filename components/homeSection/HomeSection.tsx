@@ -19,12 +19,14 @@ export const HomeSection: React.FC<IHomeSection> = (props: IHomeSection) => {
   const renderedBody = useRender(body);
 
   const padding = {} as IHomeSection;
+
   if (index === 0) {
-    padding.pt = '320px';
+    padding.pt = { base: '20px', lg: '320px' };
     padding.pb = 24;
   } else {
     padding.py = 16;
   }
+
   const side = getSide(index);
 
   return (

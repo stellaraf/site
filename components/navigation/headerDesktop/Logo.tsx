@@ -17,7 +17,7 @@ export const HeaderLogo = forwardRef<HTMLDivElement, HeaderLogoProps>((props, re
           initial={{ y: '100%' }}
           transition={{ duration: 0.2 }}
         >
-          <Link href="/">
+          <Link href="/" _focus={{ boxShadow: 'unset' }}>
             <Logo.Text color={color} width={160} height={56} pb={4} />
           </Link>
         </motion.div>
