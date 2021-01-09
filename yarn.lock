@@ -994,6 +994,11 @@
   resolved "https://registry.yarnpkg.com/@hookstate/initial/-/initial-3.0.0.tgz#5cec55eb8b57c866da576cf086721619f4d6bb9f"
   integrity sha512-dApcFrN8ttTmnk3hYArqgHAmfCbf/RU7C4d2eLWwyGo8kUr6zTrJXv45mguihLz0B9OUegp72EOP5iPVQx66mQ==
 
+"@hookstate/persistence@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@hookstate/persistence/-/persistence-3.0.0.tgz#973b30d3a3bb1b29f4f59b1afe0d914e71a23882"
+  integrity sha512-xiN22IW0Wjw/uTV1OEUpTtqB8DAJyRobYR3+iv1TyMf72o98KpaZqQrLPvXkfrjlZac5s052BypjpkttX/Cmhw==
+
 "@hookstate/touched@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@hookstate/touched/-/touched-3.0.0.tgz#caae14430b74e79a5929985c4c25c237804e81fa"

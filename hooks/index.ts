@@ -1,6 +1,7 @@
 export * from './useActiveSection';
 export * from './useAlert';
 export * from './useApple';
+export * from './useBanner';
 export * from './useBooleanValue';
 export * from './useBreakpointString';
 export * from './useCloudLocations';
