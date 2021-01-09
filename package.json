@@ -1,6 +1,6 @@
 {
   "name": "@stellaraf/site",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0-rc.3",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^1.1.1",
