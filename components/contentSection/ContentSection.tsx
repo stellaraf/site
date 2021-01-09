@@ -95,7 +95,7 @@ export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props
         <Flex h="100%" alignItems="center" justify="center" flexWrap="nowrap">
           <TitleLayout titleBlock={titleBlock} image={image} isMobile={isMobile} side={side} />
         </Flex>
-        <Flex height="100%" align="center" direction="column">
+        <Flex height="100%" align="center" direction="column" mb={{ base: 12, lg: '' }}>
           {body}
           {subsections}
           {showButton && (

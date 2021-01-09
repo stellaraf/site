@@ -34,7 +34,7 @@ const Home: React.FC<THome> = (props: THome) => {
   return (
     <>
       <SEO title={orgName} titleTemplate="%s" />
-      <Box w="100%" h="100vh" color={heroText} pt={32} zIndex={-2} {...rStyles} {...bg}>
+      <Box pt={32} zIndex={-2} minH="100vh" boxSize="100%" color={heroText} {...rStyles} {...bg}>
         <Flex flexDir="column" alignItems="center">
           <Box overflowY="hidden" width={['90%', '66%', '33%']}>
             <Logo.Text color={logo} ref={logoRef} />

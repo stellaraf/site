@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { chakra, Button, Flex, IconButton, VStack } from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useConfig, useColorValue } from '~/context';
+import { useConfig, useColorValue, useColorTokenValue } from '~/context';
 import { useOpposingColor, useRender, useMobile, useBanner } from '~/hooks';
 
 import type { IconBaseProps } from '@meronex/icons';
@@ -30,6 +30,8 @@ const MBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
   const bg = useColorValue('secondary.500', 'secondary.200');
   const color = useOpposingColor(bg);
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
+  const linkHover = useColorTokenValue('whiteAlpha.700', 'whiteAlpha.700');
+  const linkBorder = useColorTokenValue('whiteAlpha.700', 'blackAlpha.500');
   return (
     <VStack
       p={4}
@@ -43,7 +45,11 @@ const MBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
         pos="relative"
         display="inline-flex"
         fontSize={{ base: 'sm', lg: 'md' }}
-        css={{ '& p': { margin: 'unset' } }}
+        css={{
+          '& p': { margin: 'unset' },
+          '& > p > a': { borderBottomColor: linkBorder },
+          '& > p > a:hover': { '--link-color': linkHover },
+        }}
       >
         {body}
       </Flex>
@@ -67,6 +73,8 @@ const DBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
   const color = useOpposingColor(bg);
   const selectionColor = useOpposingColor(color);
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
+  const linkHover = useColorTokenValue('whiteAlpha.700', 'whiteAlpha.700');
+  const linkBorder = useColorTokenValue('whiteAlpha.700', 'blackAlpha.500');
   return (
     <Flex
       bg={bg}
@@ -83,6 +91,8 @@ const DBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
         pos="relative"
         css={{
           '& p': { margin: 'unset' },
+          '& > p > a': { borderBottomColor: linkBorder },
+          '& > p > a:hover': { '--link-color': linkHover },
           '& p::selection': { backgroundColor: color, color: selectionColor },
         }}
         fontSize="md"
