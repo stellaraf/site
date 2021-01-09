@@ -15,19 +15,20 @@ const ReactPlayer = dynamic(() => import('react-player'), {
 });
 
 const controlledProps = {
-  loop: false,
-  muted: false,
   playing: false,
-  volume: 1,
   controls: true,
+  muted: false,
+  loop: false,
+  volume: 1,
 } as ReactPlayerProps;
 
 const uncontrolledProps = {
-  loop: true,
-  muted: true,
-  playing: true,
-  volume: 0,
+  playsinline: true,
   controls: false,
+  playing: true,
+  muted: true,
+  loop: true,
+  volume: 0,
 } as ReactPlayerProps;
 
 export const Video: React.FC<IVideo> = (props: IVideo) => {
