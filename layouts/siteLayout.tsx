@@ -51,10 +51,10 @@ export const SiteLayout: React.FC<ISiteLayout> = (props: ISiteLayout) => {
             {!isMobile && <DControls />}
           </SyncedStyleProvider>
           <Stars />
-          <Banner />
           <RickRoll />
         </Wrapper>
       </AnimatePresence>
+      <Banner />
     </>
   );
 };

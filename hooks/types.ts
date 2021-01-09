@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { StateMethods } from '@hookstate/core';
 import type { ChakraProps, IToast, UseToastOptions } from '@chakra-ui/react';
 
 export type TToastPositions = UseToastOptions['position'];
@@ -84,3 +85,5 @@ export interface LinkType {
   isExternal: boolean;
   target: string;
 }
+
+export type TUseBannerReturn = [boolean, StateMethods<boolean>['set']];

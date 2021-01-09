@@ -1,15 +1,29 @@
 import dynamic from 'next/dynamic';
-import { Button, Flex, IconButton, VStack } from '@chakra-ui/react';
-import { AnimatePresence } from 'framer-motion';
-import { useLocalStorage } from 'react-use';
-import { AnimatedDiv } from '~/components';
+import { chakra, Button, Flex, IconButton, VStack } from '@chakra-ui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useConfig, useColorValue } from '~/context';
-import { useOpposingColor, useRender, useMobile } from '~/hooks';
+import { useOpposingColor, useRender, useMobile, useBanner } from '~/hooks';
 
 import type { IconBaseProps } from '@meronex/icons';
 import type { IBanner, IBannerContent } from './types';
 
 const Check = dynamic<IconBaseProps>(() => import('@meronex/icons/fa').then(i => i.FaCheckCircle));
+
+const Container = chakra(motion.div, {
+  baseStyle: {
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1000,
+    width: '100%',
+    display: 'flex',
+    minHeight: '4rem',
+    position: 'fixed',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDir: { base: 'column', lg: 'row' },
+  },
+});
 
 const MBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
   const { body, onClick } = props;
@@ -91,29 +105,21 @@ const DBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
 };
 
 export const Banner: React.FC<IBanner> = (props: IBanner) => {
-  const [agreed, setAgreed] = useLocalStorage('stellar-privacy-agreement', false);
   const { privacyBanner } = useConfig();
+
   const body = useRender(privacyBanner);
   const isMobile = useMobile();
+  const [agreed, setAgreed] = useBanner();
+
   return (
     <AnimatePresence>
       {!agreed && (
-        <AnimatedDiv
-          left={0}
-          bottom={0}
-          zIndex={100}
-          width="100%"
-          display="flex"
-          align="center"
-          minHeight="4rem"
-          position="fixed"
-          justify="center"
+        <Container
           animate={{ y: 0 }}
           exit={{ y: '100%' }}
           id="__privacy-banner"
           initial={{ y: '100%' }}
           transition={{ delay: 0.5 }}
-          flexDir={{ base: 'column', lg: 'row' }}
           {...props}
         >
           {isMobile ? (
@@ -121,7 +127,7 @@ export const Banner: React.FC<IBanner> = (props: IBanner) => {
           ) : (
             <DBannerContent body={body} onClick={() => setAgreed(true)} />
           )}
-        </AnimatedDiv>
+        </Container>
       )}
     </AnimatePresence>
   );
