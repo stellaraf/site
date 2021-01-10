@@ -10,7 +10,7 @@ export const SEO: React.FC<ISEO> = (props: ISEO) => {
 
   // Ensure noindex/nofollow are set for preview site.
   let indexFollow = {} as NextSeoProps;
-  if (process.env.GITHUB_BRANCH === 'develop') {
+  if (process.env.GIT_BRANCH === 'develop') {
     indexFollow = { nofollow: true, noindex: true };
   }
 

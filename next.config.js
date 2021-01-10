@@ -26,6 +26,6 @@ module.exports = withBundleAnalyzer({
   },
   env: {
     SITE_VERSION: getVersion(),
-    GITHUB_BRANCH: process.env.VERCEL_GITHUB_COMMIT_REF,
+    GIT_BRANCH: process.env.VERCEL_GIT_COMMIT_REF,
   },
 });
