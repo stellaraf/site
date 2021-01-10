@@ -8,11 +8,9 @@ export const SEO: React.FC<ISEO> = (props: ISEO) => {
   const { pathname } = useRouter();
   return (
     <NextSeo
-      noindex
-      nofollow
       title={title}
       description={description}
-      openGraph={{ title: title, description: description, url: `/${pathname}` }}
+      openGraph={{ title, description, url: `/${pathname}` }}
       {...rest}
     />
   );
