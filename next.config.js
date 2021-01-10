@@ -15,6 +15,8 @@ function getVersion() {
   return package.version;
 }
 
+console.dir(process.env, { depth: null });
+
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   devIndicators: { autoPrerender: false },
