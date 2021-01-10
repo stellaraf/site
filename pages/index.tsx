@@ -31,6 +31,8 @@ const Home: React.FC<THome> = (props: THome) => {
 
   useNavLogo(logoRef);
 
+  console.table(process.env);
+
   return (
     <>
       <SEO title={orgName} titleTemplate="%s" />
