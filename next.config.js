@@ -15,6 +15,8 @@ function getVersion() {
   return package.version;
 }
 
+console.dir(process.env, { depth: null });
+
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   devIndicators: { autoPrerender: false },
@@ -24,5 +26,6 @@ module.exports = withBundleAnalyzer({
   },
   env: {
     SITE_VERSION: getVersion(),
+    GIT_BRANCH: process.env.VERCEL_GIT_COMMIT_REF,
   },
 });

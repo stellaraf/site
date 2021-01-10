@@ -12,10 +12,10 @@ export const BaseSEO: React.FC<IBaseSEO> = (props: IBaseSEO) => {
       titleTemplate={`%s | ${siteTitle}`}
       twitter={{ site: twitterHandle, cardType: 'summary' }}
       openGraph={{
-        title: orgName,
-        description: siteDescription,
         url: '/',
+        title: orgName,
         type: 'website',
+        description: siteDescription,
         images: [{ url: '//opengraph.jpg', width: 1200, height: 630, alt: orgName }],
       }}
       {...props}
