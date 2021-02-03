@@ -1,6 +1,7 @@
 import type { InputProps, TextareaProps } from '@chakra-ui/react';
 import type { Control } from 'react-hook-form';
 import type { ISelect, TOptions } from '~/components';
+import type { IFormModelTrial, IFormDataTrial, TFormResponse } from '~/types';
 
 export interface ITextField extends InputProps {
   name: string;
@@ -29,4 +30,10 @@ export interface ISelectField extends Omit<ISelect, 'name' | 'onSelect' | 'optio
 
 export interface IFormHandlers {
   submit: () => void;
+}
+
+export interface TTrialForm {
+  name: string;
+  fields: Omit<IFormModelTrial, 'name'>;
+  onSubmit: (data: IFormDataTrial) => Promise<TFormResponse>;
 }

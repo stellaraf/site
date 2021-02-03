@@ -1,4 +1,3 @@
-import { useState } from '@hookstate/core';
 import { Button, Center, Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
@@ -6,17 +5,22 @@ import * as yup from 'yup';
 import { FieldGroup, TextInput } from '~/components';
 import { useAlert } from '~/hooks';
 import { requiredMsg, invalidMsg } from '~/util';
-import { usePartnerCtx } from './context';
-import { submitForm } from './submitForm';
 
-import type { IFormDataTrial } from './types';
+import type { IFormDataTrial } from '~/types';
+import type { TTrialForm } from './types';
 
-export const Form: React.FC = () => {
-  const { name, trialForm } = usePartnerCtx();
+export const TrialForm: React.FC<TTrialForm> = (props: TTrialForm) => {
+  const { name, fields, onSubmit } = props;
 
-  const trialFormState = useState(trialForm);
-
-  const { firstName, lastName, emailAddress, phoneNumber, companyName } = trialFormState.get();
+  const {
+    lastName,
+    firstName,
+    phoneNumber,
+    companyName,
+    emailAddress,
+    buttonSubmit,
+    successMessage,
+  } = fields;
 
   const formSchema = yup.object().shape({
     firstName: yup.string().label(firstName.displayName).required(requiredMsg),
@@ -37,20 +41,18 @@ export const Form: React.FC = () => {
   const { handleSubmit, control, formState } = form;
 
   async function submit(data: IFormDataTrial): Promise<void> {
-    const response = await submitForm(name, { ...data, interests: [`${name} Trial`], details: '' });
+    const response = await onSubmit({ ...data, interests: [`${name} Trial`], details: '' });
 
     if (!response.success) {
       showAlert({ message: response.message, status: 'error' });
     } else if (response.success) {
-      showAlert({ message: trialForm.successMessage.value, status: 'success' });
+      showAlert({ message: successMessage, status: 'success' });
     }
   }
 
-  const submitter = handleSubmit(submit);
-
   return (
     <>
-      <Flex as="form" onSubmit={submitter} flexDir="column" w="100%">
+      <Flex as="form" onSubmit={handleSubmit(submit)} flexDir="column" w="100%">
         <FormProvider {...form}>
           <FieldGroup>
             <TextInput
@@ -98,7 +100,7 @@ export const Form: React.FC = () => {
               colorScheme="primary"
               isLoading={formState.isSubmitting}
             >
-              {trialForm.buttonSubmit.value}
+              {buttonSubmit}
             </Button>
           </Center>
         </FormProvider>

@@ -11,3 +11,7 @@ export function isPageContent(obj: Dict): obj is PageContent {
 export function isDocsGroups(obj: Dict): obj is IDocsGroup {
   return 'summary' in obj && 'items' in obj;
 }
+
+export function notNullUndefined<T extends unknown>(obj: T): obj is NonNullable<T> {
+  return typeof obj !== 'undefined' && obj !== null;
+}
