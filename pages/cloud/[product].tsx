@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps<PageEntry<PageWithContent>, UrlQuery
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
-  paths: [],
+  paths: [{ params: { product: 'daas' } }],
   fallback: true,
 });
 
