@@ -24,3 +24,7 @@ export interface ISubSectionGroup extends GridProps {
 export interface IImage extends BoxProps {
   src: string;
 }
+
+export interface TContentForm {
+  form: NonNullable<PageContent['form']>;
+}

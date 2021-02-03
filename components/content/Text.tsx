@@ -32,6 +32,7 @@ export const Subtitle: React.FC<ISubtitle> = (props: ISubtitle) => {
 
 export const Body: React.FC<IContentBody> = (props: IContentBody) => (
   <Box
+    className="__st-content-body"
     zIndex={1}
     fontSize="lg"
     maxW={{ lg: '60%' }}

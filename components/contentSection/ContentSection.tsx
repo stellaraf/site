@@ -2,10 +2,11 @@ import { useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { Box, Flex } from '@chakra-ui/react';
 import { Button, SectionDivider } from '~/components';
-import { usePageContent, useMobile } from '~/hooks';
+import { useMobile } from '~/hooks';
 import { useColorValue } from '~/context';
 import { forwardRef } from '~/util';
 import { useResponsiveStyle } from '~/styles';
+import { usePageContent } from './usePageContent';
 
 import type { IContentSection, TSides, TSideValues, ITitleLayout } from './types';
 
@@ -44,6 +45,7 @@ const TitleLayout: React.FC<ITitleLayout> = (props: ITitleLayout) => {
 export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props, ref) => {
   const { items, index, ...rest } = props;
   const {
+    form,
     body,
     title,
     image,
@@ -97,6 +99,7 @@ export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props
         </Flex>
         <Flex height="100%" align="center" direction="column" mb={{ base: 12, lg: '' }}>
           {body}
+          {form}
           {subsections}
           {showButton && (
             <Button my={8} href={buttonLink} leftIcon={<RightArrow />}>

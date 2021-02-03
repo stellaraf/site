@@ -1,7 +1,7 @@
-import { client, getContentType } from './common';
+import { client, getParsedContent } from './common';
 
 import type { Entry } from 'contentful';
-import type { PageAttrs, PageContent } from '~/types';
+import type { PageAttrs, PageContent, PageContentEntry, IFormModelTrial } from '~/types';
 
 export async function getPageId(slug: string, preview: boolean): Promise<string> {
   let pageId = null;
@@ -44,10 +44,35 @@ export async function getPageContent(
   pageId: string,
   preview: boolean = false,
 ): Promise<PageContent[]> {
-  const data = await getContentType<PageContent>('pageContent', preview, {
+  // const data = await getContentType<PageContent>('pageContent', preview, {
+  //   'fields.page.sys.id': pageId,
+  // });
+  // const parsed = await client(preview).parseEntries<PageContent>(data);
+  // return parsed.items.map(i => i.fields);
+  const data = await getParsedContent<PageContentEntry>('pageContent', preview, {
     'fields.page.sys.id': pageId,
   });
-  const parsed = await client(preview).parseEntries<PageContent>(data);
+  const parsed = data.map(content => {
+    const { form: formEntry, ...contentEntry } = content;
+    let form = null;
+    if (typeof formEntry !== 'undefined') {
+      form = {} as IFormModelTrial;
+      for (const [k, v] of Object.entries<unknown>(formEntry.fields)) {
+        if (typeof v === 'string') {
+          // @ts-expect-error The model is such that each k:v pair could be string:string,
+          // or string:Entry. Typescript will complain about `v` being unknown, and won't
+          // accept any other type, even with extensive type guards. Therefore, while this is
+          // wrong, we _know_ the structure of `formEntry.fields` can only be one of these two
+          // types, therefore this is safe-ish.
+          form[k] = v;
+        } else {
+          // @ts-expect-error Same as above. If `v` is not a string, then it must be an Entry.
+          form[k] = v.fields;
+        }
+      }
+    }
+    return { form, ...contentEntry };
+  }) as PageContent[];
 
-  return parsed.items.map(i => i.fields);
+  return parsed;
 }

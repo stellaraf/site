@@ -1,8 +1,7 @@
 import type { Entry, Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 import type { ColorNames } from './theme';
-import type { FormModel, FormModelEntry } from './forms';
-import type { PageEntry } from './pages';
+import type { FormModel, FormModelEntry, IFormModelTrial } from './forms';
 
 export interface FooterLink {
   title: string;
@@ -74,6 +73,28 @@ export interface Paragraph {
   buttonLink?: string;
 }
 
+export type PageContentEntry = {
+  page: Entry<PageAttrs>;
+  sortWeight: number;
+  title: string;
+  subtitle?: string;
+  body: Document | null;
+  paragraphs: Entry<Paragraph>[];
+  updatedAt: string;
+  button: boolean;
+  buttonText?: string;
+  buttonLink?: string;
+  footerGroup?: Entry<FooterGroupEntry>;
+  footerTitle?: string;
+  showUpdatedDate?: boolean;
+  image?: Asset;
+  showInCallToAction: boolean;
+  callToActionIcon?: Asset;
+  callToActionIconColor?: ColorNames;
+  callToActionBody: Document | null;
+  form?: Entry<IFormModelTrial>;
+};
+
 export type PageContent = {
   page: Entry<PageAttrs>;
   sortWeight: number;
@@ -93,6 +114,7 @@ export type PageContent = {
   callToActionIcon?: Asset;
   callToActionIconColor?: ColorNames;
   callToActionBody: Document | null;
+  form?: IFormModelTrial;
 };
 
 export interface HomeSection {
@@ -124,12 +146,6 @@ export interface GeoPoint {
 export interface IMeasuredGeoPoint extends GeoPoint {
   elapsed: number;
   best: boolean;
-}
-
-export interface PageProps {
-  pageData: PageEntry;
-  pageContent: PageContent[];
-  preview: boolean;
 }
 
 export interface Bio {

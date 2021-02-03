@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Content } from '~/components';
 import { useDate, useRender, useTitle, useSlug } from '~/hooks';
+import { notNullUndefined } from '~/types';
 
 import type { PageContent, UsePageContent } from '~/types';
 
@@ -14,16 +15,17 @@ export const usePageContent = (rawContent: PageContent, deps: unknown[] = []): U
 
   try {
     const {
+      form,
+      image,
+      updatedAt,
       title = '',
-      subtitle = '',
+      paragraphs,
       body = null,
-      button: showButton = false,
+      subtitle = '',
       buttonLink = '',
       buttonText = '',
-      paragraphs,
-      updatedAt,
       showUpdatedDate = false,
-      image,
+      button: showButton = false,
     } = rawContent ?? {};
 
     let subsections = null;
@@ -50,6 +52,13 @@ export const usePageContent = (rawContent: PageContent, deps: unknown[] = []): U
     } else {
       obj.image = null;
     }
+
+    if (notNullUndefined(form)) {
+      obj.form = <Content.Form form={form} />;
+    } else {
+      obj.form = null;
+    }
+
     obj.showButton = showButton;
     obj.showUpdatedDate = showUpdatedDate;
     obj.subsections = subsections;
