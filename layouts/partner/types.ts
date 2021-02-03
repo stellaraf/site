@@ -8,7 +8,7 @@ export type IPartnerLayout = IPartnerPage['pageData'];
 export type TTrialForm = State<IFormModelTrial>;
 
 export type IPartnerContext = Omit<IPartnerLayout, 'trialForm'> & {
-  trialForm: TTrialForm;
+  fields: IFormModelTrial;
 };
 
 export interface ITextField extends InputProps {

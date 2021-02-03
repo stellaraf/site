@@ -93,3 +93,8 @@ export interface IFormDataTrial {
   interests: string[];
   details: string;
 }
+
+export type TFormResponse = {
+  success: boolean;
+  message: string;
+};

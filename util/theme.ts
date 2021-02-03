@@ -215,7 +215,7 @@ const globalStyles = (props: GlobalStyleProps) => {
       fontFamily: 'body',
       '*::selection': mode(
         { backgroundColor: 'secondary.200', color: 'black' },
-        { backgroundColor: 'tertiary.100', color: 'white' },
+        { backgroundColor: 'tertiary.100', color: 'black' },
       )(props),
     },
     // See https://github.com/rcbyr/keen-slider/blob/master/src/keen-slider.scss

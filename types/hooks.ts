@@ -23,6 +23,7 @@ export interface UsePageContent {
   showUpdatedDate: boolean;
   updatedAt: JSX.Element;
   image: JSX.Element | null;
+  form: JSX.Element | null;
 }
 
 export type TitleMe = (t: string) => string;

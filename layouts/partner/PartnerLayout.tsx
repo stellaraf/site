@@ -1,4 +1,3 @@
-import { createState } from '@hookstate/core';
 import {
   Box,
   Flex,
@@ -8,12 +7,12 @@ import {
   VisuallyHidden,
   useBreakpointValue,
 } from '@chakra-ui/react';
-import { Card, CardBody } from '~/components';
+import { Card, CardBody, TrialForm } from '~/components';
 import { useColorValue } from '~/context';
 import { useGradient, useMobile, useRender, useTitle } from '~/hooks';
+import { submitTrialForm } from '~/util';
 import { useResponsiveStyle } from '~/styles';
 import { PartnerContextProvider, usePartnerCtx } from './context';
-import { Form } from './Form';
 
 import type { IPartnerLayout, IFormModelTrial } from './types';
 
@@ -85,10 +84,11 @@ const PartnerLogo: React.FC = () => {
 };
 
 const FormCard: React.FC = () => {
+  const { name, fields } = usePartnerCtx();
   return (
     <Card minHeight="lg" height="min-content" w={{ base: '20rem', md: '80%', lg: '100%' }}>
       <CardBody>
-        <Form />
+        <TrialForm name={name} fields={fields} onSubmit={submitTrialForm} />
       </CardBody>
     </Card>
   );
@@ -134,12 +134,11 @@ const DVendorLayout: React.FC = () => {
 export const PartnerLayout: React.FC<IPartnerLayout> = (props: IPartnerLayout) => {
   const { trialForm, ...rest } = props;
 
-  const initialState = props.trialForm ?? ({} as IFormModelTrial);
-  const formState = createState<IFormModelTrial>(initialState);
+  const fields = trialForm ?? ({} as IFormModelTrial);
   const largeLayout = useBreakpointValue({ base: false, md: false, lg: false, xl: true });
 
   return (
-    <PartnerContextProvider value={{ trialForm: formState, ...rest }}>
+    <PartnerContextProvider value={{ fields, ...rest }}>
       {largeLayout ? <DVendorLayout /> : <MVendorLayout />}
     </PartnerContextProvider>
   );
