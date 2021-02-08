@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-rc.9] - 2021-02-08
+
+### Fixed
+
+- Properly extract the `updatedAt` field from Contentful.
+
+### Added
+
+- Code blocks now have a copy to clipboard button.
+
+### Changed
+
+- Moved `<CodeBlock />` to its own component.
+- Reworked the way `<Code />` and `<CodeBlock />` components inherit styles when they're contained within another colorSchemed component, such as `Admonition />`.
+
 ## [1.0.0-rc.8] - 2021-02-02
 
 ### Fixed
