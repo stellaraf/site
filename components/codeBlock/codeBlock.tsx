@@ -35,7 +35,15 @@ export const CodeBlock: React.FC<ICodeBlock> = (props: ICodeBlock) => {
     colorScheme: ctx.copyButton.colorScheme,
     variant: 'ghost',
   });
-  const { hasCopied, onCopy } = useClipboard(children);
+
+  let copyValue = '';
+  if (typeof children === 'string') {
+    copyValue = children;
+  } else {
+    copyValue = children.props.children;
+  }
+
+  const { hasCopied, onCopy } = useClipboard(copyValue);
 
   return (
     <Box
