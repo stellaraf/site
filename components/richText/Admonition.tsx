@@ -1,14 +1,6 @@
 import dynamic from 'next/dynamic';
-import {
-  Box,
-  Heading,
-  chakra,
-  Icon,
-  HStack,
-  StylesProvider,
-  useMultiStyleConfig,
-  useToken,
-} from '@chakra-ui/react';
+import { Box, Heading, chakra, Icon, HStack, useToken } from '@chakra-ui/react';
+import { CodeBlockStyleProvider } from '~/components';
 import { useColorValue } from '~/context';
 import { useOpposingColor, useRender, useTitle } from '~/hooks';
 import { shouldForwardProp } from '~/util';
@@ -82,7 +74,7 @@ export const Admonition: React.FC<TAdmonition> = (props: TAdmonition) => {
     },
     {
       Note: 'secondary.500',
-      Information: 'tertiary.300',
+      Information: 'gray.800',
       Tip: 'primary.300',
       Warning: 'primary.300',
       Critical: 'primary.300',
@@ -106,10 +98,6 @@ export const Admonition: React.FC<TAdmonition> = (props: TAdmonition) => {
     },
   )[type];
 
-  const styles = useMultiStyleConfig('Code', {
-    colorScheme: codeColorScheme,
-  });
-
   const color = useOpposingColor(bg);
 
   return (
@@ -128,7 +116,14 @@ export const Admonition: React.FC<TAdmonition> = (props: TAdmonition) => {
           '& a': { '--link-color': useToken('colors', linkColor!) },
         }}
       >
-        <StylesProvider value={styles}>{renderedBody}</StylesProvider>
+        <CodeBlockStyleProvider
+          value={{
+            codeBlock: { colorScheme: codeColorScheme },
+            copyButton: { colorScheme: codeColorScheme, variant: 'ghost' },
+          }}
+        >
+          {renderedBody}
+        </CodeBlockStyleProvider>
       </Box>
     </AdmonitionContainer>
   );

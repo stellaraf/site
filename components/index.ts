@@ -4,6 +4,7 @@ export * from './button';
 export * from './callToAction';
 export * from './card';
 export * from './carousel';
+export * from './codeBlock';
 export * from './contactForm';
 export * from './content';
 export * from './contentSection';

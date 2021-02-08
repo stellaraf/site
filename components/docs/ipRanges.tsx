@@ -30,17 +30,17 @@ export const IPRanges: React.FC = () => {
               <Heading as="h3" size="md">
                 IPv4 Ranges
               </Heading>
-              <CodeBlock>{data?.ipv4.join('\n')}</CodeBlock>
+              <CodeBlock>{data?.ipv4.join('\n') ?? ''}</CodeBlock>
             </Box>
             <Box>
               <Heading as="h3" size="md">
                 IPv6 Ranges
               </Heading>
-              <CodeBlock>{data?.ipv6.join('\n')}</CodeBlock>
+              <CodeBlock>{data?.ipv6.join('\n') ?? ''}</CodeBlock>
             </Box>
             <Box>
               <Heading as="h3" size="md">{`Domains & URLs`}</Heading>
-              <CodeBlock>{data?.urls.join('\n')}</CodeBlock>
+              <CodeBlock>{data?.urls.join('\n') ?? ''}</CodeBlock>
             </Box>
             <Box maxW={{ base: '100%', lg: '50%' }}>
               <Heading as="h3" size="md">

@@ -1,9 +1,9 @@
 import dynamic from 'next/dynamic';
 import { Box } from '@chakra-ui/react';
-import { Link } from '~/components';
+import { Link, CodeBlock } from '~/components';
 import { useColorValue } from '~/context';
 import { H1, H2, H3, H4, H5, H6 } from './Headings';
-import { Code, BlockQuote, P, CodeBlock } from './Texts';
+import { Code, BlockQuote, P } from './Texts';
 import { Ul, Ol, Li } from './Lists';
 
 const MarkdownToJSX = dynamic(() => import('markdown-to-jsx'));

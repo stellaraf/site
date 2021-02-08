@@ -52,7 +52,6 @@ export const getStaticProps: GetStaticProps<IDocsArticlePage, UrlQuery> = async 
   try {
     const res = await getParsedContent<IDocsArticlePage['article']>('docsArticle', preview, {
       'fields.slug': slug,
-      select: 'sys.id,fields',
     });
     article = res[0];
   } catch (err) {
