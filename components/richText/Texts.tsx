@@ -1,14 +1,8 @@
-import {
-  Box,
-  Code as ChakraCode,
-  Text,
-  useStyles,
-  useStyleConfig,
-  useToken,
-} from '@chakra-ui/react';
+import { Box, Text, useToken, useStyleConfig, Code as ChakraCode } from '@chakra-ui/react';
+import { useCodeBlockStyle } from '~/components';
 import { useColorValue } from '~/context';
 
-import type { IBlockQuote, ICode, IParagraph, IInline, ICodeBlock } from './types';
+import type { IBlockQuote, ICode, IParagraph, IInline } from './types';
 
 export const P: React.FC<IParagraph> = (props: IParagraph) => (
   <Text my={8} css={{ '&:first-of-type': { marginTop: useToken('space', 2) } }} {...props} />
@@ -39,7 +33,12 @@ export const BlockQuote: React.FC<IBlockQuote> = (props: IBlockQuote) => {
 
 export const Code: React.FC<ICode> = (props: ICode) => {
   const scheme = useColorValue('gray', 'tertiary');
-  const sx = useStyles();
+
+  let ctx = useCodeBlockStyle();
+  if (ctx === null) {
+    ctx = { codeBlock: { colorScheme: scheme }, copyButton: {} };
+  }
+  const sx = useStyleConfig('Code', { colorScheme: ctx.codeBlock.colorScheme });
   return <ChakraCode fontSize="sm" colorScheme={scheme} px={1} sx={sx} {...props} />;
 };
 
@@ -49,28 +48,5 @@ export const Inline: React.FC<IInline> = (props: IInline) => {
     <Box as="span" key={node.data.target.sys.id} {...rest}>
       type: {node.nodeType} id: {node.data.target.sys.id}
     </Box>
-  );
-};
-
-export const CodeBlock: React.FC<ICodeBlock> = (props: ICodeBlock) => {
-  const colorScheme = useColorValue('gray', 'tertiary');
-  const { borderRadius, px, ...sx } = useStyles();
-  const { bg, color } = useStyleConfig('Code', { colorScheme });
-
-  return (
-    <Box
-      p={3}
-      mt={5}
-      as="pre"
-      border="1px"
-      rounded="md"
-      fontSize="sm"
-      fontFamily="mono"
-      borderColor="inherit"
-      whiteSpace="pre-wrap"
-      sx={{ bg, color, ...sx }}
-      css={{ '& > code': { background: 'unset', color: 'unset', padding: 0 } }}
-      {...props}
-    />
   );
 };

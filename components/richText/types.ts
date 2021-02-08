@@ -84,8 +84,6 @@ export interface IMarkdown {
   children: string;
 }
 
-export interface ICodeBlock extends BoxProps {}
-
 export interface IAdmonitionIcon {
   type: TAdmonition['type'];
 }
