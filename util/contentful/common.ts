@@ -43,13 +43,13 @@ export async function getContentType<T extends unknown>(
 /**
  * Query Contentful for a specific content_type
  */
-export async function getParsedContent<T extends unknown>(
+export async function getParsedContent<T extends Empty>(
   contentType: string,
   preview: boolean = false,
   query: Dict = {},
 ): Promise<T[]> {
   const queryParams = merge(
-    { content_type: contentType, include: 4, select: 'sys.id,fields' },
+    { content_type: contentType, include: 4, select: 'sys.id,sys.updatedAt,fields' },
     query,
   );
 
@@ -57,7 +57,10 @@ export async function getParsedContent<T extends unknown>(
     const thisClient = client(preview);
     const entries = await thisClient.getEntries<T>(queryParams);
     const parsed = await thisClient.parseEntries<T>(entries);
-    return parsed.items.map(i => i.fields);
+    return parsed.items.map(item => ({
+      ...item.fields,
+      updatedAt: item.sys.updatedAt ?? null,
+    }));
   } catch (err) {
     console.error(err);
     throw err;
