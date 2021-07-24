@@ -98,6 +98,7 @@
     "babel-eslint": "^10.1",
     "cross-env": "^7.0.2",
     "eslint": "^6.8",
+    "eslint-config-next": "^11.0.1",
     "eslint-config-prettier": "^7.1.0",
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.1",
