@@ -1,4 +1,4 @@
-import type { BoxProps, UseDisclosureReturn } from '@chakra-ui/react';
+import type { BoxProps, UseDisclosureReturn, PopoverContentProps } from '@chakra-ui/react';
 import type { QueryObserverResult } from 'react-query';
 import type { MarkerProps } from 'react-simple-maps';
 import { State } from '@hookstate/core';
@@ -9,7 +9,7 @@ export interface IMapMarker extends MarkerProps {
   best?: boolean;
 }
 
-export interface LocationProps extends Omit<BoxProps, 'color'> {
+export interface LocationProps extends Omit<PopoverContentProps, 'color'> {
   color?: string;
   loc: Locations[number];
 }

@@ -28,3 +28,14 @@ export function buildSelections(opt: string): { value: string; label: string } {
   const value = opt.toLowerCase().replaceAll(/[^A-Za-z0-9-_]/g, '_');
   return { value, label: opt };
 }
+
+export function entries<O extends Record<string | number | symbol, unknown>>(
+  obj: O,
+): [keyof O, O[keyof O]][] {
+  const _entries = [] as [keyof O, O[keyof O]][];
+  const keys = Object.keys(obj) as (keyof O)[];
+  for (const key of keys) {
+    _entries.push([key, obj[key]]);
+  }
+  return _entries;
+}

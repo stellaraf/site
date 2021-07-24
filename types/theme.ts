@@ -1,21 +1,28 @@
 import type { Theme as DefaultTheme } from '@chakra-ui/theme';
-import type { ColorHues } from '@chakra-ui/theme/dist/types/foundations/colors';
+import type { Palette } from 'palette-by-numbers';
 
 type ExtraColors = {
-  primary: ColorHues;
-  secondary: ColorHues;
-  tertiary: ColorHues;
-  dark: ColorHues;
-  light: ColorHues;
-  blackSolid: ColorHues;
-  whiteSolid: ColorHues;
+  primary: Palette;
+  secondary: Palette;
+  tertiary: Palette;
+  dark: Palette;
+  light: Palette;
+  blackSolid: Palette;
+  whiteSolid: Palette;
 };
 
-export type InitialTheme = { [key in ColorNames]: string };
+export type InitialTheme = { [key in ChangeableColorNames]: string };
 
-export type ChangeableColors = DefaultTheme['colors'] & ExtraColors;
+type ChangeableThemeColors = Omit<
+  DefaultTheme['colors'],
+  'transparent' | 'current' | 'black' | 'white'
+>;
 
-export type CustomColors = DefaultTheme['colors'] & DefaultTheme['colors'] & ExtraColors;
+type ChangeableColorNames = keyof (ChangeableThemeColors & ExtraColors);
+
+export type ChangeableColors = { [k in ChangeableColorNames]: Palette };
+
+export type CustomColors = DefaultTheme['colors'] & ExtraColors;
 
 export type ColorNames = keyof (DefaultTheme['colors'] & ExtraColors);
 
@@ -23,11 +30,7 @@ export interface CustomTheme extends Omit<DefaultTheme, 'colors'> {
   colors: CustomColors;
 }
 
-export interface ThemeFonts {
-  body: string;
-  heading: string;
-  mono: string;
-}
+export type ThemeFonts = DefaultTheme['fonts'];
 
 export type { Fonts as ConfigFonts } from './content';
 

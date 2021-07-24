@@ -22,8 +22,8 @@ const Sales = dynamic<IconType>(() =>
   import('@meronex/icons/bs').then(i => i.BsFillPersonLinesFill),
 );
 
-const Container = motion.custom(Stack);
-const AnimatedCenter = motion.custom(Center);
+const Container = motion(Stack);
+const AnimatedCenter = motion(Center);
 
 const iconMap = { Support, Sales, Docs };
 

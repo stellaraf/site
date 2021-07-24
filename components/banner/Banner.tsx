@@ -1,15 +1,17 @@
 import dynamic from 'next/dynamic';
-import { chakra, Button, Flex, IconButton, VStack } from '@chakra-ui/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { Button, Flex, IconButton, VStack } from '@chakra-ui/react';
+import { AnimatePresence } from 'framer-motion';
+import { motionChakra } from '../util/animated';
 import { useConfig, useColorValue, useColorTokenValue } from '~/context';
 import { useOpposingColor, useRender, useMobile, useBanner } from '~/hooks';
 
+import type { BoxProps, PropsOf } from '@chakra-ui/react';
 import type { IconBaseProps } from '@meronex/icons';
-import type { IBanner, IBannerContent } from './types';
+import type { IBannerContent } from './types';
 
 const Check = dynamic<IconBaseProps>(() => import('@meronex/icons/fa').then(i => i.FaCheckCircle));
 
-const Container = chakra(motion.div, {
+const Container = motionChakra<BoxProps>('div', {
   baseStyle: {
     left: 0,
     right: 0,
@@ -114,13 +116,12 @@ const DBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
   );
 };
 
-export const Banner: React.FC<IBanner> = (props: IBanner) => {
+export const Banner: React.FC<PropsOf<typeof Container>> = (props: PropsOf<typeof Container>) => {
   const { privacyBanner } = useConfig();
 
   const body = useRender(privacyBanner);
   const isMobile = useMobile();
   const [agreed, setAgreed] = useBanner();
-
   return (
     <AnimatePresence>
       {!agreed && (
@@ -129,7 +130,7 @@ export const Banner: React.FC<IBanner> = (props: IBanner) => {
           exit={{ y: '100%' }}
           id="__privacy-banner"
           initial={{ y: '100%' }}
-          transition={{ delay: 0.5 }}
+          transition={{ type: 'spring', delay: 0.5 }}
           {...props}
         >
           {isMobile ? (

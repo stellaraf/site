@@ -26,13 +26,23 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "exclude": ["node_modules", ".next", "dist", "public"],
+  "exclude": ["node_modules", ".next", ".husky", "dist", "public"],
   "include": [
     "generateFavicons.js",
     "next.config.js",
     "next-env.d.ts",
-    "**/*.tsx",
-    "**/*.ts",
-    "./types/*.d.ts"
+    "./components/**/*.ts",
+    "./components/**/*.tsx",
+    "./context/**/*.ts",
+    "./context/**/*.tsx",
+    "./hooks/**/*.ts",
+    "./hooks/**/*.tsx",
+    "./layouts/**/*.ts",
+    "./layouts/**/*.tsx",
+    "./pages/**/*.ts",
+    "./pages/**/*.tsx",
+    "./types/**/*.ts",
+    "./types/*.d.ts",
+    "./util/**/*.ts"
   ]
 }

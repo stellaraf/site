@@ -5,7 +5,7 @@ import { useColorValue } from '~/context';
 
 import type { StackProps } from '@chakra-ui/react';
 
-const AnimatedVStack = motion.custom(VStack);
+const AnimatedVStack = motion(VStack);
 
 export const Success: React.FC<StackProps> = (props: StackProps) => {
   const { children } = props;

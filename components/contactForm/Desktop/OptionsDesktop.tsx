@@ -26,9 +26,9 @@ const Sales = dynamic<IconType>(() =>
 );
 
 // Make Chakra-UI components into Framer-Motion components for fewer components in the tree.
-const Container = motion.custom(Stack);
-const AnimatedCard = motion.custom(Card);
-const AnimatedCenter = motion.custom(Center);
+const Container = motion(Stack);
+const AnimatedCard = motion(Card);
+const AnimatedCenter = motion(Center);
 
 const iconMap = { Support, Sales, Docs };
 

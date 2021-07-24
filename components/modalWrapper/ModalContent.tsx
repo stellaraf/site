@@ -4,8 +4,7 @@ import { AnimatedDiv } from '~/components';
 import { useColorValue } from '~/context';
 import { forwardRef } from '~/util';
 
-import type { HTMLProps, Merge } from '@chakra-ui/utils';
-import type { IModalContent } from './types';
+import type { IModalContent, ModalDialogProps } from './types';
 
 /**
  * Replaces ModalContent Component.
@@ -15,7 +14,7 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
 
   const { getDialogProps, getDialogContainerProps } = useModalContext();
   const containerProps = getDialogContainerProps();
-  const dialogProps = getDialogProps(rest, ref) as Merge<HTMLProps<HTMLDivElement>, IModalContent>;
+  const dialogProps = getDialogProps(rest, ref) as ModalDialogProps;
 
   const styles = useStyles();
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
@@ -35,7 +34,7 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
         <AnimatePresence>
           <AnimatedDiv
             // Don't mess with the order of these props.
-            transition={{ duration: 0.2, type: 'spring', ease: EASINGS.easeInOut }}
+            transition={{ duration: 0.2, ease: EASINGS.easeInOut }}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             backgroundColor={bg}

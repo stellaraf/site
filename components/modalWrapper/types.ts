@@ -8,6 +8,7 @@ import type {
   ModalProps,
   UseModalProps,
 } from '@chakra-ui/react';
+import type { PropGetter } from '@chakra-ui/react-utils';
 
 export interface IModalWrapper
   extends UseModalProps,
@@ -68,3 +69,22 @@ export interface IContentContainer extends FlexProps {}
 export interface IModalContent extends Animated<FlexProps> {
   contentProps?: IModalWrapper['contentProps'];
 }
+
+/**
+ * Specific type for *actual* `getDialogProps` return value.
+ *
+ * @see https://github.com/chakra-ui/chakra-ui/blob/752910bb1f4604213134fc8ea9f547bccd6a2f09/packages/modal/src/use-modal.ts
+ */
+export type ModalDialogProps = PropGetter<
+  HTMLElement,
+  {
+    role?: string;
+    ref?: string;
+    id?: string;
+    tabIndex?: string;
+    'aria-modal'?: string;
+    'aria-labelledby'?: string;
+    'aria-described-by'?: string;
+    onClick?: (e: Event) => void;
+  }
+>;

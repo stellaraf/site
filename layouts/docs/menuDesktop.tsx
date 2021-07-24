@@ -22,7 +22,6 @@ const DMenuItem: React.FC<IDocsArticle> = (props: IDocsArticle) => {
   return (
     <AnimatedDiv
       width="100%"
-      align="center"
       borderRadius="md"
       userSelect="none"
       layoutId="menuItem"
