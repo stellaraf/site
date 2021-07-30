@@ -1,62 +1,77 @@
-import { ParsedEntry } from './contentful';
+import type { ParsedEntry } from './contentful';
 
-export interface IFormFieldBase {
+type FormWithFieldConfig<F extends Dict, E extends Partial<F> = Partial<F>> = {
+  [k in keyof F]: {
+    name: string;
+    id: k;
+    displayName: string;
+    required: boolean;
+  } & E[k];
+};
+
+type FormWithFieldConfigEntry<F extends Dict, E extends Partial<F> = Partial<F>> = {
+  [k in keyof F]: ParsedEntry<
+    {
+      name: string;
+      id: k;
+      displayName: string;
+      required: boolean;
+    } & E[k]
+  >;
+};
+
+type NoExtraValidation = Record<never, never>;
+type TextExtraFields = { validationType?: 'Email Address' | 'Phone Number' };
+type SelectExtraFields = { multiple: boolean; options: string[] };
+
+export type TFormModel = {
   name: string;
-  id: string;
-  displayName: string;
-  required: boolean;
-}
-
-export interface IFormFieldText extends IFormFieldBase {
-  validationType?: 'Email Address' | 'Phone Number';
-}
-
-export type IFormFieldTextArea = IFormFieldBase;
-
-export interface IFormFieldSelect extends IFormFieldBase {
-  multiple: boolean;
-  options: string[];
-}
+  buttonSubmit: string;
+  successMessage: string;
+} & FormWithFieldConfig<{
+  firstName: TextExtraFields;
+  lastName: TextExtraFields;
+  emailAddress: TextExtraFields;
+  phoneNumber: TextExtraFields;
+  companyName: TextExtraFields;
+  details: NoExtraValidation;
+}>;
 
 export type IFormModel = {
   name: string;
-  firstName: IFormFieldText;
-  lastName: IFormFieldText;
-  emailAddress: IFormFieldText;
-  phoneNumber: IFormFieldText;
-  companyName: IFormFieldText;
-  details: IFormFieldTextArea;
   buttonSubmit: string;
   successMessage: string;
-};
+} & FormWithFieldConfig<{
+  firstName: TextExtraFields;
+  lastName: TextExtraFields;
+  emailAddress: TextExtraFields;
+  phoneNumber: TextExtraFields;
+  companyName: TextExtraFields;
+  details: NoExtraValidation;
+}>;
 
 export type IFormModelEntry = {
   name: string;
-  firstName: ParsedEntry<IFormFieldText>;
-  lastName: ParsedEntry<IFormFieldText>;
-  emailAddress: ParsedEntry<IFormFieldText>;
-  phoneNumber: ParsedEntry<IFormFieldText>;
-  companyName: IFormFieldText;
-  details: ParsedEntry<IFormFieldTextArea>;
   buttonSubmit: string;
   successMessage: string;
-};
+} & FormWithFieldConfigEntry<{
+  firstName: TextExtraFields;
+  lastName: TextExtraFields;
+  emailAddress: TextExtraFields;
+  phoneNumber: TextExtraFields;
+  companyName: TextExtraFields;
+  details: NoExtraValidation;
+}>;
 
-export type IFormModelSupport = IFormModel & {
-  subject: IFormFieldText;
-};
+export type IFormModelSupport = IFormModel & FormWithFieldConfig<{ subject: TextExtraFields }>;
 
-export type IFormModelSales = IFormModel & {
-  interests: IFormFieldSelect;
-};
+export type IFormModelSales = IFormModel & FormWithFieldConfig<{ interests: SelectExtraFields }>;
 
-export type IFormModelSupportEntry = IFormModelEntry & {
-  subject: ParsedEntry<IFormFieldText>;
-};
+export type IFormModelSupportEntry = IFormModelEntry &
+  FormWithFieldConfigEntry<{ subject: TextExtraFields }>;
 
-export type IFormModelSalesEntry = IFormModelEntry & {
-  interests: ParsedEntry<IFormFieldSelect>;
-};
+export type IFormModelSalesEntry = IFormModelEntry &
+  FormWithFieldConfigEntry<{ interests: SelectExtraFields }>;
 
 type IFormModels = {
   Support: IFormModelSupport;
@@ -73,16 +88,17 @@ export type FormTypes = 'Support' | 'Sales';
 export type FormModel<T extends FormTypes> = IFormModels[T];
 export type FormModelEntry<T extends FormTypes> = ParsedEntry<IFormModelsEntry[T]>;
 
-export type IFormModelTrial = {
+export type TFormModelTrial = {
   name: string;
-  firstName: IFormFieldText;
-  lastName: IFormFieldText;
-  emailAddress: IFormFieldText;
-  phoneNumber: IFormFieldText;
-  companyName: IFormFieldText;
   buttonSubmit: string;
   successMessage: string;
-};
+} & FormWithFieldConfig<{
+  firstName: TextExtraFields;
+  lastName: TextExtraFields;
+  emailAddress: TextExtraFields;
+  phoneNumber: TextExtraFields;
+  companyName: TextExtraFields;
+}>;
 
 export interface IFormDataTrial {
   firstName: string;

@@ -1,10 +1,10 @@
 import { useImperativeHandle } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { FieldGroup, TextArea, TextInput } from '~/components';
 import { forwardRef, requiredMsg, invalidMsg } from '~/util';
-import { FieldGroup, TextInput, TextArea } from '../Fields';
 import { useFormState } from '../state';
 
 import type { ISupportFormFields, IForm, FormHandlers } from './types';
@@ -61,50 +61,57 @@ export const SupportForm = forwardRef<FormHandlers, IForm<'Support'>>((props, re
           <TextInput
             ctl={control}
             id={firstName.id}
+            defaultValue=""
             placeholder={firstName.displayName}
-            required={firstName.required}
+            isRequired={firstName.required}
           />
           <TextInput
             ctl={control}
             id={lastName.id}
+            defaultValue=""
             placeholder={lastName.displayName}
-            required={firstName.required}
+            isRequired={firstName.required}
           />
           <TextInput
             ctl={control}
             id={companyName.id}
+            defaultValue=""
             placeholder={companyName.displayName}
-            required={companyName.required}
+            isRequired={companyName.required}
           />
         </FieldGroup>
         <FieldGroup>
           <TextInput
             ctl={control}
             id={emailAddress.id}
+            defaultValue=""
             placeholder={emailAddress.displayName}
-            required={emailAddress.required}
+            isRequired={emailAddress.required}
           />
           <TextInput
             ctl={control}
             id={phoneNumber.id}
+            defaultValue=""
             placeholder={phoneNumber.displayName}
-            required={phoneNumber.required}
+            isRequired={phoneNumber.required}
           />
         </FieldGroup>
         <FieldGroup>
           <TextInput
             ctl={control}
             id={subject.id}
+            defaultValue=""
             placeholder={subject.displayName}
-            required={subject.required}
+            isRequired={subject.required}
           />
         </FieldGroup>
         <FieldGroup>
           <TextArea
             ctl={control}
             id={details.id}
+            defaultValue=""
             placeholder={details.displayName}
-            required={details.required}
+            isRequired={details.required}
           />
         </FieldGroup>
       </FormProvider>

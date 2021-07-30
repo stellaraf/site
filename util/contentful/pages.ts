@@ -1,7 +1,7 @@
 import { client, getParsedContent } from './common';
 
 import type { Entry } from 'contentful';
-import type { PageAttrs, PageContent, PageContentEntry, IFormModelTrial } from '~/types';
+import type { PageAttrs, PageContent, PageContentEntry, TFormModelTrial } from '~/types';
 
 export async function getPageId(slug: string, preview: boolean): Promise<string> {
   let pageId = null;
@@ -56,7 +56,7 @@ export async function getPageContent(
     const { form: formEntry, ...contentEntry } = content;
     let form = null;
     if (typeof formEntry !== 'undefined') {
-      form = {} as IFormModelTrial;
+      form = {} as TFormModelTrial;
       for (const [k, v] of Object.entries<unknown>(formEntry.fields)) {
         if (typeof v === 'string') {
           // @ts-expect-error The model is such that each k:v pair could be string:string,

@@ -9,6 +9,7 @@ import type {
   IconButtonProps,
   SimpleGridProps,
 } from '@chakra-ui/react';
+import type { ControllerRenderProps } from 'react-hook-form';
 import type { FooterItem } from '~/types';
 
 export interface IFooter extends BoxProps {
@@ -37,7 +38,9 @@ export interface ISubscribe extends StackProps {
   alertPosition?: IToast['position'];
 }
 
-export interface ISubscribeInput extends InputProps {}
+export interface ISubscribeInput extends InputProps {
+  field: ControllerRenderProps;
+}
 
 export interface ISubscribeFormData {
   email: string;

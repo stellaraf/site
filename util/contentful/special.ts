@@ -6,7 +6,7 @@ import type {
   IPartnerPage,
   IContactCard,
   IDocsArticle,
-  IFormModelTrial,
+  TFormModelTrial,
   IDocsGroupEntry,
   IPartnerPageEntry,
   IContactCardEntry,
@@ -62,7 +62,7 @@ export async function getPartnerPage(
 
   // There should only be one page per partner. Therefore, pick the first.
   const { trialForm: formEntry, ...pageEntry } = matches[0];
-  const trialForm = {} as IFormModelTrial;
+  const trialForm = {} as TFormModelTrial;
 
   if (typeof formEntry !== 'undefined') {
     for (const [k, v] of Object.entries<unknown>(formEntry.fields)) {

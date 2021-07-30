@@ -1,6 +1,6 @@
 import { Button, Center, Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { FieldGroup, TextInput } from '~/components';
 import { useAlert } from '~/hooks';
@@ -58,13 +58,13 @@ export const TrialForm: React.FC<TTrialForm> = (props: TTrialForm) => {
             <TextInput
               ctl={control}
               id={firstName.id}
-              required={firstName.required}
+              isRequired={firstName.required}
               placeholder={firstName.displayName}
             />
             <TextInput
               ctl={control}
               id={lastName.id}
-              required={lastName.required}
+              isRequired={lastName.required}
               placeholder={lastName.displayName}
             />
           </FieldGroup>
@@ -72,7 +72,7 @@ export const TrialForm: React.FC<TTrialForm> = (props: TTrialForm) => {
             <TextInput
               ctl={control}
               id={companyName.id}
-              required={companyName.required}
+              isRequired={companyName.required}
               placeholder={companyName.displayName}
             />
           </FieldGroup>
@@ -80,7 +80,7 @@ export const TrialForm: React.FC<TTrialForm> = (props: TTrialForm) => {
             <TextInput
               ctl={control}
               id={emailAddress.id}
-              required={emailAddress.required}
+              isRequired={emailAddress.required}
               placeholder={emailAddress.displayName}
             />
           </FieldGroup>
@@ -88,7 +88,7 @@ export const TrialForm: React.FC<TTrialForm> = (props: TTrialForm) => {
             <TextInput
               ctl={control}
               id={phoneNumber.id}
-              required={phoneNumber.required}
+              isRequired={phoneNumber.required}
               placeholder={phoneNumber.displayName}
             />
           </FieldGroup>

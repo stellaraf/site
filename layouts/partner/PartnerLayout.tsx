@@ -14,7 +14,7 @@ import { submitTrialForm } from '~/util';
 import { useResponsiveStyle } from '~/styles';
 import { PartnerContextProvider, usePartnerCtx } from './context';
 
-import type { IPartnerLayout, IFormModelTrial } from './types';
+import type { IPartnerLayout, TFormModelTrial } from './types';
 
 const TextContent: React.FC = () => {
   const { title, subtitle, body } = usePartnerCtx();
@@ -134,7 +134,7 @@ const DVendorLayout: React.FC = () => {
 export const PartnerLayout: React.FC<IPartnerLayout> = (props: IPartnerLayout) => {
   const { trialForm, ...rest } = props;
 
-  const fields = trialForm ?? ({} as IFormModelTrial);
+  const fields = trialForm ?? ({} as TFormModelTrial);
   const largeLayout = useBreakpointValue({ base: false, md: false, lg: false, xl: true });
 
   return (

@@ -1,10 +1,10 @@
 import { useImperativeHandle } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { FieldGroup, SelectField, TextArea, TextInput } from '~/components';
 import { forwardRef, requiredMsg, invalidMsg, buildSelections } from '~/util';
-import { FieldGroup, TextInput, TextArea, SelectField } from '../Fields';
 import { useFormState } from '../state';
 
 import type { ISalesFormFields, IForm, FormHandlers } from './types';
@@ -57,46 +57,51 @@ export const SalesForm = forwardRef<FormHandlers, IForm<'Sales'>>((props, ref) =
         <FieldGroup>
           <TextInput
             ctl={control}
+            defaultValue=""
             id={firstName.id}
+            isRequired={firstName.required}
             placeholder={firstName.displayName}
-            required={firstName.required}
           />
           <TextInput
             ctl={control}
+            defaultValue=""
             id={lastName.id}
+            isRequired={lastName.required}
             placeholder={lastName.displayName}
-            required={lastName.required}
           />
           <TextInput
             ctl={control}
+            defaultValue=""
             id={companyName.id}
+            isRequired={companyName.required}
             placeholder={companyName.displayName}
-            required={companyName.required}
           />
         </FieldGroup>
         <FieldGroup>
           <TextInput
             ctl={control}
+            defaultValue=""
             id={emailAddress.id}
+            isRequired={emailAddress.required}
             placeholder={emailAddress.displayName}
-            required={emailAddress.required}
           />
           <TextInput
             ctl={control}
+            defaultValue=""
             id={phoneNumber.id}
+            isRequired={phoneNumber.required}
             placeholder={phoneNumber.displayName}
-            required={phoneNumber.required}
           />
         </FieldGroup>
 
         <FieldGroup>
           <SelectField
+            width="100%"
             id={interests.id}
-            placeholder={interests.displayName}
+            colorScheme={accent}
             multi={interests.multiple}
             menuPortalTarget={document.body}
-            width="100%"
-            colorScheme={accent}
+            placeholder={interests.displayName}
             opts={interests.options.map(buildSelections)}
           />
         </FieldGroup>
@@ -104,8 +109,9 @@ export const SalesForm = forwardRef<FormHandlers, IForm<'Sales'>>((props, ref) =
           <TextArea
             ctl={control}
             id={details.id}
+            defaultValue=""
+            isRequired={details.required}
             placeholder={details.displayName}
-            required={details.required}
           />
         </FieldGroup>
       </FormProvider>

@@ -15,6 +15,7 @@ const hoverBorderLight = ['whiteAlpha.300', 'green.300'];
 const hoverBorderDark = [undefined, 'green.300'];
 
 export const SubscribeField: React.FC<ISubscribeInput> = (props: ISubscribeInput) => {
+  const { field, ...rest } = props;
   const {
     subscribeTitle = 'Subscribe to our newsletter',
     subscribePlaceholder = 'Email Address',
@@ -48,7 +49,7 @@ export const SubscribeField: React.FC<ISubscribeInput> = (props: ISubscribeInput
 
   return (
     <InputGroup>
-      <Input placeholder={subscribePlaceholder} {...styles} {...props} />
+      <Input placeholder={subscribePlaceholder} {...styles} {...field} {...rest} />
       <InputRightElement>
         <IconButton
           p={2}

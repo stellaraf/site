@@ -1,7 +1,8 @@
 import type { FlexProps } from '@chakra-ui/react';
+import type { FieldValues } from 'react-hook-form';
 import type { CustomColors } from '~/types';
 
-interface IFormFieldsBase {
+interface IFormFieldsBase extends FieldValues {
   firstName: string;
   lastName: string;
   email: string;

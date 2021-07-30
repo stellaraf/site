@@ -13,7 +13,7 @@ import {
   FormErrorMessage,
 } from '@chakra-ui/react';
 import { useForm, FormProvider, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useConfig } from '~/context';
 import { useGoogleAnalytics, useTitle } from '~/hooks';
 import { SubscribeField } from './SubscribeField';
@@ -36,10 +36,15 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
   const titleMe = useTitle();
   const toast = useToast();
   const toastState = useState<ISubscribeToast>({ status: 'error', message: subscribeGenericError });
-  const methods = useForm({ resolver: yupResolver(subscribeSchema) });
+  const form = useForm({ resolver: yupResolver(subscribeSchema) });
   const { trackEvent } = useGoogleAnalytics();
 
-  const { setError, errors } = methods;
+  const {
+    control,
+    setError,
+    handleSubmit,
+    formState: { errors },
+  } = form;
   const emailError = errors.email?.message;
 
   function handleError(error: string): void {
@@ -118,20 +123,25 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
   }, []);
 
   return (
-    <FormProvider {...methods}>
+    <FormProvider {...form}>
       <VStack
         as="form"
         w="25%"
         zIndex={1}
         align="flex-end"
         spacing={6}
-        onSubmit={methods.handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit)}
         {...rest}
       >
         <Text>{titleMe(subscribeTitle)}</Text>
-        <FormControl isInvalid={methods.errors.email}>
-          <Controller as={SubscribeField} name="email" control={methods.control} defaultValue="" />
-          <FormErrorMessage>{methods.errors.email?.message}</FormErrorMessage>
+        <FormControl isInvalid={typeof errors.email !== 'undefined'}>
+          <Controller
+            name="email"
+            defaultValue=""
+            control={control}
+            render={({ field }) => <SubscribeField field={field} />}
+          />
+          <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
         </FormControl>
       </VStack>
     </FormProvider>

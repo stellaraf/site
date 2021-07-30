@@ -1,27 +1,27 @@
-import type { InputProps, TextareaProps } from '@chakra-ui/react';
-import type { Control } from 'react-hook-form';
+import type {
+  Control,
+  UseControllerProps,
+  ControllerRenderProps,
+  ControllerFieldState,
+  UseFormStateReturn,
+  FieldValues,
+  Path,
+} from 'react-hook-form';
 import type { ISelect, TOptions } from '~/components';
-import type { IFormModelTrial, IFormDataTrial, TFormResponse } from '~/types';
+import type { TFormModelTrial, IFormDataTrial, TFormResponse } from '~/types';
 
-export interface ITextField extends InputProps {
-  name: string;
-  required?: boolean;
-}
+export type TTextField<V extends FieldValues> = {
+  field: ControllerRenderProps<V>;
+  formState: UseFormStateReturn<V>;
+  fieldState: ControllerFieldState;
+  isRequired: boolean;
+};
 
-export interface ITextInput extends Omit<ITextField, 'as' | 'onFocus' | 'name'> {
-  ctl: Control;
-  id: string;
-}
-
-export interface ITextAreaField extends TextareaProps {
-  name: string;
-  required?: boolean;
-}
-
-export interface ITextArea extends Omit<ITextAreaField, 'as' | 'onFocus' | 'name'> {
-  ctl: Control;
-  id: string;
-}
+export type TFormField<Props, FormData> = {
+  ctl: Control<FormData>;
+  id: Path<FormData>;
+  defaultValue?: UseControllerProps<FormData>['defaultValue'];
+} & Omit<Props, 'as' | 'onFocus' | 'name'>;
 
 export interface ISelectField extends Omit<ISelect, 'name' | 'onSelect' | 'options'> {
   id: string;
@@ -34,6 +34,6 @@ export interface IFormHandlers {
 
 export interface TTrialForm {
   name: string;
-  fields: Omit<IFormModelTrial, 'name'>;
+  fields: Omit<TFormModelTrial, 'name'>;
   onSubmit: (data: IFormDataTrial) => Promise<TFormResponse>;
 }

@@ -7,3 +7,10 @@ type Animated<T> = Omit<T, 'transition'> & import('framer-motion').MotionProps;
 type MeronexIcon = import('@meronex/icons').IconBaseProps;
 
 interface Empty {} // eslint-disable-line
+
+/**
+ * Enforce string index type (not `number` or `symbol`).
+ */
+type StringKeyOf<O extends Dict, K = keyof O> = K extends string ? `${K}` : never;
+
+type ValueOf<T> = T[keyof T];

@@ -1,7 +1,7 @@
 import type { Entry, Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
 import type { ColorNames } from './theme';
-import type { FormModel, FormModelEntry, IFormModelTrial } from './forms';
+import type { FormModel, FormModelEntry, TFormModelTrial } from './forms';
 
 export interface FooterLink {
   title: string;
@@ -92,7 +92,7 @@ export type PageContentEntry = {
   callToActionIcon?: Asset;
   callToActionIconColor?: ColorNames;
   callToActionBody: Document | null;
-  form?: Entry<IFormModelTrial>;
+  form?: Entry<TFormModelTrial>;
 };
 
 export type PageContent = {
@@ -114,7 +114,7 @@ export type PageContent = {
   callToActionIcon?: Asset;
   callToActionIconColor?: ColorNames;
   callToActionBody: Document | null;
-  form?: IFormModelTrial;
+  form?: TFormModelTrial;
 };
 
 export interface HomeSection {

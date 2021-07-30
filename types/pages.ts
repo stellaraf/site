@@ -6,7 +6,7 @@ import type {
   IMeasuredGeoPoint,
   HomeSection,
   HeroCard,
-  IFormModelTrial,
+  TFormModelTrial,
   GlobalConfig,
   IContactCard,
   IDocsArticle,
@@ -116,7 +116,7 @@ export interface IVendorPage {
     title: string;
     subtitle: string;
     body?: Document;
-    trialForm?: IFormModelTrial;
+    trialForm?: TFormModelTrial;
     partnerLogo?: Asset['fields'];
   };
 }
@@ -139,11 +139,11 @@ interface IPartnerPageDataBase {
  * Partner Page Types
  */
 interface IPartnerPageDataEntry extends IPartnerPageDataBase {
-  trialForm?: Entry<IFormModelTrial>;
+  trialForm?: Entry<TFormModelTrial>;
 }
 
 interface IPartnerPageData extends IPartnerPageDataBase {
-  trialForm?: IFormModelTrial;
+  trialForm?: TFormModelTrial;
 }
 
 export interface IPartnerPageEntry {

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
+import '@hookstate/devtools';
 import { BaseSEO } from '~/components';
 import { Provider } from '~/context';
 import { useGoogleAnalytics } from '~/hooks';
