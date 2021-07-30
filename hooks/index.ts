@@ -10,6 +10,7 @@ export * from './useGlow';
 export * from './useGoogleAnalytics';
 export * from './useGradient';
 export * from './useImageSrc';
+export * from './useIPRanges';
 export * from './useKonami';
 export * from './useLinkType';
 export * from './useMobile';

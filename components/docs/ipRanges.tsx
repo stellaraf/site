@@ -1,21 +1,12 @@
 import { Box, Tag, Heading, SimpleGrid, Skeleton, Wrap, WrapItem } from '@chakra-ui/react';
-import { useQuery } from 'react-query';
 import { CodeBlock, Link, If, Error } from '~/components';
 import { useColorValue } from '~/context';
-import { getJson } from '~/util';
-
-import type { QueryFunction } from 'react-query';
-import type { IPRangeResponse } from './types';
+import { useIPRanges } from '~/hooks';
 
 const URL = 'https://ip.stellar.tech';
 
-const getIPs: QueryFunction<IPRangeResponse> = async ctx => {
-  const { queryKey } = ctx;
-  return await getJson<IPRangeResponse>(queryKey);
-};
-
 export const IPRanges: React.FC = () => {
-  const { data, error, isLoading, isError } = useQuery<IPRangeResponse>(`${URL}/json`, getIPs);
+  const { data, error, isLoading, isError } = useIPRanges();
   const tagColorScheme = useColorValue('gray', 'tertiary');
   isError && console.error(error);
   return (
