@@ -14,8 +14,9 @@ import {
 } from '@chakra-ui/react';
 import { useForm, FormProvider, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useTitleCase } from 'use-title-case';
 import { useConfig } from '~/context';
-import { useGoogleAnalytics, useTitle } from '~/hooks';
+import { useGoogleAnalytics } from '~/hooks';
 import { SubscribeField } from './SubscribeField';
 import { subscribeEmail, subscribeSchema } from './util';
 
@@ -33,7 +34,7 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
   } = useConfig();
 
   const mount = useState<boolean>(false);
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const toast = useToast();
   const toastState = useState<ISubscribeToast>({ status: 'error', message: subscribeGenericError });
   const form = useForm({ resolver: yupResolver(subscribeSchema) });

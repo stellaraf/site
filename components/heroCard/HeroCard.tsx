@@ -1,14 +1,15 @@
 import { Flex, Heading } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { Carousel } from '~/components';
 import { useColorValue } from '~/context';
-import { useRender, useTitle } from '~/hooks';
+import { useRender } from '~/hooks';
 
 import type { ICard, IHeroCards } from './types';
 
 const Card: React.FC<ICard> = (props: ICard) => {
   const { content } = props;
   const { title, body } = content;
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const renderedBody = useRender(body);
   return (
     <>

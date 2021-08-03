@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Center, Flex, IconButton, Heading, Grid } from '@chakra-ui/react';
 import { BisLeftArrow as Back } from '@meronex/icons/bi';
+import { useTitleCase } from 'use-title-case';
 import { ModalWrapper } from '~/components';
-import { useTitle } from '~/hooks';
 import { useFormState } from '../state';
 import { SalesForm, SupportForm } from '../Forms';
 import { submitForm } from '../submitters';
@@ -24,7 +24,7 @@ export const MobileForm: React.FC<IMobileForm> = (props: IMobileForm) => {
     onClose,
   } = props;
 
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const ctx = useFormState();
   const [showSuccess, setSuccess] = useState(false);
 

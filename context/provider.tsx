@@ -1,4 +1,5 @@
 import { QueryClientProvider, QueryClient } from 'react-query';
+import { TitleCaseProvider } from 'use-title-case';
 import { UIProvider } from './ui';
 import { ConfigProvider } from './config';
 
@@ -13,7 +14,9 @@ export const Provider: React.FC<IProvider> = (props: IProvider) => {
   return (
     <ConfigProvider globalConfig={globalConfig} docsGroups={docsGroups}>
       <UIProvider theme={theme}>
-        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        <TitleCaseProvider overrides={globalConfig.titleOverrides}>
+          <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        </TitleCaseProvider>
       </UIProvider>
     </ConfigProvider>
   );

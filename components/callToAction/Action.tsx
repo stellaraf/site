@@ -1,7 +1,8 @@
 import NextLink from 'next/link';
 import { Box, Flex, Button, Heading } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { Card, CardBody, Icon } from '~/components';
-import { useRender, useSlug, useTitle } from '~/hooks';
+import { useRender, useSlug } from '~/hooks';
 
 import type { TActions } from '~/types';
 
@@ -16,7 +17,7 @@ export const Action: React.FC<TActions> = (props: TActions) => {
     callToActionIconColor,
   } = props;
 
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const renderedBody = useRender(callToActionBody ?? body ?? page.fields.body);
   const slug = useSlug(title, [title]);
 

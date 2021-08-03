@@ -1,6 +1,6 @@
 import { Flex, Center, Heading, IconButton, Grid } from '@chakra-ui/react';
 import { BisLeftArrow as Back } from '@meronex/icons/bi';
-import { useTitle } from '~/hooks';
+import { useTitleCase } from 'use-title-case';
 import { useFormState } from '../state';
 import { SalesForm, SupportForm } from '../Forms';
 import { submitForm } from '../submitters';
@@ -11,7 +11,7 @@ import type { TFormTypes, TFormFields } from '../Forms/types';
 
 export const DesktopForm: React.FC<IDesktopForm> = (props: IDesktopForm) => {
   const { title, body, icon, accent = 'primary', toggleLayout, formRef, onSubmit } = props;
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const ctx = useFormState();
 
   function goBack() {

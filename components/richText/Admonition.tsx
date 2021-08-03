@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic';
 import { Box, Heading, chakra, Icon, HStack, useToken } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { CodeBlockStyleProvider } from '~/components';
 import { useColorValue } from '~/context';
-import { useOpposingColor, useRender, useTitle } from '~/hooks';
+import { useOpposingColor, useRender } from '~/hooks';
 import { shouldForwardProp } from '~/util';
 
 const Note = dynamic<MeronexIcon>(() => import('@meronex/icons/go').then(i => i.GoNote));
@@ -44,7 +45,7 @@ const AdmonitionIcon: React.FC<IAdmonitionIcon> = (props: IAdmonitionIcon) => {
 export const Admonition: React.FC<TAdmonition> = (props: TAdmonition) => {
   const { title, body, type = 'Note', ...rest } = props;
 
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const renderedBody = useRender(body);
 
   const bg = useColorValue(

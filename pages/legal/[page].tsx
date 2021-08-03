@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { SEO, ContentSection } from '~/components';
-import { useTitle } from '~/hooks';
 import { getPage, getPageContent, getPageId } from '~/util';
 
 import type { GetStaticProps, GetStaticPaths } from 'next';
@@ -13,7 +13,7 @@ type UrlQuery = {
 const LegalPage: React.FC<PageEntry<ILegalPage>> = (props: PageEntry<ILegalPage>) => {
   const { pageData, pageContent } = props;
   const { title, subtitle } = pageData.fields;
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
 
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
   return (

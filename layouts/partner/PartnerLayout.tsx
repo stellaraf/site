@@ -7,9 +7,10 @@ import {
   VisuallyHidden,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { Card, CardBody, TrialForm } from '~/components';
 import { useColorValue } from '~/context';
-import { useGradient, useMobile, useRender, useTitle } from '~/hooks';
+import { useGradient, useMobile, useRender } from '~/hooks';
 import { submitTrialForm } from '~/util';
 import { useResponsiveStyle } from '~/styles';
 import { PartnerContextProvider, usePartnerCtx } from './context';
@@ -19,7 +20,7 @@ import type { IPartnerLayout, TFormModelTrial } from './types';
 const TextContent: React.FC = () => {
   const { title, subtitle, body } = usePartnerCtx();
   const renderedBody = useRender(body);
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   return (
     <Flex flexDir="column" width="100%" justifyContent="center">
       <Heading

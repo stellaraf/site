@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 import { Center, Heading, VStack, Divider } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { Button, Ripple } from '~/components';
 import { useColorValue } from '~/context';
-import { useTitle, useRender, useOpposingColor, useIsDark, useGlow } from '~/hooks';
+import { useRender, useOpposingColor, useIsDark, useGlow } from '~/hooks';
 import { useResponsiveStyle } from '~/styles';
 
 import type { IGetStarted } from './types';
@@ -18,7 +19,7 @@ export const GetStarted: React.FC<IGetStarted> = (props: IGetStarted) => {
   const isDark = useIsDark(bg);
   const glow = useGlow('purple.500', 'purple.800');
 
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const renderedBody = useRender(body);
 
   const hasButton = useMemo(

@@ -1,6 +1,6 @@
 import { Box, Flex, Heading } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { Avatars, Hero, GoogleMap, SEO, GetStarted } from '~/components';
-import { useTitle } from '~/hooks';
 import { useResponsiveStyle } from '~/styles';
 import { getPage, getPageContent, getPageId, getParsedContent } from '~/util';
 
@@ -10,7 +10,7 @@ import type { Bio, PageEntry, IAboutPage, ISection, PageContent } from '~/types'
 const Section: React.FC<ISection> = (props: ISection) => {
   const { title, children, ...rest } = props;
   const rStyles = useResponsiveStyle();
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   return (
     <Box as="section" py={24} overflow="hidden" {...rest}>
       <Flex height="100%" {...rStyles} alignItems="center" flexDir="column" {...rStyles}>

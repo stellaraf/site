@@ -14,7 +14,6 @@
       "~/types": ["./types/index"],
       "~/util": ["./util/index"]
     },
-    "rootDirs": ["./types/compat"],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,

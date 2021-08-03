@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
 import { Flex, Heading, Spinner } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { Groups, SEO } from '~/components';
-import { useRender, useScaledText, useTitle } from '~/hooks';
+import { useRender, useScaledText } from '~/hooks';
 import { DocsLayout } from '~/layouts';
 import { getPage, getPageId } from '~/util';
 
@@ -10,7 +11,7 @@ import type { PageEntry, IDocsMain } from '~/types';
 
 const TextContent: React.FC<IDocsMain['pageData']> = (props: IDocsMain['pageData']) => {
   const { title, subtitle, body = null } = props;
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const renderedBody = useRender(body);
   const [containerRef, headingRef, shouldResize] = useScaledText<HTMLDivElement>([]);
   return (

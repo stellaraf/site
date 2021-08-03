@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
 import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { Button, Icon } from '~/components';
-import { useRender, useTitle } from '~/hooks';
+import { useRender } from '~/hooks';
 import { useColorValue } from '~/context';
 
 import type { ISubSection, ISubSectionGroup } from './types';
@@ -9,7 +10,7 @@ import type { ISubSection, ISubSectionGroup } from './types';
 const SubSection: React.FC<ISubSection> = (props: ISubSection) => {
   const { title, body, icon, iconColor = 'primary', buttonLink, buttonText } = props;
 
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const boxProps = useColorValue(
     { bg: 'white', boxShadow: 'xl' },
     { bg: 'whiteAlpha.50', css: { backdropFilter: 'blur(2px)' } },

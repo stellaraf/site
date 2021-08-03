@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
+import { useTitleCase } from 'use-title-case';
 import { Content } from '~/components';
-import { useDate, useRender, useTitle, useSlug } from '~/hooks';
+import { useDate, useRender, useSlug } from '~/hooks';
 import { notNullUndefined } from '~/types';
 
 import type { PageContent, UsePageContent } from '~/types';
@@ -11,7 +12,7 @@ export const usePageContent = (rawContent: PageContent, deps: unknown[] = []): U
   }
 
   const obj = {} as UsePageContent;
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
 
   try {
     const {

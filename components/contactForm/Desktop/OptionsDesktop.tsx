@@ -3,8 +3,9 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { Center, Stack, Button as ChakraButton } from '@chakra-ui/react';
 import { motion, AnimatePresence, AnimateSharedLayout, useCycle } from 'framer-motion';
+import { useTitleCase } from 'use-title-case';
 import { Button, Icon } from '~/components';
-import { useGoogleAnalytics, useTitle } from '~/hooks';
+import { useGoogleAnalytics } from '~/hooks';
 import { Card, CardBody } from '../Card';
 import { ContactOption } from '../ContactOption';
 import { queryIsForm } from '../guards';
@@ -35,7 +36,7 @@ const iconMap = { Support, Sales, Docs };
 export const OptionsDesktop: React.FC<IOptionsResponsive> = (props: IOptionsResponsive) => {
   const { cards } = props;
   const ctx = useFormState();
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const { pathname, query } = useRouter();
   const { trackModal } = useGoogleAnalytics();
 

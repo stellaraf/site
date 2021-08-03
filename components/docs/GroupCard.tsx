@@ -1,7 +1,8 @@
 import NextLink from 'next/link';
 import { Box, Button, Heading, Divider } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { Card, CardBody, Icon } from '~/components';
-import { useRender, useTitle } from '~/hooks';
+import { useRender } from '~/hooks';
 
 import type { IDocsGroup } from '~/types';
 
@@ -15,7 +16,7 @@ export const GroupCard: React.FC<IDocsGroup> = (props: IDocsGroup) => {
     callToActionIconColor = 'primary',
   } = props;
 
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const body = useRender(summary, [], ['articleButton', 'image']);
 
   return (

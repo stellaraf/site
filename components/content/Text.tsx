@@ -1,14 +1,14 @@
 import { Box, Heading } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { Label } from '~/components';
 import { useColorValue } from '~/context';
-import { useTitle } from '~/hooks';
 import { forwardRef } from '~/util';
 
 import type { FlexProps } from '@chakra-ui/react';
 import type { IContentBody, IUpdatedAt, TitleProps, ISubtitle } from './types';
 
 export const Title = forwardRef<HTMLHeadingElement, TitleProps>((props, ref) => {
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const { id, children, ...rest } = props;
   return (
     <>
@@ -21,7 +21,7 @@ export const Title = forwardRef<HTMLHeadingElement, TitleProps>((props, ref) => 
 });
 
 export const Subtitle: React.FC<ISubtitle> = (props: ISubtitle) => {
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const { children, ...rest } = props;
   return (
     <Heading as="h4" fontSize={{ base: '1.5rem', lg: 'xl' }} fontWeight="light" mt={8} {...rest}>

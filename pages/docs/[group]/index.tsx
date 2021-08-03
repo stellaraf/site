@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
 import { Flex, Heading } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { ContentLoader, Error, SEO } from '~/components';
-import { useTitle, useRender, useScaledText } from '~/hooks';
+import { useRender, useScaledText } from '~/hooks';
 import { DocsLayout } from '~/layouts';
 import { getDocsGroups } from '~/util';
 
@@ -14,7 +15,7 @@ type UrlQuery = {
 
 const Content: React.FC<IDocsGroup> = (props: IDocsGroup) => {
   const { title, subtitle, summary } = props;
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const body = useRender(summary);
 
   const [containerRef, headingRef, shouldResize] = useScaledText<HTMLDivElement>([title]);

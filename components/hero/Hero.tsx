@@ -1,5 +1,6 @@
 import { chakra, Flex, Heading } from '@chakra-ui/react';
-import { useGradient, useRender, useTitle } from '~/hooks';
+import { useTitleCase } from 'use-title-case';
+import { useGradient, useRender } from '~/hooks';
 import { useResponsiveStyle } from '~/styles';
 import { shouldForwardProp } from '~/util';
 
@@ -15,7 +16,7 @@ export const Hero: React.FC<IHero> = (props: IHero) => {
 
   const bg = useGradient();
   const rStyles = useResponsiveStyle();
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
   const renderedBody = useRender(body, [title], [], {
     paragraph: {
       mt: 8,

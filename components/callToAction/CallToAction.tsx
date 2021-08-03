@@ -1,10 +1,10 @@
 import { memo } from 'react';
 import { useRouter } from 'next/router';
 import { Center, Heading, VStack, Wrap, WrapItem } from '@chakra-ui/react';
+import { useTitleCase } from 'use-title-case';
 import { useInView } from 'react-intersection-observer';
 import { AnimatedDiv, SectionDivider } from '~/components';
 import { useConfig, useColorValue } from '~/context';
-import { useTitle } from '~/hooks';
 import { useResponsiveStyle } from '~/styles';
 import { Action } from './Action';
 import { filterActions, randomActions } from './util';
@@ -15,7 +15,7 @@ export const _CallToActionContainer: React.FC<ICallToActionMemo> = (props: ICall
   const { actions: rawActions, currentPath, ...rest } = props;
 
   const rStyles = useResponsiveStyle();
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
 
   const { callToActionTitle, callsToActionShown } = useConfig();
 

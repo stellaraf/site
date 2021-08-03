@@ -47,7 +47,6 @@
     "react-use": "^15.3.4",
     "slugify": "^1.4.5",
     "smoothscroll-polyfill": "^0.4.4",
-    "title": "^3.4.2",
     "use-title-case": "^0.0.5",
     "yup": "^0.29.3",
     "yup-phone": "^1.2.8"

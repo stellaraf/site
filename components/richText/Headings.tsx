@@ -1,11 +1,11 @@
 import { Heading, useStyleConfig, useToken } from '@chakra-ui/react';
-import { useTitle } from '~/hooks';
+import { useTitleCase } from 'use-title-case';
 
 import type { BaseHeadingProps, HeadingProps, THeadingLevels } from './types';
 
 const BaseHeading = (props: BaseHeadingProps) => {
   const { level, children, ...rest } = props;
-  const titleMe = useTitle();
+  const titleMe = useTitleCase();
 
   let title = children;
   if (typeof children === 'string') {
