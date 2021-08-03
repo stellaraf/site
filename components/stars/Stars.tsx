@@ -3,7 +3,8 @@ import Particles from 'react-tsparticles';
 import { useColorValue } from '~/context';
 import { useKonami } from '~/hooks';
 
-import type { ParticlesProps, IWrapper, ParticleOptions } from './types';
+import type { BoxProps } from '@chakra-ui/react';
+import type { ISourceOptions, ParticlesProps } from 'react-tsparticles';
 
 const DEFAULT_OPTIONS = {
   particles: {
@@ -58,7 +59,7 @@ const DEFAULT_OPTIONS = {
     },
   },
   detectRetina: true,
-} as ParticleOptions;
+} as ISourceOptions;
 
 const Base = (particleProps: ParticlesProps) => {
   const konami = useKonami();
@@ -103,7 +104,7 @@ const Wrapper = chakra('div', {
   },
 });
 
-export const Stars: React.FC<IWrapper> = (props: IWrapper) => {
+export const Stars = (props: BoxProps): JSX.Element => {
   const starOpacity = (useColorValue(0, 1) ?? 0) as number;
   return <Wrapper as={Base} opacity={starOpacity} className="__stars-container" {...props} />;
 };

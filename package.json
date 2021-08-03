@@ -43,7 +43,7 @@
     "react-query": "^3.19.1",
     "react-select": "^4.3.1",
     "react-simple-maps": "^2.3.0",
-    "react-tsparticles": "1.18.11",
+    "react-tsparticles": "^1.33.2",
     "react-use": "^15.3.4",
     "slugify": "^1.4.5",
     "smoothscroll-polyfill": "^0.4.4",
