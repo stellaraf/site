@@ -29,13 +29,51 @@ export function buildSelections(opt: string): { value: string; label: string } {
   return { value, label: opt };
 }
 
-export function entries<O extends Record<string | number | symbol, unknown>>(
-  obj: O,
-): [keyof O, O[keyof O]][] {
-  const _entries = [] as [keyof O, O[keyof O]][];
-  const keys = Object.keys(obj) as (keyof O)[];
+/**
+ * Strictly typed version of `Object.entries()`.
+ */
+export function entries<O, K extends keyof O = keyof O>(obj: O): [K, O[K]][] {
+  const _entries = [] as [K, O[K]][];
+  const keys = Object.keys(obj) as K[];
   for (const key of keys) {
     _entries.push([key, obj[key]]);
   }
   return _entries;
+}
+
+/**
+ * Remove properties from an object by key.
+ *
+ * @param obj Original object.
+ * @param remove Keys to remove.
+ * @returns Object without properties defined in `remove`.
+ *
+ * @example
+ * ```
+ * const original = { one: 1, two: 2, three: 3 };
+ * console.log(removeProps(obj, 'one'));
+ * //=> { two: 2, three: 3 }
+ * ```
+ */
+export function removeProps<O, R extends keyof O = keyof O>(
+  obj: O,
+  ...remove: R[]
+): Pick<O, Exclude<keyof O, R>> {
+  // Keys of `obj` without keys from `remove`.
+  type KeyType = Exclude<keyof O, R>;
+  // `obj` without properties in `remove`.
+  type ReconstructedType = Pick<O, KeyType>;
+  // Values of `obj` without keys from `remove`.
+  type ValueType = ReconstructedType[KeyType];
+
+  // New object.
+  const reconstructed = {} as ReconstructedType;
+
+  for (const [key, value] of entries<O, keyof O>(obj)) {
+    if (!remove.includes(key as R)) {
+      // If this key isn't contained in `removed`, re-add it to the new object.
+      reconstructed[key as KeyType] = value as ValueType;
+    }
+  }
+  return reconstructed;
 }

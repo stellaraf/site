@@ -63,19 +63,19 @@ export interface RSTheme extends Omit<Theme, 'borderRadius'> {
   borderRadius: string | number;
 }
 
-export type IControl = ControlProps<TOptions>;
+export type IControl = ControlProps<TOptions, false>;
 
-export type IMenu = MenuProps<TOptions>;
+export type IMenu = MenuProps<TOptions, false>;
 
-export type IMenuList = MenuListComponentProps<TOptions>;
+export type IMenuList = MenuListComponentProps<TOptions, false>;
 
-export type IOption = OptionProps<TOptions>;
+export type IOption = OptionProps<TOptions, false>;
 
 export type IMultiValue = MultiValueProps<TOptions>;
 
-export interface IIndicator extends IndicatorProps<TOptions> {}
+export interface IIndicator extends IndicatorProps<TOptions, false> {}
 
-export type IPlaceholder = PlaceholderProps<TOptions>;
+export type IPlaceholder = PlaceholderProps<TOptions, false>;
 
 export type TSelectContextCallback = Pick<ISelectContext, 'colorMode' | 'colorScheme'>;
 
