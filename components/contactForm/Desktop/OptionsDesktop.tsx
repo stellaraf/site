@@ -122,7 +122,7 @@ export const OptionsDesktop: React.FC<IOptionsResponsive> = (props: IOptionsResp
            * moved from one location to another.
            * */
           const icon = (
-            <motion.div layoutId={iconName}>
+            <motion.div>
               <Icon icon={iconMap[iconName]} color={iconColor} {...iconProps} />
             </motion.div>
           );
