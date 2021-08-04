@@ -3,7 +3,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { StellarLogo } from '@stellaraf/logo';
 import { Link } from '~/components';
-import { useColorValue } from '~/context';
+import { useColorMode, useColorValue } from '~/context';
 import { useNavLogoState } from '~/hooks';
 
 import type { IBaseHeader } from './types';
@@ -12,6 +12,7 @@ export const Wrapper: React.FC<IBaseHeader> = (props: IBaseHeader) => {
   const { isOpen, onToggle, navHeaderHeight, children, ...rest } = props;
   const bg = useColorValue('light.500', 'transparent');
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
+  const { colorMode } = useColorMode();
   const { pathname } = useRouter();
   const { value: globalShowLogo } = useNavLogoState();
 
@@ -73,7 +74,7 @@ export const Wrapper: React.FC<IBaseHeader> = (props: IBaseHeader) => {
         {...rest}
       >
         <Link href="/" opacity={showLogo ? 1 : 0} mb={2}>
-          <StellarLogo width="auto" height={navHeaderHeight} />
+          <StellarLogo colorMode={colorMode} width="auto" height={navHeaderHeight} />
         </Link>
         {!isOpen && children}
       </Flex>

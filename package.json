@@ -17,7 +17,7 @@
     "@meronex/icons": "^4.0.0",
     "@n8tb1t/use-scroll-position": "^1.0.43",
     "@react-google-maps/api": "^1.10.1",
-    "@stellaraf/logo": "^0.2.2",
+    "@stellaraf/logo": "^0.2.3",
     "beautiful-react-hooks": "^0.31.0",
     "color2k": "1.1.0",
     "contentful": "^7.14.12",
