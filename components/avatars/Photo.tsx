@@ -25,10 +25,10 @@ export const Photo: React.FC<IPhoto> = (props: IPhoto) => {
   const { index, onOpen, ...rest } = props;
   const photoBorder = useColorValue('whiteAlpha.400', 'blackAlpha.400');
   const { bios } = useAvatar();
-  const current = useCurrent();
+  const [_, setCurrent] = useCurrent();
   const hover = useBreakpointValue({ base: {}, lg: { transform: 'scale(1.25)' } });
   const handleClick = () => {
-    current.set(index);
+    setCurrent(index);
     onOpen();
   };
   return (

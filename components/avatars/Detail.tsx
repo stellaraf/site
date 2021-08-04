@@ -52,8 +52,8 @@ const Header = memo(_Header, (prev, next) => prev.name === next.name);
 export const Detail: React.FC<IDetail> = (props: IDetail) => {
   const { isOpen, onClose } = props;
   const { bios } = useAvatar();
-  const current = useCurrent();
-  const body = useRender(bios[current.value].bio, [current.value]);
+  const [current] = useCurrent();
+  const body = useRender(bios[current].bio, [current]);
   return (
     <ModalWrapper
       isCentered
@@ -62,7 +62,7 @@ export const Detail: React.FC<IDetail> = (props: IDetail) => {
       isOpen={isOpen}
       onClose={onClose}
       blockScrollOnMount={false}
-      header={<Header {...bios[current.value]} />}
+      header={<Header {...bios[current]} />}
       headerProps={{ py: 'unset', pb: 2, px: 'unset' }}
       containerProps={{
         pl: 8,
