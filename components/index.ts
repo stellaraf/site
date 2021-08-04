@@ -21,7 +21,6 @@ export * from './homeSection';
 export * from './icon';
 export * from './label';
 export * from './link';
-export * from './logo';
 export * from './media';
 export * from './meta';
 export * from './modalWrapper';

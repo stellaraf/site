@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic';
 import { Box, Flex, HStack, VStack, useDisclosure } from '@chakra-ui/react';
 import { Spiral as Hamburger } from 'hamburger-react';
-import { Button, Logo, MControls, ModalWrapper } from '~/components';
-import { useColorValue } from '~/context';
+import { StellarLogo } from '@stellaraf/logo';
+import { Button, MControls, ModalWrapper } from '~/components';
+import { useColorMode } from '~/context';
 import { Wrapper } from './Wrapper';
 import { NavLink } from './NavLink';
 import navConfig from '../config';
@@ -31,7 +32,7 @@ const ContactButton = (props: ButtonProps) => (
 
 export const MHeader: React.FC<IHeader> = (props: IHeader) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
-  const logoColor = useColorValue('primary.500', 'white');
+  const { colorMode } = useColorMode();
   const navItems = [...navConfig.left, ...navConfig.right];
 
   return (
@@ -54,7 +55,13 @@ export const MHeader: React.FC<IHeader> = (props: IHeader) => {
         isCentered={false}
         header={
           <Flex align="center" justify="space-between">
-            <Logo.Text width="auto" height={HEADING_HEIGHT} mb={2} noAnimate color={logoColor} />
+            <StellarLogo
+              noAnimate
+              width="auto"
+              colorMode={colorMode}
+              height={HEADING_HEIGHT}
+              style={{ marginBlock: '0.5rem' }}
+            />
             {isOpen && (
               <Hamburger
                 toggled={isOpen}

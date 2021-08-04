@@ -3,7 +3,6 @@ import type { BoxProps, LinkProps, SystemStyleObject } from '@chakra-ui/react';
 import type { ILink } from '~/components';
 
 export interface HeaderLogoProps {
-  color?: string;
   show: boolean;
 }
 

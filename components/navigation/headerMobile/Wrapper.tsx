@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { Link, Logo } from '~/components';
+import { StellarLogo } from '@stellaraf/logo';
+import { Link } from '~/components';
 import { useColorValue } from '~/context';
 import { useNavLogoState } from '~/hooks';
 
@@ -71,8 +72,8 @@ export const Wrapper: React.FC<IBaseHeader> = (props: IBaseHeader) => {
         justifyContent="space-between"
         {...rest}
       >
-        <Link href="/" opacity={showLogo ? 1 : 0}>
-          <Logo.Text width="auto" height={navHeaderHeight} mb={2} />
+        <Link href="/" opacity={showLogo ? 1 : 0} mb={2}>
+          <StellarLogo width="auto" height={navHeaderHeight} />
         </Link>
         {!isOpen && children}
       </Flex>

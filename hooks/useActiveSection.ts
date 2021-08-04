@@ -7,7 +7,7 @@ import type { ActiveSectionEffectProps } from '~/types';
 /**
  * Set state based on the currently active section on a page
  */
-export const useActiveSection = (sectionRefs: ReactRef[]): void => {
+export function useActiveSection<E extends HTMLElement>(sectionRefs: ReactRef<E>[]): void {
   const { colorMode } = useColorMode();
   const variant = useSyncedStyleVariant();
 
@@ -70,4 +70,4 @@ export const useActiveSection = (sectionRefs: ReactRef[]): void => {
     }
   };
   useScrollPosition(effect, [colorMode, variant.value]);
-};
+}

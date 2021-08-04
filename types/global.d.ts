@@ -1,6 +1,8 @@
 type Dict<T extends unknown = unknown> = Record<string, T>;
 
-type ReactRef<E extends HTMLElement = HTMLElement> = React.MutableRefObject<E>;
+type ReactRef<
+  E extends HTMLElement | SVGElement = HTMLElement | SVGElement
+> = React.MutableRefObject<E>;
 
 type Animated<T> = Omit<T, 'transition'> & import('framer-motion').MotionProps;
 

@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/react';
-import { useConfig, useColorValue, useColorTokenValue } from '~/context';
+import { StellarLogo } from '@stellaraf/logo';
+import { useConfig, useColorMode, useColorValue } from '~/context';
 import {
   // HeroCards,
   HomeSection,
-  Logo,
   SEO,
   Screen,
 } from '~/components';
@@ -17,17 +17,16 @@ import type { THome, THomePageContent } from '~/types';
 
 const Home: React.FC<THome> = (props: THome) => {
   const { pageContent } = props;
-
+  const { colorMode } = useColorMode();
   const { sections: homeSections, mainVideo } = pageContent;
   const { siteSlogan, orgName, homePageVideo } = useConfig();
-  const logo = useColorTokenValue('primary.500', 'white');
   const heroText = useColorValue('primary.500', 'white');
   const rStyles = useResponsiveStyle();
 
   const bg = useGradient();
 
   const sections = homeSections.sort((a, b) => a.fields.sortWeight - b.fields.sortWeight);
-  const logoRef = useRef<HTMLDivElement>({} as HTMLDivElement);
+  const logoRef = useRef<SVGSVGElement>({} as SVGSVGElement);
 
   useNavLogo(logoRef);
 
@@ -37,7 +36,7 @@ const Home: React.FC<THome> = (props: THome) => {
       <Box pt={32} zIndex={-2} minH="100vh" boxSize="100%" color={heroText} {...rStyles} {...bg}>
         <Flex flexDir="column" alignItems="center">
           <Box overflowY="hidden" width={['90%', '66%', '33%']}>
-            <Logo.Text color={logo} ref={logoRef} />
+            <StellarLogo colorMode={colorMode} width="100%" height="100%" ref={logoRef} />
           </Box>
           <Flex textAlign="center">
             <Heading
