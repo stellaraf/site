@@ -1,19 +1,39 @@
-import { createState, useState } from '@hookstate/core';
-import { Persistence } from '@hookstate/persistence';
+import create from 'zustand';
+import { persist } from 'zustand/middleware';
 
-import type { TUseBannerReturn } from './types';
+import type { SetState } from 'zustand';
 
-const ackState = createState<boolean>(false);
+type Banner = {
+  /**
+   * `true` if the banner has been acknowledged, `false otherwise`.
+   */
+  acknowledged: boolean;
+
+  /**
+   * Update the `visible` state property.
+   */
+  setAcknowledged: (visibility: boolean) => void;
+};
+
+type BannerReturn = [boolean, (v: boolean) => void];
+
+const useStore = create<Banner>(
+  persist(
+    (set: SetState<Banner>) => ({
+      acknowledged: false,
+      setAcknowledged(acknowledged: boolean) {
+        set({ acknowledged });
+      },
+    }),
+    { name: 'stellar-privacy-agreement' },
+  ),
+);
 
 /**
- * Hook to manage the GDPR/privacy banner.
+ * Custom hook to manage the GDPR/privacy banner.
  */
-export function useBanner(): TUseBannerReturn {
-  const ack = useState<boolean>(ackState);
-
-  if (typeof window !== 'undefined') {
-    ack.attach(Persistence('stellar-privacy-agreement'));
-  }
-
-  return [ack.value, ack.set];
+export function useBanner(): BannerReturn {
+  const state = useStore(state => state.acknowledged);
+  const setState = useStore(state => state.setAcknowledged);
+  return [state, setState];
 }
