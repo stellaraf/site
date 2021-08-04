@@ -2,14 +2,14 @@ import { ModalWrapper, Video } from '~/components';
 import { useRickRoll } from '~/hooks';
 
 export const RickRoll: React.FC = () => {
-  const [open, change] = useRickRoll();
+  const [isOpen, close] = useRickRoll();
   return (
     <ModalWrapper
       isCentered
       size="full"
-      isOpen={open}
+      isOpen={isOpen}
       blockScrollOnMount={false}
-      onClose={() => change(false)}
+      onClose={() => close()}
       contentProps={{ boxSize: '100%' }}
       headerProps={{ py: 'unset', pb: 2, px: 'unset' }}
       containerProps={{
@@ -21,7 +21,7 @@ export const RickRoll: React.FC = () => {
         pr: { base: 0, lg: 12 },
         height: { base: 'sm', lg: '2xl' },
       }}
-      body={<Video enableControls playing url={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'} />}
+      body={<Video enableControls playing url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />}
     />
   );
 };
