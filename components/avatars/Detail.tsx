@@ -70,6 +70,7 @@ export const Detail: React.FC<IDetail> = (props: IDetail) => {
         pr: 12,
         maxWidth: '2xl',
         height: 'unset',
+        minHeight: 'unset',
         minWidth: { lg: 'xl' },
       }}
       bodyProps={{
