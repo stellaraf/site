@@ -9,4 +9,4 @@ pre-commit:
       run: 'yarn eslint {staged_files}'
     typescript:
       glob: '*.{ts,tsx}'
-      run: 'yarn tsc --no-Emit {staged_files}'
+      run: 'yarn tsc --noEmit'
