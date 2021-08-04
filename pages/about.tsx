@@ -1,7 +1,7 @@
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import { useTitleCase } from 'use-title-case';
 import { Avatars, Hero, GoogleMap, SEO, GetStarted } from '~/components';
-import { useResponsiveStyle } from '~/styles';
+import { useResponsiveStyle } from '~/hooks';
 import { getPage, getPageContent, getPageId, getParsedContent } from '~/util';
 
 import type { GetStaticProps } from 'next';

@@ -8,8 +8,7 @@ import {
   SEO,
   Screen,
 } from '~/components';
-import { useGradient, useNavLogo } from '~/hooks';
-import { useResponsiveStyle } from '~/styles';
+import { useGradient, useNavLogo, useResponsiveStyle } from '~/hooks';
 import { getParsedContent } from '~/util';
 
 import type { GetStaticProps } from 'next';

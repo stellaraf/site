@@ -1,8 +1,6 @@
-import { createState, useState } from '@hookstate/core';
 import { mode } from '@chakra-ui/theme-tools';
 
 import type { StyleObjectOrFn } from '@chakra-ui/react';
-import type { State } from '@hookstate/core';
 
 const variantBase = (props: Dict): StyleObjectOrFn => ({
   header: mode({}, { borderBottomWidth: 0 })(props),
@@ -200,6 +198,3 @@ export const syncedStyles = {
     variant: 0,
   },
 };
-
-const syncedStyleVariant = createState<number>(0);
-export const useSyncedStyleVariant = (): State<number> => useState(syncedStyleVariant);

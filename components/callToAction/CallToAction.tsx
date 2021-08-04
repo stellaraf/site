@@ -5,7 +5,7 @@ import { useTitleCase } from 'use-title-case';
 import { useInView } from 'react-intersection-observer';
 import { AnimatedDiv, SectionDivider } from '~/components';
 import { useConfig, useColorValue } from '~/context';
-import { useResponsiveStyle } from '~/styles';
+import { useResponsiveStyle } from '~/hooks';
 import { Action } from './Action';
 import { filterActions, randomActions } from './util';
 

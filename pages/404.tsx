@@ -2,8 +2,7 @@ import { useRouter } from 'next/router';
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import { SEO } from '~/components';
 import { useColorValue } from '~/context';
-import { useGradient } from '~/hooks';
-import { useResponsiveStyle } from '~/styles';
+import { useGradient, useResponsiveStyle } from '~/hooks';
 
 const NotFound: React.FC = () => {
   const heroText = useColorValue('black', 'white');

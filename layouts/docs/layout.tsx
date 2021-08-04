@@ -1,7 +1,7 @@
 import { Accordion, chakra, Box, Flex, VStack, useBreakpointValue } from '@chakra-ui/react';
 import { If, MSubNav } from '~/components';
 import { useColorValue, useConfig } from '~/context';
-import { useResponsiveStyle } from '~/styles';
+import { useResponsiveStyle } from '~/hooks';
 import { DMenuGroup } from './menuDesktop';
 import { MMenuGroup } from './menuMobile';
 

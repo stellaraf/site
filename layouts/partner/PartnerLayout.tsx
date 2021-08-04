@@ -10,9 +10,8 @@ import {
 import { useTitleCase } from 'use-title-case';
 import { Card, CardBody, TrialForm } from '~/components';
 import { useColorValue } from '~/context';
-import { useGradient, useMobile, useRender } from '~/hooks';
+import { useGradient, useMobile, useRender, useResponsiveStyle } from '~/hooks';
 import { submitTrialForm } from '~/util';
-import { useResponsiveStyle } from '~/styles';
 import { PartnerContextProvider, usePartnerCtx } from './context';
 
 import type { IPartnerLayout, TFormModelTrial } from './types';

@@ -6,8 +6,7 @@ import { Copyright } from './Copyright';
 import { Subscribe } from './Subscribe';
 import { MControls } from '~/components';
 import { useColorValue } from '~/context';
-import { useMobile } from '~/hooks';
-import { useResponsiveStyle } from '~/styles';
+import { useMobile, useResponsiveStyle } from '~/hooks';
 
 import type { IFooter } from './types';
 

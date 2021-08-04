@@ -2,10 +2,9 @@ import { useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { Box, Flex } from '@chakra-ui/react';
 import { Button, SectionDivider } from '~/components';
-import { useMobile } from '~/hooks';
+import { useMobile, useResponsiveStyle } from '~/hooks';
 import { useColorValue } from '~/context';
 import { forwardRef } from '~/util';
-import { useResponsiveStyle } from '~/styles';
 import { usePageContent } from './usePageContent';
 
 import type { IContentSection, TSides, TSideValues, ITitleLayout } from './types';

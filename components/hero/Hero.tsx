@@ -1,7 +1,6 @@
 import { chakra, Flex, Heading } from '@chakra-ui/react';
 import { useTitleCase } from 'use-title-case';
-import { useGradient, useRender } from '~/hooks';
-import { useResponsiveStyle } from '~/styles';
+import { useGradient, useRender, useResponsiveStyle } from '~/hooks';
 import { shouldForwardProp } from '~/util';
 
 import type { IHero } from './types';

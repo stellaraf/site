@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useState } from '@hookstate/core';
+import { useEffect, useState } from 'react';
 import {
   Flex,
   Text,
@@ -33,10 +32,13 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
     subscribeGenericError = 'Something went wrong.',
   } = useConfig();
 
-  const mount = useState<boolean>(false);
+  const [mount, setMount] = useState<boolean>(false);
+  const [toastState, setToastState] = useState<ISubscribeToast>({
+    status: 'error',
+    message: subscribeGenericError,
+  });
   const titleMe = useTitleCase();
   const toast = useToast();
-  const toastState = useState<ISubscribeToast>({ status: 'error', message: subscribeGenericError });
   const form = useForm({ resolver: yupResolver(subscribeSchema) });
   const { trackEvent } = useGoogleAnalytics();
 
@@ -51,19 +53,19 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
   function handleError(error: string): void {
     console.error(error);
     emailError !== error && setError('email', { type: 'manual', message: error });
-    toastState.set({ status: 'error', message: error });
+    setToastState({ status: 'error', message: error });
     trackEvent({ category: 'User', action: 'Error Subscribing to Newsletter' });
   }
 
   function handleSuccess(message: string): void {
-    toastState.set({ status: 'success', message });
+    setToastState({ status: 'success', message });
     trackEvent({ category: 'User', action: 'Subscribed to Newsletter' });
   }
 
   async function onSubmit(data: ISubscribeFormData): Promise<void> {
     try {
       let json = null;
-      if (mount.get()) {
+      if (mount) {
         const res = await subscribeEmail(data.email);
         if (res) {
           json = await res.json();
@@ -96,12 +98,12 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
           textAlign="left"
           alignItems="start"
           borderRadius="md"
-          status={toastState.status.get()}
+          status={toastState.status}
           {...alertProps}
         >
           <AlertIcon />
           <Flex flex="1">
-            <AlertDescription display="block">{toastState.message.get()}</AlertDescription>
+            <AlertDescription display="block">{toastState.message}</AlertDescription>
           </Flex>
           <CloseButton size="sm" onClick={onClose} position="absolute" right={1} top={1} />
         </Alert>
@@ -118,8 +120,8 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
   }
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      !mount.value && mount.set(true);
+    if (typeof window !== 'undefined' && !mount) {
+      setMount(true);
     }
   }, []);
 

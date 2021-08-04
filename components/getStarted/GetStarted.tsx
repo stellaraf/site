@@ -3,8 +3,7 @@ import { Center, Heading, VStack, Divider } from '@chakra-ui/react';
 import { useTitleCase } from 'use-title-case';
 import { Button, Ripple } from '~/components';
 import { useColorValue } from '~/context';
-import { useRender, useOpposingColor, useIsDark, useGlow } from '~/hooks';
-import { useResponsiveStyle } from '~/styles';
+import { useRender, useOpposingColor, useIsDark, useGlow, useResponsiveStyle } from '~/hooks';
 
 import type { IGetStarted } from './types';
 

@@ -1,8 +1,7 @@
 import dynamic from 'next/dynamic';
 import { Box, Flex, Button as ChakraButton, Heading, VStack } from '@chakra-ui/react';
 import { Content, Hero, Options, SEO, GetStarted } from '~/components';
-import { useSlug } from '~/hooks';
-import { useResponsiveStyle } from '~/styles';
+import { useSlug, useResponsiveStyle } from '~/hooks';
 import { getPage, getPageContent, getPageId, getContactCards } from '~/util';
 
 import type { GetStaticProps } from 'next';
