@@ -14,7 +14,7 @@ export const Wrapper: React.FC<IBaseHeader> = (props: IBaseHeader) => {
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
   const { colorMode } = useColorMode();
   const { pathname } = useRouter();
-  const { value: globalShowLogo } = useNavLogoState();
+  const globalShowLogo = useNavLogoState();
 
   /**
    * Show logo in the navbar only if:

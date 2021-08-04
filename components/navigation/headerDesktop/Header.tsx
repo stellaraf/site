@@ -46,7 +46,7 @@ const NavGroup = chakra('div', {
 
 export const DHeader: React.FC<IDHeader> = (props: IDHeader) => {
   const { pathname } = useRouter();
-  const { value: showLogo } = useNavLogoState();
+  const showLogo = useNavLogoState();
 
   const { colorMode } = useColorMode();
   const bg = useColorValue('light.500', 'transparent');
