@@ -50,7 +50,8 @@
     "smoothscroll-polyfill": "^0.4.4",
     "use-title-case": "^0.0.5",
     "yup": "^0.29.3",
-    "yup-phone": "^1.2.8"
+    "yup-phone": "^1.2.8",
+    "zustand": "^3.5.7"
   },
   "scripts": {
     "dev": "NODE_OPTIONS=--max-old-space-size=8192 next dev",
