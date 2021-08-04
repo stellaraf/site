@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@arkweid/lefthook@^0.7.6":
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/@arkweid/lefthook/-/lefthook-0.7.6.tgz#0647f698a6ae9a42440846911a277a370359d861"
+  integrity sha512-dm8UE0+9sbDRFJ6BMYpOrg56W3/wpZq2eBkGsCM+iSBrEKQF8hXFZ4eEEBxo25yfEPNVZguN/FbZcRmkeCyRiA==
+
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"
@@ -4575,11 +4580,6 @@ https-browserify@1.0.0, https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
-
-husky@^5.0.6:
-  version "5.0.6"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-5.0.6.tgz#27dbefe8603c6c0912fd89a3a67edfed9fac8bb9"
-  integrity sha512-SM+evfvcHT3rAYJKvPlatz3L5RqzgeM6xIvDjhs8VuhKj6iKqFDOt/Ov8sPjvWuE4FDB385gJBwWXRj7G3c1hg==
 
 hyphenate-style-name@^1.0.2:
   version "1.0.4"
