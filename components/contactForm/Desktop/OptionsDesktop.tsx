@@ -8,15 +8,16 @@ import { Button, Icon } from '~/components';
 import { useGoogleAnalytics } from '~/hooks';
 import { Card, CardBody } from '../Card';
 import { ContactOption } from '../ContactOption';
+import { useContactFormCtx } from '../context';
 import { queryIsForm } from '../guards';
-import { useFormState } from '../state';
+import { useContactForm } from '../state';
 import { DesktopForm } from './DesktopForm';
 
 import type { MouseEvent } from 'react';
 import type { IconType } from '@meronex/icons';
 import type { Variants } from 'framer-motion';
 import type { IContactCard } from '~/types';
-import type { IOptionsResponsive, IMotionItems, TSupportedFormQuery } from '../types';
+import type { IMotionItems } from '../types';
 import type { FormHandlers } from '../Forms/types';
 
 // Use Next.js async importing for performance.
@@ -33,9 +34,9 @@ const AnimatedCenter = motion(Center);
 
 const iconMap = { Support, Sales, Docs };
 
-export const OptionsDesktop: React.FC<IOptionsResponsive> = (props: IOptionsResponsive) => {
-  const { cards } = props;
-  const ctx = useFormState();
+export const OptionsDesktop = (): JSX.Element => {
+  const cards = useContactFormCtx();
+  const formState = useContactForm();
   const titleMe = useTitleCase();
   const { pathname, query } = useRouter();
   const { trackModal } = useGoogleAnalytics();
@@ -47,13 +48,11 @@ export const OptionsDesktop: React.FC<IOptionsResponsive> = (props: IOptionsResp
 
   const [layout, toggleLayout] = useCycle('cards', 'form');
 
-  /**
-   * Each card carries a lifecycle of two states:
-   *    - cards: a row of 3 cards displaying each type method of contact/communication.
-   *    - form: a single larger card containing a contact form.
-   * When clicking a card's button, it should appear that the other cards disappear,
-   * and the selected card expands to take over the formerly occupied space.
-   */
+  // Each card carries a lifecycle of two states:
+  //    - cards: a row of 3 cards displaying each type method of contact/communication.
+  //    - form: a single larger card containing a contact form.
+  // When clicking a card's button, it should appear that the other cards disappear,
+  // and the selected card expands to take over the formerly occupied space.
   const items: Variants = {
     cards: {
       // The cards layout is static - each card should be displayed and look about the same.
@@ -61,14 +60,15 @@ export const OptionsDesktop: React.FC<IOptionsResponsive> = (props: IOptionsResp
       width: cardSizes.width,
       display: 'flex',
     },
+
+    /**
+     * Each card, via the `custom` prop, sends the array index number of itself and the array
+     * index number of the currently selected card (or null, if one hasn't been selected).
+     *
+     * If the currently selected card index doesn't match the card's index, it disappears via
+     * animated changes to opacity (fade out), width (shrink), and display (space) props.
+     */
     form: (i: IMotionItems) => {
-      /**
-       * Each card, via the `custom` prop, sends the array index number of itself and the array
-       * index number of the currently selected card (or null, if one hasn't been selected).
-       *
-       * If the currently selected card index doesn't match the card's index, it disappears via
-       * animated changes to opacity (fade out), width (shrink), and display (space) props.
-       */
       const { idx, current } = i;
       return {
         opacity: idx === current ? 1 : current === null ? 1 : 0,
@@ -85,11 +85,12 @@ export const OptionsDesktop: React.FC<IOptionsResponsive> = (props: IOptionsResp
    */
   useEffect(() => {
     if (queryIsForm(query)) {
-      const selectedIndex = cards.map(c => c.title.toLowerCase()).indexOf(query.form);
-      const selectedName = cards[selectedIndex].title as TSupportedFormQuery['form'];
-      ctx.selectedName.value !== selectedName && ctx.merge({ selectedName, selectedIndex });
-      toggleLayout(1);
-      trackModal(`${pathname}/form-${selectedName.toLowerCase()}`);
+      const selected = cards.find(c => c.icon.toLowerCase() === query.form.toLowerCase());
+      if (typeof selected !== 'undefined') {
+        formState.setSelected(selected.icon);
+        toggleLayout(1);
+        trackModal(`${pathname}/form-${selected.icon.toLowerCase()}`);
+      }
     }
   }, [query]);
 
@@ -106,52 +107,42 @@ export const OptionsDesktop: React.FC<IOptionsResponsive> = (props: IOptionsResp
         {cards.map((card: IContactCard, i) => {
           const { icon: iconName, color: iconColor, buttonText, form, ...cardRest } = card;
 
-          /**
-           * Add the contact card's form config to the form context state so it can be consumed in
-           * the nested form component.
-           */
-          if (iconName !== 'Docs' && typeof form !== 'undefined') {
-            ctx.form.merge({ [iconName]: form });
-          }
-
-          const isForm = layout === 'form' && ctx.selectedIndex.value === i;
+          const isForm = layout === 'form' && formState.selected === iconName;
           const iconProps = isForm ? { size: 12, ml: 4 } : {};
 
-          /**
-           * Send the same component to both sub-components (ContactOption/FormContainer). Since
-           * it's the same component and wrapped by a framer component, it will be animated when
-           * moved from one location to another.
-           * */
+          // Send the same component to both sub-components (ContactOption/FormContainer). Since
+          // it's the same component and wrapped by a framer component, it will be animated when
+          // moved from one location to another.
           const icon = (
             <motion.div>
               <Icon icon={iconMap[iconName]} color={iconColor} {...iconProps} />
             </motion.div>
           );
+
           /**
            * If the card is for a Sales or Support form, the click handler sets the context state
-           * to reflect the selected form name & index number and toggles the framer layout for
-           * animation purposes. The Docs link should just be a standard router link to the /docs
-           * route.
+           * to reflect the selected form and toggles the framer layout for animation purposes.
+           * The Docs link should just be a standard router link to the /docs route.
            */
-          const handleClick = (e: MouseEvent) => {
+          function handleClick(event: MouseEvent): void {
             if (['Support', 'Sales'].includes(iconName)) {
-              e.preventDefault();
-              ctx.selectedName.value !== iconName &&
-                ctx.merge({ selectedName: iconName, selectedIndex: i });
+              event.preventDefault();
+              formState.setSelected(iconName);
               toggleLayout();
               trackModal(`${pathname}/form-${iconName.toLowerCase()}`);
             }
-          };
-          /**
-           * Create a ref object to pass to each form. Because the submit button lives outside the
-           * form for layout reasons, it needs to explicitly call the form's submit method.
-           */
-          const formRef = useRef<FormHandlers>(Object());
-          const handleFormSubmit = () => formRef.current.submit();
-          /**
-           * Button component & props need to change based on the form's current lifecycle state
-           * ('cards' vs. 'form').
-           */
+          }
+
+          // Create a ref object to pass to each form. Because the submit button lives outside the
+          // form for layout reasons, it needs to explicitly call the form's submit method.
+          const formRef = useRef<FormHandlers>({} as FormHandlers);
+
+          function handleFormSubmit(): void {
+            formRef.current.submit();
+          }
+
+          // Button component & props need to change based on the form's current lifecycle state
+          // ('cards' vs. 'form').
           const cardsButton = (
             <Button
               w="100%"
@@ -173,6 +164,7 @@ export const OptionsDesktop: React.FC<IOptionsResponsive> = (props: IOptionsResp
               {titleMe(form?.buttonSubmit ?? 'Submit')}
             </ChakraButton>
           );
+
           return (
             <motion.div
               // Animate each card from the initial position of offscreen-right to center.
@@ -187,7 +179,7 @@ export const OptionsDesktop: React.FC<IOptionsResponsive> = (props: IOptionsResp
               <AnimatedCard
                 layout
                 variants={items}
-                custom={{ idx: i, current: ctx.selectedIndex.value }}
+                custom={{ idx: i, current: cards.findIndex(c => c.icon === formState.selected) }}
                 initial={false}
                 // Framer requires a unique key per animated layout component for tracking.
                 key={`card${i}`}
@@ -231,9 +223,9 @@ export const OptionsDesktop: React.FC<IOptionsResponsive> = (props: IOptionsResp
                   width="100%"
                   exit={{ scale: 0.5, opacity: 0 }}
                 >
-                  {layout === 'form' && !ctx.showSuccess.value
+                  {layout === 'form' && !formState.showSuccess
                     ? formButton
-                    : ctx.showSuccess.value
+                    : formState.showSuccess
                     ? null
                     : cardsButton}
                 </AnimatedCenter>

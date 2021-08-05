@@ -8,13 +8,13 @@ import { Button, Icon } from '~/components';
 import { useGoogleAnalytics } from '~/hooks';
 import { Card, CardBody } from '../Card';
 import { ContactOption } from '../ContactOption';
+import { useContactFormCtx } from '../context';
 import { queryIsForm } from '../guards';
-import { useFormState } from '../state';
+import { useContactForm } from '../state';
 import { MobileForm } from './MobileForm';
 
 import type { MouseEvent } from 'react';
 import type { IconType } from '@meronex/icons';
-import type { IOptionsResponsive, TSupportedFormQuery } from '../types';
 import type { FormHandlers } from '../Forms/types';
 
 const Docs = dynamic<IconType>(() => import('@meronex/icons/cg').then(i => i.CgNotes));
@@ -33,9 +33,9 @@ const iconMap = { Support, Sales, Docs };
  * is meant to be a little more simple and its layout is more vertical than horizontal, but the
  * rest of the logic is largely the same. Differences are notated below.
  */
-export const OptionsMobile: React.FC<IOptionsResponsive> = (props: IOptionsResponsive) => {
-  const { cards } = props;
-  const ctx = useFormState();
+export const OptionsMobile = (): JSX.Element => {
+  const cards = useContactFormCtx();
+  const formState = useContactForm();
   const titleMe = useTitleCase();
   const { pathname, query } = useRouter();
   const { trackModal } = useGoogleAnalytics();
@@ -44,17 +44,16 @@ export const OptionsMobile: React.FC<IOptionsResponsive> = (props: IOptionsRespo
 
   const { isOpen, onToggle, onClose } = useDisclosure();
 
-  /**
-   * If valid query parameters are passed in the URL, e.g. /contact?form=sales or
-   * /contact?form=support, automatically load the corresponding form.
-   */
+  // If valid query parameters are passed in the URL, e.g. /contact?form=sales or
+  // /contact?form=support, automatically load the corresponding form.
   useEffect(() => {
     if (queryIsForm(query)) {
-      const selectedIndex = cards.map(c => c.title.toLowerCase()).indexOf(query.form);
-      const selectedName = cards[selectedIndex].title as TSupportedFormQuery['form'];
-      ctx.selectedName.value !== selectedName && ctx.merge({ selectedName, selectedIndex });
-      onToggle();
-      trackModal(`${pathname}/form-${selectedName.toLowerCase()}`);
+      const selected = cards.find(c => c.icon.toLowerCase() === query.form.toLowerCase());
+      if (typeof selected !== 'undefined') {
+        formState.setSelected(selected.icon);
+        onToggle();
+        trackModal(`${pathname}/form-${selected.icon.toLowerCase()}`);
+      }
     }
   }, [query]);
 
@@ -64,11 +63,7 @@ export const OptionsMobile: React.FC<IOptionsResponsive> = (props: IOptionsRespo
         {cards.map((card, i) => {
           const { icon: iconName, color: iconColor, buttonText, form, ...cardRest } = card;
 
-          if (iconName !== 'Docs' && typeof form !== 'undefined') {
-            ctx.form.merge({ [iconName]: form });
-          }
-
-          const isForm = isOpen && ctx.selectedIndex.value === i;
+          const isForm = isOpen && formState.selected === iconName;
 
           const iconProps = isForm ? { size: 12, ml: 4 } : {};
           const icon = (
@@ -80,26 +75,12 @@ export const OptionsMobile: React.FC<IOptionsResponsive> = (props: IOptionsRespo
           const handleClick = (e: MouseEvent) => {
             if (['Support', 'Sales'].includes(iconName)) {
               e.preventDefault();
-              ctx.selectedName.value !== iconName &&
-                ctx.merge({ selectedName: iconName, selectedIndex: i });
+              formState.setSelected(iconName);
               onToggle();
               trackModal(`${pathname}/form-${iconName.toLowerCase()}`);
             }
           };
 
-          const btnProps = Object();
-          btnProps.width = '100%';
-          if (!isForm) {
-            btnProps.children = titleMe(buttonText);
-            if (iconName === 'Docs') {
-              btnProps.href = '/docs';
-            } else {
-              btnProps.onClick = handleClick;
-            }
-          } else {
-            btnProps.type = 'submit';
-            btnProps.children = 'Submit';
-          }
           const formRef = useRef<FormHandlers>(Object());
           const handleFormSubmit = () => formRef.current.submit();
 

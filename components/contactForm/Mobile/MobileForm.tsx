@@ -3,7 +3,7 @@ import { Center, Flex, IconButton, Heading, Grid } from '@chakra-ui/react';
 import { BisLeftArrow as Back } from '@meronex/icons/bi';
 import { useTitleCase } from 'use-title-case';
 import { ModalWrapper } from '~/components';
-import { useFormState } from '../state';
+import { useContactForm } from '../state';
 import { SalesForm, SupportForm } from '../Forms';
 import { submitForm } from '../submitters';
 import { Success } from '../Success';
@@ -24,13 +24,13 @@ export const MobileForm: React.FC<IMobileForm> = (props: IMobileForm) => {
     onClose,
   } = props;
 
+  const formState = useContactForm();
   const titleMe = useTitleCase();
-  const ctx = useFormState();
   const [showSuccess, setSuccess] = useState(false);
 
   function goBack(e: React.MouseEvent) {
     e.preventDefault();
-    ctx.selectedIndex.value !== null && ctx.merge({ selectedName: null, selectedIndex: null });
+    formState.reset();
     onToggle();
   }
 
@@ -90,18 +90,12 @@ export const MobileForm: React.FC<IMobileForm> = (props: IMobileForm) => {
             {body}
           </Center>
           <Center width="100%" gridArea="form" alignItems="flex-start">
-            {!showSuccess && ctx.selectedName.value === 'Support' ? (
+            {formState.shouldRender('Support') ? (
               <SupportForm ref={formRef} accent={accent} onSubmit={handleSubmit} />
-            ) : !showSuccess && ctx.selectedName.value === 'Sales' ? (
+            ) : formState.shouldRender('Sales') ? (
               <SalesForm ref={formRef} accent={accent} onSubmit={handleSubmit} />
             ) : showSuccess ? (
-              <Success>
-                {ctx.selectedName.value === 'Support'
-                  ? ctx.form.Support.successMessage.value
-                  : ctx.selectedName.value === 'Sales'
-                  ? ctx.form.Sales.successMessage.value
-                  : null}
-              </Success>
+              <Success>{formState.successMessage}</Success>
             ) : null}
           </Center>
           <Center py={8} gridArea="button">

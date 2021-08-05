@@ -1,6 +1,5 @@
 import type { ComponentType, MutableRefObject } from 'react';
 import type { ParsedUrlQuery } from 'querystring';
-import type { State } from '@hookstate/core';
 import type { BoxProps, FlexProps, StackProps } from '@chakra-ui/react';
 import type { IconType } from '@meronex/icons';
 import type { IContactCard, CustomColors, FormModel } from '~/types';
@@ -8,11 +7,11 @@ import type { FormHandlers, TFormTypes } from './Forms/types';
 
 type ContactOption = IContactCard & FlexProps;
 
-type TIconName = IContactCard['icon'];
+export type FormIcon = IContactCard['icon'];
 
 export interface IContactOption extends Omit<ContactOption, 'icon' | 'color' | 'buttonText'> {
   icon: JSX.Element;
-  iconName: TIconName;
+  iconName: FormIcon;
   index?: number;
   accent?: keyof CustomColors;
   formRef?: MutableRefObject<FormHandlers>;
@@ -29,15 +28,6 @@ export interface IIcon extends Omit<FlexProps, 'color'> {
   color: string;
 }
 
-export interface IFormState {
-  selectedName: TIconName | null;
-  selectedIndex: number | null;
-  form: { Support: FormModel<'Support'>; Sales: FormModel<'Sales'> };
-  showSuccess: boolean;
-}
-
-export type FormState = State<IFormState>;
-
 export interface IMotionItems {
   idx: number;
   current: number | null;
@@ -47,12 +37,15 @@ export interface IOptions extends StackProps {
   cards: IContactCard[];
 }
 
-export interface IOptionsResponsive extends StackProps {
-  cards: IContactCard[];
-}
+export interface IOptionsResponsive extends StackProps {}
 
 export type TSupportedFormQuery = {
   form: TFormTypes;
 };
 
 export type TContactQuery = TSupportedFormQuery | ParsedUrlQuery;
+
+export type AvailableForms = {
+  Support: FormModel<'Support'>;
+  Sales: FormModel<'Sales'>;
+};

@@ -5,13 +5,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { FieldGroup, TextArea, TextInput } from '~/components';
 import { forwardRef, requiredMsg, invalidMsg } from '~/util';
-import { useFormState } from '../state';
+import { useContactFormConfig } from '../state';
 
 import type { ISupportFormFields, IForm, FormHandlers } from './types';
 
 export const SupportForm = forwardRef<FormHandlers, IForm<'Support'>>((props, ref) => {
   const { onSubmit } = props;
-  const ctx = useFormState();
   const {
     firstName,
     lastName,
@@ -20,7 +19,7 @@ export const SupportForm = forwardRef<FormHandlers, IForm<'Support'>>((props, re
     companyName,
     subject,
     details,
-  } = ctx.form.Support.get();
+  } = useContactFormConfig('Support');
 
   const formSchema = yup.object().shape({
     firstName: yup.string().label(firstName.displayName).required(requiredMsg),

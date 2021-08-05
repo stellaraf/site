@@ -1,7 +1,7 @@
 import { Flex, Center, Heading, IconButton, Grid } from '@chakra-ui/react';
 import { BisLeftArrow as Back } from '@meronex/icons/bi';
 import { useTitleCase } from 'use-title-case';
-import { useFormState } from '../state';
+import { useContactForm } from '../state';
 import { SalesForm, SupportForm } from '../Forms';
 import { submitForm } from '../submitters';
 import { Success } from '../Success';
@@ -12,11 +12,10 @@ import type { TFormTypes, TFormFields } from '../Forms/types';
 export const DesktopForm: React.FC<IDesktopForm> = (props: IDesktopForm) => {
   const { title, body, icon, accent = 'primary', toggleLayout, formRef, onSubmit } = props;
   const titleMe = useTitleCase();
-  const ctx = useFormState();
+  const formState = useContactForm();
 
   function goBack() {
-    ctx.selectedIndex.value !== null && ctx.merge({ selectedName: null, selectedIndex: null });
-    ctx.showSuccess.get() && ctx.showSuccess.set(false);
+    formState.reset();
     toggleLayout(0);
   }
 
@@ -25,7 +24,7 @@ export const DesktopForm: React.FC<IDesktopForm> = (props: IDesktopForm) => {
     if (typeof onSubmit === 'function') {
       onSubmit();
     }
-    !ctx.showSuccess.get() && ctx.showSuccess.set(true);
+    formState.toggleSuccess(true);
   }
 
   return (
@@ -50,18 +49,12 @@ export const DesktopForm: React.FC<IDesktopForm> = (props: IDesktopForm) => {
         {body}
       </Center>
       <Center width="100%" gridArea="form" alignItems={{ base: 'flex-start', lg: 'center' }}>
-        {!ctx.showSuccess.value && ctx.selectedName.value === 'Support' ? (
+        {formState.shouldRender('Support') ? (
           <SupportForm ref={formRef} accent={accent} onSubmit={handleSubmit} />
-        ) : !ctx.showSuccess.value && ctx.selectedName.value === 'Sales' ? (
+        ) : formState.shouldRender('Sales') ? (
           <SalesForm ref={formRef} accent={accent} onSubmit={handleSubmit} />
-        ) : ctx.showSuccess.value ? (
-          <Success>
-            {ctx.selectedName.value === 'Support'
-              ? ctx.form.Support.successMessage.value
-              : ctx.selectedName.value === 'Sales'
-              ? ctx.form.Sales.successMessage.value
-              : null}
-          </Success>
+        ) : formState.showSuccess ? (
+          <Success>{formState.successMessage}</Success>
         ) : null}
       </Center>
     </Grid>

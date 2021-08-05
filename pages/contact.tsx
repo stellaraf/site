@@ -9,7 +9,7 @@ import type { PageEntry, IContactPage, PageContent } from '~/types';
 
 const Phone = dynamic<MeronexIcon>(() => import('@meronex/icons/im').then(i => i.ImPhone));
 
-const Contact: React.FC<PageEntry<IContactPage>> = (props: PageEntry<IContactPage>) => {
+const Contact = (props: PageEntry<IContactPage>): JSX.Element => {
   const { pageData, contactCards, pageContent } = props;
 
   const cards = contactCards.sort((a, b) => a.sortWeight - b.sortWeight);
