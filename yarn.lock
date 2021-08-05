@@ -921,39 +921,6 @@
   resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.6.1.tgz#d41296521ccebba71f671e105b75cf36071fa293"
   integrity sha512-7tml6bUUzdkk7tYb5LBk4i6ctV/1Rs4U5qVxrNBXZd8ZhxvsELI0TyYrnCK0XSlCo8Htlat8TOzxSZcKWOH5KQ==
 
-"@hookstate/core@^3.0.3":
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/@hookstate/core/-/core-3.0.3.tgz#9fdd0e29d3cd4f3ce70ec209071d9d31b3a33677"
-  integrity sha512-tlcBxWrOZCEw3ExHTlvLK93q+JPV6d1BayjvFkXIPDCNC0fSc/aXOWjE7gywTnUYrrsidYNiOBjAROHUIWHoUw==
-
-"@hookstate/devtools@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@hookstate/devtools/-/devtools-3.0.1.tgz#7e2f2f1df72d4aeb97d39d7da9ba376048579669"
-  integrity sha512-470y5FqpeNWtb2ARXLF7oWxs1f4I1pBOMQJEQ1V6KhCiu3yu9IrXpvrCvTMs3Ev+oXECTVYRbxqmjXrMuoPr9g==
-  dependencies:
-    redux "4.0.5"
-    redux-devtools-extension "2.13.8"
-
-"@hookstate/initial@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@hookstate/initial/-/initial-3.0.0.tgz#5cec55eb8b57c866da576cf086721619f4d6bb9f"
-  integrity sha512-dApcFrN8ttTmnk3hYArqgHAmfCbf/RU7C4d2eLWwyGo8kUr6zTrJXv45mguihLz0B9OUegp72EOP5iPVQx66mQ==
-
-"@hookstate/persistence@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@hookstate/persistence/-/persistence-3.0.0.tgz#973b30d3a3bb1b29f4f59b1afe0d914e71a23882"
-  integrity sha512-xiN22IW0Wjw/uTV1OEUpTtqB8DAJyRobYR3+iv1TyMf72o98KpaZqQrLPvXkfrjlZac5s052BypjpkttX/Cmhw==
-
-"@hookstate/touched@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@hookstate/touched/-/touched-3.0.0.tgz#caae14430b74e79a5929985c4c25c237804e81fa"
-  integrity sha512-5/lN5wB4EEd80goUD953HE6t4Uy2ohrVZ30nkpQ5m2mTjCYJEKai9nUxMw23L4eFi6ZgB0w0UytAh3IUKOZ+1g==
-
-"@hookstate/untracked@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@hookstate/untracked/-/untracked-3.0.0.tgz#fcf5005f89a68956c994ffb4b04cc3bd25d7cbf6"
-  integrity sha512-NctZVu0fEXc+komMmEpJ4OAD77P1P4uhXnU8e2Y1l+k0P+ZCE+enTDvgg9rp2WmViD7s8XA2+lS7wTkHGargmw==
-
 "@jimp/bmp@^0.10.3":
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/@jimp/bmp/-/bmp-0.10.3.tgz#79a23678e8389865c62e77b0dccc3e069dfc27f0"
@@ -6874,19 +6841,6 @@ readdirp@~3.5.0:
   dependencies:
     picomatch "^2.2.1"
 
-redux-devtools-extension@2.13.8:
-  version "2.13.8"
-  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.8.tgz#37b982688626e5e4993ff87220c9bbb7cd2d96e1"
-  integrity sha512-8qlpooP2QqPtZHQZRhx3x3OP5skEV1py/zUdMY28WNAocbafxdG2tRD1MWE7sp8obGMNYuLWanhhQ7EQvT1FBg==
-
-redux@4.0.5:
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
-  integrity sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
-  dependencies:
-    loose-envify "^1.4.0"
-    symbol-observable "^1.2.0"
-
 regenerator-runtime@^0.13.2, regenerator-runtime@^0.13.3, regenerator-runtime@^0.13.4:
   version "0.13.7"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
@@ -7781,11 +7735,6 @@ supports-color@^8.0.0:
   integrity sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==
   dependencies:
     has-flag "^4.0.0"
-
-symbol-observable@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
-  integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
 
 synchronous-promise@^2.0.13:
   version "2.0.13"

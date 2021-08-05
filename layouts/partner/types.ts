@@ -1,11 +1,8 @@
 import type { InputProps } from '@chakra-ui/react';
-import type { State } from '@hookstate/core';
 import type { Control } from 'react-hook-form';
 import type { TFormModelTrial, IFormDataTrial, IPartnerPage } from '~/types';
 
 export type IPartnerLayout = IPartnerPage['pageData'];
-
-export type TTrialForm = State<TFormModelTrial>;
 
 export type IPartnerContext = Omit<IPartnerLayout, 'trialForm'> & {
   fields: TFormModelTrial;

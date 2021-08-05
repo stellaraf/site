@@ -9,7 +9,7 @@ import { requiredMsg, invalidMsg } from '~/util';
 import type { IFormDataTrial } from '~/types';
 import type { TTrialForm } from './types';
 
-export const TrialForm: React.FC<TTrialForm> = (props: TTrialForm) => {
+export const TrialForm = (props: TTrialForm): JSX.Element => {
   const { name, fields, onSubmit } = props;
 
   const {
