@@ -2,8 +2,8 @@ import dynamic from 'next/dynamic';
 import { Button, Wrap } from '@chakra-ui/react';
 import { getPage, getPageContent, getOrionLocations, getPageId } from '~/util';
 import { ContentSection, Hero, SEO, useDataCenter, GetStarted } from '~/components';
-import { useColorTokenValue } from '~/context';
-import { useAlert, useCloudLocations } from '~/hooks';
+import { useColorTokenValue, CloudLocationsProvider } from '~/context';
+import { useAlert } from '~/hooks';
 
 import type { GetStaticProps } from 'next';
 import type { IUSMap } from '~/components';
@@ -11,48 +11,58 @@ import type { ICloud, IMeasuredGeoPoint, PageContent, PageEntry } from '~/types'
 
 const USMap = dynamic<IUSMap>(() => import('~/components').then(i => i.USMap));
 
-const Cloud: React.FC<PageEntry<ICloud>> = (props: PageEntry<ICloud>) => {
+type ContentProps = React.PropsWithChildren<Pick<PageEntry<ICloud>, 'pageData'>>;
+
+const Content = (props: ContentProps): JSX.Element => {
+  const { title, subtitle, body = null } = props.pageData.fields;
+  const { execute, isError, error, isFetching } = useDataCenter();
+  const showAlert = useAlert();
+
+  // This will render twice in development due to react strict mode.
+  isError && showAlert({ status: 'error', message: `${error}` });
+
+  return (
+    <Hero title={title} subtitle={subtitle} body={body}>
+      <Wrap justify="center" w="100%" mt={8} align="center" spacing={4}>
+        <Button variant="heroPrimary" isLoading={isFetching} onClick={execute}>
+          Find Your Edge Data Center
+        </Button>
+      </Wrap>
+      {props.children}
+    </Hero>
+  );
+};
+
+const Cloud = (props: PageEntry<ICloud>): JSX.Element => {
   const { geoData, geoPoints, pageData, pageContent } = props;
 
   if (geoPoints.length === 0) {
     throw new Error('Unable to get Cloud Location Data');
   }
-  const { title, subtitle, body = null, getStarted } = pageData.fields;
-
-  const showAlert = useAlert();
+  const { title, subtitle, getStarted } = pageData.fields;
 
   const mapColor = useColorTokenValue('blackAlpha.200', 'whiteAlpha.200');
   const markerColor = useColorTokenValue('primary.400', 'tertiary.500');
 
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 
-  // Initialize test result state
-  useCloudLocations(geoPoints.map(g => ({ ...g, done: false })));
-  const { execute, isError, error, isFetching } = useDataCenter(geoPoints);
-
-  // This will render twice in development due to react strict mode.
-  isError && showAlert({ status: 'error', message: `${error}` });
   return (
     <>
       <SEO title={title} description={subtitle} />
-      <Hero title={title} subtitle={subtitle} body={body}>
-        <Wrap justify="center" w="100%" mt={8} align="center" spacing={4}>
-          <Button variant="heroPrimary" isLoading={isFetching} onClick={execute}>
-            Find Your Edge Data Center
-          </Button>
-        </Wrap>
-        <USMap
-          geoData={geoData}
-          mapColor={mapColor}
-          locations={geoPoints}
-          markerColor={markerColor}
-          maxW={{ base: '100%', lg: '75%' }}
-        />
-      </Hero>
-      {sections.map((sect, i) => {
-        return <ContentSection items={sect} index={i} key={i} />;
-      })}
-      {getStarted && <GetStarted {...getStarted.fields} />}
+      <CloudLocationsProvider value={geoPoints}>
+        <Content pageData={pageData}>
+          <USMap
+            geoData={geoData}
+            mapColor={mapColor}
+            markerColor={markerColor}
+            maxW={{ base: '100%', lg: '75%' }}
+          />
+        </Content>
+        {sections.map((sect, i) => {
+          return <ContentSection items={sect} index={i} key={i} />;
+        })}
+        {getStarted && <GetStarted {...getStarted.fields} />}
+      </CloudLocationsProvider>
     </>
   );
 };

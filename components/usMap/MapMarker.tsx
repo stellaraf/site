@@ -29,14 +29,13 @@ export const MapMarker: React.FC<IMapMarker> = (props: IMapMarker) => {
         <Marker {...rest}>
           <motion.circle
             r={radius}
+            initial="notBest"
             fill="transparent"
             strokeWidth={0.25}
             stroke={bestOutline}
-            layoutId="bestLocation"
             variants={bestVariants}
             style={{ position: 'absolute' }}
             animate={best ? 'best' : 'notBest'}
-            initial={{ opacity: 0, scale: 15, display: 'none' }}
             transition={{ type: 'spring', stiffness: 500, damping: 30 }}
           />
           <Box

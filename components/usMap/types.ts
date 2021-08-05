@@ -1,8 +1,7 @@
-import type { BoxProps, UseDisclosureReturn, PopoverContentProps } from '@chakra-ui/react';
+import type { BoxProps, PopoverContentProps } from '@chakra-ui/react';
 import type { QueryObserverResult } from 'react-query';
 import type { MarkerProps } from 'react-simple-maps';
-import { State } from '@hookstate/core';
-import type { ITestLocation, Locations, IMeasuredGeoPoint } from '~/types';
+import type { CloudMeasurement } from '~/types';
 
 export interface IMapMarker extends MarkerProps {
   color?: string;
@@ -11,27 +10,17 @@ export interface IMapMarker extends MarkerProps {
 
 export interface LocationProps extends Omit<PopoverContentProps, 'color'> {
   color?: string;
-  loc: Locations[number];
+  loc: CloudMeasurement;
 }
 
 export interface IUSMap extends BoxProps {
   geoData: Dict;
   mapColor: string;
   markerColor?: string;
-  locations: IMeasuredGeoPoint[];
-}
-
-export interface IFinder extends UseDisclosureReturn {
-  locations: Locations;
-}
-
-export interface ILocation {
-  location: Locations[number];
-  index: number;
 }
 
 export interface ILatency {
-  locState: State<ITestLocation>;
+  location: Nullable<CloudMeasurement>;
 }
 
 export interface TFetcher {

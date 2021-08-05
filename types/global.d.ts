@@ -16,3 +16,9 @@ interface Empty {} // eslint-disable-line
 type StringKeyOf<O extends Dict, K = keyof O> = K extends string ? `${K}` : never;
 
 type ValueOf<T> = T[keyof T];
+
+type Nullable<T> = T | null;
+
+type NoOp = () => void;
+
+type PropOf<T, P extends keyof T> = T[P];
