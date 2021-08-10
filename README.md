@@ -11,10 +11,10 @@
 
 # Branches
 
-| Branch | Function                                                                                                           |
-| ------ | ------------------------------------------------------------------------------------------------------------------ |
-| `main` | Production, commits auto build to production @ [stellar.tech](https://stellar.tech).                               |
-| `next` | Development, commits auto build to development environment @ [preview.stellar.tech](https://preview.stellar.tech). |
+| Branch    | Function                                                                                                           |
+| --------- | ------------------------------------------------------------------------------------------------------------------ |
+| `main`    | Production, commits auto build to production @ [stellar.tech](https://stellar.tech).                               |
+| `develop` | Development, commits auto build to development environment @ [preview.stellar.tech](https://preview.stellar.tech). |
 
 # Project
 
