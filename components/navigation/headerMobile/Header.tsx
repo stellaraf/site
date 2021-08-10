@@ -53,6 +53,8 @@ export const MHeader: React.FC<IHeader> = (props: IHeader) => {
         hideCloseButton
         onClose={onClose}
         isCentered={false}
+        footerProps={{ mb: 4 }}
+        containerProps={{ m: 2, width: '96vw', minH: '98vh' }}
         header={
           <Flex align="center" justify="space-between">
             <StellarLogo
@@ -85,8 +87,6 @@ export const MHeader: React.FC<IHeader> = (props: IHeader) => {
             <MControls />
           </HStack>
         }
-        footerProps={{ mb: 4 }}
-        containerProps={{ m: 2, width: '96vw', height: '98vh' }}
       />
     </>
   );

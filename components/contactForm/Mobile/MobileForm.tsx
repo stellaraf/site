@@ -52,8 +52,8 @@ export const MobileForm: React.FC<IMobileForm> = (props: IMobileForm) => {
       scrollInside
       hideCloseButton
       onClose={onClose}
-      bodyProps={{ overflow: 'unset' }}
-      containerProps={{ overflow: 'auto', mt: 0 }}
+      bodyProps={{ overflow: 'unset', mb: 8 }}
+      containerProps={{ m: 2, width: '96vw', minH: '98vh', pb: 32 }}
       body={
         <Grid
           boxSize="100%"

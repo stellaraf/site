@@ -1,4 +1,4 @@
-import { Flex, ModalFocusScope, useModalContext, useStyles, EASINGS } from '@chakra-ui/react';
+import { Flex, ModalFocusScope, useModalContext, useStyles } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import { AnimatedDiv } from '~/components';
 import { useColorValue } from '~/context';
@@ -34,7 +34,7 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
         <AnimatePresence>
           <AnimatedDiv
             // Don't mess with the order of these props.
-            transition={{ duration: 0.2, ease: EASINGS.easeInOut }}
+            transition={{ duration: 0.2, type: 'spring' }}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             backgroundColor={bg}
@@ -46,6 +46,7 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
             overflow="auto"
             boxSize="100%"
             boxShadow="lg"
+            alignSelf="center"
             __css={styles.dialog}
             borderColor={borderColor}
             css={{ backdropFilter: 'blur(20px)' }}
