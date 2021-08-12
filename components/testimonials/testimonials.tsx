@@ -38,7 +38,6 @@ export const Testimonials = (props: CenterProps): JSX.Element => {
         color={color}
         borderRadius="md"
         spacing={{ base: 4, lg: 8 }}
-        px={isDarkMode ? undefined : 8}
         bg={isDarkMode ? undefined : 'white'}
         boxShadow={isDarkMode ? undefined : 'xl'}
       >
