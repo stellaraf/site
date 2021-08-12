@@ -1,6 +1,6 @@
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import { useTitleCase } from 'use-title-case';
-import { Avatars, Hero, GoogleMap, SEO, GetStarted } from '~/components';
+import { Avatars, Hero, GoogleMap, SEO, GetStarted, Testimonials } from '~/components';
 import { useResponsiveStyle } from '~/hooks';
 import { getPage, getPageContent, getPageId, getParsedContent } from '~/util';
 
@@ -38,6 +38,7 @@ const About: React.FC<PageEntry<IAboutPage>> = (props: PageEntry<IAboutPage>) =>
       <Section title={mapTitle}>
         <GoogleMap />
       </Section>
+      <Testimonials />
       {getStarted && <GetStarted {...getStarted.fields} />}
     </>
   );

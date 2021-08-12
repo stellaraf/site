@@ -32,6 +32,7 @@ export * from './sectionDivider';
 export * from './select';
 export * from './special';
 export * from './stars';
+export * from './testimonials';
 export * from './usMap';
 export * from './util';
 export * from './video';

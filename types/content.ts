@@ -203,6 +203,7 @@ export interface GlobalConfigEntry {
   openMapsText?: string;
   hqAddress?: string;
   privacyBanner: Document;
+  testimonialTitle: string;
   callToActionTitle: string;
   callsToActionShown: 1 | 2 | 3 | 4 | 5 | 6;
   homePageVideo?: string;
@@ -334,5 +335,12 @@ export type TMarkdownBlock = {
   title: string;
   body: string;
 };
+
+export interface TestimonialEntry {
+  title: string;
+  subtitle?: string;
+  image: Asset;
+  body: Document;
+}
 
 export type { Entry, EntryCollection } from 'contentful';

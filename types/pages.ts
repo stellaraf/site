@@ -14,6 +14,7 @@ import type {
   FooterItem,
   PageAttrs,
   TActions,
+  TestimonialEntry,
   PageContent,
   Entry,
   Bio,
@@ -44,6 +45,7 @@ export interface TSite {
   footerGroups: FooterItem[];
   actions: TActions[];
   docsGroups: IDocsGroup[];
+  testimonials: TestimonialEntry[];
 }
 
 /**

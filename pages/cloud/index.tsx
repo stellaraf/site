@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { Button, Wrap } from '@chakra-ui/react';
 import { getPage, getPageContent, getOrionLocations, getPageId } from '~/util';
-import { ContentSection, Hero, SEO, useDataCenter, GetStarted } from '~/components';
+import { ContentSection, Hero, SEO, useDataCenter, GetStarted, Testimonials } from '~/components';
 import { useColorTokenValue, CloudLocationsProvider } from '~/context';
 import { useAlert } from '~/hooks';
 
@@ -58,11 +58,12 @@ const Cloud = (props: PageEntry<ICloud>): JSX.Element => {
             maxW={{ base: '100%', lg: '75%' }}
           />
         </Content>
-        {sections.map((sect, i) => {
-          return <ContentSection items={sect} index={i} key={i} />;
-        })}
-        {getStarted && <GetStarted {...getStarted.fields} />}
       </CloudLocationsProvider>
+      {sections.map((sect, i) => {
+        return <ContentSection items={sect} index={i} key={i} />;
+      })}
+      {getStarted && <GetStarted {...getStarted.fields} />}
+      <Testimonials />
     </>
   );
 };

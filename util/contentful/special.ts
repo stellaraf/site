@@ -11,6 +11,7 @@ import type {
   IPartnerPageEntry,
   IContactCardEntry,
   IMeasuredGeoPoint,
+  TestimonialEntry,
 } from '~/types';
 
 /**
@@ -113,3 +114,12 @@ export const getOrionLocations = async (): Promise<IMeasuredGeoPoint[]> => {
    */
   return data.items.map(p => ({ ...p.fields, elapsed: 65535, best: false }));
 };
+
+export async function getTestimonials(preview: boolean = false): Promise<TestimonialEntry[]> {
+  let testimonials = [] as TestimonialEntry[];
+  const data = await getContentType<TestimonialEntry>('testimonial', preview);
+  for (const entry of data.items) {
+    testimonials = [...testimonials, entry.fields];
+  }
+  return testimonials;
+}

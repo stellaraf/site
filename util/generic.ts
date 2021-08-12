@@ -77,3 +77,11 @@ export function removeProps<O, R extends keyof O = keyof O>(
   }
   return reconstructed;
 }
+
+/**
+ * Pick a random element from an array.
+ */
+export function randomArrayItem<T extends unknown>(arr: T[]): T {
+  const idx = Math.floor(Math.random() * arr.length);
+  return arr[idx];
+}

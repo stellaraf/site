@@ -1,5 +1,5 @@
 import { getPageId, getPage, getPageContent } from '~/util';
-import { ContentSection, Hero, SEO, GetStarted } from '~/components';
+import { ContentSection, Hero, SEO, GetStarted, Testimonials } from '~/components';
 
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { PageWithContent, PageEntry, PageContent } from '~/types';
@@ -22,6 +22,7 @@ const DynamicPage: React.FC<PageEntry<PageWithContent>> = (props: PageEntry<Page
         return <ContentSection items={sect} key={i} index={i} />;
       })}
       {getStarted && <GetStarted {...getStarted.fields} />}
+      <Testimonials />
     </>
   );
 };

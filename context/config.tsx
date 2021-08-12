@@ -17,15 +17,19 @@ function sortByTitle(prev: IDocsGroup, next: IDocsGroup) {
 
 const ConfigContext = createContext<IGlobalConfigCtx>({} as IGlobalConfigCtx);
 
-export const ConfigProvider: React.FC<IConfigProvider> = (props: IConfigProvider) => {
-  const { globalConfig, docsGroups, children } = props;
+export const ConfigProvider = (props: IConfigProvider): JSX.Element => {
+  const { globalConfig, docsGroups, testimonials, children } = props;
 
   const value = useMemo<IGlobalConfigCtx>(
-    () => ({ ...globalConfig, docsGroups: docsGroups.sort(sortByTitle).sort(sortByWeight) }),
+    () => ({
+      ...globalConfig,
+      testimonials,
+      docsGroups: docsGroups.sort(sortByTitle).sort(sortByWeight),
+    }),
     [globalConfig, docsGroups],
   );
 
   return <ConfigContext.Provider value={value}>{children}</ConfigContext.Provider>;
 };
 
-export const useConfig = (): IGlobalConfigCtx => useContext(ConfigContext);
+export const useConfig = (): IGlobalConfigCtx => useContext<IGlobalConfigCtx>(ConfigContext);

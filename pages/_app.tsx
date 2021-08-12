@@ -4,13 +4,19 @@ import { BaseSEO } from '~/components';
 import { Provider } from '~/context';
 import { useGoogleAnalytics } from '~/hooks';
 import { SiteLayout } from '~/layouts';
-import { getGlobalConfig, getFooterItems, getActions, getDocsGroups } from '~/util';
+import {
+  getGlobalConfig,
+  getFooterItems,
+  getActions,
+  getDocsGroups,
+  getTestimonials,
+} from '~/util';
 
 import type { TSite, NextApp, GetInitialPropsReturn } from '~/types';
 
 const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
   const { Component, pageProps, appProps, router } = props;
-  const { globalConfig, footerGroups, actions, docsGroups } = appProps;
+  const { globalConfig, footerGroups, actions, testimonials, docsGroups } = appProps;
 
   const { initializeAnalytics, trackPage } = useGoogleAnalytics();
 
@@ -27,7 +33,7 @@ const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
       <Head>
         <meta name="viewport" content="width=device-width" />
       </Head>
-      <Provider appConfig={globalConfig} docsGroups={docsGroups}>
+      <Provider appConfig={globalConfig} docsGroups={docsGroups} testimonials={testimonials}>
         <BaseSEO />
         <SiteLayout
           actions={actions}
@@ -46,9 +52,10 @@ Site.getInitialProps = async () => {
     const globalConfig = await getGlobalConfig();
     const footerGroups = await getFooterItems();
     const actions = await getActions();
+    const testimonials = await getTestimonials();
     const docsGroups = await getDocsGroups();
 
-    return { appProps: { globalConfig, footerGroups, actions, docsGroups } };
+    return { appProps: { globalConfig, footerGroups, actions, testimonials, docsGroups } };
   } catch (err) {
     console.error(err);
     console.dir(err.details?.errors ?? {});

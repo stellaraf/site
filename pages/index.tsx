@@ -7,6 +7,7 @@ import {
   HomeSection,
   SEO,
   Screen,
+  Testimonials,
 } from '~/components';
 import { useGradient, useNavLogo, useResponsiveStyle } from '~/hooks';
 import { getParsedContent } from '~/util';
@@ -64,6 +65,7 @@ const Home: React.FC<THome> = (props: THome) => {
       {sections.map((sect, i) => {
         return <HomeSection section={sect.fields} index={i % sections.length} key={i} />;
       })}
+      <Testimonials />
     </>
   );
 };
