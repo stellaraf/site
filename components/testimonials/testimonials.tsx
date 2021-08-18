@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Center, VStack } from '@chakra-ui/react';
 import { AnimatedDiv } from '~/components';
 import { useColorValue, useConfig } from '~/context';
@@ -9,7 +10,7 @@ import type { CenterProps } from '@chakra-ui/react';
 
 export const Testimonials = (props: CenterProps): JSX.Element => {
   const { testimonials } = useConfig();
-  const testimonial = randomArrayItem(testimonials);
+  const testimonial = useMemo(() => randomArrayItem(testimonials), []);
 
   const rStyles = useResponsiveStyle();
   const isDarkMode = useColorValue(false, true);
