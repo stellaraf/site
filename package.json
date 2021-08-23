@@ -18,6 +18,7 @@
     "camelcase-keys": "^7.0.0",
     "color2k": "1.1.0",
     "contentful": "^7.14.12",
+    "cors": "^2.8.5",
     "d3-geo": "^1.12.1",
     "dayjs": "^1.10.1",
     "favicons": "^6.2.0",
@@ -31,6 +32,7 @@
     "merge-anything": "^3.0.6",
     "mousetrap": "^1.6.5",
     "next": "^11.0.1",
+    "next-api-middleware": "^1.0.1",
     "next-seo": "^4.26.0",
     "palette-by-numbers": "^0.1.6",
     "query-string": "^7.0.1",
@@ -80,6 +82,7 @@
   "devDependencies": {
     "@arkweid/lefthook": "^0.7.6",
     "@next/bundle-analyzer": "^9.5.5",
+    "@types/cors": "^2.8.12",
     "@types/favicons": "^6.2.2",
     "@types/googlemaps": "^3.39.13",
     "@types/jsonwebtoken": "^8.5.5",

@@ -1,11 +1,10 @@
-import { SFHub } from '~/util';
+import { getProductDetails } from '~/lib/sfhub';
+import { withCors } from '~/lib/middleware';
 
 import type { NextApiHandler } from 'next';
 import type { SFHubProduct } from '~/types';
 
 type ProductsResponse = SFHubProduct[] | { error: string };
-
-const sfhub = new SFHub();
 
 const getProducts: NextApiHandler<ProductsResponse> = async (request, response) => {
   const productCodes = ((): string =>
@@ -13,16 +12,22 @@ const getProducts: NextApiHandler<ProductsResponse> = async (request, response) 
       ? request.query.productCodes.join(',')
       : request.query.productCodes)();
 
-  try {
-    const data = await sfhub.getProductDetails(...productCodes.split(','));
-    response.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate=270');
-    return response.status(200).json(data);
-  } catch (error) {
-    if (error instanceof Error) {
-      return response.status(500).json({ error: error.message });
-    }
-    return response.status(500).json({ error: String(error) });
-  }
+  const data = await getProductDetails(...productCodes.split(','));
+  response.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate=270');
+  return response.status(200).json(data);
 };
 
-export default getProducts;
+export default withCors(getProducts, {
+  origin: (origin, callback) => {
+    if (
+      typeof origin !== 'undefined' &&
+      ['https://stellar.tech', 'https://stellar.af'].includes(origin)
+    ) {
+      return callback(null, true);
+    } else {
+      return callback(new Error(`Nah, '${origin}' origin`), false);
+    }
+  },
+  preflightContinue: true,
+  methods: 'GET,OPTIONS',
+});

@@ -1,4 +1,4 @@
-import { SFHub } from '~/util';
+import { SFHub } from './client';
 
 import type { SFHubProduct } from '~/types';
 

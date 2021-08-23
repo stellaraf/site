@@ -10,6 +10,7 @@
       "~/context": ["./context/index"],
       "~/hooks": ["./hooks/index"],
       "~/layouts": ["./layouts/index"],
+      "~/lib/*": ["./lib/*"],
       "~/styles": ["./styles/index"],
       "~/types": ["./types/index"],
       "~/util": ["./util/index"]
@@ -38,6 +39,7 @@
     "./hooks/**/*.tsx",
     "./layouts/**/*.ts",
     "./layouts/**/*.tsx",
+    "./lib/**/*.ts",
     "./pages/**/*.ts",
     "./pages/**/*.tsx",
     "./types/**/*.ts",
