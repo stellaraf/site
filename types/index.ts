@@ -5,4 +5,5 @@ export * from './forms';
 export * from './guards';
 export * from './hooks';
 export * from './pages';
+export * from './sfhub';
 export * from './theme';

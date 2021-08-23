@@ -22,3 +22,9 @@ type Nullable<T> = T | null;
 type NoOp = () => void;
 
 type PropOf<T, P extends keyof T> = T[P];
+
+declare namespace NodeJS {
+  export interface ProcessEnv {
+    SFHUB_AUTH_TOKEN_REQUEST_KEY: string;
+  }
+}
