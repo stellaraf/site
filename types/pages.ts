@@ -18,6 +18,7 @@ import type {
   PageContent,
   Entry,
   Bio,
+  QuoteEntry,
 } from '~/types';
 
 export type GetInitialPropsReturn<InitialProps> = AppProps &
@@ -46,6 +47,7 @@ export interface TSite {
   actions: TActions[];
   docsGroups: IDocsGroup[];
   testimonials: TestimonialEntry[];
+  quote: QuoteEntry;
 }
 
 /**

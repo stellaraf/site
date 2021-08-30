@@ -1,17 +1,19 @@
-import { getParsedContent, getContentType } from './common';
+import { getParsedContent, getContentType, getCollection } from './common';
 
 import type {
+  Quote,
   FormModel,
+  DeepEntry,
   IDocsGroup,
   IPartnerPage,
   IContactCard,
   IDocsArticle,
   TFormModelTrial,
   IDocsGroupEntry,
+  TestimonialEntry,
   IPartnerPageEntry,
   IContactCardEntry,
   IMeasuredGeoPoint,
-  TestimonialEntry,
 } from '~/types';
 
 /**
@@ -122,4 +124,15 @@ export async function getTestimonials(preview: boolean = false): Promise<Testimo
     testimonials = [...testimonials, entry.fields];
   }
   return testimonials;
+}
+
+/**
+ * Get this environment's calculator quote data.
+ */
+export async function getCalculators(preview: boolean = false): Promise<DeepEntry<Quote>> {
+  const quote = await getCollection<Quote>('calculatorQuote', preview, {
+    'fields.name': process.env.NODE_ENV.toLowerCase(),
+  });
+
+  return quote.items[0];
 }

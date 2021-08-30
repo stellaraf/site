@@ -2,6 +2,7 @@ import { createClient } from 'contentful';
 import { merge } from 'merge-anything';
 
 import type { CreateClientParams, ContentfulClientApi, EntryCollection, Entry } from 'contentful';
+import type { DeepEntryCollection } from '~/types';
 
 export function client(preview: boolean = false): ContentfulClientApi {
   const options = {
@@ -61,6 +62,30 @@ export async function getParsedContent<T extends Empty>(
       ...item.fields,
       updatedAt: item.sys.updatedAt ?? null,
     }));
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
+/**
+ * Query Contentful for a specific content_type
+ */
+export async function getCollection<T>(
+  contentType: string,
+  preview: boolean = false,
+  query: Dict = {},
+): Promise<DeepEntryCollection<T>> {
+  const queryParams = merge(
+    { content_type: contentType, include: 10, select: 'sys.id,sys.updatedAt,fields' },
+    query,
+  );
+
+  try {
+    const thisClient = client(preview);
+    const entries = await thisClient.getEntries<T>(queryParams);
+    const parsed = await thisClient.parseEntries<T>(entries);
+    return parsed as DeepEntryCollection<T>;
   } catch (err) {
     console.error(err);
     throw err;

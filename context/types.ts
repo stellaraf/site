@@ -1,4 +1,12 @@
-import type { CustomTheme, GlobalConfig, ThemeConfig, IDocsGroup, TestimonialEntry } from '~/types';
+import React from 'react';
+import type {
+  IDocsGroup,
+  QuoteEntry,
+  CustomTheme,
+  ThemeConfig,
+  GlobalConfig,
+  TestimonialEntry,
+} from '~/types';
 
 /**
  * Root Provider Props
@@ -7,6 +15,7 @@ export interface IProvider {
   appConfig: GlobalConfig;
   docsGroups: IDocsGroup[];
   testimonials: TestimonialEntry[];
+  quote: QuoteEntry;
   children: React.ReactNode;
 }
 
@@ -16,16 +25,13 @@ export interface IProvider {
 
 type TGlobalConfig = Omit<GlobalConfig, 'theme'>;
 
+export interface IConfigProvider extends Omit<IProvider, 'appConfig'> {
+  globalConfig: TGlobalConfig;
+}
+
 export interface IGlobalConfigCtx extends TGlobalConfig {
   docsGroups: IDocsGroup[];
   testimonials: TestimonialEntry[];
-}
-
-export interface IConfigProvider {
-  globalConfig: TGlobalConfig;
-  docsGroups: IDocsGroup[];
-  testimonials: TestimonialEntry[];
-  children?: React.ReactNode;
 }
 
 /**

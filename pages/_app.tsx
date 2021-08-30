@@ -10,13 +10,14 @@ import {
   getActions,
   getDocsGroups,
   getTestimonials,
+  getCalculators,
 } from '~/util';
 
 import type { TSite, NextApp, GetInitialPropsReturn } from '~/types';
 
 const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
   const { Component, pageProps, appProps, router } = props;
-  const { globalConfig, footerGroups, actions, testimonials, docsGroups } = appProps;
+  const { globalConfig, footerGroups, actions, testimonials, docsGroups, quote } = appProps;
 
   const { initializeAnalytics, trackPage } = useGoogleAnalytics();
 
@@ -33,7 +34,12 @@ const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
       <Head>
         <meta name="viewport" content="width=device-width" />
       </Head>
-      <Provider appConfig={globalConfig} docsGroups={docsGroups} testimonials={testimonials}>
+      <Provider
+        appConfig={globalConfig}
+        docsGroups={docsGroups}
+        testimonials={testimonials}
+        quote={quote}
+      >
         <BaseSEO />
         <SiteLayout
           actions={actions}
@@ -54,8 +60,9 @@ Site.getInitialProps = async () => {
     const actions = await getActions();
     const testimonials = await getTestimonials();
     const docsGroups = await getDocsGroups();
+    const quote = await getCalculators();
 
-    return { appProps: { globalConfig, footerGroups, actions, testimonials, docsGroups } };
+    return { appProps: { globalConfig, footerGroups, actions, testimonials, docsGroups, quote } };
   } catch (err) {
     console.error(err);
     console.dir(err.details?.errors ?? {});

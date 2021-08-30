@@ -1,8 +1,8 @@
-export type Term = 0 | 1 | 3;
+import type { DeepEntry } from '~/types';
 
 export interface TermField {
   name: string;
-  value: Term;
+  value: number;
   modifier: number;
 }
 
@@ -40,11 +40,13 @@ export type Field = QuantityField | SelectField | TierField;
 
 export interface Product {
   name: string;
-  fields: Field[];
+  formFields: Field[];
   staticFields: BaseField[];
 }
 
 export interface Quote {
+  name: string;
   products: Product[];
   term: TermField;
 }
+export type QuoteEntry = DeepEntry<Quote>;

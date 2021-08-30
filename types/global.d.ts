@@ -23,6 +23,8 @@ type NoOp = () => void;
 
 type PropOf<T, P extends keyof T> = T[P];
 
+type JSONPrimitive = string | number | boolean | null;
+
 declare namespace NodeJS {
   export interface ProcessEnv {
     SFHUB_AUTH_TOKEN_REQUEST_KEY: string;

@@ -8,11 +8,16 @@ import type { IProvider } from './types';
 const queryClient = new QueryClient();
 
 export const Provider: React.FC<IProvider> = (props: IProvider) => {
-  const { children, appConfig, docsGroups, testimonials } = props;
+  const { children, appConfig, docsGroups, testimonials, quote } = props;
   const { theme, ...globalConfig } = appConfig;
 
   return (
-    <ConfigProvider globalConfig={globalConfig} docsGroups={docsGroups} testimonials={testimonials}>
+    <ConfigProvider
+      quote={quote}
+      docsGroups={docsGroups}
+      globalConfig={globalConfig}
+      testimonials={testimonials}
+    >
       <UIProvider theme={theme}>
         <TitleCaseProvider overrides={globalConfig.titleOverrides}>
           <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
