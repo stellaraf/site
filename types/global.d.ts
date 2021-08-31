@@ -25,6 +25,11 @@ type PropOf<T, P extends keyof T> = T[P];
 
 type JSONPrimitive = string | number | boolean | null;
 
+/**
+ * Construct a type that requires certain keys, but marks all other keys as optional.
+ */
+type RequiredKeys<T, K extends keyof T> = Required<Pick<T, K>> & Partial<Omit<T, K>>;
+
 declare namespace NodeJS {
   export interface ProcessEnv {
     SFHUB_AUTH_TOKEN_REQUEST_KEY: string;

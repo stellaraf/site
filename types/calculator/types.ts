@@ -7,6 +7,8 @@ export interface TermField {
 }
 
 export interface BaseField {
+  [k: string]: unknown;
+  __type: unknown;
   name: string;
   productCode: string;
   unitPrice: number;
