@@ -77,6 +77,8 @@ export const getStaticProps: GetStaticProps<PricingPageProps, UrlQuery> = async 
 
   const queryClient = new QueryClient();
 
+  console.log('VERCEL_URL:', process.env.VERCEL_URL);
+
   try {
     const pageId = await getPageId('cloud/pricing', preview);
     pageData = await getPage(pageId, preview);
