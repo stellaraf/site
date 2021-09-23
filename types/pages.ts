@@ -1,4 +1,5 @@
 import type { AppProps, AppInitialProps, AppContext } from 'next/app';
+import type { DehydratedState } from 'react-query';
 import type { BoxProps } from '@chakra-ui/react';
 import type { Asset } from 'contentful';
 import type { Document } from '@contentful/rich-text-types';
@@ -18,7 +19,6 @@ import type {
   PageContent,
   Entry,
   Bio,
-  QuoteEntry,
 } from '~/types';
 
 export type GetInitialPropsReturn<InitialProps> = AppProps &
@@ -41,13 +41,16 @@ export type PageEntry<P extends Page = Page> = Omit<P, 'pageData'> & {
   pageData: Entry<P['pageData']>;
 };
 
+export type WithDehydratedState<P> = P & {
+  dehydratedState: DehydratedState;
+};
+
 export interface TSite {
   globalConfig: GlobalConfig;
   footerGroups: FooterItem[];
   actions: TActions[];
   docsGroups: IDocsGroup[];
   testimonials: TestimonialEntry[];
-  quote: QuoteEntry;
 }
 
 /**
