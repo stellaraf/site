@@ -15,7 +15,10 @@ export async function fetchProductPrice(
 ): Promise<SFHubProduct[]> {
   const { queryKey } = ctx;
   const productCodes = queryKey.join(',');
-  const url = queryString.stringifyUrl({ url: '/api/sfhub/products', query: { productCodes } });
+  const url = queryString.stringifyUrl({
+    url: `${process.env.VERCEL_URL ?? ''}/api/sfhub/products`,
+    query: { productCodes },
+  });
   try {
     const res = await fetch(url, { method: 'GET' });
     if (!res.ok) {
