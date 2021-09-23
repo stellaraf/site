@@ -25,6 +25,21 @@ export type DeepEntry<T> = T extends Entry<infer E>
           : never;
       }
     >;
+export type DeepEntryMembers<T> = T extends Entry<infer E>
+  ? E
+  : T extends Array<infer A>
+  ? Array<DeepEntry<A>>
+  : T extends Record<string, infer R>
+  ? DeepEntry<R>
+  : {
+      [K in keyof T]: T[K] extends Array<infer A>
+        ? Array<DeepEntry<A>>
+        : T[K] extends Record<string, infer R>
+        ? DeepEntry<R>
+        : T[K] extends infer V
+        ? V
+        : never;
+    };
 
 interface PartialEntryCollection<T> {
   items: Array<DeepEntry<T>>;

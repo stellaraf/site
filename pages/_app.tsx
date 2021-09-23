@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { BaseSEO } from '~/components';
 import { Provider } from '~/context';
 import { useGoogleAnalytics } from '~/hooks';
@@ -10,14 +11,15 @@ import {
   getActions,
   getDocsGroups,
   getTestimonials,
-  getCalculators,
 } from '~/util';
 
 import type { TSite, NextApp, GetInitialPropsReturn } from '~/types';
 
 const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
   const { Component, pageProps, appProps, router } = props;
-  const { globalConfig, footerGroups, actions, testimonials, docsGroups, quote } = appProps;
+  const { globalConfig, footerGroups, actions, testimonials, docsGroups } = appProps;
+
+  const [queryClient] = useState(() => new QueryClient());
 
   const { initializeAnalytics, trackPage } = useGoogleAnalytics();
 
@@ -34,19 +36,18 @@ const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
       <Head>
         <meta name="viewport" content="width=device-width" />
       </Head>
-      <Provider
-        appConfig={globalConfig}
-        docsGroups={docsGroups}
-        testimonials={testimonials}
-        quote={quote}
-      >
+      <Provider appConfig={globalConfig} docsGroups={docsGroups} testimonials={testimonials}>
         <BaseSEO />
         <SiteLayout
           actions={actions}
           footerGroups={footerGroups}
           preview={pageProps?.preview ?? false}
         >
-          <Component {...pageProps} />
+          <QueryClientProvider client={queryClient}>
+            <Hydrate state={pageProps.dehydratedState}>
+              <Component {...pageProps} />
+            </Hydrate>
+          </QueryClientProvider>
         </SiteLayout>
       </Provider>
     </>
@@ -60,9 +61,8 @@ Site.getInitialProps = async () => {
     const actions = await getActions();
     const testimonials = await getTestimonials();
     const docsGroups = await getDocsGroups();
-    const quote = await getCalculators();
 
-    return { appProps: { globalConfig, footerGroups, actions, testimonials, docsGroups, quote } };
+    return { appProps: { globalConfig, footerGroups, actions, testimonials, docsGroups } };
   } catch (err) {
     console.error(err);
     if (err instanceof Error) {

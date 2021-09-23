@@ -1,11 +1,13 @@
 import {
   Box,
+  HStack,
   Slider,
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
   NumberInput,
   NumberInputField,
+  Tag,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
@@ -46,12 +48,15 @@ export const QuantityField = (props: QuantityFieldProps): JSX.Element => {
         </NumberInput>
       )}
       {inputType === 'slider' && (
-        <Slider defaultValue={0} value={value} max={1_000} onChange={setValue}>
-          <SliderTrack>
-            <SliderFilledTrack />
-          </SliderTrack>
-          <SliderThumb />
-        </Slider>
+        <HStack spacing={4}>
+          <Slider defaultValue={0} value={value} max={1_000} onChange={setValue}>
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb />
+          </Slider>
+          <Tag justifyContent="center">{value}</Tag>
+        </HStack>
       )}
     </Box>
   );

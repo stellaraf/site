@@ -1,21 +1,26 @@
 import { FormControl, FormLabel, FormErrorMessage, FormHelperText } from '@chakra-ui/react';
 
 import type { FormControlProps } from '@chakra-ui/react';
+import type { BaseField } from '~/types';
 
 interface FieldWrapperProps extends FormControlProps {
   id: string;
-  label: string;
+  field: BaseField;
   error?: string;
 }
 
 export const FieldWrapper = (props: FieldWrapperProps): JSX.Element => {
-  const { children, label, id, error, ...rest } = props;
+  const { children, field, id, error, ...rest } = props;
 
   return (
     <FormControl id={id} isInvalid={typeof error !== 'undefined'} {...rest}>
-      <FormLabel>{label}</FormLabel>
+      <FormLabel>{field.name}</FormLabel>
       {children}
-      <FormHelperText></FormHelperText>
+      {!error && (
+        <FormHelperText fontSize="xs" textAlign="end">
+          {field.info}
+        </FormHelperText>
+      )}
       <FormErrorMessage>{error}</FormErrorMessage>
     </FormControl>
   );

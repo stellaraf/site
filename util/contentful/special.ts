@@ -1,7 +1,9 @@
 import { getParsedContent, getContentType, getCollection } from './common';
+import { isBaseField } from '~/types';
 
 import type {
   Quote,
+  BaseField,
   FormModel,
   DeepEntry,
   IDocsGroup,
@@ -150,4 +152,29 @@ export async function getCalculators(preview: boolean = false): Promise<DeepEntr
   }
 
   return first;
+}
+
+/**
+ * Extract and deduplicate all associated product codes from a quote entry.
+ *
+ * @param quote Contentful Quote Entry.
+ * @returns Deduplicated list of product codes.
+ */
+export function extractQuoteProductCodes(quote: DeepEntry<Quote>): string[] {
+  if (!('fields' in quote)) {
+    throw new Error('Quote has not been initialized');
+  }
+  return Array.from(
+    new Set(
+      quote.fields.products
+        .map(pe => pe.fields)
+        .map(product =>
+          product.formFields
+            .filter(formField => isBaseField(formField.fields))
+            .map(formField => formField.fields as BaseField)
+            .map(field => field.productCode),
+        )
+        .flat(),
+    ),
+  ).sort();
 }

@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-key */
 import { HStack, Button } from '@chakra-ui/react';
 import { useTable } from 'react-table';
+import { DynamicIcon, CodeBlock } from '~/components';
+import { useAlert } from '~/hooks';
 import { useColumns } from './columns';
 import { Table, Td, Tr, Th, Tbody, Thead, Tfoot, TableCaption } from './elements';
 import { useTableState } from '../state';
@@ -29,6 +31,9 @@ export const QuoteTable = (): JSX.Element => {
     columns,
   });
 
+  // This is temporary.
+  const showAlert = useAlert();
+
   const {
     rows,
     headers,
@@ -42,10 +47,29 @@ export const QuoteTable = (): JSX.Element => {
     <Table {...getTableProps()}>
       <TableCaption px={0}>
         <HStack justify="flex-end">
-          <Button size="sm" colorScheme="red" variant="outline" onClick={() => reset()}>
+          <Button
+            size="sm"
+            colorScheme="red"
+            variant="outline"
+            onClick={() => reset()}
+            leftIcon={<DynamicIcon icon={{ io: 'IoIosRefresh' }} />}
+          >
             Reset
           </Button>
-          <Button size="sm" colorScheme="green" variant="solid" onClick={() => console.log(data)}>
+          <Button
+            size="sm"
+            variant="solid"
+            colorScheme="green"
+            onClick={() =>
+              showAlert({
+                status: 'success',
+                message: (
+                  <CodeBlock colorScheme="success">{JSON.stringify(data, null, 2)}</CodeBlock>
+                ),
+              })
+            }
+            leftIcon={<DynamicIcon icon={{ fa: 'CheckCircle' }} />}
+          >
             Submit
           </Button>
         </HStack>
@@ -74,19 +98,21 @@ export const QuoteTable = (): JSX.Element => {
         })}
       </Tbody>
       <Tfoot>
-        {footerGroups.map(group => {
-          const [empty, columns] = getFooterCells(group.headers);
-          return (
-            <>
-              {empty}
-              {columns.map(column => (
-                <Td {...column.getFooterProps()} textAlign="end">
-                  {column.render('Footer')}
-                </Td>
-              ))}
-            </>
-          );
-        })}
+        <Tr>
+          {footerGroups.map(group => {
+            const [empty, columns] = getFooterCells(group.headers);
+            return (
+              <>
+                {empty}
+                {columns.map(column => (
+                  <Td {...column.getFooterProps()} textAlign="end">
+                    {column.render('Footer')}
+                  </Td>
+                ))}
+              </>
+            );
+          })}
+        </Tr>
       </Tfoot>
     </Table>
   );
