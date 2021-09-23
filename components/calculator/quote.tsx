@@ -108,7 +108,7 @@ export const Quote = (props: QuoteProps): JSX.Element => {
               </Tab>
             ))}
           </TabList>
-          <Center flexGrow={1} flexDir="column">
+          <Center flexGrow={1} flexDir="column" zIndex={1}>
             <TabPanels d="flex" flexGrow={1} justifyContent="center" alignItems="center">
               {products.map((product, i) => (
                 <TabPanel key={i}>
