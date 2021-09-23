@@ -20,6 +20,7 @@ export async function fetchProductPrice(
   let origin = '';
   if (typeof process.env.VERCEL_URL !== 'undefined') {
     baseUrl = `https://${process.env.VERCEL_URL}`;
+    origin = baseUrl;
   }
   if (typeof window !== 'undefined') {
     origin = window.origin;

@@ -1,5 +1,6 @@
 import { SFHub } from './client';
 
+import type { QueryFunctionContext } from 'react-query';
 import type { SFHubProduct } from '~/types';
 
 type ProductsResponse = SFHubProduct[] | { error: string };
@@ -21,4 +22,14 @@ export async function getProductDetails(...products: string[]): Promise<Products
     }
     return { error: String(error) };
   }
+}
+
+/**
+ * Fetch details for products by SKU/Product Code, but for react-query.
+ *
+ * @param products Product codes/SKUs
+ */
+export async function queryProducts(ctx: QueryFunctionContext<string[]>): Promise<SFHubProduct[]> {
+  const { queryKey } = ctx;
+  return await sfhub.getProductDetails(...queryKey);
 }

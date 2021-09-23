@@ -2,7 +2,8 @@ import NextError from 'next/error';
 import { Box, Flex } from '@chakra-ui/react';
 import { dehydrate, QueryClient } from 'react-query';
 import { ContentSection, Hero, SEO, GetStarted, Testimonials, Quote } from '~/components';
-import { useResponsiveStyle, fetchProductPrice } from '~/hooks';
+import { useResponsiveStyle } from '~/hooks';
+import { queryProducts } from '~/lib/sfhub';
 import {
   getPage,
   getPageContent,
@@ -77,17 +78,17 @@ export const getStaticProps: GetStaticProps<PricingPageProps, UrlQuery> = async 
 
   const queryClient = new QueryClient();
 
-  console.log('VERCEL_URL:', process.env.VERCEL_URL);
-
   try {
     const pageId = await getPageId('cloud/pricing', preview);
     pageData = await getPage(pageId, preview);
     pageContent = await getPageContent(pageId, preview);
+
     quote = await getCalculators();
     const productCodes = extractQuoteProductCodes(quote);
+
     await queryClient.prefetchQuery<SFHubProduct[], Error, SFHubProduct[], string[]>({
       queryKey: productCodes,
-      queryFn: fetchProductPrice,
+      queryFn: queryProducts,
     });
   } catch (err) {
     console.error(err);

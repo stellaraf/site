@@ -10,12 +10,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 function getVersion() {
+  console.log('VERCEL_URL:', process.env.VERCEL_URL);
   const packageRaw = fs.readFileSync('package.json');
   const package = JSON.parse(packageRaw);
   return package.version;
 }
-
-console.dir(process.env, { depth: null });
 
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
