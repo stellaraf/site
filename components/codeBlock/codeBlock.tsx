@@ -16,7 +16,7 @@ const CopyIcon = dynamic<MeronexIcon>(() => import('@meronex/icons/bi').then(i =
 const CheckIcon = dynamic<MeronexIcon>(() => import('@meronex/icons/bi').then(i => i.BiCheck));
 
 export const CodeBlock: React.FC<ICodeBlock> = (props: ICodeBlock) => {
-  const { children, ...rest } = props;
+  const { children, colorScheme, ...rest } = props;
   const defaultScheme = useColorValue('gray', 'tertiary');
   const size = useBreakpointValue({ base: 'md', lg: 'sm' });
 
@@ -24,8 +24,8 @@ export const CodeBlock: React.FC<ICodeBlock> = (props: ICodeBlock) => {
 
   if (ctx === null) {
     ctx = {
-      codeBlock: { colorScheme: defaultScheme },
-      copyButton: { colorScheme: defaultScheme, variant: 'ghost' },
+      codeBlock: { colorScheme: colorScheme ?? defaultScheme },
+      copyButton: { colorScheme: colorScheme ?? defaultScheme, variant: 'ghost' },
     };
   }
 
