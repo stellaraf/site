@@ -134,5 +134,16 @@ export async function getCalculators(preview: boolean = false): Promise<DeepEntr
     'fields.name': process.env.NODE_ENV.toLowerCase(),
   });
 
-  return quote.items[0];
+  const first = quote.items[0];
+
+  for (const product of first.fields.products) {
+    for (const formField of product.fields.formFields) {
+      const contentType = formField.sys.contentType.sys.id;
+      const __type = contentType.replace('calculatorField', '').toLowerCase();
+      // @ts-expect-error The field type is currently unknown
+      formField.fields['__type'] = __type;
+    }
+  }
+
+  return first;
 }

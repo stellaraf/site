@@ -1,6 +1,7 @@
 export * from './avatars';
 export * from './banner';
 export * from './button';
+export * from './calculator';
 export * from './callToAction';
 export * from './card';
 export * from './carousel';

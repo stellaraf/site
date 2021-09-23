@@ -24,6 +24,8 @@ export default withCors(getProducts, {
       ['https://stellar.tech', 'https://stellar.af'].includes(origin)
     ) {
       return callback(null, true);
+    } else if (typeof origin === 'undefined' && process.env.NODE_ENV === 'development') {
+      return callback(null, true);
     } else {
       return callback(new Error(`Nah, '${origin}' origin`), false);
     }

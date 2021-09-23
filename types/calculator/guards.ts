@@ -6,9 +6,7 @@ import type { BaseField, QuantityField, TierField, SelectField } from './types';
  * Determine if `data` is an object of `BaseField` type.
  */
 export function isBaseField(data: unknown): data is BaseField {
-  return (
-    isObject<BaseField>(data) && objectHasKeys<BaseField>(data, 'name', 'productCode', 'unitPrice')
-  );
+  return isObject<BaseField>(data) && objectHasKeys<BaseField>(data, 'name', 'productCode');
 }
 
 /**

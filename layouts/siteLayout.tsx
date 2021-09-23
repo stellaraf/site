@@ -50,7 +50,7 @@ export const SiteLayout: React.FC<ISiteLayout> = (props: ISiteLayout) => {
             <Footer groups={footerGroups} />
             {!isMobile && <DControls />}
           </SyncedStyleProvider>
-          <Stars />
+          {process.env.NODE_ENV === 'production' && <Stars />}
           <RickRoll />
         </Wrapper>
       </AnimatePresence>

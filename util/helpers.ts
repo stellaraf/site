@@ -2,6 +2,9 @@ import * as React from 'react';
 import { shouldForwardProp as chakraShouldForwardProp } from '@chakra-ui/react';
 import emotionIsValidHTMLProp from '@emotion/is-prop-valid';
 import camelCaseKeys from 'camelcase-keys';
+import { devtools } from 'zustand/middleware';
+
+import type { StateCreator } from 'zustand';
 
 export function forwardRef<E, P>(
   _Component: React.ForwardRefRenderFunction<E, P>,
@@ -38,4 +41,21 @@ export type CamelCaseKeys<T extends Params[0]> = ReturnType<Wrapper<T, { deep: t
 
 export function camelCaseObj<D extends Dict>(obj: D): CamelCaseKeys<D> {
   return camelCaseKeys(obj, { deep: true });
+}
+
+/**
+ * Wrap a zustand state function with devtools, if applicable.
+ *
+ * @param store zustand store function.
+ * @param name Store name.
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function withDev<T extends object = {}>(
+  store: StateCreator<T>,
+  name: string,
+): StateCreator<T> {
+  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+    return devtools<T>(store, name);
+  }
+  return store;
 }

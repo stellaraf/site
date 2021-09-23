@@ -30,6 +30,13 @@ type JSONPrimitive = string | number | boolean | null;
  */
 type RequiredKeys<T, K extends keyof T> = Required<Pick<T, K>> & Partial<Omit<T, K>>;
 
+/**
+ * Infer the element type from an array type.
+ */
+type ArrayType<ArrayT extends readonly unknown[]> = ArrayT extends readonly (infer ElementT)[]
+  ? ElementT
+  : never;
+
 declare namespace NodeJS {
   export interface ProcessEnv {
     SFHUB_AUTH_TOKEN_REQUEST_KEY: string;

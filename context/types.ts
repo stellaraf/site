@@ -32,6 +32,7 @@ export interface IConfigProvider extends Omit<IProvider, 'appConfig'> {
 export interface IGlobalConfigCtx extends TGlobalConfig {
   docsGroups: IDocsGroup[];
   testimonials: TestimonialEntry[];
+  quote: QuoteEntry;
 }
 
 /**

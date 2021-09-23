@@ -17,6 +17,7 @@ export * from './useMobile';
 export * from './useMouseTrap';
 export * from './useNavLogo';
 export * from './useOpposingColor';
+export * from './useProductPrice';
 export * from './useRender';
 export * from './useResponsiveStyle';
 export * from './useRickRoll';

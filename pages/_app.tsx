@@ -65,8 +65,12 @@ Site.getInitialProps = async () => {
     return { appProps: { globalConfig, footerGroups, actions, testimonials, docsGroups, quote } };
   } catch (err) {
     console.error(err);
-    console.dir(err.details?.errors ?? {});
-    throw new Error(`Error while loading app configuration: ${err.message}`);
+    if (err instanceof Error) {
+      console.dir(err);
+      throw new Error(`Error while loading app configuration: ${err.message}`);
+    } else {
+      throw err;
+    }
   }
 };
 

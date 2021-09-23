@@ -1,0 +1,51 @@
+import { useCallback } from 'react';
+import queryString from 'query-string';
+import { useQuery } from 'react-query';
+
+import type { QueryFunctionContext, UseQueryResult } from 'react-query';
+import type { SFHubProduct } from '~/types';
+
+type UseProductPrice = {
+  getProductPrice(code: string): Nullable<SFHubProduct>;
+} & UseQueryResult<SFHubProduct[], Error>;
+
+async function queryFn(ctx: QueryFunctionContext<string[]>): Promise<SFHubProduct[]> {
+  const { queryKey } = ctx;
+  const productCodes = queryKey.join(',');
+  const url = queryString.stringifyUrl({ url: '/api/sfhub/products', query: { productCodes } });
+  try {
+    const res = await fetch(url, { method: 'GET' });
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+    return await res.json();
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error(`${error}`);
+  }
+}
+
+export function useProductPrice(productCodes: string[]): UseProductPrice {
+  const query = useQuery<SFHubProduct[], Error, SFHubProduct[], string[]>({
+    queryKey: productCodes,
+    queryFn,
+    refetchOnWindowFocus: false,
+    enabled: false,
+    cacheTime: 86400,
+  });
+  const getProductPrice = useCallback(
+    (code: string): Nullable<SFHubProduct> => {
+      if (query.data) {
+        const matching = query.data.find(p => p.productCode === code);
+        if (matching) {
+          return matching;
+        }
+      }
+      return null;
+    },
+    [query],
+  );
+  return { getProductPrice, ...query };
+}

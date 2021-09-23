@@ -148,8 +148,27 @@ export class SFHub {
       throw new Error(data.error);
     }
 
-    return data
+    const sfHubProducts: SFHubProduct[] = data
       .map(({ UnitPrice, ProductCode }) => ({ ProductCode, UnitPrice }))
-      .map(d => camelCaseObj(d)) as SFHubProduct[];
+      .map(d => camelCaseObj(d))
+      .reduce<SFHubProduct[]>((result, product) => {
+        // Remove duplicates and select the highest price item if there is a duplicate.
+        const duplicate = result.find(item => {
+          return item.productCode === product.productCode && item.unitPrice !== product.unitPrice;
+        });
+        if (typeof duplicate !== 'undefined') {
+          if (duplicate.unitPrice > product.unitPrice) {
+            return result.concat([duplicate]);
+          } else if (product.unitPrice > duplicate.unitPrice) {
+            return result
+              .filter(
+                i => i.productCode !== duplicate.productCode && duplicate.unitPrice !== i.unitPrice,
+              )
+              .concat([product]);
+          }
+        }
+        return result.concat([product]);
+      }, []);
+    return sfHubProducts;
   }
 }

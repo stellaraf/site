@@ -85,3 +85,19 @@ export function randomArrayItem<T extends unknown>(arr: T[]): T {
   const idx = Math.floor(Math.random() * arr.length);
   return arr[idx];
 }
+
+/**
+ * Divide array into two arrays, one where elements matched the predicate, one where they did not.
+ * Should operate the same way as `Array.filter`, but returns both passing and failed elements.
+ */
+export function divideArray<T>(
+  array: T[],
+  filter: (item: T, index: number) => boolean,
+): [T[], T[]] {
+  return array.reduce(
+    ([pass, fail], elem, index) => {
+      return filter(elem, index) ? [[...pass, elem], fail] : [pass, [...fail, elem]];
+    },
+    [[] as T[], [] as T[]],
+  );
+}
