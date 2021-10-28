@@ -44,7 +44,7 @@ export const SocialLinks: React.FC<ISocialLinks> = (props: ISocialLinks) => {
       <SocialLink
         label="LinkedIn"
         icon={<LinkedIn size="1.5em" />}
-        href={`https://linked.com/company/${linkedInProfile}`}
+        href={`https://linkedin.com/company/${linkedInProfile}`}
       />
       <SocialLink
         label="Twitter"
