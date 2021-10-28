@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
-import { Flex, VStack } from '@chakra-ui/react';
+import { Flex, VStack, Wrap } from '@chakra-ui/react';
 import { isQuantityField, isBaseField } from '~/types';
 import { FieldWrapper } from './fields/wrapper';
 import { QuantityField } from './fields/quantity';
+import { Configuration } from './configuration';
 import { generateId } from './util';
 
 import type { FlexProps } from '@chakra-ui/react';
@@ -21,10 +22,11 @@ export const Product = (props: ProductProps): JSX.Element => {
       .map(formField => formField.fields as BaseField) as BaseField[];
   }, [product]);
 
+  const configurations = useMemo(() => product.configurations.map(conf => conf.fields), [product]);
   return (
     <Flex {...rest}>
       <VStack>
-        {fields.map(field => {
+        {/* {fields.map(field => {
           let component: JSX.Element | undefined;
           const id = generateId(field.name);
           if (isQuantityField(field)) {
@@ -35,7 +37,12 @@ export const Product = (props: ProductProps): JSX.Element => {
               {component}
             </FieldWrapper>
           );
-        })}
+        })} */}
+        <Wrap shouldWrapChildren justify="center">
+          {product.configurations.map(conf => (
+            <Configuration product={product.name} key={conf.fields.name} configuration={conf} />
+          ))}
+        </Wrap>
       </VStack>
     </Flex>
   );

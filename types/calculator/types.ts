@@ -1,4 +1,4 @@
-import type { DeepEntry } from '~/types';
+import type { DeepEntry, ColorNames } from '~/types';
 
 export interface TermField {
   name: string;
@@ -7,7 +7,6 @@ export interface TermField {
 }
 
 export interface BaseField {
-  [k: string]: unknown;
   __type: unknown;
   name: string;
   productCode: string;
@@ -32,17 +31,25 @@ export interface TierField extends BaseField {
 
 export interface SelectFieldOption extends Omit<BaseField, 'info'> {}
 
-export interface SelectField extends BaseField {
+export interface CheckboxField extends BaseField {
+  __type: 'checkbox';
+  checkedByDefault: boolean;
+}
+
+export interface SelectField {
   __type: 'select';
+  name: string;
+  info?: string;
   inputType: 'dropdown' | 'radio';
   options: SelectFieldOption[];
 }
 
-export type Field = QuantityField | SelectField | TierField;
+export type Field = QuantityField | SelectField | TierField | CheckboxField;
 
 export interface Product {
   name: string;
   formFields: Field[];
+  configurations: Configuration[];
   staticFields: BaseField[];
 }
 
@@ -51,4 +58,21 @@ export interface Quote {
   products: Product[];
   term: TermField;
 }
+
+export interface ConfigurationItem {
+  name: string;
+  productName: string;
+  productCode: string;
+  quantity: number;
+  unit?: string;
+}
+
+export interface Configuration {
+  name: string;
+  description: string;
+  products: ConfigurationItem[];
+  addOns: Field[];
+  color: Extract<ColorNames, 'blue' | 'purple' | 'green' | 'cyan' | 'red' | 'yellow' | 'orange'>;
+}
+
 export type QuoteEntry = DeepEntry<Quote>;

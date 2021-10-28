@@ -148,6 +148,16 @@ export async function getCalculators(preview: boolean = false): Promise<DeepEntr
         // @ts-expect-error The field type is currently unknown
         formField.fields['__type'] = __type;
       }
+      if (Array.isArray(product.fields.configurations)) {
+        for (const conf of product.fields.configurations) {
+          for (const field of conf.fields.addOns) {
+            const contentType = field.sys.contentType.sys.id;
+            const __type = contentType.replace('calculatorField', '').toLowerCase();
+            // @ts-expect-error The field type is currently unknown
+            field.fields['__type'] = __type;
+          }
+        }
+      }
     }
   }
 

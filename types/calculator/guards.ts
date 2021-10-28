@@ -1,6 +1,13 @@
 import { isObject, objectHasKeys } from '~/types';
 
-import type { BaseField, QuantityField, TierField, SelectField } from './types';
+import type {
+  BaseField,
+  QuantityField,
+  TierField,
+  SelectField,
+  SelectFieldOption,
+  CheckboxField,
+} from './types';
 
 /**
  * Determine if `data` is an object of `BaseField` type.
@@ -27,5 +34,23 @@ export function isTierField(data: unknown): data is TierField {
  * Determine if an object is `SelectField`.
  */
 export function isSelectField(data: unknown): data is SelectField {
-  return isBaseField(data) && data.__type === 'select';
+  return (
+    isObject<SelectField>(data) &&
+    objectHasKeys<SelectField>(data, 'name', 'options') &&
+    data.__type === 'select'
+  );
+}
+
+/**
+ * Determine if an object is `SelectFieldOption`.
+ */
+export function isSelectFieldOption(data: unknown): data is SelectFieldOption {
+  return isBaseField(data);
+}
+
+/**
+ * Determine if an object is `SelectField`.
+ */
+export function isCheckboxField(data: unknown): data is CheckboxField {
+  return isBaseField(data) && data.__type === 'checkbox';
 }
