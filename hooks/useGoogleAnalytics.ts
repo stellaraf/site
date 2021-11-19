@@ -1,22 +1,49 @@
-import * as ReactGA from 'react-ga';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-import type { UseGoogleAnalytics } from './types';
+interface UseGoogleAnalyticsReturn {
+  trackEvent(
+    action: string,
+    params?: Gtag.CustomParams | Gtag.ControlParams | Gtag.EventParams,
+  ): void;
+  trackPage(path: string): void;
+  trackModal(path: string): void;
+}
 
-function useAnalytics(effect: UseGoogleAnalytics.Effect): void {
-  if (typeof window !== 'undefined' && typeof process.env.NEXT_PUBLIC_GANALYTICS === 'string') {
-    if (typeof effect === 'function') {
-      effect(ReactGA);
-    }
+function shouldCallEffect(effect: unknown): effect is CallableFunction {
+  return (
+    typeof window !== 'undefined' &&
+    typeof process.env.NEXT_PUBLIC_GANALYTICS === 'string' &&
+    typeof effect === 'function'
+  );
+}
+
+function useAnalytics(effect: (p: string) => void): void;
+function useAnalytics(
+  effect: (
+    action: string,
+    params?: Gtag.CustomParams | Gtag.ControlParams | Gtag.EventParams,
+  ) => void,
+): void;
+function useAnalytics(effect: unknown): void {
+  if (shouldCallEffect(effect)) {
+    effect();
   }
 }
 
-function trackEvent(e: UseGoogleAnalytics.EventArgs) {
-  useAnalytics(ga => {
-    if (process.env.NODE_ENV === 'production') {
-      ga.event(e);
+function trackEvent(
+  action: string,
+  params?: Gtag.CustomParams | Gtag.ControlParams | Gtag.EventParams,
+) {
+  useAnalytics(() => {
+    if (
+      process.env.NODE_ENV === 'production' &&
+      typeof process.env.NEXT_PUBLIC_GANALYTICS === 'string'
+    ) {
+      window.gtag('event', action, params);
     } else {
       console.log(
-        `%cEvent %c${JSON.stringify(e)}`,
+        `%cEvent %c${JSON.stringify({ action, params })}`,
         'background: green; color: black; padding: 0.5rem; font-size: 0.75rem;',
         'background: black; color: green; padding: 0.5rem; font-size: 0.75rem; font-weight: bold;',
       );
@@ -25,9 +52,12 @@ function trackEvent(e: UseGoogleAnalytics.EventArgs) {
 }
 
 function trackPage(path: string) {
-  useAnalytics(ga => {
-    if (process.env.NODE_ENV === 'production') {
-      ga.pageview(path);
+  useAnalytics(() => {
+    if (
+      process.env.NODE_ENV === 'production' &&
+      typeof process.env.NEXT_PUBLIC_GANALYTICS === 'string'
+    ) {
+      window.gtag('config', process.env.NEXT_PUBLIC_GANALYTICS, { path_page: path });
     } else {
       console.log(
         `%cPage View %c${path}`,
@@ -39,9 +69,12 @@ function trackPage(path: string) {
 }
 
 function trackModal(path: string) {
-  useAnalytics(ga => {
-    if (process.env.NODE_ENV === 'production') {
-      ga.modalview(path);
+  useAnalytics(() => {
+    if (
+      process.env.NODE_ENV === 'production' &&
+      typeof process.env.NEXT_PUBLIC_GANALYTICS === 'string'
+    ) {
+      window.gtag('config', process.env.NEXT_PUBLIC_GANALYTICS, { path_page: path });
     } else {
       console.log(
         `%cModal View %c${path}`,
@@ -52,18 +85,17 @@ function trackModal(path: string) {
   });
 }
 
-function initializeAnalytics(trackingId: string) {
-  const initializeOpts = { titleCase: false } as UseGoogleAnalytics.InitializeOptions;
-
-  if (process.env.NEXT_PUBLIC_GANALYTICS_DEBUG === '1') {
-    initializeOpts.debug = true;
-  }
-
-  useAnalytics(ga => {
-    ga.initialize(trackingId, initializeOpts);
-  });
+export function useGoogleAnalytics(): UseGoogleAnalyticsReturn {
+  return { trackEvent, trackModal, trackPage };
 }
 
-export function useGoogleAnalytics(): UseGoogleAnalytics.Return {
-  return { trackEvent, trackModal, trackPage, initializeAnalytics, ga: ReactGA };
+export function usePageTracking(): void {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.events.on('routeChangeComplete', trackPage);
+    return () => {
+      router.events.off('routeChangeComplete', trackPage);
+    };
+  }, [router.events]);
 }

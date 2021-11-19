@@ -165,7 +165,7 @@ export function useDataCenter(): UseDataCenterReturn {
    * reset the 'best' properties to false, clear the cached response, and then refetch.
    */
   function execute() {
-    trackEvent({ category: 'User', action: 'Data Center Locator' });
+    trackEvent('Data Center Locator', { event_category: 'User' });
     reset();
     refetch();
   }

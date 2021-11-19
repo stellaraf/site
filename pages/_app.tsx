@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
 import Head from 'next/head';
 import { BaseSEO } from '~/components';
 import { Provider } from '~/context';
-import { useGoogleAnalytics } from '~/hooks';
+import { usePageTracking } from '~/hooks';
 import { SiteLayout } from '~/layouts';
 import {
   getGlobalConfig,
@@ -15,18 +14,10 @@ import {
 import type { TSite, NextApp, GetInitialPropsReturn } from '~/types';
 
 const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
-  const { Component, pageProps, appProps, router } = props;
+  const { Component, pageProps, appProps } = props;
   const { globalConfig, footerGroups, actions, testimonials, docsGroups } = appProps;
 
-  const { initializeAnalytics, trackPage } = useGoogleAnalytics();
-
-  if (typeof process.env.NEXT_PUBLIC_GANALYTICS === 'string') {
-    initializeAnalytics(process.env.NEXT_PUBLIC_GANALYTICS);
-  }
-
-  useEffect(() => {
-    router.events.on('routeChangeComplete', trackPage);
-  }, []);
+  usePageTracking();
 
   return (
     <>
@@ -58,8 +49,10 @@ Site.getInitialProps = async () => {
     return { appProps: { globalConfig, footerGroups, actions, testimonials, docsGroups } };
   } catch (err) {
     console.error(err);
-    console.dir(err.details?.errors ?? {});
-    throw new Error(`Error while loading app configuration: ${err.message}`);
+    if (err instanceof Error) {
+      throw new Error(`Error while loading app configuration: ${err.message}`);
+    }
+    throw err;
   }
 };
 

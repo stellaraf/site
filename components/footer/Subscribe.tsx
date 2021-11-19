@@ -54,12 +54,12 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
     console.error(error);
     emailError !== error && setError('email', { type: 'manual', message: error });
     setToastState({ status: 'error', message: error });
-    trackEvent({ category: 'User', action: 'Error Subscribing to Newsletter' });
+    trackEvent('Error Subscribing to Newsletter', { event_category: 'User' });
   }
 
   function handleSuccess(message: string): void {
     setToastState({ status: 'success', message });
-    trackEvent({ category: 'User', action: 'Subscribed to Newsletter' });
+    trackEvent('Subscribed to Newsletter', { event_category: 'User' });
   }
 
   async function onSubmit(data: ISubscribeFormData): Promise<void> {
@@ -79,7 +79,7 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
       }
     } catch (err) {
       console.error(err);
-      handleError(err.message);
+      err instanceof Error && handleError(err.message);
     }
 
     const render: React.FC<RenderProps> = (props: RenderProps) => {

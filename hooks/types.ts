@@ -65,20 +65,6 @@ export namespace UseGlow {
   }
 }
 
-export namespace UseGoogleAnalytics {
-  export type ReactGA = typeof import('react-ga');
-  export type EventArgs = import('react-ga').EventArgs;
-  export type InitializeOptions = import('react-ga').InitializeOptions;
-  export type Effect = (ga: ReactGA) => void;
-  export interface Return {
-    ga: ReactGA;
-    trackPage(path: string): void;
-    trackModal(path: string): void;
-    trackEvent(event: EventArgs): void;
-    initializeAnalytics(trackingId: string): void;
-  }
-}
-
 export interface LinkType {
   isExternal: boolean;
   target: string;
