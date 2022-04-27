@@ -13,9 +13,16 @@ const GroupWrapper: React.FC<IGroupWrapper> = (props: IGroupWrapper) => {
     <SimpleGrid
       my={12}
       spacingY={16}
-      columns={{ base: 1, lg: 4 }}
+      spacingX={{ lg: 32 }}
+      columns={{ base: 4, lg: 6 }}
       justifyContent="space-evenly"
-      spacingX={{ lg: '25%', xl: '25%' }}
+      // CSS fuckery to center-align the last row which may not be full.
+      // See: https://css-irl.info/controlling-leftover-grid-items
+      sx={{
+        '& :last-child:nth-child(3n - 1)': { gridColumnEnd: -2 },
+        '& :nth-last-child(2):nth-child(3n + 1)': { gridColumnEnd: 4 },
+        '& :last-child:nth-child(3n - 2)': { gridColumnEnd: { base: 4, lg: 5 } },
+      }}
       {...props}
     />
   );
@@ -38,7 +45,7 @@ export const Avatars: React.FC<IAvatars> = (props: IAvatars) => {
       <Detail isOpen={isOpen} onClose={onClose} />
       <GroupWrapper {...rest}>
         {sortedBios.map((g, i) => (
-          <Photo key={g.name} index={i} onOpen={onOpen} />
+          <Photo key={g.name} index={i} onOpen={onOpen} gridColumn="span 2" />
         ))}
       </GroupWrapper>
     </AvatarContext.Provider>
