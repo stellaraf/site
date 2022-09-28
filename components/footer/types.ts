@@ -1,5 +1,5 @@
 import type {
-  IToast,
+  ToastProps,
   ToastId,
   BoxProps,
   StackProps,
@@ -35,7 +35,7 @@ export type { BoxProps } from '@chakra-ui/react';
 
 export interface ISubscribe extends StackProps {
   alertProps?: AlertProps;
-  alertPosition?: IToast['position'];
+  alertPosition?: ToastProps['position'];
 }
 
 export interface ISubscribeInput extends InputProps {
@@ -46,12 +46,12 @@ export interface ISubscribeFormData {
   email: string;
 }
 
-export type ToastStatus = IToast['status'];
+export type ToastStatus = ToastProps['status'];
 
 type RenderedAlert = Omit<RenderProps, 'id'> & Omit<AlertProps, 'id'>;
 
 export interface ISubscribeAlert extends RenderedAlert {
-  status: IToast['status'];
+  status: ToastProps['status'];
   title?: string;
   description?: string;
   isClosable?: boolean;
@@ -60,6 +60,6 @@ export interface ISubscribeAlert extends RenderedAlert {
 }
 
 export interface ISubscribeToast {
-  status: IToast['status'];
+  status: ToastProps['status'];
   message: string;
 }

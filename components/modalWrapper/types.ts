@@ -12,7 +12,7 @@ import type { PropGetter } from '@chakra-ui/react-utils';
 
 export interface IModalWrapper
   extends UseModalProps,
-    Omit<BoxProps, 'children'>,
+    Omit<BoxProps, 'children' | 'scrollBehavior'>,
     Omit<ModalProps, 'children' | 'scrollBehavior' | 'motionPreset'> {
   /**
    * Component to be nested inside <ModalBody />

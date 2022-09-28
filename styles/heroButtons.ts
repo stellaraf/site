@@ -44,6 +44,7 @@ export const heroButtons = {
         },
         {
           bg: 'transparent',
+          color: 'inherit',
           borderColor: 'white',
           borderWidth: '1px',
           boxShadow: 'md',

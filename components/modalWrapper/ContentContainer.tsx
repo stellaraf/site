@@ -16,9 +16,13 @@ export const ContentContainer: React.FC<IContentContainer> = (props: IContentCon
       width="100vw"
       height="100vh"
       position="fixed"
+      overflow="auto"
       {...containerProps}
-      __css={styles.dialogContainer}
       className="chakra-modal__content-container st-override-modal"
+      __css={styles.dialogContainer}
+      justifyContent="center"
+      alignItems="center"
+      tabIndex={-1}
       {...props}
     />
   );

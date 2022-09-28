@@ -1,13 +1,13 @@
-import type { ChakraProps, IToast, UseToastOptions } from '@chakra-ui/react';
+import type { ChakraProps, ToastProps, UseToastOptions } from '@chakra-ui/react';
 
 export type TToastPositions = UseToastOptions['position'];
 
 export interface IUseAlert {
   message: React.ReactNode;
-  status: IToast['status'];
-  duration?: IToast['duration'];
+  status: ToastProps['status'];
+  duration?: ToastProps['duration'];
   position?: TToastPositions;
-  onClose?: IToast['onCloseComplete'];
+  onClose?: ToastProps['onCloseComplete'];
 }
 
 export type UseAlertReturn = (opts: IUseAlert) => void;

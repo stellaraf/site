@@ -3,8 +3,8 @@ import {
   useToken,
   ChakraProvider,
   useColorModeValue,
-  localStorageManager,
-  cookieStorageManager,
+  createLocalStorageManager,
+  createCookieStorageManager,
   useTheme as useChakraTheme,
 } from '@chakra-ui/react';
 import { makeTheme } from '~/util';
@@ -19,9 +19,9 @@ export const UIProvider: React.FC<IUIProvider> = (props: IUIProvider) => {
 
   const colorModeManager = useMemo(() => {
     if (typeof cookies === 'string') {
-      return cookieStorageManager(cookies);
+      return createCookieStorageManager('stellar-site');
     } else {
-      return localStorageManager;
+      return createLocalStorageManager('stellar-site');
     }
   }, [cookies]);
 

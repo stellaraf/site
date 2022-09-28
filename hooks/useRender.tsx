@@ -10,12 +10,15 @@ import {
   H4,
   H5,
   H6,
-  Ul,
-  Ol,
   Li,
-  Link,
+  Ol,
+  Td,
+  Th,
+  Ul,
   Code,
+  Link,
   Asset,
+  Table,
   Inline,
   BlockQuote,
   CustomBlock,
@@ -54,6 +57,10 @@ const overrides = {
   [BLOCKS.LIST_ITEM]: {},
   [BLOCKS.QUOTE]: {},
   [BLOCKS.HR]: {},
+  [BLOCKS.TABLE]: {},
+  [BLOCKS.TABLE_CELL]: {},
+  [BLOCKS.TABLE_HEADER_CELL]: {},
+  [BLOCKS.TABLE_ROW]: {},
   [INLINES.ASSET_HYPERLINK]: {},
   [INLINES.ENTRY_HYPERLINK]: {},
   [INLINES.EMBEDDED_ENTRY]: {},
@@ -122,6 +129,11 @@ export function useRender(
       <Link href={node.data.uri} {...o[INLINES.HYPERLINK]}>
         {children}
       </Link>
+    ),
+    [BLOCKS.TABLE]: (_, children) => <Table {...o[BLOCKS.TABLE]}>{children}</Table>,
+    [BLOCKS.TABLE_CELL]: (_, children) => <Td {...o[BLOCKS.TABLE_CELL]}>{children}</Td>,
+    [BLOCKS.TABLE_HEADER_CELL]: (_, children) => (
+      <Th {...o[BLOCKS.TABLE_HEADER_CELL]}>{children}</Th>
     ),
   } as RenderNode;
 

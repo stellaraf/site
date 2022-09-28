@@ -19,9 +19,9 @@ const GroupWrapper: React.FC<IGroupWrapper> = (props: IGroupWrapper) => {
       // CSS fuckery to center-align the last row which may not be full.
       // See: https://css-irl.info/controlling-leftover-grid-items
       sx={{
-        '& :last-child:nth-child(3n - 1)': { gridColumnEnd: -2 },
-        '& :nth-last-child(2):nth-child(3n + 1)': { gridColumnEnd: 4 },
-        '& :last-child:nth-child(3n - 2)': { gridColumnEnd: { base: 4, lg: 5 } },
+        '& :last-child:nth-of-type(3n - 1)': { gridColumnEnd: -2 },
+        '& :nth-last-of-type(2):nth-of-type(3n + 1)': { gridColumnEnd: 4 },
+        '& :last-child:nth-of-type(3n - 2)': { gridColumnEnd: { base: 4, lg: 5 } },
       }}
       {...props}
     />

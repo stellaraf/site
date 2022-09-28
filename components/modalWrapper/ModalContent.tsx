@@ -22,12 +22,18 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
   return (
     <ModalFocusScope>
       <Flex
+        {...containerProps}
         top={0}
         left={0}
         width="100vw"
         height="100vh"
         position="fixed"
-        {...containerProps}
+        overflow="auto"
+        justifyContent="center"
+        alignItems="center"
+        tabIndex={-1}
+        display="flex"
+        zIndex="modal"
         __css={styles.dialogContainer}
         className="chakra-modal__content-container st-override-modal"
       >

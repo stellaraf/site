@@ -22,6 +22,7 @@ const _Header: React.FC<IHeader> = (props: IHeader) => {
             alt={name}
             rounded="full"
             boxSize="100%"
+            draggable={false}
             objectFit="cover"
             borderWidth="1px"
             borderStyle="solid"

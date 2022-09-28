@@ -45,6 +45,7 @@ export const Photo: React.FC<IPhoto> = (props: IPhoto) => {
           rounded="full"
           minHeight={32}
           _hover={hover}
+          draggable={false}
           objectFit="cover"
           borderWidth="1px"
           borderStyle="solid"

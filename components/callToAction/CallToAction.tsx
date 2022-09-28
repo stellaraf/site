@@ -36,7 +36,13 @@ export const _CallToActionContainer: React.FC<ICallToActionMemo> = (props: ICall
             {titleMe(callToActionTitle)}
           </Heading>
         </Center>
-        <Wrap direction={{ base: 'column', lg: 'row' }} spacing={8} justify="center" ref={ref}>
+        <Wrap
+          direction={{ base: 'column', lg: 'row' }}
+          spacing={8}
+          justify="center"
+          ref={ref}
+          overflow="visible"
+        >
           {inView &&
             actions.map((action, i) => (
               <WrapItem key={`action${i}`}>
