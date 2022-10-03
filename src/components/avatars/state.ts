@@ -1,25 +1,7 @@
-import create from 'zustand';
-import type { SetState } from 'zustand';
-
-type AvatarState = {
-  current: number;
-  setCurrent: (n: number) => void;
-};
+import { atom, useRecoilState } from 'recoil';
 
 type AvatarReturn = [number, (n: number) => void];
 
-const useStore = create<AvatarState>((set: SetState<AvatarState>) => ({
-  current: 0,
-  setCurrent(current: number): void {
-    set({ current });
-  },
-}));
+const currentAvatarAtom = atom({ key: 'currentAvatar', default: 0 });
 
-/**
- * Get/set the currently open avatar/bio.
- */
-export function useCurrent(): AvatarReturn {
-  const current = useStore(state => state.current);
-  const setCurrent = useStore(state => state.setCurrent);
-  return [current, setCurrent];
-}
+export const useCurrent = (): AvatarReturn => useRecoilState(currentAvatarAtom);
