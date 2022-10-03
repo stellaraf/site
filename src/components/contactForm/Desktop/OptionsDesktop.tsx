@@ -14,16 +14,15 @@ import { useContactForm } from '../state';
 import { DesktopForm } from './DesktopForm';
 
 import type { MouseEvent } from 'react';
-import type { IconType } from '@meronex/icons';
 import type { Variants } from 'framer-motion';
 import type { IContactCard } from '~/types';
 import type { IMotionItems } from '../types';
 import type { FormHandlers } from '../Forms/types';
 
 // Use Next.js async importing for performance.
-const Docs = dynamic<IconType>(() => import('@meronex/icons/cg').then(i => i.CgNotes));
-const Support = dynamic<IconType>(() => import('@meronex/icons/bs').then(i => i.BsPeopleFill));
-const Sales = dynamic<IconType>(() =>
+const Docs = dynamic<MeronexIcon>(() => import('@meronex/icons/cg').then(i => i.CgNotes));
+const Support = dynamic<MeronexIcon>(() => import('@meronex/icons/bs').then(i => i.BsPeopleFill));
+const Sales = dynamic<MeronexIcon>(() =>
   import('@meronex/icons/bs').then(i => i.BsFillPersonLinesFill),
 );
 
@@ -115,7 +114,11 @@ export const OptionsDesktop = (): JSX.Element => {
           // moved from one location to another.
           const icon = (
             <motion.div>
-              <Icon icon={iconMap[iconName]} color={iconColor} {...iconProps} />
+              <Icon
+                icon={(iconMap[iconName] as unknown) as string}
+                color={iconColor}
+                {...iconProps}
+              />
             </motion.div>
           );
 

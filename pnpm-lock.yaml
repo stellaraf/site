@@ -27,7 +27,6 @@ specifiers:
   '@types/node': ^16.4.0
   '@types/node-fetch': ^2.5.11
   '@types/react': ^18.0.21
-  '@types/react-select': ^4.0.17
   '@types/react-simple-maps': ^1.0.3
   '@types/smoothscroll-polyfill': ^0.3.1
   '@types/yup': ^0.29.7
@@ -74,7 +73,7 @@ specifiers:
   react-player: 2.10.1
   react-query: ^3.19.1
   react-redux: ^8.0.4
-  react-select: ^4.3.1
+  react-select: ^5.4.0
   react-simple-maps: ^2.3.0
   react-tsparticles: ^1.33.2
   react-use: ^15.3.4
@@ -130,7 +129,7 @@ dependencies:
   react-player: 2.10.1_react@18.2.0
   react-query: 3.19.1_biqbaboplfbrettd7655fr4n2y
   react-redux: 8.0.4_wr4jmv5xrjbe6vbq33me5wwo2a
-  react-select: 4.3.1_eat7hc23gfabdflnphmz6xfchm
+  react-select: 5.4.0_eat7hc23gfabdflnphmz6xfchm
   react-simple-maps: 2.3.0_v2m5e27vhdewzwhryxwfaorcca
   react-tsparticles: 1.33.2_react@18.2.0
   react-use: 15.3.4_biqbaboplfbrettd7655fr4n2y
@@ -155,7 +154,6 @@ devDependencies:
   '@types/node': 16.4.0
   '@types/node-fetch': 2.5.11
   '@types/react': 18.0.21
-  '@types/react-select': 4.0.17
   '@types/react-simple-maps': 1.0.3
   '@types/smoothscroll-polyfill': 0.3.1
   '@types/yup': 0.29.7
@@ -1547,20 +1545,6 @@ packages:
       stylis: 4.0.13
     dev: false
 
-  /@emotion/cache/11.4.0:
-    resolution: {integrity: sha512-Zx70bjE7LErRO9OaZrhf22Qye1y4F7iDl+ITjet0J+i+B88PrAOBkKvaAWhxsZf72tDLajwCgfCjJ2dvH77C3g==}
-    dependencies:
-      '@emotion/memoize': 0.7.5
-      '@emotion/sheet': 1.0.1
-      '@emotion/utils': 1.0.0
-      '@emotion/weak-memoize': 0.2.5
-      stylis: 4.0.3
-    dev: false
-
-  /@emotion/hash/0.8.0:
-    resolution: {integrity: sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow==}
-    dev: true
-
   /@emotion/hash/0.9.0:
     resolution: {integrity: sha512-14FtKiHhy2QoPIzdTcvh//8OyBlknNs2nXRwIhG904opCby3l+9Xaf/wuPvICBF0rc1ZCNBd3nKe9cd2mecVkQ==}
     dev: false
@@ -1583,9 +1567,6 @@ packages:
     resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
     dev: false
     optional: true
-
-  /@emotion/memoize/0.7.5:
-    resolution: {integrity: sha512-igX9a37DR2ZPGYtV6suZ6whr8pTFtyHL3K/oLUotxpSVO2ASaprmAe2Dkq7tBo7CRY7MMDrAa9nuQP9/YG8FxQ==}
 
   /@emotion/memoize/0.8.0:
     resolution: {integrity: sha512-G/YwXTkv7Den9mXDO7AhLWkE3q+I92B+VqAE+dYG4NGPaHZGvt3G8Q0p9vmE+sq7rTGphUbAvmQ9YpbfMQGGlA==}
@@ -1616,16 +1597,6 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@emotion/serialize/1.0.2:
-    resolution: {integrity: sha512-95MgNJ9+/ajxU7QIAruiOAdYNjxZX7G2mhgrtDWswA21VviYIRP1R5QilZ/bDY42xiKsaktP4egJb3QdYQZi1A==}
-    dependencies:
-      '@emotion/hash': 0.8.0
-      '@emotion/memoize': 0.7.5
-      '@emotion/unitless': 0.7.5
-      '@emotion/utils': 1.0.0
-      csstype: 3.0.8
-    dev: true
-
   /@emotion/serialize/1.1.0:
     resolution: {integrity: sha512-F1ZZZW51T/fx+wKbVlwsfchr5q97iW8brAnXmsskz4d0hVB4O3M/SiA3SaeH06x02lSNzkkQv+n3AX3kCXKSFA==}
     dependencies:
@@ -1634,10 +1605,6 @@ packages:
       '@emotion/unitless': 0.8.0
       '@emotion/utils': 1.2.0
       csstype: 3.0.8
-    dev: false
-
-  /@emotion/sheet/1.0.1:
-    resolution: {integrity: sha512-GbIvVMe4U+Zc+929N1V7nW6YYJtidj31lidSmdYcWozwoBIObXBnaJkKNDjZrLm9Nc0BR+ZyHNaRZxqNZbof5g==}
     dev: false
 
   /@emotion/sheet/1.2.0:
@@ -1669,10 +1636,6 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@emotion/unitless/0.7.5:
-    resolution: {integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==}
-    dev: true
-
   /@emotion/unitless/0.8.0:
     resolution: {integrity: sha512-VINS5vEYAscRl2ZUDiT3uMPlrFQupiKgHz5AA4bCH1miKBg4qtwkim1qPmJj/4WG6TreYMY111rEFsjupcOKHw==}
     dev: false
@@ -1685,15 +1648,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@emotion/utils/1.0.0:
-    resolution: {integrity: sha512-mQC2b3XLDs6QCW+pDQDiyO/EdGZYOygE8s5N5rrzjSI4M3IejPE/JPndCBwRT9z982aqQNi6beWs1UeayrQxxA==}
-
   /@emotion/utils/1.2.0:
     resolution: {integrity: sha512-sn3WH53Kzpw8oQ5mgMmIzzyAaH2ZqFEbozVVBSYp538E06OSE6ytOp7pRAjNQR+Q/orwqdQYJSe2m3hCOeznkw==}
-    dev: false
-
-  /@emotion/weak-memoize/0.2.5:
-    resolution: {integrity: sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==}
     dev: false
 
   /@emotion/weak-memoize/0.3.0:
@@ -2118,21 +2074,6 @@ packages:
   /@types/prop-types/15.7.3:
     resolution: {integrity: sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==}
 
-  /@types/react-dom/16.9.8:
-    resolution: {integrity: sha512-ykkPQ+5nFknnlU6lDd947WbQ6TE3NNzbQAkInC2EKY1qeYdTKp7onFusmYZb+ityzx2YviqT6BXSu+LyWWJwcA==}
-    dependencies:
-      '@types/react': 18.0.21
-    dev: true
-
-  /@types/react-select/4.0.17:
-    resolution: {integrity: sha512-ZK5wcBhJaqC8ntQl0CJvK2KXNNsk1k5flM7jO+vNPPlceRzdJQazA6zTtQUyNr6exp5yrAiwiudtYxgGlgGHLg==}
-    dependencies:
-      '@emotion/serialize': 1.0.2
-      '@types/react': 18.0.21
-      '@types/react-dom': 16.9.8
-      '@types/react-transition-group': 4.4.0
-    dev: true
-
   /@types/react-simple-maps/1.0.3:
     resolution: {integrity: sha512-cCDAsa8FRlTwvMUOUMK3+5ANnF1TDXlLoqpmIOYYIAYXT4nKwpsgSMOWjPoJyCRx5U+pN8rIK+A/HAcyAh6UWA==}
     dependencies:
@@ -2145,7 +2086,7 @@ packages:
     resolution: {integrity: sha512-/QfLHGpu+2fQOqQaXh8MG9q03bFENooTb/it4jr5kKaZlDQfWvjqWZg48AwzPVMBHlRuTRAY7hRHCEOXz5kV6w==}
     dependencies:
       '@types/react': 18.0.21
-    dev: true
+    dev: false
 
   /@types/react/18.0.21:
     resolution: {integrity: sha512-7QUCOxvFgnD5Jk8ZKlUAhVcRj7GuJRjnjjiY/IUBWKgOlnvDvTMLD4RTF7NPyVmbRhNrbomZiOepg7M/2Kj1mA==}
@@ -3040,6 +2981,7 @@ packages:
 
   /csstype/3.0.8:
     resolution: {integrity: sha512-jXKhWqXPmlUeoQnF/EhTtTl4C9SnrxSH/jZUih3jmO6lBKr99rP3/+FmrMj4EFpOXzMtXHAZkd3x0E6h6Fgflw==}
+    dev: false
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
@@ -5256,6 +5198,7 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
+    dev: true
 
   /prop-types/15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
@@ -5378,15 +5321,6 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-input-autosize/3.0.0_react@18.2.0:
-    resolution: {integrity: sha512-nL9uS7jEs/zu8sqwFE5MAPx6pPkNAriACQ2rGLlqmKr2sPGtN7TXTyDdQt4lbNXVx7Uzadb40x8qotIuru6Rhg==}
-    peerDependencies:
-      react: ^16.3.0 || ^17.0.0
-    dependencies:
-      prop-types: 15.7.2
-      react: 18.2.0
-    dev: false
-
   /react-intersection-observer/9.4.0_react@18.2.0:
     resolution: {integrity: sha512-v0403CmomOVlzhqFXlzOxg0ziLcVq8mfbP0AwAcEQWgZmR2OulOT79Ikznw4UlB3N+jlUYqLMe4SDHUOyp0t2A==}
     peerDependencies:
@@ -5502,20 +5436,20 @@ packages:
       use-sidecar: 1.1.2_iapumuv4e6jcjznwuxpf4tt22e
     dev: false
 
-  /react-select/4.3.1_eat7hc23gfabdflnphmz6xfchm:
-    resolution: {integrity: sha512-HBBd0dYwkF5aZk1zP81Wx5UsLIIT2lSvAY2JiJo199LjoLHoivjn9//KsmvQMEFGNhe58xyuOITjfxKCcGc62Q==}
+  /react-select/5.4.0_eat7hc23gfabdflnphmz6xfchm:
+    resolution: {integrity: sha512-CjE9RFLUvChd5SdlfG4vqxZd55AZJRrLrHzkQyTYeHlpOztqcgnyftYAolJ0SGsBev6zAs6qFrjm6KU3eo2hzg==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0
-      react-dom: ^16.8.0 || ^17.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@babel/runtime': 7.14.8
-      '@emotion/cache': 11.4.0
+      '@babel/runtime': 7.19.0
+      '@emotion/cache': 11.10.3
       '@emotion/react': 11.10.4_bjroym7kxlcs2vvwnej4p3gzwu
+      '@types/react-transition-group': 4.4.0
       memoize-one: 5.1.1
-      prop-types: 15.7.2
+      prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-input-autosize: 3.0.0_react@18.2.0
       react-transition-group: 4.4.1_biqbaboplfbrettd7655fr4n2y
     transitivePeerDependencies:
       - '@babel/core'
@@ -5564,7 +5498,7 @@ packages:
       '@babel/runtime': 7.19.0
       dom-helpers: 5.2.0
       loose-envify: 1.4.0
-      prop-types: 15.7.2
+      prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -6180,10 +6114,6 @@ packages:
 
   /stylis/4.0.13:
     resolution: {integrity: sha512-xGPXiFVl4YED9Jh7Euv2V220mriG9u4B2TA6Ybjc1catrstKD2PpIdU3U0RKpkVBC2EhmL/F0sPCr9vrFTNRag==}
-    dev: false
-
-  /stylis/4.0.3:
-    resolution: {integrity: sha512-iAxdFyR9cHKp4H5M2dJlDnvcb/3TvPprzlKjvYVbH7Sh+y8hjY/mUu/ssdcvVz6Z4lKI3vsoS0jAkMYmX7ozfA==}
     dev: false
 
   /supports-color/2.0.0:

@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
 import { FormControl, FormErrorMessage } from '@chakra-ui/react';
 import { useFormContext } from 'react-hook-form';
-import { Select as CustomSelect } from '~/components';
+import { Select } from '~/components';
 
-import type { TSelectOption } from '~/components';
+import type { SelectOptionSingle } from '~/types';
 import type { ISelectField } from './types';
 
-export const SelectField: React.FC<ISelectField> = (props: ISelectField) => {
+export const SelectField = (props: ISelectField): JSX.Element => {
   const { opts, id: name, required = false, multi, onSelect: _, ...rest } = props;
   const { formState, setValue, register } = useFormContext();
   const { errors } = formState;
 
   errors?.[name] && console.table(errors);
 
-  function handleSelect(values: TSelectOption[]): void {
+  function handleSelect(values: readonly SelectOptionSingle[]): void {
     const labels = [];
     for (const v of values) {
       if (v?.label) {
@@ -27,18 +27,22 @@ export const SelectField: React.FC<ISelectField> = (props: ISelectField) => {
     register(name);
   }, [register]);
 
+  const fieldError = errors?.[name];
+
   return (
-    <FormControl id={name} isInvalid={errors?.[name]} isRequired={required}>
-      <CustomSelect
+    <FormControl id={name} isInvalid={typeof fieldError !== 'undefined'} isRequired={required}>
+      <Select
         name={name}
-        multi={multi}
+        isMulti={multi}
         options={opts}
         defaultValue={[]}
         required={required}
         onSelect={handleSelect}
         {...rest}
       />
-      <FormErrorMessage>{errors?.[name] && errors[name].message}</FormErrorMessage>
+      <FormErrorMessage>
+        {typeof fieldError !== 'undefined' && fieldError.message?.toString()}
+      </FormErrorMessage>
     </FormControl>
   );
 };

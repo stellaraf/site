@@ -30,7 +30,7 @@
     "generateFavicons.js",
     "next.config.js",
     "next-env.d.ts",
-    "./src/**/*.tsx?",
+    "src/**/*",
     "global.d.ts",
     "./pages/**/*.ts",
     "./pages/**/*.tsx"

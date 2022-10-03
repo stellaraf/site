@@ -1,86 +1,55 @@
-import type {
-  Props as IReactSelect,
-  ControlProps,
-  MenuProps,
-  MenuListComponentProps,
-  OptionProps,
-  MultiValueProps,
-  IndicatorProps,
-  Theme,
-  PlaceholderProps,
-} from 'react-select';
+import * as ReactSelect from 'react-select';
 
-import type { BoxProps } from '@chakra-ui/react';
-import type { ColorNames } from '~/types';
+import type { StylesProps, StylesConfigFunction } from 'react-select/dist/declarations/src/styles';
+import type { SelectOptionSingle, ColorNames } from '~/types';
 
-export interface ISelectState {
-  [k: string]: string[];
-}
+export type SelectOnChange<
+  Opt extends SelectOptionSingle = SelectOptionSingle,
+  IsMulti extends boolean = boolean
+> = NonNullable<PropOf<ReactSelect.Props<Opt, IsMulti>, 'onChange'>>;
 
-export type TSelectOption = {
-  label: string;
-  value: string;
-};
-
-export type TSelectOptionGroup = {
-  label: string;
-  options: TSelectOption[];
-};
-
-export type TOptions = Array<TSelectOptionGroup | TSelectOption>;
-
-export interface ISelect
-  extends Omit<IReactSelect, 'isMulti' | 'onSelect' | 'onChange'>,
-    Omit<BoxProps, 'onChange' | 'onSelect'> {
-  options: TOptions;
+export interface SelectProps<Opt extends SelectOptionSingle, IsMulti extends boolean>
+  extends ReactSelect.Props<Opt, IsMulti> {
   name: string;
+  isMulti?: IsMulti;
+  isError?: boolean;
   required?: boolean;
-  multi?: boolean;
-  onSelect?: (v: TSelectOption[]) => void;
-  onChange?: (c: TSelectOption | TSelectOption[]) => void;
+  onSelect?: (s: ReactSelect.MultiValue<Opt>) => void;
   colorScheme?: ColorNames;
 }
 
-export interface ISelectContext {
-  colorScheme: ColorNames;
-  colorMode: 'light' | 'dark';
+export interface SelectContextProps {
   isOpen: boolean;
+  isError: boolean;
 }
 
-export interface MultiValueRemoveProps {
-  children: Node;
-  data: unknown;
-  innerProps: {
-    className: string;
-    onTouchEnd: (e: unknown) => void;
-    onClick: (e: unknown) => void;
-    onMouseDown: (e: unknown) => void;
-  };
-  selectProps: unknown;
+export interface RSStyleCallbackProps {
+  colorMode: 'light' | 'dark';
+  colorScheme: ColorNames;
 }
 
-export interface RSTheme extends Omit<Theme, 'borderRadius'> {
-  borderRadius: string | number;
+type StyleConfigKeys = keyof ReactSelect.StylesConfig<
+  SelectOptionSingle,
+  boolean,
+  ReactSelect.GroupBase<SelectOptionSingle>
+>;
+
+export type RSStyleFunction<
+  K extends StyleConfigKeys,
+  Opt extends SelectOptionSingle,
+  IsMulti extends boolean
+> = StylesConfigFunction<StylesProps<Opt, IsMulti, ReactSelect.GroupBase<Opt>>[K]>;
+
+export type RSThemeFunction = (theme: ReactSelect.Theme) => ReactSelect.Theme;
+
+export function isSingleValue<Opt extends SelectOptionSingle>(
+  value: ReactSelect.SingleValue<Opt> | ReactSelect.MultiValue<Opt>,
+): value is NonNullable<ReactSelect.SingleValue<Opt>> {
+  return value !== null && !Array.isArray(value);
 }
 
-export type IControl = ControlProps<TOptions, false>;
-
-export type IMenu = MenuProps<TOptions, false>;
-
-export type IMenuList = MenuListComponentProps<TOptions, false>;
-
-export type IOption = OptionProps<TOptions, false>;
-
-export type IMultiValue = MultiValueProps<TOptions>;
-
-export interface IIndicator extends IndicatorProps<TOptions, false> {}
-
-export type IPlaceholder = PlaceholderProps<TOptions, false>;
-
-export type TSelectContextCallback = Pick<ISelectContext, 'colorMode' | 'colorScheme'>;
-
-export type RSStyleValue<B, S> = (base: B, state: S) => B;
-export type RSStyleCallback<B, S> = (base: TSelectContextCallback) => RSStyleValue<B, S>;
-export type RSThemeCallback<T> = (base: TSelectContextCallback) => (t: T) => T;
-
-export type { Styles as IStyles } from 'react-select';
+export function isMultiValue<Opt extends SelectOptionSingle>(
+  value: ReactSelect.SingleValue<Opt> | ReactSelect.MultiValue<Opt>,
+): value is NonNullable<ReactSelect.MultiValue<Opt>> {
+  return value !== null && Array.isArray(value);
+}
