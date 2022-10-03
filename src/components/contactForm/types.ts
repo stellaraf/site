@@ -1,7 +1,5 @@
-import type { ComponentType, MutableRefObject } from 'react';
 import type { ParsedUrlQuery } from 'querystring';
 import type { BoxProps, FlexProps, StackProps } from '@chakra-ui/react';
-import type { IconType } from '@meronex/icons';
 import type { IContactCard, CustomColors, FormModel } from '~/types';
 import type { FormHandlers, TFormTypes } from './Forms/types';
 
@@ -14,18 +12,12 @@ export interface IContactOption extends Omit<ContactOption, 'icon' | 'color' | '
   iconName: FormIcon;
   index?: number;
   accent?: keyof CustomColors;
-  formRef?: MutableRefObject<FormHandlers>;
+  formRef?: React.MutableRefObject<FormHandlers>;
   toggleLayout?: (i?: number) => void;
 }
 
 export interface ICardBody extends BoxProps {
   spacing?: StackProps['spacing'];
-}
-
-export interface IIcon extends Omit<FlexProps, 'color'> {
-  icon: ComponentType<IconType>;
-  size?: number;
-  color: string;
 }
 
 export interface IMotionItems {

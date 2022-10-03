@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
-import dynamic from 'next/dynamic';
+
 import { useRouter } from 'next/router';
 import { Button as ChakraButton, Center, Stack, useDisclosure } from '@chakra-ui/react';
-import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import { useTitleCase } from 'use-title-case';
 import { Button, Icon } from '~/components';
 import { useGoogleAnalytics } from '~/hooks';
@@ -14,19 +14,16 @@ import { useContactForm } from '../state';
 import { MobileForm } from './MobileForm';
 
 import type { MouseEvent } from 'react';
-import type { IconType } from '@meronex/icons';
 import type { FormHandlers } from '../Forms/types';
-
-const Docs = dynamic<IconType>(() => import('@meronex/icons/cg').then(i => i.CgNotes));
-const Support = dynamic<IconType>(() => import('@meronex/icons/bs').then(i => i.BsPeopleFill));
-const Sales = dynamic<IconType>(() =>
-  import('@meronex/icons/bs').then(i => i.BsFillPersonLinesFill),
-);
 
 const Container = motion(Stack);
 const AnimatedCenter = motion(Center);
 
-const iconMap = { Support, Sales, Docs };
+const iconMap = {
+  Sales: { bs: 'BsFillPersonLinesFill' },
+  Support: { bs: 'BsPeopleFill' },
+  Docs: { cg: 'CgNotes' },
+};
 
 /**
  * See the OptionsDesktop component for more detailed information. The OptionsMobile component
@@ -113,7 +110,7 @@ export const OptionsMobile = (): JSX.Element => {
             >
               <Card w="20rem" h="100%" px={isForm ? 4 : undefined}>
                 <CardBody {...(isForm && formSizes)}>
-                  <AnimateSharedLayout>
+                  <LayoutGroup>
                     {isForm ? (
                       <MobileForm
                         onClose={onClose}
@@ -127,7 +124,7 @@ export const OptionsMobile = (): JSX.Element => {
                     ) : (
                       <ContactOption index={i} icon={icon} iconName={iconName} {...cardRest} />
                     )}
-                  </AnimateSharedLayout>
+                  </LayoutGroup>
                 </CardBody>
                 <AnimatedCenter layoutId={`button${i}`} width="100%">
                   {cardsButton}

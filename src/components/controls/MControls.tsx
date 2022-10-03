@@ -1,14 +1,12 @@
-import dynamic from 'next/dynamic';
-import { HStack, Box, Button } from '@chakra-ui/react';
+import { HStack, Button } from '@chakra-ui/react';
+import { DynamicIcon } from '~/components';
 import { useColorMode, useColorValue } from '~/context';
-import type { IMControls } from './types';
 
-const Sun = dynamic<MeronexIcon>(() => import('@meronex/icons/md').then(i => i.MdWbSunny));
-const Moon = dynamic<MeronexIcon>(() => import('@meronex/icons/bs').then(i => i.BsMoon));
+import type { IMControls } from './types';
 
 export const MControls: React.FC<IMControls> = (props: IMControls) => {
   const { toggleColorMode } = useColorMode();
-  const colorModeIcon = useColorValue(Moon, Sun);
+  const colorModeIcon = useColorValue({ bs: 'BsMoon' }, { md: 'MdWbSunny' });
   const switchTo = useColorValue('Dark', 'Light');
   const colorModeLabel = `Switch to ${switchTo} Mode`;
   return (
@@ -22,7 +20,7 @@ export const MControls: React.FC<IMControls> = (props: IMControls) => {
         onClick={toggleColorMode}
         aria-label={colorModeLabel}
       >
-        <Box as={colorModeIcon} size={32} />
+        <DynamicIcon icon={colorModeIcon} boxSize={32} />
       </Button>
     </HStack>
   );

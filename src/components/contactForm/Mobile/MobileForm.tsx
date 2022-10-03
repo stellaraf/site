@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Center, Flex, IconButton, Heading, Grid } from '@chakra-ui/react';
-import { BisLeftArrow as Back } from '@meronex/icons/bi';
 import { useTitleCase } from 'use-title-case';
-import { ModalWrapper } from '~/components';
+import { DynamicIcon, ModalWrapper } from '~/components';
 import { useContactForm } from '../state';
 import { SalesForm, SupportForm } from '../Forms';
 import { submitForm } from '../submitters';
@@ -62,7 +61,12 @@ export const MobileForm: React.FC<IMobileForm> = (props: IMobileForm) => {
           templateAreas={`"back title icon" "body body body" "form form form" "button button button"`}
         >
           <Flex p={2} align="flex-start" justify="flex-start" gridArea="back">
-            <IconButton variant="ghost" aria-label="Back" icon={<Back />} onClick={goBack} />
+            <IconButton
+              variant="ghost"
+              aria-label="Back"
+              icon={<DynamicIcon icon={{ bi: 'BisLeftArrow' }} />}
+              onClick={goBack}
+            />
           </Flex>
           <Flex p={2} align="flex-start" justify="flex-end" gridArea="icon">
             {icon}

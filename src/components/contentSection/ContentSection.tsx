@@ -1,17 +1,12 @@
 import { useMemo } from 'react';
-import dynamic from 'next/dynamic';
 import { Box, Flex } from '@chakra-ui/react';
-import { Button, SectionDivider } from '~/components';
+import { Button, DynamicIcon, SectionDivider } from '~/components';
 import { useMobile, useResponsiveStyle } from '~/hooks';
 import { useColorValue } from '~/context';
 import { forwardRef } from '~/util';
 import { usePageContent } from './usePageContent';
 
 import type { IContentSection, TSides, TSideValues, ITitleLayout } from './types';
-
-const RightArrow = dynamic<MeronexIcon>(() =>
-  import('@meronex/icons/bs').then(i => i.BsChevronRight),
-);
 
 function getSide(idx: number): TSideValues {
   const sides: TSides = ['right', 'left'];
@@ -103,7 +98,11 @@ export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props
           {form}
           {subsections}
           {showButton && (
-            <Button my={8} href={buttonLink} leftIcon={<RightArrow />}>
+            <Button
+              my={8}
+              href={buttonLink}
+              leftIcon={<DynamicIcon icon={{ bs: 'BsChevronRight' }} />}
+            >
               {buttonText}
             </Button>
           )}

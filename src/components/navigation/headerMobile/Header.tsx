@@ -1,8 +1,7 @@
-import dynamic from 'next/dynamic';
-import { Box, Flex, HStack, VStack, useDisclosure } from '@chakra-ui/react';
+import { Flex, HStack, VStack, useDisclosure } from '@chakra-ui/react';
 import { Spiral as Hamburger } from 'hamburger-react';
 import { StellarLogo } from '@stellaraf/logo';
-import { Button, MControls, ModalWrapper } from '~/components';
+import { Button, DynamicIcon, MControls, ModalWrapper } from '~/components';
 import { useColorMode } from '~/context';
 import { Wrapper } from './Wrapper';
 import { NavLink } from './NavLink';
@@ -10,8 +9,6 @@ import navConfig from '../config';
 
 import type { ButtonProps } from '~/components';
 import type { IHeader } from './types';
-
-const Heart = dynamic<MeronexIcon>(() => import('@meronex/icons/fa').then(i => i.FaHeart));
 
 const HEADING_HEIGHT = 56;
 
@@ -23,7 +20,7 @@ const ContactButton = (props: ButtonProps) => (
     variant="outline"
     borderWidth="1px"
     colorScheme="primary"
-    leftIcon={<Box as={Heart} />}
+    leftIcon={<DynamicIcon icon={{ fa: 'FaHeart' }} />}
     {...props}
   >
     Talk to Us

@@ -1,6 +1,6 @@
 import { Flex, Center, Heading, IconButton, Grid } from '@chakra-ui/react';
-import { BisLeftArrow as Back } from '@meronex/icons/bi';
 import { useTitleCase } from 'use-title-case';
+import { DynamicIcon } from '~/components';
 import { useContactForm } from '../state';
 import { SalesForm, SupportForm } from '../Forms';
 import { submitForm } from '../submitters';
@@ -35,7 +35,12 @@ export const DesktopForm: React.FC<IDesktopForm> = (props: IDesktopForm) => {
       templateAreas={`"back title icon" "body body body" "form form form"`}
     >
       <Flex p={2} align="flex-start" justify="flex-start" gridArea="back">
-        <IconButton variant="ghost" aria-label="Back" icon={<Back />} onClick={goBack} />
+        <IconButton
+          variant="ghost"
+          aria-label="Back"
+          icon={<DynamicIcon icon={{ bi: 'BisLeftArrow' }} />}
+          onClick={goBack}
+        />
       </Flex>
       <Flex p={2} align="flex-start" justify="flex-end" gridArea="icon">
         {icon}

@@ -1,19 +1,15 @@
-import dynamic from 'next/dynamic';
 import {
   Box,
-  Icon,
   useClipboard,
   IconButton,
   useStyleConfig,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import { DynamicIcon } from '~/components';
 import { useColorValue } from '~/context';
 import { useCodeBlockStyle } from './useCodeBlockStyle';
 
 import type { ICodeBlock } from './types';
-
-const CopyIcon = dynamic<MeronexIcon>(() => import('@meronex/icons/bi').then(i => i.BiCopy));
-const CheckIcon = dynamic<MeronexIcon>(() => import('@meronex/icons/bi').then(i => i.BiCheck));
 
 export const CodeBlock: React.FC<ICodeBlock> = (props: ICodeBlock) => {
   const { children, ...rest } = props;
@@ -76,14 +72,15 @@ export const CodeBlock: React.FC<ICodeBlock> = (props: ICodeBlock) => {
         aria-label="Copy to Clipboard"
         icon={
           <>
-            <Icon
-              as={CheckIcon}
+            <DynamicIcon
+              icon={{ bi: 'BiCheck' }}
               transition="all 0.2s ease"
               opacity={hasCopied ? 1 : 0}
               pos={hasCopied ? undefined : 'absolute'}
             />
-            <Icon
-              as={CopyIcon}
+
+            <DynamicIcon
+              icon={{ bi: 'BiCopy' }}
               transition="all 0.2s ease"
               opacity={hasCopied ? 0 : 1}
               pos={hasCopied ? 'absolute' : undefined}

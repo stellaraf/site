@@ -1,8 +1,7 @@
 import { useEffect, useRef } from 'react';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { Center, Stack, Button as ChakraButton } from '@chakra-ui/react';
-import { motion, AnimatePresence, AnimateSharedLayout, useCycle } from 'framer-motion';
+import { motion, AnimatePresence, LayoutGroup, useCycle } from 'framer-motion';
 import { useTitleCase } from 'use-title-case';
 import { Button, Icon } from '~/components';
 import { useGoogleAnalytics } from '~/hooks';
@@ -19,19 +18,16 @@ import type { IContactCard } from '~/types';
 import type { IMotionItems } from '../types';
 import type { FormHandlers } from '../Forms/types';
 
-// Use Next.js async importing for performance.
-const Docs = dynamic<MeronexIcon>(() => import('@meronex/icons/cg').then(i => i.CgNotes));
-const Support = dynamic<MeronexIcon>(() => import('@meronex/icons/bs').then(i => i.BsPeopleFill));
-const Sales = dynamic<MeronexIcon>(() =>
-  import('@meronex/icons/bs').then(i => i.BsFillPersonLinesFill),
-);
-
 // Make Chakra-UI components into Framer-Motion components for fewer components in the tree.
 const Container = motion(Stack);
 const AnimatedCard = motion(Card);
 const AnimatedCenter = motion(Center);
 
-const iconMap = { Support, Sales, Docs };
+const iconMap = {
+  Sales: { bs: 'BsFillPersonLinesFill' },
+  Support: { bs: 'BsPeopleFill' },
+  Docs: { cg: 'CgNotes' },
+};
 
 export const OptionsDesktop = (): JSX.Element => {
   const cards = useContactFormCtx();
@@ -107,18 +103,13 @@ export const OptionsDesktop = (): JSX.Element => {
           const { icon: iconName, color: iconColor, buttonText, form, ...cardRest } = card;
 
           const isForm = layout === 'form' && formState.selected === iconName;
-          const iconProps = isForm ? { size: 12, ml: 4 } : {};
 
           // Send the same component to both sub-components (ContactOption/FormContainer). Since
           // it's the same component and wrapped by a framer component, it will be animated when
           // moved from one location to another.
           const icon = (
             <motion.div>
-              <Icon
-                icon={(iconMap[iconName] as unknown) as string}
-                color={iconColor}
-                {...iconProps}
-              />
+              <Icon icon={iconMap[iconName]} color={iconColor} />
             </motion.div>
           );
 
@@ -196,7 +187,7 @@ export const OptionsDesktop = (): JSX.Element => {
                    * simply expand and show relevant content, rather than switching to another
                    * page or component.
                    */}
-                  <AnimateSharedLayout>
+                  <LayoutGroup>
                     {layout === 'cards' ? (
                       <ContactOption
                         index={i}
@@ -214,7 +205,7 @@ export const OptionsDesktop = (): JSX.Element => {
                         {...cardRest}
                       />
                     )}
-                  </AnimateSharedLayout>
+                  </LayoutGroup>
                 </CardBody>
                 {/**
                  * The button also remains the same component throughout the lifecycle changes.

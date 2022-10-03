@@ -1,17 +1,9 @@
 import { useMemo } from 'react';
-import dynamic from 'next/dynamic';
-import { Flex, Icon as ChakraIcon } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
+import { DynamicIcon } from '~/components';
 import { useColorValue } from '~/context';
 
 import type { FlexProps } from '@chakra-ui/react';
-
-const QuoteOpen = dynamic<MeronexIcon>(() =>
-  import('@meronex/icons/ri').then(i => i.RiDoubleQuotesL),
-);
-
-const QuoteClose = dynamic<MeronexIcon>(() =>
-  import('@meronex/icons/ri').then(i => i.RiDoubleQuotesR),
-);
 
 interface QuoteProps extends FlexProps {
   kind: 'open' | 'close';
@@ -22,12 +14,12 @@ export const Quote = (props: QuoteProps): JSX.Element => {
 
   const color = useColorValue('blackAlpha.300', 'secondary.200');
 
-  const icon = useMemo(() => {
+  const iconProps = useMemo(() => {
     switch (kind) {
       case 'open':
-        return QuoteOpen;
+        return { ri: 'RiDoubleQuotesL' };
       case 'close':
-        return QuoteClose;
+        return { ri: 'RiDoubleQuotesR' };
     }
   }, [kind]);
 
@@ -50,7 +42,7 @@ export const Quote = (props: QuoteProps): JSX.Element => {
       {...kindProps}
       {...rest}
     >
-      <ChakraIcon as={icon} boxSize="100%" />
+      <DynamicIcon icon={iconProps} boxSize="100%" />
     </Flex>
   );
 };

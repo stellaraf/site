@@ -1,28 +1,19 @@
-import dynamic from 'next/dynamic';
-import { Box, Heading, chakra, Icon, HStack, useToken } from '@chakra-ui/react';
+import { Box, Heading, chakra, HStack, useToken } from '@chakra-ui/react';
 import { useTitleCase } from 'use-title-case';
-import { CodeBlockStyleProvider } from '~/components';
+import { CodeBlockStyleProvider, DynamicIcon } from '~/components';
 import { useColorValue } from '~/context';
 import { useOpposingColor, useRender } from '~/hooks';
 import { shouldForwardProp } from '~/util';
-
-const Note = dynamic<MeronexIcon>(() => import('@meronex/icons/go').then(i => i.GoNote));
-const Tip = dynamic<MeronexIcon>(() => import('@meronex/icons/go').then(i => i.GoLightBulb));
-const Warning = dynamic<MeronexIcon>(() => import('@meronex/icons/vsc').then(i => i.VscWarning));
-const Critical = dynamic<MeronexIcon>(() => import('@meronex/icons/im').then(i => i.ImFire));
-const Information = dynamic<MeronexIcon>(() =>
-  import('@meronex/icons/bi').then(i => i.BiInfoCircle),
-);
 
 import type { TAdmonition } from '~/types';
 import type { IAdmonitionIcon } from './types';
 
 const iconMap = {
-  Information,
-  Critical,
-  Warning,
-  Note,
-  Tip,
+  Information: { bi: 'BiInfoCircle' },
+  Critical: { im: 'ImFire' },
+  Warning: { vsc: 'VscWarning' },
+  Note: { go: 'GoNote' },
+  Tip: { go: 'GoLightBulb' },
 };
 
 const AdmonitionContainer = chakra('div', {
@@ -38,8 +29,7 @@ const AdmonitionContainer = chakra('div', {
 
 const AdmonitionIcon: React.FC<IAdmonitionIcon> = (props: IAdmonitionIcon) => {
   const { type = 'Note' } = props;
-  const As = iconMap[type];
-  return <Icon as={As} boxSize={{ base: 8, lg: 6 }} />;
+  return <DynamicIcon icon={iconMap[type]} boxSize={{ base: 8, lg: 6 }} />;
 };
 
 export const Admonition: React.FC<TAdmonition> = (props: TAdmonition) => {

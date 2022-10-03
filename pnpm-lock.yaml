@@ -14,7 +14,6 @@ specifiers:
   '@emotion/react': ^11.10.4
   '@emotion/styled': ^11.10.4
   '@hookform/resolvers': ^2.9.8
-  '@meronex/icons': ^4.0.0
   '@n8tb1t/use-scroll-position': ^1.0.43
   '@next/bundle-analyzer': ^9.5.5
   '@react-google-maps/api': ^1.10.1
@@ -68,7 +67,9 @@ specifiers:
   prettier-eslint: ^12.0.0
   react: ^18.2.0
   react-dom: ^18.2.0
+  react-fast-compare: ^3.2.0
   react-hook-form: ^7.36.1
+  react-icons: ^4.4.0
   react-intersection-observer: ^9.4.0
   react-player: 2.10.1
   react-query: ^3.19.1
@@ -100,7 +101,6 @@ dependencies:
   '@emotion/react': 11.10.4_bjroym7kxlcs2vvwnej4p3gzwu
   '@emotion/styled': 11.10.4_ogudqqhlstsi7uge4lir7ff3ty
   '@hookform/resolvers': 2.9.8_react-hook-form@7.36.1
-  '@meronex/icons': 4.0.0_react@18.2.0
   '@n8tb1t/use-scroll-position': 1.0.43_react@18.2.0
   '@react-google-maps/api': 1.10.1_biqbaboplfbrettd7655fr4n2y
   '@reduxjs/toolkit': 1.8.5_kuo2ie247izvzll3jejufdtq3q
@@ -124,7 +124,9 @@ dependencies:
   palette-by-numbers: 0.1.6
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-fast-compare: 3.2.0
   react-hook-form: 7.36.1_react@18.2.0
+  react-icons: 4.4.0_react@18.2.0
   react-intersection-observer: 9.4.0_react@18.2.0
   react-player: 2.10.1_react@18.2.0
   react-query: 3.19.1_biqbaboplfbrettd7655fr4n2y
@@ -1714,16 +1716,6 @@ packages:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
 
-  /@meronex/icons/4.0.0_react@18.2.0:
-    resolution: {integrity: sha512-WnoxUT02qawZSvsoPSwe7YOqOk0APysIHugiD3dYdc/QNeoigN4PD8mmmtmZFKlv8/Z7eERub0BmPkWcJ1BI+w==}
-    peerDependencies:
-      react: '*'
-    dependencies:
-      camelcase: 5.3.1
-      ncp: 2.0.0
-      react: 18.2.0
-    dev: false
-
   /@motionone/animation/10.14.0:
     resolution: {integrity: sha512-h+1sdyBP8vbxEBW5gPFDnj+m2DCqdlAuf2g6Iafb1lcMnqjsRXWlPw1AXgvUMXmreyhqmPbJqoNfIKdytampRQ==}
     dependencies:
@@ -2680,11 +2672,6 @@ packages:
   /callsites/3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
-
-  /camelcase/5.3.1:
-    resolution: {integrity: sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==}
-    engines: {node: '>=6'}
-    dev: false
 
   /caniuse-lite/1.0.30001412:
     resolution: {integrity: sha512-+TeEIee1gS5bYOiuf+PS/kp2mrXic37Hl66VY6EAfxasIk5fELTktK2oOezYed12H8w7jt3s512PpulQidPjwA==}
@@ -4726,11 +4713,6 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /ncp/2.0.0:
-    resolution: {integrity: sha512-zIdGUrPRFTUELUvr3Gmc7KZ2Sw/h1PiVM0Af/oHB6zgnV1ikqSfRk+TOufi79aHYCW3NiOXmr1BP5nWbzojLaA==}
-    hasBin: true
-    dev: false
-
   /negotiator/0.6.2:
     resolution: {integrity: sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==}
     engines: {node: '>= 0.6'}
@@ -5317,6 +5299,14 @@ packages:
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /react-icons/4.4.0_react@18.2.0:
+    resolution: {integrity: sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==}
+    peerDependencies:
+      react: '*'
     dependencies:
       react: 18.2.0
     dev: false

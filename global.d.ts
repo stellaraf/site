@@ -6,8 +6,6 @@ type ReactRef<
 
 type Animated<T> = Omit<T, 'transition'> & import('framer-motion').MotionProps;
 
-type MeronexIcon = import('@meronex/icons').IconBaseProps;
-
 interface Empty {} // eslint-disable-line
 
 /**

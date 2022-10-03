@@ -1,10 +1,5 @@
-import dynamic from 'next/dynamic';
-import { Heading, Icon } from '@chakra-ui/react';
-import { Link } from '~/components';
-
-const RightArrow = dynamic<MeronexIcon>(() =>
-  import('@meronex/icons/fa').then(i => i.FaArrowRight),
-);
+import { Heading } from '@chakra-ui/react';
+import { DynamicIcon, Link } from '~/components';
 
 import type { INavLink } from './types';
 
@@ -13,7 +8,7 @@ export const NavLink: React.FC<INavLink> = (props: INavLink) => {
   return (
     <Link as={Heading} fontSize="2xl" href={href} _hover={{ textDecoration: 'unset' }} {...rest}>
       {title}
-      <Icon as={RightArrow} ml={4} w={4} h={6} opacity={0.9} />
+      <DynamicIcon icon={{ fa: 'FaArrowRight' }} ml={4} w={4} h={6} opacity={0.9} />
     </Link>
   );
 };

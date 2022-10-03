@@ -1,15 +1,12 @@
-import dynamic from 'next/dynamic';
 import { Button, Flex, IconButton, VStack } from '@chakra-ui/react';
+import { DynamicIcon } from '~/components';
 import { AnimatePresence } from 'framer-motion';
 import { motionChakra } from '../util/animated';
 import { useConfig, useColorValue, useColorTokenValue } from '~/context';
 import { useOpposingColor, useRender, useMobile, useBanner } from '~/hooks';
 
 import type { BoxProps, PropsOf } from '@chakra-ui/react';
-import type { IconBaseProps } from '@meronex/icons';
 import type { IBannerContent } from './types';
-
-const Check = dynamic<IconBaseProps>(() => import('@meronex/icons/fa').then(i => i.FaCheckCircle));
 
 const Container = motionChakra<BoxProps>('div', {
   baseStyle: {
@@ -27,7 +24,7 @@ const Container = motionChakra<BoxProps>('div', {
   },
 });
 
-const MBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
+const MBannerContent = (props: IBannerContent): JSX.Element => {
   const { body, onClick } = props;
   const bg = useColorValue('secondary.500', 'secondary.200');
   const color = useOpposingColor(bg);
@@ -61,7 +58,7 @@ const MBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
         variant="outline"
         onClick={onClick}
         colorScheme={color}
-        leftIcon={<Check />}
+        leftIcon={<DynamicIcon icon={{ fa: 'FaCheckCircle' }} />}
       >
         No Problem!
       </Button>
@@ -103,7 +100,7 @@ const DBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
       </Flex>
       <Flex>
         <IconButton
-          icon={<Check />}
+          icon={<DynamicIcon icon={{ fa: 'FaCheckCircle' }} />}
           onClick={onClick}
           variant="unstyled"
           alignItems="center"

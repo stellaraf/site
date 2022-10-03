@@ -1,7 +1,7 @@
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { Box, Link as ChakraLink, useToken } from '@chakra-ui/react';
-import { EiExternalLink as ExternalIcon } from '@meronex/icons/ei';
+import { chakra, Link as ChakraLink, useToken } from '@chakra-ui/react';
+import { DynamicIcon } from '~/components';
 import { useColorValue } from '~/context';
 import { useLinkType } from '~/hooks';
 import { forwardRef } from '~/util';
@@ -38,10 +38,10 @@ const BaseLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => {
 /**
  * External Icon.
  */
-const LinkIcon: React.FC<ILinkIcon> = (props: ILinkIcon) => (
-  <Box as="span" mb={1} mx={1} {...props}>
-    <ExternalIcon />
-  </Box>
+const LinkIcon = (props: ILinkIcon): JSX.Element => (
+  <chakra.span mb={1} mx={1} {...props}>
+    <DynamicIcon icon={{ ei: 'EiExternalIcon' }} />
+  </chakra.span>
 );
 
 /**

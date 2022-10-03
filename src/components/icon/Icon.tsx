@@ -1,23 +1,29 @@
-import { Box, Flex, Icon as ChakraIcon } from '@chakra-ui/react';
-import { useOpposingColor } from '~/hooks';
+import { Box, Flex, isStyleProp } from '@chakra-ui/react';
+import { DynamicIcon } from '~/components';
 import { useColorValue } from '~/context';
-import type { IIcon } from './types';
+import { useOpposingColor } from '~/hooks';
 
-export const Icon: React.FC<IIcon> = (props: IIcon) => {
+import type { ChakraProps } from '@chakra-ui/react';
+import type { IconProps } from './types';
+
+export const Icon = (props: IconProps): JSX.Element => {
   const { color: bgColor = 'primary', icon, size = 20, ...rest } = props;
+
+  const restProps = Object.entries(rest).reduce<ChakraProps>((final, [key, value]) => {
+    if (isStyleProp(key)) {
+      // @ts-expect-error TS can't infer key type even when cast.
+      final[key] = value;
+    }
+    return final;
+  }, {} as ChakraProps);
 
   const bg = useColorValue(`${bgColor}.500`, `${bgColor}.300`);
   const color = useOpposingColor(bg);
 
-  let component = null;
-  if (typeof icon === 'string') {
-    component = (
+  if (typeof icon === 'undefined') {
+    return (
       <Box css={{ mask: `url(${icon}) no-repeat center` }} backgroundColor={color} boxSize="50%" />
     );
-  } else if (typeof icon === 'undefined') {
-    component = <ChakraIcon boxSize="50%" />;
-  } else {
-    component = <ChakraIcon as={icon} boxSize="50%" />;
   }
 
   return (
@@ -31,9 +37,9 @@ export const Icon: React.FC<IIcon> = (props: IIcon) => {
       justify="center"
       overflow="hidden"
       borderRadius="full"
-      {...rest}
+      {...restProps}
     >
-      {component}
+      <DynamicIcon icon={icon} boxSize="50%" />
     </Flex>
   );
 };

@@ -1,13 +1,10 @@
-import dynamic from 'next/dynamic';
 import { Box, Flex, Button as ChakraButton, Heading, VStack } from '@chakra-ui/react';
-import { Content, Hero, Options, SEO, GetStarted } from '~/components';
+import { Content, DynamicIcon, Hero, Options, SEO, GetStarted } from '~/components';
 import { useSlug, useResponsiveStyle } from '~/hooks';
 import { getPage, getPageContent, getPageId, getContactCards } from '~/util';
 
 import type { GetStaticProps } from 'next';
 import type { PageEntry, IContactPage, PageContent } from '~/types';
-
-const Phone = dynamic<MeronexIcon>(() => import('@meronex/icons/im').then(i => i.ImPhone));
 
 const Contact = (props: PageEntry<IContactPage>): JSX.Element => {
   const { pageData, contactCards, pageContent } = props;
@@ -43,7 +40,7 @@ const Contact = (props: PageEntry<IContactPage>): JSX.Element => {
               rounded="full"
               colorScheme="green"
             >
-              <Phone />
+              <DynamicIcon icon={{ im: 'ImPhone' }} />
             </ChakraButton>
             <Heading as="h4" fontSize="xl" fontWeight="medium">
               {content.buttonText}

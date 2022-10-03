@@ -1,7 +1,5 @@
 import { Box, Button, VStack } from '@chakra-ui/react';
-import { MdWbSunny as Sun } from '@meronex/icons/md';
-import { BsMoon as Moon } from '@meronex/icons/bs';
-import { BsChevronUp as ChevronUp } from '@meronex/icons/bs';
+import { DynamicIcon } from '~/components';
 import { useColorMode, useColorValue } from '~/context';
 
 import type { IDControls } from './types';
@@ -21,7 +19,7 @@ function scrollToTop(): void {
 
 export const DControls: React.FC<IDControls> = (props: IDControls) => {
   const { toggleColorMode } = useColorMode();
-  const colorModeIcon = useColorValue(Moon, Sun);
+  const colorModeIcon = useColorValue({ bs: 'BsMoon' }, { md: 'MdWbSunny' });
   const bg = useColorValue('white', 'blackAlpha.300');
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
   const hoverColor = useColorValue('secondary.500', 'tertiary.300');
@@ -61,7 +59,7 @@ export const DControls: React.FC<IDControls> = (props: IDControls) => {
           aria-label={colorModeLabel}
           _hover={{ color: hoverColor }}
         >
-          <Box as={colorModeIcon} />
+          <DynamicIcon icon={colorModeIcon} />
         </Button>
         <Button
           minW="unset"
@@ -72,7 +70,7 @@ export const DControls: React.FC<IDControls> = (props: IDControls) => {
           aria-label="Scroll to Top"
           _hover={{ color: hoverColor }}
         >
-          <Box as={ChevronUp} />
+          <DynamicIcon icon={{ bs: 'BsChevronUp' }} />
         </Button>
       </VStack>
     </Box>

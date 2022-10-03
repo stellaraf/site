@@ -1,13 +1,8 @@
-import dynamic from 'next/dynamic';
 import { HStack, IconButton } from '@chakra-ui/react';
+import { DynamicIcon } from '~/components';
 import { useConfig, useColorValue } from '~/context';
 
 import type { ISocialLink, ISocialLinks } from './types';
-
-const Twitter = dynamic<MeronexIcon>(() => import('@meronex/icons/fa').then(i => i.FaTwitter));
-const Facebook = dynamic<MeronexIcon>(() => import('@meronex/icons/fa').then(i => i.FaFacebook));
-const GitHub = dynamic<MeronexIcon>(() => import('@meronex/icons/fa').then(i => i.FaGithub));
-const LinkedIn = dynamic<MeronexIcon>(() => import('@meronex/icons/fa').then(i => i.FaLinkedinIn));
 
 const SocialLink: React.FC<ISocialLink> = (props: ISocialLink) => {
   const { label, ...rest } = props;
@@ -43,22 +38,22 @@ export const SocialLinks: React.FC<ISocialLinks> = (props: ISocialLinks) => {
     <HStack spacing={4} {...props}>
       <SocialLink
         label="LinkedIn"
-        icon={<LinkedIn size="1.5em" />}
+        icon={<DynamicIcon icon={{ fa: 'FaLinkedin' }} boxSize="1.5em" />}
         href={`https://linkedin.com/company/${linkedInProfile}`}
       />
       <SocialLink
         label="Twitter"
-        icon={<Twitter size="1.5em" />}
+        icon={<DynamicIcon icon={{ fa: 'FaTwitter' }} boxSize="1.5em" />}
         href={`https://twitter.com/${twitterHandle}`}
       />
       <SocialLink
         label="Facebook"
-        icon={<Facebook size="1.5em" />}
+        icon={<DynamicIcon icon={{ fa: 'FaFacebook' }} boxSize="1.5em" />}
         href={`https://facebook.com/${facebookProfile}`}
       />
       <SocialLink
         label="GitHub"
-        icon={<GitHub size="1.5em" />}
+        icon={<DynamicIcon icon={{ fa: 'FaGithub' }} boxSize="1.5em" />}
         href={`https://github.com/${githubOrg}`}
       />
     </HStack>
