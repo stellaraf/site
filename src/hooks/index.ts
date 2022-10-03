@@ -1,4 +1,3 @@
-export * from './useActiveSection';
 export * from './useAlert';
 export * from './useApple';
 export * from './useBanner';
@@ -26,4 +25,3 @@ export * from './useScaledText';
 export * from './useSlider';
 export * from './useSlug';
 export * from './useSSR';
-export * from './useSyncedStyleVariant';

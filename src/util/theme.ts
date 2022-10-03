@@ -1,8 +1,7 @@
 import { extendTheme } from '@chakra-ui/react';
 import { mode, getColor } from '@chakra-ui/theme-tools';
-import { mergeWith } from '@chakra-ui/utils';
 import { generatePalette, generateFontFamily, Palette } from 'palette-by-numbers';
-import { syncedStyles, heroButtons } from '~/styles';
+import { heroButtons } from '~/styles';
 import { entries } from './generic';
 
 import type { GlobalStyleProps } from '@chakra-ui/theme-tools';
@@ -208,7 +207,5 @@ export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
     styles: { global: globalStyles },
     components: { Button: heroButtons, Heading: { sizes: headingOverrides } },
   });
-  return mergeWith(defaultTheme, {
-    components: { SyncedStyles: syncedStyles },
-  });
+  return defaultTheme as CustomTheme;
 };

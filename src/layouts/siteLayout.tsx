@@ -12,7 +12,6 @@ import {
   DControls,
   CallToAction,
 } from '~/components';
-import { SyncedStyleProvider } from '~/context';
 import { useMobile } from '~/hooks';
 import { Wrapper, Root, Main } from './common';
 
@@ -42,15 +41,13 @@ export const SiteLayout: React.FC<ISiteLayout> = (props: ISiteLayout) => {
       {preview && <Preview />}
       <AnimatePresence exitBeforeEnter>
         <Wrapper>
-          <SyncedStyleProvider>
-            {isMobile ? <MHeader /> : <DHeader />}
-            <Main>
-              <Root>{children}</Root>
-            </Main>
-            <CallToAction actions={actions} />
-            <Footer groups={footerGroups} />
-            {!isMobile && <DControls />}
-          </SyncedStyleProvider>
+          {isMobile ? <MHeader /> : <DHeader />}
+          <Main>
+            <Root>{children}</Root>
+          </Main>
+          <CallToAction actions={actions} />
+          <Footer groups={footerGroups} />
+          {!isMobile && <DControls />}
           <Stars />
           <RickRoll />
         </Wrapper>
