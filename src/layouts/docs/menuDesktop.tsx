@@ -8,52 +8,64 @@ import {
   AccordionButton,
 } from '@chakra-ui/react';
 import { useColorValue } from '~/context';
-import { AnimatedDiv, Link } from '~/components';
+import { Link } from '~/components';
 import { useDocsHref } from './useDocsHref';
 
 import type { IDocsGroup, IDocsArticle } from '~/types';
 
-const DMenuItem: React.FC<IDocsArticle> = (props: IDocsArticle) => {
+function menuItemKey(item: IDocsArticle): string {
+  let result = '';
+  const groupTitle = item.docsGroup?.fields.title.toLowerCase().split(' ').join('-');
+  if (groupTitle !== '') result += groupTitle + '--';
+  const title = item.title.toLowerCase().split(' ').join('-');
+  result += title;
+  return result;
+}
+
+const DMenuItem = (props: IDocsArticle): JSX.Element => {
   const { title } = props;
   const { href, isCurrent } = useDocsHref(props);
 
   const color = useColorValue('primary.500', 'secondary.200');
+  const bg = useColorValue('blackAlpha.100', 'whiteAlpha.100');
 
   return (
-    <AnimatedDiv
+    <Box
+      py={2}
       width="100%"
-      borderRadius="md"
       userSelect="none"
-      layoutId="menuItem"
+      borderRadius="lg"
+      bg={isCurrent ? bg : 'inherit'}
       color={isCurrent ? color : 'currentColor'}
+      transition="all 0.2s ease 0s"
+      _hover={{
+        color,
+        transform: isCurrent ? undefined : 'translateX(2px)',
+      }}
     >
       <Link
         px={3}
         py={1}
         href={href}
         width="100%"
-        opacity={isCurrent ? 1 : 0.8}
-        transition="all 0.2s ease 0s"
+        opacity={isCurrent ? 1 : 0.7}
+        fontWeight={isCurrent ? 'semibold' : 'inherit'}
+        textDecoration="none"
         _hover={{
           textDecoration: 'none',
-          opacity: 1,
-          transform: isCurrent ? undefined : 'translateX(2px)',
         }}
-        css={{ '&:focus': { borderRadius: useToken('radii', 'lg') } }}
       >
         {title}
       </Link>
-    </AnimatedDiv>
+    </Box>
   );
 };
 
-export const DMenuGroup: React.FC<IDocsGroup> = (props: IDocsGroup) => {
+export const DMenuGroup = (props: IDocsGroup): JSX.Element => {
   const { title, items } = props;
 
   const backgroundColor = useColorValue('blackAlpha.100', 'whiteAlpha.100');
   const borderRadius = useToken('radii', 'lg');
-
-  const sorted = items.sort((a, b) => (a.title > b.title ? 1 : -1));
 
   return (
     <AccordionItem
@@ -73,8 +85,8 @@ export const DMenuGroup: React.FC<IDocsGroup> = (props: IDocsGroup) => {
       </AccordionButton>
       <AccordionPanel pb={4} px={0}>
         <VStack align="flex-start" pl={4}>
-          {sorted.map(item => (
-            <DMenuItem key={item.title} {...item} />
+          {items.map(item => (
+            <DMenuItem key={menuItemKey(item)} {...item} />
           ))}
         </VStack>
       </AccordionPanel>

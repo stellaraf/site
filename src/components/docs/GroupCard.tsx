@@ -44,7 +44,7 @@ export const GroupCard: React.FC<IDocsGroup> = (props: IDocsGroup) => {
                 position="absolute"
                 alignSelf="flex-end"
                 color={callToActionIconColor}
-                icon={callToActionIcon.fields.file.url}
+                url={callToActionIcon.fields.file.url}
               />
             )}
             <Heading as="h3" fontSize={{ base: 'sm', md: 'lg' }} maxW="80%" whiteSpace="pre-wrap">

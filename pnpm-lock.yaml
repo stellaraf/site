@@ -16,7 +16,7 @@ specifiers:
   '@hookform/resolvers': ^2.9.8
   '@n8tb1t/use-scroll-position': ^1.0.43
   '@next/bundle-analyzer': ^9.5.5
-  '@react-google-maps/api': ^1.10.1
+  '@react-google-maps/api': ^2.13.1
   '@reduxjs/toolkit': ^1.8.5
   '@stellaraf/logo': ^0.2.3
   '@types/favicons': ^6.2.2
@@ -66,6 +66,7 @@ specifiers:
   react-dom: ^18.2.0
   react-fast-compare: ^3.2.0
   react-hook-form: ^7.36.1
+  react-hotkeys-hook: ^3.4.7
   react-icons: ^4.4.0
   react-intersection-observer: ^9.4.0
   react-player: 2.10.1
@@ -75,6 +76,7 @@ specifiers:
   react-simple-maps: ^2.3.0
   react-tsparticles: ^1.33.2
   react-use: ^15.3.4
+  recoil: ^0.7.5
   redux: ^4.2.0
   redux-persist: ^6.0.0
   slugify: ^1.4.5
@@ -98,7 +100,7 @@ dependencies:
   '@emotion/styled': 11.10.4_ogudqqhlstsi7uge4lir7ff3ty
   '@hookform/resolvers': 2.9.8_react-hook-form@7.36.1
   '@n8tb1t/use-scroll-position': 1.0.43_react@18.2.0
-  '@react-google-maps/api': 1.10.1_biqbaboplfbrettd7655fr4n2y
+  '@react-google-maps/api': 2.13.1_biqbaboplfbrettd7655fr4n2y
   '@reduxjs/toolkit': 1.8.5_kuo2ie247izvzll3jejufdtq3q
   '@stellaraf/logo': 0.2.3_osae6vs4t7tgn2jyonbysurltq
   color2k: 1.1.0
@@ -119,6 +121,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-fast-compare: 3.2.0
   react-hook-form: 7.36.1_react@18.2.0
+  react-hotkeys-hook: 3.4.7_biqbaboplfbrettd7655fr4n2y
   react-icons: 4.4.0_react@18.2.0
   react-intersection-observer: 9.4.0_react@18.2.0
   react-player: 2.10.1_react@18.2.0
@@ -128,6 +131,7 @@ dependencies:
   react-simple-maps: 2.3.0_v2m5e27vhdewzwhryxwfaorcca
   react-tsparticles: 1.33.2_react@18.2.0
   react-use: 15.3.4_biqbaboplfbrettd7655fr4n2y
+  recoil: 0.7.5_biqbaboplfbrettd7655fr4n2y
   redux: 4.2.0
   redux-persist: 6.0.0_react@18.2.0+redux@4.2.0
   slugify: 1.4.5
@@ -1668,6 +1672,19 @@ packages:
       - supports-color
     dev: true
 
+  /@googlemaps/js-api-loader/1.14.3:
+    resolution: {integrity: sha512-6iIb+qpGgQpgIHmIFO44WhE1rDUxPVHuezNFL30wRJnkvhwFm94tD291UvNg9L05hLDSoL16jd0lbqqmdy4C5g==}
+    dependencies:
+      fast-deep-equal: 3.1.3
+    dev: false
+
+  /@googlemaps/markerclusterer/2.0.10:
+    resolution: {integrity: sha512-3UdPE2XH+DkFRTWIxEOcKdTqb3O9dMMxBn5jlhSae//uBGPqv9iHv9dz4l6/0Mwt7YcYmkwSpQZMc61WvZI/Qg==}
+    dependencies:
+      fast-deep-equal: 3.1.3
+      supercluster: 7.1.5
+    dev: false
+
   /@hookform/resolvers/2.9.8_react-hook-form@7.36.1:
     resolution: {integrity: sha512-iVVjH0USq+1TqDdGkWe2M1x7Wn5OFPgVRo7CbWFsXTqqXqCaZtZcnzJu+UhljCWbthFWxWGXKLGYUDPZ04oVvQ==}
     peerDependencies:
@@ -1909,25 +1926,28 @@ packages:
     resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
     dev: false
 
-  /@react-google-maps/api/1.10.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-hb8urUcwZw99Cu3yQnZWUbXjR1Ym/8C21kSX6B02I29l6DXNxDbJ5Jo/T5swhnizPKY7TNhR1oTctC/HY7SQWA==}
+  /@react-google-maps/api/2.13.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-5P8H3GJpCy9th5u6OUzw36WD5NUAl3hDmcPDaVvowRb9Cn2Zf7b1wLCZ4If+k+gX4o2apsSjD+JtWiRogLOMdQ==}
     peerDependencies:
-      react: ^16.6.3
-      react-dom: ^16.6.3
+      react: ^16.8 || ^17 || ^18
+      react-dom: ^16.8 || ^17 || ^18
     dependencies:
-      '@react-google-maps/infobox': 1.10.0
-      '@react-google-maps/marker-clusterer': 1.10.0
+      '@googlemaps/js-api-loader': 1.14.3
+      '@googlemaps/markerclusterer': 2.0.10
+      '@react-google-maps/infobox': 2.11.8
+      '@react-google-maps/marker-clusterer': 2.11.8
+      '@types/google.maps': 3.49.2
       invariant: 2.2.4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@react-google-maps/infobox/1.10.0:
-    resolution: {integrity: sha512-MhT2nMmjeG7TCxRv/JdylDyNd/n66ggSQQhTWVjJJTtdB/xqd0T8BHCkBWDN9uF0i0yCZzMFl2P2Y1zJ+xppBg==}
+  /@react-google-maps/infobox/2.11.8:
+    resolution: {integrity: sha512-15y3dniys1Op5HREyLwiJI2pAdeeHRJT5b4WPrS+vyL5KF6iXK1P3y/9bXtnxHiKe2v6iPreaEhR3VgvfRA50Q==}
     dev: false
 
-  /@react-google-maps/marker-clusterer/1.10.0:
-    resolution: {integrity: sha512-3GLVgeXNStVcdiLMxzi3cBjr32ctlexLPPGQguwcYd6yPLaCcnVCwyzhV68KvL00xqOAD1c3aABV9EGgY8u6Qw==}
+  /@react-google-maps/marker-clusterer/2.11.8:
+    resolution: {integrity: sha512-OEcdbTXEgPwdpGvVuSrhIhjcZPhlzPz2TvaKCBLraf1PKiDyLOPhlTVRlbIziLiu0xN89pJcill1w9UVIVFF+Q==}
     dev: false
 
   /@reduxjs/toolkit/1.8.5_kuo2ie247izvzll3jejufdtq3q:
@@ -1992,6 +2012,10 @@ packages:
 
   /@types/google-libphonenumber/7.4.19:
     resolution: {integrity: sha512-Rm2VhKzu4UofafuTrNTG6fy+385x1PIomnTGGSzOXGbKLpXAhNlUG+7F6UdcIosM5JMvXcJBnwUW/u4qQmt0yg==}
+    dev: false
+
+  /@types/google.maps/3.49.2:
+    resolution: {integrity: sha512-ZO1qWciukqED9qcUNW7OaPXWnTlT+tO3WcYkmudZyQW2BqD7TlMFRrdqSCoqfwKhERCwBA5A/YZt/g5A3BqgLQ==}
     dev: false
 
   /@types/googlemaps/3.39.13:
@@ -4019,6 +4043,10 @@ packages:
       react: 18.2.0
     dev: false
 
+  /hamt_plus/1.0.2:
+    resolution: {integrity: sha512-t2JXKaehnMb9paaYA7J0BX8QQAY8lwfQ9Gjf4pg/mk4krt+cmwmU652HOoWonf+7+EQV97ARPMhhVgU1ra2GhA==}
+    dev: false
+
   /has-ansi/2.0.0:
     resolution: {integrity: sha512-C8vBJ8DwUCx19vhm7urhTuUsr4/IyP6l4VzNQDv+ryHQObW3TTTp9yB68WpYgRe2bbaGuZ/se74IqFeVnMnLZg==}
     engines: {node: '>=0.10.0'}
@@ -4070,6 +4098,10 @@ packages:
 
   /hosted-git-info/2.8.8:
     resolution: {integrity: sha512-f/wzC2QaWBs7t9IYqB4T3sR1xviIViXJRJTWBlx2Gf3g0Xi5vI7Yy4koXQ1c9OYDGHN9sBy1DQ2AB8fqZBWhUg==}
+
+  /hotkeys-js/3.9.4:
+    resolution: {integrity: sha512-2zuLt85Ta+gIyvs4N88pCYskNrxf1TFv3LR9t5mdAZIX8BcgQQ48F2opUptvHa6m8zsy5v/a0i9mWzTrlNWU0Q==}
+    dev: false
 
   /http-errors/1.7.2:
     resolution: {integrity: sha512-uUQBt3H/cSIVfch6i1EuPNy/YsRSOUBXTVfZ+yR7Zjez3qjBz6i9+i4zjNaoqcoFVI4lQJ5plg63TvGfRSDCRg==}
@@ -4380,6 +4412,10 @@ packages:
       array-includes: 3.1.3
       object.assign: 4.1.2
     dev: true
+
+  /kdbush/3.0.0:
+    resolution: {integrity: sha512-hRkd6/XW4HTsA9vjVpY9tuXJYLSlelnkTmVFu4M9/7MIYQtFcHpbugAU7UbOfjOiVSVYl2fqgBuJ32JUmRo5Ew==}
+    dev: false
 
   /keen-slider/5.2.3:
     resolution: {integrity: sha512-aV41QXnzsdHmD1qWF/F7kTxcLwTdFHXLSSv7x3FLS7Y+yxoOKsHsFBmRz1a9TSZ8jTmLPerqJpsvsPL4NGUVmQ==}
@@ -5273,6 +5309,17 @@ packages:
       react: 18.2.0
     dev: false
 
+  /react-hotkeys-hook/3.4.7_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-+bbPmhPAl6ns9VkXkNNyxlmCAIyDAcWbB76O4I0ntr3uWCRuIQf/aRLartUahe9chVMPj+OEzzfk3CQSjclUEQ==}
+    peerDependencies:
+      react: '>=16.8.1'
+      react-dom: '>=16.8.1'
+    dependencies:
+      hotkeys-js: 3.9.4
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /react-icons/4.4.0_react@18.2.0:
     resolution: {integrity: sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==}
     peerDependencies:
@@ -5547,6 +5594,23 @@ packages:
       inherits: 2.0.4
       string_decoder: 1.3.0
       util-deprecate: 1.0.2
+    dev: false
+
+  /recoil/0.7.5_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-GVShsj5+M/2GULWBs5WBJGcsNis/d3YvDiaKjYh3mLKXftjtmk9kfaQ8jwjoIXySCwn8/RhgJ4Sshwgzj2UpFA==}
+    peerDependencies:
+      react: '>=16.13.1'
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      hamt_plus: 1.0.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /redux-persist/6.0.0_react@18.2.0+redux@4.2.0:
@@ -6070,6 +6134,12 @@ packages:
 
   /stylis/4.0.13:
     resolution: {integrity: sha512-xGPXiFVl4YED9Jh7Euv2V220mriG9u4B2TA6Ybjc1catrstKD2PpIdU3U0RKpkVBC2EhmL/F0sPCr9vrFTNRag==}
+    dev: false
+
+  /supercluster/7.1.5:
+    resolution: {integrity: sha512-EulshI3pGUM66o6ZdH3ReiFcvHpM3vAigyK+vcxdjpJyEbIIrtbmBdY23mGgnI24uXiGFvrGq9Gkum/8U7vJWg==}
+    dependencies:
+      kdbush: 3.0.0
     dev: false
 
   /supports-color/2.0.0:

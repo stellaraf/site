@@ -1,4 +1,4 @@
-import { Flex, ModalFocusScope, useModalContext, useStyles } from '@chakra-ui/react';
+import { Flex, ModalFocusScope, useModalContext, useStyleConfig } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import { AnimatedDiv } from '~/components';
 import { useColorValue } from '~/context';
@@ -16,7 +16,7 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
   const containerProps = getDialogContainerProps();
   const dialogProps = getDialogProps(rest, ref) as ModalDialogProps;
 
-  const styles = useStyles();
+  const styles = useStyleConfig('Modal');
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
   const bg = useColorValue('light.500', 'blackAlpha.300');
   return (
@@ -34,7 +34,7 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
         tabIndex={-1}
         display="flex"
         zIndex="modal"
-        __css={styles.dialogContainer}
+        __css={styles?.dialogContainer}
         className="chakra-modal__content-container st-override-modal"
       >
         <AnimatePresence>
@@ -53,7 +53,7 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
             boxSize="100%"
             boxShadow="lg"
             alignSelf="center"
-            __css={styles.dialog}
+            __css={styles?.dialog}
             borderColor={borderColor}
             css={{ backdropFilter: 'blur(20px)' }}
             {...dialogProps}

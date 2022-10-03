@@ -61,7 +61,7 @@ const DNav: React.FC = () => {
       borderColor={borderColor}
       width={{ lg: '260px', xl: '300px' }}
     >
-      <Accordion allowMultiple allowToggle defaultIndex={[...Array(docsGroups.length).keys()]}>
+      <Accordion allowMultiple defaultIndex={[...Array(docsGroups.length).keys()]}>
         {docsGroups.map(group => (
           <DMenuGroup key={group.title} {...group} />
         ))}

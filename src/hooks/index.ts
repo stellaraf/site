@@ -11,6 +11,7 @@ export * from './useGoogleAnalytics';
 export * from './useGradient';
 export * from './useImageSrc';
 export * from './useIPRanges';
+export * from './useKeySequence';
 export * from './useKonami';
 export * from './useLinkType';
 export * from './useMobile';

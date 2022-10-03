@@ -94,10 +94,11 @@ export async function getDocsGroups(preview: boolean = false): Promise<IDocsGrou
 
   for (const group of groups) {
     // Get each Docs Article where the article's associated group title matches this group.
-    const items = await getParsedContent<IDocsArticle>('docsArticle', preview, {
+    const unsortedItems = await getParsedContent<IDocsArticle>('docsArticle', preview, {
       'fields.docsGroup.sys.contentType.sys.id': 'docsGroup',
       'fields.docsGroup.fields.title': group.title,
     });
+    const items = unsortedItems.sort(sortByTitle);
     docsGroups.push({ ...group, items });
   }
 

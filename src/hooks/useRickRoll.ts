@@ -1,39 +1,9 @@
-import create from 'zustand';
-import { useMouseTrap } from './useMouseTrap';
-
-import type { SetState, GetState } from 'zustand';
-
-type Astley = {
-  /**
-   * `true` if the combination has been pressed and is active, `false otherwise`.
-   */
-  isOpen: boolean;
-
-  /**
-   * Open the model.
-   */
-  open: () => void;
-
-  /**
-   * Close the modal.
-   */
-  close: () => void;
-};
+import { atom, useRecoilState } from 'recoil';
+import { useKeySequence } from './useKeySequence';
 
 type AstleyReturn = [boolean, () => void];
 
-const useStore = create<Astley>((set: SetState<Astley>, get: GetState<Astley>) => ({
-  isOpen: false,
-  open: () => {
-    const { isOpen } = get();
-    if (!isOpen) {
-      set({ isOpen: true });
-    }
-  },
-  close(): void {
-    set({ isOpen: false });
-  },
-}));
+const astleyAtom = atom({ key: 'astley', default: false });
 
 /**
  * Track special Dave Barrett state.
@@ -41,9 +11,9 @@ const useStore = create<Astley>((set: SetState<Astley>, get: GetState<Astley>) =
  * @see ❤️
  */
 export function useRickRoll(): AstleyReturn {
-  const state = useStore(state => state.isOpen);
-  const open = useStore(state => state.open);
-  const close = useStore(state => state.close);
-  useMouseTrap('n e v e r g o n n a', open, 'keyup');
-  return [state, close];
+  const [isOpen, setOpen] = useRecoilState(astleyAtom);
+  const open = () => !isOpen && setOpen(true);
+  const close = () => isOpen && setOpen(false);
+  useKeySequence('n e v e r g o n n a', open);
+  return [isOpen, close];
 }
