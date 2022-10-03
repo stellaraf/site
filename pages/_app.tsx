@@ -1,3 +1,4 @@
+import App from 'next/app';
 import Head from 'next/head';
 import { BaseSEO } from '~/components';
 import { Provider } from '~/context';
@@ -38,7 +39,7 @@ const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
   );
 };
 
-Site.getInitialProps = async () => {
+Site.getInitialProps = async ctx => {
   try {
     const globalConfig = await getGlobalConfig();
     const footerGroups = await getFooterItems();
@@ -46,7 +47,12 @@ Site.getInitialProps = async () => {
     const testimonials = await getTestimonials();
     const docsGroups = await getDocsGroups();
 
-    return { appProps: { globalConfig, footerGroups, actions, testimonials, docsGroups } };
+    const defaultProps = await App.getInitialProps(ctx);
+
+    return {
+      ...defaultProps,
+      appProps: { globalConfig, footerGroups, actions, testimonials, docsGroups },
+    };
   } catch (err) {
     console.error(err);
     if (err instanceof Error) {

@@ -6,13 +6,13 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "~/components": ["./components/index"],
-      "~/context": ["./context/index"],
-      "~/hooks": ["./hooks/index"],
-      "~/layouts": ["./layouts/index"],
-      "~/styles": ["./styles/index"],
-      "~/types": ["./types/index"],
-      "~/util": ["./util/index"]
+      "~/components": ["./src/components/index"],
+      "~/context": ["./src/context/index"],
+      "~/hooks": ["./src/hooks/index"],
+      "~/layouts": ["./src/layouts/index"],
+      "~/styles": ["./src/styles/index"],
+      "~/types": ["./src/types/index"],
+      "~/util": ["./src/util/index"]
     },
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -30,18 +30,9 @@
     "generateFavicons.js",
     "next.config.js",
     "next-env.d.ts",
-    "./components/**/*.ts",
-    "./components/**/*.tsx",
-    "./context/**/*.ts",
-    "./context/**/*.tsx",
-    "./hooks/**/*.ts",
-    "./hooks/**/*.tsx",
-    "./layouts/**/*.ts",
-    "./layouts/**/*.tsx",
+    "./src/**/*.tsx?",
+    "global.d.ts",
     "./pages/**/*.ts",
-    "./pages/**/*.tsx",
-    "./types/**/*.ts",
-    "./types/*.d.ts",
-    "./util/**/*.ts"
+    "./pages/**/*.tsx"
   ]
 }

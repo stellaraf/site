@@ -19,8 +19,8 @@ console.dir(process.env, { depth: null });
 
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
-  devIndicators: { autoPrerender: false },
   poweredByHeader: false,
+  swcMinify: true,
   images: {
     domains: ['images.ctfassets.net'],
   },

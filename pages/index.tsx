@@ -2,13 +2,7 @@ import { useRef } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import { StellarLogo } from '@stellaraf/logo';
 import { useConfig, useColorMode, useColorValue } from '~/context';
-import {
-  // HeroCards,
-  HomeSection,
-  SEO,
-  Screen,
-  Testimonials,
-} from '~/components';
+import { HomeSection, SEO, Screen, Testimonials } from '~/components';
 import { useGradient, useNavLogo, useResponsiveStyle } from '~/hooks';
 import { getParsedContent } from '~/util';
 
@@ -56,11 +50,6 @@ const Home: React.FC<THome> = (props: THome) => {
             <Screen url={homePageVideo} />
           ) : null}
         </Flex>
-        {/* <Flex pos="relative" mt={32} h="160px">
-          <Flex justifyContent="center" pos="absolute" w="100%" h="sm">
-            <HeroCards content={pageContent.heroCards} />
-          </Flex>
-        </Flex> */}
       </Box>
       {sections.map((sect, i) => {
         return <HomeSection section={sect.fields} index={i % sections.length} key={i} />;
