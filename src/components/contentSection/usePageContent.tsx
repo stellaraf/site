@@ -25,6 +25,8 @@ export const usePageContent = (rawContent: PageContent, deps: unknown[] = []): U
   const slug = useSlug(title, [title]);
   const updated = useDate(updatedAt);
 
+  const renderedBody = useRender(body);
+
   return useMemo(() => {
     if (deps.length === 0) {
       deps = [rawContent];
@@ -42,11 +44,11 @@ export const usePageContent = (rawContent: PageContent, deps: unknown[] = []): U
       obj.updatedAt = <Content.UpdatedAt>{updated}</Content.UpdatedAt>;
 
       if (body) {
-        const renderedBody = useRender(body);
         obj.body = <Content.Body>{renderedBody}</Content.Body>;
       } else {
         obj.body = null;
       }
+
       if (typeof paragraphs !== 'undefined' && paragraphs?.length !== 0) {
         subsections = <Content.SubSections sections={paragraphs} />;
       }

@@ -49,7 +49,7 @@ export const Action: React.FC<TActions> = (props: TActions) => {
                   size={12}
                   ml={2}
                   color={callToActionIconColor}
-                  icon={callToActionIcon.fields.file.url}
+                  url={callToActionIcon.fields.file.url}
                 />
               )}
             </Flex>

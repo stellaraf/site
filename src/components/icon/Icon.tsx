@@ -1,13 +1,24 @@
+import { useMemo } from 'react';
 import { Box, Flex, isStyleProp } from '@chakra-ui/react';
 import { DynamicIcon } from '~/components';
 import { useColorValue } from '~/context';
 import { useOpposingColor } from '~/hooks';
 
 import type { ChakraProps } from '@chakra-ui/react';
+import type { DynamicIconProps } from '~/components';
 import type { IconProps } from './types';
 
 export const Icon = (props: IconProps): JSX.Element => {
-  const { color: bgColor = 'primary', icon, size = 20, ...rest } = props;
+  const { color: bgColor = 'primary', size = 20, ...rest } = props;
+
+  let icon: DynamicIconProps['icon'] | undefined;
+  let url: string | undefined;
+
+  if ('icon' in props) {
+    icon = props.icon;
+  } else {
+    url = props.url;
+  }
 
   const restProps = Object.entries(rest).reduce<ChakraProps>((final, [key, value]) => {
     if (isStyleProp(key)) {
@@ -20,10 +31,15 @@ export const Icon = (props: IconProps): JSX.Element => {
   const bg = useColorValue(`${bgColor}.500`, `${bgColor}.300`);
   const color = useOpposingColor(bg);
 
-  if (typeof icon === 'undefined') {
-    return (
-      <Box css={{ mask: `url(${icon}) no-repeat center` }} backgroundColor={color} boxSize="50%" />
-    );
+  const fromUrl = useMemo<boolean>(() => {
+    if (typeof icon === 'undefined' && typeof url === 'string') {
+      return true;
+    }
+    return false;
+  }, [url, typeof icon]);
+
+  if (fromUrl && url?.startsWith('//')) {
+    url = `https://${url}`;
   }
 
   return (
@@ -39,7 +55,11 @@ export const Icon = (props: IconProps): JSX.Element => {
       borderRadius="full"
       {...restProps}
     >
-      <DynamicIcon icon={icon} boxSize="50%" />
+      {fromUrl ? (
+        <Box css={{ mask: `url(${url}) no-repeat center` }} backgroundColor={color} boxSize="50%" />
+      ) : (
+        <DynamicIcon icon={icon!} boxSize="50%" />
+      )}
     </Flex>
   );
 };

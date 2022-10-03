@@ -34,7 +34,7 @@ const SubSection: React.FC<ISubSection> = (props: ISubSection) => {
           <Heading as="h4" fontSize="lg" mb={4}>
             {titleMe(title)}
           </Heading>
-          {icon && <Icon size={12} icon={icon} color={iconColor} />}
+          {icon && <Icon size={12} url={icon} color={iconColor} />}
         </Flex>
         <Box whiteSpace="pre-line" fontSize="lg" textAlign={{ base: 'left', xl: 'justify' }}>
           {renderedBody}
