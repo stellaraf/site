@@ -1,14 +1,14 @@
-import { Box, HStack, VStack } from '@chakra-ui/react';
-import { SocialLinks } from './SocialLinks';
-import { DesktopLinks } from './DesktopLinks';
-import { MobileLinks } from './MobileLinks';
-import { Copyright } from './Copyright';
-import { Subscribe } from './Subscribe';
-import { MControls } from '~/components';
-import { useColorValue } from '~/context';
-import { useMobile, useResponsiveStyle } from '~/hooks';
+import { Box, HStack, VStack } from "@chakra-ui/react";
+import { SocialLinks } from "./SocialLinks";
+import { DesktopLinks } from "./DesktopLinks";
+import { MobileLinks } from "./MobileLinks";
+import { Copyright } from "./Copyright";
+import { Subscribe } from "./Subscribe";
+import { MControls } from "~/components";
+import { useColorValue } from "~/context";
+import { useMobile, useResponsiveStyle } from "~/hooks";
 
-import type { IFooter } from './types';
+import type { IFooter } from "./types";
 
 const BottomDesktop: React.FC = () => {
   return (
@@ -42,8 +42,8 @@ const BottomMobile: React.FC = () => {
 
 export const Footer: React.FC<IFooter> = (props: IFooter) => {
   const { groups, ...rest } = props;
-  const bg = useColorValue('primary.800', 'dark.500');
-  const color = useColorValue('white', 'white');
+  const bg = useColorValue("primary.800", "dark.500");
+  const color = useColorValue("white", "white");
   const rStyles = useResponsiveStyle();
   const isMobile = useMobile();
   return (

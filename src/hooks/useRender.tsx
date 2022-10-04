@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
-import { Divider } from '@chakra-ui/react';
-import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { useMemo } from "react";
+import { Divider } from "@chakra-ui/react";
+import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import {
   P,
   H1,
@@ -22,10 +22,10 @@ import {
   Inline,
   BlockQuote,
   CustomBlock,
-} from '~/components';
+} from "~/components";
 
-import type { Document } from '@contentful/rich-text-types';
-import type { RenderNode, RenderMark } from '@contentful/rich-text-react-renderer';
+import type { Document } from "@contentful/rich-text-types";
+import type { RenderNode, RenderMark } from "@contentful/rich-text-react-renderer";
 
 type Keys = BLOCKS | INLINES;
 
@@ -89,18 +89,18 @@ export function useRender(
   return useMemo(() => {
     if (exclude.length !== 0) {
       for (const ex of exclude) {
-        const pattern = new RegExp(ex, 'gi');
-        if ('content' in renderable && renderable.content.constructor.name === 'Array') {
+        const pattern = new RegExp(ex, "gi");
+        if ("content" in renderable && renderable.content.constructor.name === "Array") {
           for (const [idx, content] of Object.entries(renderable.content)) {
             let contentType = null;
             const entryType = content.data?.target?.sys?.type as string | null;
-            if (entryType === 'Entry') {
+            if (entryType === "Entry") {
               contentType = content.data?.target?.sys?.contentType?.sys?.id as string | null;
-            } else if (entryType === 'Asset') {
+            } else if (entryType === "Asset") {
               contentType = content.data?.target?.fields?.file?.contentType as string | null;
             }
             if (
-              (typeof contentType === 'string' && contentType.match(pattern)?.length) ??
+              (typeof contentType === "string" && contentType.match(pattern)?.length) ??
               0 !== 0
             ) {
               renderable?.content?.splice(Number(idx));

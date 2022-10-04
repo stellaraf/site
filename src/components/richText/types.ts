@@ -5,12 +5,12 @@ import type {
   TextProps,
   CodeProps,
   HeadingProps as ChakraHeadingProps,
-} from '@chakra-ui/react';
-import { INLINES } from '@contentful/rich-text-types';
+} from "@chakra-ui/react";
+import { INLINES } from "@contentful/rich-text-types";
 
-import type { Asset } from 'contentful';
-import type { Link, Block as BlockNode, Inline as InlineNode } from '@contentful/rich-text-types';
-import type { TTableEntry, TCustomBlocks, TAdmonition } from '~/types';
+import type { Asset } from "contentful";
+import type { Link, Block as BlockNode, Inline as InlineNode } from "@contentful/rich-text-types";
+import type { TTableEntry, TCustomBlocks, TAdmonition } from "~/types";
 
 export interface IBlockQuote extends BoxProps {}
 
@@ -28,24 +28,24 @@ export interface BaseHeadingProps extends ChakraHeadingProps {
   level: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
-export type THeadingLevels = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+export type THeadingLevels = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 export type TCustomBlockTypes =
-  | 'markdownBlock'
-  | 'articleButton'
-  | 'admonition'
-  | 'expandable'
-  | 'table'
+  | "markdownBlock"
+  | "articleButton"
+  | "admonition"
+  | "expandable"
+  | "table"
   | string;
 
 type TContentType<T = TCustomBlocks> = {
-  contentType: { sys: { id: T; linkType: 'ContentType'; type: 'Link' } };
+  contentType: { sys: { id: T; linkType: "ContentType"; type: "Link" } };
 };
 
 export type ICustomBlockPre = {
   data: {
     target?: {
-      sys: Link<TCustomBlockTypes>['sys'] & TContentType<TCustomBlockTypes>;
+      sys: Link<TCustomBlockTypes>["sys"] & TContentType<TCustomBlockTypes>;
       fields: TCustomBlocks;
     };
   };
@@ -72,12 +72,12 @@ export interface IInline extends BoxProps {
   node: InlineNode | BlockNode;
 }
 
-export type TAsset = Asset['fields'];
+export type TAsset = Asset["fields"];
 
-type TAssetFields = Asset['fields']['file'];
+type TAssetFields = Asset["fields"]["file"];
 
 export interface IAssetFields extends TAssetFields, BoxProps {
-  title: TAsset['title'];
+  title: TAsset["title"];
 }
 
 export interface IMarkdown {
@@ -85,7 +85,7 @@ export interface IMarkdown {
 }
 
 export interface IAdmonitionIcon {
-  type: TAdmonition['type'];
+  type: TAdmonition["type"];
 }
 
-export type TTableData = Pick<TTableEntry['data'], 'tableData'>;
+export type TTableData = Pick<TTableEntry["data"], "tableData">;

@@ -1,13 +1,13 @@
-import { useRouter } from 'next/router';
-import { Flex, Heading } from '@chakra-ui/react';
-import { useTitleCase } from 'use-title-case';
-import { ContentLoader, Error, SEO } from '~/components';
-import { useRender, useScaledText } from '~/hooks';
-import { DocsLayout } from '~/layouts';
-import { getDocsGroups } from '~/util';
+import { useRouter } from "next/router";
+import { Flex, Heading } from "@chakra-ui/react";
+import { useTitleCase } from "use-title-case";
+import { ContentLoader, Error, SEO } from "~/components";
+import { useRender, useScaledText } from "~/hooks";
+import { DocsLayout } from "~/layouts";
+import { getDocsGroups } from "~/util";
 
-import type { GetStaticProps, GetStaticPaths } from 'next';
-import type { IDocsGroup, IDocsGroupMain } from '~/types';
+import type { GetStaticProps, GetStaticPaths } from "next";
+import type { IDocsGroup, IDocsGroupMain } from "~/types";
 
 type UrlQuery = {
   group: string;
@@ -24,7 +24,7 @@ const Content: React.FC<IDocsGroup> = (props: IDocsGroup) => {
       <Flex textAlign="center" flexDir="column" alignItems="center" ref={containerRef}>
         <Heading
           as="h1"
-          fontSize={{ base: shouldResize ? '3xl' : '4xl', lg: '6xl' }}
+          fontSize={{ base: shouldResize ? "3xl" : "4xl", lg: "6xl" }}
           fontWeight="light"
           ref={headingRef}
         >
@@ -34,8 +34,8 @@ const Content: React.FC<IDocsGroup> = (props: IDocsGroup) => {
           <Heading
             as="h2"
             fontWeight="light"
-            fontSize={{ base: '1.5rem', lg: 'xl' }}
-            textAlign={{ base: 'center', lg: 'left' }}
+            fontSize={{ base: "1.5rem", lg: "xl" }}
+            textAlign={{ base: "center", lg: "left" }}
           >
             {titleMe(subtitle)}
           </Heading>
@@ -72,9 +72,9 @@ const DocsGroupMain: React.FC<IDocsGroupMain> = (props: IDocsGroupMain) => {
 };
 
 export const getStaticProps: GetStaticProps<IDocsGroupMain, UrlQuery> = async ctx => {
-  const group = ctx.params?.group ?? '';
+  const group = ctx.params?.group ?? "";
   const preview = ctx?.preview ?? false;
-  let pageData = {} as IDocsGroupMain['pageData'];
+  let pageData = {} as IDocsGroupMain["pageData"];
   let docsGroups = [] as IDocsGroup[];
   let notFound = false;
 
@@ -89,7 +89,7 @@ export const getStaticProps: GetStaticProps<IDocsGroupMain, UrlQuery> = async ct
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
-  paths: [{ params: { group: 'interconnection' } }, { params: { group: 'orion' } }],
+  paths: [{ params: { group: "interconnection" } }, { params: { group: "orion" } }],
   fallback: true,
 });
 

@@ -1,19 +1,19 @@
-import { Box } from '@chakra-ui/react';
-import { useColorValue } from '~/context';
-import { Markdown } from './Markdown';
+import { Box } from "@chakra-ui/react";
+import { useColorValue } from "~/context";
+import { Markdown } from "./Markdown";
 
-import type { BoxProps } from '@chakra-ui/react';
-import type { TTableEntry } from '~/types';
-import type { ITd, ITableCell, TTableData } from './types';
+import type { BoxProps } from "@chakra-ui/react";
+import type { TTableEntry } from "~/types";
+import type { ITd, ITableCell, TTableData } from "./types";
 
 export const TableHeader: React.FC<BoxProps> = (props: BoxProps) => {
-  const bg = useColorValue('blackAlpha.100', 'whiteAlpha.100');
+  const bg = useColorValue("blackAlpha.100", "whiteAlpha.100");
   return <Box as="th" bg={bg} fontWeight="bold" p={2} fontSize="sm" {...props} />;
 };
 
 export const TD: React.FC<ITd> = (props: ITd) => {
   const { isHeader = false, children, ...rest } = props;
-  const border = useColorValue('gray.100', 'whiteAlpha.100');
+  const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
     <Box
       p={2}
@@ -21,7 +21,7 @@ export const TD: React.FC<ITd> = (props: ITd) => {
       whiteSpace="normal"
       borderTopWidth="1px"
       borderColor={border}
-      as={isHeader ? 'th' : 'td'}
+      as={isHeader ? "th" : "td"}
       {...rest}
     >
       {children}
@@ -31,7 +31,7 @@ export const TD: React.FC<ITd> = (props: ITd) => {
 
 export const TableCell: React.FC<ITableCell> = (props: ITableCell) => {
   const { isHeader = false, children, ...rest } = props;
-  const border = useColorValue('gray.100', 'whiteAlpha.100');
+  const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
     <Box
       p={2}
@@ -39,7 +39,7 @@ export const TableCell: React.FC<ITableCell> = (props: ITableCell) => {
       whiteSpace="normal"
       borderTopWidth="1px"
       borderColor={border}
-      as={isHeader ? 'th' : 'td'}
+      as={isHeader ? "th" : "td"}
       {...rest}
     >
       <Markdown>{children}</Markdown>
@@ -48,7 +48,7 @@ export const TableCell: React.FC<ITableCell> = (props: ITableCell) => {
 };
 
 export const TableMain: React.FC<BoxProps> = (props: BoxProps) => {
-  const border = useColorValue('gray.100', 'whiteAlpha.100');
+  const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
     <Box
       mt={4}
@@ -57,7 +57,7 @@ export const TableMain: React.FC<BoxProps> = (props: BoxProps) => {
       borderWidth="1px"
       borderRadius="lg"
       borderColor={border}
-      width={{ base: '100%', lg: 'max-content' }}
+      width={{ base: "100%", lg: "max-content" }}
     >
       <Box as="table" textAlign="left" width="100%" overflowX="hidden" {...props} />
     </Box>

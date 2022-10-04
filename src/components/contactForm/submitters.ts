@@ -1,31 +1,31 @@
-import { all, getErrorMessage } from '~/util';
+import { all, getErrorMessage } from "~/util";
 
-import type { TFormTypes, TFormFields, TFormResponse } from './Forms/types';
+import type { TFormTypes, TFormFields, TFormResponse } from "./Forms/types";
 
 export async function submitForm<F extends TFormTypes, D extends TFormFields<F>>(
   form: F,
   data: D,
 ): Promise<TFormResponse> {
-  let response = { success: false, message: 'Something went wrong.' };
+  let response = { success: false, message: "Something went wrong." };
   const formKey = form.toUpperCase();
-  let envUrl = '',
-    envHeader = '',
-    envKey = '';
+  let envUrl = "",
+    envHeader = "",
+    envKey = "";
 
-  if (formKey === 'SUPPORT') {
-    envUrl = process.env.NEXT_PUBLIC_FORM_SUPPORT_URL ?? '';
-    envHeader = process.env.NEXT_PUBLIC_FORM_SUPPORT_HEADER ?? '';
-    envKey = process.env.NEXT_PUBLIC_FORM_SUPPORT_KEY ?? '';
-  } else if (formKey === 'SALES') {
-    envUrl = process.env.NEXT_PUBLIC_FORM_SALES_URL ?? '';
-    envHeader = process.env.NEXT_PUBLIC_FORM_SALES_HEADER ?? '';
-    envKey = process.env.NEXT_PUBLIC_FORM_SALES_KEY ?? '';
+  if (formKey === "SUPPORT") {
+    envUrl = process.env.NEXT_PUBLIC_FORM_SUPPORT_URL ?? "";
+    envHeader = process.env.NEXT_PUBLIC_FORM_SUPPORT_HEADER ?? "";
+    envKey = process.env.NEXT_PUBLIC_FORM_SUPPORT_KEY ?? "";
+  } else if (formKey === "SALES") {
+    envUrl = process.env.NEXT_PUBLIC_FORM_SALES_URL ?? "";
+    envHeader = process.env.NEXT_PUBLIC_FORM_SALES_HEADER ?? "";
+    envKey = process.env.NEXT_PUBLIC_FORM_SALES_KEY ?? "";
   }
 
   if (all(envUrl, envHeader, envKey)) {
     try {
       const res = await fetch(envUrl, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify(data),
         headers: { [envHeader]: envKey },
       });

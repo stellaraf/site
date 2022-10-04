@@ -1,6 +1,6 @@
-import type KeenSlider from 'keen-slider';
-import type { TOptionsEvents } from 'keen-slider';
-import type { RefObject } from 'react';
+import type KeenSlider from "keen-slider";
+import type { TOptionsEvents } from "keen-slider";
+import type { RefObject } from "react";
 
 interface UseScrollPositionPoint {
   x: number;

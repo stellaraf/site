@@ -1,9 +1,9 @@
-import type { FlexProps, UseDisclosureReturn } from '@chakra-ui/react';
-import type { ILink } from '~/components';
+import type { FlexProps, UseDisclosureReturn } from "@chakra-ui/react";
+import type { ILink } from "~/components";
 
 export interface IBaseHeader extends FlexProps {
-  isOpen: UseDisclosureReturn['isOpen'];
-  onToggle: UseDisclosureReturn['onToggle'];
+  isOpen: UseDisclosureReturn["isOpen"];
+  onToggle: UseDisclosureReturn["onToggle"];
   navHeaderHeight: number;
 }
 

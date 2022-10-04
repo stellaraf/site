@@ -1,6 +1,6 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 
-import type { GeoPoint } from '~/types';
+import type { GeoPoint } from "~/types";
 
 const CloudLocationsCtx = createContext<GeoPoint[]>([]);
 

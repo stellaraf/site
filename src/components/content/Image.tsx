@@ -1,11 +1,11 @@
-import { Box, Image as ChakraImage } from '@chakra-ui/react';
-import { useInView } from 'react-intersection-observer';
+import { Box, Image as ChakraImage } from "@chakra-ui/react";
+import { useInView } from "react-intersection-observer";
 
-import type { IImage } from './types';
+import type { IImage } from "./types";
 
 export const Image = (props: IImage): JSX.Element => {
-  const { src, boxSize = 'xl', ...rest } = props;
-  const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '-150px' });
+  const { src, boxSize = "xl", ...rest } = props;
+  const [ref, inView] = useInView({ triggerOnce: true, rootMargin: "-150px" });
   return (
     <Box
       ref={ref}

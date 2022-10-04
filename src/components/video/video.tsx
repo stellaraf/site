@@ -1,18 +1,18 @@
-import dynamic from 'next/dynamic';
-import { Skeleton } from '@chakra-ui/react';
-import { useBooleanValue, useSSR } from '~/hooks';
+import dynamic from "next/dynamic";
+import { Skeleton } from "@chakra-ui/react";
+import { useBooleanValue, useSSR } from "~/hooks";
 
-import type { DynamicOptions } from 'next/dynamic';
-import type { ReactPlayerProps } from 'react-player';
-import type { IVideo } from './types';
+import type { DynamicOptions } from "next/dynamic";
+import type { ReactPlayerProps } from "react-player";
+import type { IVideo } from "./types";
 
-type LoaderType = NonNullable<DynamicOptions['loading']>;
+type LoaderType = NonNullable<DynamicOptions["loading"]>;
 
 const Loader: LoaderType = () => (
   <Skeleton boxSize="100%" startColor="gray.500" endColor="tertiary.500" />
 );
 
-const ReactPlayer = dynamic(() => import('react-player'), {
+const ReactPlayer = dynamic(() => import("react-player"), {
   loading: Loader,
 });
 
@@ -40,19 +40,19 @@ export const Video: React.FC<IVideo> = (props: IVideo) => {
 
   let { url } = rest;
   if (url.match(/^\/\/.*$/)?.length ?? 0 !== 0) {
-    url = 'https:' + url;
+    url = "https:" + url;
   }
 
   const customConfig = {
     file: {
       attributes: {
-        controlsList: ['nodownload', 'nofullscreen'],
+        controlsList: ["nodownload", "nofullscreen"],
       },
     },
     ...config,
-  } as ReactPlayerProps['config'];
+  } as ReactPlayerProps["config"];
 
-  const customStyle = { borderRadius: '1.6rem', ...style } as ReactPlayerProps['style'];
+  const customStyle = { borderRadius: "1.6rem", ...style } as ReactPlayerProps["style"];
 
   const playerProps = useBooleanValue(enableControls, controlledProps, uncontrolledProps);
 

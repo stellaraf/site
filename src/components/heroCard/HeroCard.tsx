@@ -1,10 +1,10 @@
-import { Flex, Heading } from '@chakra-ui/react';
-import { useTitleCase } from 'use-title-case';
-import { Carousel } from '~/components';
-import { useColorValue } from '~/context';
-import { useRender } from '~/hooks';
+import { Flex, Heading } from "@chakra-ui/react";
+import { useTitleCase } from "use-title-case";
+import { Carousel } from "~/components";
+import { useColorValue } from "~/context";
+import { useRender } from "~/hooks";
 
-import type { ICard, IHeroCards } from './types';
+import type { ICard, IHeroCards } from "./types";
 
 const Card: React.FC<ICard> = (props: ICard) => {
   const { content } = props;
@@ -24,8 +24,8 @@ const Card: React.FC<ICard> = (props: ICard) => {
 export const HeroCards: React.FC<IHeroCards> = (props: IHeroCards) => {
   const { content, icon, ...rest } = props;
   const styles = useColorValue(
-    { bg: 'white', color: 'dark.500' },
-    { bg: 'whiteAlpha.100', color: 'white', css: { backdropFilter: 'blur(2px)' } },
+    { bg: "white", color: "dark.500" },
+    { bg: "whiteAlpha.100", color: "white", css: { backdropFilter: "blur(2px)" } },
   );
   return (
     <Flex

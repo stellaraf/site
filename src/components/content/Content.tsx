@@ -1,7 +1,7 @@
-import { Title, Subtitle, Body, UpdatedAt } from './Text';
-import { SubSections } from './SubSections';
-import { Image } from './Image';
-import { Form } from './form';
+import { Title, Subtitle, Body, UpdatedAt } from "./Text";
+import { SubSections } from "./SubSections";
+import { Image } from "./Image";
+import { Form } from "./form";
 
 export const Content = {
   SubSections,

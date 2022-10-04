@@ -1,13 +1,13 @@
-import { Accordion, chakra, Box, Flex, VStack, useBreakpointValue } from '@chakra-ui/react';
-import { If, MSubNav } from '~/components';
-import { useColorValue, useConfig } from '~/context';
-import { useResponsiveStyle } from '~/hooks';
-import { DMenuGroup } from './menuDesktop';
-import { MMenuGroup } from './menuMobile';
+import { Accordion, chakra, Box, Flex, VStack, useBreakpointValue } from "@chakra-ui/react";
+import { If, MSubNav } from "~/components";
+import { useColorValue, useConfig } from "~/context";
+import { useResponsiveStyle } from "~/hooks";
+import { DMenuGroup } from "./menuDesktop";
+import { MMenuGroup } from "./menuMobile";
 
-import type { IDocsLayout, IResponsiveLayout } from './types';
+import type { IDocsLayout, IResponsiveLayout } from "./types";
 
-const LayoutContainer = chakra('div', { baseStyle: { w: '100%', minH: '40vh', pt: 32 } });
+const LayoutContainer = chakra("div", { baseStyle: { w: "100%", minH: "40vh", pt: 32 } });
 
 const MLayout: React.FC<IResponsiveLayout> = (props: IResponsiveLayout) => {
   const { children, ...rest } = props;
@@ -45,7 +45,7 @@ const DLayout: React.FC<IResponsiveLayout> = (props: IResponsiveLayout) => {
 
 const DNav: React.FC = () => {
   const { docsGroups } = useConfig();
-  const borderColor = useColorValue('blackAlpha.200', 'whiteAlpha.200');
+  const borderColor = useColorValue("blackAlpha.200", "whiteAlpha.200");
   return (
     <Flex
       p={4}
@@ -59,7 +59,7 @@ const DNav: React.FC = () => {
       position="sticky"
       borderRightWidth="1px"
       borderColor={borderColor}
-      width={{ lg: '260px', xl: '300px' }}
+      width={{ lg: "260px", xl: "300px" }}
     >
       <Accordion allowMultiple defaultIndex={[...Array(docsGroups.length).keys()]}>
         {docsGroups.map(group => (

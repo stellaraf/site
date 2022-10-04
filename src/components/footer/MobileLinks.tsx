@@ -7,15 +7,15 @@ import {
   AccordionItem,
   AccordionPanel,
   AccordionButton,
-} from '@chakra-ui/react';
-import { Link } from '~/components';
-import { useColorValue } from '~/context';
+} from "@chakra-ui/react";
+import { Link } from "~/components";
+import { useColorValue } from "~/context";
 
-import type { IFooterLinks } from './types';
+import type { IFooterLinks } from "./types";
 
 export const MobileLinks: React.FC<IFooterLinks> = (props: IFooterLinks) => {
   const { groups } = props;
-  const linkColor = useColorValue('whiteAlpha.700', 'whiteAlpha.700');
+  const linkColor = useColorValue("whiteAlpha.700", "whiteAlpha.700");
   return (
     <Accordion allowToggle position="relative" zIndex={1}>
       {groups.map(({ title, items }) => {

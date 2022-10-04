@@ -1,10 +1,10 @@
-import { RecoilRoot } from 'recoil';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import { TitleCaseProvider } from 'use-title-case';
-import { UIProvider } from './ui';
-import { ConfigProvider } from './config';
+import { RecoilRoot } from "recoil";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { TitleCaseProvider } from "use-title-case";
+import { UIProvider } from "./ui";
+import { ConfigProvider } from "./config";
 
-import type { IProvider } from './types';
+import type { IProvider } from "./types";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +24,6 @@ export const Provider: React.FC<IProvider> = (props: IProvider) => {
   );
 };
 
-export { useConfig } from './config';
-export { useTheme } from './ui';
-export { useColorMode, useColorValue } from './ui';
+export { useConfig } from "./config";
+export { useTheme } from "./ui";
+export { useColorMode, useColorValue } from "./ui";

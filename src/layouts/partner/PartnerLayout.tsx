@@ -6,15 +6,15 @@ import {
   Heading,
   VisuallyHidden,
   useBreakpointValue,
-} from '@chakra-ui/react';
-import { useTitleCase } from 'use-title-case';
-import { Card, CardBody, TrialForm } from '~/components';
-import { useColorValue } from '~/context';
-import { useGradient, useMobile, useRender, useResponsiveStyle } from '~/hooks';
-import { submitTrialForm } from '~/util';
-import { PartnerContextProvider, usePartnerCtx } from './context';
+} from "@chakra-ui/react";
+import { useTitleCase } from "use-title-case";
+import { Card, CardBody, TrialForm } from "~/components";
+import { useColorValue } from "~/context";
+import { useGradient, useMobile, useRender, useResponsiveStyle } from "~/hooks";
+import { submitTrialForm } from "~/util";
+import { PartnerContextProvider, usePartnerCtx } from "./context";
 
-import type { IPartnerLayout, TFormModelTrial } from './types';
+import type { IPartnerLayout, TFormModelTrial } from "./types";
 
 const TextContent: React.FC = () => {
   const { title, subtitle, body } = usePartnerCtx();
@@ -25,8 +25,8 @@ const TextContent: React.FC = () => {
       <Heading
         as="h1"
         fontWeight="light"
-        fontSize={{ base: '4xl', lg: '5xl' }}
-        textAlign={{ base: 'center', lg: 'left' }}
+        fontSize={{ base: "4xl", lg: "5xl" }}
+        textAlign={{ base: "center", lg: "left" }}
       >
         {titleMe(title)}
       </Heading>
@@ -34,8 +34,8 @@ const TextContent: React.FC = () => {
         <Heading
           as="h2"
           fontWeight="light"
-          fontSize={{ base: '1.5rem', lg: 'xl' }}
-          textAlign={{ base: 'center', lg: 'left' }}
+          fontSize={{ base: "1.5rem", lg: "xl" }}
+          textAlign={{ base: "center", lg: "left" }}
         >
           {titleMe(subtitle)}
         </Heading>
@@ -47,8 +47,8 @@ const TextContent: React.FC = () => {
           flexDir="column"
           fontWeight="normal"
           display="inline-flex"
-          maxW={{ base: 'none', md: 'none', xl: '75%' }}
-          alignSelf={{ base: 'center', lg: 'flex-start' }}
+          maxW={{ base: "none", md: "none", xl: "75%" }}
+          alignSelf={{ base: "center", lg: "flex-start" }}
         >
           {renderedBody}
         </Box>
@@ -62,7 +62,7 @@ const PartnerLogo: React.FC = () => {
   const color = useColorValue(logoColorLightMode, logoColorDarkMode);
   const isMobile = useMobile();
   return (
-    <VStack w="100%" alignItems={{ base: 'center', lg: 'flex-start' }} spacing={4}>
+    <VStack w="100%" alignItems={{ base: "center", lg: "flex-start" }} spacing={4}>
       <Heading as="h3" fontSize="sm" opacity={0.8}>
         Powered By
       </Heading>
@@ -72,8 +72,8 @@ const PartnerLogo: React.FC = () => {
           boxSize="100%"
           css={{
             maskImage: `url(${logo.fields.file.url})`,
-            maskRepeat: 'no-repeat',
-            maskPosition: isMobile ? 'center' : 'left',
+            maskRepeat: "no-repeat",
+            maskPosition: isMobile ? "center" : "left",
           }}
           backgroundColor={color}
         />
@@ -86,7 +86,7 @@ const PartnerLogo: React.FC = () => {
 const FormCard: React.FC = () => {
   const { name, fields } = usePartnerCtx();
   return (
-    <Card minHeight="lg" height="min-content" w={{ base: '20rem', md: '80%', lg: '100%' }}>
+    <Card minHeight="lg" height="min-content" w={{ base: "20rem", md: "80%", lg: "100%" }}>
       <CardBody>
         <TrialForm name={name} fields={fields} onSubmit={submitTrialForm} />
       </CardBody>

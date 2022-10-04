@@ -1,22 +1,22 @@
-import { useEffect, useRef } from 'react';
-import { useRouter } from 'next/router';
-import { Center, Stack, Button as ChakraButton } from '@chakra-ui/react';
-import { motion, AnimatePresence, LayoutGroup, useCycle } from 'framer-motion';
-import { useTitleCase } from 'use-title-case';
-import { Button, Icon } from '~/components';
-import { useGoogleAnalytics } from '~/hooks';
-import { Card, CardBody } from '../Card';
-import { ContactOption } from '../ContactOption';
-import { useContactFormCtx } from '../context';
-import { queryIsForm } from '../guards';
-import { useContactForm } from '../state';
-import { DesktopForm } from './DesktopForm';
+import { useEffect, useRef } from "react";
+import { useRouter } from "next/router";
+import { Center, Stack, Button as ChakraButton } from "@chakra-ui/react";
+import { motion, AnimatePresence, LayoutGroup, useCycle } from "framer-motion";
+import { useTitleCase } from "use-title-case";
+import { Button, Icon } from "~/components";
+import { useGoogleAnalytics } from "~/hooks";
+import { Card, CardBody } from "../Card";
+import { ContactOption } from "../ContactOption";
+import { useContactFormCtx } from "../context";
+import { queryIsForm } from "../guards";
+import { useContactForm } from "../state";
+import { DesktopForm } from "./DesktopForm";
 
-import type { MouseEvent } from 'react';
-import type { Variants } from 'framer-motion';
-import type { IContactCard } from '~/types';
-import type { IMotionItems } from '../types';
-import type { FormHandlers } from '../Forms/types';
+import type { MouseEvent } from "react";
+import type { Variants } from "framer-motion";
+import type { IContactCard } from "~/types";
+import type { IMotionItems } from "../types";
+import type { FormHandlers } from "../Forms/types";
 
 // Make Chakra-UI components into Framer-Motion components for fewer components in the tree.
 const Container = motion(Stack);
@@ -24,9 +24,9 @@ const AnimatedCard = motion(Card);
 const AnimatedCenter = motion(Center);
 
 const iconMap = {
-  Sales: { bs: 'BsFillPersonLinesFill' },
-  Support: { bs: 'BsPeopleFill' },
-  Docs: { cg: 'CgNotes' },
+  Sales: { bs: "BsFillPersonLinesFill" },
+  Support: { bs: "BsPeopleFill" },
+  Docs: { cg: "CgNotes" },
 };
 
 export const OptionsDesktop = (): JSX.Element => {
@@ -37,11 +37,11 @@ export const OptionsDesktop = (): JSX.Element => {
   const { trackModal } = useGoogleAnalytics();
 
   // Static desktop sizes for cards layout
-  const cardSizes = { width: '20rem', minHeight: '28rem' };
+  const cardSizes = { width: "20rem", minHeight: "28rem" };
   // Static desktop sizes for form layout
-  const formSizes = { width: '66rem', minHeight: '32rem', height: '100%', px: 8 };
+  const formSizes = { width: "66rem", minHeight: "32rem", height: "100%", px: 8 };
 
-  const [layout, toggleLayout] = useCycle('cards', 'form');
+  const [layout, toggleLayout] = useCycle("cards", "form");
 
   // Each card carries a lifecycle of two states:
   //    - cards: a row of 3 cards displaying each type method of contact/communication.
@@ -53,7 +53,7 @@ export const OptionsDesktop = (): JSX.Element => {
       // The cards layout is static - each card should be displayed and look about the same.
       opacity: 1,
       width: cardSizes.width,
-      display: 'flex',
+      display: "flex",
     },
 
     /**
@@ -67,9 +67,9 @@ export const OptionsDesktop = (): JSX.Element => {
       const { idx, current } = i;
       return {
         opacity: idx === current ? 1 : current === null ? 1 : 0,
-        width: idx === current ? formSizes.width : '0rem',
+        width: idx === current ? formSizes.width : "0rem",
         transition: { duration: 0.25 },
-        display: idx === current ? 'flex' : 'none',
+        display: idx === current ? "flex" : "none",
       };
     },
   };
@@ -81,7 +81,7 @@ export const OptionsDesktop = (): JSX.Element => {
   useEffect(() => {
     if (queryIsForm(query)) {
       const selected = cards.find(c => c.icon.toLowerCase() === query.form.toLowerCase());
-      if (typeof selected !== 'undefined') {
+      if (typeof selected !== "undefined") {
         formState.setSelected(selected.icon);
         toggleLayout(1);
         trackModal(`${pathname}/form-${selected.icon.toLowerCase()}`);
@@ -93,7 +93,7 @@ export const OptionsDesktop = (): JSX.Element => {
     <Container
       minH="lg"
       zIndex={1}
-      spacing={layout === 'cards' ? 12 : 0}
+      spacing={layout === "cards" ? 12 : 0}
       align="stretch"
       direction="row"
       animate={layout}
@@ -102,7 +102,7 @@ export const OptionsDesktop = (): JSX.Element => {
         {cards.map((card: IContactCard, i) => {
           const { icon: iconName, color: iconColor, buttonText, form, ...cardRest } = card;
 
-          const isForm = layout === 'form' && formState.selected === iconName;
+          const isForm = layout === "form" && formState.selected === iconName;
 
           // Send the same component to both sub-components (ContactOption/FormContainer). Since
           // it's the same component and wrapped by a framer component, it will be animated when
@@ -119,7 +119,7 @@ export const OptionsDesktop = (): JSX.Element => {
            * The Docs link should just be a standard router link to the /docs route.
            */
           function handleClick(event: MouseEvent): void {
-            if (['Support', 'Sales'].includes(iconName)) {
+            if (["Support", "Sales"].includes(iconName)) {
               event.preventDefault();
               formState.setSelected(iconName);
               toggleLayout();
@@ -141,8 +141,8 @@ export const OptionsDesktop = (): JSX.Element => {
             <Button
               w="100%"
               colorScheme={iconColor}
-              href={iconName === 'Docs' ? '/docs' : undefined}
-              onClick={iconName === 'Docs' ? undefined : handleClick}
+              href={iconName === "Docs" ? "/docs" : undefined}
+              onClick={iconName === "Docs" ? undefined : handleClick}
             >
               {titleMe(buttonText)}
             </Button>
@@ -155,19 +155,19 @@ export const OptionsDesktop = (): JSX.Element => {
               colorScheme={iconColor}
               onClick={handleFormSubmit}
             >
-              {titleMe(form?.buttonSubmit ?? 'Submit')}
+              {titleMe(form?.buttonSubmit ?? "Submit")}
             </ChakraButton>
           );
 
           return (
             <motion.div
               // Animate each card from the initial position of offscreen-right to center.
-              initial={{ x: '100%' }}
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
               // Stagger each card by index x interval.
               transition={{ delay: i * 0.1 }}
               // Animate component unmount by moving it offscreen-left.
-              exit={{ opacity: 0, x: '-100%' }}
+              exit={{ opacity: 0, x: "-100%" }}
               key={`cardWrapper${i}`}
             >
               <AnimatedCard
@@ -188,7 +188,7 @@ export const OptionsDesktop = (): JSX.Element => {
                    * page or component.
                    */}
                   <LayoutGroup>
-                    {layout === 'cards' ? (
+                    {layout === "cards" ? (
                       <ContactOption
                         index={i}
                         icon={icon}
@@ -217,7 +217,7 @@ export const OptionsDesktop = (): JSX.Element => {
                   width="100%"
                   exit={{ scale: 0.5, opacity: 0 }}
                 >
-                  {layout === 'form' && !formState.showSuccess
+                  {layout === "form" && !formState.showSuccess
                     ? formButton
                     : formState.showSuccess
                     ? null

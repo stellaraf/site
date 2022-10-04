@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import { slug } from '~/util';
+import { useMemo } from "react";
+import { slug } from "~/util";
 
 export const useSlug = (original: string, deps: unknown[] = []): string =>
-  useMemo(() => slug(original, '', ''), deps);
+  useMemo(() => slug(original, "", ""), deps);

@@ -1,16 +1,16 @@
-import { Box, Text, useToken, useStyleConfig, Code as ChakraCode } from '@chakra-ui/react';
-import { useCodeBlockStyle } from '~/components';
-import { useColorValue } from '~/context';
+import { Box, Text, useToken, useStyleConfig, Code as ChakraCode } from "@chakra-ui/react";
+import { useCodeBlockStyle } from "~/components";
+import { useColorValue } from "~/context";
 
-import type { IBlockQuote, ICode, IParagraph, IInline } from './types';
+import type { IBlockQuote, ICode, IParagraph, IInline } from "./types";
 
 export const P: React.FC<IParagraph> = (props: IParagraph) => (
-  <Text my={8} css={{ '&:first-of-type': { marginTop: useToken('space', 2) } }} {...props} />
+  <Text my={8} css={{ "&:first-of-type": { marginTop: useToken("space", 2) } }} {...props} />
 );
 
 export const BlockQuote: React.FC<IBlockQuote> = (props: IBlockQuote) => {
-  const bg = useColorValue('blackAlpha.100', 'whiteAlpha.100');
-  const border = useColorValue('blackAlpha.300', 'whiteAlpha.300');
+  const bg = useColorValue("blackAlpha.100", "whiteAlpha.100");
+  const border = useColorValue("blackAlpha.300", "whiteAlpha.300");
   return (
     <Box
       my={8}
@@ -32,13 +32,13 @@ export const BlockQuote: React.FC<IBlockQuote> = (props: IBlockQuote) => {
 };
 
 export const Code: React.FC<ICode> = (props: ICode) => {
-  const scheme = useColorValue('gray', 'tertiary');
+  const scheme = useColorValue("gray", "tertiary");
 
   let ctx = useCodeBlockStyle();
   if (ctx === null) {
     ctx = { codeBlock: { colorScheme: scheme }, copyButton: {} };
   }
-  const sx = useStyleConfig('Code', { colorScheme: ctx.codeBlock.colorScheme });
+  const sx = useStyleConfig("Code", { colorScheme: ctx.codeBlock.colorScheme });
   return <ChakraCode fontSize="sm" colorScheme={scheme} px={1} sx={sx} {...props} />;
 };
 

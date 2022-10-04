@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
-import { useKeenSlider } from 'keen-slider/react';
-import { useBreakpointString } from '~/hooks';
+import { useEffect, useRef, useState } from "react";
+import { useKeenSlider } from "keen-slider/react";
+import { useBreakpointString } from "~/hooks";
 
-import type KeenSlider from 'keen-slider';
-import type { TOptionsEvents } from 'keen-slider';
-import type { UseSlider, UseSliderOptions } from '~/types';
+import type KeenSlider from "keen-slider";
+import type { TOptionsEvents } from "keen-slider";
+import type { UseSlider, UseSliderOptions } from "~/types";
 
 export function useSlider(options: UseSliderOptions = {}): UseSlider {
   const { sm, md, lg, xl } = useBreakpointString();
@@ -81,7 +81,7 @@ export function useSlider(options: UseSliderOptions = {}): UseSlider {
     duration: 1000,
     dragStart: pause,
     dragEnd: unpause,
-    slides: '.__slider_slide',
+    slides: ".__slider_slide",
     slideChanged: handleSlideChange,
   } as TOptionsEvents;
 
@@ -93,7 +93,7 @@ export function useSlider(options: UseSliderOptions = {}): UseSlider {
     [md]: optionsMd ?? {},
     [lg]: optionsLg ?? { controls: false },
     [xl]: optionsXl ?? { controls: false },
-  } as TOptionsEvents['breakpoints'];
+  } as TOptionsEvents["breakpoints"];
 
   /**
    * Merge default options with overrides.
@@ -112,10 +112,10 @@ export function useSlider(options: UseSliderOptions = {}): UseSlider {
    * Add mouseover/mouseout events with callbacks.
    */
   useEffect(() => {
-    containerRef.current?.addEventListener('mouseover', () =>
+    containerRef.current?.addEventListener("mouseover", () =>
       onMouseOver(slider, paused, setPaused, currentSlide, setSlide),
     );
-    containerRef.current?.addEventListener('mouseout', () =>
+    containerRef.current?.addEventListener("mouseout", () =>
       onMouseOut(slider, paused, setPaused, currentSlide, setSlide),
     );
   }, [containerRef]);

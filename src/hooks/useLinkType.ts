@@ -1,11 +1,11 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import type { LinkType } from './types';
+import type { LinkType } from "./types";
 
 export const useLinkType = (href: string): LinkType => {
   let linkTarget = href;
   let external = false;
-  if (href[0] === '/') {
+  if (href[0] === "/") {
     linkTarget = href.substring(1);
   }
 
@@ -14,12 +14,12 @@ export const useLinkType = (href: string): LinkType => {
       external = true;
     }
   } else {
-    let prefix = '/';
-    if (!linkTarget.includes('.mdx') && linkTarget.includes('#')) {
-      prefix = '';
+    let prefix = "/";
+    if (!linkTarget.includes(".mdx") && linkTarget.includes("#")) {
+      prefix = "";
     }
-    const parts = linkTarget.split('.mdx');
-    linkTarget = [prefix, ...parts].join('');
+    const parts = linkTarget.split(".mdx");
+    linkTarget = [prefix, ...parts].join("");
   }
 
   const isExternal = useMemo(() => external, [href]);

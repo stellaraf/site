@@ -1,14 +1,14 @@
-import { Box, Flex, Image, VStack, Heading, Divider } from '@chakra-ui/react';
-import { useColorValue } from '~/context';
-import { useRender } from '~/hooks';
-import { Quote } from './quotes';
+import { Box, Flex, Image, VStack, Heading, Divider } from "@chakra-ui/react";
+import { useColorValue } from "~/context";
+import { useRender } from "~/hooks";
+import { Quote } from "./quotes";
 
-import type { TestimonialEntry } from '~/types';
+import type { TestimonialEntry } from "~/types";
 
 export const Testimonial = (props: TestimonialEntry): JSX.Element => {
   const { title, subtitle, body, image } = props;
-  const renderedBody = useRender(body, [], [], { paragraph: { display: 'inline' } });
-  const fontWeight = useColorValue('thin', undefined);
+  const renderedBody = useRender(body, [], [], { paragraph: { display: "inline" } });
+  const fontWeight = useColorValue("thin", undefined);
 
   return (
     <Flex
@@ -25,8 +25,8 @@ export const Testimonial = (props: TestimonialEntry): JSX.Element => {
             <Box
               whiteSpace="pre-line"
               fontWeight={fontWeight}
-              fontSize={{ base: 'lg', lg: 'xl' }}
-              textAlign={{ base: 'left', xl: 'justify' }}
+              fontSize={{ base: "lg", lg: "xl" }}
+              textAlign={{ base: "left", xl: "justify" }}
             >
               <Quote kind="open" />
               {renderedBody}
@@ -35,11 +35,11 @@ export const Testimonial = (props: TestimonialEntry): JSX.Element => {
             <VStack w="100%" pt={8} align="center" textAlign="center">
               <Divider mb={4} />
               {subtitle && (
-                <Heading as="h5" fontSize={{ base: 'md', lg: 'lg' }} fontWeight="light">
+                <Heading as="h5" fontSize={{ base: "md", lg: "lg" }} fontWeight="light">
                   {subtitle}
                 </Heading>
               )}
-              <Heading as="h4" fontSize={{ base: 'lg', lg: 'xl' }}>
+              <Heading as="h4" fontSize={{ base: "lg", lg: "xl" }}>
                 {title}
               </Heading>
               <Box minW={12} maxW={48} overflow="hidden">

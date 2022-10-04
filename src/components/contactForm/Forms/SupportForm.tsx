@@ -1,16 +1,16 @@
-import { useImperativeHandle } from 'react';
-import { Flex } from '@chakra-ui/react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { isValidPhoneNumber } from 'libphonenumber-js';
-import { FieldGroup, TextArea, TextInput } from '~/components';
-import { forwardRef } from '~/util';
-import { useContactFormConfig } from '../state';
+import { useImperativeHandle } from "react";
+import { Flex } from "@chakra-ui/react";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { isValidPhoneNumber } from "libphonenumber-js";
+import { FieldGroup, TextArea, TextInput } from "~/components";
+import { forwardRef } from "~/util";
+import { useContactFormConfig } from "../state";
 
-import type { IForm, FormHandlers } from './types';
+import type { IForm, FormHandlers } from "./types";
 
-export const SupportForm = forwardRef<FormHandlers, IForm<'Support'>>((props, ref) => {
+export const SupportForm = forwardRef<FormHandlers, IForm<"Support">>((props, ref) => {
   const { onSubmit } = props;
   const {
     firstName,
@@ -20,16 +20,16 @@ export const SupportForm = forwardRef<FormHandlers, IForm<'Support'>>((props, re
     companyName,
     subject,
     details,
-  } = useContactFormConfig('Support');
+  } = useContactFormConfig("Support");
 
   const formSchemaZod = z.object({
     firstName: z.string().min(1, `${firstName.displayName} is required`),
     lastName: z.string().min(1, `${lastName.displayName} is required`),
     emailAddress: z.string().email(`${emailAddress.displayName} is required`),
-    phoneNumber: z.string().refine(isValidPhoneNumber, 'Invalid phone number').optional(),
+    phoneNumber: z.string().refine(isValidPhoneNumber, "Invalid phone number").optional(),
     companyName: z.string().min(1, `${companyName.displayName} is required`),
     subject: z.string().min(1, `${subject.displayName} is required`),
-    details: z.string().min(1, 'Please tell us how we can help you'),
+    details: z.string().min(1, "Please tell us how we can help you"),
   });
 
   const form = useForm<z.infer<typeof formSchemaZod>>({
@@ -39,7 +39,7 @@ export const SupportForm = forwardRef<FormHandlers, IForm<'Support'>>((props, re
   const { handleSubmit, control } = form;
 
   const submitForm = async (data: z.infer<typeof formSchemaZod>) => {
-    return onSubmit('Support', data);
+    return onSubmit("Support", data);
   };
 
   const submitter = handleSubmit(submitForm);
@@ -51,7 +51,7 @@ export const SupportForm = forwardRef<FormHandlers, IForm<'Support'>>((props, re
   }));
 
   return (
-    <Flex as="form" onSubmit={submitter} flexDir="column" w={{ base: '100%', lg: '75%' }}>
+    <Flex as="form" onSubmit={submitter} flexDir="column" w={{ base: "100%", lg: "75%" }}>
       <FormProvider {...form}>
         <FieldGroup>
           <TextInput

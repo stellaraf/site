@@ -1,5 +1,5 @@
-import { createContext, useContext } from 'react';
-import type { IContactCard } from '~/types';
+import { createContext, useContext } from "react";
+import type { IContactCard } from "~/types";
 
 const ContactFormCtx = createContext<IContactCard[]>([]);
 

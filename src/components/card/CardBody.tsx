@@ -1,7 +1,7 @@
-import { VStack } from '@chakra-ui/react';
-import { forwardRef } from '~/util';
+import { VStack } from "@chakra-ui/react";
+import { forwardRef } from "~/util";
 
-import type { ICardBody } from './types';
+import type { ICardBody } from "./types";
 
 export const CardBody = forwardRef<HTMLDivElement, ICardBody>((props, ref) => {
   const { spacing = 8, ...rest } = props;

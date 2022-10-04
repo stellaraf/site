@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
-import { FormControl, FormErrorMessage } from '@chakra-ui/react';
-import { useFormContext } from 'react-hook-form';
-import { Select } from '~/components';
+import { useEffect } from "react";
+import { FormControl, FormErrorMessage } from "@chakra-ui/react";
+import { useFormContext } from "react-hook-form";
+import { Select } from "~/components";
 
-import type { SelectOptionSingle } from '~/types';
-import type { ISelectField } from './types';
+import type { SelectOptionSingle } from "~/types";
+import type { ISelectField } from "./types";
 
 export const SelectField = (props: ISelectField): JSX.Element => {
   const { opts, id: name, required = false, isMulti, ...rest } = props;
@@ -30,7 +30,7 @@ export const SelectField = (props: ISelectField): JSX.Element => {
   const fieldError = errors?.[name];
 
   return (
-    <FormControl id={name} isInvalid={typeof fieldError !== 'undefined'} isRequired={required}>
+    <FormControl id={name} isInvalid={typeof fieldError !== "undefined"} isRequired={required}>
       <Select
         name={name}
         options={opts}
@@ -41,7 +41,7 @@ export const SelectField = (props: ISelectField): JSX.Element => {
         {...rest}
       />
       <FormErrorMessage>
-        {typeof fieldError !== 'undefined' && fieldError.message?.toString()}
+        {typeof fieldError !== "undefined" && fieldError.message?.toString()}
       </FormErrorMessage>
     </FormControl>
   );

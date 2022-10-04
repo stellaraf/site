@@ -1,15 +1,15 @@
-import { useMemo } from 'react';
-import { Box, Flex } from '@chakra-ui/react';
-import { Button, DynamicIcon, SectionDivider } from '~/components';
-import { useMobile, useResponsiveStyle } from '~/hooks';
-import { useColorValue } from '~/context';
-import { forwardRef } from '~/util';
-import { usePageContent } from './usePageContent';
+import { useMemo } from "react";
+import { Box, Flex } from "@chakra-ui/react";
+import { Button, DynamicIcon, SectionDivider } from "~/components";
+import { useMobile, useResponsiveStyle } from "~/hooks";
+import { useColorValue } from "~/context";
+import { forwardRef } from "~/util";
+import { usePageContent } from "./usePageContent";
 
-import type { IContentSection, TSides, TSideValues, ITitleLayout } from './types';
+import type { IContentSection, TSides, TSideValues, ITitleLayout } from "./types";
 
 function getSide(idx: number): TSideValues {
-  const sides: TSides = ['right', 'left'];
+  const sides: TSides = ["right", "left"];
   return sides[idx % 2];
 }
 
@@ -18,7 +18,7 @@ const TitleLayout = (props: ITitleLayout): JSX.Element => {
   if (isMobile) {
     return titleBlock;
   } else {
-    if (side === 'right') {
+    if (side === "right") {
       return (
         <>
           {image}
@@ -60,9 +60,9 @@ export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props
 
   let titleMargin = {};
   if (image !== null && !isMobile) {
-    if (side === 'right') {
+    if (side === "right") {
       titleMargin = { ml: 16 };
-    } else if (side === 'left') {
+    } else if (side === "left") {
       titleMargin = { mr: 16 };
     }
   }
@@ -72,7 +72,7 @@ export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props
       key={items.title}
       {...titleMargin}
       direction="column"
-      textAlign={isMobile ? 'center' : !hasImage ? 'center' : side === 'right' ? 'left' : 'right'}
+      textAlign={isMobile ? "center" : !hasImage ? "center" : side === "right" ? "left" : "right"}
     >
       {title}
       {subtitle}
@@ -93,7 +93,7 @@ export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props
         <Flex h="100%" alignItems="center" justify="center" flexWrap="nowrap">
           <TitleLayout titleBlock={titleBlock} image={image} isMobile={isMobile} side={side} />
         </Flex>
-        <Flex height="100%" align="center" direction="column" mb={{ base: 12, lg: '' }}>
+        <Flex height="100%" align="center" direction="column" mb={{ base: 12, lg: "" }}>
           {body}
           {form}
           {subsections}
@@ -101,7 +101,7 @@ export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props
             <Button
               my={8}
               href={buttonLink}
-              leftIcon={<DynamicIcon icon={{ bs: 'BsChevronRight' }} />}
+              leftIcon={<DynamicIcon icon={{ bs: "BsChevronRight" }} />}
             >
               {buttonText}
             </Button>
@@ -109,7 +109,7 @@ export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props
           {showUpdatedDate && updatedAt}
         </Flex>
       </Box>
-      {showBorder && <SectionDivider left={side === 'left'} right={side === 'right'} />}
+      {showBorder && <SectionDivider left={side === "left"} right={side === "right"} />}
     </>
   );
 });

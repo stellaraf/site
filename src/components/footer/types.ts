@@ -8,9 +8,9 @@ import type {
   RenderProps,
   IconButtonProps,
   SimpleGridProps,
-} from '@chakra-ui/react';
-import type { ControllerRenderProps } from 'react-hook-form';
-import type { SortedFooterItem } from '~/types';
+} from "@chakra-ui/react";
+import type { ControllerRenderProps } from "react-hook-form";
+import type { SortedFooterItem } from "~/types";
 
 export interface IFooter extends BoxProps {
   groups: SortedFooterItem[];
@@ -26,16 +26,16 @@ export interface StructuredItems<T> {
 
 export interface ISocialLinks extends StackProps {}
 
-export interface ISocialLink extends Omit<IconButtonProps, 'href' | 'title' | 'aria-label'> {
+export interface ISocialLink extends Omit<IconButtonProps, "href" | "title" | "aria-label"> {
   label: string;
   href: string;
 }
 
-export type { BoxProps } from '@chakra-ui/react';
+export type { BoxProps } from "@chakra-ui/react";
 
 export interface ISubscribe extends StackProps {
   alertProps?: AlertProps;
-  alertPosition?: ToastProps['position'];
+  alertPosition?: ToastProps["position"];
 }
 
 export interface ISubscribeInput extends InputProps {
@@ -46,12 +46,12 @@ export interface ISubscribeFormData {
   email: string;
 }
 
-export type ToastStatus = ToastProps['status'];
+export type ToastStatus = ToastProps["status"];
 
-type RenderedAlert = Omit<RenderProps, 'id'> & Omit<AlertProps, 'id'>;
+type RenderedAlert = Omit<RenderProps, "id"> & Omit<AlertProps, "id">;
 
 export interface ISubscribeAlert extends RenderedAlert {
-  status: ToastProps['status'];
+  status: ToastProps["status"];
   title?: string;
   description?: string;
   isClosable?: boolean;
@@ -60,6 +60,6 @@ export interface ISubscribeAlert extends RenderedAlert {
 }
 
 export interface ISubscribeToast {
-  status: ToastProps['status'];
+  status: ToastProps["status"];
   message: string;
 }

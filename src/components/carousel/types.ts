@@ -1,5 +1,5 @@
-import type { BoxProps } from '@chakra-ui/react';
-import type { ReactNodeArray } from 'react';
+import type { BoxProps } from "@chakra-ui/react";
+import type { ReactNodeArray } from "react";
 
 export interface CarouselProps extends BoxProps {
   interval?: number;

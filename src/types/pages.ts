@@ -1,7 +1,7 @@
-import type { AppProps, AppInitialProps, AppContext } from 'next/app';
-import type { BoxProps } from '@chakra-ui/react';
-import type { Asset } from 'contentful';
-import type { Document } from '@contentful/rich-text-types';
+import type { AppProps, AppInitialProps, AppContext } from "next/app";
+import type { BoxProps } from "@chakra-ui/react";
+import type { Asset } from "contentful";
+import type { Document } from "@contentful/rich-text-types";
 import type {
   IMeasuredGeoPoint,
   HomeSection,
@@ -18,7 +18,7 @@ import type {
   PageContent,
   Entry,
   Bio,
-} from '~/types';
+} from "~/types";
 
 export type GetInitialPropsReturn<InitialProps> = AppProps &
   AppInitialProps & { appProps: InitialProps };
@@ -36,8 +36,8 @@ export type PageWithContent<P extends Dict = Dict> = Page<PageAttrs & P> & {
   pageContent: PageContent[];
 };
 
-export type PageEntry<P extends Page = Page> = Omit<P, 'pageData'> & {
-  pageData: Entry<P['pageData']>;
+export type PageEntry<P extends Page = Page> = Omit<P, "pageData"> & {
+  pageData: Entry<P["pageData"]>;
 };
 
 export interface TSite {
@@ -112,14 +112,14 @@ export interface ILegalPage extends PageWithContent {}
 export interface IVendorPage {
   pageData: {
     name: string;
-    logo: Asset['fields'];
+    logo: Asset["fields"];
     logoColorLightMode: string;
     logoColorDarkMode: string;
     title: string;
     subtitle: string;
     body?: Document;
     trialForm?: TFormModelTrial;
-    partnerLogo?: Asset['fields'];
+    partnerLogo?: Asset["fields"];
   };
 }
 

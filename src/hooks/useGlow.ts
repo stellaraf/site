@@ -1,7 +1,7 @@
-import { useToken } from '@chakra-ui/react';
-import { getScale } from 'color2k';
+import { useToken } from "@chakra-ui/react";
+import { getScale } from "color2k";
 
-import type { UseGlow } from './types';
+import type { UseGlow } from "./types";
 
 /**
  * Generate boxShadow & starting backgroundColor for a glow effect between two colors.
@@ -14,8 +14,8 @@ export function useGlow(
   const { shadows = 4, increment = 20 } = options ?? {};
 
   // Get real colors from Chakra UI theme tokens.
-  const startHex = useToken('colors', start);
-  const stopHex = useToken('colors', stop);
+  const startHex = useToken("colors", start);
+  const stopHex = useToken("colors", stop);
 
   // Create an array of numbers from 0 through `shadows`.
   const shadowsArray = Array.from({ length: shadows }, (_, i) => i);
@@ -40,7 +40,7 @@ export function useGlow(
     return `0 0 ${px} ${px} ${color}`;
   }
 
-  const boxShadow = shadowsArray.map(createShadow).join(', ');
+  const boxShadow = shadowsArray.map(createShadow).join(", ");
   const backgroundColor = getColor(0);
 
   return { boxShadow, backgroundColor };

@@ -1,0 +1,32 @@
+name: Quality
+on: [push, pull_request]
+
+jobs:
+  quality:
+    name: Quality
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Node Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: PNPM Setup
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: latest
+          run_install: true
+
+      - name: Formatting
+        run: pnpm run format
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Typing
+        run: pnpm run typecheck

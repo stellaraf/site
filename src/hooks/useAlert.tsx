@@ -6,26 +6,26 @@ import {
   CloseButton,
   AlertDescription,
   useBreakpointValue,
-} from '@chakra-ui/react';
-import { useConfig } from '~/context';
-import { useRender } from '~/hooks';
+} from "@chakra-ui/react";
+import { useConfig } from "~/context";
+import { useRender } from "~/hooks";
 
-import type { TToastPositions, UseAlertReturn } from './types';
+import type { TToastPositions, UseAlertReturn } from "./types";
 
 export function useAlert(): UseAlertReturn {
   const toast = useToast();
   const { errorMessage = null } = useConfig();
   const rendered = useRender(errorMessage);
   const defaultPosition = useBreakpointValue<TToastPositions>({
-    base: 'bottom',
-    lg: 'bottom-right',
+    base: "bottom",
+    lg: "bottom-right",
   });
 
   const showToast: UseAlertReturn = opts => {
     const {
-      status = 'info',
-      message = '',
-      position = defaultPosition ?? 'bottom',
+      status = "info",
+      message = "",
+      position = defaultPosition ?? "bottom",
       onClose: customOnClose,
       duration = 5000,
     } = opts;
@@ -59,18 +59,18 @@ export function useAlert(): UseAlertReturn {
                   display="block"
                   css={{
                     // Don't add normal paragraph padding in alerts.
-                    '& p.chakra-text': { marginTop: 'unset', marginBottom: 'unset' },
+                    "& p.chakra-text": { marginTop: "unset", marginBottom: "unset" },
                     // Inherit alert styles for links - so the branded underline doesn't clash.
-                    '& a': {
-                      '--link-color': 'inherit',
+                    "& a": {
+                      "--link-color": "inherit",
                     },
-                    '& a:hover': {
+                    "& a:hover": {
                       opacity: 0.8,
                     },
                   }}
                 >
                   {message}
-                  {status === 'error' && rendered}
+                  {status === "error" && rendered}
                 </AlertDescription>
               </Flex>
               <CloseButton size="sm" onClick={onClose} position="absolute" right={1} top={1} />

@@ -1,4 +1,4 @@
-import { useWindowScroll } from 'react-use';
+import { useWindowScroll } from "react-use";
 
 export type UseScrollPositionCallback = (p: { x: number; y: number }) => void;
 

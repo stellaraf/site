@@ -1,13 +1,13 @@
-import { HStack, Button } from '@chakra-ui/react';
-import { DynamicIcon } from '~/components';
-import { useColorMode, useColorValue } from '~/context';
+import { HStack, Button } from "@chakra-ui/react";
+import { DynamicIcon } from "~/components";
+import { useColorMode, useColorValue } from "~/context";
 
-import type { IMControls } from './types';
+import type { IMControls } from "./types";
 
 export const MControls: React.FC<IMControls> = (props: IMControls) => {
   const { toggleColorMode } = useColorMode();
-  const colorModeIcon = useColorValue({ bs: 'BsMoon' }, { md: 'MdWbSunny' });
-  const switchTo = useColorValue('Dark', 'Light');
+  const colorModeIcon = useColorValue({ bs: "BsMoon" }, { md: "MdWbSunny" });
+  const switchTo = useColorValue("Dark", "Light");
   const colorModeLabel = `Switch to ${switchTo} Mode`;
   return (
     <HStack {...props}>

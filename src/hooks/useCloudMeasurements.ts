@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
-import { atom, selector, useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
-import { merge } from 'merge-anything';
-import { useCloudLocations } from '~/context';
-import { all } from '~/util';
+import { useEffect } from "react";
+import { atom, selector, useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { merge } from "merge-anything";
+import { useCloudLocations } from "~/context";
+import { all } from "~/util";
 
-import type { GeoPoint, CloudMeasurement } from '~/types';
+import type { GeoPoint, CloudMeasurement } from "~/types";
 
-type PartialMeasurement = Pick<CloudMeasurement, 'id'> & Partial<CloudMeasurement>;
+type PartialMeasurement = Pick<CloudMeasurement, "id"> & Partial<CloudMeasurement>;
 
 interface CloudMeasurements {
   /**
@@ -64,10 +64,10 @@ interface CloudMeasurements {
   reset: NoOp;
 }
 
-const measurementAtom = atom<CloudMeasurement[]>({ key: 'cloudMeasurements', default: [] });
+const measurementAtom = atom<CloudMeasurement[]>({ key: "cloudMeasurements", default: [] });
 
 const completeMeasurementsSelector = selector<boolean>({
-  key: 'cloud-measurements-complete',
+  key: "cloud-measurements-complete",
   get: ({ get }) => {
     const measurements = get(measurementAtom);
     if (measurements.length === 0) {

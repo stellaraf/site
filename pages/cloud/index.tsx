@@ -1,17 +1,17 @@
-import dynamic from 'next/dynamic';
-import { Button, Wrap } from '@chakra-ui/react';
-import { getPage, getPageContent, getOrionLocations, getPageId } from '~/util';
-import { ContentSection, Hero, SEO, useDataCenter, GetStarted, Testimonials } from '~/components';
-import { useColorTokenValue, CloudLocationsProvider } from '~/context';
-import { useAlert } from '~/hooks';
+import dynamic from "next/dynamic";
+import { Button, Wrap } from "@chakra-ui/react";
+import { getPage, getPageContent, getOrionLocations, getPageId } from "~/util";
+import { ContentSection, Hero, SEO, useDataCenter, GetStarted, Testimonials } from "~/components";
+import { useColorTokenValue, CloudLocationsProvider } from "~/context";
+import { useAlert } from "~/hooks";
 
-import type { GetStaticProps } from 'next';
-import type { IUSMap } from '~/components';
-import type { ICloud, IMeasuredGeoPoint, PageContent, PageEntry } from '~/types';
+import type { GetStaticProps } from "next";
+import type { IUSMap } from "~/components";
+import type { ICloud, IMeasuredGeoPoint, PageContent, PageEntry } from "~/types";
 
-const USMap = dynamic<IUSMap>(() => import('~/components').then(i => i.USMap));
+const USMap = dynamic<IUSMap>(() => import("~/components").then(i => i.USMap));
 
-type ContentProps = React.PropsWithChildren<Pick<PageEntry<ICloud>, 'pageData'>>;
+type ContentProps = React.PropsWithChildren<Pick<PageEntry<ICloud>, "pageData">>;
 
 const Content = (props: ContentProps): JSX.Element => {
   const { title, subtitle, body = null } = props.pageData.fields;
@@ -19,7 +19,7 @@ const Content = (props: ContentProps): JSX.Element => {
   const showAlert = useAlert();
 
   // This will render twice in development due to react strict mode.
-  isError && showAlert({ status: 'error', message: `${error}` });
+  isError && showAlert({ status: "error", message: `${error}` });
 
   return (
     <Hero title={title} subtitle={subtitle} body={body}>
@@ -37,12 +37,12 @@ const Cloud = (props: PageEntry<ICloud>): JSX.Element => {
   const { geoData, geoPoints, pageData, pageContent } = props;
 
   if (geoPoints.length === 0) {
-    throw new Error('Unable to get Cloud Location Data');
+    throw new Error("Unable to get Cloud Location Data");
   }
   const { title, subtitle, getStarted } = pageData.fields;
 
-  const mapColor = useColorTokenValue('blackAlpha.200', 'whiteAlpha.200');
-  const markerColor = useColorTokenValue('primary.400', 'tertiary.500');
+  const mapColor = useColorTokenValue("blackAlpha.200", "whiteAlpha.200");
+  const markerColor = useColorTokenValue("primary.400", "tertiary.500");
 
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 
@@ -55,7 +55,7 @@ const Cloud = (props: PageEntry<ICloud>): JSX.Element => {
             geoData={geoData}
             mapColor={mapColor}
             markerColor={markerColor}
-            maxW={{ base: '100%', lg: '75%' }}
+            maxW={{ base: "100%", lg: "75%" }}
           />
         </Content>
       </CloudLocationsProvider>
@@ -72,12 +72,12 @@ export const getStaticProps: GetStaticProps<PageEntry<ICloud>> = async ctx => {
   const preview = ctx?.preview ?? false;
   let geoData = {} as Dict;
   let geoPoints = [] as IMeasuredGeoPoint[];
-  let pageData = {} as PageEntry<ICloud>['pageData'];
+  let pageData = {} as PageEntry<ICloud>["pageData"];
   let pageContent = [] as PageContent[];
 
   try {
-    const pageId = await getPageId('cloud', preview);
-    const geoRes = await fetch('https://us-map-geo-points.stellar.workers.dev');
+    const pageId = await getPageId("cloud", preview);
+    const geoRes = await fetch("https://us-map-geo-points.stellar.workers.dev");
     geoData = await geoRes.json();
     geoPoints = await getOrionLocations();
     pageData = await getPage(pageId, preview);

@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
-import { useGoogleAnalytics, useCloudMeasurements } from '~/hooks';
-import { fetchWithTimeout } from '~/util';
+import { useQuery } from "@tanstack/react-query";
+import { useGoogleAnalytics, useCloudMeasurements } from "~/hooks";
+import { fetchWithTimeout } from "~/util";
 
-import type { CloudMeasurement } from '~/types';
-import type { TFetcher, UseDataCenterReturn } from './types';
+import type { CloudMeasurement } from "~/types";
+import type { TFetcher, UseDataCenterReturn } from "./types";
 
 /**
  * Track the latency of an HTTP connection.
@@ -22,7 +22,7 @@ async function fetcher(args: TFetcher): Promise<number> {
     const res = await fetchWithTimeout(
       url,
       {
-        method: 'POST',
+        method: "POST",
         signal: controller.signal,
         body: JSON.stringify({ id }),
       },
@@ -74,8 +74,8 @@ async function fetcher(args: TFetcher): Promise<number> {
       // indicates either a problem in this code or some other strange issue. For display
       // purposes, we consider the endpoint unreachable and show an error message in the console.
       console.group(`Location ${id} at Test URL ${url} encountered an error`);
-      console.log('Timeout:', timeout);
-      console.log('Duration:', duration);
+      console.log("Timeout:", timeout);
+      console.log("Duration:", duration);
       console.trace(err);
       console.groupEnd();
       duration = 65533;
@@ -121,7 +121,7 @@ export function useDataCenter(): UseDataCenterReturn {
         // if one query times out, they will all be cancelled.
         const controller = new AbortController();
         let debug = false;
-        if (process.env.NODE_ENV === 'development') debug = true;
+        if (process.env.NODE_ENV === "development") debug = true;
         const elapsed = await fetcher({
           id: measurement.id,
           url: measurement.testUrl,
@@ -164,7 +164,7 @@ export function useDataCenter(): UseDataCenterReturn {
    * reset the 'best' properties to false, clear the cached response, and then refetch.
    */
   function execute() {
-    trackEvent('Data Center Locator', { event_category: 'User' });
+    trackEvent("Data Center Locator", { event_category: "User" });
     reset();
     refetch();
   }

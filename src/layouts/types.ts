@@ -1,4 +1,4 @@
-import type { SortedFooterItem, TActions } from '~/types';
+import type { SortedFooterItem, TActions } from "~/types";
 
 export interface ISiteLayout {
   footerGroups: SortedFooterItem[];

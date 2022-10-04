@@ -1,13 +1,13 @@
-import { Box } from '@chakra-ui/react';
-import { SectionDivider } from '~/components';
-import { useColorValue } from '~/context';
-import { useRender } from '~/hooks';
-import { HomeBlock } from './HomeBlock';
+import { Box } from "@chakra-ui/react";
+import { SectionDivider } from "~/components";
+import { useColorValue } from "~/context";
+import { useRender } from "~/hooks";
+import { HomeBlock } from "./HomeBlock";
 
-import type { IHomeSection, TSides, TSideValues } from './types';
+import type { IHomeSection, TSides, TSideValues } from "./types";
 
 function getSide(idx: number): TSideValues {
-  const sides: TSides = ['right', 'left'];
+  const sides: TSides = ["right", "left"];
   return sides[idx % sides.length];
 }
 
@@ -21,7 +21,7 @@ export const HomeSection: React.FC<IHomeSection> = (props: IHomeSection) => {
   const padding = {} as IHomeSection;
 
   if (index === 0) {
-    padding.pt = { base: '20px', lg: '320px' };
+    padding.pt = { base: "20px", lg: "320px" };
     padding.pb = 24;
   } else {
     padding.py = 16;
@@ -49,7 +49,7 @@ export const HomeSection: React.FC<IHomeSection> = (props: IHomeSection) => {
           side={side}
         />
       </Box>
-      {showBorder && <SectionDivider left={side === 'left'} right={side === 'right'} />}
+      {showBorder && <SectionDivider left={side === "left"} right={side === "right"} />}
     </>
   );
 };

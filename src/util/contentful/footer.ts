@@ -1,5 +1,5 @@
-import { getParsedContent } from './common';
-import { slug, sortByTitle, sortByWeight } from '../generic';
+import { getParsedContent } from "./common";
+import { slug, sortByTitle, sortByWeight } from "../generic";
 
 import type {
   PageAttrs,
@@ -8,18 +8,18 @@ import type {
   PageContent,
   FooterGroupEntry,
   SortedFooterItem,
-} from '~/types';
+} from "~/types";
 
 type FooterPageContent = Pick<
   PageContent,
-  'title' | 'footerGroup' | 'footerTitle' | 'page' | 'sortWeight'
+  "title" | "footerGroup" | "footerTitle" | "page" | "sortWeight"
 >;
 
-type FooterPage = Pick<PageAttrs, 'title' | 'footerTitle' | 'footerGroup' | 'slug'>;
+type FooterPage = Pick<PageAttrs, "title" | "footerTitle" | "footerGroup" | "slug">;
 
 type FooterDocsGroup = Pick<
   IDocsGroup,
-  'title' | 'footerGroup' | 'footerTitle' | 'sortWeight' | 'slug'
+  "title" | "footerGroup" | "footerTitle" | "sortWeight" | "slug"
 >;
 
 /**
@@ -32,19 +32,19 @@ async function* getPageContentFooterItems(preview: boolean): AsyncGenerator<Foot
    * the select operator with up to 2 levels deep, so we must pull down the entire footerGroup &
    * page referenced items as well.
    */
-  const data = await getParsedContent<FooterPageContent>('pageContent', preview, {
-    'fields.footerGroup[exists]': true,
+  const data = await getParsedContent<FooterPageContent>("pageContent", preview, {
+    "fields.footerGroup[exists]": true,
     select:
-      'sys.id,fields.title,fields.sortWeight,fields.footerTitle,fields.footerGroup,fields.page',
+      "sys.id,fields.title,fields.sortWeight,fields.footerTitle,fields.footerGroup,fields.page",
   });
 
   for (const i of data) {
     // This will always be true because of the `footerGroup[exists]` filter in the query.
-    if (typeof i.footerGroup !== 'undefined') {
+    if (typeof i.footerGroup !== "undefined") {
       const footerGroup = {
         title: i.footerGroup.fields.title,
         sortWeight: i.footerGroup.fields.sortWeight,
-      } as FooterItem['footerGroup'];
+      } as FooterItem["footerGroup"];
       // Use the `footerTitle` if it's defined, otherwise just use the section's title.
       const title = i.footerTitle ?? i.title;
       // Create a slug with the section's title & the associated page's slug.
@@ -61,17 +61,17 @@ async function* getPageContentFooterItems(preview: boolean): AsyncGenerator<Foot
  * form a `FooterItem`.
  */
 async function* getPageFooterItems(preview: boolean): AsyncGenerator<FooterItem> {
-  const data = await getParsedContent<FooterPage>('page', preview, {
-    'fields.footerGroup[exists]': true,
-    select: 'sys.id,fields.title,fields.footerTitle,fields.footerGroup,fields.slug',
+  const data = await getParsedContent<FooterPage>("page", preview, {
+    "fields.footerGroup[exists]": true,
+    select: "sys.id,fields.title,fields.footerTitle,fields.footerGroup,fields.slug",
   });
   for (const i of data) {
     // This will always be true because of the `footerGroup[exists]` filter in the query.
-    if (typeof i.footerGroup !== 'undefined') {
+    if (typeof i.footerGroup !== "undefined") {
       const footerGroup = {
         title: i.footerGroup.fields.title,
         sortWeight: i.footerGroup.fields.sortWeight,
-      } as FooterItem['footerGroup'];
+      } as FooterItem["footerGroup"];
       // Use the `footerTitle` if it's defined, otherwise just use the page's title.
       const title = i.footerTitle ?? i.title;
       const href = `/${i.slug}`;
@@ -87,23 +87,23 @@ async function* getPageFooterItems(preview: boolean): AsyncGenerator<FooterItem>
  * form a `FooterItem`.
  */
 async function* getDocsGroupsFooterItems(preview: boolean): AsyncGenerator<FooterItem> {
-  const data = await getParsedContent<FooterDocsGroup>('docsGroup', preview, {
-    'fields.footerGroup[exists]': true,
+  const data = await getParsedContent<FooterDocsGroup>("docsGroup", preview, {
+    "fields.footerGroup[exists]": true,
     select:
-      'sys.id,fields.title,fields.slug,fields.footerTitle,fields.footerGroup,fields.sortWeight',
+      "sys.id,fields.title,fields.slug,fields.footerTitle,fields.footerGroup,fields.sortWeight",
   });
   for (const i of data) {
     // This will always be true because of the `footerGroup[exists]` filter in the query.
-    if (typeof i.footerGroup !== 'undefined') {
+    if (typeof i.footerGroup !== "undefined") {
       const footerGroup = {
         title: i.footerGroup.fields.title,
         sortWeight: i.footerGroup.fields.sortWeight,
-      } as FooterItem['footerGroup'];
+      } as FooterItem["footerGroup"];
       // Use the `footerTitle` if it's defined, otherwise just use the doc group's title.
       const title = i.footerTitle ?? i.title;
       let href = `/docs/${i.slug}`;
 
-      if (i.slug === 'docs') {
+      if (i.slug === "docs") {
         // If we're at the root, just use the base slug.
         href = `/${i.slug}`;
       }
@@ -119,18 +119,18 @@ async function* getDocsGroupsFooterItems(preview: boolean): AsyncGenerator<Foote
  * form a `FooterItem`.
  */
 async function* getFooterGroupItems(preview: boolean): AsyncGenerator<FooterItem> {
-  const data = await getParsedContent<FooterGroupEntry>('footerGroup', preview, {
-    'fields.externalLinks[exists]': true,
-    select: 'sys.id,fields.title,fields.sortWeight,fields.externalLinks',
+  const data = await getParsedContent<FooterGroupEntry>("footerGroup", preview, {
+    "fields.externalLinks[exists]": true,
+    select: "sys.id,fields.title,fields.sortWeight,fields.externalLinks",
   });
   for (const i of data) {
     // This will always be true because of the `footerGroup[exists]` filter in the query.
-    if (typeof i.externalLinks !== 'undefined') {
+    if (typeof i.externalLinks !== "undefined") {
       for (const e of i.externalLinks) {
         const footerGroup = {
           title: i.title,
           sortWeight: i.sortWeight,
-        } as FooterItem['footerGroup'];
+        } as FooterItem["footerGroup"];
         const title = e.fields.title;
         const href = e.fields.href;
         const sortWeight = e.fields.sortWeight ?? 255;
@@ -167,7 +167,7 @@ export async function getFooterItems(preview: boolean = false): Promise<SortedFo
     const groupA = footerItems.find(f => f.footerGroup.title === a);
     const groupB = footerItems.find(f => f.footerGroup.title === b);
 
-    if (typeof groupA !== 'undefined' && typeof groupB !== 'undefined') {
+    if (typeof groupA !== "undefined" && typeof groupB !== "undefined") {
       return sortByWeight(groupA.footerGroup, groupB.footerGroup);
     }
     return -1;

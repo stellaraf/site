@@ -1,7 +1,7 @@
-import { Box, Flex, Heading } from '@chakra-ui/react';
-import { useTitleCase } from 'use-title-case';
-import { Avatars, Hero, GoogleMap, SEO, GetStarted, Testimonials } from '~/components';
-import { useResponsiveStyle } from '~/hooks';
+import { Box, Flex, Heading } from "@chakra-ui/react";
+import { useTitleCase } from "use-title-case";
+import { Avatars, Hero, GoogleMap, SEO, GetStarted, Testimonials } from "~/components";
+import { useResponsiveStyle } from "~/hooks";
 import {
   getPage,
   getPageContent,
@@ -9,10 +9,10 @@ import {
   getParsedContent,
   stringSorter,
   sortByWeight,
-} from '~/util';
+} from "~/util";
 
-import type { GetStaticProps } from 'next';
-import type { Bio, PageEntry, IAboutPage, ISection, PageContent } from '~/types';
+import type { GetStaticProps } from "next";
+import type { Bio, PageEntry, IAboutPage, ISection, PageContent } from "~/types";
 
 const Section: React.FC<ISection> = (props: ISection) => {
   const { title, children, ...rest } = props;
@@ -33,7 +33,7 @@ const Section: React.FC<ISection> = (props: ISection) => {
 const About: React.FC<PageEntry<IAboutPage>> = (props: PageEntry<IAboutPage>) => {
   const { pageData, bios } = props;
   const { title, subtitle, body = null, customProperties, getStarted } = pageData.fields;
-  const { employeesTitle = '', mapTitle = '' } = customProperties;
+  const { employeesTitle = "", mapTitle = "" } = customProperties;
 
   return (
     <>
@@ -53,17 +53,17 @@ const About: React.FC<PageEntry<IAboutPage>> = (props: PageEntry<IAboutPage>) =>
 
 export const getStaticProps: GetStaticProps<PageEntry<IAboutPage>> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let pageData = {} as PageEntry<IAboutPage>['pageData'];
+  let pageData = {} as PageEntry<IAboutPage>["pageData"];
   let pageContent = [] as PageContent[];
   let bios = [] as Bio[];
 
   try {
-    const pageId = await getPageId('about', preview);
-    pageData = await getPage<IAboutPage['pageData']>(pageId, preview);
+    const pageId = await getPageId("about", preview);
+    pageData = await getPage<IAboutPage["pageData"]>(pageId, preview);
     pageContent = await getPageContent(pageId, preview);
-    bios = await getParsedContent<Bio>('bio', preview, { select: 'sys.id,fields' });
+    bios = await getParsedContent<Bio>("bio", preview, { select: "sys.id,fields" });
     // Sort bios alphabetically first, then by sortWeight.
-    bios = bios.sort(stringSorter('name')).sort(sortByWeight);
+    bios = bios.sort(stringSorter("name")).sort(sortByWeight);
   } catch (err) {
     console.error(err);
     throw err;

@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import { useApple } from '~/hooks';
+import { useMemo } from "react";
+import { useApple } from "~/hooks";
 
 /**
  * Render an Apple Maps link if the device is an Apple device.
@@ -18,9 +18,9 @@ export function useMapUrl(address: string, search: string): string {
 // Convenience selectors for Google's generated element classes
 export const gm = {
   iw: {
-    d: 'div.gm-style-iw-a div.gm-style-iw-d',
-    t: 'div.gm-style-iw-a div.gm-style-iw-t',
-    c: 'div.gm-style-iw-a div.gm-style-iw.gm-style-iw-c',
-    img: 'div.gm-style-iw-a button.gm-ui-hover-effect img',
+    d: "div.gm-style-iw-a div.gm-style-iw-d",
+    t: "div.gm-style-iw-a div.gm-style-iw-t",
+    c: "div.gm-style-iw-a div.gm-style-iw.gm-style-iw-c",
+    img: "div.gm-style-iw-a button.gm-ui-hover-effect img",
   },
 };

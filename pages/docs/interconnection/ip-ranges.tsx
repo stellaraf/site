@@ -1,9 +1,9 @@
-import { SEO, DocsArticle, IPRanges } from '~/components';
-import { DocsLayout } from '~/layouts';
-import { getParsedContent } from '~/util';
+import { SEO, DocsArticle, IPRanges } from "~/components";
+import { DocsLayout } from "~/layouts";
+import { getParsedContent } from "~/util";
 
-import type { GetStaticProps } from 'next';
-import type { IDocsArticlePage } from '~/types';
+import type { GetStaticProps } from "next";
+import type { IDocsArticlePage } from "~/types";
 
 type UrlQuery = {
   slug: string;
@@ -26,10 +26,10 @@ const DocsArticlePage: React.FC<IDocsArticlePage> = (props: IDocsArticlePage) =>
 
 export const getStaticProps: GetStaticProps<IDocsArticlePage, UrlQuery> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let article = {} as IDocsArticlePage['article'];
+  let article = {} as IDocsArticlePage["article"];
   try {
-    const res = await getParsedContent<IDocsArticlePage['article']>('docsArticle', preview, {
-      'fields.slug': 'ip-ranges',
+    const res = await getParsedContent<IDocsArticlePage["article"]>("docsArticle", preview, {
+      "fields.slug": "ip-ranges",
     });
     article = res[0];
   } catch (err) {

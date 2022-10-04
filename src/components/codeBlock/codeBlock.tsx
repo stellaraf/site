@@ -4,36 +4,36 @@ import {
   IconButton,
   useStyleConfig,
   useBreakpointValue,
-} from '@chakra-ui/react';
-import { DynamicIcon } from '~/components';
-import { useColorValue } from '~/context';
-import { useCodeBlockStyle } from './useCodeBlockStyle';
+} from "@chakra-ui/react";
+import { DynamicIcon } from "~/components";
+import { useColorValue } from "~/context";
+import { useCodeBlockStyle } from "./useCodeBlockStyle";
 
-import type { ICodeBlock } from './types';
+import type { ICodeBlock } from "./types";
 
 export const CodeBlock: React.FC<ICodeBlock> = (props: ICodeBlock) => {
   const { children, ...rest } = props;
-  const defaultScheme = useColorValue('gray', 'tertiary');
-  const size = useBreakpointValue({ base: 'md', lg: 'sm' });
+  const defaultScheme = useColorValue("gray", "tertiary");
+  const size = useBreakpointValue({ base: "md", lg: "sm" });
 
   let ctx = useCodeBlockStyle();
 
   if (ctx === null) {
     ctx = {
       codeBlock: { colorScheme: defaultScheme },
-      copyButton: { colorScheme: defaultScheme, variant: 'ghost' },
+      copyButton: { colorScheme: defaultScheme, variant: "ghost" },
     };
   }
 
-  const { bg, color } = useStyleConfig('Code', { colorScheme: ctx.codeBlock.colorScheme });
+  const { bg, color } = useStyleConfig("Code", { colorScheme: ctx.codeBlock.colorScheme });
 
-  const btnSx = useStyleConfig('Button', {
+  const btnSx = useStyleConfig("Button", {
     colorScheme: ctx.copyButton.colorScheme,
-    variant: 'ghost',
+    variant: "ghost",
   });
 
-  let copyValue = '';
-  if (typeof children === 'string') {
+  let copyValue = "";
+  if (typeof children === "string") {
     copyValue = children;
   } else {
     copyValue = children.props.children;
@@ -58,7 +58,7 @@ export const CodeBlock: React.FC<ICodeBlock> = (props: ICodeBlock) => {
         fontFamily="mono"
         whiteSpace="pre-wrap"
         minHeight={btnSx.h as number}
-        css={{ '& > code': { background: 'unset', color: 'unset', padding: 0 } }}
+        css={{ "& > code": { background: "unset", color: "unset", padding: 0 } }}
       >
         {children}
       </Box>
@@ -73,17 +73,17 @@ export const CodeBlock: React.FC<ICodeBlock> = (props: ICodeBlock) => {
         icon={
           <>
             <DynamicIcon
-              icon={{ bi: 'BiCheck' }}
+              icon={{ bi: "BiCheck" }}
               transition="all 0.2s ease"
               opacity={hasCopied ? 1 : 0}
-              pos={hasCopied ? undefined : 'absolute'}
+              pos={hasCopied ? undefined : "absolute"}
             />
 
             <DynamicIcon
-              icon={{ bi: 'BiCopy' }}
+              icon={{ bi: "BiCopy" }}
               transition="all 0.2s ease"
               opacity={hasCopied ? 0 : 1}
-              pos={hasCopied ? 'absolute' : undefined}
+              pos={hasCopied ? "absolute" : undefined}
             />
           </>
         }

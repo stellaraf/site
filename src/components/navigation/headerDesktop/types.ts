@@ -1,6 +1,6 @@
-import type { BoxProps, LinkProps, SystemStyleObject } from '@chakra-ui/react';
+import type { BoxProps, LinkProps, SystemStyleObject } from "@chakra-ui/react";
 
-import type { ILink } from '~/components';
+import type { ILink } from "~/components";
 
 export interface HeaderLogoProps {
   show: boolean;
@@ -17,7 +17,7 @@ export interface INavLink extends ILink {
 }
 
 export interface ILinkGroup extends ILink {
-  side: 'left' | 'right';
+  side: "left" | "right";
 }
 
 export interface IPassedLink extends LinkProps {}

@@ -1,7 +1,7 @@
-import { Flex } from '@chakra-ui/react';
-import { useOpposingColor } from '~/hooks';
+import { Flex } from "@chakra-ui/react";
+import { useOpposingColor } from "~/hooks";
 
-import type { ILabel } from './types';
+import type { ILabel } from "./types";
 
 export const Label: React.FC<ILabel> = (props: ILabel) => {
   const {
@@ -9,8 +9,8 @@ export const Label: React.FC<ILabel> = (props: ILabel) => {
     right,
     leftProps = {},
     rightProps = {},
-    leftColor: leftBg = 'primary.500',
-    rightColor: rightBg = 'secondary.500',
+    leftColor: leftBg = "primary.500",
+    rightColor: rightBg = "secondary.500",
     ...rest
   } = props;
 
@@ -43,7 +43,7 @@ export const Label: React.FC<ILabel> = (props: ILabel) => {
         borderTopRightRadius={0}
         borderBottomLeftRadius={4}
         borderBottomRightRadius={0}
-        fontSize={{ base: 'xs', md: 'sm' }}
+        fontSize={{ base: "xs", md: "sm" }}
         {...leftProps}
       >
         {left}
@@ -64,7 +64,7 @@ export const Label: React.FC<ILabel> = (props: ILabel) => {
         borderTopRightRadius={4}
         borderBottomLeftRadius={0}
         borderBottomRightRadius={4}
-        fontSize={{ base: 'xs', md: 'sm' }}
+        fontSize={{ base: "xs", md: "sm" }}
         {...rightProps}
       >
         {right}

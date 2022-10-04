@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 import type {
   FlexProps,
   ModalBodyProps,
@@ -7,13 +7,13 @@ import type {
   BoxProps,
   ModalProps,
   UseModalProps,
-} from '@chakra-ui/react';
-import type { PropGetter } from '@chakra-ui/react-utils';
+} from "@chakra-ui/react";
+import type { PropGetter } from "@chakra-ui/react-utils";
 
 export interface IModalWrapper
   extends UseModalProps,
-    Omit<BoxProps, 'children' | 'scrollBehavior'>,
-    Omit<ModalProps, 'children' | 'scrollBehavior' | 'motionPreset'> {
+    Omit<BoxProps, "children" | "scrollBehavior">,
+    Omit<ModalProps, "children" | "scrollBehavior" | "motionPreset"> {
   /**
    * Component to be nested inside <ModalBody />
    */
@@ -53,7 +53,7 @@ export interface IModalWrapper
   /**
    * Modal Size
    */
-  size?: ModalProps['size'];
+  size?: ModalProps["size"];
   /**
    * Scroll inside of modal, default is `false`/outside of modal.
    */
@@ -67,7 +67,7 @@ export interface IModalWrapper
 export interface IContentContainer extends FlexProps {}
 
 export interface IModalContent extends Animated<FlexProps> {
-  contentProps?: IModalWrapper['contentProps'];
+  contentProps?: IModalWrapper["contentProps"];
 }
 
 /**
@@ -82,9 +82,9 @@ export type ModalDialogProps = PropGetter<
     ref?: string;
     id?: string;
     tabIndex?: string;
-    'aria-modal'?: string;
-    'aria-labelledby'?: string;
-    'aria-described-by'?: string;
+    "aria-modal"?: string;
+    "aria-labelledby"?: string;
+    "aria-described-by"?: string;
     onClick?: (e: Event) => void;
   }
 >;

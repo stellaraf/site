@@ -1,15 +1,15 @@
-import { getPageId } from '~/util';
+import { getPageId } from "~/util";
 
-import type { NextApiHandler } from 'next';
+import type { NextApiHandler } from "next";
 
 const previewHandler: NextApiHandler = async (request, response) => {
   if (request.query.secret !== process.env.PREVIEW_SECRET || !request.query.slug) {
-    return response.status(401).json({ message: 'Invalid Token.' });
+    return response.status(401).json({ message: "Invalid Token." });
   }
   const pageId = await getPageId(request.query.slug as string, false);
 
   if (!pageId) {
-    response.status(401).json({ message: 'Invalid Path.' });
+    response.status(401).json({ message: "Invalid Path." });
     return;
   }
 

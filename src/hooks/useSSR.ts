@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface UseSSR {
   /** `true` if render is taking place on the client, `false` if not. */
@@ -13,7 +13,7 @@ interface UseSSR {
 export function useSSR(): UseSSR {
   const [isClient, setClient] = useState<boolean>(false);
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       setClient(true);
     }
   }, []);

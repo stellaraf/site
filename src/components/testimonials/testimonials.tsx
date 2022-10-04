@@ -1,10 +1,10 @@
-import { Center, VStack } from '@chakra-ui/react';
-import { AnimatedDiv } from '~/components';
-import { useColorValue, useConfig } from '~/context';
-import { useOpposingColor, useGlow, useResponsiveStyle, useRandomElement, useSSR } from '~/hooks';
-import { Testimonial } from './testimonial';
+import { Center, VStack } from "@chakra-ui/react";
+import { AnimatedDiv } from "~/components";
+import { useColorValue, useConfig } from "~/context";
+import { useOpposingColor, useGlow, useResponsiveStyle, useRandomElement, useSSR } from "~/hooks";
+import { Testimonial } from "./testimonial";
 
-import type { CenterProps } from '@chakra-ui/react';
+import type { CenterProps } from "@chakra-ui/react";
 
 export const Testimonials = (props: CenterProps): JSX.Element => {
   const { testimonials } = useConfig();
@@ -12,9 +12,9 @@ export const Testimonials = (props: CenterProps): JSX.Element => {
 
   const rStyles = useResponsiveStyle();
   const isDarkMode = useColorValue(false, true);
-  const bg = useColorValue('light.500', 'blackSolid.500');
+  const bg = useColorValue("light.500", "blackSolid.500");
   const color = useOpposingColor(bg);
-  const glow = useGlow('blackSolid.500', 'blackSolid.500');
+  const glow = useGlow("blackSolid.500", "blackSolid.500");
   const my = useColorValue({ base: 4, lg: 16, xl: 64 }, { base: 32, xl: 64 });
 
   // this can probably go away or change if/when this gets migrated to remix, and the data
@@ -41,10 +41,10 @@ export const Testimonials = (props: CenterProps): JSX.Element => {
         color={color}
         borderRadius="md"
         spacing={{ base: 4, lg: 8 }}
-        bg={isDarkMode ? undefined : 'white'}
-        boxShadow={isDarkMode ? undefined : 'xl'}
+        bg={isDarkMode ? undefined : "white"}
+        boxShadow={isDarkMode ? undefined : "xl"}
       >
-        <AnimatedDiv zIndex={1} animate={{ x: 0 }} initial={{ x: '100%' }}>
+        <AnimatedDiv zIndex={1} animate={{ x: 0 }} initial={{ x: "100%" }}>
           {isClient && <Testimonial {...testimonial} />}
         </AnimatedDiv>
       </VStack>

@@ -1,1 +1,1 @@
-export * from './PartnerLayout';
+export * from "./PartnerLayout";

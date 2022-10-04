@@ -1,6 +1,6 @@
-import { Flex, useStyles, useModalContext } from '@chakra-ui/react';
+import { Flex, useStyles, useModalContext } from "@chakra-ui/react";
 
-import type { IContentContainer } from './types';
+import type { IContentContainer } from "./types";
 
 /**
  * Replaces Modal Contain Container.

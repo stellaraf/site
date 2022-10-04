@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { PageLoaderStyles } from './pageLoader.styles';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { PageLoaderStyles } from "./pageLoader.styles";
 
 export const PageLoader: React.FC = () => {
   const router = useRouter();
   const [show, setShow] = useState(false);
   useEffect(() => {
-    router.events.on('routeChangeStart', () => {
+    router.events.on("routeChangeStart", () => {
       setShow(true);
     });
-    router.events.on('routeChangeComplete', () => {
+    router.events.on("routeChangeComplete", () => {
       setShow(false);
     });
-    router.events.on('routeChangeError', () => {
+    router.events.on("routeChangeError", () => {
       setShow(false);
     });
     return () => {

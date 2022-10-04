@@ -4,7 +4,7 @@ type ReactRef<
   E extends HTMLElement | SVGElement = HTMLElement | SVGElement
 > = React.MutableRefObject<E>;
 
-type Animated<T> = Omit<T, 'transition'> & import('framer-motion').MotionProps;
+type Animated<T> = Omit<T, "transition"> & import("framer-motion").MotionProps;
 
 interface Empty {} // eslint-disable-line
 

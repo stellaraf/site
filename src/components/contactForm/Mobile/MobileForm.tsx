@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import { Center, Flex, IconButton, Heading, Grid } from '@chakra-ui/react';
-import { useTitleCase } from 'use-title-case';
-import { DynamicIcon, ModalWrapper } from '~/components';
-import { useContactForm } from '../state';
-import { SalesForm, SupportForm } from '../Forms';
-import { submitForm } from '../submitters';
-import { Success } from '../Success';
+import { useState } from "react";
+import { Center, Flex, IconButton, Heading, Grid } from "@chakra-ui/react";
+import { useTitleCase } from "use-title-case";
+import { DynamicIcon, ModalWrapper } from "~/components";
+import { useContactForm } from "../state";
+import { SalesForm, SupportForm } from "../Forms";
+import { submitForm } from "../submitters";
+import { Success } from "../Success";
 
-import type { TFormTypes, TFormFields } from '../Forms/types';
-import type { IMobileForm } from './types';
+import type { TFormTypes, TFormFields } from "../Forms/types";
+import type { IMobileForm } from "./types";
 
 export const MobileForm: React.FC<IMobileForm> = (props: IMobileForm) => {
   const {
     title,
     body,
     icon,
-    accent = 'primary',
+    accent = "primary",
     onToggle,
     formRef,
     onSubmit,
@@ -35,7 +35,7 @@ export const MobileForm: React.FC<IMobileForm> = (props: IMobileForm) => {
 
   async function handleSubmit<F extends TFormTypes, D extends TFormFields<F>>(form: F, data: D) {
     await submitForm(form, data);
-    if (typeof onSubmit === 'function') {
+    if (typeof onSubmit === "function") {
       onSubmit();
     }
     !showSuccess && setSuccess(true);
@@ -51,8 +51,8 @@ export const MobileForm: React.FC<IMobileForm> = (props: IMobileForm) => {
       scrollInside
       hideCloseButton
       onClose={onClose}
-      bodyProps={{ overflow: 'unset', mb: 8 }}
-      containerProps={{ m: 2, width: '96vw', minH: '98vh', pb: 32 }}
+      bodyProps={{ overflow: "unset", mb: 8 }}
+      containerProps={{ m: 2, width: "96vw", minH: "98vh", pb: 32 }}
       body={
         <Grid
           boxSize="100%"
@@ -64,7 +64,7 @@ export const MobileForm: React.FC<IMobileForm> = (props: IMobileForm) => {
             <IconButton
               variant="ghost"
               aria-label="Back"
-              icon={<DynamicIcon icon={{ bi: 'BiLeftArrow' }} />}
+              icon={<DynamicIcon icon={{ bi: "BiLeftArrow" }} />}
               onClick={goBack}
             />
           </Flex>
@@ -94,9 +94,9 @@ export const MobileForm: React.FC<IMobileForm> = (props: IMobileForm) => {
             {body}
           </Center>
           <Center width="100%" gridArea="form" alignItems="flex-start">
-            {formState.shouldRender('Support') ? (
+            {formState.shouldRender("Support") ? (
               <SupportForm ref={formRef} accent={accent} onSubmit={handleSubmit} />
-            ) : formState.shouldRender('Sales') ? (
+            ) : formState.shouldRender("Sales") ? (
               <SalesForm ref={formRef} accent={accent} onSubmit={handleSubmit} />
             ) : showSuccess ? (
               <Success>{formState.successMessage}</Success>

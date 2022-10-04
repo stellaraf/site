@@ -6,9 +6,9 @@ import type {
   UseFormStateReturn,
   FieldValues,
   Path,
-} from 'react-hook-form';
-import type { SelectProps } from '~/components';
-import type { TFormModelTrial, IFormDataTrial, TFormResponse, SelectOptionSingle } from '~/types';
+} from "react-hook-form";
+import type { SelectProps } from "~/components";
+import type { TFormModelTrial, IFormDataTrial, TFormResponse, SelectOptionSingle } from "~/types";
 
 export type TTextField<V extends FieldValues> = {
   field: ControllerRenderProps<V>;
@@ -20,11 +20,11 @@ export type TTextField<V extends FieldValues> = {
 export type TFormField<Props, FormData extends Dict> = {
   ctl: Control<FormData>;
   id: Path<FormData>;
-  defaultValue?: UseControllerProps<FormData>['defaultValue'];
-} & Omit<Props, 'as' | 'onFocus' | 'name'>;
+  defaultValue?: UseControllerProps<FormData>["defaultValue"];
+} & Omit<Props, "as" | "onFocus" | "name">;
 
 export interface ISelectField
-  extends Omit<SelectProps<SelectOptionSingle>, 'name' | 'onSelect' | 'options'> {
+  extends Omit<SelectProps<SelectOptionSingle>, "name" | "onSelect" | "options"> {
   id: string;
   opts: SelectOptionSingle[];
 }
@@ -35,6 +35,6 @@ export interface IFormHandlers {
 
 export interface TTrialForm {
   name: string;
-  fields: Omit<TFormModelTrial, 'name'>;
+  fields: Omit<TFormModelTrial, "name">;
   onSubmit: (data: IFormDataTrial) => Promise<TFormResponse>;
 }

@@ -1,7 +1,7 @@
-import type { Entry, Asset } from 'contentful';
-import type { Document } from '@contentful/rich-text-types';
-import type { ColorNames } from './theme';
-import type { FormModel, FormModelEntry, TFormModelTrial } from './forms';
+import type { Entry, Asset } from "contentful";
+import type { Document } from "@contentful/rich-text-types";
+import type { ColorNames } from "./theme";
+import type { FormModel, FormModelEntry, TFormModelTrial } from "./forms";
 
 export interface FooterLink {
   title: string;
@@ -22,7 +22,7 @@ export interface FooterGroupEntry {
   externalLinks?: Entry<ExternalFooterLink>[];
 }
 
-export interface FooterGroup extends Omit<FooterGroupEntry, 'externalLinks'> {
+export interface FooterGroup extends Omit<FooterGroupEntry, "externalLinks"> {
   externalLinks?: ExternalFooterLink[];
 }
 
@@ -31,11 +31,11 @@ export interface FooterItem extends FooterLink {
 }
 
 export interface SortedFooterItem {
-  title: FooterGroup['title'];
+  title: FooterGroup["title"];
   items: FooterItem[];
 }
 
-export interface FooterItemEntry extends Pick<PageAttrs, 'title' | 'slug' | 'footerTitle'> {
+export interface FooterItemEntry extends Pick<PageAttrs, "title" | "slug" | "footerTitle"> {
   sortWeight?: number;
   footerGroup: Entry<FooterGroupEntry>;
 }
@@ -60,11 +60,11 @@ export type PageAttrs = {
   getStarted?: Entry<IGetStartedEntry>;
 };
 
-export interface PageParsed extends Omit<PageAttrs, 'footerGroup'> {
+export interface PageParsed extends Omit<PageAttrs, "footerGroup"> {
   footerGroup: FooterGroupEntry;
 }
 
-export interface PageContentParsed extends Omit<PageContent, 'footerGroup' | 'page'> {
+export interface PageContentParsed extends Omit<PageContent, "footerGroup" | "page"> {
   footerGroup: FooterGroupEntry;
   page: PageAttrs;
 }
@@ -216,11 +216,11 @@ export interface GlobalConfigEntry {
 }
 
 export type ThemeConfig = {
-  colors: Omit<Colors, 'themeName'>;
-  fonts: Omit<Fonts, 'themeName'>;
+  colors: Omit<Colors, "themeName">;
+  fonts: Omit<Fonts, "themeName">;
 };
 
-export interface GlobalConfig extends Omit<GlobalConfigEntry, 'theme'> {
+export interface GlobalConfig extends Omit<GlobalConfigEntry, "theme"> {
   theme: ThemeConfig;
 }
 
@@ -231,13 +231,13 @@ export interface IContactCard {
   body: string;
   buttonText: string;
   color: ColorNames;
-  icon: 'Support' | 'Sales' | 'Docs';
+  icon: "Support" | "Sales" | "Docs";
   sortWeight: number;
-  form?: FormModel<'Support' | 'Sales'>;
+  form?: FormModel<"Support" | "Sales">;
 }
 
-export interface IContactCardEntry extends Omit<IContactCard, 'form'> {
-  form?: FormModelEntry<'Support' | 'Sales'>;
+export interface IContactCardEntry extends Omit<IContactCard, "form"> {
+  form?: FormModelEntry<"Support" | "Sales">;
 }
 
 export interface IFormPlaceholders {
@@ -256,24 +256,24 @@ export interface IFormPlaceholders {
 export interface IActions
   extends Pick<
     PageContentParsed,
-    | 'page'
-    | 'body'
-    | 'title'
-    | 'subtitle'
-    | 'callToActionIcon'
-    | 'callToActionBody'
-    | 'callToActionIconColor'
+    | "page"
+    | "body"
+    | "title"
+    | "subtitle"
+    | "callToActionIcon"
+    | "callToActionBody"
+    | "callToActionIconColor"
   > {}
 
 export type TActions = Pick<
   PageContent,
-  | 'body'
-  | 'page'
-  | 'title'
-  | 'subtitle'
-  | 'callToActionBody'
-  | 'callToActionIcon'
-  | 'callToActionIconColor'
+  | "body"
+  | "page"
+  | "title"
+  | "subtitle"
+  | "callToActionBody"
+  | "callToActionIcon"
+  | "callToActionIconColor"
 > & { showInCallToAction: true };
 
 export type IDocsGroupEntry = {
@@ -310,7 +310,7 @@ export type TArticleButton = {
   link: string;
 };
 
-export type TAdmonitionTypes = 'Note' | 'Tip' | 'Information' | 'Warning' | 'Critical';
+export type TAdmonitionTypes = "Note" | "Tip" | "Information" | "Warning" | "Critical";
 
 export type TAdmonition = {
   title?: string;
@@ -348,4 +348,4 @@ export interface TestimonialEntry {
   body: Document;
 }
 
-export type { Entry, EntryCollection } from 'contentful';
+export type { Entry, EntryCollection } from "contentful";

@@ -1,10 +1,10 @@
-import { useCallback, useEffect } from 'react';
-import { atom, useRecoilState, useRecoilValue } from 'recoil';
-import { useContactFormCtx } from './context';
-import { isSupportedForm } from './guards';
+import { useCallback, useEffect } from "react";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
+import { useContactFormCtx } from "./context";
+import { isSupportedForm } from "./guards";
 
-import type { IContactCard } from '~/types';
-import type { FormIcon, AvailableForms } from './types';
+import type { IContactCard } from "~/types";
+import type { FormIcon, AvailableForms } from "./types";
 
 interface ContactFormValues {
   /**
@@ -58,7 +58,7 @@ interface ContactFormMethods {
 }
 
 const formAtom = atom<ContactFormValues>({
-  key: 'formState',
+  key: "formState",
   default: {
     selected: null,
     form: {} as AvailableForms,
@@ -81,7 +81,7 @@ export function useContactForm(): ContactFormValues & ContactFormMethods {
 
       for (const card of cards) {
         const { icon: name, form: value } = card;
-        if (name !== 'Docs' && typeof value !== 'undefined') {
+        if (name !== "Docs" && typeof value !== "undefined") {
           // @ts-expect-error TS doesn't know which name corresponds to the value, but it's all good.
           form[name] = value;
         }

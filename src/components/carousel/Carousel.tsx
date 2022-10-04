@@ -1,10 +1,10 @@
-import { createContext, useContext } from 'react';
-import { Box, Button, Flex } from '@chakra-ui/react';
-import { useSlider } from '~/hooks';
-import { forwardRef } from '~/util';
+import { createContext, useContext } from "react";
+import { Box, Button, Flex } from "@chakra-ui/react";
+import { useSlider } from "~/hooks";
+import { forwardRef } from "~/util";
 
-import type { FlexProps } from '@chakra-ui/react';
-import type { DotProps, CarouselProps, UseCarousel } from './types';
+import type { FlexProps } from "@chakra-ui/react";
+import type { DotProps, CarouselProps, UseCarousel } from "./types";
 
 /**
  * Cycle through range of numbers `total` starting with `current`.
@@ -27,7 +27,7 @@ const CarouselContext = createContext<UseCarousel>(Object());
 const useCarousel = (): UseCarousel => {
   const ctx = useContext(CarouselContext);
   if (!ctx) {
-    throw Error('useCarousel must be inside a Provider with a value');
+    throw Error("useCarousel must be inside a Provider with a value");
   }
   return ctx;
 };
@@ -58,7 +58,7 @@ const Dots: React.FC<DotProps> = (props: DotProps) => {
               borderRadius="50%"
               borderStyle="solid"
               borderColor={color}
-              bg={i === current ? color : 'transparent'}
+              bg={i === current ? color : "transparent"}
               {...rest}
             />
           </Button>
@@ -82,11 +82,11 @@ const SliderContainer = forwardRef<HTMLDivElement, FlexProps>((props, ref) => (
     position="absolute"
     className="__slider_container"
     css={{
-      touchAction: 'pan-y',
-      msTouchAction: 'none',
-      KhtmlUserSelect: 'none',
-      WebkitTouchCallout: 'none',
-      WebkitTapHighlightColor: 'transparent',
+      touchAction: "pan-y",
+      msTouchAction: "none",
+      KhtmlUserSelect: "none",
+      WebkitTouchCallout: "none",
+      WebkitTapHighlightColor: "transparent",
     }}
     {...props}
   />
@@ -112,7 +112,7 @@ const Slide = (props: FlexProps) => (
  * Cycle through child elements with animation.
  */
 export const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
-  const { interval = 4000, noDots = false, dotColor = 'black', children, ...rest } = props;
+  const { interval = 4000, noDots = false, dotColor = "black", children, ...rest } = props;
   const { slide, setSlide, containerRef } = useSlider();
   return (
     <CarouselContext.Provider

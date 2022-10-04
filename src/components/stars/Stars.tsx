@@ -1,19 +1,19 @@
-import { useCallback, useMemo } from 'react';
-import { chakra } from '@chakra-ui/react';
-import Particles from 'react-tsparticles';
-import { loadFull } from 'tsparticles';
-import { useColorValue } from '~/context';
-import { useKonami } from '~/hooks';
+import { useCallback, useMemo } from "react";
+import { chakra } from "@chakra-ui/react";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
+import { useColorValue } from "~/context";
+import { useKonami } from "~/hooks";
 
-import type { BoxProps } from '@chakra-ui/react';
-import type { Engine } from 'tsparticles-engine';
-import type { ParticlesProps } from 'react-tsparticles';
+import type { BoxProps } from "@chakra-ui/react";
+import type { Engine } from "tsparticles-engine";
+import type { ParticlesProps } from "react-tsparticles";
 
-export type ParticlesOptions = NonNullable<ParticlesProps['options']>;
+export type ParticlesOptions = NonNullable<ParticlesProps["options"]>;
 
 const DEFAULT_OPTIONS = {
   particles: {
-    shape: { type: 'circle' },
+    shape: { type: "circle" },
     number: {
       limit: 100,
       value: 160,
@@ -29,7 +29,7 @@ const DEFAULT_OPTIONS = {
     },
     move: {
       enable: true,
-      direction: 'none',
+      direction: "none",
       random: true,
       speed: 0.25,
     },
@@ -49,11 +49,11 @@ const DEFAULT_OPTIONS = {
     events: {
       onClick: {
         enable: true,
-        mode: 'push',
+        mode: "push",
       },
       onHover: {
         enable: true,
-        mode: 'connect',
+        mode: "connect",
       },
     },
     modes: {
@@ -69,7 +69,7 @@ const DEFAULT_OPTIONS = {
 const konamiOptions: ParticlesOptions = {
   detectRetina: true,
   particles: {
-    shape: { type: 'circle' },
+    shape: { type: "circle" },
     number: {
       limit: 500,
       value: 300,
@@ -93,7 +93,7 @@ const konamiOptions: ParticlesOptions = {
     move: {
       enable: true,
       speed: 5,
-      direction: 'inside',
+      direction: "inside",
       size: true,
       trail: { enable: true, length: 3 },
       warp: true,
@@ -137,15 +137,15 @@ const Base = (particleProps: ParticlesProps) => {
   );
 };
 
-const Wrapper = chakra('div', {
+const Wrapper = chakra("div", {
   baseStyle: {
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
     zIndex: 0,
-    position: 'fixed',
-    transition: 'opacity 500ms ease-in',
+    position: "fixed",
+    transition: "opacity 500ms ease-in",
   },
 });
 

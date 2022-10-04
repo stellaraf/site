@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Flex,
   Text,
@@ -10,34 +10,34 @@ import {
   FormControl,
   AlertDescription,
   FormErrorMessage,
-} from '@chakra-ui/react';
-import { useForm, FormProvider, Controller } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useTitleCase } from 'use-title-case';
-import { useConfig } from '~/context';
-import { useGoogleAnalytics } from '~/hooks';
-import { SubscribeField } from './SubscribeField';
-import { subscribeEmail } from './util';
+} from "@chakra-ui/react";
+import { useForm, FormProvider, Controller } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTitleCase } from "use-title-case";
+import { useConfig } from "~/context";
+import { useGoogleAnalytics } from "~/hooks";
+import { SubscribeField } from "./SubscribeField";
+import { subscribeEmail } from "./util";
 
-import type { RenderProps } from '@chakra-ui/react';
-import type { ISubscribe, ISubscribeFormData, ISubscribeToast } from './types';
+import type { RenderProps } from "@chakra-ui/react";
+import type { ISubscribe, ISubscribeFormData, ISubscribeToast } from "./types";
 
-const subscribeSchema = z.object({ email: z.string().email('Must be a valid email address') });
+const subscribeSchema = z.object({ email: z.string().email("Must be a valid email address") });
 
 export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
-  const { alertProps = {}, alertPosition = 'bottom-right', ...rest } = props;
+  const { alertProps = {}, alertPosition = "bottom-right", ...rest } = props;
 
   const {
-    subscribeTitle = 'Subscribe to our newsletter',
-    subscribeSuccess = 'Thanks! Please check your email to confirm your subscription.',
+    subscribeTitle = "Subscribe to our newsletter",
+    subscribeSuccess = "Thanks! Please check your email to confirm your subscription.",
     subscribeDuration = 5,
-    subscribeGenericError = 'Something went wrong.',
+    subscribeGenericError = "Something went wrong.",
   } = useConfig();
 
   const [mount, setMount] = useState<boolean>(false);
   const [toastState, setToastState] = useState<ISubscribeToast>({
-    status: 'error',
+    status: "error",
     message: subscribeGenericError,
   });
   const titleMe = useTitleCase();
@@ -55,14 +55,14 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
 
   function handleError(error: string): void {
     console.error(error);
-    emailError !== error && setError('email', { type: 'manual', message: error });
-    setToastState({ status: 'error', message: error });
-    trackEvent('Error Subscribing to Newsletter', { event_category: 'User' });
+    emailError !== error && setError("email", { type: "manual", message: error });
+    setToastState({ status: "error", message: error });
+    trackEvent("Error Subscribing to Newsletter", { event_category: "User" });
   }
 
   function handleSuccess(message: string): void {
-    setToastState({ status: 'success', message });
-    trackEvent('Subscribed to Newsletter', { event_category: 'User' });
+    setToastState({ status: "success", message });
+    trackEvent("Subscribed to Newsletter", { event_category: "User" });
   }
 
   async function onSubmit(data: ISubscribeFormData): Promise<void> {
@@ -123,7 +123,7 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
   }
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !mount) {
+    if (typeof window !== "undefined" && !mount) {
       setMount(true);
     }
   }, []);
@@ -142,7 +142,7 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
         {...rest}
       >
         <Text>{titleMe(subscribeTitle)}</Text>
-        <FormControl isInvalid={typeof formField !== 'undefined'}>
+        <FormControl isInvalid={typeof formField !== "undefined"}>
           <Controller
             name="email"
             defaultValue=""

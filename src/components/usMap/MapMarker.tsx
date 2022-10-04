@@ -1,27 +1,27 @@
-import { Box, Link, PopoverTrigger, useBreakpointValue } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
-import { Marker } from 'react-simple-maps';
-import { useColorValue, useColorTokenValue } from '~/context';
+import { Box, Link, PopoverTrigger, useBreakpointValue } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+import { Marker } from "react-simple-maps";
+import { useColorValue, useColorTokenValue } from "~/context";
 
-import type { Variants } from 'framer-motion';
-import type { IMapMarker } from './types';
+import type { Variants } from "framer-motion";
+import type { IMapMarker } from "./types";
 
 const bestVariants = {
   best: {
     opacity: 1,
     scale: 3,
-    display: 'block',
+    display: "block",
   },
-  notBest: { opacity: 0, scale: 15, display: 'none' },
+  notBest: { opacity: 0, scale: 15, display: "none" },
 } as Variants;
 
 export const MapMarker = (props: IMapMarker): JSX.Element => {
-  const { color = 'currentColor', best = false, ...rest } = props;
+  const { color = "currentColor", best = false, ...rest } = props;
 
-  const bestOutline = useColorTokenValue('secondary.500', 'tertiary.500');
-  const fill = useColorValue('black', 'white');
+  const bestOutline = useColorTokenValue("secondary.500", "tertiary.500");
+  const fill = useColorValue("black", "white");
   const radius = useBreakpointValue({ base: 12, lg: 4 });
-  const bestColor = useColorValue('tertiary.500', 'red.500');
+  const bestColor = useColorValue("tertiary.500", "red.500");
 
   return (
     <PopoverTrigger>
@@ -34,9 +34,9 @@ export const MapMarker = (props: IMapMarker): JSX.Element => {
             strokeWidth={0.25}
             stroke={bestOutline}
             variants={bestVariants}
-            style={{ position: 'absolute' }}
-            animate={best ? 'best' : 'notBest'}
-            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+            style={{ position: "absolute" }}
+            animate={best ? "best" : "notBest"}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
           />
           <Box
             r={radius}
@@ -49,7 +49,7 @@ export const MapMarker = (props: IMapMarker): JSX.Element => {
           <motion.circle
             r={radius}
             fill={fill}
-            style={{ position: 'absolute', userSelect: 'none' }}
+            style={{ position: "absolute", userSelect: "none" }}
             animate={{ scale: [1, 4], opacity: [0.2, 0] }}
             transition={{ duration: 1, loop: Infinity, repeatDelay: 0.5 }}
           />

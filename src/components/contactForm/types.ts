@@ -1,13 +1,13 @@
-import type { ParsedUrlQuery } from 'querystring';
-import type { BoxProps, FlexProps, StackProps } from '@chakra-ui/react';
-import type { IContactCard, CustomColors, FormModel } from '~/types';
-import type { FormHandlers, TFormTypes } from './Forms/types';
+import type { ParsedUrlQuery } from "querystring";
+import type { BoxProps, FlexProps, StackProps } from "@chakra-ui/react";
+import type { IContactCard, CustomColors, FormModel } from "~/types";
+import type { FormHandlers, TFormTypes } from "./Forms/types";
 
 type ContactOption = IContactCard & FlexProps;
 
-export type FormIcon = IContactCard['icon'];
+export type FormIcon = IContactCard["icon"];
 
-export interface IContactOption extends Omit<ContactOption, 'icon' | 'color' | 'buttonText'> {
+export interface IContactOption extends Omit<ContactOption, "icon" | "color" | "buttonText"> {
   icon: JSX.Element;
   iconName: FormIcon;
   index?: number;
@@ -17,7 +17,7 @@ export interface IContactOption extends Omit<ContactOption, 'icon' | 'color' | '
 }
 
 export interface ICardBody extends BoxProps {
-  spacing?: StackProps['spacing'];
+  spacing?: StackProps["spacing"];
 }
 
 export interface IMotionItems {
@@ -38,6 +38,6 @@ export type TSupportedFormQuery = {
 export type TContactQuery = TSupportedFormQuery | ParsedUrlQuery;
 
 export type AvailableForms = {
-  Support: FormModel<'Support'>;
-  Sales: FormModel<'Sales'>;
+  Support: FormModel<"Support">;
+  Sales: FormModel<"Sales">;
 };

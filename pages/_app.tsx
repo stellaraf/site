@@ -1,18 +1,18 @@
-import App from 'next/app';
-import Head from 'next/head';
-import { BaseSEO } from '~/components';
-import { Provider } from '~/context';
-import { usePageTracking } from '~/hooks';
-import { SiteLayout } from '~/layouts';
+import App from "next/app";
+import Head from "next/head";
+import { BaseSEO } from "~/components";
+import { Provider } from "~/context";
+import { usePageTracking } from "~/hooks";
+import { SiteLayout } from "~/layouts";
 import {
   getGlobalConfig,
   getFooterItems,
   getActions,
   getDocsGroups,
   getTestimonials,
-} from '~/util';
+} from "~/util";
 
-import type { TSite, NextApp, GetInitialPropsReturn } from '~/types';
+import type { TSite, NextApp, GetInitialPropsReturn } from "~/types";
 
 const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
   const { Component, pageProps, appProps } = props;
@@ -62,6 +62,6 @@ Site.getInitialProps = async ctx => {
   }
 };
 
-export { getServerSideProps } from '~/context';
+export { getServerSideProps } from "~/context";
 
 export default Site;

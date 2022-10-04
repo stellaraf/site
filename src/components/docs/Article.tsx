@@ -1,13 +1,13 @@
-import { chakra, Box, Flex } from '@chakra-ui/react';
-import { Content } from '~/components';
-import { useSlug, useDate, useRender } from '~/hooks';
-import { shouldForwardProp } from '~/util';
+import { chakra, Box, Flex } from "@chakra-ui/react";
+import { Content } from "~/components";
+import { useSlug, useDate, useRender } from "~/hooks";
+import { shouldForwardProp } from "~/util";
 
-import type { IDocsArticle } from '~/types';
+import type { IDocsArticle } from "~/types";
 
-const Article = chakra('article', {
+const Article = chakra("article", {
   shouldForwardProp,
-  baseStyle: { overflow: 'auto', zIndex: 1 },
+  baseStyle: { overflow: "auto", zIndex: 1 },
 });
 
 export const DocsArticle: React.FC<IDocsArticle> = (props: IDocsArticle) => {
@@ -25,7 +25,7 @@ export const DocsArticle: React.FC<IDocsArticle> = (props: IDocsArticle) => {
       </Flex>
       <Box>
         <Content.Body maxW="unset">{renderedBody}</Content.Body>
-        {typeof children !== 'undefined' && children}
+        {typeof children !== "undefined" && children}
       </Box>
     </Article>
   );

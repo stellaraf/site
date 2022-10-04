@@ -1,4 +1,4 @@
-import type { GeoPoint } from './content';
+import type { GeoPoint } from "./content";
 
 export interface CloudMeasurement extends GeoPoint {
   elapsed: number;

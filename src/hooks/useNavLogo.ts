@@ -1,8 +1,8 @@
-import { useCallback } from 'react';
-import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
-import { useScrollPosition } from './useScrollPosition';
+import { useCallback } from "react";
+import { atom, useRecoilValue, useSetRecoilState } from "recoil";
+import { useScrollPosition } from "./useScrollPosition";
 
-const navLogoAtom = atom({ key: 'navLogo', default: false });
+const navLogoAtom = atom({ key: "navLogo", default: false });
 
 export const useNavLogoState = (): boolean => useRecoilValue(navLogoAtom);
 
@@ -27,7 +27,7 @@ export function useNavLogo<E extends SVGElement>(logoRef: ReactRef<E>): void {
   );
 
   const effect = () => {
-    if (typeof logoRef.current.getBoundingClientRect === 'function') {
+    if (typeof logoRef.current.getBoundingClientRect === "function") {
       const { top } = logoRef.current.getBoundingClientRect();
       setVisibility(top);
     }

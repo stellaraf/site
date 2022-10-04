@@ -1,21 +1,21 @@
-import { memo } from 'react';
-import { Divider, Heading, Image, VStack, Wrap, WrapItem } from '@chakra-ui/react';
-import { ModalWrapper } from '~/components';
-import { useColorValue } from '~/context';
-import { useRender, useScaledText } from '~/hooks';
-import { PhotoWrapper } from './Photo';
-import { useAvatar } from './Avatars';
-import { useCurrent } from './state';
+import { memo } from "react";
+import { Divider, Heading, Image, VStack, Wrap, WrapItem } from "@chakra-ui/react";
+import { ModalWrapper } from "~/components";
+import { useColorValue } from "~/context";
+import { useRender, useScaledText } from "~/hooks";
+import { PhotoWrapper } from "./Photo";
+import { useAvatar } from "./Avatars";
+import { useCurrent } from "./state";
 
-import type { IDetail, IHeader } from './types';
+import type { IDetail, IHeader } from "./types";
 
 const _Header: React.FC<IHeader> = (props: IHeader) => {
   const { name, title, photo } = props;
   const [containerRef, headingRef, shouldResize] = useScaledText<HTMLDivElement>([name]);
-  const border = useColorValue('blackAlpha.300', 'whiteAlpha.300');
+  const border = useColorValue("blackAlpha.300", "whiteAlpha.300");
 
   return (
-    <Wrap justify={{ base: 'center', lg: 'space-between' }} align="center" ref={containerRef}>
+    <Wrap justify={{ base: "center", lg: "space-between" }} align="center" ref={containerRef}>
       <WrapItem>
         <PhotoWrapper minWidth="unset" boxSize={32}>
           <Image
@@ -29,13 +29,13 @@ const _Header: React.FC<IHeader> = (props: IHeader) => {
             borderColor={border}
             transition="transform .15s ease 0s"
             fallbackSrc="https://via.placeholder.com/150"
-            src={photo?.fields.file.url ?? 'https://via.placeholder.com/150'}
+            src={photo?.fields.file.url ?? "https://via.placeholder.com/150"}
           />
         </PhotoWrapper>
       </WrapItem>
       <WrapItem>
-        <VStack align={{ base: 'center', lg: 'flex-end' }}>
-          <Heading as="h2" fontSize={shouldResize ? 'lg' : 'xl'} ref={headingRef}>
+        <VStack align={{ base: "center", lg: "flex-end" }}>
+          <Heading as="h2" fontSize={shouldResize ? "lg" : "xl"} ref={headingRef}>
             {name}
           </Heading>
           <Divider bg={border} />
@@ -64,23 +64,23 @@ export const Detail: React.FC<IDetail> = (props: IDetail) => {
       onClose={onClose}
       blockScrollOnMount={false}
       header={<Header {...bios[current]} />}
-      headerProps={{ py: 'unset', pb: 2, px: 'unset' }}
+      headerProps={{ py: "unset", pb: 2, px: "unset" }}
       containerProps={{
         pl: 8,
         py: 8,
         pr: 12,
-        maxWidth: '2xl',
-        height: 'unset',
-        minHeight: 'unset',
-        minWidth: { lg: 'xl' },
+        maxWidth: "2xl",
+        height: "unset",
+        minHeight: "unset",
+        minWidth: { lg: "xl" },
       }}
       bodyProps={{
         pt: 2,
-        py: 'unset',
-        px: 'unset',
-        textAlign: { base: 'left', lg: 'right' },
+        py: "unset",
+        px: "unset",
+        textAlign: { base: "left", lg: "right" },
         css: {
-          '& p': {
+          "& p": {
             marginTop: 0,
             marginBottom: 0,
           },

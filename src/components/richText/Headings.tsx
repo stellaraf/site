@@ -1,24 +1,24 @@
-import { Heading, useStyleConfig, useToken } from '@chakra-ui/react';
-import { useTitleCase } from 'use-title-case';
+import { Heading, useStyleConfig, useToken } from "@chakra-ui/react";
+import { useTitleCase } from "use-title-case";
 
-import type { BaseHeadingProps, HeadingProps, THeadingLevels } from './types';
+import type { BaseHeadingProps, HeadingProps, THeadingLevels } from "./types";
 
 const BaseHeading = (props: BaseHeadingProps) => {
   const { level, children, ...rest } = props;
   const titleMe = useTitleCase();
 
   let title = children;
-  if (typeof children === 'string') {
+  if (typeof children === "string") {
     title = titleMe(children);
   }
 
   const headingLevel = `h${level}` as THeadingLevels;
-  const sx = useStyleConfig('Heading', props);
-  const headingSize = (sx?.fontSize as string | string[]) ?? 'md';
-  const fontSize = useToken('fontSizes', headingSize);
+  const sx = useStyleConfig("Heading", props);
+  const headingSize = (sx?.fontSize as string | string[]) ?? "md";
+  const fontSize = useToken("fontSizes", headingSize);
 
   return (
-    <Heading as={headingLevel} mb={2} mt={12} css={{ '& > code': { fontSize } }} {...rest}>
+    <Heading as={headingLevel} mb={2} mt={12} css={{ "& > code": { fontSize } }} {...rest}>
       {title}
     </Heading>
   );

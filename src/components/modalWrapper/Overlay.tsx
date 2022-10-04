@@ -1,7 +1,7 @@
-import { Box, useStyles } from '@chakra-ui/react';
-import { forwardRef } from '~/util';
+import { Box, useStyles } from "@chakra-ui/react";
+import { forwardRef } from "~/util";
 
-import type { BoxProps } from '@chakra-ui/react';
+import type { BoxProps } from "@chakra-ui/react";
 
 export const Overlay = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   const styles = useStyles();

@@ -1,20 +1,20 @@
-import dynamic from 'next/dynamic';
-import { Box } from '@chakra-ui/react';
-import { Link, CodeBlock } from '~/components';
-import { useColorValue } from '~/context';
-import { H1, H2, H3, H4, H5, H6 } from './Headings';
-import { Code, BlockQuote, P } from './Texts';
-import { Ul, Ol, Li } from './Lists';
+import dynamic from "next/dynamic";
+import { Box } from "@chakra-ui/react";
+import { Link, CodeBlock } from "~/components";
+import { useColorValue } from "~/context";
+import { H1, H2, H3, H4, H5, H6 } from "./Headings";
+import { Code, BlockQuote, P } from "./Texts";
+import { Ul, Ol, Li } from "./Lists";
 
-const MarkdownToJSX = dynamic(() => import('markdown-to-jsx'));
+const MarkdownToJSX = dynamic(() => import("markdown-to-jsx"));
 
-import type { MarkdownToJSX as TMarkdownToJSX } from 'markdown-to-jsx';
-import type { TMarkdownBlock } from '~/types';
-import type { IMarkdown, ITd, ITableHeader, ITableMain } from './types';
+import type { MarkdownToJSX as TMarkdownToJSX } from "markdown-to-jsx";
+import type { TMarkdownBlock } from "~/types";
+import type { IMarkdown, ITd, ITableHeader, ITableMain } from "./types";
 
 export const Td: React.FC<ITd> = (props: ITd) => {
   const { isHeader = false, children, ...rest } = props;
-  const border = useColorValue('gray.100', 'whiteAlpha.100');
+  const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
     <Box
       p={2}
@@ -22,7 +22,7 @@ export const Td: React.FC<ITd> = (props: ITd) => {
       whiteSpace="normal"
       borderTopWidth="1px"
       borderColor={border}
-      as={isHeader ? 'th' : 'td'}
+      as={isHeader ? "th" : "td"}
       {...rest}
     >
       {children}
@@ -31,14 +31,14 @@ export const Td: React.FC<ITd> = (props: ITd) => {
 };
 
 export const Th: React.FC<ITableHeader> = (props: ITableHeader) => {
-  const bg = useColorValue('blackAlpha.100', 'whiteAlpha.100');
+  const bg = useColorValue("blackAlpha.100", "whiteAlpha.100");
   return <Box as="th" bg={bg} fontWeight="bold" p={2} fontSize="sm" {...props} />;
 };
 
 export const Table: React.FC<ITableMain> = (props: ITableMain) => {
-  const border = useColorValue('gray.100', 'whiteAlpha.100');
+  const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
-    <Box overflowX="auto" width={{ base: '100%', lg: 'fit-content' }}>
+    <Box overflowX="auto" width={{ base: "100%", lg: "fit-content" }}>
       <Box
         mt={4}
         zIndex={1}

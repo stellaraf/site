@@ -1,9 +1,9 @@
-import { Flex, Image, Button, Text, useBreakpointValue } from '@chakra-ui/react';
-import { useColorValue } from '~/context';
-import { useAvatar } from './Avatars';
-import { useCurrent } from './state';
+import { Flex, Image, Button, Text, useBreakpointValue } from "@chakra-ui/react";
+import { useColorValue } from "~/context";
+import { useAvatar } from "./Avatars";
+import { useCurrent } from "./state";
 
-import type { IPhoto, IPhotoWrapper } from './types';
+import type { IPhoto, IPhotoWrapper } from "./types";
 
 export const PhotoWrapper: React.FC<IPhotoWrapper> = (props: IPhotoWrapper) => (
   <Flex
@@ -23,10 +23,10 @@ export const PhotoWrapper: React.FC<IPhotoWrapper> = (props: IPhotoWrapper) => (
  */
 export const Photo: React.FC<IPhoto> = (props: IPhoto) => {
   const { index, onOpen, ...rest } = props;
-  const photoBorder = useColorValue('whiteAlpha.400', 'blackAlpha.400');
+  const photoBorder = useColorValue("whiteAlpha.400", "blackAlpha.400");
   const { bios } = useAvatar();
   const [_, setCurrent] = useCurrent();
-  const hover = useBreakpointValue({ base: {}, lg: { transform: 'scale(1.25)' } });
+  const hover = useBreakpointValue({ base: {}, lg: { transform: "scale(1.25)" } });
   const handleClick = () => {
     setCurrent(index);
     onOpen();

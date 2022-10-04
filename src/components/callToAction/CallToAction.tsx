@@ -1,16 +1,16 @@
-import { memo } from 'react';
-import { useRouter } from 'next/router';
-import { Center, Heading, VStack, Wrap, WrapItem } from '@chakra-ui/react';
-import { useTitleCase } from 'use-title-case';
-import { useInView } from 'react-intersection-observer';
-import { AnimatedDiv, SectionDivider } from '~/components';
-import { useConfig, useColorValue } from '~/context';
-import { useResponsiveStyle } from '~/hooks';
-import { Action } from './Action';
-import { useRandomActions } from './util';
+import { memo } from "react";
+import { useRouter } from "next/router";
+import { Center, Heading, VStack, Wrap, WrapItem } from "@chakra-ui/react";
+import { useTitleCase } from "use-title-case";
+import { useInView } from "react-intersection-observer";
+import { AnimatedDiv, SectionDivider } from "~/components";
+import { useConfig, useColorValue } from "~/context";
+import { useResponsiveStyle } from "~/hooks";
+import { Action } from "./Action";
+import { useRandomActions } from "./util";
 
-import type { TActions } from '~/types';
-import type { ICallToAction, ICallToActionMemo } from './types';
+import type { TActions } from "~/types";
+import type { ICallToAction, ICallToActionMemo } from "./types";
 
 export const _CallToActionContainer: React.FC<ICallToActionMemo> = (props: ICallToActionMemo) => {
   const { actions: rawActions, currentPath, ...rest } = props;
@@ -23,9 +23,9 @@ export const _CallToActionContainer: React.FC<ICallToActionMemo> = (props: ICall
   // Remove actions from the array if they are contained within the list of exclusions, and only
   // filter out actions if we're NOT on the home page.
   const filteredActions = rawActions.reduce<TActions[]>((filtered, action) => {
-    if (currentPath !== '/') {
-      const pathName = currentPath.replace('/', '');
-      const pattern = new RegExp(pathName, 'g');
+    if (currentPath !== "/") {
+      const pathName = currentPath.replace("/", "");
+      const pattern = new RegExp(pathName, "g");
       if (action.page.fields.slug.match(pattern)) {
         filtered.push(action);
       }
@@ -35,18 +35,18 @@ export const _CallToActionContainer: React.FC<ICallToActionMemo> = (props: ICall
 
   const actions = useRandomActions(filteredActions, callsToActionShown);
 
-  const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '-100px' });
+  const [ref, inView] = useInView({ triggerOnce: true, rootMargin: "-100px" });
 
   return (
     <>
       <VStack py={24} spacing={12} className="__actions" minH="30vh" {...rStyles} {...rest}>
         <Center>
-          <Heading as="h5" fontSize={{ base: 'lg', lg: '2xl' }}>
+          <Heading as="h5" fontSize={{ base: "lg", lg: "2xl" }}>
             {titleMe(callToActionTitle)}
           </Heading>
         </Center>
         <Wrap
-          direction={{ base: 'column', lg: 'row' }}
+          direction={{ base: "column", lg: "row" }}
           spacing={8}
           justify="center"
           ref={ref}
@@ -59,9 +59,9 @@ export const _CallToActionContainer: React.FC<ICallToActionMemo> = (props: ICall
                   zIndex={1}
                   animate={{ x: 0 }}
                   key={`action${i}`}
-                  initial={{ x: '100%' }}
-                  whileTap={{ y: '-3%' }}
-                  whileHover={{ y: '-5%' }}
+                  initial={{ x: "100%" }}
+                  whileTap={{ y: "-3%" }}
+                  whileHover={{ y: "-5%" }}
                   transition={{ delay: i * 0.1 }}
                 >
                   <Action {...action} />

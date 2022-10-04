@@ -7,15 +7,15 @@ import {
   PopoverBody,
   PopoverHeader,
   PopoverContent,
-} from '@chakra-ui/react';
-import { If } from '~/components';
-import { useColorValue } from '~/context';
-import { MapMarker } from './MapMarker';
+} from "@chakra-ui/react";
+import { If } from "~/components";
+import { useColorValue } from "~/context";
+import { MapMarker } from "./MapMarker";
 
-import type { LocationProps, ILatency } from './types';
+import type { LocationProps, ILatency } from "./types";
 
 const Latency = (props: ILatency): JSX.Element => {
-  const colorScheme = useColorValue('secondary', 'tertiary');
+  const colorScheme = useColorValue("secondary", "tertiary");
   const { location } = props;
   if (location === null) {
     return (
@@ -44,10 +44,10 @@ const Latency = (props: ILatency): JSX.Element => {
 };
 
 export const Location = (props: LocationProps): JSX.Element => {
-  const { loc, color = 'currentcolor', ...rest } = props;
+  const { loc, color = "currentcolor", ...rest } = props;
   const { coordinates, displayName, description } = loc;
 
-  const bg = useColorValue('white', 'blackAlpha.600');
+  const bg = useColorValue("white", "blackAlpha.600");
 
   return (
     <Popover trigger="hover" placement="top">
@@ -57,7 +57,7 @@ export const Location = (props: LocationProps): JSX.Element => {
           bg={bg}
           zIndex={4}
           border={0}
-          css={{ backdropFilter: 'blur(2px)' }}
+          css={{ backdropFilter: "blur(2px)" }}
           {...rest}
         >
           <PopoverHeader pt={4} fontWeight="bold" border={0}>

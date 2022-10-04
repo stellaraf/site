@@ -1,10 +1,10 @@
-import { getPartnerPage } from '~/util';
+import { getPartnerPage } from "~/util";
 
-import type { NextApiHandler } from 'next';
+import type { NextApiHandler } from "next";
 
 const previewHandler: NextApiHandler = async (request, response) => {
   if (request.query.secret !== process.env.PREVIEW_SECRET) {
-    return response.status(401).json({ message: 'Invalid Token.' });
+    return response.status(401).json({ message: "Invalid Token." });
   }
 
   const partner = request.query.partner as string;

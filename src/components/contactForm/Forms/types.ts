@@ -1,6 +1,6 @@
-import type { FlexProps } from '@chakra-ui/react';
-import type { FieldValues } from 'react-hook-form';
-import type { CustomColors } from '~/types';
+import type { FlexProps } from "@chakra-ui/react";
+import type { FieldValues } from "react-hook-form";
+import type { CustomColors } from "~/types";
 
 interface IFormFieldsBase extends FieldValues {
   firstName: string;
@@ -19,7 +19,7 @@ export interface ISalesFormFields extends IFormFieldsBase {
   interests: string[];
 }
 
-export type TFormTypes = 'Sales' | 'Support';
+export type TFormTypes = "Sales" | "Support";
 
 interface IFormFields {
   Support: ISupportFormFields;
@@ -33,7 +33,7 @@ interface FormFields {
   Sales: ISalesFormFields;
 }
 
-export interface IForm<T extends TFormTypes> extends Omit<FlexProps, 'onSubmit'> {
+export interface IForm<T extends TFormTypes> extends Omit<FlexProps, "onSubmit"> {
   onSubmit(f: T, d: FormFields[T]): void;
   accent: keyof CustomColors;
 }

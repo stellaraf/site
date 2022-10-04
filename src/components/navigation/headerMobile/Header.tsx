@@ -1,14 +1,14 @@
-import { Flex, HStack, VStack, useDisclosure } from '@chakra-ui/react';
-import { Spiral as Hamburger } from 'hamburger-react';
-import { StellarLogo } from '@stellaraf/logo';
-import { Button, DynamicIcon, MControls, ModalWrapper } from '~/components';
-import { useColorMode } from '~/context';
-import { Wrapper } from './Wrapper';
-import { NavLink } from './NavLink';
-import navConfig from '../config';
+import { Flex, HStack, VStack, useDisclosure } from "@chakra-ui/react";
+import { Spiral as Hamburger } from "hamburger-react";
+import { StellarLogo } from "@stellaraf/logo";
+import { Button, DynamicIcon, MControls, ModalWrapper } from "~/components";
+import { useColorMode } from "~/context";
+import { Wrapper } from "./Wrapper";
+import { NavLink } from "./NavLink";
+import navConfig from "../config";
 
-import type { ButtonProps } from '~/components';
-import type { IHeader } from './types';
+import type { ButtonProps } from "~/components";
+import type { IHeader } from "./types";
 
 const HEADING_HEIGHT = 56;
 
@@ -20,7 +20,7 @@ const ContactButton = (props: ButtonProps) => (
     variant="outline"
     borderWidth="1px"
     colorScheme="primary"
-    leftIcon={<DynamicIcon icon={{ fa: 'FaHeart' }} />}
+    leftIcon={<DynamicIcon icon={{ fa: "FaHeart" }} />}
     {...props}
   >
     Talk to Us
@@ -51,7 +51,7 @@ export const MHeader: React.FC<IHeader> = (props: IHeader) => {
         onClose={onClose}
         isCentered={false}
         footerProps={{ mb: 4 }}
-        containerProps={{ m: 2, width: '96vw', minH: '98vh' }}
+        containerProps={{ m: 2, width: "96vw", minH: "98vh" }}
         header={
           <Flex align="center" justify="space-between">
             <StellarLogo
@@ -59,7 +59,7 @@ export const MHeader: React.FC<IHeader> = (props: IHeader) => {
               width="auto"
               colorMode={colorMode}
               height={HEADING_HEIGHT}
-              style={{ marginBlock: '0.5rem' }}
+              style={{ marginBlock: "0.5rem" }}
             />
             {isOpen && (
               <Hamburger

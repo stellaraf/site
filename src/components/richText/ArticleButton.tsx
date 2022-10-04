@@ -1,7 +1,7 @@
-import { useTitleCase } from 'use-title-case';
-import { Button } from '~/components';
+import { useTitleCase } from "use-title-case";
+import { Button } from "~/components";
 
-import type { TArticleButton } from '~/types';
+import type { TArticleButton } from "~/types";
 
 export const ArticleButton: React.FC<TArticleButton> = (props: TArticleButton) => {
   const { text, link } = props;

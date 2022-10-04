@@ -1,5 +1,5 @@
-import type { CustomColors } from '~/types';
-import type { FormHandlers } from '../Forms/types';
+import type { CustomColors } from "~/types";
+import type { FormHandlers } from "../Forms/types";
 
 export interface IDesktopForm {
   title: string;

@@ -1,13 +1,13 @@
-import type { ChakraProps, ToastProps, UseToastOptions } from '@chakra-ui/react';
+import type { ChakraProps, ToastProps, UseToastOptions } from "@chakra-ui/react";
 
-export type TToastPositions = UseToastOptions['position'];
+export type TToastPositions = UseToastOptions["position"];
 
 export interface IUseAlert {
   message: React.ReactNode;
-  status: ToastProps['status'];
-  duration?: ToastProps['duration'];
+  status: ToastProps["status"];
+  duration?: ToastProps["duration"];
   position?: TToastPositions;
-  onClose?: ToastProps['onCloseComplete'];
+  onClose?: ToastProps["onCloseComplete"];
 }
 
 export type UseAlertReturn = (opts: IUseAlert) => void;
@@ -47,11 +47,11 @@ export namespace UseGlow {
     /**
      * Background Color as string.
      */
-    backgroundColor: ChakraProps['backgroundColor'];
+    backgroundColor: ChakraProps["backgroundColor"];
     /**
      * Box Shadow as string.
      */
-    boxShadow: ChakraProps['boxShadow'];
+    boxShadow: ChakraProps["boxShadow"];
   }
   export interface Options {
     /**

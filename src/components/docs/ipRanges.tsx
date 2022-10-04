@@ -1,13 +1,13 @@
-import { Box, Tag, Heading, SimpleGrid, Skeleton, Wrap, WrapItem } from '@chakra-ui/react';
-import { CodeBlock, Link, If, Error } from '~/components';
-import { useColorValue } from '~/context';
-import { useIPRanges } from '~/hooks';
+import { Box, Tag, Heading, SimpleGrid, Skeleton, Wrap, WrapItem } from "@chakra-ui/react";
+import { CodeBlock, Link, If, Error } from "~/components";
+import { useColorValue } from "~/context";
+import { useIPRanges } from "~/hooks";
 
-const URL = 'https://ip.stellar.tech';
+const URL = "https://ip.stellar.tech";
 
 export const IPRanges: React.FC = () => {
   const { data, error, isLoading, isError } = useIPRanges();
-  const tagColorScheme = useColorValue('gray', 'tertiary');
+  const tagColorScheme = useColorValue("gray", "tertiary");
   isError && console.error(error);
   return (
     <>
@@ -21,29 +21,29 @@ export const IPRanges: React.FC = () => {
               <Heading as="h3" size="md">
                 IPv4 Ranges
               </Heading>
-              <CodeBlock>{data?.ipv4.join('\n') ?? ''}</CodeBlock>
+              <CodeBlock>{data?.ipv4.join("\n") ?? ""}</CodeBlock>
             </Box>
             <Box>
               <Heading as="h3" size="md">
                 IPv6 Ranges
               </Heading>
-              <CodeBlock>{data?.ipv6.join('\n') ?? ''}</CodeBlock>
+              <CodeBlock>{data?.ipv6.join("\n") ?? ""}</CodeBlock>
             </Box>
             <Box>
               <Heading as="h3" size="md">{`Domains & URLs`}</Heading>
-              <CodeBlock>{data?.urls.join('\n') ?? ''}</CodeBlock>
+              <CodeBlock>{data?.urls.join("\n") ?? ""}</CodeBlock>
             </Box>
-            <Box maxW={{ base: '100%', lg: '50%' }}>
+            <Box maxW={{ base: "100%", lg: "50%" }}>
               <Heading as="h3" size="md">
                 Other Formats
               </Heading>
               <Wrap mt={5}>
                 {[
-                  ['json', 'JSON'],
-                  ['', 'Plain Text (IPv4 & IPv6)'],
-                  ['ipv4', 'Plain Text (IPv4 Only)'],
-                  ['ipv6', 'Plain Text (IPv6 Only)'],
-                  ['urls', 'Plain Text (URLs Only)'],
+                  ["json", "JSON"],
+                  ["", "Plain Text (IPv4 & IPv6)"],
+                  ["ipv4", "Plain Text (IPv4 Only)"],
+                  ["ipv6", "Plain Text (IPv6 Only)"],
+                  ["urls", "Plain Text (URLs Only)"],
                 ].map(([href, title]) => (
                   <WrapItem key={title}>
                     <Link href={`${URL}/${href}`}>

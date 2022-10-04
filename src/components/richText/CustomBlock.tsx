@@ -1,8 +1,8 @@
-import { Admonition } from './Admonition';
-import { ArticleButton } from './ArticleButton';
-import { Table } from './Table';
-import { Expandable } from './Expandable';
-import { MarkdownBlock } from './Markdown';
+import { Admonition } from "./Admonition";
+import { ArticleButton } from "./ArticleButton";
+import { Table } from "./Table";
+import { Expandable } from "./Expandable";
+import { MarkdownBlock } from "./Markdown";
 
 import {
   isTable,
@@ -11,9 +11,9 @@ import {
   isExpandable,
   isArticleButton,
   isMarkdownBlock,
-} from './guards';
+} from "./guards";
 
-import type { ICustomBlockPre } from './types';
+import type { ICustomBlockPre } from "./types";
 
 export const CustomBlock: React.FC<ICustomBlockPre> = (props: ICustomBlockPre) => {
   const target = parseTarget(props);

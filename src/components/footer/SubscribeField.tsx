@@ -1,21 +1,21 @@
-import { useMemo } from 'react';
-import { IconButton, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
-import { useFormContext } from 'react-hook-form';
-import { DynamicIcon } from '~/components';
-import { useColorValue, useConfig } from '~/context';
+import { useMemo } from "react";
+import { IconButton, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { useFormContext } from "react-hook-form";
+import { DynamicIcon } from "~/components";
+import { useColorValue, useConfig } from "~/context";
 
-import type { ISubscribeInput } from './types';
+import type { ISubscribeInput } from "./types";
 
-const borderLight = ['whiteAlpha.50', 'green.100'];
-const borderDark = [undefined, 'green.100'];
-const hoverBorderLight = ['whiteAlpha.300', 'green.300'];
-const hoverBorderDark = [undefined, 'green.300'];
+const borderLight = ["whiteAlpha.50", "green.100"];
+const borderDark = [undefined, "green.100"];
+const hoverBorderLight = ["whiteAlpha.300", "green.300"];
+const hoverBorderDark = [undefined, "green.300"];
 
 export const SubscribeField = (props: ISubscribeInput): JSX.Element => {
   const { field, ...rest } = props;
   const {
-    subscribeTitle = 'Subscribe to our newsletter',
-    subscribePlaceholder = 'Email Address',
+    subscribeTitle = "Subscribe to our newsletter",
+    subscribePlaceholder = "Email Address",
   } = useConfig();
 
   const { formState } = useFormContext();
@@ -23,7 +23,7 @@ export const SubscribeField = (props: ISubscribeInput): JSX.Element => {
 
   const styles = useColorValue(
     {
-      bg: 'whiteAlpha.100',
+      bg: "whiteAlpha.100",
       borderColor: borderLight[+isSubmitSuccessful],
       boxShadow: borderLight[+isSubmitSuccessful],
       _hover: {
@@ -43,22 +43,22 @@ export const SubscribeField = (props: ISubscribeInput): JSX.Element => {
 
   const icon = useMemo(() => {
     if (errors.email) {
-      return { fa: 'FaTimesCircle' };
+      return { fa: "FaTimesCircle" };
     }
     if (isSubmitSuccessful) {
-      return { fa: 'FaCheckCircle' };
+      return { fa: "FaCheckCircle" };
     }
-    return { fa: 'FaArrowAltCircleRight' };
+    return { fa: "FaArrowAltCircleRight" };
   }, [errors.email, isSubmitSuccessful]);
 
   const color = useMemo(() => {
     if (errors.email) {
-      return 'red.300';
+      return "red.300";
     }
     if (isSubmitSuccessful) {
-      return 'green.300';
+      return "green.300";
     }
-    return 'light.500';
+    return "light.500";
   }, [errors.email, isSubmitSuccessful]);
 
   return (
@@ -77,7 +77,7 @@ export const SubscribeField = (props: ISubscribeInput): JSX.Element => {
           title={subscribeTitle}
           isLoading={isSubmitting}
           aria-label={subscribeTitle}
-          _hover={{ color: 'tertiary.500' }}
+          _hover={{ color: "tertiary.500" }}
         />
       </InputRightElement>
     </InputGroup>

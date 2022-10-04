@@ -1,17 +1,17 @@
-import { createClient } from 'contentful';
-import { merge } from 'merge-anything';
+import { createClient } from "contentful";
+import { merge } from "merge-anything";
 
-import type { CreateClientParams, ContentfulClientApi, EntryCollection, Entry } from 'contentful';
+import type { CreateClientParams, ContentfulClientApi, EntryCollection, Entry } from "contentful";
 
 export function client(preview: boolean = false): ContentfulClientApi {
   const options = {
-    space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE ?? '',
-    accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN ?? '',
+    space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE ?? "",
+    accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN ?? "",
   } as CreateClientParams;
 
   if (preview) {
-    options.host = 'preview.contentful.com';
-    options.accessToken = process.env.CONTENTFUL_PREVIEW_TOKEN ?? '';
+    options.host = "preview.contentful.com";
+    options.accessToken = process.env.CONTENTFUL_PREVIEW_TOKEN ?? "";
   }
 
   return createClient(options);
@@ -49,7 +49,7 @@ export async function getParsedContent<T extends Empty>(
   query: Dict = {},
 ): Promise<T[]> {
   const queryParams = merge(
-    { content_type: contentType, include: 4, select: 'sys.id,sys.updatedAt,fields' },
+    { content_type: contentType, include: 4, select: "sys.id,sys.updatedAt,fields" },
     query,
   );
 

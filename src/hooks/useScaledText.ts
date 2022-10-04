@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
-import { useMeasure } from 'react-use';
+import { useMemo } from "react";
+import { useMeasure } from "react-use";
 
-import type { UseMeasureRef as UM } from 'react-use/esm/useMeasure';
+import type { UseMeasureRef as UM } from "react-use/esm/useMeasure";
 
 /**
  * These type aliases are for the readability of the function below.

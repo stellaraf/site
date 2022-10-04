@@ -7,18 +7,18 @@ import {
   AccordionItem,
   AccordionPanel,
   AccordionButton,
-} from '@chakra-ui/react';
-import { useColorValue } from '~/context';
-import { Link } from '~/components';
-import { useDocsHref } from './useDocsHref';
+} from "@chakra-ui/react";
+import { useColorValue } from "~/context";
+import { Link } from "~/components";
+import { useDocsHref } from "./useDocsHref";
 
-import type { IDocsGroup, IDocsArticle } from '~/types';
+import type { IDocsGroup, IDocsArticle } from "~/types";
 
 const MMenuItem: React.FC<IDocsArticle> = (props: IDocsArticle) => {
   const { title } = props;
   const { href, isCurrent } = useDocsHref(props);
 
-  const color = useColorValue('primary.500', 'secondary.200');
+  const color = useColorValue("primary.500", "secondary.200");
 
   return (
     <ListItem my={2} pl={4} color={isCurrent ? color : undefined}>
@@ -32,7 +32,7 @@ const MMenuItem: React.FC<IDocsArticle> = (props: IDocsArticle) => {
 export const MMenuGroup: React.FC<IDocsGroup> = (props: IDocsGroup) => {
   const { title, items } = props;
 
-  const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
+  const borderColor = useColorValue("blackAlpha.300", "whiteAlpha.300");
 
   return (
     <>

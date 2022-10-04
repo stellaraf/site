@@ -1,7 +1,7 @@
-import { createContext, forwardRef, useContext } from 'react';
-import ReactSelect from 'react-select';
-import { useDisclosure, useColorMode } from '@chakra-ui/react';
-import { Option } from './option';
+import { createContext, forwardRef, useContext } from "react";
+import ReactSelect from "react-select";
+import { useDisclosure, useColorMode } from "@chakra-ui/react";
+import { Option } from "./option";
 import {
   useRSTheme,
   useMenuStyle,
@@ -14,17 +14,17 @@ import {
   useMultiValueLabelStyle,
   useMultiValueRemoveStyle,
   useIndicatorSeparatorStyle,
-} from './styles';
-import { isSingleValue } from './types';
+} from "./styles";
+import { isSingleValue } from "./types";
 
 import type {
   Props as ReactSelectProps,
   MultiValue,
   OnChangeValue,
   SelectInstance,
-} from 'react-select';
-import type { SelectOptionSingle } from '~/types';
-import type { SelectProps, SelectContextProps } from './types';
+} from "react-select";
+import type { SelectOptionSingle } from "~/types";
+import type { SelectProps, SelectContextProps } from "./types";
 
 const SelectContext = createContext<SelectContextProps>({} as SelectContextProps);
 export const useSelectContext = (): SelectContextProps => useContext(SelectContext);
@@ -34,20 +34,20 @@ export const Select = forwardRef(
     props: SelectProps<Opt, IsMulti>,
     ref: React.Ref<SelectInstance<Opt, IsMulti>>,
   ): JSX.Element => {
-    const { options, isMulti, onSelect, isError = false, colorScheme = 'gray', ...rest } = props;
+    const { options, isMulti, onSelect, isError = false, colorScheme = "gray", ...rest } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const { colorMode } = useColorMode();
 
-    const defaultOnChange: ReactSelectProps<Opt, IsMulti>['onChange'] = changed => {
+    const defaultOnChange: ReactSelectProps<Opt, IsMulti>["onChange"] = changed => {
       if (changed === null) {
         changed = ([] as unknown) as OnChangeValue<Opt, IsMulti>;
       }
       if (isSingleValue<Opt>(changed)) {
         changed = ([changed] as unknown) as OnChangeValue<Opt, IsMulti>;
       }
-      if (typeof onSelect === 'function') {
+      if (typeof onSelect === "function") {
         onSelect(changed as MultiValue<Opt>);
       }
     };
@@ -94,4 +94,4 @@ export const Select = forwardRef(
     );
   },
 );
-Select.displayName = 'Search';
+Select.displayName = "Search";

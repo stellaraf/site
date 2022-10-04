@@ -1,10 +1,10 @@
-import { Flex, ModalFocusScope, useModalContext, useMultiStyleConfig } from '@chakra-ui/react';
-import { AnimatePresence } from 'framer-motion';
-import { AnimatedDiv } from '~/components';
-import { useColorValue } from '~/context';
-import { forwardRef } from '~/util';
+import { Flex, ModalFocusScope, useModalContext, useMultiStyleConfig } from "@chakra-ui/react";
+import { AnimatePresence } from "framer-motion";
+import { AnimatedDiv } from "~/components";
+import { useColorValue } from "~/context";
+import { forwardRef } from "~/util";
 
-import type { IModalContent, ModalDialogProps } from './types';
+import type { IModalContent, ModalDialogProps } from "./types";
 
 /**
  * Replaces ModalContent Component.
@@ -16,9 +16,9 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
   const containerProps = getDialogContainerProps();
   const dialogProps = getDialogProps(rest, ref) as ModalDialogProps;
 
-  const styles = useMultiStyleConfig('Modal');
-  const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
-  const bg = useColorValue('light.500', 'blackAlpha.300');
+  const styles = useMultiStyleConfig("Modal");
+  const borderColor = useColorValue("blackAlpha.300", "whiteAlpha.300");
+  const bg = useColorValue("light.500", "blackAlpha.300");
   return (
     <ModalFocusScope>
       <Flex
@@ -40,7 +40,7 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
         <AnimatePresence>
           <AnimatedDiv
             // Don't mess with the order of these props.
-            transition={{ duration: 0.2, type: 'spring' }}
+            transition={{ duration: 0.2, type: "spring" }}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             backgroundColor={bg}
@@ -55,7 +55,7 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
             alignSelf="center"
             __css={styles?.dialog}
             borderColor={borderColor}
-            css={{ backdropFilter: 'blur(20px)' }}
+            css={{ backdropFilter: "blur(20px)" }}
             {...dialogProps}
           >
             <Flex

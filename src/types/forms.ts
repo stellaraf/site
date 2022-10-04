@@ -1,4 +1,4 @@
-import type { ParsedEntry } from './contentful';
+import type { ParsedEntry } from "./contentful";
 
 type FormWithFieldConfig<F extends Dict, E extends Partial<F> = Partial<F>> = {
   [k in keyof F]: {
@@ -21,7 +21,7 @@ type FormWithFieldConfigEntry<F extends Dict, E extends Partial<F> = Partial<F>>
 };
 
 type NoExtraValidation = Record<never, never>;
-type TextExtraFields = { validationType?: 'Email Address' | 'Phone Number' };
+type TextExtraFields = { validationType?: "Email Address" | "Phone Number" };
 type SelectExtraFields = { multiple: boolean; options: string[] };
 
 export type TFormModel = {
@@ -83,7 +83,7 @@ type IFormModelsEntry = {
   Sales: IFormModelSalesEntry;
 };
 
-export type FormTypes = 'Support' | 'Sales';
+export type FormTypes = "Support" | "Sales";
 
 export type FormModel<T extends FormTypes> = IFormModels[T];
 export type FormModelEntry<T extends FormTypes> = ParsedEntry<IFormModelsEntry[T]>;

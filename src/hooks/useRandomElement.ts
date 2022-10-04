@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef } from "react";
 
 /**
  * Hook to return a random element from an array.

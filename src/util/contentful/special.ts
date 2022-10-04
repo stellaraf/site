@@ -1,5 +1,5 @@
-import { sortByWeight, sortByTitle } from '~/util';
-import { getParsedContent, getContentType } from './common';
+import { sortByWeight, sortByTitle } from "~/util";
+import { getParsedContent, getContentType } from "./common";
 
 import type {
   FormModel,
@@ -13,24 +13,24 @@ import type {
   IContactCardEntry,
   IMeasuredGeoPoint,
   TestimonialEntry,
-} from '~/types';
+} from "~/types";
 
 /**
  * Get all contact cards, as pre-parsed as possible.
  */
 export async function getContactCards(preview: boolean = false): Promise<IContactCard[]> {
-  const contactCardEntries = await getParsedContent<IContactCardEntry>('contactCard', preview);
+  const contactCardEntries = await getParsedContent<IContactCardEntry>("contactCard", preview);
   /**
    * Because each contact card definition ends up being hyper-nested, it's necessary, or rather
    * ideal, to pre-parse the data instead of trying to do it in the component.
    */
   const contactCards = contactCardEntries.map(entry => {
     const { form: formEntry, ...cardEntry } = entry;
-    const form = {} as FormModel<'Support' | 'Sales'>;
+    const form = {} as FormModel<"Support" | "Sales">;
 
-    if (typeof formEntry !== 'undefined') {
+    if (typeof formEntry !== "undefined") {
       for (const [k, v] of Object.entries<unknown>(formEntry.fields)) {
-        if (typeof v === 'string') {
+        if (typeof v === "string") {
           // @ts-expect-error The model is such that each k:v pair could be string:string,
           // or string:Entry. Typescript will complain about `v` being unknown, and won't
           // accept any other type, even with extensive type guards. Therefore, while this is
@@ -55,10 +55,10 @@ export async function getContactCards(preview: boolean = false): Promise<IContac
 export async function getPartnerPage(
   partner: string,
   preview: boolean = false,
-): Promise<IPartnerPage['pageData']> {
+): Promise<IPartnerPage["pageData"]> {
   // Get all Partner Pages matching the the partner's name.
-  const matches = await getParsedContent<IPartnerPageEntry['pageData']>('partnerPage', preview, {
-    'fields.name[match]': partner,
+  const matches = await getParsedContent<IPartnerPageEntry["pageData"]>("partnerPage", preview, {
+    "fields.name[match]": partner,
     include: 4,
   });
 
@@ -66,9 +66,9 @@ export async function getPartnerPage(
   const { trialForm: formEntry, ...pageEntry } = matches[0];
   const trialForm = {} as TFormModelTrial;
 
-  if (typeof formEntry !== 'undefined') {
+  if (typeof formEntry !== "undefined") {
     for (const [k, v] of Object.entries<unknown>(formEntry.fields)) {
-      if (typeof v === 'string') {
+      if (typeof v === "string") {
         // @ts-expect-error The model is such that each k:v pair could be string:string,
         // or string:Entry. Typescript will complain about `v` being unknown, and won't
         // accept any other type, even with extensive type guards. Therefore, while this is
@@ -90,13 +90,13 @@ export async function getPartnerPage(
  */
 export async function getDocsGroups(preview: boolean = false): Promise<IDocsGroup[]> {
   const docsGroups = [] as IDocsGroup[];
-  const groups = await getParsedContent<IDocsGroupEntry>('docsGroup', preview);
+  const groups = await getParsedContent<IDocsGroupEntry>("docsGroup", preview);
 
   for (const group of groups) {
     // Get each Docs Article where the article's associated group title matches this group.
-    const unsortedItems = await getParsedContent<IDocsArticle>('docsArticle', preview, {
-      'fields.docsGroup.sys.contentType.sys.id': 'docsGroup',
-      'fields.docsGroup.fields.title': group.title,
+    const unsortedItems = await getParsedContent<IDocsArticle>("docsArticle", preview, {
+      "fields.docsGroup.sys.contentType.sys.id": "docsGroup",
+      "fields.docsGroup.fields.title": group.title,
     });
     const items = unsortedItems.sort(sortByTitle);
     docsGroups.push({ ...group, items });
@@ -109,7 +109,7 @@ export async function getDocsGroups(preview: boolean = false): Promise<IDocsGrou
  * Get all Orion cloud locations, pre-parse, & set default values.
  */
 export const getOrionLocations = async (): Promise<IMeasuredGeoPoint[]> => {
-  const data = await getContentType<IMeasuredGeoPoint>('orionLocation');
+  const data = await getContentType<IMeasuredGeoPoint>("orionLocation");
   /**
    * Add default values for cloud locations - this ensures type safety but also signals to
    * components if the location has been checked.
@@ -118,7 +118,7 @@ export const getOrionLocations = async (): Promise<IMeasuredGeoPoint[]> => {
 };
 
 export async function getTestimonials(preview: boolean = false): Promise<TestimonialEntry[]> {
-  const data = await getContentType<TestimonialEntry>('testimonial', preview);
+  const data = await getContentType<TestimonialEntry>("testimonial", preview);
   const testimonials = data.items.map(entry => entry.fields).sort(sortByTitle);
   return testimonials;
 }

@@ -3,10 +3,10 @@ import {
   useContext,
   // useMemo,
   useRef,
-} from 'react';
+} from "react";
 
-import type { MutableRefObject } from 'react';
-import type { IGlobalConfigCtx, IConfigProvider } from './types';
+import type { MutableRefObject } from "react";
+import type { IGlobalConfigCtx, IConfigProvider } from "./types";
 
 const ConfigContext = createContext<MutableRefObject<IGlobalConfigCtx>>(
   {} as MutableRefObject<IGlobalConfigCtx>,

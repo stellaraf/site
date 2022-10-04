@@ -1,36 +1,36 @@
-import { Button, Flex, IconButton, VStack } from '@chakra-ui/react';
-import { DynamicIcon } from '~/components';
-import { AnimatePresence } from 'framer-motion';
-import { motionChakra } from '../util/animated';
-import { useConfig, useColorValue, useColorTokenValue } from '~/context';
-import { useOpposingColor, useRender, useMobile, useBanner } from '~/hooks';
+import { Button, Flex, IconButton, VStack } from "@chakra-ui/react";
+import { DynamicIcon } from "~/components";
+import { AnimatePresence } from "framer-motion";
+import { motionChakra } from "../util/animated";
+import { useConfig, useColorValue, useColorTokenValue } from "~/context";
+import { useOpposingColor, useRender, useMobile, useBanner } from "~/hooks";
 
-import type { BoxProps, PropsOf } from '@chakra-ui/react';
-import type { IBannerContent } from './types';
+import type { BoxProps, PropsOf } from "@chakra-ui/react";
+import type { IBannerContent } from "./types";
 
-const Container = motionChakra<BoxProps>('div', {
+const Container = motionChakra<BoxProps>("div", {
   baseStyle: {
     left: 0,
     right: 0,
     bottom: 0,
     zIndex: 1000,
-    width: '100%',
-    display: 'flex',
-    minHeight: '4rem',
-    position: 'fixed',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDir: { base: 'column', lg: 'row' },
+    width: "100%",
+    display: "flex",
+    minHeight: "4rem",
+    position: "fixed",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDir: { base: "column", lg: "row" },
   },
 });
 
 const MBannerContent = (props: IBannerContent): JSX.Element => {
   const { body, onClick } = props;
-  const bg = useColorValue('secondary.500', 'secondary.200');
+  const bg = useColorValue("secondary.500", "secondary.200");
   const color = useOpposingColor(bg);
-  const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
-  const linkHover = useColorTokenValue('whiteAlpha.700', 'whiteAlpha.700');
-  const linkBorder = useColorTokenValue('whiteAlpha.700', 'blackAlpha.500');
+  const borderColor = useColorValue("blackAlpha.300", "whiteAlpha.300");
+  const linkHover = useColorTokenValue("whiteAlpha.700", "whiteAlpha.700");
+  const linkBorder = useColorTokenValue("whiteAlpha.700", "blackAlpha.500");
   return (
     <VStack
       p={4}
@@ -43,11 +43,11 @@ const MBannerContent = (props: IBannerContent): JSX.Element => {
       <Flex
         pos="relative"
         display="inline-flex"
-        fontSize={{ base: 'sm', lg: 'md' }}
+        fontSize={{ base: "sm", lg: "md" }}
         css={{
-          '& p': { margin: 'unset' },
-          '& > p > a': { borderBottomColor: linkBorder },
-          '& > p > a:hover': { '--link-color': linkHover },
+          "& p": { margin: "unset" },
+          "& > p > a": { borderBottomColor: linkBorder },
+          "& > p > a:hover": { "--link-color": linkHover },
         }}
       >
         {body}
@@ -58,7 +58,7 @@ const MBannerContent = (props: IBannerContent): JSX.Element => {
         variant="outline"
         onClick={onClick}
         colorScheme={color}
-        leftIcon={<DynamicIcon icon={{ fa: 'FaCheckCircle' }} />}
+        leftIcon={<DynamicIcon icon={{ fa: "FaCheckCircle" }} />}
       >
         No Problem!
       </Button>
@@ -68,12 +68,12 @@ const MBannerContent = (props: IBannerContent): JSX.Element => {
 
 const DBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
   const { body, onClick } = props;
-  const bg = useColorValue('secondary.500', 'secondary.200');
+  const bg = useColorValue("secondary.500", "secondary.200");
   const color = useOpposingColor(bg);
   const selectionColor = useOpposingColor(color);
-  const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
-  const linkHover = useColorTokenValue('whiteAlpha.700', 'whiteAlpha.700');
-  const linkBorder = useColorTokenValue('whiteAlpha.700', 'blackAlpha.500');
+  const borderColor = useColorValue("blackAlpha.300", "whiteAlpha.300");
+  const linkHover = useColorTokenValue("whiteAlpha.700", "whiteAlpha.700");
+  const linkBorder = useColorTokenValue("whiteAlpha.700", "blackAlpha.500");
   return (
     <Flex
       bg={bg}
@@ -89,10 +89,10 @@ const DBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
         p={4}
         pos="relative"
         css={{
-          '& p': { margin: 'unset' },
-          '& > p > a': { borderBottomColor: linkBorder },
-          '& > p > a:hover': { '--link-color': linkHover },
-          '& p::selection': { backgroundColor: color, color: selectionColor },
+          "& p": { margin: "unset" },
+          "& > p > a": { borderBottomColor: linkBorder },
+          "& > p > a:hover": { "--link-color": linkHover },
+          "& p::selection": { backgroundColor: color, color: selectionColor },
         }}
         fontSize="md"
       >
@@ -100,7 +100,7 @@ const DBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
       </Flex>
       <Flex>
         <IconButton
-          icon={<DynamicIcon icon={{ fa: 'FaCheckCircle' }} />}
+          icon={<DynamicIcon icon={{ fa: "FaCheckCircle" }} />}
           onClick={onClick}
           variant="unstyled"
           alignItems="center"
@@ -125,10 +125,10 @@ export const Banner: React.FC<PropsOf<typeof Container>> = (props: PropsOf<typeo
       {!agreed && (
         <Container
           animate={{ y: 0 }}
-          exit={{ y: '100%' }}
+          exit={{ y: "100%" }}
           id="__privacy-banner"
-          initial={{ y: '100%' }}
-          transition={{ type: 'spring', delay: 0.5 }}
+          initial={{ y: "100%" }}
+          transition={{ type: "spring", delay: 0.5 }}
           {...props}
         >
           {isMobile ? (

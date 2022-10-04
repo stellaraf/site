@@ -1,4 +1,4 @@
-import { BoxProps, AlertProps } from '@chakra-ui/react';
+import { BoxProps, AlertProps } from "@chakra-ui/react";
 
 export interface IError extends AlertProps {
   title?: string;

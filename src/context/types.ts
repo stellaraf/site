@@ -1,4 +1,4 @@
-import type { CustomTheme, GlobalConfig, ThemeConfig, IDocsGroup, TestimonialEntry } from '~/types';
+import type { CustomTheme, GlobalConfig, ThemeConfig, IDocsGroup, TestimonialEntry } from "~/types";
 
 /**
  * Root Provider Props
@@ -14,7 +14,7 @@ export interface IProvider {
  * Config Provider Types
  */
 
-type TGlobalConfig = Omit<GlobalConfig, 'theme'>;
+type TGlobalConfig = Omit<GlobalConfig, "theme">;
 
 export interface IGlobalConfigCtx extends TGlobalConfig {
   docsGroups: IDocsGroup[];

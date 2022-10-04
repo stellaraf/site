@@ -1,23 +1,23 @@
-import { useCallback } from 'react';
-import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react';
-import { useTitleCase } from 'use-title-case';
-import { Button, Icon } from '~/components';
-import { useRender } from '~/hooks';
-import { useColorValue } from '~/context';
+import { useCallback } from "react";
+import { Box, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
+import { useTitleCase } from "use-title-case";
+import { Button, Icon } from "~/components";
+import { useRender } from "~/hooks";
+import { useColorValue } from "~/context";
 
-import type { ISubSection, ISubSectionGroup } from './types';
+import type { ISubSection, ISubSectionGroup } from "./types";
 
 const SubSection: React.FC<ISubSection> = (props: ISubSection) => {
-  const { title, body, icon, iconColor = 'primary', buttonLink, buttonText } = props;
+  const { title, body, icon, iconColor = "primary", buttonLink, buttonText } = props;
 
   const titleMe = useTitleCase();
   const boxProps = useColorValue(
-    { bg: 'white', boxShadow: 'xl' },
-    { bg: 'whiteAlpha.50', css: { backdropFilter: 'blur(2px)' } },
+    { bg: "white", boxShadow: "xl" },
+    { bg: "whiteAlpha.50", css: { backdropFilter: "blur(2px)" } },
   );
   const renderedBody = useRender(body);
   const hasButton = useCallback(
-    () => typeof buttonLink !== 'undefined' && typeof buttonText !== 'undefined',
+    () => typeof buttonLink !== "undefined" && typeof buttonText !== "undefined",
     [buttonText, buttonLink],
   );
   return (
@@ -36,14 +36,14 @@ const SubSection: React.FC<ISubSection> = (props: ISubSection) => {
           </Heading>
           {icon && <Icon size={12} url={icon} color={iconColor} />}
         </Flex>
-        <Box whiteSpace="pre-line" fontSize="lg" textAlign={{ base: 'left', xl: 'justify' }}>
+        <Box whiteSpace="pre-line" fontSize="lg" textAlign={{ base: "left", xl: "justify" }}>
           {renderedBody}
         </Box>
       </Flex>
       {hasButton() && (
-        <Flex align="center" justify={{ base: 'flex-start', lg: 'flex-end' }}>
+        <Flex align="center" justify={{ base: "flex-start", lg: "flex-end" }}>
           <Button size="sm" colorScheme={iconColor} variant="outline" href={buttonLink}>
-            {typeof buttonText !== 'undefined' && titleMe(buttonText)}
+            {typeof buttonText !== "undefined" && titleMe(buttonText)}
           </Button>
         </Flex>
       )}

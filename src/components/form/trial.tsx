@@ -1,12 +1,12 @@
-import { Button, Center, Flex } from '@chakra-ui/react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { isValidPhoneNumber } from 'libphonenumber-js';
-import { FieldGroup, TextInput } from '~/components';
-import { useAlert } from '~/hooks';
+import { Button, Center, Flex } from "@chakra-ui/react";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { isValidPhoneNumber } from "libphonenumber-js";
+import { FieldGroup, TextInput } from "~/components";
+import { useAlert } from "~/hooks";
 
-import type { TTrialForm } from './types';
+import type { TTrialForm } from "./types";
 
 export const TrialForm = (props: TTrialForm): JSX.Element => {
   const { name, fields, onSubmit } = props;
@@ -25,7 +25,7 @@ export const TrialForm = (props: TTrialForm): JSX.Element => {
     firstName: z.string().min(1, `${firstName.displayName} is required`),
     lastName: z.string().min(1, `${lastName.displayName} is required`),
     emailAddress: z.string().email(`${emailAddress.displayName} is required`),
-    phoneNumber: z.string().refine(isValidPhoneNumber, 'Invalid phone number').optional(),
+    phoneNumber: z.string().refine(isValidPhoneNumber, "Invalid phone number").optional(),
     companyName: z.string().min(1, `${companyName.displayName} is required`),
   });
 
@@ -37,12 +37,12 @@ export const TrialForm = (props: TTrialForm): JSX.Element => {
   const { handleSubmit, control, formState } = form;
 
   async function submit(data: Schema): Promise<void> {
-    const response = await onSubmit({ ...data, interests: [`${name} Trial`], details: '' });
+    const response = await onSubmit({ ...data, interests: [`${name} Trial`], details: "" });
 
     if (!response.success) {
-      showAlert({ message: response.message, status: 'error' });
+      showAlert({ message: response.message, status: "error" });
     } else if (response.success) {
-      showAlert({ message: successMessage, status: 'success' });
+      showAlert({ message: successMessage, status: "success" });
     }
   }
 

@@ -1,10 +1,10 @@
-import { Box, Flex, Button as ChakraButton, Heading, VStack } from '@chakra-ui/react';
-import { Content, DynamicIcon, Hero, Options, SEO, GetStarted } from '~/components';
-import { useSlug, useResponsiveStyle } from '~/hooks';
-import { getPage, getPageContent, getPageId, getContactCards } from '~/util';
+import { Box, Flex, Button as ChakraButton, Heading, VStack } from "@chakra-ui/react";
+import { Content, DynamicIcon, Hero, Options, SEO, GetStarted } from "~/components";
+import { useSlug, useResponsiveStyle } from "~/hooks";
+import { getPage, getPageContent, getPageId, getContactCards } from "~/util";
 
-import type { GetStaticProps } from 'next';
-import type { PageEntry, IContactPage, PageContent } from '~/types';
+import type { GetStaticProps } from "next";
+import type { PageEntry, IContactPage, PageContent } from "~/types";
 
 const Contact = (props: PageEntry<IContactPage>): JSX.Element => {
   const { pageData, contactCards, pageContent } = props;
@@ -40,7 +40,7 @@ const Contact = (props: PageEntry<IContactPage>): JSX.Element => {
               rounded="full"
               colorScheme="green"
             >
-              <DynamicIcon icon={{ im: 'ImPhone' }} />
+              <DynamicIcon icon={{ im: "ImPhone" }} />
             </ChakraButton>
             <Heading as="h4" fontSize="xl" fontWeight="medium">
               {content.buttonText}
@@ -55,14 +55,14 @@ const Contact = (props: PageEntry<IContactPage>): JSX.Element => {
 
 export const getStaticProps: GetStaticProps<PageEntry<IContactPage>> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let pageData = {} as PageEntry<IContactPage>['pageData'];
+  let pageData = {} as PageEntry<IContactPage>["pageData"];
   let pageContent = [] as PageContent[];
 
   const contactCards = await getContactCards(preview);
 
   try {
-    const pageId = await getPageId('contact', preview);
-    pageData = await getPage<IContactPage['pageData']>(pageId, preview);
+    const pageId = await getPageId("contact", preview);
+    pageData = await getPage<IContactPage["pageData"]>(pageId, preview);
     pageContent = await getPageContent(pageId, preview);
   } catch (err) {
     console.error(err);

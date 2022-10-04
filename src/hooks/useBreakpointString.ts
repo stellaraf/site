@@ -1,6 +1,6 @@
-import { useTheme } from '~/context';
+import { useTheme } from "~/context";
 
-import type { TUseBreakpointString } from './types';
+import type { TUseBreakpointString } from "./types";
 
 /**
  * Convenience hook for converting Chakra-UI Theme breakpoints (back) to standard media query string.

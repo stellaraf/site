@@ -1,5 +1,5 @@
-import type { Theme as DefaultTheme } from '@chakra-ui/theme';
-import type { Palette } from 'palette-by-numbers';
+import type { Theme as DefaultTheme } from "@chakra-ui/theme";
+import type { Palette } from "palette-by-numbers";
 
 type ExtraColors = {
   primary: Palette;
@@ -14,26 +14,26 @@ type ExtraColors = {
 export type InitialTheme = { [key in ChangeableColorNames]: string };
 
 type ChangeableThemeColors = Omit<
-  DefaultTheme['colors'],
-  'transparent' | 'current' | 'black' | 'white'
+  DefaultTheme["colors"],
+  "transparent" | "current" | "black" | "white"
 >;
 
 type ChangeableColorNames = keyof (ChangeableThemeColors & ExtraColors);
 
 export type ChangeableColors = { [k in ChangeableColorNames]: Palette };
 
-export type CustomColors = DefaultTheme['colors'] & ExtraColors;
+export type CustomColors = DefaultTheme["colors"] & ExtraColors;
 
-export type ColorNames = keyof (DefaultTheme['colors'] & ExtraColors);
+export type ColorNames = keyof (DefaultTheme["colors"] & ExtraColors);
 
-export interface CustomTheme extends Omit<DefaultTheme, 'colors'> {
+export interface CustomTheme extends Omit<DefaultTheme, "colors"> {
   colors: CustomColors;
 }
 
-export type ThemeFonts = DefaultTheme['fonts'];
+export type ThemeFonts = DefaultTheme["fonts"];
 
-export type { Fonts as ConfigFonts } from './content';
+export type { Fonts as ConfigFonts } from "./content";
 
-export type FontWeights = DefaultTheme['fontWeights'];
+export type FontWeights = DefaultTheme["fontWeights"];
 
-export type { Styles } from '@chakra-ui/theme-tools';
+export type { Styles } from "@chakra-ui/theme-tools";

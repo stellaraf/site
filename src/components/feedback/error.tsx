@@ -1,8 +1,8 @@
-import { Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/react';
-import { useConfig } from '~/context';
-import { useRender } from '~/hooks';
+import { Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
+import { useConfig } from "~/context";
+import { useRender } from "~/hooks";
 
-import type { IError } from './types';
+import type { IError } from "./types";
 
 export const Error: React.FC<IError> = (props: IError) => {
   const { title, description, children, ...rest } = props;
@@ -21,19 +21,19 @@ export const Error: React.FC<IError> = (props: IError) => {
       textAlign="center"
       alignItems="center"
       justifyContent="center"
-      maxW={{ base: '100%', lg: '75%', xl: '50%' }}
+      maxW={{ base: "100%", lg: "75%", xl: "50%" }}
       {...rest}
       status="error"
     >
       <AlertIcon boxSize={16} mr={0} />
       <AlertTitle mt={4} mb={1} fontSize="lg">
-        {title ?? 'Something Went Wrong'}
+        {title ?? "Something Went Wrong"}
       </AlertTitle>
       <AlertDescription
         maxWidth="sm"
         css={{
-          '& > p': { marginTop: 0, marginBottom: 0 },
-          '& > p > a': { '--link-color': 'currentColor' },
+          "& > p": { marginTop: 0, marginBottom: 0 },
+          "& > p > a": { "--link-color": "currentColor" },
         }}
       >
         {detail}

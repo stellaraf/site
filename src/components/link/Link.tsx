@@ -1,32 +1,32 @@
-import NextLink from 'next/link';
-import { useRouter } from 'next/router';
-import { chakra, Link as ChakraLink, useToken } from '@chakra-ui/react';
-import { DynamicIcon } from '~/components';
-import { useColorValue } from '~/context';
-import { useLinkType } from '~/hooks';
-import { forwardRef } from '~/util';
+import NextLink from "next/link";
+import { useRouter } from "next/router";
+import { chakra, Link as ChakraLink, useToken } from "@chakra-ui/react";
+import { DynamicIcon } from "~/components";
+import { useColorValue } from "~/context";
+import { useLinkType } from "~/hooks";
+import { forwardRef } from "~/util";
 
-import type { ILinkIcon, ILink } from './types';
+import type { ILinkIcon, ILink } from "./types";
 
 const BaseLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => {
   const borderColor = useColorValue(
-    useToken('colors', 'secondary.500'),
-    useToken('colors', 'secondary.300'),
+    useToken("colors", "secondary.500"),
+    useToken("colors", "secondary.300"),
   );
 
   return (
     <ChakraLink
       ref={ref}
       css={{
-        '&': { '--link-color': borderColor },
-        'p > &, td > &': {
-          borderBottomWidth: '1px',
-          borderBottomColor: 'var(--link-color)',
-          color: 'inherit',
-          transition: 'all 0.2s ease-in-out',
-          '&:hover': {
-            textDecoration: 'none',
-            color: 'var(--link-color)',
+        "&": { "--link-color": borderColor },
+        "p > &, td > &": {
+          borderBottomWidth: "1px",
+          borderBottomColor: "var(--link-color)",
+          color: "inherit",
+          transition: "all 0.2s ease-in-out",
+          "&:hover": {
+            textDecoration: "none",
+            color: "var(--link-color)",
           },
         },
       }}
@@ -40,7 +40,7 @@ const BaseLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => {
  */
 const LinkIcon = (props: ILinkIcon): JSX.Element => (
   <chakra.span mb={1} mx={1} {...props}>
-    <DynamicIcon icon={{ ei: 'EiExternalIcon' }} />
+    <DynamicIcon icon={{ ei: "EiExternalIcon" }} />
   </chakra.span>
 );
 
@@ -56,7 +56,7 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => (
  * routing.
  */
 const InternalLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => {
-  const { href = '/', children, ...rest } = props;
+  const { href = "/", children, ...rest } = props;
 
   /**
    * Links rendered outside of the Next.js Router Context won't be able to prefetch pages, which is
@@ -84,7 +84,7 @@ const InternalLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => {
  * optionally show an external link icon.
  */
 export const Link: React.FC<ILink> = (props: ILink) => {
-  const { href = '/', showIcon = false, children, ...rest } = props;
+  const { href = "/", showIcon = false, children, ...rest } = props;
 
   const { isExternal, target } = useLinkType(href);
 

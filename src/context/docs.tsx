@@ -1,6 +1,6 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 
-import type { IDocsCtx } from './types';
+import type { IDocsCtx } from "./types";
 
 export const DocsCtx = createContext<IDocsCtx>({} as IDocsCtx);
 

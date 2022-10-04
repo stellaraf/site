@@ -1,10 +1,10 @@
-import { Box } from '@chakra-ui/react';
-import { useTitleCase } from 'use-title-case';
-import { SEO, ContentSection } from '~/components';
-import { getPage, getPageContent, getPageId } from '~/util';
+import { Box } from "@chakra-ui/react";
+import { useTitleCase } from "use-title-case";
+import { SEO, ContentSection } from "~/components";
+import { getPage, getPageContent, getPageId } from "~/util";
 
-import type { GetStaticProps, GetStaticPaths } from 'next';
-import type { PageEntry, ILegalPage, PageContent } from '~/types';
+import type { GetStaticProps, GetStaticPaths } from "next";
+import type { PageEntry, ILegalPage, PageContent } from "~/types";
 
 type UrlQuery = {
   page: string;
@@ -28,9 +28,9 @@ const LegalPage: React.FC<PageEntry<ILegalPage>> = (props: PageEntry<ILegalPage>
 };
 
 export const getStaticProps: GetStaticProps<PageEntry<ILegalPage>, UrlQuery> = async ctx => {
-  const page = ctx.params?.page ?? '';
+  const page = ctx.params?.page ?? "";
   const preview = ctx?.preview ?? false;
-  let pageData = {} as PageEntry<ILegalPage>['pageData'];
+  let pageData = {} as PageEntry<ILegalPage>["pageData"];
   let pageContent = [] as PageContent[];
   try {
     const pageId = await getPageId(`legal/${page}`, preview);
@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps<PageEntry<ILegalPage>, UrlQuery> = a
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [{ params: { page: 'privacy' } }, { params: { page: 'msa' } }],
+  paths: [{ params: { page: "privacy" } }, { params: { page: "msa" } }],
   fallback: false,
 });
 

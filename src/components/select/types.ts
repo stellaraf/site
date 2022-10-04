@@ -1,14 +1,14 @@
-import * as ReactSelect from 'react-select';
-import type { ChakraProps } from '@chakra-ui/react';
-import type { StylesProps, StylesConfigFunction } from 'react-select/dist/declarations/src/styles';
-import type { SelectOptionSingle, ColorNames } from '~/types';
+import * as ReactSelect from "react-select";
+import type { ChakraProps } from "@chakra-ui/react";
+import type { StylesProps, StylesConfigFunction } from "react-select/dist/declarations/src/styles";
+import type { SelectOptionSingle, ColorNames } from "~/types";
 
-type ReactSelectExcluded = KeysOf<ReactSelect.Props, 'onChange' | 'components' | 'styles'>;
+type ReactSelectExcluded = KeysOf<ReactSelect.Props, "onChange" | "components" | "styles">;
 
 export type SelectOnChange<
   Opt extends SelectOptionSingle = SelectOptionSingle,
   IsMulti extends boolean = boolean
-> = NonNullable<PropOf<ReactSelect.Props<Opt, IsMulti>, 'onChange'>>;
+> = NonNullable<PropOf<ReactSelect.Props<Opt, IsMulti>, "onChange">>;
 
 export interface SelectProps<Opt extends SelectOptionSingle, IsMulti extends boolean = boolean>
   extends Omit<ReactSelect.Props<Opt, IsMulti>, ReactSelectExcluded>,
@@ -27,7 +27,7 @@ export interface SelectContextProps {
 }
 
 export interface RSStyleCallbackProps {
-  colorMode: 'light' | 'dark';
+  colorMode: "light" | "dark";
   colorScheme: ColorNames;
 }
 

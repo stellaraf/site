@@ -1,4 +1,4 @@
-import slugify from 'slugify';
+import slugify from "slugify";
 
 export function all<T>(...iter: T[]): boolean {
   for (const i of iter) {
@@ -9,11 +9,11 @@ export function all<T>(...iter: T[]): boolean {
   return true;
 }
 
-export function slug(original: string, parent: string = '', prefix: string = '#'): string {
-  let result = '';
-  if (typeof original === 'string') {
+export function slug(original: string, parent: string = "", prefix: string = "#"): string {
+  let result = "";
+  if (typeof original === "string") {
     const slugged = slugify(original, { lower: true });
-    if (parent && parent.charAt(0) !== '/') {
+    if (parent && parent.charAt(0) !== "/") {
       parent = `/${parent}`;
     }
     result = [parent, slugged].join(prefix);
@@ -25,7 +25,7 @@ export function slug(original: string, parent: string = '', prefix: string = '#'
  * Build an object usable by a select element from a single display name string.
  */
 export function buildSelections(opt: string): { value: string; label: string } {
-  const value = opt.toLowerCase().replaceAll(/[^A-Za-z0-9-_]/g, '_');
+  const value = opt.toLowerCase().replaceAll(/[^A-Za-z0-9-_]/g, "_");
   return { value, label: opt };
 }
 
@@ -98,7 +98,7 @@ export function stringSorter<O extends Empty>(prop: string) {
   return (prev: O, next: O): number => {
     const a = prev[prop as keyof O];
     const b = next[prop as keyof O];
-    if (typeof a === 'string' && typeof b === 'string') {
+    if (typeof a === "string" && typeof b === "string") {
       return a.toLowerCase() > b.toLowerCase() ? 1 : -1;
     }
     console.warn(`object ${JSON.stringify(prev)} does not have property '${prop}'`);
@@ -113,15 +113,15 @@ export function sortByTitle<O extends { title: string }>(prev: O, next: O): numb
 }
 
 export function getErrorMessage(thrown: unknown): string {
-  let message = 'An unknown error occurred';
+  let message = "An unknown error occurred";
   if (thrown instanceof Error) {
     message = thrown.message;
-    ('');
+    ("");
   } else if (
-    typeof thrown === 'object' &&
+    typeof thrown === "object" &&
     thrown !== null &&
-    'toString' in thrown &&
-    typeof thrown.toString === 'function'
+    "toString" in thrown &&
+    typeof thrown.toString === "function"
   ) {
     message = thrown.toString();
   }

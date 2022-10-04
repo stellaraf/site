@@ -1,9 +1,9 @@
-import { atom, useRecoilState } from 'recoil';
-import { useKeySequence } from './useKeySequence';
+import { atom, useRecoilState } from "recoil";
+import { useKeySequence } from "./useKeySequence";
 
 type KonamiReturn = [boolean, () => void];
 
-const konamiAtom = atom({ key: 'konami', default: false });
+const konamiAtom = atom({ key: "konami", default: false });
 
 /**
  * Custom hook for detecting when the konami combination is pressed from anywhere within the site.
@@ -13,7 +13,7 @@ export function useKonami(): KonamiReturn {
   const open = () => !isOpen && setOpen(true);
   const close = () => isOpen && setOpen(false);
   useKeySequence(
-    'arrowup arrowup arrowdown arrowdown arrowleft arrowright arrowleft arrowright b a',
+    "arrowup arrowup arrowdown arrowdown arrowleft arrowright arrowleft arrowright b a",
     open,
   );
   return [isOpen, close];

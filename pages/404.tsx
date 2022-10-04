@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
-import { Box, Flex, Heading } from '@chakra-ui/react';
-import { SEO } from '~/components';
-import { useColorValue } from '~/context';
-import { useGradient, useResponsiveStyle } from '~/hooks';
+import { useRouter } from "next/router";
+import { Box, Flex, Heading } from "@chakra-ui/react";
+import { SEO } from "~/components";
+import { useColorValue } from "~/context";
+import { useGradient, useResponsiveStyle } from "~/hooks";
 
 const NotFound: React.FC = () => {
-  const heroText = useColorValue('black', 'white');
-  const pathText = useColorValue('red.500', 'red.300');
+  const heroText = useColorValue("black", "white");
+  const pathText = useColorValue("red.500", "red.300");
   const rStyles = useResponsiveStyle();
   const bg = useGradient();
   const { asPath } = useRouter();
@@ -26,7 +26,7 @@ const NotFound: React.FC = () => {
       >
         <Heading
           as="h1"
-          fontSize={{ base: '1.5rem', md: 'xl', lg: '2xl' }}
+          fontSize={{ base: "1.5rem", md: "xl", lg: "2xl" }}
           fontWeight="light"
           mb={32}
         >

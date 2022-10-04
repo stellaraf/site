@@ -1,4 +1,4 @@
-import type { BoxProps } from '@chakra-ui/react';
+import type { BoxProps } from "@chakra-ui/react";
 
 export interface IMapContainer extends BoxProps {
   bg: string;

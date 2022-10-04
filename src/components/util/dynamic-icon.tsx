@@ -1,15 +1,15 @@
-import { memo, useMemo } from 'react';
-import dynamic from 'next/dynamic';
-import { chakra, Icon as ChakraIcon } from '@chakra-ui/react';
-import isEqual from 'react-fast-compare';
+import { memo, useMemo } from "react";
+import dynamic from "next/dynamic";
+import { chakra, Icon as ChakraIcon } from "@chakra-ui/react";
+import isEqual from "react-fast-compare";
 
-import type { IconProps as ChakraIconProps, TooltipProps } from '@chakra-ui/react';
+import type { IconProps as ChakraIconProps, TooltipProps } from "@chakra-ui/react";
 
 interface IconMap {
   [library: string]: string;
 }
 
-export interface DynamicIconProps extends Omit<ChakraIconProps, 'icon'> {
+export interface DynamicIconProps extends Omit<ChakraIconProps, "icon"> {
   icon: IconMap;
 }
 
@@ -81,12 +81,12 @@ function iconPath(iconObj: IconMap): [string, string] {
   let name = capitalizeFirst(initialName!);
   // Create a regex pattern to determine if the family name is in the icon name. If `name` is
   // `Faplus`, this will be true.
-  const familyPattern = new RegExp(`^${family}`, 'g');
+  const familyPattern = new RegExp(`^${family}`, "g");
 
   if (name.match(familyPattern)) {
     // If the icon name contains the family name, remove it and capitalize the result. If `name`
     // was `Faplus`, it is now `Plus`.
-    name = capitalizeFirst(name.replace(familyPattern, ''));
+    name = capitalizeFirst(name.replace(familyPattern, ""));
   }
   // Return a tuple of [family, icon name], i.e. [fa, FaPlus].
   return [family.toLowerCase(), `${family}${name}`];
@@ -100,7 +100,7 @@ function iconPath(iconObj: IconMap): [string, string] {
  * @param props Error message to be displayed.
  */
 const ErrorIcon = (props: ErrorIconProps): JSX.Element => {
-  const Tooltip = dynamic<TooltipProps>(() => import('@chakra-ui/react').then(m => m.Tooltip));
+  const Tooltip = dynamic<TooltipProps>(() => import("@chakra-ui/react").then(m => m.Tooltip));
   return (
     <Tooltip hasArrow bg="red.500" label={props.message}>
       <chakra.span boxSize={8} color="red.500" p={1} textAlign="center">
@@ -113,7 +113,7 @@ const ErrorIcon = (props: ErrorIconProps): JSX.Element => {
 const _DynamicIcon = (props: DynamicIconProps): JSX.Element => {
   const { icon: iconObj, ...rest } = props;
   // Create a string representation of the icon family and name mapping for memoization.
-  const key = Object.entries(iconObj).flat().join('--');
+  const key = Object.entries(iconObj).flat().join("--");
   try {
     const [library, iconName] = useMemo(() => {
       return iconPath(iconObj);

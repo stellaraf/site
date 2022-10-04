@@ -1,8 +1,8 @@
-import type { NextApiHandler } from 'next';
+import type { NextApiHandler } from "next";
 
 const previewHandler: NextApiHandler = async (_, response) => {
   response.clearPreviewData();
-  response.redirect('/');
+  response.redirect("/");
 };
 
 export default previewHandler;

@@ -1,9 +1,9 @@
-import { merge } from 'merge-anything';
+import { merge } from "merge-anything";
 
 export async function post(url: string, data: Dict, config: RequestInit = {}): Promise<Response> {
   const defaultConfig = {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    method: "POST",
+    headers: { "content-type": "application/json" },
     crossDomain: true,
   } as RequestInit;
 
@@ -13,9 +13,9 @@ export async function post(url: string, data: Dict, config: RequestInit = {}): P
 
 export async function get(url: string, config: RequestInit = {}): Promise<Response> {
   const defaultConfig = {
-    method: 'GET',
+    method: "GET",
     crossDomain: true,
-    mode: 'cors',
+    mode: "cors",
   } as RequestInit;
 
   const merged = merge(defaultConfig, config) as RequestInit;
@@ -55,8 +55,8 @@ export async function getJson<R extends Dict = Dict>(
 ): Promise<R> {
   const defaultConfig = {
     crossDomain: true,
-    method: 'GET',
-    mode: 'cors',
+    method: "GET",
+    mode: "cors",
   } as RequestInit;
   const merged = merge(defaultConfig, config) as RequestInit;
   const res = await fetch(url, merged);

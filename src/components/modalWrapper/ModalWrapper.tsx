@@ -5,11 +5,11 @@ import {
   ModalHeader,
   ModalOverlay,
   ModalCloseButton,
-} from '@chakra-ui/react';
-import { If } from '~/components';
-import { ModalContent } from './ModalContent';
+} from "@chakra-ui/react";
+import { If } from "~/components";
+import { ModalContent } from "./ModalContent";
 
-import type { IModalWrapper } from './types';
+import type { IModalWrapper } from "./types";
 
 export const ModalWrapper: React.FC<IModalWrapper> = (props: IModalWrapper) => {
   const {
@@ -32,7 +32,7 @@ export const ModalWrapper: React.FC<IModalWrapper> = (props: IModalWrapper) => {
     blockScrollOnMount,
     isCentered = true,
     onOverlayClick,
-    size = 'xl',
+    size = "xl",
     closeOnEsc,
     useInert,
     onClose,
@@ -57,21 +57,21 @@ export const ModalWrapper: React.FC<IModalWrapper> = (props: IModalWrapper) => {
       blockScrollOnMount={blockScrollOnMount}
       closeOnOverlayClick={closeOnOverlayClick}
       preserveScrollBarGap={preserveScrollBarGap}
-      scrollBehavior={scrollInside ? 'inside' : 'outside'}
+      scrollBehavior={scrollInside ? "inside" : "outside"}
       {...rest}
     >
-      <ModalOverlay {...(noOverlay ? { bg: 'unset' } : {})} />
+      <ModalOverlay {...(noOverlay ? { bg: "unset" } : {})} />
       <ModalContent contentProps={contentProps} {...containerProps}>
-        <If condition={typeof header !== 'undefined'}>
+        <If condition={typeof header !== "undefined"}>
           <ModalHeader {...headerProps}>{header}</ModalHeader>
         </If>
         <If condition={!hideCloseButton}>
           <ModalCloseButton />
         </If>
-        <If condition={typeof body !== 'undefined'}>
+        <If condition={typeof body !== "undefined"}>
           <ModalBody {...bodyProps}>{body}</ModalBody>
         </If>
-        <If condition={typeof footer !== 'undefined'}>
+        <If condition={typeof footer !== "undefined"}>
           <ModalFooter mb={4} {...footerProps}>
             {footer}
           </ModalFooter>

@@ -1,8 +1,8 @@
-import { getPageId, getPage, getPageContent } from '~/util';
-import { ContentSection, Hero, SEO, GetStarted, Testimonials } from '~/components';
+import { getPageId, getPage, getPageContent } from "~/util";
+import { ContentSection, Hero, SEO, GetStarted, Testimonials } from "~/components";
 
-import type { GetStaticPaths, GetStaticProps } from 'next';
-import type { PageWithContent, PageEntry, PageContent } from '~/types';
+import type { GetStaticPaths, GetStaticProps } from "next";
+import type { PageWithContent, PageEntry, PageContent } from "~/types";
 
 type UrlQuery = {
   page: string;
@@ -28,9 +28,9 @@ const DynamicPage: React.FC<PageEntry<PageWithContent>> = (props: PageEntry<Page
 };
 
 export const getStaticProps: GetStaticProps<PageEntry<PageWithContent>, UrlQuery> = async ctx => {
-  const page = ctx.params?.page ?? 'notfound';
+  const page = ctx.params?.page ?? "notfound";
   const preview = ctx?.preview ?? false;
-  let pageData = {} as PageEntry<PageWithContent>['pageData'];
+  let pageData = {} as PageEntry<PageWithContent>["pageData"];
   let pageContent = [] as PageContent[];
 
   try {
@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps<PageEntry<PageWithContent>, UrlQuery
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
-  paths: [{ params: { page: 'consulting' } }, { params: { page: 'services' } }],
+  paths: [{ params: { page: "consulting" } }, { params: { page: "services" } }],
   fallback: false,
 });
 

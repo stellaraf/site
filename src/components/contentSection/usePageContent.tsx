@@ -1,22 +1,22 @@
-import { useMemo } from 'react';
-import { useTitleCase } from 'use-title-case';
-import { Content } from '~/components';
-import { useDate, useRender, useSlug } from '~/hooks';
-import { notNullUndefined } from '~/types';
+import { useMemo } from "react";
+import { useTitleCase } from "use-title-case";
+import { Content } from "~/components";
+import { useDate, useRender, useSlug } from "~/hooks";
+import { notNullUndefined } from "~/types";
 
-import type { PageContent, UsePageContent } from '~/types';
+import type { PageContent, UsePageContent } from "~/types";
 
 export const usePageContent = (rawContent: PageContent, deps: unknown[] = []): UsePageContent => {
   const {
     form,
     image,
     updatedAt,
-    title = '',
+    title = "",
     paragraphs,
     body = null,
-    subtitle = '',
-    buttonLink = '',
-    buttonText = '',
+    subtitle = "",
+    buttonLink = "",
+    buttonText = "",
     showUpdatedDate = false,
     button: showButton = false,
   } = rawContent ?? {};
@@ -49,10 +49,10 @@ export const usePageContent = (rawContent: PageContent, deps: unknown[] = []): U
         obj.body = null;
       }
 
-      if (typeof paragraphs !== 'undefined' && paragraphs?.length !== 0) {
+      if (typeof paragraphs !== "undefined" && paragraphs?.length !== 0) {
         subsections = <Content.SubSections sections={paragraphs} />;
       }
-      if (typeof image !== 'undefined') {
+      if (typeof image !== "undefined") {
         obj.image = <Content.Image src={image.fields.file.url} />;
       } else {
         obj.image = null;

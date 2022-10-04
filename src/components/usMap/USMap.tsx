@@ -1,19 +1,19 @@
-import { chakra } from '@chakra-ui/react';
-import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
-import { LayoutGroup } from 'framer-motion';
-import { useCloudMeasurementValues } from '~/hooks';
-import { Location } from './Location';
+import { chakra } from "@chakra-ui/react";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+import { LayoutGroup } from "framer-motion";
+import { useCloudMeasurementValues } from "~/hooks";
+import { Location } from "./Location";
 
-import type { IUSMap } from './types';
+import type { IUSMap } from "./types";
 
-const Container = chakra('div', { baseStyle: { mx: 'auto' } });
+const Container = chakra("div", { baseStyle: { mx: "auto" } });
 
 export const USMap = (props: IUSMap): JSX.Element => {
   const { geoData, mapColor, markerColor, ...rest } = props;
   const measurements = useCloudMeasurementValues();
   return (
     <Container {...rest}>
-      <ComposableMap projection="geoAlbersUsa" style={{ zIndex: 1, position: 'relative' }}>
+      <ComposableMap projection="geoAlbersUsa" style={{ zIndex: 1, position: "relative" }}>
         <Geographies geography={geoData}>
           {({ geographies }) => (
             <>
@@ -23,9 +23,9 @@ export const USMap = (props: IUSMap): JSX.Element => {
                   geography={geo}
                   fill={mapColor}
                   style={{
-                    hover: { outline: 'none' },
-                    pressed: { outline: 'none' },
-                    default: { outline: 'none' },
+                    hover: { outline: "none" },
+                    pressed: { outline: "none" },
+                    default: { outline: "none" },
                   }}
                 />
               ))}

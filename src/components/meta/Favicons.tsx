@@ -1,11 +1,11 @@
-import Head from 'next/head';
+import Head from "next/head";
 
-import { useConfig, useColorMode, useColorTokenValue } from '~/context';
+import { useConfig, useColorMode, useColorTokenValue } from "~/context";
 
 export const Favicons: React.FC = () => {
   const { colorMode } = useColorMode();
   const { orgName } = useConfig();
-  const theme = useColorTokenValue('primary.500', 'secondary.500');
+  const theme = useColorTokenValue("primary.500", "secondary.500");
 
   return (
     <Head>
