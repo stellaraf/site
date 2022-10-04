@@ -26,9 +26,8 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "exclude": ["node_modules", ".next", ".husky", "dist", "public"],
+  "exclude": ["node_modules", ".next", ".husky", "dist", "public", "generateFavicons.ts"],
   "include": [
-    "generateFavicons.js",
     "next.config.js",
     "next-env.d.ts",
     "src/**/*",
