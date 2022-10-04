@@ -17,7 +17,6 @@ specifiers:
   '@n8tb1t/use-scroll-position': ^1.0.43
   '@next/bundle-analyzer': ^9.5.5
   '@react-google-maps/api': ^2.13.1
-  '@reduxjs/toolkit': ^1.8.5
   '@stellaraf/logo': ^0.2.3
   '@types/favicons': ^6.2.2
   '@types/googlemaps': ^3.39.13
@@ -71,21 +70,17 @@ specifiers:
   react-intersection-observer: ^9.4.0
   react-player: 2.10.1
   react-query: ^3.19.1
-  react-redux: ^8.0.4
   react-select: ^5.4.0
   react-simple-maps: ^2.3.0
   react-tsparticles: ^1.33.2
   react-use: ^15.3.4
   recoil: ^0.7.5
-  redux: ^4.2.0
-  redux-persist: ^6.0.0
   slugify: ^1.4.5
   typescript: ^4.3.5
   use-local-storage-state: ^18.1.1
   use-title-case: ^0.0.5
   yup: ^0.32.11
   yup-phone: ^1.2.8
-  zustand: ^4.1.1
 
 dependencies:
   '@chakra-ui/react': 2.3.4_hnjso5wr5e3digklcjugvw5ori
@@ -101,7 +96,6 @@ dependencies:
   '@hookform/resolvers': 2.9.8_react-hook-form@7.36.1
   '@n8tb1t/use-scroll-position': 1.0.43_react@18.2.0
   '@react-google-maps/api': 2.13.1_biqbaboplfbrettd7655fr4n2y
-  '@reduxjs/toolkit': 1.8.5_kuo2ie247izvzll3jejufdtq3q
   '@stellaraf/logo': 0.2.3_osae6vs4t7tgn2jyonbysurltq
   color2k: 1.1.0
   contentful: 7.14.12
@@ -126,20 +120,16 @@ dependencies:
   react-intersection-observer: 9.4.0_react@18.2.0
   react-player: 2.10.1_react@18.2.0
   react-query: 3.19.1_biqbaboplfbrettd7655fr4n2y
-  react-redux: 8.0.4_wr4jmv5xrjbe6vbq33me5wwo2a
   react-select: 5.4.0_eat7hc23gfabdflnphmz6xfchm
   react-simple-maps: 2.3.0_v2m5e27vhdewzwhryxwfaorcca
   react-tsparticles: 1.33.2_react@18.2.0
   react-use: 15.3.4_biqbaboplfbrettd7655fr4n2y
   recoil: 0.7.5_biqbaboplfbrettd7655fr4n2y
-  redux: 4.2.0
-  redux-persist: 6.0.0_react@18.2.0+redux@4.2.0
   slugify: 1.4.5
   use-local-storage-state: 18.1.1_biqbaboplfbrettd7655fr4n2y
   use-title-case: 0.0.5_react@18.2.0
   yup: 0.32.11
   yup-phone: 1.2.8_yup@0.32.11
-  zustand: 4.1.1_react@18.2.0
 
 devDependencies:
   '@arkweid/lefthook': 0.7.6
@@ -1950,25 +1940,6 @@ packages:
     resolution: {integrity: sha512-OEcdbTXEgPwdpGvVuSrhIhjcZPhlzPz2TvaKCBLraf1PKiDyLOPhlTVRlbIziLiu0xN89pJcill1w9UVIVFF+Q==}
     dev: false
 
-  /@reduxjs/toolkit/1.8.5_kuo2ie247izvzll3jejufdtq3q:
-    resolution: {integrity: sha512-f4D5EXO7A7Xq35T0zRbWq5kJQyXzzscnHKmjnu2+37B3rwHU6mX9PYlbfXdnxcY6P/7zfmjhgan0Z+yuOfeBmA==}
-    peerDependencies:
-      react: ^16.9.0 || ^17.0.0 || ^18
-      react-redux: ^7.2.1 || ^8.0.2
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-redux:
-        optional: true
-    dependencies:
-      immer: 9.0.15
-      react: 18.2.0
-      react-redux: 8.0.4_wr4jmv5xrjbe6vbq33me5wwo2a
-      redux: 4.2.0
-      redux-thunk: 2.4.1_redux@4.2.0
-      reselect: 4.1.6
-    dev: false
-
   /@rushstack/eslint-patch/1.0.6:
     resolution: {integrity: sha512-Myxw//kzromB9yWgS8qYGuGVf91oBUUJpNvy5eM50sqvmKLbKjwLxohJnkWGTeeI9v9IBMtPLxz5Gc60FIfvCA==}
     dev: true
@@ -2026,13 +1997,6 @@ packages:
   /@types/gtag.js/0.0.8:
     resolution: {integrity: sha512-xKDygydxruSUNkVbZWjiEbMijz9+xZCLb2yiTiQT88pm5EhIAUhaCo05IZF1HcQc90u4W7cp+7OZNpcJxpyL5g==}
     dev: true
-
-  /@types/hoist-non-react-statics/3.3.1:
-    resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
-    dependencies:
-      '@types/react': 18.0.21
-      hoist-non-react-statics: 3.3.2
-    dev: false
 
   /@types/js-cookie/2.2.6:
     resolution: {integrity: sha512-+oY0FDTO2GYKEV0YPvSshGq9t7YozVkgvXLty7zogQNuCxBhT9/3INX9Q7H1aRZ4SUDRXAKlJuA4EA5nTt7SNw==}
@@ -2109,10 +2073,6 @@ packages:
   /@types/smoothscroll-polyfill/0.3.1:
     resolution: {integrity: sha512-+KkHw4y+EyeCtVXET7woHUhIbfWFCflc0E0mZnSV+ZdjPQeHt/9KPEuT7gSW/kFQ8O3EG30PLO++YhChDt8+Ag==}
     dev: true
-
-  /@types/use-sync-external-store/0.0.3:
-    resolution: {integrity: sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==}
-    dev: false
 
   /@types/yup/0.29.7:
     resolution: {integrity: sha512-x3Zeh8/qLZ6fG4S1EztI1S1mLj6N1pSUV1PAj/9finZba48d3Maxtyz4WYNUY0NE76u1KSukfNLkjcRlb+O00g==}
@@ -4150,10 +4110,6 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  /immer/9.0.15:
-    resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
-    dev: false
-
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -5339,10 +5295,6 @@ packages:
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-  /react-is/18.2.0:
-    resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
-    dev: false
-
   /react-player/2.10.1_react@18.2.0:
     resolution: {integrity: sha512-ova0jY1Y1lqLYxOehkzbNEju4rFXYVkr5rdGD71nsiG4UKPzRXQPTd3xjoDssheoMNjZ51mjT5ysTrdQ2tEvsg==}
     peerDependencies:
@@ -5373,39 +5325,6 @@ packages:
       match-sorter: 6.0.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-    dev: false
-
-  /react-redux/8.0.4_wr4jmv5xrjbe6vbq33me5wwo2a:
-    resolution: {integrity: sha512-yMfQ7mX6bWuicz2fids6cR1YT59VTuT8MKyyE310wJQlINKENCeT1UcPdEiX6znI5tF8zXyJ/VYvDgeGuaaNwQ==}
-    peerDependencies:
-      '@types/react': ^16.8 || ^17.0 || ^18.0
-      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-      react-native: '>=0.59'
-      redux: ^4
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-      redux:
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.19.0
-      '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 18.0.21
-      '@types/use-sync-external-store': 0.0.3
-      hoist-non-react-statics: 3.3.2
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-is: 18.2.0
-      redux: 4.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
   /react-remove-scroll-bar/2.3.3_iapumuv4e6jcjznwuxpf4tt22e:
@@ -5613,33 +5532,6 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /redux-persist/6.0.0_react@18.2.0+redux@4.2.0:
-    resolution: {integrity: sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==}
-    peerDependencies:
-      react: '>=16'
-      redux: '>4.0.0'
-    peerDependenciesMeta:
-      react:
-        optional: true
-    dependencies:
-      react: 18.2.0
-      redux: 4.2.0
-    dev: false
-
-  /redux-thunk/2.4.1_redux@4.2.0:
-    resolution: {integrity: sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q==}
-    peerDependencies:
-      redux: ^4
-    dependencies:
-      redux: 4.2.0
-    dev: false
-
-  /redux/4.2.0:
-    resolution: {integrity: sha512-oSBmcKKIuIR4ME29/AeNUnl5L+hvBq7OaJWzaptTQJAntaPvxIJqfnjbaEiCzzaIz+XmVILfqAM3Ob0aXLPfjA==}
-    dependencies:
-      '@babel/runtime': 7.19.0
-    dev: false
-
   /regenerator-runtime/0.13.7:
     resolution: {integrity: sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==}
 
@@ -5673,10 +5565,6 @@ packages:
   /require-relative/0.8.7:
     resolution: {integrity: sha512-AKGr4qvHiryxRb19m3PsLRGuKVAbJLUD7E6eOaHkfKhwc+vSgVOCY5xNvm9EkolBKTOf0GrQAZKLimOCz81Khg==}
     dev: true
-
-  /reselect/4.1.6:
-    resolution: {integrity: sha512-ZovIuXqto7elwnxyXbBtCPo9YFEr3uJqj2rRbcOOog1bmu2Ag85M4hixSwFWyaBMKXNgvPaJ9OSu9SkBPIeJHQ==}
-    dev: false
 
   /resize-observer-polyfill/1.5.1:
     resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
@@ -6674,20 +6562,4 @@ packages:
       nanoclone: 0.2.1
       property-expr: 2.0.4
       toposort: 2.0.2
-    dev: false
-
-  /zustand/4.1.1_react@18.2.0:
-    resolution: {integrity: sha512-h4F3WMqsZgvvaE0n3lThx4MM81Ls9xebjvrABNzf5+jb3/03YjNTSgZXeyrvXDArMeV9untvWXRw1tY+ntPYbA==}
-    engines: {node: '>=12.7.0'}
-    peerDependencies:
-      immer: '>=9.0'
-      react: '>=16.8'
-    peerDependenciesMeta:
-      immer:
-        optional: true
-      react:
-        optional: true
-    dependencies:
-      react: 18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
     dev: false

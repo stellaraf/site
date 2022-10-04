@@ -39,7 +39,7 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
   });
   const titleMe = useTitleCase();
   const toast = useToast();
-  const form = useForm({ resolver: yupResolver(subscribeSchema) });
+  const form = useForm<ISubscribeFormData>({ resolver: yupResolver(subscribeSchema) });
   const { trackEvent } = useGoogleAnalytics();
 
   const {
@@ -82,7 +82,7 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
       err instanceof Error && handleError(err.message);
     }
 
-    const render: React.FC<RenderProps> = (props: RenderProps) => {
+    const render = (props: RenderProps): JSX.Element => {
       const { id, onClose } = props;
       return (
         <Alert
@@ -125,6 +125,8 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
     }
   }, []);
 
+  const formField = errors.email;
+
   return (
     <FormProvider {...form}>
       <VStack
@@ -137,14 +139,14 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
         {...rest}
       >
         <Text>{titleMe(subscribeTitle)}</Text>
-        <FormControl isInvalid={typeof errors.email !== 'undefined'}>
+        <FormControl isInvalid={typeof formField !== 'undefined'}>
           <Controller
             name="email"
             defaultValue=""
             control={control}
             render={({ field }) => <SubscribeField field={field} />}
           />
-          <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+          <FormErrorMessage>{formField?.message?.toString()}</FormErrorMessage>
         </FormControl>
       </VStack>
     </FormProvider>

@@ -7,8 +7,8 @@ import type {
   FieldValues,
   Path,
 } from 'react-hook-form';
-import type { ISelect, TOptions } from '~/components';
-import type { TFormModelTrial, IFormDataTrial, TFormResponse } from '~/types';
+import type { SelectProps } from '~/components';
+import type { TFormModelTrial, IFormDataTrial, TFormResponse, SelectOptionSingle } from '~/types';
 
 export type TTextField<V extends FieldValues> = {
   field: ControllerRenderProps<V>;
@@ -17,15 +17,16 @@ export type TTextField<V extends FieldValues> = {
   isRequired: boolean;
 };
 
-export type TFormField<Props, FormData> = {
+export type TFormField<Props, FormData extends Dict> = {
   ctl: Control<FormData>;
   id: Path<FormData>;
   defaultValue?: UseControllerProps<FormData>['defaultValue'];
 } & Omit<Props, 'as' | 'onFocus' | 'name'>;
 
-export interface ISelectField extends Omit<ISelect, 'name' | 'onSelect' | 'options'> {
+export interface ISelectField
+  extends Omit<SelectProps<SelectOptionSingle>, 'name' | 'onSelect' | 'options'> {
   id: string;
-  opts: TOptions;
+  opts: SelectOptionSingle[];
 }
 
 export interface IFormHandlers {

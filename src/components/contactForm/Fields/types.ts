@@ -1,6 +1,7 @@
 import type { InputProps, TextareaProps } from '@chakra-ui/react';
 import type { Control } from 'react-hook-form';
-import type { ISelect, TOptions } from '~/components';
+import type { SelectProps } from '~/components';
+import type { SelectOptionSingle } from '~/types';
 
 export interface ITextField extends InputProps {
   name: string;
@@ -22,7 +23,8 @@ export interface ITextArea extends Omit<ITextAreaField, 'as' | 'onFocus' | 'name
   id: string;
 }
 
-export interface ISelectField extends Omit<ISelect, 'name' | 'onSelect' | 'options'> {
+export interface ISelectField
+  extends Omit<SelectProps<SelectOptionSingle>, 'name' | 'onSelect' | 'options'> {
   id: string;
-  opts: TOptions;
+  opts: SelectOptionSingle[];
 }

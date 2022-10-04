@@ -8,7 +8,7 @@ export type SelectOnChange<
   IsMulti extends boolean = boolean
 > = NonNullable<PropOf<ReactSelect.Props<Opt, IsMulti>, 'onChange'>>;
 
-export interface SelectProps<Opt extends SelectOptionSingle, IsMulti extends boolean>
+export interface SelectProps<Opt extends SelectOptionSingle, IsMulti extends boolean = false>
   extends ReactSelect.Props<Opt, IsMulti> {
   name: string;
   isMulti?: IsMulti;

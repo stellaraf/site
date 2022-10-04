@@ -39,7 +39,7 @@ export interface ISubscribe extends StackProps {
 }
 
 export interface ISubscribeInput extends InputProps {
-  field: ControllerRenderProps;
+  field: ControllerRenderProps<ISubscribeFormData>;
 }
 
 export interface ISubscribeFormData {

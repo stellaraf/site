@@ -11,7 +11,7 @@ const borderDark = [undefined, 'green.100'];
 const hoverBorderLight = ['whiteAlpha.300', 'green.300'];
 const hoverBorderDark = [undefined, 'green.300'];
 
-export const SubscribeField: React.FC<ISubscribeInput> = (props: ISubscribeInput) => {
+export const SubscribeField = (props: ISubscribeInput): JSX.Element => {
   const { field, ...rest } = props;
   const {
     subscribeTitle = 'Subscribe to our newsletter',

@@ -1,4 +1,4 @@
-import { Flex, ModalFocusScope, useModalContext, useStyleConfig } from '@chakra-ui/react';
+import { Flex, ModalFocusScope, useModalContext, useMultiStyleConfig } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import { AnimatedDiv } from '~/components';
 import { useColorValue } from '~/context';
@@ -16,7 +16,7 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
   const containerProps = getDialogContainerProps();
   const dialogProps = getDialogProps(rest, ref) as ModalDialogProps;
 
-  const styles = useStyleConfig('Modal');
+  const styles = useMultiStyleConfig('Modal');
   const borderColor = useColorValue('blackAlpha.300', 'whiteAlpha.300');
   const bg = useColorValue('light.500', 'blackAlpha.300');
   return (
