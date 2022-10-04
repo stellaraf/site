@@ -1,4 +1,4 @@
-import { all } from '~/util';
+import { all, getErrorMessage } from '~/util';
 
 import type { TFormTypes, TFormFields, TFormResponse } from './Forms/types';
 
@@ -33,7 +33,7 @@ export async function submitForm<F extends TFormTypes, D extends TFormFields<F>>
       response = resData;
     } catch (err) {
       console.error(err);
-      response.message = err.message;
+      response.message = getErrorMessage(err);
     }
   }
 

@@ -1,4 +1,4 @@
-import { all } from './generic';
+import { all, getErrorMessage } from './generic';
 
 import type { IFormDataTrial, TFormResponse } from '~/types';
 
@@ -19,7 +19,7 @@ export async function submitTrialForm(data: IFormDataTrial): Promise<TFormRespon
       response = resData;
     } catch (err) {
       console.error(err);
-      response.message = err.message;
+      response.message = getErrorMessage(err);
     }
   }
 

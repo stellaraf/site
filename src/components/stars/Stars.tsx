@@ -1,10 +1,15 @@
+import { useCallback, useMemo } from 'react';
 import { chakra } from '@chakra-ui/react';
 import Particles from 'react-tsparticles';
+import { loadFull } from 'tsparticles';
 import { useColorValue } from '~/context';
 import { useKonami } from '~/hooks';
 
 import type { BoxProps } from '@chakra-ui/react';
-import type { ISourceOptions, ParticlesProps } from 'react-tsparticles';
+import type { Engine } from 'tsparticles-engine';
+import type { ParticlesProps } from 'react-tsparticles';
+
+export type ParticlesOptions = NonNullable<ParticlesProps['options']>;
 
 const DEFAULT_OPTIONS = {
   particles: {
@@ -59,37 +64,77 @@ const DEFAULT_OPTIONS = {
     },
   },
   detectRetina: true,
-} as ISourceOptions;
+} as ParticlesOptions;
+
+const konamiOptions: ParticlesOptions = {
+  detectRetina: true,
+  particles: {
+    shape: { type: 'circle' },
+    number: {
+      limit: 500,
+      value: 300,
+      density: {
+        enable: true,
+        value_area: 800,
+      },
+    },
+    size: {
+      value: 1,
+      random: true,
+    },
+    opacity: {
+      anim: {
+        enable: true,
+        speed: 1,
+        opacity_min: 0.05,
+      },
+    },
+    twinkle: { particles: { enable: true } },
+    move: {
+      enable: true,
+      speed: 5,
+      direction: 'inside',
+      size: true,
+      trail: { enable: true, length: 3 },
+      warp: true,
+    },
+  },
+  interactivity: {
+    events: {
+      onHover: {
+        parallax: { enable: true, force: 10, smooth: 10 },
+      },
+    },
+    modes: {
+      connect: { distance: 100, radius: 200, links: { opacity: 0.2 } },
+      push: {
+        quantity: 2,
+      },
+    },
+  },
+};
 
 const Base = (particleProps: ParticlesProps) => {
-  const konami = useKonami();
-  let options = DEFAULT_OPTIONS;
-  if (konami) {
-    options = {
-      ...DEFAULT_OPTIONS,
-      particles: {
-        ...DEFAULT_OPTIONS.particles,
-        twinkle: { particles: { enable: true } },
-        move: {
-          ...DEFAULT_OPTIONS?.particles?.move,
-          speed: 4,
-          direction: 'top-left',
-        },
-      },
-      interactivity: {
-        ...DEFAULT_OPTIONS.interactivity,
-        events: {
-          ...DEFAULT_OPTIONS.interactivity?.events,
-          onHover: {
-            ...DEFAULT_OPTIONS.interactivity?.events?.onHover,
-            parallax: { enable: true, force: 10, smooth: 10 },
-          },
-        },
-      },
-    };
-  }
+  const [konami] = useKonami();
 
-  return <Particles options={options} {...particleProps} />;
+  const options = useMemo(() => {
+    if (konami) {
+      return konamiOptions;
+    }
+    return DEFAULT_OPTIONS;
+  }, [konami]);
+
+  const particlesInit = useCallback(async (engine: Engine) => {
+    await loadFull(engine);
+  }, []);
+
+  const particlesLoaded = useCallback(async () => {
+    return;
+  }, []);
+
+  return (
+    <Particles options={options} {...particleProps} init={particlesInit} loaded={particlesLoaded} />
+  );
 };
 
 const Wrapper = chakra('div', {
@@ -100,7 +145,7 @@ const Wrapper = chakra('div', {
     bottom: 0,
     zIndex: 0,
     position: 'fixed',
-    transition: 'opacity: 500ms ease-in',
+    transition: 'opacity 500ms ease-in',
   },
 });
 

@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import { atom, useRecoilState, useRecoilValue } from 'recoil';
-import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useScrollPosition } from './useScrollPosition';
 
 const navLogoAtom = atom({ key: 'navLogo', default: false });
 
@@ -12,16 +12,19 @@ export const useNavLogoState = (): boolean => useRecoilValue(navLogoAtom);
  * @param logoRef Ref to the logo DOM element.
  */
 export function useNavLogo<E extends SVGElement>(logoRef: ReactRef<E>): void {
-  const [, setShow] = useRecoilState(navLogoAtom);
+  const setShow = useSetRecoilState(navLogoAtom);
 
-  const setVisibility = useCallback((top: number): void => {
-    if (top < 0) {
-      setShow(true);
-    }
-    if (top > 0) {
-      setShow(false);
-    }
-  }, []);
+  const setVisibility = useCallback(
+    (top: number): void => {
+      if (top < 0) {
+        setShow(true);
+      }
+      if (top > 0) {
+        setShow(false);
+      }
+    },
+    [setShow],
+  );
 
   const effect = () => {
     if (typeof logoRef.current.getBoundingClientRect === 'function') {
@@ -30,5 +33,5 @@ export function useNavLogo<E extends SVGElement>(logoRef: ReactRef<E>): void {
     }
   };
 
-  useScrollPosition(effect, [logoRef]);
+  useScrollPosition(effect);
 }

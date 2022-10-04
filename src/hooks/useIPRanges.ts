@@ -1,7 +1,7 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getJson } from '~/util';
 
-import type { UseQueryResult, QueryFunction } from 'react-query';
+import type { UseQueryResult, QueryFunction } from '@tanstack/react-query';
 
 export type IPRanges = {
   ipv4: string[];
@@ -9,7 +9,7 @@ export type IPRanges = {
   urls: string[];
 };
 
-const queryFn: QueryFunction<IPRanges, string> = async ctx => {
+const queryFn: QueryFunction<IPRanges, string[]> = async ctx => {
   const { queryKey } = ctx;
   const [url] = queryKey;
   return await getJson<IPRanges>(url);
@@ -21,8 +21,8 @@ const queryFn: QueryFunction<IPRanges, string> = async ctx => {
  * @returns react-query instance
  */
 export function useIPRanges(): UseQueryResult<IPRanges> {
-  return useQuery<IPRanges, unknown, IPRanges, string>({
+  return useQuery<IPRanges, unknown, IPRanges, string[]>({
     queryFn,
-    queryKey: 'https://ip.stellar.tech/json',
+    queryKey: ['https://ip.stellar.tech/json'],
   });
 }

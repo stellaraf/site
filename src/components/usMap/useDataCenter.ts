@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useGoogleAnalytics, useCloudMeasurements } from '~/hooks';
 import { fetchWithTimeout } from '~/util';
 

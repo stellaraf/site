@@ -13,7 +13,7 @@ function getSide(idx: number): TSideValues {
   return sides[idx % 2];
 }
 
-const TitleLayout: React.FC<ITitleLayout> = (props: ITitleLayout) => {
+const TitleLayout = (props: ITitleLayout): JSX.Element => {
   const { titleBlock, image, side, isMobile } = props;
   if (isMobile) {
     return titleBlock;

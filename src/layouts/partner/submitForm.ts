@@ -1,5 +1,6 @@
+import { all, getErrorMessage } from '~/util';
+
 import type { TFormResponse, IFormDataTrial } from './types';
-import { all } from '~/util';
 
 export async function submitForm(vendor: string, data: IFormDataTrial): Promise<TFormResponse> {
   let response = { success: false, message: 'Something went wrong.' };
@@ -18,7 +19,7 @@ export async function submitForm(vendor: string, data: IFormDataTrial): Promise<
       response = resData;
     } catch (err) {
       console.error(err);
-      response.message = err.message;
+      response.message = getErrorMessage(err);
     }
   }
 

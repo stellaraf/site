@@ -97,7 +97,7 @@ export const SalesForm = forwardRef<FormHandlers, IForm<'Sales'>>((props, ref) =
             width="100%"
             id={interests.id}
             colorScheme={accent}
-            multi={interests.multiple}
+            isMulti={interests.multiple}
             menuPortalTarget={document.body}
             placeholder={interests.displayName}
             opts={interests.options.map(buildSelections)}

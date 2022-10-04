@@ -1,5 +1,5 @@
 import type { BoxProps, PopoverContentProps } from '@chakra-ui/react';
-import type { QueryObserverResult } from 'react-query';
+import type { QueryObserverResult } from '@tanstack/react-query';
 import type { MarkerProps } from 'react-simple-maps';
 import type { CloudMeasurement } from '~/types';
 

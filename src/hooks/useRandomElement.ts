@@ -15,7 +15,7 @@ import { useMemo, useRef } from 'react';
  * }
  * ```
  */
-export function useRandomElement<E extends unknown>(array: Array<E>, deps: unknown[] = []): E {
+export function useRandomElement<E>(array: Array<E>, deps: unknown[] = []): E {
   const idxCb = useRef(() => Math.floor(Math.random() * array.length));
   const element = useMemo(() => array[idxCb.current()], deps);
   return element;

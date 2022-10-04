@@ -1,4 +1,4 @@
-type Dict<T extends unknown = unknown> = Record<string, T>;
+type Dict<T = unknown> = Record<string, T>;
 
 type ReactRef<
   E extends HTMLElement | SVGElement = HTMLElement | SVGElement
@@ -20,3 +20,5 @@ type Nullable<T> = T | null;
 type NoOp = () => void;
 
 type PropOf<T, P extends keyof T> = T[P];
+
+type KeysOf<T, K extends keyof T> = keyof Pick<T, K>;

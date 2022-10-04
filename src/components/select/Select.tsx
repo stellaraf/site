@@ -11,7 +11,6 @@ import {
   useMenuListStyle,
   useMultiValueStyle,
   usePlaceholderStyle,
-  //   useSingleValueStyle,
   useMultiValueLabelStyle,
   useMultiValueRemoveStyle,
   useIndicatorSeparatorStyle,
@@ -35,15 +34,7 @@ export const Select = forwardRef(
     props: SelectProps<Opt, IsMulti>,
     ref: React.Ref<SelectInstance<Opt, IsMulti>>,
   ): JSX.Element => {
-    const {
-      options,
-      isMulti,
-      onSelect,
-      isError = false,
-      components,
-      colorScheme = 'gray',
-      ...rest
-    } = props;
+    const { options, isMulti, onSelect, isError = false, colorScheme = 'gray', ...rest } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -65,7 +56,6 @@ export const Select = forwardRef(
     const menuList = useMenuListStyle<Opt, IsMulti>({ colorMode, colorScheme });
     const control = useControlStyle<Opt, IsMulti>({ colorMode, colorScheme });
     const option = useOptionStyle<Opt, IsMulti>({ colorMode, colorScheme });
-    // const singleValue = useSingleValueStyle<Opt, IsMulti>({ colorMode, colorScheme });
     const multiValue = useMultiValueStyle<Opt, IsMulti>({ colorMode, colorScheme });
     const multiValueLabel = useMultiValueLabelStyle<Opt, IsMulti>({ colorMode, colorScheme });
     const multiValueRemove = useMultiValueRemoveStyle<Opt, IsMulti>({ colorMode, colorScheme });
@@ -84,7 +74,7 @@ export const Select = forwardRef(
           options={options}
           isMulti={isMulti}
           theme={rsTheme}
-          components={{ Option, ...components }}
+          components={{ Option }}
           ref={ref}
           styles={{
             menu,
@@ -93,7 +83,6 @@ export const Select = forwardRef(
             menuList,
             menuPortal,
             multiValue,
-            // singleValue,
             placeholder,
             multiValueLabel,
             multiValueRemove,
@@ -105,3 +94,4 @@ export const Select = forwardRef(
     );
   },
 );
+Select.displayName = 'Search';

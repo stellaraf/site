@@ -7,7 +7,7 @@ import type { SelectOptionSingle } from '~/types';
 import type { ISelectField } from './types';
 
 export const SelectField = (props: ISelectField): JSX.Element => {
-  const { opts, id: name, required = false, multi, onSelect: _, ...rest } = props;
+  const { opts, id: name, required = false, isMulti, ...rest } = props;
   const { formState, setValue, register } = useFormContext();
   const { errors } = formState;
 
@@ -33,8 +33,8 @@ export const SelectField = (props: ISelectField): JSX.Element => {
     <FormControl id={name} isInvalid={typeof fieldError !== 'undefined'} isRequired={required}>
       <Select
         name={name}
-        isMulti={multi}
         options={opts}
+        isMulti={isMulti}
         defaultValue={[]}
         required={required}
         onSelect={handleSelect}

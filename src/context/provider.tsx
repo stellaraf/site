@@ -1,5 +1,5 @@
 import { RecoilRoot } from 'recoil';
-import { QueryClientProvider, QueryClient } from 'react-query';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { TitleCaseProvider } from 'use-title-case';
 import { UIProvider } from './ui';
 import { ConfigProvider } from './config';

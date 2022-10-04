@@ -6,8 +6,8 @@ import { Select as CustomSelect } from '~/components';
 import type { SelectOptionSingle } from '~/types';
 import type { ISelectField } from './types';
 
-export const SelectField: React.FC<ISelectField> = (props: ISelectField) => {
-  const { opts, id: name, required = false, multi, onSelect: _, ...rest } = props;
+export const SelectField = (props: ISelectField): JSX.Element => {
+  const { opts, id: name, required = false, isMulti = false, ...rest } = props;
   const { formState, setValue, register } = useFormContext();
   const { errors } = formState;
 
@@ -33,7 +33,7 @@ export const SelectField: React.FC<ISelectField> = (props: ISelectField) => {
     <FormControl id={name} isInvalid={typeof fieldError !== 'undefined'} isRequired={required}>
       <CustomSelect
         name={name}
-        isMulti={multi}
+        isMulti={isMulti}
         options={opts}
         defaultValue={[]}
         required={required}

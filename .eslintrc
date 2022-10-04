@@ -16,12 +16,6 @@
     "node": true
   },
   "parserOptions": {
-    "ecmaVersion": 2020,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true,
-      "arrowFunctions": true
-    },
     "project": "./tsconfig.json"
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
@@ -38,7 +32,6 @@
   },
   "rules": {
     "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars-experimental": "error",
     "no-unused-vars": "off",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",

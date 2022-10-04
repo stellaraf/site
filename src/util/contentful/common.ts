@@ -20,7 +20,7 @@ export function client(preview: boolean = false): ContentfulClientApi {
 /**
  * Query Contentful for a specific content_type
  */
-export async function getContentType<T extends unknown>(
+export async function getContentType<T>(
   contentType: string,
   preview: boolean = false,
   query?: Dict,
@@ -70,9 +70,6 @@ export async function getParsedContent<T extends Empty>(
 /**
  * Get an entry by its ID.
  */
-export async function getEntry<T extends unknown>(
-  entryId: string,
-  query: Dict = {},
-): Promise<Entry<T>> {
+export async function getEntry<T>(entryId: string, query: Dict = {}): Promise<Entry<T>> {
   return await client().getEntry<T>(entryId, query);
 }

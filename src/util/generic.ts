@@ -1,6 +1,6 @@
 import slugify from 'slugify';
 
-export function all<T extends unknown>(...iter: T[]): boolean {
+export function all<T>(...iter: T[]): boolean {
   for (const i of iter) {
     if (!i) {
       return false;
@@ -32,7 +32,9 @@ export function buildSelections(opt: string): { value: string; label: string } {
 /**
  * Strictly typed version of `Object.entries()`.
  */
-export function entries<O, K extends keyof O = keyof O>(obj: O): [K, O[K]][] {
+export function entries<O extends Record<string, unknown>, K extends keyof O = keyof O>(
+  obj: O,
+): [K, O[K]][] {
   const _entries = [] as [K, O[K]][];
   const keys = Object.keys(obj) as K[];
   for (const key of keys) {
@@ -55,7 +57,7 @@ export function entries<O, K extends keyof O = keyof O>(obj: O): [K, O[K]][] {
  * //=> { two: 2, three: 3 }
  * ```
  */
-export function removeProps<O, R extends keyof O = keyof O>(
+export function removeProps<O extends Record<string, unknown>, R extends keyof O = keyof O>(
   obj: O,
   ...remove: R[]
 ): Pick<O, Exclude<keyof O, R>> {
@@ -81,7 +83,7 @@ export function removeProps<O, R extends keyof O = keyof O>(
 /**
  * Pick a random element from an array.
  */
-export function randomArrayItem<T extends unknown>(arr: T[]): T {
+export function randomArrayItem<T>(arr: T[]): T {
   const idx = Math.floor(Math.random() * arr.length);
   return arr[idx];
 }
@@ -108,4 +110,20 @@ export function sortByTitle<O extends { title: string }>(prev: O, next: O): numb
   const { title: prevTitle } = prev;
   const { title: nextTitle } = next;
   return prevTitle.toLowerCase() > nextTitle.toLowerCase() ? 1 : -1;
+}
+
+export function getErrorMessage(thrown: unknown): string {
+  let message = 'An unknown error occurred';
+  if (thrown instanceof Error) {
+    message = thrown.message;
+    ('');
+  } else if (
+    typeof thrown === 'object' &&
+    thrown !== null &&
+    'toString' in thrown &&
+    typeof thrown.toString === 'function'
+  ) {
+    message = thrown.toString();
+  }
+  return message;
 }

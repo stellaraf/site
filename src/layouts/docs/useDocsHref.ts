@@ -7,6 +7,7 @@ import type { UseDocsHref } from './types';
 export function useDocsHref(props: IDocsArticle): UseDocsHref {
   const { docsGroup, slug } = props;
   const { asPath } = useRouter();
+
   return useMemo(() => {
     const thisSlug = asPath.split('/').slice(-1)[0];
     const isCurrent = thisSlug === slug;
