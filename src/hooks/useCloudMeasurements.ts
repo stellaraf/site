@@ -1,142 +1,170 @@
-import create from 'zustand';
+import { useEffect } from 'react';
+import { atom, selector, useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { merge } from 'merge-anything';
 import { useCloudLocations } from '~/context';
 import { all } from '~/util';
 
-import type { GetState, SetState } from 'zustand';
 import type { GeoPoint, CloudMeasurement } from '~/types';
 
 type PartialMeasurement = Pick<CloudMeasurement, 'id'> & Partial<CloudMeasurement>;
 
-type CloudMeasurements = {
+interface CloudMeasurements {
+  /**
+   * Array of measurements.
+   */
   measurements: CloudMeasurement[];
+
+  /**
+   * Get a measurement by ID.
+   * @param id Measurement ID
+   */
   getMeasurement: (id: string) => Nullable<CloudMeasurement>;
+
+  /**
+   * Get a measurement's array index by its ID property.
+   *
+   * @param id Measurement ID
+   */
   getMeasurementIndex: (id: string) => Nullable<number>;
+
+  /**
+   * Populate cloud locations & initial measurement data.
+   *
+   * @param locations GeoPoints/Cloud locations from CMS.
+   */
   addMeasurements: (locations: GeoPoint[]) => void;
+
+  /**
+   * Update a measurement's properties.
+   *
+   * @param measurement Partial measurement (`id` property is required).
+   */
   updateMeasurement: (measurement: PartialMeasurement) => void;
-  getBestMeasurement: () => CloudMeasurement;
+
+  /**
+   * Set a measurement as the "best" (lowest elapsed time).
+   *
+   * @param measurement Best measurement.
+   */
   setBestMeasurement: (measurement: CloudMeasurement) => void;
-  isComplete: () => boolean;
+
+  /**
+   * Determine if all measurements are active, have been measured, and are done.
+   */
+  complete: boolean;
+
+  /**
+   * Get the measurement with the best elapsed time.
+   */
+  getBestMeasurement: () => CloudMeasurement;
+
+  /**
+   * Reset all measurement properties (`elapsed`, `done` & `best`) to initial values.
+   */
   reset: NoOp;
-};
-
-const useStore = create<CloudMeasurements>(
-  (set: SetState<CloudMeasurements>, get: GetState<CloudMeasurements>) => ({
-    measurements: [],
-
-    /**
-     * Get a measurement by ID.
-     * @param id Measurement ID
-     */
-    getMeasurement(id: string): Nullable<CloudMeasurement> {
-      const { measurements } = get();
-      return measurements.find(each => each.id === id) ?? null;
-    },
-
-    /**
-     * Get a measurement's array index by its ID property.
-     *
-     * @param id Measurement ID
-     */
-    getMeasurementIndex(id: string): Nullable<number> {
-      const { measurements } = get();
-      const idx = measurements.findIndex(each => each.id === id);
-      if (idx === -1) {
-        return null;
-      }
-      return idx;
-    },
-
-    /**
-     * Populate cloud locations & initial measurement data.
-     *
-     * @param locations GeoPoints/Cloud locations from CMS.
-     */
-    addMeasurements(locations: GeoPoint[]): void {
-      const measurements: CloudMeasurement[] = locations.map(loc => {
-        // Use the inactive status (65534) and consider the measurement complete.
-        const elapsed = loc.active ? 65535 : 65534;
-        return {
-          ...loc,
-          elapsed,
-          done: false,
-          best: false,
-        };
-      });
-      set({ measurements });
-    },
-
-    /**
-     * Update a measurement's properties.
-     *
-     * @param measurement Partial measurement (`id` property is required).
-     */
-    updateMeasurement(measurement: Pick<CloudMeasurement, 'id'> & Partial<CloudMeasurement>): void {
-      set(state => ({
-        measurements: state.measurements.map(current => {
-          if (current.id === measurement.id) {
-            return { ...current, ...measurement };
-          }
-          return current;
-        }),
-      }));
-    },
-
-    /**
-     * Get the measurement with the best elapsed time.
-     */
-    getBestMeasurement(): CloudMeasurement {
-      const { measurements } = get();
-      return measurements.reduce((prev, next) => (prev.elapsed > next.elapsed ? next : prev));
-    },
-
-    /**
-     * Set a measurement as the "best" (lowest elapsed time).
-     *
-     * @param measurement Best measurement.
-     */
-    setBestMeasurement(measurement: CloudMeasurement): void {
-      const { updateMeasurement } = get();
-      updateMeasurement({ ...measurement, best: true });
-    },
-
-    /**
-     * Determine if all measurements are active, have been measured, and are done.
-     */
-    isComplete(): boolean {
-      const { measurements } = get();
-      return all(...measurements.filter(m => m.active).map(m => m.done));
-    },
-
-    /**
-     * Reset all measurement properties (`elapsed`, `done` & `best`) to initial values.
-     */
-    reset(): void {
-      const { measurements, addMeasurements } = get();
-      addMeasurements(measurements);
-      //   for (const measurement of measurements) {
-      //     updateMeasurement({ ...measurement, elapsed: 65535, done: false, best: false });
-      //   }
-    },
-  }),
-);
-
-/**
- * Access only the `measurements` value of `useCloudMeasurements()`.
- */
-export function useCloudMeasurementValues(): CloudMeasurement[] {
-  const measurements = useStore(state => state.measurements);
-  return measurements;
 }
+
+const measurementAtom = atom<CloudMeasurement[]>({ key: 'cloudMeasurements', default: [] });
+
+const completeMeasurementsSelector = selector<boolean>({
+  key: 'cloud-measurements-complete',
+  get: ({ get }) => {
+    const measurements = get(measurementAtom);
+    if (measurements.length === 0) {
+      return false;
+    }
+    const completed = measurements.reduce<boolean[]>((final, each) => {
+      if (each.active) {
+        final.push(each.done);
+      }
+      return final;
+    }, []);
+    return all(...completed);
+  },
+});
 
 /**
  * Manage measurement state of cloud location latency tests.
  */
 export function useCloudMeasurements(): CloudMeasurements {
   const locations = useCloudLocations();
-  const state = useStore();
-  if (state.measurements.length === 0) {
-    state.addMeasurements(locations);
-  }
+  const [measurements, setMeasurements] = useRecoilState(measurementAtom);
+  const complete = useRecoilValue(completeMeasurementsSelector);
+  const resetState = useResetRecoilState(measurementAtom);
 
-  return state;
+  /**
+   * Get a measurement by ID.
+   * @param id Measurement ID
+   */
+  const getMeasurement = (id: string) => measurements.find(each => each.id === id) ?? null;
+
+  const getMeasurementIndex = (id: string) => {
+    const idx = measurements.findIndex(each => each.id === id);
+    if (idx === -1) {
+      return null;
+    }
+    return idx;
+  };
+
+  const addMeasurements = (locations: GeoPoint[]) => {
+    const measurements: CloudMeasurement[] = locations.map(loc => {
+      // Use the inactive status (65534) and consider the measurement complete.
+      const elapsed = loc.active ? 65535 : 65534;
+      return {
+        ...loc,
+        elapsed,
+        done: false,
+        best: false,
+      };
+    });
+    setMeasurements(measurements);
+  };
+
+  const updateMeasurement = (measurement: PartialMeasurement) => {
+    setMeasurements(prev => {
+      return prev.reduce<CloudMeasurement[]>((final, each) => {
+        if (each.id === measurement.id) {
+          final.push({ ...each, ...measurement });
+        } else {
+          final.push(each);
+        }
+        return final;
+      }, []);
+    });
+  };
+
+  const getBestMeasurement = () =>
+    measurements.reduce((prev, next) => (prev.elapsed > next.elapsed ? next : prev));
+
+  const setBestMeasurement = (measurement: CloudMeasurement) => {
+    const merged = merge({}, measurement, { best: true });
+    updateMeasurement(merged);
+  };
+
+  const reset = () => addMeasurements(locations);
+
+  useEffect(() => {
+    if (measurements.length === 0) {
+      addMeasurements(locations);
+    }
+  }, [resetState]);
+
+  return {
+    measurements,
+    getMeasurement,
+    getMeasurementIndex,
+    addMeasurements,
+    updateMeasurement,
+    setBestMeasurement,
+    complete,
+    getBestMeasurement,
+    reset,
+  };
+}
+
+/**
+ * Access only the `measurements` value of `useCloudMeasurements()`.
+ */
+export function useCloudMeasurementValues(): CloudMeasurement[] {
+  return useRecoilValue(measurementAtom);
 }

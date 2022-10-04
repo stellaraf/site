@@ -97,7 +97,7 @@ export function useDataCenter(): UseDataCenterReturn {
   const {
     measurements,
     reset,
-    isComplete,
+    complete,
     getBestMeasurement,
     setBestMeasurement,
     updateMeasurement,
@@ -135,11 +135,10 @@ export function useDataCenter(): UseDataCenterReturn {
 
     // Use the 'done' property to determine if the location objects have been checked or otherwise
     // considered to be completed (i.e., has errored or is marked inactive).
-    // const isDone = isComplete();
 
     // Only if all locations have been checked, determine which of the locations has the lowest
     // RTT.
-    if (isComplete()) {
+    if (complete) {
       best = getBestMeasurement();
 
       // Only if the elapsed value has been checked, is active, has not errored, and if the

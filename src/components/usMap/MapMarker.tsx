@@ -15,7 +15,7 @@ const bestVariants = {
   notBest: { opacity: 0, scale: 15, display: 'none' },
 } as Variants;
 
-export const MapMarker: React.FC<IMapMarker> = (props: IMapMarker) => {
+export const MapMarker = (props: IMapMarker): JSX.Element => {
   const { color = 'currentColor', best = false, ...rest } = props;
 
   const bestOutline = useColorTokenValue('secondary.500', 'tertiary.500');
