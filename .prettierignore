@@ -1,8 +1,9 @@
 node_modules
 dist
-yarn.lock
-package-lock.json
 .next/
 public/
 CHANGELOG.md
 *.yml
+*-lock.yaml
+*-lock.json
+*.lock
