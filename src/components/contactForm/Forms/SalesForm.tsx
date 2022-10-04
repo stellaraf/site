@@ -1,10 +1,11 @@
 import { useImperativeHandle } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { isValidPhoneNumber } from 'libphonenumber-js';
 import { FieldGroup, SelectField, TextArea, TextInput } from '~/components';
-import { forwardRef, requiredMsg, invalidMsg, buildSelections } from '~/util';
+import { forwardRef, buildSelections } from '~/util';
 import { useContactFormConfig } from '../state';
 
 import type { ISalesFormFields, IForm, FormHandlers } from './types';
@@ -21,25 +22,20 @@ export const SalesForm = forwardRef<FormHandlers, IForm<'Sales'>>((props, ref) =
     details,
   } = useContactFormConfig('Sales');
 
-  const formSchema = yup.object().shape({
-    firstName: yup.string().label(firstName.displayName).required(requiredMsg),
-    lastName: yup.string().label(lastName.displayName).required(requiredMsg),
-    emailAddress: yup
-      .string()
-      .label(emailAddress.displayName)
-      .email()
-      .required(requiredMsg)
-      .typeError(invalidMsg),
-    phoneNumber: yup.string().label(phoneNumber.displayName).typeError(invalidMsg),
-    companyName: yup.string().label(companyName.displayName).required(requiredMsg),
-    interests: yup.array(yup.string()),
-    details: yup.string().label(details.displayName),
+  const formSchema = z.object({
+    firstName: z.string().min(1, `${firstName.displayName} is required`),
+    lastName: z.string().min(1, `${lastName.displayName} is required`),
+    emailAddress: z.string().email(`${emailAddress.displayName} is required`),
+    phoneNumber: z.string().refine(isValidPhoneNumber, 'Invalid phone number').optional(),
+    companyName: z.string().min(1, `${companyName.displayName} is required`),
+    interests: z.array(z.string()).min(1, 'Please select at least one interest'),
+    details: z.string().min(1, 'Please tell us how we can help you'),
   });
 
-  const form = useForm<ISalesFormFields>({ resolver: yupResolver(formSchema) });
+  const form = useForm<z.infer<typeof formSchema>>({ resolver: zodResolver(formSchema) });
   const { handleSubmit, control } = form;
   const submitForm = async (data: ISalesFormFields) => {
-    await onSubmit('Sales', data);
+    return onSubmit('Sales', data);
   };
   const submitter = handleSubmit(submitForm);
 

@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { forwardRef as ReactforwardRef } from 'react';
 import { shouldForwardProp as chakraShouldForwardProp } from '@chakra-ui/react';
 import emotionIsValidHTMLProp from '@emotion/is-prop-valid';
 
 export function forwardRef<E, P>(
   _Component: React.ForwardRefRenderFunction<E, P>,
 ): React.ForwardRefExoticComponent<React.PropsWithoutRef<P> & React.RefAttributes<E>> {
-  const Component = React.forwardRef<E, P>(_Component);
+  const Component = ReactforwardRef<E, P>(_Component);
   Component.displayName = _Component.displayName?.replaceAll('_', '');
   return Component;
 }

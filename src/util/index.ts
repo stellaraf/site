@@ -4,4 +4,3 @@ export * from './forms';
 export * from './generic';
 export * from './helpers';
 export * from './theme';
-export * from './validators';

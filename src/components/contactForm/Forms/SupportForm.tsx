@@ -1,13 +1,14 @@
 import { useImperativeHandle } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { isValidPhoneNumber } from 'libphonenumber-js';
 import { FieldGroup, TextArea, TextInput } from '~/components';
-import { forwardRef, requiredMsg, invalidMsg } from '~/util';
+import { forwardRef } from '~/util';
 import { useContactFormConfig } from '../state';
 
-import type { ISupportFormFields, IForm, FormHandlers } from './types';
+import type { IForm, FormHandlers } from './types';
 
 export const SupportForm = forwardRef<FormHandlers, IForm<'Support'>>((props, ref) => {
   const { onSubmit } = props;
@@ -21,28 +22,24 @@ export const SupportForm = forwardRef<FormHandlers, IForm<'Support'>>((props, re
     details,
   } = useContactFormConfig('Support');
 
-  const formSchema = yup.object().shape({
-    firstName: yup.string().label(firstName.displayName).required(requiredMsg),
-    lastName: yup.string().label(lastName.displayName).required(requiredMsg),
-    emailAddress: yup
-      .string()
-      .label(emailAddress.displayName)
-      .email()
-      .required(requiredMsg)
-      .typeError(invalidMsg),
-    phoneNumber: yup.string().label(phoneNumber.displayName),
-    companyName: yup.string().label(companyName.displayName).required(requiredMsg),
-    details: yup
-      .string()
-      .label(details.displayName)
-      .required('Please tell us how we can help you.'),
+  const formSchemaZod = z.object({
+    firstName: z.string().min(1, `${firstName.displayName} is required`),
+    lastName: z.string().min(1, `${lastName.displayName} is required`),
+    emailAddress: z.string().email(`${emailAddress.displayName} is required`),
+    phoneNumber: z.string().refine(isValidPhoneNumber, 'Invalid phone number').optional(),
+    companyName: z.string().min(1, `${companyName.displayName} is required`),
+    subject: z.string().min(1, `${subject.displayName} is required`),
+    details: z.string().min(1, 'Please tell us how we can help you'),
   });
 
-  const form = useForm<ISupportFormFields>({ resolver: yupResolver(formSchema) });
+  const form = useForm<z.infer<typeof formSchemaZod>>({
+    resolver: zodResolver(formSchemaZod),
+  });
+
   const { handleSubmit, control } = form;
 
-  const submitForm = async (data: ISupportFormFields) => {
-    await onSubmit('Support', data);
+  const submitForm = async (data: z.infer<typeof formSchemaZod>) => {
+    return onSubmit('Support', data);
   };
 
   const submitter = handleSubmit(submitForm);

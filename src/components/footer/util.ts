@@ -1,4 +1,3 @@
-import * as yup from 'yup';
 import { post } from '~/util';
 
 export async function subscribeEmail(email: string): Promise<Response | undefined> {
@@ -11,7 +10,3 @@ export async function subscribeEmail(email: string): Promise<Response | undefine
   }
   return response;
 }
-
-export const subscribeSchema = yup.object().shape({
-  email: yup.string().email('Must be a valid email address'),
-});

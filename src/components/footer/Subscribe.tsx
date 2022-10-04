@@ -12,15 +12,18 @@ import {
   FormErrorMessage,
 } from '@chakra-ui/react';
 import { useForm, FormProvider, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useTitleCase } from 'use-title-case';
 import { useConfig } from '~/context';
 import { useGoogleAnalytics } from '~/hooks';
 import { SubscribeField } from './SubscribeField';
-import { subscribeEmail, subscribeSchema } from './util';
+import { subscribeEmail } from './util';
 
 import type { RenderProps } from '@chakra-ui/react';
 import type { ISubscribe, ISubscribeFormData, ISubscribeToast } from './types';
+
+const subscribeSchema = z.object({ email: z.string().email('Must be a valid email address') });
 
 export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
   const { alertProps = {}, alertPosition = 'bottom-right', ...rest } = props;
@@ -39,7 +42,7 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
   });
   const titleMe = useTitleCase();
   const toast = useToast();
-  const form = useForm<ISubscribeFormData>({ resolver: yupResolver(subscribeSchema) });
+  const form = useForm<z.infer<typeof subscribeSchema>>({ resolver: zodResolver(subscribeSchema) });
   const { trackEvent } = useGoogleAnalytics();
 
   const {

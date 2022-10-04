@@ -1,12 +1,11 @@
 import { Button, Center, Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { isValidPhoneNumber } from 'libphonenumber-js';
 import { FieldGroup, TextInput } from '~/components';
 import { useAlert } from '~/hooks';
-import { requiredMsg, invalidMsg } from '~/util';
 
-import type { IFormDataTrial } from '~/types';
 import type { TTrialForm } from './types';
 
 export const TrialForm = (props: TTrialForm): JSX.Element => {
@@ -22,25 +21,22 @@ export const TrialForm = (props: TTrialForm): JSX.Element => {
     successMessage,
   } = fields;
 
-  const formSchema = yup.object().shape({
-    firstName: yup.string().label(firstName.displayName).required(requiredMsg),
-    lastName: yup.string().label(lastName.displayName).required(requiredMsg),
-    emailAddress: yup
-      .string()
-      .label(emailAddress.displayName)
-      .email()
-      .required(requiredMsg)
-      .typeError(invalidMsg),
-    phoneNumber: yup.string().label(phoneNumber.displayName).typeError(invalidMsg),
-    companyName: yup.string().label(companyName.displayName).required(requiredMsg),
+  const formSchema = z.object({
+    firstName: z.string().min(1, `${firstName.displayName} is required`),
+    lastName: z.string().min(1, `${lastName.displayName} is required`),
+    emailAddress: z.string().email(`${emailAddress.displayName} is required`),
+    phoneNumber: z.string().refine(isValidPhoneNumber, 'Invalid phone number').optional(),
+    companyName: z.string().min(1, `${companyName.displayName} is required`),
   });
+
+  type Schema = z.infer<typeof formSchema>;
 
   const showAlert = useAlert();
 
-  const form = useForm<IFormDataTrial>({ resolver: yupResolver(formSchema) });
+  const form = useForm<Schema>({ resolver: zodResolver(formSchema) });
   const { handleSubmit, control, formState } = form;
 
-  async function submit(data: IFormDataTrial): Promise<void> {
+  async function submit(data: Schema): Promise<void> {
     const response = await onSubmit({ ...data, interests: [`${name} Trial`], details: '' });
 
     if (!response.success) {

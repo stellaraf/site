@@ -5,13 +5,15 @@ import type { CustomColors } from '~/types';
 interface IFormFieldsBase extends FieldValues {
   firstName: string;
   lastName: string;
-  email: string;
+  emailAddress: string;
   phone?: string;
   companyName: string;
   details: string;
 }
 
-export interface ISupportFormFields extends IFormFieldsBase {}
+export interface ISupportFormFields extends IFormFieldsBase {
+  subject: string;
+}
 
 export interface ISalesFormFields extends IFormFieldsBase {
   interests: string[];

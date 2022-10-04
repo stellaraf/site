@@ -15,7 +15,7 @@
     "@emotion/styled": "^11.10.4",
     "@hookform/resolvers": "^2.9.8",
     "@react-google-maps/api": "^2.13.1",
-    "@stellaraf/logo": "^0.2.3",
+    "@stellaraf/logo": "^0.3.1",
     "@tanstack/react-query": "^4.10.1",
     "color2k": "1.1.0",
     "contentful": "^7.14.12",
@@ -24,6 +24,7 @@
     "framer-motion": "^7.4.0",
     "hamburger-react": "^2.5.0",
     "keen-slider": "^5.2.3",
+    "libphonenumber-js": "^1.10.13",
     "markdown-to-jsx": "^7.1.7",
     "merge-anything": "^5.0.4",
     "next": "12",
@@ -46,8 +47,7 @@
     "tsparticles-engine": "^2.3.3",
     "use-local-storage-state": "^18.1.1",
     "use-title-case": "^0.1.5",
-    "yup": "^0.32.11",
-    "yup-phone": "^1.2.8"
+    "zod": "^3.19.1"
   },
   "scripts": {
     "dev": "NODE_OPTIONS=--max-old-space-size=8192 next dev",

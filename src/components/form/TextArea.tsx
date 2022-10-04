@@ -1,4 +1,4 @@
-import { FormControl, Textarea } from '@chakra-ui/react';
+import { FormControl, Textarea, FormErrorMessage } from '@chakra-ui/react';
 import { Controller } from 'react-hook-form';
 import { useColorValue } from '~/context';
 
@@ -25,6 +25,7 @@ const Field = <V extends FieldValues>(props: TTextField<V>): JSX.Element => {
         _placeholder={placeholderStyle}
         {...rest}
       />
+      <FormErrorMessage>{fieldState.error && fieldState.error.message}</FormErrorMessage>
     </FormControl>
   );
 };
