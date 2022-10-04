@@ -38,7 +38,7 @@ export const DesktopForm: React.FC<IDesktopForm> = (props: IDesktopForm) => {
         <IconButton
           variant="ghost"
           aria-label="Back"
-          icon={<DynamicIcon icon={{ bi: 'BisLeftArrow' }} />}
+          icon={<DynamicIcon icon={{ bi: 'BiLeftArrow' }} />}
           onClick={goBack}
         />
       </Flex>

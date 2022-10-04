@@ -1,12 +1,12 @@
-import create from 'zustand';
+import { useCallback, useEffect } from 'react';
+import { atom, useRecoilState, useRecoilValue } from 'recoil';
 import { useContactFormCtx } from './context';
 import { isSupportedForm } from './guards';
 
-import type { SetState, GetState } from 'zustand';
 import type { IContactCard } from '~/types';
 import type { FormIcon, AvailableForms } from './types';
 
-interface ContactForm {
+interface ContactFormValues {
   /**
    * Currently selected form name. `null` if no form is selected (indicates card row view).
    */
@@ -26,7 +26,9 @@ interface ContactForm {
    * If `true`, the form container should show a success message, `false` otherwise.
    */
   showSuccess: boolean;
+}
 
+interface ContactFormMethods {
   /**
    * Toggle the `showSuccess` property (or provide a specific `value`).
    */
@@ -55,17 +57,23 @@ interface ContactForm {
   addForms: (c: IContactCard[]) => void;
 }
 
-// function is
+const formAtom = atom<ContactFormValues>({
+  key: 'formState',
+  default: {
+    selected: null,
+    form: {} as AvailableForms,
+    showSuccess: false,
+    successMessage: null,
+  },
+});
 
-const useStore = create<ContactForm>((set: SetState<ContactForm>, get: GetState<ContactForm>) => ({
-  selected: null,
+export function useContactForm(): ContactFormValues & ContactFormMethods {
+  const [state, setState] = useRecoilState(formAtom);
 
-  form: {} as AvailableForms,
-  showSuccess: false,
-  successMessage: null,
+  const cards = useContactFormCtx();
 
-  addForms(cards: IContactCard[]): void {
-    const { form: current } = get();
+  const addForms = useCallback((cards: IContactCard[]): void => {
+    const current = state.form;
 
     // If no forms are present, add them.
     if (Object.keys(current).length === 0) {
@@ -78,45 +86,40 @@ const useStore = create<ContactForm>((set: SetState<ContactForm>, get: GetState<
           form[name] = value;
         }
       }
-      set(state => ({ ...state, form }));
+      setState(prev => ({ ...prev, form }));
     }
-  },
+  }, []);
 
-  toggleSuccess(value?: boolean): void {
-    set(state => ({ showSuccess: value ?? !state.showSuccess }));
-  },
+  const toggleSuccess = useCallback((value?: boolean): void => {
+    setState(prev => ({ ...prev, showSuccess: value ?? !prev.showSuccess }));
+  }, []);
 
-  reset(): void {
-    const { selected } = get();
+  const reset = useCallback((): void => {
     // If there is a selected value, reset it and set `showSuccess` to `false`.
-    if (selected !== null) {
-      set(state => ({ ...state, showSuccess: false, selected: null }));
+    if (state.selected !== null) {
+      setState(prev => ({ ...prev, showSuccess: false, selected: null }));
     }
-  },
+  }, []);
 
-  shouldRender(name: keyof AvailableForms): boolean {
-    const { showSuccess, selected } = get();
-    return !showSuccess && selected === name;
-  },
+  const shouldRender = useCallback(
+    (name: keyof AvailableForms): boolean => !state.showSuccess && state.selected === name,
+    [state.showSuccess, state.selected],
+  );
 
-  setSelected(selected: FormIcon): void {
-    const { form } = get();
+  const setSelected = useCallback((selected: FormIcon): void => {
     if (isSupportedForm(selected)) {
-      const successMessage = form[selected].successMessage;
-      set(state => ({ ...state, selected, successMessage }));
+      const successMessage = state.form[selected].successMessage;
+      setState(prev => ({ ...prev, selected, successMessage }));
     }
-  },
-}));
+  }, []);
 
-/**
- * Access the full contact form state and all methods.
- */
-export function useContactForm(): ContactForm {
-  const store = useStore();
-  const cards = useContactFormCtx();
-  // Populate the store's form values from context.
-  store.addForms(cards);
-  return store;
+  useEffect(() => {
+    // Populate the store's form values from context.
+    addForms(cards);
+    // return reset;
+  }, []);
+
+  return { ...state, addForms, toggleSuccess, reset, shouldRender, setSelected };
 }
 
 /**
@@ -126,5 +129,6 @@ export function useContactForm(): ContactForm {
  * @returns Form configuration state.
  */
 export function useContactFormConfig<K extends keyof AvailableForms>(name: K): AvailableForms[K] {
-  return useStore(state => state.form[name]);
+  const state = useRecoilValue(formAtom);
+  return state.form[name];
 }
