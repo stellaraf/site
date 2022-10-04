@@ -14,7 +14,6 @@ export * from './useKeySequence';
 export * from './useKonami';
 export * from './useLinkType';
 export * from './useMobile';
-export * from './useMouseTrap';
 export * from './useNavLogo';
 export * from './useOpposingColor';
 export * from './useRandomElement';

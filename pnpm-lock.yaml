@@ -35,7 +35,6 @@ specifiers:
   color2k: 1.1.0
   contentful: ^7.14.12
   cross-env: ^7.0.2
-  d3-geo: ^1.12.1
   dayjs: ^1.11.5
   eslint: ^8.24.0
   eslint-config-next: ^12.3.1
@@ -51,18 +50,16 @@ specifiers:
   framer-motion: ^7.4.0
   hamburger-react: ^2.5.0
   keen-slider: ^5.2.3
-  markdown-to-jsx: ^7.0.1
+  markdown-to-jsx: ^7.1.7
   merge-anything: ^5.0.4
-  mousetrap: ^1.6.5
   next: '12'
-  next-seo: ^4.26.0
+  next-seo: ^5.5.0
   palette-by-numbers: ^0.1.6
   prettier: ^2.2.1
   react: ^18.2.0
   react-dom: ^18.2.0
   react-fast-compare: ^3.2.0
   react-hook-form: ^7.36.1
-  react-hotkeys-hook: ^3.4.7
   react-icons: ^4.4.0
   react-intersection-observer: ^9.4.0
   react-player: 2.10.1
@@ -97,23 +94,20 @@ dependencies:
   '@tanstack/react-query': 4.10.1_biqbaboplfbrettd7655fr4n2y
   color2k: 1.1.0
   contentful: 7.14.12
-  d3-geo: 1.12.1
   dayjs: 1.11.5
   favicons: 7.0.0
   framer-motion: 7.4.0_biqbaboplfbrettd7655fr4n2y
   hamburger-react: 2.5.0_react@18.2.0
   keen-slider: 5.2.3
-  markdown-to-jsx: 7.0.1_react@18.2.0
+  markdown-to-jsx: 7.1.7_react@18.2.0
   merge-anything: 5.0.4
-  mousetrap: 1.6.5
   next: 12.3.1_6tziyx3dehkoeijunclpkpolha
-  next-seo: 4.26.0_azq6kxkn3od7qdylwkyksrwopy
+  next-seo: 5.5.0_azq6kxkn3od7qdylwkyksrwopy
   palette-by-numbers: 0.1.6
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-fast-compare: 3.2.0
   react-hook-form: 7.36.1_react@18.2.0
-  react-hotkeys-hook: 3.4.7_biqbaboplfbrettd7655fr4n2y
   react-icons: 4.4.0_react@18.2.0
   react-intersection-observer: 9.4.0_react@18.2.0
   react-player: 2.10.1_react@18.2.0
@@ -2823,10 +2817,6 @@ packages:
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
 
-  /d3-array/1.2.4:
-    resolution: {integrity: sha512-KHW6M86R+FUPYGb3R5XiYjXPq7VzwxZ22buHhAEVG5ztoEcZZMLov530mmccaqA1GghZArjQV46fuc8kUqhhHw==}
-    dev: false
-
   /d3-array/2.9.1:
     resolution: {integrity: sha512-Ob7RdOtkqsjx1NWyQHMFLtCSk6/aKTxDdC4ZIolX+O+mDD2RzrsYgAyc0WGAlfYFVELLSilS7w8BtE3PKM8bHg==}
     dev: false
@@ -2848,12 +2838,6 @@ packages:
 
   /d3-ease/2.0.0:
     resolution: {integrity: sha512-68/n9JWarxXkOWMshcT5IcjbB+agblQUaIsbnXmrzejn2O82n3p2A9R2zEB9HIEFWKFwPAEDDN8gR0VdSAyyAQ==}
-    dev: false
-
-  /d3-geo/1.12.1:
-    resolution: {integrity: sha512-XG4d1c/UJSEX9NfU02KwBL6BYPj8YKHxgBEw5om2ZnTRSbIcego6dhHwcxuSR3clxh0EpE38os1DVPOmnYtTPg==}
-    dependencies:
-      d3-array: 1.2.4
     dev: false
 
   /d3-geo/2.0.2:
@@ -4041,10 +4025,6 @@ packages:
     resolution: {integrity: sha512-f/wzC2QaWBs7t9IYqB4T3sR1xviIViXJRJTWBlx2Gf3g0Xi5vI7Yy4koXQ1c9OYDGHN9sBy1DQ2AB8fqZBWhUg==}
     dev: false
 
-  /hotkeys-js/3.9.4:
-    resolution: {integrity: sha512-2zuLt85Ta+gIyvs4N88pCYskNrxf1TFv3LR9t5mdAZIX8BcgQQ48F2opUptvHa6m8zsy5v/a0i9mWzTrlNWU0Q==}
-    dev: false
-
   /http-errors/1.7.2:
     resolution: {integrity: sha512-uUQBt3H/cSIVfch6i1EuPNy/YsRSOUBXTVfZ+yR7Zjez3qjBz6i9+i4zjNaoqcoFVI4lQJ5plg63TvGfRSDCRg==}
     engines: {node: '>= 0.6'}
@@ -4441,9 +4421,9 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /markdown-to-jsx/7.0.1_react@18.2.0:
-    resolution: {integrity: sha512-0agsmQtnoAzGt2fO8jgoFL5wvDUbpjoIfQffErQZmP66BxaWMBGifsAo0RRuye+2Ydlp7csX6X6HpF2xaL6J1w==}
-    engines: {node: '>= 4'}
+  /markdown-to-jsx/7.1.7_react@18.2.0:
+    resolution: {integrity: sha512-VI3TyyHlGkO8uFle0IOibzpO1c1iJDcXcS/zBrQrXQQvJ2tpdwVzVZ7XdKsyRz1NdRmre4dqQkMZzUHaKIG/1w==}
+    engines: {node: '>= 10'}
     peerDependencies:
       react: '>= 0.14.0'
     dependencies:
@@ -4554,10 +4534,6 @@ packages:
       minimist: 0.0.8
     dev: true
 
-  /mousetrap/1.6.5:
-    resolution: {integrity: sha512-QNo4kEepaIBwiT8CDhP98umTetp+JNfQYBWvC1pc6/OAibuXtRcxZ58Qz8skvEHYvURne/7R8T5VoOI7rDsEUA==}
-    dev: false
-
   /ms/2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
     dev: true
@@ -4610,8 +4586,8 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /next-seo/4.26.0_azq6kxkn3od7qdylwkyksrwopy:
-    resolution: {integrity: sha512-5TqywQ3XAwqdmEU1AyNZjR7WdDKFTkDD8aBtgQelPvzBUEy8i0mTjtiw+09jhiHFNik6FqS8uPKCaYcY6jRgSQ==}
+  /next-seo/5.5.0_azq6kxkn3od7qdylwkyksrwopy:
+    resolution: {integrity: sha512-5ouBHFtx8YrSDW44lj0qIEQ+oMcz6stgoITB+SqHUZbhgizoJsyLmq73gJ0lxtEKpcN8vG2QgRIJfdb8OAPChw==}
     peerDependencies:
       next: ^8.1.1-canary.54 || >=9.0.0
       react: '>=16.0.0'
@@ -5110,17 +5086,6 @@ packages:
       react: ^16.8.0 || ^17 || ^18
     dependencies:
       react: 18.2.0
-    dev: false
-
-  /react-hotkeys-hook/3.4.7_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-+bbPmhPAl6ns9VkXkNNyxlmCAIyDAcWbB76O4I0ntr3uWCRuIQf/aRLartUahe9chVMPj+OEzzfk3CQSjclUEQ==}
-    peerDependencies:
-      react: '>=16.8.1'
-      react-dom: '>=16.8.1'
-    dependencies:
-      hotkeys-js: 3.9.4
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react-icons/4.4.0_react@18.2.0:

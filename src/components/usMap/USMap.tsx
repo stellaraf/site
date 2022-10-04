@@ -1,6 +1,6 @@
 import { chakra } from '@chakra-ui/react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
-import { AnimateSharedLayout } from 'framer-motion';
+import { LayoutGroup } from 'framer-motion';
 import { useCloudMeasurementValues } from '~/hooks';
 import { Location } from './Location';
 
@@ -29,11 +29,11 @@ export const USMap = (props: IUSMap): JSX.Element => {
                   }}
                 />
               ))}
-              <AnimateSharedLayout>
+              <LayoutGroup>
                 {measurements.map(loc => (
                   <Location key={loc.displayName} loc={loc} color={markerColor} />
                 ))}
-              </AnimateSharedLayout>
+              </LayoutGroup>
             </>
           )}
         </Geographies>
