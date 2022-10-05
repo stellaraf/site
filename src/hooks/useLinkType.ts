@@ -1,28 +1,27 @@
 import { useMemo } from "react";
 
-import type { LinkType } from "./types";
+const SCHEME_PATTERN = /(https?|mailto):\/{0,2}.+/;
 
-export const useLinkType = (href: string): LinkType => {
-  let linkTarget = href;
-  let external = false;
-  if (href[0] === "/") {
-    linkTarget = href.substring(1);
-  }
+export interface UseLinkType {
+  isExternal: boolean;
+  target: string;
+}
 
-  if (linkTarget.match(/(http|https|mailto):\/{0,2}.*/g)) {
-    if (!external) {
-      external = true;
+export function useLinkType(href: string): UseLinkType {
+  return useMemo(() => {
+    let target = href;
+    let isExternal = false;
+    if (href[0] === "/") {
+      target = href.substring(1);
     }
-  } else {
-    let prefix = "/";
-    if (!linkTarget.includes(".mdx") && linkTarget.includes("#")) {
-      prefix = "";
-    }
-    const parts = linkTarget.split(".mdx");
-    linkTarget = [prefix, ...parts].join("");
-  }
 
-  const isExternal = useMemo(() => external, [href]);
-  const target = useMemo(() => linkTarget, [href]);
-  return { isExternal, target };
-};
+    if (SCHEME_PATTERN.test(target)) {
+      isExternal = true;
+      return { isExternal, target };
+    }
+    const prefix = target.startsWith("#") ? "" : "/";
+    target = [prefix, target].join("");
+
+    return { isExternal, target };
+  }, [href]);
+}

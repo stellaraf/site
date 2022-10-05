@@ -64,8 +64,3 @@ export namespace UseGlow {
     increment?: number;
   }
 }
-
-export interface LinkType {
-  isExternal: boolean;
-  target: string;
-}

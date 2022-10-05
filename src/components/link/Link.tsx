@@ -58,11 +58,9 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => (
 const InternalLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => {
   const { href = "/", children, ...rest } = props;
 
-  /**
-   * Links rendered outside of the Next.js Router Context won't be able to prefetch pages, which is
-   * the default. If we're outside the Next.js Router Context, the returned value of useRouter()
-   * will be `null`. When outside the Next.js Router Context, disable prefetching.
-   */
+  // Links rendered outside of the Next.js Router Context won't be able to prefetch pages, which is
+  // the default. If we're outside the Next.js Router Context, the returned value of useRouter()
+  // will be `null`. When outside the Next.js Router Context, disable prefetching.
   const router = useRouter();
   let nextLinkProps = {};
 
@@ -71,11 +69,9 @@ const InternalLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => {
   }
 
   return (
-    <NextLink href={href} {...nextLinkProps}>
-      <BaseLink ref={ref} href={href} {...rest}>
-        {children}
-      </BaseLink>
-    </NextLink>
+    <BaseLink ref={ref} href={href} {...nextLinkProps} {...rest} as={NextLink}>
+      {children}
+    </BaseLink>
   );
 });
 
@@ -83,7 +79,7 @@ const InternalLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => {
  * Extended Link Component to automagically determine internal vs. external or
  * optionally show an external link icon.
  */
-export const Link: React.FC<ILink> = (props: ILink) => {
+export const Link = (props: ILink) => {
   const { href = "/", showIcon = false, children, ...rest } = props;
 
   const { isExternal, target } = useLinkType(href);

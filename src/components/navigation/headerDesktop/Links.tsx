@@ -8,7 +8,7 @@ import navConfig from "../config";
 import type { ButtonProps } from "~/components";
 import type { INavLink, ILinkGroup, IPassedLink } from "./types";
 
-export const NavLink: React.FC<INavLink> = (props: INavLink) => {
+export const NavLink = (props: INavLink) => {
   const { isActive = false, ...rest } = props;
   const activeColor = useColorValue("blackAlpha.300", "whiteAlpha.300");
   const borderRadius = useToken("radii", "lg");
@@ -32,27 +32,27 @@ export const NavLink: React.FC<INavLink> = (props: INavLink) => {
     };
   }
   return (
-    <NextLink href={props.href ?? "/"}>
-      <ChakraLink
-        py={4}
-        pos="relative"
-        fontWeight="medium"
-        px={{ lg: 2, xl: 4 }}
-        mr={{ lg: 4, xl: 8 }}
-        transition="all 0.2s"
-        css={{ "&:focus": { borderRadius } }}
-        _hover={{ textDecoration: "none", transform: "translateY(-2px)", opacity: 0.8 }}
-        {...linkProps}
-        {...rest}
-      />
-    </NextLink>
+    <ChakraLink
+      py={4}
+      pos="relative"
+      fontWeight="medium"
+      px={{ lg: 2, xl: 4 }}
+      mr={{ lg: 4, xl: 8 }}
+      transition="all 0.2s"
+      css={{ "&:focus": { borderRadius } }}
+      _hover={{ textDecoration: "none", transform: "translateY(-2px)", opacity: 0.8 }}
+      href={props.href ?? "/"}
+      as={NextLink}
+      {...linkProps}
+      {...rest}
+    />
   );
 };
 
 /**
  * Group of header links, pinned to a specific side of the header.
  */
-export const LinkGroup: React.FC<ILinkGroup> = (props: ILinkGroup) => {
+export const LinkGroup = (props: ILinkGroup) => {
   const { side, ...rest } = props;
   const { asPath } = useRouter();
 
@@ -80,7 +80,7 @@ export const LinkGroup: React.FC<ILinkGroup> = (props: ILinkGroup) => {
   );
 };
 
-export const ContactButton: React.FC<ButtonProps> = (props: ButtonProps) => {
+export const ContactButton = (props: ButtonProps) => {
   const color = useColorValue("secondary.600", "white");
   const hoverBg = useColorValue("secondary.50", "whiteAlpha.100");
   const borderColor = useColorValue("secondary.500", "white");

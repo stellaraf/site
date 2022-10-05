@@ -18,7 +18,13 @@ export const Action: React.FC<TActions> = (props: TActions) => {
   } = props;
 
   const titleMe = useTitleCase();
-  const renderedBody = useRender(callToActionBody ?? body ?? page.fields.body);
+  const renderedBody = useRender(
+    callToActionBody ?? body ?? page.fields.body,
+    undefined,
+    undefined,
+    undefined,
+    { hyperlink: (_, children) => <span>{children}</span> },
+  );
   const slug = useSlug(title, [title]);
 
   return (

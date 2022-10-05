@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useGoogleAnalytics, useCloudMeasurements } from "~/hooks";
 import { fetchWithTimeout } from "~/util";
@@ -144,7 +145,10 @@ export function useDataCenter(): UseDataCenterReturn {
       // Only if the elapsed value has been checked, is active, has not errored, and if the
       // location is not already the best, fully export the best location's object as the return
       // value of this hook.
-      if (best.elapsed < 65533 && !best.best) {
+      if (
+        best.elapsed < 65533
+        // && !best.best
+      ) {
         setBestMeasurement(best);
       }
     }
@@ -168,6 +172,8 @@ export function useDataCenter(): UseDataCenterReturn {
     reset();
     refetch();
   }
+
+  useEffect(() => reset, []);
 
   return { execute, ...otherQuery };
 }

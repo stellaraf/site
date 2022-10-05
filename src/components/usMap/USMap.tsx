@@ -11,6 +11,7 @@ const Container = chakra("div", { baseStyle: { mx: "auto" } });
 export const USMap = (props: IUSMap): JSX.Element => {
   const { geoData, mapColor, markerColor, ...rest } = props;
   const measurements = useCloudMeasurementValues();
+  console.log(measurements.filter(m => m.active).map(m => [m.id, m.elapsed, m.done, m.best]));
   return (
     <Container {...rest}>
       <ComposableMap projection="geoAlbersUsa" style={{ zIndex: 1, position: "relative" }}>

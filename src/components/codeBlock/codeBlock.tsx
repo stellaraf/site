@@ -7,11 +7,12 @@ import {
 } from "@chakra-ui/react";
 import { DynamicIcon } from "~/components";
 import { useColorValue } from "~/context";
+import { reactChildText } from "~/util";
 import { useCodeBlockStyle } from "./useCodeBlockStyle";
 
-import type { ICodeBlock } from "./types";
+import type { CodeBlockProps } from "./types";
 
-export const CodeBlock: React.FC<ICodeBlock> = (props: ICodeBlock) => {
+export const CodeBlock = (props: CodeBlockProps) => {
   const { children, ...rest } = props;
   const defaultScheme = useColorValue("gray", "tertiary");
   const size = useBreakpointValue({ base: "md", lg: "sm" });
@@ -32,12 +33,7 @@ export const CodeBlock: React.FC<ICodeBlock> = (props: ICodeBlock) => {
     variant: "ghost",
   });
 
-  let copyValue = "";
-  if (typeof children === "string") {
-    copyValue = children;
-  } else {
-    copyValue = children.props.children;
-  }
+  const copyValue = reactChildText(children);
 
   const { hasCopied, onCopy } = useClipboard(copyValue);
 

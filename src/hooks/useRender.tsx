@@ -71,7 +71,8 @@ export function useRender(
   renderable?: Document | null,
   deps: unknown[] = [],
   exclude: string[] = [],
-  props?: OverrideProps,
+  props: OverrideProps = {},
+  components: RenderNode = {},
 ): React.ReactNode | null {
   if (deps.length === 0) {
     deps = [renderable];
@@ -140,6 +141,7 @@ export function useRender(
       [BLOCKS.TABLE_HEADER_CELL]: (_, children) => (
         <Th {...o[BLOCKS.TABLE_HEADER_CELL]}>{children}</Th>
       ),
+      ...components,
     } as RenderNode;
     return documentToReactComponents(renderable, { renderNode, renderMark });
   }, deps);

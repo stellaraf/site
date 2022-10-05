@@ -14,6 +14,9 @@ export function client(preview: boolean = false): ContentfulClientApi {
     options.accessToken = process.env.CONTENTFUL_PREVIEW_TOKEN ?? "";
   }
 
+  // options.proxy = { host: "127.0.0.1", port: 9090 };
+  // options.httpAgent
+
   return createClient(options);
 }
 

@@ -51,7 +51,7 @@ export const MapMarker = (props: IMapMarker): JSX.Element => {
             fill={fill}
             style={{ position: "absolute", userSelect: "none" }}
             animate={{ scale: [1, 4], opacity: [0.2, 0] }}
-            transition={{ duration: 1, loop: Infinity, repeatDelay: 0.5 }}
+            transition={{ duration: 1, repeat: Infinity, repeatDelay: 0.5 }}
           />
         </Marker>
       </Link>

@@ -79,6 +79,7 @@ const completeMeasurementsSelector = selector<boolean>({
       }
       return final;
     }, []);
+    console.log(completed);
     return all(...completed);
   },
 });
@@ -141,12 +142,16 @@ export function useCloudMeasurements(): CloudMeasurements {
     updateMeasurement(merged);
   };
 
-  const reset = () => addMeasurements(locations);
+  const reset = () => {
+    resetState();
+    addMeasurements(locations);
+  };
 
   useEffect(() => {
     if (measurements.length === 0) {
       addMeasurements(locations);
     }
+    return reset;
   }, [resetState]);
 
   return {

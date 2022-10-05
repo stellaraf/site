@@ -1,5 +1,5 @@
 import { Accordion, chakra, Box, Flex, VStack, useBreakpointValue } from "@chakra-ui/react";
-import { If, MSubNav } from "~/components";
+import { MSubNav } from "~/components";
 import { useColorValue, useConfig } from "~/context";
 import { useResponsiveStyle } from "~/hooks";
 import { DMenuGroup } from "./menuDesktop";
@@ -78,16 +78,15 @@ export const DocsLayout: React.FC<IDocsLayout> = (props: IDocsLayout) => {
 
   return (
     <>
-      <If condition={largeLayout === true}>
+      {largeLayout ? (
         <DLayout {...rStyles} {...rest}>
           {children}
         </DLayout>
-      </If>
-      <If condition={largeLayout !== true}>
+      ) : (
         <MLayout {...rStyles} {...rest}>
           {children}
         </MLayout>
-      </If>
+      )}
     </>
   );
 };

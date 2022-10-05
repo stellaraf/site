@@ -39,7 +39,7 @@ export const SiteLayout: React.FC<ISiteLayout> = (props: ISiteLayout) => {
     <>
       <Favicons />
       {preview && <Preview />}
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         <Wrapper>
           {isMobile ? <MHeader /> : <DHeader />}
           <Main>

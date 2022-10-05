@@ -14,15 +14,16 @@ export const BlockQuote: React.FC<IBlockQuote> = (props: IBlockQuote) => {
   return (
     <Box
       my={8}
+      pb={4}
       pl={4}
       pt={2}
-      pb={4}
       fontSize="lg"
+      as="blockquote"
       fontFamily="body"
       lineHeight="tall"
       fontWeight="light"
-      position="relative"
       borderLeftWidth={2}
+      position="relative"
       backgroundColor={bg}
       borderLeftStyle="solid"
       borderLeftColor={border}

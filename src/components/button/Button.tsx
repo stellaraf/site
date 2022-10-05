@@ -10,11 +10,16 @@ const BaseButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => (
 ));
 
 const ExternalButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => {
-  const { href = "#", ...rest } = props;
+  const { href = "#", target, ...rest } = props;
   return (
-    <NextLink href={href}>
-      <BaseButton ref={ref} href={href} target="_blank" rel="noopener noreferrer" {...rest} />
-    </NextLink>
+    <BaseButton
+      ref={ref}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      as={NextLink}
+      {...rest}
+    />
   );
 });
 

@@ -11,10 +11,14 @@ function getVersion() {
 
 console.dir(process.env, { depth: null });
 
-export default withBundleAnalyzer({
+/** @type {import("next").NextConfig} */
+const config = {
   reactStrictMode: true,
   poweredByHeader: false,
   swcMinify: true,
+  experimental: {
+    newNextLinkBehavior: true,
+  },
   images: {
     domains: ["images.ctfassets.net"],
   },
@@ -22,4 +26,6 @@ export default withBundleAnalyzer({
     SITE_VERSION: getVersion(),
     GIT_BRANCH: process.env.VERCEL_GIT_COMMIT_REF,
   },
-});
+};
+
+export default withBundleAnalyzer(config);
