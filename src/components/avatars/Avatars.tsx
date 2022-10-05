@@ -8,7 +8,7 @@ import type { IGroupWrapper, IAvatars, IAvatarContext } from "./types";
 const AvatarContext = createContext<IAvatarContext>({} as IAvatarContext);
 export const useAvatar = (): IAvatarContext => useContext(AvatarContext);
 
-const GroupWrapper: React.FC<IGroupWrapper> = (props: IGroupWrapper) => {
+const GroupWrapper = (props: IGroupWrapper): JSX.Element => {
   return (
     <SimpleGrid
       my={12}
@@ -16,12 +16,15 @@ const GroupWrapper: React.FC<IGroupWrapper> = (props: IGroupWrapper) => {
       spacingX={{ lg: 32 }}
       columns={{ base: 4, lg: 6 }}
       justifyContent="space-evenly"
-      // CSS fuckery to center-align the last row which may not be full.
-      // See: https://css-irl.info/controlling-leftover-grid-items
       sx={{
-        "& :last-child:nth-of-type(3n - 1)": { gridColumnEnd: -2 },
-        "& :nth-last-of-type(2):nth-of-type(3n + 1)": { gridColumnEnd: 4 },
-        "& :last-child:nth-of-type(3n - 2)": { gridColumnEnd: { base: 4, lg: 5 } },
+        // CSS fuckery to center-align the last row which may not be full.
+        // See: https://css-irl.info/controlling-leftover-grid-items
+        "& :last-child:nth-of-type(3n - 1)": {
+          base: { gridColumnEnd: -2 },
+          lg: { gridColumnEnd: -2 },
+        },
+        "& :nth-last-of-type(2):nth-of-type(3n + 1)": { lg: { gridColumnEnd: 4 } },
+        "& :last-child:nth-of-type(3n - 2)": { lg: { gridColumnEnd: { base: 4, lg: 5 } } },
       }}
       {...props}
     />

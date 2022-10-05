@@ -9,7 +9,7 @@ import { useCurrent } from "./state";
 
 import type { IDetail, IHeader } from "./types";
 
-const _Header: React.FC<IHeader> = (props: IHeader) => {
+const _Header = (props: IHeader): JSX.Element => {
   const { name, title, photo } = props;
   const [containerRef, headingRef, shouldResize] = useScaledText<HTMLDivElement>([name]);
   const border = useColorValue("blackAlpha.300", "whiteAlpha.300");
@@ -50,7 +50,7 @@ const _Header: React.FC<IHeader> = (props: IHeader) => {
 
 const Header = memo(_Header, (prev, next) => prev.name === next.name);
 
-export const Detail: React.FC<IDetail> = (props: IDetail) => {
+export const Detail = (props: IDetail): JSX.Element => {
   const { isOpen, onClose } = props;
   const { bios } = useAvatar();
   const [current] = useCurrent();
