@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useId } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useGoogleAnalytics, useCloudMeasurements } from "~/hooks";
+import { useGoogleAnalytics } from "~/hooks";
 import { fetchWithTimeout } from "~/util";
+import { useCloudMeasurements } from "./useCloudMeasurements";
 
 import type { CloudMeasurement } from "~/types";
+import type { PartialMeasurement } from "./useCloudMeasurements";
 import type { TFetcher, UseDataCenterReturn } from "./types";
 
 /**
@@ -86,6 +88,34 @@ async function fetcher(args: TFetcher): Promise<number> {
   return duration;
 }
 
+async function queryAll(
+  measurements: CloudMeasurement[],
+  updateMeasurement: (m: PartialMeasurement) => void,
+): Promise<Nullable<CloudMeasurement[]>> {
+  // Perform the query for each active location & set its new elapsed value.
+  for (const measurement of measurements) {
+    if (measurement.active) {
+      // AbortController & signal are used to cancel async tasks; in this case, the fetch(). The
+      // fetch is cancelled when each the cancel() method is called by react-query. There needs
+      // to be a controller per location, so that each are individually cancellable. Otherwise,
+      // if one query times out, they will all be cancelled.
+      const controller = new AbortController();
+      let debug = false;
+      if (process.env.NODE_ENV === "development") debug = true;
+      const elapsed = await fetcher({
+        id: measurement.id,
+        url: measurement.testUrl,
+        controller,
+        debug,
+        timeout: measurement.timeout,
+      });
+      updateMeasurement({ id: measurement.id, elapsed, done: true });
+    }
+  }
+
+  return measurements;
+}
+
 /**
  * Custom hook to query each data center location and measure its response time in milliseconds.
  *
@@ -95,69 +125,18 @@ async function fetcher(args: TFetcher): Promise<number> {
  *   65535: Not checked (no latency or error shown in the UI)
  */
 export function useDataCenter(): UseDataCenterReturn {
-  const {
-    measurements,
-    reset,
-    complete,
-    getBestMeasurement,
-    setBestMeasurement,
-    updateMeasurement,
-  } = useCloudMeasurements();
+  const { measurements, reset, updateMeasurement } = useCloudMeasurements();
 
   const { trackEvent } = useGoogleAnalytics();
 
-  function getQueryKey(): string[] {
-    return [new Date().toString(), ...measurements.map(m => m.id)];
-  }
+  const queryId = useId();
 
-  async function queryAll(): Promise<Nullable<CloudMeasurement>> {
-    let best = null;
+  const queryKey = [queryId, ...measurements.map(m => m.id)];
 
-    // Perform the query for each active location & set its new elapsed value.
-    for (const measurement of measurements) {
-      if (measurement.active) {
-        // AbortController & signal are used to cancel async tasks; in this case, the fetch(). The
-        // fetch is cancelled when each the cancel() method is called by react-query. There needs
-        // to be a controller per location, so that each are individually cancellable. Otherwise,
-        // if one query times out, they will all be cancelled.
-        const controller = new AbortController();
-        let debug = false;
-        if (process.env.NODE_ENV === "development") debug = true;
-        const elapsed = await fetcher({
-          id: measurement.id,
-          url: measurement.testUrl,
-          controller,
-          debug,
-          timeout: measurement.timeout,
-        });
-        updateMeasurement({ id: measurement.id, elapsed, done: true });
-      }
-    }
+  const queryFn = async () => await queryAll(measurements, updateMeasurement);
 
-    // Use the 'done' property to determine if the location objects have been checked or otherwise
-    // considered to be completed (i.e., has errored or is marked inactive).
-
-    // Only if all locations have been checked, determine which of the locations has the lowest
-    // RTT.
-    if (complete) {
-      best = getBestMeasurement();
-
-      // Only if the elapsed value has been checked, is active, has not errored, and if the
-      // location is not already the best, fully export the best location's object as the return
-      // value of this hook.
-      if (
-        best.elapsed < 65533
-        // && !best.best
-      ) {
-        setBestMeasurement(best);
-      }
-    }
-    return best;
-  }
-
-  const queryKey = getQueryKey();
-
-  const { refetch, ...otherQuery } = useQuery(queryKey, queryAll, {
+  const { refetch, ...otherQuery } = useQuery(queryKey, {
+    queryFn,
     enabled: false, // Don't automatically query.
     retry: false, // Don't automatically retry on failures.
     cacheTime: 30000, // Cache the data for 30 seconds.
@@ -167,13 +146,11 @@ export function useDataCenter(): UseDataCenterReturn {
    * When executing a new query (which is done by manually pressing a button, NOT automatically),
    * reset the 'best' properties to false, clear the cached response, and then refetch.
    */
-  function execute() {
+  const execute = () => {
     trackEvent("Data Center Locator", { event_category: "User" });
     reset();
     refetch();
-  }
-
-  useEffect(() => reset, []);
+  };
 
   return { execute, ...otherQuery };
 }

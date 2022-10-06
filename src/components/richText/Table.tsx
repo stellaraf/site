@@ -6,12 +6,12 @@ import type { BoxProps } from "@chakra-ui/react";
 import type { TTableEntry } from "~/types";
 import type { ITd, ITableCell, TTableData } from "./types";
 
-export const TableHeader: React.FC<BoxProps> = (props: BoxProps) => {
+export const TableHeader = (props: BoxProps) => {
   const bg = useColorValue("blackAlpha.100", "whiteAlpha.100");
   return <Box as="th" bg={bg} fontWeight="bold" p={2} fontSize="sm" {...props} />;
 };
 
-export const TD: React.FC<ITd> = (props: ITd) => {
+export const TD = (props: ITd) => {
   const { isHeader = false, children, ...rest } = props;
   const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
@@ -29,7 +29,7 @@ export const TD: React.FC<ITd> = (props: ITd) => {
   );
 };
 
-export const TableCell: React.FC<ITableCell> = (props: ITableCell) => {
+export const TableCell = (props: ITableCell) => {
   const { isHeader = false, children, ...rest } = props;
   const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
@@ -47,7 +47,7 @@ export const TableCell: React.FC<ITableCell> = (props: ITableCell) => {
   );
 };
 
-export const TableMain: React.FC<BoxProps> = (props: BoxProps) => {
+export const TableMain = (props: BoxProps) => {
   const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
     <Box
@@ -64,7 +64,7 @@ export const TableMain: React.FC<BoxProps> = (props: BoxProps) => {
   );
 };
 
-const TableWithHeader: React.FC<TTableData> = (props: TTableData) => {
+const TableWithHeader = (props: TTableData) => {
   const { tableData } = props;
   const [header, ...rows] = tableData;
   return (
@@ -89,7 +89,7 @@ const TableWithHeader: React.FC<TTableData> = (props: TTableData) => {
   );
 };
 
-const TableNoHeader: React.FC<TTableData> = (props: TTableData) => {
+const TableNoHeader = (props: TTableData) => {
   const { tableData } = props;
   return (
     <tbody>
@@ -104,7 +104,7 @@ const TableNoHeader: React.FC<TTableData> = (props: TTableData) => {
   );
 };
 
-export const Table: React.FC<TTableEntry> = (props: TTableEntry) => {
+export const Table = (props: TTableEntry) => {
   const { useColumnHeader, tableData } = props.data;
 
   return (

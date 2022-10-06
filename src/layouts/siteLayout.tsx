@@ -7,7 +7,6 @@ import {
   DHeader,
   Preview,
   MHeader,
-  Favicons,
   RickRoll,
   DControls,
   CallToAction,
@@ -37,7 +36,6 @@ export const SiteLayout: React.FC<ISiteLayout> = (props: ISiteLayout) => {
 
   return (
     <>
-      <Favicons />
       {preview && <Preview />}
       <AnimatePresence mode="wait">
         <Wrapper>

@@ -12,6 +12,7 @@ import type { ParticlesProps } from "react-tsparticles";
 export type ParticlesOptions = NonNullable<ParticlesProps["options"]>;
 
 const DEFAULT_OPTIONS = {
+  detectRetina: true,
   particles: {
     shape: { type: "circle" },
     number: {
@@ -19,7 +20,7 @@ const DEFAULT_OPTIONS = {
       value: 160,
       density: {
         enable: true,
-        value_area: 800,
+        value_area: typeof window === "undefined" ? 800 : window.outerHeight,
       },
     },
     links: {
@@ -63,7 +64,6 @@ const DEFAULT_OPTIONS = {
       },
     },
   },
-  detectRetina: true,
 } as ParticlesOptions;
 
 const konamiOptions: ParticlesOptions = {
@@ -71,15 +71,15 @@ const konamiOptions: ParticlesOptions = {
   particles: {
     shape: { type: "circle" },
     number: {
-      limit: 500,
-      value: 300,
+      limit: 1000,
+      value: 500,
       density: {
         enable: true,
-        value_area: 800,
+        value_area: typeof window === "undefined" ? 800 : window.outerHeight,
       },
     },
     size: {
-      value: 1,
+      value: 0,
       random: true,
     },
     opacity: {
@@ -92,23 +92,20 @@ const konamiOptions: ParticlesOptions = {
     twinkle: { particles: { enable: true } },
     move: {
       enable: true,
-      speed: 5,
+      speed: 6,
       direction: "inside",
       size: true,
-      trail: { enable: true, length: 3 },
-      warp: true,
+      trail: { enable: true, length: 3, fillColor: "transparent" },
+      outMode: "out",
+      straight: true,
+      collisions: false,
     },
   },
   interactivity: {
     events: {
       onHover: {
-        parallax: { enable: true, force: 10, smooth: 10 },
-      },
-    },
-    modes: {
-      connect: { distance: 100, radius: 200, links: { opacity: 0.2 } },
-      push: {
-        quantity: 2,
+        enable: true,
+        parallax: { enable: true, force: 5, smooth: 25 },
       },
     },
   },
@@ -146,6 +143,7 @@ const Wrapper = chakra("div", {
     zIndex: 0,
     position: "fixed",
     transition: "opacity 500ms ease-in",
+    bg: "transparent",
   },
 });
 

@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import { useConfig, useColorMode, useColorTokenValue } from "~/context";
 
-export const Favicons: React.FC = () => {
+export const Favicons = () => {
   const { colorMode } = useColorMode();
   const { orgName } = useConfig();
   const theme = useColorTokenValue("primary.500", "secondary.500");

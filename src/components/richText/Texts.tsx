@@ -4,11 +4,11 @@ import { useColorValue } from "~/context";
 
 import type { IBlockQuote, ICode, IParagraph, IInline } from "./types";
 
-export const P: React.FC<IParagraph> = (props: IParagraph) => (
+export const P = (props: IParagraph) => (
   <Text my={8} css={{ "&:first-of-type": { marginTop: useToken("space", 2) } }} {...props} />
 );
 
-export const BlockQuote: React.FC<IBlockQuote> = (props: IBlockQuote) => {
+export const BlockQuote = (props: IBlockQuote) => {
   const bg = useColorValue("blackAlpha.100", "whiteAlpha.100");
   const border = useColorValue("blackAlpha.300", "whiteAlpha.300");
   return (
@@ -32,7 +32,7 @@ export const BlockQuote: React.FC<IBlockQuote> = (props: IBlockQuote) => {
   );
 };
 
-export const Code: React.FC<ICode> = (props: ICode) => {
+export const Code = (props: ICode) => {
   const scheme = useColorValue("gray", "tertiary");
 
   let ctx = useCodeBlockStyle();
@@ -43,7 +43,7 @@ export const Code: React.FC<ICode> = (props: ICode) => {
   return <ChakraCode fontSize="sm" colorScheme={scheme} px={1} sx={sx} {...props} />;
 };
 
-export const Inline: React.FC<IInline> = (props: IInline) => {
+export const Inline = (props: IInline) => {
   const { node, ...rest } = props;
   return (
     <Box as="span" key={node.data.target.sys.id} {...rest}>

@@ -29,7 +29,7 @@ const Home: React.FC<THome> = (props: THome) => {
       <SEO title={orgName} titleTemplate="%s" />
       <Box pt={32} zIndex={-2} minH="100vh" boxSize="100%" color={heroText} {...rStyles} {...bg}>
         <Flex flexDir="column" alignItems="center">
-          <Box overflowY="hidden" width={["90%", "66%", "33%"]}>
+          <Box overflowY="hidden" width={["90%", "66%", "33%"]} zIndex={1}>
             <StellarLogo colorMode={colorMode} width="100%" height="100%" ref={logoRef} />
           </Box>
           <Flex textAlign="center">

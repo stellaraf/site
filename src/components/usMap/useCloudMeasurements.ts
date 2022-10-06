@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { atom, selector, useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
-import { merge } from "merge-anything";
 import { useCloudLocations } from "~/context";
 import { all } from "~/util";
 
 import type { GeoPoint, CloudMeasurement } from "~/types";
 
-type PartialMeasurement = Pick<CloudMeasurement, "id"> & Partial<CloudMeasurement>;
+export type PartialMeasurement = Pick<CloudMeasurement, "id"> & Partial<CloudMeasurement>;
 
 interface CloudMeasurements {
   /**
@@ -42,26 +41,9 @@ interface CloudMeasurements {
   updateMeasurement: (measurement: PartialMeasurement) => void;
 
   /**
-   * Set a measurement as the "best" (lowest elapsed time).
-   *
-   * @param measurement Best measurement.
-   */
-  setBestMeasurement: (measurement: CloudMeasurement) => void;
-
-  /**
-   * Determine if all measurements are active, have been measured, and are done.
-   */
-  complete: boolean;
-
-  /**
-   * Get the measurement with the best elapsed time.
-   */
-  getBestMeasurement: () => CloudMeasurement;
-
-  /**
    * Reset all measurement properties (`elapsed`, `done` & `best`) to initial values.
    */
-  reset: NoOp;
+  reset: () => void;
 }
 
 const measurementAtom = atom<CloudMeasurement[]>({ key: "cloudMeasurements", default: [] });
@@ -79,10 +61,37 @@ const completeMeasurementsSelector = selector<boolean>({
       }
       return final;
     }, []);
-    console.log(completed);
-    return all(...completed);
+    const complete = all(...completed);
+    return complete;
   },
 });
+
+const bestMeasurementSelector = selector<CloudMeasurement | null>({
+  key: "cloud-measurements-best",
+  get: ({ get }): CloudMeasurement | null => {
+    const measurements = get(measurementAtom);
+    const complete = get(completeMeasurementsSelector);
+    if (measurements.length === 0) {
+      return null;
+    }
+    if (!complete) {
+      return null;
+    }
+    const best = measurements.reduce((prev, next) => (prev.elapsed > next.elapsed ? next : prev));
+    return best;
+  },
+});
+
+/**
+ * Access only the `measurements` value of `useCloudMeasurements()`.
+ */
+export const useCloudMeasurementValues = (): CloudMeasurement[] => useRecoilValue(measurementAtom);
+
+/**
+ * Best Cloud Measurement if all measurements are complete, `null` if not.
+ */
+export const useBestMeasurement = (): Nullable<CloudMeasurement> =>
+  useRecoilValue(bestMeasurementSelector);
 
 /**
  * Manage measurement state of cloud location latency tests.
@@ -90,7 +99,6 @@ const completeMeasurementsSelector = selector<boolean>({
 export function useCloudMeasurements(): CloudMeasurements {
   const locations = useCloudLocations();
   const [measurements, setMeasurements] = useRecoilState(measurementAtom);
-  const complete = useRecoilValue(completeMeasurementsSelector);
   const resetState = useResetRecoilState(measurementAtom);
 
   /**
@@ -134,14 +142,6 @@ export function useCloudMeasurements(): CloudMeasurements {
     });
   };
 
-  const getBestMeasurement = () =>
-    measurements.reduce((prev, next) => (prev.elapsed > next.elapsed ? next : prev));
-
-  const setBestMeasurement = (measurement: CloudMeasurement) => {
-    const merged = merge({}, measurement, { best: true });
-    updateMeasurement(merged);
-  };
-
   const reset = () => {
     resetState();
     addMeasurements(locations);
@@ -160,16 +160,6 @@ export function useCloudMeasurements(): CloudMeasurements {
     getMeasurementIndex,
     addMeasurements,
     updateMeasurement,
-    setBestMeasurement,
-    complete,
-    getBestMeasurement,
     reset,
   };
-}
-
-/**
- * Access only the `measurements` value of `useCloudMeasurements()`.
- */
-export function useCloudMeasurementValues(): CloudMeasurement[] {
-  return useRecoilValue(measurementAtom);
 }

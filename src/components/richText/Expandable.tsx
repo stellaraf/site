@@ -12,7 +12,7 @@ import { useRender } from "~/hooks";
 
 import type { TExpandable } from "~/types";
 
-export const Expandable: React.FC<TExpandable> = (props: TExpandable) => {
+export const Expandable = (props: TExpandable) => {
   const { title, body, useDefaultTitle } = props;
   const renderedBody = useRender(body);
   const hoverBorder = useColorValue("blackAlpha.400", "whiteAlpha.400");

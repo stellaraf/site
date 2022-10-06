@@ -1,6 +1,6 @@
 import App from "next/app";
 import Head from "next/head";
-import { BaseSEO } from "~/components";
+import { BaseSEO, Favicons } from "~/components";
 import { Provider } from "~/context";
 import { usePageTracking } from "~/hooks";
 import { SiteLayout } from "~/layouts";
@@ -27,6 +27,7 @@ const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
       </Head>
       <Provider appConfig={globalConfig} docsGroups={docsGroups} testimonials={testimonials}>
         <BaseSEO />
+        <Favicons />
         <SiteLayout
           actions={actions}
           footerGroups={footerGroups}

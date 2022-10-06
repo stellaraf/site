@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { If } from "~/components";
 import { useColorValue } from "~/context";
+import { useBestMeasurement } from "./useCloudMeasurements";
 import { MapMarker } from "./MapMarker";
 
 import type { LocationProps, ILatency } from "./types";
@@ -49,9 +50,15 @@ export const Location = (props: LocationProps): JSX.Element => {
 
   const bg = useColorValue("white", "blackAlpha.600");
 
+  const best = useBestMeasurement();
+
   return (
     <Popover trigger="hover" placement="top">
-      <MapMarker coordinates={[coordinates.lon, coordinates.lat]} color={color} best={loc.best} />
+      <MapMarker
+        coordinates={[coordinates.lon, coordinates.lat]}
+        color={color}
+        best={best?.id === loc.id}
+      />
       <Portal>
         <PopoverContent
           bg={bg}

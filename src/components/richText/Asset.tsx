@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import NextImage from "next/image";
 import { Image as ChakraImage, useDisclosure } from "@chakra-ui/react";
 import { Backdrop, ModalWrapper, Video } from "~/components";
@@ -5,22 +6,25 @@ import { useColorValue } from "~/context";
 
 import type { TAsset, IAssetFields } from "./types";
 
-const ImageAsset: React.FC<IAssetFields> = (props: IAssetFields) => {
+const SVG_PATTERN = /^image\/svg.*/i;
+const IMAGE_PATTERN = /^image.*/i;
+const VIDEO_PATTERN = /^video.*/i;
+
+const ImageAsset = (props: IAssetFields) => {
   const { color, title, url, details, fileName, contentType, ...rest } = props;
   const { width = 0, height = 0 } = details.image ?? {};
   const { isOpen, onClose, onOpen } = useDisclosure();
   const css = useColorValue({}, { filter: "invert(1)" });
-  /**
-   * Override the background/border colors if SVG. Since SVG's won't have a background, it looks
-   * better to make the background match the color mode.
-   */
+
+  // Override the background/border colors if SVG. Since SVG's won't have a background, it looks
+  // better to make the background match the color mode.
   let bg = useColorValue("dark.500", "light.500");
   const svgBg = useColorValue("white", "black");
 
   // next/image doesn't support SVGs, as of 10.0.1 testing. Use native element for SVGs.
   let image = null;
 
-  if (contentType.match(/image\/svg.*/gi)) {
+  if (SVG_PATTERN.test(contentType)) {
     image = <ChakraImage src={url} alt={title} boxSize="100%" css={css} />;
     bg = svgBg;
   } else {
@@ -66,7 +70,7 @@ const ImageAsset: React.FC<IAssetFields> = (props: IAssetFields) => {
   );
 };
 
-const VideoAsset: React.FC<IAssetFields> = (props: IAssetFields) => {
+const VideoAsset = (props: IAssetFields) => {
   const { color, title, url, details, fileName, contentType, ...rest } = props;
 
   return (
@@ -76,16 +80,23 @@ const VideoAsset: React.FC<IAssetFields> = (props: IAssetFields) => {
   );
 };
 
-export const Asset: React.FC<TAsset> = (props: TAsset) => {
+export const Asset = (props: TAsset) => {
   const { title, file } = props;
   const { contentType } = file;
   const borderColor = useColorValue("dark.500", "light.500");
 
-  let asset = null;
-  if (contentType.match(/image/gi)?.length ?? 0 !== 0) {
-    asset = <ImageAsset color={borderColor} title={title} {...file} />;
-  } else if (contentType.match(/video/gi)?.length ?? 0 !== 0) {
-    asset = <VideoAsset color={borderColor} title={title} {...file} />;
-  }
+  const isImage = IMAGE_PATTERN.test(contentType);
+  const isVideo = VIDEO_PATTERN.test(contentType);
+
+  const asset = useMemo(() => {
+    if (isImage) {
+      return <ImageAsset color={borderColor} title={title} {...file} />;
+    }
+    if (isVideo) {
+      return <VideoAsset color={borderColor} title={title} {...file} />;
+    }
+    return <></>;
+  }, [isImage, isVideo, contentType]);
+
   return asset;
 };

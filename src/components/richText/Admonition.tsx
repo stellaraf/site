@@ -27,15 +27,15 @@ const AdmonitionContainer = chakra("div", {
   },
 });
 
-const AdmonitionIcon: React.FC<IAdmonitionIcon> = (props: IAdmonitionIcon) => {
+const AdmonitionIcon = (props: IAdmonitionIcon) => {
   const { type = "Note" } = props;
   return <DynamicIcon icon={iconMap[type]} boxSize={{ base: 8, lg: 6 }} />;
 };
 
-export const Admonition: React.FC<TAdmonition> = (props: TAdmonition) => {
+export const Admonition = (props: TAdmonition) => {
   const { title, body, type = "Note", ...rest } = props;
 
-  const titleMe = useTitleCase();
+  const fnTitle = useTitleCase();
   const renderedBody = useRender(body);
 
   const bg = useColorValue(
@@ -45,15 +45,15 @@ export const Admonition: React.FC<TAdmonition> = (props: TAdmonition) => {
       Tip: "green.500",
       Warning: "yellow.500",
       Critical: "red.500",
-    },
+    }[type],
     {
       Information: "primary.300",
       Note: "gray.300",
       Tip: "green.300",
       Warning: "yellow.300",
       Critical: "red.300",
-    },
-  )[type];
+    }[type],
+  );
 
   const linkColor = useColorValue(
     {
@@ -62,15 +62,15 @@ export const Admonition: React.FC<TAdmonition> = (props: TAdmonition) => {
       Tip: "primary.500",
       Warning: "primary.500",
       Critical: "primary.500",
-    },
+    }[type],
     {
       Note: "secondary.500",
       Information: "gray.800",
       Tip: "primary.300",
       Warning: "primary.300",
       Critical: "primary.300",
-    },
-  )[type];
+    }[type],
+  );
 
   const codeColorScheme = useColorValue(
     {
@@ -79,15 +79,15 @@ export const Admonition: React.FC<TAdmonition> = (props: TAdmonition) => {
       Tip: "green",
       Warning: "yellow",
       Critical: "red",
-    },
+    }[type],
     {
       Note: "blackSolid",
       Information: "whiteSolid",
       Tip: "blackSolid",
       Warning: "blackSolid",
       Critical: "blackSolid",
-    },
-  )[type];
+    }[type],
+  );
 
   const color = useOpposingColor(bg);
 
@@ -97,7 +97,7 @@ export const Admonition: React.FC<TAdmonition> = (props: TAdmonition) => {
         <AdmonitionIcon type={type} />
         {title && (
           <Heading as="h3" fontWeight="bold" fontSize="md">
-            {titleMe(title)}
+            {fnTitle(title)}
           </Heading>
         )}
       </HStack>

@@ -25,8 +25,8 @@ export const _CallToActionContainer: React.FC<ICallToActionMemo> = (props: ICall
   const filteredActions = rawActions.reduce<TActions[]>((filtered, action) => {
     if (currentPath !== "/") {
       const pathName = currentPath.replace("/", "");
-      const pattern = new RegExp(pathName, "g");
-      if (pattern.test(action.page.fields.slug)) {
+      const pattern = new RegExp(`^${pathName}.*`, "g");
+      if (!pattern.test(action.page.fields.slug)) {
         filtered.push(action);
       }
     } else {
