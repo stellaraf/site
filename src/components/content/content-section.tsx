@@ -7,9 +7,10 @@ import { useColorValue } from "~/context";
 import { useMobile, useResponsiveStyle } from "~/hooks";
 import { forwardRef } from "~/util";
 
+import { usePageContent } from "./use-page-content";
+
 import type { ContentSectionProps, ContentSides, ContentSide, TitleLayoutProps } from "./types";
 import type { FlexProps } from "@chakra-ui/react";
-import { usePageContent } from "./use-page-content";
 
 function getSide(idx: number): ContentSide {
   const sides: ContentSides = ["right", "left"];

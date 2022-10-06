@@ -3,9 +3,9 @@ import { LayoutGroup } from "framer-motion";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
 import { Location } from "./location";
+import { useCloudMeasurementValues } from "./use-cloud-measurements";
 
 import type { USMapProps } from "./types";
-import { useCloudMeasurementValues } from "./use-cloud-measurements";
 
 const Container = chakra("div", { baseStyle: { mx: "auto" } });
 

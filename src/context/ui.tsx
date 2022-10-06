@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 
-import type { GetServerSideProps } from "next";
 import {
   useToken,
   ChakraProvider,
@@ -13,6 +12,7 @@ import {
 import { makeTheme } from "~/util";
 
 import type { UseTheme, UIProviderProps, ColorModeContext } from "./types";
+import type { GetServerSideProps } from "next";
 
 export const UIProvider = (props: UIProviderProps) => {
   const { theme, children, cookies } = props;

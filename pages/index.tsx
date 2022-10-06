@@ -1,6 +1,5 @@
 import { useRef } from "react";
 
-import type { GetStaticProps } from "next";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
 
@@ -9,6 +8,7 @@ import { useConfig, useColorMode, useColorValue } from "~/context";
 import { useGradient, useNavLogo, useResponsiveStyle } from "~/hooks";
 import { getParsedContent } from "~/util";
 
+import type { GetStaticProps } from "next";
 import type { THome, THomePageContent } from "~/types";
 
 const Home = (props: THome) => {

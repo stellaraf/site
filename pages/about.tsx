@@ -1,4 +1,3 @@
-import type { GetStaticProps } from "next";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
@@ -13,6 +12,7 @@ import {
   sortByWeight,
 } from "~/util";
 
+import type { GetStaticProps } from "next";
 import type { Bio, PageEntry, IAboutPage, ISection, PageContent } from "~/types";
 
 const Section = (props: ISection) => {

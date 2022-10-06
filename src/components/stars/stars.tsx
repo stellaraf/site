@@ -5,10 +5,9 @@ import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
 import { useColorValue } from "~/context";
-
-import type { BoxProps } from "@chakra-ui/react";
 import { useKonami } from "~/hooks";
 
+import type { BoxProps } from "@chakra-ui/react";
 import type { ParticlesProps } from "react-tsparticles";
 import type { Engine } from "tsparticles-engine";
 

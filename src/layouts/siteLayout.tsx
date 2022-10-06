@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+
 import { useBreakpointValue } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 
@@ -14,9 +15,10 @@ import {
 } from "~/components";
 import { useMobile } from "~/hooks";
 
+import { Wrapper, Root, Main } from "./common";
+
 import type { ISiteLayout } from "./types";
 import type { BoxProps } from "@chakra-ui/react";
-import { Wrapper, Root, Main } from "./common";
 
 const Stars = dynamic<BoxProps>(() => import("~/components").then(i => i.Stars));
 

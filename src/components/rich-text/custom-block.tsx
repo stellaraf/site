@@ -9,10 +9,10 @@ import {
   isArticleButton,
   isMarkdownBlock,
 } from "./guards";
-
-import type { CustomBlockPreProps } from "./types";
 import { MarkdownBlock } from "./markdown";
 import { Table } from "./table";
+
+import type { CustomBlockPreProps } from "./types";
 
 export const CustomBlock = (props: CustomBlockPreProps) => {
   const target = parseTarget(props);

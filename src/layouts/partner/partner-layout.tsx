@@ -12,12 +12,12 @@ import { useTitleCase } from "use-title-case";
 import { Card, CardBody, TrialForm } from "~/components";
 import { useColorValue } from "~/context";
 import { useGradient, useMobile, useRender, useResponsiveStyle } from "~/hooks";
-
-import type { PartnerLayoutProps } from "./types";
 import { submitTrialForm } from "~/util";
 
-import type { TFormModelTrial } from "~/types";
 import { PartnerContextProvider, usePartnerCtx } from "./context";
+
+import type { PartnerLayoutProps } from "./types";
+import type { TFormModelTrial } from "~/types";
 
 const TextContent = () => {
   const { title, subtitle, body } = usePartnerCtx();

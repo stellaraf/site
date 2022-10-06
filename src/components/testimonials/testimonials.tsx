@@ -4,8 +4,9 @@ import { AnimatedDiv } from "~/components";
 import { useColorValue, useConfig } from "~/context";
 import { useOpposingColor, useGlow, useResponsiveStyle, useRandomElement, useSSR } from "~/hooks";
 
-import type { CenterProps } from "@chakra-ui/react";
 import { Testimonial } from "./testimonial";
+
+import type { CenterProps } from "@chakra-ui/react";
 
 export const Testimonials = (props: CenterProps) => {
   const { testimonials } = useConfig();

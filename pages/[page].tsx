@@ -1,8 +1,7 @@
-import type { GetStaticPaths, GetStaticProps } from "next";
-
 import { ContentSection, Hero, SEO, GetStarted, Testimonials } from "~/components";
 import { getPageId, getPage, getPageContent } from "~/util";
 
+import type { GetStaticPaths, GetStaticProps } from "next";
 import type { PageWithContent, PageEntry, PageContent } from "~/types";
 
 type UrlQuery = {

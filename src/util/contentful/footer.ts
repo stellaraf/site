@@ -1,5 +1,5 @@
-import { getParsedContent } from "./common";
 import { slug, sortByTitle, sortByWeight } from "../generic";
+import { getParsedContent } from "./common";
 
 import type {
   PageAttrs,

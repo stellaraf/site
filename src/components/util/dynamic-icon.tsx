@@ -1,6 +1,7 @@
 import { memo, useMemo } from "react";
 
 import dynamic from "next/dynamic";
+
 import { chakra, Icon as ChakraIcon } from "@chakra-ui/react";
 import isEqual from "react-fast-compare";
 

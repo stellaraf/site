@@ -7,11 +7,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { FieldGroup, TextArea, TextInput } from "~/components";
-
-import type { FormProps, FormHandlers } from "./types";
 import { forwardRef } from "~/util";
 
 import { useContactFormConfig } from "../state";
+
+import type { FormProps, FormHandlers } from "./types";
 
 export const SupportForm = forwardRef<FormHandlers, FormProps<"Support">>((props, ref) => {
   const { onSubmit } = props;

@@ -7,9 +7,9 @@ import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { FieldGroup, TextInput } from "~/components";
+import { useAlert } from "~/hooks";
 
 import type { TrialFormProps } from "./types";
-import { useAlert } from "~/hooks";
 
 export const TrialForm = (props: TrialFormProps) => {
   const { name, fields, onSubmit } = props;

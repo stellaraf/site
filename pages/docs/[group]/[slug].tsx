@@ -1,10 +1,10 @@
-import type { GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 
 import { SEO, DocsArticle, Error, ContentLoader } from "~/components";
 import { DocsLayout } from "~/layouts";
 import { getParsedContent } from "~/util";
 
+import type { GetStaticProps, GetStaticPaths } from "next";
 import type { IDocsArticlePage } from "~/types";
 
 type UrlQuery = {

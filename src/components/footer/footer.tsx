@@ -4,11 +4,12 @@ import { Controls, Subscribe } from "~/components";
 import { useColorValue } from "~/context";
 import { useMobile, useResponsiveStyle } from "~/hooks";
 
-import type { FooterProps } from "./types";
 import { Copyright } from "./copyright";
 import { DesktopLinks } from "./desktop-links";
 import { MobileLinks } from "./mobile-links";
 import { SocialLinks } from "./social-links";
+
+import type { FooterProps } from "./types";
 
 const DBottom = () => {
   return (

@@ -10,8 +10,9 @@ import { DynamicIcon } from "~/components";
 import { useColorValue } from "~/context";
 import { reactChildText } from "~/util";
 
-import type { CodeBlockProps } from "./types";
 import { useCodeBlockStyle } from "./use-code-block-style";
+
+import type { CodeBlockProps } from "./types";
 
 export const CodeBlock = (props: CodeBlockProps) => {
   const { children, ...rest } = props;

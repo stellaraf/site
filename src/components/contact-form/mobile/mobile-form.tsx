@@ -5,13 +5,13 @@ import { useTitleCase } from "use-title-case";
 
 import { DynamicIcon, Modal } from "~/components";
 
-import type { MobileFormProps } from "./types";
 import { SalesForm, SupportForm } from "../forms";
-
-import type { FormType, FormFieldValue } from "../forms/types";
 import { useContactForm } from "../state";
 import { submitForm } from "../submitters";
 import { Success } from "../success";
+
+import type { FormType, FormFieldValue } from "../forms/types";
+import type { MobileFormProps } from "./types";
 
 export const MobileForm = (props: MobileFormProps) => {
   const {

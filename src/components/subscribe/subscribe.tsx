@@ -17,14 +17,14 @@ import { useForm, FormProvider, Controller } from "react-hook-form";
 import { useTitleCase } from "use-title-case";
 import { z } from "zod";
 
-import type { SubscribeProps, SubscribeFormData, SubscribeToast } from "./types";
 import { useConfig } from "~/context";
-
-import type { RenderProps } from "@chakra-ui/react";
 import { useGoogleAnalytics } from "~/hooks";
 
 import { SubscribeField } from "./subscribe-field";
 import { subscribeEmail } from "./util";
+
+import type { SubscribeProps, SubscribeFormData, SubscribeToast } from "./types";
+import type { RenderProps } from "@chakra-ui/react";
 
 const subscribeSchema = z.object({
   email: z.string().email("Must be a valid email address"),

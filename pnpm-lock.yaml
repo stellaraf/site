@@ -38,7 +38,7 @@ specifiers:
   eslint-config-next: ^12.3.1
   eslint-config-prettier: ^7.2.0
   eslint-import-resolver-typescript: ^2.7.1
-  eslint-plugin-import: git://github.com/import-js/eslint-plugin-import#753505d062f7ae6736eb4ffb2cc35c3f699c5b6f
+  eslint-plugin-import: ^2.26.0
   eslint-plugin-json: ^2.1.2
   eslint-plugin-jsx-a11y: ^6.6.1
   eslint-plugin-prettier: ^3.4.1
@@ -147,7 +147,7 @@ devDependencies:
   eslint-config-next: 12.3.1_ypn2ylkkyfa5i233caldtndbqa
   eslint-config-prettier: 7.2.0_eslint@8.24.0
   eslint-import-resolver-typescript: 2.7.1_dg2pe6kqkrddxbf2funb723kue
-  eslint-plugin-import: github.com/import-js/eslint-plugin-import/753505d062f7ae6736eb4ffb2cc35c3f699c5b6f_gcianqk2r5w7qn6wdun4jzyvom
+  eslint-plugin-import: 2.26.0_gcianqk2r5w7qn6wdun4jzyvom
   eslint-plugin-json: 2.1.2
   eslint-plugin-jsx-a11y: 6.6.1_eslint@8.24.0
   eslint-plugin-prettier: 3.4.1_6qt3dqybzexcsp6pjbwpjfxzzu
@@ -3173,7 +3173,7 @@ packages:
     dependencies:
       debug: 4.3.4
       eslint: 8.24.0
-      eslint-plugin-import: github.com/import-js/eslint-plugin-import/753505d062f7ae6736eb4ffb2cc35c3f699c5b6f_gcianqk2r5w7qn6wdun4jzyvom
+      eslint-plugin-import: 2.26.0_gcianqk2r5w7qn6wdun4jzyvom
       glob: 7.2.3
       is-glob: 4.0.3
       resolve: 1.22.1
@@ -6741,37 +6741,3 @@ packages:
   /zwitch/2.0.2:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
-
-  github.com/import-js/eslint-plugin-import/753505d062f7ae6736eb4ffb2cc35c3f699c5b6f_gcianqk2r5w7qn6wdun4jzyvom:
-    resolution: {tarball: https://codeload.github.com/import-js/eslint-plugin-import/tar.gz/753505d062f7ae6736eb4ffb2cc35c3f699c5b6f}
-    id: github.com/import-js/eslint-plugin-import/753505d062f7ae6736eb4ffb2cc35c3f699c5b6f
-    name: eslint-plugin-import
-    version: 2.26.0
-    engines: {node: '>=4'}
-    peerDependencies:
-      '@typescript-eslint/parser': '*'
-      eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8
-    peerDependenciesMeta:
-      '@typescript-eslint/parser':
-        optional: true
-    dependencies:
-      '@typescript-eslint/parser': 5.39.0_ypn2ylkkyfa5i233caldtndbqa
-      array-includes: 3.1.5
-      array.prototype.flat: 1.3.0
-      debug: 2.6.9
-      doctrine: 2.1.0
-      eslint: 8.24.0
-      eslint-import-resolver-node: 0.3.6
-      eslint-module-utils: 2.7.4_u3o3cbxhjcofsya2eebinaptmi
-      has: 1.0.3
-      is-core-module: 2.10.0
-      is-glob: 4.0.3
-      minimatch: 3.1.2
-      object.values: 1.1.5
-      resolve: 1.22.1
-      tsconfig-paths: 3.14.1
-    transitivePeerDependencies:
-      - eslint-import-resolver-typescript
-      - eslint-import-resolver-webpack
-      - supports-color
-    dev: true

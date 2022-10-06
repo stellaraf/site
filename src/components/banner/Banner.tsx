@@ -5,10 +5,11 @@ import { DynamicIcon } from "~/components";
 import { useConfig, useColorValue, useColorTokenValue } from "~/context";
 import { useOpposingColor, useRender, useMobile } from "~/hooks";
 
+import { motionChakra } from "../util/animated";
+import { useBanner } from "./use-banner";
+
 import type { BannerContentProps } from "./types";
 import type { BoxProps, PropsOf } from "@chakra-ui/react";
-import { useBanner } from "./use-banner";
-import { motionChakra } from "../util/animated";
 
 const BannerContainer = motionChakra<BoxProps>("div", {
   baseStyle: {

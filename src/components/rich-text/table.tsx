@@ -2,9 +2,9 @@ import { Box } from "@chakra-ui/react";
 
 import { useColorValue } from "~/context";
 
-import type { TableCellProps, TableData } from "./types";
 import { Markdown } from "./markdown";
 
+import type { TableCellProps, TableData } from "./types";
 import type { BoxProps } from "@chakra-ui/react";
 import type { TTableEntry } from "~/types";
 

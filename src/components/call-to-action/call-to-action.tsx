@@ -1,19 +1,20 @@
 import { memo } from "react";
 
 import { useRouter } from "next/router";
+
 import { Center, Heading, VStack, Wrap, WrapItem } from "@chakra-ui/react";
 import { useInView } from "react-intersection-observer";
 import { useTitleCase } from "use-title-case";
 
 import { AnimatedDiv, Divider } from "~/components";
 import { useConfig, useColorValue } from "~/context";
-
-import type { CallToActionProps, MemoCallToActionProps } from "./types";
 import { useResponsiveStyle } from "~/hooks";
 
-import type { TActions } from "~/types";
 import { Action } from "./action";
 import { useRandomActions } from "./util";
+
+import type { CallToActionProps, MemoCallToActionProps } from "./types";
+import type { TActions } from "~/types";
 
 export const _CallToActionContainer = (props: MemoCallToActionProps) => {
   const { actions: rawActions, currentPath, ...rest } = props;

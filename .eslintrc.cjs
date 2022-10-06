@@ -38,7 +38,6 @@ const config = {
       "error",
       {
         "newlines-between": "always",
-        distinctGroup: false,
         alphabetize: {
           order: "asc",
           caseInsensitive: false,
@@ -47,11 +46,6 @@ const config = {
           {
             pattern: "react",
             group: "builtin",
-            position: "before",
-          },
-          {
-            pattern: "next",
-            group: "external",
             position: "before",
           },
           {

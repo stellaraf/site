@@ -2,24 +2,25 @@ import { useEffect, useRef } from "react";
 import type { MouseEvent } from "react";
 
 import { useRouter } from "next/router";
+
 import { Center, Stack, Button as ChakraButton } from "@chakra-ui/react";
 import { motion, AnimatePresence, LayoutGroup, useCycle } from "framer-motion";
 import { useTitleCase } from "use-title-case";
 
-import type { FormHandlers } from "../forms/types";
 import { Button, Icon } from "~/components";
-
-import type { MotionItems } from "../types";
 import { useGoogleAnalytics } from "~/hooks";
 
-import type { Variants } from "framer-motion";
-import type { IContactCard } from "~/types";
-import { DesktopForm } from "./desktop-form";
 import { useContactFormCtx } from "../context";
 import { FormCard, FormCardBody } from "../form-card";
 import { FormCardContent } from "../form-card-content";
 import { queryIsForm } from "../guards";
 import { useContactForm } from "../state";
+import { DesktopForm } from "./desktop-form";
+
+import type { FormHandlers } from "../forms/types";
+import type { MotionItems } from "../types";
+import type { Variants } from "framer-motion";
+import type { IContactCard } from "~/types";
 
 // Make Chakra-UI components into Framer-Motion components for fewer components in the tree.
 const Container = motion(Stack);

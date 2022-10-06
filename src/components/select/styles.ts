@@ -6,12 +6,12 @@ import * as ReactSelect from "react-select";
 
 import { useColorValue, useColorTokenValue, useToken } from "~/context";
 import { useMobile, useOpposingColor } from "~/hooks";
-
-import type { RSStyleCallbackProps, RSThemeFunction, RSStyleFunction } from "./types";
 import { removeProps } from "~/util";
 
-import type { SelectOptionSingle } from "~/types";
 import { useSelectContext } from "./select";
+
+import type { RSStyleCallbackProps, RSThemeFunction, RSStyleFunction } from "./types";
+import type { SelectOptionSingle } from "~/types";
 
 export const useControlStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
   props: RSStyleCallbackProps,

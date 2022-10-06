@@ -5,13 +5,13 @@ import { useTitleCase } from "use-title-case";
 
 import { DynamicIcon } from "~/components";
 
-import type { DesktopFormProps } from "./types";
 import { SalesForm, SupportForm } from "../forms";
-
-import type { FormType, FormFieldValue } from "../forms/types";
 import { useContactForm } from "../state";
 import { submitForm } from "../submitters";
 import { Success } from "../success";
+
+import type { FormType, FormFieldValue } from "../forms/types";
+import type { DesktopFormProps } from "./types";
 
 export const DesktopForm = (props: DesktopFormProps) => {
   const { title, body, icon, accent = "primary", toggleLayout, formRef, onSubmit } = props;

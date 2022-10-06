@@ -12,9 +12,10 @@ import { Link, Error } from "~/components";
 import { useConfig, useColorValue, useColorTokenValue } from "~/context";
 import { useRender } from "~/hooks";
 
-import type { LocationProps, MapContainerProps } from "./types";
 import { mapDark, mapLight } from "./styles";
 import { gm, useMapUrl } from "./util";
+
+import type { LocationProps, MapContainerProps } from "./types";
 
 const Location = (props: LocationProps) => {
   const { lat, lng, content, bg, color, openMapsText, orgName, address, ...rest } = props;

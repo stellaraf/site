@@ -7,11 +7,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { FieldGroup, SelectField, TextArea, TextInput } from "~/components";
-
-import type { SalesFormFields, FormProps, FormHandlers } from "./types";
 import { forwardRef, buildSelections } from "~/util";
 
 import { useContactFormConfig } from "../state";
+
+import type { SalesFormFields, FormProps, FormHandlers } from "./types";
 
 export const SalesForm = forwardRef<FormHandlers, FormProps<"Sales">>((props, ref) => {
   const { onSubmit, accent } = props;

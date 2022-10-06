@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import type { DynamicOptions } from "next/dynamic";
+
 import { Skeleton } from "@chakra-ui/react";
 
 import { useBooleanValue, useSSR } from "~/hooks";

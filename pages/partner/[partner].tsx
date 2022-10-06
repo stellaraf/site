@@ -1,12 +1,13 @@
-import type { GetStaticProps, GetStaticPaths } from "next";
 import NextError from "next/error";
 import { useRouter } from "next/router";
+
 import { chakra } from "@chakra-ui/react";
 
 import { SEO, ContentLoader } from "~/components";
 import { PartnerLayout } from "~/layouts";
 import { getPartnerPage } from "~/util";
 
+import type { GetStaticProps, GetStaticPaths } from "next";
 import type { IPartnerPage } from "~/types";
 
 type UrlQuery = {

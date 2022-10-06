@@ -5,11 +5,12 @@ import { Spiral as Hamburger } from "hamburger-react";
 import { Button, DynamicIcon, Controls, Modal } from "~/components";
 import { useColorMode } from "~/context";
 
-import type { FlexProps } from "@chakra-ui/react";
-import type { ButtonProps } from "~/components";
 import navConfig from "./config";
 import { NavLink } from "./mobile-links";
 import { Wrapper } from "./mobile-wrapper";
+
+import type { FlexProps } from "@chakra-ui/react";
+import type { ButtonProps } from "~/components";
 
 const HEADING_HEIGHT = 56;
 

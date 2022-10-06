@@ -2,17 +2,17 @@ import { Box } from "@chakra-ui/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import type { MarkdownProps, TdProps } from "./types";
 import { Link, CodeBlock } from "~/components";
-
-import type { BoxProps } from "@chakra-ui/react";
 import { useColorValue } from "~/context";
 
-import type { Components } from "react-markdown";
-import type { TMarkdownBlock } from "~/types";
 import { H1, H2, H3, H4, H5, H6 } from "./headings";
 import { Ul, Ol, Li } from "./lists";
 import { Code, BlockQuote, P } from "./text";
+
+import type { MarkdownProps, TdProps } from "./types";
+import type { BoxProps } from "@chakra-ui/react";
+import type { Components } from "react-markdown";
+import type { TMarkdownBlock } from "~/types";
 
 export const Td = (props: TdProps) => {
   const { isHeader = false, children, ...rest } = props;

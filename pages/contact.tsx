@@ -1,10 +1,10 @@
-import type { GetStaticProps } from "next";
 import { Box, Flex, Button as ChakraButton, Heading, VStack } from "@chakra-ui/react";
 
 import { Content, DynamicIcon, Hero, FormCardGroup, SEO, GetStarted } from "~/components";
 import { useSlug, useResponsiveStyle } from "~/hooks";
 import { getPage, getPageContent, getPageId, getContactCards } from "~/util";
 
+import type { GetStaticProps } from "next";
 import type { PageEntry, IContactPage, PageContent } from "~/types";
 
 const Contact = (props: PageEntry<IContactPage>): JSX.Element => {

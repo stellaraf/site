@@ -3,9 +3,9 @@ import { RecoilRoot } from "recoil";
 import { TitleCaseProvider } from "use-title-case";
 
 import { ConfigProvider } from "./config";
+import { UIProvider } from "./ui";
 
 import type { ProviderProps } from "./types";
-import { UIProvider } from "./ui";
 
 const queryClient = new QueryClient();
 

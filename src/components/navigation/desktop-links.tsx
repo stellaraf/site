@@ -1,14 +1,16 @@
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+
 import { Link as ChakraLink, useToken } from "@chakra-ui/react";
 
 import { Button } from "~/components";
 import { useColorValue } from "~/context";
 
+import navConfig from "./config";
+
 import type { DesktopNavLinkProps, DesktopLinkGroupProps } from "./types";
 import type { LinkProps as ChakraLinkProps } from "@chakra-ui/react";
 import type { ButtonProps } from "~/components";
-import navConfig from "./config";
 
 const NavLink = (props: DesktopNavLinkProps) => {
   const { isActive = false, ...rest } = props;

@@ -1,9 +1,8 @@
-import type { GetStaticProps } from "next";
-
 import { SEO, DocsArticle, IPRanges } from "~/components";
 import { DocsLayout } from "~/layouts";
 import { getParsedContent } from "~/util";
 
+import type { GetStaticProps } from "next";
 import type { IDocsArticlePage } from "~/types";
 
 type UrlQuery = {
