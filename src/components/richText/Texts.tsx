@@ -4,9 +4,7 @@ import { useColorValue } from "~/context";
 
 import type { IBlockQuote, ICode, IParagraph, IInline } from "./types";
 
-export const P = (props: IParagraph) => (
-  <Text my={8} css={{ "&:first-of-type": { marginTop: useToken("space", 2) } }} {...props} />
-);
+export const P = (props: IParagraph) => <Text my={8} css={{ "&:first-of-type": { marginTop: useToken("space", 2) } }} {...props} />;
 
 export const BlockQuote = (props: IBlockQuote) => {
   const bg = useColorValue("blackAlpha.100", "whiteAlpha.100");

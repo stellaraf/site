@@ -52,10 +52,7 @@ export async function getContactCards(preview: boolean = false): Promise<IContac
  * Get a partner page. Because of the stupidly complex multi-nested structure of the data for any
  * model that has a form associated, some special parsing needs to occur.
  */
-export async function getPartnerPage(
-  partner: string,
-  preview: boolean = false,
-): Promise<IPartnerPage["pageData"]> {
+export async function getPartnerPage(partner: string, preview: boolean = false): Promise<IPartnerPage["pageData"]> {
   // Get all Partner Pages matching the the partner's name.
   const matches = await getParsedContent<IPartnerPageEntry["pageData"]>("partnerPage", preview, {
     "fields.name[match]": partner,

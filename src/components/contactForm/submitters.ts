@@ -2,10 +2,7 @@ import { all, getErrorMessage } from "~/util";
 
 import type { TFormTypes, TFormFields, TFormResponse } from "./Forms/types";
 
-export async function submitForm<F extends TFormTypes, D extends TFormFields<F>>(
-  form: F,
-  data: D,
-): Promise<TFormResponse> {
+export async function submitForm<F extends TFormTypes, D extends TFormFields<F>>(form: F, data: D): Promise<TFormResponse> {
   let response = { success: false, message: "Something went wrong." };
   const formKey = form.toUpperCase();
   let envUrl = "",

@@ -1,13 +1,4 @@
-import {
-  Box,
-  List,
-  ListItem,
-  Divider,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  AccordionButton,
-} from "@chakra-ui/react";
+import { Box, List, ListItem, Divider, AccordionIcon, AccordionItem, AccordionPanel, AccordionButton } from "@chakra-ui/react";
 import { useColorValue } from "~/context";
 import { Link } from "~/components";
 import { useDocsHref } from "./useDocsHref";
@@ -38,13 +29,7 @@ export const MMenuGroup: React.FC<IDocsGroup> = (props: IDocsGroup) => {
     <>
       <AccordionItem border="none">
         <AccordionButton my={4}>
-          <Box
-            w="100%"
-            textAlign="left"
-            textTransform="uppercase"
-            fontSize="md"
-            fontWeight="medium"
-          >
+          <Box w="100%" textAlign="left" textTransform="uppercase" fontSize="md" fontWeight="medium">
             {title}
           </Box>
           <AccordionIcon />

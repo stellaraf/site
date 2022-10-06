@@ -88,10 +88,7 @@ async function fetcher(args: TFetcher): Promise<number> {
   return duration;
 }
 
-async function queryAll(
-  measurements: CloudMeasurement[],
-  updateMeasurement: (m: PartialMeasurement) => void,
-): Promise<Nullable<CloudMeasurement[]>> {
+async function queryAll(measurements: CloudMeasurement[], updateMeasurement: (m: PartialMeasurement) => void): Promise<Nullable<CloudMeasurement[]>> {
   // Perform the query for each active location & set its new elapsed value.
   for (const measurement of measurements) {
     if (measurement.active) {

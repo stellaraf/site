@@ -1,12 +1,4 @@
-import {
-  Box,
-  Flex,
-  VStack,
-  Grid,
-  Heading,
-  VisuallyHidden,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Box, Flex, VStack, Grid, Heading, VisuallyHidden, useBreakpointValue } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 import { Card, CardBody, TrialForm } from "~/components";
 import { useColorValue } from "~/context";
@@ -22,34 +14,16 @@ const TextContent: React.FC = () => {
   const titleMe = useTitleCase();
   return (
     <Flex flexDir="column" width="100%" justifyContent="center">
-      <Heading
-        as="h1"
-        fontWeight="light"
-        fontSize={{ base: "4xl", lg: "5xl" }}
-        textAlign={{ base: "center", lg: "left" }}
-      >
+      <Heading as="h1" fontWeight="light" fontSize={{ base: "4xl", lg: "5xl" }} textAlign={{ base: "center", lg: "left" }}>
         {titleMe(title)}
       </Heading>
       {subtitle && (
-        <Heading
-          as="h2"
-          fontWeight="light"
-          fontSize={{ base: "1.5rem", lg: "xl" }}
-          textAlign={{ base: "center", lg: "left" }}
-        >
+        <Heading as="h2" fontWeight="light" fontSize={{ base: "1.5rem", lg: "xl" }} textAlign={{ base: "center", lg: "left" }}>
           {titleMe(subtitle)}
         </Heading>
       )}
       {body && (
-        <Box
-          mt={8}
-          fontSize="lg"
-          flexDir="column"
-          fontWeight="normal"
-          display="inline-flex"
-          maxW={{ base: "none", md: "none", xl: "75%" }}
-          alignSelf={{ base: "center", lg: "flex-start" }}
-        >
+        <Box mt={8} fontSize="lg" flexDir="column" fontWeight="normal" display="inline-flex" maxW={{ base: "none", md: "none", xl: "75%" }} alignSelf={{ base: "center", lg: "flex-start" }}>
           {renderedBody}
         </Box>
       )}
@@ -113,12 +87,7 @@ const DVendorLayout: React.FC = () => {
   const rStyles = useResponsiveStyle();
   return (
     <Box w="100%" minH="40vh" pt={32} {...bg} {...rStyles}>
-      <Grid
-        mt={16}
-        gridTemplateRows="1fr"
-        gridTemplateColumns="1fr 0.33fr"
-        gridTemplateAreas={`"content form"`}
-      >
+      <Grid mt={16} gridTemplateRows="1fr" gridTemplateColumns="1fr 0.33fr" gridTemplateAreas={`"content form"`}>
         <VStack alignItems="flex-start" gridArea="content">
           <TextContent />
           <PartnerLogo />
@@ -135,11 +104,12 @@ export const PartnerLayout: React.FC<IPartnerLayout> = (props: IPartnerLayout) =
   const { trialForm, ...rest } = props;
 
   const fields = trialForm ?? ({} as TFormModelTrial);
-  const largeLayout = useBreakpointValue({ base: false, md: false, lg: false, xl: true });
+  const largeLayout = useBreakpointValue({
+    base: false,
+    md: false,
+    lg: false,
+    xl: true,
+  });
 
-  return (
-    <PartnerContextProvider value={{ fields, ...rest }}>
-      {largeLayout ? <DVendorLayout /> : <MVendorLayout />}
-    </PartnerContextProvider>
-  );
+  return <PartnerContextProvider value={{ fields, ...rest }}>{largeLayout ? <DVendorLayout /> : <MVendorLayout />}</PartnerContextProvider>;
 };

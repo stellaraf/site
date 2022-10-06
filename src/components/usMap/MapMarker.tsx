@@ -38,14 +38,7 @@ export const MapMarker = (props: IMapMarker): JSX.Element => {
             animate={best ? "best" : "notBest"}
             transition={{ type: "spring", stiffness: 500, damping: 30 }}
           />
-          <Box
-            r={radius}
-            as="circle"
-            stroke="white"
-            boxShadow="sm"
-            strokeWidth={1.5}
-            fill={best ? bestColor : color}
-          />
+          <Box r={radius} as="circle" stroke="white" boxShadow="sm" strokeWidth={1.5} fill={best ? bestColor : color} />
           <motion.circle
             r={radius}
             fill={fill}

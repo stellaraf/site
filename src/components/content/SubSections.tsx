@@ -11,24 +11,11 @@ const SubSection: React.FC<ISubSection> = (props: ISubSection) => {
   const { title, body, icon, iconColor = "primary", buttonLink, buttonText } = props;
 
   const titleMe = useTitleCase();
-  const boxProps = useColorValue(
-    { bg: "white", boxShadow: "xl" },
-    { bg: "whiteAlpha.50", css: { backdropFilter: "blur(2px)" } },
-  );
+  const boxProps = useColorValue({ bg: "white", boxShadow: "xl" }, { bg: "whiteAlpha.50", css: { backdropFilter: "blur(2px)" } });
   const renderedBody = useRender(body);
-  const hasButton = useCallback(
-    () => typeof buttonLink !== "undefined" && typeof buttonText !== "undefined",
-    [buttonText, buttonLink],
-  );
+  const hasButton = useCallback(() => typeof buttonLink !== "undefined" && typeof buttonText !== "undefined", [buttonText, buttonLink]);
   return (
-    <Flex
-      {...boxProps}
-      p={8}
-      direction="column"
-      justify="space-between"
-      borderRadius="md"
-      zIndex={1}
-    >
+    <Flex {...boxProps} p={8} direction="column" justify="space-between" borderRadius="md" zIndex={1}>
       <Flex direction="column">
         <Flex align="center" justify="space-between">
           <Heading as="h4" fontSize="lg" mb={4}>

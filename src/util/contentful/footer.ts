@@ -1,26 +1,13 @@
 import { getParsedContent } from "./common";
 import { slug, sortByTitle, sortByWeight } from "../generic";
 
-import type {
-  PageAttrs,
-  FooterItem,
-  IDocsGroup,
-  PageContent,
-  FooterGroupEntry,
-  SortedFooterItem,
-} from "~/types";
+import type { PageAttrs, FooterItem, IDocsGroup, PageContent, FooterGroupEntry, SortedFooterItem } from "~/types";
 
-type FooterPageContent = Pick<
-  PageContent,
-  "title" | "footerGroup" | "footerTitle" | "page" | "sortWeight"
->;
+type FooterPageContent = Pick<PageContent, "title" | "footerGroup" | "footerTitle" | "page" | "sortWeight">;
 
 type FooterPage = Pick<PageAttrs, "title" | "footerTitle" | "footerGroup" | "slug">;
 
-type FooterDocsGroup = Pick<
-  IDocsGroup,
-  "title" | "footerGroup" | "footerTitle" | "sortWeight" | "slug"
->;
+type FooterDocsGroup = Pick<IDocsGroup, "title" | "footerGroup" | "footerTitle" | "sortWeight" | "slug">;
 
 /**
  * Get & parse each instance of the `pageContent` model, extract its attributes & references to
@@ -34,8 +21,7 @@ async function* getPageContentFooterItems(preview: boolean): AsyncGenerator<Foot
    */
   const data = await getParsedContent<FooterPageContent>("pageContent", preview, {
     "fields.footerGroup[exists]": true,
-    select:
-      "sys.id,fields.title,fields.sortWeight,fields.footerTitle,fields.footerGroup,fields.page",
+    select: "sys.id,fields.title,fields.sortWeight,fields.footerTitle,fields.footerGroup,fields.page",
   });
 
   for (const i of data) {
@@ -89,8 +75,7 @@ async function* getPageFooterItems(preview: boolean): AsyncGenerator<FooterItem>
 async function* getDocsGroupsFooterItems(preview: boolean): AsyncGenerator<FooterItem> {
   const data = await getParsedContent<FooterDocsGroup>("docsGroup", preview, {
     "fields.footerGroup[exists]": true,
-    select:
-      "sys.id,fields.title,fields.slug,fields.footerTitle,fields.footerGroup,fields.sortWeight",
+    select: "sys.id,fields.title,fields.slug,fields.footerTitle,fields.footerGroup,fields.sortWeight",
   });
   for (const i of data) {
     // This will always be true because of the `footerGroup[exists]` filter in the query.
@@ -150,12 +135,7 @@ async function* getFooterGroupItems(preview: boolean): AsyncGenerator<FooterItem
 export async function getFooterItems(preview: boolean = false): Promise<SortedFooterItem[]> {
   const footerItems = [] as FooterItem[];
 
-  for (const promise of [
-    getPageFooterItems(preview),
-    getFooterGroupItems(preview),
-    getDocsGroupsFooterItems(preview),
-    getPageContentFooterItems(preview),
-  ]) {
+  for (const promise of [getPageFooterItems(preview), getFooterGroupItems(preview), getDocsGroupsFooterItems(preview), getPageContentFooterItems(preview)]) {
     for await (const item of promise) {
       footerItems.push(item);
     }

@@ -1,13 +1,4 @@
-import {
-  Tag,
-  Flex,
-  HStack,
-  Portal,
-  Popover,
-  PopoverBody,
-  PopoverHeader,
-  PopoverContent,
-} from "@chakra-ui/react";
+import { Tag, Flex, HStack, Portal, Popover, PopoverBody, PopoverHeader, PopoverContent } from "@chakra-ui/react";
 import { If } from "~/components";
 import { useColorValue } from "~/context";
 import { useBestMeasurement } from "./useCloudMeasurements";
@@ -54,19 +45,9 @@ export const Location = (props: LocationProps): JSX.Element => {
 
   return (
     <Popover trigger="hover" placement="top">
-      <MapMarker
-        coordinates={[coordinates.lon, coordinates.lat]}
-        color={color}
-        best={best?.id === loc.id}
-      />
+      <MapMarker coordinates={[coordinates.lon, coordinates.lat]} color={color} best={best?.id === loc.id} />
       <Portal>
-        <PopoverContent
-          bg={bg}
-          zIndex={4}
-          border={0}
-          css={{ backdropFilter: "blur(2px)" }}
-          {...rest}
-        >
+        <PopoverContent bg={bg} zIndex={4} border={0} css={{ backdropFilter: "blur(2px)" }} {...rest}>
           <PopoverHeader pt={4} fontWeight="bold" border={0}>
             <HStack justifyContent="space-between">
               <Flex>{displayName}</Flex>

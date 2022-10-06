@@ -2,12 +2,10 @@ import { Children, isValidElement } from "react";
 
 // See: https://github.com/fernandopasik/react-children-utilities/blob/main/src/lib/onlyText.ts
 
-function hasChildren(
-  element: React.ReactNode,
-): element is React.ReactElement<{ children: React.ReactNode | React.ReactNode[] }> {
-  return (
-    isValidElement<{ children?: React.ReactNode[] }>(element) && Boolean(element.props.children)
-  );
+function hasChildren(element: React.ReactNode): element is React.ReactElement<{
+  children: React.ReactNode | React.ReactNode[];
+}> {
+  return isValidElement<{ children?: React.ReactNode[] }>(element) && Boolean(element.props.children);
 }
 
 function childToString(child?: React.ReactNode): string {

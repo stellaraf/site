@@ -38,19 +38,7 @@ const TitleLayout = (props: ITitleLayout): JSX.Element => {
 
 export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props, ref) => {
   const { items, index, ...rest } = props;
-  const {
-    form,
-    body,
-    title,
-    image,
-    subtitle,
-    updatedAt,
-    showButton,
-    buttonText,
-    buttonLink,
-    subsections,
-    showUpdatedDate,
-  } = usePageContent(items, [items.title]);
+  const { form, body, title, image, subtitle, updatedAt, showButton, buttonText, buttonLink, subsections, showUpdatedDate } = usePageContent(items, [items.title]);
 
   const isMobile = useMobile();
   const rStyles = useResponsiveStyle();
@@ -68,12 +56,7 @@ export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props
   }
 
   const titleBlock = (
-    <Flex
-      key={items.title}
-      {...titleMargin}
-      direction="column"
-      textAlign={isMobile ? "center" : !hasImage ? "center" : side === "right" ? "left" : "right"}
-    >
+    <Flex key={items.title} {...titleMargin} direction="column" textAlign={isMobile ? "center" : !hasImage ? "center" : side === "right" ? "left" : "right"}>
       {title}
       {subtitle}
     </Flex>
@@ -81,15 +64,7 @@ export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props
 
   return (
     <>
-      <Box
-        ref={ref}
-        as="article"
-        overflow="hidden"
-        my={{ base: 4, lg: 16, xl: 32 }}
-        px={{ base: 4, lg: 16, xl: 64 }}
-        {...rStyles}
-        {...rest}
-      >
+      <Box ref={ref} as="article" overflow="hidden" my={{ base: 4, lg: 16, xl: 32 }} px={{ base: 4, lg: 16, xl: 64 }} {...rStyles} {...rest}>
         <Flex h="100%" alignItems="center" justify="center" flexWrap="nowrap">
           <TitleLayout titleBlock={titleBlock} image={image} isMobile={isMobile} side={side} />
         </Flex>
@@ -98,11 +73,7 @@ export const ContentSection = forwardRef<HTMLDivElement, IContentSection>((props
           {form}
           {subsections}
           {showButton && (
-            <Button
-              my={8}
-              href={buttonLink}
-              leftIcon={<DynamicIcon icon={{ bs: "BsChevronRight" }} />}
-            >
+            <Button my={8} href={buttonLink} leftIcon={<DynamicIcon icon={{ bs: "BsChevronRight" }} />}>
               {buttonText}
             </Button>
           )}

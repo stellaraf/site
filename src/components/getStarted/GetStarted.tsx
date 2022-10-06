@@ -21,10 +21,7 @@ export const GetStarted: React.FC<IGetStarted> = (props: IGetStarted) => {
   const titleMe = useTitleCase();
   const renderedBody = useRender(body);
 
-  const hasButton = useMemo(
-    () => typeof buttonLink !== "undefined" && typeof buttonText !== "undefined",
-    [buttonText, buttonLink],
-  );
+  const hasButton = useMemo(() => typeof buttonLink !== "undefined" && typeof buttonText !== "undefined", [buttonText, buttonLink]);
   const my = useColorValue({ base: 4, lg: 16, xl: 64 }, { base: 32, xl: 64 });
 
   return (
@@ -63,7 +60,9 @@ export const GetStarted: React.FC<IGetStarted> = (props: IGetStarted) => {
             variant="outline"
             href={buttonLink}
             borderColor={color}
-            _hover={{ backgroundColor: isDark ? "blackAlpha.100" : "whiteAlpha.100" }}
+            _hover={{
+              backgroundColor: isDark ? "blackAlpha.100" : "whiteAlpha.100",
+            }}
           >
             {titleMe(buttonText!)}
           </Button>

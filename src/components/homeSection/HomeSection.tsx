@@ -31,23 +31,8 @@ export const HomeSection: React.FC<IHomeSection> = (props: IHomeSection) => {
 
   return (
     <>
-      <Box
-        as="section"
-        overflow="hidden"
-        my={{ base: 4, lg: 16, xl: 32 }}
-        px={{ base: 4, lg: 16, xl: 64 }}
-        {...padding}
-        {...rest}
-      >
-        <HomeBlock
-          title={title}
-          subtitle={subtitle}
-          body={renderedBody}
-          buttonText={buttonText}
-          buttonLink={buttonLink}
-          imageUrl={image.fields.file.url}
-          side={side}
-        />
+      <Box as="section" overflow="hidden" my={{ base: 4, lg: 16, xl: 32 }} px={{ base: 4, lg: 16, xl: 64 }} {...padding} {...rest}>
+        <HomeBlock title={title} subtitle={subtitle} body={renderedBody} buttonText={buttonText} buttonLink={buttonLink} imageUrl={image.fields.file.url} side={side} />
       </Box>
       {showBorder && <SectionDivider left={side === "left"} right={side === "right"} />}
     </>

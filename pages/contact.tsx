@@ -33,13 +33,7 @@ const Contact = (props: PageEntry<IContactPage>): JSX.Element => {
             {content.subtitle && <Content.Subtitle>{content.subtitle}</Content.Subtitle>}
           </VStack>
           <VStack spacing={4} my={12}>
-            <ChakraButton
-              as="a"
-              boxSize="3rem"
-              href={content.buttonLink}
-              rounded="full"
-              colorScheme="green"
-            >
+            <ChakraButton as="a" boxSize="3rem" href={content.buttonLink} rounded="full" colorScheme="green">
               <DynamicIcon icon={{ im: "ImPhone" }} />
             </ChakraButton>
             <Heading as="h4" fontSize="xl" fontWeight="medium">

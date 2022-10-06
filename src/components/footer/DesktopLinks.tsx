@@ -17,20 +17,8 @@ export const DesktopLinks: React.FC<IFooterLinks> = (props: IFooterLinks) => {
             </Text>
             <List>
               {items.map(item => (
-                <ListItem
-                  key={item.title}
-                  my={2}
-                  transition="transform 0.1s ease-in-out"
-                  _hover={{ transform: "translateX(2px)" }}
-                >
-                  <Link
-                    p={1}
-                    opacity={0.6}
-                    href={item.href}
-                    fontSize={{ base: "xs", lg: "sm" }}
-                    css={{ "&:focus": { borderRadius } }}
-                    _hover={{ textDecoration: "none", opacity: 0.9 }}
-                  >
+                <ListItem key={item.title} my={2} transition="transform 0.1s ease-in-out" _hover={{ transform: "translateX(2px)" }}>
+                  <Link p={1} opacity={0.6} href={item.href} fontSize={{ base: "xs", lg: "sm" }} css={{ "&:focus": { borderRadius } }} _hover={{ textDecoration: "none", opacity: 0.9 }}>
                     {item.title}
                   </Link>
                 </ListItem>

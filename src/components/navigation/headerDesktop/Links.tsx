@@ -40,7 +40,11 @@ export const NavLink = (props: INavLink) => {
       mr={{ lg: 4, xl: 8 }}
       transition="all 0.2s"
       css={{ "&:focus": { borderRadius } }}
-      _hover={{ textDecoration: "none", transform: "translateY(-2px)", opacity: 0.8 }}
+      _hover={{
+        textDecoration: "none",
+        transform: "translateY(-2px)",
+        opacity: 0.8,
+      }}
       href={props.href ?? "/"}
       as={NextLink}
       {...linkProps}
@@ -85,15 +89,7 @@ export const ContactButton = (props: ButtonProps) => {
   const hoverBg = useColorValue("secondary.50", "whiteAlpha.100");
   const borderColor = useColorValue("secondary.500", "white");
   return (
-    <Button
-      color={color}
-      href="/contact"
-      borderWidth="1px"
-      variant="outline"
-      borderColor={borderColor}
-      _hover={{ backgroundColor: hoverBg }}
-      {...props}
-    >
+    <Button color={color} href="/contact" borderWidth="1px" variant="outline" borderColor={borderColor} _hover={{ backgroundColor: hoverBg }} {...props}>
       Talk to Us
     </Button>
   );

@@ -61,17 +61,7 @@ export function useSlider(options: UseSliderOptions = {}): UseSlider {
   /**
    * Default keen-slider options, with overrides.
    */
-  const {
-    interval = 4000,
-    onInterval = nextSlide,
-    onMouseOver = pause,
-    onMouseOut = unpause,
-    optionsSm,
-    optionsMd,
-    optionsLg,
-    optionsXl,
-    ...ksOverrides
-  } = options;
+  const { interval = 4000, onInterval = nextSlide, onMouseOver = pause, onMouseOut = unpause, optionsSm, optionsMd, optionsLg, optionsXl, ...ksOverrides } = options;
 
   /**
    * Default keen-slider options.
@@ -112,22 +102,15 @@ export function useSlider(options: UseSliderOptions = {}): UseSlider {
    * Add mouseover/mouseout events with callbacks.
    */
   useEffect(() => {
-    containerRef.current?.addEventListener("mouseover", () =>
-      onMouseOver(slider, paused, setPaused, currentSlide, setSlide),
-    );
-    containerRef.current?.addEventListener("mouseout", () =>
-      onMouseOut(slider, paused, setPaused, currentSlide, setSlide),
-    );
+    containerRef.current?.addEventListener("mouseover", () => onMouseOver(slider, paused, setPaused, currentSlide, setSlide));
+    containerRef.current?.addEventListener("mouseout", () => onMouseOut(slider, paused, setPaused, currentSlide, setSlide));
   }, [containerRef]);
 
   /**
    * Perform action on interval.
    */
   useEffect(() => {
-    timerRef.current = setInterval(
-      () => onInterval(slider, paused, setPaused, currentSlide, setSlide),
-      interval,
-    );
+    timerRef.current = setInterval(() => onInterval(slider, paused, setPaused, currentSlide, setSlide), interval);
     return () => {
       clearInterval(timerRef.current);
     };

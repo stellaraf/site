@@ -6,7 +6,11 @@ import type { IContentLoader } from "./types";
 
 const Article = chakra("article", {
   shouldForwardProp,
-  baseStyle: { overflow: "hidden", zIndex: 1, minW: { base: "90vw", lg: "80vw" } },
+  baseStyle: {
+    overflow: "hidden",
+    zIndex: 1,
+    minW: { base: "90vw", lg: "80vw" },
+  },
 });
 
 /**

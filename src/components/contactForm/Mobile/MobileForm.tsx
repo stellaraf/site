@@ -11,17 +11,7 @@ import type { TFormTypes, TFormFields } from "../Forms/types";
 import type { IMobileForm } from "./types";
 
 export const MobileForm: React.FC<IMobileForm> = (props: IMobileForm) => {
-  const {
-    title,
-    body,
-    icon,
-    accent = "primary",
-    onToggle,
-    formRef,
-    onSubmit,
-    button,
-    onClose,
-  } = props;
+  const { title, body, icon, accent = "primary", onToggle, formRef, onSubmit, button, onClose } = props;
 
   const formState = useContactForm();
   const titleMe = useTitleCase();
@@ -54,43 +44,19 @@ export const MobileForm: React.FC<IMobileForm> = (props: IMobileForm) => {
       bodyProps={{ overflow: "unset", mb: 8 }}
       containerProps={{ m: 2, width: "96vw", minH: "98vh", pb: 32 }}
       body={
-        <Grid
-          boxSize="100%"
-          templateColumns="30% 1fr 30%"
-          templateRows="10% 15% 1fr 10%"
-          templateAreas={`"back title icon" "body body body" "form form form" "button button button"`}
-        >
+        <Grid boxSize="100%" templateColumns="30% 1fr 30%" templateRows="10% 15% 1fr 10%" templateAreas={`"back title icon" "body body body" "form form form" "button button button"`}>
           <Flex p={2} align="flex-start" justify="flex-start" gridArea="back">
-            <IconButton
-              variant="ghost"
-              aria-label="Back"
-              icon={<DynamicIcon icon={{ bi: "BiLeftArrow" }} />}
-              onClick={goBack}
-            />
+            <IconButton variant="ghost" aria-label="Back" icon={<DynamicIcon icon={{ bi: "BiLeftArrow" }} />} onClick={goBack} />
           </Flex>
           <Flex p={2} align="flex-start" justify="flex-end" gridArea="icon">
             {icon}
           </Flex>
-          <Center
-            p={2}
-            pt={4}
-            fontSize="sm"
-            gridArea="title"
-            textAlign="center"
-            flexDirection="column"
-          >
+          <Center p={2} pt={4} fontSize="sm" gridArea="title" textAlign="center" flexDirection="column">
             <Heading as="h3" fontSize="lg">
               {titleMe(title)}
             </Heading>
           </Center>
-          <Center
-            p={2}
-            pt={4}
-            fontSize="sm"
-            gridArea="body"
-            textAlign="center"
-            flexDirection="column"
-          >
+          <Center p={2} pt={4} fontSize="sm" gridArea="body" textAlign="center" flexDirection="column">
             {body}
           </Center>
           <Center width="100%" gridArea="form" alignItems="flex-start">

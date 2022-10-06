@@ -253,28 +253,9 @@ export interface IFormPlaceholders {
   subject: string;
 }
 
-export interface IActions
-  extends Pick<
-    PageContentParsed,
-    | "page"
-    | "body"
-    | "title"
-    | "subtitle"
-    | "callToActionIcon"
-    | "callToActionBody"
-    | "callToActionIconColor"
-  > {}
+export interface IActions extends Pick<PageContentParsed, "page" | "body" | "title" | "subtitle" | "callToActionIcon" | "callToActionBody" | "callToActionIconColor"> {}
 
-export type TActions = Pick<
-  PageContent,
-  | "body"
-  | "page"
-  | "title"
-  | "subtitle"
-  | "callToActionBody"
-  | "callToActionIcon"
-  | "callToActionIconColor"
-> & { showInCallToAction: true };
+export type TActions = Pick<PageContent, "body" | "page" | "title" | "subtitle" | "callToActionBody" | "callToActionIcon" | "callToActionIconColor"> & { showInCallToAction: true };
 
 export type IDocsGroupEntry = {
   slug: string;
@@ -318,16 +299,15 @@ export type TAdmonition = {
   type?: TAdmonitionTypes;
 };
 
-export type TCustomBlocks =
-  | TArticleButton
-  | TMarkdownBlock
-  | TAdmonition
-  | TTableEntry
-  | TExpandable;
+export type TCustomBlocks = TArticleButton | TMarkdownBlock | TAdmonition | TTableEntry | TExpandable;
 
 export type TTableEntry = {
   name: string;
-  data: { tableData: string[][]; useColumnHeader: boolean; useRowHeader: boolean };
+  data: {
+    tableData: string[][];
+    useColumnHeader: boolean;
+    useRowHeader: boolean;
+  };
 };
 
 export type TExpandable = {

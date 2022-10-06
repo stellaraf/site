@@ -6,11 +6,7 @@ import type { UseGlow } from "./types";
 /**
  * Generate boxShadow & starting backgroundColor for a glow effect between two colors.
  */
-export function useGlow(
-  start: UseGlow.Start,
-  stop: UseGlow.Stop,
-  options?: UseGlow.Options,
-): UseGlow.Return {
+export function useGlow(start: UseGlow.Start, stop: UseGlow.Stop, options?: UseGlow.Options): UseGlow.Return {
   const { shadows = 4, increment = 20 } = options ?? {};
 
   // Get real colors from Chakra UI theme tokens.

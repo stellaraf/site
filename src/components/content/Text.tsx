@@ -31,15 +31,7 @@ export const Subtitle: React.FC<ISubtitle> = (props: ISubtitle) => {
 };
 
 export const Body: React.FC<IContentBody> = (props: IContentBody) => (
-  <Box
-    className="__st-content-body"
-    zIndex={1}
-    fontSize="lg"
-    maxW={{ lg: "60%" }}
-    whiteSpace="pre-line"
-    my={{ base: 8, lg: 16 }}
-    {...props}
-  />
+  <Box className="__st-content-body" zIndex={1} fontSize="lg" maxW={{ lg: "60%" }} whiteSpace="pre-line" my={{ base: 8, lg: 16 }} {...props} />
 );
 
 export const UpdatedAt: React.FC<IUpdatedAt> = (props: IUpdatedAt) => {

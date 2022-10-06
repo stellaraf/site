@@ -24,7 +24,12 @@ function createHeading(level: number, baseStyle: SystemStyleObject): React.FC<He
 
     return createElement(
       Base,
-      { as: headingLevel, id: slug, css: { "& > code": { fontSize } }, ...rest },
+      {
+        as: headingLevel,
+        id: slug,
+        css: { "& > code": { fontSize } },
+        ...rest,
+      },
       title,
     );
   };

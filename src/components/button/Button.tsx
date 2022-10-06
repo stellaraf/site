@@ -5,22 +5,11 @@ import { forwardRef } from "~/util";
 
 import type { ButtonProps, ButtonLinkElement } from "./types";
 
-const BaseButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => (
-  <ChakraButton as="a" ref={ref} px={3} py={1} lineHeight={1.5} borderRadius="lg" {...props} />
-));
+const BaseButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => <ChakraButton as="a" ref={ref} px={3} py={1} lineHeight={1.5} borderRadius="lg" {...props} />);
 
 const ExternalButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => {
   const { href = "#", target, ...rest } = props;
-  return (
-    <BaseButton
-      ref={ref}
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      as={NextLink}
-      {...rest}
-    />
-  );
+  return <BaseButton ref={ref} href={href} target="_blank" rel="noopener noreferrer" as={NextLink} {...rest} />;
 });
 
 export const Button = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => {

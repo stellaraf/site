@@ -4,30 +4,13 @@ import { useOpposingColor } from "~/hooks";
 import type { ILabel } from "./types";
 
 export const Label: React.FC<ILabel> = (props: ILabel) => {
-  const {
-    left,
-    right,
-    leftProps = {},
-    rightProps = {},
-    leftColor: leftBg = "primary.500",
-    rightColor: rightBg = "secondary.500",
-    ...rest
-  } = props;
+  const { left, right, leftProps = {}, rightProps = {}, leftColor: leftBg = "primary.500", rightColor: rightBg = "secondary.500", ...rest } = props;
 
   const leftColor = useOpposingColor(leftBg);
   const rightColor = useOpposingColor(rightBg);
 
   return (
-    <Flex
-      my={2}
-      zIndex={1}
-      boxShadow="md"
-      flexWrap="nowrap"
-      alignItems="center"
-      mx={{ base: 1, md: 2 }}
-      justifyContent="flex-start"
-      {...rest}
-    >
+    <Flex my={2} zIndex={1} boxShadow="md" flexWrap="nowrap" alignItems="center" mx={{ base: 1, md: 2 }} justifyContent="flex-start" {...rest}>
       <Flex
         mr={0}
         py={1}

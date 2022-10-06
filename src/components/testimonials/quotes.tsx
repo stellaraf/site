@@ -33,15 +33,7 @@ export const Quote = (props: QuoteProps): JSX.Element => {
   }, [kind]);
 
   return (
-    <Flex
-      color={color}
-      align="center"
-      justify="center"
-      overflow="hidden"
-      display="inline-flex"
-      {...kindProps}
-      {...rest}
-    >
+    <Flex color={color} align="center" justify="center" overflow="hidden" display="inline-flex" {...kindProps} {...rest}>
       <DynamicIcon icon={iconProps} boxSize="100%" />
     </Flex>
   );

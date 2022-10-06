@@ -1,11 +1,6 @@
 import { useCallback } from "react";
 import { Box, Skeleton } from "@chakra-ui/react";
-import {
-  GoogleMap as GoogleMapApi,
-  Marker,
-  InfoWindow,
-  useJsApiLoader,
-} from "@react-google-maps/api";
+import { GoogleMap as GoogleMapApi, Marker, InfoWindow, useJsApiLoader } from "@react-google-maps/api";
 import { Link } from "~/components";
 import { useConfig, useColorValue, useColorTokenValue } from "~/context";
 import { useRender } from "~/hooks";
@@ -62,13 +57,7 @@ const MapContainer = (props: IMapContainer): JSX.Element => {
 };
 
 export const GoogleMap = (): JSX.Element => {
-  const {
-    orgName,
-    hqMapInfo,
-    hqAddress = "",
-    openMapsText = "",
-    hqCoordinates = { lat: 0, lon: 0 },
-  } = useConfig();
+  const { orgName, hqMapInfo, hqAddress = "", openMapsText = "", hqCoordinates = { lat: 0, lon: 0 } } = useConfig();
   const { lat, lon: lng } = hqCoordinates;
 
   const renderedInfoContent = useRender(hqMapInfo);
@@ -83,22 +72,8 @@ export const GoogleMap = (): JSX.Element => {
 
   const renderMap = useCallback(
     () => (
-      <GoogleMapApi
-        zoom={13.5}
-        options={mapOptions}
-        center={{ lat, lng }}
-        mapContainerStyle={{ width: "100%", height: "100%" }}
-      >
-        <Location
-          bg={bg}
-          lat={lat}
-          lng={lng}
-          address={hqAddress}
-          color={color}
-          orgName={orgName}
-          openMapsText={openMapsText}
-          content={renderedInfoContent}
-        />
+      <GoogleMapApi zoom={13.5} options={mapOptions} center={{ lat, lng }} mapContainerStyle={{ width: "100%", height: "100%" }}>
+        <Location bg={bg} lat={lat} lng={lng} address={hqAddress} color={color} orgName={orgName} openMapsText={openMapsText} content={renderedInfoContent} />
       </GoogleMapApi>
     ),
     [isLoaded],

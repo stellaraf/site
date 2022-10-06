@@ -29,16 +29,7 @@ export async function getActions(preview: boolean = false): Promise<TActions[]> 
 
   const data = await getParsedContent<TActions>("pageContent", preview, {
     "fields.showInCallToAction": true,
-    select: [
-      "sys.id",
-      "fields.body",
-      "fields.page",
-      "fields.title",
-      "fields.subtitle",
-      "fields.callToActionBody",
-      "fields.callToActionIcon",
-      "fields.callToActionIconColor",
-    ].join(","),
+    select: ["sys.id", "fields.body", "fields.page", "fields.title", "fields.subtitle", "fields.callToActionBody", "fields.callToActionIcon", "fields.callToActionIconColor"].join(","),
   });
 
   for (const item of data) {

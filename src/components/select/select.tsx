@@ -17,12 +17,7 @@ import {
 } from "./styles";
 import { isSingleValue } from "./types";
 
-import type {
-  Props as ReactSelectProps,
-  MultiValue,
-  OnChangeValue,
-  SelectInstance,
-} from "react-select";
+import type { Props as ReactSelectProps, MultiValue, OnChangeValue, SelectInstance } from "react-select";
 import type { SelectOptionSingle } from "~/types";
 import type { SelectProps, SelectContextProps } from "./types";
 
@@ -30,10 +25,7 @@ const SelectContext = createContext<SelectContextProps>({} as SelectContextProps
 export const useSelectContext = (): SelectContextProps => useContext(SelectContext);
 
 export const Select = forwardRef(
-  <Opt extends SelectOptionSingle = SelectOptionSingle, IsMulti extends boolean = boolean>(
-    props: SelectProps<Opt, IsMulti>,
-    ref: React.Ref<SelectInstance<Opt, IsMulti>>,
-  ): JSX.Element => {
+  <Opt extends SelectOptionSingle = SelectOptionSingle, IsMulti extends boolean = boolean>(props: SelectProps<Opt, IsMulti>, ref: React.Ref<SelectInstance<Opt, IsMulti>>): JSX.Element => {
     const { options, isMulti, onSelect, isError = false, colorScheme = "gray", ...rest } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,10 +34,10 @@ export const Select = forwardRef(
 
     const defaultOnChange: ReactSelectProps<Opt, IsMulti>["onChange"] = changed => {
       if (changed === null) {
-        changed = ([] as unknown) as OnChangeValue<Opt, IsMulti>;
+        changed = [] as unknown as OnChangeValue<Opt, IsMulti>;
       }
       if (isSingleValue<Opt>(changed)) {
-        changed = ([changed] as unknown) as OnChangeValue<Opt, IsMulti>;
+        changed = [changed] as unknown as OnChangeValue<Opt, IsMulti>;
       }
       if (typeof onSelect === "function") {
         onSelect(changed as MultiValue<Opt>);
@@ -56,12 +48,27 @@ export const Select = forwardRef(
     const menuList = useMenuListStyle<Opt, IsMulti>({ colorMode, colorScheme });
     const control = useControlStyle<Opt, IsMulti>({ colorMode, colorScheme });
     const option = useOptionStyle<Opt, IsMulti>({ colorMode, colorScheme });
-    const multiValue = useMultiValueStyle<Opt, IsMulti>({ colorMode, colorScheme });
-    const multiValueLabel = useMultiValueLabelStyle<Opt, IsMulti>({ colorMode, colorScheme });
-    const multiValueRemove = useMultiValueRemoveStyle<Opt, IsMulti>({ colorMode, colorScheme });
+    const multiValue = useMultiValueStyle<Opt, IsMulti>({
+      colorMode,
+      colorScheme,
+    });
+    const multiValueLabel = useMultiValueLabelStyle<Opt, IsMulti>({
+      colorMode,
+      colorScheme,
+    });
+    const multiValueRemove = useMultiValueRemoveStyle<Opt, IsMulti>({
+      colorMode,
+      colorScheme,
+    });
     const menuPortal = useMenuPortal<Opt, IsMulti>();
-    const placeholder = usePlaceholderStyle<Opt, IsMulti>({ colorMode, colorScheme });
-    const indicatorSeparator = useIndicatorSeparatorStyle<Opt, IsMulti>({ colorMode, colorScheme });
+    const placeholder = usePlaceholderStyle<Opt, IsMulti>({
+      colorMode,
+      colorScheme,
+    });
+    const indicatorSeparator = useIndicatorSeparatorStyle<Opt, IsMulti>({
+      colorMode,
+      colorScheme,
+    });
     const rsTheme = useRSTheme();
 
     return (
@@ -94,4 +101,4 @@ export const Select = forwardRef(
     );
   },
 );
-Select.displayName = "Search";
+Select.displayName = "Select";

@@ -11,15 +11,7 @@ export const MControls: React.FC<IMControls> = (props: IMControls) => {
   const colorModeLabel = `Switch to ${switchTo} Mode`;
   return (
     <HStack {...props}>
-      <Button
-        py={2}
-        minW="unset"
-        height="unset"
-        variant="unstyled"
-        title={colorModeLabel}
-        onClick={toggleColorMode}
-        aria-label={colorModeLabel}
-      >
+      <Button py={2} minW="unset" height="unset" variant="unstyled" title={colorModeLabel} onClick={toggleColorMode} aria-label={colorModeLabel}>
         <DynamicIcon icon={colorModeIcon} boxSize={32} />
       </Button>
     </HStack>

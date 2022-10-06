@@ -23,8 +23,7 @@ export interface ITextArea extends Omit<ITextAreaField, "as" | "onFocus" | "name
   id: string;
 }
 
-export interface ISelectField
-  extends Omit<SelectProps<SelectOptionSingle>, "name" | "onSelect" | "options"> {
+export interface ISelectField extends Omit<SelectProps<SelectOptionSingle>, "name" | "onSelect" | "options"> {
   id: string;
   opts: SelectOptionSingle[];
 }

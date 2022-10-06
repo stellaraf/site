@@ -1,11 +1,4 @@
-import type {
-  TAdmonition,
-  TTableEntry,
-  TExpandable,
-  TCustomBlocks,
-  TArticleButton,
-  TMarkdownBlock,
-} from "~/types";
+import type { TAdmonition, TTableEntry, TExpandable, TCustomBlocks, TArticleButton, TMarkdownBlock } from "~/types";
 import type { ICustomBlock, ICustomBlockPre } from "./types";
 
 export function parseTarget(props: ICustomBlockPre): ICustomBlock<TCustomBlocks> {

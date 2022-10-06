@@ -30,14 +30,7 @@ export const HomeBlock: React.FC<IHomeBlock> = (props: IHomeBlock) => {
       gridTemplateColumns={{ base: "1fr", lg: columns[side] }}
       gridTemplateRows={{ base: "0.33fr 1fr 0.1fr", lg: "0.5fr 1fr 0.1fr" }}
     >
-      <Center
-        ref={ref}
-        boxSize="100%"
-        gridArea="image"
-        opacity={+inView}
-        transition="opacity 0.2s ease-in 0.1s"
-        display={{ base: "none", lg: "flex" }}
-      >
+      <Center ref={ref} boxSize="100%" gridArea="image" opacity={+inView} transition="opacity 0.2s ease-in 0.1s" display={{ base: "none", lg: "flex" }}>
         <Image boxSize="100%" src={imageUrl} />
       </Center>
       <Box gridArea="title">

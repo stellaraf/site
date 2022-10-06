@@ -15,15 +15,7 @@ export const Td = (props: ITd) => {
   const { isHeader = false, children, ...rest } = props;
   const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
-    <Box
-      p={2}
-      fontSize="sm"
-      whiteSpace="normal"
-      borderTopWidth="1px"
-      borderColor={border}
-      as={isHeader ? "th" : "td"}
-      {...rest}
-    >
+    <Box p={2} fontSize="sm" whiteSpace="normal" borderTopWidth="1px" borderColor={border} as={isHeader ? "th" : "td"} {...rest}>
       {children}
     </Box>
   );
@@ -38,15 +30,7 @@ export const Table = (props: ITableMain) => {
   const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
     <Box overflowX="auto" width={{ base: "100%", lg: "fit-content" }}>
-      <Box
-        mt={4}
-        zIndex={1}
-        minWidth="50%"
-        borderWidth="1px"
-        borderRadius="lg"
-        borderColor={border}
-        width="100%"
-      >
+      <Box mt={4} zIndex={1} minWidth="50%" borderWidth="1px" borderRadius="lg" borderColor={border} width="100%">
         <Box as="table" textAlign="left" width="100%" {...props} />
       </Box>
     </Box>

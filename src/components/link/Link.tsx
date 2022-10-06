@@ -9,10 +9,7 @@ import { forwardRef } from "~/util";
 import type { ILinkIcon, ILink } from "./types";
 
 const BaseLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => {
-  const borderColor = useColorValue(
-    useToken("colors", "secondary.500"),
-    useToken("colors", "secondary.300"),
-  );
+  const borderColor = useColorValue(useToken("colors", "secondary.500"), useToken("colors", "secondary.300"));
 
   return (
     <ChakraLink
@@ -47,9 +44,7 @@ const LinkIcon = (props: ILinkIcon): JSX.Element => (
 /**
  * Anchor link with proper external attributes set.
  */
-const ExternalLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => (
-  <BaseLink isExternal ref={ref} {...props} />
-));
+const ExternalLink = forwardRef<HTMLAnchorElement, ILink>((props, ref) => <BaseLink isExternal ref={ref} {...props} />);
 
 /**
  * Anchor link wrapped with a Next.js router link component for internal

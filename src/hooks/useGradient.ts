@@ -4,9 +4,7 @@ import { useColorValue } from "~/context";
 
 import type { BoxProps } from "@chakra-ui/react";
 
-export const useGradient = (
-  direction: number = 180,
-): Pick<BoxProps, "background" | "backgroundColor"> => {
+export const useGradient = (direction: number = 180): Pick<BoxProps, "background" | "backgroundColor"> => {
   const primary = useToken("colors", "primary.500");
   const dark = useToken("colors", "dark.500");
   // const secondary = useToken('colors', 'secondary.500');

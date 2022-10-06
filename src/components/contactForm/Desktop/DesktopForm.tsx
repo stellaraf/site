@@ -35,12 +35,7 @@ export const DesktopForm: React.FC<IDesktopForm> = (props: IDesktopForm) => {
       templateAreas={`"back title icon" "body body body" "form form form"`}
     >
       <Flex p={2} align="flex-start" justify="flex-start" gridArea="back">
-        <IconButton
-          variant="ghost"
-          aria-label="Back"
-          icon={<DynamicIcon icon={{ bi: "BiLeftArrow" }} />}
-          onClick={goBack}
-        />
+        <IconButton variant="ghost" aria-label="Back" icon={<DynamicIcon icon={{ bi: "BiLeftArrow" }} />} onClick={goBack} />
       </Flex>
       <Flex p={2} align="flex-start" justify="flex-end" gridArea="icon">
         {icon}

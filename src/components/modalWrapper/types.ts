@@ -1,19 +1,8 @@
 import type { ReactNode } from "react";
-import type {
-  FlexProps,
-  ModalBodyProps,
-  ModalFooterProps,
-  ModalHeaderProps,
-  BoxProps,
-  ModalProps,
-  UseModalProps,
-} from "@chakra-ui/react";
+import type { FlexProps, ModalBodyProps, ModalFooterProps, ModalHeaderProps, BoxProps, ModalProps, UseModalProps } from "@chakra-ui/react";
 import type { PropGetter } from "@chakra-ui/react-utils";
 
-export interface IModalWrapper
-  extends UseModalProps,
-    Omit<BoxProps, "children" | "scrollBehavior">,
-    Omit<ModalProps, "children" | "scrollBehavior" | "motionPreset"> {
+export interface IModalWrapper extends UseModalProps, Omit<BoxProps, "children" | "scrollBehavior">, Omit<ModalProps, "children" | "scrollBehavior" | "motionPreset"> {
   /**
    * Component to be nested inside <ModalBody />
    */

@@ -32,14 +32,7 @@ const MBannerContent = (props: IBannerContent): JSX.Element => {
   const linkHover = useColorTokenValue("whiteAlpha.700", "whiteAlpha.700");
   const linkBorder = useColorTokenValue("whiteAlpha.700", "blackAlpha.500");
   return (
-    <VStack
-      p={4}
-      bg={bg}
-      color={color}
-      boxSize="100%"
-      borderTop="1px solid"
-      borderTopColor={borderColor}
-    >
+    <VStack p={4} bg={bg} color={color} boxSize="100%" borderTop="1px solid" borderTopColor={borderColor}>
       <Flex
         pos="relative"
         display="inline-flex"
@@ -52,14 +45,7 @@ const MBannerContent = (props: IBannerContent): JSX.Element => {
       >
         {body}
       </Flex>
-      <Button
-        mt={4}
-        width="100%"
-        variant="outline"
-        onClick={onClick}
-        colorScheme={color}
-        leftIcon={<DynamicIcon icon={{ fa: "FaCheckCircle" }} />}
-      >
+      <Button mt={4} width="100%" variant="outline" onClick={onClick} colorScheme={color} leftIcon={<DynamicIcon icon={{ fa: "FaCheckCircle" }} />}>
         No Problem!
       </Button>
     </VStack>
@@ -75,16 +61,7 @@ const DBannerContent: React.FC<IBannerContent> = (props: IBannerContent) => {
   const linkHover = useColorTokenValue("whiteAlpha.700", "whiteAlpha.700");
   const linkBorder = useColorTokenValue("whiteAlpha.700", "blackAlpha.500");
   return (
-    <Flex
-      bg={bg}
-      maxW="80%"
-      color={color}
-      boxSize="100%"
-      borderTopRadius="lg"
-      borderTop="1px solid"
-      justify="space-between"
-      borderTopColor={borderColor}
-    >
+    <Flex bg={bg} maxW="80%" color={color} boxSize="100%" borderTopRadius="lg" borderTop="1px solid" justify="space-between" borderTopColor={borderColor}>
       <Flex
         p={4}
         pos="relative"
@@ -123,19 +100,8 @@ export const Banner: React.FC<PropsOf<typeof Container>> = (props: PropsOf<typeo
   return (
     <AnimatePresence>
       {!agreed && (
-        <Container
-          animate={{ y: 0 }}
-          exit={{ y: "100%" }}
-          id="__privacy-banner"
-          initial={{ y: "100%" }}
-          transition={{ type: "spring", delay: 0.5 }}
-          {...props}
-        >
-          {isMobile ? (
-            <MBannerContent body={body} onClick={() => setAgreed(true)} />
-          ) : (
-            <DBannerContent body={body} onClick={() => setAgreed(true)} />
-          )}
+        <Container animate={{ y: 0 }} exit={{ y: "100%" }} id="__privacy-banner" initial={{ y: "100%" }} transition={{ type: "spring", delay: 0.5 }} {...props}>
+          {isMobile ? <MBannerContent body={body} onClick={() => setAgreed(true)} /> : <DBannerContent body={body} onClick={() => setAgreed(true)} />}
         </Container>
       )}
     </AnimatePresence>

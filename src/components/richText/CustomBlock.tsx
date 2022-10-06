@@ -4,14 +4,7 @@ import { Table } from "./Table";
 import { Expandable } from "./Expandable";
 import { MarkdownBlock } from "./Markdown";
 
-import {
-  isTable,
-  parseTarget,
-  isAdmonition,
-  isExpandable,
-  isArticleButton,
-  isMarkdownBlock,
-} from "./guards";
+import { isTable, parseTarget, isAdmonition, isExpandable, isArticleButton, isMarkdownBlock } from "./guards";
 
 import type { ICustomBlockPre } from "./types";
 

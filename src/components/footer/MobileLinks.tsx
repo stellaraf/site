@@ -1,13 +1,4 @@
-import {
-  Box,
-  List,
-  ListItem,
-  Accordion,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  AccordionButton,
-} from "@chakra-ui/react";
+import { Box, List, ListItem, Accordion, AccordionIcon, AccordionItem, AccordionPanel, AccordionButton } from "@chakra-ui/react";
 import { Link } from "~/components";
 import { useColorValue } from "~/context";
 
@@ -20,12 +11,7 @@ export const MobileLinks: React.FC<IFooterLinks> = (props: IFooterLinks) => {
     <Accordion allowToggle position="relative" zIndex={1}>
       {groups.map(({ title, items }) => {
         return (
-          <AccordionItem
-            key={title}
-            borderTopWidth={0}
-            borderBottomWidth={1}
-            _last={{ borderBottomWidth: 1 }}
-          >
+          <AccordionItem key={title} borderTopWidth={0} borderBottomWidth={1} _last={{ borderBottomWidth: 1 }}>
             <AccordionButton my={4}>
               <Box w="100%" textAlign="left">
                 {title}

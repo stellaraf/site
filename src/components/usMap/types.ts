@@ -31,4 +31,6 @@ export interface TFetcher {
   timeout: number;
 }
 
-export type UseDataCenterReturn = Omit<QueryObserverResult, "refetch"> & { execute(): void };
+export type UseDataCenterReturn = Omit<QueryObserverResult, "refetch"> & {
+  execute(): void;
+};

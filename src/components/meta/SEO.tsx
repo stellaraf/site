@@ -7,12 +7,5 @@ export const SEO: React.FC<ISEO> = (props: ISEO) => {
   const { title, description, ...rest } = props;
   const { pathname } = useRouter();
 
-  return (
-    <NextSeo
-      title={title}
-      description={description}
-      openGraph={{ title, description, url: pathname }}
-      {...rest}
-    />
-  );
+  return <NextSeo title={title} description={description} openGraph={{ title, description, url: pathname }} {...rest} />;
 };

@@ -15,5 +15,4 @@ const CodeBlockStyleCtx = createContext<TCodeBlockStyleCtx | null>(null);
 
 export const { Provider: CodeBlockStyleProvider } = CodeBlockStyleCtx;
 
-export const useCodeBlockStyle = (): TCodeBlockStyleCtx | null =>
-  useContext<TCodeBlockStyleCtx | null>(CodeBlockStyleCtx);
+export const useCodeBlockStyle = (): TCodeBlockStyleCtx | null => useContext<TCodeBlockStyleCtx | null>(CodeBlockStyleCtx);

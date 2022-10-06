@@ -11,13 +11,7 @@ export const Copyright: React.FC<BoxProps> = (props: BoxProps) => {
   const color = useOpposingColor(bg);
   return (
     <Tooltip hasArrow placement="bottom" bg={bg} color={color} label={`Version ${version}`}>
-      <Box
-        mt={8}
-        zIndex={1}
-        fontSize="sm"
-        color="whiteAlpha.700"
-        {...props}
-      >{`Copyright © ${new Date().getFullYear()} ${orgName}`}</Box>
+      <Box mt={8} zIndex={1} fontSize="sm" color="whiteAlpha.700" {...props}>{`Copyright © ${new Date().getFullYear()} ${orgName}`}</Box>
     </Tooltip>
   );
 };

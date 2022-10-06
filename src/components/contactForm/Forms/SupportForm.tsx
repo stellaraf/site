@@ -12,15 +12,7 @@ import type { IForm, FormHandlers } from "./types";
 
 export const SupportForm = forwardRef<FormHandlers, IForm<"Support">>((props, ref) => {
   const { onSubmit } = props;
-  const {
-    firstName,
-    lastName,
-    emailAddress,
-    phoneNumber,
-    companyName,
-    subject,
-    details,
-  } = useContactFormConfig("Support");
+  const { firstName, lastName, emailAddress, phoneNumber, companyName, subject, details } = useContactFormConfig("Support");
 
   const formSchemaZod = z.object({
     firstName: z.string().min(1, `${firstName.displayName} is required`),
@@ -54,61 +46,19 @@ export const SupportForm = forwardRef<FormHandlers, IForm<"Support">>((props, re
     <Flex as="form" onSubmit={submitter} flexDir="column" w={{ base: "100%", lg: "75%" }}>
       <FormProvider {...form}>
         <FieldGroup>
-          <TextInput
-            ctl={control}
-            id={firstName.id}
-            defaultValue=""
-            placeholder={firstName.displayName}
-            isRequired={firstName.required}
-          />
-          <TextInput
-            ctl={control}
-            id={lastName.id}
-            defaultValue=""
-            placeholder={lastName.displayName}
-            isRequired={firstName.required}
-          />
-          <TextInput
-            ctl={control}
-            id={companyName.id}
-            defaultValue=""
-            placeholder={companyName.displayName}
-            isRequired={companyName.required}
-          />
+          <TextInput ctl={control} id={firstName.id} defaultValue="" placeholder={firstName.displayName} isRequired={firstName.required} />
+          <TextInput ctl={control} id={lastName.id} defaultValue="" placeholder={lastName.displayName} isRequired={firstName.required} />
+          <TextInput ctl={control} id={companyName.id} defaultValue="" placeholder={companyName.displayName} isRequired={companyName.required} />
         </FieldGroup>
         <FieldGroup>
-          <TextInput
-            ctl={control}
-            id={emailAddress.id}
-            defaultValue=""
-            placeholder={emailAddress.displayName}
-            isRequired={emailAddress.required}
-          />
-          <TextInput
-            ctl={control}
-            id={phoneNumber.id}
-            defaultValue=""
-            placeholder={phoneNumber.displayName}
-            isRequired={phoneNumber.required}
-          />
+          <TextInput ctl={control} id={emailAddress.id} defaultValue="" placeholder={emailAddress.displayName} isRequired={emailAddress.required} />
+          <TextInput ctl={control} id={phoneNumber.id} defaultValue="" placeholder={phoneNumber.displayName} isRequired={phoneNumber.required} />
         </FieldGroup>
         <FieldGroup>
-          <TextInput
-            ctl={control}
-            id={subject.id}
-            defaultValue=""
-            placeholder={subject.displayName}
-            isRequired={subject.required}
-          />
+          <TextInput ctl={control} id={subject.id} defaultValue="" placeholder={subject.displayName} isRequired={subject.required} />
         </FieldGroup>
         <FieldGroup>
-          <TextArea
-            ctl={control}
-            id={details.id}
-            defaultValue=""
-            placeholder={details.displayName}
-            isRequired={details.required}
-          />
+          <TextArea ctl={control} id={details.id} defaultValue="" placeholder={details.displayName} isRequired={details.required} />
         </FieldGroup>
       </FormProvider>
     </Flex>

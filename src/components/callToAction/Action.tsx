@@ -7,24 +7,10 @@ import { useRender, useSlug } from "~/hooks";
 import type { TActions } from "~/types";
 
 export const Action: React.FC<TActions> = (props: TActions) => {
-  const {
-    body,
-    page,
-    title,
-    subtitle,
-    callToActionIcon,
-    callToActionBody,
-    callToActionIconColor,
-  } = props;
+  const { body, page, title, subtitle, callToActionIcon, callToActionBody, callToActionIconColor } = props;
 
   const titleMe = useTitleCase();
-  const renderedBody = useRender(
-    callToActionBody ?? body ?? page.fields.body,
-    undefined,
-    undefined,
-    undefined,
-    { hyperlink: (_, children) => <span>{children}</span> },
-  );
+  const renderedBody = useRender(callToActionBody ?? body ?? page.fields.body, undefined, undefined, undefined, { hyperlink: (_, children) => <span>{children}</span> });
   const slug = useSlug(title, [title]);
 
   return (
@@ -50,14 +36,7 @@ export const Action: React.FC<TActions> = (props: TActions) => {
               <Heading fontSize={{ base: "md", md: "md" }} maxW="80%" whiteSpace="pre-wrap">
                 {titleMe(title)}
               </Heading>
-              {typeof callToActionIcon !== "undefined" && (
-                <Icon
-                  size={12}
-                  ml={2}
-                  color={callToActionIconColor}
-                  url={callToActionIcon.fields.file.url}
-                />
-              )}
+              {typeof callToActionIcon !== "undefined" && <Icon size={12} ml={2} color={callToActionIconColor} url={callToActionIcon.fields.file.url} />}
             </Flex>
             <Heading as="h4" fontSize="sm" fontWeight="light" whiteSpace="pre-wrap">
               {subtitle}
@@ -67,7 +46,11 @@ export const Action: React.FC<TActions> = (props: TActions) => {
               fontWeight="normal"
               whiteSpace="pre-line"
               css={{
-                "& p": { marginTop: "unset", marginBottom: "unset", textOverflow: "ellipsis" },
+                "& p": {
+                  marginTop: "unset",
+                  marginBottom: "unset",
+                  textOverflow: "ellipsis",
+                },
               }}
             >
               {renderedBody}

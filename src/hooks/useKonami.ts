@@ -12,9 +12,6 @@ export function useKonami(): KonamiReturn {
   const [isOpen, setOpen] = useRecoilState(konamiAtom);
   const open = () => !isOpen && setOpen(true);
   const close = () => isOpen && setOpen(false);
-  useKeySequence(
-    "arrowup arrowup arrowdown arrowdown arrowleft arrowright arrowleft arrowright b a",
-    open,
-  );
+  useKeySequence("arrowup arrowup arrowdown arrowdown arrowleft arrowright arrowleft arrowright b a", open);
   return [isOpen, close];
 }

@@ -12,15 +12,7 @@ import type { ISalesFormFields, IForm, FormHandlers } from "./types";
 
 export const SalesForm = forwardRef<FormHandlers, IForm<"Sales">>((props, ref) => {
   const { onSubmit, accent } = props;
-  const {
-    firstName,
-    lastName,
-    emailAddress,
-    phoneNumber,
-    companyName,
-    interests,
-    details,
-  } = useContactFormConfig("Sales");
+  const { firstName, lastName, emailAddress, phoneNumber, companyName, interests, details } = useContactFormConfig("Sales");
 
   const formSchema = z.object({
     firstName: z.string().min(1, `${firstName.displayName} is required`),
@@ -32,7 +24,9 @@ export const SalesForm = forwardRef<FormHandlers, IForm<"Sales">>((props, ref) =
     details: z.string().min(1, "Please tell us how we can help you"),
   });
 
-  const form = useForm<z.infer<typeof formSchema>>({ resolver: zodResolver(formSchema) });
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+  });
   const { handleSubmit, control } = form;
   const submitForm = async (data: ISalesFormFields) => {
     return onSubmit("Sales", data);
@@ -49,43 +43,13 @@ export const SalesForm = forwardRef<FormHandlers, IForm<"Sales">>((props, ref) =
     <Flex as="form" onSubmit={submitter} flexDir="column" w={{ base: "100%", lg: "75%" }}>
       <FormProvider {...form}>
         <FieldGroup>
-          <TextInput
-            ctl={control}
-            defaultValue=""
-            id={firstName.id}
-            isRequired={firstName.required}
-            placeholder={firstName.displayName}
-          />
-          <TextInput
-            ctl={control}
-            defaultValue=""
-            id={lastName.id}
-            isRequired={lastName.required}
-            placeholder={lastName.displayName}
-          />
-          <TextInput
-            ctl={control}
-            defaultValue=""
-            id={companyName.id}
-            isRequired={companyName.required}
-            placeholder={companyName.displayName}
-          />
+          <TextInput ctl={control} defaultValue="" id={firstName.id} isRequired={firstName.required} placeholder={firstName.displayName} />
+          <TextInput ctl={control} defaultValue="" id={lastName.id} isRequired={lastName.required} placeholder={lastName.displayName} />
+          <TextInput ctl={control} defaultValue="" id={companyName.id} isRequired={companyName.required} placeholder={companyName.displayName} />
         </FieldGroup>
         <FieldGroup>
-          <TextInput
-            ctl={control}
-            defaultValue=""
-            id={emailAddress.id}
-            isRequired={emailAddress.required}
-            placeholder={emailAddress.displayName}
-          />
-          <TextInput
-            ctl={control}
-            defaultValue=""
-            id={phoneNumber.id}
-            isRequired={phoneNumber.required}
-            placeholder={phoneNumber.displayName}
-          />
+          <TextInput ctl={control} defaultValue="" id={emailAddress.id} isRequired={emailAddress.required} placeholder={emailAddress.displayName} />
+          <TextInput ctl={control} defaultValue="" id={phoneNumber.id} isRequired={phoneNumber.required} placeholder={phoneNumber.displayName} />
         </FieldGroup>
 
         <FieldGroup>
@@ -100,13 +64,7 @@ export const SalesForm = forwardRef<FormHandlers, IForm<"Sales">>((props, ref) =
           />
         </FieldGroup>
         <FieldGroup>
-          <TextArea
-            ctl={control}
-            id={details.id}
-            defaultValue=""
-            isRequired={details.required}
-            placeholder={details.displayName}
-          />
+          <TextArea ctl={control} id={details.id} defaultValue="" isRequired={details.required} placeholder={details.displayName} />
         </FieldGroup>
       </FormProvider>
     </Flex>

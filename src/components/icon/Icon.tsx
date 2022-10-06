@@ -43,23 +43,8 @@ export const Icon = (props: IconProps): JSX.Element => {
   }
 
   return (
-    <Flex
-      bg={bg}
-      width={size}
-      height={size}
-      color={color}
-      align="center"
-      minWidth={size}
-      justify="center"
-      overflow="hidden"
-      borderRadius="full"
-      {...restProps}
-    >
-      {fromUrl ? (
-        <Box css={{ mask: `url(${url}) no-repeat center` }} backgroundColor={color} boxSize="50%" />
-      ) : (
-        <DynamicIcon icon={icon!} boxSize="50%" />
-      )}
+    <Flex bg={bg} width={size} height={size} color={color} align="center" minWidth={size} justify="center" overflow="hidden" borderRadius="full" {...restProps}>
+      {fromUrl ? <Box css={{ mask: `url(${url}) no-repeat center` }} backgroundColor={color} boxSize="50%" /> : <DynamicIcon icon={icon!} boxSize="50%" />}
     </Flex>
   );
 };

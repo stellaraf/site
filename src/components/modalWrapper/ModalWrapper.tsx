@@ -1,11 +1,4 @@
-import {
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  ModalCloseButton,
-} from "@chakra-ui/react";
+import { Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, ModalCloseButton } from "@chakra-ui/react";
 import { If } from "~/components";
 import { ModalContent } from "./ModalContent";
 

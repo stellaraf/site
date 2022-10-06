@@ -8,14 +8,16 @@ import {
 import type { MutableRefObject } from "react";
 import type { IGlobalConfigCtx, IConfigProvider } from "./types";
 
-const ConfigContext = createContext<MutableRefObject<IGlobalConfigCtx>>(
-  {} as MutableRefObject<IGlobalConfigCtx>,
-);
+const ConfigContext = createContext<MutableRefObject<IGlobalConfigCtx>>({} as MutableRefObject<IGlobalConfigCtx>);
 
 export const ConfigProvider = (props: IConfigProvider): JSX.Element => {
   const { globalConfig, docsGroups, testimonials, children } = props;
 
-  const config = useRef<IGlobalConfigCtx>({ ...globalConfig, testimonials, docsGroups });
+  const config = useRef<IGlobalConfigCtx>({
+    ...globalConfig,
+    testimonials,
+    docsGroups,
+  });
 
   // const value = useMemo<IGlobalConfigCtx>(
   //   () => ({ ...globalConfig, testimonials, docsGroups }),

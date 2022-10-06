@@ -12,14 +12,7 @@ export const HeaderLogo = forwardRef<HTMLDivElement, HeaderLogoProps>((props, re
   return (
     <AnimatePresence>
       {show && (
-        <motion.div
-          ref={ref}
-          key="headerLogo"
-          exit={{ y: "100%" }}
-          animate={{ y: "0%" }}
-          initial={{ y: "100%" }}
-          transition={{ duration: 0.2 }}
-        >
+        <motion.div ref={ref} key="headerLogo" exit={{ y: "100%" }} animate={{ y: "0%" }} initial={{ y: "100%" }} transition={{ duration: 0.2 }}>
           <Link href="/" _focus={{ boxShadow: "unset" }} pb={4}>
             <StellarLogo noAnimate colorMode={colorMode} width={160} height={56} />
           </Link>

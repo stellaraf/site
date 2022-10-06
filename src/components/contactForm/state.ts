@@ -101,10 +101,7 @@ export function useContactForm(): ContactFormValues & ContactFormMethods {
     }
   }, []);
 
-  const shouldRender = useCallback(
-    (name: keyof AvailableForms): boolean => !state.showSuccess && state.selected === name,
-    [state.showSuccess, state.selected],
-  );
+  const shouldRender = useCallback((name: keyof AvailableForms): boolean => !state.showSuccess && state.selected === name, [state.showSuccess, state.selected]);
 
   const setSelected = useCallback((selected: FormIcon): void => {
     if (isSupportedForm(selected)) {
@@ -120,7 +117,14 @@ export function useContactForm(): ContactFormValues & ContactFormMethods {
     // addForms(cards);
   }, []);
 
-  return { ...state, addForms, toggleSuccess, reset, shouldRender, setSelected };
+  return {
+    ...state,
+    addForms,
+    toggleSuccess,
+    reset,
+    shouldRender,
+    setSelected,
+  };
 }
 
 /**

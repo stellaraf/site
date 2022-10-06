@@ -13,10 +13,7 @@ const hoverBorderDark = [undefined, "green.300"];
 
 export const SubscribeField = (props: ISubscribeInput): JSX.Element => {
   const { field, ...rest } = props;
-  const {
-    subscribeTitle = "Subscribe to our newsletter",
-    subscribePlaceholder = "Email Address",
-  } = useConfig();
+  const { subscribeTitle = "Subscribe to our newsletter", subscribePlaceholder = "Email Address" } = useConfig();
 
   const { formState } = useFormContext();
   const { isSubmitting, isSubmitSuccessful, errors } = formState;

@@ -1,7 +1,9 @@
 import fs from "node:fs";
 import createBundleAnalyzer from "@next/bundle-analyzer";
 
-const withBundleAnalyzer = createBundleAnalyzer({ enabled: process.env.ANALYZE === "true" });
+const withBundleAnalyzer = createBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 function getVersion() {
   const packageRaw = fs.readFileSync("package.json");

@@ -6,7 +6,10 @@ import type { FaviconOptions } from "favicons";
 const sourceLight = "./public/logos/stellar-icon-round.svg";
 const sourceDark = "./public/logos/stellar-icon-alt-round.svg";
 
-type ColorModeMap = { light: [string, FaviconOptions]; dark: [string, FaviconOptions] };
+type ColorModeMap = {
+  light: [string, FaviconOptions];
+  dark: [string, FaviconOptions];
+};
 
 const common: FaviconOptions = {
   appName: "Stellar Technologies",

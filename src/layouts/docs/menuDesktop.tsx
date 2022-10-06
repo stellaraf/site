@@ -1,12 +1,4 @@
-import {
-  Box,
-  VStack,
-  useToken,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  AccordionButton,
-} from "@chakra-ui/react";
+import { Box, VStack, useToken, AccordionIcon, AccordionItem, AccordionPanel, AccordionButton } from "@chakra-ui/react";
 import { useColorValue } from "~/context";
 import { Link } from "~/components";
 import { useDocsHref } from "./useDocsHref";
@@ -68,16 +60,8 @@ export const DMenuGroup = (props: IDocsGroup): JSX.Element => {
   const borderRadius = useToken("radii", "lg");
 
   return (
-    <AccordionItem
-      border="none"
-      borderTopWidth={{ base: 0 }}
-      borderBottomWidth={{ base: 1, lg: 0 }}
-      _last={{ borderBottomWidth: { base: 1, lg: 0 } }}
-    >
-      <AccordionButton
-        _hover={{ backgroundColor, borderRadius: "lg" }}
-        css={{ "&:focus": { borderRadius } }}
-      >
+    <AccordionItem border="none" borderTopWidth={{ base: 0 }} borderBottomWidth={{ base: 1, lg: 0 }} _last={{ borderBottomWidth: { base: 1, lg: 0 } }}>
+      <AccordionButton _hover={{ backgroundColor, borderRadius: "lg" }} css={{ "&:focus": { borderRadius } }}>
         <Box flex={1} textAlign="left" fontSize="sm" fontWeight="medium" textTransform="uppercase">
           {title}
         </Box>

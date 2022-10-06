@@ -5,16 +5,7 @@ import { heroButtons } from "~/styles";
 import { entries } from "./generic";
 
 import type { GlobalStyleProps } from "@chakra-ui/theme-tools";
-import type {
-  Fonts,
-  ThemeFonts,
-  CustomTheme,
-  FontWeights,
-  ThemeConfig,
-  CustomColors,
-  ChangeableColors,
-  InitialTheme,
-} from "~/types";
+import type { Fonts, ThemeFonts, CustomTheme, FontWeights, ThemeConfig, CustomColors, ChangeableColors, InitialTheme } from "~/types";
 
 export { isDark, isLight } from "@chakra-ui/theme-tools";
 
@@ -44,46 +35,10 @@ const fontSizes = {
   "6xl": "6rem",
 };
 
-const themeColorKeys = [
-  "secondary",
-  "tertiary",
-  "primary",
-  "orange",
-  "yellow",
-  "purple",
-  "green",
-  "light",
-  "gray",
-  "teal",
-  "blue",
-  "cyan",
-  "pink",
-  "dark",
-  "red",
-];
+const themeColorKeys = ["secondary", "tertiary", "primary", "orange", "yellow", "purple", "green", "light", "gray", "teal", "blue", "cyan", "pink", "dark", "red"];
 
 const globalStyles = (props: GlobalStyleProps) => {
-  const zIndexKeys = [
-    "button",
-    "label",
-    "table",
-    "tbody",
-    "thead",
-    "span",
-    "ol",
-    "ul",
-    "li",
-    "h1",
-    "h2",
-    "h3",
-    "h4",
-    "h5",
-    "h6",
-    "td",
-    "th",
-    "a",
-    "p",
-  ].join(", ");
+  const zIndexKeys = ["button", "label", "table", "tbody", "thead", "span", "ol", "ul", "li", "h1", "h2", "h3", "h4", "h5", "h6", "td", "th", "a", "p"].join(", ");
   return {
     [zIndexKeys]: {
       zIndex: 1,
@@ -93,10 +48,7 @@ const globalStyles = (props: GlobalStyleProps) => {
       backgroundColor: mode("light.500", "dark.500")(props),
       color: mode("dark.500", "light.500")(props),
       fontFamily: "body",
-      "*::selection": mode(
-        { backgroundColor: "secondary.200", color: "black" },
-        { backgroundColor: "tertiary.100", color: "black" },
-      )(props),
+      "*::selection": mode({ backgroundColor: "secondary.200", color: "black" }, { backgroundColor: "tertiary.100", color: "black" })(props),
     },
     // See https://github.com/rcbyr/keen-slider/blob/master/src/keen-slider.scss
     ".__slider_container": {
@@ -113,10 +65,7 @@ const globalStyles = (props: GlobalStyleProps) => {
     ":root": Object.assign(
       {},
       ...themeColorKeys.map(c => ({
-        [`--${c}`]: mode(
-          getColor(props.theme, `${c}.500`),
-          getColor(props.theme, `${c}.300`),
-        )(props),
+        [`--${c}`]: mode(getColor(props.theme, `${c}.500`), getColor(props.theme, `${c}.300`))(props),
       })),
     ),
   };

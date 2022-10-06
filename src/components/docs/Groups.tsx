@@ -13,15 +13,7 @@ export const Groups: React.FC = () => {
         {inView &&
           docsGroups.map((group, i) => (
             <WrapItem key={group.title}>
-              <AnimatedDiv
-                zIndex={1}
-                animate={{ x: 0 }}
-                key={group.title}
-                initial={{ x: "100%" }}
-                whileTap={{ y: "-3%" }}
-                whileHover={{ y: "-3%" }}
-                transition={{ delay: i * 0.075 }}
-              >
+              <AnimatedDiv zIndex={1} animate={{ x: 0 }} key={group.title} initial={{ x: "100%" }} whileTap={{ y: "-3%" }} whileHover={{ y: "-3%" }} transition={{ delay: i * 0.075 }}>
                 <GroupCard {...group} />
               </AnimatedDiv>
             </WrapItem>

@@ -47,25 +47,11 @@ export const _CallToActionContainer: React.FC<ICallToActionMemo> = (props: ICall
             {titleMe(callToActionTitle)}
           </Heading>
         </Center>
-        <Wrap
-          direction={{ base: "column", lg: "row" }}
-          spacing={8}
-          justify="center"
-          ref={ref}
-          overflow="visible"
-        >
+        <Wrap direction={{ base: "column", lg: "row" }} spacing={8} justify="center" ref={ref} overflow="visible">
           {inView &&
             actions.map((action, i) => (
-              <WrapItem key={`action${i}`}>
-                <AnimatedDiv
-                  zIndex={1}
-                  animate={{ x: 0 }}
-                  key={`action${i}`}
-                  initial={{ x: "100%" }}
-                  whileTap={{ y: "-3%" }}
-                  whileHover={{ y: "-5%" }}
-                  transition={{ delay: i * 0.1 }}
-                >
+              <WrapItem key={action.title}>
+                <AnimatedDiv zIndex={1} animate={{ x: 0 }} key={action.title} initial={{ x: "100%" }} whileTap={{ y: "-3%" }} whileHover={{ y: "-3%" }} transition={{ delay: i * 0.075 }}>
                   <Action {...action} />
                 </AnimatedDiv>
               </WrapItem>
@@ -81,10 +67,7 @@ export const _CallToActionContainer: React.FC<ICallToActionMemo> = (props: ICall
  * visibility of the <SectionDivider /> is dependent on dark-mode, this is expected, but a little
  * annoying.
  */
-const CallToActionContainer = memo(
-  _CallToActionContainer,
-  (prev, next) => prev.currentPath === next.currentPath,
-);
+const CallToActionContainer = memo(_CallToActionContainer, (prev, next) => prev.currentPath === next.currentPath);
 
 export const CallToAction: React.FC<ICallToAction> = (props: ICallToAction) => {
   const showBorder = useColorValue(0, 1);

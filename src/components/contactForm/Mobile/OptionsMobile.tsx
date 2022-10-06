@@ -82,12 +82,7 @@ export const OptionsMobile = (): JSX.Element => {
           const handleFormSubmit = () => formRef.current.submit();
 
           const cardsButton = (
-            <Button
-              w="100%"
-              colorScheme={iconColor}
-              href={iconName === "Docs" ? "/docs" : undefined}
-              onClick={iconName === "Docs" ? undefined : handleClick}
-            >
+            <Button w="100%" colorScheme={iconColor} href={iconName === "Docs" ? "/docs" : undefined} onClick={iconName === "Docs" ? undefined : handleClick}>
               {titleMe(buttonText)}
             </Button>
           );
@@ -112,15 +107,7 @@ export const OptionsMobile = (): JSX.Element => {
                 <CardBody {...(isForm && formSizes)}>
                   <LayoutGroup>
                     {isForm ? (
-                      <MobileForm
-                        onClose={onClose}
-                        button={formButton}
-                        icon={icon}
-                        formRef={formRef}
-                        accent={iconColor}
-                        onToggle={onToggle}
-                        {...cardRest}
-                      />
+                      <MobileForm onClose={onClose} button={formButton} icon={icon} formRef={formRef} accent={iconColor} onToggle={onToggle} {...cardRest} />
                     ) : (
                       <ContactOption index={i} icon={icon} iconName={iconName} {...cardRest} />
                     )}

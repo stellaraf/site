@@ -26,12 +26,7 @@ const BottomMobile: React.FC = () => {
   return (
     <VStack justify="space-between" align="center" mb={8} mt={12} spacing={12}>
       <MControls />
-      <Subscribe
-        width="100%"
-        align="center"
-        alertPosition="top"
-        alertProps={{ right: 0, mx: 4, top: 16 }}
-      />
+      <Subscribe width="100%" align="center" alertPosition="top" alertProps={{ right: 0, mx: 4, top: 16 }} />
       <VStack align="flex-start" spacing={12}>
         <SocialLinks />
       </VStack>

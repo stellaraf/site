@@ -129,9 +129,7 @@ const Base = (particleProps: ParticlesProps) => {
     return;
   }, []);
 
-  return (
-    <Particles options={options} {...particleProps} init={particlesInit} loaded={particlesLoaded} />
-  );
+  return <Particles options={options} {...particleProps} init={particlesInit} loaded={particlesLoaded} />;
 };
 
 const Wrapper = chakra("div", {

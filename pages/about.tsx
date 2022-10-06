@@ -2,14 +2,7 @@ import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 import { Avatars, Hero, GoogleMap, SEO, GetStarted, Testimonials } from "~/components";
 import { useResponsiveStyle } from "~/hooks";
-import {
-  getPage,
-  getPageContent,
-  getPageId,
-  getParsedContent,
-  stringSorter,
-  sortByWeight,
-} from "~/util";
+import { getPage, getPageContent, getPageId, getParsedContent, stringSorter, sortByWeight } from "~/util";
 
 import type { GetStaticProps } from "next";
 import type { Bio, PageEntry, IAboutPage, ISection, PageContent } from "~/types";
@@ -61,7 +54,9 @@ export const getStaticProps: GetStaticProps<PageEntry<IAboutPage>> = async ctx =
     const pageId = await getPageId("about", preview);
     pageData = await getPage<IAboutPage["pageData"]>(pageId, preview);
     pageContent = await getPageContent(pageId, preview);
-    bios = await getParsedContent<Bio>("bio", preview, { select: "sys.id,fields" });
+    bios = await getParsedContent<Bio>("bio", preview, {
+      select: "sys.id,fields",
+    });
     // Sort bios alphabetically first, then by sortWeight.
     bios = bios.sort(stringSorter("name")).sort(sortByWeight);
   } catch (err) {

@@ -10,9 +10,7 @@ import { useSelectContext } from "./select";
 import type { SelectOptionSingle } from "~/types";
 import type { RSStyleCallbackProps, RSThemeFunction, RSStyleFunction } from "./types";
 
-export const useControlStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
-  props: RSStyleCallbackProps,
-): RSStyleFunction<"control", Opt, IsMulti> => {
+export const useControlStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(props: RSStyleCallbackProps): RSStyleFunction<"control", Opt, IsMulti> => {
   const { colorMode } = props;
 
   const { isError } = useSelectContext();
@@ -47,7 +45,10 @@ export const useControlStyle = <Opt extends SelectOptionSingle, IsMulti extends 
           boxShadow: `0 0 0 1px ${focusBorder}`,
           zIndex: "unset",
         },
-        "&.invalid": { borderColor: invalidBorder, boxShadow: `0 0 0 1px ${invalidBorder}` },
+        "&.invalid": {
+          borderColor: invalidBorder,
+          boxShadow: `0 0 0 1px ${invalidBorder}`,
+        },
       };
       return mergeWith({}, baseProps, styles);
     },
@@ -55,9 +56,7 @@ export const useControlStyle = <Opt extends SelectOptionSingle, IsMulti extends 
   );
 };
 
-export const useMenuStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
-  props: RSStyleCallbackProps,
-): RSStyleFunction<"menu", Opt, IsMulti> => {
+export const useMenuStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(props: RSStyleCallbackProps): RSStyleFunction<"menu", Opt, IsMulti> => {
   const { colorMode } = props;
   const { isOpen } = useSelectContext();
   const backgroundColor = useColorTokenValue("white", "blackSolid.800");
@@ -87,9 +86,7 @@ export const useMenuStyle = <Opt extends SelectOptionSingle, IsMulti extends boo
   );
 };
 
-export const useMenuListStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
-  props: RSStyleCallbackProps,
-): RSStyleFunction<"menuList", Opt, IsMulti> => {
+export const useMenuListStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(props: RSStyleCallbackProps): RSStyleFunction<"menuList", Opt, IsMulti> => {
   const { colorMode } = props;
   const { isOpen } = useSelectContext();
 
@@ -115,9 +112,7 @@ export const useMenuListStyle = <Opt extends SelectOptionSingle, IsMulti extends
   );
 };
 
-export const useOptionStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
-  props: RSStyleCallbackProps,
-): RSStyleFunction<"option", Opt, IsMulti> => {
+export const useOptionStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(props: RSStyleCallbackProps): RSStyleFunction<"option", Opt, IsMulti> => {
   const { colorMode, colorScheme } = props;
   const { isOpen } = useSelectContext();
 
@@ -152,27 +147,21 @@ export const useOptionStyle = <Opt extends SelectOptionSingle, IsMulti extends b
   );
 };
 
-export const useIndicatorSeparatorStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
-  props: RSStyleCallbackProps,
-): RSStyleFunction<"indicatorSeparator", Opt, IsMulti> => {
+export const useIndicatorSeparatorStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(props: RSStyleCallbackProps): RSStyleFunction<"indicatorSeparator", Opt, IsMulti> => {
   const { colorMode } = props;
   const border = useColorTokenValue("gray.200", "whiteAlpha.200");
   const styles = { backgroundColor: border, transition: "all 0.2s" };
   return useCallback(base => mergeWith({}, base, styles), [colorMode]);
 };
 
-export const usePlaceholderStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
-  props: RSStyleCallbackProps,
-): RSStyleFunction<"placeholder", Opt, IsMulti> => {
+export const usePlaceholderStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(props: RSStyleCallbackProps): RSStyleFunction<"placeholder", Opt, IsMulti> => {
   const { colorMode } = props;
   const color = useColorTokenValue("gray.600", "whiteAlpha.600");
   const style = useColorValue({ opacity: 0.8 }, {});
   return useCallback(base => mergeWith({}, base, { color, ...style }), [colorMode]);
 };
 
-export const useMultiValueStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
-  props: RSStyleCallbackProps,
-): RSStyleFunction<"multiValue", Opt, IsMulti> => {
+export const useMultiValueStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(props: RSStyleCallbackProps): RSStyleFunction<"multiValue", Opt, IsMulti> => {
   const { colorMode, colorScheme } = props;
 
   const boxShadowLight = useToken("shadows", "md");
@@ -193,9 +182,7 @@ export const useMultiValueStyle = <Opt extends SelectOptionSingle, IsMulti exten
   return useCallback(base => mergeWith({}, base, styles), [colorMode]);
 };
 
-export const useMultiValueLabelStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
-  props: RSStyleCallbackProps,
-): RSStyleFunction<"multiValueLabel", Opt, IsMulti> => {
+export const useMultiValueLabelStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(props: RSStyleCallbackProps): RSStyleFunction<"multiValueLabel", Opt, IsMulti> => {
   const { colorMode, colorScheme } = props;
 
   const styles = {
@@ -211,9 +198,7 @@ export const useMultiValueLabelStyle = <Opt extends SelectOptionSingle, IsMulti 
   return useCallback(base => mergeWith({}, base, styles), [colorMode, colorScheme]);
 };
 
-export const useMultiValueRemoveStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
-  props: RSStyleCallbackProps,
-): RSStyleFunction<"multiValueRemove", Opt, IsMulti> => {
+export const useMultiValueRemoveStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(props: RSStyleCallbackProps): RSStyleFunction<"multiValueRemove", Opt, IsMulti> => {
   const { colorMode } = props;
 
   const styles = {
@@ -229,10 +214,7 @@ export const useMultiValueRemoveStyle = <Opt extends SelectOptionSingle, IsMulti
   return useCallback(base => mergeWith({}, base, styles), [colorMode]);
 };
 
-export const useMenuPortal = <
-  Opt extends SelectOptionSingle,
-  IsMulti extends boolean
->(): RSStyleFunction<"menuPortal", Opt, IsMulti> => {
+export const useMenuPortal = <Opt extends SelectOptionSingle, IsMulti extends boolean>(): RSStyleFunction<"menuPortal", Opt, IsMulti> => {
   const isMobile = useMobile();
   const styles = {
     zIndex: isMobile ? 1500 : 1,

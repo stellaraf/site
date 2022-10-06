@@ -46,7 +46,10 @@ interface CloudMeasurements {
   reset: () => void;
 }
 
-const measurementAtom = atom<CloudMeasurement[]>({ key: "cloudMeasurements", default: [] });
+const measurementAtom = atom<CloudMeasurement[]>({
+  key: "cloudMeasurements",
+  default: [],
+});
 
 const completeMeasurementsSelector = selector<boolean>({
   key: "cloud-measurements-complete",
@@ -90,8 +93,7 @@ export const useCloudMeasurementValues = (): CloudMeasurement[] => useRecoilValu
 /**
  * Best Cloud Measurement if all measurements are complete, `null` if not.
  */
-export const useBestMeasurement = (): Nullable<CloudMeasurement> =>
-  useRecoilValue(bestMeasurementSelector);
+export const useBestMeasurement = (): Nullable<CloudMeasurement> => useRecoilValue(bestMeasurementSelector);
 
 /**
  * Manage measurement state of cloud location latency tests.

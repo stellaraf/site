@@ -25,21 +25,14 @@ export const HeroCards: React.FC<IHeroCards> = (props: IHeroCards) => {
   const { content, icon, ...rest } = props;
   const styles = useColorValue(
     { bg: "white", color: "dark.500" },
-    { bg: "whiteAlpha.100", color: "white", css: { backdropFilter: "blur(2px)" } },
+    {
+      bg: "whiteAlpha.100",
+      color: "white",
+      css: { backdropFilter: "blur(2px)" },
+    },
   );
   return (
-    <Flex
-      p={8}
-      zIndex={1}
-      width="6xl"
-      height="sm"
-      boxShadow="2xl"
-      flexDir="column"
-      borderRadius="md"
-      position="relative"
-      {...styles}
-      {...rest}
-    >
+    <Flex p={8} zIndex={1} width="6xl" height="sm" boxShadow="2xl" flexDir="column" borderRadius="md" position="relative" {...styles} {...rest}>
       <Carousel dotColor={styles.color}>
         {content.map((card, i) => (
           <Card content={card} key={i} />

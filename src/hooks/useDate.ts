@@ -10,10 +10,7 @@ dayjs.extend(utc);
 dayjs.extend(advFmt);
 dayjs.extend(timezone);
 
-export function useDate(
-  utcTime: string | null,
-  options: UseDateOptions = { format: "MMMM DD, YYYY HH:mm:ss z" },
-): string {
+export function useDate(utcTime: string | null, options: UseDateOptions = { format: "MMMM DD, YYYY HH:mm:ss z" }): string {
   if (utcTime === null) {
     return "Unknown";
   }

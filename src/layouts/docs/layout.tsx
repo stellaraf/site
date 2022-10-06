@@ -7,7 +7,9 @@ import { MMenuGroup } from "./menuMobile";
 
 import type { IDocsLayout, IResponsiveLayout } from "./types";
 
-const LayoutContainer = chakra("div", { baseStyle: { w: "100%", minH: "40vh", pt: 32 } });
+const LayoutContainer = chakra("div", {
+  baseStyle: { w: "100%", minH: "40vh", pt: 32 },
+});
 
 const MLayout: React.FC<IResponsiveLayout> = (props: IResponsiveLayout) => {
   const { children, ...rest } = props;
@@ -73,7 +75,12 @@ const DNav: React.FC = () => {
 export const DocsLayout: React.FC<IDocsLayout> = (props: IDocsLayout) => {
   const { children, ...rest } = props;
 
-  const largeLayout = useBreakpointValue({ base: false, md: false, lg: true, xl: true });
+  const largeLayout = useBreakpointValue({
+    base: false,
+    md: false,
+    lg: true,
+    xl: true,
+  });
   const rStyles = useResponsiveStyle();
 
   return (

@@ -6,16 +6,7 @@ import { useCurrent } from "./state";
 import type { IPhoto, IPhotoWrapper } from "./types";
 
 export const PhotoWrapper: React.FC<IPhotoWrapper> = (props: IPhotoWrapper) => (
-  <Flex
-    minWidth={40}
-    maxWidth="100%"
-    flexDir="column"
-    textAlign="center"
-    alignItems="center"
-    position="relative"
-    justifyContent="center"
-    {...props}
-  />
+  <Flex minWidth={40} maxWidth="100%" flexDir="column" textAlign="center" alignItems="center" position="relative" justifyContent="center" {...props} />
 );
 
 /**
@@ -26,20 +17,17 @@ export const Photo: React.FC<IPhoto> = (props: IPhoto) => {
   const photoBorder = useColorValue("whiteAlpha.400", "blackAlpha.400");
   const { bios } = useAvatar();
   const [_, setCurrent] = useCurrent();
-  const hover = useBreakpointValue({ base: {}, lg: { transform: "scale(1.25)" } });
+  const hover = useBreakpointValue({
+    base: {},
+    lg: { transform: "scale(1.25)" },
+  });
   const handleClick = () => {
     setCurrent(index);
     onOpen();
   };
   return (
     <PhotoWrapper {...rest}>
-      <Button
-        boxSize={32}
-        rounded="full"
-        overflow="hidden"
-        variant="unstyled"
-        onClick={handleClick}
-      >
+      <Button boxSize={32} rounded="full" overflow="hidden" variant="unstyled" onClick={handleClick}>
         <Image
           width="100%"
           rounded="full"

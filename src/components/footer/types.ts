@@ -1,14 +1,4 @@
-import type {
-  ToastProps,
-  ToastId,
-  BoxProps,
-  StackProps,
-  InputProps,
-  AlertProps,
-  RenderProps,
-  IconButtonProps,
-  SimpleGridProps,
-} from "@chakra-ui/react";
+import type { ToastProps, ToastId, BoxProps, StackProps, InputProps, AlertProps, RenderProps, IconButtonProps, SimpleGridProps } from "@chakra-ui/react";
 import type { ControllerRenderProps } from "react-hook-form";
 import type { SortedFooterItem } from "~/types";
 

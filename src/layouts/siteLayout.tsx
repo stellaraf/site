@@ -1,16 +1,7 @@
 import dynamic from "next/dynamic";
 import { useBreakpointValue } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
-import {
-  Banner,
-  Footer,
-  DHeader,
-  Preview,
-  MHeader,
-  RickRoll,
-  DControls,
-  CallToAction,
-} from "~/components";
+import { Banner, Footer, DHeader, Preview, MHeader, RickRoll, DControls, CallToAction } from "~/components";
 import { useMobile } from "~/hooks";
 import { Wrapper, Root, Main } from "./common";
 
@@ -24,7 +15,12 @@ export const SiteLayout: React.FC<ISiteLayout> = (props: ISiteLayout) => {
 
   const isMobile = useMobile();
 
-  const bp = useBreakpointValue({ base: "Base", md: "Medium", lg: "Large", xl: "X-Large" });
+  const bp = useBreakpointValue({
+    base: "Base",
+    md: "Medium",
+    lg: "Large",
+    xl: "X-Large",
+  });
 
   if (process.env.NODE_ENV === "development" && typeof bp !== "undefined") {
     console.log(

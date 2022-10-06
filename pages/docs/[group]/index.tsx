@@ -22,21 +22,11 @@ const Content: React.FC<IDocsGroup> = (props: IDocsGroup) => {
   return (
     <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
       <Flex textAlign="center" flexDir="column" alignItems="center" ref={containerRef}>
-        <Heading
-          as="h1"
-          fontSize={{ base: shouldResize ? "3xl" : "4xl", lg: "6xl" }}
-          fontWeight="light"
-          ref={headingRef}
-        >
+        <Heading as="h1" fontSize={{ base: shouldResize ? "3xl" : "4xl", lg: "6xl" }} fontWeight="light" ref={headingRef}>
           {titleMe(title)}
         </Heading>
         {subtitle && (
-          <Heading
-            as="h2"
-            fontWeight="light"
-            fontSize={{ base: "1.5rem", lg: "xl" }}
-            textAlign={{ base: "center", lg: "left" }}
-          >
+          <Heading as="h2" fontWeight="light" fontSize={{ base: "1.5rem", lg: "xl" }} textAlign={{ base: "center", lg: "left" }}>
             {titleMe(subtitle)}
           </Heading>
         )}

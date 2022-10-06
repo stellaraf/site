@@ -51,12 +51,7 @@ const Cloud = (props: PageEntry<ICloud>): JSX.Element => {
       <SEO title={title} description={subtitle} />
       <CloudLocationsProvider value={geoPoints}>
         <Content pageData={pageData}>
-          <USMap
-            geoData={geoData}
-            mapColor={mapColor}
-            markerColor={markerColor}
-            maxW={{ base: "100%", lg: "75%" }}
-          />
+          <USMap geoData={geoData} mapColor={mapColor} markerColor={markerColor} maxW={{ base: "100%", lg: "75%" }} />
         </Content>
       </CloudLocationsProvider>
       {sections.map((sect, i) => {

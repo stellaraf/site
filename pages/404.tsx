@@ -13,23 +13,8 @@ const NotFound: React.FC = () => {
   return (
     <>
       <SEO title="Not Found" noindex nofollow />
-      <Flex
-        w="100%"
-        h="100vh"
-        color={heroText}
-        pt={32}
-        zIndex={-2}
-        align="center"
-        justify="center"
-        {...rStyles}
-        {...bg}
-      >
-        <Heading
-          as="h1"
-          fontSize={{ base: "1.5rem", md: "xl", lg: "2xl" }}
-          fontWeight="light"
-          mb={32}
-        >
+      <Flex w="100%" h="100vh" color={heroText} pt={32} zIndex={-2} align="center" justify="center" {...rStyles} {...bg}>
+        <Heading as="h1" fontSize={{ base: "1.5rem", md: "xl", lg: "2xl" }} fontWeight="light" mb={32}>
           <Box as="span" color={pathText}>{`${asPath} `}</Box>
           is not a thing...yet.
         </Heading>

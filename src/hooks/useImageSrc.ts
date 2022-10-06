@@ -15,10 +15,7 @@ export function useImageSrc(initialUrl: string): string {
   const urlBase = urlParts.join("/");
   const { colorMode } = useColorMode();
 
-  const src = useMemo(() => `${urlBase}/${baseFile}--${colorMode}.${extension}`, [
-    colorMode,
-    initialUrl,
-  ]);
+  const src = useMemo(() => `${urlBase}/${baseFile}--${colorMode}.${extension}`, [colorMode, initialUrl]);
 
   return src;
 }

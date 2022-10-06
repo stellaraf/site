@@ -33,22 +33,13 @@ const Home: React.FC<THome> = (props: THome) => {
             <StellarLogo colorMode={colorMode} width="100%" height="100%" ref={logoRef} />
           </Box>
           <Flex textAlign="center">
-            <Heading
-              as="h1"
-              fontSize={{ base: "1.5rem", md: "xl", lg: "2xl" }}
-              fontWeight="light"
-              mb={32}
-            >
+            <Heading as="h1" fontSize={{ base: "1.5rem", md: "xl", lg: "2xl" }} fontWeight="light" mb={32}>
               {siteSlogan}
             </Heading>
           </Flex>
         </Flex>
         <Flex justifyContent="center" w="100%">
-          {typeof mainVideo !== "undefined" ? (
-            <Screen url={mainVideo.fields.file.url} />
-          ) : typeof homePageVideo !== "undefined" ? (
-            <Screen url={homePageVideo} />
-          ) : null}
+          {typeof mainVideo !== "undefined" ? <Screen url={mainVideo.fields.file.url} /> : typeof homePageVideo !== "undefined" ? <Screen url={homePageVideo} /> : null}
         </Flex>
       </Box>
       {sections.map((sect, i) => {
@@ -63,7 +54,9 @@ export const getStaticProps: GetStaticProps<THome> = async ctx => {
   const preview = ctx?.preview ?? false;
   let pageContent = {} as THomePageContent;
   try {
-    [pageContent] = await getParsedContent<THomePageContent>("homepage", preview, { include: 4 });
+    [pageContent] = await getParsedContent<THomePageContent>("homepage", preview, {
+      include: 4,
+    });
   } catch (err) {
     console.error(err);
   }

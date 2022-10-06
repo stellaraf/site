@@ -37,13 +37,7 @@ export const Testimonials = (props: CenterProps): JSX.Element => {
       {...rStyles}
       {...props}
     >
-      <VStack
-        color={color}
-        borderRadius="md"
-        spacing={{ base: 4, lg: 8 }}
-        bg={isDarkMode ? undefined : "white"}
-        boxShadow={isDarkMode ? undefined : "xl"}
-      >
+      <VStack color={color} borderRadius="md" spacing={{ base: 4, lg: 8 }} bg={isDarkMode ? undefined : "white"} boxShadow={isDarkMode ? undefined : "xl"}>
         <AnimatedDiv zIndex={1} animate={{ x: 0 }} initial={{ x: "100%" }}>
           {isClient && <Testimonial {...testimonial} />}
         </AnimatedDiv>

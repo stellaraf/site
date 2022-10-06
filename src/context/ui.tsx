@@ -1,12 +1,5 @@
 import { useMemo } from "react";
-import {
-  useToken,
-  ChakraProvider,
-  useColorModeValue,
-  createLocalStorageManager,
-  createCookieStorageManager,
-  useTheme as useChakraTheme,
-} from "@chakra-ui/react";
+import { useToken, ChakraProvider, useColorModeValue, createLocalStorageManager, createCookieStorageManager, useTheme as useChakraTheme } from "@chakra-ui/react";
 import { makeTheme } from "~/util";
 
 import type { GetServerSideProps } from "next";

@@ -4,9 +4,7 @@ import { components } from "react-select";
 import type { OptionProps, GroupBase } from "react-select";
 import type { SelectOptionSingle } from "~/types";
 
-export const Option = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
-  props: OptionProps<Opt, IsMulti>,
-): JSX.Element => {
+export const Option = <Opt extends SelectOptionSingle, IsMulti extends boolean>(props: OptionProps<Opt, IsMulti>): JSX.Element => {
   const { label } = props;
 
   return (

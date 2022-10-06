@@ -15,15 +15,7 @@ export const TD = (props: ITd) => {
   const { isHeader = false, children, ...rest } = props;
   const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
-    <Box
-      p={2}
-      fontSize="sm"
-      whiteSpace="normal"
-      borderTopWidth="1px"
-      borderColor={border}
-      as={isHeader ? "th" : "td"}
-      {...rest}
-    >
+    <Box p={2} fontSize="sm" whiteSpace="normal" borderTopWidth="1px" borderColor={border} as={isHeader ? "th" : "td"} {...rest}>
       {children}
     </Box>
   );
@@ -33,15 +25,7 @@ export const TableCell = (props: ITableCell) => {
   const { isHeader = false, children, ...rest } = props;
   const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
-    <Box
-      p={2}
-      fontSize="sm"
-      whiteSpace="normal"
-      borderTopWidth="1px"
-      borderColor={border}
-      as={isHeader ? "th" : "td"}
-      {...rest}
-    >
+    <Box p={2} fontSize="sm" whiteSpace="normal" borderTopWidth="1px" borderColor={border} as={isHeader ? "th" : "td"} {...rest}>
       <Markdown>{children}</Markdown>
     </Box>
   );
@@ -50,15 +34,7 @@ export const TableCell = (props: ITableCell) => {
 export const TableMain = (props: BoxProps) => {
   const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
-    <Box
-      mt={4}
-      minWidth="50%"
-      overflow="auto"
-      borderWidth="1px"
-      borderRadius="lg"
-      borderColor={border}
-      width={{ base: "100%", lg: "max-content" }}
-    >
+    <Box mt={4} minWidth="50%" overflow="auto" borderWidth="1px" borderRadius="lg" borderColor={border} width={{ base: "100%", lg: "max-content" }}>
       <Box as="table" textAlign="left" width="100%" overflowX="hidden" {...props} />
     </Box>
   );
@@ -107,13 +83,5 @@ const TableNoHeader = (props: TTableData) => {
 export const Table = (props: TTableEntry) => {
   const { useColumnHeader, tableData } = props.data;
 
-  return (
-    <TableMain>
-      {useColumnHeader ? (
-        <TableWithHeader tableData={tableData} />
-      ) : (
-        <TableNoHeader tableData={tableData} />
-      )}
-    </TableMain>
-  );
+  return <TableMain>{useColumnHeader ? <TableWithHeader tableData={tableData} /> : <TableNoHeader tableData={tableData} />}</TableMain>;
 };

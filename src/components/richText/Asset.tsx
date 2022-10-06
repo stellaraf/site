@@ -28,15 +28,7 @@ const ImageAsset = (props: IAssetFields) => {
     image = <ChakraImage src={url} alt={title} boxSize="100%" css={css} />;
     bg = svgBg;
   } else {
-    image = (
-      <NextImage
-        src={"https:" + url}
-        alt={title}
-        width={width}
-        height={height}
-        layout="responsive"
-      />
-    );
+    image = <NextImage src={"https:" + url} alt={title} width={width} height={height} layout="responsive" />;
   }
 
   return (

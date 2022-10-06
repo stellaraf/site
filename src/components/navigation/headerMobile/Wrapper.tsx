@@ -46,19 +46,7 @@ export const Wrapper: React.FC<IBaseHeader> = (props: IBaseHeader) => {
   );
 
   return (
-    <Box
-      h={20}
-      top={0}
-      bg={bg}
-      left={0}
-      w="100%"
-      right={0}
-      as="header"
-      pos="fixed"
-      zIndex={1000}
-      css={{ backdropFilter: "blur(10px)" }}
-      transition={{ transition: "all 200ms ease-in" }}
-    >
+    <Box h={20} top={0} bg={bg} left={0} w="100%" right={0} as="header" pos="fixed" zIndex={1000} css={{ backdropFilter: "blur(10px)" }} transition={{ transition: "all 200ms ease-in" }}>
       <Flex
         px={8}
         h="100%"

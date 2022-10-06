@@ -13,16 +13,7 @@ import type { IHeader } from "./types";
 const HEADING_HEIGHT = 56;
 
 const ContactButton = (props: ButtonProps) => (
-  <Button
-    mr={8}
-    w="100%"
-    href="/contact"
-    variant="outline"
-    borderWidth="1px"
-    colorScheme="primary"
-    leftIcon={<DynamicIcon icon={{ fa: "FaHeart" }} />}
-    {...props}
-  >
+  <Button mr={8} w="100%" href="/contact" variant="outline" borderWidth="1px" colorScheme="primary" leftIcon={<DynamicIcon icon={{ fa: "FaHeart" }} />} {...props}>
     Talk to Us
   </Button>
 );
@@ -35,12 +26,7 @@ export const MHeader: React.FC<IHeader> = (props: IHeader) => {
   return (
     <>
       <Wrapper isOpen={isOpen} onToggle={onToggle} navHeaderHeight={HEADING_HEIGHT} {...props}>
-        <Hamburger
-          toggled={isOpen}
-          toggle={onToggle}
-          rounded
-          size={isOpen ? HEADING_HEIGHT : undefined}
-        />
+        <Hamburger toggled={isOpen} toggle={onToggle} rounded size={isOpen ? HEADING_HEIGHT : undefined} />
       </Wrapper>
       <ModalWrapper
         noOverlay
@@ -54,21 +40,8 @@ export const MHeader: React.FC<IHeader> = (props: IHeader) => {
         containerProps={{ m: 2, width: "96vw", minH: "98vh" }}
         header={
           <Flex align="center" justify="space-between">
-            <StellarLogo
-              noAnimate
-              width="auto"
-              colorMode={colorMode}
-              height={HEADING_HEIGHT}
-              style={{ marginBlock: "0.5rem" }}
-            />
-            {isOpen && (
-              <Hamburger
-                toggled={isOpen}
-                toggle={onToggle}
-                rounded
-                size={isOpen ? HEADING_HEIGHT : undefined}
-              />
-            )}
+            <StellarLogo noAnimate width="auto" colorMode={colorMode} height={HEADING_HEIGHT} style={{ marginBlock: "0.5rem" }} />
+            {isOpen && <Hamburger toggled={isOpen} toggle={onToggle} rounded size={isOpen ? HEADING_HEIGHT : undefined} />}
           </Flex>
         }
         body={

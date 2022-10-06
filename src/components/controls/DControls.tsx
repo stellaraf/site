@@ -50,26 +50,10 @@ export const DControls: React.FC<IDControls> = (props: IDControls) => {
     >
       <VStack pos="relative" spacing={6}>
         ?
-        <Button
-          minW="unset"
-          height="unset"
-          variant="unstyled"
-          title={colorModeLabel}
-          onClick={toggleColorMode}
-          aria-label={colorModeLabel}
-          _hover={{ color: hoverColor }}
-        >
+        <Button minW="unset" height="unset" variant="unstyled" title={colorModeLabel} onClick={toggleColorMode} aria-label={colorModeLabel} _hover={{ color: hoverColor }}>
           <DynamicIcon icon={colorModeIcon} />
         </Button>
-        <Button
-          minW="unset"
-          height="unset"
-          variant="unstyled"
-          onClick={scrollToTop}
-          title="Scroll to Top"
-          aria-label="Scroll to Top"
-          _hover={{ color: hoverColor }}
-        >
+        <Button minW="unset" height="unset" variant="unstyled" onClick={scrollToTop} title="Scroll to Top" aria-label="Scroll to Top" _hover={{ color: hoverColor }}>
           <DynamicIcon icon={{ bs: "BsChevronUp" }} />
         </Button>
       </VStack>

@@ -2,15 +2,19 @@ import { mode } from "@chakra-ui/theme-tools";
 
 import type { StyleObjectOrFn } from "@chakra-ui/react";
 
-const common = { px: 3, py: 1, lineHeight: 1.5, borderRadius: "lg" } as StyleObjectOrFn;
+const common = {
+  px: 3,
+  py: 1,
+  lineHeight: 1.5,
+  borderRadius: "lg",
+} as StyleObjectOrFn;
 
 export const heroButtons = {
   variants: {
     heroPrimary: (props: Dict) =>
       mode(
         {
-          bg:
-            "linear-gradient(45deg,rgba(41,21,214,1) 0%,rgba(145,0,250,1) 51%,rgba(41,21,214,1) 100%)",
+          bg: "linear-gradient(45deg,rgba(41,21,214,1) 0%,rgba(145,0,250,1) 51%,rgba(41,21,214,1) 100%)",
           color: "white",
           boxShadow: "lg",
           transition: "all 0.2s",
@@ -22,8 +26,7 @@ export const heroButtons = {
           ...common,
         },
         {
-          bg:
-            "linear-gradient(45deg,rgba(80, 216, 215,1) 0%,rgba(113, 108, 233,1) 51%,rgba(80, 216, 215,1) 100%)",
+          bg: "linear-gradient(45deg,rgba(80, 216, 215,1) 0%,rgba(113, 108, 233,1) 51%,rgba(80, 216, 215,1) 100%)",
           backgroundSize: "200% auto",
           color: "white",
           boxShadow: "md",

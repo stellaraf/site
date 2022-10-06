@@ -58,12 +58,7 @@ export const ModalContent = forwardRef<HTMLDivElement, IModalContent>((props, re
             css={{ backdropFilter: "blur(20px)" }}
             {...dialogProps}
           >
-            <Flex
-              as="section"
-              flexDir="column"
-              className="chakra-modal__content st-override-modal"
-              {...contentProps}
-            >
+            <Flex as="section" flexDir="column" className="chakra-modal__content st-override-modal" {...contentProps}>
               {children}
             </Flex>
           </AnimatedDiv>

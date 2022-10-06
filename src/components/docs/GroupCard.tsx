@@ -7,14 +7,7 @@ import { useRender } from "~/hooks";
 import type { IDocsGroup } from "~/types";
 
 export const GroupCard: React.FC<IDocsGroup> = (props: IDocsGroup) => {
-  const {
-    slug,
-    title,
-    summary,
-    subtitle,
-    callToActionIcon,
-    callToActionIconColor = "primary",
-  } = props;
+  const { slug, title, summary, subtitle, callToActionIcon, callToActionIconColor = "primary" } = props;
 
   const titleMe = useTitleCase();
   const body = useRender(summary, [], ["articleButton", "image"]);
@@ -38,25 +31,11 @@ export const GroupCard: React.FC<IDocsGroup> = (props: IDocsGroup) => {
       >
         <Card width={{ base: "20rem", md: "18rem", xl: "lg" }} maxHeight={80} zIndex={1}>
           <CardBody spacing={4} textAlign="left" alignItems="flex-start">
-            {typeof callToActionIcon !== "undefined" && (
-              <Icon
-                size={12}
-                position="absolute"
-                alignSelf="flex-end"
-                color={callToActionIconColor}
-                url={callToActionIcon.fields.file.url}
-              />
-            )}
+            {typeof callToActionIcon !== "undefined" && <Icon size={12} position="absolute" alignSelf="flex-end" color={callToActionIconColor} url={callToActionIcon.fields.file.url} />}
             <Heading as="h3" fontSize={{ base: "sm", md: "lg" }} maxW="80%" whiteSpace="pre-wrap">
               {titleMe(title)}
             </Heading>
-            <Heading
-              as="h4"
-              maxW="90%"
-              fontWeight="light"
-              whiteSpace="pre-wrap"
-              fontSize={{ base: "sm", md: "md" }}
-            >
+            <Heading as="h4" maxW="90%" fontWeight="light" whiteSpace="pre-wrap" fontSize={{ base: "sm", md: "md" }}>
               {subtitle}
             </Heading>
             <Divider />
@@ -65,7 +44,11 @@ export const GroupCard: React.FC<IDocsGroup> = (props: IDocsGroup) => {
               fontWeight="normal"
               whiteSpace="pre-line"
               css={{
-                "& p": { marginTop: "unset", marginBottom: "unset", textOverflow: "ellipsis" },
+                "& p": {
+                  marginTop: "unset",
+                  marginBottom: "unset",
+                  textOverflow: "ellipsis",
+                },
               }}
             >
               {body}

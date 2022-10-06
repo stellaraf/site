@@ -17,12 +17,7 @@ const TextContent: React.FC<IDocsMain["pageData"]> = (props: IDocsMain["pageData
   return (
     <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
       <Flex textAlign="center" flexDir="column" alignItems="center" ref={containerRef}>
-        <Heading
-          as="h1"
-          fontSize={{ base: shouldResize ? "2xl" : "4xl", lg: "6xl" }}
-          fontWeight="light"
-          ref={headingRef}
-        >
+        <Heading as="h1" fontSize={{ base: shouldResize ? "2xl" : "4xl", lg: "6xl" }} fontWeight="light" ref={headingRef}>
           {titleMe(title)}
         </Heading>
         {subtitle && (

@@ -1,16 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Flex,
-  Text,
-  Alert,
-  VStack,
-  useToast,
-  AlertIcon,
-  CloseButton,
-  FormControl,
-  AlertDescription,
-  FormErrorMessage,
-} from "@chakra-ui/react";
+import { Flex, Text, Alert, VStack, useToast, AlertIcon, CloseButton, FormControl, AlertDescription, FormErrorMessage } from "@chakra-ui/react";
 import { useForm, FormProvider, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,7 +12,9 @@ import { subscribeEmail } from "./util";
 import type { RenderProps } from "@chakra-ui/react";
 import type { ISubscribe, ISubscribeFormData, ISubscribeToast } from "./types";
 
-const subscribeSchema = z.object({ email: z.string().email("Must be a valid email address") });
+const subscribeSchema = z.object({
+  email: z.string().email("Must be a valid email address"),
+});
 
 export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
   const { alertProps = {}, alertPosition = "bottom-right", ...rest } = props;
@@ -42,7 +33,9 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
   });
   const titleMe = useTitleCase();
   const toast = useToast();
-  const form = useForm<z.infer<typeof subscribeSchema>>({ resolver: zodResolver(subscribeSchema) });
+  const form = useForm<z.infer<typeof subscribeSchema>>({
+    resolver: zodResolver(subscribeSchema),
+  });
   const { trackEvent } = useGoogleAnalytics();
 
   const {
@@ -132,23 +125,10 @@ export const Subscribe: React.FC<ISubscribe> = (props: ISubscribe) => {
 
   return (
     <FormProvider {...form}>
-      <VStack
-        as="form"
-        w="25%"
-        zIndex={1}
-        align="flex-end"
-        spacing={6}
-        onSubmit={handleSubmit(onSubmit)}
-        {...rest}
-      >
+      <VStack as="form" w="25%" zIndex={1} align="flex-end" spacing={6} onSubmit={handleSubmit(onSubmit)} {...rest}>
         <Text>{titleMe(subscribeTitle)}</Text>
         <FormControl isInvalid={typeof formField !== "undefined"}>
-          <Controller
-            name="email"
-            defaultValue=""
-            control={control}
-            render={({ field }) => <SubscribeField field={field} />}
-          />
+          <Controller name="email" defaultValue="" control={control} render={({ field }) => <SubscribeField field={field} />} />
           <FormErrorMessage>{formField?.message?.toString()}</FormErrorMessage>
         </FormControl>
       </VStack>

@@ -32,9 +32,7 @@ export function buildSelections(opt: string): { value: string; label: string } {
 /**
  * Strictly typed version of `Object.entries()`.
  */
-export function entries<O extends Record<string, unknown>, K extends keyof O = keyof O>(
-  obj: O,
-): [K, O[K]][] {
+export function entries<O extends Record<string, unknown>, K extends keyof O = keyof O>(obj: O): [K, O[K]][] {
   const _entries = [] as [K, O[K]][];
   const keys = Object.keys(obj) as K[];
   for (const key of keys) {
@@ -57,10 +55,7 @@ export function entries<O extends Record<string, unknown>, K extends keyof O = k
  * //=> { two: 2, three: 3 }
  * ```
  */
-export function removeProps<O extends Record<string, unknown>, R extends keyof O = keyof O>(
-  obj: O,
-  ...remove: R[]
-): Pick<O, Exclude<keyof O, R>> {
+export function removeProps<O extends Record<string, unknown>, R extends keyof O = keyof O>(obj: O, ...remove: R[]): Pick<O, Exclude<keyof O, R>> {
   // Keys of `obj` without keys from `remove`.
   type KeyType = Exclude<keyof O, R>;
   // `obj` without properties in `remove`.
@@ -117,12 +112,7 @@ export function getErrorMessage(thrown: unknown): string {
   if (thrown instanceof Error) {
     message = thrown.message;
     ("");
-  } else if (
-    typeof thrown === "object" &&
-    thrown !== null &&
-    "toString" in thrown &&
-    typeof thrown.toString === "function"
-  ) {
+  } else if (typeof thrown === "object" && thrown !== null && "toString" in thrown && typeof thrown.toString === "function") {
     message = thrown.toString();
   }
   return message;

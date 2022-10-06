@@ -31,18 +31,8 @@ export const SelectField = (props: ISelectField): JSX.Element => {
 
   return (
     <FormControl id={name} isInvalid={typeof fieldError !== "undefined"} isRequired={required}>
-      <CustomSelect
-        name={name}
-        isMulti={isMulti}
-        options={opts}
-        defaultValue={[]}
-        required={required}
-        onSelect={handleSelect}
-        {...rest}
-      />
-      <FormErrorMessage>
-        {typeof fieldError !== "undefined" && fieldError.message?.toString()}
-      </FormErrorMessage>
+      <CustomSelect name={name} isMulti={isMulti} options={opts} defaultValue={[]} required={required} onSelect={handleSelect} {...rest} />
+      <FormErrorMessage>{typeof fieldError !== "undefined" && fieldError.message?.toString()}</FormErrorMessage>
     </FormControl>
   );
 };

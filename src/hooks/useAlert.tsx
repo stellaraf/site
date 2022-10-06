@@ -1,12 +1,4 @@
-import {
-  Flex,
-  Alert,
-  useToast,
-  AlertIcon,
-  CloseButton,
-  AlertDescription,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Flex, Alert, useToast, AlertIcon, CloseButton, AlertDescription, useBreakpointValue } from "@chakra-ui/react";
 import { useConfig } from "~/context";
 import { useRender } from "~/hooks";
 
@@ -22,13 +14,7 @@ export function useAlert(): UseAlertReturn {
   });
 
   const showToast: UseAlertReturn = opts => {
-    const {
-      status = "info",
-      message = "",
-      position = defaultPosition ?? "bottom",
-      onClose: customOnClose,
-      duration = 5000,
-    } = opts;
+    const { status = "info", message = "", position = defaultPosition ?? "bottom", onClose: customOnClose, duration = 5000 } = opts;
     toast({
       status,
       duration,
@@ -59,7 +45,10 @@ export function useAlert(): UseAlertReturn {
                   display="block"
                   css={{
                     // Don't add normal paragraph padding in alerts.
-                    "& p.chakra-text": { marginTop: "unset", marginBottom: "unset" },
+                    "& p.chakra-text": {
+                      marginTop: "unset",
+                      marginBottom: "unset",
+                    },
                     // Inherit alert styles for links - so the branded underline doesn't clash.
                     "& a": {
                       "--link-color": "inherit",

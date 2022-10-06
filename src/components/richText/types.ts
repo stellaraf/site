@@ -1,11 +1,4 @@
-import type {
-  BoxProps,
-  ListProps,
-  ListItemProps,
-  TextProps,
-  CodeProps,
-  HeadingProps as ChakraHeadingProps,
-} from "@chakra-ui/react";
+import type { BoxProps, ListProps, ListItemProps, TextProps, CodeProps, HeadingProps as ChakraHeadingProps } from "@chakra-ui/react";
 import { INLINES } from "@contentful/rich-text-types";
 
 import type { Asset } from "contentful";
@@ -30,13 +23,7 @@ export interface BaseHeadingProps extends ChakraHeadingProps {
 
 export type THeadingLevels = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
-export type TCustomBlockTypes =
-  | "markdownBlock"
-  | "articleButton"
-  | "admonition"
-  | "expandable"
-  | "table"
-  | string;
+export type TCustomBlockTypes = "markdownBlock" | "articleButton" | "admonition" | "expandable" | "table" | string;
 
 type TContentType<T = TCustomBlocks> = {
   contentType: { sys: { id: T; linkType: "ContentType"; type: "Link" } };

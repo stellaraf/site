@@ -10,83 +10,24 @@ export const Favicons = () => {
   return (
     <Head>
       <link rel="shortcut icon" href={`/logos/${colorMode}/favicon.ico`} />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href={`/logos/${colorMode}/favicon-16x16.png`}
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href={`/logos/${colorMode}/favicon-32x32.png`}
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="48x48"
-        href={`/logos/${colorMode}/favicon-48x48.png`}
-      />
+      <link rel="icon" type="image/png" sizes="16x16" href={`/logos/${colorMode}/favicon-16x16.png`} />
+      <link rel="icon" type="image/png" sizes="32x32" href={`/logos/${colorMode}/favicon-32x32.png`} />
+      <link rel="icon" type="image/png" sizes="48x48" href={`/logos/${colorMode}/favicon-48x48.png`} />
       <link rel="manifest" href={`/logos/${colorMode}/manifest.json`} />
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="theme-color" content={theme} />
       <meta name="application-name" content={orgName} />
-      <link
-        rel="apple-touch-icon"
-        sizes="57x57"
-        href={`/logos/${colorMode}/apple-touch-icon-57x57.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="60x60"
-        href={`/logos/${colorMode}/apple-touch-icon-60x60.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="72x72"
-        href={`/logos/${colorMode}/apple-touch-icon-72x72.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="76x76"
-        href={`/logos/${colorMode}/apple-touch-icon-76x76.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="114x114"
-        href={`/logos/${colorMode}/apple-touch-icon-114x114.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="120x120"
-        href={`/logos/${colorMode}/apple-touch-icon-120x120.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="144x144"
-        href={`/logos/${colorMode}/apple-touch-icon-144x144.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="152x152"
-        href={`/logos/${colorMode}/apple-touch-icon-152x152.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="167x167"
-        href={`/logos/${colorMode}/apple-touch-icon-167x167.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href={`/logos/${colorMode}/apple-touch-icon-180x180.png`}
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="1024x1024"
-        href={`/logos/${colorMode}/apple-touch-icon-1024x1024.png`}
-      />
+      <link rel="apple-touch-icon" sizes="57x57" href={`/logos/${colorMode}/apple-touch-icon-57x57.png`} />
+      <link rel="apple-touch-icon" sizes="60x60" href={`/logos/${colorMode}/apple-touch-icon-60x60.png`} />
+      <link rel="apple-touch-icon" sizes="72x72" href={`/logos/${colorMode}/apple-touch-icon-72x72.png`} />
+      <link rel="apple-touch-icon" sizes="76x76" href={`/logos/${colorMode}/apple-touch-icon-76x76.png`} />
+      <link rel="apple-touch-icon" sizes="114x114" href={`/logos/${colorMode}/apple-touch-icon-114x114.png`} />
+      <link rel="apple-touch-icon" sizes="120x120" href={`/logos/${colorMode}/apple-touch-icon-120x120.png`} />
+      <link rel="apple-touch-icon" sizes="144x144" href={`/logos/${colorMode}/apple-touch-icon-144x144.png`} />
+      <link rel="apple-touch-icon" sizes="152x152" href={`/logos/${colorMode}/apple-touch-icon-152x152.png`} />
+      <link rel="apple-touch-icon" sizes="167x167" href={`/logos/${colorMode}/apple-touch-icon-167x167.png`} />
+      <link rel="apple-touch-icon" sizes="180x180" href={`/logos/${colorMode}/apple-touch-icon-180x180.png`} />
+      <link rel="apple-touch-icon" sizes="1024x1024" href={`/logos/${colorMode}/apple-touch-icon-1024x1024.png`} />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <meta name="apple-mobile-web-app-title" content={orgName} />
@@ -200,12 +141,7 @@ export const Favicons = () => {
         media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
         href={`/logos/${colorMode}/apple-touch-startup-image-2160x1620.png`}
       />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="228x228"
-        href={`/logos/${colorMode}/coast-228x228.png`}
-      />
+      <link rel="icon" type="image/png" sizes="228x228" href={`/logos/${colorMode}/coast-228x228.png`} />
       <meta name="msapplication-TileColor" content="#fff" />
       <meta name="msapplication-TileImage" content={`/logos/${colorMode}/mstile-144x144.png`} />
       <meta name="msapplication-config" content={`/logos/${colorMode}/browserconfig.xml`} />

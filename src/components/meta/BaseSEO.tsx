@@ -27,8 +27,18 @@ export const BaseSEO: React.FC<IBaseSEO> = (props: IBaseSEO) => {
         type: "website",
         description: siteDescription,
         images: [
-          { url: `${urlPrefix}/opengraph.jpg`, width: 1200, height: 630, alt: orgName },
-          { url: `${urlPrefix}/opengraph.png`, width: 1429, height: 687, alt: orgName },
+          {
+            url: `${urlPrefix}/opengraph.jpg`,
+            width: 1200,
+            height: 630,
+            alt: orgName,
+          },
+          {
+            url: `${urlPrefix}/opengraph.png`,
+            width: 1429,
+            height: 687,
+            alt: orgName,
+          },
         ],
       }}
       {...indexFollow}

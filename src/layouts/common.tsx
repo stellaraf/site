@@ -8,17 +8,7 @@ export const Root: React.FC<BoxProps> = (props: BoxProps) => {
 };
 
 export const Wrapper: React.FC<Animated<BoxProps>> = (props: Animated<BoxProps>) => (
-  <AnimatedDiv
-    h="100%"
-    zIndex={-1}
-    minH="100vh"
-    id="__wrapper"
-    overflowX="hidden"
-    exit={{ opacity: 0 }}
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    {...props}
-  />
+  <AnimatedDiv h="100%" zIndex={-1} minH="100vh" id="__wrapper" overflowX="hidden" exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} {...props} />
 );
 
 export const Main = chakra("main");

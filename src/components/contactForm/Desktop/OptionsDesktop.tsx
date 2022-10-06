@@ -39,7 +39,12 @@ export const OptionsDesktop = (): JSX.Element => {
   // Static desktop sizes for cards layout
   const cardSizes = { width: "20rem", minHeight: "28rem" };
   // Static desktop sizes for form layout
-  const formSizes = { width: "66rem", minHeight: "32rem", height: "100%", px: 8 };
+  const formSizes = {
+    width: "66rem",
+    minHeight: "32rem",
+    height: "100%",
+    px: 8,
+  };
 
   const [layout, toggleLayout] = useCycle("cards", "form");
 
@@ -90,14 +95,7 @@ export const OptionsDesktop = (): JSX.Element => {
   }, [query]);
 
   return (
-    <Container
-      minH="lg"
-      zIndex={1}
-      spacing={layout === "cards" ? 12 : 0}
-      align="stretch"
-      direction="row"
-      animate={layout}
-    >
+    <Container minH="lg" zIndex={1} spacing={layout === "cards" ? 12 : 0} align="stretch" direction="row" animate={layout}>
       <AnimatePresence>
         {cards.map((card: IContactCard, i) => {
           const { icon: iconName, color: iconColor, buttonText, form, ...cardRest } = card;
@@ -138,23 +136,12 @@ export const OptionsDesktop = (): JSX.Element => {
           // Button component & props need to change based on the form's current lifecycle state
           // ('cards' vs. 'form').
           const cardsButton = (
-            <Button
-              w="100%"
-              colorScheme={iconColor}
-              href={iconName === "Docs" ? "/docs" : undefined}
-              onClick={iconName === "Docs" ? undefined : handleClick}
-            >
+            <Button w="100%" colorScheme={iconColor} href={iconName === "Docs" ? "/docs" : undefined} onClick={iconName === "Docs" ? undefined : handleClick}>
               {titleMe(buttonText)}
             </Button>
           );
           const formButton = (
-            <ChakraButton
-              w="100%"
-              maxW="50%"
-              type="submit"
-              colorScheme={iconColor}
-              onClick={handleFormSubmit}
-            >
+            <ChakraButton w="100%" maxW="50%" type="submit" colorScheme={iconColor} onClick={handleFormSubmit}>
               {titleMe(form?.buttonSubmit ?? "Submit")}
             </ChakraButton>
           );
@@ -173,7 +160,10 @@ export const OptionsDesktop = (): JSX.Element => {
               <AnimatedCard
                 layout
                 variants={items}
-                custom={{ idx: i, current: cards.findIndex(c => c.icon === formState.selected) }}
+                custom={{
+                  idx: i,
+                  current: cards.findIndex(c => c.icon === formState.selected),
+                }}
                 initial={false}
                 // Framer requires a unique key per animated layout component for tracking.
                 key={`card${i}`}
@@ -189,21 +179,9 @@ export const OptionsDesktop = (): JSX.Element => {
                    */}
                   <LayoutGroup>
                     {layout === "cards" ? (
-                      <ContactOption
-                        index={i}
-                        icon={icon}
-                        iconName={iconName}
-                        toggleLayout={toggleLayout}
-                        {...cardRest}
-                      />
+                      <ContactOption index={i} icon={icon} iconName={iconName} toggleLayout={toggleLayout} {...cardRest} />
                     ) : (
-                      <DesktopForm
-                        icon={icon}
-                        formRef={formRef}
-                        accent={iconColor}
-                        toggleLayout={toggleLayout}
-                        {...cardRest}
-                      />
+                      <DesktopForm icon={icon} formRef={formRef} accent={iconColor} toggleLayout={toggleLayout} {...cardRest} />
                     )}
                   </LayoutGroup>
                 </CardBody>
@@ -212,16 +190,8 @@ export const OptionsDesktop = (): JSX.Element => {
                  * Wrapping it in animation makes it appear to move around with the card as states
                  * change.
                  */}
-                <AnimatedCenter
-                  layoutId={`button${i}`}
-                  width="100%"
-                  exit={{ scale: 0.5, opacity: 0 }}
-                >
-                  {layout === "form" && !formState.showSuccess
-                    ? formButton
-                    : formState.showSuccess
-                    ? null
-                    : cardsButton}
+                <AnimatedCenter layoutId={`button${i}`} width="100%" exit={{ scale: 0.5, opacity: 0 }}>
+                  {layout === "form" && !formState.showSuccess ? formButton : formState.showSuccess ? null : cardsButton}
                 </AnimatedCenter>
               </AnimatedCard>
             </motion.div>

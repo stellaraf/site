@@ -7,19 +7,7 @@ import { notNullUndefined } from "~/types";
 import type { PageContent, UsePageContent } from "~/types";
 
 export const usePageContent = (rawContent: PageContent, deps: unknown[] = []): UsePageContent => {
-  const {
-    form,
-    image,
-    updatedAt,
-    title = "",
-    paragraphs,
-    body = null,
-    subtitle = "",
-    buttonLink = "",
-    buttonText = "",
-    showUpdatedDate = false,
-    button: showButton = false,
-  } = rawContent ?? {};
+  const { form, image, updatedAt, title = "", paragraphs, body = null, subtitle = "", buttonLink = "", buttonText = "", showUpdatedDate = false, button: showButton = false } = rawContent ?? {};
 
   const titleMe = useTitleCase();
   const slug = useSlug(title, [title]);

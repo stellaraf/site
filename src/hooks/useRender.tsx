@@ -2,27 +2,7 @@ import { useMemo } from "react";
 import { Divider } from "@chakra-ui/react";
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import {
-  P,
-  H1,
-  H2,
-  H3,
-  H4,
-  H5,
-  H6,
-  Li,
-  Ol,
-  Td,
-  Th,
-  Ul,
-  Code,
-  Link,
-  Asset,
-  Table,
-  Inline,
-  BlockQuote,
-  CustomBlock,
-} from "~/components";
+import { P, H1, H2, H3, H4, H5, H6, Li, Ol, Td, Th, Ul, Code, Link, Asset, Table, Inline, BlockQuote, CustomBlock } from "~/components";
 
 import type { Document } from "@contentful/rich-text-types";
 import type { RenderNode, RenderMark } from "@contentful/rich-text-react-renderer";
@@ -67,13 +47,7 @@ const overrides = {
   [INLINES.HYPERLINK]: {},
 } as OverrideProps;
 
-export function useRender(
-  renderable?: Document | null,
-  deps: unknown[] = [],
-  exclude: string[] = [],
-  props: OverrideProps = {},
-  components: RenderNode = {},
-): React.ReactNode | null {
+export function useRender(renderable?: Document | null, deps: unknown[] = [], exclude: string[] = [], props: OverrideProps = {}, components: RenderNode = {}): React.ReactNode | null {
   if (deps.length === 0) {
     deps = [renderable];
   }
@@ -100,10 +74,7 @@ export function useRender(
             } else if (entryType === "Asset") {
               contentType = content.data?.target?.fields?.file?.contentType as string | null;
             }
-            if (
-              (typeof contentType === "string" && contentType.match(pattern)?.length) ??
-              0 !== 0
-            ) {
+            if ((typeof contentType === "string" && contentType.match(pattern)?.length) ?? 0 !== 0) {
               renderable?.content?.splice(Number(idx));
             }
           }
@@ -120,9 +91,7 @@ export function useRender(
       [BLOCKS.HEADING_5]: (_, children) => <H5 {...o[BLOCKS.HEADING_5]}>{children}</H5>,
       [BLOCKS.HEADING_6]: (_, children) => <H6 {...o[BLOCKS.HEADING_6]}>{children}</H6>,
       [BLOCKS.EMBEDDED_ENTRY]: block => <CustomBlock {...block} {...o[BLOCKS.EMBEDDED_ENTRY]} />,
-      [BLOCKS.EMBEDDED_ASSET]: node => (
-        <Asset {...node.data.target.fields} {...o[BLOCKS.EMBEDDED_ASSET]} />
-      ),
+      [BLOCKS.EMBEDDED_ASSET]: node => <Asset {...node.data.target.fields} {...o[BLOCKS.EMBEDDED_ASSET]} />,
       [BLOCKS.UL_LIST]: (_, children) => <Ul {...o[BLOCKS.UL_LIST]}>{children}</Ul>,
       [BLOCKS.OL_LIST]: (_, children) => <Ol {...o[BLOCKS.OL_LIST]}>{children}</Ol>,
       [BLOCKS.LIST_ITEM]: (_, children) => <Li {...o[BLOCKS.LIST_ITEM]}>{children}</Li>,
@@ -138,9 +107,7 @@ export function useRender(
       ),
       [BLOCKS.TABLE]: (_, children) => <Table {...o[BLOCKS.TABLE]}>{children}</Table>,
       [BLOCKS.TABLE_CELL]: (_, children) => <Td {...o[BLOCKS.TABLE_CELL]}>{children}</Td>,
-      [BLOCKS.TABLE_HEADER_CELL]: (_, children) => (
-        <Th {...o[BLOCKS.TABLE_HEADER_CELL]}>{children}</Th>
-      ),
+      [BLOCKS.TABLE_HEADER_CELL]: (_, children) => <Th {...o[BLOCKS.TABLE_HEADER_CELL]}>{children}</Th>,
       ...components,
     } as RenderNode;
     return documentToReactComponents(renderable, { renderNode, renderMark });

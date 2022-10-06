@@ -39,28 +39,12 @@ const Dots: React.FC<DotProps> = (props: DotProps) => {
   const { color, ...rest } = props;
   const { current, setCurrent, total } = useCarousel();
   return (
-    <Flex
-      position="absolute"
-      width="100%"
-      bottom={0}
-      alignItems="flex-end"
-      justifyContent="center"
-      zIndex={3}
-    >
+    <Flex position="absolute" width="100%" bottom={0} alignItems="flex-end" justifyContent="center" zIndex={3}>
       {[...Array(total)].map((_, i) => {
         const handleClick = (): void => setCurrent(i);
         return (
           <Button key={i} mx={1} minW="unset" variant="unstyled" onClick={handleClick} h="unset">
-            <Box
-              width={2}
-              height={2}
-              borderWidth="1px"
-              borderRadius="50%"
-              borderStyle="solid"
-              borderColor={color}
-              bg={i === current ? color : "transparent"}
-              {...rest}
-            />
+            <Box width={2} height={2} borderWidth="1px" borderRadius="50%" borderStyle="solid" borderColor={color} bg={i === current ? color : "transparent"} {...rest} />
           </Button>
         );
       })}
@@ -96,17 +80,7 @@ const SliderContainer = forwardRef<HTMLDivElement, FlexProps>((props, ref) => (
  * Bastardized Chakra/style props version of Keen-Slider's CSS so CSS doesn't have to be imported.
  * See: https://github.com/rcbyr/keen-slider/blob/master/src/keen-slider.scss
  */
-const Slide = (props: FlexProps) => (
-  <Flex
-    width="100%"
-    minHeight="100%"
-    overflow="hidden"
-    position="relative"
-    display="inline-block"
-    className="__slider_slide"
-    {...props}
-  />
-);
+const Slide = (props: FlexProps) => <Flex width="100%" minHeight="100%" overflow="hidden" position="relative" display="inline-block" className="__slider_slide" {...props} />;
 
 /**
  * Cycle through child elements with animation.

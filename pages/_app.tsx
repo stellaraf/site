@@ -4,13 +4,7 @@ import { BaseSEO, Favicons } from "~/components";
 import { Provider } from "~/context";
 import { usePageTracking } from "~/hooks";
 import { SiteLayout } from "~/layouts";
-import {
-  getGlobalConfig,
-  getFooterItems,
-  getActions,
-  getDocsGroups,
-  getTestimonials,
-} from "~/util";
+import { getGlobalConfig, getFooterItems, getActions, getDocsGroups, getTestimonials } from "~/util";
 
 import type { TSite, NextApp, GetInitialPropsReturn } from "~/types";
 
@@ -28,11 +22,7 @@ const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
       <Provider appConfig={globalConfig} docsGroups={docsGroups} testimonials={testimonials}>
         <BaseSEO />
         <Favicons />
-        <SiteLayout
-          actions={actions}
-          footerGroups={footerGroups}
-          preview={pageProps?.preview ?? false}
-        >
+        <SiteLayout actions={actions} footerGroups={footerGroups} preview={pageProps?.preview ?? false}>
           <Component {...pageProps} />
         </SiteLayout>
       </Provider>
@@ -52,7 +42,13 @@ Site.getInitialProps = async ctx => {
 
     return {
       ...defaultProps,
-      appProps: { globalConfig, footerGroups, actions, testimonials, docsGroups },
+      appProps: {
+        globalConfig,
+        footerGroups,
+        actions,
+        testimonials,
+        docsGroups,
+      },
     };
   } catch (err) {
     console.error(err);

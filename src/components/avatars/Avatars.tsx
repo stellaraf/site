@@ -23,8 +23,12 @@ const GroupWrapper = (props: IGroupWrapper): JSX.Element => {
           base: { gridColumnEnd: -2 },
           lg: { gridColumnEnd: -2 },
         },
-        "& :nth-last-of-type(2):nth-of-type(3n + 1)": { lg: { gridColumnEnd: 4 } },
-        "& :last-child:nth-of-type(3n - 2)": { lg: { gridColumnEnd: { base: 4, lg: 5 } } },
+        "& :nth-last-of-type(2):nth-of-type(3n + 1)": {
+          lg: { gridColumnEnd: 4 },
+        },
+        "& :last-child:nth-of-type(3n - 2)": {
+          lg: { gridColumnEnd: { base: 4, lg: 5 } },
+        },
       }}
       {...props}
     />
