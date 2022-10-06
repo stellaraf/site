@@ -2,11 +2,11 @@ pre-commit:
   parallel: true
   commands:
     prettier:
-      glob: '*.{js,jsx,ts,tsx}'
+      glob: '*.{js,jsx,ts,tsx,yml,yaml,json,md,mjs}'
       run: 'pnpm exec prettier --loglevel warn -c {staged_files}'
     eslint:
       glob: '*.{js,jsx,ts,tsx}'
       run: 'pnpm exec eslint {staged_files}'
     typescript:
       glob: '*.{ts,tsx}'
-      run: 'pnpm exec tsc --noEmit'
+      run: 'pnpm exec tsc --noEmit {staged_files}'
