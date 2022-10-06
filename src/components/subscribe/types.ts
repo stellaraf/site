@@ -1,5 +1,4 @@
 import type { ToastProps, StackProps, InputProps, AlertProps } from "@chakra-ui/react";
-
 import type { ControllerRenderProps } from "react-hook-form";
 
 export interface SubscribeProps extends StackProps {

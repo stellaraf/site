@@ -1,13 +1,14 @@
 import { useRouter } from "next/router";
 import { chakra, Box } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
+
 import { Link } from "~/components";
 import { useColorValue, useColorMode } from "~/context";
 import { useNavLogoState } from "~/hooks";
-import { LinkGroup, ContactButton } from "./desktop-links";
-import { HeaderLogo } from "./desktop-logo";
 
 import type { BoxProps } from "@chakra-ui/react";
+import { LinkGroup, ContactButton } from "./desktop-links";
+import { HeaderLogo } from "./desktop-logo";
 
 const Header = chakra("header", {
   baseStyle: {

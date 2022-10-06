@@ -1,6 +1,7 @@
+import type { NextApiHandler } from "next";
+
 import { getEntry } from "~/util";
 
-import type { NextApiHandler } from "next";
 import type { PageAttrs } from "~/types";
 
 const previewHandler: NextApiHandler = async (request, response) => {

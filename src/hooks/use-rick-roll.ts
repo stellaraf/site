@@ -1,4 +1,5 @@
 import { atom, useRecoilState } from "recoil";
+
 import { useKeySequence } from "./use-key-sequence";
 
 type AstleyReturn = [boolean, () => void];

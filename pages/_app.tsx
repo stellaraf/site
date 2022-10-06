@@ -1,5 +1,6 @@
 import App from "next/app";
 import Head from "next/head";
+
 import { SEOBase, Favicons } from "~/components";
 import { Provider } from "~/context";
 import { usePageTracking } from "~/hooks";

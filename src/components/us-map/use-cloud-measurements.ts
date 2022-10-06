@@ -1,10 +1,12 @@
 import { useEffect } from "react";
+
 import { atom, selector, useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+
 import { useCloudLocations } from "~/context";
 import { all } from "~/util";
 
-import type { GeoPoint } from "~/types";
 import type { CloudMeasurement } from "./types";
+import type { GeoPoint } from "~/types";
 
 export type PartialMeasurement = Pick<CloudMeasurement, "id"> & Partial<CloudMeasurement>;
 

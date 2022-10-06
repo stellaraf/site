@@ -1,12 +1,14 @@
 import { useMemo } from "react";
+
 import { Box, Flex, isStyleProp } from "@chakra-ui/react";
+
 import { DynamicIcon } from "~/components";
 import { useColorValue } from "~/context";
 import { useOpposingColor } from "~/hooks";
 
+import type { IconProps } from "./types";
 import type { ChakraProps } from "@chakra-ui/react";
 import type { DynamicIconProps } from "~/components";
-import type { IconProps } from "./types";
 
 export const Icon = (props: IconProps) => {
   const { color: bgColor = "primary", size = 20, ...rest } = props;

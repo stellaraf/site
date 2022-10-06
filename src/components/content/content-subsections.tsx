@@ -1,4 +1,5 @@
 import { SimpleGrid } from "@chakra-ui/react";
+
 import { ContentSubSection } from "./content-subsection";
 
 import type { SubSectionGroupProps } from "./types";

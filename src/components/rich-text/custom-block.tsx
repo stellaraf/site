@@ -1,8 +1,6 @@
 import { Admonition } from "./admonition";
 import { ArticleButton } from "./article-button";
-import { Table } from "./table";
 import { Expandable } from "./expandable";
-import { MarkdownBlock } from "./markdown";
 import {
   isTable,
   parseTarget,
@@ -13,6 +11,8 @@ import {
 } from "./guards";
 
 import type { CustomBlockPreProps } from "./types";
+import { MarkdownBlock } from "./markdown";
+import { Table } from "./table";
 
 export const CustomBlock = (props: CustomBlockPreProps) => {
   const target = parseTarget(props);

@@ -1,5 +1,6 @@
 import { Flex, ModalFocusScope, useModalContext, useMultiStyleConfig } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
+
 import { AnimatedDiv } from "~/components";
 import { useColorValue } from "~/context";
 import { forwardRef } from "~/util";

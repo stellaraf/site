@@ -1,5 +1,6 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
+
 import { Carousel } from "~/components";
 import { useColorValue } from "~/context";
 import { useRender } from "~/hooks";

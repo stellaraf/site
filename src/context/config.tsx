@@ -1,6 +1,6 @@
 import { createContext, useContext, useRef } from "react";
-
 import type { MutableRefObject } from "react";
+
 import type { ConfigContextType, ConfigProviderProps } from "./types";
 
 const ConfigContext = createContext<MutableRefObject<ConfigContextType>>(

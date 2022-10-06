@@ -1,13 +1,15 @@
 import { useCallback } from "react";
+
 import { Button, Center, Flex } from "@chakra-ui/react";
-import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import { FormProvider, useForm } from "react-hook-form";
+import { z } from "zod";
+
 import { FieldGroup, TextInput } from "~/components";
-import { useAlert } from "~/hooks";
 
 import type { TrialFormProps } from "./types";
+import { useAlert } from "~/hooks";
 
 export const TrialForm = (props: TrialFormProps) => {
   const { name, fields, onSubmit } = props;

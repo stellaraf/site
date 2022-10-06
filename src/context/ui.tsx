@@ -1,4 +1,6 @@
 import { useMemo } from "react";
+
+import type { GetServerSideProps } from "next";
 import {
   useToken,
   ChakraProvider,
@@ -7,9 +9,9 @@ import {
   createCookieStorageManager,
   useTheme as useChakraTheme,
 } from "@chakra-ui/react";
+
 import { makeTheme } from "~/util";
 
-import type { GetServerSideProps } from "next";
 import type { UseTheme, UIProviderProps, ColorModeContext } from "./types";
 
 export const UIProvider = (props: UIProviderProps) => {

@@ -7,16 +7,10 @@ export interface CarouselProps extends BoxProps {
   children: React.ReactNode[];
 }
 
-export type SetCurrent = (c: number) => void;
+type SetCurrent = (c: number) => void;
 
 export interface UseCarousel {
   total: number;
   current: number;
   setCurrent: SetCurrent;
 }
-
-export interface CarouselContextProps {
-  value: UseCarousel;
-}
-
-export type DotProps = BoxProps;

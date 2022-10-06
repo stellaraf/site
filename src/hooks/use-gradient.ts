@@ -1,12 +1,13 @@
 import { useToken } from "@chakra-ui/react";
 import { parseToRgba } from "color2k";
+
 import { useColorValue } from "~/context";
 
 import type { BoxProps } from "@chakra-ui/react";
 
 type UseGradientReturn = Pick<BoxProps, "background" | "backgroundColor">;
 
-export function useGradient(direction: number = 180): UseGradientReturn {
+export function useGradient(direction = 180): UseGradientReturn {
   const primary = useToken("colors", "primary.500");
   const dark = useToken("colors", "dark.500");
   // const secondary = useToken('colors', 'secondary.500');

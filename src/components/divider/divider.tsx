@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+
 import { Box, useToken } from "@chakra-ui/react";
 
 import type { DividerProps } from "./types";

@@ -1,14 +1,17 @@
 import { useImperativeHandle } from "react";
+
 import { Flex } from "@chakra-ui/react";
-import { FormProvider, useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import { FormProvider, useForm } from "react-hook-form";
+import { z } from "zod";
+
 import { FieldGroup, SelectField, TextArea, TextInput } from "~/components";
-import { forwardRef, buildSelections } from "~/util";
-import { useContactFormConfig } from "../state";
 
 import type { SalesFormFields, FormProps, FormHandlers } from "./types";
+import { forwardRef, buildSelections } from "~/util";
+
+import { useContactFormConfig } from "../state";
 
 export const SalesForm = forwardRef<FormHandlers, FormProps<"Sales">>((props, ref) => {
   const { onSubmit, accent } = props;

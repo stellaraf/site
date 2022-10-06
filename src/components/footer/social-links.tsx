@@ -1,9 +1,10 @@
 import { HStack, IconButton } from "@chakra-ui/react";
+
 import { DynamicIcon } from "~/components";
 import { useConfig, useColorValue } from "~/context";
 
-import type { StackProps } from "@chakra-ui/react";
 import type { SocialLinkProps } from "./types";
+import type { StackProps } from "@chakra-ui/react";
 
 const SocialLink = (props: SocialLinkProps) => {
   const { label, ...rest } = props;

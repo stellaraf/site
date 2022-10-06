@@ -1,12 +1,13 @@
+import type { GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 import { Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
+
 import { ContentLoader, Error, SEO } from "~/components";
 import { useRender, useScaledText } from "~/hooks";
 import { DocsLayout } from "~/layouts";
 import { getDocsGroups } from "~/util";
 
-import type { GetStaticProps, GetStaticPaths } from "next";
 import type { IDocsGroup, IDocsGroupMain } from "~/types";
 
 type UrlQuery = {

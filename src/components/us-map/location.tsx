@@ -8,9 +8,11 @@ import {
   PopoverHeader,
   PopoverContent,
 } from "@chakra-ui/react";
+
 import { useColorValue } from "~/context";
-import { useBestMeasurement } from "./use-cloud-measurements";
+
 import { MapMarker } from "./map-marker";
+import { useBestMeasurement } from "./use-cloud-measurements";
 
 import type { LocationProps, LatencyProps } from "./types";
 

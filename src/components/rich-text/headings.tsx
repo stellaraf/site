@@ -1,11 +1,13 @@
 import { createElement } from "react";
+
 import { chakra, useStyleConfig, useToken } from "@chakra-ui/react";
-import { useSlug } from "~/hooks";
 import { useTitleCase } from "use-title-case";
 
-import type { SystemStyleObject } from "@chakra-ui/styled-system";
-import type { HeadingProps } from "@chakra-ui/react";
+import { useSlug } from "~/hooks";
+
 import type { Headings, HeadingLevel } from "./types";
+import type { HeadingProps } from "@chakra-ui/react";
+import type { SystemStyleObject } from "@chakra-ui/styled-system";
 
 function createHeading(level: HeadingLevel, baseStyle: SystemStyleObject): React.FC<HeadingProps> {
   const Base = chakra("h2", { baseStyle: { mb: 2, mt: 12, ...baseStyle } });

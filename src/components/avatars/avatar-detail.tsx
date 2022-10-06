@@ -1,13 +1,15 @@
 import { memo } from "react";
+
 import { Divider, Heading, Image, VStack, Wrap, WrapItem } from "@chakra-ui/react";
+
 import { Modal } from "~/components";
 import { useColorValue } from "~/context";
 import { useRender, useScaledText } from "~/hooks";
-import { AvatarPhotoWrapper } from "./avatar-photo";
-import { useAvatar } from "./avatar-layout";
-import { useCurrent } from "./state";
 
 import type { AvatarDetailProps, AvatarHeaderProps } from "./types";
+import { useAvatar } from "./avatar-layout";
+import { AvatarPhotoWrapper } from "./avatar-photo";
+import { useCurrent } from "./state";
 
 const _Header = (props: AvatarHeaderProps) => {
   const { name, title, photo } = props;

@@ -1,10 +1,11 @@
 import { chakra } from "@chakra-ui/react";
-import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import { LayoutGroup } from "framer-motion";
-import { useCloudMeasurementValues } from "./use-cloud-measurements";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+
 import { Location } from "./location";
 
 import type { USMapProps } from "./types";
+import { useCloudMeasurementValues } from "./use-cloud-measurements";
 
 const Container = chakra("div", { baseStyle: { mx: "auto" } });
 

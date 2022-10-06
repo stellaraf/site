@@ -1,7 +1,7 @@
-import type { Entry, Asset } from "contentful";
-import type { Document } from "@contentful/rich-text-types";
-import type { ColorNames } from "./theme";
 import type { FormModel, FormModelEntry, TFormModelTrial } from "./forms";
+import type { ColorNames } from "./theme";
+import type { Document } from "@contentful/rich-text-types";
+import type { Entry, Asset } from "contentful";
 
 export interface FooterLink {
   title: string;
@@ -253,17 +253,16 @@ export interface IFormPlaceholders {
   subject: string;
 }
 
-export interface IActions
-  extends Pick<
-    PageContentParsed,
-    | "page"
-    | "body"
-    | "title"
-    | "subtitle"
-    | "callToActionIcon"
-    | "callToActionBody"
-    | "callToActionIconColor"
-  > {}
+export type IActions = Pick<
+  PageContentParsed,
+  | "page"
+  | "body"
+  | "title"
+  | "subtitle"
+  | "callToActionIcon"
+  | "callToActionBody"
+  | "callToActionIconColor"
+>;
 
 export type TActions = Pick<
   PageContent,

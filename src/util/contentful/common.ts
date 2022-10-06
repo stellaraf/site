@@ -3,7 +3,7 @@ import { merge } from "merge-anything";
 
 import type { CreateClientParams, ContentfulClientApi, EntryCollection, Entry } from "contentful";
 
-export function client(preview: boolean = false): ContentfulClientApi {
+export function client(preview = false): ContentfulClientApi {
   const options = {
     space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE ?? "",
     accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN ?? "",
@@ -25,7 +25,7 @@ export function client(preview: boolean = false): ContentfulClientApi {
  */
 export async function getContentType<T>(
   contentType: string,
-  preview: boolean = false,
+  preview = false,
   query?: Dict,
 ): Promise<EntryCollection<T>> {
   let queryParams = { content_type: contentType };
@@ -48,7 +48,7 @@ export async function getContentType<T>(
  */
 export async function getParsedContent<T extends Empty>(
   contentType: string,
-  preview: boolean = false,
+  preview = false,
   query: Dict = {},
 ): Promise<T[]> {
   const queryParams = merge(

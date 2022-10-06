@@ -9,7 +9,7 @@ export function all<T>(...iter: T[]): boolean {
   return true;
 }
 
-export function slug(original: string, parent: string = "", prefix: string = "#"): string {
+export function slug(original: string, parent = "", prefix = "#"): string {
   let result = "";
   if (typeof original === "string") {
     const slugged = slugify(original, { lower: true });

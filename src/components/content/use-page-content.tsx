@@ -1,8 +1,11 @@
 import { useMemo } from "react";
+
 import { useTitleCase } from "use-title-case";
-import { Content } from "./index";
+
 import { useDate, useRender, useSlug } from "~/hooks";
 import { notNullUndefined } from "~/types";
+
+import { Content } from "./index";
 
 import type { PageContent, UsePageContent } from "~/types";
 

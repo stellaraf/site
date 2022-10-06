@@ -1,14 +1,15 @@
 import { Flex, HStack, VStack, useDisclosure } from "@chakra-ui/react";
-import { Spiral as Hamburger } from "hamburger-react";
 import { StellarLogo } from "@stellaraf/logo";
+import { Spiral as Hamburger } from "hamburger-react";
+
 import { Button, DynamicIcon, Controls, Modal } from "~/components";
 import { useColorMode } from "~/context";
-import { Wrapper } from "./mobile-wrapper";
-import { NavLink } from "./mobile-links";
-import navConfig from "./config";
 
 import type { FlexProps } from "@chakra-ui/react";
 import type { ButtonProps } from "~/components";
+import navConfig from "./config";
+import { NavLink } from "./mobile-links";
+import { Wrapper } from "./mobile-wrapper";
 
 const HEADING_HEIGHT = 56;
 

@@ -1,6 +1,6 @@
-import { getPartnerPage } from "~/util";
-
 import type { NextApiHandler } from "next";
+
+import { getPartnerPage } from "~/util";
 
 const previewHandler: NextApiHandler = async (request, response) => {
   if (request.query.secret !== process.env.PREVIEW_SECRET) {

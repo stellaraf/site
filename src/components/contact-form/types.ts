@@ -1,7 +1,7 @@
-import type { ParsedUrlQuery } from "querystring";
-import type { BoxProps, FlexProps, StackProps } from "@chakra-ui/react";
-import type { IContactCard, CustomColors, FormModel } from "~/types";
 import type { FormHandlers, FormType } from "./forms/types";
+import type { BoxProps, FlexProps, StackProps } from "@chakra-ui/react";
+import type { ParsedUrlQuery } from "querystring";
+import type { IContactCard, CustomColors, FormModel } from "~/types";
 
 type FormCardContentPropsBase = IContactCard & FlexProps;
 
@@ -29,8 +29,6 @@ export interface MotionItems {
 export interface FormCardGroupProps extends StackProps {
   cards: IContactCard[];
 }
-
-export interface IOptionsResponsive extends StackProps {}
 
 export type TSupportedFormQuery = {
   form: FormType;

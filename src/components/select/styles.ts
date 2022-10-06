@@ -1,14 +1,17 @@
 import { useCallback } from "react";
+
 import { useStyleConfig } from "@chakra-ui/react";
 import { mergeWith } from "@chakra-ui/utils";
 import * as ReactSelect from "react-select";
+
 import { useColorValue, useColorTokenValue, useToken } from "~/context";
 import { useMobile, useOpposingColor } from "~/hooks";
+
+import type { RSStyleCallbackProps, RSThemeFunction, RSStyleFunction } from "./types";
 import { removeProps } from "~/util";
-import { useSelectContext } from "./select";
 
 import type { SelectOptionSingle } from "~/types";
-import type { RSStyleCallbackProps, RSThemeFunction, RSStyleFunction } from "./types";
+import { useSelectContext } from "./select";
 
 export const useControlStyle = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
   props: RSStyleCallbackProps,

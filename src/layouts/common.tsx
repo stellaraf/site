@@ -1,4 +1,5 @@
 import { chakra, Box } from "@chakra-ui/react";
+
 import { AnimatedDiv } from "~/components";
 
 import type { BoxProps } from "@chakra-ui/react";

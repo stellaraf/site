@@ -1,8 +1,8 @@
 import { extendTheme } from "@chakra-ui/react";
 import { mode, getColor } from "@chakra-ui/theme-tools";
 import { generatePalette, generateFontFamily, Palette } from "palette-by-numbers";
+
 import { heroButtons } from "~/styles";
-import { entries } from "./generic";
 
 import type { GlobalStyleProps } from "@chakra-ui/theme-tools";
 import type {
@@ -15,6 +15,7 @@ import type {
   ChangeableColors,
   InitialTheme,
 } from "~/types";
+import { entries } from "./generic";
 
 export { isDark, isLight } from "@chakra-ui/theme-tools";
 

@@ -10,9 +10,9 @@ import {
   DrawerOverlay,
   DrawerContent,
 } from "@chakra-ui/react";
-import { useColorValue } from "~/context";
-
 import { BoxProps, IconProps } from "@chakra-ui/react";
+
+import { useColorValue } from "~/context";
 
 const Nav = chakra("nav", {
   baseStyle: {

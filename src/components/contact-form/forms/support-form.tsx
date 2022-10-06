@@ -1,14 +1,17 @@
 import { useImperativeHandle } from "react";
+
 import { Flex } from "@chakra-ui/react";
-import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import { FormProvider, useForm } from "react-hook-form";
+import { z } from "zod";
+
 import { FieldGroup, TextArea, TextInput } from "~/components";
-import { forwardRef } from "~/util";
-import { useContactFormConfig } from "../state";
 
 import type { FormProps, FormHandlers } from "./types";
+import { forwardRef } from "~/util";
+
+import { useContactFormConfig } from "../state";
 
 export const SupportForm = forwardRef<FormHandlers, FormProps<"Support">>((props, ref) => {
   const { onSubmit } = props;

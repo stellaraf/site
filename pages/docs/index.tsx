@@ -1,12 +1,13 @@
+import type { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { Flex, Heading, Spinner } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
+
 import { DocsGroups, SEO } from "~/components";
 import { useRender, useScaledText } from "~/hooks";
 import { DocsLayout } from "~/layouts";
 import { getPage, getPageId } from "~/util";
 
-import type { GetStaticProps } from "next";
 import type { PageEntry, IDocsMain } from "~/types";
 
 const TextContent = (props: IDocsMain["pageData"]) => {

@@ -1,13 +1,14 @@
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { chakra, Link as ChakraLink } from "@chakra-ui/react";
+
 import { DynamicIcon } from "~/components";
 import { useColorTokenValue } from "~/context";
 import { useLinkType } from "~/hooks";
 import { forwardRef } from "~/util";
 
-import type { BoxProps } from "@chakra-ui/react";
 import type { LinkProps } from "./types";
+import type { BoxProps } from "@chakra-ui/react";
 
 const BaseLink = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
   const borderColor = useColorTokenValue("secondary.500", "secondary.300");

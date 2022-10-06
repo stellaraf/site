@@ -1,9 +1,11 @@
 import { useCallback } from "react";
+
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
+
 import { Button, Icon } from "~/components";
-import { useRender } from "~/hooks";
 import { useColorValue } from "~/context";
+import { useRender } from "~/hooks";
 
 import type { ContentSubSectionProps } from "./types";
 

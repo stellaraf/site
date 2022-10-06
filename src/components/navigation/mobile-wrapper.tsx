@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { Box, Flex } from "@chakra-ui/react";
+
 import { useRouter } from "next/router";
+import { Box, Flex } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
+
 import { Link } from "~/components";
 import { useColorMode, useColorValue } from "~/context";
 import { useNavLogoState } from "~/hooks";

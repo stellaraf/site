@@ -1,6 +1,6 @@
-import { getPageId } from "~/util";
-
 import type { NextApiHandler } from "next";
+
+import { getPageId } from "~/util";
 
 const previewHandler: NextApiHandler = async (request, response) => {
   if (request.query.secret !== process.env.PREVIEW_SECRET || !request.query.slug) {

@@ -1,4 +1,5 @@
 import { Heading } from "@chakra-ui/react";
+
 import { DynamicIcon, Link } from "~/components";
 
 import type { MobileNavLinkProps } from "./types";

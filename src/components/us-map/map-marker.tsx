@@ -1,10 +1,11 @@
 import { Box, Link, PopoverTrigger, useBreakpointValue } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Marker } from "react-simple-maps";
+
 import { useColorValue, useColorTokenValue } from "~/context";
 
-import type { Variants } from "framer-motion";
 import type { MapMarkerProps } from "./types";
+import type { Variants } from "framer-motion";
 
 const bestVariants = {
   best: {

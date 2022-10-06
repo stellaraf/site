@@ -1,12 +1,14 @@
 import { Box, Heading, chakra, HStack, useToken } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
+
 import { CodeBlockStyleProvider, DynamicIcon } from "~/components";
 import { useColorValue } from "~/context";
 import { useOpposingColor, useRender } from "~/hooks";
+
+import type { AdmonitionIconProps } from "./types";
 import { shouldForwardProp } from "~/util";
 
 import type { TAdmonition } from "~/types";
-import type { AdmonitionIconProps } from "./types";
 
 const iconMap = {
   Information: { bi: "BiInfoCircle" },

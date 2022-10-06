@@ -1,3 +1,4 @@
+import type { CustomBlockProps, CustomBlockPreProps } from "./types";
 import type {
   TAdmonition,
   TTableEntry,
@@ -6,7 +7,6 @@ import type {
   TArticleButton,
   TMarkdownBlock,
 } from "~/types";
-import type { CustomBlockProps, CustomBlockPreProps } from "./types";
 
 export function parseTarget(props: CustomBlockPreProps): CustomBlockProps<TCustomBlocks> {
   const fallback = { sys: { contentType: { sys: { id: "fallback" } } } };

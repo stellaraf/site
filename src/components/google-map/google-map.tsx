@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+
 import { Box, Skeleton } from "@chakra-ui/react";
 import {
   GoogleMap as GoogleMapApi,
@@ -6,13 +7,14 @@ import {
   InfoWindow,
   useJsApiLoader,
 } from "@react-google-maps/api";
+
 import { Link, Error } from "~/components";
 import { useConfig, useColorValue, useColorTokenValue } from "~/context";
 import { useRender } from "~/hooks";
-import { gm, useMapUrl } from "./util";
-import { mapDark, mapLight } from "./styles";
 
 import type { LocationProps, MapContainerProps } from "./types";
+import { mapDark, mapLight } from "./styles";
+import { gm, useMapUrl } from "./util";
 
 const Location = (props: LocationProps) => {
   const { lat, lng, content, bg, color, openMapsText, orgName, address, ...rest } = props;

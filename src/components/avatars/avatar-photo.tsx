@@ -1,5 +1,7 @@
 import { Flex, Image, Button, Text, useBreakpointValue } from "@chakra-ui/react";
+
 import { useColorValue } from "~/context";
+
 import { useAvatar } from "./avatar-layout";
 import { useSetCurrent } from "./state";
 

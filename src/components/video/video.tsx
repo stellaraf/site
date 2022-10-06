@@ -1,10 +1,11 @@
 import dynamic from "next/dynamic";
+import type { DynamicOptions } from "next/dynamic";
 import { Skeleton } from "@chakra-ui/react";
+
 import { useBooleanValue, useSSR } from "~/hooks";
 
-import type { DynamicOptions } from "next/dynamic";
-import type { ReactPlayerProps } from "react-player";
 import type { IVideo } from "./types";
+import type { ReactPlayerProps } from "react-player";
 
 type LoaderType = NonNullable<DynamicOptions["loading"]>;
 

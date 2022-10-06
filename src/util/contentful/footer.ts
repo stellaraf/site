@@ -147,7 +147,7 @@ async function* getFooterGroupItems(preview: boolean): AsyncGenerator<FooterItem
  * Each footer link contains its parent's title & sortWeight as well as its own title, link, and
  * sortWeight.
  */
-export async function getFooterItems(preview: boolean = false): Promise<SortedFooterItem[]> {
+export async function getFooterItems(preview = false): Promise<SortedFooterItem[]> {
   const footerItems = [] as FooterItem[];
 
   for (const promise of [

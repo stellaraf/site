@@ -59,13 +59,14 @@
     "build": "pnpm run favicons && pnpm exec next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --ext .ts --ext .tsx",
+    "lint": "eslint . --ext .ts --ext .tsx --ext .js --ext .jsx",
     "format": "prettier --loglevel warn -c .",
     "format:fix": "prettier --loglevel warn -w .",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
-    "precommit": "pnpx lefthook run pre-commit"
+    "precommit": "pnpx lefthook run pre-commit",
+    "build:eslint-plugin-import": "cd node_modules/eslint-plugin-import && pnpm --silent install && pnpm run build"
   },
   "browserslist": {
     "production": [
@@ -84,7 +85,6 @@
     "@contentful/rich-text-types": "^15.13.2",
     "@evilmartians/lefthook": "^1.1.1",
     "@next/bundle-analyzer": "^9.5.5",
-    "@types/favicons": "^7.0.0",
     "@types/google.maps": "^3.50.2",
     "@types/gtag.js": "^0.0.8",
     "@types/mousetrap": "^1.6.9",
@@ -101,7 +101,7 @@
     "eslint-config-next": "^12.3.1",
     "eslint-config-prettier": "^7.2.0",
     "eslint-import-resolver-typescript": "^2.7.1",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-import": "git://github.com/import-js/eslint-plugin-import#753505d062f7ae6736eb4ffb2cc35c3f699c5b6f",
     "eslint-plugin-json": "^2.1.2",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-prettier": "^3.4.1",

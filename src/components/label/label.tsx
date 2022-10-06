@@ -1,4 +1,5 @@
 import { Flex } from "@chakra-ui/react";
+
 import { useOpposingColor } from "~/hooks";
 
 import type { LabelProps } from "./types";

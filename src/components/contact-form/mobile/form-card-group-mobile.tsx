@@ -1,19 +1,21 @@
 import { useEffect, useRef } from "react";
+import type { MouseEvent } from "react";
+
 import { useRouter } from "next/router";
 import { Button as ChakraButton, Center, Stack, useDisclosure } from "@chakra-ui/react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useTitleCase } from "use-title-case";
+
 import { Button, Icon } from "~/components";
 import { useGoogleAnalytics } from "~/hooks";
+
+import type { FormHandlers } from "../forms/types";
+import { MobileForm } from "./mobile-form";
+import { useContactFormCtx } from "../context";
 import { FormCard, FormCardBody } from "../form-card";
 import { FormCardContent } from "../form-card-content";
-import { useContactFormCtx } from "../context";
 import { queryIsForm } from "../guards";
 import { useContactForm } from "../state";
-import { MobileForm } from "./mobile-form";
-
-import type { MouseEvent } from "react";
-import type { FormHandlers } from "../forms/types";
 
 const Container = motion(Stack);
 const AnimatedCenter = motion(Center);

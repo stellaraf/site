@@ -1,4 +1,5 @@
 import { sortByWeight, sortByTitle } from "~/util";
+
 import { getParsedContent, getContentType } from "./common";
 
 import type {
@@ -18,7 +19,7 @@ import type {
 /**
  * Get all contact cards, as pre-parsed as possible.
  */
-export async function getContactCards(preview: boolean = false): Promise<IContactCard[]> {
+export async function getContactCards(preview = false): Promise<IContactCard[]> {
   const contactCardEntries = await getParsedContent<IContactCardEntry>("contactCard", preview);
   /**
    * Because each contact card definition ends up being hyper-nested, it's necessary, or rather
@@ -54,7 +55,7 @@ export async function getContactCards(preview: boolean = false): Promise<IContac
  */
 export async function getPartnerPage(
   partner: string,
-  preview: boolean = false,
+  preview = false,
 ): Promise<IPartnerPage["pageData"]> {
   // Get all Partner Pages matching the the partner's name.
   const matches = await getParsedContent<IPartnerPageEntry["pageData"]>("partnerPage", preview, {
@@ -88,7 +89,7 @@ export async function getPartnerPage(
 /**
  * Get all Docs Groups & each of their associated articles.
  */
-export async function getDocsGroups(preview: boolean = false): Promise<IDocsGroup[]> {
+export async function getDocsGroups(preview = false): Promise<IDocsGroup[]> {
   const docsGroups = [] as IDocsGroup[];
   const groups = await getParsedContent<IDocsGroupEntry>("docsGroup", preview);
 
@@ -117,7 +118,7 @@ export const getOrionLocations = async (): Promise<IMeasuredGeoPoint[]> => {
   return data.items.map(p => ({ ...p.fields, elapsed: 65535, best: false }));
 };
 
-export async function getTestimonials(preview: boolean = false): Promise<TestimonialEntry[]> {
+export async function getTestimonials(preview = false): Promise<TestimonialEntry[]> {
   const data = await getContentType<TestimonialEntry>("testimonial", preview);
   const testimonials = data.items.map(entry => entry.fields).sort(sortByTitle);
   return testimonials;

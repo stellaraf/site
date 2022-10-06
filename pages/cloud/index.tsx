@@ -1,11 +1,12 @@
+import type { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { Button, Wrap } from "@chakra-ui/react";
-import { getPage, getPageContent, getOrionLocations, getPageId } from "~/util";
+
 import { ContentSection, Hero, SEO, useDataCenter, GetStarted, Testimonials } from "~/components";
 import { useColorTokenValue, CloudLocationsProvider } from "~/context";
 import { useAlert } from "~/hooks";
+import { getPage, getPageContent, getOrionLocations, getPageId } from "~/util";
 
-import type { GetStaticProps } from "next";
 import type { USMapProps } from "~/components";
 import type { ICloud, IMeasuredGeoPoint, PageContent, PageEntry } from "~/types";
 

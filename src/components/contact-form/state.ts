@@ -1,10 +1,12 @@
 import { useCallback, useEffect } from "react";
+
 import { atom, useRecoilState, useRecoilValue } from "recoil";
+
 import { useContactFormCtx } from "./context";
 import { isSupportedForm } from "./guards";
 
-import type { IContactCard } from "~/types";
 import type { FormIcon, AvailableForms } from "./types";
+import type { IContactCard } from "~/types";
 
 interface ContactFormValues {
   /**

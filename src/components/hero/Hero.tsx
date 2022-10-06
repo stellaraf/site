@@ -1,5 +1,6 @@
 import { chakra, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
+
 import { useGradient, useRender, useResponsiveStyle } from "~/hooks";
 import { shouldForwardProp } from "~/util";
 

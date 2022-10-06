@@ -2,7 +2,7 @@ interface NavConfigItem {
   title: string;
   link: string;
 }
-export interface NavConfig {
+interface NavConfig {
   left: NavConfigItem[];
   right: NavConfigItem[];
 }

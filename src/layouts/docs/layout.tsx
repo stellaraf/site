@@ -1,11 +1,12 @@
 import { Accordion, chakra, Box, Flex, VStack, useBreakpointValue } from "@chakra-ui/react";
+
 import { MSubNav } from "~/components";
 import { useColorValue, useConfig } from "~/context";
 import { useResponsiveStyle } from "~/hooks";
-import { DMenuGroup } from "./menu-desktop";
-import { MMenuGroup } from "./menu-mobile";
 
 import type { BoxProps } from "@chakra-ui/react";
+import { DMenuGroup } from "./menu-desktop";
+import { MMenuGroup } from "./menu-mobile";
 
 const LayoutContainer = chakra("div", {
   baseStyle: { w: "100%", minH: "40vh", pt: 32 },

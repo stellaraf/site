@@ -1,6 +1,8 @@
 import { useState } from "react";
+
 import { useToken } from "@chakra-ui/react";
 import { getColor, isLight } from "@chakra-ui/theme-tools";
+
 import { useTheme } from "~/context";
 
 interface IOpposingOptions {

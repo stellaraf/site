@@ -1,8 +1,8 @@
 import { chakra, Flex, SkeletonText, Skeleton } from "@chakra-ui/react";
+import { BoxProps } from "@chakra-ui/react";
+
 import { Content } from "~/components";
 import { shouldForwardProp } from "~/util";
-
-import { BoxProps } from "@chakra-ui/react";
 
 const Wrapper = chakra("article", {
   shouldForwardProp,

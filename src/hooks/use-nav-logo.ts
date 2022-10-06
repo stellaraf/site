@@ -1,5 +1,7 @@
 import { useCallback } from "react";
+
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
+
 import { useScrollPosition } from "./use-scroll-position";
 
 const navLogoAtom = atom({ key: "navLogo", default: false });

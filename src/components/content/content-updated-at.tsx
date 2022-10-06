@@ -1,8 +1,8 @@
 import { Label } from "~/components";
 import { useColorValue } from "~/context";
 
-import type { FlexProps } from "@chakra-ui/react";
 import type { ContentUpdatedAtProps } from "./types";
+import type { FlexProps } from "@chakra-ui/react";
 
 export const ContentUpdatedAt = (props: ContentUpdatedAtProps) => {
   const { children, ...rest } = props;

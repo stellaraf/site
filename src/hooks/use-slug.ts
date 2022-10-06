@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+
 import { slug, reactChildText } from "~/util";
 
 export const useSlug = (original: string | React.ReactNode, deps: unknown[] = []): string => {

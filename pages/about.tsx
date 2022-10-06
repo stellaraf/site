@@ -1,5 +1,7 @@
+import type { GetStaticProps } from "next";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
+
 import { Avatars, Hero, GoogleMap, SEO, GetStarted, Testimonials } from "~/components";
 import { useResponsiveStyle } from "~/hooks";
 import {
@@ -11,7 +13,6 @@ import {
   sortByWeight,
 } from "~/util";
 
-import type { GetStaticProps } from "next";
 import type { Bio, PageEntry, IAboutPage, ISection, PageContent } from "~/types";
 
 const Section = (props: ISection) => {

@@ -1,5 +1,5 @@
-import type { CustomColors } from "~/types";
 import type { FormHandlers } from "../forms/types";
+import type { CustomColors } from "~/types";
 
 export interface DesktopFormProps {
   title: string;

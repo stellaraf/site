@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { getJson } from "~/util";
 
 import type { UseQueryResult, QueryFunction } from "@tanstack/react-query";
 
-export type IPRanges = {
+type IPRanges = {
   ipv4: string[];
   ipv6: string[];
   urls: string[];

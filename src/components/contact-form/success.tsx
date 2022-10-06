@@ -1,5 +1,6 @@
 import { VStack, Heading } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+
 import { DynamicIcon } from "~/components";
 import { useColorValue } from "~/context";
 

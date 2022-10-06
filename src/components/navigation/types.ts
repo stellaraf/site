@@ -1,5 +1,4 @@
 import type { FlexProps, UseDisclosureReturn } from "@chakra-ui/react";
-
 import type { LinkProps } from "~/components";
 
 export interface HeaderLogoProps {

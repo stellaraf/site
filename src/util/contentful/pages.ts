@@ -42,10 +42,7 @@ export async function getPage<T extends PageAttrs>(
 /**
  * Get content for a specific page by its sys.id
  */
-export async function getPageContent(
-  pageId: string,
-  preview: boolean = false,
-): Promise<PageContent[]> {
+export async function getPageContent(pageId: string, preview = false): Promise<PageContent[]> {
   // const data = await getContentType<PageContent>('pageContent', preview, {
   //   'fields.page.sys.id': pageId,
   // });

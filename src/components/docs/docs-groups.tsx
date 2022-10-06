@@ -1,7 +1,9 @@
 import { Flex, Wrap, WrapItem } from "@chakra-ui/react";
 import { useInView } from "react-intersection-observer";
+
 import { AnimatedDiv } from "~/components";
 import { useConfig } from "~/context";
+
 import { DocsGroupCard } from "./docs-group-card";
 
 export const DocsGroups = () => {

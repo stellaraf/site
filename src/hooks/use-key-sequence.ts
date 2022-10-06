@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback } from "react";
+
 import isEqual from "react-fast-compare";
 
 interface KeySequenceRef {

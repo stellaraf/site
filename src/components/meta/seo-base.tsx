@@ -1,4 +1,5 @@
 import { DefaultSeo } from "next-seo";
+
 import { useConfig } from "~/context";
 
 import type { DefaultSeoProps, NextSeoProps } from "next-seo";

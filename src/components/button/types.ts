@@ -3,10 +3,6 @@ import type {
   LinkProps as ChakraLinkProps,
 } from "@chakra-ui/react";
 
-export type ExternalButtonProps = ButtonProps &
-  ChakraLinkProps &
-  React.AnchorHTMLAttributes<HTMLAnchorElement>;
-
 export type ButtonLinkElement = HTMLButtonElement & HTMLAnchorElement;
 
 type ButtonLinkProps = ChakraLinkProps & ChakraButtonProps;

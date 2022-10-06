@@ -1,9 +1,10 @@
+import type { GetStaticProps, GetStaticPaths } from "next";
 import { Box } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
+
 import { SEO, ContentSection } from "~/components";
 import { getPage, getPageContent, getPageId } from "~/util";
 
-import type { GetStaticProps, GetStaticPaths } from "next";
 import type { PageEntry, ILegalPage, PageContent } from "~/types";
 
 type UrlQuery = {

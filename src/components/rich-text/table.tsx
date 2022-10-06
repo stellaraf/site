@@ -1,35 +1,19 @@
 import { Box } from "@chakra-ui/react";
+
 import { useColorValue } from "~/context";
+
+import type { TableCellProps, TableData } from "./types";
 import { Markdown } from "./markdown";
 
 import type { BoxProps } from "@chakra-ui/react";
 import type { TTableEntry } from "~/types";
-import type { TdProps, TableCellProps, TableData } from "./types";
 
-export const TableHeader = (props: BoxProps) => {
+const TableHeader = (props: BoxProps) => {
   const bg = useColorValue("blackAlpha.100", "whiteAlpha.100");
   return <Box as="th" bg={bg} fontWeight="bold" p={2} fontSize="sm" {...props} />;
 };
 
-export const TD = (props: TdProps) => {
-  const { isHeader = false, children, ...rest } = props;
-  const border = useColorValue("gray.100", "whiteAlpha.100");
-  return (
-    <Box
-      p={2}
-      fontSize="sm"
-      whiteSpace="normal"
-      borderTopWidth="1px"
-      borderColor={border}
-      as={isHeader ? "th" : "td"}
-      {...rest}
-    >
-      {children}
-    </Box>
-  );
-};
-
-export const TableCell = (props: TableCellProps) => {
+const TableCell = (props: TableCellProps) => {
   const { isHeader = false, children, ...rest } = props;
   const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
@@ -47,7 +31,7 @@ export const TableCell = (props: TableCellProps) => {
   );
 };
 
-export const TableMain = (props: BoxProps) => {
+const TableMain = (props: BoxProps) => {
   const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
     <Box

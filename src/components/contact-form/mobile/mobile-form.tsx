@@ -1,14 +1,17 @@
 import { useCallback, useState } from "react";
+
 import { Center, Flex, IconButton, Heading, Grid } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
+
 import { DynamicIcon, Modal } from "~/components";
-import { useContactForm } from "../state";
+
+import type { MobileFormProps } from "./types";
 import { SalesForm, SupportForm } from "../forms";
-import { submitForm } from "../submitters";
-import { Success } from "../success";
 
 import type { FormType, FormFieldValue } from "../forms/types";
-import type { MobileFormProps } from "./types";
+import { useContactForm } from "../state";
+import { submitForm } from "../submitters";
+import { Success } from "../success";
 
 export const MobileForm = (props: MobileFormProps) => {
   const {

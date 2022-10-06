@@ -1,19 +1,15 @@
 import { INLINES } from "@contentful/rich-text-types";
 
-import type { BoxProps, HeadingProps as ChakraHeadingProps } from "@chakra-ui/react";
-import type { Asset } from "contentful";
+import type { BoxProps } from "@chakra-ui/react";
 import type { Link, Block as BlockNode, Inline as InlineNode } from "@contentful/rich-text-types";
+import type { Asset } from "contentful";
 import type { TTableEntry, TCustomBlocks, TAdmonition } from "~/types";
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
-export interface BaseHeadingProps extends ChakraHeadingProps {
-  level: HeadingLevel;
-}
-
 export type Headings = `h${HeadingLevel}`;
 
-export type TCustomBlockTypes =
+type TCustomBlockTypes =
   | "markdownBlock"
   | "articleButton"
   | "admonition"

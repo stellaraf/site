@@ -1,4 +1,5 @@
 import { memo, useMemo } from "react";
+
 import dynamic from "next/dynamic";
 import { chakra, Icon as ChakraIcon } from "@chakra-ui/react";
 import isEqual from "react-fast-compare";
@@ -176,4 +177,3 @@ const _DynamicIcon = (props: DynamicIconProps): JSX.Element => {
  * ```
  */
 export const DynamicIcon = memo(_DynamicIcon, isEqual);
-export default DynamicIcon;

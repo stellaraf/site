@@ -1,4 +1,5 @@
 import { Box, List, ListItem, Text, SimpleGrid, useToken } from "@chakra-ui/react";
+
 import { Link } from "~/components";
 
 import type { FooterLinksProps } from "./types";

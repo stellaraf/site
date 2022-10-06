@@ -1,11 +1,14 @@
 import { useId } from "react";
+
 import { useQuery } from "@tanstack/react-query";
+
 import { useGoogleAnalytics } from "~/hooks";
 import { fetchWithTimeout } from "~/util";
+
+import type { CloudMeasurement, FetcherArgs, UseDataCenterReturn } from "./types";
 import { useCloudMeasurements } from "./use-cloud-measurements";
 
 import type { PartialMeasurement } from "./use-cloud-measurements";
-import type { CloudMeasurement, FetcherArgs, UseDataCenterReturn } from "./types";
 
 /**
  * Track the latency of an HTTP connection.

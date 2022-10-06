@@ -4,4 +4,4 @@ export interface CardBodyProps extends BoxProps {
   spacing?: StackProps["spacing"];
 }
 
-export interface CardProps extends StackProps {}
+export type CardProps = StackProps;

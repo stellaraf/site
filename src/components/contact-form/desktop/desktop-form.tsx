@@ -1,14 +1,17 @@
 import { useCallback } from "react";
+
 import { Flex, Center, Heading, IconButton, Grid } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
+
 import { DynamicIcon } from "~/components";
-import { useContactForm } from "../state";
-import { SalesForm, SupportForm } from "../forms";
-import { submitForm } from "../submitters";
-import { Success } from "../success";
 
 import type { DesktopFormProps } from "./types";
+import { SalesForm, SupportForm } from "../forms";
+
 import type { FormType, FormFieldValue } from "../forms/types";
+import { useContactForm } from "../state";
+import { submitForm } from "../submitters";
+import { Success } from "../success";
 
 export const DesktopForm = (props: DesktopFormProps) => {
   const { title, body, icon, accent = "primary", toggleLayout, formRef, onSubmit } = props;

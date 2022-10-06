@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
 
-import type { TFormModelTrial } from "~/types";
 import type { PartnerLayoutProps } from "./types";
+import type { TFormModelTrial } from "~/types";
 
-export type PartnerContextType = Omit<PartnerLayoutProps, "trialForm"> & {
+type PartnerContextType = Omit<PartnerLayoutProps, "trialForm"> & {
   fields: TFormModelTrial;
 };
 

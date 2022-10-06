@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { Box, Flex, Heading } from "@chakra-ui/react";
+
 import { SEO } from "~/components";
 import { useColorValue } from "~/context";
 import { useGradient, useResponsiveStyle } from "~/hooks";

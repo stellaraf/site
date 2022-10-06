@@ -9,10 +9,6 @@ export interface FooterLinksProps extends SimpleGridProps {
   groups: SortedFooterItem[];
 }
 
-export interface StructuredItems<T> {
-  [k: string]: T;
-}
-
 export interface SocialLinkProps extends Omit<IconButtonProps, "href" | "title" | "aria-label"> {
   label: string;
   href: string;

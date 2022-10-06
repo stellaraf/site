@@ -1,7 +1,9 @@
 import { createContext, useContext } from "react";
+
 import { SimpleGrid, useDisclosure } from "@chakra-ui/react";
-import { Photo } from "./avatar-photo";
+
 import { Detail } from "./avatar-detail";
+import { Photo } from "./avatar-photo";
 
 import type { AvatarsWrapperProps, AvatarsProps, AvatarContextType } from "./types";
 

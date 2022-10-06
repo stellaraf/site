@@ -30,6 +30,7 @@
   "exclude": ["node_modules", ".next", ".husky", "dist", "public", "generateFavicons.ts"],
   "include": [
     "next.config.js",
+    ".eslintrc.*",
     "next-env.d.ts",
     "src/**/*",
     "global.d.ts",

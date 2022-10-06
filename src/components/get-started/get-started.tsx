@@ -1,6 +1,8 @@
 import { useMemo } from "react";
+
 import { Center, Heading, VStack, Divider } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
+
 import { Button, Ripple } from "~/components";
 import { useColorValue } from "~/context";
 import { useRender, useOpposingColor, useIsDark, useGlow, useResponsiveStyle } from "~/hooks";

@@ -1,5 +1,6 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { StellarLogo } from "@stellaraf/logo";
+import { motion, AnimatePresence } from "framer-motion";
+
 import { Link } from "~/components";
 import { useColorMode } from "~/context";
 import { forwardRef } from "~/util";

@@ -1,7 +1,9 @@
 import { useMemo } from "react";
+
 import { Divider } from "@chakra-ui/react";
-import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
+
 import {
   P,
   H1,
@@ -24,8 +26,8 @@ import {
   CustomBlock,
 } from "~/components";
 
-import type { Document } from "@contentful/rich-text-types";
 import type { RenderNode, RenderMark } from "@contentful/rich-text-react-renderer";
+import type { Document } from "@contentful/rich-text-types";
 
 type Keys = BLOCKS | INLINES;
 

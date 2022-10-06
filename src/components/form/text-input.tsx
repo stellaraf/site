@@ -1,10 +1,11 @@
 import { FormControl, FormErrorMessage, Input } from "@chakra-ui/react";
 import { Controller } from "react-hook-form";
+
 import { useColorValue } from "~/context";
 
+import type { TextFieldProps, FormFieldProps } from "./types";
 import type { InputProps } from "@chakra-ui/react";
 import type { FieldValues } from "react-hook-form";
-import type { TextFieldProps, FormFieldProps } from "./types";
 
 const Field = <V extends FieldValues>(props: TextFieldProps<V>) => {
   const { field, fieldState, isRequired, ...rest } = props;

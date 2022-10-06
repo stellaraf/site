@@ -1,7 +1,8 @@
 import type { AppProps, AppInitialProps, AppContext } from "next/app";
+
 import type { BoxProps } from "@chakra-ui/react";
-import type { Asset } from "contentful";
 import type { Document } from "@contentful/rich-text-types";
+import type { Asset } from "contentful";
 import type {
   IMeasuredGeoPoint,
   HomeSection,
@@ -81,7 +82,7 @@ export interface IBioSection extends ISection {
   bios: Bio[];
 }
 
-export interface IMapSection extends ISection {}
+export type IMapSection = ISection;
 
 /**
  * Contact Page Types
@@ -109,7 +110,7 @@ export interface IAboutPage
 /**
  * Legal Page Types (Dynamic)
  */
-export interface ILegalPage extends PageWithContent {}
+export type ILegalPage = PageWithContent;
 
 export interface IVendorPage {
   pageData: {
@@ -165,9 +166,9 @@ export interface IDocs {
   docsGroups: IDocsGroup[];
 }
 
-export interface IDocsGroupMain extends Page<IDocsGroup> {}
+export type IDocsGroupMain = Page<IDocsGroup>;
 
-export interface IDocsMain extends Page<PageAttrs> {}
+export type IDocsMain = Page<PageAttrs>;
 
 export interface IDocsArticlePage {
   article: IDocsArticle;

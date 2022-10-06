@@ -1,7 +1,8 @@
 import type { MutableRefObject } from "react";
+
+import type { FormHandlers } from "../forms/types";
 import type { UseDisclosureReturn } from "@chakra-ui/react";
 import type { CustomColors } from "~/types";
-import type { FormHandlers } from "../forms/types";
 
 export interface MobileFormProps {
   title: string;

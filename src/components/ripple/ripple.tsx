@@ -1,6 +1,7 @@
 import { Box, useToken } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+
 import { useInterpolatedColors } from "./use-interpolated-colors";
 
 import type { RippleProps } from "./types";

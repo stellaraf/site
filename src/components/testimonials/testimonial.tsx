@@ -1,6 +1,8 @@
 import { Box, Flex, Image, VStack, Heading, Divider } from "@chakra-ui/react";
+
 import { useColorValue } from "~/context";
 import { useRender } from "~/hooks";
+
 import { Quote } from "./quote";
 
 import type { TestimonialEntry } from "~/types";

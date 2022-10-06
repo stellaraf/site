@@ -1,10 +1,11 @@
-import { RecoilRoot } from "recoil";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { RecoilRoot } from "recoil";
 import { TitleCaseProvider } from "use-title-case";
-import { UIProvider } from "./ui";
+
 import { ConfigProvider } from "./config";
 
 import type { ProviderProps } from "./types";
+import { UIProvider } from "./ui";
 
 const queryClient = new QueryClient();
 

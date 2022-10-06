@@ -32,7 +32,7 @@ export async function get(url: string, config: RequestInit = {}): Promise<Respon
 export async function fetchWithTimeout(
   uri: string,
   options: RequestInit = {},
-  time: number = 7500,
+  time = 7500,
   controller: AbortController,
 ): Promise<Response> {
   /**

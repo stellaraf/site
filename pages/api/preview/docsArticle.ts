@@ -1,6 +1,7 @@
+import type { NextApiHandler } from "next";
+
 import { getParsedContent } from "~/util";
 
-import type { NextApiHandler } from "next";
 import type { IDocsArticle } from "~/types";
 
 const previewHandler: NextApiHandler = async (request, response) => {

@@ -1,11 +1,13 @@
 import { useMemo } from "react";
+
 import { Box } from "@chakra-ui/react";
+
 import { Divider } from "~/components";
 import { useColorValue } from "~/context";
 import { useRender } from "~/hooks";
-import { HomeBlock } from "./home-block";
 
 import type { HomeSectionProps, Sides, Side } from "./types";
+import { HomeBlock } from "./home-block";
 
 function getSide(idx: number): Side {
   const sides: Sides = ["right", "left"];

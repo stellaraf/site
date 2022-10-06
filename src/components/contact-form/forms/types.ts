@@ -11,7 +11,7 @@ interface FormFieldsBase extends FieldValues {
   details: string;
 }
 
-export interface SupportFormFields extends FormFieldsBase {
+interface SupportFormFields extends FormFieldsBase {
   subject: string;
 }
 

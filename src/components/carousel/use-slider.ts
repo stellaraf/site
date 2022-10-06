@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+
 import { useKeenSlider } from "keen-slider/react";
+
 import { useBreakpointString } from "~/hooks";
 
 import type KeenSlider from "keen-slider";

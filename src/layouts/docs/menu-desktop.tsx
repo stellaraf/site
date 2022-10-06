@@ -7,8 +7,10 @@ import {
   AccordionPanel,
   AccordionButton,
 } from "@chakra-ui/react";
-import { useColorValue } from "~/context";
+
 import { Link } from "~/components";
+import { useColorValue } from "~/context";
+
 import { useDocsHref } from "./use-docs-href";
 
 import type { IDocsGroup, IDocsArticle } from "~/types";

@@ -1,9 +1,10 @@
 import { Box, Text, useToken, useStyleConfig, Code as ChakraCode } from "@chakra-ui/react";
+
 import { useCodeBlockStyle } from "~/components";
 import { useColorValue } from "~/context";
 
-import type { BoxProps, TextProps, CodeProps } from "@chakra-ui/react";
 import type { InlineProps } from "./types";
+import type { BoxProps, TextProps, CodeProps } from "@chakra-ui/react";
 
 export const P = (props: TextProps) => (
   <Text my={8} css={{ "&:first-of-type": { marginTop: useToken("space", 2) } }} {...props} />

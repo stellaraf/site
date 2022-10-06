@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+
 import {
   Flex,
   Text,
@@ -11,17 +12,19 @@ import {
   AlertDescription,
   FormErrorMessage,
 } from "@chakra-ui/react";
-import { useForm, FormProvider, Controller } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, FormProvider, Controller } from "react-hook-form";
 import { useTitleCase } from "use-title-case";
+import { z } from "zod";
+
+import type { SubscribeProps, SubscribeFormData, SubscribeToast } from "./types";
 import { useConfig } from "~/context";
-import { useGoogleAnalytics } from "~/hooks";
-import { SubscribeField } from "./subscribe-field";
-import { subscribeEmail } from "./util";
 
 import type { RenderProps } from "@chakra-ui/react";
-import type { SubscribeProps, SubscribeFormData, SubscribeToast } from "./types";
+import { useGoogleAnalytics } from "~/hooks";
+
+import { SubscribeField } from "./subscribe-field";
+import { subscribeEmail } from "./util";
 
 const subscribeSchema = z.object({
   email: z.string().email("Must be a valid email address"),

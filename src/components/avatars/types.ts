@@ -6,9 +6,9 @@ export interface AvatarPhotoProps extends FlexProps {
   onOpen: UseDisclosureReturn["onOpen"];
 }
 
-export interface AvatarPhotoWrapperProps extends FlexProps {}
+export type AvatarPhotoWrapperProps = FlexProps;
 
-export interface AvatarsWrapperProps extends SimpleGridProps {}
+export type AvatarsWrapperProps = SimpleGridProps;
 
 export interface AvatarsProps extends SimpleGridProps {
   bios: Bio[];
@@ -19,7 +19,7 @@ export interface AvatarDetailProps {
   onClose: UseDisclosureReturn["onClose"];
 }
 
-export interface AvatarHeaderProps extends Omit<Bio, "body"> {}
+export type AvatarHeaderProps = Omit<Bio, "body">;
 
 export interface AvatarContextType {
   bios: Bio[];

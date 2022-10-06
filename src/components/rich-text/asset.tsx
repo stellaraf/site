@@ -1,6 +1,8 @@
 import { useMemo } from "react";
+
 import NextImage from "next/image";
 import { Image as ChakraImage, useDisclosure } from "@chakra-ui/react";
+
 import { Backdrop, Modal, Video } from "~/components";
 import { useColorValue } from "~/context";
 

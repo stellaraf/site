@@ -1,10 +1,12 @@
 import { useCallback, useEffect } from "react";
+
 import { FormControl, FormErrorMessage } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
+
 import { Select as CustomSelect } from "~/components";
 
-import type { SelectOptionSingle } from "~/types";
 import type { SelectFieldProps } from "./types";
+import type { SelectOptionSingle } from "~/types";
 
 export const SelectField = (props: SelectFieldProps) => {
   const { opts, id: name, required = false, isMulti = false, ...rest } = props;

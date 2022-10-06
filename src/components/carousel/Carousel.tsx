@@ -1,10 +1,13 @@
 import { createContext, useContext } from "react";
+
 import { Box, Button, Flex } from "@chakra-ui/react";
-import { useSlider } from "./use-slider";
+
 import { forwardRef } from "~/util";
 
-import type { FlexProps } from "@chakra-ui/react";
-import type { DotProps, CarouselProps, UseCarousel } from "./types";
+import { useSlider } from "./use-slider";
+
+import type { CarouselProps, UseCarousel } from "./types";
+import type { BoxProps, FlexProps } from "@chakra-ui/react";
 
 /**
  * Cycle through range of numbers `total` starting with `current`.
@@ -35,7 +38,7 @@ const useCarousel = (): UseCarousel => {
 /**
  * Show a row of dots for each Hero Card. The currently active card's dot is filled.
  */
-const Dots = (props: DotProps) => {
+const Dots = (props: BoxProps) => {
   const { color, ...rest } = props;
   const { current, setCurrent, total } = useCarousel();
   return (
@@ -112,7 +115,14 @@ const Slide = (props: FlexProps) => (
  * Cycle through child elements with animation.
  */
 export const Carousel = (props: CarouselProps) => {
-  const { interval = 4000, noDots = false, dotColor = "black", children, ...rest } = props;
+  const {
+    interval,
+    // = 4000
+    noDots = false,
+    dotColor = "black",
+    children,
+    ...rest
+  } = props;
   const { slide, setSlide, containerRef } = useSlider();
   return (
     <CarouselContext.Provider
