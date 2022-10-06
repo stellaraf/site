@@ -9,18 +9,18 @@ export const Groups: React.FC = () => {
   const [ref, inView] = useInView({ triggerOnce: true, rootMargin: "-100px" });
   return (
     <Flex align="center" justify="center" m={4}>
-      <Wrap spacing={8} ref={ref} justify="center">
+      <Wrap spacing={8} ref={ref} justify="center" overflow="visible">
         {inView &&
           docsGroups.map((group, i) => (
-            <WrapItem key={`docsGroup${i}`}>
+            <WrapItem key={group.title}>
               <AnimatedDiv
                 zIndex={1}
                 animate={{ x: 0 }}
-                key={`docsGroup${i}`}
+                key={group.title}
                 initial={{ x: "100%" }}
                 whileTap={{ y: "-3%" }}
-                whileHover={{ y: "-5%" }}
-                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: "-3%" }}
+                transition={{ delay: i * 0.075 }}
               >
                 <GroupCard {...group} />
               </AnimatedDiv>

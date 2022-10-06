@@ -9,4 +9,4 @@ pre-commit:
       run: 'pnpm exec eslint {staged_files}'
     typescript:
       glob: '*.{ts,tsx}'
-      run: 'pnpm exec tsc --noEmit {staged_files}'
+      run: 'pnpm exec tsc --noEmit'
