@@ -23,7 +23,11 @@ export function client(preview: boolean = false): ContentfulClientApi {
 /**
  * Query Contentful for a specific content_type
  */
-export async function getContentType<T>(contentType: string, preview: boolean = false, query?: Dict): Promise<EntryCollection<T>> {
+export async function getContentType<T>(
+  contentType: string,
+  preview: boolean = false,
+  query?: Dict,
+): Promise<EntryCollection<T>> {
   let queryParams = { content_type: contentType };
 
   if (query) {
@@ -42,7 +46,11 @@ export async function getContentType<T>(contentType: string, preview: boolean = 
 /**
  * Query Contentful for a specific content_type
  */
-export async function getParsedContent<T extends Empty>(contentType: string, preview: boolean = false, query: Dict = {}): Promise<T[]> {
+export async function getParsedContent<T extends Empty>(
+  contentType: string,
+  preview: boolean = false,
+  query: Dict = {},
+): Promise<T[]> {
   const queryParams = merge(
     {
       content_type: contentType,

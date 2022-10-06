@@ -8,7 +8,7 @@ type UrlQuery = {
   page: string;
 };
 
-const DynamicPage: React.FC<PageEntry<PageWithContent>> = (props: PageEntry<PageWithContent>) => {
+const DynamicPage = (props: PageEntry<PageWithContent>) => {
   const { pageData, pageContent } = props;
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 

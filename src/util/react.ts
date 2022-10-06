@@ -5,7 +5,9 @@ import { Children, isValidElement } from "react";
 function hasChildren(element: React.ReactNode): element is React.ReactElement<{
   children: React.ReactNode | React.ReactNode[];
 }> {
-  return isValidElement<{ children?: React.ReactNode[] }>(element) && Boolean(element.props.children);
+  return (
+    isValidElement<{ children?: React.ReactNode[] }>(element) && Boolean(element.props.children)
+  );
 }
 
 function childToString(child?: React.ReactNode): string {

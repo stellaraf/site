@@ -1,14 +1,21 @@
 import { useMemo } from "react";
-import { useToken, ChakraProvider, useColorModeValue, createLocalStorageManager, createCookieStorageManager, useTheme as useChakraTheme } from "@chakra-ui/react";
+import {
+  useToken,
+  ChakraProvider,
+  useColorModeValue,
+  createLocalStorageManager,
+  createCookieStorageManager,
+  useTheme as useChakraTheme,
+} from "@chakra-ui/react";
 import { makeTheme } from "~/util";
 
 import type { GetServerSideProps } from "next";
-import type { TUseTheme, IUIProvider, TColorModeCtx } from "./types";
+import type { UseTheme, UIProviderProps, ColorModeContext } from "./types";
 
-export const UIProvider: React.FC<IUIProvider> = (props: IUIProvider) => {
+export const UIProvider = (props: UIProviderProps) => {
   const { theme, children, cookies } = props;
 
-  const generatedTheme = useMemo(() => makeTheme(theme), [theme]);
+  const generatedTheme = useMemo(() => makeTheme(theme), []);
 
   const colorModeManager = useMemo(() => {
     if (typeof cookies === "string") {
@@ -25,7 +32,7 @@ export const UIProvider: React.FC<IUIProvider> = (props: IUIProvider) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<TColorModeCtx> = async ctx => {
+export const getServerSideProps: GetServerSideProps<ColorModeContext> = async ctx => {
   return {
     props: {
       // First time users will not have any cookies, so an empty string is required.
@@ -34,14 +41,13 @@ export const getServerSideProps: GetServerSideProps<TColorModeCtx> = async ctx =
   };
 };
 
-export const useTheme: TUseTheme = useChakraTheme;
+export const useTheme: UseTheme = useChakraTheme;
 
 /**
  * Get a color token value based on color-mode.
  */
-export function useColorTokenValue(light: string, dark: string): string {
-  return useColorModeValue(useToken("colors", light), useToken("colors", dark));
-}
+export const useColorTokenValue = (light: string, dark: string) =>
+  useColorModeValue(useToken("colors", light), useToken("colors", dark));
 
 export { useColorMode, useToken } from "@chakra-ui/react";
 export { useColorModeValue as useColorValue } from "@chakra-ui/react";

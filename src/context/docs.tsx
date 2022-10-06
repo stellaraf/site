@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
-import type { IDocsCtx } from "./types";
+import type { DocsContextType } from "./types";
 
-export const DocsCtx = createContext<IDocsCtx>({} as IDocsCtx);
+export const DocsCtx = createContext<DocsContextType>({} as DocsContextType);
 
-export const useDocsCtx = (): IDocsCtx => useContext(DocsCtx);
+export const useDocsCtx = (): DocsContextType => useContext(DocsCtx);

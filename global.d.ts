@@ -1,6 +1,7 @@
 type Dict<T = unknown> = Record<string, T>;
 
-type ReactRef<E extends HTMLElement | SVGElement = HTMLElement | SVGElement> = React.MutableRefObject<E>;
+type ReactRef<E extends HTMLElement | SVGElement = HTMLElement | SVGElement> =
+  React.MutableRefObject<E>;
 
 type Animated<T> = Omit<T, "transition"> & import("framer-motion").MotionProps;
 
@@ -20,3 +21,6 @@ type NoOp = () => void;
 type PropOf<T, P extends keyof T> = T[P];
 
 type KeysOf<T, K extends keyof T> = keyof Pick<T, K>;
+
+type ArrayElement<ArrayType extends readonly unknown[]> =
+  ArrayType extends readonly (infer ElementType)[] ? ElementType : never;

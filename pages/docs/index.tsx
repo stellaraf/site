@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { Flex, Heading, Spinner } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
-import { Groups, SEO } from "~/components";
+import { DocsGroups, SEO } from "~/components";
 import { useRender, useScaledText } from "~/hooks";
 import { DocsLayout } from "~/layouts";
 import { getPage, getPageId } from "~/util";
@@ -9,20 +9,25 @@ import { getPage, getPageId } from "~/util";
 import type { GetStaticProps } from "next";
 import type { PageEntry, IDocsMain } from "~/types";
 
-const TextContent: React.FC<IDocsMain["pageData"]> = (props: IDocsMain["pageData"]) => {
+const TextContent = (props: IDocsMain["pageData"]) => {
   const { title, subtitle, body = null } = props;
-  const titleMe = useTitleCase();
+  const fnTitle = useTitleCase();
   const renderedBody = useRender(body);
   const [containerRef, headingRef, shouldResize] = useScaledText<HTMLDivElement>([]);
   return (
     <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
       <Flex textAlign="center" flexDir="column" alignItems="center" ref={containerRef}>
-        <Heading as="h1" fontSize={{ base: shouldResize ? "2xl" : "4xl", lg: "6xl" }} fontWeight="light" ref={headingRef}>
-          {titleMe(title)}
+        <Heading
+          as="h1"
+          fontSize={{ base: shouldResize ? "2xl" : "4xl", lg: "6xl" }}
+          fontWeight="light"
+          ref={headingRef}
+        >
+          {fnTitle(title)}
         </Heading>
         {subtitle && (
           <Heading as="h2" fontSize={{ base: "1.5rem", lg: "3xl" }} fontWeight="light">
-            {titleMe(subtitle)}
+            {fnTitle(subtitle)}
           </Heading>
         )}
       </Flex>
@@ -31,7 +36,7 @@ const TextContent: React.FC<IDocsMain["pageData"]> = (props: IDocsMain["pageData
   );
 };
 
-const Docs: React.FC<PageEntry<IDocsMain>> = (props: PageEntry<IDocsMain>) => {
+const Docs = (props: PageEntry<IDocsMain>) => {
   const { isFallback } = useRouter();
   if (isFallback) {
     return (
@@ -47,7 +52,7 @@ const Docs: React.FC<PageEntry<IDocsMain>> = (props: PageEntry<IDocsMain>) => {
       <SEO title={title} description={subtitle} />
       <DocsLayout>
         <TextContent {...pageData.fields} />
-        <Groups />
+        <DocsGroups />
       </DocsLayout>
     </>
   );

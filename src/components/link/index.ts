@@ -1,2 +1,2 @@
-export * from "./Link";
+export * from "./link";
 export * from "./types";

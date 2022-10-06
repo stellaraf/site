@@ -1,11 +1,10 @@
 import type { BoxProps } from "@chakra-ui/react";
-import type { ReactNodeArray } from "react";
 
 export interface CarouselProps extends BoxProps {
   interval?: number;
   noDots?: boolean;
   dotColor?: string;
-  children: ReactNodeArray;
+  children: React.ReactNode[];
 }
 
 export type SetCurrent = (c: number) => void;

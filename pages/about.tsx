@@ -2,15 +2,23 @@ import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 import { Avatars, Hero, GoogleMap, SEO, GetStarted, Testimonials } from "~/components";
 import { useResponsiveStyle } from "~/hooks";
-import { getPage, getPageContent, getPageId, getParsedContent, stringSorter, sortByWeight } from "~/util";
+import {
+  getPage,
+  getPageContent,
+  getPageId,
+  getParsedContent,
+  stringSorter,
+  sortByWeight,
+} from "~/util";
 
 import type { GetStaticProps } from "next";
 import type { Bio, PageEntry, IAboutPage, ISection, PageContent } from "~/types";
 
-const Section: React.FC<ISection> = (props: ISection) => {
+const Section = (props: ISection) => {
   const { title, children, ...rest } = props;
   const rStyles = useResponsiveStyle();
   const titleMe = useTitleCase();
+
   return (
     <Box as="section" py={24} overflow="hidden" {...rest}>
       <Flex height="100%" {...rStyles} alignItems="center" flexDir="column" {...rStyles}>
@@ -23,7 +31,7 @@ const Section: React.FC<ISection> = (props: ISection) => {
   );
 };
 
-const About: React.FC<PageEntry<IAboutPage>> = (props: PageEntry<IAboutPage>) => {
+const About = (props: PageEntry<IAboutPage>) => {
   const { pageData, bios } = props;
   const { title, subtitle, body = null, customProperties, getStarted } = pageData.fields;
   const { employeesTitle = "", mapTitle = "" } = customProperties;

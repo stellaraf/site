@@ -1,1 +1,1 @@
-export * from "./Avatars";
+export * from "./avatar-layout";

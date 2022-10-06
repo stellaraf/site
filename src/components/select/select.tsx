@@ -17,7 +17,12 @@ import {
 } from "./styles";
 import { isSingleValue } from "./types";
 
-import type { Props as ReactSelectProps, MultiValue, OnChangeValue, SelectInstance } from "react-select";
+import type {
+  Props as ReactSelectProps,
+  MultiValue,
+  OnChangeValue,
+  SelectInstance,
+} from "react-select";
 import type { SelectOptionSingle } from "~/types";
 import type { SelectProps, SelectContextProps } from "./types";
 
@@ -25,7 +30,10 @@ const SelectContext = createContext<SelectContextProps>({} as SelectContextProps
 export const useSelectContext = (): SelectContextProps => useContext(SelectContext);
 
 export const Select = forwardRef(
-  <Opt extends SelectOptionSingle = SelectOptionSingle, IsMulti extends boolean = boolean>(props: SelectProps<Opt, IsMulti>, ref: React.Ref<SelectInstance<Opt, IsMulti>>): JSX.Element => {
+  <Opt extends SelectOptionSingle = SelectOptionSingle, IsMulti extends boolean = boolean>(
+    props: SelectProps<Opt, IsMulti>,
+    ref: React.Ref<SelectInstance<Opt, IsMulti>>,
+  ): JSX.Element => {
     const { options, isMulti, onSelect, isError = false, colorScheme = "gray", ...rest } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();

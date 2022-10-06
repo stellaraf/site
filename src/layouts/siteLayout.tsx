@@ -1,7 +1,16 @@
 import dynamic from "next/dynamic";
 import { useBreakpointValue } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
-import { Banner, Footer, DHeader, Preview, MHeader, RickRoll, DControls, CallToAction } from "~/components";
+import {
+  Banner,
+  Footer,
+  DHeader,
+  Preview,
+  MHeader,
+  RickRoll,
+  Controls,
+  CallToAction,
+} from "~/components";
 import { useMobile } from "~/hooks";
 import { Wrapper, Root, Main } from "./common";
 
@@ -10,7 +19,7 @@ import type { ISiteLayout } from "./types";
 
 const Stars = dynamic<BoxProps>(() => import("~/components").then(i => i.Stars));
 
-export const SiteLayout: React.FC<ISiteLayout> = (props: ISiteLayout) => {
+export const SiteLayout = (props: ISiteLayout) => {
   const { children, footerGroups, actions, preview } = props;
 
   const isMobile = useMobile();
@@ -41,7 +50,7 @@ export const SiteLayout: React.FC<ISiteLayout> = (props: ISiteLayout) => {
           </Main>
           <CallToAction actions={actions} />
           <Footer groups={footerGroups} />
-          {!isMobile && <DControls />}
+          {!isMobile && <Controls.Desktop />}
           <Stars />
           <RickRoll />
         </Wrapper>

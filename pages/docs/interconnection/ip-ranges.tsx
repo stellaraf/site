@@ -10,7 +10,7 @@ type UrlQuery = {
   group?: string;
 };
 
-const DocsArticlePage: React.FC<IDocsArticlePage> = (props: IDocsArticlePage) => {
+const DocsArticlePage = (props: IDocsArticlePage) => {
   const { title, description } = props.article;
   return (
     <>

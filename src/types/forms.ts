@@ -67,9 +67,11 @@ export type IFormModelSupport = IFormModel & FormWithFieldConfig<{ subject: Text
 
 export type IFormModelSales = IFormModel & FormWithFieldConfig<{ interests: SelectExtraFields }>;
 
-export type IFormModelSupportEntry = IFormModelEntry & FormWithFieldConfigEntry<{ subject: TextExtraFields }>;
+export type IFormModelSupportEntry = IFormModelEntry &
+  FormWithFieldConfigEntry<{ subject: TextExtraFields }>;
 
-export type IFormModelSalesEntry = IFormModelEntry & FormWithFieldConfigEntry<{ interests: SelectExtraFields }>;
+export type IFormModelSalesEntry = IFormModelEntry &
+  FormWithFieldConfigEntry<{ interests: SelectExtraFields }>;
 
 type IFormModels = {
   Support: IFormModelSupport;

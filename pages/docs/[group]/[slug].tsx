@@ -11,7 +11,7 @@ type UrlQuery = {
   group?: string;
 };
 
-const DocsArticlePage: React.FC<IDocsArticlePage> = (props: IDocsArticlePage) => {
+const DocsArticlePage = (props: IDocsArticlePage) => {
   const { article } = props;
   const { isFallback } = useRouter();
 

@@ -2,9 +2,9 @@ import { chakra } from "@chakra-ui/react";
 import { useColorValue } from "~/context";
 import { shouldForwardProp } from "~/util";
 
-import type { IBackdrop } from "./types";
+import type { BoxProps } from "@chakra-ui/react";
 
-const BackdropFactory = chakra("div", {
+const BackdropBase = chakra("div", {
   shouldForwardProp,
   baseStyle: {
     mx: "auto",
@@ -20,8 +20,8 @@ const BackdropFactory = chakra("div", {
   },
 });
 
-export const Backdrop: React.FC<IBackdrop> = (props: IBackdrop) => {
+export const Backdrop = (props: BoxProps) => {
   const color = useColorValue("dark.500", "light.500");
 
-  return <BackdropFactory bg={color} borderColor={color} {...props} />;
+  return <BackdropBase bg={color} borderColor={color} {...props} />;
 };

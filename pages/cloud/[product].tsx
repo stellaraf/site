@@ -22,7 +22,7 @@ const Layout = chakra("div", {
   },
 });
 
-const CloudPage: React.FC<PageEntry<PageWithContent>> = (props: PageEntry<PageWithContent>) => {
+const CloudPage = (props: PageEntry<PageWithContent>) => {
   const { isFallback } = useRouter();
   const { pageData, pageContent } = props;
 

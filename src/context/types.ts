@@ -3,7 +3,7 @@ import type { CustomTheme, GlobalConfig, ThemeConfig, IDocsGroup, TestimonialEnt
 /**
  * Root Provider Props
  */
-export interface IProvider {
+export interface ProviderProps {
   appConfig: GlobalConfig;
   docsGroups: IDocsGroup[];
   testimonials: TestimonialEntry[];
@@ -16,12 +16,12 @@ export interface IProvider {
 
 type TGlobalConfig = Omit<GlobalConfig, "theme">;
 
-export interface IGlobalConfigCtx extends TGlobalConfig {
+export interface ConfigContextType extends TGlobalConfig {
   docsGroups: IDocsGroup[];
   testimonials: TestimonialEntry[];
 }
 
-export interface IConfigProvider {
+export interface ConfigProviderProps {
   globalConfig: TGlobalConfig;
   docsGroups: IDocsGroup[];
   testimonials: TestimonialEntry[];
@@ -31,25 +31,21 @@ export interface IConfigProvider {
 /**
  * UI Provider Types
  */
-export type TUseTheme = () => CustomTheme;
+export type UseTheme = () => CustomTheme;
 
-export interface IUIProvider {
+export interface UIProviderProps {
   theme: ThemeConfig;
   children?: React.ReactNode;
   cookies?: string;
 }
 
-export interface ISyncedStyleProvider {
-  children: React.ReactNode;
-}
-
 /**
  * Docs Layout Provider
  */
-export interface IDocsCtx {
+export interface DocsContextType {
   groups: IDocsGroup[];
 }
 
-export type TColorModeCtx = {
+export type ColorModeContext = {
   cookies: string;
 };

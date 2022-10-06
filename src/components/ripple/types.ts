@@ -1,6 +1,6 @@
 import type { BoxProps } from "@chakra-ui/react";
 
-export interface IRipple extends BoxProps {
+export interface RippleProps extends BoxProps {
   start?: string;
   stop?: string;
 }

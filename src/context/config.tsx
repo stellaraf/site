@@ -1,36 +1,25 @@
-import {
-  createContext,
-  useContext,
-  // useMemo,
-  useRef,
-} from "react";
+import { createContext, useContext, useRef } from "react";
 
 import type { MutableRefObject } from "react";
-import type { IGlobalConfigCtx, IConfigProvider } from "./types";
+import type { ConfigContextType, ConfigProviderProps } from "./types";
 
-const ConfigContext = createContext<MutableRefObject<IGlobalConfigCtx>>({} as MutableRefObject<IGlobalConfigCtx>);
+const ConfigContext = createContext<MutableRefObject<ConfigContextType>>(
+  {} as MutableRefObject<ConfigContextType>,
+);
 
-export const ConfigProvider = (props: IConfigProvider): JSX.Element => {
+export const ConfigProvider = (props: ConfigProviderProps) => {
   const { globalConfig, docsGroups, testimonials, children } = props;
 
-  const config = useRef<IGlobalConfigCtx>({
+  const config = useRef<ConfigContextType>({
     ...globalConfig,
     testimonials,
     docsGroups,
   });
 
-  // const value = useMemo<IGlobalConfigCtx>(
-  //   () => ({ ...globalConfig, testimonials, docsGroups }),
-  //   [],
-  // );
-
-  // return <ConfigContext.Provider value={value}>{children}</ConfigContext.Provider>;
   return <ConfigContext.Provider value={config}>{children}</ConfigContext.Provider>;
 };
 
-// export const useConfig = (): IGlobalConfigCtx => useContext<IGlobalConfigCtx>(ConfigContext);
-
-export const useConfig = (): IGlobalConfigCtx => {
-  const ctx = useContext<MutableRefObject<IGlobalConfigCtx>>(ConfigContext);
+export const useConfig = (): ConfigContextType => {
+  const ctx = useContext<MutableRefObject<ConfigContextType>>(ConfigContext);
   return ctx.current;
 };

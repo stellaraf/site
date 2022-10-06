@@ -1,3 +1,3 @@
-export * from "./BaseSEO";
-export * from "./Favicons";
-export * from "./SEO";
+export * from "./seo-base";
+export * from "./favicons";
+export * from "./seo";

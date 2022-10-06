@@ -1,7 +1,14 @@
 import { createContext, useContext } from "react";
 
-import type { IPartnerContext } from "./types";
+import type { TFormModelTrial } from "~/types";
+import type { PartnerLayoutProps } from "./types";
 
-const PartnerContext = createContext<IPartnerContext>({} as IPartnerContext);
+export type PartnerContextType = Omit<PartnerLayoutProps, "trialForm"> & {
+  fields: TFormModelTrial;
+};
+
+const PartnerContext = createContext<PartnerContextType>({} as PartnerContextType);
+
 export const { Provider: PartnerContextProvider } = PartnerContext;
-export const usePartnerCtx = (): IPartnerContext => useContext(PartnerContext);
+
+export const usePartnerCtx = (): PartnerContextType => useContext(PartnerContext);

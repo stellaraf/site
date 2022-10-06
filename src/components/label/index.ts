@@ -1,1 +1,2 @@
-export * from "./Label";
+export * from "./label";
+export * from "./types";

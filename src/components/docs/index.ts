@@ -1,3 +1,3 @@
-export * from "./Article";
-export * from "./Groups";
-export * from "./ipRanges";
+export * from "./docs-article";
+export * from "./docs-groups";
+export * from "./ip-ranges";

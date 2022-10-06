@@ -4,11 +4,11 @@ import { TitleCaseProvider } from "use-title-case";
 import { UIProvider } from "./ui";
 import { ConfigProvider } from "./config";
 
-import type { IProvider } from "./types";
+import type { ProviderProps } from "./types";
 
 const queryClient = new QueryClient();
 
-export const Provider: React.FC<IProvider> = (props: IProvider) => {
+export const Provider = (props: ProviderProps) => {
   const { children, appConfig, docsGroups, testimonials } = props;
   const { theme, ...globalConfig } = appConfig;
   return (
@@ -23,7 +23,3 @@ export const Provider: React.FC<IProvider> = (props: IProvider) => {
     </ConfigProvider>
   );
 };
-
-export { useConfig } from "./config";
-export { useTheme } from "./ui";
-export { useColorMode, useColorValue } from "./ui";

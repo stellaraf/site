@@ -1,4 +1,13 @@
-export default {
+interface NavConfigItem {
+  title: string;
+  link: string;
+}
+export interface NavConfig {
+  left: NavConfigItem[];
+  right: NavConfigItem[];
+}
+
+const config: NavConfig = {
   left: [
     {
       title: "Home",
@@ -22,3 +31,5 @@ export default {
     { title: "Docs", link: "/docs" },
   ],
 };
+
+export default config;

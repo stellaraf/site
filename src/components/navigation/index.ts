@@ -1,3 +1,3 @@
-export * from "./headerDesktop";
-export * from "./headerMobile";
-export * from "./subnavMobile";
+export * from "./desktop-header";
+export * from "./mobile-header";
+export * from "./mobile-subnav";

@@ -1,9 +1,8 @@
-import type { ReactNode } from "react";
 import type { FlexProps } from "@chakra-ui/react";
 
-export interface ILabel extends Omit<FlexProps, "left" | "right"> {
-  left: ReactNode;
-  right: ReactNode;
+export interface LabelProps extends Omit<FlexProps, "left" | "right"> {
+  left: React.ReactNode;
+  right: React.ReactNode;
   leftColor: string;
   rightColor: string;
   rightProps?: FlexProps;

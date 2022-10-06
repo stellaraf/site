@@ -8,7 +8,9 @@ import type { IVideo } from "./types";
 
 type LoaderType = NonNullable<DynamicOptions["loading"]>;
 
-const Loader: LoaderType = () => <Skeleton boxSize="100%" startColor="gray.500" endColor="tertiary.500" />;
+const Loader: LoaderType = () => (
+  <Skeleton boxSize="100%" startColor="gray.500" endColor="tertiary.500" />
+);
 
 const ReactPlayer = dynamic(() => import("react-player"), {
   loading: Loader,
@@ -31,7 +33,7 @@ const uncontrolledProps = {
   volume: 0,
 } as ReactPlayerProps;
 
-export const Video: React.FC<IVideo> = (props: IVideo) => {
+export const Video = (props: IVideo) => {
   const { enableControls = false, ...rest } = props;
 
   const { config = {}, style = {}, url: _, ...other } = rest;
@@ -59,5 +61,19 @@ export const Video: React.FC<IVideo> = (props: IVideo) => {
 
   const { isClient } = useSSR();
 
-  return <>{isClient && <ReactPlayer url={url} width="100%" height="100%" style={customStyle} config={customConfig} {...playerProps} {...other} />}</>;
+  return (
+    <>
+      {isClient && (
+        <ReactPlayer
+          url={url}
+          width="100%"
+          height="100%"
+          style={customStyle}
+          config={customConfig}
+          {...playerProps}
+          {...other}
+        />
+      )}
+    </>
+  );
 };

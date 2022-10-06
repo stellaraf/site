@@ -10,15 +10,15 @@ type UrlQuery = {
   page: string;
 };
 
-const LegalPage: React.FC<PageEntry<ILegalPage>> = (props: PageEntry<ILegalPage>) => {
+const LegalPage = (props: PageEntry<ILegalPage>) => {
   const { pageData, pageContent } = props;
   const { title, subtitle } = pageData.fields;
-  const titleMe = useTitleCase();
-
+  const fnTitle = useTitleCase();
   const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
+
   return (
     <>
-      <SEO title={titleMe(title)} description={subtitle} />
+      <SEO title={fnTitle(title)} description={subtitle} />
       <Box minH="10vh" />
       {sections.map((sect, i) => {
         return <ContentSection index={i} items={sect} key={i} />;

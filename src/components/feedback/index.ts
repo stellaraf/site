@@ -1,3 +1,3 @@
-export * from "./contentLoader";
+export * from "./content-loader";
 export * from "./error";
-export * from "./pageLoader";
+export * from "./page-loader";

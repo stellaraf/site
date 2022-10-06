@@ -1,1 +1,1 @@
-export * from "./heroButtons";
+export * from "./hero-button";

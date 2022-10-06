@@ -1,7 +1,7 @@
 import type { BoxProps, StackProps } from "@chakra-ui/react";
 
-export interface ICardBody extends BoxProps {
+export interface CardBodyProps extends BoxProps {
   spacing?: StackProps["spacing"];
 }
 
-export interface ICard extends StackProps {}
+export interface CardProps extends StackProps {}

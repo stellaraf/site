@@ -1,5 +1,5 @@
 import { Box, Flex, Button as ChakraButton, Heading, VStack } from "@chakra-ui/react";
-import { Content, DynamicIcon, Hero, Options, SEO, GetStarted } from "~/components";
+import { Content, DynamicIcon, Hero, FormCardGroup, SEO, GetStarted } from "~/components";
 import { useSlug, useResponsiveStyle } from "~/hooks";
 import { getPage, getPageContent, getPageId, getContactCards } from "~/util";
 
@@ -22,7 +22,7 @@ const Contact = (props: PageEntry<IContactPage>): JSX.Element => {
       <Hero title={title} subtitle={subtitle} body={body} minH="40vh">
         <Box as="section" py={{ base: 16, lg: 32 }}>
           <Flex height="100%" align="center" direction="column" {...rStyles}>
-            <Options cards={cards} />
+            <FormCardGroup cards={cards} />
           </Flex>
         </Box>
       </Hero>
@@ -33,7 +33,13 @@ const Contact = (props: PageEntry<IContactPage>): JSX.Element => {
             {content.subtitle && <Content.Subtitle>{content.subtitle}</Content.Subtitle>}
           </VStack>
           <VStack spacing={4} my={12}>
-            <ChakraButton as="a" boxSize="3rem" href={content.buttonLink} rounded="full" colorScheme="green">
+            <ChakraButton
+              as="a"
+              boxSize="3rem"
+              href={content.buttonLink}
+              rounded="full"
+              colorScheme="green"
+            >
               <DynamicIcon icon={{ im: "ImPhone" }} />
             </ChakraButton>
             <Heading as="h4" fontSize="xl" fontWeight="medium">

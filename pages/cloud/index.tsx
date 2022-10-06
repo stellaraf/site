@@ -6,14 +6,14 @@ import { useColorTokenValue, CloudLocationsProvider } from "~/context";
 import { useAlert } from "~/hooks";
 
 import type { GetStaticProps } from "next";
-import type { IUSMap } from "~/components";
+import type { USMapProps } from "~/components";
 import type { ICloud, IMeasuredGeoPoint, PageContent, PageEntry } from "~/types";
 
-const USMap = dynamic<IUSMap>(() => import("~/components").then(i => i.USMap));
+const USMap = dynamic<USMapProps>(() => import("~/components").then(i => i.USMap));
 
 type ContentProps = React.PropsWithChildren<Pick<PageEntry<ICloud>, "pageData">>;
 
-const Content = (props: ContentProps): JSX.Element => {
+const Content = (props: ContentProps) => {
   const { title, subtitle, body = null } = props.pageData.fields;
   const { execute, isError, error, isFetching } = useDataCenter();
   const showAlert = useAlert();
@@ -33,7 +33,7 @@ const Content = (props: ContentProps): JSX.Element => {
   );
 };
 
-const Cloud = (props: PageEntry<ICloud>): JSX.Element => {
+const Cloud = (props: PageEntry<ICloud>) => {
   const { geoData, geoPoints, pageData, pageContent } = props;
 
   if (geoPoints.length === 0) {
@@ -51,7 +51,12 @@ const Cloud = (props: PageEntry<ICloud>): JSX.Element => {
       <SEO title={title} description={subtitle} />
       <CloudLocationsProvider value={geoPoints}>
         <Content pageData={pageData}>
-          <USMap geoData={geoData} mapColor={mapColor} markerColor={markerColor} maxW={{ base: "100%", lg: "75%" }} />
+          <USMap
+            geoData={geoData}
+            mapColor={mapColor}
+            markerColor={markerColor}
+            maxW={{ base: "100%", lg: "75%" }}
+          />
         </Content>
       </CloudLocationsProvider>
       {sections.map((sect, i) => {

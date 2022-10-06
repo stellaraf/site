@@ -9,7 +9,7 @@ import { getParsedContent } from "~/util";
 import type { GetStaticProps } from "next";
 import type { THome, THomePageContent } from "~/types";
 
-const Home: React.FC<THome> = (props: THome) => {
+const Home = (props: THome) => {
   const { pageContent } = props;
   const { colorMode } = useColorMode();
   const { sections: homeSections, mainVideo } = pageContent;
@@ -33,13 +33,22 @@ const Home: React.FC<THome> = (props: THome) => {
             <StellarLogo colorMode={colorMode} width="100%" height="100%" ref={logoRef} />
           </Box>
           <Flex textAlign="center">
-            <Heading as="h1" fontSize={{ base: "1.5rem", md: "xl", lg: "2xl" }} fontWeight="light" mb={32}>
+            <Heading
+              as="h1"
+              fontSize={{ base: "1.5rem", md: "xl", lg: "2xl" }}
+              fontWeight="light"
+              mb={32}
+            >
               {siteSlogan}
             </Heading>
           </Flex>
         </Flex>
         <Flex justifyContent="center" w="100%">
-          {typeof mainVideo !== "undefined" ? <Screen url={mainVideo.fields.file.url} /> : typeof homePageVideo !== "undefined" ? <Screen url={homePageVideo} /> : null}
+          {typeof mainVideo !== "undefined" ? (
+            <Screen url={mainVideo.fields.file.url} />
+          ) : typeof homePageVideo !== "undefined" ? (
+            <Screen url={homePageVideo} />
+          ) : null}
         </Flex>
       </Box>
       {sections.map((sect, i) => {

@@ -13,7 +13,10 @@ type ExtraColors = {
 
 export type InitialTheme = { [key in ChangeableColorNames]: string };
 
-type ChangeableThemeColors = Omit<DefaultTheme["colors"], "transparent" | "current" | "black" | "white">;
+type ChangeableThemeColors = Omit<
+  DefaultTheme["colors"],
+  "transparent" | "current" | "black" | "white"
+>;
 
 type ChangeableColorNames = keyof (ChangeableThemeColors & ExtraColors);
 

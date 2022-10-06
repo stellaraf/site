@@ -27,7 +27,10 @@ export async function getPageId(slug: string, preview: boolean): Promise<string>
 /**
  * Get Page by slug
  */
-export async function getPage<T extends PageAttrs>(pageId: string, preview: boolean): Promise<Entry<T>> {
+export async function getPage<T extends PageAttrs>(
+  pageId: string,
+  preview: boolean,
+): Promise<Entry<T>> {
   // Only get the sys id to cut out noise.
   const data = await client(preview).getEntry<T>(pageId, {
     select: "fields,sys.id",
@@ -39,7 +42,10 @@ export async function getPage<T extends PageAttrs>(pageId: string, preview: bool
 /**
  * Get content for a specific page by its sys.id
  */
-export async function getPageContent(pageId: string, preview: boolean = false): Promise<PageContent[]> {
+export async function getPageContent(
+  pageId: string,
+  preview: boolean = false,
+): Promise<PageContent[]> {
   // const data = await getContentType<PageContent>('pageContent', preview, {
   //   'fields.page.sys.id': pageId,
   // });

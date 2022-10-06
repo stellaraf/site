@@ -1,9 +1,4 @@
-import type { ReactNode } from "react";
-import type { FlexProps } from "@chakra-ui/react";
-
-export interface IBanner extends Animated<FlexProps> {}
-
-export interface IBannerContent {
-  body: ReactNode;
+export interface BannerContentProps {
+  body: React.ReactNode;
   onClick: () => void;
 }

@@ -28,7 +28,13 @@ export interface UsePageContent {
 
 export type TitleMe = (t: string) => string;
 
-type SliderEvent = (slider: KeenSlider, paused: boolean, setPaused: (paused: boolean) => void, currentSlide: number, setCurrentSlide: (slideNumber: number) => void) => void;
+type SliderEvent = (
+  slider: KeenSlider,
+  paused: boolean,
+  setPaused: (paused: boolean) => void,
+  currentSlide: number,
+  setCurrentSlide: (slideNumber: number) => void,
+) => void;
 
 export interface UseSliderOptionsBase extends TOptionsEvents {
   interval?: number;

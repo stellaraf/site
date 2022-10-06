@@ -1,10 +1,16 @@
 import App from "next/app";
 import Head from "next/head";
-import { BaseSEO, Favicons } from "~/components";
+import { SEOBase, Favicons } from "~/components";
 import { Provider } from "~/context";
 import { usePageTracking } from "~/hooks";
 import { SiteLayout } from "~/layouts";
-import { getGlobalConfig, getFooterItems, getActions, getDocsGroups, getTestimonials } from "~/util";
+import {
+  getGlobalConfig,
+  getFooterItems,
+  getActions,
+  getDocsGroups,
+  getTestimonials,
+} from "~/util";
 
 import type { TSite, NextApp, GetInitialPropsReturn } from "~/types";
 
@@ -20,9 +26,13 @@ const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
         <meta name="viewport" content="width=device-width" />
       </Head>
       <Provider appConfig={globalConfig} docsGroups={docsGroups} testimonials={testimonials}>
-        <BaseSEO />
+        <SEOBase />
         <Favicons />
-        <SiteLayout actions={actions} footerGroups={footerGroups} preview={pageProps?.preview ?? false}>
+        <SiteLayout
+          actions={actions}
+          footerGroups={footerGroups}
+          preview={pageProps?.preview ?? false}
+        >
           <Component {...pageProps} />
         </SiteLayout>
       </Provider>

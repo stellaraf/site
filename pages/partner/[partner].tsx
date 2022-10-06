@@ -23,7 +23,7 @@ const Layout = chakra("div", {
   },
 });
 
-const PartnerPage: React.FC<IPartnerPage> = (props: IPartnerPage) => {
+const PartnerPage = (props: IPartnerPage) => {
   const { isFallback } = useRouter();
   if (isFallback) {
     return (

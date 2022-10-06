@@ -29,7 +29,12 @@ export async function get(url: string, config: RequestInit = {}): Promise<Respon
  *
  * Adapted from: https://lowmess.com/blog/fetch-with-timeout
  */
-export async function fetchWithTimeout(uri: string, options: RequestInit = {}, time: number = 7500, controller: AbortController): Promise<Response> {
+export async function fetchWithTimeout(
+  uri: string,
+  options: RequestInit = {},
+  time: number = 7500,
+  controller: AbortController,
+): Promise<Response> {
   /**
    * Lets set up our `AbortController`, and create a request options object that includes the
    * controller's `signal` to pass to `fetch`.
@@ -46,7 +51,10 @@ export async function fetchWithTimeout(uri: string, options: RequestInit = {}, t
   return await fetch(uri, config);
 }
 
-export async function getJson<R extends Dict = Dict>(url: string, config: RequestInit = {}): Promise<R> {
+export async function getJson<R extends Dict = Dict>(
+  url: string,
+  config: RequestInit = {},
+): Promise<R> {
   const defaultConfig = {
     crossDomain: true,
     method: "GET",

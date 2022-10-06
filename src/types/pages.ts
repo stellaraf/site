@@ -20,7 +20,8 @@ import type {
   Bio,
 } from "~/types";
 
-export type GetInitialPropsReturn<InitialProps> = AppProps & AppInitialProps & { appProps: InitialProps };
+export type GetInitialPropsReturn<InitialProps> = AppProps &
+  AppInitialProps & { appProps: InitialProps };
 
 export type NextApp<P> = React.FC<GetInitialPropsReturn<P>> & {
   getInitialProps(ctx: AppContext): Promise<{ appProps: P }>;
@@ -90,7 +91,8 @@ interface IContactCustomProperties {
   metaTitle: string;
 }
 
-export interface IContactPage extends PageWithContent<{ customProperties: IContactCustomProperties }> {
+export interface IContactPage
+  extends PageWithContent<{ customProperties: IContactCustomProperties }> {
   contactCards: IContactCard[];
 }
 

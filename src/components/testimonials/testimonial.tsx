@@ -1,11 +1,11 @@
 import { Box, Flex, Image, VStack, Heading, Divider } from "@chakra-ui/react";
 import { useColorValue } from "~/context";
 import { useRender } from "~/hooks";
-import { Quote } from "./quotes";
+import { Quote } from "./quote";
 
 import type { TestimonialEntry } from "~/types";
 
-export const Testimonial = (props: TestimonialEntry): JSX.Element => {
+export const Testimonial = (props: TestimonialEntry) => {
   const { title, subtitle, body, image } = props;
   const renderedBody = useRender(body, [], [], {
     paragraph: { display: "inline" },
@@ -13,11 +13,23 @@ export const Testimonial = (props: TestimonialEntry): JSX.Element => {
   const fontWeight = useColorValue("thin", undefined);
 
   return (
-    <Flex zIndex={1} pos="relative" borderRadius="md" direction="column" p={{ base: 4, lg: 12 }} justify="space-between">
+    <Flex
+      zIndex={1}
+      pos="relative"
+      borderRadius="md"
+      direction="column"
+      p={{ base: 4, lg: 12 }}
+      justify="space-between"
+    >
       <Flex direction="column">
         <Flex align="center" justify="space-between">
           <VStack align="flex-start">
-            <Box whiteSpace="pre-line" fontWeight={fontWeight} fontSize={{ base: "lg", lg: "xl" }} textAlign={{ base: "left", xl: "justify" }}>
+            <Box
+              whiteSpace="pre-line"
+              fontWeight={fontWeight}
+              fontSize={{ base: "lg", lg: "xl" }}
+              textAlign={{ base: "left", xl: "justify" }}
+            >
               <Quote kind="open" />
               {renderedBody}
               <Quote kind="close" />
@@ -33,7 +45,15 @@ export const Testimonial = (props: TestimonialEntry): JSX.Element => {
                 {title}
               </Heading>
               <Box minW={12} maxW={48} overflow="hidden">
-                <Image alt={title} width="100%" userSelect="none" draggable={false} pointerEvents="none" src={image.fields.file.url} fallbackSrc="https://via.placeholder.com/150" />
+                <Image
+                  alt={title}
+                  width="100%"
+                  userSelect="none"
+                  draggable={false}
+                  pointerEvents="none"
+                  src={image.fields.file.url}
+                  fallbackSrc="https://via.placeholder.com/150"
+                />
               </Box>
             </VStack>
           </VStack>

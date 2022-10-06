@@ -8,11 +8,15 @@ const previewHandler: NextApiHandler = async (request, response) => {
     return response.status(401).json({ message: "Invalid Token." });
   }
 
-  const articles = await getParsedContent<Pick<IDocsArticle, "slug" | "docsGroup">>("docsArticle", false, {
-    "fields.slug": request.query.slug as string,
-    select: "sys.id,fields.slug,fields.docsGroup",
-    include: 4,
-  });
+  const articles = await getParsedContent<Pick<IDocsArticle, "slug" | "docsGroup">>(
+    "docsArticle",
+    false,
+    {
+      "fields.slug": request.query.slug as string,
+      select: "sys.id,fields.slug,fields.docsGroup",
+      include: 4,
+    },
+  );
 
   if (articles.length === 0) {
     response.status(401).json({ message: "Invalid Path." });

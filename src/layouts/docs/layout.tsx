@@ -2,16 +2,16 @@ import { Accordion, chakra, Box, Flex, VStack, useBreakpointValue } from "@chakr
 import { MSubNav } from "~/components";
 import { useColorValue, useConfig } from "~/context";
 import { useResponsiveStyle } from "~/hooks";
-import { DMenuGroup } from "./menuDesktop";
-import { MMenuGroup } from "./menuMobile";
+import { DMenuGroup } from "./menu-desktop";
+import { MMenuGroup } from "./menu-mobile";
 
-import type { IDocsLayout, IResponsiveLayout } from "./types";
+import type { BoxProps } from "@chakra-ui/react";
 
 const LayoutContainer = chakra("div", {
   baseStyle: { w: "100%", minH: "40vh", pt: 32 },
 });
 
-const MLayout: React.FC<IResponsiveLayout> = (props: IResponsiveLayout) => {
+const MLayout = (props: BoxProps) => {
   const { children, ...rest } = props;
   const { docsGroups } = useConfig();
   return (
@@ -28,7 +28,7 @@ const MLayout: React.FC<IResponsiveLayout> = (props: IResponsiveLayout) => {
   );
 };
 
-const DLayout: React.FC<IResponsiveLayout> = (props: IResponsiveLayout) => {
+const DLayout = (props: BoxProps) => {
   const { children, ...rest } = props;
 
   return (
@@ -45,7 +45,7 @@ const DLayout: React.FC<IResponsiveLayout> = (props: IResponsiveLayout) => {
   );
 };
 
-const DNav: React.FC = () => {
+const DNav = () => {
   const { docsGroups } = useConfig();
   const borderColor = useColorValue("blackAlpha.200", "whiteAlpha.200");
   return (
@@ -72,7 +72,7 @@ const DNav: React.FC = () => {
   );
 };
 
-export const DocsLayout: React.FC<IDocsLayout> = (props: IDocsLayout) => {
+export const DocsLayout = (props: BoxProps) => {
   const { children, ...rest } = props;
 
   const largeLayout = useBreakpointValue({

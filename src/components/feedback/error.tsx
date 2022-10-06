@@ -2,9 +2,9 @@ import { Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react
 import { useConfig } from "~/context";
 import { useRender } from "~/hooks";
 
-import type { IError } from "./types";
+import type { ErrorProps } from "./types";
 
-export const Error: React.FC<IError> = (props: IError) => {
+export const Error = (props: ErrorProps) => {
   const { title, description, children, ...rest } = props;
 
   const { errorMessage } = useConfig();
