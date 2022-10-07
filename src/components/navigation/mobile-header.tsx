@@ -13,6 +13,7 @@ import type { FlexProps } from "@chakra-ui/react";
 import type { ButtonProps } from "~/components";
 
 const HEADING_HEIGHT = 56;
+const navItems = [...navConfig.left, ...navConfig.right];
 
 const ContactButton = (props: ButtonProps) => (
   <Button
@@ -32,15 +33,14 @@ const ContactButton = (props: ButtonProps) => (
 export const MHeader = (props: FlexProps) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const { colorMode } = useColorMode();
-  const navItems = [...navConfig.left, ...navConfig.right];
 
   return (
     <>
       <Wrapper isOpen={isOpen} onToggle={onToggle} navHeaderHeight={HEADING_HEIGHT} {...props}>
         <Hamburger
+          rounded
           toggled={isOpen}
           toggle={onToggle}
-          rounded
           size={isOpen ? HEADING_HEIGHT : undefined}
         />
       </Wrapper>

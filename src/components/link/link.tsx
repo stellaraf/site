@@ -84,15 +84,18 @@ export const Link = (props: LinkProps) => {
 
   const { isExternal, target } = useLinkType(href);
 
-  let Component = InternalLink;
   if (isExternal) {
-    Component = ExternalLink;
+    return (
+      <ExternalLink href={target} {...rest}>
+        {children}
+        {showIcon && <LinkIcon />}
+      </ExternalLink>
+    );
   }
 
   return (
-    <Component href={target} {...rest}>
+    <InternalLink href={target} {...rest}>
       {children}
-      {showIcon && isExternal && <LinkIcon />}
-    </Component>
+    </InternalLink>
   );
 };

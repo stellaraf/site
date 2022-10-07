@@ -22,7 +22,7 @@ export const MControls = (props: StackProps) => {
         onClick={toggleColorMode}
         aria-label={colorModeLabel}
       >
-        <DynamicIcon icon={colorModeIcon} boxSize={32} />
+        <DynamicIcon icon={colorModeIcon} boxSize={10} />
       </Button>
     </HStack>
   );

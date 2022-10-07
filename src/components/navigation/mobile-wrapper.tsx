@@ -19,34 +19,29 @@ export const Wrapper = (props: BaseHeaderProps) => {
   const { pathname } = useRouter();
   const globalShowLogo = useNavLogoState();
 
-  /**
-   * Show logo in the navbar only if:
-   *   a) the homepage hero logo is hidden
-   *   b) or on any other page
-   *   c) and if the mobile nav is NOT open
-   */
+  // Show logo in the navbar only if:
+  //   a) the homepage hero logo is hidden
+  //   b) or on any other page
+  //   c) and if the mobile nav is NOT open
   const [showLogo, setShowLogo] = useState(false);
 
-  if (pathname === "/") {
-    // Homepage: mobile nav closed, hero hidden, not already shown, then SHOW
-    !isOpen && globalShowLogo && !showLogo && setShowLogo(true);
-    // Homepage: mobile nav closed, hero shown, already shown, then HIDE
-    !isOpen && !globalShowLogo && showLogo && setShowLogo(false);
-    // Homepage: mobile nav open, hero shown, already shown, then HIDE
-    isOpen && showLogo && setShowLogo(false);
-  } else if (pathname !== "/") {
-    // Non-homepage: mobile nav closed, not already shown, then SHOW
-    !isOpen && !showLogo && setShowLogo(true);
-    // Non-homepage: mobile nav open, already shown, then HIDE
-    isOpen && showLogo && setShowLogo(false);
-  }
+  useEffect(() => {
+    if (pathname === "/") {
+      // Homepage: mobile nav closed, hero hidden, not already shown, then SHOW
+      !isOpen && globalShowLogo && !showLogo && setShowLogo(true);
+      // Homepage: mobile nav closed, hero shown, already shown, then HIDE
+      !isOpen && !globalShowLogo && showLogo && setShowLogo(false);
+      // Homepage: mobile nav open, hero shown, already shown, then HIDE
+      isOpen && showLogo && setShowLogo(false);
+    } else if (pathname !== "/") {
+      // Non-homepage: mobile nav closed, not already shown, then SHOW
+      !isOpen && !showLogo && setShowLogo(true);
+      // Non-homepage: mobile nav open, already shown, then HIDE
+      isOpen && showLogo && setShowLogo(false);
+    }
+  }, [globalShowLogo, showLogo, isOpen]);
 
-  useEffect(
-    () => () => {
-      setShowLogo(false);
-    },
-    [],
-  );
+  useEffect(() => () => setShowLogo(false), []);
 
   return (
     <Box
@@ -76,10 +71,12 @@ export const Wrapper = (props: BaseHeaderProps) => {
         justifyContent="space-between"
         {...rest}
       >
-        <Link href="/" opacity={showLogo ? 1 : 0} mb={2}>
-          <StellarLogo colorMode={colorMode} width="auto" height={navHeaderHeight} />
-        </Link>
-        {!isOpen && children}
+        <>
+          <Link href="/" opacity={showLogo ? 1 : 0} mb={2}>
+            <StellarLogo colorMode={colorMode} width="auto" height={navHeaderHeight} />
+          </Link>
+          {!isOpen && children}
+        </>
       </Flex>
     </Box>
   );
