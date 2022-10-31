@@ -1,0 +1,26 @@
+query footerGroups($title: String) {
+  configuration(where: { title: $title }) {
+    footerGroups {
+      title
+      row
+      pages {
+        slug
+        title
+        footerTitle
+      }
+      pageContents {
+        slug
+        title
+        footerTitle
+        page {
+          slug
+        }
+      }
+      docsGroup {
+        slug
+        footerTitle
+        title
+      }
+    }
+  }
+}

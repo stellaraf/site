@@ -1,0 +1,38 @@
+query docsGroups {
+  docsGroups(first: 20) {
+    callToAction {
+      body {
+        raw
+      }
+      enable
+      icon {
+        mimeType
+        height
+        size
+        url
+        width
+        fileName
+      }
+      iconColor
+    }
+    docsPages {
+      body {
+        raw
+      }
+      updatedAt
+      title
+      slug
+      showUpdatedDate
+      description
+      docsGroup {
+        slug
+      }
+    }
+    slug
+    subtitle
+    title
+    summary {
+      raw
+    }
+  }
+}

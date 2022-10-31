@@ -2,14 +2,16 @@ import { useMemo } from "react";
 
 import { useRouter } from "next/router";
 
-import type { IDocsArticle } from "~/types";
+import { notNullUndefined } from "~/types";
+
+import type { DocsPage } from "~/queries";
 
 interface UseDocsHrefReturn {
   href: string;
   isCurrent: boolean;
 }
 
-export function useDocsHref(props: IDocsArticle): UseDocsHrefReturn {
+export function useDocsHref(props: Omit<DocsPage, "body">): UseDocsHrefReturn {
   const { docsGroup, slug } = props;
   const { asPath } = useRouter();
 
@@ -18,8 +20,8 @@ export function useDocsHref(props: IDocsArticle): UseDocsHrefReturn {
     const isCurrent = thisSlug === slug;
 
     let href = `/docs/${slug}`;
-    if (typeof docsGroup !== "undefined") {
-      href = `/docs/${docsGroup.fields.slug}/${slug}`;
+    if (notNullUndefined(docsGroup)) {
+      href = `/docs/${docsGroup.slug}/${slug}`;
     }
     return { href, isCurrent };
   }, [asPath, slug]);

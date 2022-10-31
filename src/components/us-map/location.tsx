@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   Tag,
   Flex,
@@ -14,40 +15,48 @@ import { useColorValue } from "~/context";
 import { MapMarker } from "./map-marker";
 import { useBestMeasurement } from "./use-cloud-measurements";
 
+import type { TagProps } from "@chakra-ui/react";
 import type { LocationProps, LatencyProps } from "./types";
 
 const Latency = (props: LatencyProps) => {
   const colorScheme = useColorValue("secondary", "tertiary");
   const { location } = props;
-  if (location === null) {
-    return (
-      <Tag size="sm" colorScheme="red">
-        UNKNOWN LOCATION
-      </Tag>
-    );
-  }
-  return (
-    <>
-      {location.elapsed < 65533 && (
-        <Tag size="sm" colorScheme={colorScheme}>{`${location.elapsed.toFixed(2)} ms`}</Tag>
-      )}
-      {location.elapsed === 65533 && (
-        <Tag size="sm" colorScheme="red">
-          UNREACHABLE
-        </Tag>
-      )}
-      {location.elapsed === 65534 && (
-        <Tag size="sm" colorScheme="gray">
-          INACTIVE
-        </Tag>
-      )}
-    </>
-  );
+
+  const tagProps = useMemo<TagProps>(() => {
+    if (location === null || location.elapsed === 65533) {
+      return { size: "sm", colorScheme: "red" };
+    }
+    if (location.elapsed < 65533) {
+      return { size: "md", colorScheme };
+    }
+    if (location.elapsed === 65534) {
+      return { size: "sm", colorScheme: "gray" };
+    }
+    return { opacity: 0 };
+  }, [location, colorScheme]);
+
+  const value = useMemo<React.ReactNode>(() => {
+    if (location === null) {
+      return "UNKNOWN LOCATION";
+    }
+    if (location.elapsed < 65533) {
+      return `${location.elapsed.toFixed(2)} ms`;
+    }
+    if (location.elapsed === 65533) {
+      return "UNREACHABLE";
+    }
+    if (location.elapsed === 65534) {
+      return "INACTIVE";
+    }
+    return null;
+  }, [location]);
+
+  return <Tag {...tagProps}>{value}</Tag>;
 };
 
 export const Location = (props: LocationProps) => {
   const { loc, color = "currentcolor", ...rest } = props;
-  const { coordinates, displayName, description } = loc;
+  const { coordinates, name, description } = loc;
 
   const bg = useColorValue("white", "blackAlpha.600");
 
@@ -56,9 +65,9 @@ export const Location = (props: LocationProps) => {
   return (
     <Popover trigger="hover" placement="top">
       <MapMarker
-        coordinates={[coordinates.lon, coordinates.lat]}
+        best={best?.identifier === loc.identifier}
         color={color}
-        best={best?.id === loc.id}
+        coordinates={[coordinates.longitude, coordinates.latitude]}
       />
       <Portal>
         <PopoverContent
@@ -70,7 +79,7 @@ export const Location = (props: LocationProps) => {
         >
           <PopoverHeader pt={4} fontWeight="bold" border={0}>
             <HStack justifyContent="space-between">
-              <Flex>{displayName}</Flex>
+              <Flex>{name}</Flex>
               <Latency location={loc} />
             </HStack>
           </PopoverHeader>

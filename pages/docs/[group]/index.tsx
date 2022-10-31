@@ -3,22 +3,21 @@ import { useRouter } from "next/router";
 import { Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { ContentLoader, Error, SEO } from "~/components";
-import { useRender, useScaledText } from "~/hooks";
+import { ContentLoader, Error, SEO, RichText } from "~/components";
+import { useScaledText } from "~/hooks";
 import { DocsLayout } from "~/layouts";
-import { getDocsGroups } from "~/util";
+import { docsGroupQuery } from "~/queries";
 
-import type { GetStaticProps, GetStaticPaths } from "next";
-import type { IDocsGroup, IDocsGroupMain } from "~/types";
+import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
+import type { DocsGroup } from "~/queries";
 
 type UrlQuery = {
   group: string;
 };
 
-const Content = (props: IDocsGroup) => {
+const Content = (props: DocsGroup) => {
   const { title, subtitle, summary } = props;
   const fnTitle = useTitleCase();
-  const body = useRender(summary);
 
   const [containerRef, headingRef, shouldResize] = useScaledText<HTMLDivElement>([title]);
   return (
@@ -43,16 +42,15 @@ const Content = (props: IDocsGroup) => {
           </Heading>
         )}
       </Flex>
-      {summary && body}
+      <RichText content={summary.raw} />
     </Flex>
   );
 };
 
-const DocsGroupMain = (props: IDocsGroupMain) => {
-  const { pageData } = props;
+const DocsGroupIndex: NextPage<DocsGroup> = props => {
   const { isFallback } = useRouter();
 
-  if (!isFallback && !pageData) {
+  if (!isFallback && !props) {
     return (
       <>
         <SEO title="Error" noindex nofollow />
@@ -63,31 +61,28 @@ const DocsGroupMain = (props: IDocsGroupMain) => {
     );
   }
 
-  const { title, subtitle } = props.pageData ?? {};
+  const { title, subtitle } = props;
 
   return (
     <>
-      <SEO title={title} description={subtitle} />
-      <DocsLayout>{!isFallback ? <Content {...pageData} /> : <ContentLoader />}</DocsLayout>
+      <SEO title={title} description={subtitle ? subtitle : undefined} />
+      <DocsLayout>{!isFallback ? <Content {...props} /> : <ContentLoader />}</DocsLayout>
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<IDocsGroupMain, UrlQuery> = async ctx => {
+export const getStaticProps: GetStaticProps<DocsGroup, UrlQuery> = async ctx => {
   const group = ctx.params?.group ?? "";
   const preview = ctx?.preview ?? false;
-  let pageData = {} as IDocsGroupMain["pageData"];
-  let docsGroups = [] as IDocsGroup[];
   let notFound = false;
-
+  let docsGroup = {} as DocsGroup;
   try {
-    docsGroups = await getDocsGroups(preview);
-    pageData = docsGroups.reduce((prev, next) => (prev.slug === group ? prev : next));
+    docsGroup = await docsGroupQuery({ slug: group });
   } catch (err) {
     console.error(err);
     notFound = true;
   }
-  return { props: { pageData, notFound, preview } };
+  return { props: { ...docsGroup, notFound, preview } };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
@@ -95,4 +90,4 @@ export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
   fallback: true,
 });
 
-export default DocsGroupMain;
+export default DocsGroupIndex;

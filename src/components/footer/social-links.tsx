@@ -30,35 +30,21 @@ const SocialLink = (props: SocialLinkProps) => {
 };
 
 export const SocialLinks = (props: StackProps) => {
-  const {
-    twitterHandle = "#",
-    facebookProfile = "#",
-    linkedInProfile = "#",
-    githubOrg = "#",
-  } = useConfig();
+  const { socialLinks } = useConfig();
 
   return (
     <HStack spacing={4} {...props}>
-      <SocialLink
-        label="LinkedIn"
-        icon={<DynamicIcon icon={{ fa: "FaLinkedin" }} boxSize="1.5em" />}
-        href={`https://linkedin.com/company/${linkedInProfile}`}
-      />
-      <SocialLink
-        label="Twitter"
-        icon={<DynamicIcon icon={{ fa: "FaTwitter" }} boxSize="1.5em" />}
-        href={`https://twitter.com/${twitterHandle}`}
-      />
-      <SocialLink
-        label="Facebook"
-        icon={<DynamicIcon icon={{ fa: "FaFacebook" }} boxSize="1.5em" />}
-        href={`https://facebook.com/${facebookProfile}`}
-      />
-      <SocialLink
-        label="GitHub"
-        icon={<DynamicIcon icon={{ fa: "FaGithub" }} boxSize="1.5em" />}
-        href={`https://github.com/${githubOrg}`}
-      />
+      {socialLinks.map(social => {
+        const [family, iconName] = social.iconName.split("-");
+        return (
+          <SocialLink
+            key={social.name}
+            href={social.href}
+            label={social.name}
+            icon={<DynamicIcon icon={{ [family]: iconName }} />}
+          />
+        );
+      })}
     </HStack>
   );
 };

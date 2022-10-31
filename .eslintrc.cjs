@@ -74,6 +74,7 @@ const config = {
         destructuredArrayIgnorePattern: "^_+",
       },
     ],
+    "react/prop-types": "off",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "comma-dangle": ["error", "always-multiline"],

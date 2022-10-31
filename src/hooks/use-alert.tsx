@@ -8,8 +8,8 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 
+import { RichText } from "~/components";
 import { useConfig } from "~/context";
-import { useRender } from "~/hooks";
 
 import type { ToastProps, UseToastOptions } from "@chakra-ui/react";
 
@@ -25,8 +25,7 @@ type UseAlertReturn = (opts: UseAlert) => void;
 
 export function useAlert(): UseAlertReturn {
   const toast = useToast();
-  const { errorMessage = null } = useConfig();
-  const rendered = useRender(errorMessage);
+  const { errorMessage } = useConfig();
   const defaultPosition = useBreakpointValue<ToastPosition>({
     base: "bottom",
     lg: "bottom-right",
@@ -84,7 +83,7 @@ export function useAlert(): UseAlertReturn {
                   }}
                 >
                   {message}
-                  {status === "error" && rendered}
+                  {status === "error" && <RichText content={errorMessage.body.raw} />}
                 </AlertDescription>
               </Flex>
               <CloseButton size="sm" onClick={onClose} position="absolute" right={1} top={1} />

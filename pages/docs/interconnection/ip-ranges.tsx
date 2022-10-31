@@ -1,22 +1,22 @@
 import { SEO, DocsArticle, IPRanges } from "~/components";
 import { DocsLayout } from "~/layouts";
-import { getParsedContent } from "~/util";
+import { docsPageQuery } from "~/queries";
 
 import type { GetStaticProps } from "next";
-import type { IDocsArticlePage } from "~/types";
+import type { DocsPage } from "~/queries";
 
 type UrlQuery = {
   slug: string;
   group?: string;
 };
 
-const DocsArticlePage = (props: IDocsArticlePage) => {
-  const { title, description } = props.article;
+const DocsArticlePage = (props: DocsPage) => {
+  const { title, description } = props;
   return (
     <>
       <SEO title={title} description={description} />
       <DocsLayout>
-        <DocsArticle {...props.article}>
+        <DocsArticle {...props}>
           <IPRanges />
         </DocsArticle>
       </DocsLayout>
@@ -24,18 +24,10 @@ const DocsArticlePage = (props: IDocsArticlePage) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<IDocsArticlePage, UrlQuery> = async ctx => {
+export const getStaticProps: GetStaticProps<DocsPage, UrlQuery> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let article = {} as IDocsArticlePage["article"];
-  try {
-    const res = await getParsedContent<IDocsArticlePage["article"]>("docsArticle", preview, {
-      "fields.slug": "ip-ranges",
-    });
-    article = res[0];
-  } catch (err) {
-    console.error(err);
-  }
-  return { props: { article, preview } };
+  const page = await docsPageQuery({ slug: "ip-ranges" });
+  return { props: { ...page, preview } };
 };
 
 export default DocsArticlePage;

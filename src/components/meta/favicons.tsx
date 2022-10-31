@@ -4,7 +4,7 @@ import { useConfig, useColorMode, useColorTokenValue } from "~/context";
 
 export const Favicons = () => {
   const { colorMode } = useColorMode();
-  const { orgName } = useConfig();
+  const { organizationName } = useConfig();
   const theme = useColorTokenValue("primary.500", "secondary.500");
 
   return (
@@ -31,7 +31,7 @@ export const Favicons = () => {
       <link rel="manifest" href={`/logos/${colorMode}/manifest.json`} />
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="theme-color" content={theme} />
-      <meta name="application-name" content={orgName} />
+      <meta name="application-name" content={organizationName} />
       <link
         rel="apple-touch-icon"
         sizes="57x57"
@@ -89,7 +89,7 @@ export const Favicons = () => {
       />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-      <meta name="apple-mobile-web-app-title" content={orgName} />
+      <meta name="apple-mobile-web-app-title" content={organizationName} />
       <link
         rel="apple-touch-startup-image"
         media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"

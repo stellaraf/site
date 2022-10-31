@@ -2,46 +2,35 @@ import { Box } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { SEO, ContentSection } from "~/components";
-import { getPage, getPageContent, getPageId } from "~/util";
+import { pageQuery } from "~/queries";
 
-import type { GetStaticProps, GetStaticPaths } from "next";
-import type { PageEntry, ILegalPage, PageContent } from "~/types";
+import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import type { PageProps } from "~/types";
 
 type UrlQuery = {
   page: string;
 };
 
-const LegalPage = (props: PageEntry<ILegalPage>) => {
-  const { pageData, pageContent } = props;
-  const { title, subtitle } = pageData.fields;
+const LegalPage: NextPage<PageProps> = props => {
+  const { title, subtitle, contents } = props;
   const fnTitle = useTitleCase();
-  const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
 
   return (
     <>
-      <SEO title={fnTitle(title)} description={subtitle} />
+      <SEO title={fnTitle(title)} description={subtitle ? subtitle : undefined} />
       <Box minH="10vh" />
-      {sections.map((sect, i) => {
-        return <ContentSection index={i} items={sect} key={i} />;
+      {contents.map((sect, i) => {
+        return <ContentSection index={i} content={sect} key={sect.title} />;
       })}
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<PageEntry<ILegalPage>, UrlQuery> = async ctx => {
-  const page = ctx.params?.page ?? "";
+export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
+  const slug = ctx.params?.page ?? "";
   const preview = ctx?.preview ?? false;
-  let pageData = {} as PageEntry<ILegalPage>["pageData"];
-  let pageContent = [] as PageContent[];
-  try {
-    const pageId = await getPageId(`legal/${page}`, preview);
-    pageData = await getPage(pageId, preview);
-    pageContent = await getPageContent(pageId, preview);
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-  return { props: { pageData, pageContent, preview } };
+  const page = await pageQuery({ slug: `legal/${slug}` });
+  return { props: { ...page, preview } };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({

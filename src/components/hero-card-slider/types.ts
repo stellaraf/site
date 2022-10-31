@@ -1,9 +1,9 @@
 import type { FlexProps } from "@chakra-ui/react";
-import type { Document } from "@contentful/rich-text-types";
+import type { RichTextContent } from "@graphcms/rich-text-types";
 
 interface CardContent {
   title: string;
-  body: Document;
+  body: RichTextContent;
 }
 
 export interface HeroCardProps extends FlexProps {

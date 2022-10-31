@@ -1,8 +1,8 @@
-import type { SortedFooterItem, TActions } from "~/types";
+import type { FooterGroups, Actions } from "~/queries";
 
-export interface ISiteLayout {
-  footerGroups: SortedFooterItem[];
-  actions: TActions[];
+export interface SiteLayoutProps {
+  footerGroups: FooterGroups;
+  actions: Actions;
   children: React.ReactNode;
   preview: boolean;
 }

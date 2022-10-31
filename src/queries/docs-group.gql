@@ -1,0 +1,35 @@
+query docsGroup($slug: String) {
+  docsGroup(where: { slug: $slug }) {
+    callToAction {
+      body {
+        raw
+      }
+      enable
+      icon {
+        mimeType
+        height
+        size
+        url
+        width
+        fileName
+      }
+      iconColor
+    }
+    docsPages {
+      body {
+        raw
+      }
+      updatedAt
+      title
+      slug
+      showUpdatedDate
+      description
+    }
+    slug
+    subtitle
+    title
+    summary {
+      raw
+    }
+  }
+}

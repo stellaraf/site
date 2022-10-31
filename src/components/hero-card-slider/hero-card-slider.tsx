@@ -1,9 +1,8 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { Carousel } from "~/components";
+import { Carousel, RichText } from "~/components";
 import { useColorValue } from "~/context";
-import { useRender } from "~/hooks";
 
 import type { HeroCardProps, HeroCardSliderProps } from "./types";
 
@@ -11,14 +10,13 @@ const HeroCard = (props: HeroCardProps) => {
   const { content } = props;
   const { title, body } = content;
   const fnTitle = useTitleCase();
-  const renderedBody = useRender(body);
 
   return (
     <>
       <Heading as="h2" fontSize="xl">
         {fnTitle(title)}
       </Heading>
-      {renderedBody}
+      <RichText>{body}</RichText>
     </>
   );
 };

@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-
 import NextImage from "next/image";
 
 import { Image as ChakraImage, useDisclosure } from "@chakra-ui/react";
@@ -7,15 +5,13 @@ import { Image as ChakraImage, useDisclosure } from "@chakra-ui/react";
 import { Backdrop, Modal, Video } from "~/components";
 import { useColorValue } from "~/context";
 
-import type { AssetProps, AssetFieldProps } from "./types";
+import type { ImageProps, VideoProps } from "@graphcms/rich-text-types";
 
 const SVG_PATTERN = /^image\/svg.*/i;
-const IMAGE_PATTERN = /^image.*/i;
-const VIDEO_PATTERN = /^video.*/i;
 
-const ImageAsset = (props: AssetFieldProps) => {
-  const { color, title, url, details, fileName, contentType, ...rest } = props;
-  const { width = 0, height = 0 } = details.image ?? {};
+export const ImageAsset = (props: Partial<ImageProps>) => {
+  const { title, src = "", height = 0, width = 0, mimeType = "", ...rest } = props;
+
   const { isOpen, onClose, onOpen } = useDisclosure();
   const css = useColorValue({}, { filter: "invert(1)" });
 
@@ -27,19 +23,11 @@ const ImageAsset = (props: AssetFieldProps) => {
   // next/image doesn't support SVGs, as of 10.0.1 testing. Use native element for SVGs.
   let image = null;
 
-  if (SVG_PATTERN.test(contentType)) {
-    image = <ChakraImage src={url} alt={title} boxSize="100%" css={css} />;
+  if (SVG_PATTERN.test(mimeType)) {
+    image = <ChakraImage src={src} alt={title} boxSize="100%" css={css} />;
     bg = svgBg;
   } else {
-    image = (
-      <NextImage
-        src={"https:" + url}
-        alt={title}
-        width={width}
-        height={height}
-        layout="responsive"
-      />
-    );
+    image = <NextImage src={src} alt={title} width={width} height={height} layout="responsive" />;
   }
 
   return (
@@ -73,33 +61,12 @@ const ImageAsset = (props: AssetFieldProps) => {
   );
 };
 
-const VideoAsset = (props: AssetFieldProps) => {
-  const { color, title, url, details, fileName, contentType, ...rest } = props;
+export const VideoAsset = (props: Partial<VideoProps>) => {
+  const { title, src, ...rest } = props;
 
   return (
     <Backdrop {...rest}>
-      <Video url={url} enableControls />
+      <Video url={src ?? ""} enableControls />
     </Backdrop>
   );
-};
-
-export const Asset = (props: AssetProps) => {
-  const { title, file } = props;
-  const { contentType } = file;
-  const borderColor = useColorValue("dark.500", "light.500");
-
-  const isImage = IMAGE_PATTERN.test(contentType);
-  const isVideo = VIDEO_PATTERN.test(contentType);
-
-  const asset = useMemo(() => {
-    if (isImage) {
-      return <ImageAsset color={borderColor} title={title} {...file} />;
-    }
-    if (isVideo) {
-      return <VideoAsset color={borderColor} title={title} {...file} />;
-    }
-    return <></>;
-  }, [isImage, isVideo, contentType]);
-
-  return asset;
 };

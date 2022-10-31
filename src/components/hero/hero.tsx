@@ -1,7 +1,8 @@
 import { chakra, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { useGradient, useRender, useResponsiveStyle } from "~/hooks";
+import { RichText } from "~/components";
+import { useGradient, useResponsiveStyle } from "~/hooks";
 import { shouldForwardProp } from "~/util";
 
 import type { HeroProps } from "./types";
@@ -17,21 +18,35 @@ export const Hero = (props: HeroProps) => {
   const bg = useGradient();
   const rStyles = useResponsiveStyle();
   const fnTitle = useTitleCase();
-  const renderedBody = useRender(body, [title], [], {
-    paragraph: {
-      mt: 8,
-      as: "h3",
-      zIndex: 1,
-      fontSize: "lg",
-      maxW: { lg: "75%" },
-      fontWeight: "normal",
-    },
-  });
+  // const renderedBody = useRender(body, [title], [], {
+  //   paragraph: {
+  //     mt: 8,
+  //     as: "h3",
+  //     zIndex: 1,
+  //     fontSize: "lg",
+  //     maxW: { lg: "75%" },
+  //     fontWeight: "normal",
+  //   },
+  // });
 
   return (
     <Container {...bg} {...rStyles} {...rest}>
       <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
-        <Flex textAlign="center" flexDir="column" alignItems="center">
+        <Flex
+          textAlign="center"
+          flexDir="column"
+          alignItems="center"
+          sx={{
+            "& p": {
+              mt: 8,
+              as: "h3",
+              zIndex: 1,
+              fontSize: "lg",
+              maxW: { lg: "75%" },
+              fontWeight: "normal",
+            },
+          }}
+        >
           <Heading as="h1" fontSize={{ base: "4xl", lg: "6xl" }} fontWeight="light">
             {fnTitle(title)}
           </Heading>
@@ -40,7 +55,7 @@ export const Hero = (props: HeroProps) => {
               {fnTitle(subtitle)}
             </Heading>
           )}
-          {body && renderedBody}
+          <RichText content={body} />
         </Flex>
       </Flex>
       {children && children}

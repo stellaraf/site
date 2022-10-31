@@ -1,14 +1,13 @@
-import NextError from "next/error";
 import { useRouter } from "next/router";
 
 import { chakra } from "@chakra-ui/react";
 
 import { SEO, ContentLoader } from "~/components";
 import { PartnerLayout } from "~/layouts";
-import { getPartnerPage } from "~/util";
+import { pageQuery } from "~/queries";
 
-import type { GetStaticProps, GetStaticPaths } from "next";
-import type { IPartnerPage } from "~/types";
+import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
+import type { PageProps } from "~/types";
 
 type UrlQuery = {
   partner: string;
@@ -25,7 +24,7 @@ const Layout = chakra("div", {
   },
 });
 
-const PartnerPage = (props: IPartnerPage) => {
+const PartnerPage: NextPage<PageProps> = props => {
   const { isFallback } = useRouter();
   if (isFallback) {
     return (
@@ -38,32 +37,26 @@ const PartnerPage = (props: IPartnerPage) => {
     );
   }
 
-  const { pageData } = props;
-
-  if (typeof pageData === "undefined" || Object.keys(pageData).length === 0) {
-    return <NextError statusCode={400} />;
-  }
-
-  const { title, subtitle } = pageData;
+  const { title, subtitle } = props;
 
   return (
     <>
-      <SEO title={title} description={subtitle} />
-      <PartnerLayout {...pageData} />
+      <SEO title={title} description={subtitle ?? undefined} />
+      <PartnerLayout {...props} />
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<IPartnerPage, UrlQuery> = async ctx => {
+export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const partner = ctx.params?.partner;
   const preview = ctx?.preview ?? false;
   if (typeof partner === "undefined") {
     throw new Error("No partner specified.");
   }
 
-  const pageData = await getPartnerPage(partner, preview);
+  const page = await pageQuery({ slug: `partner/${partner}` });
 
-  return { props: { pageData } };
+  return { props: { ...page, preview } };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({

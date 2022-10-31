@@ -10,13 +10,13 @@ import type { ProviderProps } from "./types";
 const queryClient = new QueryClient();
 
 export const Provider = (props: ProviderProps) => {
-  const { children, appConfig, docsGroups, testimonials } = props;
-  const { theme, ...globalConfig } = appConfig;
+  const { children, config, theme, docsGroups } = props;
+
   return (
-    <ConfigProvider globalConfig={globalConfig} docsGroups={docsGroups} testimonials={testimonials}>
+    <ConfigProvider config={config} docsGroups={docsGroups}>
       <RecoilRoot>
         <UIProvider theme={theme}>
-          <TitleCaseProvider overrides={globalConfig.titleOverrides}>
+          <TitleCaseProvider overrides={config.titleOverrides}>
             <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
           </TitleCaseProvider>
         </UIProvider>

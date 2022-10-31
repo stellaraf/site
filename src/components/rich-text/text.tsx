@@ -1,14 +1,15 @@
-import { Box, Text, useToken, useStyleConfig, Code as ChakraCode } from "@chakra-ui/react";
+import { Box, useStyleConfig, Code as ChakraCode } from "@chakra-ui/react";
 
 import { useCodeBlockStyle } from "~/components";
 import { useColorValue } from "~/context";
 
-import type { InlineProps } from "./types";
 import type { BoxProps, TextProps, CodeProps } from "@chakra-ui/react";
 
-export const P = (props: TextProps) => (
-  <Text my={8} css={{ "&:first-of-type": { marginTop: useToken("space", 2) } }} {...props} />
-);
+export const P = (props: TextProps) => {
+  return (
+    <Box className="st-content-p" my={8} sx={{ "&:first-of-type": { marginTop: 2 } }} {...props} />
+  );
+};
 
 export const BlockQuote = (props: BoxProps) => {
   const bg = useColorValue("blackAlpha.100", "whiteAlpha.100");
@@ -43,13 +44,4 @@ export const Code = (props: CodeProps) => {
   }
   const sx = useStyleConfig("Code", { colorScheme: ctx.codeBlock.colorScheme });
   return <ChakraCode fontSize="sm" colorScheme={scheme} px={1} sx={sx} {...props} />;
-};
-
-export const Inline = (props: InlineProps) => {
-  const { node, ...rest } = props;
-  return (
-    <Box as="span" key={node.data.target.sys.id} {...rest}>
-      type: {node.nodeType} id: {node.data.target.sys.id}
-    </Box>
-  );
 };

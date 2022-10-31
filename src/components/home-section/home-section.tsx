@@ -2,25 +2,20 @@ import { useMemo } from "react";
 
 import { Box } from "@chakra-ui/react";
 
-import { Divider } from "~/components";
+import { Divider, RichText } from "~/components";
 import { useColorValue } from "~/context";
-import { useRender } from "~/hooks";
 
 import { HomeBlock } from "./home-block";
 
-import type { HomeSectionProps, Sides, Side } from "./types";
+import type { HomeSectionProps, Sides } from "./types";
 
-function getSide(idx: number): Side {
-  const sides: Sides = ["right", "left"];
-  return sides[idx % sides.length];
-}
+const sides: Sides = ["right", "left"];
 
 export const HomeSection = (props: HomeSectionProps) => {
-  const { section, index, ...rest } = props;
-  const { title, subtitle, body, buttonText, buttonLink, image } = section;
+  const { block, index, ...rest } = props;
+  const { title, subtitle, body, button, image } = block;
 
   const showBorder = useColorValue(false, true);
-  const renderedBody = useRender(body);
 
   const padding = useMemo<Partial<HomeSectionProps>>(() => {
     if (index === 0) {
@@ -29,7 +24,7 @@ export const HomeSection = (props: HomeSectionProps) => {
     return { py: 16 };
   }, [index]);
 
-  const side = getSide(index);
+  const side = useMemo(() => sides[index % sides.length], [index]);
 
   return (
     <>
@@ -45,10 +40,9 @@ export const HomeSection = (props: HomeSectionProps) => {
           side={side}
           title={title}
           subtitle={subtitle}
-          body={renderedBody}
-          buttonText={buttonText}
-          buttonLink={buttonLink}
-          imageUrl={image.fields.file.url}
+          body={<RichText content={body.raw} />}
+          button={button}
+          image={image}
         />
       </Box>
       {showBorder && <Divider left={side === "left"} right={side === "right"} />}

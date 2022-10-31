@@ -1,0 +1,73 @@
+query theme {
+  configuration(where: { title: "Stellar" }) {
+    theme {
+      colors {
+        black {
+          hex
+        }
+        blue {
+          hex
+        }
+        cyan {
+          hex
+        }
+        dark {
+          hex
+        }
+        gray {
+          hex
+        }
+        green {
+          hex
+        }
+        light {
+          hex
+        }
+        orange {
+          hex
+        }
+        pink {
+          hex
+        }
+        primary {
+          hex
+        }
+        purple {
+          hex
+        }
+        red {
+          hex
+        }
+        secondary {
+          hex
+        }
+        teal {
+          hex
+        }
+        tertiary {
+          hex
+        }
+        white {
+          hex
+        }
+        yellow {
+          hex
+        }
+      }
+      fonts {
+        black
+        body
+        bold
+        extrabold
+        hairline
+        headings
+        light
+        medium
+        monospace
+        normal
+        semibold
+        thin
+      }
+    }
+  }
+}

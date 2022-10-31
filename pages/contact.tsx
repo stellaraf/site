@@ -1,29 +1,27 @@
 import { Box, Flex, Button as ChakraButton, Heading, VStack } from "@chakra-ui/react";
 
-import { Content, DynamicIcon, Hero, FormCardGroup, SEO, GetStarted } from "~/components";
+import { Content, DynamicIcon, Hero, FormCardGroup, SEO, Callout } from "~/components";
 import { useSlug, useResponsiveStyle } from "~/hooks";
-import { getPage, getPageContent, getPageId, getContactCards } from "~/util";
+import { contactFormsQuery, pageQuery } from "~/queries";
+import { notNullUndefined } from "~/types";
 
-import type { GetStaticProps } from "next";
-import type { PageEntry, IContactPage, PageContent } from "~/types";
+import type { GetStaticProps, NextPage } from "next";
+import type { ContactPageProps } from "~/types";
 
-const Contact = (props: PageEntry<IContactPage>): JSX.Element => {
-  const { pageData, contactCards, pageContent } = props;
-
-  const cards = contactCards.sort((a, b) => a.sortWeight - b.sortWeight);
-  const { title, subtitle, body = null, customProperties, getStarted } = pageData.fields;
+const Contact: NextPage<ContactPageProps> = props => {
+  const { title, subtitle, body, contents, callout, footerTitle, contactForms } = props;
 
   const rStyles = useResponsiveStyle();
-  const content = pageContent[0];
+  const content = contents[0];
   const slug = useSlug(content.title, [content.title]);
 
   return (
     <>
-      <SEO title={customProperties?.metaTitle ?? title} description={subtitle} />
-      <Hero title={title} subtitle={subtitle} body={body} minH="40vh">
+      <SEO title={footerTitle ?? title} description={subtitle ?? undefined} />
+      <Hero title={title} subtitle={subtitle} body={body?.raw} minH="40vh">
         <Box as="section" py={{ base: 16, lg: 32 }}>
           <Flex height="100%" align="center" direction="column" {...rStyles}>
-            <FormCardGroup cards={cards} />
+            <FormCardGroup contactForms={contactForms} />
           </Flex>
         </Box>
       </Hero>
@@ -33,43 +31,36 @@ const Contact = (props: PageEntry<IContactPage>): JSX.Element => {
             <Content.Title id={slug}>{content.title}</Content.Title>
             {content.subtitle && <Content.Subtitle>{content.subtitle}</Content.Subtitle>}
           </VStack>
-          <VStack spacing={4} my={12}>
-            <ChakraButton
-              as="a"
-              boxSize="3rem"
-              href={content.buttonLink}
-              rounded="full"
-              colorScheme="green"
-            >
-              <DynamicIcon icon={{ im: "ImPhone" }} />
-            </ChakraButton>
-            <Heading as="h4" fontSize="xl" fontWeight="medium">
-              {content.buttonText}
-            </Heading>
-          </VStack>
+          {notNullUndefined(content.button) && (
+            <VStack spacing={4} my={12}>
+              <ChakraButton
+                as="a"
+                boxSize="3rem"
+                href={content.button.link ?? ""}
+                rounded="full"
+                colorScheme="green"
+              >
+                <DynamicIcon icon={{ im: "ImPhone" }} />
+              </ChakraButton>
+              <Heading as="h4" fontSize="xl" fontWeight="medium">
+                {content.button.text}
+              </Heading>
+            </VStack>
+          )}
         </Flex>
       </Box>
-      {getStarted && <GetStarted {...getStarted.fields} />}
+      {notNullUndefined(callout) && <Callout {...callout} />}
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<PageEntry<IContactPage>> = async ctx => {
+export const getStaticProps: GetStaticProps<ContactPageProps> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let pageData = {} as PageEntry<IContactPage>["pageData"];
-  let pageContent = [] as PageContent[];
 
-  const contactCards = await getContactCards(preview);
+  const contactForms = await contactFormsQuery();
+  const page = await pageQuery({ slug: "contact" });
 
-  try {
-    const pageId = await getPageId("contact", preview);
-    pageData = await getPage<IContactPage["pageData"]>(pageId, preview);
-    pageContent = await getPageContent(pageId, preview);
-  } catch (err) {
-    console.error(err);
-  }
-
-  return { props: { pageData, pageContent, contactCards, preview } };
+  return { props: { ...page, contactForms, preview } };
 };
 
 export default Contact;

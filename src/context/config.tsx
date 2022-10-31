@@ -8,15 +8,11 @@ const ConfigContext = createContext<MutableRefObject<ConfigContextType>>(
 );
 
 export const ConfigProvider = (props: ConfigProviderProps) => {
-  const { globalConfig, docsGroups, testimonials, children } = props;
+  const { config, docsGroups, children } = props;
 
-  const config = useRef<ConfigContextType>({
-    ...globalConfig,
-    testimonials,
-    docsGroups,
-  });
+  const value = useRef<ConfigContextType>({ ...config, docsGroups });
 
-  return <ConfigContext.Provider value={config}>{children}</ConfigContext.Provider>;
+  return <ConfigContext.Provider value={value}>{children}</ConfigContext.Provider>;
 };
 
 export const useConfig = (): ConfigContextType => {

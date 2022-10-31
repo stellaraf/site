@@ -1,17 +1,15 @@
 import { Box, Flex, Image, VStack, Heading, Divider } from "@chakra-ui/react";
 
+import { RichText } from "~/components";
 import { useColorValue } from "~/context";
-import { useRender } from "~/hooks";
 
 import { Quote } from "./quote";
 
-import type { TestimonialEntry } from "~/types";
+import type { Testimonial as TestimonialProps } from "~/queries";
 
-export const Testimonial = (props: TestimonialEntry) => {
+export const Testimonial = (props: TestimonialProps) => {
   const { title, subtitle, body, image } = props;
-  const renderedBody = useRender(body, [], [], {
-    paragraph: { display: "inline" },
-  });
+
   const fontWeight = useColorValue("thin", undefined);
 
   return (
@@ -31,9 +29,10 @@ export const Testimonial = (props: TestimonialEntry) => {
               fontWeight={fontWeight}
               fontSize={{ base: "lg", lg: "xl" }}
               textAlign={{ base: "left", xl: "justify" }}
+              sx={{ "& p": { display: "inline" } }}
             >
               <Quote kind="open" />
-              {renderedBody}
+              <RichText content={body.raw} />
               <Quote kind="close" />
             </Box>
             <VStack w="100%" pt={8} align="center" textAlign="center">
@@ -53,7 +52,7 @@ export const Testimonial = (props: TestimonialEntry) => {
                   userSelect="none"
                   draggable={false}
                   pointerEvents="none"
-                  src={image.fields.file.url}
+                  src={image.url}
                   fallbackSrc="https://via.placeholder.com/150"
                 />
               </Box>

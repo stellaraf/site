@@ -1,0 +1,23 @@
+overwrite: true
+schema: https://api-us-east-1.hygraph.com/v2/cl8z8boma0tpz01ul4h162cir/master
+documents: 'src/**/*.{ts,tsx,gql,graphql}'
+generates:
+  src/types/schema.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - fragment-matcher
+      - typed-document-node
+      - typescript-resolvers
+      - add:
+          content: '/* eslint-disable */'
+    config:
+      scalars:
+        RichTextAST: '@graphcms/rich-text-types#RichTextContent'
+        DateTime: string
+        Date: string
+        Hex: string
+        Css: string
+        Long: number
+        Json: string
+      Test: ConfigQuery.configuration

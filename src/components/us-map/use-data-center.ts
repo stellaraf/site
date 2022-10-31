@@ -105,13 +105,13 @@ async function queryAll(
       let debug = false;
       if (process.env.NODE_ENV === "development") debug = true;
       const elapsed = await fetcher({
-        id: measurement.id,
+        id: measurement.identifier,
         url: measurement.testUrl,
         controller,
         debug,
         timeout: measurement.timeout,
       });
-      updateMeasurement({ id: measurement.id, elapsed, done: true });
+      updateMeasurement({ identifier: measurement.identifier, elapsed, done: true });
     }
   }
 
@@ -133,7 +133,7 @@ export function useDataCenter(): UseDataCenterReturn {
 
   const queryId = useId();
 
-  const queryKey = [queryId, ...measurements.map(m => m.id)];
+  const queryKey = [queryId, ...measurements.map(m => m.identifier)];
 
   const queryFn = async () => await queryAll(measurements, updateMeasurement);
 

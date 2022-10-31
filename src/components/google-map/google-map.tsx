@@ -8,9 +8,8 @@ import {
   useJsApiLoader,
 } from "@react-google-maps/api";
 
-import { Link, Error } from "~/components";
+import { Link, Error, RichText } from "~/components";
 import { useConfig, useColorValue, useColorTokenValue } from "~/context";
-import { useRender } from "~/hooks";
 
 import { mapDark, mapLight } from "./styles";
 import { gm, useMapUrl } from "./util";
@@ -66,18 +65,16 @@ const MapContainer = (props: MapContainerProps) => {
   );
 };
 
-export const GoogleMap = (): JSX.Element => {
+export const GoogleMap = () => {
   const {
-    orgName,
+    organizationName,
     hqMapInfo,
-    hqAddress = "",
-    openMapsText = "",
-    hqCoordinates = { lat: 0, lon: 0 },
+    hqAddress,
+    openMapsText,
+    hqCoordinates = { latitude: 0, longitude: 0 },
   } = useConfig();
 
-  const { lat, lon: lng } = hqCoordinates;
-
-  const renderedInfoContent = useRender(hqMapInfo);
+  const { latitude: lat, longitude: lng } = hqCoordinates;
 
   const bg = useColorTokenValue("light.500", "dark.500");
   const color = useColorTokenValue("dark.500", "light.500");
@@ -99,11 +96,11 @@ export const GoogleMap = (): JSX.Element => {
           bg={bg}
           lat={lat}
           lng={lng}
-          address={hqAddress}
           color={color}
-          orgName={orgName}
+          address={hqAddress}
+          orgName={organizationName}
           openMapsText={openMapsText}
-          content={renderedInfoContent}
+          content={<RichText content={hqMapInfo.raw} />}
         />
       </GoogleMapApi>
     ),

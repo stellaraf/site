@@ -1,42 +1,40 @@
 import { useRouter } from "next/router";
 
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { chakra } from "@chakra-ui/react";
 
 import { SEO } from "~/components";
-import { useColorValue } from "~/context";
-import { useGradient, useResponsiveStyle } from "~/hooks";
+import { useGradient } from "~/hooks";
+
+const Wrapper = chakra("div", {
+  baseStyle: {
+    width: "100%",
+    height: "100vh",
+    color: { _dark: "white", _light: "black" },
+    pt: 32,
+    px: { base: 4, md: 4, lg: 16, xl: 24 },
+    zIndex: -2,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+
+const Header = chakra("h1", {
+  baseStyle: { fontSize: { base: "1.5rem", md: "xl", lg: "2xl" }, fontWeight: "light", mb: 32 },
+});
 
 const NotFound = () => {
-  const heroText = useColorValue("black", "white");
-  const pathText = useColorValue("red.500", "red.300");
-  const rStyles = useResponsiveStyle();
   const bg = useGradient();
   const { asPath } = useRouter();
 
   return (
     <>
       <SEO title="Not Found" noindex nofollow />
-      <Flex
-        w="100%"
-        h="100vh"
-        color={heroText}
-        pt={32}
-        zIndex={-2}
-        align="center"
-        justify="center"
-        {...rStyles}
-        {...bg}
-      >
-        <Heading
-          as="h1"
-          fontSize={{ base: "1.5rem", md: "xl", lg: "2xl" }}
-          fontWeight="light"
-          mb={32}
-        >
-          <Box as="span" color={pathText}>{`${asPath} `}</Box>
+      <Wrapper {...bg}>
+        <Header>
+          <chakra.span color={{ _light: "red.500", _dark: "red.300" }}>{`${asPath} `}</chakra.span>
           is not a thing...yet.
-        </Heading>
-      </Flex>
+        </Header>
+      </Wrapper>
     </>
   );
 };

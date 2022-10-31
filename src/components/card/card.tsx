@@ -27,6 +27,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
       spacing={{ base: 8, lg: 0 }}
       borderRadius="lg"
       overflow="hidden"
+      className="st-card"
       {...styles}
       {...props}
     />

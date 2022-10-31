@@ -1,48 +1,32 @@
-import { FormControl, Textarea, FormErrorMessage } from "@chakra-ui/react";
-import { Controller } from "react-hook-form";
+import { FormControl, Textarea, FormErrorMessage, FormLabel } from "@chakra-ui/react";
+import { useFormContext } from "react-hook-form";
 
-import { useColorValue } from "~/context";
+import { notNullUndefined } from "~/types";
 
-import type { TextFieldProps, FormFieldProps } from "./types";
+import type { FormFieldProps } from "./types";
 import type { TextareaProps } from "@chakra-ui/react";
 import type { FieldValues } from "react-hook-form";
 
-const Field = <V extends FieldValues>(props: TextFieldProps<V>) => {
-  const { field, fieldState, isRequired } = props;
-  const { name, ...rest } = field;
+export const TextArea = <V extends FieldValues>(props: FormFieldProps<TextareaProps, V>) => {
+  const { name, field, defaultValue, rules = {}, isRequired = false, ...rest } = props;
 
-  const placeholderStyle = useColorValue(
-    { opacity: 0.8, color: "gray.600" },
-    { color: "whiteAlpha.600" },
-  );
+  const { register, getFieldState } = useFormContext();
+  const { error } = getFieldState(name);
 
   return (
-    <FormControl
-      id={name}
-      isRequired={isRequired}
-      isInvalid={typeof fieldState.error !== "undefined"}
-    >
+    <FormControl id={name} isRequired={isRequired} isInvalid={typeof error !== "undefined"}>
+      {notNullUndefined(field.label) && <FormLabel>{field.label}</FormLabel>}
       <Textarea
         resize="vertical"
         h={{ base: "10rem", lg: "unset" }}
-        _placeholder={placeholderStyle}
+        _placeholder={{
+          _light: { opacity: 0.8, color: "gray.600" },
+          _dark: { color: "whiteAlpha.600", opacity: 1 },
+        }}
+        {...register(name, { required: isRequired, ...rules })}
         {...rest}
       />
-      <FormErrorMessage>{fieldState.error && fieldState.error.message}</FormErrorMessage>
+      <FormErrorMessage>{typeof error !== "undefined" && error.message}</FormErrorMessage>
     </FormControl>
-  );
-};
-
-export const TextArea = <V extends FieldValues>(props: FormFieldProps<TextareaProps, V>) => {
-  const { ctl, id, defaultValue, isRequired = false, ...rest } = props;
-
-  return (
-    <Controller<V>
-      name={id}
-      control={ctl}
-      defaultValue={defaultValue}
-      rules={{ required: isRequired }}
-      render={r => <Field<V> isRequired={isRequired} {...r} {...rest} />}
-    />
   );
 };

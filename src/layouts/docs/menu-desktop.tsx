@@ -13,18 +13,9 @@ import { useColorValue } from "~/context";
 
 import { useDocsHref } from "./use-docs-href";
 
-import type { IDocsGroup, IDocsArticle } from "~/types";
+import type { DocsGroup, DocsPage } from "~/queries";
 
-function menuItemKey(item: IDocsArticle): string {
-  let result = "";
-  const groupTitle = item.docsGroup?.fields.title.toLowerCase().split(" ").join("-");
-  if (groupTitle !== "") result += groupTitle + "--";
-  const title = item.title.toLowerCase().split(" ").join("-");
-  result += title;
-  return result;
-}
-
-const DMenuItem = (props: IDocsArticle): JSX.Element => {
+const DMenuItem = (props: Omit<DocsPage, "body">) => {
   const { title } = props;
   const { href, isCurrent } = useDocsHref(props);
 
@@ -63,8 +54,8 @@ const DMenuItem = (props: IDocsArticle): JSX.Element => {
   );
 };
 
-export const DMenuGroup = (props: IDocsGroup): JSX.Element => {
-  const { title, items } = props;
+export const DMenuGroup = (props: DocsGroup) => {
+  const { title, docsPages } = props;
 
   const backgroundColor = useColorValue("blackAlpha.100", "whiteAlpha.100");
   const borderRadius = useToken("radii", "lg");
@@ -87,8 +78,8 @@ export const DMenuGroup = (props: IDocsGroup): JSX.Element => {
       </AccordionButton>
       <AccordionPanel pb={4} px={0}>
         <VStack align="flex-start" pl={4}>
-          {items.map(item => (
-            <DMenuItem key={menuItemKey(item)} {...item} />
+          {docsPages.map(page => (
+            <DMenuItem key={page.title} {...page} />
           ))}
         </VStack>
       </AccordionPanel>

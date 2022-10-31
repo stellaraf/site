@@ -39,9 +39,9 @@ function createHeading(level: HeadingLevel, baseStyle: SystemStyleObject): React
   return HeadingComponent;
 }
 
-export const H1 = createHeading(1, { my: "1em", size: "xl" });
+export const H1 = createHeading(1, { my: "1em", fontSize: "2xl" });
 export const H2 = createHeading(2, { fontWeight: "light", fontSize: "2rem" });
-export const H3 = createHeading(3, { pl: 1, size: "md", fontWeight: "normal" });
-export const H4 = createHeading(4, { pl: 1, size: "md", fontWeight: "medium" });
-export const H5 = createHeading(5, { pl: 1, size: "sm", fontWeight: "medium" });
-export const H6 = createHeading(6, { pl: 1, size: "sm", fontWeight: "bold" });
+export const H3 = createHeading(3, { pl: 1, fontSize: "xl", fontWeight: "normal" });
+export const H4 = createHeading(4, { pl: 1, fontSize: "lg", fontWeight: "medium" });
+export const H5 = createHeading(5, { pl: 1, fontSize: "lg", fontWeight: "medium" });
+export const H6 = createHeading(6, { pl: 1, mt: 1, fontSize: "md", fontWeight: "bold" });

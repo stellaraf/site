@@ -6,29 +6,28 @@ import { StellarLogo } from "@stellaraf/logo";
 import { HomeSection, SEO, Screen, Testimonials } from "~/components";
 import { useConfig, useColorMode, useColorValue } from "~/context";
 import { useGradient, useNavLogo, useResponsiveStyle } from "~/hooks";
-import { getParsedContent } from "~/util";
+import { homePageQuery } from "~/queries";
+import { notNullUndefined } from "~/types";
 
-import type { GetStaticProps } from "next";
-import type { THome, THomePageContent } from "~/types";
+import type { NextPage, GetStaticProps } from "next";
+import type { HomePage } from "~/queries";
 
-const Home = (props: THome) => {
-  const { pageContent } = props;
+const Home: NextPage<HomePage> = props => {
+  const { blocks, mainVideo } = props;
   const { colorMode } = useColorMode();
-  const { sections: homeSections, mainVideo } = pageContent;
-  const { siteSlogan, orgName, homePageVideo } = useConfig();
+  const { slogan, organizationName } = useConfig();
   const heroText = useColorValue("primary.500", "white");
   const rStyles = useResponsiveStyle();
 
   const bg = useGradient();
 
-  const sections = homeSections.sort((a, b) => a.fields.sortWeight - b.fields.sortWeight);
   const logoRef = useRef<SVGSVGElement>({} as SVGSVGElement);
 
   useNavLogo(logoRef);
 
   return (
     <>
-      <SEO title={orgName} titleTemplate="%s" />
+      <SEO title={organizationName} titleTemplate="%s" />
       <Box pt={32} zIndex={-2} minH="100vh" boxSize="100%" color={heroText} {...rStyles} {...bg}>
         <Flex flexDir="column" alignItems="center">
           <Box overflowY="hidden" width={["90%", "66%", "33%"]} zIndex={1}>
@@ -41,37 +40,26 @@ const Home = (props: THome) => {
               fontWeight="light"
               mb={32}
             >
-              {siteSlogan}
+              {slogan}
             </Heading>
           </Flex>
         </Flex>
         <Flex justifyContent="center" w="100%">
-          {typeof mainVideo !== "undefined" ? (
-            <Screen url={mainVideo.fields.file.url} />
-          ) : typeof homePageVideo !== "undefined" ? (
-            <Screen url={homePageVideo} />
-          ) : null}
+          {notNullUndefined(mainVideo) && <Screen url={mainVideo.url} />}
         </Flex>
       </Box>
-      {sections.map((sect, i) => {
-        return <HomeSection section={sect.fields} index={i % sections.length} key={i} />;
+      {blocks.map((block, i) => {
+        return <HomeSection index={i % blocks.length} key={block.title} block={block} />;
       })}
       <Testimonials />
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<THome> = async ctx => {
+export const getStaticProps: GetStaticProps<HomePage> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let pageContent = {} as THomePageContent;
-  try {
-    [pageContent] = await getParsedContent<THomePageContent>("homepage", preview, {
-      include: 4,
-    });
-  } catch (err) {
-    console.error(err);
-  }
-  return { props: { pageContent, preview } };
+  const homePage = await homePageQuery();
+  return { props: { ...homePage, preview } };
 };
 
 export default Home;

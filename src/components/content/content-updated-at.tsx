@@ -1,11 +1,13 @@
 import { Label } from "~/components";
 import { useColorValue } from "~/context";
+import { useDate } from "~/hooks";
 
 import type { ContentUpdatedAtProps } from "./types";
 import type { FlexProps } from "@chakra-ui/react";
 
 export const ContentUpdatedAt = (props: ContentUpdatedAtProps) => {
-  const { children, ...rest } = props;
+  const { time, ...rest } = props;
+  const updated = useDate(time);
 
   const label = useColorValue(
     { leftColor: "white", rightColor: "whiteAlpha.300" },
@@ -22,5 +24,5 @@ export const ContentUpdatedAt = (props: ContentUpdatedAtProps) => {
     },
   );
 
-  return <Label right="Last Updated" left={children} {...label} {...rest} />;
+  return <Label right="Last Updated" left={updated} {...label} {...rest} />;
 };

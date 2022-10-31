@@ -1,0 +1,74 @@
+query contactForms($config: String) {
+  configuration(where: { title: $config }) {
+    contactForms {
+      body {
+        raw
+      }
+      button {
+        link
+        text
+        variant
+      }
+      color
+      fields {
+        ... on CheckboxField {
+          __typename
+          displayName
+          fieldGroup
+          formId
+          label
+          multiple
+          options
+          required
+        }
+        ... on FormButton {
+          __typename
+          id
+          action
+          alert {
+            name
+            title
+            level
+            body {
+              raw
+            }
+          }
+          text
+          variant
+        }
+        ... on SelectField {
+          __typename
+          displayName
+          fieldGroup
+          formId
+          label
+          multiple
+          options
+          required
+        }
+        ... on TextAreaField {
+          __typename
+          displayName
+          fieldGroup
+          formId
+          label
+          required
+        }
+        ... on TextInputField {
+          __typename
+          displayName
+          fieldGroup
+          formId
+          label
+          required
+          validationType
+        }
+      }
+      icon {
+        name
+        family
+      }
+      title
+    }
+  }
+}

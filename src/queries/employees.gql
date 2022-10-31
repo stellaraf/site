@@ -1,0 +1,19 @@
+query employees($config: String) {
+  configuration(where: { title: $config }) {
+    employees {
+      bio {
+        raw
+      }
+      name
+      photo {
+        fileName
+        height
+        mimeType
+        size
+        url
+        width
+      }
+      title
+    }
+  }
+}

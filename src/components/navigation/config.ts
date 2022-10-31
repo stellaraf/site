@@ -22,6 +22,10 @@ const config: NavConfig = {
       link: "/services",
     },
     {
+      title: "Security",
+      link: "/security",
+    },
+    {
       title: "Consulting",
       link: "/consulting",
     },

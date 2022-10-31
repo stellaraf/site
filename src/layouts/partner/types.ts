@@ -1,3 +1,3 @@
-import type { IPartnerPage } from "~/types";
+import type { Page } from "~/queries";
 
-export type PartnerLayoutProps = IPartnerPage["pageData"];
+export type PartnerLayoutProps = Page;

@@ -1,16 +1,14 @@
-import type { TContactQuery, TSupportedFormQuery, AvailableForms } from "./types";
+import type { NextRouter } from "next/router";
 
-export function isSupportedForm(name: unknown): name is keyof AvailableForms {
-  return typeof name === "string" && ["support", "sales"].includes(name.toLowerCase());
+type ParsedURLQuery = NextRouter["query"];
+
+interface ValidFormQuery extends ParsedURLQuery {
+  form: string;
 }
 
-/**
- * Type guard to determine if the URL query references a valid form.
- */
-export function queryIsForm(query: TContactQuery): query is TSupportedFormQuery {
-  let result = false;
-  if ("form" in query) {
-    result = isSupportedForm(query.form);
+export function isValidFormQuery(query: ParsedURLQuery): query is ValidFormQuery {
+  if (Object.keys(query).includes("form")) {
+    return typeof query.form === "string";
   }
-  return result;
+  return false;
 }

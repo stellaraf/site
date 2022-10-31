@@ -9,13 +9,9 @@ import {
 } from "@chakra-ui/react";
 
 import { useColorValue } from "~/context";
-import { useRender } from "~/hooks";
 
-import type { TExpandable } from "~/types";
-
-export const Expandable = (props: TExpandable) => {
-  const { title, body, useDefaultTitle } = props;
-  const renderedBody = useRender(body);
+export const Expandable = (props: React.PropsWithChildren) => {
+  const { children } = props;
   const hoverBorder = useColorValue("blackAlpha.400", "whiteAlpha.400");
 
   return (
@@ -27,11 +23,11 @@ export const Expandable = (props: TExpandable) => {
       >
         <AccordionButton mx={1} css={{ "&:focus": { borderRadius: useToken("radii", "md") } }}>
           <Box flex={1} textAlign="left">
-            {useDefaultTitle ? "Expand..." : title}
+            Expand...
           </Box>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel pb={4}>{renderedBody}</AccordionPanel>
+        <AccordionPanel pb={4}>{children}</AccordionPanel>
       </AccordionItem>
     </Accordion>
   );

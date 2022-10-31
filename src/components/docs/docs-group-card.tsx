@@ -3,23 +3,14 @@ import NextLink from "next/link";
 import { Box, Button, Heading, Divider } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { Card, CardBody, Icon } from "~/components";
-import { useRender } from "~/hooks";
+import { Card, CardBody, Icon, RichText } from "~/components";
 
-import type { IDocsGroup } from "~/types";
+import type { DocsGroup } from "~/queries";
 
-export const DocsGroupCard = (props: IDocsGroup) => {
-  const {
-    slug,
-    title,
-    summary,
-    subtitle,
-    callToActionIcon,
-    callToActionIconColor = "primary",
-  } = props;
+export const DocsGroupCard = (props: DocsGroup) => {
+  const { slug, title, summary, subtitle, callToAction } = props;
 
-  const titleMe = useTitleCase();
-  const body = useRender(summary, [], ["articleButton", "image"]);
+  const fnTitle = useTitleCase();
 
   return (
     <NextLink href={`/docs/${slug}`} scroll={false}>
@@ -40,17 +31,17 @@ export const DocsGroupCard = (props: IDocsGroup) => {
       >
         <Card width={{ base: "20rem", md: "18rem", xl: "lg" }} maxHeight={80} zIndex={1}>
           <CardBody spacing={4} textAlign="left" alignItems="flex-start">
-            {typeof callToActionIcon !== "undefined" && (
+            {callToAction.enable && (
               <Icon
                 size={12}
                 position="absolute"
                 alignSelf="flex-end"
-                color={callToActionIconColor}
-                url={callToActionIcon.fields.file.url}
+                url={callToAction.icon?.url ?? ""}
+                color={callToAction.iconColor ?? "primary"}
               />
             )}
             <Heading as="h3" fontSize={{ base: "sm", md: "lg" }} maxW="80%" whiteSpace="pre-wrap">
-              {titleMe(title)}
+              {fnTitle(title)}
             </Heading>
             <Heading
               as="h4"
@@ -74,7 +65,7 @@ export const DocsGroupCard = (props: IDocsGroup) => {
                 },
               }}
             >
-              {body}
+              <RichText content={summary.raw} />
             </Box>
           </CardBody>
         </Card>

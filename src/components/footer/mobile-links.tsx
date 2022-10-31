@@ -12,35 +12,39 @@ import {
 import { Link } from "~/components";
 import { useColorValue } from "~/context";
 
+import { useFooterLinks } from "./use-footer-links";
+
 import type { FooterLinksProps } from "./types";
 
 export const MobileLinks = (props: FooterLinksProps) => {
-  const { groups } = props;
   const linkColor = useColorValue("whiteAlpha.700", "whiteAlpha.700");
+
+  const rows = useFooterLinks(props.groups);
+  const groups = rows.flat();
 
   return (
     <Accordion allowToggle position="relative" zIndex={1}>
-      {groups.map(({ title, items }) => {
+      {groups.map((group, i) => {
         return (
           <AccordionItem
-            key={title}
+            key={i}
             borderTopWidth={0}
             borderBottomWidth={1}
             _last={{ borderBottomWidth: 1 }}
           >
             <AccordionButton my={4}>
               <Box w="100%" textAlign="left">
-                {title}
+                {group.group}
               </Box>
               <AccordionIcon />
             </AccordionButton>
 
             <AccordionPanel pb={4}>
               <List>
-                {items.map(item => (
+                {group.items.map(item => (
                   <ListItem key={item.title} my={2} pl={2}>
-                    <Link href={item.href} fontSize="sm" color={linkColor}>
-                      {item.title}
+                    <Link href={`/${item.slug}`} fontSize="sm" color={linkColor}>
+                      {item.footerTitle ? item.footerTitle : item.title}
                     </Link>
                   </ListItem>
                 ))}

@@ -33,7 +33,7 @@ export const USMap = (props: USMapProps) => {
               ))}
               <LayoutGroup>
                 {measurements.map(loc => (
-                  <Location key={loc.displayName} loc={loc} color={markerColor} />
+                  <Location key={loc.name} loc={loc} color={markerColor} />
                 ))}
               </LayoutGroup>
             </>

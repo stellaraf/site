@@ -14,7 +14,7 @@ import { Action } from "./action";
 import { useRandomActions } from "./util";
 
 import type { CallToActionProps, MemoCallToActionProps } from "./types";
-import type { TActions } from "~/types";
+import type { Actions } from "~/queries";
 
 export const _CallToActionContainer = (props: MemoCallToActionProps) => {
   const { actions: rawActions, currentPath, ...rest } = props;
@@ -22,15 +22,15 @@ export const _CallToActionContainer = (props: MemoCallToActionProps) => {
   const rStyles = useResponsiveStyle();
   const titleMe = useTitleCase();
 
-  const { callToActionTitle, callsToActionShown } = useConfig();
+  const { callToAction } = useConfig();
 
   // Remove actions from the array if they are contained within the list of exclusions, and only
   // filter out actions if we're NOT on the home page.
-  const filteredActions = rawActions.reduce<TActions[]>((filtered, action) => {
+  const filteredActions = rawActions.reduce<Actions>((filtered, action) => {
     if (currentPath !== "/") {
       const pathName = currentPath.replace("/", "");
       const pattern = new RegExp(`^${pathName}.*`, "g");
-      if (!pattern.test(action.page.fields.slug)) {
+      if (!pattern.test(action.page?.slug ?? "")) {
         filtered.push(action);
       }
     } else {
@@ -39,7 +39,7 @@ export const _CallToActionContainer = (props: MemoCallToActionProps) => {
     return filtered;
   }, []);
 
-  const actions = useRandomActions(filteredActions, callsToActionShown);
+  const actions = useRandomActions(filteredActions, callToAction.shown);
 
   const [ref, inView] = useInView({ triggerOnce: true, rootMargin: "-100px" });
 
@@ -48,7 +48,7 @@ export const _CallToActionContainer = (props: MemoCallToActionProps) => {
       <VStack py={24} spacing={12} className="__actions" minH="30vh" {...rStyles} {...rest}>
         <Center>
           <Heading as="h5" fontSize={{ base: "lg", lg: "2xl" }}>
-            {titleMe(callToActionTitle)}
+            {titleMe(callToAction.title)}
           </Heading>
         </Center>
         <Wrap

@@ -1,0 +1,29 @@
+query actions {
+  pageContents(where: { callToAction: { enable: true } }) {
+    callToAction {
+      body {
+        raw
+      }
+      icon {
+        fileName
+        height
+        mimeType
+        size
+        url
+        width
+      }
+      iconColor
+    }
+    title
+    subtitle
+    body {
+      raw
+    }
+    page {
+      slug
+      body {
+        raw
+      }
+    }
+  }
+}

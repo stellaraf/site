@@ -1,33 +1,22 @@
 import { useCallback, useState } from "react";
 
-import { Center, Flex, IconButton, Heading, Grid } from "@chakra-ui/react";
+import { Button as ChakraButton, Center, Flex, IconButton, Heading, Grid } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { DynamicIcon, Modal } from "~/components";
+import { DynamicIcon, Modal, RichText, GenericForm } from "~/components";
+import { notNullUndefined } from "~/types";
 
-import { SalesForm, SupportForm } from "../forms";
 import { useContactForm } from "../state";
-import { submitForm } from "../submitters";
 import { Success } from "../success";
+import { separateFormFields } from "../util";
 
-import type { FormType, FormFieldValue } from "../forms/types";
 import type { MobileFormProps } from "./types";
 
 export const MobileForm = (props: MobileFormProps) => {
-  const {
-    title,
-    body,
-    icon,
-    accent = "primary",
-    onToggle,
-    formRef,
-    onSubmit,
-    button,
-    onClose,
-  } = props;
+  const { title, body, icon, onToggle, formRef, onSubmit, onClose, colorScheme } = props;
 
   const formState = useContactForm();
-  const titleMe = useTitleCase();
+  const fnTitle = useTitleCase();
   const [showSuccess, setSuccess] = useState(false);
 
   const goBack = useCallback(
@@ -39,17 +28,27 @@ export const MobileForm = (props: MobileFormProps) => {
     [onToggle, formState],
   );
 
-  const handleSubmit = useCallback(
-    async <F extends FormType, D extends FormFieldValue<F>>(form: F, data: D) => {
-      await submitForm(form, data);
-      if (typeof onSubmit === "function") {
-        onSubmit();
-      }
-      !showSuccess && setSuccess(true);
-      setTimeout(() => onToggle(), 1500);
-    },
-    [onSubmit, onToggle, showSuccess],
-  );
+  // const handleSubmit = useCallback(
+  //   async <F extends FormType, D extends FormFieldValue<F>>(form: F, data: D) => {
+  //     await submitForm(form, data);
+  //     if (typeof onSubmit === "function") {
+  //       onSubmit();
+  //     }
+  //     !showSuccess && setSuccess(true);
+  //     setTimeout(() => onToggle(), 1500);
+  //   },
+  //   [onSubmit, onToggle, showSuccess],
+  // );
+
+  const handleSubmit = useCallback(() => {
+    if (typeof onSubmit === "function") {
+      onSubmit();
+    }
+    !showSuccess && setSuccess(true);
+    setTimeout(() => onToggle(), 1500);
+  }, [onSubmit, onToggle, showSuccess]);
+
+  const { button, fields } = separateFormFields(formState.selected);
 
   return (
     <Modal
@@ -89,7 +88,7 @@ export const MobileForm = (props: MobileFormProps) => {
             flexDirection="column"
           >
             <Heading as="h3" fontSize="lg">
-              {titleMe(title)}
+              {fnTitle(title)}
             </Heading>
           </Center>
           <Center
@@ -100,19 +99,34 @@ export const MobileForm = (props: MobileFormProps) => {
             textAlign="center"
             flexDirection="column"
           >
-            {body}
+            <RichText>{body}</RichText>
           </Center>
           <Center width="100%" gridArea="form" alignItems="flex-start">
-            {formState.shouldRender("Support") ? (
-              <SupportForm ref={formRef} accent={accent} onSubmit={handleSubmit} />
-            ) : formState.shouldRender("Sales") ? (
-              <SalesForm ref={formRef} accent={accent} onSubmit={handleSubmit} />
-            ) : showSuccess ? (
-              <Success>{formState.successMessage}</Success>
+            {notNullUndefined(formState.selected) && notNullUndefined(button) ? (
+              !formState.showSuccess ? (
+                <GenericForm
+                  ref={formRef}
+                  fields={fields}
+                  onSubmit={handleSubmit}
+                  colorScheme={formState.selected.color}
+                />
+              ) : (
+                <Success>
+                  <RichText>{button.alert?.body.raw}</RichText>
+                </Success>
+              )
             ) : null}
           </Center>
-          <Center py={8} gridArea="button">
-            {button}
+          <Center py={8} px={2} gridArea="button">
+            <ChakraButton
+              w="100%"
+              type="submit"
+              colorScheme={colorScheme}
+              // onClick={handleFormSubmit}
+              variant={button?.variant ? button.variant : undefined}
+            >
+              {fnTitle(button?.text ?? "Submit")}
+            </ChakraButton>
           </Center>
         </Grid>
       }

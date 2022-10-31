@@ -127,3 +127,26 @@ export function getErrorMessage(thrown: unknown): string {
   }
   return message;
 }
+
+export function separate<
+  Item extends Record<string, unknown>,
+  Key extends keyof Item,
+  WithoutKey extends Omit<Item, Key>,
+  KeysWithout extends keyof WithoutKey,
+  Return extends [Item[Key] | null, Array<{ [K in KeysWithout]: WithoutKey[K] }>],
+  Predicate extends (item: unknown) => item is Item[Key],
+>(
+  items: Array<Item>,
+  key: Key,
+  predicate: Predicate,
+  defaultValue: Return = [null, [] as Array<{ [K in KeysWithout]: WithoutKey[K] }>] as Return,
+): Return {
+  return items.reduce<Return>((final, item) => {
+    if (predicate(item[key])) {
+      final[0] = item[key];
+    }
+    const { [key]: _, ...rest } = item;
+    final[1].push(rest as unknown as { [K in KeysWithout]: WithoutKey[K] });
+    return final;
+  }, defaultValue);
+}

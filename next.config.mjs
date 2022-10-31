@@ -15,6 +15,14 @@ console.dir(process.env, { depth: null });
 
 /** @type {import("next").NextConfig} */
 const config = {
+  webpack: config => {
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      exclude: /node_modules/,
+      loader: "raw-loader",
+    });
+    return config;
+  },
   reactStrictMode: true,
   poweredByHeader: false,
   swcMinify: true,
@@ -22,7 +30,7 @@ const config = {
     newNextLinkBehavior: true,
   },
   images: {
-    domains: ["images.ctfassets.net"],
+    domains: ["images.ctfassets.net", "media.graphassets.com"],
   },
   env: {
     SITE_VERSION: getVersion(),

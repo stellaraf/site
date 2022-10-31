@@ -1,44 +1,32 @@
-import { FormControl, FormErrorMessage, Input } from "@chakra-ui/react";
-import { Controller } from "react-hook-form";
+import { FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react";
+import { useFormContext } from "react-hook-form";
 
-import { useColorValue } from "~/context";
+import { notNullUndefined } from "~/types";
 
-import type { TextFieldProps, FormFieldProps } from "./types";
+import type { FormFieldProps } from "./types";
 import type { InputProps } from "@chakra-ui/react";
 import type { FieldValues } from "react-hook-form";
 
-const Field = <V extends FieldValues>(props: TextFieldProps<V>) => {
-  const { field, fieldState, isRequired, ...rest } = props;
-
-  const { name, ...fieldProps } = field;
-
-  const placeholderStyle = useColorValue(
-    { opacity: 0.8, color: "gray.600" },
-    { color: "whiteAlpha.600" },
-  );
-
-  return (
-    <FormControl
-      id={name}
-      isRequired={isRequired}
-      isInvalid={typeof fieldState.error !== "undefined"}
-    >
-      <Input {...fieldProps} {...rest} _placeholder={placeholderStyle} />
-      <FormErrorMessage>{fieldState.error && fieldState.error.message}</FormErrorMessage>
-    </FormControl>
-  );
-};
-
 export const TextInput = <V extends FieldValues>(props: FormFieldProps<InputProps, V>) => {
-  const { ctl, id, defaultValue, isRequired = false, ...rest } = props;
+  const { field, name, defaultValue, rules = {}, isRequired = false, ...rest } = props;
+
+  const { register, getFieldState } = useFormContext();
+  const { error } = getFieldState(name);
 
   return (
-    <Controller<V>
-      name={id}
-      control={ctl}
-      defaultValue={defaultValue}
-      rules={{ required: isRequired }}
-      render={r => <Field<V> isRequired={isRequired} {...r} {...rest} />}
-    />
+    <FormControl id={name} isRequired={isRequired} isInvalid={typeof error !== "undefined"}>
+      {notNullUndefined(field.label) && <FormLabel>{field.label}</FormLabel>}
+      <Input
+        placeholder={field.displayName}
+        _placeholder={{
+          color: "gray.600",
+          opacity: 0.8,
+          _dark: { color: "whiteAlpha.600", opacity: 1 },
+        }}
+        {...register(name, { required: isRequired, ...rules })}
+        {...rest}
+      />
+      <FormErrorMessage>{typeof error !== "undefined" && error.message}</FormErrorMessage>
+    </FormControl>
   );
 };

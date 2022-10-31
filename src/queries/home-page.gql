@@ -1,0 +1,34 @@
+query homePage($name: String) {
+  homePage(where: { name: $name }) {
+    blocks(first: 10) {
+      body {
+        raw
+      }
+      button {
+        link
+        text
+        variant
+      }
+      image {
+        fileName
+        height
+        mimeType
+        size
+        url
+        width
+        handle
+      }
+      subtitle
+      title
+    }
+    mainVideo {
+      fileName
+      handle
+      height
+      mimeType
+      size
+      url
+      width
+    }
+  }
+}

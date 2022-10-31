@@ -1,0 +1,106 @@
+query config($title: String) {
+  values: configuration(where: { title: $title }) {
+    description
+    organizationName
+    privacyBanner {
+      raw
+    }
+    slogan
+    title
+    titleOverrides
+    socialLinks(first: 10) {
+      id
+      name
+      href
+      iconName
+    }
+    errorMessage {
+      id
+      name
+      level
+      title
+      body {
+        raw
+      }
+    }
+    callToAction {
+      shown
+      title
+    }
+    testimonials(first: 10) {
+      body {
+        raw
+      }
+      image {
+        fileName
+        handle
+        height
+        mimeType
+        size
+        url
+        width
+      }
+      subtitle
+      title
+    }
+    createdAt
+    hqAddress
+    hqCoordinates {
+      latitude
+      longitude
+    }
+    hqMapInfo {
+      raw
+    }
+    openMapsText
+    subscribe {
+      id
+      button {
+        id
+        action
+        alert {
+          body {
+            raw
+          }
+          level
+          name
+          title
+        }
+        text
+        variant
+      }
+      fields {
+        ... on CheckboxField {
+          displayName
+          formId
+          label
+          multiple
+          options
+          required
+        }
+        ... on SelectField {
+          displayName
+          formId
+          label
+          multiple
+          options
+          required
+        }
+        ... on TextAreaField {
+          formId
+          displayName
+          label
+          required
+        }
+        ... on TextInputField {
+          displayName
+          formId
+          label
+          required
+          validationType
+        }
+      }
+      colorScheme
+    }
+  }
+}

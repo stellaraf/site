@@ -1,9 +1,10 @@
 import { createContext, useContext } from "react";
 
-import type { GeoPoint } from "~/types";
+import type { CloudLocations } from "~/queries";
 
-const CloudLocationsCtx = createContext<GeoPoint[]>([]);
+const CloudLocationsCtx = createContext<CloudLocations>([]);
 
 export const CloudLocationsProvider = CloudLocationsCtx.Provider;
 
-export const useCloudLocations = (): GeoPoint[] => useContext<GeoPoint[]>(CloudLocationsCtx);
+export const useCloudLocations = (): CloudLocations =>
+  useContext<CloudLocations>(CloudLocationsCtx);

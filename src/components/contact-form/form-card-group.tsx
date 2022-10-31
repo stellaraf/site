@@ -7,10 +7,10 @@ import { MFormCardGroup } from "./mobile";
 import type { FormCardGroupProps } from "./types";
 
 export const FormCardGroup = (props: FormCardGroupProps) => {
-  const { cards } = props;
+  const { contactForms } = props;
   const isMobile = useMobile();
   return (
-    <ContactFormProvider value={cards}>
+    <ContactFormProvider value={contactForms}>
       {isMobile ? <MFormCardGroup /> : <DFormCardGroup />}
     </ContactFormProvider>
   );

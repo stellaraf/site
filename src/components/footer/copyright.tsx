@@ -6,7 +6,7 @@ import { useOpposingColor } from "~/hooks";
 import type { BoxProps } from "@chakra-ui/react";
 
 export const Copyright = (props: BoxProps) => {
-  const { orgName } = useConfig();
+  const { organizationName } = useConfig();
   const version = process.env.SITE_VERSION as string;
 
   const bg = useColorValue("tertiary.500", "secondary.300");
@@ -20,7 +20,7 @@ export const Copyright = (props: BoxProps) => {
         fontSize="sm"
         color="whiteAlpha.700"
         {...props}
-      >{`Copyright © ${new Date().getFullYear()} ${orgName}`}</Box>
+      >{`Copyright © ${new Date().getFullYear()} ${organizationName}`}</Box>
     </Tooltip>
   );
 };

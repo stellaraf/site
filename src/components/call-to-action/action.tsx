@@ -3,27 +3,22 @@ import NextLink from "next/link";
 import { Box, Flex, Button, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { Card, CardBody, Icon } from "~/components";
-import { useRender, useSlug } from "~/hooks";
+import { Card, CardBody, Icon, RichText } from "~/components";
+import { useSlug } from "~/hooks";
+import { notNullUndefined } from "~/types";
 
-import type { TActions } from "~/types";
+import type { Actions } from "~/queries";
 
-export const Action = (props: TActions) => {
-  const { body, page, title, subtitle, callToActionIcon, callToActionBody, callToActionIconColor } =
-    props;
+export const Action = (props: ArrayElement<Actions>) => {
+  const { body, page, title, subtitle, callToAction } = props;
 
   const titleMe = useTitleCase();
-  const renderedBody = useRender(
-    callToActionBody ?? body ?? page.fields.body,
-    undefined,
-    undefined,
-    undefined,
-    { hyperlink: (_, children) => <span>{children}</span> },
-  );
+
+  const resolvedBody = callToAction.body ?? body ?? page?.body;
   const slug = useSlug(title, [title]);
 
   return (
-    <NextLink href={`${page.fields.slug}#${slug}`} scroll={false}>
+    <NextLink href={`${page?.slug}#${slug}`} scroll={false}>
       <Button
         p={0}
         rounded="lg"
@@ -45,12 +40,12 @@ export const Action = (props: TActions) => {
               <Heading fontSize={{ base: "md", md: "md" }} maxW="80%" whiteSpace="pre-wrap">
                 {titleMe(title)}
               </Heading>
-              {typeof callToActionIcon !== "undefined" && (
+              {notNullUndefined(callToAction.icon) && (
                 <Icon
                   size={12}
                   ml={2}
-                  color={callToActionIconColor}
-                  url={callToActionIcon.fields.file.url}
+                  color={callToAction.iconColor ?? "gray"}
+                  url={callToAction.icon?.url}
                 />
               )}
             </Flex>
@@ -69,7 +64,7 @@ export const Action = (props: TActions) => {
                 },
               }}
             >
-              {renderedBody}
+              <RichText content={resolvedBody?.raw} />
             </Box>
           </CardBody>
         </Card>

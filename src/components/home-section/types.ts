@@ -1,18 +1,15 @@
 import type { BoxProps, GridProps } from "@chakra-ui/react";
-import type { HomeSection } from "~/types";
+import type { HomePageBlock } from "~/queries";
 
 export interface HomeSectionProps extends BoxProps {
-  section: HomeSection;
+  block: HomePageBlock;
   index: number;
 }
 
 export type Sides = ["right", "left"];
 export type Side = ArrayElement<Sides>;
 
-export interface HomeBlockProps
-  extends Omit<GridProps, "title">,
-    Pick<HomeSection, "buttonLink" | "buttonText" | "title" | "subtitle"> {
-  body: React.ReactNode;
+export interface HomeBlockProps extends Omit<GridProps, "title">, Omit<HomePageBlock, "body"> {
   side: Side;
-  imageUrl: string;
+  body: React.ReactNode;
 }

@@ -8,7 +8,6 @@ import {
   createCookieStorageManager,
   useTheme as useChakraTheme,
 } from "@chakra-ui/react";
-
 import { makeTheme } from "~/util";
 
 import type { UseTheme, UIProviderProps, ColorModeContext } from "./types";
@@ -17,7 +16,7 @@ import type { GetServerSideProps } from "next";
 export const UIProvider = (props: UIProviderProps) => {
   const { theme, children, cookies } = props;
 
-  const generatedTheme = useMemo(() => makeTheme(theme), []);
+  const fullTheme = useMemo(() => makeTheme(theme), []);
 
   const colorModeManager = useMemo(() => {
     if (typeof cookies === "string") {
@@ -28,7 +27,7 @@ export const UIProvider = (props: UIProviderProps) => {
   }, [cookies]);
 
   return (
-    <ChakraProvider resetCSS theme={generatedTheme} colorModeManager={colorModeManager}>
+    <ChakraProvider resetCSS theme={fullTheme} colorModeManager={colorModeManager}>
       {children}
     </ChakraProvider>
   );

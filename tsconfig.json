@@ -10,8 +10,11 @@
       "~/context": ["./src/context/index"],
       "~/hooks": ["./src/hooks/index"],
       "~/layouts": ["./src/layouts/index"],
+      "~/queries": ["./src/queries/index"],
+      "~/queries/*": ["./src/queries/*"],
       "~/styles": ["./src/styles/index"],
       "~/types": ["./src/types/index"],
+      "~/types/*": ["./src/types/*"],
       "~/util": ["./src/util/index"]
     },
     "esModuleInterop": true,
@@ -29,6 +32,7 @@
   },
   "exclude": ["node_modules", ".next", ".husky", "dist", "public", "generateFavicons.ts"],
   "include": [
+    "codegen.ts",
     "next.config.js",
     ".eslintrc.*",
     "next-env.d.ts",

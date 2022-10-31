@@ -22,5 +22,27 @@ type PropOf<T, P extends keyof T> = T[P];
 
 type KeysOf<T, K extends keyof T> = keyof Pick<T, K>;
 
+type RequiredKeys<T, R extends keyof T> = { [K in Exclude<keyof T, R>]: T[K] } & {
+  [K in R]-?: NonNullable<T[R]>;
+};
+
 type ArrayElement<ArrayType extends readonly unknown[]> =
   ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+
+interface GraphQLResponseError {
+  errors: { message: string }[];
+  data: { values: null };
+}
+
+interface GraphQLResponseSuccess<T> {
+  data: T;
+}
+
+type GraphQLResponse<T> = GraphQLResponseSuccess<T> | GraphQLResponseError;
+
+declare module "*.gql" {
+  import { DocumentNode } from "graphql";
+  const Schema: DocumentNode;
+
+  export = Schema;
+}

@@ -9,19 +9,18 @@ import {
 } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { Card, CardBody, TrialForm } from "~/components";
-import { useColorValue } from "~/context";
-import { useGradient, useMobile, useRender, useResponsiveStyle } from "~/hooks";
-import { submitTrialForm } from "~/util";
+import { Card, CardBody, GenericForm, RichText } from "~/components";
+import { useGradient, useMobile, useResponsiveStyle } from "~/hooks";
+import { notNullUndefined } from "~/types";
+import { separate } from "~/util";
 
 import { PartnerContextProvider, usePartnerCtx } from "./context";
 
 import type { PartnerLayoutProps } from "./types";
-import type { TFormModelTrial } from "~/types";
+import type { VendorLogo } from "~/queries";
 
 const TextContent = () => {
   const { title, subtitle, body } = usePartnerCtx();
-  const renderedBody = useRender(body);
   const fnTitle = useTitleCase();
 
   return (
@@ -54,46 +53,68 @@ const TextContent = () => {
           maxW={{ base: "none", md: "none", xl: "75%" }}
           alignSelf={{ base: "center", lg: "flex-start" }}
         >
-          {renderedBody}
+          <RichText content={body.raw} />
         </Box>
       )}
     </Flex>
   );
 };
 
-const PartnerLogo = () => {
-  const { name, logo, logoColorDarkMode, logoColorLightMode } = usePartnerCtx();
-  const color = useColorValue(logoColorLightMode, logoColorDarkMode);
+const PartnerLogo = (props: VendorLogo) => {
+  const { name, logo, lightColor, darkColor, pretext, postText } = props;
   const isMobile = useMobile();
 
   return (
     <VStack w="100%" alignItems={{ base: "center", lg: "flex-start" }} spacing={4}>
       <Heading as="h3" fontSize="sm" opacity={0.8}>
-        Powered By
+        {pretext}
       </Heading>
       <Flex w="100%" flex="1 0 100%" height={8} justifyContent="flex-start">
         <Box
           display="inline-block"
           boxSize="100%"
           css={{
-            maskImage: `url(${logo.fields.file.url})`,
             maskRepeat: "no-repeat",
+            maskImage: `url(${logo.url})`,
             maskPosition: isMobile ? "center" : "left",
           }}
-          backgroundColor={color}
+          _dark={{ bg: darkColor.hex }}
+          bg={lightColor.hex}
         />
         <VisuallyHidden>{name}</VisuallyHidden>
       </Flex>
+      {postText && (
+        <Heading as="h3" fontSize="sm" opacity={0.8}>
+          {postText}
+        </Heading>
+      )}
     </VStack>
   );
 };
 
 const FormCard = () => {
-  const { name, fields } = usePartnerCtx();
+  const { contents } = usePartnerCtx();
+
+  const [, pageContents] = separate(
+    contents,
+    "vendorLogo",
+    (v: unknown): v is VendorLogo => (v as Record<string, unknown>).__typename === "VendorLogo",
+  );
+
+  const form = pageContents.find(c => notNullUndefined(c.form))?.form;
+
   return (
     <Card minHeight="lg" height="min-content" w={{ base: "20rem", md: "80%", lg: "100%" }}>
       <CardBody>
-        <TrialForm name={name} fields={fields} onSubmit={submitTrialForm} />
+        {notNullUndefined(form) && (
+          <GenericForm
+            w="100%"
+            button={form.button}
+            buttonProps={{ maxW: undefined }}
+            fields={form.fields}
+            colorScheme={form.colorScheme}
+          />
+        )}
       </CardBody>
     </Card>
   );
@@ -102,13 +123,20 @@ const FormCard = () => {
 const MVendorLayout = () => {
   const bg = useGradient();
   const rStyles = useResponsiveStyle();
+  const { contents } = usePartnerCtx();
+
+  const [vendorLogo] = separate(
+    contents,
+    "vendorLogo",
+    (v: unknown): v is VendorLogo => (v as Record<string, unknown>).__typename === "VendorLogo",
+  );
 
   return (
     <Box w="100%" minH="40vh" pt={32} {...bg} {...rStyles}>
       <VStack spacing={8}>
         <TextContent />
         <FormCard />
-        <PartnerLogo />
+        {notNullUndefined(vendorLogo) && <PartnerLogo {...vendorLogo} />}
       </VStack>
     </Box>
   );
@@ -117,6 +145,14 @@ const MVendorLayout = () => {
 const DVendorLayout = () => {
   const bg = useGradient();
   const rStyles = useResponsiveStyle();
+
+  const { contents } = usePartnerCtx();
+
+  const [vendorLogo] = separate(
+    contents,
+    "vendorLogo",
+    (v: unknown): v is VendorLogo => (v as Record<string, unknown>).__typename === "VendorLogo",
+  );
 
   return (
     <Box w="100%" minH="40vh" pt={32} {...bg} {...rStyles}>
@@ -128,7 +164,7 @@ const DVendorLayout = () => {
       >
         <VStack alignItems="flex-start" gridArea="content">
           <TextContent />
-          <PartnerLogo />
+          {notNullUndefined(vendorLogo) && <PartnerLogo {...vendorLogo} />}
         </VStack>
         <VStack alignItems="flex-end" gridArea="form" maxHeight="80%">
           <FormCard />
@@ -139,9 +175,6 @@ const DVendorLayout = () => {
 };
 
 export const PartnerLayout = (props: PartnerLayoutProps) => {
-  const { trialForm, ...rest } = props;
-
-  const fields = trialForm ?? ({} as TFormModelTrial);
   const largeLayout = useBreakpointValue({
     base: false,
     md: false,
@@ -150,7 +183,7 @@ export const PartnerLayout = (props: PartnerLayoutProps) => {
   });
 
   return (
-    <PartnerContextProvider value={{ fields, ...rest }}>
+    <PartnerContextProvider value={props}>
       {largeLayout ? <DVendorLayout /> : <MVendorLayout />}
     </PartnerContextProvider>
   );

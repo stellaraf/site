@@ -13,30 +13,23 @@ import { useGoogleAnalytics } from "~/hooks";
 import { useContactFormCtx } from "../context";
 import { FormCard, FormCardBody } from "../form-card";
 import { FormCardContent } from "../form-card-content";
-import { queryIsForm } from "../guards";
+import { isValidFormQuery } from "../guards";
 import { useContactForm } from "../state";
+import { separateFormFields } from "../util";
 import { DesktopForm } from "./desktop-form";
 
-import type { FormHandlers } from "../forms/types";
 import type { MotionItems } from "../types";
 import type { Variants } from "framer-motion";
-import type { IContactCard } from "~/types";
 
 // Make Chakra-UI components into Framer-Motion components for fewer components in the tree.
 const Container = motion(Stack);
 const AnimatedCard = motion(FormCard);
 const AnimatedCenter = motion(Center);
 
-const iconMap = {
-  Sales: { bs: "BsFillPersonLinesFill" },
-  Support: { bs: "BsPeopleFill" },
-  Docs: { cg: "CgNotes" },
-};
-
-export const DFormCardGroup = (): JSX.Element => {
+export const DFormCardGroup = () => {
   const cards = useContactFormCtx();
   const formState = useContactForm();
-  const titleMe = useTitleCase();
+  const fnTitle = useTitleCase();
   const { pathname, query } = useRouter();
   const { trackModal } = useGoogleAnalytics();
 
@@ -88,12 +81,12 @@ export const DFormCardGroup = (): JSX.Element => {
    * /contact?form=support, automatically load the corresponding form.
    */
   useEffect(() => {
-    if (queryIsForm(query)) {
-      const selected = cards.find(c => c.icon.toLowerCase() === query.form.toLowerCase());
-      if (typeof selected !== "undefined") {
-        formState.setSelected(selected.icon);
+    if (isValidFormQuery(query)) {
+      const match = cards.find(c => c.title.toLowerCase() === query.form.toLowerCase());
+      if (typeof match !== "undefined") {
+        formState.setSelected(match.title);
         toggleLayout(1);
-        trackModal(`${pathname}/form-${selected.icon.toLowerCase()}`);
+        trackModal(`${pathname}/form-${match.title.toLowerCase().replace(/\s/gi, "-")}`);
       }
     }
   }, [query]);
@@ -108,17 +101,21 @@ export const DFormCardGroup = (): JSX.Element => {
       animate={layout}
     >
       <AnimatePresence>
-        {cards.map((card: IContactCard, i) => {
-          const { icon: iconName, color: iconColor, buttonText, form, ...cardRest } = card;
+        {cards.map((card, i) => {
+          const { icon, color: iconColor, button, title, body, ...cardRest } = card;
 
-          const isForm = layout === "form" && formState.selected === iconName;
+          const { button: formButton, fields } = separateFormFields(card);
+
+          // const isForm = layout === "form" && formState.selected?.title === iconName;
+          const isForm =
+            fields.length > 0 && (typeof button.link === "undefined" || button.link === null);
 
           // Send the same component to both sub-components (FormCardContent/FormContainer). Since
           // it's the same component and wrapped by a framer component, it will be animated when
           // moved from one location to another.
-          const icon = (
+          const renderedIcon = (
             <motion.div>
-              <Icon icon={iconMap[iconName]} color={iconColor} />
+              <Icon icon={{ [icon.family]: icon.name }} color={iconColor} />
             </motion.div>
           );
 
@@ -128,20 +125,20 @@ export const DFormCardGroup = (): JSX.Element => {
            * The Docs link should just be a standard router link to the /docs route.
            */
           function handleClick(event: MouseEvent): void {
-            if (["Support", "Sales"].includes(iconName)) {
+            if (isForm) {
               event.preventDefault();
-              formState.setSelected(iconName);
+              formState.setSelected(title);
               toggleLayout();
-              trackModal(`${pathname}/form-${iconName.toLowerCase()}`);
+              trackModal(`${pathname}/form-${title.replace(/\s/gi, "-").toLowerCase()}`);
             }
           }
 
           // Create a ref object to pass to each form. Because the submit button lives outside the
           // form for layout reasons, it needs to explicitly call the form's submit method.
-          const formRef = useRef<FormHandlers>({} as FormHandlers);
+          const formRef = useRef<{ submit: () => void }>(null);
 
           function handleFormSubmit(): void {
-            formRef.current.submit();
+            formRef.current?.submit();
           }
 
           // Button component & props need to change based on the form's current lifecycle state
@@ -150,21 +147,22 @@ export const DFormCardGroup = (): JSX.Element => {
             <Button
               w="100%"
               colorScheme={iconColor}
-              href={iconName === "Docs" ? "/docs" : undefined}
-              onClick={iconName === "Docs" ? undefined : handleClick}
+              href={isForm ? undefined : button.link!}
+              onClick={isForm ? handleClick : undefined}
             >
-              {titleMe(buttonText)}
+              {fnTitle(button.text)}
             </Button>
           );
-          const formButton = (
+          const renderedFormButton = (
             <ChakraButton
               w="100%"
               maxW="50%"
               type="submit"
               colorScheme={iconColor}
               onClick={handleFormSubmit}
+              variant={formButton?.variant ? formButton.variant : undefined}
             >
-              {titleMe(form?.buttonSubmit ?? "Submit")}
+              {fnTitle(formButton?.text ?? "Submit")}
             </ChakraButton>
           );
 
@@ -184,13 +182,13 @@ export const DFormCardGroup = (): JSX.Element => {
                 variants={items}
                 custom={{
                   idx: i,
-                  current: cards.findIndex(c => c.icon === formState.selected),
+                  current: cards.findIndex(c => c.title === formState.selected?.title),
                 }}
                 initial={false}
                 // Framer requires a unique key per animated layout component for tracking.
                 key={`card${i}`}
                 // Apply static styles based on current layout state.
-                {...(isForm ? formSizes : cardSizes)}
+                {...(layout === "form" ? formSizes : cardSizes)}
               >
                 <FormCardBody>
                   {/**
@@ -203,34 +201,37 @@ export const DFormCardGroup = (): JSX.Element => {
                     {layout === "cards" ? (
                       <FormCardContent
                         index={i}
-                        icon={icon}
-                        iconName={iconName}
+                        body={body}
+                        title={title}
+                        button={button}
+                        icon={renderedIcon}
                         toggleLayout={toggleLayout}
                         {...cardRest}
                       />
                     ) : (
                       <DesktopForm
-                        icon={icon}
+                        title={title}
+                        body={body.raw}
                         formRef={formRef}
-                        accent={iconColor}
+                        icon={renderedIcon}
                         toggleLayout={toggleLayout}
                         {...cardRest}
                       />
                     )}
                   </LayoutGroup>
                 </FormCardBody>
-                {/**
-                 * The button also remains the same component throughout the lifecycle changes.
-                 * Wrapping it in animation makes it appear to move around with the card as states
-                 * change.
-                 */}
+                {
+                  // The button also remains the same component throughout the lifecycle changes.
+                  // Wrapping it in animation makes it appear to move around with the card as states
+                  // change.
+                }
                 <AnimatedCenter
                   layoutId={`button${i}`}
                   width="100%"
                   exit={{ scale: 0.5, opacity: 0 }}
                 >
                   {layout === "form" && !formState.showSuccess
-                    ? formButton
+                    ? renderedFormButton
                     : formState.showSuccess
                     ? null
                     : cardsButton}

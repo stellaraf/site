@@ -3,26 +3,19 @@ import { useCallback, useEffect } from "react";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
 
 import { useContactFormCtx } from "./context";
-import { isSupportedForm } from "./guards";
 
-import type { FormIcon, AvailableForms } from "./types";
-import type { IContactCard } from "~/types";
+import type { ContactForm, ContactForms } from "~/queries";
 
 interface ContactFormValues {
   /**
    * Currently selected form name. `null` if no form is selected (indicates card row view).
    */
-  selected: Nullable<keyof AvailableForms>;
-
-  /**
-   * Success message, determined by the currently `selected` form.
-   */
-  successMessage: Nullable<string>;
+  selected: ContactForm | null;
 
   /**
    * Contact forms by name, e.g. `{ Support: { ...data } }`
    */
-  form: AvailableForms;
+  forms: ContactForms;
 
   /**
    * If `true`, the form container should show a success message, `false` otherwise.
@@ -39,33 +32,32 @@ interface ContactFormMethods {
   /**
    * Reset the form's state.
    */
-  reset: NoOp;
+  reset: () => void;
 
   /**
    * Determine if form identified by `name` parameter should be rendered.
    *
    * @param name Form name
    */
-  shouldRender: (name: keyof AvailableForms) => boolean;
+  shouldRender: (name: string) => boolean;
 
   /**
    * Set the selected form by name.
    */
-  setSelected: (name: FormIcon) => void;
+  setSelected: (title: string) => void;
 
   /**
    * Populate form configuration from CMS data. This should only be run once during initialization.
    */
-  addForms: (c: IContactCard[]) => void;
+  addForms: (c: ContactForms) => void;
 }
 
 const formAtom = atom<ContactFormValues>({
   key: "formState",
   default: {
     selected: null,
-    form: {} as AvailableForms,
+    forms: [],
     showSuccess: false,
-    successMessage: null,
   },
 });
 
@@ -74,21 +66,11 @@ export function useContactForm(): ContactFormValues & ContactFormMethods {
 
   const cards = useContactFormCtx();
 
-  const addForms = useCallback((cards: IContactCard[]): void => {
-    const current = state.form;
-
+  const addForms = useCallback((cards: ContactForms): void => {
     // If no forms are present, add them.
-    if (Object.keys(current).length === 0) {
-      const form = {} as AvailableForms;
-
-      for (const card of cards) {
-        const { icon: name, form: value } = card;
-        if (name !== "Docs" && typeof value !== "undefined") {
-          // @ts-expect-error TS doesn't know which name corresponds to the value, but it's all good.
-          form[name] = value;
-        }
-      }
-      setState(prev => ({ ...prev, form }));
+    if (state.forms.length === 0) {
+      const withFields = cards.filter(c => c.fields.length !== 0);
+      setState(prev => ({ ...prev, forms: withFields }));
     }
   }, []);
 
@@ -104,14 +86,14 @@ export function useContactForm(): ContactFormValues & ContactFormMethods {
   }, []);
 
   const shouldRender = useCallback(
-    (name: keyof AvailableForms): boolean => !state.showSuccess && state.selected === name,
+    (name: string): boolean => !state.showSuccess && state.selected?.title === name,
     [state.showSuccess, state.selected],
   );
 
-  const setSelected = useCallback((selected: FormIcon): void => {
-    if (isSupportedForm(selected)) {
-      const successMessage = state.form[selected].successMessage;
-      setState(prev => ({ ...prev, selected, successMessage }));
+  const setSelected = useCallback((title: string): void => {
+    const selected = state.forms.find(f => f.title === title);
+    if (typeof selected !== "undefined") {
+      setState(prev => ({ ...prev, selected }));
     }
   }, []);
 
@@ -138,7 +120,7 @@ export function useContactForm(): ContactFormValues & ContactFormMethods {
  * @param name Form name.
  * @returns Form configuration state.
  */
-export function useContactFormConfig<K extends keyof AvailableForms>(name: K): AvailableForms[K] {
+export function useContactFormConfig(name: string): ContactForm | null {
   const state = useRecoilValue(formAtom);
-  return state.form[name];
+  return state.selected;
 }

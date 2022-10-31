@@ -3,18 +3,18 @@ import { useRouter } from "next/router";
 import { Flex, Heading, Spinner } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { DocsGroups, SEO } from "~/components";
-import { useRender, useScaledText } from "~/hooks";
+import { DocsGroups, SEO, RichText } from "~/components";
+import { useScaledText } from "~/hooks";
 import { DocsLayout } from "~/layouts";
-import { getPage, getPageId } from "~/util";
+import { pageQuery } from "~/queries";
 
-import type { GetStaticProps } from "next";
-import type { PageEntry, IDocsMain } from "~/types";
+import type { GetStaticProps, NextPage } from "next";
+import type { PageProps } from "~/types";
 
-const TextContent = (props: IDocsMain["pageData"]) => {
-  const { title, subtitle, body = null } = props;
+const TextContent = (props: PageProps) => {
+  const { title, subtitle, body } = props;
   const fnTitle = useTitleCase();
-  const renderedBody = useRender(body);
+
   const [containerRef, headingRef, shouldResize] = useScaledText<HTMLDivElement>([]);
   return (
     <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
@@ -33,12 +33,12 @@ const TextContent = (props: IDocsMain["pageData"]) => {
           </Heading>
         )}
       </Flex>
-      {body && renderedBody}
+      <RichText content={body?.raw} />
     </Flex>
   );
 };
 
-const Docs = (props: PageEntry<IDocsMain>) => {
+const Docs: NextPage<PageProps> = props => {
   const { isFallback } = useRouter();
   if (isFallback) {
     return (
@@ -47,31 +47,22 @@ const Docs = (props: PageEntry<IDocsMain>) => {
       </DocsLayout>
     );
   }
-  const { pageData } = props;
-  const { title, subtitle } = pageData.fields;
+  const { title, subtitle } = props;
   return (
     <>
-      <SEO title={title} description={subtitle} />
+      <SEO title={title} description={subtitle ? subtitle : undefined} />
       <DocsLayout>
-        <TextContent {...pageData.fields} />
+        <TextContent {...props} />
         <DocsGroups />
       </DocsLayout>
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<PageEntry<IDocsMain>> = async ctx => {
+export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let pageData = {} as PageEntry<IDocsMain>["pageData"];
-
-  try {
-    const pageId = await getPageId("docs", preview);
-    pageData = await getPage<IDocsMain["pageData"]>(pageId, preview);
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-  return { props: { pageData, preview } };
+  const page = await pageQuery({ slug: "docs" });
+  return { props: { ...page, preview } };
 };
 
 export default Docs;

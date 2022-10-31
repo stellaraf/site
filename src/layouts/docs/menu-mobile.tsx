@@ -14,9 +14,9 @@ import { useColorValue } from "~/context";
 
 import { useDocsHref } from "./use-docs-href";
 
-import type { IDocsGroup, IDocsArticle } from "~/types";
+import type { DocsGroup, DocsPage } from "~/queries";
 
-const MMenuItem = (props: IDocsArticle) => {
+const MMenuItem = (props: Omit<DocsPage, "body">) => {
   const { title } = props;
   const { href, isCurrent } = useDocsHref(props);
 
@@ -31,8 +31,8 @@ const MMenuItem = (props: IDocsArticle) => {
   );
 };
 
-export const MMenuGroup = (props: IDocsGroup) => {
-  const { title, items } = props;
+export const MMenuGroup = (props: DocsGroup) => {
+  const { title, docsPages } = props;
 
   const borderColor = useColorValue("blackAlpha.300", "whiteAlpha.300");
 
@@ -53,8 +53,8 @@ export const MMenuGroup = (props: IDocsGroup) => {
         </AccordionButton>
         <AccordionPanel pb={4}>
           <List>
-            {items.map(item => (
-              <MMenuItem key={item.title} {...item} />
+            {docsPages.map(page => (
+              <MMenuItem key={page.title} {...page} />
             ))}
           </List>
         </AccordionPanel>

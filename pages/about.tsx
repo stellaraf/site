@@ -1,21 +1,14 @@
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, type BoxProps, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { Avatars, Hero, GoogleMap, SEO, GetStarted, Testimonials } from "~/components";
+import { EmployeeGrid, Hero, GoogleMap, SEO, Callout, Testimonials } from "~/components";
 import { useResponsiveStyle } from "~/hooks";
-import {
-  getPage,
-  getPageContent,
-  getPageId,
-  getParsedContent,
-  stringSorter,
-  sortByWeight,
-} from "~/util";
+import { pageQuery, employeesQuery } from "~/queries";
 
-import type { GetStaticProps } from "next";
-import type { Bio, PageEntry, IAboutPage, ISection, PageContent } from "~/types";
+import type { GetStaticProps, NextPage } from "next";
+import type { AboutPageProps } from "~/types";
 
-const Section = (props: ISection) => {
+const Section = (props: React.PropsWithChildren<BoxProps & Pick<AboutPageProps, "title">>) => {
   const { title, children, ...rest } = props;
   const rStyles = useResponsiveStyle();
   const titleMe = useTitleCase();
@@ -32,48 +25,33 @@ const Section = (props: ISection) => {
   );
 };
 
-const About = (props: PageEntry<IAboutPage>) => {
-  const { pageData, bios } = props;
-  const { title, subtitle, body = null, customProperties, getStarted } = pageData.fields;
-  const { employeesTitle = "", mapTitle = "" } = customProperties;
+const About: NextPage<AboutPageProps> = props => {
+  const { title, subtitle, body, contents, callout, employees } = props;
+
+  const [employeesSection, locationsSection] = contents;
 
   return (
     <>
-      <SEO title={title} description={subtitle} />
-      <Hero title={title} subtitle={subtitle} body={body} />
-      <Section title={employeesTitle}>
-        <Avatars bios={bios} />
+      <SEO title={title} description={subtitle ?? undefined} />
+      <Hero title={title} subtitle={subtitle} body={body?.raw} />
+      <Section title={employeesSection.title}>
+        <EmployeeGrid employees={employees} />
       </Section>
-      <Section title={mapTitle}>
+      <Section title={locationsSection.title}>
         <GoogleMap />
       </Section>
       <Testimonials />
-      {getStarted && <GetStarted {...getStarted.fields} />}
+      {callout && <Callout {...callout} />}
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<PageEntry<IAboutPage>> = async ctx => {
+export const getStaticProps: GetStaticProps<AboutPageProps> = async ctx => {
   const preview = ctx?.preview ?? false;
-  let pageData = {} as PageEntry<IAboutPage>["pageData"];
-  let pageContent = [] as PageContent[];
-  let bios = [] as Bio[];
+  const page = await pageQuery({ slug: "about" });
+  const employees = await employeesQuery();
 
-  try {
-    const pageId = await getPageId("about", preview);
-    pageData = await getPage<IAboutPage["pageData"]>(pageId, preview);
-    pageContent = await getPageContent(pageId, preview);
-    bios = await getParsedContent<Bio>("bio", preview, {
-      select: "sys.id,fields",
-    });
-    // Sort bios alphabetically first, then by sortWeight.
-    bios = bios.sort(stringSorter("name")).sort(sortByWeight);
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-
-  return { props: { pageData, pageContent, bios, preview } };
+  return { props: { ...page, employees, preview } };
 };
 
 export default About;

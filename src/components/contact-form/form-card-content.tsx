@@ -1,5 +1,7 @@
-import { Heading, Text } from "@chakra-ui/react";
+import { Heading, Box } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
+
+import { RichText } from "~/components";
 
 import type { FormCardContentProps } from "./types";
 
@@ -13,7 +15,9 @@ export const FormCardContent = (props: FormCardContentProps) => {
       <Heading as="h3" fontSize="lg">
         {fnTitle(title)}
       </Heading>
-      <Text textAlign="center">{body}</Text>
+      <Box textAlign="center">
+        <RichText>{body.raw}</RichText>
+      </Box>
     </>
   );
 };

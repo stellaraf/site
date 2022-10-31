@@ -1,20 +1,20 @@
 import { Box, Heading, chakra, HStack, useToken } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { CodeBlockStyleProvider, DynamicIcon } from "~/components";
+import { CodeBlockStyleProvider, DynamicIcon, RichText } from "~/components";
 import { useColorValue } from "~/context";
-import { useOpposingColor, useRender } from "~/hooks";
+import { useOpposingColor } from "~/hooks";
+import { AdmonitionType } from "~/types/schema";
 import { shouldForwardProp } from "~/util";
 
-import type { AdmonitionIconProps } from "./types";
-import type { TAdmonition } from "~/types";
+import type { AdmonitionModel } from "~/queries";
 
 const iconMap = {
-  Information: { bi: "BiInfoCircle" },
-  Critical: { im: "ImFire" },
-  Warning: { vsc: "VscWarning" },
-  Note: { go: "GoNote" },
-  Tip: { go: "GoLightBulb" },
+  [AdmonitionType.Information]: { bi: "BiInfoCircle" },
+  [AdmonitionType.Critical]: { im: "ImFire" },
+  [AdmonitionType.Warning]: { vsc: "VscWarning" },
+  [AdmonitionType.Note]: { go: "GoNote" },
+  [AdmonitionType.Tip]: { go: "GoLightBulb" },
 };
 
 const AdmonitionContainer = chakra("div", {
@@ -28,65 +28,64 @@ const AdmonitionContainer = chakra("div", {
   },
 });
 
-const AdmonitionIcon = (props: AdmonitionIconProps) => {
-  const { type = "Note" } = props;
+const AdmonitionIcon = (props: Pick<AdmonitionModel, "type">) => {
+  const { type = AdmonitionType.Note } = props;
   return <DynamicIcon icon={iconMap[type]} boxSize={{ base: 8, lg: 6 }} />;
 };
 
-export const Admonition = (props: TAdmonition) => {
-  const { title, body, type = "Note", ...rest } = props;
+export const Admonition = (props: AdmonitionModel) => {
+  const { title, body, type = AdmonitionType.Note, ...rest } = props;
 
   const fnTitle = useTitleCase();
-  const renderedBody = useRender(body);
 
   const bg = useColorValue(
     {
-      Information: "primary.500",
-      Note: "gray.500",
-      Tip: "green.500",
-      Warning: "yellow.500",
-      Critical: "red.500",
+      [AdmonitionType.Information]: "primary.500",
+      [AdmonitionType.Note]: "gray.500",
+      [AdmonitionType.Tip]: "green.500",
+      [AdmonitionType.Warning]: "yellow.500",
+      [AdmonitionType.Critical]: "red.500",
     }[type],
     {
-      Information: "primary.300",
-      Note: "gray.300",
-      Tip: "green.300",
-      Warning: "yellow.300",
-      Critical: "red.300",
+      [AdmonitionType.Information]: "primary.300",
+      [AdmonitionType.Note]: "gray.300",
+      [AdmonitionType.Tip]: "green.300",
+      [AdmonitionType.Warning]: "yellow.300",
+      [AdmonitionType.Critical]: "red.300",
     }[type],
   );
 
   const linkColor = useColorValue(
     {
-      Note: undefined,
-      Information: "red.500",
-      Tip: "primary.500",
-      Warning: "primary.500",
-      Critical: "primary.500",
+      [AdmonitionType.Note]: undefined,
+      [AdmonitionType.Information]: "red.500",
+      [AdmonitionType.Tip]: "primary.500",
+      [AdmonitionType.Warning]: "primary.500",
+      [AdmonitionType.Critical]: "primary.500",
     }[type],
     {
-      Note: "secondary.500",
-      Information: "gray.800",
-      Tip: "primary.300",
-      Warning: "primary.300",
-      Critical: "primary.300",
+      [AdmonitionType.Note]: "secondary.500",
+      [AdmonitionType.Information]: "gray.800",
+      [AdmonitionType.Tip]: "primary.300",
+      [AdmonitionType.Warning]: "primary.300",
+      [AdmonitionType.Critical]: "primary.300",
     }[type],
   );
 
   const codeColorScheme = useColorValue(
     {
-      Note: "blackAlpha",
-      Information: "primary",
-      Tip: "green",
-      Warning: "yellow",
-      Critical: "red",
+      [AdmonitionType.Note]: "blackAlpha",
+      [AdmonitionType.Information]: "primary",
+      [AdmonitionType.Tip]: "green",
+      [AdmonitionType.Warning]: "yellow",
+      [AdmonitionType.Critical]: "red",
     }[type],
     {
-      Note: "blackSolid",
-      Information: "whiteSolid",
-      Tip: "blackSolid",
-      Warning: "blackSolid",
-      Critical: "blackSolid",
+      [AdmonitionType.Note]: "blackSolid",
+      [AdmonitionType.Information]: "whiteSolid",
+      [AdmonitionType.Tip]: "blackSolid",
+      [AdmonitionType.Warning]: "blackSolid",
+      [AdmonitionType.Critical]: "blackSolid",
     }[type],
   );
 
@@ -104,7 +103,7 @@ export const Admonition = (props: TAdmonition) => {
       </HStack>
       <Box
         css={{
-          "& p": { marginTop: "1rem", marginBottom: 0 },
+          "& div.st-content-p": { marginTop: "1rem", marginBottom: 0 },
           "& a": { "--link-color": useToken("colors", linkColor!) },
         }}
       >
@@ -114,7 +113,7 @@ export const Admonition = (props: TAdmonition) => {
             copyButton: { colorScheme: codeColorScheme, variant: "ghost" },
           }}
         >
-          {renderedBody}
+          <RichText content={body.raw} />
         </CodeBlockStyleProvider>
       </Box>
     </AdmonitionContainer>

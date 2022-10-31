@@ -1,7 +1,7 @@
 import { Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
 
+import { RichText } from "~/components";
 import { useConfig } from "~/context";
-import { useRender } from "~/hooks";
 
 import type { ErrorProps } from "./types";
 
@@ -9,9 +9,8 @@ export const Error = (props: ErrorProps) => {
   const { title, description, children, ...rest } = props;
 
   const { errorMessage } = useConfig();
-  const renderedError = useRender(errorMessage);
 
-  const detail = description ?? children ?? renderedError;
+  const detail = description ?? children;
 
   return (
     <Alert
@@ -23,8 +22,8 @@ export const Error = (props: ErrorProps) => {
       alignItems="center"
       justifyContent="center"
       maxW={{ base: "100%", lg: "75%", xl: "50%" }}
+      status={errorMessage.level}
       {...rest}
-      status="error"
     >
       <AlertIcon boxSize={16} mr={0} />
       <AlertTitle mt={4} mb={1} fontSize="lg">
@@ -37,7 +36,7 @@ export const Error = (props: ErrorProps) => {
           "& > p > a": { "--link-color": "currentColor" },
         }}
       >
-        {detail}
+        {detail ? detail : <RichText content={errorMessage.body.raw} />}
       </AlertDescription>
     </Alert>
   );

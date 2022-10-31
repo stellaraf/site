@@ -1,7 +1,9 @@
 import { Box, Center, Grid, Image, Heading } from "@chakra-ui/react";
 import { useInView } from "react-intersection-observer";
+import { useTitleCase } from "use-title-case";
 
 import { Button } from "~/components";
+import { notNullUndefined } from "~/types";
 
 import type { HomeBlockProps } from "./types";
 
@@ -19,9 +21,10 @@ const templates = {
 const columns = { right: "0.5fr 1fr", left: "1fr 0.5fr" };
 
 export const HomeBlock = (props: HomeBlockProps) => {
-  const { title, subtitle, imageUrl, body, buttonText, buttonLink, side } = props;
+  const { title, subtitle, image, button, body, side } = props;
 
   const [ref, inView] = useInView({ triggerOnce: true, rootMargin: "-150px" });
+  const fnTitle = useTitleCase();
 
   return (
     <Grid
@@ -40,23 +43,25 @@ export const HomeBlock = (props: HomeBlockProps) => {
         transition="opacity 0.2s ease-in 0.1s"
         display={{ base: "none", lg: "flex" }}
       >
-        <Image boxSize="100%" src={imageUrl} />
+        <Image boxSize="100%" src={image.url} />
       </Center>
       <Box gridArea="title">
         <Heading as="h3" fontSize={{ base: "2xl", lg: "4xl" }}>
-          {title}
+          {fnTitle(title)}
         </Heading>
         <Heading as="h4" fontSize={{ base: "1.5rem", lg: "xl" }} fontWeight="light">
-          {subtitle}
+          {fnTitle(subtitle)}
         </Heading>
       </Box>
       <Box whiteSpace="pre-line" fontSize="lg" gridArea="body">
         {body}
       </Box>
       <Box gridArea="button">
-        <Button mx="unset" href={buttonLink} variant="heroPrimary">
-          {buttonText}
-        </Button>
+        {notNullUndefined(button) && (
+          <Button mx="unset" href={button.link ?? ""} variant={button.variant ?? "heroPrimary"}>
+            {button.text}
+          </Button>
+        )}
       </Box>
     </Grid>
   );

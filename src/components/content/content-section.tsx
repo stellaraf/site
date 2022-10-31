@@ -1,21 +1,23 @@
 import { useMemo } from "react";
 
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, VStack, Heading, VisuallyHidden } from "@chakra-ui/react";
 
-import { Button, DynamicIcon, Divider } from "~/components";
+import { Button, DynamicIcon, Divider, RichText } from "~/components";
 import { useColorValue } from "~/context";
 import { useMobile, useResponsiveStyle } from "~/hooks";
+import { notNullUndefined } from "~/types";
 import { forwardRef } from "~/util";
 
-import { usePageContent } from "./use-page-content";
+import { ContentBody } from "./content-body";
+import { ContentForm } from "./content-form";
+import { ContentImage } from "./content-image";
+import { ContentSubSections } from "./content-subsections";
+import { ContentSubtitle } from "./content-subtitle";
+import { ContentTitle } from "./content-title";
+import { ContentUpdatedAt } from "./content-updated-at";
 
 import type { ContentSectionProps, ContentSides, ContentSide, TitleLayoutProps } from "./types";
 import type { FlexProps } from "@chakra-ui/react";
-
-function getSide(idx: number): ContentSide {
-  const sides: ContentSides = ["right", "left"];
-  return sides[idx % 2];
-}
 
 const TitleLayout = (props: TitleLayoutProps) => {
   const { titleBlock, image, side, isMobile } = props;
@@ -41,26 +43,27 @@ const TitleLayout = (props: TitleLayoutProps) => {
 };
 
 export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((props, ref) => {
-  const { items, index, ...rest } = props;
+  const { content, index, ...rest } = props;
   const {
-    form,
-    body,
     title,
-    image,
     subtitle,
-    updatedAt,
-    showButton,
-    buttonText,
-    buttonLink,
-    subsections,
+    body,
     showUpdatedDate,
-  } = usePageContent(items, [items.title]);
+    button,
+    image,
+    form,
+    features,
+    slug,
+    updatedAt,
+    vendorLogo,
+  } = content;
 
   const isMobile = useMobile();
   const rStyles = useResponsiveStyle();
   const showBorder = useColorValue(false, true);
-  const hasImage = useMemo(() => image !== null && !isMobile, [items.title, index, isMobile]);
-  const side = useMemo(() => getSide(index), [index]);
+
+  const hasImage = useMemo(() => notNullUndefined(image) && !isMobile, [title, index, isMobile]);
+  const side = useMemo<ContentSide>(() => (["right", "left"] as ContentSides)[index % 2], [index]);
 
   const titleMargin = useMemo<FlexProps>(() => {
     if (image !== null && !isMobile) {
@@ -75,13 +78,13 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
 
   const titleBlock = (
     <Flex
-      key={items.title}
+      key={title}
       {...titleMargin}
       direction="column"
       textAlign={isMobile ? "center" : !hasImage ? "center" : side === "right" ? "left" : "right"}
     >
-      {title}
-      {subtitle}
+      <ContentTitle id={slug}>{title}</ContentTitle>
+      {subtitle && <ContentSubtitle>{subtitle}</ContentSubtitle>}
     </Flex>
   );
 
@@ -97,22 +100,60 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
         {...rest}
       >
         <Flex h="100%" alignItems="center" justify="center" flexWrap="nowrap">
-          <TitleLayout titleBlock={titleBlock} image={image} isMobile={isMobile} side={side} />
+          <TitleLayout
+            side={side}
+            isMobile={isMobile}
+            titleBlock={titleBlock}
+            image={notNullUndefined(image) ? <ContentImage src={image.url} /> : null}
+          />
         </Flex>
         <Flex height="100%" align="center" direction="column" mb={{ base: 12, lg: "" }}>
-          {body}
-          {form}
-          {subsections}
-          {showButton && (
+          {notNullUndefined(body) && (
+            <ContentBody>
+              <RichText content={body?.raw} />
+            </ContentBody>
+          )}
+          <ContentSubSections features={features} />
+          {notNullUndefined(vendorLogo) && (
+            <VStack w="100%" alignItems={{ base: "center", lg: "flex-start" }} spacing={4}>
+              <Heading as="h3" fontSize="sm" opacity={0.8}>
+                {vendorLogo.pretext}
+              </Heading>
+              <Flex w="100%" flex="1 0 100%" height={8} justifyContent="flex-start">
+                <Box
+                  display="inline-block"
+                  boxSize="100%"
+                  css={{
+                    maskImage: `url(${vendorLogo.logo.url})`,
+                    maskRepeat: "no-repeat",
+                    maskPosition: isMobile ? "center" : "left",
+                  }}
+                  backgroundColor={{
+                    _light: vendorLogo.lightColor.hex,
+                    _dark: vendorLogo.darkColor.hex,
+                  }}
+                />
+                <VisuallyHidden>{vendorLogo.name}</VisuallyHidden>
+              </Flex>
+              {vendorLogo.postText && (
+                <Heading as="h3" fontSize="sm" opacity={0.8}>
+                  {vendorLogo.postText}
+                </Heading>
+              )}
+            </VStack>
+          )}
+          {notNullUndefined(form) && <ContentForm form={form} />}
+          {notNullUndefined(button) && (
             <Button
               my={8}
-              href={buttonLink}
+              href={button.link ?? "#"}
               leftIcon={<DynamicIcon icon={{ bs: "BsChevronRight" }} />}
+              variant={notNullUndefined(button.variant) ? button.variant : undefined}
             >
-              {buttonText}
+              {button.text}
             </Button>
           )}
-          {showUpdatedDate && updatedAt}
+          {showUpdatedDate && <ContentUpdatedAt time={updatedAt} />}
         </Flex>
       </Box>
       {showBorder && <Divider left={side === "left"} right={side === "right"} />}

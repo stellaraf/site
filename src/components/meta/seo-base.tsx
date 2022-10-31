@@ -5,7 +5,7 @@ import { useConfig } from "~/context";
 import type { DefaultSeoProps, NextSeoProps } from "next-seo";
 
 export const SEOBase = (props: DefaultSeoProps) => {
-  const { siteTitle, twitterHandle, siteDescription, orgName } = useConfig();
+  const { title, description, socialLinks, organizationName } = useConfig();
 
   let indexFollow = {} as NextSeoProps;
   let urlPrefix = "https://stellar.tech";
@@ -15,29 +15,37 @@ export const SEOBase = (props: DefaultSeoProps) => {
     urlPrefix = "https://preview.stellar.tech";
   }
 
+  const twitterHandle = socialLinks.reduce<string | undefined>((final, link) => {
+    if (link.name.toLowerCase() === "twitter") {
+      const parts = link.href.split("/");
+      final = parts[parts.length - 1];
+    }
+    return final;
+  }, undefined);
+
   return (
     <DefaultSeo
-      title={orgName}
-      description={siteDescription}
-      titleTemplate={`%s | ${siteTitle}`}
+      title={organizationName}
+      description={description}
+      titleTemplate={`%s | ${title}`}
       twitter={{ site: twitterHandle, cardType: "summary" }}
       openGraph={{
         url: "/",
-        title: orgName,
+        title: organizationName,
         type: "website",
-        description: siteDescription,
+        description,
         images: [
           {
             url: `${urlPrefix}/opengraph.jpg`,
             width: 1200,
             height: 630,
-            alt: orgName,
+            alt: organizationName,
           },
           {
             url: `${urlPrefix}/opengraph.png`,
             width: 1429,
             height: 687,
-            alt: orgName,
+            alt: organizationName,
           },
         ],
       }}

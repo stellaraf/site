@@ -1,0 +1,14 @@
+query cloudLocations {
+  cloudLocations(first: 10) {
+    active
+    coordinates {
+      latitude
+      longitude
+    }
+    description
+    identifier
+    name
+    testUrl
+    timeout
+  }
+}

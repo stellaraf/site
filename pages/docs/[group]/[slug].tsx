@@ -2,21 +2,21 @@ import { useRouter } from "next/router";
 
 import { SEO, DocsArticle, Error, ContentLoader } from "~/components";
 import { DocsLayout } from "~/layouts";
-import { getParsedContent } from "~/util";
+import { docsPageQuery } from "~/queries";
 
-import type { GetStaticProps, GetStaticPaths } from "next";
-import type { IDocsArticlePage } from "~/types";
+import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import type { DocsPage as DocsPageProps } from "~/queries";
 
 type UrlQuery = {
   slug: string;
   group?: string;
 };
 
-const DocsArticlePage = (props: IDocsArticlePage) => {
-  const { article } = props;
+const DocsPage: NextPage<DocsPageProps> = props => {
+  const { title, description, body } = props;
   const { isFallback } = useRouter();
 
-  if (!isFallback && !article) {
+  if (!isFallback && !body) {
     return (
       <>
         <SEO title="Error" noindex nofollow />
@@ -26,6 +26,7 @@ const DocsArticlePage = (props: IDocsArticlePage) => {
       </>
     );
   }
+
   if (isFallback) {
     return (
       <DocsLayout>
@@ -34,32 +35,28 @@ const DocsArticlePage = (props: IDocsArticlePage) => {
     );
   }
 
-  const { title, description } = article ?? {};
   return (
     <>
       <SEO title={title} description={description} />
       <DocsLayout>
-        <DocsArticle {...article} />
+        <DocsArticle {...props} />
       </DocsLayout>
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<IDocsArticlePage, UrlQuery> = async ctx => {
+export const getStaticProps: GetStaticProps<DocsPageProps, UrlQuery> = async ctx => {
   const slug = ctx.params?.slug ?? "";
   const preview = ctx?.preview ?? false;
-  let article = {} as IDocsArticlePage["article"];
+  let page = {} as DocsPageProps;
   let notFound = false;
   try {
-    const res = await getParsedContent<IDocsArticlePage["article"]>("docsArticle", preview, {
-      "fields.slug": slug,
-    });
-    article = res[0];
+    page = await docsPageQuery({ slug });
   } catch (err) {
     console.error(err);
     notFound = true;
   }
-  return { props: { article, preview }, notFound };
+  return { props: { ...page, preview }, notFound };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
@@ -71,4 +68,4 @@ export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
   fallback: true,
 });
 
-export default DocsArticlePage;
+export default DocsPage;

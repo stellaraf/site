@@ -1,8 +1,8 @@
 import type { BoxProps } from "@chakra-ui/react";
-import type { TActions } from "~/types";
+import type { Actions } from "~/queries";
 
 export interface CallToActionProps extends BoxProps {
-  actions: TActions[];
+  actions: Actions;
 }
 export interface MemoCallToActionProps extends CallToActionProps {
   currentPath: string;

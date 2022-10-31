@@ -1,19 +1,13 @@
-import type { FormHandlers, FormType } from "./forms/types";
 import type { BoxProps, FlexProps, StackProps } from "@chakra-ui/react";
-import type { ParsedUrlQuery } from "querystring";
-import type { IContactCard, CustomColors, FormModel } from "~/types";
+import type { GenericForm } from "~/components";
+import type { ContactForms, ContactForm, ContactFormFields } from "~/queries";
+import type { CustomColors } from "~/types";
 
-type FormCardContentPropsBase = IContactCard & FlexProps;
-
-export type FormIcon = IContactCard["icon"];
-
-export interface FormCardContentProps
-  extends Omit<FormCardContentPropsBase, "icon" | "color" | "buttonText"> {
+export interface FormCardContentProps extends Omit<ContactForm & FlexProps, "icon" | "color"> {
   icon: JSX.Element;
-  iconName: FormIcon;
   index?: number;
   accent?: keyof CustomColors;
-  formRef?: React.MutableRefObject<FormHandlers>;
+  formRef?: React.MutableRefObject<{ submit: () => void }>;
   toggleLayout?: (i?: number) => void;
 }
 
@@ -27,16 +21,22 @@ export interface MotionItems {
 }
 
 export interface FormCardGroupProps extends StackProps {
-  cards: IContactCard[];
+  contactForms: ContactForms;
 }
 
-export type TSupportedFormQuery = {
-  form: FormType;
-};
+type NotFormButton<
+  T extends ArrayElement<ContactFormFields>,
+  U = { [K in keyof T]: Pick<T, K> },
+> = T["__typename"] extends "FormButton" ? never : Partial<T> & U[keyof U];
 
-export type TContactQuery = TSupportedFormQuery | ParsedUrlQuery;
+type ExcludeFormButton<Union extends ArrayElement<ContactFormFields>> =
+  Union extends NotFormButton<Union> ? Union : never;
 
-export type AvailableForms = {
-  Support: FormModel<"Support">;
-  Sales: FormModel<"Sales">;
-};
+type ContactFormFieldsWithoutFormButton = ExcludeFormButton<ArrayElement<ContactFormFields>>;
+
+type RequiredFormButton = React.ComponentProps<typeof GenericForm>["button"];
+
+export interface FormElements {
+  button: RequiredFormButton | null;
+  fields: ContactFormFieldsWithoutFormButton[];
+}

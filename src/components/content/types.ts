@@ -1,6 +1,6 @@
 import type { BoxProps, GridProps, HeadingProps } from "@chakra-ui/react";
-import type { LabelProps } from "~/components";
-import type { PageContent, Paragraph } from "~/types";
+import type { LabelProps, CardProps } from "~/components";
+import type { PageContent, Feature } from "~/queries";
 
 export interface ContentTitleProps extends HeadingProps {
   id: string;
@@ -10,29 +10,27 @@ export interface ContentSubtitleProps extends HeadingProps {
   children: string;
 }
 
-export interface ContentSubSectionProps extends Omit<Paragraph, "icon"> {
-  icon?: string;
-}
+export interface ContentSubSectionProps extends Feature {}
 
 export interface SubSectionGroupProps extends GridProps {
-  sections: PageContent["paragraphs"];
+  features: Feature[];
 }
 
 export interface ContentImageProps extends BoxProps {
   src: string;
 }
 
-export interface ContentFormProps {
+export interface ContentFormProps extends CardProps {
   form: NonNullable<PageContent["form"]>;
 }
 
 export interface ContentUpdatedAtProps
   extends Omit<LabelProps, "left" | "right" | "leftColor" | "rightColor"> {
-  children: React.ReactNode;
+  time: string;
 }
 
 export interface ContentSectionProps extends BoxProps {
-  items: PageContent;
+  content: PageContent;
   index: number;
 }
 

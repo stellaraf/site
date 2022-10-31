@@ -5,10 +5,10 @@ import { atom, selector, useRecoilState, useRecoilValue, useResetRecoilState } f
 import { useCloudLocations } from "~/context";
 import { all } from "~/util";
 
+import type { CloudLocation } from "~/queries";
 import type { CloudMeasurement } from "./types";
-import type { GeoPoint } from "~/types";
 
-export type PartialMeasurement = Pick<CloudMeasurement, "id"> & Partial<CloudMeasurement>;
+export type PartialMeasurement = Pick<CloudMeasurement, "identifier"> & Partial<CloudMeasurement>;
 
 interface CloudMeasurements {
   /**
@@ -34,7 +34,7 @@ interface CloudMeasurements {
    *
    * @param locations GeoPoints/Cloud locations from CMS.
    */
-  addMeasurements: (locations: GeoPoint[]) => void;
+  addMeasurements: (locations: CloudLocation[]) => void;
 
   /**
    * Update a measurement's properties.
@@ -111,17 +111,17 @@ export function useCloudMeasurements(): CloudMeasurements {
    * Get a measurement by ID.
    * @param id Measurement ID
    */
-  const getMeasurement = (id: string) => measurements.find(each => each.id === id) ?? null;
+  const getMeasurement = (id: string) => measurements.find(each => each.identifier === id) ?? null;
 
   const getMeasurementIndex = (id: string) => {
-    const idx = measurements.findIndex(each => each.id === id);
+    const idx = measurements.findIndex(each => each.identifier === id);
     if (idx === -1) {
       return null;
     }
     return idx;
   };
 
-  const addMeasurements = (locations: GeoPoint[]) => {
+  const addMeasurements = (locations: CloudLocation[]) => {
     const measurements: CloudMeasurement[] = locations.map(loc => {
       // Use the inactive status (65534) and consider the measurement complete.
       const elapsed = loc.active ? 65535 : 65534;
@@ -138,7 +138,7 @@ export function useCloudMeasurements(): CloudMeasurements {
   const updateMeasurement = (measurement: PartialMeasurement) => {
     setMeasurements(prev => {
       return prev.reduce<CloudMeasurement[]>((final, each) => {
-        if (each.id === measurement.id) {
+        if (each.identifier === measurement.identifier) {
           final.push({ ...each, ...measurement });
         } else {
           final.push(each);

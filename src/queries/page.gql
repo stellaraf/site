@@ -1,0 +1,142 @@
+query page($slug: String) {
+  page(where: { slug: $slug }) {
+    body {
+      raw
+    }
+    callout {
+      body {
+        raw
+      }
+      button {
+        link
+        text
+        variant
+      }
+      subtitle
+      title
+    }
+    slug
+    title
+    subtitle
+    footerTitle
+    contents {
+      body {
+        raw
+      }
+      button {
+        text
+        link
+        variant
+      }
+      features {
+        body {
+          raw
+        }
+        button {
+          link
+          text
+          variant
+        }
+        icon {
+          fileName
+          height
+          mimeType
+          size
+          url
+          width
+        }
+        iconColor
+        title
+      }
+      form {
+        name
+        colorScheme
+        button {
+          __typename
+          id
+          action
+          alert {
+            level
+            name
+            title
+            body {
+              raw
+            }
+          }
+          text
+          variant
+        }
+        fields {
+          ... on CheckboxField {
+            __typename
+            displayName
+            formId
+            label
+            multiple
+            options
+            required
+            fieldGroup
+          }
+          ... on SelectField {
+            __typename
+            displayName
+            formId
+            label
+            multiple
+            options
+            required
+            fieldGroup
+          }
+          ... on TextAreaField {
+            __typename
+            displayName
+            formId
+            label
+            required
+            fieldGroup
+          }
+          ... on TextInputField {
+            __typename
+            displayName
+            formId
+            label
+            required
+            fieldGroup
+          }
+        }
+      }
+      image {
+        fileName
+        mimeType
+        size
+        url
+        width
+        height
+      }
+      slug
+      showUpdatedDate
+      subtitle
+      title
+      updatedAt
+      vendorLogo {
+        __typename
+        darkColor {
+          hex
+        }
+        lightColor {
+          hex
+        }
+        logo {
+          size
+          mimeType
+          width
+          url
+          height
+        }
+        postText
+        pretext
+        name
+      }
+    }
+  }
+}

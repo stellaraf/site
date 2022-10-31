@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
 
-import type { IContactCard } from "~/types";
+import type { ContactForms } from "~/queries";
 
-const ContactFormCtx = createContext<IContactCard[]>([]);
+const ContactFormCtx = createContext<ContactForms>([]);
 
 export const ContactFormProvider = ContactFormCtx.Provider;
 
-export const useContactFormCtx = (): IContactCard[] => useContext<IContactCard[]>(ContactFormCtx);
+export const useContactFormCtx = (): ContactForms => useContext<ContactForms>(ContactFormCtx);

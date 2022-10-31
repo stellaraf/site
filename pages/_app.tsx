@@ -6,18 +6,18 @@ import { Provider } from "~/context";
 import { usePageTracking } from "~/hooks";
 import { SiteLayout } from "~/layouts";
 import {
-  getGlobalConfig,
-  getFooterItems,
-  getActions,
-  getDocsGroups,
-  getTestimonials,
-} from "~/util";
+  configQuery,
+  themeQuery,
+  docsGroupsQuery,
+  footerGroupsQuery,
+  actionsQuery,
+} from "~/queries";
 
-import type { TSite, NextApp, GetInitialPropsReturn } from "~/types";
+import type { SiteProps, NextApp, GetInitialPropsReturn } from "~/types";
 
-const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
+const Site: NextApp<SiteProps> = (props: GetInitialPropsReturn<SiteProps>) => {
   const { Component, pageProps, appProps } = props;
-  const { globalConfig, footerGroups, actions, testimonials, docsGroups } = appProps;
+  const { config, theme, footerGroups, actions, docsGroups } = appProps;
 
   usePageTracking();
 
@@ -26,7 +26,7 @@ const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
       <Head>
         <meta name="viewport" content="width=device-width" />
       </Head>
-      <Provider appConfig={globalConfig} docsGroups={docsGroups} testimonials={testimonials}>
+      <Provider config={config} theme={theme} docsGroups={docsGroups}>
         <SEOBase />
         <Favicons />
         <SiteLayout
@@ -43,21 +43,21 @@ const Site: NextApp<TSite> = (props: GetInitialPropsReturn<TSite>) => {
 
 Site.getInitialProps = async ctx => {
   try {
-    const globalConfig = await getGlobalConfig();
-    const footerGroups = await getFooterItems();
-    const actions = await getActions();
-    const testimonials = await getTestimonials();
-    const docsGroups = await getDocsGroups();
+    const config = await configQuery();
+    const docsGroups = await docsGroupsQuery();
+    const theme = await themeQuery();
+    const footerGroups = await footerGroupsQuery();
+    const actions = await actionsQuery();
 
     const defaultProps = await App.getInitialProps(ctx);
 
     return {
       ...defaultProps,
       appProps: {
-        globalConfig,
+        theme,
+        config,
         footerGroups,
         actions,
-        testimonials,
         docsGroups,
       },
     };

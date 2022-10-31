@@ -1,9 +1,9 @@
 import type { BoxProps, PopoverContentProps } from "@chakra-ui/react";
 import type { QueryObserverResult } from "@tanstack/react-query";
 import type { MarkerProps } from "react-simple-maps";
-import type { GeoPoint } from "~/types";
+import type { CloudLocation } from "~/queries";
 
-export interface CloudMeasurement extends GeoPoint {
+export interface CloudMeasurement extends CloudLocation {
   elapsed: number;
   best: boolean;
   done: boolean;

@@ -1,9 +1,10 @@
+import { useMemo } from "react";
 import { Button, Flex, IconButton, VStack } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 
-import { DynamicIcon } from "~/components";
+import { DynamicIcon, RichText } from "~/components";
 import { useConfig, useColorValue, useColorTokenValue } from "~/context";
-import { useOpposingColor, useRender, useMobile } from "~/hooks";
+import { useOpposingColor, useMobile } from "~/hooks";
 
 import { motionChakra } from "../util/animated";
 import { useBanner } from "./use-banner";
@@ -119,9 +120,10 @@ const DBannerContent = (props: BannerContentProps) => {
 export const Banner = (props: PropsOf<typeof BannerContainer>) => {
   const { privacyBanner } = useConfig();
 
-  const body = useRender(privacyBanner);
   const isMobile = useMobile();
   const [agreed, setAgreed] = useBanner();
+
+  const body = useMemo(() => <RichText content={privacyBanner.raw} />, []);
 
   return (
     <AnimatePresence>

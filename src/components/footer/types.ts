@@ -1,12 +1,12 @@
 import type { BoxProps, IconButtonProps, SimpleGridProps } from "@chakra-ui/react";
-import type { SortedFooterItem } from "~/types";
+import type { FooterGroups } from "~/queries";
 
 export interface FooterProps extends BoxProps {
-  groups: SortedFooterItem[];
+  groups: FooterGroups;
 }
 
 export interface FooterLinksProps extends SimpleGridProps {
-  groups: SortedFooterItem[];
+  groups: FooterGroups;
 }
 
 export interface SocialLinkProps extends Omit<IconButtonProps, "href" | "title" | "aria-label"> {

@@ -1,6 +1,15 @@
 import type { ParsedEntry } from "./contentful";
 
-type FormWithFieldConfig<F extends Dict, E extends Partial<F> = Partial<F>> = {
+interface FormFieldEntryBase {
+  id: string;
+  name: string;
+  displayName: string;
+  required: boolean;
+}
+
+type FormFieldEntry<Extra> = FormFieldEntryBase & Extra;
+
+type FormWithFieldConfig<F, E extends Partial<F> = Partial<F>> = {
   [k in keyof F]: {
     name: string;
     id: k;
@@ -9,7 +18,7 @@ type FormWithFieldConfig<F extends Dict, E extends Partial<F> = Partial<F>> = {
   } & E[k];
 };
 
-type FormWithFieldConfigEntry<F extends Dict, E extends Partial<F> = Partial<F>> = {
+type FormWithFieldConfigEntry<F, E extends Partial<F> = Partial<F>> = {
   [k in keyof F]: ParsedEntry<
     {
       name: string;
@@ -23,6 +32,31 @@ type FormWithFieldConfigEntry<F extends Dict, E extends Partial<F> = Partial<F>>
 type NoExtraValidation = Record<never, never>;
 type TextExtraFields = { validationType?: "Email Address" | "Phone Number" };
 type SelectExtraFields = { multiple: boolean; options: string[] };
+
+// interface FormGenericModel {
+//   name: string;
+//   buttonSubmit: string;
+//   successMessage: string;
+//   formFields: Array<
+//     | FormFieldEntry<NoExtraValidation>
+//     | FormFieldEntry<TextExtraFields>
+//     | FormFieldEntry<SelectExtraFields>
+//   >;
+// }
+
+export type GenericFormFields = Array<
+  | FormFieldEntry<NoExtraValidation>
+  | FormFieldEntry<TextExtraFields>
+  | FormFieldEntry<SelectExtraFields>
+>;
+
+// interface FormGenericEntry extends Omit<FormGenericModel, "formFields"> {
+//   formFields: ContentType<
+//     | FormFieldEntry<NoExtraValidation>
+//     | FormFieldEntry<TextExtraFields>
+//     | FormFieldEntry<SelectExtraFields>
+//   >;
+// }
 
 export type TFormModel = {
   name: string;

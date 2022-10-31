@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 
 import { chakra } from "@chakra-ui/react";
 
-import { ContentLoader, ContentSection, Hero, SEO, GetStarted, Testimonials } from "~/components";
-import { getPage, getPageContent, getPageId } from "~/util";
+import { ContentLoader, ContentSection, Hero, SEO, Callout, Testimonials } from "~/components";
+import { pageQuery } from "~/queries";
+import { notNullUndefined } from "~/types";
 
-import type { GetStaticProps, GetStaticPaths } from "next";
-import type { PageWithContent, PageEntry, PageContent } from "~/types";
+import type { PageProps } from "~/types";
+import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
 
 type UrlQuery = {
   product: string;
@@ -24,9 +25,9 @@ const Layout = chakra("div", {
   },
 });
 
-const CloudPage = (props: PageEntry<PageWithContent>) => {
+const CloudPage: NextPage<PageProps> = props => {
   const { isFallback } = useRouter();
-  const { pageData, pageContent } = props;
+  const { title, subtitle, body, callout, contents } = props;
 
   if (isFallback) {
     return (
@@ -39,41 +40,30 @@ const CloudPage = (props: PageEntry<PageWithContent>) => {
     );
   }
 
-  if (typeof pageContent === "undefined" || typeof pageData === "undefined") {
+  if (contents.length === 0 || typeof title === "undefined") {
     return <NextError statusCode={400} />;
   }
 
-  const sections = pageContent.sort((a, b) => a.sortWeight - b.sortWeight);
-  const { title, subtitle, body = null, getStarted } = pageData.fields;
-
   return (
     <>
-      <SEO title={title} description={subtitle} />
-      <Hero title={title} subtitle={subtitle} body={body} />
-      {sections.map((sect, i) => {
-        return <ContentSection items={sect} key={i} index={i} />;
+      <SEO title={title} description={subtitle ?? undefined} />
+      <Hero title={title} subtitle={subtitle} body={body?.raw} />
+      {contents.map((sect, i) => {
+        return <ContentSection content={sect} key={sect.title} index={i} />;
       })}
-      {getStarted && <GetStarted {...getStarted.fields} />}
+      {notNullUndefined(callout) && <Callout {...callout} />}
       <Testimonials />
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<PageEntry<PageWithContent>, UrlQuery> = async ctx => {
+export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const product = ctx.params?.product ?? "notfound";
   const preview = ctx?.preview ?? false;
-  let pageData = {} as PageEntry<PageWithContent>["pageData"];
-  let pageContent = [] as PageContent[];
 
-  try {
-    const pageId = await getPageId(`cloud/${product}`, preview);
-    pageData = await getPage(pageId, preview);
-    pageContent = await getPageContent(pageId, preview);
-  } catch (err) {
-    console.error(err);
-  }
+  const page = await pageQuery({ slug: `cloud/${product}` });
 
-  return { props: { pageData, pageContent, preview } };
+  return { props: { ...page, preview } };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({

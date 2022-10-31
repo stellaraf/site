@@ -9,11 +9,12 @@ import type { SelectFieldProps } from "./types";
 import type { SelectOptionSingle } from "~/types";
 
 export const SelectField = (props: SelectFieldProps) => {
-  const { opts, id: name, required = false, isMulti = false, ...rest } = props;
-  const { formState, setValue, register } = useFormContext();
-  const { errors } = formState;
+  const { opts, field, name, required = false, isMulti = false, ...rest } = props;
+  const { setValue, register, getFieldState } = useFormContext();
 
-  errors?.[name] && console.table(errors);
+  const { error } = getFieldState(name);
+
+  typeof error !== "undefined" && console.warn(error);
 
   const handleSelect = useCallback(
     (values: readonly SelectOptionSingle[]) => {
@@ -30,23 +31,21 @@ export const SelectField = (props: SelectFieldProps) => {
 
   useEffect(() => {
     register(name);
-  }, [register]);
-
-  const fieldError = errors?.[name];
+  }, [register, name]);
 
   return (
-    <FormControl id={name} isInvalid={typeof fieldError !== "undefined"} isRequired={required}>
+    <FormControl id={name} isInvalid={typeof error !== "undefined"} isRequired={required}>
       <CustomSelect
         name={name}
-        isMulti={isMulti}
         options={opts}
+        isMulti={isMulti}
         defaultValue={[]}
         required={required}
         onSelect={handleSelect}
         {...rest}
       />
       <FormErrorMessage>
-        {typeof fieldError !== "undefined" && fieldError.message?.toString()}
+        {typeof error !== "undefined" && error.message?.toString()}
       </FormErrorMessage>
     </FormControl>
   );

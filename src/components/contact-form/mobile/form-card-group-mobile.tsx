@@ -1,9 +1,17 @@
-import { useEffect, useRef } from "react";
+import {
+  // useEffect,
+  useRef,
+} from "react";
 import type { MouseEvent } from "react";
 
 import { useRouter } from "next/router";
 
-import { Button as ChakraButton, Center, Stack, useDisclosure } from "@chakra-ui/react";
+import {
+  // Button as ChakraButton,
+  Center,
+  Stack,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useTitleCase } from "use-title-case";
 
@@ -13,31 +21,23 @@ import { useGoogleAnalytics } from "~/hooks";
 import { useContactFormCtx } from "../context";
 import { FormCard, FormCardBody } from "../form-card";
 import { FormCardContent } from "../form-card-content";
-import { queryIsForm } from "../guards";
 import { useContactForm } from "../state";
+import { useFormQuery } from "../use-form-query";
 import { MobileForm } from "./mobile-form";
-
-import type { FormHandlers } from "../forms/types";
 
 const Container = motion(Stack);
 const AnimatedCenter = motion(Center);
-
-const iconMap = {
-  Sales: { bs: "BsFillPersonLinesFill" },
-  Support: { bs: "BsPeopleFill" },
-  Docs: { cg: "CgNotes" },
-};
 
 /**
  * See the OptionsDesktop component for more detailed information. The OptionsMobile component
  * is meant to be a little more simple and its layout is more vertical than horizontal, but the
  * rest of the logic is largely the same. Differences are notated below.
  */
-export const MFormCardGroup = (): JSX.Element => {
+export const MFormCardGroup = () => {
   const cards = useContactFormCtx();
   const formState = useContactForm();
   const titleMe = useTitleCase();
-  const { pathname, query } = useRouter();
+  const { pathname } = useRouter();
   const { trackModal } = useGoogleAnalytics();
 
   const formSizes = { minHeight: "48rem", height: "100%" };
@@ -46,59 +46,55 @@ export const MFormCardGroup = (): JSX.Element => {
 
   // If valid query parameters are passed in the URL, e.g. /contact?form=sales or
   // /contact?form=support, automatically load the corresponding form.
-  useEffect(() => {
-    if (queryIsForm(query)) {
-      const selected = cards.find(c => c.icon.toLowerCase() === query.form.toLowerCase());
-      if (typeof selected !== "undefined") {
-        formState.setSelected(selected.icon);
-        onToggle();
-        trackModal(`${pathname}/form-${selected.icon.toLowerCase()}`);
-      }
-    }
-  }, [query]);
+  useFormQuery({ cards, setSelected: formState.setSelected, toggleLayout: onToggle, trackModal });
 
   return (
     <Container minH="3xl" zIndex={1} spacing={12} align="stretch" direction="column">
       <AnimatePresence>
         {cards.map((card, i) => {
-          const { icon: iconName, color: iconColor, buttonText, form, ...cardRest } = card;
+          const {
+            icon,
+            color: iconColor,
+            button: cardButton,
+            title,
+            body,
+            fields,
+            ...cardRest
+          } = card;
 
-          const isForm = isOpen && formState.selected === iconName;
+          const isFormLayout = isOpen && formState.selected?.title === title;
 
-          const iconProps = isForm ? { size: 12, ml: 4 } : {};
-          const icon = (
-            <motion.div layoutId={iconName}>
-              <Icon icon={iconMap[iconName]} color={iconColor} {...iconProps} />
+          const isForm =
+            fields.length > 0 &&
+            (typeof cardButton.link === "undefined" || cardButton.link === null);
+
+          const iconProps = isFormLayout ? { size: 12, ml: 4 } : {};
+          const renderedIcon = (
+            <motion.div layoutId={title}>
+              <Icon icon={{ [icon.family]: icon.name }} color={iconColor} {...iconProps} />
             </motion.div>
           );
 
-          const handleClick = (e: MouseEvent) => {
-            if (["Support", "Sales"].includes(iconName)) {
-              e.preventDefault();
-              formState.setSelected(iconName);
+          const handleClick = (event: MouseEvent) => {
+            if (isForm) {
+              event.preventDefault();
+              formState.setSelected(title);
               onToggle();
-              trackModal(`${pathname}/form-${iconName.toLowerCase()}`);
+              trackModal(`${pathname}/form-${title.replace(/\s/gi, "-").toLowerCase()}`);
             }
           };
 
-          const formRef = useRef<FormHandlers>(Object());
-          const handleFormSubmit = () => formRef.current.submit();
+          const formRef = useRef<{ submit: () => void }>(null);
 
           const cardsButton = (
             <Button
               w="100%"
               colorScheme={iconColor}
-              href={iconName === "Docs" ? "/docs" : undefined}
-              onClick={iconName === "Docs" ? undefined : handleClick}
+              href={isForm ? undefined : cardButton.link!}
+              onClick={isForm ? handleClick : undefined}
             >
-              {titleMe(buttonText)}
+              {titleMe(cardButton.text)}
             </Button>
-          );
-
-          const formButton = (
-            <ChakraButton w="100%" type="submit" colorScheme={iconColor} onClick={handleFormSubmit}>
-              {titleMe(form?.buttonSubmit ?? "Submit")}
-            </ChakraButton>
           );
 
           return (
@@ -111,21 +107,30 @@ export const MFormCardGroup = (): JSX.Element => {
               exit={{ opacity: 0, y: "-100%" }}
               key={`cardWrapper${i}`}
             >
-              <FormCard w="20rem" h="100%" px={isForm ? 4 : undefined}>
-                <FormCardBody {...(isForm && formSizes)}>
+              <FormCard w="20rem" h="100%" px={isFormLayout ? 4 : undefined}>
+                <FormCardBody {...(isFormLayout && formSizes)}>
                   <LayoutGroup>
-                    {isForm ? (
+                    {isFormLayout ? (
                       <MobileForm
+                        title={title}
+                        body={body.raw}
                         onClose={onClose}
-                        button={formButton}
-                        icon={icon}
                         formRef={formRef}
-                        accent={iconColor}
                         onToggle={onToggle}
+                        icon={renderedIcon}
+                        colorScheme={iconColor}
                         {...cardRest}
                       />
                     ) : (
-                      <FormCardContent index={i} icon={icon} iconName={iconName} {...cardRest} />
+                      <FormCardContent
+                        index={i}
+                        body={body}
+                        title={title}
+                        fields={fields}
+                        button={cardButton}
+                        icon={renderedIcon}
+                        {...cardRest}
+                      />
                     )}
                   </LayoutGroup>
                 </FormCardBody>

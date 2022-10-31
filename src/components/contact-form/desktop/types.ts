@@ -1,11 +1,10 @@
+import type { RichTextContent } from "@graphcms/rich-text-types";
 import type { FormHandlers } from "../forms/types";
-import type { CustomColors } from "~/types";
 
 export interface DesktopFormProps {
   title: string;
-  body: string;
+  body: RichTextContent | null;
   icon: JSX.Element;
-  accent: keyof CustomColors;
   toggleLayout: (i?: number) => void;
   formRef: React.MutableRefObject<FormHandlers>;
   onSubmit?: () => void;

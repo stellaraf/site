@@ -1,30 +1,23 @@
-import type { CustomTheme, GlobalConfig, ThemeConfig, IDocsGroup, TestimonialEntry } from "~/types";
+import type { Config, DocsGroups } from "~/queries";
+import type { CustomTheme, ThemeConfig } from "~/types";
 
 /**
  * Root Provider Props
  */
 export interface ProviderProps {
-  appConfig: GlobalConfig;
-  docsGroups: IDocsGroup[];
-  testimonials: TestimonialEntry[];
+  config: Config;
+  theme: ThemeConfig;
+  docsGroups: DocsGroups;
   children: React.ReactNode;
 }
 
-/**
- * Config Provider Types
- */
-
-type TGlobalConfig = Omit<GlobalConfig, "theme">;
-
-export interface ConfigContextType extends TGlobalConfig {
-  docsGroups: IDocsGroup[];
-  testimonials: TestimonialEntry[];
+export interface ConfigContextType extends Config {
+  docsGroups: DocsGroups;
 }
 
 export interface ConfigProviderProps {
-  globalConfig: TGlobalConfig;
-  docsGroups: IDocsGroup[];
-  testimonials: TestimonialEntry[];
+  config: Config;
+  docsGroups: DocsGroups;
   children?: React.ReactNode;
 }
 
@@ -43,7 +36,7 @@ export interface UIProviderProps {
  * Docs Layout Provider
  */
 export interface DocsContextType {
-  groups: IDocsGroup[];
+  groups: DocsGroups;
 }
 
 export type ColorModeContext = {
