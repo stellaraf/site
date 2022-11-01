@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
  * @param actions Input actions
  * @param limit Limit number of returned actions.
  */
-export function useRandomActions<A extends unknown>(actions: A[], limit: number): A[] {
+export function useRandomActions<A>(actions: A[], limit: number): A[] {
   const { asPath } = useRouter();
   const [randomActions, setRandomActions] = useState<A[]>([]);
   const sorter = useCallback(() => Math.random() - Math.random(), []);

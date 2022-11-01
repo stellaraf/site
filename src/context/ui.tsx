@@ -8,6 +8,7 @@ import {
   createCookieStorageManager,
   useTheme as useChakraTheme,
 } from "@chakra-ui/react";
+
 import { makeTheme } from "~/util";
 
 import type { UseTheme, UIProviderProps, ColorModeContext } from "./types";

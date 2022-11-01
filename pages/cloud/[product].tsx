@@ -7,8 +7,8 @@ import { ContentLoader, ContentSection, Hero, SEO, Callout, Testimonials } from 
 import { pageQuery } from "~/queries";
 import { notNullUndefined } from "~/types";
 
-import type { PageProps } from "~/types";
 import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
+import type { PageProps } from "~/types";
 
 type UrlQuery = {
   product: string;

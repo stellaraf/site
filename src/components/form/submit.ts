@@ -4,7 +4,7 @@ export async function submitter(
   if (typeof window !== "undefined") {
     try {
       // TODO: add an API route for form handling
-      const url = `${window.location.origin}/api/form${window.location.pathname}`;
+      // const url = `${window.location.origin}/api/form${window.location.pathname}`;
       const response = await fetch(window.location.href, {
         method: "POST",
         headers: { "content-type": "application/json" },

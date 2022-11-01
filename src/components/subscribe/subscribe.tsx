@@ -14,10 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider, Controller } from "react-hook-form";
-import { useTitleCase } from "use-title-case";
 import { z } from "zod";
 
-import { useConfig } from "~/context";
 import { useGoogleAnalytics } from "~/hooks";
 
 import { SubscribeField } from "./subscribe-field";
@@ -33,19 +31,12 @@ const subscribeSchema = z.object({
 export const Subscribe = (props: SubscribeProps) => {
   const { alertProps = {}, alertPosition = "bottom-right", ...rest } = props;
 
-  const {
-    subscribeTitle = "Subscribe to our newsletter",
-    subscribeSuccess = "Thanks! Please check your email to confirm your subscription.",
-    subscribeDuration = 5,
-    subscribeGenericError = "Something went wrong.",
-  } = useConfig();
-
   const [mount, setMount] = useState<boolean>(false);
   const [toastState, setToastState] = useState<SubscribeToast>({
     status: "error",
-    message: subscribeGenericError,
+    message: "Something went wrong.",
   });
-  const fnTitle = useTitleCase();
+
   const toast = useToast();
   const form = useForm<z.infer<typeof subscribeSchema>>({
     resolver: zodResolver(subscribeSchema),
@@ -87,7 +78,7 @@ export const Subscribe = (props: SubscribeProps) => {
           my={2}
           mb={4}
           pr={8}
-          id={id.toString()}
+          id={id?.toString()}
           right={24}
           width="auto"
           fontSize="sm"
@@ -111,9 +102,9 @@ export const Subscribe = (props: SubscribeProps) => {
       render,
       isClosable: true,
       position: alertPosition,
-      duration: subscribeDuration * 1000,
+      duration: 5000,
     });
-  }, [alertProps, toastState.status, alertPosition, subscribeDuration]);
+  }, [alertProps, toastState.status, alertPosition]);
 
   const onSubmit = useCallback(
     async (data: SubscribeFormData) => {
@@ -129,7 +120,7 @@ export const Subscribe = (props: SubscribeProps) => {
           handleError(json.error);
         }
         if (json?.data) {
-          handleSuccess(subscribeSuccess);
+          handleSuccess("Thanks! Please check your email to confirm your subscription.");
         }
       } catch (err) {
         console.error(err);
@@ -138,7 +129,7 @@ export const Subscribe = (props: SubscribeProps) => {
 
       showToast();
     },
-    [handleError, handleSuccess, subscribeSuccess],
+    [handleError, handleSuccess],
   );
 
   useEffect(() => {
@@ -160,7 +151,7 @@ export const Subscribe = (props: SubscribeProps) => {
         onSubmit={handleSubmit(onSubmit)}
         {...rest}
       >
-        <Text>{fnTitle(subscribeTitle)}</Text>
+        <Text>Subscribe to our newsletter</Text>
         <FormControl isInvalid={typeof formField !== "undefined"}>
           <Controller
             name="email"

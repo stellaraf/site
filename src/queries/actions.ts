@@ -1,9 +1,8 @@
+import { notNullUndefined } from "~/types";
+import { ThemeColor, type ActionsQuery, type ActionsQueryVariables } from "~/types/schema";
+
 import query from "./actions.gql";
 import { queryFn } from "./base";
-import { notNullUndefined } from "~/types";
-import { ThemeColor } from "~/types/schema";
-
-import type { ActionsQuery, ActionsQueryVariables } from "~/types/schema";
 
 export type Actions = NonNullable<PropOf<ActionsQuery, "pageContents">>;
 

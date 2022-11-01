@@ -33,7 +33,10 @@ const config = {
   ignorePatterns: ["node_modules", "next.config.mjs", "generateFavicons.ts"],
   rules: {
     "import/prefer-default-export": "off",
-    "import/no-unused-modules": [1, { unusedExports: true, ignoreExports: ["pages/**/*"] }],
+    "import/no-unused-modules": [
+      1,
+      { unusedExports: true, ignoreExports: ["pages/**/*", "src/queries/**/*"] },
+    ],
     "import/order": [
       "error",
       {

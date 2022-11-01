@@ -8,6 +8,7 @@ import { notNullUndefined } from "~/types";
 
 import { Admonition } from "./admonition";
 import { ImageAsset, VideoAsset } from "./asset";
+import { ContentButton } from "./content-button";
 import { Expandable } from "./expandable";
 import { H1, H2, H3, H4, H5, H6 } from "./headings";
 import { Ul, Ol, Li } from "./lists";
@@ -43,7 +44,7 @@ const renderers: NodeRendererType = {
   code_block: ({ children }) => <CodeBlock>{children}</CodeBlock>,
   img: props => <ImageAsset {...props} />,
   video: props => <VideoAsset {...props} />,
-  embed: { Admonition: props => <Admonition {...props} /> },
+  embed: { Admonition: props => <Admonition {...props} />, ContentButton },
   class: ({ className, children }) =>
     className === "expandable" ? <Expandable>{children}</Expandable> : <>{children}</>,
 };

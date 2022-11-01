@@ -1,5 +1,6 @@
 import { getToken, extendTheme } from "@chakra-ui/react";
-import { getColor, isLight } from "@chakra-ui/theme-tools";
+import { readableColorIsBlack } from "color2k";
+import { getProperty } from "dot-prop";
 
 type ExtendThemeReturn = ReturnType<typeof extendTheme>;
 
@@ -10,14 +11,11 @@ interface OpposingOptions {
 
 export function isDark(theme: ExtendThemeReturn, color: string): boolean {
   if (typeof color === "string" && color.match(/[a-zA-Z]+\.[a-zA-Z0-9]+/g)) {
-    color = getColor(theme, color, color);
+    color = getProperty(theme, `colors.${color}`);
   }
   let opposingShouldBeDark = true;
-  opposingShouldBeDark = isLight(color)(theme);
-  try {
-  } catch (err) {
-    console.error(err);
-  }
+  opposingShouldBeDark = readableColorIsBlack(color);
+
   return opposingShouldBeDark;
 }
 

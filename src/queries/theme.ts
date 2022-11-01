@@ -1,6 +1,7 @@
-import query from "./theme.gql";
-import { queryFn } from "./base";
 import { notNullUndefined } from "~/types";
+
+import { queryFn } from "./base";
+import query from "./theme.gql";
 
 import type { ThemeConfig } from "~/types";
 import type { ThemeQuery, ThemeQueryVariables } from "~/types/schema";

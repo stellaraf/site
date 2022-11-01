@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+
 import {
   Tag,
   Flex,
@@ -7,6 +8,7 @@ import {
   Popover,
   PopoverBody,
   PopoverHeader,
+  type TagProps,
   PopoverContent,
 } from "@chakra-ui/react";
 
@@ -15,7 +17,6 @@ import { useColorValue } from "~/context";
 import { MapMarker } from "./map-marker";
 import { useBestMeasurement } from "./use-cloud-measurements";
 
-import type { TagProps } from "@chakra-ui/react";
 import type { LocationProps, LatencyProps } from "./types";
 
 const Latency = (props: LatencyProps) => {

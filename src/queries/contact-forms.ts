@@ -1,6 +1,7 @@
-import query from "./contact-forms.gql";
-import { queryFn } from "./base";
 import { notNullUndefined } from "~/types";
+
+import { queryFn } from "./base";
+import query from "./contact-forms.gql";
 
 import type { ContactFormsQuery, ContactFormsQueryVariables } from "~/types/schema";
 

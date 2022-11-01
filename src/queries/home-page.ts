@@ -1,6 +1,7 @@
-import query from "./home-page.gql";
-import { queryFn } from "./base";
 import { notNullUndefined } from "~/types";
+
+import { queryFn } from "./base";
+import query from "./home-page.gql";
 
 import type { HomePageQuery, HomePageQueryVariables } from "~/types/schema";
 

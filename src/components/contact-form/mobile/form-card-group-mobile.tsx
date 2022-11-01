@@ -2,7 +2,6 @@ import {
   // useEffect,
   useRef,
 } from "react";
-import type { MouseEvent } from "react";
 
 import { useRouter } from "next/router";
 
@@ -75,7 +74,7 @@ export const MFormCardGroup = () => {
             </motion.div>
           );
 
-          const handleClick = (event: MouseEvent) => {
+          const handleClick = (event: React.MouseEvent) => {
             if (isForm) {
               event.preventDefault();
               formState.setSelected(title);

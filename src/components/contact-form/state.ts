@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 
-import { atom, useRecoilState, useRecoilValue } from "recoil";
+import { atom, useRecoilState } from "recoil";
 
 import { useContactFormCtx } from "./context";
 
@@ -112,15 +112,4 @@ export function useContactForm(): ContactFormValues & ContactFormMethods {
     shouldRender,
     setSelected,
   };
-}
-
-/**
- * Access only a specific form configuration.
- *
- * @param name Form name.
- * @returns Form configuration state.
- */
-export function useContactFormConfig(name: string): ContactForm | null {
-  const state = useRecoilValue(formAtom);
-  return state.selected;
 }

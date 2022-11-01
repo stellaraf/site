@@ -3,7 +3,7 @@ import { useTitleCase } from "use-title-case";
 
 import { Button, Ripple, RichText } from "~/components";
 import { useColorValue } from "~/context";
-import { useOpposingColor, useIsDark, useGlow, useResponsiveStyle } from "~/hooks";
+import { useOpposingColor, useColorWhenDark, useGlow, useResponsiveStyle } from "~/hooks";
 import { notNullUndefined } from "~/types";
 
 import type { CalloutProps } from "./types";
@@ -16,7 +16,7 @@ export const Callout = (props: CalloutProps) => {
   const bg = useColorValue("secondary.500", "purple.500");
   const rippleStart = useColorValue("secondary.200", "secondary.700");
   const color = useOpposingColor(bg);
-  const isDark = useIsDark(bg);
+  const buttonHoverBg = useColorWhenDark(bg, "blackAlpha.100", "whiteAlpha.100");
   const glow = useGlow("purple.500", "purple.800");
 
   const fnTitle = useTitleCase();
@@ -60,9 +60,7 @@ export const Callout = (props: CalloutProps) => {
             variant="outline"
             href={button.link ?? ""}
             borderColor={color}
-            _hover={{
-              backgroundColor: isDark ? "blackAlpha.100" : "whiteAlpha.100",
-            }}
+            _hover={{ backgroundColor: buttonHoverBg }}
           >
             {fnTitle(button.text)}
           </Button>

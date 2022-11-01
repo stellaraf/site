@@ -5,8 +5,8 @@ import { atom, selector, useRecoilState, useRecoilValue, useResetRecoilState } f
 import { useCloudLocations } from "~/context";
 import { all } from "~/util";
 
-import type { CloudLocation } from "~/queries";
 import type { CloudMeasurement } from "./types";
+import type { CloudLocation } from "~/queries";
 
 export type PartialMeasurement = Pick<CloudMeasurement, "identifier"> & Partial<CloudMeasurement>;
 

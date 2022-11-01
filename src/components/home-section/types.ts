@@ -7,7 +7,7 @@ export interface HomeSectionProps extends BoxProps {
 }
 
 export type Sides = ["right", "left"];
-export type Side = ArrayElement<Sides>;
+type Side = ArrayElement<Sides>;
 
 export interface HomeBlockProps extends Omit<GridProps, "title">, Omit<HomePageBlock, "body"> {
   side: Side;

@@ -4,6 +4,7 @@ import { generatePalette, generateFontFamily, Palette } from "palette-by-numbers
 import { button } from "~/styles";
 
 import { entries } from "../generic";
+import { opposingColor } from "./opposing-color";
 
 import type {
   Fonts,
@@ -15,9 +16,8 @@ import type {
   ChangeableColors,
   InitialTheme,
 } from "~/types";
-import { opposingColor } from "./opposing-color";
 
-export { isDark, isLight } from "@chakra-ui/theme-tools";
+export * from "./opposing-color";
 
 const radii = {
   none: "0",

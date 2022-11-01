@@ -4,7 +4,7 @@ import { IconButton, Input, InputGroup, InputRightElement } from "@chakra-ui/rea
 import { useFormContext } from "react-hook-form";
 
 import { DynamicIcon } from "~/components";
-import { useColorValue, useConfig } from "~/context";
+import { useColorValue } from "~/context";
 
 import type { SubscribeFieldProps } from "./types";
 
@@ -15,8 +15,6 @@ const hoverBorderDark = [undefined, "green.300"];
 
 export const SubscribeField = (props: SubscribeFieldProps) => {
   const { field, ...rest } = props;
-  const { subscribeTitle = "Subscribe to our newsletter", subscribePlaceholder = "Email Address" } =
-    useConfig();
 
   const { formState } = useFormContext();
   const { isSubmitting, isSubmitSuccessful, errors } = formState;
@@ -63,7 +61,7 @@ export const SubscribeField = (props: SubscribeFieldProps) => {
 
   return (
     <InputGroup>
-      <Input placeholder={subscribePlaceholder} {...styles} {...field} {...rest} />
+      <Input placeholder="Email Address" {...styles} {...field} {...rest} />
       <InputRightElement>
         <IconButton
           p={2}
@@ -74,9 +72,9 @@ export const SubscribeField = (props: SubscribeFieldProps) => {
           variant="unstyled"
           alignItems="center"
           display="inline-flex"
-          title={subscribeTitle}
+          title="Subscribe to our newsletter"
           isLoading={isSubmitting}
-          aria-label={subscribeTitle}
+          aria-label="Subscribe to our newsletter"
           _hover={{ color: "tertiary.500" }}
         />
       </InputRightElement>

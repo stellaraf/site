@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
-import type { MouseEvent } from "react";
 
 import { useRouter } from "next/router";
 
 import { Center, Stack, Button as ChakraButton } from "@chakra-ui/react";
-import { motion, AnimatePresence, LayoutGroup, useCycle } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup, useCycle, type Variants } from "framer-motion";
 import { useTitleCase } from "use-title-case";
 
 import { Button, Icon } from "~/components";
@@ -19,7 +18,6 @@ import { separateFormFields } from "../util";
 import { DesktopForm } from "./desktop-form";
 
 import type { MotionItems } from "../types";
-import type { Variants } from "framer-motion";
 
 // Make Chakra-UI components into Framer-Motion components for fewer components in the tree.
 const Container = motion(Stack);
@@ -124,7 +122,7 @@ export const DFormCardGroup = () => {
            * to reflect the selected form and toggles the framer layout for animation purposes.
            * The Docs link should just be a standard router link to the /docs route.
            */
-          function handleClick(event: MouseEvent): void {
+          function handleClick(event: React.MouseEvent): void {
             if (isForm) {
               event.preventDefault();
               formState.setSelected(title);
