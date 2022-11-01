@@ -1,29 +1,5 @@
 import { merge } from "merge-anything";
 
-export async function post(url: string, data: Dict, config: RequestInit = {}): Promise<Response> {
-  const defaultConfig = {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    crossDomain: true,
-  } as RequestInit;
-
-  const merged = merge(defaultConfig, config, {
-    body: JSON.stringify(data),
-  }) as RequestInit;
-  return await fetch(url, merged);
-}
-
-export async function get(url: string, config: RequestInit = {}): Promise<Response> {
-  const defaultConfig = {
-    method: "GET",
-    crossDomain: true,
-    mode: "cors",
-  } as RequestInit;
-
-  const merged = merge(defaultConfig, config) as RequestInit;
-  return await fetch(url, merged);
-}
-
 /**
  * Fetch Wrapper that incorporates a timeout via a passed AbortController instance.
  *

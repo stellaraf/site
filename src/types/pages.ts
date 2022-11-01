@@ -10,7 +10,7 @@ import type {
   Employees,
   ContactForms,
 } from "~/queries";
-import type { ThemeConfig } from "~/types";
+import type { ThemeConfig } from "~/theme";
 
 export type GetInitialPropsReturn<InitialProps> = AppProps &
   AppInitialProps & { appProps: InitialProps };

@@ -8,8 +8,13 @@ import type {
 import type { FieldValues, ControllerProps } from "react-hook-form";
 import type { SelectProps } from "~/components";
 import type { PageContent } from "~/queries";
-import type { SelectOptionSingle } from "~/types";
-import type { CheckboxField, SelectField, TextInputField, TextAreaField } from "~/types/schema";
+import type {
+  SelectOptionSingle,
+  CheckboxField,
+  SelectField,
+  TextInputField,
+  TextAreaField,
+} from "~/types";
 
 interface BaseFormProps
   extends Partial<Pick<NonNullable<PageContent["form"]>, "button" | "colorScheme">> {

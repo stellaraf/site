@@ -3,7 +3,7 @@ import { useId } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { useGoogleAnalytics } from "~/hooks";
-import { fetchWithTimeout } from "~/util";
+import { fetchWithTimeout } from "~/lib";
 
 import { useCloudMeasurements } from "./use-cloud-measurements";
 

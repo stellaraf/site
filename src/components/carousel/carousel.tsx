@@ -1,8 +1,6 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, forwardRef } from "react";
 
 import { Box, Button, Flex } from "@chakra-ui/react";
-
-import { forwardRef } from "~/util";
 
 import { useSlider } from "./use-slider";
 
@@ -143,3 +141,5 @@ export const Carousel = (props: CarouselProps) => {
     </CarouselContext.Provider>
   );
 };
+
+SliderContainer.displayName = "SliderContainer";

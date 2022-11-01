@@ -1,20 +1,20 @@
-import { notNullUndefined } from "~/types";
+import { is } from "~/lib";
 
 import { queryFn } from "./base";
 import query from "./theme.gql";
 
-import type { ThemeConfig } from "~/types";
-import type { ThemeQuery, ThemeQueryVariables } from "~/types/schema";
+import type { ThemeConfig } from "~/theme";
+import type { ThemeQuery, ThemeQueryVariables } from "~/types";
 
 export type Theme = NonNullable<NonNullable<ThemeQuery["configuration"]>["theme"]>;
 
 export default async function theme(): Promise<ThemeConfig> {
   const base = await queryFn<ThemeQuery, ThemeQueryVariables>({ query });
 
-  if (!notNullUndefined(base.configuration)) {
+  if (!is(base.configuration)) {
     throw new Error("Failed to find configuration with theme");
   }
-  if (!notNullUndefined(base.configuration.theme)) {
+  if (!is(base.configuration.theme)) {
     throw new Error("No theme associated with configuration");
   }
 

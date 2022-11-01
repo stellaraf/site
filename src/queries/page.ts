@@ -1,9 +1,9 @@
-import { notNullUndefined } from "~/types";
+import { is } from "~/lib";
 
 import { queryFn } from "./base";
 import query from "./page.gql";
 
-import type { PageQuery, PageQueryVariables } from "~/types/schema";
+import type { PageQuery, PageQueryVariables } from "~/types";
 
 export type Page = NonNullable<PageQuery["page"]>;
 export type PageContents = Page["contents"];
@@ -14,7 +14,7 @@ export type VendorLogo = NonNullable<PageContent["vendorLogo"]>;
 
 export default async function (variables: PageQueryVariables): Promise<Page> {
   const result = await queryFn<PageQuery, PageQueryVariables>({ query, variables });
-  if (!notNullUndefined(result.page)) {
+  if (!is(result.page)) {
     throw new Error(`Failed to find page with query variables '${JSON.stringify(variables)}'`);
   }
   return result.page;

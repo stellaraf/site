@@ -8,7 +8,7 @@ import {
 
 import { DynamicIcon } from "~/components";
 import { useColorValue } from "~/context";
-import { reactChildText } from "~/util";
+import { reactChildText } from "~/lib";
 
 import { useCodeBlockStyle } from "./use-code-block-style";
 

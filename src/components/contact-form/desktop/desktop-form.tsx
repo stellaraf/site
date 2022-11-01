@@ -9,7 +9,7 @@ import {
   // isFormButton,
   RichText,
 } from "~/components";
-import { notNullUndefined } from "~/types";
+import { is } from "~/lib";
 
 import { useContactForm } from "../state";
 import { Success } from "../success";
@@ -77,7 +77,7 @@ export const DesktopForm = (props: DesktopFormProps) => {
         <RichText>{body}</RichText>
       </Center>
       <Center width="100%" gridArea="form" alignItems={{ base: "flex-start", lg: "center" }}>
-        {notNullUndefined(formState.selected) && notNullUndefined(button) ? (
+        {is(formState.selected) && is(button) ? (
           !formState.showSuccess ? (
             <GenericForm ref={formRef} colorScheme={formState.selected.color} fields={fields} />
           ) : (

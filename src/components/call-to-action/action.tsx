@@ -5,7 +5,7 @@ import { useTitleCase } from "use-title-case";
 
 import { Card, CardBody, Icon, RichText } from "~/components";
 import { useSlug } from "~/hooks";
-import { notNullUndefined } from "~/types";
+import { is } from "~/lib";
 
 import type { Actions } from "~/queries";
 
@@ -40,7 +40,7 @@ export const Action = (props: ArrayElement<Actions>) => {
               <Heading fontSize={{ base: "md", md: "md" }} maxW="80%" whiteSpace="pre-wrap">
                 {titleMe(title)}
               </Heading>
-              {notNullUndefined(callToAction.icon) && (
+              {is(callToAction.icon) && (
                 <Icon
                   size={12}
                   ml={2}

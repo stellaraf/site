@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { slug, reactChildText } from "~/util";
+import { slug, reactChildText } from "~/lib";
 
 export const useSlug = (original: string | React.ReactNode, deps: unknown[] = []): string => {
   return useMemo(() => {

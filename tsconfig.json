@@ -10,12 +10,11 @@
       "~/context": ["./src/context/index"],
       "~/hooks": ["./src/hooks/index"],
       "~/layouts": ["./src/layouts/index"],
+      "~/lib": ["./lib/index"],
       "~/queries": ["./src/queries/index"],
-      "~/queries/*": ["./src/queries/*"],
       "~/styles": ["./src/styles/index"],
-      "~/types": ["./src/types/index"],
-      "~/types/*": ["./src/types/*"],
-      "~/util": ["./src/util/index"]
+      "~/theme": ["./src/theme/index"],
+      "~/types": ["./src/types/index"]
     },
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -33,10 +32,11 @@
   "exclude": ["node_modules", ".next", ".husky", "dist", "public", "generateFavicons.ts"],
   "include": [
     "codegen.ts",
-    "next.config.js",
+    "next.config.mjs",
     ".eslintrc.*",
     "next-env.d.ts",
     "src/**/*",
+    "lib/**/*",
     "global.d.ts",
     "./pages/**/*.ts",
     "./pages/**/*.tsx"

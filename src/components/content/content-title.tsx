@@ -1,7 +1,7 @@
+import { forwardRef } from "react";
+
 import { Box, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
-
-import { forwardRef } from "~/util";
 
 import type { ContentTitleProps } from "./types";
 
@@ -17,3 +17,5 @@ export const ContentTitle = forwardRef<HTMLHeadingElement, ContentTitleProps>((p
     </>
   );
 });
+
+ContentTitle.displayName = "ContentTitle";

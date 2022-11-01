@@ -1,7 +1,7 @@
 import { FormControl, Textarea, FormErrorMessage, FormLabel } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
 
-import { notNullUndefined } from "~/types";
+import { is } from "~/lib";
 
 import type { FormFieldProps } from "./types";
 import type { TextareaProps } from "@chakra-ui/react";
@@ -15,7 +15,7 @@ export const TextArea = <V extends FieldValues>(props: FormFieldProps<TextareaPr
 
   return (
     <FormControl id={name} isRequired={isRequired} isInvalid={typeof error !== "undefined"}>
-      {notNullUndefined(field.label) && <FormLabel>{field.label}</FormLabel>}
+      {is(field.label) && <FormLabel>{field.label}</FormLabel>}
       <Textarea
         resize="vertical"
         h={{ base: "10rem", lg: "unset" }}

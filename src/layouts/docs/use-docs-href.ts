@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { useRouter } from "next/router";
 
-import { notNullUndefined } from "~/types";
+import { is } from "~/lib";
 
 import type { DocsPage } from "~/queries";
 
@@ -20,7 +20,7 @@ export function useDocsHref(props: Omit<DocsPage, "body">): UseDocsHrefReturn {
     const isCurrent = thisSlug === slug;
 
     let href = `/docs/${slug}`;
-    if (notNullUndefined(docsGroup)) {
+    if (is(docsGroup)) {
       href = `/docs/${docsGroup.slug}/${slug}`;
     }
     return { href, isCurrent };

@@ -1,6 +1,6 @@
 import type { UseDisclosureReturn } from "@chakra-ui/react";
 import type { RichTextContent } from "@graphcms/rich-text-types";
-import type { ColorNames } from "~/types";
+import type { ColorNames } from "~/theme";
 
 export interface MobileFormProps {
   title: string;

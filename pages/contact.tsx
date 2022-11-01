@@ -2,8 +2,8 @@ import { Box, Flex, Button as ChakraButton, Heading, VStack } from "@chakra-ui/r
 
 import { Content, DynamicIcon, Hero, FormCardGroup, SEO, Callout } from "~/components";
 import { useSlug, useResponsiveStyle } from "~/hooks";
+import { is } from "~/lib";
 import { contactFormsQuery, pageQuery } from "~/queries";
-import { notNullUndefined } from "~/types";
 
 import type { GetStaticProps, NextPage } from "next";
 import type { ContactPageProps } from "~/types";
@@ -31,7 +31,7 @@ const Contact: NextPage<ContactPageProps> = props => {
             <Content.Title id={slug}>{content.title}</Content.Title>
             {content.subtitle && <Content.Subtitle>{content.subtitle}</Content.Subtitle>}
           </VStack>
-          {notNullUndefined(content.button) && (
+          {is(content.button) && (
             <VStack spacing={4} my={12}>
               <ChakraButton
                 as="a"
@@ -49,7 +49,7 @@ const Contact: NextPage<ContactPageProps> = props => {
           )}
         </Flex>
       </Box>
-      {notNullUndefined(callout) && <Callout {...callout} />}
+      {is(callout) && <Callout {...callout} />}
     </>
   );
 };

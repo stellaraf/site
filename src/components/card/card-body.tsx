@@ -1,6 +1,6 @@
-import { VStack } from "@chakra-ui/react";
+import { forwardRef } from "react";
 
-import { forwardRef } from "~/util";
+import { VStack } from "@chakra-ui/react";
 
 import type { CardBodyProps } from "./types";
 
@@ -18,3 +18,5 @@ export const CardBody = forwardRef<HTMLDivElement, CardBodyProps>((props, ref) =
     />
   );
 });
+
+CardBody.displayName = "CardBody";

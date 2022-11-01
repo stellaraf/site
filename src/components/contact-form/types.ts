@@ -1,7 +1,7 @@
 import type { BoxProps, FlexProps, StackProps } from "@chakra-ui/react";
 import type { GenericForm } from "~/components";
 import type { ContactForms, ContactForm, ContactFormFields } from "~/queries";
-import type { CustomColors } from "~/types";
+import type { CustomColors } from "~/theme";
 
 export interface FormCardContentProps extends Omit<ContactForm & FlexProps, "icon" | "color"> {
   icon: JSX.Element;

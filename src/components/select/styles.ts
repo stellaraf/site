@@ -6,7 +6,7 @@ import * as ReactSelect from "react-select";
 
 import { useColorValue, useColorTokenValue, useToken } from "~/context";
 import { useMobile, useOpposingColor } from "~/hooks";
-import { removeProps } from "~/util";
+import { removeProps } from "~/lib";
 
 import { useSelectContext } from "./select";
 

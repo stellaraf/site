@@ -22,14 +22,6 @@ export function slug(original: string, parent = "", prefix = "#"): string {
 }
 
 /**
- * Build an object usable by a select element from a single display name string.
- */
-export function buildSelections(opt: string): { value: string; label: string } {
-  const value = opt.toLowerCase().replaceAll(/[^A-Za-z0-9-_]/g, "_");
-  return { value, label: opt };
-}
-
-/**
  * Strictly typed version of `Object.entries()`.
  */
 export function entries<O extends Record<string, unknown>, K extends keyof O = keyof O>(
@@ -78,38 +70,6 @@ export function removeProps<O extends Record<string, unknown>, R extends keyof O
     }
   }
   return reconstructed;
-}
-
-/**
- * Pick a random element from an array.
- */
-export function randomArrayItem<T>(arr: T[]): T {
-  const idx = Math.floor(Math.random() * arr.length);
-  return arr[idx];
-}
-
-export function sortByWeight<O extends { sortWeight?: number }>(prev: O, next: O): number {
-  const { sortWeight: prevWeight = 999 } = prev;
-  const { sortWeight: nextWeight = 999 } = next;
-  return prevWeight - nextWeight;
-}
-
-export function stringSorter<O extends Empty>(prop: string) {
-  return (prev: O, next: O): number => {
-    const a = prev[prop as keyof O];
-    const b = next[prop as keyof O];
-    if (typeof a === "string" && typeof b === "string") {
-      return a.toLowerCase() > b.toLowerCase() ? 1 : -1;
-    }
-    console.warn(`object ${JSON.stringify(prev)} does not have property '${prop}'`);
-    return 0;
-  };
-}
-
-export function sortByTitle<O extends { title: string }>(prev: O, next: O): number {
-  const { title: prevTitle } = prev;
-  const { title: nextTitle } = next;
-  return prevTitle.toLowerCase() > nextTitle.toLowerCase() ? 1 : -1;
 }
 
 export function getErrorMessage(thrown: unknown): string {

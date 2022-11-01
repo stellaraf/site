@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 import { useTheme } from "~/context";
-import { opposingColor, isDark } from "~/util";
+import { opposingColor, isDark } from "~/theme";
 
 export function useColorWhenDark(color: string, whenDark: string, fallback: string): string {
   const theme = useTheme();

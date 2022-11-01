@@ -6,8 +6,8 @@ import { StellarLogo } from "@stellaraf/logo";
 import { HomeSection, SEO, Screen, Testimonials } from "~/components";
 import { useConfig, useColorMode, useColorValue } from "~/context";
 import { useGradient, useNavLogo, useResponsiveStyle } from "~/hooks";
+import { is } from "~/lib";
 import { homePageQuery } from "~/queries";
-import { notNullUndefined } from "~/types";
 
 import type { NextPage, GetStaticProps } from "next";
 import type { HomePage } from "~/queries";
@@ -45,7 +45,7 @@ const Home: NextPage<HomePage> = props => {
           </Flex>
         </Flex>
         <Flex justifyContent="center" w="100%">
-          {notNullUndefined(mainVideo) && <Screen url={mainVideo.url} />}
+          {is(mainVideo) && <Screen url={mainVideo.url} />}
         </Flex>
       </Box>
       {blocks.map((block, i) => {

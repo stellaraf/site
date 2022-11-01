@@ -4,7 +4,7 @@ import {
 } from "@graphcms/rich-text-react-renderer";
 
 import { Link, CodeBlock } from "~/components";
-import { notNullUndefined } from "~/types";
+import { is } from "~/lib";
 
 import { Admonition } from "./admonition";
 import { ImageAsset, VideoAsset } from "./asset";
@@ -54,7 +54,7 @@ export const RichText = (props: RichTextProps) => {
   const resolved = content ?? children;
   return (
     <>
-      {notNullUndefined(resolved) ? (
+      {is(resolved) ? (
         <HygraphRichText content={resolved} renderers={renderers} references={references} />
       ) : null}
     </>

@@ -1,12 +1,11 @@
-import { useMemo } from "react";
+import { forwardRef, useMemo } from "react";
 
 import { Box, Flex, VStack, Heading, VisuallyHidden } from "@chakra-ui/react";
 
 import { Button, DynamicIcon, Divider, RichText } from "~/components";
 import { useColorValue } from "~/context";
 import { useMobile, useResponsiveStyle } from "~/hooks";
-import { notNullUndefined } from "~/types";
-import { forwardRef } from "~/util";
+import { is } from "~/lib";
 
 import { ContentBody } from "./content-body";
 import { ContentForm } from "./content-form";
@@ -62,7 +61,7 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
   const rStyles = useResponsiveStyle();
   const showBorder = useColorValue(false, true);
 
-  const hasImage = useMemo(() => notNullUndefined(image) && !isMobile, [title, index, isMobile]);
+  const hasImage = useMemo(() => is(image) && !isMobile, [title, index, isMobile]);
   const side = useMemo<ContentSide>(() => (["right", "left"] as ContentSides)[index % 2], [index]);
 
   const titleMargin = useMemo<FlexProps>(() => {
@@ -104,17 +103,17 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
             side={side}
             isMobile={isMobile}
             titleBlock={titleBlock}
-            image={notNullUndefined(image) ? <ContentImage src={image.url} /> : null}
+            image={is(image) ? <ContentImage src={image.url} /> : null}
           />
         </Flex>
         <Flex height="100%" align="center" direction="column" mb={{ base: 12, lg: "" }}>
-          {notNullUndefined(body) && (
+          {is(body) && (
             <ContentBody>
               <RichText content={body?.raw} />
             </ContentBody>
           )}
           <ContentSubSections features={features} />
-          {notNullUndefined(vendorLogo) && (
+          {is(vendorLogo) && (
             <VStack w="100%" alignItems={{ base: "center", lg: "flex-start" }} spacing={4}>
               <Heading as="h3" fontSize="sm" opacity={0.8}>
                 {vendorLogo.pretext}
@@ -142,13 +141,13 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
               )}
             </VStack>
           )}
-          {notNullUndefined(form) && <ContentForm form={form} />}
-          {notNullUndefined(button) && (
+          {is(form) && <ContentForm form={form} />}
+          {is(button) && (
             <Button
               my={8}
               href={button.link ?? "#"}
               leftIcon={<DynamicIcon icon={{ bs: "BsChevronRight" }} />}
-              variant={notNullUndefined(button.variant) ? button.variant : undefined}
+              variant={is(button.variant) ? button.variant : undefined}
             >
               {button.text}
             </Button>
@@ -160,3 +159,5 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
     </>
   );
 });
+
+ContentSection.displayName = "ContentSection";

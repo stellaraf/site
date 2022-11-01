@@ -1,5 +1,5 @@
 import type { Config, DocsGroups } from "~/queries";
-import type { CustomTheme, ThemeConfig } from "~/types";
+import type { CustomTheme, ThemeConfig } from "~/theme";
 
 /**
  * Root Provider Props

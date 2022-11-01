@@ -11,8 +11,7 @@ import { useTitleCase } from "use-title-case";
 
 import { Card, CardBody, GenericForm, RichText } from "~/components";
 import { useGradient, useMobile, useResponsiveStyle } from "~/hooks";
-import { notNullUndefined } from "~/types";
-import { separate } from "~/util";
+import { is, separate } from "~/lib";
 
 import { PartnerContextProvider, usePartnerCtx } from "./context";
 
@@ -101,12 +100,12 @@ const FormCard = () => {
     (v: unknown): v is VendorLogo => (v as Record<string, unknown>).__typename === "VendorLogo",
   );
 
-  const form = pageContents.find(c => notNullUndefined(c.form))?.form;
+  const form = pageContents.find(c => is(c.form))?.form;
 
   return (
     <Card minHeight="lg" height="min-content" w={{ base: "20rem", md: "80%", lg: "100%" }}>
       <CardBody>
-        {notNullUndefined(form) && (
+        {is(form) && (
           <GenericForm
             w="100%"
             button={form.button}
@@ -136,7 +135,7 @@ const MVendorLayout = () => {
       <VStack spacing={8}>
         <TextContent />
         <FormCard />
-        {notNullUndefined(vendorLogo) && <PartnerLogo {...vendorLogo} />}
+        {is(vendorLogo) && <PartnerLogo {...vendorLogo} />}
       </VStack>
     </Box>
   );
@@ -164,7 +163,7 @@ const DVendorLayout = () => {
       >
         <VStack alignItems="flex-start" gridArea="content">
           <TextContent />
-          {notNullUndefined(vendorLogo) && <PartnerLogo {...vendorLogo} />}
+          {is(vendorLogo) && <PartnerLogo {...vendorLogo} />}
         </VStack>
         <VStack alignItems="flex-end" gridArea="form" maxHeight="80%">
           <FormCard />

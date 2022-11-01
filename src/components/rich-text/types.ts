@@ -1,6 +1,6 @@
 import type { BoxProps } from "@chakra-ui/react";
 import type { ButtonProps } from "~/components";
-import type { ContentButton } from "~/types/schema";
+import type { ContentButton } from "~/types";
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 

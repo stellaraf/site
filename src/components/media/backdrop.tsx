@@ -1,6 +1,6 @@
 import { chakra } from "@chakra-ui/react";
 
-import { shouldForwardProp } from "~/util";
+import { shouldForwardProp } from "~/theme";
 
 export const Backdrop = chakra("div", {
   shouldForwardProp,

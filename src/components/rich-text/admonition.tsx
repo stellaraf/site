@@ -4,8 +4,8 @@ import { useTitleCase } from "use-title-case";
 import { CodeBlockStyleProvider, DynamicIcon, RichText } from "~/components";
 import { useColorValue } from "~/context";
 import { useOpposingColor } from "~/hooks";
-import { AdmonitionType } from "~/types/schema";
-import { shouldForwardProp } from "~/util";
+import { shouldForwardProp } from "~/theme";
+import { AdmonitionType } from "~/types";
 
 import type { AdmonitionModel } from "~/queries";
 

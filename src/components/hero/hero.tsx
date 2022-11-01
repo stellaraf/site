@@ -3,7 +3,7 @@ import { useTitleCase } from "use-title-case";
 
 import { RichText } from "~/components";
 import { useGradient, useResponsiveStyle } from "~/hooks";
-import { shouldForwardProp } from "~/util";
+import { shouldForwardProp } from "~/theme";
 
 import type { HeroProps } from "./types";
 

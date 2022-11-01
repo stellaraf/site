@@ -3,7 +3,7 @@ import { useInView } from "react-intersection-observer";
 import { useTitleCase } from "use-title-case";
 
 import { Button } from "~/components";
-import { notNullUndefined } from "~/types";
+import { is } from "~/lib";
 
 import type { HomeBlockProps } from "./types";
 
@@ -57,7 +57,7 @@ export const HomeBlock = (props: HomeBlockProps) => {
         {body}
       </Box>
       <Box gridArea="button">
-        {notNullUndefined(button) && (
+        {is(button) && (
           <Button mx="unset" href={button.link ?? ""} variant={button.variant ?? "heroPrimary"}>
             {button.text}
           </Button>

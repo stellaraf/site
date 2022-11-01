@@ -3,7 +3,7 @@ import { useTitleCase } from "use-title-case";
 
 import { Button, Icon, RichText } from "~/components";
 import { useColorValue } from "~/context";
-import { notNullUndefined } from "~/types";
+import { is } from "~/lib";
 
 import type { ContentSubSectionProps } from "./types";
 
@@ -37,7 +37,7 @@ export const ContentSubSection = (props: ContentSubSectionProps) => {
           <RichText content={body.raw} />
         </Box>
       </Flex>
-      {notNullUndefined(button) && (
+      {is(button) && (
         <Flex align="center" justify={{ base: "flex-start", lg: "flex-end" }}>
           <Button
             size="sm"

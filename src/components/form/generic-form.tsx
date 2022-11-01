@@ -1,4 +1,4 @@
-import { useImperativeHandle } from "react";
+import { useImperativeHandle, forwardRef } from "react";
 
 import { Button, Flex } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,9 +8,8 @@ import { useTitleCase } from "use-title-case";
 import { z } from "zod";
 
 import { FieldGroup, TextArea, TextInput, SelectField, CheckboxField } from "~/components";
-import { notNullUndefined } from "~/types";
-import { TextInputValidationType } from "~/types/schema";
-import { forwardRef } from "~/util";
+import { is } from "~/lib";
+import { TextInputValidationType } from "~/types";
 
 import {
   isCheckboxField,
@@ -168,7 +167,7 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
             })}
           </FieldGroup>
         ))}
-        {notNullUndefined(button) && (
+        {is(button) && (
           <FieldGroup justifyContent="center" p={2} {...fieldGroupProps}>
             <Button
               w="100%"
@@ -193,3 +192,5 @@ export const GenericForm = forwardRef(
     ref: React.ForwardedRef<{ submit: () => void }>,
   ) => <_GenericForm<V> fRef={ref} {...props} />,
 );
+
+GenericForm.displayName = "GenericForm";

@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import { chakra } from "@chakra-ui/react";
 
 import { ContentLoader, ContentSection, Hero, SEO, Callout, Testimonials } from "~/components";
+import { is } from "~/lib";
 import { pageQuery } from "~/queries";
-import { notNullUndefined } from "~/types";
 
 import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
 import type { PageProps } from "~/types";
@@ -51,7 +51,7 @@ const CloudPage: NextPage<PageProps> = props => {
       {contents.map((sect, i) => {
         return <ContentSection content={sect} key={sect.title} index={i} />;
       })}
-      {notNullUndefined(callout) && <Callout {...callout} />}
+      {is(callout) && <Callout {...callout} />}
       <Testimonials />
     </>
   );

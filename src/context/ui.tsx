@@ -9,7 +9,7 @@ import {
   useTheme as useChakraTheme,
 } from "@chakra-ui/react";
 
-import { makeTheme } from "~/util";
+import { makeTheme } from "~/theme";
 
 import type { UseTheme, UIProviderProps, ColorModeContext } from "./types";
 import type { GetServerSideProps } from "next";

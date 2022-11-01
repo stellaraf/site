@@ -4,9 +4,8 @@ import { useKeenSlider } from "keen-slider/react";
 
 import { useBreakpointString } from "~/hooks";
 
-import type KeenSlider from "keen-slider";
-import type { TOptionsEvents } from "keen-slider";
-import type { UseSlider, UseSliderOptions } from "~/types";
+import type { UseSlider, UseSliderOptions } from "./types";
+import type { default as KeenSlider, TOptionsEvents } from "keen-slider";
 
 export function useSlider(options: UseSliderOptions = {}): UseSlider {
   const { sm, md, lg, xl } = useBreakpointString();

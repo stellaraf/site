@@ -1,9 +1,9 @@
 import { extendTheme } from "@chakra-ui/react";
 import { generatePalette, generateFontFamily, Palette } from "palette-by-numbers";
 
+import { entries } from "~/lib";
 import { button } from "~/styles";
 
-import { entries } from "../generic";
 import { opposingColor } from "./opposing-color";
 
 import type {
@@ -15,9 +15,7 @@ import type {
   CustomColors,
   ChangeableColors,
   InitialTheme,
-} from "~/types";
-
-export * from "./opposing-color";
+} from "./types";
 
 const radii = {
   none: "0",

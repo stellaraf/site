@@ -2,7 +2,8 @@ import * as ReactSelect from "react-select";
 
 import type { ChakraProps } from "@chakra-ui/react";
 import type { StylesProps, StylesConfigFunction } from "react-select/dist/declarations/src/styles";
-import type { SelectOptionSingle, ColorNames } from "~/types";
+import type { ColorNames } from "~/theme";
+import type { SelectOptionSingle } from "~/types";
 
 type ReactSelectExcluded = KeysOf<ReactSelect.Props, "onChange" | "components" | "styles">;
 

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { atom, selector, useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { useCloudLocations } from "~/context";
-import { all } from "~/util";
+import { all } from "~/lib";
 
 import type { CloudMeasurement } from "./types";
 import type { CloudLocation } from "~/queries";

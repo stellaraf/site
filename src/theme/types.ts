@@ -32,8 +32,27 @@ export interface CustomTheme extends Omit<DefaultTheme, "colors"> {
 
 export type ThemeFonts = DefaultTheme["fonts"];
 
-export type { Fonts as ConfigFonts } from "./content";
-
 export type FontWeights = DefaultTheme["fontWeights"];
 
-export type { Styles } from "@chakra-ui/theme-tools";
+interface Colors {
+  [k: string]: string;
+}
+
+export interface Fonts {
+  body: string;
+  monospace: string;
+  hairline: number;
+  thin: number;
+  light: number;
+  normal: number;
+  medium: number;
+  semibold: number;
+  bold: number;
+  extrabold: number;
+  black: number;
+}
+
+export interface ThemeConfig {
+  colors: Colors;
+  fonts: Fonts;
+}

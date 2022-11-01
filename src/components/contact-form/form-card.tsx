@@ -1,7 +1,8 @@
+import { forwardRef } from "react";
+
 import { VStack } from "@chakra-ui/react";
 
 import { useColorValue } from "~/context";
-import { forwardRef } from "~/util";
 
 import type { FormCardBodyProps } from "./types";
 import type { StackProps } from "@chakra-ui/react";
@@ -35,3 +36,5 @@ export const FormCard = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
     />
   );
 });
+
+FormCard.displayName = "FormCard";

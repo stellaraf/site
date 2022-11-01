@@ -1,9 +1,10 @@
+import { forwardRef } from "react";
+
 import { StellarLogo } from "@stellaraf/logo";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Link } from "~/components";
 import { useColorMode } from "~/context";
-import { forwardRef } from "~/util";
 
 import type { HeaderLogoProps } from "./types";
 
@@ -29,3 +30,5 @@ export const HeaderLogo = forwardRef<HTMLDivElement, HeaderLogoProps>((props, re
     </AnimatePresence>
   );
 });
+
+HeaderLogo.displayName = "HeaderLogo";

@@ -1,9 +1,10 @@
+import { forwardRef } from "react";
+
 import NextLink from "next/link";
 
 import { Button as ChakraButton } from "@chakra-ui/react";
 
 import { useLinkType } from "~/hooks";
-import { forwardRef } from "~/util";
 
 import type { ButtonProps, ButtonLinkElement } from "./types";
 
@@ -39,3 +40,7 @@ export const Button = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) =>
   }
   return <Component href={target} ref={ref} {...rest} />;
 });
+
+BaseButton.displayName = "BaseButton";
+ExternalButton.displayName = "ExternalButton";
+Button.displayName = "Buttom";

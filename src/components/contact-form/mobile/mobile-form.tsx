@@ -4,7 +4,7 @@ import { Button as ChakraButton, Center, Flex, IconButton, Heading, Grid } from 
 import { useTitleCase } from "use-title-case";
 
 import { DynamicIcon, Modal, RichText, GenericForm } from "~/components";
-import { notNullUndefined } from "~/types";
+import { is } from "~/lib";
 
 import { useContactForm } from "../state";
 import { Success } from "../success";
@@ -102,7 +102,7 @@ export const MobileForm = (props: MobileFormProps) => {
             <RichText>{body}</RichText>
           </Center>
           <Center width="100%" gridArea="form" alignItems="flex-start">
-            {notNullUndefined(formState.selected) && notNullUndefined(button) ? (
+            {is(formState.selected) && is(button) ? (
               !formState.showSuccess ? (
                 <GenericForm
                   ref={formRef}

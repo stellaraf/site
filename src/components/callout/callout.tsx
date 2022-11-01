@@ -4,7 +4,7 @@ import { useTitleCase } from "use-title-case";
 import { Button, Ripple, RichText } from "~/components";
 import { useColorValue } from "~/context";
 import { useOpposingColor, useColorWhenDark, useGlow, useResponsiveStyle } from "~/hooks";
-import { notNullUndefined } from "~/types";
+import { is } from "~/lib";
 
 import type { CalloutProps } from "./types";
 
@@ -52,9 +52,9 @@ export const Callout = (props: CalloutProps) => {
             </Heading>
           )}
         </VStack>
-        {notNullUndefined(body) && <Divider bg={color} />}
-        {notNullUndefined(body) && <RichText content={body.raw} />}
-        {notNullUndefined(button) && (
+        {is(body) && <Divider bg={color} />}
+        {is(body) && <RichText content={body.raw} />}
+        {is(button) && (
           <Button
             color={color}
             variant="outline"

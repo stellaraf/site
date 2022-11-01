@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getJson } from "~/util";
+import { getJson } from "~/lib";
 
 import type { UseQueryResult, QueryFunction } from "@tanstack/react-query";
 

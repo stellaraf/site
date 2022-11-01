@@ -5,8 +5,8 @@ import { Button, Wrap } from "@chakra-ui/react";
 import { ContentSection, Hero, SEO, useDataCenter, Callout, Testimonials } from "~/components";
 import { useColorTokenValue, CloudLocationsProvider } from "~/context";
 import { useAlert } from "~/hooks";
+import { is } from "~/lib";
 import { pageQuery, cloudLocationsQuery } from "~/queries";
-import { notNullUndefined } from "~/types";
 
 import type { GetStaticProps, NextPage } from "next";
 import type { USMapProps } from "~/components";
@@ -58,7 +58,7 @@ const Cloud: NextPage<CloudPageProps> = props => {
       {contents.map((sect, i) => {
         return <ContentSection index={i} key={sect.title} content={sect} />;
       })}
-      {notNullUndefined(callout) && <Callout {...callout} />}
+      {is(callout) && <Callout {...callout} />}
       <Testimonials />
     </>
   );

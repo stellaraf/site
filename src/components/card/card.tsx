@@ -1,7 +1,8 @@
+import { forwardRef } from "react";
+
 import { VStack } from "@chakra-ui/react";
 
 import { useColorValue } from "~/context";
-import { forwardRef } from "~/util";
 
 import type { CardProps } from "./types";
 
@@ -33,3 +34,5 @@ export const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
     />
   );
 });
+
+Card.displayName = "Card";
