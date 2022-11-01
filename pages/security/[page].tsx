@@ -1,11 +1,7 @@
 import { ContentSection, Hero, SEO, Callout, Testimonials } from "~/components";
 import { pageQuery } from "~/queries";
 
-import type {
-  // GetStaticPaths,
-  GetStaticProps,
-  NextPage,
-} from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { PageProps } from "~/types";
 
 type UrlQuery = {
@@ -35,9 +31,9 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
   return { props: { ...page, preview } };
 };
 
-// export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
-//   paths: [{ params: { page: "consulting" } }, { params: { page: "services" } }],
-//   fallback: false,
-// });
+export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
+  paths: [{ params: { page: "security/demo" } }],
+  fallback: false,
+});
 
 export default SecurityPage;
