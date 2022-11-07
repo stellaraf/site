@@ -4,6 +4,8 @@ dist
 public/
 CHANGELOG.md
 *.yml
+*.yaml
 *-lock.yaml
 *-lock.json
 *.lock
+src/types/schema.ts
