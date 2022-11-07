@@ -69,16 +69,17 @@ export function useAlert(): UseAlertReturn {
                   display="block"
                   css={{
                     // Don't add normal paragraph padding in alerts.
-                    "& p.chakra-text": {
+                    "& p.chakra-text, & .st-content-p": {
                       marginTop: "unset",
                       marginBottom: "unset",
                     },
                     // Inherit alert styles for links - so the branded underline doesn't clash.
                     "& a": {
                       "--link-color": "inherit",
+                      textDecoration: "underline",
                     },
                     "& a:hover": {
-                      opacity: 0.8,
+                      opacity: 0.75,
                     },
                   }}
                 >
@@ -89,7 +90,7 @@ export function useAlert(): UseAlertReturn {
               <CloseButton size="sm" onClick={onClose} position="absolute" right={1} top={1} />
             </Alert>
           </>
-        ) as JSX.Element;
+        );
         return component;
       },
     });

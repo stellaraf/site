@@ -7,7 +7,7 @@ export const ContentForm = (props: ContentFormProps) => {
   return (
     <Card py={16} height="min-content" w={{ base: "20rem", md: "80%" }} {...rest}>
       <CardBody>
-        <GenericForm button={button} colorScheme={colorScheme} fields={fields} />
+        <GenericForm name={name} button={button} colorScheme={colorScheme} fields={fields} />
       </CardBody>
     </Card>
   );

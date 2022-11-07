@@ -46,3 +46,12 @@ declare module "*.gql" {
 
   export = Schema;
 }
+
+declare namespace NodeJS {
+  export interface ProcessEnv {
+    SFDC_ORG_ID: string;
+    VERCEL_ENV: string;
+    CPM_API_KEY: string;
+    CPM_LIST_ID: string;
+  }
+}

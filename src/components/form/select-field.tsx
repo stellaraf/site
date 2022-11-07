@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 
 import { FormControl, FormErrorMessage } from "@chakra-ui/react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useController } from "react-hook-form";
 
 import { Select as CustomSelect } from "~/components";
 
@@ -10,9 +10,11 @@ import type { SelectOptionSingle } from "~/types";
 
 export const SelectField = (props: SelectFieldProps) => {
   const { opts, field, name, required = false, isMulti = false, ...rest } = props;
-  const { setValue, register, getFieldState } = useFormContext();
+  const { setValue, register } = useFormContext();
 
-  const { error } = getFieldState(name);
+  const {
+    fieldState: { error },
+  } = useController({ name });
 
   typeof error !== "undefined" && console.warn(error);
 

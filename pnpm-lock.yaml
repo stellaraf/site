@@ -35,6 +35,7 @@ specifiers:
   '@types/node-fetch': ^2.6.2
   '@types/react': ^18.0.21
   '@types/react-simple-maps': ^1.0.8
+  '@types/ua-parser-js': ^0.7.36
   '@typescript-eslint/eslint-plugin': ^5.39.0
   '@typescript-eslint/parser': ^5.39.0
   '@welldone-software/why-did-you-render': ^4.3.2
@@ -56,6 +57,7 @@ specifiers:
   framer-motion: ^7.5.2
   graphql: ^16.6.0
   hamburger-react: ^2.5.0
+  isbot: ^3.6.2
   keen-slider: ^5.5.1
   libphonenumber-js: ^1.10.13
   merge-anything: ^5.0.4
@@ -63,6 +65,7 @@ specifiers:
   next-seo: ^5.5.0
   palette-by-numbers: ^0.1.6
   prettier: ^2.7.1
+  query-string: ^7.1.1
   raw-loader: ^4.0.2
   react: ^18.2.0
   react-dom: ^18.2.0
@@ -81,6 +84,7 @@ specifiers:
   tsparticles: ^2.3.4
   tsparticles-engine: ^2.3.3
   typescript: ^4.8.4
+  ua-parser-js: ^1.0.32
   use-local-storage-state: ^18.1.1
   use-title-case: ^0.1.5
   zod: ^3.19.1
@@ -107,12 +111,14 @@ dependencies:
   framer-motion: 7.5.2_biqbaboplfbrettd7655fr4n2y
   graphql: 16.6.0
   hamburger-react: 2.5.0_react@18.2.0
+  isbot: 3.6.2
   keen-slider: 5.5.1
   libphonenumber-js: 1.10.13
   merge-anything: 5.0.4
   next: 12.3.2_6tziyx3dehkoeijunclpkpolha
   next-seo: 5.5.0_o3dmoitd6lovh72xiz6lllvwai
   palette-by-numbers: 0.1.6
+  query-string: 7.1.1
   raw-loader: 4.0.2_webpack@5.74.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -130,6 +136,7 @@ dependencies:
   ts-node: 10.9.1_p2zphemn5bk5inasc666rmprwi
   tsparticles: 2.3.4
   tsparticles-engine: 2.3.3
+  ua-parser-js: 1.0.32
   use-local-storage-state: 18.1.1_biqbaboplfbrettd7655fr4n2y
   use-title-case: 0.1.5_react@18.2.0
   zod: 3.19.1
@@ -156,6 +163,7 @@ devDependencies:
   '@types/node-fetch': 2.6.2
   '@types/react': 18.0.21
   '@types/react-simple-maps': 1.0.8
+  '@types/ua-parser-js': 0.7.36
   '@typescript-eslint/eslint-plugin': 5.39.0_xyciw6oqjoiiono4dhv3uhn5my
   '@typescript-eslint/parser': 5.39.0_ypn2ylkkyfa5i233caldtndbqa
   '@welldone-software/why-did-you-render': 4.3.2_react@18.2.0
@@ -3057,6 +3065,10 @@ packages:
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
 
+  /@types/ua-parser-js/0.7.36:
+    resolution: {integrity: sha512-N1rW+njavs70y2cApeIw1vLMYXRwfBy+7trgavGuuTfOd7j1Yh7QTRc/yqsPl6ncokt72ZXuxEU0PiCp9bSwNQ==}
+    dev: true
+
   /@types/ws/8.5.3:
     resolution: {integrity: sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==}
     dependencies:
@@ -4307,6 +4319,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /decode-uri-component/0.2.0:
+    resolution: {integrity: sha512-hjf+xovcEn31w/EUYdTXQh/8smFL/dzYjohQGEIgjyNavaJfBY2p5F527Bo1VPATxv0VYTUC2bOcXvqFwk78Og==}
+    engines: {node: '>=0.10'}
+    dev: false
+
   /decompress-response/6.0.0:
     resolution: {integrity: sha512-aW35yZM6Bb/4oJlZncMH2LCoZtJXTRxES17vE3hoRiowU2kWHaJKFkSBDnDR+cm9J+9QhXmREyIfv0pji9ejCQ==}
     engines: {node: '>=10'}
@@ -5081,6 +5098,11 @@ packages:
       to-regex-range: 5.0.1
     dev: true
 
+  /filter-obj/1.1.0:
+    resolution: {integrity: sha512-8rXg1ZnX7xzy2NGDVkBVaAy+lSlPNwad13BtgSlLuxfIslyt5Vg64U7tFcCt4WS1R0hvtnQybT/IyCkGZ3DpXQ==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /finalhandler/1.2.0:
     resolution: {integrity: sha512-5uXcUVftlQMFnWC9qu/svkWv3GTd2PfUhK/3PLkYNAe7FbqJMt3515HaxE6eRL74GdsriiwujiawdaB1BpEISg==}
     engines: {node: '>= 0.8'}
@@ -5819,6 +5841,11 @@ packages:
     resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /isbot/3.6.2:
+    resolution: {integrity: sha512-jk8IRbrvyTJC2f4VpxXQ4ff+xVJgsXHygtpc5Sl6m9PWuF8oXVcpEmcZKR88j5WOoqpHTxrOKccCpxdAgW7Afw==}
+    engines: {node: '>=12'}
+    dev: false
 
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
@@ -6828,6 +6855,16 @@ packages:
       side-channel: 1.0.4
     dev: false
 
+  /query-string/7.1.1:
+    resolution: {integrity: sha512-MplouLRDHBZSG9z7fpuAAcI7aAYjDLhtsiVZsevsfaHWDS2IDdORKbSd1kWUA+V4zyva/HZoSfpwnYMMQDhb0w==}
+    engines: {node: '>=6'}
+    dependencies:
+      decode-uri-component: 0.2.0
+      filter-obj: 1.1.0
+      split-on-first: 1.1.0
+      strict-uri-encode: 2.0.0
+    dev: false
+
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
@@ -7530,6 +7567,11 @@ packages:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
     dev: false
 
+  /split-on-first/1.1.0:
+    resolution: {integrity: sha512-43ZssAJaMusuKWL8sKUBQXHWOpq8d6CfN/u1p4gUzfJkM05C8rxTmYrkIPTXapZpORA6LkkzcUulJ8FqA7Uudw==}
+    engines: {node: '>=6'}
+    dev: false
+
   /sponge-case/1.0.1:
     resolution: {integrity: sha512-dblb9Et4DAtiZ5YSUZHLl4XhH4uK80GhAZrVXdN4O2P4gQ40Wa5UIOPUHlA/nFd2PLblBZWUioLMMAVrgpoYcA==}
     dependencies:
@@ -7570,6 +7612,11 @@ packages:
     resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
     engines: {node: '>=10.0.0'}
     dev: true
+
+  /strict-uri-encode/2.0.0:
+    resolution: {integrity: sha512-QwiXZgpRcKkhTj2Scnn++4PKtWsH0kpzZ62L2R6c/LUVYv7hVnZqcg2+sMuT6R7Jusu1vviK/MFsu6kNJfWlEQ==}
+    engines: {node: '>=4'}
+    dev: false
 
   /string-env-interpolation/1.0.1:
     resolution: {integrity: sha512-78lwMoCcn0nNu8LszbP1UA7g55OeE4v7rCeWnM5B453rnNr4aq+5it3FEYtZrSEiMvHZOZ9Jlqb0OD0M2VInqg==}
@@ -8263,6 +8310,10 @@ packages:
   /ua-parser-js/0.7.31:
     resolution: {integrity: sha512-qLK/Xe9E2uzmYI3qLeOmI0tEOt+TBBQyUIAh4aAgU05FVYzeZrKUdkAZfBNVGRaHVgV0TDkdEngJSw/SyQchkQ==}
     dev: true
+
+  /ua-parser-js/1.0.32:
+    resolution: {integrity: sha512-dXVsz3M4j+5tTiovFVyVqssXBu5HM47//YSOeZ9fQkdDKkfzv2v3PP1jmH6FUyPW+yCSn7aBVK1fGGKNhowdDA==}
+    dev: false
 
   /unbox-primitive/1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}

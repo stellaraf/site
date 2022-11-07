@@ -16,11 +16,6 @@ import type {
   TextAreaField,
 } from "~/types";
 
-interface BaseFormProps
-  extends Partial<Pick<NonNullable<PageContent["form"]>, "button" | "colorScheme">> {
-  onSubmit?: () => void | Promise<void>;
-}
-
 type ControlProps<V extends FieldValues> = Required<
   Pick<ControllerProps<V>, "control" | "defaultValue" | "name">
 > &
@@ -55,11 +50,15 @@ export type FormValue<Field extends FormField> = Field extends CheckboxField
   : null;
 
 export interface GenericFormProps<Fields extends FormField[]>
-  extends Omit<FlexProps, "onSubmit">,
-    BaseFormProps {
+  extends Omit<FlexProps, "onSubmit" | "title">,
+    Partial<Pick<NonNullable<PageContent["form"]>, "button" | "colorScheme">> {
+  name: string;
   fields: Fields;
   buttonProps?: Partial<ButtonProps>;
   fieldGroupProps?: Partial<StackProps>;
+  onSubmit?: () => void | Promise<void>;
+  onSuccess?: (detail: unknown) => void | Promise<void>;
+  onFailure?: (detail: unknown) => void | Promise<void>;
 }
 
 export interface CheckboxGroupProps

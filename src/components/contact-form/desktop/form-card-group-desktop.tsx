@@ -6,7 +6,7 @@ import { Center, Stack, Button as ChakraButton } from "@chakra-ui/react";
 import { motion, AnimatePresence, LayoutGroup, useCycle, type Variants } from "framer-motion";
 import { useTitleCase } from "use-title-case";
 
-import { Button, Icon } from "~/components";
+import { Button, Icon, type FormSubmitRef } from "~/components";
 import { useGoogleAnalytics } from "~/hooks";
 
 import { useContactFormCtx } from "../context";
@@ -133,11 +133,7 @@ export const DFormCardGroup = () => {
 
           // Create a ref object to pass to each form. Because the submit button lives outside the
           // form for layout reasons, it needs to explicitly call the form's submit method.
-          const formRef = useRef<{ submit: () => void }>(null);
-
-          function handleFormSubmit(): void {
-            formRef.current?.submit();
-          }
+          const formRef = useRef<FormSubmitRef>(null);
 
           // Button component & props need to change based on the form's current lifecycle state
           // ('cards' vs. 'form').
@@ -157,7 +153,7 @@ export const DFormCardGroup = () => {
               maxW="50%"
               type="submit"
               colorScheme={iconColor}
-              onClick={handleFormSubmit}
+              onClick={async () => formRef.current?.submit()}
               variant={formButton?.variant ? formButton.variant : undefined}
             >
               {fnTitle(formButton?.text ?? "Submit")}

@@ -108,10 +108,11 @@ const FormCard = () => {
         {is(form) && (
           <GenericForm
             w="100%"
+            name={form.name}
             button={form.button}
-            buttonProps={{ maxW: undefined }}
             fields={form.fields}
             colorScheme={form.colorScheme}
+            buttonProps={{ maxW: undefined }}
           />
         )}
       </CardBody>

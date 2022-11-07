@@ -1,5 +1,5 @@
 import { FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useController } from "react-hook-form";
 
 import { is } from "~/lib";
 
@@ -10,8 +10,11 @@ import type { FieldValues } from "react-hook-form";
 export const TextInput = <V extends FieldValues>(props: FormFieldProps<InputProps, V>) => {
   const { field, name, defaultValue, rules = {}, isRequired = false, ...rest } = props;
 
-  const { register, getFieldState } = useFormContext();
-  const { error } = getFieldState(name);
+  const { register } = useFormContext<V>();
+
+  const {
+    fieldState: { error },
+  } = useController({ name });
 
   return (
     <FormControl id={name} isRequired={isRequired} isInvalid={typeof error !== "undefined"}>

@@ -28,18 +28,6 @@ export const MobileForm = (props: MobileFormProps) => {
     [onToggle, formState],
   );
 
-  // const handleSubmit = useCallback(
-  //   async <F extends FormType, D extends FormFieldValue<F>>(form: F, data: D) => {
-  //     await submitForm(form, data);
-  //     if (typeof onSubmit === "function") {
-  //       onSubmit();
-  //     }
-  //     !showSuccess && setSuccess(true);
-  //     setTimeout(() => onToggle(), 1500);
-  //   },
-  //   [onSubmit, onToggle, showSuccess],
-  // );
-
   const handleSubmit = useCallback(() => {
     if (typeof onSubmit === "function") {
       onSubmit();
@@ -105,6 +93,7 @@ export const MobileForm = (props: MobileFormProps) => {
             {is(formState.selected) && is(button) ? (
               !formState.showSuccess ? (
                 <GenericForm
+                  name={title}
                   ref={formRef}
                   fields={fields}
                   onSubmit={handleSubmit}
@@ -122,7 +111,6 @@ export const MobileForm = (props: MobileFormProps) => {
               w="100%"
               type="submit"
               colorScheme={colorScheme}
-              // onClick={handleFormSubmit}
               variant={button?.variant ? button.variant : undefined}
             >
               {fnTitle(button?.text ?? "Submit")}

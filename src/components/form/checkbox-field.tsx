@@ -8,7 +8,7 @@ import {
   CheckboxGroup,
   FormErrorMessage,
 } from "@chakra-ui/react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useController } from "react-hook-form";
 
 import type { CheckboxGroupProps, FormFieldProps } from "./types";
 import type { FieldValues } from "react-hook-form";
@@ -27,9 +27,11 @@ export const CheckboxField = <V extends FieldValues>(
     ...rest
   } = props;
 
-  const { register, getFieldState } = useFormContext();
+  const { register } = useFormContext();
 
-  const { error } = getFieldState(name);
+  const {
+    fieldState: { error },
+  } = useController({ name });
 
   return (
     <FormControl

@@ -3,32 +3,17 @@ import { useCallback } from "react";
 import { Flex, Center, Heading, IconButton, Grid } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import {
-  DynamicIcon,
-  GenericForm,
-  // isFormButton,
-  RichText,
-} from "~/components";
+import { DynamicIcon, GenericForm, RichText } from "~/components";
 import { is } from "~/lib";
 
 import { useContactForm } from "../state";
 import { Success } from "../success";
 import { separateFormFields } from "../util";
-// import { submitForm } from "../submitters";
 
-// import type { FormType, FormFieldValue } from "../forms/types";
-// import type { FormElements } from "../types";
 import type { DesktopFormProps } from "./types";
 
 export const DesktopForm = (props: DesktopFormProps) => {
-  const {
-    title,
-    body,
-    icon,
-    toggleLayout,
-    formRef,
-    // onSubmit
-  } = props;
+  const { title, body, icon, toggleLayout, formRef } = props;
   const fnTitle = useTitleCase();
   const formState = useContactForm();
 
@@ -36,17 +21,6 @@ export const DesktopForm = (props: DesktopFormProps) => {
     formState.reset();
     toggleLayout(0);
   }, [toggleLayout, formState]);
-
-  // const handleSubmit = useCallback(
-  //   async <F extends FormType, D extends FormFieldValue<F>>(form: F, data: D) => {
-  //     await submitForm(form, data);
-  //     if (typeof onSubmit === "function") {
-  //       onSubmit();
-  //     }
-  //     formState.toggleSuccess(true);
-  //   },
-  //   [onSubmit, formState],
-  // );
 
   const { button, fields } = separateFormFields(formState.selected);
 
@@ -79,7 +53,12 @@ export const DesktopForm = (props: DesktopFormProps) => {
       <Center width="100%" gridArea="form" alignItems={{ base: "flex-start", lg: "center" }}>
         {is(formState.selected) && is(button) ? (
           !formState.showSuccess ? (
-            <GenericForm ref={formRef} colorScheme={formState.selected.color} fields={fields} />
+            <GenericForm
+              name={title}
+              ref={formRef}
+              fields={fields}
+              colorScheme={formState.selected.color}
+            />
           ) : (
             <Success>
               <RichText>{button.alert?.body.raw}</RichText>

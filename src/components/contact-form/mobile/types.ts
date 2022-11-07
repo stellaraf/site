@@ -1,5 +1,6 @@
 import type { UseDisclosureReturn } from "@chakra-ui/react";
 import type { RichTextContent } from "@graphcms/rich-text-types";
+import type { FormSubmitRef } from "~/components";
 import type { ColorNames } from "~/theme";
 
 export interface MobileFormProps {
@@ -9,6 +10,6 @@ export interface MobileFormProps {
   colorScheme: ColorNames;
   onClose: UseDisclosureReturn["onClose"];
   onToggle: UseDisclosureReturn["onToggle"];
-  formRef: React.MutableRefObject<{ submit: () => void } | null>;
+  formRef: React.MutableRefObject<FormSubmitRef | null>;
   onSubmit?: () => void;
 }

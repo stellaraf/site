@@ -3,12 +3,12 @@ import { useImperativeHandle, forwardRef } from "react";
 import { Button, Flex } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isValidPhoneNumber } from "libphonenumber-js";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, type UseFormHandleSubmit } from "react-hook-form";
 import { useTitleCase } from "use-title-case";
 import { z } from "zod";
 
 import { FieldGroup, TextArea, TextInput, SelectField, CheckboxField } from "~/components";
-import { is } from "~/lib";
+import { is, submitForm } from "~/lib";
 import { TextInputValidationType } from "~/types";
 
 import {
@@ -18,17 +18,23 @@ import {
   isTextInputField,
   isFormButton,
 } from "./guards";
-import { submitter } from "./submit";
 
 import type { GenericFormProps, FormField } from "./types";
 import type { ZodRawShape } from "zod";
 
+type FormSubmitter = ReturnType<UseFormHandleSubmit<Dict>>;
+
+export interface FormSubmitRef {
+  submit: FormSubmitter;
+}
+
 type GenericFormPropsWithRef<T extends FormField[]> = GenericFormProps<T> & {
-  fRef: React.ForwardedRef<{ submit: () => void }>;
+  fRef: React.ForwardedRef<FormSubmitRef>;
 };
 
 function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef<Fields>) {
   const {
+    name,
     fRef,
     fields,
     button,
@@ -36,6 +42,8 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
     onSubmit,
     buttonProps = {},
     fieldGroupProps = {},
+    onSuccess,
+    onFailure,
     ...rest
   } = props;
 
@@ -62,7 +70,12 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
       if (fieldConfig.validationType === TextInputValidationType.Email) {
         value = z.string().email(`${fieldConfig.displayName} is missing or invalid`);
       } else if (fieldConfig.validationType === TextInputValidationType.Phone) {
-        value = z.string().refine(isValidPhoneNumber, `${fieldConfig.displayName} is invalid`);
+        value = z
+          .string()
+          .refine(
+            (v: string) => isValidPhoneNumber(v, "US"),
+            `${fieldConfig.displayName} is invalid`,
+          );
       }
       if (!fieldConfig.required) {
         value = value.optional();
@@ -81,19 +94,32 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
     resolver: zodResolver(schema),
   });
 
-  const submitForm = async (data: Schema) => {
+  const handleSubmit = async (data: Schema) => {
     if (typeof onSubmit !== "undefined") {
       const maybePromise = onSubmit();
       if (maybePromise instanceof Promise) {
         await maybePromise;
       }
     }
-    return submitter(data);
+    const result = await submitForm(name, data);
+    if (result instanceof Error && typeof onFailure === "function") {
+      const failureCallable = onFailure(data);
+      if (failureCallable instanceof Promise) {
+        await failureCallable;
+      }
+    } else {
+      if (typeof onSuccess === "function") {
+        const successCallable = onSuccess(data);
+        if (successCallable instanceof Promise) {
+          await successCallable;
+        }
+      }
+    }
   };
 
-  const submit = form.handleSubmit(submitForm);
+  const submit = form.handleSubmit(handleSubmit);
 
-  useImperativeHandle(fRef, () => ({ submit }));
+  useImperativeHandle<FormSubmitRef, FormSubmitRef>(fRef, () => ({ submit }));
 
   const groups = fields.reduce<FormField[][]>((final, field) => {
     if (typeof final[field.fieldGroup] === "undefined") {
@@ -187,10 +213,9 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
 }
 
 export const GenericForm = forwardRef(
-  <V extends FormField[]>(
-    props: GenericFormProps<V>,
-    ref: React.ForwardedRef<{ submit: () => void }>,
-  ) => <_GenericForm<V> fRef={ref} {...props} />,
+  <V extends FormField[]>(props: GenericFormProps<V>, ref: React.ForwardedRef<FormSubmitRef>) => (
+    <_GenericForm<V> fRef={ref} {...props} />
+  ),
 );
 
 GenericForm.displayName = "GenericForm";

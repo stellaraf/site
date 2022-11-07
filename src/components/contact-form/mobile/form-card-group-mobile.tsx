@@ -14,7 +14,7 @@ import {
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useTitleCase } from "use-title-case";
 
-import { Button, Icon } from "~/components";
+import { Button, Icon, type FormSubmitRef } from "~/components";
 import { useGoogleAnalytics } from "~/hooks";
 
 import { useContactFormCtx } from "../context";
@@ -83,7 +83,7 @@ export const MFormCardGroup = () => {
             }
           };
 
-          const formRef = useRef<{ submit: () => void }>(null);
+          const formRef = useRef<FormSubmitRef>(null);
 
           const cardsButton = (
             <Button
