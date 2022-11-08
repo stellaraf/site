@@ -29,7 +29,7 @@ export const Testimonial = (props: TestimonialProps) => {
               fontWeight={fontWeight}
               fontSize={{ base: "lg", lg: "xl" }}
               textAlign={{ base: "left", xl: "justify" }}
-              sx={{ "& p": { display: "inline" } }}
+              sx={{ "& p, & .st-content-p": { display: "inline" } }}
             >
               <Quote kind="open" />
               <RichText content={body} />

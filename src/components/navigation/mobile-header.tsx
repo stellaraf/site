@@ -13,7 +13,6 @@ import type { FlexProps } from "@chakra-ui/react";
 import type { ButtonProps } from "~/components";
 
 const HEADING_HEIGHT = 56;
-const navItems = [...navConfig.left, ...navConfig.right];
 
 const ContactButton = (props: ButtonProps) => (
   <Button
@@ -75,8 +74,8 @@ export const MHeader = (props: FlexProps) => {
         }
         body={
           <VStack align="flex-start" spacing={6}>
-            {navItems.map(i => (
-              <NavLink href={i.link} title={i.title} key={i.title} onClick={onClose} />
+            {navConfig.map(i => (
+              <NavLink key={i.title} href={i.link} title={i.title} onClick={onClose} />
             ))}
           </VStack>
         }

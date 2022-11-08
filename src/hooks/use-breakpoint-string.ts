@@ -5,6 +5,7 @@ interface UseBreakpointStringReturn {
   md: string;
   lg: string;
   xl: string;
+  xxl: string;
 }
 
 /**
@@ -12,11 +13,12 @@ interface UseBreakpointStringReturn {
  */
 export function useBreakpointString(): UseBreakpointStringReturn {
   const { breakpoints } = useTheme();
-  const { md, lg, xl } = breakpoints;
+  const { md, lg, xl, "2xl": xxl } = breakpoints;
   return {
     sm: `(max-width: ${md})`,
     md: `(min-width: ${md}) and (max-width: ${lg})`,
     lg: `(min-width: ${lg}) and (max-width: ${xl})`,
-    xl: `(min-width: ${xl})`,
+    xl: `(min-width: ${xl}) and (max-width: ${xxl})`,
+    xxl: `(min-width: ${xxl})`,
   };
 }

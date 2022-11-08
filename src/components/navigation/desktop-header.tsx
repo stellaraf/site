@@ -69,8 +69,7 @@ export const DHeader = (props: BoxProps) => {
           )}
         </Box>
         <NavGroup>
-          <LinkGroup side="left" />
-          <LinkGroup side="right" />
+          <LinkGroup />
           <ContactButton />
         </NavGroup>
       </Navbar>

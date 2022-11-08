@@ -8,9 +8,9 @@ import { useColorValue } from "~/context";
 
 import navConfig from "./config";
 
-import type { DesktopNavLinkProps, DesktopLinkGroupProps } from "./types";
+import type { DesktopNavLinkProps } from "./types";
 import type { LinkProps as ChakraLinkProps } from "@chakra-ui/react";
-import type { ButtonProps } from "~/components";
+import type { ButtonProps, LinkProps } from "~/components";
 
 const NavLink = (props: DesktopNavLinkProps) => {
   const { isActive = false, ...rest } = props;
@@ -40,7 +40,7 @@ const NavLink = (props: DesktopNavLinkProps) => {
       py={4}
       pos="relative"
       fontWeight="medium"
-      px={{ lg: 2, xl: 4 }}
+      px={{ lg: 2, xl: 3, "2xl": 6 }}
       mr={{ lg: 4, xl: 8 }}
       transition="all 0.2s"
       css={{ "&:focus": { borderRadius } }}
@@ -60,13 +60,12 @@ const NavLink = (props: DesktopNavLinkProps) => {
 /**
  * Group of header links, pinned to a specific side of the header.
  */
-export const LinkGroup = (props: DesktopLinkGroupProps) => {
-  const { side, ...rest } = props;
+export const LinkGroup = (props: LinkProps) => {
   const { asPath } = useRouter();
 
   return (
     <>
-      {navConfig[side].map(i => {
+      {navConfig.map(i => {
         /**
          * Determine which nav item is currently active, including child/sub pages. Because
          * the / route will match everything, filter that out from current path comparisons.
@@ -79,7 +78,7 @@ export const LinkGroup = (props: DesktopLinkGroupProps) => {
           isActive = match.length !== 0;
         }
         return (
-          <NavLink key={i.link} href={i.link} isActive={isActive} {...rest}>
+          <NavLink key={i.link} href={i.link} isActive={isActive} {...props}>
             {i.title}
           </NavLink>
         );

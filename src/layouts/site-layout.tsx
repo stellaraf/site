@@ -32,6 +32,7 @@ export const SiteLayout = (props: SiteLayoutProps) => {
     md: "Medium",
     lg: "Large",
     xl: "X-Large",
+    "2xl": "XX-Large",
   });
 
   if (process.env.NODE_ENV === "development" && typeof bp !== "undefined") {

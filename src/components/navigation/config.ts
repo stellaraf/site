@@ -2,38 +2,29 @@ interface NavConfigItem {
   title: string;
   link: string;
 }
-interface NavConfig {
-  left: NavConfigItem[];
-  right: NavConfigItem[];
-}
 
-const config: NavConfig = {
-  left: [
-    {
-      title: "Home",
-      link: "/",
-    },
-    {
-      title: "Cloud",
-      link: "/cloud",
-    },
-    {
-      title: "Services",
-      link: "/services",
-    },
-    {
-      title: "Security",
-      link: "/security",
-    },
-    {
-      title: "Consulting",
-      link: "/consulting",
-    },
-  ],
-  right: [
-    { title: "About", link: "/about" },
-    { title: "Docs", link: "/docs" },
-  ],
-};
+const config: NavConfigItem[] = [
+  {
+    title: "Home",
+    link: "/",
+  },
+  {
+    title: "Cloud",
+    link: "/cloud",
+  },
+  {
+    title: "Services",
+    link: "/services",
+  },
+  {
+    title: "Security",
+    link: "/security",
+  },
+  {
+    title: "Consulting",
+    link: "/consulting",
+  },
+  { title: "About", link: "/about" },
+];
 
 export default config;

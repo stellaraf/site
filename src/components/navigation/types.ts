@@ -9,10 +9,6 @@ export interface DesktopNavLinkProps extends LinkProps {
   isActive?: boolean;
 }
 
-export interface DesktopLinkGroupProps extends LinkProps {
-  side: "left" | "right";
-}
-
 export interface MobileNavLinkProps extends LinkProps {
   title: string;
 }
