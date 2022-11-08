@@ -97,11 +97,9 @@ export function useContactForm(): ContactFormValues & ContactFormMethods {
     }
   }, []);
 
-  addForms(cards);
-
   useEffect(() => {
     // Populate the store's form values from context.
-    // addForms(cards);
+    addForms(cards);
   }, []);
 
   return {
