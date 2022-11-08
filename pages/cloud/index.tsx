@@ -25,7 +25,7 @@ const Content = (props: ContentProps) => {
   isError && showAlert({ status: "error", message: `${error}` });
 
   return (
-    <Hero title={title} subtitle={subtitle} body={body?.raw}>
+    <Hero title={title} subtitle={subtitle} body={body}>
       <Wrap justify="center" w="100%" mt={8} align="center" spacing={4}>
         <Button variant="heroPrimary" isLoading={isFetching} onClick={execute}>
           Find Your Edge Data Center

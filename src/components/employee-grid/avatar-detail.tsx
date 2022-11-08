@@ -63,7 +63,7 @@ export const Detail = (props: AvatarDetailProps) => {
     <Modal
       isCentered
       size="full"
-      body={<RichText content={employees[current].bio.raw} />}
+      body={<RichText content={employees[current].bio} />}
       isOpen={isOpen}
       onClose={onClose}
       blockScrollOnMount={false}

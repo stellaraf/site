@@ -84,7 +84,7 @@ export function useAlert(): UseAlertReturn {
                   }}
                 >
                   {message}
-                  {status === "error" && <RichText content={errorMessage.body.raw} />}
+                  {status === "error" && <RichText content={errorMessage.body} />}
                 </AlertDescription>
               </Flex>
               <CloseButton size="sm" onClick={onClose} position="absolute" right={1} top={1} />

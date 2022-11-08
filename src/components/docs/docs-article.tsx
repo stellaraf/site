@@ -26,7 +26,7 @@ export const DocsArticle = (props: React.PropsWithChildren<DocsPage>) => {
       </Flex>
       <Box>
         <Content.Body maxW="unset">
-          <RichText references={body.references}>{body.raw}</RichText>
+          <RichText content={body} />
         </Content.Body>
         {typeof children !== "undefined" && children}
       </Box>

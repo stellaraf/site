@@ -6,7 +6,7 @@ import { useTitleCase } from "use-title-case";
 import { DynamicIcon, Modal, RichText, GenericForm } from "~/components";
 import { is } from "~/lib";
 
-import { useContactForm } from "../state";
+import { useContactForm, useSelectedForm } from "../state";
 import { Success } from "../success";
 import { separateFormFields } from "../util";
 
@@ -16,6 +16,7 @@ export const MobileForm = (props: MobileFormProps) => {
   const { title, body, icon, onToggle, formRef, onSubmit, onClose, colorScheme } = props;
 
   const formState = useContactForm();
+  const selected = useSelectedForm();
   const fnTitle = useTitleCase();
   const [showSuccess, setSuccess] = useState(false);
 
@@ -36,7 +37,7 @@ export const MobileForm = (props: MobileFormProps) => {
     setTimeout(() => onToggle(), 1500);
   }, [onSubmit, onToggle, showSuccess]);
 
-  const { button, fields } = separateFormFields(formState.selected);
+  const { button, fields } = separateFormFields(selected);
 
   return (
     <Modal
@@ -87,21 +88,22 @@ export const MobileForm = (props: MobileFormProps) => {
             textAlign="center"
             flexDirection="column"
           >
-            <RichText>{body}</RichText>
+            <RichText content={body} />
           </Center>
           <Center width="100%" gridArea="form" alignItems="flex-start">
-            {is(formState.selected) && is(button) ? (
+            {is(selected) && is(button) ? (
               !formState.showSuccess ? (
                 <GenericForm
                   name={title}
                   ref={formRef}
                   fields={fields}
                   onSubmit={handleSubmit}
-                  colorScheme={formState.selected.color}
+                  colorScheme={selected.color}
+                  onSuccess={() => formState.toggleSuccess(true)}
                 />
               ) : (
                 <Success>
-                  <RichText>{button.alert?.body.raw}</RichText>
+                  <RichText content={button.alert?.body} />
                 </Success>
               )
             ) : null}

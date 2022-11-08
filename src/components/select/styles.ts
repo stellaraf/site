@@ -30,6 +30,7 @@ export const useControlStyle = <Opt extends SelectOptionSingle, IsMulti extends 
       const { isFocused } = state;
       const baseProps = removeProps(base, "border", "borderColor");
       const styles = {
+        zIndex: 1,
         justifyContent: "space-between",
         display: "flex",
         flexWrap: "wrap",

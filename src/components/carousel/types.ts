@@ -24,7 +24,7 @@ type SliderEvent = (
   setCurrentSlide: (slideNumber: number) => void,
 ) => void;
 
-export interface UseSliderOptionsBase extends TOptionsEvents {
+interface UseSliderOptionsBase extends TOptionsEvents {
   interval?: number;
   onMouseOver?: SliderEvent;
   onMouseOut?: SliderEvent;

@@ -1,7 +1,4 @@
-import {
-  RichText as HygraphRichText,
-  type RichTextProps as HygraphRichTextProps,
-} from "@graphcms/rich-text-react-renderer";
+import { RichText as HygraphRichText } from "@graphcms/rich-text-react-renderer";
 
 import { Link, CodeBlock } from "~/components";
 import { is } from "~/lib";
@@ -16,15 +13,15 @@ import { Table, Td, Th } from "./table";
 import { Code, BlockQuote, P } from "./text";
 
 import type { NodeRendererType } from "@graphcms/rich-text-react-renderer";
-import type { RichTextContent } from "@graphcms/rich-text-types";
+import type { RichTextValue } from "~/types";
 
 interface RichTextProps {
-  content?: RichTextContent | null;
-  children?: RichTextContent | null;
-  references?: HygraphRichTextProps["references"];
+  content?: RichTextValue | null;
+  children?: RichTextValue;
+  overrides?: Partial<NodeRendererType>;
 }
 
-const renderers: NodeRendererType = {
+const defaultRenderers: NodeRendererType = {
   h1: ({ children }) => <H1>{children}</H1>,
   h2: ({ children }) => <H2>{children}</H2>,
   h3: ({ children }) => <H3>{children}</H3>,
@@ -44,19 +41,19 @@ const renderers: NodeRendererType = {
   code_block: ({ children }) => <CodeBlock>{children}</CodeBlock>,
   img: props => <ImageAsset {...props} />,
   video: props => <VideoAsset {...props} />,
-  embed: { Admonition: props => <Admonition {...props} />, ContentButton },
+  embed: {
+    Admonition: props => <Admonition {...props} />,
+    ContentButton: props => <ContentButton {...props} />,
+  },
   class: ({ className, children }) =>
     className === "expandable" ? <Expandable>{children}</Expandable> : <>{children}</>,
 };
 
 export const RichText = (props: RichTextProps) => {
-  const { content, children, references } = props;
-  const resolved = content ?? children;
-  return (
-    <>
-      {is(resolved) ? (
-        <HygraphRichText content={resolved} renderers={renderers} references={references} />
-      ) : null}
-    </>
-  );
+  const { content, children, overrides } = props;
+  const resolved = content ?? children ?? {};
+  const renderers = { ...defaultRenderers, ...overrides };
+  const { raw, ...rest } = resolved;
+
+  return <>{is(raw) ? <HygraphRichText content={raw} renderers={renderers} {...rest} /> : null}</>;
 };

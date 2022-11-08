@@ -124,7 +124,7 @@ export const Banner = (props: PropsOf<typeof BannerContainer>) => {
   const isMobile = useMobile();
   const [agreed, setAgreed] = useBanner();
 
-  const body = useMemo(() => <RichText content={privacyBanner.raw} />, []);
+  const body = useMemo(() => <RichText content={privacyBanner} />, []);
 
   return (
     <AnimatePresence>

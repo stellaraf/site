@@ -2,9 +2,8 @@ import { extendTheme } from "@chakra-ui/react";
 import { generatePalette, generateFontFamily, Palette } from "palette-by-numbers";
 
 import { entries } from "~/lib";
-import { button } from "~/styles";
 
-import { opposingColor } from "./opposing-color";
+import { button } from "./styles";
 
 import type {
   Fonts,
@@ -49,6 +48,7 @@ const zIndexKeys = [
   "table",
   "tbody",
   "thead",
+  "input",
   "span",
   "ol",
   "ul",
@@ -168,53 +168,13 @@ export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
   const [fonts, fontWeights] = importFonts(userTheme.fonts);
   const colors = importColors(userTheme.colors as InitialTheme);
 
-  const globalColors = (Object.keys(colors) as StringKeyOf<CustomColors>[]).reduce<
-    Record<string, Record<string, string>>
-  >((final, name) => {
-    if (typeof final[":root[data-theme=light],:root[data-theme=light]"] === "undefined") {
-      final[":root[data-theme=light],:root[data-theme=light]"] = {};
-    }
-    if (typeof final[":root[data-theme=dark]"] === "undefined") {
-      final[":root[data-theme=dark]"] = {};
-    }
-
-    final[":root[data-theme=light],:root[data-theme=light]"][`--${name}`] = colors[name][500];
-    final[":root[data-theme=dark]"][`--${name}`] = colors[name][300];
-    final[":root"] = {};
-    final[":root"]["--chakra-colors-white"] = colors.white;
-    final[":root"]["--chakra-colors-black"] = colors.black;
-    return final;
-  }, {});
-
-  const tokenColors = (Object.keys(colors) as StringKeyOf<CustomColors>[]).reduce<
-    Record<StringKeyOf<CustomColors>, Record<string, string>>
-  >((final, name) => {
-    final[name] = { _default: colors[name][500], _dark: colors[name][300] };
-    return final;
-  }, {} as Record<StringKeyOf<CustomColors>, Record<string, string>>);
-
-  const theme = extendTheme({ colors });
-
-  const opposingColors = Object.entries(colors).reduce((final, [colorName, color]) => {
-    if (typeof color !== "string") {
-      const newColors = Object.fromEntries(
-        Object.entries(color).map(([n, v]) => [
-          `${colorName}.${n}.opposing`,
-          opposingColor(theme, v),
-        ]),
-      );
-      final = { ...final, ...newColors };
-    }
-    return final;
-  }, {});
-
   const customTheme = extendTheme({
-    colors: { ...colors, ...opposingColors },
+    colors,
     fonts,
     fontWeights,
     fontSizes,
     radii,
-    styles: { global: { ...globalStyles, ...globalColors } },
+    styles: { global: globalStyles },
     components: { Button: button, Heading: { sizes: headingOverrides } },
     semanticTokens: {
       colors: {
@@ -230,7 +190,6 @@ export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
           default: "secondary.200",
           _dark: "tertiary.100",
         },
-        ...tokenColors,
       },
     },
     config: { useSystemColorMode: true },

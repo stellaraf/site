@@ -7,6 +7,7 @@ import { createContext, useContext } from "react";
 import type { CodeProps } from "@chakra-ui/react";
 
 interface CodeBlockStyleCtxType {
+  colorScheme: CodeProps["colorScheme"];
   copyButton: CodeProps;
   codeBlock: CodeProps;
 }

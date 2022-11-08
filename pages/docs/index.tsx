@@ -33,7 +33,7 @@ const TextContent = (props: PageProps) => {
           </Heading>
         )}
       </Flex>
-      <RichText content={body?.raw} />
+      <RichText content={body} />
     </Flex>
   );
 };

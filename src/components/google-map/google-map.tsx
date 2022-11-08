@@ -100,7 +100,7 @@ export const GoogleMap = () => {
           address={hqAddress}
           orgName={organizationName}
           openMapsText={openMapsText}
-          content={<RichText content={hqMapInfo.raw} />}
+          content={<RichText content={hqMapInfo} />}
         />
       </GoogleMapApi>
     ),

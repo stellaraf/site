@@ -7,14 +7,16 @@ import { Card, CardBody, Icon, RichText } from "~/components";
 import { useSlug } from "~/hooks";
 import { is } from "~/lib";
 
+import { useBody } from "./use-body";
+
 import type { Actions } from "~/queries";
 
 export const Action = (props: ArrayElement<Actions>) => {
   const { body, page, title, subtitle, callToAction } = props;
 
   const titleMe = useTitleCase();
+  const resolvedBody = useBody(callToAction.body, body, page?.body);
 
-  const resolvedBody = callToAction.body ?? body ?? page?.body;
   const slug = useSlug(title, [title]);
 
   return (
@@ -64,7 +66,12 @@ export const Action = (props: ArrayElement<Actions>) => {
                 },
               }}
             >
-              <RichText content={resolvedBody?.raw} />
+              <RichText
+                content={resolvedBody}
+                // Override links in the CTA to eliminate DOM nesting errors (plus you don't want
+                // to actually click the link in the CTA).
+                overrides={{ a: ({ children }) => <>{children}</> }}
+              />
             </Box>
           </CardBody>
         </Card>

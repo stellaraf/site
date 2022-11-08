@@ -112,7 +112,7 @@ export const MFormCardGroup = () => {
                     {isFormLayout ? (
                       <MobileForm
                         title={title}
-                        body={body.raw}
+                        body={body}
                         onClose={onClose}
                         formRef={formRef}
                         onToggle={onToggle}

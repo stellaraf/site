@@ -33,7 +33,7 @@ const About: NextPage<AboutPageProps> = props => {
   return (
     <>
       <SEO title={title} description={subtitle ?? undefined} />
-      <Hero title={title} subtitle={subtitle} body={body?.raw} />
+      <Hero title={title} subtitle={subtitle} body={body} />
       <Section title={employeesSection.title}>
         <EmployeeGrid employees={employees} />
       </Section>

@@ -48,6 +48,7 @@ declare module "*.gql" {
 }
 
 declare namespace NodeJS {
+  // eslint-disable-next-line import/no-unused-modules
   export interface ProcessEnv {
     SFDC_ORG_ID: string;
     VERCEL_ENV: string;

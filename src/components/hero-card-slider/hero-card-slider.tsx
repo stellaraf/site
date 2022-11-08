@@ -16,7 +16,7 @@ const HeroCard = (props: HeroCardProps) => {
       <Heading as="h2" fontSize="xl">
         {fnTitle(title)}
       </Heading>
-      <RichText>{body}</RichText>
+      <RichText content={body} />
     </>
   );
 };

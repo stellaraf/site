@@ -20,7 +20,7 @@ const BaseLink = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
       ref={ref}
       css={{
         "&": { "--link-color": borderColor },
-        "p > &, td > &": {
+        "p > &, .st-content-p > &, td > &": {
           borderBottomWidth: "1px",
           borderBottomColor: "var(--link-color)",
           color: "inherit",

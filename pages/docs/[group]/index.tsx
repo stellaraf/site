@@ -42,7 +42,7 @@ const Content = (props: DocsGroup) => {
           </Heading>
         )}
       </Flex>
-      <RichText content={summary.raw} />
+      <RichText content={summary} />
     </Flex>
   );
 };

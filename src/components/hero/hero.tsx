@@ -18,16 +18,6 @@ export const Hero = (props: HeroProps) => {
   const bg = useGradient();
   const rStyles = useResponsiveStyle();
   const fnTitle = useTitleCase();
-  // const renderedBody = useRender(body, [title], [], {
-  //   paragraph: {
-  //     mt: 8,
-  //     as: "h3",
-  //     zIndex: 1,
-  //     fontSize: "lg",
-  //     maxW: { lg: "75%" },
-  //     fontWeight: "normal",
-  //   },
-  // });
 
   return (
     <Container {...bg} {...rStyles} {...rest}>

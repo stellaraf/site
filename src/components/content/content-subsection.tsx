@@ -34,7 +34,7 @@ export const ContentSubSection = (props: ContentSubSectionProps) => {
           {icon && <Icon size={12} url={icon.url} color={iconColor ?? "primary"} />}
         </Flex>
         <Box whiteSpace="pre-line" fontSize="lg" textAlign={{ base: "left", xl: "justify" }}>
-          <RichText content={body.raw} />
+          <RichText content={body} />
         </Box>
       </Flex>
       {is(button) && (

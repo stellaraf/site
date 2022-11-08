@@ -6,7 +6,7 @@ import { useTitleCase } from "use-title-case";
 import { DynamicIcon, GenericForm, RichText } from "~/components";
 import { is } from "~/lib";
 
-import { useContactForm } from "../state";
+import { useContactForm, useSelectedForm } from "../state";
 import { Success } from "../success";
 import { separateFormFields } from "../util";
 
@@ -16,13 +16,14 @@ export const DesktopForm = (props: DesktopFormProps) => {
   const { title, body, icon, toggleLayout, formRef } = props;
   const fnTitle = useTitleCase();
   const formState = useContactForm();
+  const selected = useSelectedForm();
 
   const goBack = useCallback(() => {
     formState.reset();
     toggleLayout(0);
   }, [toggleLayout, formState]);
 
-  const { button, fields } = separateFormFields(formState.selected);
+  const { button, fields } = separateFormFields(selected);
 
   return (
     <Grid
@@ -48,20 +49,21 @@ export const DesktopForm = (props: DesktopFormProps) => {
         </Heading>
       </Center>
       <Center p={2} gridArea="body" flexDirection="column" textAlign="center" pt={4} fontSize="sm">
-        <RichText>{body}</RichText>
+        <RichText content={body} />
       </Center>
       <Center width="100%" gridArea="form" alignItems={{ base: "flex-start", lg: "center" }}>
-        {is(formState.selected) && is(button) ? (
+        {is(selected) && is(button) ? (
           !formState.showSuccess ? (
             <GenericForm
               name={title}
               ref={formRef}
               fields={fields}
-              colorScheme={formState.selected.color}
+              colorScheme={selected.color}
+              onSuccess={() => formState.toggleSuccess(true)}
             />
           ) : (
             <Success>
-              <RichText>{button.alert?.body.raw}</RichText>
+              <RichText content={button.alert?.body} />
             </Success>
           )
         ) : null}

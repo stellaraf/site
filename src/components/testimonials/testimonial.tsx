@@ -32,7 +32,7 @@ export const Testimonial = (props: TestimonialProps) => {
               sx={{ "& p": { display: "inline" } }}
             >
               <Quote kind="open" />
-              <RichText content={body.raw} />
+              <RichText content={body} />
               <Quote kind="close" />
             </Box>
             <VStack w="100%" pt={8} align="center" textAlign="center">

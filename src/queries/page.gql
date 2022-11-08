@@ -14,6 +14,63 @@ query page($slug: String) {
       }
       subtitle
       title
+      form {
+        name
+        colorScheme
+        button {
+          __typename
+          id
+          action
+          alert {
+            level
+            name
+            title
+            body {
+              raw
+            }
+          }
+          text
+          variant
+        }
+        fields {
+          ... on CheckboxField {
+            __typename
+            displayName
+            formId
+            label
+            multiple
+            options
+            required
+            fieldGroup
+          }
+          ... on SelectField {
+            __typename
+            displayName
+            formId
+            label
+            multiple
+            options
+            required
+            fieldGroup
+          }
+          ... on TextAreaField {
+            __typename
+            displayName
+            formId
+            label
+            required
+            fieldGroup
+          }
+          ... on TextInputField {
+            __typename
+            displayName
+            formId
+            label
+            required
+            fieldGroup
+          }
+        }
+      }
     }
     slug
     title

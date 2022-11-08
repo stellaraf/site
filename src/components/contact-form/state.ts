@@ -1,21 +1,16 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 
-import { atom, useRecoilState } from "recoil";
+import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 
 import { useContactFormCtx } from "./context";
 
-import type { ContactForm, ContactForms } from "~/queries";
+import type { ContactForm } from "~/queries";
 
 interface ContactFormValues {
   /**
    * Currently selected form name. `null` if no form is selected (indicates card row view).
    */
   selected: ContactForm | null;
-
-  /**
-   * Contact forms by name, e.g. `{ Support: { ...data } }`
-   */
-  forms: ContactForms;
 
   /**
    * If `true`, the form container should show a success message, `false` otherwise.
@@ -35,44 +30,33 @@ interface ContactFormMethods {
   reset: () => void;
 
   /**
-   * Determine if form identified by `name` parameter should be rendered.
-   *
-   * @param name Form name
-   */
-  shouldRender: (name: string) => boolean;
-
-  /**
    * Set the selected form by name.
    */
   setSelected: (title: string) => void;
-
-  /**
-   * Populate form configuration from CMS data. This should only be run once during initialization.
-   */
-  addForms: (c: ContactForms) => void;
 }
 
 const formAtom = atom<ContactFormValues>({
   key: "formState",
   default: {
     selected: null,
-    forms: [],
     showSuccess: false,
   },
 });
+
+const formSelectedSelector = selector<ContactForm | null>({
+  key: "formState.selected",
+  get: ({ get }) => {
+    const state = get(formAtom);
+    return state.selected;
+  },
+});
+
+export const useSelectedForm = () => useRecoilValue(formSelectedSelector);
 
 export function useContactForm(): ContactFormValues & ContactFormMethods {
   const [state, setState] = useRecoilState(formAtom);
 
   const cards = useContactFormCtx();
-
-  const addForms = useCallback((cards: ContactForms): void => {
-    // If no forms are present, add them.
-    if (state.forms.length === 0) {
-      const withFields = cards.filter(c => c.fields.length !== 0);
-      setState(prev => ({ ...prev, forms: withFields }));
-    }
-  }, []);
 
   const toggleSuccess = useCallback((value?: boolean): void => {
     setState(prev => ({ ...prev, showSuccess: value ?? !prev.showSuccess }));
@@ -85,29 +69,18 @@ export function useContactForm(): ContactFormValues & ContactFormMethods {
     }
   }, []);
 
-  const shouldRender = useCallback(
-    (name: string): boolean => !state.showSuccess && state.selected?.title === name,
-    [state.showSuccess, state.selected],
-  );
-
   const setSelected = useCallback((title: string): void => {
-    const selected = state.forms.find(f => f.title === title);
+    const selected = cards.find(f => f.title === title);
+
     if (typeof selected !== "undefined") {
       setState(prev => ({ ...prev, selected }));
     }
   }, []);
 
-  useEffect(() => {
-    // Populate the store's form values from context.
-    addForms(cards);
-  }, []);
-
   return {
     ...state,
-    addForms,
     toggleSuccess,
     reset,
-    shouldRender,
     setSelected,
   };
 }

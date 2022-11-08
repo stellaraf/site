@@ -8,7 +8,7 @@ import {
 
 import { DynamicIcon } from "~/components";
 import { useColorValue } from "~/context";
-import { reactChildText } from "~/lib";
+import { reactChildText, publicProps } from "~/lib";
 
 import { useCodeBlockStyle } from "./use-code-block-style";
 
@@ -16,21 +16,24 @@ import type { CodeBlockProps } from "./types";
 
 export const CodeBlock = (props: CodeBlockProps) => {
   const { children, ...rest } = props;
-  const defaultScheme = useColorValue("gray", "tertiary");
+  const defaultScheme = useColorValue("blackAlpha", "tertiary");
   const size = useBreakpointValue({ base: "md", lg: "sm" });
 
   let ctx = useCodeBlockStyle();
 
   if (ctx === null) {
     ctx = {
+      colorScheme: "gray",
       codeBlock: { colorScheme: defaultScheme },
       copyButton: { colorScheme: defaultScheme, variant: "ghost" },
     };
   }
 
-  const { bg, color } = useStyleConfig("Code", {
+  const code = useStyleConfig("Code", {
     colorScheme: ctx.codeBlock.colorScheme,
   });
+
+  const containerStyle = publicProps(code, "bg", "color");
 
   const btnSx = useStyleConfig("Button", {
     colorScheme: ctx.copyButton.colorScheme,
@@ -41,6 +44,8 @@ export const CodeBlock = (props: CodeBlockProps) => {
 
   const { hasCopied, onCopy } = useClipboard(copyValue);
 
+  const borderColor = useColorValue(`${ctx.colorScheme}.200`, `${ctx.colorScheme}.600`);
+
   return (
     <Box
       p={3}
@@ -49,11 +54,12 @@ export const CodeBlock = (props: CodeBlockProps) => {
       fontSize="sm"
       pos="relative"
       borderRadius="md"
-      borderColor="inherit"
-      sx={{ bg, color }}
+      sx={containerStyle}
+      borderColor={borderColor}
       {...rest}
     >
       <Box
+        mr={12}
         as="pre"
         fontFamily="mono"
         whiteSpace="pre-wrap"

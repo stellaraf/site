@@ -40,8 +40,9 @@ export const Code = (props: CodeProps) => {
 
   let ctx = useCodeBlockStyle();
   if (ctx === null) {
-    ctx = { codeBlock: { colorScheme: scheme }, copyButton: {} };
+    ctx = { colorScheme: "gray", codeBlock: { colorScheme: scheme }, copyButton: {} };
   }
   const sx = useStyleConfig("Code", { colorScheme: ctx.codeBlock.colorScheme });
+
   return <ChakraCode fontSize="sm" colorScheme={scheme} px={1} sx={sx} {...props} />;
 };

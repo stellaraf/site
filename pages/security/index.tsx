@@ -14,7 +14,7 @@ const SecurityIndex: NextPage<PageProps> = props => {
   return (
     <>
       <SEO title={title} description={subtitle ?? undefined} />
-      <Hero title={title} subtitle={subtitle} body={body?.raw} />
+      <Hero title={title} subtitle={subtitle} body={body} />
       {contents.map((sect, i) => {
         return <ContentSection content={sect} key={sect.title} index={i} />;
       })}

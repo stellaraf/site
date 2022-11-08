@@ -1,19 +1,21 @@
 import { Center, Heading, VStack, Divider } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { Button, Ripple, RichText } from "~/components";
+import { Button, Ripple, RichText, Content } from "~/components";
 import { useColorValue } from "~/context";
 import { useOpposingColor, useColorWhenDark, useGlow, useResponsiveStyle } from "~/hooks";
 import { is } from "~/lib";
+import { ThemeColor } from "~/types";
 
 import type { CalloutProps } from "./types";
 
 export const Callout = (props: CalloutProps) => {
-  const { title, subtitle, body = null, button, ...rest } = props;
+  const { title, subtitle, body = null, button, form, ...rest } = props;
 
   const rStyles = useResponsiveStyle();
   const isDarkMode = useColorValue(false, true);
-  const bg = useColorValue("secondary.500", "purple.500");
+  const colorScheme = useColorValue(ThemeColor.Secondary, ThemeColor.Purple);
+  const bg = `${colorScheme}.500`;
   const rippleStart = useColorValue("secondary.200", "secondary.700");
   const color = useOpposingColor(bg);
   const buttonHoverBg = useColorWhenDark(bg, "blackAlpha.100", "whiteAlpha.100");
@@ -41,7 +43,7 @@ export const Callout = (props: CalloutProps) => {
       {...rest}
     >
       {!isDarkMode && <Ripple start={rippleStart} stop={bg} />}
-      <VStack spacing={{ base: 4, lg: 8 }} color={color}>
+      <VStack spacing={{ base: 4, lg: 8 }} color={color} w="full">
         <VStack>
           <Heading as="h2" fontSize="2xl">
             {fnTitle(title)}
@@ -53,7 +55,7 @@ export const Callout = (props: CalloutProps) => {
           )}
         </VStack>
         {is(body) && <Divider bg={color} />}
-        {is(body) && <RichText content={body.raw} />}
+        {is(body) && <RichText content={body} />}
         {is(button) && (
           <Button
             color={color}
@@ -65,6 +67,7 @@ export const Callout = (props: CalloutProps) => {
             {fnTitle(button.text)}
           </Button>
         )}
+        {is(form) && <Content.Form form={{ ...form, colorScheme }} color="body-fg" />}
       </VStack>
     </Center>
   );

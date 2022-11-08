@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import { useRouter } from "next/router";
 
@@ -122,14 +122,17 @@ export const DFormCardGroup = () => {
            * to reflect the selected form and toggles the framer layout for animation purposes.
            * The Docs link should just be a standard router link to the /docs route.
            */
-          function handleClick(event: React.MouseEvent): void {
-            if (isForm) {
-              event.preventDefault();
-              formState.setSelected(title);
-              toggleLayout();
-              trackModal(`${pathname}/form-${title.replace(/\s/gi, "-").toLowerCase()}`);
-            }
-          }
+          const handleClick = useCallback(
+            (event: React.MouseEvent): void => {
+              if (isForm) {
+                event.preventDefault();
+                formState.setSelected(title);
+                toggleLayout();
+                trackModal(`${pathname}/form-${title.replace(/\s/gi, "-").toLowerCase()}`);
+              }
+            },
+            [isForm, title],
+          );
 
           // Create a ref object to pass to each form. Because the submit button lives outside the
           // form for layout reasons, it needs to explicitly call the form's submit method.
@@ -205,7 +208,7 @@ export const DFormCardGroup = () => {
                     ) : (
                       <DesktopForm
                         title={title}
-                        body={body.raw}
+                        body={body}
                         formRef={formRef}
                         icon={renderedIcon}
                         toggleLayout={toggleLayout}

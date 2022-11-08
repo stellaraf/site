@@ -40,7 +40,7 @@ export const HomeSection = (props: HomeSectionProps) => {
           side={side}
           title={title}
           subtitle={subtitle}
-          body={<RichText content={body.raw} />}
+          body={<RichText content={body} />}
           button={button}
           image={image}
         />

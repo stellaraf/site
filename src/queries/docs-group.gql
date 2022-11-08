@@ -18,6 +18,33 @@ query docsGroup($slug: String) {
     docsPages {
       body {
         raw
+        references {
+          ... on Admonition {
+            id
+            body {
+              raw
+            }
+            title
+            type
+          }
+          ... on Asset {
+            id
+            mimeType
+            size
+            url
+            width
+            height
+            fileName
+          }
+          ... on ContentButton {
+            id
+            colorScheme
+            link
+            showIcon
+            text
+            variant
+          }
+        }
       }
       updatedAt
       title
@@ -30,6 +57,33 @@ query docsGroup($slug: String) {
     title
     summary {
       raw
+      references {
+        ... on Admonition {
+          id
+          body {
+            raw
+          }
+          title
+          type
+        }
+        ... on Asset {
+          id
+          mimeType
+          size
+          url
+          width
+          height
+          fileName
+        }
+        ... on ContentButton {
+          id
+          colorScheme
+          link
+          showIcon
+          text
+          variant
+        }
+      }
     }
   }
 }

@@ -16,7 +16,7 @@ export const FormCardContent = (props: FormCardContentProps) => {
         {fnTitle(title)}
       </Heading>
       <Box textAlign="center">
-        <RichText>{body.raw}</RichText>
+        <RichText>{body}</RichText>
       </Box>
     </>
   );

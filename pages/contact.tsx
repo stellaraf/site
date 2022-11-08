@@ -18,7 +18,7 @@ const Contact: NextPage<ContactPageProps> = props => {
   return (
     <>
       <SEO title={footerTitle ?? title} description={subtitle ?? undefined} />
-      <Hero title={title} subtitle={subtitle} body={body?.raw} minH="40vh">
+      <Hero title={title} subtitle={subtitle} body={body} minH="40vh">
         <Box as="section" py={{ base: 16, lg: 32 }}>
           <Flex height="100%" align="center" direction="column" {...rStyles}>
             <FormCardGroup contactForms={contactForms} />

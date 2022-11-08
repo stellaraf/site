@@ -7,6 +7,8 @@ import { useOpposingColor } from "~/hooks";
 import { shouldForwardProp } from "~/theme";
 import { AdmonitionType } from "~/types";
 
+import { Table, Td, Th } from "./table";
+
 import type { AdmonitionModel } from "~/queries";
 
 const iconMap = {
@@ -38,22 +40,23 @@ export const Admonition = (props: AdmonitionModel) => {
 
   const fnTitle = useTitleCase();
 
-  const bg = useColorValue(
+  const bgBase = useColorValue(
     {
-      [AdmonitionType.Information]: "primary.500",
-      [AdmonitionType.Note]: "gray.500",
-      [AdmonitionType.Tip]: "green.500",
-      [AdmonitionType.Warning]: "yellow.500",
-      [AdmonitionType.Critical]: "red.500",
+      [AdmonitionType.Information]: "primary",
+      [AdmonitionType.Note]: "gray",
+      [AdmonitionType.Tip]: "green",
+      [AdmonitionType.Warning]: "yellow",
+      [AdmonitionType.Critical]: "red",
     }[type],
     {
-      [AdmonitionType.Information]: "primary.300",
-      [AdmonitionType.Note]: "gray.300",
-      [AdmonitionType.Tip]: "green.300",
-      [AdmonitionType.Warning]: "yellow.300",
-      [AdmonitionType.Critical]: "red.300",
+      [AdmonitionType.Information]: "primary",
+      [AdmonitionType.Note]: "gray",
+      [AdmonitionType.Tip]: "green",
+      [AdmonitionType.Warning]: "yellow",
+      [AdmonitionType.Critical]: "red",
     }[type],
   );
+  const bg = useColorValue(`${bgBase}.500`, `${bgBase}.300`);
 
   const linkColor = useColorValue(
     {
@@ -89,6 +92,31 @@ export const Admonition = (props: AdmonitionModel) => {
     }[type],
   );
 
+  const codeCopyButtonColorScheme = useColorValue(
+    {
+      [AdmonitionType.Note]: "blackAlpha",
+      [AdmonitionType.Information]: "whiteAlpha",
+      [AdmonitionType.Tip]: "blackAlpha",
+      [AdmonitionType.Warning]: "blackAlpha",
+      [AdmonitionType.Critical]: "whiteAlpha",
+    }[type],
+    {
+      [AdmonitionType.Note]: "blackSolid",
+      [AdmonitionType.Information]: "whiteSolid",
+      [AdmonitionType.Tip]: "blackSolid",
+      [AdmonitionType.Warning]: "blackSolid",
+      [AdmonitionType.Critical]: "blackSolid",
+    }[type],
+  );
+
+  const tableColorScheme = {
+    [AdmonitionType.Note]: "blackAlpha",
+    [AdmonitionType.Information]: "primary",
+    [AdmonitionType.Tip]: "green",
+    [AdmonitionType.Warning]: "yellow",
+    [AdmonitionType.Critical]: "red",
+  }[type];
+
   const color = useOpposingColor(bg);
 
   return (
@@ -109,11 +137,27 @@ export const Admonition = (props: AdmonitionModel) => {
       >
         <CodeBlockStyleProvider
           value={{
+            colorScheme: bgBase,
             codeBlock: { colorScheme: codeColorScheme },
-            copyButton: { colorScheme: codeColorScheme, variant: "ghost" },
+            copyButton: { colorScheme: codeCopyButtonColorScheme, variant: "ghost" },
           }}
         >
-          <RichText content={body.raw} />
+          <RichText
+            content={body}
+            overrides={{
+              table: props => <Table colorScheme={tableColorScheme} borderRadius="md" {...props} />,
+              table_header_cell: props => (
+                <Th
+                  sx={{
+                    bg: `${tableColorScheme}.300`,
+                    _dark: { bg: `${tableColorScheme}.400` },
+                  }}
+                  {...props}
+                />
+              ),
+              table_cell: props => <Td {...props} />,
+            }}
+          />
         </CodeBlockStyleProvider>
       </Box>
     </AdmonitionContainer>

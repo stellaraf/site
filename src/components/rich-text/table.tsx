@@ -1,59 +1,101 @@
-import { Box } from "@chakra-ui/react";
+import { createContext, useContext } from "react";
 
-import { useColorValue } from "~/context";
+import {
+  Box,
+  TableContainer,
+  Th as ChakraTh,
+  Td as ChakraTd,
+  useMultiStyleConfig,
+  Table as ChakraTable,
+  type TableProps,
+  type ThemingProps,
+  type TableCellProps,
+  type SystemStyleObject,
+} from "@chakra-ui/react";
 
 import type { TdProps } from "./types";
-import type { BoxProps } from "@chakra-ui/react";
+
+type TableThemingProps = Required<Pick<ThemingProps, "colorScheme" | "variant" | "size">>;
+
+interface TableContextType extends Record<string, SystemStyleObject> {
+  props: TableThemingProps;
+}
+
+const TableContext = createContext<TableContextType>({
+  props: { colorScheme: "gray", variant: "simple", size: "sm" },
+});
 
 export const Td = (props: TdProps) => {
-  const { isHeader = false, children, ...rest } = props;
-  const border = useColorValue("gray.100", "whiteAlpha.100");
   return (
-    <Box
-      p={2}
-      fontSize="sm"
+    <ChakraTd
       whiteSpace="normal"
       borderTopWidth="1px"
-      borderColor={border}
-      as={isHeader ? "th" : "td"}
       sx={{ "& div.st-content-p": { m: 0 } }}
-      {...rest}
-    >
-      {children}
-    </Box>
-  );
-};
-
-export const Th = (props: BoxProps) => {
-  const bg = useColorValue("blackAlpha.100", "whiteAlpha.100");
-  return (
-    <Box
-      as="th"
-      bg={bg}
-      fontWeight="bold"
-      p={2}
-      fontSize="sm"
-      sx={{ "& div.st-content-p,& div.st-content-p:first-of-type": { m: 0 } }}
       {...props}
     />
   );
 };
 
-export const Table = (props: BoxProps) => {
-  const border = useColorValue("gray.100", "whiteAlpha.100");
+export const Th = (props: TableCellProps) => {
+  const { sx = {}, ...rest } = props;
+  const {
+    td,
+    props: { colorScheme },
+  } = useContext(TableContext);
+
   return (
-    <Box overflowX="auto" width={{ base: "100%", lg: "fit-content" }}>
-      <Box
-        mt={4}
-        zIndex={1}
-        minWidth="50%"
-        borderWidth="1px"
-        borderRadius="lg"
-        borderColor={border}
-        width="100%"
-      >
-        <Box as="table" textAlign="left" width="100%" {...props} />
+    <ChakraTh
+      py={2}
+      sx={{
+        bg: `${colorScheme}.100`,
+        _dark: { bg: `${colorScheme}.800` },
+        color: td.color,
+        "& div.st-content-p,& div.st-content-p:first-of-type": { m: 0 },
+        ...sx,
+      }}
+      {...rest}
+    />
+  );
+};
+
+export const Table = (props: TableProps) => {
+  const {
+    mt = 4,
+    size = "sm",
+    borderColor,
+    width = "100%",
+    minWidth = "50%",
+    variant = "simple",
+    borderRadius = "lg",
+    borderWidth = "1px",
+    colorScheme = "gray",
+    ...rest
+  } = props;
+  const themeProps: TableThemingProps = { variant, size, colorScheme };
+
+  const styles = useMultiStyleConfig("Table", { ...themeProps });
+  return (
+    <TableContext.Provider value={{ ...styles, props: themeProps }}>
+      <Box overflowX="auto" width={{ base: "100%", lg: "fit-content" }}>
+        <TableContainer
+          mt={mt}
+          zIndex={1}
+          minWidth={minWidth}
+          borderWidth={borderWidth}
+          borderRadius={borderRadius}
+          borderColor={borderColor ? borderColor : (styles.td?.borderColor as string)}
+          width={width}
+        >
+          <ChakraTable
+            variant="simple"
+            size="sm"
+            textAlign="left"
+            width="100%"
+            sx={{ "& tr:last-of-type td": { borderBottom: "unset" } }}
+            {...rest}
+          />
+        </TableContainer>
       </Box>
-    </Box>
+    </TableContext.Provider>
   );
 };

@@ -109,7 +109,7 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
         <Flex height="100%" align="center" direction="column" mb={{ base: 12, lg: "" }}>
           {is(body) && (
             <ContentBody>
-              <RichText content={body?.raw} />
+              <RichText content={body} />
             </ContentBody>
           )}
           <ContentSubSections features={features} />

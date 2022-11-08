@@ -4,6 +4,7 @@ import { Box, Button, Heading, Divider } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { Card, CardBody, Icon, RichText } from "~/components";
+import { is } from "~/lib";
 
 import type { DocsGroup } from "~/queries";
 
@@ -30,8 +31,22 @@ export const DocsGroupCard = (props: DocsGroup) => {
         flexDirection="column"
       >
         <Card width={{ base: "20rem", md: "18rem", xl: "lg" }} maxHeight={80} zIndex={1}>
-          <CardBody spacing={4} textAlign="left" alignItems="flex-start">
-            {callToAction.enable && (
+          <CardBody
+            spacing={4}
+            textAlign="left"
+            alignItems="flex-start"
+            overflow="hidden"
+            // Fade out the text
+            _before={{
+              bg: "linear-gradient(transparent, 200px, white)",
+              position: "absolute",
+              boxSize: "100%",
+              content: "''",
+              left: 0,
+              top: 0,
+            }}
+          >
+            {callToAction.enable && is(callToAction.icon) && (
               <Icon
                 size={12}
                 position="absolute"
@@ -58,14 +73,14 @@ export const DocsGroupCard = (props: DocsGroup) => {
               fontWeight="normal"
               whiteSpace="pre-line"
               css={{
-                "& p": {
+                "& p, & .st-content-p": {
                   marginTop: "unset",
                   marginBottom: "unset",
                   textOverflow: "ellipsis",
                 },
               }}
             >
-              <RichText content={summary.raw} />
+              <RichText content={summary} overrides={{ img: () => <br />, video: () => <br /> }} />
             </Box>
           </CardBody>
         </Card>

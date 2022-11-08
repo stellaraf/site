@@ -52,7 +52,7 @@ const TextContent = () => {
           maxW={{ base: "none", md: "none", xl: "75%" }}
           alignSelf={{ base: "center", lg: "flex-start" }}
         >
-          <RichText content={body.raw} />
+          <RichText content={body} />
         </Box>
       )}
     </Flex>

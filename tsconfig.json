@@ -13,7 +13,6 @@
       "~/lib": ["./lib/index"],
       "~/lib/api": ["./lib/api/index"],
       "~/queries": ["./src/queries/index"],
-      "~/styles": ["./src/styles/index"],
       "~/theme": ["./src/theme/index"],
       "~/types": ["./src/types/index"]
     },

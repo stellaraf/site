@@ -134,7 +134,7 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
     <Flex as="form" onSubmit={submit} flexDir="column" w={{ base: "100%", lg: "75%" }} {...rest}>
       <FormProvider {...form}>
         {groups.map((group, index) => (
-          <FieldGroup key={index} {...fieldGroupProps}>
+          <FieldGroup key={index} className={`field-group-${index + 1}`} {...fieldGroupProps}>
             {group.map(field => {
               if (isCheckboxField(field)) {
                 return (
@@ -159,7 +159,8 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
                     name={field.formId}
                     isMulti={field.multiple}
                     required={field.required}
-                    menuPortalTarget={document.body}
+                    menuPortalTarget={typeof document !== "undefined" ? document.body : undefined}
+                    // menuPortalTarget={document.body}
                     placeholder={field.displayName}
                     opts={field.options.map(opt => ({ value: opt, label: opt }))}
                   />

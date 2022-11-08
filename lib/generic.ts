@@ -110,3 +110,46 @@ export function separate<
     return final;
   }, defaultValue);
 }
+
+/**
+ * Extract specified public props from an object, while keeping private props on the object.
+ *
+ * @example
+ * ```ts
+ * const before = { one: "one", two: "two", _three: 3 };
+ * const after = publicProps(before, "one");
+ * console.log(after);
+ * // { one: "one", _three: 3 }
+ * ```
+ */
+export function publicProps<
+  Props extends Record<string, unknown>,
+  All extends string & keyof Props,
+  Keep extends string & keyof Props,
+  PrivateKeys extends All extends `_${infer S}`
+    ? `_${S}`
+    : All extends `__${infer S}`
+    ? `__${S}`
+    : All extends `-${infer S}`
+    ? `-${S}`
+    : All extends `--${infer S}`
+    ? `--${S}`
+    : never,
+  Kept extends string & (Keep | PrivateKeys),
+  Return extends { [K in Kept]: Props[K] },
+>(obj: Props, ...keysToKeep: Keep[]): Return {
+  const prefixes = ["-", "--", "_", "__"];
+  return Object.keys(obj).reduce<Return>((final, key) => {
+    for (const keep of keysToKeep) {
+      if (keep === key) {
+        final[key as Kept] = obj[key] as Return[Kept];
+      }
+    }
+    for (const prefix of prefixes) {
+      if (key.startsWith(prefix)) {
+        final[key as Kept] = obj[key] as Return[Kept];
+      }
+    }
+    return final;
+  }, {} as Return);
+}

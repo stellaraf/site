@@ -36,7 +36,7 @@ export const Error = (props: ErrorProps) => {
           "& > p > a": { "--link-color": "currentColor" },
         }}
       >
-        {detail ? detail : <RichText content={errorMessage.body.raw} />}
+        {detail ? detail : <RichText content={errorMessage.body} />}
       </AlertDescription>
     </Alert>
   );

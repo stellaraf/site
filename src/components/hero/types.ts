@@ -1,8 +1,8 @@
 import type { BoxProps } from "@chakra-ui/react";
-import type { RichTextContent } from "@graphcms/rich-text-types";
+import type { RichTextValue } from "~/types";
 
 export interface HeroProps extends BoxProps {
   title: string;
   subtitle?: string | null;
-  body?: RichTextContent | null;
+  body?: RichTextValue | null;
 }
