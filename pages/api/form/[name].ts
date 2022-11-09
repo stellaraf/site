@@ -9,6 +9,7 @@ const FORM_MAP = new Map<FormKeys | string, FormHandler>([
   ["sales", handleSalesForm],
   ["support", handleSupportForm],
   ["subscribe", handleSubscribe],
+  ["security-demo", handleSalesForm],
 ]);
 
 function isValidForm(form: unknown): form is FormKeys {

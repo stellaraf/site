@@ -153,3 +153,46 @@ export function publicProps<
     return final;
   }, {} as Return);
 }
+
+/**
+ * Await a function if it returns a promise, or not, if it doesn't.
+ *
+ * @param func
+ * @param args
+ */
+export async function awaitIfNeeded<Func extends (...args: never[]) => unknown>(
+  func: Func,
+  ...args: Parameters<Func>
+): Promise<ReturnType<Func>> {
+  if (typeof func !== "function") {
+    throw new Error("First argument to awaitIfNeeded must be a function");
+  }
+  let result;
+  const initial = func(...args);
+  if (initial instanceof Promise) {
+    result = await initial;
+  } else {
+    result = initial;
+  }
+  return result;
+}
+
+export async function messageFromResponseOrError(response: Error | Response): Promise<string> {
+  let message = `Failed to parse message from ${String(response)} (type ${typeof response})`;
+  if (response instanceof Error) {
+    message = response.message;
+  } else {
+    message = await response.text();
+    try {
+      const parsed = JSON.parse(message);
+      if (typeof parsed === "object" && parsed !== null && "error" in parsed) {
+        message = parsed.error;
+      } else {
+        message = JSON.stringify(parsed, null, 2);
+      }
+    } catch (error) {
+      message = response.statusText;
+    }
+  }
+  return message;
+}

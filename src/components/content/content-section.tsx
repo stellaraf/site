@@ -93,7 +93,8 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
         ref={ref}
         as="article"
         overflow="hidden"
-        my={{ base: 4, lg: 16, xl: 32 }}
+        mt={{ base: 2, lg: 8, xl: 16 }}
+        mb={{ base: 4, lg: 16, xl: 32 }}
         px={{ base: 4, lg: 16, xl: 64 }}
         {...rStyles}
         {...rest}

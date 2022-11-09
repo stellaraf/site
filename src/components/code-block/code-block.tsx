@@ -15,7 +15,7 @@ import { useCodeBlockStyle } from "./use-code-block-style";
 import type { CodeBlockProps } from "./types";
 
 export const CodeBlock = (props: CodeBlockProps) => {
-  const { children, ...rest } = props;
+  const { children, colorScheme, ...rest } = props;
   const defaultScheme = useColorValue("blackAlpha", "tertiary");
   const size = useBreakpointValue({ base: "md", lg: "sm" });
 
@@ -24,8 +24,8 @@ export const CodeBlock = (props: CodeBlockProps) => {
   if (ctx === null) {
     ctx = {
       colorScheme: "gray",
-      codeBlock: { colorScheme: defaultScheme },
-      copyButton: { colorScheme: defaultScheme, variant: "ghost" },
+      codeBlock: { colorScheme: colorScheme ?? defaultScheme },
+      copyButton: { colorScheme: colorScheme ?? defaultScheme, variant: "ghost" },
     };
   }
 

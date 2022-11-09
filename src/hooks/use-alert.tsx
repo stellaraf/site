@@ -1,4 +1,5 @@
 import {
+  Box,
   Flex,
   Alert,
   useToast,
@@ -15,15 +16,16 @@ import type { ToastProps, UseToastOptions } from "@chakra-ui/react";
 
 interface UseAlert {
   message: React.ReactNode;
-  status: ToastProps["status"];
+  status?: ToastProps["status"];
   duration?: ToastProps["duration"];
   position?: ToastPosition;
   onClose?: ToastProps["onCloseComplete"];
 }
 type ToastPosition = UseToastOptions["position"];
 type UseAlertReturn = (opts: UseAlert) => void;
+type UseAlertOptions = Partial<Pick<UseAlert, "duration" | "position" | "onClose" | "status">>;
 
-export function useAlert(): UseAlertReturn {
+export function useAlert(options: UseAlertOptions = {}): UseAlertReturn {
   const toast = useToast();
   const { errorMessage } = useConfig();
   const defaultPosition = useBreakpointValue<ToastPosition>({
@@ -33,11 +35,11 @@ export function useAlert(): UseAlertReturn {
 
   const showToast: UseAlertReturn = opts => {
     const {
-      status = "info",
-      message = "",
-      position = defaultPosition ?? "bottom",
-      onClose: customOnClose,
-      duration = 5000,
+      status = options.status ?? "error",
+      message = "Something went wrong",
+      position = options.position ?? defaultPosition ?? "bottom",
+      onClose: customOnClose = options.onClose,
+      duration = options.duration ?? 5000,
     } = opts;
     toast({
       status,
@@ -76,7 +78,6 @@ export function useAlert(): UseAlertReturn {
                     // Inherit alert styles for links - so the branded underline doesn't clash.
                     "& a": {
                       "--link-color": "inherit",
-                      textDecoration: "underline",
                     },
                     "& a:hover": {
                       opacity: 0.75,
@@ -84,7 +85,11 @@ export function useAlert(): UseAlertReturn {
                   }}
                 >
                   {message}
-                  {status === "error" && <RichText content={errorMessage.body} />}
+                  {status === "error" && (
+                    <Box mt={4}>
+                      <RichText content={errorMessage.body} />
+                    </Box>
+                  )}
                 </AlertDescription>
               </Flex>
               <CloseButton size="sm" onClick={onClose} position="absolute" right={1} top={1} />

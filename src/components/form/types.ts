@@ -57,8 +57,8 @@ export interface GenericFormProps<Fields extends FormField[]>
   buttonProps?: Partial<ButtonProps>;
   fieldGroupProps?: Partial<StackProps>;
   onSubmit?: () => void | Promise<void>;
-  onSuccess?: (detail: unknown) => void | Promise<void>;
-  onFailure?: (detail: unknown) => void | Promise<void>;
+  onSuccess?: (detail: Response) => void | Promise<void>;
+  onFailure?: (detail: Error | Response) => void | Promise<void>;
 }
 
 export interface CheckboxGroupProps

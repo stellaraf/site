@@ -8,7 +8,7 @@ import { useTitleCase } from "use-title-case";
 import { z } from "zod";
 
 import { FieldGroup, TextArea, TextInput, SelectField, CheckboxField } from "~/components";
-import { is, submitForm } from "~/lib";
+import { is, submitForm, awaitIfNeeded } from "~/lib";
 import { TextInputValidationType } from "~/types";
 
 import {
@@ -95,25 +95,21 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
   });
 
   const handleSubmit = async (data: Schema) => {
-    if (typeof onSubmit !== "undefined") {
-      const maybePromise = onSubmit();
-      if (maybePromise instanceof Promise) {
-        await maybePromise;
-      }
+    if (typeof onSubmit === "function") {
+      awaitIfNeeded(onSubmit);
     }
     const result = await submitForm(name, data);
-    if (result instanceof Error && typeof onFailure === "function") {
-      const failureCallable = onFailure(data);
-      if (failureCallable instanceof Promise) {
-        await failureCallable;
+    const isError = result instanceof Error || !result.ok;
+
+    if (isError) {
+      if (typeof onFailure === "function") {
+        await awaitIfNeeded(onFailure, result);
       }
     } else {
       if (typeof onSuccess === "function") {
-        const successCallable = onSuccess(data);
-        if (successCallable instanceof Promise) {
-          await successCallable;
-        }
+        await awaitIfNeeded(onSuccess, result);
       }
+      form.reset();
     }
   };
 
@@ -160,7 +156,6 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
                     isMulti={field.multiple}
                     required={field.required}
                     menuPortalTarget={typeof document !== "undefined" ? document.body : undefined}
-                    // menuPortalTarget={document.body}
                     placeholder={field.displayName}
                     opts={field.options.map(opt => ({ value: opt, label: opt }))}
                   />
@@ -198,7 +193,7 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
           <FieldGroup justifyContent="center" p={2} {...fieldGroupProps}>
             <Button
               w="100%"
-              maxW="50%"
+              maxW={{ lg: "50%" }}
               type="submit"
               colorScheme={colorScheme}
               variant={button.variant ? button.variant : "outline"}

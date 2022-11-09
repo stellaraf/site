@@ -33,6 +33,13 @@ export async function handleSalesForm(request: NextApiRequest): Promise<Response
     throw new Error("You seem like a robot");
   }
 
+  let form = "unknown";
+  if (typeof request.url !== "undefined") {
+    const [withoutQuery] = request.url.split("?");
+    const paths = withoutQuery.split("/");
+    form = paths[paths.length - 1];
+  }
+
   const data = request.body;
 
   const schemaResult = await schema.safeParseAsync(data);
@@ -47,8 +54,10 @@ export async function handleSalesForm(request: NextApiRequest): Promise<Response
       companyName: company,
     } = data as Schema;
     const userData = parseUserAgent(request);
+
     // Initialize multi-line string for case comments, to which User Data will be added.
-    let webFormMetadata = `Interests: ${interests.join(", ")}
+    let webFormMetadata = `Form: ${form}
+    Interests: ${interests.join(", ")}
 
   `;
     // Add each User Data key & value to case comment.
@@ -79,8 +88,6 @@ export async function handleSalesForm(request: NextApiRequest): Promise<Response
       formData.debug = 1;
       formData.debugEmail = "matt@stellar.tech";
     }
-
-    console.log(formData);
 
     const url = queryString.stringifyUrl({
       url: "https://webto.salesforce.com/servlet/servlet.WebToLead",

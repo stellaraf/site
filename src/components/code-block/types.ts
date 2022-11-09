@@ -1,3 +1,3 @@
-import type { BoxProps } from "@chakra-ui/react";
+import type { BoxProps, CodeProps } from "@chakra-ui/react";
 
-export type CodeBlockProps = BoxProps;
+export type CodeBlockProps = BoxProps & Pick<CodeProps, "colorScheme">;

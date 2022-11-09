@@ -24,6 +24,7 @@ const config: NavConfigItem[] = [
     title: "Consulting",
     link: "/consulting",
   },
+  { title: "Docs", link: "/docs" },
   { title: "About", link: "/about" },
 ];
 
