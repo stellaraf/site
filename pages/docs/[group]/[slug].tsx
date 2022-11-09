@@ -5,7 +5,7 @@ import { DocsLayout } from "~/layouts";
 import { docsPageQuery } from "~/queries";
 
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
-import type { DocsPage as DocsPageProps } from "~/queries";
+import type { DocsPageProps } from "~/types";
 
 type UrlQuery = {
   slug: string;
@@ -13,10 +13,10 @@ type UrlQuery = {
 };
 
 const DocsPage: NextPage<DocsPageProps> = props => {
-  const { title, description, body } = props;
+  const { title, description } = props;
   const { isFallback } = useRouter();
 
-  if (!isFallback && !body) {
+  if (!isFallback && !title) {
     return (
       <>
         <SEO title="Error" noindex nofollow />
@@ -46,17 +46,19 @@ const DocsPage: NextPage<DocsPageProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps<DocsPageProps, UrlQuery> = async ctx => {
-  const slug = ctx.params?.slug ?? "";
+  const slug = ctx.params?.slug ?? "notfound";
   const preview = ctx?.preview ?? false;
-  let page = {} as DocsPageProps;
-  let notFound = false;
-  try {
-    page = await docsPageQuery({ slug });
-  } catch (err) {
-    console.error(err);
-    notFound = true;
+
+  if (slug === "notfound") {
+    return { notFound: true };
   }
-  return { props: { ...page, preview }, notFound };
+  try {
+    const page = await docsPageQuery({ slug });
+    return { props: { ...page, preview } };
+  } catch (error) {
+    console.error(error);
+    return { notFound: true };
+  }
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({

@@ -1,31 +1,28 @@
-import NextError from "next/error";
 import { useRouter } from "next/router";
 
-import { chakra } from "@chakra-ui/react";
-
-import { ContentLoader, ContentSection, Hero, SEO, Callout, Testimonials } from "~/components";
+import { Callout, ContentLoader, ContentSection, Hero, SEO, Testimonials } from "~/components";
+import { FallbackLayout } from "~/layouts";
 import { is } from "~/lib";
 import { pageQuery } from "~/queries";
+
+import ErrorPage from "../_error";
 
 import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
 import type { PageProps } from "~/types";
 
 type UrlQuery = {
-  product: string;
+  page: string;
 };
 
-const Layout = chakra("div", {
-  baseStyle: {
-    w: "100%",
-    d: "flex",
-    flexDir: "column",
-    alignItems: "center",
-    minH: "40vh",
-    pt: 32,
-  },
-});
-
 const CloudPage: NextPage<PageProps> = props => {
+  if (props.error) {
+    return (
+      <FallbackLayout>
+        <ErrorPage error={props.error} />
+      </FallbackLayout>
+    );
+  }
+
   const { isFallback } = useRouter();
   const { title, subtitle, body, callout, contents } = props;
 
@@ -33,15 +30,11 @@ const CloudPage: NextPage<PageProps> = props => {
     return (
       <>
         <SEO title="Loading..." />
-        <Layout>
+        <FallbackLayout>
           <ContentLoader css={{ "& div.__st-content-body": { maxWidth: "unset" } }} />
-        </Layout>
+        </FallbackLayout>
       </>
     );
-  }
-
-  if (contents.length === 0 || typeof title === "undefined") {
-    return <NextError statusCode={400} />;
   }
 
   return (
@@ -58,16 +51,27 @@ const CloudPage: NextPage<PageProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
-  const product = ctx.params?.product ?? "notfound";
+  const path = ctx.params?.page ?? "notfound";
   const preview = ctx?.preview ?? false;
 
-  const page = await pageQuery({ slug: `cloud/${product}` });
+  if (path === "notfound") {
+    return { notFound: true };
+  }
 
+  try {
+    const page = await pageQuery({ slug: `cloud/${path}` });
+    return { props: { ...page, preview } };
+  } catch (error) {
+    console.error(error);
+    return { notFound: true };
+  }
+
+  const page = await pageQuery({ slug: `cloud/${path}` });
   return { props: { ...page, preview } };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
-  paths: [{ params: { product: "daas" } }],
+  paths: [{ params: { page: "daas" } }],
   fallback: true,
 });
 

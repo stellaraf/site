@@ -2,21 +2,16 @@ import { useMemo } from "react";
 
 import { useMeasure } from "react-use";
 
-import type { UseMeasureRef as UM } from "react-use/esm/useMeasure";
-
-/**
- * These type aliases are for the readability of the function below.
- */
-type DC = HTMLElement;
-type DT = HTMLHeadingElement;
-type A = unknown;
-type B = boolean;
+import type { UseMeasureRef } from "react-use/esm/useMeasure";
 
 /**
  * Wrapper for useMeasure() which determines if a text element should be scaled down due to its
  * size relative to its parent's size.
  */
-export function useScaledText<C extends DC = DC, T extends DT = DT>(deps: A[]): [UM<C>, UM<T>, B] {
+export function useScaledText<
+  C extends HTMLElement = HTMLElement,
+  T extends HTMLHeadingElement = HTMLHeadingElement,
+>(deps: unknown[]): [UseMeasureRef<C>, UseMeasureRef<T>, boolean] {
   // Get a ref & state object for the containing element.
   const [containerRef, container] = useMeasure<C>();
 

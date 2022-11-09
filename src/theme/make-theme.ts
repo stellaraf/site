@@ -3,7 +3,8 @@ import { generatePalette, generateFontFamily, Palette } from "palette-by-numbers
 
 import { entries } from "~/lib";
 
-import { button } from "./styles";
+import { button, heading } from "./components";
+import { globalStyles } from "./global-css";
 
 import type {
   Fonts,
@@ -29,6 +30,7 @@ const radii = {
   "5xl": "1.75rem",
   "6xl": "2rem",
 };
+
 const fontSizes = {
   xs: "0.75rem",
   sm: "0.875rem",
@@ -40,54 +42,6 @@ const fontSizes = {
   "4xl": "4rem",
   "5xl": "5rem",
   "6xl": "6rem",
-};
-
-const zIndexKeys = [
-  "button",
-  "label",
-  "table",
-  "tbody",
-  "thead",
-  "input",
-  "span",
-  "ol",
-  "ul",
-  "li",
-  "h1",
-  "h2",
-  "h3",
-  "h4",
-  "h5",
-  "h6",
-  "td",
-  "th",
-  "a",
-  "p",
-].join(", ");
-
-const globalStyles = {
-  [zIndexKeys]: {
-    zIndex: 1,
-  },
-  html: { scrollBehavior: "smooth" },
-  body: {
-    bg: "body-bg",
-    color: "body-fg",
-    fontFamily: "body",
-    "*::selection": { backgroundColor: "text-selection-bg", color: "black" },
-  },
-  // See https://github.com/rcbyr/keen-slider/blob/master/src/keen-slider.scss
-  ".__slider_container": {
-    "&[data-keen-slider-v]": {
-      flexWrap: "wrap",
-    },
-    "&[data-keen-slider-v] &__slider_slide": {
-      width: "100%",
-    },
-    "&[data-keen-slider-moves] *": {
-      pointerEvents: "none",
-    },
-  },
 };
 
 function importFonts(userFonts: Omit<Fonts, "themeName">): [ThemeFonts, FontWeights] {
@@ -143,27 +97,6 @@ function importColors(userColors: InitialTheme): CustomColors {
   };
 }
 
-const headingOverrides = {
-  "4xl": {
-    lineHeight: 1,
-  },
-  "3xl": {
-    lineHeight: 1,
-  },
-  "2xl": {
-    lineHeight: [1.5, null, 1],
-  },
-  xl: {
-    lineHeight: [1.5, null, 1.5],
-  },
-  lg: {
-    lineHeight: [1.25, null, 1.25],
-  },
-  md: { lineHeight: 1.25 },
-  sm: { lineHeight: 1 },
-  xs: { lineHeight: 1 },
-};
-
 export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
   const [fonts, fontWeights] = importFonts(userTheme.fonts);
   const colors = importColors(userTheme.colors as InitialTheme);
@@ -175,7 +108,7 @@ export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
     fontSizes,
     radii,
     styles: { global: globalStyles },
-    components: { Button: button, Heading: { sizes: headingOverrides } },
+    components: { Button: button, Heading: heading },
     semanticTokens: {
       colors: {
         "body-bg": {

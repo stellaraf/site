@@ -32,13 +32,6 @@ export interface UIProviderProps {
   cookies?: string;
 }
 
-/**
- * Docs Layout Provider
- */
-export interface DocsContextType {
-  groups: DocsGroups;
-}
-
 export type ColorModeContext = {
   cookies: string;
 };

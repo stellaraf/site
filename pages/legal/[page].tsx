@@ -2,7 +2,10 @@ import { Box } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { SEO, ContentSection } from "~/components";
+import { FallbackLayout } from "~/layouts";
 import { pageQuery } from "~/queries";
+
+import ErrorPage from "../_error";
 
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import type { PageProps } from "~/types";
@@ -12,6 +15,13 @@ type UrlQuery = {
 };
 
 const LegalPage: NextPage<PageProps> = props => {
+  if (props.error) {
+    return (
+      <FallbackLayout>
+        <ErrorPage error={props.error} />
+      </FallbackLayout>
+    );
+  }
   const { title, subtitle, contents } = props;
   const fnTitle = useTitleCase();
 
@@ -27,9 +37,15 @@ const LegalPage: NextPage<PageProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
-  const slug = ctx.params?.page ?? "";
+  const slug = ctx.params?.page ?? "notfound";
+
+  if (slug === "notfound") {
+    return { notFound: true };
+  }
+
   const preview = ctx?.preview ?? false;
   const page = await pageQuery({ slug: `legal/${slug}` });
+
   return { props: { ...page, preview } };
 };
 

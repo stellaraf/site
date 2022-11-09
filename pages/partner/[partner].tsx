@@ -1,10 +1,11 @@
+import NextError from "next/error";
 import { useRouter } from "next/router";
 
-import { chakra } from "@chakra-ui/react";
-
 import { SEO, ContentLoader } from "~/components";
-import { PartnerLayout } from "~/layouts";
+import { PartnerLayout, FallbackLayout } from "~/layouts";
 import { pageQuery } from "~/queries";
+
+import ErrorPage from "../_error";
 
 import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
 import type { PageProps } from "~/types";
@@ -13,31 +14,31 @@ type UrlQuery = {
   partner: string;
 };
 
-const Layout = chakra("div", {
-  baseStyle: {
-    w: "100%",
-    d: "flex",
-    flexDir: "column",
-    alignItems: "center",
-    minH: "40vh",
-    pt: 32,
-  },
-});
-
 const PartnerPage: NextPage<PageProps> = props => {
+  if (props.error) {
+    return (
+      <FallbackLayout>
+        <ErrorPage error={props.error} />
+      </FallbackLayout>
+    );
+  }
   const { isFallback } = useRouter();
   if (isFallback) {
     return (
       <>
         <SEO title="Loading..." />
-        <Layout>
+        <FallbackLayout>
           <ContentLoader css={{ "& div.__st-content-body": { maxWidth: "unset" } }} />
-        </Layout>
+        </FallbackLayout>
       </>
     );
   }
 
   const { title, subtitle } = props;
+
+  if (typeof title === "undefined") {
+    return <NextError statusCode={400} />;
+  }
 
   return (
     <>
@@ -50,13 +51,17 @@ const PartnerPage: NextPage<PageProps> = props => {
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const partner = ctx.params?.partner;
   const preview = ctx?.preview ?? false;
+
   if (typeof partner === "undefined") {
-    throw new Error("No partner specified.");
+    return { notFound: true };
   }
-
-  const page = await pageQuery({ slug: `partner/${partner}` });
-
-  return { props: { ...page, preview } };
+  try {
+    const page = await pageQuery({ slug: `partner/${partner}` });
+    return { props: { ...page, preview } };
+  } catch (error) {
+    console.error(error);
+    return { notFound: true };
+  }
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({

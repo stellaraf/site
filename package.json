@@ -65,9 +65,9 @@
     "lint:fix": "eslint . --fix --ext .ts --ext .tsx --ext .js --ext .jsx",
     "format": "prettier --loglevel warn -c .",
     "format:fix": "prettier --loglevel warn -w .",
-    "analyze": "cross-env ANALYZE=true next build",
-    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
+    "analyze": "ANALYZE=true next build",
+    "analyze:server": "BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "BUNDLE_ANALYZE=browser next build",
     "precommit": "pnpx lefthook run pre-commit",
     "codegen": "graphql-codegen -c codegen.yaml"
   },

@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 
-import { useStyleConfig } from "@chakra-ui/react";
+import { useStyleConfig, useToken } from "@chakra-ui/react";
 import { mergeWith } from "@chakra-ui/utils";
 import * as ReactSelect from "react-select";
 
-import { useColorValue, useColorTokenValue, useToken } from "~/context";
+import { useColorValue, useColorTokenValue } from "~/context";
 import { useMobile, useOpposingColor } from "~/hooks";
 import { removeProps } from "~/lib";
 

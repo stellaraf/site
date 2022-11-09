@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unused-modules */
 import { useMemo } from "react";
 
 import {
@@ -51,5 +52,4 @@ export const useTheme: UseTheme = useChakraTheme;
 export const useColorTokenValue = (light: string, dark: string) =>
   useColorModeValue(useToken("colors", light), useToken("colors", dark));
 
-export { useColorMode, useToken } from "@chakra-ui/react";
-export { useColorModeValue as useColorValue } from "@chakra-ui/react";
+export { useColorMode, useColorModeValue as useColorValue } from "@chakra-ui/react";

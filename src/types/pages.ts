@@ -1,14 +1,16 @@
 import type { AppProps, AppInitialProps, AppContext } from "next/app";
 
+import type { NextPageContext } from "next";
 import type {
   Actions,
   Config,
   DocsGroups,
   FooterGroups,
   CloudLocations,
-  Page as FixMePage,
+  Page,
   Employees,
   ContactForms,
+  DocsPage,
 } from "~/queries";
 import type { ThemeConfig } from "~/theme";
 
@@ -19,26 +21,39 @@ export type NextApp<P> = React.FC<GetInitialPropsReturn<P>> & {
   getInitialProps(ctx: AppContext): Promise<{ appProps: P }>;
 };
 
-export interface SiteProps {
-  config: Config;
-  docsGroups: DocsGroups;
-  theme: ThemeConfig;
-  footerGroups: FooterGroups;
-  actions: Actions;
+export type PageWithInitialProps<
+  InitialProps,
+  Context extends AppContext | NextPageContext = NextPageContext,
+> = React.FC<InitialProps> & {
+  getInitialProps(ctx: Context): Promise<InitialProps>;
+};
+
+interface WithError {
+  error?: string;
 }
 
-export interface CloudPageProps extends FixMePage {
+export type PageProps = Page & WithError;
+
+export type DocsPageProps = DocsPage & WithError;
+
+export interface SiteProps {
+  actions: Actions;
+  config: Config;
+  docsGroups: DocsGroups;
+  footerGroups: FooterGroups;
+  theme: ThemeConfig;
+}
+
+export interface CloudPageProps extends PageProps {
   locations: CloudLocations;
-  //TODO: do something else with this BS
+  // TODO: do something else with this BS
   geoData: Dict;
 }
 
-export interface ContactPageProps extends FixMePage {
+export interface ContactPageProps extends PageProps {
   contactForms: ContactForms;
 }
 
-export interface AboutPageProps extends FixMePage {
+export interface AboutPageProps extends PageProps {
   employees: Employees;
 }
-
-export type PageProps = FixMePage;

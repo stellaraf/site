@@ -1,5 +1,8 @@
 import { ContentSection, Hero, SEO, Callout, Testimonials } from "~/components";
+import { FallbackLayout } from "~/layouts";
 import { pageQuery } from "~/queries";
+
+import ErrorPage from "../_error";
 
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { PageProps } from "~/types";
@@ -9,6 +12,14 @@ type UrlQuery = {
 };
 
 const SecurityPage: NextPage<PageProps> = props => {
+  if (props.error) {
+    return (
+      <FallbackLayout>
+        <ErrorPage error={props.error} />
+      </FallbackLayout>
+    );
+  }
+
   const { title, subtitle, body, contents, callout } = props;
 
   return (
@@ -26,13 +37,18 @@ const SecurityPage: NextPage<PageProps> = props => {
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const slug = ctx.params?.page ?? "notfound";
+  if (slug === "notfound") {
+    return { notFound: true };
+  }
+
   const preview = ctx?.preview ?? false;
-  const page = await pageQuery({ slug });
+  const page = await pageQuery({ slug: `security/${slug}` });
+
   return { props: { ...page, preview } };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
-  paths: [{ params: { page: "security/demo" } }],
+  paths: [{ params: { page: "demo" } }],
   fallback: false,
 });
 

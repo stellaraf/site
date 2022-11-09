@@ -15,6 +15,7 @@ const SocialLink = (props: SocialLinkProps) => {
       p={2}
       as="a"
       h="100%"
+      size="lg"
       title={label}
       target="_blank"
       color="light.500"
@@ -33,7 +34,7 @@ export const SocialLinks = (props: StackProps) => {
   const { socialLinks } = useConfig();
 
   return (
-    <HStack spacing={4} {...props}>
+    <HStack spacing={4} alignItems={{ lg: "flex-start" }} {...props}>
       {socialLinks.map(social => {
         const [family, iconName] = social.iconName.split("-");
         return (
