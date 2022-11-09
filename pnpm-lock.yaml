@@ -69,7 +69,7 @@ specifiers:
   react: ^18.2.0
   react-dom: ^18.2.0
   react-fast-compare: ^3.2.0
-  react-hook-form: ^7.38.0
+  react-hook-form: ^7.39.1
   react-icons: ^4.4.0
   react-intersection-observer: ^9.4.0
   react-player: 2.10.1
@@ -98,7 +98,7 @@ dependencies:
   '@emotion/react': 11.10.5_bjroym7kxlcs2vvwnej4p3gzwu
   '@emotion/styled': 11.10.5_4ogoqwwuwamwrnyxqdf7jrdstm
   '@graphcms/rich-text-react-renderer': 0.6.1_biqbaboplfbrettd7655fr4n2y
-  '@hookform/resolvers': 2.9.10_react-hook-form@7.38.0
+  '@hookform/resolvers': 2.9.10_react-hook-form@7.39.1
   '@react-google-maps/api': 2.13.1_biqbaboplfbrettd7655fr4n2y
   '@stellaraf/logo': 0.3.3_5xmkhvnjllbyj3a5q6oq7aeuji
   '@tanstack/react-query': 4.10.1_biqbaboplfbrettd7655fr4n2y
@@ -121,7 +121,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-fast-compare: 3.2.0
-  react-hook-form: 7.38.0_react@18.2.0
+  react-hook-form: 7.39.1_react@18.2.0
   react-icons: 4.4.0_react@18.2.0
   react-intersection-observer: 9.4.0_react@18.2.0
   react-player: 2.10.1_react@18.2.0
@@ -2530,12 +2530,12 @@ packages:
       graphql: 16.6.0
     dev: true
 
-  /@hookform/resolvers/2.9.10_react-hook-form@7.38.0:
+  /@hookform/resolvers/2.9.10_react-hook-form@7.39.1:
     resolution: {integrity: sha512-JIL1DgJIlH9yuxcNGtyhsWX/PgNltz+5Gr6+8SX9fhXc/hPbEIk6wPI82nhgvp3uUb6ZfAM5mqg/x7KR7NAb+A==}
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
-      react-hook-form: 7.38.0_react@18.2.0
+      react-hook-form: 7.39.1_react@18.2.0
     dev: false
 
   /@humanwhocodes/config-array/0.10.7:
@@ -6889,8 +6889,8 @@ packages:
       use-sidecar: 1.1.2_iapumuv4e6jcjznwuxpf4tt22e
     dev: false
 
-  /react-hook-form/7.38.0_react@18.2.0:
-    resolution: {integrity: sha512-gxWW1kMeru9xR1GoR+Iw4hA+JBOM3SHfr4DWCUKY0xc7Vv1MLsF109oHtBeWl9shcyPFx67KHru44DheN0XY5A==}
+  /react-hook-form/7.39.1_react@18.2.0:
+    resolution: {integrity: sha512-MiF9PCILN5KulhSGbnjohMiTOrB47GerDTichMNP0y2cPUu1GTRFqbunOxCE9N1499YTLMV/ne4gFzqCp1rxrQ==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18

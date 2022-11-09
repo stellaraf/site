@@ -15,7 +15,7 @@ export const ContentImage = (props: ContentImageProps) => {
       transition="opacity 0.2s ease-in-out"
       {...rest}
     >
-      <ChakraImage src={src} boxSize={boxSize} />
+      <ChakraImage src={src} boxSize={boxSize} draggable={false} />
     </Box>
   );
 };

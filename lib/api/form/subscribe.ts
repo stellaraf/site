@@ -5,7 +5,7 @@ import { isValidJsonRequest } from "~/lib";
 
 import type { NextApiRequest } from "next";
 
-const schema = z.object({ email: z.string().email() });
+const schema = z.object({ emailAddress: z.string().email() });
 
 type Schema = z.infer<typeof schema>;
 
@@ -35,11 +35,11 @@ export async function handleSubscribe(request: NextApiRequest): Promise<Response
     throw new Error(error);
   }
 
-  const { email } = data as Schema;
+  const { emailAddress } = data as Schema;
 
   const url = `https://api.createsend.com/api/v3.3/subscribers/${process.env.CPM_LIST_ID}.json`;
   const basic = Buffer.from(`${process.env.CPM_API_KEY}:empty`).toString("base64");
-  const body = JSON.stringify({ EmailAddress: email, ConsentToTrack: "Yes" });
+  const body = JSON.stringify({ EmailAddress: emailAddress, ConsentToTrack: "Yes" });
   const Authorization = `Basic ${basic}`;
   const headers = new Headers({ "content-type": "application/json", Authorization });
   return await fetch(url, { body, headers, method: "POST" });

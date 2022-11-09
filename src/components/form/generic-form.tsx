@@ -2,25 +2,17 @@ import { useImperativeHandle, forwardRef } from "react";
 
 import { Button, Flex } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { isValidPhoneNumber } from "libphonenumber-js";
 import { FormProvider, useForm, type UseFormHandleSubmit } from "react-hook-form";
 import { useTitleCase } from "use-title-case";
 import { z } from "zod";
 
 import { FieldGroup, TextArea, TextInput, SelectField, CheckboxField } from "~/components";
 import { is, submitForm, awaitIfNeeded } from "~/lib";
-import { TextInputValidationType } from "~/types";
 
-import {
-  isCheckboxField,
-  isSelectField,
-  isTextAreaField,
-  isTextInputField,
-  isFormButton,
-} from "./guards";
+import { isCheckboxField, isSelectField, isTextAreaField, isTextInputField } from "./guards";
+import { createSchema } from "./schema";
 
 import type { GenericFormProps, FormField } from "./types";
-import type { ZodRawShape } from "zod";
 
 type FormSubmitter = ReturnType<UseFormHandleSubmit<Dict>>;
 
@@ -49,45 +41,7 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
 
   const fnTitle = useTitleCase();
 
-  const schemaObject = fields.reduce<ZodRawShape>((final, fieldConfig) => {
-    let value;
-    if (isCheckboxField(fieldConfig) || isSelectField(fieldConfig)) {
-      value = z.array(z.string());
-      if (fieldConfig.required) {
-        value = z
-          .array(z.string())
-          .min(1, `Please select at least one option from ${fieldConfig.displayName}`);
-      }
-    } else if (isTextAreaField(fieldConfig)) {
-      value = z.string();
-      if (fieldConfig.required) {
-        value = z.string().min(1, `'${fieldConfig.displayName}' is required`);
-      } else {
-        value = value.optional();
-      }
-    } else if (isTextInputField(fieldConfig)) {
-      value = z.string();
-      if (fieldConfig.validationType === TextInputValidationType.Email) {
-        value = z.string().email(`${fieldConfig.displayName} is missing or invalid`);
-      } else if (fieldConfig.validationType === TextInputValidationType.Phone) {
-        value = z
-          .string()
-          .refine(
-            (v: string) => isValidPhoneNumber(v, "US"),
-            `${fieldConfig.displayName} is invalid`,
-          );
-      }
-      if (!fieldConfig.required) {
-        value = value.optional();
-      }
-    }
-    if (typeof value !== "undefined" && !isFormButton(fieldConfig)) {
-      final[fieldConfig.formId] = value;
-    }
-    return final;
-  }, {});
-
-  const schema = z.object(schemaObject);
+  const schema = createSchema(fields);
   type Schema = z.infer<typeof schema>;
 
   const form = useForm<Schema>({

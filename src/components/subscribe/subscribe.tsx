@@ -1,79 +1,76 @@
-import { Text, VStack, FormControl, FormErrorMessage, type StackProps } from "@chakra-ui/react";
+import { Text, VStack, type StackProps } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, FormProvider, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { useTitleCase } from "use-title-case";
 import { z } from "zod";
 
+import { CodeBlock, RichText, createSchema } from "~/components";
+import { useConfig } from "~/context";
 import { useGoogleAnalytics, useAlert } from "~/hooks";
-import { submitForm } from "~/lib";
+import { is, submitForm, messageFromResponseOrError } from "~/lib";
 
 import { SubscribeField } from "./subscribe-field";
 
-import type { SubscribeFormData } from "./types";
-
-const subscribeSchema = z.object({
-  email: z.string().email("Must be a valid email address"),
-});
-
 export const Subscribe = (props: StackProps) => {
+  const { subscribe } = useConfig();
   const showAlert = useAlert();
+  const fnTitle = useTitleCase();
 
-  const form = useForm<z.infer<typeof subscribeSchema>>({
-    resolver: zodResolver(subscribeSchema),
-  });
   const { trackEvent } = useGoogleAnalytics();
 
-  const { control, handleSubmit, getFieldState } = form;
+  const field = subscribe?.fields[0];
 
-  const onSubmit = async (data: SubscribeFormData) => {
+  if (!is(field)) {
+    throw new Error("Subscribe field not defined in CMS");
+  }
+
+  const schema = createSchema([field]);
+  type Schema = z.infer<typeof schema>;
+
+  const defaultValues = { [field.formId]: "" };
+
+  const form = useForm<Schema>({ resolver: zodResolver(schema), defaultValues });
+
+  const onSubmit = async (data: Schema) => {
     const res = await submitForm("subscribe", data);
-    if (res instanceof Error) {
+    const isError = res instanceof Error || !res.ok;
+
+    if (isError) {
+      const message = await messageFromResponseOrError(res);
       trackEvent("Error Subscribing to Newsletter", { event_category: "User" });
-      return showAlert({ message: res.message, status: "error" });
+      return showAlert({
+        message: <CodeBlock colorScheme="red">{message}</CodeBlock>,
+        status: "error",
+      });
     }
-    if (!res.ok) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let json: any = {};
-      try {
-        json = await res.json();
-      } catch (error) {
-        return showAlert({ message: String(error), status: "error" });
-      }
-      console.error(res.status, res.statusText, json);
-      trackEvent("Error Subscribing to Newsletter", { event_category: "User" });
-      if ("error" in json && typeof json.error === "string") {
-        return showAlert({ message: json.error, status: "error" });
-      }
-      return showAlert({ message: res.statusText, status: "error" });
-    }
+
     trackEvent("Subscribed to Newsletter", { event_category: "User" });
-    return showAlert({
-      message: "Thanks! Please check your email to confirm your subscription.",
-      status: "success",
+    showAlert({
+      message: <RichText content={subscribe?.button.alert?.body} />,
+      status: subscribe?.button.alert?.level ?? "success",
     });
   };
 
+  const title = fnTitle(field.label ?? field.displayName);
+
   return (
-    <FormProvider {...form}>
-      <VStack
-        w="25%"
-        as="form"
-        zIndex={1}
-        spacing={6}
-        align="flex-end"
-        onSubmit={handleSubmit(onSubmit)}
-        {...props}
-      >
-        <Text>Subscribe to our newsletter</Text>
-        <FormControl isInvalid={typeof getFieldState("email").error !== "undefined"}>
-          <Controller
-            name="email"
-            defaultValue=""
-            control={control}
-            render={({ field }) => <SubscribeField field={field} />}
-          />
-          <FormErrorMessage>{getFieldState("email").error?.message}</FormErrorMessage>
-        </FormControl>
-      </VStack>
-    </FormProvider>
+    <VStack
+      w="25%"
+      as="form"
+      zIndex={1}
+      spacing={6}
+      align="flex-end"
+      onSubmit={form.handleSubmit(onSubmit)}
+      {...props}
+    >
+      <Text>{title}</Text>
+      <SubscribeField
+        title={title}
+        isSubmitting={form.formState.isSubmitting}
+        error={form.getFieldState(field.formId).error}
+        isSubmitSuccessful={form.formState.isSubmitSuccessful}
+        {...form.register(field.formId, { required: true })}
+      />
+    </VStack>
   );
 };

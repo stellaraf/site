@@ -71,33 +71,40 @@ query config($title: String) {
       }
       fields {
         ... on CheckboxField {
+          __typename
           displayName
           formId
           label
           multiple
           options
           required
+          fieldGroup
         }
         ... on SelectField {
+          __typename
           displayName
           formId
           label
           multiple
           options
           required
+          fieldGroup
         }
         ... on TextAreaField {
-          formId
+          __typename
           displayName
+          formId
           label
           required
+          fieldGroup
         }
         ... on TextInputField {
+          __typename
           displayName
           formId
           label
           required
-          validationType
+          fieldGroup
         }
       }
       colorScheme

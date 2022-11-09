@@ -1,7 +1,13 @@
-import { useMemo } from "react";
+import { useMemo, forwardRef } from "react";
 
-import { IconButton, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
-import { useFormContext } from "react-hook-form";
+import {
+  Input,
+  IconButton,
+  InputGroup,
+  FormControl,
+  FormErrorMessage,
+  InputRightElement,
+} from "@chakra-ui/react";
 
 import { DynamicIcon } from "~/components";
 import { useColorValue } from "~/context";
@@ -13,17 +19,13 @@ const borderDark = [undefined, "green.100"];
 const hoverBorderLight = ["whiteAlpha.300", "green.300"];
 const hoverBorderDark = [undefined, "green.300"];
 
-export const SubscribeField = (props: SubscribeFieldProps) => {
-  const { field, ...rest } = props;
-
-  const { formState } = useFormContext();
-  const { isSubmitting, isSubmitSuccessful, errors } = formState;
+export const SubscribeField = forwardRef<HTMLInputElement, SubscribeFieldProps>((props, ref) => {
+  const { name, title, isSubmitSuccessful, isSubmitting, error, ...rest } = props;
 
   const styles = useColorValue(
     {
       bg: "whiteAlpha.100",
       borderColor: borderLight[+isSubmitSuccessful],
-      boxShadow: borderLight[+isSubmitSuccessful],
       _hover: {
         borderColor: hoverBorderLight[+isSubmitSuccessful],
         boxShadow: hoverBorderLight[+isSubmitSuccessful],
@@ -31,53 +33,56 @@ export const SubscribeField = (props: SubscribeFieldProps) => {
     },
     {
       borderColor: borderDark[+isSubmitSuccessful],
-      boxShadow: borderDark[+isSubmitSuccessful],
       _hover: {
         borderColor: hoverBorderDark[+isSubmitSuccessful],
-        boxShadow: hoverBorderDark[+isSubmitSuccessful],
       },
     },
   );
 
   const icon = useMemo(() => {
-    if (errors.email) {
+    if (error) {
       return { fa: "FaTimesCircle" };
     }
     if (isSubmitSuccessful) {
       return { fa: "FaCheckCircle" };
     }
     return { fa: "FaArrowAltCircleRight" };
-  }, [errors.email, isSubmitSuccessful]);
+  }, [error, isSubmitSuccessful]);
 
   const color = useMemo(() => {
-    if (errors.email) {
+    if (error) {
       return "red.300";
     }
     if (isSubmitSuccessful) {
       return "green.300";
     }
     return "light.500";
-  }, [errors.email, isSubmitSuccessful]);
+  }, [error, isSubmitSuccessful]);
 
   return (
-    <InputGroup>
-      <Input placeholder="Email Address" {...styles} {...field} {...rest} />
-      <InputRightElement>
-        <IconButton
-          p={2}
-          h="100%"
-          icon={<DynamicIcon icon={icon} />}
-          type="submit"
-          color={color}
-          variant="unstyled"
-          alignItems="center"
-          display="inline-flex"
-          title="Subscribe to our newsletter"
-          isLoading={isSubmitting}
-          aria-label="Subscribe to our newsletter"
-          _hover={{ color: "tertiary.500" }}
-        />
-      </InputRightElement>
-    </InputGroup>
+    <FormControl isInvalid={typeof error !== "undefined"}>
+      <InputGroup>
+        <Input name={name} ref={ref} placeholder="Email Address" {...styles} {...rest} />
+        <InputRightElement>
+          <IconButton
+            p={2}
+            h="100%"
+            color={color}
+            title={title}
+            type="submit"
+            aria-label={title}
+            variant="unstyled"
+            alignItems="center"
+            display="inline-flex"
+            isLoading={isSubmitting}
+            _hover={{ color: "tertiary.500" }}
+            icon={<DynamicIcon icon={icon} />}
+          />
+        </InputRightElement>
+      </InputGroup>
+      <FormErrorMessage>{error?.message}</FormErrorMessage>
+    </FormControl>
   );
-};
+});
+
+SubscribeField.displayName = "SubscribeField";

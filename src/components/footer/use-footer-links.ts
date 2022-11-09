@@ -15,23 +15,25 @@ type FooterGroup = {
   items: FooterGroupItem[];
 };
 
-const mapper = ({ slug, title, footerTitle }: FooterGroupItem) => ({
-  slug,
-  title: footerTitle ? footerTitle : title,
-});
+function createMapper(prefix: string = ""): (i: FooterGroupItem) => FooterGroupItem {
+  return ({ slug, title, footerTitle }: FooterGroupItem) => ({
+    slug: `${prefix}${slug}`,
+    title: footerTitle ? footerTitle : title,
+  });
+}
 
 export function useFooterLinks(groups: FooterGroups): FooterGroup[][] {
   return useMemo(() => {
     const processedGroups = groups.reduce<FooterGroup[]>(
       (final, { pages, pageContents, docsGroup, title, row }) => {
         const items = [
-          ...pages.map(mapper),
+          ...pages.map(createMapper()),
           ...pageContents.reduce<FooterGroupItem[]>((final, each): FooterGroupItem[] => {
             const { slug, title, page, footerTitle } = each;
             final.push({ title: footerTitle ? footerTitle : title, slug: `${page?.slug}#${slug}` });
             return final;
           }, []),
-          ...docsGroup.map(mapper),
+          ...docsGroup.map(createMapper("docs/")),
         ];
         final.push({ group: title, items, row });
         return final;
