@@ -1,6 +1,6 @@
 query employees($config: String) {
   configuration(where: { title: $config }) {
-    employees {
+    employees(first: 50) {
       bio {
         raw
       }
