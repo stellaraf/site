@@ -1,4 +1,3 @@
-export * from "./banner";
 export * from "./button";
 export * from "./call-to-action";
 export * from "./callout";

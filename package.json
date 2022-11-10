@@ -50,7 +50,6 @@
     "tsparticles": "^2.3.4",
     "tsparticles-engine": "^2.3.3",
     "ua-parser-js": "^1.0.32",
-    "use-local-storage-state": "^18.1.1",
     "use-title-case": "^0.1.5",
     "zod": "^3.19.1"
   },
