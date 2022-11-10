@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import {
   Box,
   List,
@@ -7,10 +9,10 @@ import {
   AccordionItem,
   AccordionPanel,
   AccordionButton,
+  type ListItemProps,
 } from "@chakra-ui/react";
 
-import { Link } from "~/components";
-import { useColorValue } from "~/context";
+import { Link, useMobileSubNav } from "~/components";
 
 import { useDocsHref } from "./use-docs-href";
 
@@ -19,12 +21,26 @@ import type { DocsGroup, DocsPage } from "~/queries";
 const MMenuItem = (props: Omit<DocsPage, "body">) => {
   const { title } = props;
   const { href, isCurrent } = useDocsHref(props);
+  const subNav = useMobileSubNav();
 
-  const color = useColorValue("primary.500", "secondary.200");
+  if (subNav === null) {
+    throw new Error("Cannot use MobileSubNavContext outside of provider");
+  }
+
+  const color = useMemo<ListItemProps | undefined>(
+    () => (isCurrent ? { color: "primary.500", _dark: { color: "secondary.200" } } : undefined),
+    [isCurrent],
+  );
 
   return (
-    <ListItem my={2} pl={4} color={isCurrent ? color : undefined}>
-      <Link href={href} width="100%" fontSize="sm" opacity={isCurrent ? 1 : 0.8}>
+    <ListItem my={2} pl={4} {...color}>
+      <Link
+        href={href}
+        width="100%"
+        fontSize="sm"
+        onClick={subNav.onClose}
+        opacity={isCurrent ? 1 : 0.8}
+      >
         {title}
       </Link>
     </ListItem>
@@ -34,18 +50,16 @@ const MMenuItem = (props: Omit<DocsPage, "body">) => {
 export const MMenuGroup = (props: DocsGroup) => {
   const { title, docsPages } = props;
 
-  const borderColor = useColorValue("blackAlpha.300", "whiteAlpha.300");
-
   return (
     <>
       <AccordionItem border="none">
         <AccordionButton my={4}>
           <Box
             w="100%"
-            textAlign="left"
-            textTransform="uppercase"
             fontSize="md"
+            textAlign="left"
             fontWeight="medium"
+            textTransform="uppercase"
           >
             {title}
           </Box>
@@ -59,7 +73,7 @@ export const MMenuGroup = (props: DocsGroup) => {
           </List>
         </AccordionPanel>
       </AccordionItem>
-      <Divider mx="auto" w="90%" bg={borderColor} />
+      <Divider mx="auto" w="90%" bg="blackAlpha.300" _dark={{ color: "whiteAlpha.300" }} />
     </>
   );
 };

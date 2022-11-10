@@ -19,7 +19,7 @@ const MLayout = (props: BoxProps) => {
   return (
     <LayoutContainer {...rest}>
       <MSubNav>
-        <Accordion allowMultiple allowToggle>
+        <Accordion allowMultiple>
           {docsGroups.map(group => (
             <MMenuGroup key={group.title} {...group} />
           ))}
