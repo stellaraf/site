@@ -3,7 +3,6 @@ import { useMemo } from "react";
 import { Flex } from "@chakra-ui/react";
 
 import { DynamicIcon } from "~/components";
-import { useColorValue } from "~/context";
 
 import type { FlexProps } from "@chakra-ui/react";
 
@@ -13,8 +12,6 @@ interface QuoteProps extends FlexProps {
 
 export const Quote = (props: QuoteProps) => {
   const { kind, ...rest } = props;
-
-  const color = useColorValue("blackAlpha.300", "secondary.200");
 
   const iconProps = useMemo(() => {
     switch (kind) {
@@ -38,7 +35,8 @@ export const Quote = (props: QuoteProps) => {
 
   return (
     <Flex
-      color={color}
+      color="blackAlpha.300"
+      _dark={{ color: "whiteAlpha.300" }}
       align="center"
       justify="center"
       overflow="hidden"
@@ -46,7 +44,7 @@ export const Quote = (props: QuoteProps) => {
       {...kindProps}
       {...rest}
     >
-      <DynamicIcon icon={iconProps} boxSize="100%" />
+      <DynamicIcon icon={iconProps} boxSize={8} />
     </Flex>
   );
 };
