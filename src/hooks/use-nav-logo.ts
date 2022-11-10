@@ -13,7 +13,7 @@ export const useNavLogoState = (): boolean => useRecoilValue(navLogoAtom);
  *
  * @param logoRef Ref to the logo DOM element.
  */
-export function useNavLogo<E extends SVGElement>(logoRef: ReactRef<E>): void {
+export function useNavLogo<E extends SVGElement>(logoRef: React.MutableRefObject<E>): void {
   const setShow = useSetRecoilState(navLogoAtom);
 
   const setVisibility = useCallback(
