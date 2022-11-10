@@ -20,18 +20,15 @@ function scrollToTop(): void {
 export const DControls = (props: BoxProps) => {
   const { toggleColorMode } = useColorMode();
   const colorModeIcon = useColorValue({ bs: "BsMoon" }, { md: "MdWbSunny" });
-  const bg = useColorValue("white", "blackAlpha.300");
-  const borderColor = useColorValue("blackAlpha.300", "whiteAlpha.300");
-  const hoverColor = useColorValue("secondary.500", "tertiary.300");
   const switchTo = useColorValue("Dark", "Light");
   const colorModeLabel = `Switch to ${switchTo} Mode`;
 
   return (
     <Box
       py={4}
-      bg={bg}
+      bg="white"
       right={0}
-      zIndex={5}
+      zIndex="modal"
       pos="fixed"
       width="2rem"
       height="6rem"
@@ -44,7 +41,8 @@ export const DControls = (props: BoxProps) => {
       justifyContent="center"
       borderBottomWidth="1px"
       borderTopLeftRadius="lg"
-      borderColor={borderColor}
+      borderColor="blackAlpha.300"
+      _dark={{ bg: "blackAlpha.300", borderColor: "whiteAlpha.300" }}
       borderBottomLeftRadius="lg"
       css={{ backdropFilter: "blur(20px)" }}
       {...props}
@@ -58,7 +56,8 @@ export const DControls = (props: BoxProps) => {
           title={colorModeLabel}
           onClick={toggleColorMode}
           aria-label={colorModeLabel}
-          _hover={{ color: hoverColor }}
+          _hover={{ color: "secondary.500" }}
+          _dark={{ _hover: { color: "tertiary.300" } }}
         >
           <DynamicIcon icon={colorModeIcon} />
         </Button>
@@ -69,7 +68,8 @@ export const DControls = (props: BoxProps) => {
           onClick={scrollToTop}
           title="Scroll to Top"
           aria-label="Scroll to Top"
-          _hover={{ color: hoverColor }}
+          _hover={{ color: "secondary.500" }}
+          _dark={{ _hover: { color: "tertiary.300" } }}
         >
           <DynamicIcon icon={{ bs: "BsChevronUp" }} />
         </Button>
