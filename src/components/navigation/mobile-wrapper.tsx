@@ -17,7 +17,7 @@ export const Wrapper = (props: BaseHeaderProps) => {
   const borderColor = useColorValue("blackAlpha.300", "whiteAlpha.300");
   const { colorMode } = useColorMode();
   const { pathname } = useRouter();
-  const globalShowLogo = useNavLogoState();
+  const homePageLogo = useNavLogoState();
 
   // Show logo in the navbar only if:
   //   a) the homepage hero logo is hidden
@@ -25,21 +25,25 @@ export const Wrapper = (props: BaseHeaderProps) => {
   //   c) and if the mobile nav is NOT open
   const [showLogo, setShowLogo] = useState(false);
 
-  useEffect(() => {
-    if (pathname === "/") {
-      // Homepage: mobile nav closed, hero hidden, not already shown, then SHOW
-      !isOpen && globalShowLogo && !showLogo && setShowLogo(true);
-      // Homepage: mobile nav closed, hero shown, already shown, then HIDE
-      !isOpen && !globalShowLogo && showLogo && setShowLogo(false);
-      // Homepage: mobile nav open, hero shown, already shown, then HIDE
-      isOpen && showLogo && setShowLogo(false);
-    } else if (pathname !== "/") {
-      // Non-homepage: mobile nav closed, not already shown, then SHOW
-      !isOpen && !showLogo && setShowLogo(true);
-      // Non-homepage: mobile nav open, already shown, then HIDE
-      isOpen && showLogo && setShowLogo(false);
-    }
-  }, [globalShowLogo, showLogo, isOpen]);
+  // Homepage cases
+  if (pathname === "/") {
+    // Mobile nav closed, hero logo shown, header logo not already shown: SHOW
+    !isOpen && homePageLogo && !showLogo && setShowLogo(true);
+
+    // Mobile nav closed, hero logo hidden, header logo already shown: HIDE
+    !isOpen && !homePageLogo && showLogo && setShowLogo(false);
+
+    // Homepage: mobile nav open, header logo shown: HIDE
+    isOpen && showLogo && setShowLogo(false);
+  }
+  // Non-homepage cases
+  else if (pathname !== "/") {
+    // Non-homepage: mobile nav closed, not already shown, then SHOW
+    !isOpen && !showLogo && setShowLogo(true);
+
+    // Non-homepage: mobile nav open, already shown, then HIDE
+    isOpen && showLogo && setShowLogo(false);
+  }
 
   useEffect(() => () => setShowLogo(false), []);
 
