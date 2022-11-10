@@ -28,7 +28,7 @@ export const ContentSubSection = (props: ContentSubSectionProps) => {
     >
       <Flex direction="column">
         <Flex align="center" justify="space-between">
-          <Heading as="h4" fontSize="lg" mb={4}>
+          <Heading as="h4" fontSize="lg" mb={4} mr={4}>
             {fnTitle(title)}
           </Heading>
           {icon && <Icon size={12} url={icon.url} color={iconColor ?? "primary"} />}
