@@ -2,9 +2,6 @@ query config($title: String) {
   values: configuration(where: { title: $title }) {
     description
     organizationName
-    privacyBanner {
-      raw
-    }
     slogan
     title
     titleOverrides
