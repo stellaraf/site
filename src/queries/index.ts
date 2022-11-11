@@ -19,11 +19,7 @@ export { default as docsGroupQuery } from "./docs-group";
 
 export { default as docsGroupsQuery, type DocsGroups, type DocsGroup } from "./docs-groups";
 
-export { default as docsGroupStaticPathsQuery } from "./static-paths/docs-group-static-paths";
-
 export { default as docsPageQuery, type DocsPage, type AdmonitionModel } from "./docs-page";
-
-export { default as docsPageStaticPathsQuery } from "./static-paths/docs-page-static-paths";
 
 export { default as employeesQuery, type Employee, type Employees } from "./employees";
 
@@ -41,8 +37,7 @@ export {
   type VendorLogo,
 } from "./page";
 
-export { default as pageStaticPathsQuery } from "./static-paths/page-static-paths";
-export { default as pageStaticPathsExactQuery } from "./static-paths/page-static-paths-exact";
+export * from "./static-paths";
 
 export * from "./static-props";
 

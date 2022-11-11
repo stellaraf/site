@@ -1,35 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { findUp } from "find-up";
-
-import { is } from "~/lib";
+import { is, findProjectRoot, directoryFiles } from "~/lib";
 
 import { queryFn } from "../base";
-import query from "./gql/docs-page-static-paths.gql";
+import query from "../gql/docs-page-static-paths.gql";
 
 import type { DocsPageStaticPathsQuery, DocsPageStaticPathsQueryVariables } from "~/types";
-
-function dirBaseNames(dir: string): string[] {
-  let final: string[] = [];
-  let result: string[] = [];
-  for (const child of fs.readdirSync(dir)) {
-    const childPath = path.resolve(dir, child);
-    const pageName = path.parse(path.basename(childPath)).name;
-    if (pageName.match(/^[a-zA-Z].+/gi)) {
-      result = [...result, childPath];
-    }
-  }
-  for (const child of result) {
-    const stat = fs.statSync(child);
-    if (stat.isDirectory()) {
-      final = [...final, ...dirBaseNames(child)];
-    } else {
-      final = [...final, child];
-    }
-  }
-  return final;
-}
 
 export default async function (variables: DocsPageStaticPathsQueryVariables): Promise<string[]> {
   const result = await queryFn<DocsPageStaticPathsQuery, DocsPageStaticPathsQueryVariables>({
@@ -43,28 +20,34 @@ export default async function (variables: DocsPageStaticPathsQueryVariables): Pr
     );
   }
 
-  const slugs = result.docsPages.map(d => d.slug);
+  const root = await findProjectRoot(__dirname);
+  const pagesDir = (await fs.promises.readdir(root)).map(dir => path.resolve(root, dir));
 
-  const pkg = await findUp("package.json");
-  if (typeof pkg === "undefined") {
-    throw new Error("unable to find package.json in project");
-  }
-  const baseDir = path.resolve(path.dirname(pkg));
-
-  const pagesDir = (await fs.promises.readdir(baseDir)).map(dir => path.resolve(baseDir, dir));
-
-  const pages = pagesDir.reduce<string[]>((final, child) => {
-    const stat = fs.statSync(child);
+  const pages = await pagesDir.reduce<Promise<string[]>>(async (finalPromise, child) => {
     let pagePaths: string[] = [];
+    let final = await finalPromise;
+
+    const stat = await fs.promises.stat(child);
+
+    // If child is a directory, recursively check each file and subdirectory to find all file names.
     if (stat.isDirectory()) {
-      pagePaths = [...pagePaths, ...dirBaseNames(child)];
-    } else {
+      const childFiles = await directoryFiles(child, { pattern: /^[a-zA-Z].+/gi });
+      pagePaths = [...pagePaths, ...childFiles];
+    }
+    // Otherwise, add the file to the list.
+    else {
       pagePaths = [...pagePaths, child];
     }
-    final = [...final, ...pagePaths.map(pagePath => path.parse(path.basename(pagePath)).name)];
-    return final;
-  }, []);
+    // Get each file's base file name without the file extension. E.g. `/path/to/file.tsx` becomes `file`
+    const resolvedPageNames = pagePaths.map(pagePath => path.parse(path.basename(pagePath)).name);
 
+    final = [...final, ...resolvedPageNames];
+    return final;
+  }, Promise.resolve([]));
+
+  const slugs = result.docsPages.map(d => d.slug);
+
+  // Filter page names from CMS so that non-dynamic pages are excluded.
   const staticPaths = slugs.reduce<string[]>((final, slug) => {
     if (!pages.includes(slug)) {
       final = [...final, slug];

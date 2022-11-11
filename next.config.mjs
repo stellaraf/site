@@ -21,6 +21,9 @@ const config = {
       exclude: /node_modules/,
       loader: "raw-loader",
     });
+    config.externals.push("find-up", "'node:path'", { "node:path": "commonjs path" }, "'node:fs'", {
+      "node:fs": "commonjs fs",
+    });
     return config;
   },
   reactStrictMode: true,
