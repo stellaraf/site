@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { is } from "~/lib";
 
-import { queryFn } from "./base";
+import { queryFn } from "../base";
 import query from "./gql/page-static-paths-exact.gql";
 
 import type { StaticPathsExactQuery, StaticPathsExactQueryVariables } from "~/types";

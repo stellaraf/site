@@ -1,6 +1,6 @@
 import { is } from "~/lib";
 
-import { queryFn } from "./base";
+import { queryFn } from "../base";
 import query from "./gql/docs-group-static-paths.gql";
 
 import type { DocsGroupStaticPathsQuery, DocsGroupStaticPathsQueryVariables } from "~/types";

@@ -5,7 +5,7 @@ import { findUp } from "find-up";
 
 import { is } from "~/lib";
 
-import { queryFn } from "./base";
+import { queryFn } from "../base";
 import query from "./gql/docs-page-static-paths.gql";
 
 import type { DocsPageStaticPathsQuery, DocsPageStaticPathsQueryVariables } from "~/types";

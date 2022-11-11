@@ -1,6 +1,6 @@
 import { is } from "~/lib";
 
-import { queryFn } from "./base";
+import { queryFn } from "../base";
 import query from "./gql/page-static-paths.gql";
 
 import type { StaticPathsQuery, StaticPathsQueryVariables } from "~/types";
