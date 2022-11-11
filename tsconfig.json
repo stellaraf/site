@@ -29,9 +29,8 @@
     "incremental": true,
     "noUnusedLocals": true
   },
-  "exclude": ["node_modules", ".next", ".husky", "dist", "public", "generateFavicons.ts"],
+  "exclude": ["node_modules", ".next", ".husky", "dist", "public", "generate-favicons.ts"],
   "include": [
-    "codegen.ts",
     "next.config.mjs",
     ".eslintrc.*",
     "next-env.d.ts",

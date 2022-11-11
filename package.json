@@ -57,7 +57,7 @@
   "scripts": {
     "dev": "NODE_OPTIONS=--max-old-space-size=8192 next dev",
     "dev:favicons": "FAVICONS=true NODE_OPTIONS=--max-old-space-size=8192 next dev",
-    "favicons": "ts-node-esm generateFavicons.ts",
+    "favicons": "ts-node-esm generate-favicons.ts",
     "build": "pnpm run favicons && pnpm exec next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
