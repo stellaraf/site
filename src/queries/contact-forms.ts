@@ -1,7 +1,7 @@
 import { is } from "~/lib";
 
 import { queryFn } from "./base";
-import query from "./contact-forms.gql";
+import query from "./gql/contact-forms.gql";
 
 import type { ContactFormsQuery, ContactFormsQueryVariables } from "~/types";
 

@@ -6,7 +6,7 @@ import { ContentSection, Hero, SEO, useDataCenter, Callout, Testimonials } from 
 import { useColorTokenValue, CloudLocationsProvider } from "~/context";
 import { useAlert } from "~/hooks";
 import { is } from "~/lib";
-import { pageQuery, cloudLocationsQuery } from "~/queries";
+import { pageQuery, cloudLocationsQuery, commonStaticPropsQuery } from "~/queries";
 
 import type { GetStaticProps, NextPage } from "next";
 import type { USMapProps } from "~/components";
@@ -70,7 +70,8 @@ export const getStaticProps: GetStaticProps<CloudPageProps> = async ctx => {
   const geoData = await geoRes.json();
   const locations = await cloudLocationsQuery();
   const page = await pageQuery({ slug: "cloud" });
-  return { props: { geoData, preview, locations, ...page } };
+  const common = await commonStaticPropsQuery();
+  return { props: { ...page, geoData, preview, locations, common } };
 };
 
 export default Cloud;

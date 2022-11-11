@@ -21,6 +21,7 @@
     "dayjs": "^1.11.6",
     "dot-prop": "^7.2.0",
     "favicons": "^7.0.1",
+    "find-up": "^6.3.0",
     "framer-motion": "^7.6.5",
     "graphql": "^16.6.0",
     "hamburger-react": "^2.5.0",

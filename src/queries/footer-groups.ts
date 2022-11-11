@@ -1,7 +1,7 @@
 import { is } from "~/lib";
 
 import { queryFn } from "./base";
-import query from "./footer-groups.gql";
+import query from "./gql/footer-groups.gql";
 
 import type { FooterGroupsQuery, FooterGroupsQueryVariables } from "~/types";
 

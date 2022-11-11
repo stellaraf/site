@@ -1,0 +1,5 @@
+query staticPaths($startsWith: String) {
+  pages(first: 100, where: { slug_starts_with: $startsWith }) {
+    slug
+  }
+}

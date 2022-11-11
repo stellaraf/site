@@ -3,7 +3,7 @@ import { useTitleCase } from "use-title-case";
 
 import { SEO, ContentSection } from "~/components";
 import { FallbackLayout } from "~/layouts";
-import { pageQuery } from "~/queries";
+import { pageQuery, commonStaticPropsQuery, pageStaticPathsQuery } from "~/queries";
 
 import ErrorPage from "../_error";
 
@@ -45,13 +45,15 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
 
   const preview = ctx?.preview ?? false;
   const page = await pageQuery({ slug: `legal/${slug}` });
+  const common = await commonStaticPropsQuery();
 
-  return { props: { ...page, preview } };
+  return { props: { ...page, preview, common } };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [{ params: { page: "privacy" } }, { params: { page: "msa" } }],
-  fallback: false,
-});
+export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
+  const pages = await pageStaticPathsQuery({ startsWith: "legal" });
+  const paths = pages.map(page => ({ params: { page } }));
+  return { paths, fallback: false };
+};
 
 export default LegalPage;

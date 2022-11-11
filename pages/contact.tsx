@@ -3,7 +3,7 @@ import { Box, Flex, Button as ChakraButton, Heading, VStack } from "@chakra-ui/r
 import { Content, DynamicIcon, Hero, FormCardGroup, SEO, Callout } from "~/components";
 import { useSlug, useResponsiveStyle } from "~/hooks";
 import { is } from "~/lib";
-import { contactFormsQuery, pageQuery } from "~/queries";
+import { contactFormsQuery, pageQuery, commonStaticPropsQuery } from "~/queries";
 
 import type { GetStaticProps, NextPage } from "next";
 import type { ContactPageProps } from "~/types";
@@ -59,8 +59,9 @@ export const getStaticProps: GetStaticProps<ContactPageProps> = async ctx => {
 
   const contactForms = await contactFormsQuery();
   const page = await pageQuery({ slug: "contact" });
+  const common = await commonStaticPropsQuery();
 
-  return { props: { ...page, contactForms, preview } };
+  return { props: { ...page, contactForms, preview, common } };
 };
 
 export default Contact;

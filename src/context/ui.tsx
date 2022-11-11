@@ -12,8 +12,7 @@ import {
 
 import { makeTheme } from "~/theme";
 
-import type { UseTheme, UIProviderProps, ColorModeContext } from "./types";
-import type { GetServerSideProps } from "next";
+import type { UseTheme, UIProviderProps } from "./types";
 
 export const UIProvider = (props: UIProviderProps) => {
   const { theme, children, cookies } = props;
@@ -33,15 +32,6 @@ export const UIProvider = (props: UIProviderProps) => {
       {children}
     </ChakraProvider>
   );
-};
-
-export const getServerSideProps: GetServerSideProps<ColorModeContext> = async ctx => {
-  return {
-    props: {
-      // First time users will not have any cookies, so an empty string is required.
-      cookies: ctx.req.headers.cookie ?? "",
-    },
-  };
 };
 
 export const useTheme: UseTheme = useChakraTheme;

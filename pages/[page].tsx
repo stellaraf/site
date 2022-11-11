@@ -1,5 +1,5 @@
 import { ContentSection, Hero, SEO, Callout, Testimonials } from "~/components";
-import { pageQuery } from "~/queries";
+import { pageQuery, commonStaticPropsQuery, pageStaticPathsExactQuery } from "~/queries";
 
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { PageProps } from "~/types";
@@ -28,12 +28,14 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
   const slug = ctx.params?.page ?? "notfound";
   const preview = ctx?.preview ?? false;
   const page = await pageQuery({ slug });
-  return { props: { ...page, preview } };
+  const common = await commonStaticPropsQuery();
+  return { props: { ...page, preview, common } };
 };
 
-export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
-  paths: [{ params: { page: "consulting" } }, { params: { page: "services" } }],
-  fallback: false,
-});
+export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
+  const pages = await pageStaticPathsExactQuery();
+  const paths = pages.map(page => ({ params: { page } }));
+  return { paths, fallback: false };
+};
 
 export default DynamicPage;

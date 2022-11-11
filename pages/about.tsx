@@ -3,7 +3,7 @@ import { useTitleCase } from "use-title-case";
 
 import { EmployeeGrid, Hero, GoogleMap, SEO, Callout, Testimonials } from "~/components";
 import { useResponsiveStyle } from "~/hooks";
-import { pageQuery, employeesQuery } from "~/queries";
+import { pageQuery, employeesQuery, commonStaticPropsQuery } from "~/queries";
 
 import type { GetStaticProps, NextPage } from "next";
 import type { AboutPageProps } from "~/types";
@@ -50,8 +50,9 @@ export const getStaticProps: GetStaticProps<AboutPageProps> = async ctx => {
   const preview = ctx?.preview ?? false;
   const page = await pageQuery({ slug: "about" });
   const employees = await employeesQuery();
+  const common = await commonStaticPropsQuery();
 
-  return { props: { ...page, employees, preview } };
+  return { props: { ...page, employees, preview, common } };
 };
 
 export default About;

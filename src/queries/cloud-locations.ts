@@ -1,7 +1,7 @@
 import { is } from "~/lib";
 
 import { queryFn } from "./base";
-import query from "./cloud-locations.gql";
+import query from "./gql/cloud-locations.gql";
 
 import type { CloudLocationsQuery } from "~/types";
 

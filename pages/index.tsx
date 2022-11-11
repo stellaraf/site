@@ -7,12 +7,12 @@ import { HomeSection, SEO, Screen, Testimonials } from "~/components";
 import { useConfig, useColorMode, useColorValue } from "~/context";
 import { useGradient, useNavLogo, useResponsiveStyle } from "~/hooks";
 import { is } from "~/lib";
-import { homePageQuery } from "~/queries";
+import { homePageQuery, commonStaticPropsQuery } from "~/queries";
 
 import type { NextPage, GetStaticProps } from "next";
-import type { HomePage } from "~/queries";
+import type { HomePageProps } from "~/types";
 
-const Home: NextPage<HomePage> = props => {
+const Home: NextPage<HomePageProps> = props => {
   const { blocks, mainVideo } = props;
   const { colorMode } = useColorMode();
   const { slogan, organizationName } = useConfig();
@@ -56,10 +56,11 @@ const Home: NextPage<HomePage> = props => {
   );
 };
 
-export const getStaticProps: GetStaticProps<HomePage> = async ctx => {
+export const getStaticProps: GetStaticProps<HomePageProps> = async ctx => {
   const preview = ctx?.preview ?? false;
   const homePage = await homePageQuery();
-  return { props: { ...homePage, preview } };
+  const common = await commonStaticPropsQuery();
+  return { props: { ...homePage, preview, common } };
 };
 
 export default Home;

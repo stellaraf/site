@@ -6,7 +6,7 @@ import { useTitleCase } from "use-title-case";
 import { ContentLoader, Error, SEO, RichText } from "~/components";
 import { useScaledText } from "~/hooks";
 import { DocsLayout } from "~/layouts";
-import { docsGroupQuery } from "~/queries";
+import { docsGroupQuery, commonStaticPropsQuery, docsGroupStaticPathsQuery } from "~/queries";
 
 import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
 import type { DocsGroup } from "~/queries";
@@ -72,22 +72,27 @@ const DocsGroupIndex: NextPage<DocsGroup> = props => {
 };
 
 export const getStaticProps: GetStaticProps<DocsGroup, UrlQuery> = async ctx => {
-  const group = ctx.params?.group ?? "";
+  const group = ctx.params?.group ?? "notfound";
   const preview = ctx?.preview ?? false;
-  let notFound = false;
-  let docsGroup = {} as DocsGroup;
-  try {
-    docsGroup = await docsGroupQuery({ slug: group });
-  } catch (err) {
-    console.error(err);
-    notFound = true;
+
+  if (group === "notfound") {
+    return { notFound: true };
   }
-  return { props: { ...docsGroup, notFound, preview } };
+
+  try {
+    const docsGroup = await docsGroupQuery({ slug: group });
+    const common = await commonStaticPropsQuery();
+    return { props: { ...docsGroup, preview, common } };
+  } catch (error) {
+    console.error(error);
+    return { notFound: true };
+  }
 };
 
-export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
-  paths: [{ params: { group: "interconnection" } }, { params: { group: "orion" } }],
-  fallback: true,
-});
+export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
+  const groups = await docsGroupStaticPathsQuery();
+  const paths = groups.map(group => ({ params: { group } }));
+  return { paths, fallback: false };
+};
 
 export default DocsGroupIndex;

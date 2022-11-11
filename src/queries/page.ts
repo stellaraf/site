@@ -1,7 +1,7 @@
 import { is } from "~/lib";
 
 import { queryFn } from "./base";
-import query from "./page.gql";
+import query from "./gql/page.gql";
 
 import type { PageQuery, PageQueryVariables } from "~/types";
 

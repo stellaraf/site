@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Callout, ContentLoader, ContentSection, Hero, SEO, Testimonials } from "~/components";
 import { FallbackLayout } from "~/layouts";
 import { is } from "~/lib";
-import { pageQuery } from "~/queries";
+import { pageQuery, commonStaticPropsQuery, pageStaticPathsQuery } from "~/queries";
 
 import ErrorPage from "../_error";
 
@@ -60,19 +60,18 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
 
   try {
     const page = await pageQuery({ slug: `cloud/${path}` });
-    return { props: { ...page, preview } };
+    const common = await commonStaticPropsQuery();
+    return { props: { ...page, preview, common } };
   } catch (error) {
     console.error(error);
     return { notFound: true };
   }
-
-  const page = await pageQuery({ slug: `cloud/${path}` });
-  return { props: { ...page, preview } };
 };
 
-export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
-  paths: [{ params: { page: "daas" } }],
-  fallback: true,
-});
+export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
+  const pages = await pageStaticPathsQuery({ startsWith: "cloud" });
+  const paths = pages.map(page => ({ params: { page } }));
+  return { paths, fallback: false };
+};
 
 export default CloudPage;

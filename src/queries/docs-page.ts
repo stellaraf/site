@@ -1,7 +1,7 @@
 import { is } from "~/lib";
 
 import { queryFn } from "./base";
-import query from "./docs-page.gql";
+import query from "./gql/docs-page.gql";
 
 import type { DocsPageQuery, DocsPageQueryVariables, Admonition } from "~/types";
 

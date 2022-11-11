@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import { SEO, ContentLoader } from "~/components";
 import { PartnerLayout, FallbackLayout } from "~/layouts";
-import { pageQuery } from "~/queries";
+import { pageQuery, commonStaticPropsQuery, pageStaticPathsQuery } from "~/queries";
 
 import ErrorPage from "../_error";
 
@@ -57,16 +57,18 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
   }
   try {
     const page = await pageQuery({ slug: `partner/${partner}` });
-    return { props: { ...page, preview } };
+    const common = await commonStaticPropsQuery();
+    return { props: { ...page, preview, common } };
   } catch (error) {
     console.error(error);
     return { notFound: true };
   }
 };
 
-export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => ({
-  paths: [{ params: { partner: "vmware" } }, { params: { partner: "veeam" } }],
-  fallback: true,
-});
+export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
+  const pages = await pageStaticPathsQuery({ startsWith: "partner" });
+  const paths = pages.map(partner => ({ params: { partner } }));
+  return { paths, fallback: false };
+};
 
 export default PartnerPage;

@@ -1,23 +1,17 @@
-import App from "next/app";
+import type { AppProps, AppType } from "next/app";
 import Head from "next/head";
 
 import { SEOBase, Favicons } from "~/components";
-import { Provider } from "~/context";
+import { Provider, type ColorModeContext } from "~/context";
 import { usePageTracking } from "~/hooks";
 import { SiteLayout } from "~/layouts";
-import {
-  configQuery,
-  themeQuery,
-  docsGroupsQuery,
-  footerGroupsQuery,
-  actionsQuery,
-} from "~/queries";
 
-import type { SiteProps, NextApp, GetInitialPropsReturn } from "~/types";
+import type { GetServerSideProps } from "next";
+import type { PageProps } from "~/types";
 
-const Site: NextApp<SiteProps> = (props: GetInitialPropsReturn<SiteProps>) => {
-  const { Component, pageProps, appProps } = props;
-  const { config, theme, footerGroups, actions, docsGroups } = appProps;
+const Site: AppType<PageProps> = (props: AppProps<PageProps>) => {
+  const { Component, pageProps } = props;
+  const { config, theme, footerGroups, actions, docsGroups } = pageProps.common;
 
   usePageTracking();
 
@@ -41,35 +35,13 @@ const Site: NextApp<SiteProps> = (props: GetInitialPropsReturn<SiteProps>) => {
   );
 };
 
-Site.getInitialProps = async ctx => {
-  try {
-    const config = await configQuery();
-    const docsGroups = await docsGroupsQuery();
-    const theme = await themeQuery();
-    const footerGroups = await footerGroupsQuery();
-    const actions = await actionsQuery();
-
-    const defaultProps = await App.getInitialProps(ctx);
-
-    return {
-      ...defaultProps,
-      appProps: {
-        theme,
-        config,
-        footerGroups,
-        actions,
-        docsGroups,
-      },
-    };
-  } catch (err) {
-    console.error(err);
-    if (err instanceof Error) {
-      throw new Error(`Error while loading app configuration: ${err.message}`);
-    }
-    throw err;
-  }
+export const getServerSideProps: GetServerSideProps<ColorModeContext> = async ctx => {
+  return {
+    props: {
+      // First time users will not have any cookies, so an empty string is required.
+      cookies: ctx.req.headers.cookie ?? "",
+    },
+  };
 };
-
-export { getServerSideProps } from "~/context";
 
 export default Site;

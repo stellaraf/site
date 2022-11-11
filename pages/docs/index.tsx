@@ -6,7 +6,7 @@ import { useTitleCase } from "use-title-case";
 import { DocsGroups, SEO, RichText } from "~/components";
 import { useScaledText } from "~/hooks";
 import { DocsLayout } from "~/layouts";
-import { pageQuery } from "~/queries";
+import { pageQuery, commonStaticPropsQuery } from "~/queries";
 
 import type { GetStaticProps, NextPage } from "next";
 import type { PageProps } from "~/types";
@@ -62,7 +62,8 @@ const Docs: NextPage<PageProps> = props => {
 export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
   const preview = ctx?.preview ?? false;
   const page = await pageQuery({ slug: "docs" });
-  return { props: { ...page, preview } };
+  const common = await commonStaticPropsQuery();
+  return { props: { ...page, preview, common } };
 };
 
 export default Docs;

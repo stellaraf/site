@@ -1,6 +1,6 @@
 import { SEO, DocsArticle, IPRanges } from "~/components";
 import { DocsLayout } from "~/layouts";
-import { docsPageQuery } from "~/queries";
+import { docsPageQuery, commonStaticPropsQuery } from "~/queries";
 
 import type { GetStaticProps } from "next";
 import type { DocsPage } from "~/queries";
@@ -27,7 +27,8 @@ const DocsArticlePage = (props: DocsPage) => {
 export const getStaticProps: GetStaticProps<DocsPage, UrlQuery> = async ctx => {
   const preview = ctx?.preview ?? false;
   const page = await docsPageQuery({ slug: "ip-ranges" });
-  return { props: { ...page, preview } };
+  const common = await commonStaticPropsQuery();
+  return { props: { ...page, preview, common } };
 };
 
 export default DocsArticlePage;

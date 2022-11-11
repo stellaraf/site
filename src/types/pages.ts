@@ -3,14 +3,15 @@ import type { AppProps, AppInitialProps, AppContext } from "next/app";
 import type { NextPageContext } from "next";
 import type {
   Actions,
-  Config,
-  DocsGroups,
-  FooterGroups,
   CloudLocations,
-  Page,
-  Employees,
+  Config,
   ContactForms,
+  DocsGroups,
   DocsPage,
+  Employees,
+  FooterGroups,
+  HomePage,
+  Page,
 } from "~/queries";
 import type { ThemeConfig } from "~/theme";
 
@@ -32,11 +33,29 @@ interface WithError {
   error?: string;
 }
 
-export type PageProps = Page & WithError;
+export type PageProps = Page & WithError & WithPreview & WithCommonPageProps;
 
-export type DocsPageProps = DocsPage & WithError;
+export type DocsPageProps = DocsPage & WithPreview & WithError & WithCommonPageProps;
+
+export type HomePageProps = HomePage & WithPreview & WithError & WithCommonPageProps;
 
 export interface SiteProps {
+  actions: Actions;
+  config: Config;
+  docsGroups: DocsGroups;
+  footerGroups: FooterGroups;
+  theme: ThemeConfig;
+}
+
+interface WithPreview {
+  preview: boolean;
+}
+
+interface WithCommonPageProps {
+  common: CommonPageProps;
+}
+
+export interface CommonPageProps {
   actions: Actions;
   config: Config;
   docsGroups: DocsGroups;

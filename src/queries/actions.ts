@@ -1,8 +1,8 @@
 import { is } from "~/lib";
 import { ThemeColor, type ActionsQuery, type ActionsQueryVariables } from "~/types";
 
-import query from "./actions.gql";
 import { queryFn } from "./base";
+import query from "./gql/actions.gql";
 
 export type Actions = NonNullable<PropOf<ActionsQuery, "pageContents">>;
 

@@ -1,7 +1,7 @@
 import { is } from "~/lib";
 
 import { queryFn } from "./base";
-import query from "./home-page.gql";
+import query from "./gql/home-page.gql";
 
 import type { HomePageQuery, HomePageQueryVariables } from "~/types";
 

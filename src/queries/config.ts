@@ -1,7 +1,7 @@
 import { is } from "~/lib";
 
 import { queryFn } from "./base";
-import query from "./config.gql";
+import query from "./gql/config.gql";
 
 import type { ConfigQuery, ConfigQueryVariables } from "~/types";
 

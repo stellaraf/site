@@ -1,7 +1,7 @@
 import { is } from "~/lib";
 
 import { queryFn } from "./base";
-import query from "./theme.gql";
+import query from "./gql/theme.gql";
 
 import type { ThemeConfig } from "~/theme";
 import type { ThemeQuery, ThemeQueryVariables } from "~/types";

@@ -1,0 +1,5 @@
+query docsGroupStaticPaths {
+  docsGroups(first: 100) {
+    slug
+  }
+}

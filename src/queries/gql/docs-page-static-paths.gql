@@ -1,0 +1,5 @@
+query docsPageStaticPaths($group: String) {
+  docsPages(first: 100, where: { docsGroup: { slug: $group } }) {
+    slug
+  }
+}

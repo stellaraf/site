@@ -1,0 +1,5 @@
+query staticPathsExact {
+  pages(first: 100, where: { slug_not_contains: "/" }) {
+    slug
+  }
+}

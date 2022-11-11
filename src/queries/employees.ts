@@ -1,7 +1,7 @@
 import { is } from "~/lib";
 
 import { queryFn } from "./base";
-import query from "./employees.gql";
+import query from "./gql/employees.gql";
 
 import type { EmployeesQuery, EmployeesQueryVariables } from "~/types";
 
