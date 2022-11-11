@@ -9,7 +9,7 @@ export const SEOBase = (props: DefaultSeoProps) => {
 
   let indexFollow = {} as NextSeoProps;
   let urlPrefix = "https://stellar.tech";
-  if (process.env.GIT_BRANCH === "develop") {
+  if (process.env.VERCEL_ENV === "preview") {
     // Ensure noindex/nofollow are set for preview site.
     indexFollow = { nofollow: true, noindex: true };
     urlPrefix = "https://preview.stellar.tech";
