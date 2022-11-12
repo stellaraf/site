@@ -12,6 +12,7 @@
       "~/layouts": ["./src/layouts/index"],
       "~/lib": ["./lib/index"],
       "~/lib/api": ["./lib/api/index"],
+      "~/lib/server": ["./lib/server/index"],
       "~/queries": ["./src/queries/index"],
       "~/theme": ["./src/theme/index"],
       "~/types": ["./src/types/index"]

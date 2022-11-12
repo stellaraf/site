@@ -1,7 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { is, findProjectRoot } from "~/lib";
+import { is } from "~/lib";
+import { findProjectRoot } from "~/lib/server";
 
 import { queryFn } from "../base";
 import query from "../gql/page-static-paths-exact.gql";
