@@ -1,7 +1,7 @@
 # Ignore everything in this directory
 *
-# Except this file
+# Except these files
 !.gitignore
-!opengraph*
+!*.ttf
 !robots.txt
 !logos

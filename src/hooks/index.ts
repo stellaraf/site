@@ -10,6 +10,7 @@ export * from "./use-image-src";
 export * from "./use-key-sequence";
 export * from "./use-konami";
 export * from "./use-link-type";
+export * from "./use-location";
 export * from "./use-mobile";
 export * from "./use-nav-logo";
 export * from "./use-opposing-color";

@@ -17,6 +17,7 @@
     "@react-google-maps/api": "^2.13.1",
     "@stellaraf/logo": "^0.3.3",
     "@tanstack/react-query": "^4.10.1",
+    "@vercel/og": "^0.0.20",
     "color2k": "2.0.0",
     "dayjs": "^1.11.6",
     "dot-prop": "^7.2.0",
