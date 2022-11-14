@@ -1,0 +1,9 @@
+query twitterHandle($title: String) {
+  configuration(where: { title: $title }) {
+    id
+    socialLinks(where: { href_contains: "twitter" }) {
+      id
+      href
+    }
+  }
+}

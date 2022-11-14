@@ -42,3 +42,5 @@ export * from "./static-paths";
 export * from "./static-props";
 
 export { default as themeQuery, type Theme } from "./theme";
+
+export { default as twitterHandleQuery } from "./twitter-handle";

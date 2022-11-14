@@ -1,4 +1,4 @@
-import { ContentSection, Hero, SEO, Callout, Testimonials } from "~/components";
+import { ContentSection, Hero, Callout, Testimonials } from "~/components";
 import { pageQuery, commonStaticPropsQuery, pageStaticPathsExactQuery } from "~/queries";
 
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
@@ -13,7 +13,6 @@ const DynamicPage: NextPage<PageProps> = props => {
 
   return (
     <>
-      <SEO title={title} description={subtitle ?? undefined} />
       <Hero title={title} subtitle={subtitle} body={body} />
       {contents.map((sect, i) => {
         return <ContentSection content={sect} key={sect.title} index={i} />;

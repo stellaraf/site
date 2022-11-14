@@ -26,6 +26,7 @@ const config = {
     });
     return config;
   },
+  productionBrowserSourceMaps: true,
   reactStrictMode: true,
   poweredByHeader: false,
   swcMinify: true,

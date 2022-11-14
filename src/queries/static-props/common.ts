@@ -4,6 +4,7 @@ import {
   docsGroupsQuery,
   footerGroupsQuery,
   actionsQuery,
+  twitterHandleQuery,
 } from "~/queries";
 
 import type { CommonPageProps } from "~/types";
@@ -14,5 +15,6 @@ export async function commonStaticPropsQuery(): Promise<CommonPageProps> {
   const docsGroups = await docsGroupsQuery();
   const footerGroups = await footerGroupsQuery();
   const theme = await themeQuery();
-  return { actions, config, docsGroups, footerGroups, theme };
+  const twitterHandle = await twitterHandleQuery({ title: "Stellar" });
+  return { actions, config, docsGroups, footerGroups, theme, twitterHandle };
 }

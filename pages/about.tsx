@@ -1,7 +1,7 @@
 import { Box, type BoxProps, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { EmployeeGrid, Hero, GoogleMap, SEO, Callout, Testimonials } from "~/components";
+import { EmployeeGrid, Hero, GoogleMap, Callout, Testimonials } from "~/components";
 import { useResponsiveStyle } from "~/hooks";
 import { pageQuery, employeesQuery, commonStaticPropsQuery } from "~/queries";
 
@@ -32,7 +32,6 @@ const About: NextPage<AboutPageProps> = props => {
 
   return (
     <>
-      <SEO title={title} description={subtitle ?? undefined} />
       <Hero title={title} subtitle={subtitle} body={body} />
       <Section title={employeesSection.title}>
         <EmployeeGrid employees={employees} />

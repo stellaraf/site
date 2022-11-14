@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Flex, Heading, Spinner } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { DocsGroups, SEO, RichText } from "~/components";
+import { DocsGroups, RichText } from "~/components";
 import { useScaledText } from "~/hooks";
 import { DocsLayout } from "~/layouts";
 import { pageQuery, commonStaticPropsQuery } from "~/queries";
@@ -47,15 +47,11 @@ const Docs: NextPage<PageProps> = props => {
       </DocsLayout>
     );
   }
-  const { title, subtitle } = props;
   return (
-    <>
-      <SEO title={title} description={subtitle ? subtitle : undefined} />
-      <DocsLayout>
-        <TextContent {...props} />
-        <DocsGroups />
-      </DocsLayout>
-    </>
+    <DocsLayout>
+      <TextContent {...props} />
+      <DocsGroups />
+    </DocsLayout>
   );
 };
 

@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 
 import { Button, Wrap } from "@chakra-ui/react";
 
-import { ContentSection, Hero, SEO, useDataCenter, Callout, Testimonials } from "~/components";
+import { ContentSection, Hero, useDataCenter, Callout, Testimonials } from "~/components";
 import { useColorTokenValue, CloudLocationsProvider } from "~/context";
 import { useAlert } from "~/hooks";
 import { is } from "~/lib";
@@ -44,7 +44,6 @@ const Cloud: NextPage<CloudPageProps> = props => {
 
   return (
     <>
-      <SEO title={title} description={subtitle ?? undefined} />
       <CloudLocationsProvider value={locations}>
         <Content title={title} subtitle={subtitle} body={body}>
           <USMap

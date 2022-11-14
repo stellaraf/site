@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import { useTitleCase } from "use-title-case";
 
-import { SEO, ContentSection } from "~/components";
+import { ContentSection } from "~/components";
 import { FallbackLayout } from "~/layouts";
 import { pageQuery, commonStaticPropsQuery, pageStaticPathsQuery } from "~/queries";
 
@@ -22,12 +21,10 @@ const LegalPage: NextPage<PageProps> = props => {
       </FallbackLayout>
     );
   }
-  const { title, subtitle, contents } = props;
-  const fnTitle = useTitleCase();
+  const { contents } = props;
 
   return (
     <>
-      <SEO title={fnTitle(title)} description={subtitle ? subtitle : undefined} />
       <Box minH="10vh" />
       {contents.map((sect, i) => {
         return <ContentSection index={i} content={sect} key={sect.title} />;

@@ -1,6 +1,6 @@
 import { Box, Flex, Button as ChakraButton, Heading, VStack } from "@chakra-ui/react";
 
-import { Content, DynamicIcon, Hero, FormCardGroup, SEO, Callout } from "~/components";
+import { Content, DynamicIcon, Hero, FormCardGroup, Callout } from "~/components";
 import { useSlug, useResponsiveStyle } from "~/hooks";
 import { is } from "~/lib";
 import { contactFormsQuery, pageQuery, commonStaticPropsQuery } from "~/queries";
@@ -9,7 +9,7 @@ import type { GetStaticProps, NextPage } from "next";
 import type { ContactPageProps } from "~/types";
 
 const Contact: NextPage<ContactPageProps> = props => {
-  const { title, subtitle, body, contents, callout, footerTitle, contactForms } = props;
+  const { title, subtitle, body, contents, callout, contactForms } = props;
 
   const rStyles = useResponsiveStyle();
   const content = contents[0];
@@ -17,7 +17,6 @@ const Contact: NextPage<ContactPageProps> = props => {
 
   return (
     <>
-      <SEO title={footerTitle ?? title} description={subtitle ?? undefined} />
       <Hero title={title} subtitle={subtitle} body={body} minH="40vh">
         <Box as="section" py={{ base: 16, lg: 32 }}>
           <Flex height="100%" align="center" direction="column" {...rStyles}>

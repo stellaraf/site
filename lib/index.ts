@@ -5,3 +5,4 @@ export * from "./hygraph";
 export * from "./next";
 export * from "./react";
 export * from "./type-guards";
+export * from "./type-manipulation";

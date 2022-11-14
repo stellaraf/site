@@ -34,18 +34,11 @@ const PartnerPage: NextPage<PageProps> = props => {
     );
   }
 
-  const { title, subtitle } = props;
-
-  if (typeof title === "undefined") {
+  if (typeof props.title === "undefined") {
     return <NextError statusCode={400} />;
   }
 
-  return (
-    <>
-      <SEO title={title} description={subtitle ?? undefined} />
-      <PartnerLayout {...props} />
-    </>
-  );
+  return <PartnerLayout {...props} />;
 };
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {

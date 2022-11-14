@@ -1,4 +1,4 @@
-import { ContentSection, Hero, SEO, Callout, Testimonials } from "~/components";
+import { ContentSection, Hero, Callout, Testimonials } from "~/components";
 import { FallbackLayout } from "~/layouts";
 import { pageQuery, commonStaticPropsQuery, pageStaticPathsQuery } from "~/queries";
 
@@ -24,7 +24,6 @@ const SecurityPage: NextPage<PageProps> = props => {
 
   return (
     <>
-      <SEO title={title} description={subtitle ?? undefined} />
       <Hero title={title} subtitle={subtitle} body={body} />
       {contents.map((sect, i) => {
         return <ContentSection content={sect} key={sect.title} index={i} />;
