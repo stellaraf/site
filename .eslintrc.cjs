@@ -30,7 +30,13 @@ const config = {
       typescript: {},
     },
   },
-  ignorePatterns: ["node_modules", "next.config.mjs", "generate-favicons.ts", "remix.config.mjs"],
+  ignorePatterns: [
+    "node_modules",
+    "next.config.mjs",
+    "generate-favicons.ts",
+    "remix.config.mjs",
+    "middleware.ts",
+  ],
   rules: {
     "import/prefer-default-export": "off",
     "import/no-unused-modules": [

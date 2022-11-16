@@ -9,7 +9,7 @@ import { Favicons } from "~/components";
 import { Provider } from "~/context";
 import { usePageTracking } from "~/hooks";
 import { SiteLayout } from "~/layouts";
-import { serializeUrl } from "~/lib";
+import { serializeUrl, parseCookie } from "~/lib";
 
 import type { PageProps } from "~/types";
 
@@ -20,12 +20,17 @@ interface SiteProps extends AppProps<PageProps> {
 const noIndexNoFollow = process.env.VERCEL_ENV !== "production";
 
 const Site = (props: SiteProps) => {
-  const { Component, pageProps, requestUrl } = props;
+  const {
+    Component,
+    pageProps,
+    requestUrl,
+    router: { pathname },
+  } = props;
   const { common, title: pageTitle, subtitle, footerTitle } = pageProps;
   const { config, theme, footerGroups, actions, docsGroups, twitterHandle } = common;
   const { organizationName, title, description } = config;
 
-  const { origin = "", pathname = "", href = "" } = requestUrl ?? {};
+  const { origin = "" } = requestUrl ?? {};
   const useFallback = pathname === "/" || typeof title !== "string";
 
   const imageUrl = useFallback
@@ -51,7 +56,7 @@ const Site = (props: SiteProps) => {
         additionalMetaTags={[{ name: "viewport", content: "width=device-width" }]}
         openGraph={{
           title,
-          url: href,
+          url: origin + pathname,
           description,
           type: "website",
           images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
@@ -75,9 +80,14 @@ const Site = (props: SiteProps) => {
 
 Site.getInitialProps = async (appCtx: AppContext) => {
   const initialProps: AppInitialProps<PageProps> = await App.getInitialProps(appCtx);
-  const referrerHeader = appCtx.ctx.req?.headers.referer ?? "";
+  // const referrerHeader = appCtx.ctx.req?.headers.referer ?? "";
+  // appCtx.ctx.req?.headers.cookie
   try {
-    const requestUrl = serializeUrl(new URL(referrerHeader));
+    const { __origin: origin } = parseCookie(appCtx.ctx.req?.headers.cookie ?? "");
+    if (typeof origin !== "string") {
+      throw new TypeError("origin header value must be a string");
+    }
+    const requestUrl = serializeUrl(new URL(origin));
     return { requestUrl, ...initialProps };
   } catch (error) {
     console.group("Failed to parse referrer URL");

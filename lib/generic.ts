@@ -196,3 +196,30 @@ export async function messageFromResponseOrError(response: Error | Response): Pr
   }
   return message;
 }
+
+export function parseCookie(
+  value: string,
+): Record<string, string | undefined | null | number | boolean> {
+  return value
+    .split(";")
+    .map(pair => pair.split("="))
+    .reduce<Record<string, string | undefined | null | number | boolean>>((final, [k, v]) => {
+      const key = decodeURIComponent(k.trim());
+      let value: string | string | undefined | null | number | boolean = decodeURIComponent(
+        v.trim(),
+      );
+      if (value === "" || value.toLowerCase() === "undefined") {
+        value = undefined;
+      } else if (value.toLowerCase() === "null") {
+        value = null;
+      } else if (value.toLowerCase() === "false") {
+        value = false;
+      } else if (value.toLowerCase() === "true") {
+        value = true;
+      } else if (value.match(/^[0-9]+$/)) {
+        value = parseInt(value);
+      }
+      final[key] = value;
+      return final;
+    }, {});
+}

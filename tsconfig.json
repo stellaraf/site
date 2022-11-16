@@ -32,6 +32,7 @@
   },
   "exclude": ["node_modules", ".next", ".husky", "dist", "public", "generate-favicons.ts"],
   "include": [
+    "middleware.ts",
     "next.config.mjs",
     ".eslintrc.*",
     "next-env.d.ts",
