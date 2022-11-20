@@ -12,7 +12,7 @@ export function isValidJsonRequest(request: NextApiRequest): request is ValidJso
 }
 
 export function originFromEnv(env: NodeJS.ProcessEnv): URL {
-  let vercel_env = env.VERCEL_ENV ?? "development";
+  let vercel_env = env.NEXT_PUBLIC_VERCEL_ENV ?? "development";
   vercel_env = vercel_env.replace(/[^a-zA-Z0-9-]/g, "").toLowerCase();
   if (!["production", "development"].includes(vercel_env)) {
     return new URL(`https://${vercel_env}.stellar.tech`);

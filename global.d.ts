@@ -32,9 +32,10 @@ declare module "*.gql" {
 declare namespace NodeJS {
   // eslint-disable-next-line import/no-unused-modules
   export interface ProcessEnv {
-    SFDC_ORG_ID: string;
-    VERCEL_ENV: string;
     CPM_API_KEY: string;
     CPM_LIST_ID: string;
+    NEXT_PUBLIC_VERCEL_ENV: string;
+    SFDC_ORG_ID: string;
+    VERCEL_ENV: string;
   }
 }
