@@ -30,7 +30,7 @@ const Site = (props: AppProps<PageProps>) => {
     : new URL(
         queryString.stringifyUrl({
           url: new URL("/api/og/page", origin).toString(),
-          query: { title, subtitle: description },
+          query: { title: pageTitle, subtitle: subtitle ?? description },
         }),
       );
 
