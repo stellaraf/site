@@ -62,6 +62,7 @@ export interface CommonPageProps {
   footerGroups: FooterGroups;
   theme: ThemeConfig;
   twitterHandle: string;
+  origin: string;
 }
 
 export interface CloudPageProps extends PageProps {

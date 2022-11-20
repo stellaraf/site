@@ -1,3 +1,4 @@
+import { originFromEnv } from "~/lib";
 import {
   configQuery,
   themeQuery,
@@ -16,5 +17,7 @@ export async function commonStaticPropsQuery(): Promise<CommonPageProps> {
   const footerGroups = await footerGroupsQuery();
   const theme = await themeQuery();
   const twitterHandle = await twitterHandleQuery({ title: "Stellar" });
-  return { actions, config, docsGroups, footerGroups, theme, twitterHandle };
+  const originUrl = originFromEnv(process.env);
+  const origin = originUrl.toString();
+  return { actions, config, docsGroups, footerGroups, theme, twitterHandle, origin };
 }
