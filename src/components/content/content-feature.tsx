@@ -5,9 +5,9 @@ import { Button, Icon, RichText } from "~/components";
 import { useColorValue } from "~/context";
 import { is } from "~/lib";
 
-import type { ContentSubSectionProps } from "./types";
+import type { ContentFeatureProps } from "./types";
 
-export const ContentSubSection = (props: ContentSubSectionProps) => {
+export const ContentFeature = (props: ContentFeatureProps) => {
   const { title, body, icon, iconColor, button } = props;
 
   const fnTitle = useTitleCase();

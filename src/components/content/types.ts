@@ -10,9 +10,9 @@ export interface ContentSubtitleProps extends HeadingProps {
   children: string;
 }
 
-export interface ContentSubSectionProps extends Feature {}
+export interface ContentFeatureProps extends Feature {}
 
-export interface SubSectionGroupProps extends GridProps {
+export interface ContentFeatureGridProps extends GridProps {
   features: Feature[];
 }
 

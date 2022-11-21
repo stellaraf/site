@@ -8,9 +8,9 @@ import { useMobile, useResponsiveStyle } from "~/hooks";
 import { is } from "~/lib";
 
 import { ContentBody } from "./content-body";
+import { ContentFeatureGrid } from "./content-feature-grid";
 import { ContentForm } from "./content-form";
 import { ContentImage } from "./content-image";
-import { ContentSubSections } from "./content-subsections";
 import { ContentSubtitle } from "./content-subtitle";
 import { ContentTitle } from "./content-title";
 import { ContentUpdatedAt } from "./content-updated-at";
@@ -113,7 +113,7 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
               <RichText content={body} />
             </ContentBody>
           )}
-          <ContentSubSections features={features} />
+          <ContentFeatureGrid features={features} />
           {is(vendorLogo) && (
             <VStack w="100%" alignItems={{ base: "center", lg: "flex-start" }} spacing={4}>
               <Heading as="h3" fontSize="sm" opacity={0.8}>
