@@ -30,7 +30,10 @@ export const Icon = (props: IconProps) => {
     return final;
   }, {} as ChakraProps);
 
-  const bg = useColorValue(`${bgColor}.500`, `${bgColor}.300`);
+  const bg = useColorValue(
+    bgColor === "black" ? "black" : bgColor === "white" ? "whiteAlpha.500" : `${bgColor}.500`,
+    bgColor === "black" ? "white" : bgColor === "white" ? "white" : `${bgColor}.300`,
+  );
   const color = useOpposingColor(bg);
 
   const fromUrl = useMemo<boolean>(() => {
