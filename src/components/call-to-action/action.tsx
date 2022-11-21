@@ -38,10 +38,25 @@ export const Action = (props: ArrayElement<Actions>) => {
       >
         <Card width={{ base: "20rem", md: "18rem", xl: "sm" }} maxHeight={64} zIndex={1}>
           <CardBody spacing={4} textAlign="left" alignItems="flex-start">
-            <Flex align="center" justify="space-between" width="100%">
-              <Heading fontSize={{ base: "md", md: "md" }} maxW="80%" whiteSpace="pre-wrap">
-                {titleMe(title)}
-              </Heading>
+            <Flex align="flex-start" justify="space-between" width="100%">
+              <Flex flexDir="column" maxW="80%">
+                <Heading fontSize={{ base: "md", md: "md" }} whiteSpace="pre-wrap">
+                  {titleMe(title)}
+                </Heading>
+                {is(page) && (
+                  <Heading
+                    as="h6"
+                    maxW="80%"
+                    fontSize="xs"
+                    opacity={0.5}
+                    fontWeight="normal"
+                    whiteSpace="pre-wrap"
+                  >
+                    {page.title}
+                  </Heading>
+                )}
+              </Flex>
+
               {is(callToAction.icon) && (
                 <Icon
                   size={12}
@@ -51,9 +66,11 @@ export const Action = (props: ArrayElement<Actions>) => {
                 />
               )}
             </Flex>
-            <Heading as="h4" fontSize="sm" fontWeight="light" whiteSpace="pre-wrap">
-              {subtitle}
-            </Heading>
+            {is(subtitle) && (
+              <Heading as="h4" fontSize="sm" fontWeight="light" whiteSpace="pre-wrap">
+                {subtitle}
+              </Heading>
+            )}
             <Box
               fontSize="sm"
               fontWeight="normal"

@@ -21,6 +21,7 @@ query actions {
     }
     page {
       slug
+      title
       body {
         raw
       }
