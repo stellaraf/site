@@ -46,7 +46,7 @@ const colorModeMap: ColorModeMap = {
 
 const modes: Array<keyof ColorModeMap> = ["light", "dark"];
 
-export default async function generate() {
+async function generate() {
   const images = new Set();
   for (const mode of modes) {
     const [source, config] = colorModeMap[mode];
@@ -66,3 +66,5 @@ export default async function generate() {
     }
   }
 }
+
+generate();
