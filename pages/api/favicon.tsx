@@ -1,6 +1,6 @@
 import { ImageResponse, type ImageResponseOptions } from "@vercel/og";
 
-import { faviconDimensions } from "~/lib/server";
+import { faviconDimensions } from "~/lib/edge";
 
 import type { NextApiRequest, NextApiResponse } from "next";
 

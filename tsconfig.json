@@ -13,6 +13,7 @@
       "~/lib": ["./lib/index"],
       "~/lib/api": ["./lib/api/index"],
       "~/lib/server": ["./lib/server/index"],
+      "~/lib/edge": ["./lib/edge/index"],
       "~/queries": ["./src/queries/index"],
       "~/theme": ["./src/theme/index"],
       "~/types": ["./src/types/index"]
