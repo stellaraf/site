@@ -46,31 +46,27 @@ export const Favicons = (props: FaviconsProps) => {
       rel: "icon",
       type: "image/png",
       sizes: `${s}x${s}`,
-      href: `/logos/${colorMode}/favicon-${s}x${s}.png`,
+      href: `/api/favicon?m=${colorMode}&w=${s}&h=${s}&a=true`,
     })),
     ...[57, 60, 72, 76, 120, 144, 152, 167, 180, 1024].map(s => ({
       rel: "apple-touch-icon",
       sizes: `${s}x${s}`,
-      href: `/logos/${colorMode}/apple-touch-icon-${s}x${s}.png`,
+      href: `/api/favicon?m=${colorMode}&w=${s}&h=${s}&a=false`,
     })),
     ...appleStartup.map(
       ([deviceWidth, deviceHeight, webkitRatio, orientation, resWidth, resHeight]) => ({
         rel: "apple-touch-startup-image",
         media: `(device-width: ${deviceWidth}px) and (device-height: ${deviceHeight}px) and (-webkit-device-pixel-ratio: ${webkitRatio}) and (orientation: ${orientation})`,
-        href: `/logos/${colorMode}/apple-touch-startup-image-${resWidth}x${resHeight}.png`,
+        href: `/api/favicon?m=${colorMode}&w=${resWidth}&h=${resHeight}&a=false`,
       }),
     ),
-    { rel: "shortcut icon", href: `/logos/${colorMode}/favicon.ico` },
-    { rel: "manifest", href: `/logos/${colorMode}/manifest.json` },
+    { rel: "shortcut icon", href: `/favicon-${colorMode}.ico` },
+    { rel: "manifest", href: `/site.webmanifest` },
     {
       rel: "icon",
       type: "image/png",
       sizes: "228x228",
-      href: `/logos/${colorMode}/coast-228x228.png`,
-    },
-    {
-      rel: "yandex-tableau-widget",
-      href: `/logos/${colorMode}/yandex-browser-manifest.json`,
+      href: `/api/favicon?m=${colorMode}&w=228&h=228&a=false`,
     },
   ];
 
@@ -82,8 +78,7 @@ export const Favicons = (props: FaviconsProps) => {
     { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
     { name: "apple-mobile-web-app-title", content: organizationName },
     { name: "msapplication-TileColor", content: "#fff" },
-    { name: "msapplication-TileImage", content: `/logos/${colorMode}/mstile-144x144.png` },
-    { name: "msapplication-config", content: `/logos/${colorMode}/browserconfig.xml` },
+    { name: "msapplication-TileImage", content: `/api/favicon?m=${colorMode}&w=144&h=144&a=true` },
   ];
 
   return <NextSeo additionalLinkTags={linkTags} additionalMetaTags={metaTags} />;

@@ -1,7 +1,0 @@
-# Ignore everything in this directory
-*
-# Except these files
-!.gitignore
-!*.ttf
-!robots.txt
-!logos
