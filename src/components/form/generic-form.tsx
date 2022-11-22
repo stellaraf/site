@@ -89,8 +89,8 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
               if (isCheckboxField(field)) {
                 return (
                   <CheckboxField<Schema>
-                    key={field.formId}
                     field={field}
+                    key={field.formId}
                     name={field.formId}
                     isMulti={field.multiple}
                     label={field.displayName}
@@ -103,25 +103,25 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
               if (isSelectField(field)) {
                 return (
                   <SelectField
-                    key={field.formId}
-                    field={field}
                     width="100%"
+                    field={field}
+                    key={field.formId}
                     name={field.formId}
                     isMulti={field.multiple}
                     required={field.required}
-                    menuPortalTarget={typeof document !== "undefined" ? document.body : undefined}
                     placeholder={field.displayName}
                     opts={field.options.map(opt => ({ value: opt, label: opt }))}
+                    menuPortalTarget={typeof document !== "undefined" ? document.body : undefined}
                   />
                 );
               }
               if (isTextAreaField(field)) {
                 return (
                   <TextArea<Schema>
-                    key={field.formId}
                     field={field}
-                    name={field.formId}
                     defaultValue=""
+                    key={field.formId}
+                    name={field.formId}
                     isRequired={field.required}
                     placeholder={field.displayName}
                   />
@@ -130,9 +130,9 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
               if (isTextInputField(field)) {
                 return (
                   <TextInput<Schema>
-                    key={field.formId}
                     field={field}
                     defaultValue=""
+                    key={field.formId}
                     name={field.formId}
                     isRequired={field.required}
                     placeholder={field.displayName}
@@ -147,9 +147,10 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
           <FieldGroup justifyContent="center" p={2} {...fieldGroupProps}>
             <Button
               w="100%"
-              maxW={{ lg: "50%" }}
               type="submit"
+              maxW={{ lg: "50%" }}
               colorScheme={colorScheme}
+              isLoading={form.formState.isSubmitting}
               variant={button.variant ? button.variant : "outline"}
               {...buttonProps}
             >

@@ -89,11 +89,13 @@ export async function handleSalesForm(request: NextApiRequest): Promise<Response
       formData.debugEmail = "matt@stellar.tech";
     }
 
+    console.log({ formData });
+
     const url = queryString.stringifyUrl({
       url: "https://webto.salesforce.com/servlet/servlet.WebToLead",
       query: formData,
     });
-    return fetch(url, {
+    return await fetch(url, {
       method: "POST",
     });
   }

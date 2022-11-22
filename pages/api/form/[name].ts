@@ -38,6 +38,8 @@ const handler: NextApiHandler = async (request, response) => {
     }
     const result = await handler(request);
     if (result.ok) {
+      const body = await result.text();
+      console.log({ status: result.status, body });
       return response.status(201).send(null);
     } else {
       const error = await result.json();
