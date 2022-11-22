@@ -3,8 +3,6 @@ import {
   useRef,
 } from "react";
 
-import { useRouter } from "next/router";
-
 import {
   // Button as ChakraButton,
   Center,
@@ -15,7 +13,6 @@ import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useTitleCase } from "use-title-case";
 
 import { Button, Icon, type FormSubmitRef } from "~/components";
-import { useGoogleAnalytics } from "~/hooks";
 
 import { useContactFormCtx } from "../context";
 import { FormCard, FormCardBody } from "../form-card";
@@ -36,8 +33,6 @@ export const MFormCardGroup = () => {
   const cards = useContactFormCtx();
   const formState = useContactForm();
   const titleMe = useTitleCase();
-  const { pathname } = useRouter();
-  const { trackModal } = useGoogleAnalytics();
 
   const formSizes = { minHeight: "48rem", height: "100%" };
 
@@ -45,7 +40,7 @@ export const MFormCardGroup = () => {
 
   // If valid query parameters are passed in the URL, e.g. /contact?form=sales or
   // /contact?form=support, automatically load the corresponding form.
-  useFormQuery({ cards, setSelected: formState.setSelected, toggleLayout: onToggle, trackModal });
+  useFormQuery({ cards, setSelected: formState.setSelected, toggleLayout: onToggle });
 
   return (
     <Container minH="3xl" zIndex={1} spacing={12} align="stretch" direction="column">
@@ -79,7 +74,6 @@ export const MFormCardGroup = () => {
               event.preventDefault();
               formState.setSelected(title);
               onToggle();
-              trackModal(`${pathname}/form-${title.replace(/\s/gi, "-").toLowerCase()}`);
             }
           };
 

@@ -2,7 +2,6 @@ import { useId } from "react";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { useGoogleAnalytics } from "~/hooks";
 import { fetchWithTimeout } from "~/lib";
 
 import { useCloudMeasurements } from "./use-cloud-measurements";
@@ -129,8 +128,6 @@ async function queryAll(
 export function useDataCenter(): UseDataCenterReturn {
   const { measurements, reset, updateMeasurement } = useCloudMeasurements();
 
-  const { trackEvent } = useGoogleAnalytics();
-
   const queryId = useId();
 
   const queryKey = [queryId, ...measurements.map(m => m.identifier)];
@@ -149,7 +146,6 @@ export function useDataCenter(): UseDataCenterReturn {
    * reset the 'best' properties to false, clear the cached response, and then refetch.
    */
   const execute = () => {
-    trackEvent("Data Center Locator", { event_category: "User" });
     reset();
     refetch();
   };

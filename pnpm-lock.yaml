@@ -29,7 +29,6 @@ specifiers:
   '@stellaraf/logo': ^0.3.3
   '@tanstack/react-query': ^4.10.1
   '@types/google.maps': ^3.50.2
-  '@types/gtag.js': ^0.0.8
   '@types/mousetrap': ^1.6.9
   '@types/node': ^18.8.2
   '@types/node-fetch': ^2.6.2
@@ -38,6 +37,7 @@ specifiers:
   '@types/ua-parser-js': ^0.7.36
   '@typescript-eslint/eslint-plugin': ^5.39.0
   '@typescript-eslint/parser': ^5.39.0
+  '@vercel/analytics': ^0.1.5
   '@vercel/og': ^0.0.20
   '@welldone-software/why-did-you-render': ^4.3.2
   color2k: 2.0.0
@@ -102,6 +102,7 @@ dependencies:
   '@react-google-maps/api': 2.13.1_biqbaboplfbrettd7655fr4n2y
   '@stellaraf/logo': 0.3.3_5xmkhvnjllbyj3a5q6oq7aeuji
   '@tanstack/react-query': 4.10.1_biqbaboplfbrettd7655fr4n2y
+  '@vercel/analytics': 0.1.5_react@18.2.0
   '@vercel/og': 0.0.20
   color2k: 2.0.0
   dayjs: 1.11.6
@@ -155,7 +156,6 @@ devDependencies:
   '@graphql-typed-document-node/core': 3.1.1_graphql@16.6.0
   '@next/bundle-analyzer': 9.5.5
   '@types/google.maps': 3.50.2
-  '@types/gtag.js': 0.0.8
   '@types/mousetrap': 1.6.9
   '@types/node': 18.8.2
   '@types/node-fetch': 2.6.2
@@ -3002,10 +3002,6 @@ packages:
     resolution: {integrity: sha512-F47YMR1sdAVYk6mWab1J9CyO8J5QnCl62QGx9i87cTB2VW5/j2V5b/qgpXTvtUCg91PffirYKiAXlff/XTp+Zw==}
     dev: true
 
-  /@types/gtag.js/0.0.8:
-    resolution: {integrity: sha512-xKDygydxruSUNkVbZWjiEbMijz9+xZCLb2yiTiQT88pm5EhIAUhaCo05IZF1HcQc90u4W7cp+7OZNpcJxpyL5g==}
-    dev: true
-
   /@types/js-cookie/2.2.7:
     resolution: {integrity: sha512-aLkWa0C0vO5b4Sr798E26QgOkss68Un0bLjs7u9qxzPT5CG+8DuNTffWES58YzJs3hrVAOs1wonycqEBqNJubA==}
     dev: false
@@ -3225,6 +3221,14 @@ packages:
       '@typescript-eslint/types': 5.39.0
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /@vercel/analytics/0.1.5_react@18.2.0:
+    resolution: {integrity: sha512-/k9N8Ea3Yc5A52GlkjzUEbi2vE/izClrOf++ryBkxEfrZM/OZwtHkdNw/QExZ1h/B67RCZLK7bCOnKKrhG7gTg==}
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@vercel/og/0.0.20:
     resolution: {integrity: sha512-089P+TfqWz0xBxjOvOhkZIDDtfrLcye94H4IZ+SqxoGPWpNGXaBvRJER/z5SoJxJRcCAL8tPiK5zdjRskM6tLw==}

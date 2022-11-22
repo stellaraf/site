@@ -4,7 +4,6 @@ export * from "./use-boolean-value";
 export * from "./use-breakpoint-string";
 export * from "./use-date";
 export * from "./use-glow";
-export * from "./use-google-analytics";
 export * from "./use-gradient";
 export * from "./use-image-src";
 export * from "./use-key-sequence";

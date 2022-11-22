@@ -7,7 +7,6 @@ import { motion, AnimatePresence, LayoutGroup, useCycle, type Variants } from "f
 import { useTitleCase } from "use-title-case";
 
 import { Button, Icon, type FormSubmitRef } from "~/components";
-import { useGoogleAnalytics } from "~/hooks";
 
 import { useContactFormCtx } from "../context";
 import { FormCard, FormCardBody } from "../form-card";
@@ -28,8 +27,7 @@ export const DFormCardGroup = () => {
   const cards = useContactFormCtx();
   const formState = useContactForm();
   const fnTitle = useTitleCase();
-  const { pathname, query } = useRouter();
-  const { trackModal } = useGoogleAnalytics();
+  const { query } = useRouter();
 
   // Static desktop sizes for cards layout
   const cardSizes = { width: "20rem", minHeight: "28rem" };
@@ -84,7 +82,6 @@ export const DFormCardGroup = () => {
       if (typeof match !== "undefined") {
         formState.setSelected(match.title);
         toggleLayout(1);
-        trackModal(`${pathname}/form-${match.title.toLowerCase().replace(/\s/gi, "-")}`);
       }
     }
   }, [query]);
@@ -128,7 +125,6 @@ export const DFormCardGroup = () => {
                 event.preventDefault();
                 formState.setSelected(title);
                 toggleLayout();
-                trackModal(`${pathname}/form-${title.replace(/\s/gi, "-").toLowerCase()}`);
               }
             },
             [isForm, title],

@@ -6,7 +6,7 @@ import { z } from "zod";
 
 import { CodeBlock, RichText, createSchema } from "~/components";
 import { useConfig } from "~/context";
-import { useGoogleAnalytics, useAlert } from "~/hooks";
+import { useAlert } from "~/hooks";
 import { is, submitForm, messageFromResponseOrError } from "~/lib";
 
 import { SubscribeField } from "./subscribe-field";
@@ -15,8 +15,6 @@ export const Subscribe = (props: StackProps) => {
   const { subscribe } = useConfig();
   const showAlert = useAlert();
   const fnTitle = useTitleCase();
-
-  const { trackEvent } = useGoogleAnalytics();
 
   const field = subscribe?.fields[0];
 
@@ -37,14 +35,12 @@ export const Subscribe = (props: StackProps) => {
 
     if (isError) {
       const message = await messageFromResponseOrError(res);
-      trackEvent("Error Subscribing to Newsletter", { event_category: "User" });
       return showAlert({
         message: <CodeBlock colorScheme="red">{message}</CodeBlock>,
         status: "error",
       });
     }
 
-    trackEvent("Subscribed to Newsletter", { event_category: "User" });
     showAlert({
       message: <RichText content={subscribe?.button.alert?.body} />,
       status: subscribe?.button.alert?.level ?? "success",
