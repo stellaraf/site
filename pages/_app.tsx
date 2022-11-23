@@ -9,17 +9,22 @@ import { Favicons } from "~/components";
 import { Provider } from "~/context";
 import { SiteLayout } from "~/layouts";
 
+import type { GetServerSidePropsContext } from "next";
 import type { PageProps } from "~/types";
 
 const noIndexNoFollow = process.env.VERCEL_ENV !== "production";
 
-const Site = (props: AppProps<PageProps>) => {
+interface SiteProps extends PageProps {
+  cookies: string | undefined;
+}
+
+const Site = (props: AppProps<SiteProps>) => {
   const {
     Component,
     pageProps,
     router: { pathname },
   } = props;
-  const { common, title: pageTitle, subtitle, footerTitle } = pageProps;
+  const { common, title: pageTitle, subtitle, footerTitle, cookies } = pageProps;
   const { config, theme, footerGroups, actions, docsGroups, twitterHandle, origin } = common;
   const { organizationName, title, description } = config;
 
@@ -40,7 +45,7 @@ const Site = (props: AppProps<PageProps>) => {
 
   return (
     <>
-      <Provider theme={theme} config={config} docsGroups={docsGroups}>
+      <Provider theme={theme} config={config} docsGroups={docsGroups} cookies={cookies}>
         <DefaultSeo
           titleTemplate={`%s | ${title}`}
           description={subtitle ?? description}
@@ -76,3 +81,14 @@ const Site = (props: AppProps<PageProps>) => {
 };
 
 export default Site;
+
+/**
+ * @see https://chakra-ui.com/docs/styled-system/color-mode#add-colormodemanager-optional-for-ssr
+ */
+export function getServerSideProps(ctx: GetServerSidePropsContext) {
+  return {
+    props: {
+      cookies: ctx.req.headers.cookie ?? "",
+    },
+  };
+}

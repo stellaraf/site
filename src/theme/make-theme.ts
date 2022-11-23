@@ -125,7 +125,7 @@ export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
         },
       },
     },
-    config: { useSystemColorMode: true },
+    config: { initialColorMode: "system" },
   }) as CustomTheme;
   return customTheme;
 };

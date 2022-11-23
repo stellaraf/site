@@ -4,11 +4,9 @@ import type { CustomTheme, ThemeConfig } from "~/theme";
 /**
  * Root Provider Props
  */
-export interface ProviderProps {
+export interface ProviderProps extends UIProviderProps {
   config: Config;
-  theme: ThemeConfig;
   docsGroups: DocsGroups;
-  children: React.ReactNode;
 }
 
 export interface ConfigContextType extends Config {
@@ -28,7 +26,7 @@ export type UseTheme = () => CustomTheme;
 
 export interface UIProviderProps {
   theme: ThemeConfig;
-  children?: React.ReactNode;
+  children: React.ReactNode;
   cookies?: string;
 }
 
