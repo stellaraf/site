@@ -50,17 +50,23 @@ export async function handleSupportForm(request: NextApiRequest): Promise<Respon
     lastName: last_name,
     emailAddress: email,
     phoneNumber: phone,
-    details: description,
+    details,
     companyName: company,
   } = data as Schema;
   const userData = parseUserAgent(request);
   // Initialize multi-line string for case comments, to which User Data will be added.
-  let caseComment = `${description}
+  let description = `${details}
+  ---
+  Submission Details:
+  Name: ${first_name} ${last_name}
+  Company: ${company}
+  Email Address: ${email}
+  Phone Number: ${phone ?? "None"}
   `;
 
   // Add each User Data key & value to case comment.
   for (const [k, v] of Object.entries(userData)) {
-    caseComment += `
+    description += `
     ${k}: ${v}`;
   }
   // Create an object conforming with SFDC field requirements.
@@ -74,7 +80,6 @@ export async function handleSupportForm(request: NextApiRequest): Promise<Respon
     description,
     status: "New",
     type: "Request",
-    ["00N3j00000FccHG"]: caseComment,
     orgid: process.env.SFDC_ORG_ID,
   };
 
