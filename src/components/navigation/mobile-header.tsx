@@ -25,7 +25,7 @@ const ContactButton = (props: ButtonProps) => (
     leftIcon={<DynamicIcon icon={{ fa: "FaHeart" }} />}
     {...props}
   >
-    Talk to Us
+    Contact Us
   </Button>
 );
 

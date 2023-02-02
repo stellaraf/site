@@ -101,7 +101,7 @@ export const ContactButton = (props: ButtonProps) => {
       _hover={{ backgroundColor: hoverBg }}
       {...props}
     >
-      Talk to Us
+      Contact Us
     </Button>
   );
 };
