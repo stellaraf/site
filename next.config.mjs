@@ -29,10 +29,6 @@ const config = {
   productionBrowserSourceMaps: true,
   reactStrictMode: true,
   poweredByHeader: false,
-  swcMinify: true,
-  experimental: {
-    newNextLinkBehavior: true,
-  },
   images: {
     domains: ["images.ctfassets.net", "media.graphassets.com"],
   },

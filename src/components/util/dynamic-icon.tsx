@@ -131,22 +131,24 @@ const _DynamicIcon = (props: DynamicIconProps): JSX.Element => {
 
     const Component = useMemo(
       () =>
-        dynamic(() =>
-          import(`react-icons/${library}/index.js`)
-            .then(i => {
-              if (!(iconName in i)) {
-                // If the icon name doesn't exist in the module, error out.
-                throw new IconError({ original: iconObj, iconName, library });
-              }
-              // Otherwise, return the imported icon.
-              return i[iconName as keyof typeof i];
-            })
-            .catch(error => {
-              // Handle any error that occurs during dynamic import.
-              console.error(error);
-              const CaughtError = (): JSX.Element => <ErrorIcon message={String(error)} />;
-              return CaughtError;
-            }),
+        dynamic(
+          () =>
+            import(`react-icons/${library}/index.js`)
+              .then(i => {
+                if (!(iconName in i)) {
+                  // If the icon name doesn't exist in the module, error out.
+                  throw new IconError({ original: iconObj, iconName, library });
+                }
+                // Otherwise, return the imported icon.
+                return i[iconName as keyof typeof i];
+              })
+              .catch(error => {
+                // Handle any error that occurs during dynamic import.
+                console.error(error);
+                const CaughtError = (): JSX.Element => <ErrorIcon message={String(error)} />;
+                return CaughtError;
+              }),
+          { ssr: false },
         ),
       [library, iconName],
     );

@@ -27,7 +27,7 @@ export const ImageAsset = (props: Partial<ImageProps>) => {
     image = <ChakraImage src={src} alt={title} boxSize="100%" css={css} />;
     bg = svgBg;
   } else {
-    image = <NextImage src={src} alt={title} width={width} height={height} layout="responsive" />;
+    image = <NextImage src={src} width={width} height={height} alt={title ?? "Unknown"} />;
   }
 
   return (
