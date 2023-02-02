@@ -1,5 +1,6 @@
 import NextDocument, {
   Html,
+  Head,
   Main,
   NextScript,
   DocumentContext,
@@ -17,6 +18,7 @@ export default class Document extends NextDocument {
   render(): JSX.Element {
     return (
       <Html lang="en">
+        <Head />
         <body>
           <ColorModeScript initialColorMode="system" />
           <Main />
