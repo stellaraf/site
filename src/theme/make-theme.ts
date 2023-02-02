@@ -1,5 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
-import { generatePalette, generateFontFamily, Palette } from "palette-by-numbers";
+import { generatePalette, Palette } from "palette-by-numbers";
 
 import { entries } from "~/lib";
 
@@ -10,7 +10,6 @@ import type {
   Fonts,
   ThemeFonts,
   CustomTheme,
-  FontWeights,
   ThemeConfig,
   CustomColors,
   ChangeableColors,
@@ -44,18 +43,12 @@ const fontSizes = {
   "6xl": "6rem",
 };
 
-function importFonts(userFonts: Omit<Fonts, "themeName">): [ThemeFonts, FontWeights] {
-  const { body: userBody, monospace: userMono, ...fontWeights } = userFonts;
-  const body = generateFontFamily("sans-serif", userBody);
-  const mono = generateFontFamily("monospace", userMono);
-  return [
-    {
-      body,
-      heading: body,
-      mono,
-    },
-    fontWeights,
-  ];
+function importFonts(fonts: Fonts): ThemeFonts {
+  return {
+    body: fonts.body.style.fontFamily,
+    heading: fonts.body.style.fontFamily,
+    mono: fonts.monospace.style.fontFamily,
+  };
 }
 
 function importColors(userColors: InitialTheme): CustomColors {
@@ -97,14 +90,13 @@ function importColors(userColors: InitialTheme): CustomColors {
   };
 }
 
-export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
-  const [fonts, fontWeights] = importFonts(userTheme.fonts);
+export const makeTheme = (userTheme: ThemeConfig, fontConfig: Fonts): CustomTheme => {
   const colors = importColors(userTheme.colors as InitialTheme);
+  const fonts = importFonts(fontConfig);
 
   const customTheme = extendTheme({
     colors,
     fonts,
-    fontWeights,
     fontSizes,
     radii,
     styles: { global: globalStyles },

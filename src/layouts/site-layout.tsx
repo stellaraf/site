@@ -8,10 +8,17 @@ import { useMobile } from "~/hooks";
 
 import { Wrapper, Root, Main } from "./common";
 
-import type { SiteLayoutProps } from "./types";
 import type { BoxProps } from "@chakra-ui/react";
+import type { FooterGroups, Actions } from "~/queries";
 
 const Stars = dynamic<BoxProps>(() => import("~/components").then(i => i.Stars));
+
+interface SiteLayoutProps {
+  footerGroups: FooterGroups;
+  actions: Actions;
+  children: React.ReactNode;
+  preview: boolean;
+}
 
 export const SiteLayout = (props: SiteLayoutProps) => {
   const { children, footerGroups, actions, preview } = props;

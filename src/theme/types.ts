@@ -1,4 +1,5 @@
 import type { Theme as DefaultTheme } from "@chakra-ui/theme";
+import type { NextFont } from "@next/font";
 import type { Palette } from "palette-by-numbers";
 
 type ExtraColors = {
@@ -39,20 +40,11 @@ interface Colors {
 }
 
 export interface Fonts {
-  body: string;
-  monospace: string;
-  hairline: number;
-  thin: number;
-  light: number;
-  normal: number;
-  medium: number;
-  semibold: number;
-  bold: number;
-  extrabold: number;
-  black: number;
+  body: NextFont;
+  heading: NextFont;
+  monospace: NextFont;
 }
 
 export interface ThemeConfig {
   colors: Colors;
-  fonts: Fonts;
 }

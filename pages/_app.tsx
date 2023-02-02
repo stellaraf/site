@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 
+import { Open_Sans, Fira_Code } from "@next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { DefaultSeo } from "next-seo";
 import queryString from "query-string";
@@ -12,11 +13,23 @@ import { SiteLayout } from "~/layouts";
 import type { GetServerSidePropsContext } from "next";
 import type { PageProps } from "~/types";
 
-const noIndexNoFollow = process.env.VERCEL_ENV !== "production";
-
 interface SiteProps extends PageProps {
   cookies: string | undefined;
 }
+
+const noIndexNoFollow = process.env.VERCEL_ENV !== "production";
+
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  style: "normal",
+  display: "swap",
+});
+
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  style: "normal",
+  display: "swap",
+});
 
 const Site = (props: AppProps<SiteProps>) => {
   const {
@@ -45,7 +58,13 @@ const Site = (props: AppProps<SiteProps>) => {
 
   return (
     <>
-      <Provider theme={theme} config={config} docsGroups={docsGroups} cookies={cookies}>
+      <Provider
+        theme={theme}
+        config={config}
+        cookies={cookies}
+        docsGroups={docsGroups}
+        fonts={{ body: openSans, heading: openSans, monospace: firaCode }}
+      >
         <DefaultSeo
           titleTemplate={`%s | ${title}`}
           description={subtitle ?? description}

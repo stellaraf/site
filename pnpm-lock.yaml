@@ -25,6 +25,7 @@ specifiers:
   '@graphql-typed-document-node/core': ^3.1.1
   '@hookform/resolvers': ^2.9.10
   '@next/bundle-analyzer': ^9.5.5
+  '@next/font': ^13.1.6
   '@react-google-maps/api': ^2.13.1
   '@stellaraf/logo': ^0.3.4
   '@tanstack/react-query': ^4.10.1
@@ -99,6 +100,7 @@ dependencies:
   '@emotion/styled': 11.10.5_sif2flbmwshceh3oxsmqujcdze
   '@graphcms/rich-text-react-renderer': 0.6.1_biqbaboplfbrettd7655fr4n2y
   '@hookform/resolvers': 2.9.10_react-hook-form@7.39.1
+  '@next/font': 13.1.6
   '@react-google-maps/api': 2.13.1_biqbaboplfbrettd7655fr4n2y
   '@stellaraf/logo': 0.3.4_myn2qzgc7rn2hjxmczthzghoze
   '@tanstack/react-query': 4.10.1_biqbaboplfbrettd7655fr4n2y
@@ -2856,7 +2858,7 @@ packages:
     dependencies:
       '@jridgewell/set-array': 1.1.2
       '@jridgewell/sourcemap-codec': 1.4.14
-      '@jridgewell/trace-mapping': 0.3.15
+      '@jridgewell/trace-mapping': 0.3.17
 
   /@jridgewell/resolve-uri/3.1.0:
     resolution: {integrity: sha512-F2msla3tad+Mfht5cJq7LSXcdudKTWCVYUgw6pLFOOHSTtZlj6SWNYAp+AhuqLmWdBO2X5hPrLcu8cVP8fy28w==}
@@ -2887,7 +2889,6 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
-    dev: false
 
   /@jridgewell/trace-mapping/0.3.9:
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
@@ -2961,6 +2962,10 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
+
+  /@next/font/13.1.6:
+    resolution: {integrity: sha512-AITjmeb1RgX1HKMCiA39ztx2mxeAyxl4ljv2UoSBUGAbFFMg8MO7YAvjHCgFhD39hL7YTbFjol04e/BPBH5RzQ==}
+    dev: false
 
   /@next/swc-android-arm-eabi/13.1.6:
     resolution: {integrity: sha512-F3/6Z8LH/pGlPzR1AcjPFxx35mPqjE5xZcf+IL+KgbW9tMkp7CYi1y7qKrEWU7W4AumxX/8OINnDQWLiwLasLQ==}

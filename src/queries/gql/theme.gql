@@ -54,20 +54,6 @@ query theme {
           hex
         }
       }
-      fonts {
-        black
-        body
-        bold
-        extrabold
-        hairline
-        headings
-        light
-        medium
-        monospace
-        normal
-        semibold
-        thin
-      }
     }
   }
 }

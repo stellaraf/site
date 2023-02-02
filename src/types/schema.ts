@@ -64,6 +64,7 @@ export type Admonition = Node & {
 
 
 export type AdmonitionCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -83,6 +84,7 @@ export type AdmonitionHistoryArgs = {
 
 
 export type AdmonitionPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -91,6 +93,7 @@ export type AdmonitionScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -99,6 +102,7 @@ export type AdmonitionScheduledInArgs = {
 
 
 export type AdmonitionUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -961,6 +965,7 @@ export type AssetCreatedAtArgs = {
 
 /** Asset system model */
 export type AssetCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -986,6 +991,7 @@ export type AssetImagePageContentArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<PageContentOrderByInput>;
@@ -999,6 +1005,7 @@ export type AssetImageTestimonialArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<TestimonialOrderByInput>;
@@ -1019,6 +1026,7 @@ export type AssetMainVideoHomePageArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<HomePageOrderByInput>;
@@ -1032,6 +1040,7 @@ export type AssetPhotoEmployeeArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<EmployeeOrderByInput>;
@@ -1048,6 +1057,7 @@ export type AssetPublishedAtArgs = {
 
 /** Asset system model */
 export type AssetPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -1057,6 +1067,7 @@ export type AssetScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -1072,6 +1083,7 @@ export type AssetUpdatedAtArgs = {
 
 /** Asset system model */
 export type AssetUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -2313,6 +2325,7 @@ export type CallToActionSettings = {
 
 
 export type CallToActionSettingsIconArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -2796,11 +2809,13 @@ export type Callout = {
 
 
 export type CalloutButtonArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type CalloutFormArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -3713,6 +3728,7 @@ export type CloudLocation = Node & {
 
 
 export type CloudLocationCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -3732,6 +3748,7 @@ export type CloudLocationHistoryArgs = {
 
 
 export type CloudLocationPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -3740,6 +3757,7 @@ export type CloudLocationScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -3748,6 +3766,7 @@ export type CloudLocationScheduledInArgs = {
 
 
 export type CloudLocationUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -4349,6 +4368,7 @@ export type Configuration = Node & {
 
 
 export type ConfigurationCallToActionArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -4357,6 +4377,7 @@ export type ConfigurationContactFormsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<ContactFormOrderByInput>;
@@ -4366,6 +4387,7 @@ export type ConfigurationContactFormsArgs = {
 
 
 export type ConfigurationCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -4374,6 +4396,7 @@ export type ConfigurationDocsGroupsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<DocsGroupOrderByInput>;
@@ -4393,6 +4416,7 @@ export type ConfigurationEmployeesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<EmployeeOrderByInput>;
@@ -4402,6 +4426,7 @@ export type ConfigurationEmployeesArgs = {
 
 
 export type ConfigurationErrorMessageArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -4410,6 +4435,7 @@ export type ConfigurationFooterGroupsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<FooterGroupOrderByInput>;
@@ -4426,6 +4452,7 @@ export type ConfigurationHistoryArgs = {
 
 
 export type ConfigurationPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -4434,6 +4461,7 @@ export type ConfigurationScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -4445,6 +4473,7 @@ export type ConfigurationSocialLinksArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<SocialLinkOrderByInput>;
@@ -4454,6 +4483,7 @@ export type ConfigurationSocialLinksArgs = {
 
 
 export type ConfigurationSubscribeArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -4462,6 +4492,7 @@ export type ConfigurationTestimonialsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<TestimonialOrderByInput>;
@@ -4471,11 +4502,13 @@ export type ConfigurationTestimonialsArgs = {
 
 
 export type ConfigurationThemeArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type ConfigurationUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -5193,11 +5226,13 @@ export type ContactForm = Node & {
 
 
 export type ContactFormButtonArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type ContactFormCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -5213,6 +5248,7 @@ export type ContactFormFieldsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -5227,11 +5263,13 @@ export type ContactFormHistoryArgs = {
 
 
 export type ContactFormIconArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type ContactFormPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -5240,6 +5278,7 @@ export type ContactFormScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -5248,6 +5287,7 @@ export type ContactFormScheduledInArgs = {
 
 
 export type ContactFormUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -5800,6 +5840,7 @@ export type ContentButton = Node & {
 
 
 export type ContentButtonCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -5819,6 +5860,7 @@ export type ContentButtonHistoryArgs = {
 
 
 export type ContentButtonPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -5827,6 +5869,7 @@ export type ContentButtonScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -5835,6 +5878,7 @@ export type ContentButtonScheduledInArgs = {
 
 
 export type ContentButtonUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -6325,11 +6369,13 @@ export type DocsGroup = Node & {
 
 
 export type DocsGroupCallToActionArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type DocsGroupCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -6338,6 +6384,7 @@ export type DocsGroupDocsPagesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<DocsPageOrderByInput>;
@@ -6354,6 +6401,7 @@ export type DocsGroupDocumentInStagesArgs = {
 
 
 export type DocsGroupFooterGroupArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -6366,6 +6414,7 @@ export type DocsGroupHistoryArgs = {
 
 
 export type DocsGroupPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -6374,6 +6423,7 @@ export type DocsGroupScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -6382,6 +6432,7 @@ export type DocsGroupScheduledInArgs = {
 
 
 export type DocsGroupUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -6954,11 +7005,13 @@ export type DocsPage = Node & {
 
 
 export type DocsPageCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type DocsPageDocsGroupArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -6978,6 +7031,7 @@ export type DocsPageHistoryArgs = {
 
 
 export type DocsPagePublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -6986,6 +7040,7 @@ export type DocsPageScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -6994,6 +7049,7 @@ export type DocsPageScheduledInArgs = {
 
 
 export type DocsPageUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -7581,6 +7637,7 @@ export type Employee = Node & {
 
 
 export type EmployeeCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -7600,11 +7657,13 @@ export type EmployeeHistoryArgs = {
 
 
 export type EmployeePhotoArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type EmployeePublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -7613,6 +7672,7 @@ export type EmployeeScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -7621,6 +7681,7 @@ export type EmployeeScheduledInArgs = {
 
 
 export type EmployeeUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -8432,11 +8493,13 @@ export type Feature = {
 
 
 export type FeatureButtonArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type FeatureIconArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -8818,6 +8881,7 @@ export type FooterGroup = Node & {
 
 
 export type FooterGroupCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -8826,6 +8890,7 @@ export type FooterGroupDocsGroupArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<DocsGroupOrderByInput>;
@@ -8845,6 +8910,7 @@ export type FooterGroupExternalLinksArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<ExternalLinkOrderByInput>;
@@ -8864,6 +8930,7 @@ export type FooterGroupPageContentsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<PageContentOrderByInput>;
@@ -8876,6 +8943,7 @@ export type FooterGroupPagesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<PageOrderByInput>;
@@ -8885,6 +8953,7 @@ export type FooterGroupPagesArgs = {
 
 
 export type FooterGroupPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -8893,6 +8962,7 @@ export type FooterGroupScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -8901,6 +8971,7 @@ export type FooterGroupScheduledInArgs = {
 
 
 export type FooterGroupUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -9365,11 +9436,13 @@ export type Form = Node & {
 
 
 export type FormButtonArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type FormCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -9385,6 +9458,7 @@ export type FormFieldsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -9402,6 +9476,7 @@ export type FormPageContentsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<PageContentOrderByInput>;
@@ -9411,6 +9486,7 @@ export type FormPageContentsArgs = {
 
 
 export type FormPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -9419,6 +9495,7 @@ export type FormScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -9427,6 +9504,7 @@ export type FormScheduledInArgs = {
 
 
 export type FormUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -9449,6 +9527,7 @@ export type FormButton = {
 
 
 export type FormButtonAlertArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -10358,6 +10437,7 @@ export type HomePageBlocksArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<HomePageBlockOrderByInput>;
@@ -10367,6 +10447,7 @@ export type HomePageBlocksArgs = {
 
 
 export type HomePageCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -10386,11 +10467,13 @@ export type HomePageHistoryArgs = {
 
 
 export type HomePageMainVideoArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type HomePagePublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -10399,6 +10482,7 @@ export type HomePageScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -10407,6 +10491,7 @@ export type HomePageScheduledInArgs = {
 
 
 export type HomePageUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -10425,11 +10510,13 @@ export type HomePageBlock = {
 
 
 export type HomePageBlockButtonArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type HomePageBlockImageArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -14288,6 +14375,7 @@ export type Page = Node & {
 
 
 export type PageCalloutArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -14296,6 +14384,7 @@ export type PageContentsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<PageContentOrderByInput>;
@@ -14305,6 +14394,7 @@ export type PageContentsArgs = {
 
 
 export type PageCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -14317,6 +14407,7 @@ export type PageDocumentInStagesArgs = {
 
 
 export type PageFooterGroupArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -14329,6 +14420,7 @@ export type PageHistoryArgs = {
 
 
 export type PagePublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -14337,6 +14429,7 @@ export type PageScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -14345,6 +14438,7 @@ export type PageScheduledInArgs = {
 
 
 export type PageUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -14406,16 +14500,19 @@ export type PageContent = Node & {
 
 
 export type PageContentButtonArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type PageContentCallToActionArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type PageContentCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -14431,6 +14528,7 @@ export type PageContentFeaturesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<FeatureOrderByInput>;
@@ -14440,11 +14538,13 @@ export type PageContentFeaturesArgs = {
 
 
 export type PageContentFooterGroupArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type PageContentFormArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -14457,16 +14557,19 @@ export type PageContentHistoryArgs = {
 
 
 export type PageContentImageArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type PageContentPageArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type PageContentPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -14475,6 +14578,7 @@ export type PageContentScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -14483,11 +14587,13 @@ export type PageContentScheduledInArgs = {
 
 
 export type PageContentUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type PageContentVendorLogoArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -16479,6 +16585,7 @@ export type ScheduledOperationAffectedDocumentsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -16487,6 +16594,7 @@ export type ScheduledOperationAffectedDocumentsArgs = {
 
 /** Scheduled Operation system model */
 export type ScheduledOperationCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -16501,18 +16609,21 @@ export type ScheduledOperationDocumentInStagesArgs = {
 
 /** Scheduled Operation system model */
 export type ScheduledOperationPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 /** Scheduled Operation system model */
 export type ScheduledOperationReleaseArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 /** Scheduled Operation system model */
 export type ScheduledOperationUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -16893,6 +17004,7 @@ export type ScheduledRelease = Node & {
 
 /** Scheduled Release system model */
 export type ScheduledReleaseCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -16910,6 +17022,7 @@ export type ScheduledReleaseOperationsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<ScheduledOperationOrderByInput>;
@@ -16920,12 +17033,14 @@ export type ScheduledReleaseOperationsArgs = {
 
 /** Scheduled Release system model */
 export type ScheduledReleasePublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 /** Scheduled Release system model */
 export type ScheduledReleaseUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -18391,6 +18506,7 @@ export type Testimonial = Node & {
 
 
 export type TestimonialCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -18410,11 +18526,13 @@ export type TestimonialHistoryArgs = {
 
 
 export type TestimonialImageArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type TestimonialPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -18423,6 +18541,7 @@ export type TestimonialScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -18431,6 +18550,7 @@ export type TestimonialScheduledInArgs = {
 
 
 export type TestimonialUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -19817,7 +19937,6 @@ export type Theme = Node & {
   createdBy?: Maybe<User>;
   /** Get the document in other stages */
   documentInStages: Array<Theme>;
-  fonts: ThemeFonts;
   /** List of Theme versions */
   history: Array<Version>;
   /** The unique identifier */
@@ -19838,6 +19957,7 @@ export type Theme = Node & {
 
 
 export type ThemeColorsArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -19846,6 +19966,7 @@ export type ThemeConfigurationsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<ConfigurationOrderByInput>;
@@ -19855,6 +19976,7 @@ export type ThemeConfigurationsArgs = {
 
 
 export type ThemeCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -19866,11 +19988,6 @@ export type ThemeDocumentInStagesArgs = {
 };
 
 
-export type ThemeFontsArgs = {
-  locales?: InputMaybe<Array<Locale>>;
-};
-
-
 export type ThemeHistoryArgs = {
   limit?: Scalars['Int'];
   skip?: Scalars['Int'];
@@ -19879,6 +19996,7 @@ export type ThemeHistoryArgs = {
 
 
 export type ThemePublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -19887,6 +20005,7 @@ export type ThemeScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -19895,6 +20014,7 @@ export type ThemeScheduledInArgs = {
 
 
 export type ThemeUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -20285,7 +20405,6 @@ export type ThemeCreateInput = {
   colors: ThemeColorsCreateOneInlineInput;
   configurations?: InputMaybe<ConfigurationCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
-  fonts: ThemeFontsCreateOneInlineInput;
   name: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -20333,13 +20452,6 @@ export type ThemeFonts = {
   thin: Scalars['Int'];
 };
 
-export type ThemeFontsConnectInput = {
-  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
-  position?: InputMaybe<ConnectPositionInput>;
-  /** Document to connect */
-  where: ThemeFontsWhereUniqueInput;
-};
-
 /** A connection to a list of items. */
 export type ThemeFontsConnection = {
   __typename?: 'ThemeFontsConnection';
@@ -20363,16 +20475,6 @@ export type ThemeFontsCreateInput = {
   normal: Scalars['Int'];
   semibold: Scalars['Int'];
   thin: Scalars['Int'];
-};
-
-export type ThemeFontsCreateManyInlineInput = {
-  /** Create and connect multiple existing ThemeFonts documents */
-  create?: InputMaybe<Array<ThemeFontsCreateInput>>;
-};
-
-export type ThemeFontsCreateOneInlineInput = {
-  /** Create and connect one ThemeFonts document */
-  create?: InputMaybe<ThemeFontsCreateInput>;
 };
 
 export type ThemeFontsCreateWithPositionInput = {
@@ -20643,86 +20745,6 @@ export enum ThemeFontsOrderByInput {
   ThinDesc = 'thin_DESC'
 }
 
-export type ThemeFontsParent = Theme;
-
-export type ThemeFontsParentConnectInput = {
-  Theme?: InputMaybe<ThemeConnectInput>;
-};
-
-export type ThemeFontsParentCreateInput = {
-  Theme?: InputMaybe<ThemeCreateInput>;
-};
-
-export type ThemeFontsParentCreateManyInlineInput = {
-  /** Connect multiple existing ThemeFontsParent documents */
-  connect?: InputMaybe<Array<ThemeFontsParentWhereUniqueInput>>;
-  /** Create and connect multiple existing ThemeFontsParent documents */
-  create?: InputMaybe<Array<ThemeFontsParentCreateInput>>;
-};
-
-export type ThemeFontsParentCreateOneInlineInput = {
-  /** Connect one existing ThemeFontsParent document */
-  connect?: InputMaybe<ThemeFontsParentWhereUniqueInput>;
-  /** Create and connect one ThemeFontsParent document */
-  create?: InputMaybe<ThemeFontsParentCreateInput>;
-};
-
-export type ThemeFontsParentUpdateInput = {
-  Theme?: InputMaybe<ThemeUpdateInput>;
-};
-
-export type ThemeFontsParentUpdateManyInlineInput = {
-  /** Connect multiple existing ThemeFontsParent documents */
-  connect?: InputMaybe<Array<ThemeFontsParentConnectInput>>;
-  /** Create and connect multiple ThemeFontsParent documents */
-  create?: InputMaybe<Array<ThemeFontsParentCreateInput>>;
-  /** Delete multiple ThemeFontsParent documents */
-  delete?: InputMaybe<Array<ThemeFontsParentWhereUniqueInput>>;
-  /** Disconnect multiple ThemeFontsParent documents */
-  disconnect?: InputMaybe<Array<ThemeFontsParentWhereUniqueInput>>;
-  /** Override currently-connected documents with multiple existing ThemeFontsParent documents */
-  set?: InputMaybe<Array<ThemeFontsParentWhereUniqueInput>>;
-  /** Update multiple ThemeFontsParent documents */
-  update?: InputMaybe<Array<ThemeFontsParentUpdateWithNestedWhereUniqueInput>>;
-  /** Upsert multiple ThemeFontsParent documents */
-  upsert?: InputMaybe<Array<ThemeFontsParentUpsertWithNestedWhereUniqueInput>>;
-};
-
-export type ThemeFontsParentUpdateManyWithNestedWhereInput = {
-  Theme?: InputMaybe<ThemeUpdateManyWithNestedWhereInput>;
-};
-
-export type ThemeFontsParentUpdateOneInlineInput = {
-  /** Connect existing ThemeFontsParent document */
-  connect?: InputMaybe<ThemeFontsParentWhereUniqueInput>;
-  /** Create and connect one ThemeFontsParent document */
-  create?: InputMaybe<ThemeFontsParentCreateInput>;
-  /** Delete currently connected ThemeFontsParent document */
-  delete?: InputMaybe<Scalars['Boolean']>;
-  /** Disconnect currently connected ThemeFontsParent document */
-  disconnect?: InputMaybe<Scalars['Boolean']>;
-  /** Update single ThemeFontsParent document */
-  update?: InputMaybe<ThemeFontsParentUpdateWithNestedWhereUniqueInput>;
-  /** Upsert single ThemeFontsParent document */
-  upsert?: InputMaybe<ThemeFontsParentUpsertWithNestedWhereUniqueInput>;
-};
-
-export type ThemeFontsParentUpdateWithNestedWhereUniqueInput = {
-  Theme?: InputMaybe<ThemeUpdateWithNestedWhereUniqueInput>;
-};
-
-export type ThemeFontsParentUpsertWithNestedWhereUniqueInput = {
-  Theme?: InputMaybe<ThemeUpsertWithNestedWhereUniqueInput>;
-};
-
-export type ThemeFontsParentWhereInput = {
-  Theme?: InputMaybe<ThemeWhereInput>;
-};
-
-export type ThemeFontsParentWhereUniqueInput = {
-  Theme?: InputMaybe<ThemeWhereUniqueInput>;
-};
-
 export type ThemeFontsUpdateInput = {
   black?: InputMaybe<Scalars['Int']>;
   body?: InputMaybe<Scalars['String']>;
@@ -20736,17 +20758,6 @@ export type ThemeFontsUpdateInput = {
   normal?: InputMaybe<Scalars['Int']>;
   semibold?: InputMaybe<Scalars['Int']>;
   thin?: InputMaybe<Scalars['Int']>;
-};
-
-export type ThemeFontsUpdateManyInlineInput = {
-  /** Create and connect multiple ThemeFonts component instances */
-  create?: InputMaybe<Array<ThemeFontsCreateWithPositionInput>>;
-  /** Delete multiple ThemeFonts documents */
-  delete?: InputMaybe<Array<ThemeFontsWhereUniqueInput>>;
-  /** Update multiple ThemeFonts component instances */
-  update?: InputMaybe<Array<ThemeFontsUpdateWithNestedWhereUniqueAndPositionInput>>;
-  /** Upsert multiple ThemeFonts component instances */
-  upsert?: InputMaybe<Array<ThemeFontsUpsertWithNestedWhereUniqueAndPositionInput>>;
 };
 
 export type ThemeFontsUpdateManyInput = {
@@ -20769,17 +20780,6 @@ export type ThemeFontsUpdateManyWithNestedWhereInput = {
   data: ThemeFontsUpdateManyInput;
   /** Document search */
   where: ThemeFontsWhereInput;
-};
-
-export type ThemeFontsUpdateOneInlineInput = {
-  /** Create and connect one ThemeFonts document */
-  create?: InputMaybe<ThemeFontsCreateInput>;
-  /** Delete currently connected ThemeFonts document */
-  delete?: InputMaybe<Scalars['Boolean']>;
-  /** Update single ThemeFonts document */
-  update?: InputMaybe<ThemeFontsUpdateWithNestedWhereUniqueInput>;
-  /** Upsert single ThemeFonts document */
-  upsert?: InputMaybe<ThemeFontsUpsertWithNestedWhereUniqueInput>;
 };
 
 export type ThemeFontsUpdateWithNestedWhereUniqueAndPositionInput = {
@@ -21082,7 +21082,6 @@ export type ThemeManyWhereInput = {
   documentInStages_every?: InputMaybe<ThemeWhereStageInput>;
   documentInStages_none?: InputMaybe<ThemeWhereStageInput>;
   documentInStages_some?: InputMaybe<ThemeWhereStageInput>;
-  fonts?: InputMaybe<ThemeFontsWhereInput>;
   id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']>;
@@ -21174,7 +21173,6 @@ export enum ThemeOrderByInput {
 export type ThemeUpdateInput = {
   colors?: InputMaybe<ThemeColorsUpdateOneInlineInput>;
   configurations?: InputMaybe<ConfigurationUpdateManyInlineInput>;
-  fonts?: InputMaybe<ThemeFontsUpdateOneInlineInput>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -21282,7 +21280,6 @@ export type ThemeWhereInput = {
   documentInStages_every?: InputMaybe<ThemeWhereStageInput>;
   documentInStages_none?: InputMaybe<ThemeWhereStageInput>;
   documentInStages_some?: InputMaybe<ThemeWhereStageInput>;
-  fonts?: InputMaybe<ThemeFontsWhereInput>;
   id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']>;
@@ -21794,6 +21791,7 @@ export type VendorLogo = {
 
 
 export type VendorLogoLogoArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -22399,7 +22397,7 @@ export type PageQuery = { __typename?: 'Query', page?: { __typename?: 'Page', sl
 export type ThemeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ThemeQuery = { __typename?: 'Query', configuration?: { __typename?: 'Configuration', theme?: { __typename?: 'Theme', colors: { __typename?: 'ThemeColors', black: { __typename?: 'Color', hex: string }, blue: { __typename?: 'Color', hex: string }, cyan: { __typename?: 'Color', hex: string }, dark: { __typename?: 'Color', hex: string }, gray: { __typename?: 'Color', hex: string }, green: { __typename?: 'Color', hex: string }, light: { __typename?: 'Color', hex: string }, orange: { __typename?: 'Color', hex: string }, pink: { __typename?: 'Color', hex: string }, primary: { __typename?: 'Color', hex: string }, purple: { __typename?: 'Color', hex: string }, red: { __typename?: 'Color', hex: string }, secondary: { __typename?: 'Color', hex: string }, teal: { __typename?: 'Color', hex: string }, tertiary: { __typename?: 'Color', hex: string }, white: { __typename?: 'Color', hex: string }, yellow: { __typename?: 'Color', hex: string } }, fonts: { __typename?: 'ThemeFonts', black: number, body: string, bold: number, extrabold: number, hairline: number, headings: string, light: number, medium: number, monospace: string, normal: number, semibold: number, thin: number } } | null } | null };
+export type ThemeQuery = { __typename?: 'Query', configuration?: { __typename?: 'Configuration', theme?: { __typename?: 'Theme', colors: { __typename?: 'ThemeColors', black: { __typename?: 'Color', hex: string }, blue: { __typename?: 'Color', hex: string }, cyan: { __typename?: 'Color', hex: string }, dark: { __typename?: 'Color', hex: string }, gray: { __typename?: 'Color', hex: string }, green: { __typename?: 'Color', hex: string }, light: { __typename?: 'Color', hex: string }, orange: { __typename?: 'Color', hex: string }, pink: { __typename?: 'Color', hex: string }, primary: { __typename?: 'Color', hex: string }, purple: { __typename?: 'Color', hex: string }, red: { __typename?: 'Color', hex: string }, secondary: { __typename?: 'Color', hex: string }, teal: { __typename?: 'Color', hex: string }, tertiary: { __typename?: 'Color', hex: string }, white: { __typename?: 'Color', hex: string }, yellow: { __typename?: 'Color', hex: string } } } | null } | null };
 
 export type TwitterHandleQueryVariables = Exact<{
   title?: InputMaybe<Scalars['String']>;
@@ -22537,9 +22535,6 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
     "ThemeColorsParent": [
       "Theme"
     ],
-    "ThemeFontsParent": [
-      "Theme"
-    ],
     "VendorLogoParent": [
       "PageContent"
     ]
@@ -22563,7 +22558,7 @@ export const HomePageDocument = {"kind":"Document","definitions":[{"kind":"Opera
 export const StaticPathsExactDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"staticPathsExact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug_not_contains"},"value":{"kind":"StringValue","value":"/","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<StaticPathsExactQuery, StaticPathsExactQueryVariables>;
 export const StaticPathsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"staticPaths"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startsWith"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug_starts_with"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startsWith"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<StaticPathsQuery, StaticPathsQueryVariables>;
 export const PageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"page"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"callout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"form"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"features"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"form"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"vendorLogo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"darkColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lightColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"logo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"postText"}},{"kind":"Field","name":{"kind":"Name","value":"pretext"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<PageQuery, PageQueryVariables>;
-export const ThemeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"theme"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"StringValue","value":"Stellar","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"theme"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"colors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"black"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"blue"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"cyan"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dark"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"gray"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"green"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"light"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"orange"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pink"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"primary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"purple"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"red"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"secondary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"teal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tertiary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"white"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"yellow"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"fonts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"black"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"bold"}},{"kind":"Field","name":{"kind":"Name","value":"extrabold"}},{"kind":"Field","name":{"kind":"Name","value":"hairline"}},{"kind":"Field","name":{"kind":"Name","value":"headings"}},{"kind":"Field","name":{"kind":"Name","value":"light"}},{"kind":"Field","name":{"kind":"Name","value":"medium"}},{"kind":"Field","name":{"kind":"Name","value":"monospace"}},{"kind":"Field","name":{"kind":"Name","value":"normal"}},{"kind":"Field","name":{"kind":"Name","value":"semibold"}},{"kind":"Field","name":{"kind":"Name","value":"thin"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ThemeQuery, ThemeQueryVariables>;
+export const ThemeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"theme"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"StringValue","value":"Stellar","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"theme"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"colors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"black"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"blue"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"cyan"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dark"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"gray"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"green"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"light"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"orange"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pink"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"primary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"purple"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"red"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"secondary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"teal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tertiary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"white"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"yellow"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ThemeQuery, ThemeQueryVariables>;
 export const TwitterHandleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"twitterHandle"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"socialLinks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"href_contains"},"value":{"kind":"StringValue","value":"twitter","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"href"}}]}}]}}]}}]} as unknown as DocumentNode<TwitterHandleQuery, TwitterHandleQueryVariables>;
 
 
@@ -23642,33 +23637,15 @@ export type ResolversTypes = {
   ThemeCreateOneInlineInput: ThemeCreateOneInlineInput;
   ThemeEdge: ResolverTypeWrapper<ThemeEdge>;
   ThemeFonts: ResolverTypeWrapper<ThemeFonts>;
-  ThemeFontsConnectInput: ThemeFontsConnectInput;
   ThemeFontsConnection: ResolverTypeWrapper<ThemeFontsConnection>;
   ThemeFontsCreateInput: ThemeFontsCreateInput;
-  ThemeFontsCreateManyInlineInput: ThemeFontsCreateManyInlineInput;
-  ThemeFontsCreateOneInlineInput: ThemeFontsCreateOneInlineInput;
   ThemeFontsCreateWithPositionInput: ThemeFontsCreateWithPositionInput;
   ThemeFontsEdge: ResolverTypeWrapper<ThemeFontsEdge>;
   ThemeFontsManyWhereInput: ThemeFontsManyWhereInput;
   ThemeFontsOrderByInput: ThemeFontsOrderByInput;
-  ThemeFontsParent: ResolversTypes['Theme'];
-  ThemeFontsParentConnectInput: ThemeFontsParentConnectInput;
-  ThemeFontsParentCreateInput: ThemeFontsParentCreateInput;
-  ThemeFontsParentCreateManyInlineInput: ThemeFontsParentCreateManyInlineInput;
-  ThemeFontsParentCreateOneInlineInput: ThemeFontsParentCreateOneInlineInput;
-  ThemeFontsParentUpdateInput: ThemeFontsParentUpdateInput;
-  ThemeFontsParentUpdateManyInlineInput: ThemeFontsParentUpdateManyInlineInput;
-  ThemeFontsParentUpdateManyWithNestedWhereInput: ThemeFontsParentUpdateManyWithNestedWhereInput;
-  ThemeFontsParentUpdateOneInlineInput: ThemeFontsParentUpdateOneInlineInput;
-  ThemeFontsParentUpdateWithNestedWhereUniqueInput: ThemeFontsParentUpdateWithNestedWhereUniqueInput;
-  ThemeFontsParentUpsertWithNestedWhereUniqueInput: ThemeFontsParentUpsertWithNestedWhereUniqueInput;
-  ThemeFontsParentWhereInput: ThemeFontsParentWhereInput;
-  ThemeFontsParentWhereUniqueInput: ThemeFontsParentWhereUniqueInput;
   ThemeFontsUpdateInput: ThemeFontsUpdateInput;
-  ThemeFontsUpdateManyInlineInput: ThemeFontsUpdateManyInlineInput;
   ThemeFontsUpdateManyInput: ThemeFontsUpdateManyInput;
   ThemeFontsUpdateManyWithNestedWhereInput: ThemeFontsUpdateManyWithNestedWhereInput;
-  ThemeFontsUpdateOneInlineInput: ThemeFontsUpdateOneInlineInput;
   ThemeFontsUpdateWithNestedWhereUniqueAndPositionInput: ThemeFontsUpdateWithNestedWhereUniqueAndPositionInput;
   ThemeFontsUpdateWithNestedWhereUniqueInput: ThemeFontsUpdateWithNestedWhereUniqueInput;
   ThemeFontsUpsertInput: ThemeFontsUpsertInput;
@@ -24717,32 +24694,14 @@ export type ResolversParentTypes = {
   ThemeCreateOneInlineInput: ThemeCreateOneInlineInput;
   ThemeEdge: ThemeEdge;
   ThemeFonts: ThemeFonts;
-  ThemeFontsConnectInput: ThemeFontsConnectInput;
   ThemeFontsConnection: ThemeFontsConnection;
   ThemeFontsCreateInput: ThemeFontsCreateInput;
-  ThemeFontsCreateManyInlineInput: ThemeFontsCreateManyInlineInput;
-  ThemeFontsCreateOneInlineInput: ThemeFontsCreateOneInlineInput;
   ThemeFontsCreateWithPositionInput: ThemeFontsCreateWithPositionInput;
   ThemeFontsEdge: ThemeFontsEdge;
   ThemeFontsManyWhereInput: ThemeFontsManyWhereInput;
-  ThemeFontsParent: ResolversParentTypes['Theme'];
-  ThemeFontsParentConnectInput: ThemeFontsParentConnectInput;
-  ThemeFontsParentCreateInput: ThemeFontsParentCreateInput;
-  ThemeFontsParentCreateManyInlineInput: ThemeFontsParentCreateManyInlineInput;
-  ThemeFontsParentCreateOneInlineInput: ThemeFontsParentCreateOneInlineInput;
-  ThemeFontsParentUpdateInput: ThemeFontsParentUpdateInput;
-  ThemeFontsParentUpdateManyInlineInput: ThemeFontsParentUpdateManyInlineInput;
-  ThemeFontsParentUpdateManyWithNestedWhereInput: ThemeFontsParentUpdateManyWithNestedWhereInput;
-  ThemeFontsParentUpdateOneInlineInput: ThemeFontsParentUpdateOneInlineInput;
-  ThemeFontsParentUpdateWithNestedWhereUniqueInput: ThemeFontsParentUpdateWithNestedWhereUniqueInput;
-  ThemeFontsParentUpsertWithNestedWhereUniqueInput: ThemeFontsParentUpsertWithNestedWhereUniqueInput;
-  ThemeFontsParentWhereInput: ThemeFontsParentWhereInput;
-  ThemeFontsParentWhereUniqueInput: ThemeFontsParentWhereUniqueInput;
   ThemeFontsUpdateInput: ThemeFontsUpdateInput;
-  ThemeFontsUpdateManyInlineInput: ThemeFontsUpdateManyInlineInput;
   ThemeFontsUpdateManyInput: ThemeFontsUpdateManyInput;
   ThemeFontsUpdateManyWithNestedWhereInput: ThemeFontsUpdateManyWithNestedWhereInput;
-  ThemeFontsUpdateOneInlineInput: ThemeFontsUpdateOneInlineInput;
   ThemeFontsUpdateWithNestedWhereUniqueAndPositionInput: ThemeFontsUpdateWithNestedWhereUniqueAndPositionInput;
   ThemeFontsUpdateWithNestedWhereUniqueInput: ThemeFontsUpdateWithNestedWhereUniqueInput;
   ThemeFontsUpsertInput: ThemeFontsUpsertInput;
@@ -26304,7 +26263,6 @@ export type ThemeResolvers<ContextType = any, ParentType extends ResolversParent
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<ThemeCreatedByArgs>>;
   documentInStages?: Resolver<Array<ResolversTypes['Theme']>, ParentType, ContextType, RequireFields<ThemeDocumentInStagesArgs, 'includeCurrent' | 'inheritLocale' | 'stages'>>;
-  fonts?: Resolver<ResolversTypes['ThemeFonts'], ParentType, ContextType, Partial<ThemeFontsArgs>>;
   history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<ThemeHistoryArgs, 'limit' | 'skip'>>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -26399,10 +26357,6 @@ export type ThemeFontsEdgeResolvers<ContextType = any, ParentType extends Resolv
   cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   node?: Resolver<ResolversTypes['ThemeFonts'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ThemeFontsParentResolvers<ContextType = any, ParentType extends ResolversParentTypes['ThemeFontsParent'] = ResolversParentTypes['ThemeFontsParent']> = {
-  __resolveType: TypeResolveFn<'Theme', ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -26617,7 +26571,6 @@ export type Resolvers<ContextType = any> = {
   ThemeFonts?: ThemeFontsResolvers<ContextType>;
   ThemeFontsConnection?: ThemeFontsConnectionResolvers<ContextType>;
   ThemeFontsEdge?: ThemeFontsEdgeResolvers<ContextType>;
-  ThemeFontsParent?: ThemeFontsParentResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   UserConnection?: UserConnectionResolvers<ContextType>;
   UserEdge?: UserEdgeResolvers<ContextType>;

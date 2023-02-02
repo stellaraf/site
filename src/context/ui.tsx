@@ -18,9 +18,9 @@ import type { UseTheme, UIProviderProps } from "./types";
 type StorageManager = NonNullable<ColorModeProviderProps["colorModeManager"]>;
 
 export const UIProvider = (props: UIProviderProps) => {
-  const { theme, children, cookies } = props;
+  const { theme, children, cookies, fonts } = props;
 
-  const fullTheme = useMemo(() => makeTheme(theme), []);
+  const fullTheme = useMemo(() => makeTheme(theme, fonts), []);
 
   const colorModeManager = useMemo<StorageManager>(() => {
     if (typeof cookies === "string") {

@@ -18,8 +18,6 @@ export default async function theme(): Promise<ThemeConfig> {
     throw new Error("No theme associated with configuration");
   }
 
-  const { fonts } = base.configuration.theme;
-
   const colors = Object.entries(base.configuration.theme.colors).reduce<ThemeConfig["colors"]>(
     (final, [color, value]) => {
       if (typeof value === "object") {
@@ -30,5 +28,5 @@ export default async function theme(): Promise<ThemeConfig> {
     {},
   );
 
-  return { colors, fonts };
+  return { colors };
 }
