@@ -7,7 +7,7 @@ import { Link } from "~/components";
 import { useColorValue, useColorMode } from "~/context";
 import { useNavLogoState } from "~/hooks";
 
-import { LinkGroup, ContactButton } from "./desktop-links";
+import { LinkGroup, LoginButton } from "./desktop-links";
 import { HeaderLogo } from "./desktop-logo";
 
 import type { BoxProps } from "@chakra-ui/react";
@@ -70,7 +70,7 @@ export const DHeader = (props: BoxProps) => {
         </Box>
         <NavGroup>
           <LinkGroup />
-          <ContactButton />
+          <LoginButton />
         </NavGroup>
       </Navbar>
     </Header>

@@ -26,6 +26,7 @@ const config: NavConfigItem[] = [
   },
   { title: "Docs", link: "/docs" },
   { title: "About", link: "/about" },
+  { title: "Contact", link: "/contact" },
 ];
 
 export default config;

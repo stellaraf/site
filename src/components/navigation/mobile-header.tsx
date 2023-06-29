@@ -2,7 +2,7 @@ import { Flex, HStack, VStack, useDisclosure } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
 import { Spiral as Hamburger } from "hamburger-react";
 
-import { Button, DynamicIcon, Controls, Modal } from "~/components";
+import { Button, Controls, Modal } from "~/components";
 import { useColorMode } from "~/context";
 
 import navConfig from "./config";
@@ -14,18 +14,18 @@ import type { ButtonProps } from "~/components";
 
 const HEADING_HEIGHT = 56;
 
-const ContactButton = (props: ButtonProps) => (
+const LoginButton = (props: ButtonProps) => (
   <Button
     mr={8}
     w="100%"
-    href="/contact"
+    href="https://launch.stellar.tech"
+    target="_blank"
     variant="outline"
     borderWidth="1px"
     colorScheme="primary"
-    leftIcon={<DynamicIcon icon={{ fa: "FaHeart" }} />}
     {...props}
   >
-    Contact Us
+    Log In
   </Button>
 );
 
@@ -81,7 +81,7 @@ export const MHeader = (props: FlexProps) => {
         }
         footer={
           <HStack w="100%" justify="flex-start">
-            <ContactButton />
+            <LoginButton />
             <Controls.Mobile />
           </HStack>
         }

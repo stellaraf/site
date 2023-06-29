@@ -87,21 +87,22 @@ export const LinkGroup = (props: LinkProps) => {
   );
 };
 
-export const ContactButton = (props: ButtonProps) => {
+export const LoginButton = (props: ButtonProps) => {
   const color = useColorValue("secondary.600", "white");
   const hoverBg = useColorValue("secondary.50", "whiteAlpha.100");
   const borderColor = useColorValue("secondary.500", "white");
   return (
     <Button
       color={color}
-      href="/contact"
+      target="_blank"
       borderWidth="1px"
       variant="outline"
       borderColor={borderColor}
+      href="https://launch.stellar.tech"
       _hover={{ backgroundColor: hoverBg }}
       {...props}
     >
-      Contact Us
+      Log In
     </Button>
   );
 };
