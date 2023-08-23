@@ -1,6 +1,6 @@
 import { Box, Flex, Button as ChakraButton, Heading, VStack } from "@chakra-ui/react";
 
-import { Content, DynamicIcon, Hero, FormCardGroup, Callout } from "~/components";
+import { Content, DynamicIcon, Hero, FormCardGroup, Callout, RichText } from "~/components";
 import { useSlug, useResponsiveStyle } from "~/hooks";
 import { is } from "~/lib";
 import { contactFormsQuery, pageQuery, commonStaticPropsQuery } from "~/queries";
@@ -45,6 +45,11 @@ const Contact: NextPage<ContactPageProps> = props => {
                 {content.button.text}
               </Heading>
             </VStack>
+          )}
+          {is(content.body) && (
+            <Content.Body>
+              <RichText>{content.body}</RichText>
+            </Content.Body>
           )}
         </Flex>
       </Box>
