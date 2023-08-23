@@ -45,7 +45,7 @@ export const Hero = (props: HeroProps) => {
               {fnTitle(subtitle)}
             </Heading>
           )}
-          <Flex zIndex={1}>
+          <Flex zIndex={1} flexDir="column">
             <RichText content={body} />
           </Flex>
         </Flex>
