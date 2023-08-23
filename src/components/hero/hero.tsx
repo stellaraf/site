@@ -45,7 +45,9 @@ export const Hero = (props: HeroProps) => {
               {fnTitle(subtitle)}
             </Heading>
           )}
-          <RichText content={body} />
+          <Flex zIndex={1}>
+            <RichText content={body} />
+          </Flex>
         </Flex>
       </Flex>
       {children && children}
