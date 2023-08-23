@@ -1,0 +1,55 @@
+query blogPosts {
+  blogPosts(stage: PUBLISHED, orderBy: updatedAt_DESC) {
+    description
+    id
+    publishedAt
+    slug
+    title
+    overrideDate
+    blogPostTags {
+      tag
+    }
+    authors {
+      name
+      photo {
+        fileName
+        height
+        mimeType
+        size
+        url
+        width
+      }
+      title
+    }
+    body {
+      raw
+      references {
+        ... on Admonition {
+          id
+          body {
+            raw
+          }
+          title
+          type
+        }
+        ... on Asset {
+          id
+          mimeType
+          size
+          url
+          width
+          height
+          fileName
+        }
+        ... on ContentButton {
+          id
+          colorScheme
+          link
+          showIcon
+          text
+          variant
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,5 @@
 import type { BoxProps, CodeProps } from "@chakra-ui/react";
 
-export type CodeBlockProps = BoxProps & Pick<CodeProps, "colorScheme">;
+export interface CodeBlockProps extends BoxProps, Pick<CodeProps, "colorScheme"> {
+  hideCopyButton?: boolean;
+}

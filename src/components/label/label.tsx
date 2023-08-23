@@ -37,6 +37,7 @@ export const Label = (props: LabelProps) => {
         color={leftColor}
         fontWeight="bold"
         whiteSpace="nowrap"
+        alignItems="center"
         display="inline-flex"
         px={{ base: 2, md: 3 }}
         justifyContent="center"

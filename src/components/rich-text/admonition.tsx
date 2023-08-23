@@ -1,7 +1,12 @@
 import { Box, Heading, chakra, HStack, useToken } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { CodeBlockStyleProvider, DynamicIcon, RichText } from "~/components";
+import {
+  BlockQuoteStyleProvider,
+  CodeBlockStyleProvider,
+  DynamicIcon,
+  RichText,
+} from "~/components";
 import { useColorValue } from "~/context";
 import { useOpposingColor } from "~/hooks";
 import { shouldForwardProp } from "~/theme";
@@ -61,7 +66,7 @@ export const Admonition = (props: AdmonitionModel) => {
   const linkColor = useColorValue(
     {
       [AdmonitionType.Note]: undefined,
-      [AdmonitionType.Information]: "red.500",
+      [AdmonitionType.Information]: "secondary.100",
       [AdmonitionType.Tip]: "primary.500",
       [AdmonitionType.Warning]: "primary.500",
       [AdmonitionType.Critical]: "primary.500",
@@ -121,7 +126,7 @@ export const Admonition = (props: AdmonitionModel) => {
 
   return (
     <AdmonitionContainer bg={bg} color={color} {...rest}>
-      <HStack isInline align="center" mb={6}>
+      <HStack direction="row" align="center" mb={6}>
         <AdmonitionIcon type={type} />
         {title && (
           <Heading as="h3" fontWeight="bold" fontSize="md">
@@ -142,22 +147,28 @@ export const Admonition = (props: AdmonitionModel) => {
             copyButton: { colorScheme: codeCopyButtonColorScheme, variant: "ghost" },
           }}
         >
-          <RichText
-            content={body}
-            overrides={{
-              table: props => <Table colorScheme={tableColorScheme} borderRadius="md" {...props} />,
-              table_header_cell: props => (
-                <Th
-                  sx={{
-                    bg: `${tableColorScheme}.300`,
-                    _dark: { bg: `${tableColorScheme}.400` },
-                  }}
-                  {...props}
-                />
-              ),
-              table_cell: props => <Td {...props} />,
-            }}
-          />
+          <BlockQuoteStyleProvider
+            value={{ colorScheme: bgBase, blockQuote: { colorScheme: codeColorScheme } }}
+          >
+            <RichText
+              content={body}
+              overrides={{
+                table: props => (
+                  <Table colorScheme={tableColorScheme} borderRadius="md" {...props} />
+                ),
+                table_header_cell: props => (
+                  <Th
+                    sx={{
+                      bg: `${tableColorScheme}.300`,
+                      _dark: { bg: `${tableColorScheme}.400` },
+                    }}
+                    {...props}
+                  />
+                ),
+                table_cell: props => <Td {...props} />,
+              }}
+            />
+          </BlockQuoteStyleProvider>
         </CodeBlockStyleProvider>
       </Box>
     </AdmonitionContainer>

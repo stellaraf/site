@@ -1,0 +1,54 @@
+query blogPost($slug: String) {
+  blogPost(where: { slug: $slug }, stage: PUBLISHED) {
+    publishedAt
+    description
+    slug
+    title
+    overrideDate
+    blogPostTags {
+      tag
+    }
+    authors {
+      name
+      title
+      photo {
+        mimeType
+        size
+        url
+        width
+        height
+        fileName
+      }
+    }
+    body {
+      raw
+      references {
+        ... on Admonition {
+          id
+          body {
+            raw
+          }
+          title
+          type
+        }
+        ... on Asset {
+          id
+          fileName
+          height
+          mimeType
+          size
+          url
+          width
+        }
+        ... on ContentButton {
+          id
+          colorScheme
+          link
+          showIcon
+          text
+          variant
+        }
+      }
+    }
+  }
+}

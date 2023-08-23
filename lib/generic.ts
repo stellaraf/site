@@ -223,3 +223,29 @@ export function parseCookie(
       return final;
     }, {});
 }
+
+/**
+ * Determine if an object has a given method or property.
+ *
+ * @param obj Object to check
+ * @param props Properties or methods to look for
+ */
+export function objectHasProperty<O>(obj: O, ...props: string[]): boolean {
+  if (typeof obj !== "object" || obj === null) {
+    return false;
+  }
+  const set = new Set();
+  for (const prop of Object.getOwnPropertyNames(Object.getPrototypeOf(obj))) {
+    set.add(prop);
+  }
+  for (const prop of Object.getOwnPropertyNames(obj)) {
+    set.add(prop);
+  }
+  const all = Array.from(set);
+  for (const prop of props) {
+    if (!all.includes(prop)) {
+      return false;
+    }
+  }
+  return true;
+}

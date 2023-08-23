@@ -2,24 +2,54 @@ import { chakra } from "@chakra-ui/react";
 
 import { shouldForwardProp } from "~/theme";
 
-export const Backdrop = chakra("div", {
+import type { BackdropProps } from "./types";
+
+const Base = chakra("div", {
   shouldForwardProp,
   baseStyle: {
     mx: "auto",
     zIndex: 1,
     pos: "relative",
-    boxShadow: "xl",
     cursor: "pointer",
     overflow: "hidden",
     borderStyle: "solid",
     width: { base: "100%", lg: "75%", xl: "50%" },
-    borderRadius: { base: "1rem", lg: "2rem" },
-    borderWidth: { base: "0.2rem", lg: "0.4rem", xl: "0.8rem" },
-    color: "light.500",
-    borderColor: "light.500",
+    borderRadius: "lg",
+    borderWidth: "0.1rem",
+    borderColor: "blackAlpha.200",
     _dark: {
-      color: "dark.500",
-      borderColor: "dark.500",
+      borderColor: "whiteAlpha.300",
     },
   },
 });
+
+const Title = chakra("div", {
+  shouldForwardProp,
+  baseStyle: {
+    py: 4,
+    borderTopStyle: "solid",
+    borderTopWidth: "0.1rem",
+    borderTopColor: "blackAlpha.200",
+    _dark: {
+      borderTopColor: "whiteAlpha.300",
+    },
+    textAlign: "center",
+  },
+});
+
+const ChildContainer = chakra("div", {
+  shouldForwardProp,
+  baseStyle: {
+    p: 2,
+  },
+});
+
+export const Backdrop = (props: BackdropProps) => {
+  const { title, children, ...rest } = props;
+  return (
+    <Base {...rest}>
+      <ChildContainer>{children}</ChildContainer>
+      {title && <Title>{title}</Title>}
+    </Base>
+  );
+};

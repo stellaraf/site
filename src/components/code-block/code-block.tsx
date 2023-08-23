@@ -15,7 +15,7 @@ import { useCodeBlockStyle } from "./use-code-block-style";
 import type { CodeBlockProps } from "./types";
 
 export const CodeBlock = (props: CodeBlockProps) => {
-  const { children, colorScheme, ...rest } = props;
+  const { children, colorScheme, hideCopyButton = false, ...rest } = props;
   const defaultScheme = useColorValue("blackAlpha", "tertiary");
   const size = useBreakpointValue({ base: "md", lg: "sm" });
 
@@ -70,33 +70,35 @@ export const CodeBlock = (props: CodeBlockProps) => {
       >
         {children}
       </Box>
-      <IconButton
-        sx={btnSx}
-        m={2}
-        top={0}
-        right={0}
-        size={size}
-        pos="absolute"
-        aria-label="Copy to Clipboard"
-        icon={
-          <>
-            <DynamicIcon
-              icon={{ bi: "BiCheck" }}
-              transition="all 0.2s ease"
-              opacity={hasCopied ? 1 : 0}
-              pos={hasCopied ? undefined : "absolute"}
-            />
+      {!hideCopyButton && (
+        <IconButton
+          sx={btnSx}
+          m={2}
+          top={0}
+          right={0}
+          size={size}
+          pos="absolute"
+          aria-label="Copy to Clipboard"
+          icon={
+            <>
+              <DynamicIcon
+                icon={{ bi: "BiCheck" }}
+                transition="all 0.2s ease"
+                opacity={hasCopied ? 1 : 0}
+                pos={hasCopied ? undefined : "absolute"}
+              />
 
-            <DynamicIcon
-              icon={{ bi: "BiCopy" }}
-              transition="all 0.2s ease"
-              opacity={hasCopied ? 0 : 1}
-              pos={hasCopied ? "absolute" : undefined}
-            />
-          </>
-        }
-        onClick={onCopy}
-      />
+              <DynamicIcon
+                icon={{ bi: "BiCopy" }}
+                transition="all 0.2s ease"
+                opacity={hasCopied ? 0 : 1}
+                pos={hasCopied ? "absolute" : undefined}
+              />
+            </>
+          }
+          onClick={onCopy}
+        />
+      )}
     </Box>
   );
 };
