@@ -1,8 +1,19 @@
 import { memo } from "react";
 
-import { Divider, Heading, Image, VStack, Wrap, WrapItem } from "@chakra-ui/react";
+import {
+  Divider,
+  Flex,
+  Heading,
+  Image,
+  Tag,
+  TagLeftIcon,
+  TagLabel,
+  VStack,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
 
-import { Modal, RichText } from "~/components";
+import { Modal, RichText, DynamicIcon } from "~/components";
 import { useColorValue } from "~/context";
 import { useScaledText } from "~/hooks";
 
@@ -54,6 +65,17 @@ const _Header = (props: Pick<Employee, "name" | "title" | "photo">) => {
 
 const Header = memo(_Header, (prev, next) => prev.name === next.name);
 
+const Footer = (props: Pick<Employee, "location">) => {
+  return (
+    <Flex alignItems="flex-end" justifyContent="flex-end">
+      <Tag>
+        <TagLeftIcon as={() => <DynamicIcon icon={{ go: "location" }} />} />
+        <TagLabel ml={2}>{props.location}</TagLabel>
+      </Tag>
+    </Flex>
+  );
+};
+
 export const Detail = (props: AvatarDetailProps) => {
   const { isOpen, onClose } = props;
   const { employees } = useAvatar();
@@ -69,6 +91,8 @@ export const Detail = (props: AvatarDetailProps) => {
       blockScrollOnMount={false}
       header={<Header {...employees[current]} />}
       headerProps={{ py: "unset", pb: 2, px: "unset" }}
+      footer={<Footer location={employees[current].location} />}
+      footerProps={{ mb: "unset", px: "unset" }}
       containerProps={{
         pl: 8,
         py: 8,
