@@ -5,6 +5,7 @@ query employees($config: String) {
         raw
       }
       name
+      location
       photo {
         fileName
         height
