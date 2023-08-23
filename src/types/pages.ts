@@ -8,6 +8,8 @@ import type {
   ContactForms,
   DocsGroups,
   DocsPage,
+  BlogPost,
+  BlogPosts,
   Employees,
   FooterGroups,
   HomePage,
@@ -37,6 +39,8 @@ export type PageProps = Page & WithError & WithPreview & WithCommonPageProps;
 
 export type DocsPageProps = DocsPage & WithPreview & WithError & WithCommonPageProps;
 
+export type BlogPostProps = BlogPost & WithPreview & WithError & WithCommonPageProps;
+
 export type HomePageProps = HomePage & WithPreview & WithError & WithCommonPageProps;
 
 export interface SiteProps {
@@ -53,6 +57,10 @@ interface WithPreview {
 
 interface WithCommonPageProps {
   common: CommonPageProps;
+}
+
+export interface BlogPageProps extends PageProps {
+  blogPosts: BlogPosts;
 }
 
 export interface CommonPageProps {

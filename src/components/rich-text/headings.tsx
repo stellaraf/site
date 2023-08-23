@@ -4,6 +4,7 @@ import { chakra, useStyleConfig, useToken } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { useSlug } from "~/hooks";
+import { getTextValueFromReactNode } from "~/lib";
 
 import type { Headings, HeadingLevel } from "./types";
 import type { HeadingProps } from "@chakra-ui/react";
@@ -14,16 +15,19 @@ function createHeading(level: HeadingLevel, baseStyle: SystemStyleObject): React
 
   const HeadingComponent = (props: HeadingProps): JSX.Element => {
     const { children, ...rest } = props;
+
     const fnTitle = useTitleCase();
     let title = children;
     if (typeof children === "string") {
       title = fnTitle(children);
     }
+
     const headingLevel: Headings = `h${level}`;
     const sx = useStyleConfig("Heading", props);
     const headingSize = (sx?.fontSize as string | string[]) ?? "md";
     const fontSize = useToken("fontSizes", headingSize);
-    const slug = useSlug(title as string, [title]);
+    const titleValue = getTextValueFromReactNode(title);
+    const slug = useSlug(titleValue, [title]);
 
     return createElement(
       Base,

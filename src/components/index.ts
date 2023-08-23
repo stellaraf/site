@@ -1,3 +1,5 @@
+export * from "./block-quote";
+export * from "./blog";
 export * from "./button";
 export * from "./call-to-action";
 export * from "./callout";

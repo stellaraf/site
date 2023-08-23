@@ -20,7 +20,7 @@ export const Hero = (props: HeroProps) => {
   const fnTitle = useTitleCase();
 
   return (
-    <Container {...bg} {...rStyles} {...rest}>
+    <Container className="__hero" {...bg} {...rStyles} {...rest}>
       <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
         <Flex
           textAlign="center"

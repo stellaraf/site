@@ -1,6 +1,6 @@
 import { RichText as HygraphRichText } from "@graphcms/rich-text-react-renderer";
 
-import { Link, CodeBlock } from "~/components";
+import { Link, CodeBlock, BlockQuote } from "~/components";
 import { is } from "~/lib";
 
 import { Admonition } from "./admonition";
@@ -10,7 +10,7 @@ import { Expandable } from "./expandable";
 import { H1, H2, H3, H4, H5, H6 } from "./headings";
 import { Ul, Ol, Li } from "./lists";
 import { Table, Td, Th } from "./table";
-import { Code, BlockQuote, P } from "./text";
+import { Code, P } from "./text";
 
 import type { NodeRendererType } from "@graphcms/rich-text-react-renderer";
 import type { RichTextValue } from "~/types";
@@ -23,7 +23,7 @@ interface RichTextProps {
 
 const defaultRenderers: NodeRendererType = {
   h1: ({ children }) => <H1>{children}</H1>,
-  h2: ({ children }) => <H2>{children}</H2>,
+  h2: ({ children, ...rest }) => <H2 {...rest}>{children}</H2>,
   h3: ({ children }) => <H3>{children}</H3>,
   h4: ({ children }) => <H4>{children}</H4>,
   h5: ({ children }) => <H5>{children}</H5>,
@@ -54,6 +54,5 @@ export const RichText = (props: RichTextProps) => {
   const resolved = content ?? children ?? {};
   const renderers = { ...defaultRenderers, ...overrides };
   const { raw, ...rest } = resolved;
-
   return <>{is(raw) ? <HygraphRichText content={raw} renderers={renderers} {...rest} /> : null}</>;
 };

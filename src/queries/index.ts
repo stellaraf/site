@@ -21,6 +21,10 @@ export { default as docsGroupsQuery, type DocsGroups, type DocsGroup } from "./d
 
 export { default as docsPageQuery, type DocsPage, type AdmonitionModel } from "./docs-page";
 
+export { default as blogPostQuery, type BlogPost, type BlogPostTags } from "./blog-post";
+
+export { default as blogPostsQuery, type BlogPosts } from "./blog-posts";
+
 export { default as employeesQuery, type Employee, type Employees } from "./employees";
 
 export { default as footerGroupsQuery, type FooterGroups } from "./footer-groups";

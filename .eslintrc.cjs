@@ -36,6 +36,7 @@ const config = {
     "generate-favicons.ts",
     "remix.config.mjs",
     "middleware.ts",
+    "codegen.ts",
   ],
   rules: {
     "import/prefer-default-export": "off",

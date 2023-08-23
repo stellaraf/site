@@ -1,0 +1,5 @@
+query blogPostStaticPaths {
+  blogPosts(stage: PUBLISHED) {
+    slug
+  }
+}

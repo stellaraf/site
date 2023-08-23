@@ -8,3 +8,4 @@ CHANGELOG.md
 *-lock.json
 *.lock
 src/types/schema.ts
+.vercel/

@@ -10,24 +10,27 @@ import type { ImageProps, VideoProps } from "@graphcms/rich-text-types";
 const SVG_PATTERN = /^image\/svg.*/i;
 
 export const ImageAsset = (props: Partial<ImageProps>) => {
-  const { title, src = "", height = 0, width = 0, mimeType = "", ...rest } = props;
+  const { title, src = "", height = 0, width = 0, mimeType = "", altText, ...rest } = props;
 
   const { isOpen, onClose, onOpen } = useDisclosure();
   const css = useColorValue({}, { filter: "invert(1)" });
 
   // Override the background/border colors if SVG. Since SVG's won't have a background, it looks
   // better to make the background match the color mode.
-  let bg = useColorValue("dark.500", "light.500");
-  const svgBg = useColorValue("white", "black");
+  // let bg = useColorValue("blackAlpha.300", "whiteAlpha.400");
+  // const svgBg = useColorValue("white", "black");
 
   // next/image doesn't support SVGs, as of 10.0.1 testing. Use native element for SVGs.
   let image = null;
 
-  if (SVG_PATTERN.test(mimeType)) {
-    image = <ChakraImage src={src} alt={title} boxSize="100%" css={css} />;
-    bg = svgBg;
+  const isSVG = SVG_PATTERN.test(mimeType);
+
+  if (isSVG) {
+    image = <ChakraImage src={src} alt={altText ?? title ?? "Unknown"} boxSize="100%" css={css} />;
   } else {
-    image = <NextImage src={src} width={width} height={height} alt={title ?? "Unknown"} />;
+    image = (
+      <NextImage src={src} width={width} height={height} alt={altText ?? title ?? "Unknown"} />
+    );
   }
 
   return (
@@ -54,7 +57,13 @@ export const ImageAsset = (props: Partial<ImageProps>) => {
           textAlign: { base: "left", lg: "right" },
         }}
       />
-      <Backdrop onClick={onOpen} bg={bg} borderColor={bg} {...rest}>
+      <Backdrop
+        onClick={onOpen}
+        borderColor={"blackAlpha.200"}
+        _dark={{ borderColor: "whiteAlpha.300" }}
+        title={altText}
+        {...rest}
+      >
         {image}
       </Backdrop>
     </>
