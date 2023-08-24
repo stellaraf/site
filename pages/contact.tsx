@@ -8,18 +8,24 @@ import {
   Callout,
   RichText,
   HolidayTable,
+  Timezones,
   P,
 } from "~/components";
 import { useSlug, useResponsiveStyle } from "~/hooks";
 import { is } from "~/lib";
-import { getHolidays } from "~/lib/server";
-import { contactFormsQuery, pageQuery, commonStaticPropsQuery } from "~/queries";
+import { getHolidays, getLocationTime } from "~/lib/server";
+import {
+  contactFormsQuery,
+  pageQuery,
+  commonStaticPropsQuery,
+  cloudLocationsQuery,
+} from "~/queries";
 
 import type { GetStaticProps, NextPage } from "next";
 import type { ContactPageProps } from "~/types";
 
 const Contact: NextPage<ContactPageProps> = props => {
-  const { title, subtitle, body, contents, callout, contactForms, holidays } = props;
+  const { title, subtitle, body, contents, callout, contactForms, holidays, locationTimes } = props;
 
   const rStyles = useResponsiveStyle();
   const content = contents[0];
@@ -63,6 +69,7 @@ const Contact: NextPage<ContactPageProps> = props => {
             maxW="100%"
             css={{ "& div.st-content-p": { marginTop: "unset" } }}
           >
+            <Timezones times={locationTimes} />
             <Flex
               maxW="100%"
               justifyContent="center"
@@ -97,7 +104,12 @@ export const getStaticProps: GetStaticProps<ContactPageProps> = async ctx => {
   const page = await pageQuery({ slug: "contact" });
   const common = await commonStaticPropsQuery();
   const holidays = getHolidays();
-  return { props: { ...page, holidays, contactForms, preview, common }, revalidate: 43_200 };
+  const locations = await cloudLocationsQuery();
+  const locationTimes = await Promise.all(locations.map(getLocationTime));
+  return {
+    props: { ...page, holidays, contactForms, preview, locationTimes, common },
+    revalidate: 43_200,
+  };
 };
 
 export default Contact;

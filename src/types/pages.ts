@@ -1,7 +1,7 @@
 import type { AppProps, AppInitialProps, AppContext } from "next/app";
 
 import type { NextPageContext } from "next";
-import type { Holidays } from "~/lib/server";
+import type { Holidays, LocationTime } from "~/lib/server";
 import type {
   Actions,
   BlogPost,
@@ -83,6 +83,7 @@ export interface CloudPageProps extends PageProps {
 export interface ContactPageProps extends PageProps {
   contactForms: ContactForms;
   holidays: Holidays;
+  locationTimes: LocationTime[];
 }
 
 export interface AboutPageProps extends PageProps {
