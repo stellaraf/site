@@ -35,6 +35,7 @@ export * from "./special";
 export * from "./stars";
 export * from "./subscribe";
 export * from "./testimonials";
+export * from "./timezones";
 export * from "./us-map";
 export * from "./util";
 export * from "./video";

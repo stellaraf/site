@@ -37,5 +37,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_VERCEL_ENV: string;
     SFDC_ORG_ID: string;
     VERCEL_ENV: string;
+    NEXT_PUBLIC_GMAPS_KEY: string;
   }
 }
