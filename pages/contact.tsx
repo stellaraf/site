@@ -1,15 +1,25 @@
 import { Box, Flex, Button as ChakraButton, Heading, VStack } from "@chakra-ui/react";
 
-import { Content, DynamicIcon, Hero, FormCardGroup, Callout, RichText } from "~/components";
+import {
+  Content,
+  DynamicIcon,
+  Hero,
+  FormCardGroup,
+  Callout,
+  RichText,
+  HolidayTable,
+  P,
+} from "~/components";
 import { useSlug, useResponsiveStyle } from "~/hooks";
 import { is } from "~/lib";
+import { getHolidays } from "~/lib/server";
 import { contactFormsQuery, pageQuery, commonStaticPropsQuery } from "~/queries";
 
 import type { GetStaticProps, NextPage } from "next";
 import type { ContactPageProps } from "~/types";
 
 const Contact: NextPage<ContactPageProps> = props => {
-  const { title, subtitle, body, contents, callout, contactForms } = props;
+  const { title, subtitle, body, contents, callout, contactForms, holidays } = props;
 
   const rStyles = useResponsiveStyle();
   const content = contents[0];
@@ -46,11 +56,22 @@ const Contact: NextPage<ContactPageProps> = props => {
               </Heading>
             </VStack>
           )}
-          {is(content.body) && (
-            <Content.Body>
-              <RichText>{content.body}</RichText>
-            </Content.Body>
-          )}
+          <Content.Body
+            display="flex"
+            flexDir="column"
+            alignItems="center"
+            css={{ "& div.st-content-p": { marginTop: "unset" } }}
+          >
+            {is(content.body) && (
+              <>
+                <Content.Subtitle as="h4">Support Hours</Content.Subtitle>
+                <RichText>{content.body}</RichText>
+              </>
+            )}
+            <Content.Subtitle as="h4">Observed Holidays</Content.Subtitle>
+            <P />
+            <HolidayTable holidays={holidays} />
+          </Content.Body>
         </Flex>
       </Box>
       {is(callout) && <Callout {...callout} />}
@@ -64,8 +85,8 @@ export const getStaticProps: GetStaticProps<ContactPageProps> = async ctx => {
   const contactForms = await contactFormsQuery();
   const page = await pageQuery({ slug: "contact" });
   const common = await commonStaticPropsQuery();
-
-  return { props: { ...page, contactForms, preview, common } };
+  const holidays = getHolidays();
+  return { props: { ...page, holidays, contactForms, preview, common } };
 };
 
 export default Contact;

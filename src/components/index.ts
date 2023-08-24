@@ -18,6 +18,7 @@ export * from "./form";
 export * from "./google-map";
 export * from "./hero-card-slider";
 export * from "./hero";
+export * from "./holiday-table";
 export * from "./home-section";
 export * from "./icon";
 export * from "./label";
