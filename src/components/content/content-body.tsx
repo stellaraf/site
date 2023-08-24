@@ -6,7 +6,7 @@ export const ContentBody = (props: BoxProps) => (
   <Box
     zIndex={1}
     fontSize="lg"
-    maxW={{ lg: "60%" }}
+    maxW={{ base: "100%", lg: "60%" }}
     whiteSpace="pre-line"
     my={{ base: 8, lg: 16 }}
     className="__st-content-body"

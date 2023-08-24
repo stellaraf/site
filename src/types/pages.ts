@@ -1,15 +1,16 @@
 import type { AppProps, AppInitialProps, AppContext } from "next/app";
 
 import type { NextPageContext } from "next";
+import type { Holidays } from "~/lib/server";
 import type {
   Actions,
+  BlogPost,
+  BlogPosts,
   CloudLocations,
   Config,
   ContactForms,
   DocsGroups,
   DocsPage,
-  BlogPost,
-  BlogPosts,
   Employees,
   FooterGroups,
   HomePage,
@@ -81,6 +82,7 @@ export interface CloudPageProps extends PageProps {
 
 export interface ContactPageProps extends PageProps {
   contactForms: ContactForms;
+  holidays: Holidays;
 }
 
 export interface AboutPageProps extends PageProps {
