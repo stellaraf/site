@@ -60,17 +60,28 @@ const Contact: NextPage<ContactPageProps> = props => {
             display="flex"
             flexDir="column"
             alignItems="center"
+            maxW="100%"
             css={{ "& div.st-content-p": { marginTop: "unset" } }}
           >
-            {is(content.body) && (
-              <>
-                <Content.Subtitle as="h4">Support Hours</Content.Subtitle>
-                <RichText>{content.body}</RichText>
-              </>
-            )}
-            <Content.Subtitle as="h4">Observed Holidays</Content.Subtitle>
-            <P />
-            <HolidayTable holidays={holidays} />
+            <Flex
+              maxW="100%"
+              justifyContent="center"
+              gap={{ base: 0, lg: 4 }}
+              flexDir={{ base: "column", lg: "row" }}
+              alignItems={{ base: "center", lg: "flex-start" }}
+            >
+              {is(content.body) && (
+                <VStack maxW="100%">
+                  <Content.Subtitle as="h4">Support Hours</Content.Subtitle>
+                  <RichText>{content.body}</RichText>
+                </VStack>
+              )}
+              <VStack maxW="100%">
+                <Content.Subtitle as="h4">Observed Holidays</Content.Subtitle>
+                <P />
+                <HolidayTable holidays={holidays} />
+              </VStack>
+            </Flex>
           </Content.Body>
         </Flex>
       </Box>
@@ -86,7 +97,7 @@ export const getStaticProps: GetStaticProps<ContactPageProps> = async ctx => {
   const page = await pageQuery({ slug: "contact" });
   const common = await commonStaticPropsQuery();
   const holidays = getHolidays();
-  return { props: { ...page, holidays, contactForms, preview, common } };
+  return { props: { ...page, holidays, contactForms, preview, common }, revalidate: 43_200 };
 };
 
 export default Contact;
