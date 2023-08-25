@@ -15,6 +15,7 @@ import type { PageProps } from "~/types";
 
 interface SiteProps extends PageProps {
   cookies: string | undefined;
+  description?: string;
 }
 
 const noIndexNoFollow = process.env.VERCEL_ENV !== "production";
@@ -48,7 +49,7 @@ const Site = (props: AppProps<SiteProps>) => {
     : new URL(
         queryString.stringifyUrl({
           url: new URL("/api/og/page", origin).toString(),
-          query: { title: pageTitle, subtitle: subtitle ?? description },
+          query: { title: pageTitle, subtitle: subtitle ?? pageProps.description ?? description },
         }),
       );
 

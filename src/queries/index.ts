@@ -23,7 +23,9 @@ export { default as docsPageQuery, type DocsPage, type AdmonitionModel } from ".
 
 export { default as blogPostQuery, type BlogPost, type BlogPostTags } from "./blog-post";
 
-export { default as blogPostsQuery, type BlogPosts } from "./blog-posts";
+export { default as blogPostsQuery, blogPostsByTagsQuery, type BlogPosts } from "./blog-posts";
+
+export { default as blogPostTagsQuery } from "./blog-post-tags";
 
 export { default as employeesQuery, type Employee, type Employees } from "./employees";
 

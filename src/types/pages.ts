@@ -64,6 +64,10 @@ export interface BlogPageProps extends PageProps {
   blogPosts: BlogPosts;
 }
 
+export interface BlogTagPageProps extends BlogPageProps {
+  tag: string;
+}
+
 export interface CommonPageProps {
   actions: Actions;
   config: Config;

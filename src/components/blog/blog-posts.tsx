@@ -1,4 +1,4 @@
-import { VStack, Wrap, WrapItem } from "@chakra-ui/react";
+import { Heading, VStack, Wrap, WrapItem } from "@chakra-ui/react";
 
 import { AnimatedDiv } from "~/components";
 import { useResponsiveStyle } from "~/hooks";
@@ -13,23 +13,27 @@ interface BlogPostsProps extends StackProps {
 }
 
 export const BlogPosts = (props: BlogPostsProps) => {
-  const { blogPosts, ...rest } = props;
+  const { blogPosts, children, ...rest } = props;
   const rStyles = useResponsiveStyle();
+
   return (
-    <>
-      <VStack py={24} spacing={12} className="__blogposts" minH="30vh" {...rStyles} {...rest}>
-        <Wrap
-          direction={{ base: "column", lg: "row" }}
-          spacing={8}
-          justify="center"
-          overflow="visible"
-        >
-          {blogPosts.map((post, i) => (
+    <VStack py={24} spacing={12} className="__blogposts" minH="30vh" {...rStyles} {...rest}>
+      {children}
+      <Wrap
+        spacing={8}
+        justify="center"
+        overflow="visible"
+        direction={{ base: "column", lg: "row" }}
+      >
+        {blogPosts.length === 0 ? (
+          <Heading as="h4">No Posts Found</Heading>
+        ) : (
+          blogPosts.map((post, i) => (
             <WrapItem key={post.title}>
               <AnimatedDiv
                 zIndex={1}
-                animate={{ x: 0 }}
                 key={post.title}
+                animate={{ x: 0 }}
                 initial={{ x: "100%" }}
                 whileTap={{ y: "-3%" }}
                 whileHover={{ y: "-3%" }}
@@ -38,9 +42,9 @@ export const BlogPosts = (props: BlogPostsProps) => {
                 <BlogPreview {...post} />
               </AnimatedDiv>
             </WrapItem>
-          ))}
-        </Wrap>
-      </VStack>
-    </>
+          ))
+        )}
+      </Wrap>
+    </VStack>
   );
 };

@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 
-import { Flex, HStack, Button, Heading } from "@chakra-ui/react";
+import { Flex, HStack, Button, Heading, Badge } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { Card, CardBody } from "~/components";
@@ -11,7 +11,7 @@ import { PublishedAt } from "./published-at";
 import type { BlogPost } from "~/queries";
 
 export const BlogPreview = (props: BlogPost) => {
-  const { title, slug, description, publishedAt, overrideDate, authors } = props;
+  const { title, slug, description, publishedAt, overrideDate, authors, blogPostTags } = props;
 
   const titleMe = useTitleCase();
 
@@ -32,7 +32,7 @@ export const BlogPreview = (props: BlogPost) => {
         verticalAlign="unset"
         flexDirection="column"
       >
-        <Card width={{ base: "20rem", md: "18rem", xl: "sm" }} maxHeight={48} zIndex={1}>
+        <Card width={{ base: "20rem", md: "18rem", xl: "sm" }} maxHeight={64} zIndex={1}>
           <CardBody spacing={4} textAlign="left" alignItems="flex-start">
             <Flex align="flex-start" justify="space-between" width="100%">
               <Flex flexDir="column" maxW="80%">
@@ -58,6 +58,11 @@ export const BlogPreview = (props: BlogPost) => {
                 />
               </Flex>
             </Flex>
+            <HStack w="100%" justifyContent="flex-start">
+              {blogPostTags.map(pt => (
+                <Badge key={pt.tag}>{pt.tag}</Badge>
+              ))}
+            </HStack>
           </CardBody>
         </Card>
       </Button>

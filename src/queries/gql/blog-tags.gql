@@ -1,0 +1,7 @@
+query blogPostTags {
+  blogPosts(stage: PUBLISHED) {
+    blogPostTags {
+      tag
+    }
+  }
+}

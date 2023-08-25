@@ -1,4 +1,4 @@
-import { chakra, Box, Flex, HStack } from "@chakra-ui/react";
+import { chakra, Box, Flex, HStack, Stack } from "@chakra-ui/react";
 
 import { CodeBlock, Content, RichText } from "~/components";
 import { useSlug } from "~/hooks";
@@ -6,6 +6,7 @@ import { shouldForwardProp } from "~/theme";
 
 import { Author } from "./author";
 import { PublishedAt } from "./published-at";
+import { Share } from "./share";
 import { Tags } from "./tags";
 
 import type { BlogPost } from "~/queries";
@@ -37,14 +38,15 @@ export const BlogPostContent = (props: React.PropsWithChildren<BlogPost>) => {
         <PublishedAt time={overrideDate ?? publishedAt!} />
         <Content.Title id={generatedSlug}>{title}</Content.Title>
         <Content.Subtitle my={2}>{description}</Content.Subtitle>
-        <HStack spacing={8}>
+        <Stack spacing={8} direction={{ base: "column", lg: "row" }}>
           <HStack>
             {authors.map(author => (
               <Author key={author.name} {...author} />
             ))}
           </HStack>
-          <Tags tags={blogPostTags} />
-        </HStack>
+          <Tags fontSize="lg" tags={blogPostTags} />
+          <Share url={`https://stellar.tech/blog/${slug}`} title={title} />
+        </Stack>
       </Flex>
       <Box>
         <Content.Body maxW="unset">
@@ -57,6 +59,9 @@ export const BlogPostContent = (props: React.PropsWithChildren<BlogPost>) => {
         </Content.Body>
         {typeof children !== "undefined" && children}
       </Box>
+      <Flex width="100%" flexDir="column" justifyContent="center" alignItems="center">
+        <Share spacing={6} url={`https://stellar.tech/blog/${slug}`} title={title} />
+      </Flex>
     </Article>
   );
 };

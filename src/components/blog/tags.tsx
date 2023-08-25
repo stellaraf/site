@@ -1,19 +1,26 @@
-import { HStack, Tag } from "@chakra-ui/react";
+import NextLink from "next/link";
+
+import { Tag, type TagProps, Wrap, WrapItem } from "@chakra-ui/react";
 
 import type { BlogPostTags } from "~/queries";
 
-interface TagsProps {
+interface TagsProps extends TagProps {
   tags: BlogPostTags;
 }
 export const Tags = (props: TagsProps) => {
-  if (props.tags.length == 0) {
+  const { tags, ...rest } = props;
+  if (tags.length == 0) {
     return <></>;
   }
   return (
-    <HStack my={2}>
-      {props.tags.map(({ tag }) => (
-        <Tag key={tag}>{tag}</Tag>
+    <Wrap my={2} spacing={4} display="flex" alignItems="center">
+      {tags.map(({ tag }) => (
+        <WrapItem key={tag}>
+          <NextLink href={`/blog/tag/${tag.toLowerCase()}`}>
+            <Tag {...rest}>{tag}</Tag>
+          </NextLink>
+        </WrapItem>
       ))}
-    </HStack>
+    </Wrap>
   );
 };
