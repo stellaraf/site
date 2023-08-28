@@ -1,7 +1,7 @@
 import * as ReactSelect from "react-select";
 
 import type { ChakraProps } from "@chakra-ui/react";
-import type { StylesProps, StylesConfigFunction } from "react-select/dist/declarations/src/styles";
+import type { StylesConfig } from "react-select";
 import type { ColorNames } from "~/theme";
 import type { SelectOptionSingle } from "~/types";
 
@@ -43,7 +43,7 @@ export type RSStyleFunction<
   K extends StyleConfigKeys,
   Opt extends SelectOptionSingle,
   IsMulti extends boolean,
-> = StylesConfigFunction<StylesProps<Opt, IsMulti, ReactSelect.GroupBase<Opt>>[K]>;
+> = NonNullable<StylesConfig<Opt, IsMulti, ReactSelect.GroupBase<Opt>>[K]>;
 
 export type RSThemeFunction = (theme: ReactSelect.Theme) => ReactSelect.Theme;
 
