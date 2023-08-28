@@ -43,7 +43,10 @@ const holidayNames = [
   "Christmas Day",
 ];
 
-const eves = [["Christmas Day", "Christmas Eve"]];
+const eves = [
+  ["Christmas Day", "Christmas Eve"],
+  ["Thanksgiving Day", "Black Friday"],
+];
 
 function matchEve(holiday: EveArgs): Holiday | undefined {
   for (const [day, eve] of eves) {
