@@ -1,7 +1,7 @@
 import { Box, List, ListItem, Text, SimpleGrid, useToken } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { Link } from "~/components";
+import { Link, Status } from "~/components";
 
 import { useFooterLinks } from "./use-footer-links";
 
@@ -66,6 +66,16 @@ export const DesktopLinks = (props: FooterLinksProps) => {
                       </Link>
                     </ListItem>
                   ))}
+                  {group === "Cloud" && (
+                    <ListItem my={2} transition="transform 0.1s ease-in-out">
+                      <Status
+                        p={1}
+                        opacity={0.6}
+                        css={{ "&:focus": { borderRadius } }}
+                        _hover={{ textDecoration: "none", opacity: 0.9 }}
+                      />
+                    </ListItem>
+                  )}
                 </List>
               </Box>
             );

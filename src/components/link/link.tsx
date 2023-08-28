@@ -41,7 +41,7 @@ const BaseLink = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
  */
 const LinkIcon = (props: BoxProps) => (
   <chakra.span mb={1} mx={1} {...props}>
-    <DynamicIcon icon={{ ei: "EiExternalIcon" }} />
+    <DynamicIcon icon={{ fi: "FiExternalLink" }} />
   </chakra.span>
 );
 

@@ -5,6 +5,7 @@ query config($title: String) {
     slogan
     title
     titleOverrides
+    statusUrl
     socialLinks(first: 10) {
       id
       name

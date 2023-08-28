@@ -9,7 +9,7 @@ import {
   AccordionButton,
 } from "@chakra-ui/react";
 
-import { Link } from "~/components";
+import { Link, Status } from "~/components";
 import { useColorValue } from "~/context";
 
 import { useFooterLinks } from "./use-footer-links";
@@ -53,6 +53,11 @@ export const MobileLinks = (props: FooterLinksProps) => {
                     </Link>
                   </ListItem>
                 ))}
+                {group.group === "Cloud" && (
+                  <ListItem my={2} pl={2}>
+                    <Status fontSize="sm" color={linkColor} borderBottom="none" />
+                  </ListItem>
+                )}
               </List>
             </AccordionPanel>
           </AccordionItem>

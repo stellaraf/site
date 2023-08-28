@@ -7,9 +7,7 @@ import utc from "dayjs/plugin/utc";
 
 import { Table, Td, Th } from "~/components";
 import { useColorValue } from "~/context";
-import { useSSR } from "~/hooks";
-
-import { useTimezone, useBrowserTimezone } from "./use-timezone";
+import { useSSR, useTimezone, useBrowserTimezone } from "~/hooks";
 
 import type { TimezonesProps, TimezoneProps } from "./types";
 import type { LocationTime } from "~/lib/server";

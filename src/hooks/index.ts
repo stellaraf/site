@@ -19,3 +19,4 @@ export * from "./use-rick-roll";
 export * from "./use-scaled-text";
 export * from "./use-slug";
 export * from "./use-ssr";
+export * from "./use-timezone";

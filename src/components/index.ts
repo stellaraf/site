@@ -33,6 +33,7 @@ export * from "./screen";
 export * from "./select";
 export * from "./special";
 export * from "./stars";
+export * from "./status";
 export * from "./subscribe";
 export * from "./testimonials";
 export * from "./timezones";
