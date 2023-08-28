@@ -48,6 +48,7 @@ export const Video = (props: IVideo) => {
   const customConfig = {
     file: {
       attributes: {
+        disablepictureinpicture: "",
         controlsList: ["nodownload", "nofullscreen"],
       },
     },
@@ -56,6 +57,7 @@ export const Video = (props: IVideo) => {
 
   const customStyle = {
     borderRadius: "1.6rem",
+    cursor: "default",
     ...style,
   } as ReactPlayerProps["style"];
 

@@ -123,8 +123,8 @@ dependencies:
     specifier: ^9.5.2
     version: 9.5.2(react@18.2.0)
   react-player:
-    specifier: 2.10.1
-    version: 2.10.1(react@18.2.0)
+    specifier: 2.12.0
+    version: 2.12.0(react@18.2.0)
   react-select:
     specifier: ^5.6.0
     version: 5.6.0(@types/react@18.0.21)(react-dom@18.2.0)(react@18.2.0)
@@ -7877,8 +7877,8 @@ packages:
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-  /react-player@2.10.1(react@18.2.0):
-    resolution: {integrity: sha512-ova0jY1Y1lqLYxOehkzbNEju4rFXYVkr5rdGD71nsiG4UKPzRXQPTd3xjoDssheoMNjZ51mjT5ysTrdQ2tEvsg==}
+  /react-player@2.12.0(react@18.2.0):
+    resolution: {integrity: sha512-rymLRz/2GJJD+Wc01S7S+i9pGMFYnNmQibR2gVE3KmHJCBNN8BhPAlOPTGZtn1uKpJ6p4RPLlzPQ1OLreXd8gw==}
     peerDependencies:
       react: '>=16.6.0'
     dependencies:
