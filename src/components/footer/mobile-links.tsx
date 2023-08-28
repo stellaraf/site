@@ -43,7 +43,12 @@ export const MobileLinks = (props: FooterLinksProps) => {
               <List>
                 {group.items.map(item => (
                   <ListItem key={item.title} my={2} pl={2}>
-                    <Link href={`/${item.slug}`} fontSize="sm" color={linkColor}>
+                    <Link
+                      fontSize="sm"
+                      color={linkColor}
+                      borderBottom="none"
+                      href={`/${item.slug}`}
+                    >
                       {item.footerTitle ? item.footerTitle : item.title}
                     </Link>
                   </ListItem>
