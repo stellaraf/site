@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 
-import { ImageResponse, type ImageResponseOptions } from "@vercel/og";
+import { ImageResponse } from "@vercel/og";
 
 const semiBoldFont = fetch(new URL("../../../public/OpenSans-Semibold.ttf", import.meta.url)).then(
   res => res.arrayBuffer(),
@@ -93,18 +93,16 @@ const handler = async (request: NextRequest) => {
   const semiBold = await semiBoldFont;
   const light = await lightFont;
 
-  const options: ImageResponseOptions = {
+  const element = createElement(title, subtitle);
+
+  return new ImageResponse(element, {
     width: 1200,
     height: 630,
     fonts: [
       { name: "OpenSans Light", data: light, weight: 300, style: "normal" },
       { name: "OpenSans Semibold", data: semiBold, weight: 700, style: "normal" },
     ],
-  };
-
-  const element = createElement(title, subtitle);
-
-  return new ImageResponse(element, options);
+  });
 };
 
 export const config = {

@@ -1,4 +1,4 @@
-import { ImageResponse, type ImageResponseOptions } from "@vercel/og";
+import { ImageResponse } from "@vercel/og";
 
 import { faviconDimensions } from "~/lib/edge";
 
@@ -30,8 +30,6 @@ export default async function handler(request: NextApiRequest, response: NextApi
   if (alpha) {
     background = "transparent";
   }
-
-  const options: ImageResponseOptions = { width, height };
 
   const image =
     mode === "dark"
@@ -68,7 +66,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
         </div>
       </div>
     ),
-    options,
+    { width, height },
   );
 }
 

@@ -1,4 +1,4 @@
-import { ImageResponse, type ImageResponseOptions } from "@vercel/og";
+import { ImageResponse } from "@vercel/og";
 
 const element = (
   <div
@@ -31,7 +31,7 @@ const element = (
   </div>
 );
 
-const options: ImageResponseOptions = {
+const options = {
   width: 1200,
   height: 630,
 };
