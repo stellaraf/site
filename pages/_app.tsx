@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
+import { Open_Sans, Fira_Code } from "next/font/google";
 
-import { Open_Sans, Fira_Code } from "@next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { DefaultSeo } from "next-seo";
 import queryString from "query-string";

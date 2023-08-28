@@ -15,7 +15,6 @@
     "@emotion/styled": "^11.11.0",
     "@graphcms/rich-text-react-renderer": "^0.6.1",
     "@hookform/resolvers": "^2.9.10",
-    "@next/font": "^13.1.6",
     "@react-google-maps/api": "^2.13.1",
     "@stellaraf/logo": "^0.3.5",
     "@stellaraf/utilities": "^1.0.2",

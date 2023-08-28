@@ -1,6 +1,9 @@
+import type { Open_Sans } from "next/font/google";
+
 import type { Theme as DefaultTheme } from "@chakra-ui/theme";
-import type { NextFont } from "@next/font";
 import type { Palette } from "palette-by-numbers";
+
+export type NextFont = ReturnType<typeof Open_Sans>;
 
 type ExtraColors = {
   primary: Palette;
