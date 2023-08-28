@@ -37,7 +37,6 @@ const holidayNames = [
   "Memorial Day",
   "Juneteenth National Independence Day",
   "Independence Day",
-  "Labor Day",
   "Indigenous Peoples' Day",
   "Veterans Day",
   "Thanksgiving Day",
