@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 
 import { chakra } from "@chakra-ui/react";
 import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
+import { loadSlim } from "tsparticles-slim";
 
 import { useColorValue } from "~/context";
 import { useKonami } from "~/hooks";
@@ -124,7 +124,7 @@ const Base = (particleProps: ParticlesProps) => {
   }, [konami]);
 
   const particlesInit = useCallback(async (engine: Engine) => {
-    await loadFull(engine);
+    await loadSlim(engine);
   }, []);
 
   const particlesLoaded = useCallback(async () => {
