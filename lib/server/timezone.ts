@@ -51,7 +51,6 @@ export async function getLocationTime(cloudLocation: CloudLocation): Promise<Loc
   });
 
   const url = new URL("https://maps.googleapis.com/maps/api/timezone/json?" + params.toString());
-  console.log(url.toString());
   const req = new Request(url, { method: "GET" });
   const res = await fetch(req);
   const json = await res.json();

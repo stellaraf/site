@@ -25,7 +25,6 @@ export function useBrowserTimezone() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const browserTz = dayjs.tz.guess();
-      console.log(browserTz);
       const now = dayjs().tz(browserTz);
       const offset = now.utcOffset() / 60;
       setTime({ offset, timezoneId: browserTz, timezoneName: "Your Time" });

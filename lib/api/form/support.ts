@@ -89,8 +89,6 @@ export async function handleSupportForm(request: NextApiRequest): Promise<Respon
     formData.debugEmail = "matt@stellar.tech";
   }
 
-  console.log({ formData });
-
   const url = queryString.stringifyUrl({
     url: "https://webto.salesforce.com/servlet/servlet.WebToCase",
     query: formData,
