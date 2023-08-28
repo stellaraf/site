@@ -58,8 +58,8 @@ export const Timezones = (props: TimezonesProps) => {
   if (showMobileVersion) {
     return (
       <Table {...rest}>
-        {sorted.map(time => (
-          <Tr key={time.timezoneId}>
+        {sorted.map((time, idx) => (
+          <Tr key={`row-${time.timezoneId}-${idx}`}>
             <Th
               sx={time.timezoneName === userTime?.timezoneName ? userTimeSx : undefined}
               paddingInline={2}
@@ -67,7 +67,7 @@ export const Timezones = (props: TimezonesProps) => {
               {time.timezoneName}
             </Th>
             <Timezone
-              key={time.timezoneId}
+              key={`tz-${time.timezoneId}-${idx}`}
               time={time}
               start={now}
               isServer={isServer}
@@ -84,10 +84,10 @@ export const Timezones = (props: TimezonesProps) => {
     <Table {...rest}>
       <thead>
         <Tr>
-          {sorted.map(time => {
+          {sorted.map((time, idx) => {
             return (
               <Th
-                key={time.timezoneId}
+                key={`row-${time.timezoneId}-${idx}`}
                 sx={time.timezoneName === userTime?.timezoneName ? userTimeSx : undefined}
               >
                 {time.timezoneName}
@@ -98,9 +98,9 @@ export const Timezones = (props: TimezonesProps) => {
       </thead>
       <tbody>
         <Tr>
-          {sorted.map(time => (
+          {sorted.map((time, idx) => (
             <Timezone
-              key={time.timezoneId}
+              key={`tz-${time.timezoneId}-${idx}`}
               time={time}
               start={now}
               isServer={isServer}
