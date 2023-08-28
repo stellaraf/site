@@ -77,6 +77,7 @@ export const MHeader = (props: FlexProps) => {
             {navConfig.map(i => (
               <NavLink key={i.title} href={i.link} title={i.title} onClick={onClose} />
             ))}
+            <NavLink href="/blog" title="Blog" onClick={onClose} />
           </VStack>
         }
         footer={
