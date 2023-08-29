@@ -106,7 +106,7 @@ const handler = async (request: NextRequest) => {
 };
 
 export const config = {
-  runtime: "experimental-edge",
+  runtime: "edge",
 };
 
 export default handler;

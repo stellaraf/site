@@ -71,5 +71,5 @@ export default async function handler(request: NextApiRequest, response: NextApi
 }
 
 export const config = {
-  runtime: "experimental-edge",
+  runtime: "edge",
 };
