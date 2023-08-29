@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import { Open_Sans, Fira_Code } from "next/font/google";
 
 import { Analytics } from "@vercel/analytics/react";
-import { DefaultSeo } from "next-seo";
+import { DefaultSeo, DefaultSeoProps } from "next-seo";
 import queryString from "query-string";
 import { useTitleCase } from "use-title-case";
 
@@ -18,6 +18,16 @@ interface SiteProps extends PageProps {
   description?: string;
 }
 
+interface RootSEOProps
+  extends Omit<DefaultSeoProps, "title" | "description">,
+    Pick<SiteProps, "footerTitle" | "subtitle">,
+    Pick<PageProps["common"], "twitterHandle">,
+    Pick<PageProps["common"]["config"], "organizationName" | "description" | "title"> {
+  imageUrl: URL;
+  siteUrl: URL;
+  pageTitle: string;
+}
+
 const noIndexNoFollow = process.env.VERCEL_ENV !== "production";
 
 const openSans = Open_Sans({
@@ -31,6 +41,42 @@ const firaCode = Fira_Code({
   style: "normal",
   display: "swap",
 });
+
+// Separate component so useTitleCase doesn't render outside of context.
+const RootSEO = (props: RootSEOProps) => {
+  const {
+    description,
+    footerTitle,
+    imageUrl,
+    organizationName,
+    pageTitle,
+    siteUrl,
+    subtitle,
+    title,
+    twitterHandle,
+    ...rest
+  } = props;
+  const fnTitle = useTitleCase();
+  return (
+    <DefaultSeo
+      titleTemplate={`%s | ${title}`}
+      description={subtitle ?? description}
+      dangerouslySetAllPagesToNoIndex={noIndexNoFollow}
+      dangerouslySetAllPagesToNoFollow={noIndexNoFollow}
+      twitter={{ site: twitterHandle, cardType: "summary" }}
+      title={fnTitle(footerTitle ?? pageTitle ?? organizationName)}
+      additionalMetaTags={[{ name: "viewport", content: "width=device-width" }]}
+      openGraph={{
+        title,
+        description,
+        type: "website",
+        url: siteUrl.toString(),
+        images: [{ url: imageUrl.toString(), width: 1200, height: 630, alt: title }],
+      }}
+      {...rest}
+    />
+  );
+};
 
 const Site = (props: AppProps<SiteProps>) => {
   const {
@@ -55,8 +101,6 @@ const Site = (props: AppProps<SiteProps>) => {
 
   const siteUrl = new URL(pathname, origin);
 
-  const fnTitle = useTitleCase();
-
   return (
     <>
       <Provider
@@ -66,22 +110,18 @@ const Site = (props: AppProps<SiteProps>) => {
         docsGroups={docsGroups}
         fonts={{ body: openSans, heading: openSans, monospace: firaCode }}
       >
-        <DefaultSeo
-          titleTemplate={`%s | ${title}`}
-          description={subtitle ?? description}
-          dangerouslySetAllPagesToNoIndex={noIndexNoFollow}
-          dangerouslySetAllPagesToNoFollow={noIndexNoFollow}
-          twitter={{ site: twitterHandle, cardType: "summary" }}
-          title={fnTitle(footerTitle ?? pageTitle ?? organizationName)}
-          additionalMetaTags={[{ name: "viewport", content: "width=device-width" }]}
-          openGraph={{
-            title,
-            description,
-            type: "website",
-            url: siteUrl.toString(),
-            images: [{ url: imageUrl.toString(), width: 1200, height: 630, alt: title }],
-          }}
+        <RootSEO
+          description={description}
+          footerTitle={footerTitle}
+          imageUrl={imageUrl}
+          organizationName={organizationName}
+          pageTitle={pageTitle}
+          siteUrl={siteUrl}
+          subtitle={subtitle}
+          title={title}
+          twitterHandle={twitterHandle}
         />
+
         <Favicons
           light={theme.colors.primary}
           dark={theme.colors.secondary}
