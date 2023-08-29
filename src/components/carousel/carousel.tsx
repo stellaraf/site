@@ -117,7 +117,9 @@ export const Carousel = (props: CarouselProps) => {
     interval,
     // = 4000
     noDots = false,
-    dotColor = "black",
+    color = "black",
+    _dark,
+    _light,
     children,
     ...rest
   } = props;
@@ -136,7 +138,7 @@ export const Carousel = (props: CarouselProps) => {
             <Slide key={i}>{child}</Slide>
           ))}
         </SliderContainer>
-        {!noDots && <Dots color={dotColor} />}
+        {!noDots && <Dots color={color} _dark={_dark} _light={_light} />}
       </Box>
     </CarouselContext.Provider>
   );

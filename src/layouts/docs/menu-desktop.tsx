@@ -6,10 +6,10 @@ import {
   AccordionItem,
   AccordionPanel,
   AccordionButton,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 import { Link } from "~/components";
-import { useColorValue } from "~/context";
 
 import { useDocsHref } from "./use-docs-href";
 
@@ -19,8 +19,8 @@ const DMenuItem = (props: Omit<DocsPage, "body">) => {
   const { title } = props;
   const { href, isCurrent } = useDocsHref(props);
 
-  const color = useColorValue("primary.500", "secondary.200");
-  const bg = useColorValue("blackAlpha.100", "whiteAlpha.100");
+  const color = useColorModeValue("primary.500", "secondary.200");
+  const bg = useColorModeValue("blackAlpha.100", "whiteAlpha.100");
 
   return (
     <Box
@@ -57,7 +57,6 @@ const DMenuItem = (props: Omit<DocsPage, "body">) => {
 export const DMenuGroup = (props: DocsGroup) => {
   const { title, docsPages } = props;
 
-  const backgroundColor = useColorValue("blackAlpha.100", "whiteAlpha.100");
   const borderRadius = useToken("radii", "lg");
 
   return (
@@ -68,7 +67,11 @@ export const DMenuGroup = (props: DocsGroup) => {
       _last={{ borderBottomWidth: { base: 1, lg: 0 } }}
     >
       <AccordionButton
-        _hover={{ backgroundColor, borderRadius: "lg" }}
+        _hover={{
+          backgroundColor: "blackAlpha.100",
+          borderRadius: "lg",
+          _dark: { backgroundColor: "whiteAlpha.100" },
+        }}
         css={{ "&:focus": { borderRadius } }}
       >
         <Box flex={1} textAlign="left" fontSize="sm" fontWeight="medium" textTransform="uppercase">

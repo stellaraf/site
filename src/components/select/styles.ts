@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 
-import { useStyleConfig, useToken } from "@chakra-ui/react";
+import { useStyleConfig, useToken, useColorModeValue } from "@chakra-ui/react";
 import { mergeWith } from "@chakra-ui/utils";
 import * as ReactSelect from "react-select";
 
-import { useColorValue, useColorTokenValue } from "~/context";
+import { useColorTokenValue } from "~/context";
 import { useMobile, useOpposingColor } from "~/hooks";
 import { removeProps } from "~/lib";
 
@@ -68,9 +68,9 @@ export const useMenuStyle = <Opt extends SelectOptionSingle, IsMulti extends boo
   const { colorMode } = props;
   const { isOpen } = useSelectContext();
   const backgroundColor = useColorTokenValue("white", "blackSolid.800");
-  const shadowSize = useColorValue("sm", "dark-lg");
+  const shadowSize = useColorModeValue("sm", "dark-lg");
   const boxShadow = useToken("shadows", shadowSize);
-  const backdropFilter = useColorValue(undefined, "blur(4px");
+  const backdropFilter = useColorModeValue(undefined, "blur(4px");
 
   return useCallback(
     base => {
@@ -173,7 +173,7 @@ export const usePlaceholderStyle = <Opt extends SelectOptionSingle, IsMulti exte
 ): RSStyleFunction<"placeholder", Opt, IsMulti> => {
   const { colorMode } = props;
   const color = useColorTokenValue("gray.600", "whiteAlpha.600");
-  const style = useColorValue({ opacity: 0.8 }, {});
+  const style = useColorModeValue({ opacity: 0.8 }, {});
   return useCallback(base => mergeWith({}, base, { color, ...style }), [colorMode]);
 };
 
@@ -183,7 +183,7 @@ export const useMultiValueStyle = <Opt extends SelectOptionSingle, IsMulti exten
   const { colorMode, colorScheme } = props;
 
   const boxShadowLight = useToken("shadows", "md");
-  const boxShadow = useColorValue(boxShadowLight, undefined);
+  const boxShadow = useColorModeValue(boxShadowLight, undefined);
   const style = useStyleConfig("Button", { colorScheme, variant: "solid" });
   const backgroundColor = useToken("colors", style.bg?.toString() ?? "inherit");
   const color = useToken("colors", style.color?.toString() ?? "inherit");

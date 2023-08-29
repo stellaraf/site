@@ -10,9 +10,8 @@ import {
   PopoverHeader,
   type TagProps,
   PopoverContent,
+  useColorModeValue,
 } from "@chakra-ui/react";
-
-import { useColorValue } from "~/context";
 
 import { MapMarker } from "./map-marker";
 import { useBestMeasurement } from "./use-cloud-measurements";
@@ -20,7 +19,7 @@ import { useBestMeasurement } from "./use-cloud-measurements";
 import type { LocationProps, LatencyProps } from "./types";
 
 const Latency = (props: LatencyProps) => {
-  const colorScheme = useColorValue("secondary", "tertiary");
+  const colorScheme = useColorModeValue("secondary", "tertiary");
   const { location } = props;
 
   const tagProps = useMemo<TagProps>(() => {
@@ -59,8 +58,6 @@ export const Location = (props: LocationProps) => {
   const { loc, color = "currentcolor", ...rest } = props;
   const { coordinates, name, description } = loc;
 
-  const bg = useColorValue("white", "blackAlpha.600");
-
   const best = useBestMeasurement();
 
   return (
@@ -72,9 +69,10 @@ export const Location = (props: LocationProps) => {
       />
       <Portal>
         <PopoverContent
-          bg={bg}
+          bg="white"
           zIndex={4}
           border={0}
+          _dark={{ bg: "blackAlpha.600" }}
           css={{ backdropFilter: "blur(2px)" }}
           {...rest}
         >

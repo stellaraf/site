@@ -8,16 +8,13 @@ import {
   AccordionButton,
 } from "@chakra-ui/react";
 
-import { useColorValue } from "~/context";
-
 export const Expandable = (props: React.PropsWithChildren) => {
   const { children } = props;
-  const hoverBorder = useColorValue("blackAlpha.400", "whiteAlpha.400");
 
   return (
     <Accordion allowToggle>
       <AccordionItem
-        _hover={{ borderColor: hoverBorder }}
+        _hover={{ borderColor: "blackAlpha.400", _dark: { borderColor: "whiteAlpha.400" } }}
         transition="border-color 0.2s ease"
         maxW={{ lg: "60%" }}
       >

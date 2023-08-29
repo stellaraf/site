@@ -1,16 +1,15 @@
 import { useCallback } from "react";
 
-import { Box, Button, VStack } from "@chakra-ui/react";
+import { Box, Button, VStack, useColorMode, useColorModeValue } from "@chakra-ui/react";
 
-import { useColorMode, useColorValue } from "~/context";
 import { Sun, Moon, ChevronUp } from "~/icons";
 
 import type { BoxProps } from "@chakra-ui/react";
 
 export const DControls = (props: BoxProps) => {
   const { toggleColorMode } = useColorMode();
-  const colorModeIcon = useColorValue(<Moon />, <Sun />);
-  const switchTo = useColorValue("Dark", "Light");
+  const colorModeIcon = useColorModeValue(<Moon />, <Sun />);
+  const switchTo = useColorModeValue("Dark", "Light");
   const colorModeLabel = `Switch to ${switchTo} Mode`;
 
   const scrollToTop = useCallback(() => {

@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer";
 import { useTitleCase } from "use-title-case";
 
 import { AnimatedDiv, Divider } from "~/components";
-import { useConfig, useColorValue } from "~/context";
+import { useConfig } from "~/context";
 import { useResponsiveStyle } from "~/hooks";
 
 import { Action } from "./action";
@@ -91,12 +91,11 @@ const CallToActionContainer = memo(
 );
 
 export const CallToAction = (props: CallToActionProps) => {
-  const showBorder = useColorValue(0, 1);
   const { asPath: currentPath } = useRouter();
   return (
     <>
       <CallToActionContainer currentPath={currentPath} {...props} />
-      <Divider straight opacity={showBorder} />
+      <Divider straight opacity={0} _dark={{ opacity: 1 }} />
     </>
   );
 };

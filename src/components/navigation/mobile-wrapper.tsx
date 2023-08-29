@@ -2,19 +2,16 @@ import { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, useColorMode } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
 
 import { Link } from "~/components";
-import { useColorMode, useColorValue } from "~/context";
 import { useNavLogoState } from "~/hooks";
 
 import type { BaseHeaderProps } from "./types";
 
 export const Wrapper = (props: BaseHeaderProps) => {
   const { isOpen, onToggle, navHeaderHeight, children, ...rest } = props;
-  const bg = useColorValue("light.500", "transparent");
-  const borderColor = useColorValue("blackAlpha.300", "whiteAlpha.300");
   const { colorMode } = useColorMode();
   const { pathname } = useRouter();
   const homePageLogo = useNavLogoState();
@@ -51,13 +48,14 @@ export const Wrapper = (props: BaseHeaderProps) => {
     <Box
       h={20}
       top={0}
-      bg={bg}
       left={0}
       w="100%"
       right={0}
       as="header"
       pos="fixed"
       zIndex={1000}
+      bg="light.500"
+      _dark={{ bg: "transparent" }}
       css={{ backdropFilter: "blur(10px)" }}
       transition={{ transition: "all 200ms ease-in" }}
     >
@@ -71,8 +69,9 @@ export const Wrapper = (props: BaseHeaderProps) => {
         alignItems="center"
         borderBottomWidth="1px"
         borderBottomStyle="solid"
-        borderBottomColor={borderColor}
         justifyContent="space-between"
+        borderBottomColor="blackAlpha.300"
+        _dark={{ borderBottomColor: "whiteAlpha.300" }}
         {...rest}
       >
         <>

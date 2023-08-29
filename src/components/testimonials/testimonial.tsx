@@ -1,7 +1,6 @@
 import { Box, Flex, Image, VStack, Heading, Divider } from "@chakra-ui/react";
 
 import { RichText } from "~/components";
-import { useColorValue } from "~/context";
 
 import { Quote } from "./quote";
 
@@ -9,8 +8,6 @@ import type { Testimonial as TestimonialProps } from "~/queries";
 
 export const Testimonial = (props: TestimonialProps) => {
   const { title, subtitle, body, image } = props;
-
-  const fontWeight = useColorValue("thin", undefined);
 
   return (
     <Flex
@@ -26,7 +23,7 @@ export const Testimonial = (props: TestimonialProps) => {
           <VStack align="flex-start">
             <Box
               whiteSpace="pre-line"
-              fontWeight={fontWeight}
+              _light={{ fontWeight: "thin" }}
               fontSize={{ base: "lg", lg: "xl" }}
               textAlign={{ base: "left", xl: "justify" }}
               sx={{ "& p, & .st-content-p": { display: "inline" } }}
@@ -36,7 +33,7 @@ export const Testimonial = (props: TestimonialProps) => {
               <Quote kind="close" />
             </Box>
             <VStack w="100%" pt={8} align="center" textAlign="center">
-              <Divider mb={4} />
+              <Divider mb={4} _dark={{ borderColor: "whiteAlpha.500" }} />
               {subtitle && (
                 <Heading as="h5" fontSize={{ base: "md", lg: "lg" }} fontWeight="light">
                   {subtitle}
@@ -49,10 +46,10 @@ export const Testimonial = (props: TestimonialProps) => {
                 <Image
                   alt={title}
                   width="100%"
+                  src={image.url}
                   userSelect="none"
                   draggable={false}
                   pointerEvents="none"
-                  src={image.url}
                   fallbackSrc="https://via.placeholder.com/150"
                 />
               </Box>

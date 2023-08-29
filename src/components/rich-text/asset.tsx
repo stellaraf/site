@@ -3,7 +3,6 @@ import NextImage from "next/image";
 import { Image as ChakraImage, useDisclosure } from "@chakra-ui/react";
 
 import { Backdrop, Modal, Video } from "~/components";
-import { useColorValue } from "~/context";
 
 import type { ImageProps, VideoProps } from "@graphcms/rich-text-types";
 
@@ -13,12 +12,6 @@ export const ImageAsset = (props: Partial<ImageProps>) => {
   const { title, src = "", height = 0, width = 0, mimeType = "", altText, ...rest } = props;
 
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const css = useColorValue({}, { filter: "invert(1)" });
-
-  // Override the background/border colors if SVG. Since SVG's won't have a background, it looks
-  // better to make the background match the color mode.
-  // let bg = useColorValue("blackAlpha.300", "whiteAlpha.400");
-  // const svgBg = useColorValue("white", "black");
 
   // next/image doesn't support SVGs, as of 10.0.1 testing. Use native element for SVGs.
   let image = null;
@@ -26,7 +19,14 @@ export const ImageAsset = (props: Partial<ImageProps>) => {
   const isSVG = SVG_PATTERN.test(mimeType);
 
   if (isSVG) {
-    image = <ChakraImage src={src} alt={altText ?? title ?? "Unknown"} boxSize="100%" css={css} />;
+    image = (
+      <ChakraImage
+        src={src}
+        boxSize="100%"
+        _dark={{ filter: "invert(1)" }}
+        alt={altText ?? title ?? "Unknown"}
+      />
+    );
   } else {
     image = (
       <NextImage src={src} width={width} height={height} alt={altText ?? title ?? "Unknown"} />

@@ -1,16 +1,15 @@
-import { Tr } from "@chakra-ui/react";
+import { Tr, useColorModeValue } from "@chakra-ui/react";
 
 import { Table, Td, Th } from "~/components";
-import { useColorValue } from "~/context";
 
 import type { HolidayTableProps } from "./types";
 
 export const HolidayTable = (props: HolidayTableProps) => {
   const { holidays, ...rest } = props;
 
-  const activeColor = useColorValue("green.500", "green.700");
-  const elapsedColor = useColorValue("blackAlpha.200", "whiteAlpha.200");
-  const nextColor = useColorValue("yellow.300", "yellow.700");
+  const activeColor = useColorModeValue("green.500", "green.700");
+  const elapsedColor = useColorModeValue("blackAlpha.200", "whiteAlpha.200");
+  const nextColor = useColorModeValue("yellow.300", "yellow.700");
 
   return (
     <Table {...rest}>

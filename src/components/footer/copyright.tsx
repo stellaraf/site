@@ -1,6 +1,6 @@
-import { Box, Tooltip } from "@chakra-ui/react";
+import { Box, Tooltip, useColorModeValue } from "@chakra-ui/react";
 
-import { useConfig, useColorValue } from "~/context";
+import { useConfig } from "~/context";
 import { useOpposingColor } from "~/hooks";
 
 import type { BoxProps } from "@chakra-ui/react";
@@ -9,7 +9,7 @@ export const Copyright = (props: BoxProps) => {
   const { organizationName } = useConfig();
   const version = process.env.SITE_VERSION as string;
 
-  const bg = useColorValue("tertiary.500", "secondary.300");
+  const bg = useColorModeValue("tertiary.500", "secondary.300");
   const color = useOpposingColor(bg);
 
   return (

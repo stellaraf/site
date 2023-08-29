@@ -1,7 +1,6 @@
 import { VStack, Heading } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-import { useColorValue } from "~/context";
 import { CircleCheck } from "~/icons";
 
 import type { StackProps } from "@chakra-ui/react";
@@ -10,11 +9,11 @@ const AnimatedVStack = motion(VStack);
 
 export const Success = (props: StackProps): JSX.Element => {
   const { children } = props;
-  const color = useColorValue("green.500", "green.300");
   return (
     <AnimatedVStack
       spacing={8}
-      color={color}
+      color="green.500"
+      _dark={{ color: "green.300" }}
       textAlign="center"
       animate={{ scale: 1, opacity: 1 }}
       initial={{ scale: 0.5, opacity: 0 }}

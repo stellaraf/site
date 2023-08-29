@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 
 import { Modal, RichText } from "~/components";
-import { useColorValue } from "~/context";
 import { useScaledText } from "~/hooks";
 import { LocationPin } from "~/icons";
 
@@ -28,7 +27,6 @@ import type { Employee } from "~/queries";
 const _Header = (props: Pick<Employee, "name" | "title" | "photo">) => {
   const { name, title, photo } = props;
   const [containerRef, headingRef, shouldResize] = useScaledText<HTMLDivElement>([name]);
-  const border = useColorValue("blackAlpha.300", "whiteAlpha.300");
 
   return (
     <Wrap justify={{ base: "center", lg: "space-between" }} align="center" ref={containerRef}>
@@ -42,8 +40,9 @@ const _Header = (props: Pick<Employee, "name" | "title" | "photo">) => {
             objectFit="cover"
             borderWidth="1px"
             borderStyle="solid"
-            borderColor={border}
+            borderColor="blackAlpha.300"
             transition="transform .15s ease 0s"
+            _dark={{ borderColor: "whiteAlpha.300" }}
             fallbackSrc="https://via.placeholder.com/150"
             src={photo.url ?? "https://via.placeholder.com/150"}
           />
@@ -54,7 +53,7 @@ const _Header = (props: Pick<Employee, "name" | "title" | "photo">) => {
           <Heading as="h2" fontSize={shouldResize ? "lg" : "xl"} ref={headingRef}>
             {name}
           </Heading>
-          <Divider bg={border} />
+          <Divider bg="blackAlpha.300" _dark={{ bg: "whiteAlpha.300" }} />
           <Heading as="h3" fontSize="lg" fontWeight="light">
             {title}
           </Heading>

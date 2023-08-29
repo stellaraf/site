@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { slug, reactChildText } from "~/lib";
+import { slug, getTextValueFromReactNode } from "~/lib";
 
 export const useSlug = (original: string | React.ReactNode, deps: unknown[] = []): string => {
   return useMemo(() => {
@@ -8,7 +8,7 @@ export const useSlug = (original: string | React.ReactNode, deps: unknown[] = []
     if (typeof original === "string") {
       value = original;
     } else {
-      value = reactChildText(original);
+      value = getTextValueFromReactNode(original);
     }
     return slug(value, undefined, "");
   }, [original, ...deps]);

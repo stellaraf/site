@@ -1,7 +1,6 @@
-import { Box, useStyleConfig, Code as ChakraCode } from "@chakra-ui/react";
+import { Box, useStyleConfig, Code as ChakraCode, useColorModeValue } from "@chakra-ui/react";
 
 import { useCodeBlockStyle } from "~/components";
-import { useColorValue } from "~/context";
 
 import type { TextProps, CodeProps } from "@chakra-ui/react";
 
@@ -12,7 +11,7 @@ export const P = (props: TextProps) => {
 };
 
 export const Code = (props: CodeProps) => {
-  const scheme = useColorValue("gray", "tertiary");
+  const scheme = useColorModeValue("gray", "tertiary");
 
   let ctx = useCodeBlockStyle();
   if (ctx === null) {

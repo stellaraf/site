@@ -4,7 +4,7 @@ import { Box, Flex, Heading, useColorMode } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
 
 import { HomeSection, SEO, Screen, Testimonials } from "~/components";
-import { useConfig, useColorValue } from "~/context";
+import { useConfig } from "~/context";
 import { useGradient, useNavLogo, useResponsiveStyle } from "~/hooks";
 import { homePageQuery, commonStaticPropsQuery } from "~/queries";
 
@@ -27,7 +27,6 @@ const Logo = () => {
 const Home: NextPage<HomePageProps> = props => {
   const { blocks, mainVideo } = props;
   const { slogan, organizationName } = useConfig();
-  const heroText = useColorValue("primary.500", "white");
   const rStyles = useResponsiveStyle();
 
   const bg = useGradient();
@@ -35,7 +34,16 @@ const Home: NextPage<HomePageProps> = props => {
   return (
     <>
       <SEO title={organizationName} titleTemplate="%s" />
-      <Box pt={32} zIndex={-2} minH="100vh" boxSize="100%" color={heroText} {...rStyles} {...bg}>
+      <Box
+        pt={32}
+        zIndex={-2}
+        minH="100vh"
+        boxSize="100%"
+        color="primary.500"
+        _dark={{ color: "white" }}
+        {...rStyles}
+        {...bg}
+      >
         <Flex flexDir="column" alignItems="center">
           <Logo />
           <Flex textAlign="center">

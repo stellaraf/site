@@ -1,14 +1,13 @@
-import { HStack, Button } from "@chakra-ui/react";
+import { HStack, Button, useColorMode, useColorModeValue } from "@chakra-ui/react";
 
-import { useColorMode, useColorValue } from "~/context";
 import { Sun, Moon } from "~/icons";
 
 import type { StackProps } from "@chakra-ui/react";
 
 export const MControls = (props: StackProps) => {
   const { toggleColorMode } = useColorMode();
-  const colorModeIcon = useColorValue(<Moon boxSize={10} />, <Sun boxSize={10} />);
-  const switchTo = useColorValue("Dark", "Light");
+  const colorModeIcon = useColorModeValue(<Moon boxSize={10} />, <Sun boxSize={10} />);
+  const switchTo = useColorModeValue("Dark", "Light");
   const colorModeLabel = `Switch to ${switchTo} Mode`;
 
   return (

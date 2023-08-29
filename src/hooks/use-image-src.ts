@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { useColorMode } from "~/context";
+import { useColorMode } from "@chakra-ui/react";
 
 export function useImageSrc(initialUrl: string): string {
   const { colorMode } = useColorMode();

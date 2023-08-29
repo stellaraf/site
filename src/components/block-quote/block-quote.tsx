@@ -1,6 +1,5 @@
 import { chakra, useStyleConfig } from "@chakra-ui/react";
 
-import { useColorValue } from "~/context";
 import { publicProps } from "~/lib";
 import { shouldForwardProp } from "~/theme";
 
@@ -27,12 +26,14 @@ const BaseBlockQuote = chakra("blockquote", {
 
 export const BlockQuote = (props: BlockQuoteProps) => {
   const { colorScheme, ...rest } = props;
-  const defaultScheme = useColorValue("blackAlpha", "tertiary");
   let ctx = useBlockQuoteStyle();
   if (ctx === null) {
     ctx = {
       colorScheme: "gray",
-      blockQuote: { colorScheme: colorScheme ?? defaultScheme },
+      blockQuote: {
+        colorScheme: colorScheme ?? "blackAlpha",
+        _dark: { colorScheme: colorScheme ?? "tertiary" },
+      },
     };
   }
 
@@ -42,7 +43,12 @@ export const BlockQuote = (props: BlockQuoteProps) => {
 
   const containerStyle = publicProps(code, "bg", "color");
 
-  const borderColor = useColorValue(`${ctx.colorScheme}.200`, `${ctx.colorScheme}.600`);
-
-  return <BaseBlockQuote borderLeftColor={borderColor} sx={containerStyle} {...rest} />;
+  return (
+    <BaseBlockQuote
+      borderLeftColor={`${ctx.colorScheme}.200`}
+      _dark={{ borderLeftColor: `${ctx.colorScheme}.600` }}
+      sx={containerStyle}
+      {...rest}
+    />
+  );
 };

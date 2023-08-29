@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { Link as ChakraLink, useToken } from "@chakra-ui/react";
 
 import { Button } from "~/components";
-import { useColorValue } from "~/context";
 
 import navConfig from "./config";
 
@@ -14,10 +13,9 @@ import type { ButtonProps, LinkProps } from "~/components";
 
 const NavLink = (props: DesktopNavLinkProps) => {
   const { isActive = false, ...rest } = props;
-  const activeColor = useColorValue("blackAlpha.300", "whiteAlpha.300");
   const borderRadius = useToken("radii", "lg");
 
-  const linkProps = {} as ChakraLinkProps;
+  const linkProps: ChakraLinkProps = {};
   if (isActive) {
     linkProps._after = {
       left: 0,
@@ -30,10 +28,11 @@ const NavLink = (props: DesktopNavLinkProps) => {
       marginRight: "auto",
       position: "absolute",
       borderRadius: "0.75rem",
-      backgroundColor: activeColor,
+      backgroundColor: "blackAlpha.300",
       transform: "translateY(-10px)",
       transition: "width: 0.5s, opacity: 0.5s, transform 0.5s",
     };
+    linkProps._dark = { _after: { backgroundColor: "whiteAlpha.300" } };
   }
   return (
     <ChakraLink
@@ -87,22 +86,21 @@ export const LinkGroup = (props: LinkProps) => {
   );
 };
 
-export const LoginButton = (props: ButtonProps) => {
-  const color = useColorValue("secondary.600", "white");
-  const hoverBg = useColorValue("secondary.50", "whiteAlpha.100");
-  const borderColor = useColorValue("secondary.500", "white");
-  return (
-    <Button
-      color={color}
-      target="_blank"
-      borderWidth="1px"
-      variant="outline"
-      borderColor={borderColor}
-      href="https://launch.stellar.tech"
-      _hover={{ backgroundColor: hoverBg }}
-      {...props}
-    >
-      Log In
-    </Button>
-  );
-};
+export const LoginButton = (props: ButtonProps) => (
+  <Button
+    color="secondary.600"
+    _dark={{
+      color: "white",
+      borderColor: "white",
+    }}
+    target="_blank"
+    borderWidth="1px"
+    variant="outline"
+    borderColor="secondary.500"
+    href="https://launch.stellar.tech"
+    _hover={{ backgroundColor: "secondary.50", _dark: { backgroundColor: "white" } }}
+    {...props}
+  >
+    Log In
+  </Button>
+);

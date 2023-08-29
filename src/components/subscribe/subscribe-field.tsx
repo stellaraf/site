@@ -7,9 +7,9 @@ import {
   FormControl,
   FormErrorMessage,
   InputRightElement,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
-import { useColorValue } from "~/context";
 import { CircleArrowRight, CircleCheck, CircleX } from "~/icons";
 
 import type { SubscribeFieldProps } from "./types";
@@ -22,7 +22,7 @@ const hoverBorderDark = [undefined, "green.300"];
 export const SubscribeField = forwardRef<HTMLInputElement, SubscribeFieldProps>((props, ref) => {
   const { name, title, isSubmitSuccessful, isSubmitting, error, ...rest } = props;
 
-  const styles = useColorValue(
+  const styles = useColorModeValue(
     {
       bg: "whiteAlpha.100",
       borderColor: borderLight[+isSubmitSuccessful],

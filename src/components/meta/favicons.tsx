@@ -1,6 +1,5 @@
+import { useColorMode } from "@chakra-ui/react";
 import { NextSeo, type NextSeoProps } from "next-seo";
-
-import { useColorMode } from "~/context";
 
 const appleStartup: [number, number, number, "portrait" | "landscape", number, number][] = [
   [320, 568, 2, "portrait", 640, 1136],

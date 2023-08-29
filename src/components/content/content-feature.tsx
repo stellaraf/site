@@ -2,7 +2,6 @@ import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { Button, Icon, RichText } from "~/components";
-import { useColorValue } from "~/context";
 import { is } from "~/lib";
 
 import type { ContentFeatureProps } from "./types";
@@ -12,19 +11,19 @@ export const ContentFeature = (props: ContentFeatureProps) => {
 
   const fnTitle = useTitleCase();
 
-  const boxProps = useColorValue(
-    { bg: "white", boxShadow: "xl" },
-    { bg: "whiteAlpha.50", css: { backdropFilter: "blur(2px)" } },
-  );
-
   return (
     <Flex
-      {...boxProps}
       p={8}
+      bg="white"
+      zIndex={1}
+      borderRadius="md"
       direction="column"
       justify="space-between"
-      borderRadius="md"
-      zIndex={1}
+      _light={{ boxShadow: "xl" }}
+      _dark={{
+        bg: "whiteAlpha.50",
+        backdropFilter: "blur(2px)",
+      }}
     >
       <Flex direction="column">
         <Flex align="center" justify="space-between">

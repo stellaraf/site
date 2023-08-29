@@ -1,7 +1,5 @@
-import { useToken } from "@chakra-ui/react";
+import { useToken, useColorModeValue } from "@chakra-ui/react";
 import { parseToRgba } from "color2k";
-
-import { useColorValue } from "~/context";
 
 import type { BoxProps } from "@chakra-ui/react";
 
@@ -19,5 +17,5 @@ export function useGradient(direction = 180): UseGradientReturn {
     background: `linear-gradient(${direction}deg, rgba(${rgbaPrimary}) 0%, rgba(${rgbaDark}) 100%)`,
   };
   const lightValue = { backgroundColor: light };
-  return useColorValue(lightValue, darkValue);
+  return useColorModeValue(lightValue, darkValue);
 }

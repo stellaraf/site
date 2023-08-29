@@ -1,8 +1,7 @@
-import { Box, Heading, chakra, HStack, useToken } from "@chakra-ui/react";
+import { Box, Heading, chakra, HStack, useToken, useColorModeValue } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { BlockQuoteStyleProvider, CodeBlockStyleProvider, RichText } from "~/components";
-import { useColorValue } from "~/context";
 import { useOpposingColor } from "~/hooks";
 import {
   AdmonitionCritical,
@@ -49,7 +48,7 @@ export const Admonition = (props: AdmonitionModel) => {
 
   const fnTitle = useTitleCase();
 
-  const bgBase = useColorValue(
+  const bgBase = useColorModeValue(
     {
       [AdmonitionType.Information]: "primary",
       [AdmonitionType.Note]: "gray",
@@ -65,9 +64,9 @@ export const Admonition = (props: AdmonitionModel) => {
       [AdmonitionType.Critical]: "red",
     }[type],
   );
-  const bg = useColorValue(`${bgBase}.500`, `${bgBase}.300`);
+  const bg = useColorModeValue(`${bgBase}.500`, `${bgBase}.300`);
 
-  const linkColor = useColorValue(
+  const linkColor = useColorModeValue(
     {
       [AdmonitionType.Note]: undefined,
       [AdmonitionType.Information]: "secondary.100",
@@ -84,7 +83,7 @@ export const Admonition = (props: AdmonitionModel) => {
     }[type],
   );
 
-  const codeColorScheme = useColorValue(
+  const codeColorScheme = useColorModeValue(
     {
       [AdmonitionType.Note]: "blackAlpha",
       [AdmonitionType.Information]: "primary",
@@ -101,7 +100,7 @@ export const Admonition = (props: AdmonitionModel) => {
     }[type],
   );
 
-  const codeCopyButtonColorScheme = useColorValue(
+  const codeCopyButtonColorScheme = useColorModeValue(
     {
       [AdmonitionType.Note]: "blackAlpha",
       [AdmonitionType.Information]: "whiteAlpha",

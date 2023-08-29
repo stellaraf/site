@@ -1,9 +1,8 @@
-import { Flex, HStack, VStack, useDisclosure } from "@chakra-ui/react";
+import { Flex, HStack, VStack, useDisclosure, useColorMode } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
 import { Spiral as Hamburger } from "hamburger-react";
 
 import { Button, Controls, Modal } from "~/components";
-import { useColorMode } from "~/context";
 
 import navConfig from "./config";
 import { NavLink } from "./mobile-links";

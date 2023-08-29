@@ -4,7 +4,6 @@ import { Flex, ModalFocusScope, useModalContext, useMultiStyleConfig } from "@ch
 import { AnimatePresence } from "framer-motion";
 
 import { AnimatedDiv } from "~/components";
-import { useColorValue } from "~/context";
 
 import type { ModalContentProps, ModalDialogProps } from "./types";
 
@@ -19,8 +18,6 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>((props
   const dialogProps = getDialogProps(rest, ref) as ModalDialogProps;
 
   const styles = useMultiStyleConfig("Modal");
-  const borderColor = useColorValue("blackAlpha.300", "whiteAlpha.300");
-  const bg = useColorValue("light.500", "blackAlpha.300");
 
   return (
     <ModalFocusScope>
@@ -46,7 +43,7 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>((props
             transition={{ duration: 0.2, type: "spring" }}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            backgroundColor={bg}
+            backgroundColor="light.500"
             exit={{ scale: 0 }}
             borderStyle="solid"
             position="relative"
@@ -57,8 +54,9 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>((props
             boxShadow="lg"
             alignSelf="center"
             __css={styles?.dialog}
-            borderColor={borderColor}
+            borderColor="blackAlpha.300"
             css={{ backdropFilter: "blur(20px)" }}
+            _dark={{ borderColor: "whiteAlpha.300", backgroundColor: "blackAlpha.300" }}
             {...dialogProps}
           >
             <Flex

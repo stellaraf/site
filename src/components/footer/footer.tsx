@@ -1,7 +1,6 @@
 import { Box, HStack, VStack } from "@chakra-ui/react";
 
 import { Controls, Subscribe } from "~/components";
-import { useColorValue } from "~/context";
 import { useMobile, useResponsiveStyle } from "~/hooks";
 
 import { Copyright } from "./copyright";
@@ -39,14 +38,21 @@ const MBottom = () => {
 export const Footer = (props: FooterProps) => {
   const { groups, ...rest } = props;
 
-  const bg = useColorValue("primary.800", "dark.500");
-  const color = useColorValue("white", "white");
-
   const rStyles = useResponsiveStyle();
   const isMobile = useMobile();
 
   return (
-    <Box as="footer" pt={24} pb={12} w="100%" bg={bg} color={color} {...rStyles} {...rest}>
+    <Box
+      pt={24}
+      pb={12}
+      w="100%"
+      as="footer"
+      color="white"
+      bg="primary.800"
+      _dark={{ bg: "dark.500" }}
+      {...rStyles}
+      {...rest}
+    >
       {isMobile ? <MobileLinks groups={groups} /> : <DesktopLinks groups={groups} />}
       {isMobile ? <MBottom /> : <DBottom />}
     </Box>

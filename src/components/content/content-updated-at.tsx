@@ -1,15 +1,15 @@
+import { useColorModeValue, type FlexProps } from "@chakra-ui/react";
+
 import { Label } from "~/components";
-import { useColorValue } from "~/context";
 import { useDate } from "~/hooks";
 
 import type { ContentUpdatedAtProps } from "./types";
-import type { FlexProps } from "@chakra-ui/react";
 
 export const ContentUpdatedAt = (props: ContentUpdatedAtProps) => {
   const { time, ...rest } = props;
   const updated = useDate(time);
 
-  const label = useColorValue(
+  const label = useColorModeValue(
     { leftColor: "white", rightColor: "whiteAlpha.300" },
     {
       borderRadius: "md",

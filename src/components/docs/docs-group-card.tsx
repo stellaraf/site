@@ -4,7 +4,6 @@ import { Box, Heading, Divider, LinkBox, LinkOverlay } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { Card, CardBody, Icon, RichText } from "~/components";
-import { useColorValue } from "~/context";
 import { is } from "~/lib";
 
 import type { DocsGroup } from "~/queries";
@@ -13,11 +12,11 @@ export const DocsGroupCard = (props: DocsGroup) => {
   const { slug, title, summary, subtitle, callToAction } = props;
 
   const fnTitle = useTitleCase();
-  const bg = useColorValue("white", "black");
 
   return (
     <LinkBox
       p={0}
+      zIndex={1}
       rounded="lg"
       display="flex"
       height="unset"
@@ -29,23 +28,23 @@ export const DocsGroupCard = (props: DocsGroup) => {
       borderColor="unset"
       verticalAlign="unset"
       flexDirection="column"
-      zIndex={1}
     >
       <Card width={{ base: "20rem", md: "18rem", xl: "lg" }} maxHeight={80} zIndex={1}>
         <CardBody
           spacing={4}
           textAlign="left"
-          alignItems="flex-start"
           overflow="hidden"
+          alignItems="flex-start"
           // Fade out the text
           _before={{
-            bg: `linear-gradient(transparent, 200px, ${bg})`,
+            bg: "linear-gradient(transparent, 200px, white)",
             position: "absolute",
             boxSize: "100%",
             content: "''",
             left: 0,
             top: 0,
           }}
+          _dark={{ _before: { bg: "linear-gradient(transparent, 200px, black)" } }}
         >
           {callToAction.enable && is(callToAction.icon) && (
             <Icon

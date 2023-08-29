@@ -2,7 +2,6 @@ import { Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { Carousel, RichText } from "~/components";
-import { useColorValue } from "~/context";
 
 import type { HeroCardProps, HeroCardSliderProps } from "./types";
 
@@ -23,14 +22,6 @@ const HeroCard = (props: HeroCardProps) => {
 
 export const HeroCardSlider = (props: HeroCardSliderProps) => {
   const { content, icon, ...rest } = props;
-  const styles = useColorValue(
-    { bg: "white", color: "dark.500" },
-    {
-      bg: "whiteAlpha.100",
-      color: "white",
-      css: { backdropFilter: "blur(2px)" },
-    },
-  );
 
   return (
     <Flex
@@ -42,10 +33,16 @@ export const HeroCardSlider = (props: HeroCardSliderProps) => {
       flexDir="column"
       borderRadius="md"
       position="relative"
-      {...styles}
+      bg="white"
+      color="dark.500"
+      _dark={{
+        bg: "whiteAlpha.100",
+        color: "white",
+        backdropFilter: "blur(2px)",
+      }}
       {...rest}
     >
-      <Carousel dotColor={styles.color}>
+      <Carousel color="dark.500" _dark={{ color: "white" }}>
         {content.map(card => (
           <HeroCard content={card} key={card.title} />
         ))}

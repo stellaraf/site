@@ -1,8 +1,7 @@
-import { Center, Heading, VStack, Divider } from "@chakra-ui/react";
+import { Center, Heading, VStack, Divider, useColorModeValue } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { Button, Ripple, RichText, Content } from "~/components";
-import { useColorValue } from "~/context";
 import { useOpposingColor, useColorWhenDark, useGlow, useResponsiveStyle } from "~/hooks";
 import { is } from "~/lib";
 import { ThemeColor } from "~/types";
@@ -13,17 +12,17 @@ export const Callout = (props: CalloutProps) => {
   const { title, subtitle, body = null, button, form, ...rest } = props;
 
   const rStyles = useResponsiveStyle();
-  const isDarkMode = useColorValue(false, true);
-  const colorScheme = useColorValue(ThemeColor.Secondary, ThemeColor.Purple);
+  const isDarkMode = useColorModeValue(false, true);
+  const colorScheme = useColorModeValue(ThemeColor.Secondary, ThemeColor.Purple);
   const bg = `${colorScheme}.500`;
-  const rippleStart = useColorValue("secondary.200", "secondary.700");
+  const rippleStart = useColorModeValue("secondary.200", "secondary.700");
   const color = useOpposingColor(bg);
   const buttonHoverBg = useColorWhenDark(bg, "blackAlpha.100", "whiteAlpha.100");
   const glow = useGlow("purple.500", "purple.800");
 
   const fnTitle = useTitleCase();
 
-  const wrapperProps = useColorValue(
+  const wrapperProps = useColorModeValue(
     { bg, boxShadow: undefined, my: { base: 4, lg: 16, xl: 64 } },
     { bg: glow.backgroundColor, boxShadow: glow.boxShadow, my: { base: 32, xl: 64 } },
   );

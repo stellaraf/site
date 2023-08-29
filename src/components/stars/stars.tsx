@@ -4,7 +4,6 @@ import { chakra } from "@chakra-ui/react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 
-import { useColorValue } from "~/context";
 import { useKonami } from "~/hooks";
 
 import type { BoxProps } from "@chakra-ui/react";
@@ -149,7 +148,6 @@ const Wrapper = chakra("div", {
   },
 });
 
-export const Stars = (props: BoxProps) => {
-  const starOpacity = (useColorValue(0, 1) ?? 0) as number;
-  return <Wrapper as={Base} opacity={starOpacity} className="__stars-container" {...props} />;
-};
+export const Stars = (props: BoxProps) => (
+  <Wrapper as={Base} opacity={0} _dark={{ opacity: 1 }} className="__stars-container" {...props} />
+);

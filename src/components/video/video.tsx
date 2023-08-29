@@ -16,7 +16,6 @@ const controlledProps: PlyrOptions = {
   loop: { active: false },
   muted: false,
   volume: 1,
-  debug: true,
   storage: { enabled: true, key: "plyr" },
 };
 
@@ -30,7 +29,6 @@ const uncontrolledProps: PlyrOptions = {
   hideControls: true,
   loop: { active: true },
   muted: true,
-  debug: true,
   volume: 0,
   storage: { enabled: false },
 };

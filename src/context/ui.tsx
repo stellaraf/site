@@ -44,5 +44,3 @@ export const useTheme: UseTheme = useChakraTheme;
  */
 export const useColorTokenValue = (light: string, dark: string) =>
   useColorModeValue(useToken("colors", light), useToken("colors", dark));
-
-export { useColorMode, useColorModeValue as useColorValue } from "@chakra-ui/react";

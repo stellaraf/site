@@ -1,7 +1,5 @@
 import { chakra, Image, Button, Text, useBreakpointValue } from "@chakra-ui/react";
 
-import { useColorValue } from "~/context";
-
 import { useAvatar } from "./employee-grid";
 import { useSetCurrent } from "./state";
 
@@ -25,7 +23,6 @@ export const AvatarPhotoWrapper = chakra("div", {
  */
 export const Photo = (props: AvatarPhotoProps) => {
   const { index, onOpen, ...rest } = props;
-  const photoBorder = useColorValue("whiteAlpha.400", "blackAlpha.400");
   const { employees } = useAvatar();
   const setCurrent = useSetCurrent();
   const hover = useBreakpointValue({
@@ -55,9 +52,10 @@ export const Photo = (props: AvatarPhotoProps) => {
           borderWidth="1px"
           borderStyle="solid"
           alt={employees[index].name}
-          borderColor={photoBorder}
+          borderColor="whiteAlpha.400"
           src={employees[index].photo.url}
           transition="transform .15s ease 0s"
+          _dark={{ borderColor: "blackAlpha.400" }}
           fallbackSrc="https://via.placeholder.com/150"
         />
       </Button>

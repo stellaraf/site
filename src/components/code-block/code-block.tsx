@@ -4,11 +4,11 @@ import {
   IconButton,
   useStyleConfig,
   useBreakpointValue,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
-import { useColorValue } from "~/context";
 import { Copy, Check } from "~/icons";
-import { reactChildText, publicProps } from "~/lib";
+import { getTextValueFromReactNode, publicProps } from "~/lib";
 
 import { useCodeBlockStyle } from "./use-code-block-style";
 
@@ -16,7 +16,7 @@ import type { CodeBlockProps } from "./types";
 
 export const CodeBlock = (props: CodeBlockProps) => {
   const { children, colorScheme, hideCopyButton = false, ...rest } = props;
-  const defaultScheme = useColorValue("blackAlpha", "tertiary");
+  const defaultScheme = useColorModeValue("blackAlpha", "tertiary");
   const size = useBreakpointValue({ base: "md", lg: "sm" });
 
   let ctx = useCodeBlockStyle();
@@ -40,11 +40,11 @@ export const CodeBlock = (props: CodeBlockProps) => {
     variant: "ghost",
   });
 
-  const copyValue = reactChildText(children);
+  const copyValue = getTextValueFromReactNode(children);
 
   const { hasCopied, onCopy } = useClipboard(copyValue);
 
-  const borderColor = useColorValue(`${ctx.colorScheme}.200`, `${ctx.colorScheme}.600`);
+  const borderColor = useColorModeValue(`${ctx.colorScheme}.200`, `${ctx.colorScheme}.600`);
 
   return (
     <Box
@@ -86,6 +86,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
                 opacity={hasCopied ? 1 : 0}
                 pos={hasCopied ? undefined : "absolute"}
               />
+
               <Copy
                 transition="all 0.2s ease"
                 opacity={hasCopied ? 0 : 1}

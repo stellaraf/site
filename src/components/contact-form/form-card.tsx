@@ -2,8 +2,6 @@ import { forwardRef } from "react";
 
 import { VStack } from "@chakra-ui/react";
 
-import { useColorValue } from "~/context";
-
 import type { FormCardBodyProps } from "./types";
 import type { StackProps } from "@chakra-ui/react";
 
@@ -13,13 +11,6 @@ export const FormCardBody = (props: FormCardBodyProps) => {
 };
 
 export const FormCard = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
-  const styles = useColorValue(
-    { bg: "white", boxShadow: "2xl" },
-    {
-      bg: "blackAlpha.400",
-      css: { backdropFilter: "blur(2px)" },
-    },
-  );
   return (
     <VStack
       p={8}
@@ -31,7 +22,9 @@ export const FormCard = forwardRef<HTMLDivElement, StackProps>((props, ref) => {
       overflow="hidden"
       spacing={{ base: 8, lg: 0 }}
       h={props.minH ?? props.minHeight ?? props.height ?? props.h ?? "md"}
-      {...styles}
+      bg="white"
+      _light={{ boxShadow: "2xl" }}
+      _dark={{ bg: "blackAlpha.400", backdropFilter: "blur(2px)" }}
       {...props}
     />
   );

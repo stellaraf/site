@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
 
-import { chakra, Box } from "@chakra-ui/react";
+import { chakra, Box, useColorMode } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
 
 import { Link } from "~/components";
-import { useColorValue, useColorMode } from "~/context";
 import { useNavLogoState } from "~/hooks";
 
 import { LinkGroup, LoginButton } from "./desktop-links";
@@ -52,12 +51,13 @@ export const DHeader = (props: BoxProps) => {
   const showLogo = useNavLogoState();
 
   const { colorMode } = useColorMode();
-  const bg = useColorValue("light.500", "transparent");
-  const color = useColorValue("dark.500", "light.500");
-  const cssProps = useColorValue({}, { css: { backdropFilter: "blur(10px)" } });
 
   return (
-    <Header bg={bg} color={color} {...cssProps}>
+    <Header
+      bg="light.500"
+      color="dark.500"
+      _dark={{ bg: "transparent", color: "light.500", backdropFilter: "blur(10px)" }}
+    >
       <Navbar {...props}>
         <Box overflow="hidden" pos="absolute">
           {pathname === "/" ? (

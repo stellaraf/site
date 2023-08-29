@@ -1,12 +1,11 @@
 import { useMemo } from "react";
 
-import { Tr, useBreakpointValue } from "@chakra-ui/react";
+import { Tr, useBreakpointValue, useColorModeValue } from "@chakra-ui/react";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import utc from "dayjs/plugin/utc";
 
 import { Table, Td, Th } from "~/components";
-import { useColorValue } from "~/context";
 import { useSSR, useTimezone, useBrowserTimezone } from "~/hooks";
 
 import type { TimezonesProps, TimezoneProps } from "./types";
@@ -48,7 +47,7 @@ export const Timezones = (props: TimezonesProps) => {
     sorted = sorted.sort((a, b) => (a.offset > b.offset ? 1 : -1));
   }
 
-  const userTimeSx = useColorValue(
+  const userTimeSx = useColorModeValue(
     { color: "primary.500", fontWeight: "bold" },
     { color: "secondary.300", fontWeight: "bold" },
   );

@@ -1,9 +1,8 @@
 import { forwardRef, useMemo } from "react";
 
-import { Box, Flex, VStack, Heading, VisuallyHidden } from "@chakra-ui/react";
+import { Box, Flex, VStack, Heading, VisuallyHidden, useColorModeValue } from "@chakra-ui/react";
 
 import { Button, Divider, RichText } from "~/components";
-import { useColorValue } from "~/context";
 import { useMobile, useResponsiveStyle } from "~/hooks";
 import { ChevronRight } from "~/icons";
 import { is } from "~/lib";
@@ -60,7 +59,7 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
 
   const isMobile = useMobile();
   const rStyles = useResponsiveStyle();
-  const showBorder = useColorValue(false, true);
+  const showBorder = useColorModeValue(false, true);
 
   const hasImage = useMemo(() => is(image) && !isMobile, [title, index, isMobile]);
   const side = useMemo<ContentSide>(() => (["right", "left"] as ContentSides)[index % 2], [index]);

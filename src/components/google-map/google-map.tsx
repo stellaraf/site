@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { Box, Skeleton } from "@chakra-ui/react";
+import { Box, Skeleton, useColorModeValue } from "@chakra-ui/react";
 import {
   GoogleMap as GoogleMapApi,
   MarkerF,
@@ -9,7 +9,7 @@ import {
 } from "@react-google-maps/api";
 
 import { Link, Error, RichText } from "~/components";
-import { useConfig, useColorValue, useColorTokenValue } from "~/context";
+import { useConfig, useColorTokenValue } from "~/context";
 
 import { mapDark, mapLight } from "./styles";
 import { gm, useMapUrl } from "./util";
@@ -78,7 +78,7 @@ export const GoogleMap = () => {
 
   const bg = useColorTokenValue("light.500", "dark.500");
   const color = useColorTokenValue("dark.500", "light.500");
-  const styles = useColorValue(mapLight, mapDark);
+  const styles = useColorModeValue(mapLight, mapDark);
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GMAPS_KEY ?? "",

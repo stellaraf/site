@@ -1,7 +1,6 @@
 import { Button, Box, Heading, SimpleGrid, Skeleton, Wrap, WrapItem } from "@chakra-ui/react";
 
 import { CodeBlock, Error } from "~/components";
-import { useColorValue } from "~/context";
 
 import { useIPRanges } from "./use-ip-ranges";
 
@@ -9,7 +8,6 @@ const URL = "https://ip.stellar.tech";
 
 export const IPRanges = () => {
   const { data, error, isLoading, isError } = useIPRanges();
-  const tagColorScheme = useColorValue("gray", "tertiary");
 
   isError && console.error(error);
 
@@ -53,7 +51,8 @@ export const IPRanges = () => {
                       as="a"
                       target="_blank"
                       href={`${URL}/${href}`}
-                      colorScheme={tagColorScheme}
+                      colorScheme="gray"
+                      _dark={{ colorScheme: "tertiary" }}
                       size={{ base: "xs", lg: "md" }}
                     >
                       {title}

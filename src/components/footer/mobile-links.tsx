@@ -10,15 +10,12 @@ import {
 } from "@chakra-ui/react";
 
 import { Link, Status } from "~/components";
-import { useColorValue } from "~/context";
 
 import { useFooterLinks } from "./use-footer-links";
 
 import type { FooterLinksProps } from "./types";
 
 export const MobileLinks = (props: FooterLinksProps) => {
-  const linkColor = useColorValue("whiteAlpha.700", "whiteAlpha.700");
-
   const rows = useFooterLinks(props.groups);
   const groups = rows.flat();
 
@@ -45,7 +42,7 @@ export const MobileLinks = (props: FooterLinksProps) => {
                   <ListItem key={item.title} my={2} pl={2}>
                     <Link
                       fontSize="sm"
-                      color={linkColor}
+                      color="whiteAlpha.700"
                       borderBottom="none"
                       href={item.external ? item.slug : `/${item.slug}`}
                       showIcon={item.external && item.showIcon}
@@ -56,7 +53,7 @@ export const MobileLinks = (props: FooterLinksProps) => {
                 ))}
                 {group.group === "Cloud" && (
                   <ListItem my={2} pl={2}>
-                    <Status fontSize="sm" color={linkColor} borderBottom="none" />
+                    <Status fontSize="sm" color="whiteAlpha.700" borderBottom="none" />
                   </ListItem>
                 )}
               </List>

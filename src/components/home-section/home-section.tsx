@@ -1,9 +1,8 @@
 import { useMemo } from "react";
 
-import { Box } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 
 import { Divider, RichText } from "~/components";
-import { useColorValue } from "~/context";
 
 import { HomeBlock } from "./home-block";
 
@@ -15,7 +14,7 @@ export const HomeSection = (props: HomeSectionProps) => {
   const { block, index, ...rest } = props;
   const { title, subtitle, body, button, image } = block;
 
-  const showBorder = useColorValue(false, true);
+  const showBorder = useColorModeValue(false, true);
 
   const padding = useMemo<Partial<HomeSectionProps>>(() => {
     if (index === 0) {

@@ -1,7 +1,7 @@
 import { Accordion, chakra, Box, Flex, VStack, useBreakpointValue } from "@chakra-ui/react";
 
 import { MSubNav } from "~/components";
-import { useColorValue, useConfig } from "~/context";
+import { useConfig } from "~/context";
 import { useResponsiveStyle } from "~/hooks";
 
 import { DMenuGroup } from "./menu-desktop";
@@ -49,7 +49,6 @@ const DLayout = (props: BoxProps) => {
 
 const DNav = () => {
   const { docsGroups } = useConfig();
-  const borderColor = useColorValue("blackAlpha.200", "whiteAlpha.200");
   return (
     <Flex
       p={4}
@@ -62,7 +61,8 @@ const DNav = () => {
       flexDir="column"
       position="sticky"
       borderRightWidth="1px"
-      borderColor={borderColor}
+      borderColor="blackAlpha.200"
+      _dark={{ borderColor: "whiteAlpha.200" }}
       width={{ lg: "260px", xl: "300px" }}
     >
       <Accordion allowMultiple defaultIndex={[...Array(docsGroups.length).keys()]}>
