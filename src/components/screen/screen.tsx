@@ -22,11 +22,11 @@ const Container = chakra("div", {
 });
 
 export const Screen = (props: ScreenProps) => {
-  const { url, enableControls = false, ...rest } = props;
+  const { url, enableControls = false, autoPlay, ...rest } = props;
 
   return (
     <Container {...rest}>
-      <Video url={url} enableControls={enableControls} />
+      <Video url={url} enableControls={enableControls} autoPlay={autoPlay} />
     </Container>
   );
 };

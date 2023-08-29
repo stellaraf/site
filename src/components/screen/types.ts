@@ -1,5 +1,5 @@
 import type { BoxProps } from "@chakra-ui/react";
-import type { IVideo } from "~/components";
+import type { VideoProps } from "~/components";
 
-export type ScreenProps = Pick<IVideo, "config" | "style" | "url" | "enableControls"> &
+export type ScreenProps = Pick<VideoProps, "url" | "enableControls" | "autoPlay"> &
   Omit<BoxProps, "style">;

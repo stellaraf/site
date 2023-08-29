@@ -1,6 +1,8 @@
-import type { ReactPlayerProps } from "react-player";
+import { AsProps } from "~/types";
 
-export interface IVideo extends ReactPlayerProps {
+export type VideoProps = AsProps<"video"> & {
   url: string;
   enableControls?: boolean;
-}
+  autoPlay?: boolean;
+  youTube?: boolean;
+};

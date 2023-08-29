@@ -21,7 +21,9 @@ export const RickRoll = () => {
         pr: { base: 0, lg: 12 },
         height: { base: "sm", lg: "2xl" },
       }}
-      body={<Video enableControls playing url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />}
+      body={
+        <Video enableControls autoPlay youTube url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
+      }
     />
   );
 };

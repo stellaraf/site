@@ -1,83 +1,68 @@
-import dynamic from "next/dynamic";
-import type { DynamicOptions } from "next/dynamic";
+import { useMemo } from "react";
 
-import { Skeleton } from "@chakra-ui/react";
+import { chakra } from "@chakra-ui/react";
+import Plyr from "plyr-react";
 
-import { useBooleanValue, useSSR } from "~/hooks";
+import "plyr-react/plyr.css";
 
-import type { IVideo } from "./types";
-import type { ReactPlayerProps } from "react-player";
+import type { VideoProps } from "./types";
+import type { PlyrOptions, PlyrSource } from "plyr-react";
 
-type LoaderType = NonNullable<DynamicOptions["loading"]>;
-
-const Loader: LoaderType = () => (
-  <Skeleton boxSize="100%" startColor="gray.500" endColor="tertiary.500" />
-);
-
-const ReactPlayer = dynamic(() => import("react-player"), {
-  loading: Loader,
-});
-
-const controlledProps = {
-  playing: false,
-  controls: true,
+const controlledProps: PlyrOptions = {
+  autoplay: false,
+  clickToPlay: true,
+  disableContextMenu: true,
+  hideControls: false,
+  loop: { active: false },
   muted: false,
-  loop: false,
   volume: 1,
-} as ReactPlayerProps;
+  debug: true,
+  storage: { enabled: true, key: "plyr" },
+};
 
-const uncontrolledProps = {
-  playsinline: true,
-  controls: false,
-  playing: true,
+const uncontrolledProps: PlyrOptions = {
+  autopause: false,
+  autoplay: true,
+  clickToPlay: false,
+  controls: [],
+  disableContextMenu: true,
+  fullscreen: { enabled: false },
+  hideControls: true,
+  loop: { active: true },
   muted: true,
-  loop: true,
+  debug: true,
   volume: 0,
-} as ReactPlayerProps;
+  storage: { enabled: false },
+};
 
-export const Video = (props: IVideo) => {
-  const { enableControls = false, ...rest } = props;
+export const Video = (props: VideoProps) => {
+  const { enableControls = false, autoPlay, youTube = false, url: _, ...rest } = props;
 
-  const { config = {}, style = {}, url: _, ...other } = rest;
-
-  let { url } = rest;
+  let { url } = props;
   if (url.match(/^\/\/.*$/)?.length ?? 0 !== 0) {
     url = "https:" + url;
   }
 
-  const customConfig = {
-    file: {
-      attributes: {
-        disablepictureinpicture: "",
-        controlsList: ["nodownload", "nofullscreen"],
-      },
-    },
-    ...config,
-  } as ReactPlayerProps["config"];
+  const options = useMemo<PlyrOptions>(() => {
+    const out = enableControls ? controlledProps : uncontrolledProps;
+    if (typeof autoPlay !== "undefined") {
+      out.autoplay = autoPlay;
+    }
+    return out;
+  }, [enableControls]);
 
-  const customStyle = {
-    borderRadius: "1.6rem",
-    cursor: "default",
-    ...style,
-  } as ReactPlayerProps["style"];
-
-  const playerProps = useBooleanValue(enableControls, controlledProps, uncontrolledProps);
-
-  const { isClient } = useSSR();
+  const source = useMemo<PlyrSource>(() => {
+    const src: ArrayElement<PlyrSource["sources"]> = { src: url };
+    if (youTube) {
+      src.provider = "youtube";
+    }
+    const out: PlyrSource = { type: "video", sources: [src] };
+    return out;
+  }, [url]);
 
   return (
-    <>
-      {isClient && (
-        <ReactPlayer
-          url={url}
-          width="100%"
-          height="100%"
-          style={customStyle}
-          config={customConfig}
-          {...playerProps}
-          {...other}
-        />
-      )}
-    </>
+    <chakra.div css={{ "& .plyr": { cursor: "default", height: "100%" } }} boxSize="100%">
+      <Plyr id={url} disablePictureInPicture {...rest} source={source} options={options} />
+    </chakra.div>
   );
 };
