@@ -3,6 +3,7 @@ query footerGroups($title: String) {
     footerGroups {
       title
       row
+      sortAlphabetically
       pages {
         slug
         title
@@ -19,6 +20,11 @@ query footerGroups($title: String) {
       docsGroup {
         slug
         footerTitle
+        title
+      }
+      externalLinks {
+        href
+        showIcon
         title
       }
     }

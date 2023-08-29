@@ -57,10 +57,11 @@ export const DesktopLinks = (props: FooterLinksProps) => {
                       <Link
                         p={1}
                         opacity={0.6}
-                        href={`/${item.slug}`}
                         fontSize={{ base: "xs", lg: "sm" }}
                         css={{ "&:focus": { borderRadius } }}
+                        showIcon={item.external && item.showIcon}
                         _hover={{ textDecoration: "none", opacity: 0.9 }}
+                        href={item.external ? item.slug : `/${item.slug}`}
                       >
                         {item.title}
                       </Link>
