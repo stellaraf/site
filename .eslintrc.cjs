@@ -34,7 +34,6 @@ const config = {
     "node_modules",
     "next.config.mjs",
     "generate-favicons.ts",
-    "remix.config.mjs",
     "middleware.ts",
     "codegen.ts",
   ],

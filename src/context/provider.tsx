@@ -15,11 +15,11 @@ export const Provider = (props: ProviderProps) => {
   return (
     <ConfigProvider config={config} docsGroups={docsGroups}>
       <RecoilRoot>
-        <UIProvider theme={theme} fonts={fonts}>
-          <TitleCaseProvider overrides={config.titleOverrides}>
+        <TitleCaseProvider overrides={config.titleOverrides}>
+          <UIProvider theme={theme} fonts={fonts}>
             <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-          </TitleCaseProvider>
-        </UIProvider>
+          </UIProvider>
+        </TitleCaseProvider>
       </RecoilRoot>
     </ConfigProvider>
   );

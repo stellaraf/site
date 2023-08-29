@@ -30,7 +30,7 @@ const config = {
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
-    domains: ["images.ctfassets.net", "media.graphassets.com"],
+    domains: ["media.graphassets.com"],
   },
   env: {
     SITE_VERSION: getVersion(),
