@@ -2,6 +2,7 @@ export * from "./use-alert";
 export * from "./use-apple";
 export * from "./use-boolean-value";
 export * from "./use-breakpoint-string";
+export * from "./use-color-token-value";
 export * from "./use-date";
 export * from "./use-glow";
 export * from "./use-gradient";

@@ -9,7 +9,8 @@ import {
 } from "@react-google-maps/api";
 
 import { Link, Error, RichText } from "~/components";
-import { useConfig, useColorTokenValue } from "~/context";
+import { useConfig } from "~/context";
+import { useColorTokenValue } from "~/hooks";
 
 import { mapDark, mapLight } from "./styles";
 import { gm, useMapUrl } from "./util";

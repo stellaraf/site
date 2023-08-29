@@ -2,9 +2,7 @@
 import { useMemo } from "react";
 
 import {
-  useToken,
   ChakraProvider,
-  useColorModeValue,
   cookieStorageManagerSSR,
   localStorageManager,
   useTheme as useChakraTheme,
@@ -38,9 +36,3 @@ export const UIProvider = (props: UIProviderProps) => {
 };
 
 export const useTheme: UseTheme = useChakraTheme;
-
-/**
- * Get a color token value based on color-mode.
- */
-export const useColorTokenValue = (light: string, dark: string) =>
-  useColorModeValue(useToken("colors", light), useToken("colors", dark));

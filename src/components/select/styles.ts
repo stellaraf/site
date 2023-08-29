@@ -4,8 +4,7 @@ import { useStyleConfig, useToken, useColorModeValue } from "@chakra-ui/react";
 import { mergeWith } from "@chakra-ui/utils";
 import * as ReactSelect from "react-select";
 
-import { useColorTokenValue } from "~/context";
-import { useMobile, useOpposingColor } from "~/hooks";
+import { useMobile, useOpposingColor, useColorTokenValue } from "~/hooks";
 import { removeProps } from "~/lib";
 
 import { useSelectContext } from "./select";

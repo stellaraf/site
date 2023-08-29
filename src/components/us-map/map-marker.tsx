@@ -2,7 +2,7 @@ import { Box, Link, PopoverTrigger, useBreakpointValue, useColorModeValue } from
 import { motion } from "framer-motion";
 import { Marker } from "react-simple-maps";
 
-import { useColorTokenValue } from "~/context";
+import { useColorTokenValue } from "~/hooks";
 
 import type { MapMarkerProps } from "./types";
 import type { Variants } from "framer-motion";

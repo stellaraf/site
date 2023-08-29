@@ -3,8 +3,8 @@ import dynamic from "next/dynamic";
 import { Button, Wrap } from "@chakra-ui/react";
 
 import { ContentSection, Hero, useDataCenter, Callout, Testimonials } from "~/components";
-import { useColorTokenValue, CloudLocationsProvider } from "~/context";
-import { useAlert } from "~/hooks";
+import { CloudLocationsProvider } from "~/context";
+import { useAlert, useColorTokenValue } from "~/hooks";
 import { is } from "~/lib";
 import { pageQuery, cloudLocationsQuery, commonStaticPropsQuery } from "~/queries";
 
