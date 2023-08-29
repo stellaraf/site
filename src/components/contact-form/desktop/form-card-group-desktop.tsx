@@ -110,7 +110,7 @@ export const DFormCardGroup = () => {
           // moved from one location to another.
           const renderedIcon = (
             <motion.div>
-              <Icon icon={{ [icon.family]: icon.name }} color={iconColor} />
+              <Icon url={icon.url} color={iconColor} />
             </motion.div>
           );
 

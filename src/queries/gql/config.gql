@@ -10,7 +10,6 @@ query config($title: String) {
       id
       name
       href
-      iconName
     }
     errorMessage {
       id

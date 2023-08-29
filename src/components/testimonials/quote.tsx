@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { Flex } from "@chakra-ui/react";
 
-import { DynamicIcon } from "~/components";
+import { QuotesLeft, QuotesRight } from "~/icons";
 
 import type { FlexProps } from "@chakra-ui/react";
 
@@ -12,17 +12,6 @@ interface QuoteProps extends FlexProps {
 
 export const Quote = (props: QuoteProps) => {
   const { kind, ...rest } = props;
-
-  const iconProps = useMemo(() => {
-    switch (kind) {
-      case "open": {
-        return { ri: "RiDoubleQuotesL" };
-      }
-      case "close": {
-        return { ri: "RiDoubleQuotesR" };
-      }
-    }
-  }, [kind]);
 
   const kindProps = useMemo<Partial<FlexProps>>(() => {
     switch (kind) {
@@ -35,16 +24,22 @@ export const Quote = (props: QuoteProps) => {
 
   return (
     <Flex
-      color="blackAlpha.300"
-      _dark={{ color: "whiteAlpha.300" }}
       align="center"
       justify="center"
       overflow="hidden"
       display="inline-flex"
+      color="blackAlpha.400"
+      _dark={{ color: "whiteAlpha.500" }}
       {...kindProps}
       {...rest}
     >
-      <DynamicIcon icon={iconProps} boxSize={8} />
+      {kind === "open" ? (
+        <QuotesLeft boxSize={8} />
+      ) : kind === "close" ? (
+        <QuotesRight boxSize={8} />
+      ) : (
+        <></>
+      )}
     </Flex>
   );
 };

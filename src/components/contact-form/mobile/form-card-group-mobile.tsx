@@ -62,10 +62,14 @@ export const MFormCardGroup = () => {
             fields.length > 0 &&
             (typeof cardButton.link === "undefined" || cardButton.link === null);
 
-          const iconProps = isFormLayout ? { size: 12, ml: 4 } : {};
           const renderedIcon = (
             <motion.div layoutId={title}>
-              <Icon icon={{ [icon.family]: icon.name }} color={iconColor} {...iconProps} />
+              <Icon
+                url={icon.url}
+                color={iconColor}
+                size={isFormLayout ? 12 : undefined}
+                ml={isFormLayout ? 4 : undefined}
+              />
             </motion.div>
           );
 

@@ -1,7 +1,7 @@
 import { HStack, IconButton, StackProps } from "@chakra-ui/react";
 import queryString from "query-string";
 
-import { DynamicIcon } from "~/components";
+import { Facebook, Twitter, LinkedIn } from "~/icons";
 
 interface ShareProps extends StackProps {
   url: string;
@@ -19,7 +19,7 @@ export const Share = (props: ShareProps) => {
         colorScheme="linkedin"
         title="Share to LinkedIn"
         aria-label="Share to LinkedIn"
-        icon={<DynamicIcon icon={{ fa: "FaLinkedin" }} />}
+        icon={<LinkedIn />}
         href={queryString.stringifyUrl({
           url: "https://linkedin.com/shareArticle",
           query: { mini: true, url, title },
@@ -32,7 +32,7 @@ export const Share = (props: ShareProps) => {
         colorScheme="twitter"
         title="Share to Twitter"
         aria-label="Share to Twitter"
-        icon={<DynamicIcon icon={{ fa: "FaTwitter" }} />}
+        icon={<Twitter />}
         href={queryString.stringifyUrl({
           url: "https://twitter.com/intent/tweet",
           query: { url, text: title },
@@ -45,7 +45,7 @@ export const Share = (props: ShareProps) => {
         colorScheme="facebook"
         title="Share to Facebook"
         aria-label="Share to Facebook"
-        icon={<DynamicIcon icon={{ fa: "FaFacebook" }} />}
+        icon={<Facebook />}
         href={queryString.stringifyUrl({
           url: "https://facebook.com/sharer/sharer.php",
           query: { u: url },

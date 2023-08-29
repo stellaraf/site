@@ -1,14 +1,17 @@
 import { Box, Heading, chakra, HStack, useToken } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import {
-  BlockQuoteStyleProvider,
-  CodeBlockStyleProvider,
-  DynamicIcon,
-  RichText,
-} from "~/components";
+import { BlockQuoteStyleProvider, CodeBlockStyleProvider, RichText } from "~/components";
 import { useColorValue } from "~/context";
 import { useOpposingColor } from "~/hooks";
+import {
+  AdmonitionCritical,
+  AdmonitionInfo,
+  AdmonitionNote,
+  AdmonitionTip,
+  AdmonitionWarning,
+  type IconProps,
+} from "~/icons";
 import { shouldForwardProp } from "~/theme";
 import { AdmonitionType } from "~/types";
 
@@ -16,12 +19,12 @@ import { Table, Td, Th } from "./table";
 
 import type { AdmonitionModel } from "~/queries";
 
-const iconMap = {
-  [AdmonitionType.Information]: { bi: "BiInfoCircle" },
-  [AdmonitionType.Critical]: { im: "ImFire" },
-  [AdmonitionType.Warning]: { vsc: "VscWarning" },
-  [AdmonitionType.Note]: { go: "GoNote" },
-  [AdmonitionType.Tip]: { go: "GoLightBulb" },
+const iconMap: { [K in AdmonitionType]: (props: IconProps) => JSX.Element } = {
+  [AdmonitionType.Information]: AdmonitionInfo,
+  [AdmonitionType.Critical]: AdmonitionCritical,
+  [AdmonitionType.Warning]: AdmonitionWarning,
+  [AdmonitionType.Note]: AdmonitionNote,
+  [AdmonitionType.Tip]: AdmonitionTip,
 };
 
 const AdmonitionContainer = chakra("div", {
@@ -37,7 +40,8 @@ const AdmonitionContainer = chakra("div", {
 
 const AdmonitionIcon = (props: Pick<AdmonitionModel, "type">) => {
   const { type = AdmonitionType.Note } = props;
-  return <DynamicIcon icon={iconMap[type]} boxSize={{ base: 8, lg: 6 }} />;
+  const Icon = iconMap[type];
+  return <Icon boxSize={{ base: 8, lg: 6 }} />;
 };
 
 export const Admonition = (props: AdmonitionModel) => {

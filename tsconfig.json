@@ -7,6 +7,7 @@
     "baseUrl": ".",
     "paths": {
       "~/components": ["./src/components/index"],
+      "~/icons": ["./src/icons/index"],
       "~/context": ["./src/context/index"],
       "~/hooks": ["./src/hooks/index"],
       "~/layouts": ["./src/layouts/index"],

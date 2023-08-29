@@ -3,7 +3,8 @@ import { useCallback } from "react";
 import { Flex, Center, Heading, IconButton, Grid } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { DynamicIcon, GenericForm, RichText } from "~/components";
+import { GenericForm, RichText } from "~/components";
+import { CaretLeft } from "~/icons";
 import { is } from "~/lib";
 
 import { useContactForm, useSelectedForm } from "../state";
@@ -33,12 +34,7 @@ export const DesktopForm = (props: DesktopFormProps) => {
       templateAreas={`"back title icon" "body body body" "form form form"`}
     >
       <Flex p={2} align="flex-start" justify="flex-start" gridArea="back">
-        <IconButton
-          variant="ghost"
-          aria-label="Back"
-          icon={<DynamicIcon icon={{ bi: "BiLeftArrow" }} />}
-          onClick={goBack}
-        />
+        <IconButton variant="ghost" aria-label="Back" icon={<CaretLeft />} onClick={goBack} />
       </Flex>
       <Flex p={2} align="flex-start" justify="flex-end" gridArea="icon">
         {icon}

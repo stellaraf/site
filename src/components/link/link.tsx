@@ -5,9 +5,9 @@ import { useRouter } from "next/router";
 
 import { chakra, Link as ChakraLink } from "@chakra-ui/react";
 
-import { DynamicIcon } from "~/components";
 import { useColorTokenValue } from "~/context";
 import { useLinkType } from "~/hooks";
+import { ExternalLink as ExternalLinkIcon } from "~/icons";
 
 import type { LinkProps } from "./types";
 import type { BoxProps } from "@chakra-ui/react";
@@ -41,7 +41,7 @@ const BaseLink = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
  */
 const LinkIcon = (props: BoxProps) => (
   <chakra.span mb={1} mx={1} {...props}>
-    <DynamicIcon icon={{ fi: "FiExternalLink" }} />
+    <ExternalLinkIcon display="inline" opacity={0.6} ml={1} />
   </chakra.span>
 );
 
@@ -81,15 +81,17 @@ const InternalLink = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
  * optionally show an external link icon.
  */
 export const Link = (props: LinkProps) => {
-  const { href = "/", showIcon = false, children, ...rest } = props;
+  const { href = "/", showIcon = false, children, rightIcon, ...rest } = props;
 
   const { isExternal, target } = useLinkType(href);
+
+  const icon = typeof rightIcon !== "undefined" ? rightIcon : showIcon ? <LinkIcon /> : <></>;
 
   if (isExternal) {
     return (
       <ExternalLink href={target} {...rest}>
         {children}
-        {showIcon && <LinkIcon />}
+        {icon}
       </ExternalLink>
     );
   }
@@ -97,6 +99,7 @@ export const Link = (props: LinkProps) => {
   return (
     <InternalLink href={target} {...rest}>
       {children}
+      {icon}
     </InternalLink>
   );
 };

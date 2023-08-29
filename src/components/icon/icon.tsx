@@ -1,26 +1,13 @@
-import { useMemo } from "react";
-
 import { Box, Flex, isStyleProp } from "@chakra-ui/react";
 
-import { DynamicIcon } from "~/components";
 import { useColorValue } from "~/context";
 import { useOpposingColor } from "~/hooks";
 
 import type { IconProps } from "./types";
 import type { ChakraProps } from "@chakra-ui/react";
-import type { DynamicIconProps } from "~/components";
 
 export const Icon = (props: IconProps) => {
-  const { color: bgColor = "primary", size = 20, ...rest } = props;
-
-  let icon: DynamicIconProps["icon"] | undefined;
-  let url: string | undefined;
-
-  if ("icon" in props) {
-    icon = props.icon;
-  } else {
-    url = props.url;
-  }
+  const { color: bgColor = "primary", size = 20, url, ...rest } = props;
 
   const restProps = Object.entries(rest).reduce<ChakraProps>((final, [key, value]) => {
     if (isStyleProp(key)) {
@@ -36,15 +23,10 @@ export const Icon = (props: IconProps) => {
   );
   const color = useOpposingColor(bg);
 
-  const fromUrl = useMemo<boolean>(() => {
-    if (typeof icon === "undefined" && typeof url === "string") {
-      return true;
-    }
-    return false;
-  }, [url, typeof icon]);
+  let mask = url;
 
-  if (fromUrl && url?.startsWith("//")) {
-    url = `https://${url}`;
+  if (url.startsWith("//")) {
+    mask = `https://${url}`;
   }
 
   return (
@@ -60,11 +42,11 @@ export const Icon = (props: IconProps) => {
       borderRadius="full"
       {...restProps}
     >
-      {fromUrl ? (
-        <Box css={{ mask: `url(${url}) no-repeat center` }} backgroundColor={color} boxSize="50%" />
-      ) : (
-        <DynamicIcon icon={icon!} boxSize="50%" />
-      )}
+      <Box
+        css={{ mask: `url(${mask}) no-repeat center`, maskSize: "cover" }}
+        backgroundColor={color}
+        boxSize="50%"
+      />
     </Flex>
   );
 };

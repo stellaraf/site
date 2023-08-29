@@ -3,7 +3,8 @@ import { useCallback, useState } from "react";
 import { Button as ChakraButton, Center, Flex, IconButton, Heading, Grid } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { DynamicIcon, Modal, RichText, GenericForm } from "~/components";
+import { Modal, RichText, GenericForm } from "~/components";
+import { CaretLeft } from "~/icons";
 import { is } from "~/lib";
 
 import { useContactForm, useSelectedForm } from "../state";
@@ -58,12 +59,7 @@ export const MobileForm = (props: MobileFormProps) => {
           templateAreas={`"back title icon" "body body body" "form form form" "button button button"`}
         >
           <Flex p={2} align="flex-start" justify="flex-start" gridArea="back">
-            <IconButton
-              variant="ghost"
-              aria-label="Back"
-              icon={<DynamicIcon icon={{ bi: "BiLeftArrow" }} />}
-              onClick={goBack}
-            />
+            <IconButton variant="ghost" aria-label="Back" icon={<CaretLeft />} onClick={goBack} />
           </Flex>
           <Flex p={2} align="flex-start" justify="flex-end" gridArea="icon">
             {icon}

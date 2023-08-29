@@ -65,8 +65,12 @@ query contactForms($config: String) {
         }
       }
       icon {
-        name
-        family
+        fileName
+        height
+        mimeType
+        size
+        url
+        width
       }
       title
     }

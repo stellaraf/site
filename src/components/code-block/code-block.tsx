@@ -6,8 +6,8 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 
-import { DynamicIcon } from "~/components";
 import { useColorValue } from "~/context";
+import { Copy, Check } from "~/icons";
 import { reactChildText, publicProps } from "~/lib";
 
 import { useCodeBlockStyle } from "./use-code-block-style";
@@ -81,15 +81,12 @@ export const CodeBlock = (props: CodeBlockProps) => {
           aria-label="Copy to Clipboard"
           icon={
             <>
-              <DynamicIcon
-                icon={{ bi: "BiCheck" }}
+              <Check
                 transition="all 0.2s ease"
                 opacity={hasCopied ? 1 : 0}
                 pos={hasCopied ? undefined : "absolute"}
               />
-
-              <DynamicIcon
-                icon={{ bi: "BiCopy" }}
+              <Copy
                 transition="all 0.2s ease"
                 opacity={hasCopied ? 0 : 1}
                 pos={hasCopied ? "absolute" : undefined}

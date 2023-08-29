@@ -928,6 +928,7 @@ export type Asset = Node & {
   height?: Maybe<Scalars['Float']['output']>;
   /** List of Asset versions */
   history: Array<Version>;
+  iconContactForm: Array<ContactForm>;
   /** The unique identifier */
   id: Scalars['ID']['output'];
   imagePageContent: Array<PageContent>;
@@ -986,6 +987,20 @@ export type AssetHistoryArgs = {
   limit?: Scalars['Int']['input'];
   skip?: Scalars['Int']['input'];
   stageOverride?: InputMaybe<Stage>;
+};
+
+
+/** Asset system model */
+export type AssetIconContactFormArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<ContactFormOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ContactFormWhereInput>;
 };
 
 
@@ -1119,6 +1134,7 @@ export type AssetCreateInput = {
   handle: Scalars['String']['input'];
   height?: InputMaybe<Scalars['Float']['input']>;
   iconCallToActionSettings?: InputMaybe<CallToActionSettingsCreateManyInlineInput>;
+  iconContactForm?: InputMaybe<ContactFormCreateManyInlineInput>;
   iconFeature?: InputMaybe<FeatureCreateManyInlineInput>;
   imageHomePageBlock?: InputMaybe<HomePageBlockCreateManyInlineInput>;
   imagePageContent?: InputMaybe<PageContentCreateManyInlineInput>;
@@ -1208,6 +1224,9 @@ export type AssetManyWhereInput = {
   documentInStages_every?: InputMaybe<AssetWhereStageInput>;
   documentInStages_none?: InputMaybe<AssetWhereStageInput>;
   documentInStages_some?: InputMaybe<AssetWhereStageInput>;
+  iconContactForm_every?: InputMaybe<ContactFormWhereInput>;
+  iconContactForm_none?: InputMaybe<ContactFormWhereInput>;
+  iconContactForm_some?: InputMaybe<ContactFormWhereInput>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -1312,6 +1331,7 @@ export type AssetUpdateInput = {
   handle?: InputMaybe<Scalars['String']['input']>;
   height?: InputMaybe<Scalars['Float']['input']>;
   iconCallToActionSettings?: InputMaybe<CallToActionSettingsUpdateManyInlineInput>;
+  iconContactForm?: InputMaybe<ContactFormUpdateManyInlineInput>;
   iconFeature?: InputMaybe<FeatureUpdateManyInlineInput>;
   imageHomePageBlock?: InputMaybe<HomePageBlockUpdateManyInlineInput>;
   imagePageContent?: InputMaybe<PageContentUpdateManyInlineInput>;
@@ -1532,6 +1552,9 @@ export type AssetWhereInput = {
   height_not?: InputMaybe<Scalars['Float']['input']>;
   /** All values that are not contained in given list. */
   height_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  iconContactForm_every?: InputMaybe<ContactFormWhereInput>;
+  iconContactForm_none?: InputMaybe<ContactFormWhereInput>;
+  iconContactForm_some?: InputMaybe<ContactFormWhereInput>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -6336,7 +6359,7 @@ export type ContactForm = Node & {
   fields: Array<ContactFormfieldsUnion>;
   /** List of ContactForm versions */
   history: Array<Version>;
-  icon: Icon;
+  icon: Asset;
   /** The unique identifier */
   id: Scalars['ID']['output'];
   /** The time the document was published. Null on documents in draft stage. */
@@ -6444,7 +6467,7 @@ export type ContactFormCreateInput = {
   color: ThemeColor;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   fields?: InputMaybe<ContactFormfieldsUnionCreateManyInlineInput>;
-  icon: IconCreateOneInlineInput;
+  icon: AssetCreateOneInlineInput;
   title: Scalars['String']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -6513,7 +6536,7 @@ export type ContactFormManyWhereInput = {
   fields_empty?: InputMaybe<Scalars['Boolean']['input']>;
   /** Matches if the modular component contains at least one connection to the item provided to the filter */
   fields_some?: InputMaybe<ContactFormfieldsUnionWhereInput>;
-  icon?: InputMaybe<IconWhereInput>;
+  icon?: InputMaybe<AssetWhereInput>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -6610,7 +6633,7 @@ export type ContactFormUpdateInput = {
   cl946yxav4qo701tcbhuw0z3j?: InputMaybe<ConfigurationUpdateManyInlineInput>;
   color?: InputMaybe<ThemeColor>;
   fields?: InputMaybe<ContactFormfieldsUnionUpdateManyInlineInput>;
-  icon?: InputMaybe<IconUpdateOneInlineInput>;
+  icon?: InputMaybe<AssetUpdateOneInlineInput>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -6727,7 +6750,7 @@ export type ContactFormWhereInput = {
   fields_empty?: InputMaybe<Scalars['Boolean']['input']>;
   /** Matches if the modular component contains at least one connection to the item provided to the filter */
   fields_some?: InputMaybe<ContactFormfieldsUnionWhereInput>;
-  icon?: InputMaybe<IconWhereInput>;
+  icon?: InputMaybe<AssetWhereInput>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -12484,375 +12507,6 @@ export type HomePageWhereStageInput = {
 export type HomePageWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Icon = {
-  __typename?: 'Icon';
-  /** React-Icons Family Name. See: https://react-icons.github.io/react-icons/ */
-  family: Scalars['String']['output'];
-  /** The unique identifier */
-  id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
-  /** System stage field */
-  stage: Stage;
-};
-
-export type IconConnectInput = {
-  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
-  position?: InputMaybe<ConnectPositionInput>;
-  /** Document to connect */
-  where: IconWhereUniqueInput;
-};
-
-/** A connection to a list of items. */
-export type IconConnection = {
-  __typename?: 'IconConnection';
-  aggregate: Aggregate;
-  /** A list of edges. */
-  edges: Array<IconEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-};
-
-export type IconCreateInput = {
-  family: Scalars['String']['input'];
-  name: Scalars['String']['input'];
-};
-
-export type IconCreateManyInlineInput = {
-  /** Create and connect multiple existing Icon documents */
-  create?: InputMaybe<Array<IconCreateInput>>;
-};
-
-export type IconCreateOneInlineInput = {
-  /** Create and connect one Icon document */
-  create?: InputMaybe<IconCreateInput>;
-};
-
-export type IconCreateWithPositionInput = {
-  /** Document to create */
-  data: IconCreateInput;
-  /** Position in the list of existing component instances, will default to appending at the end of list */
-  position?: InputMaybe<ConnectPositionInput>;
-};
-
-/** An edge in a connection. */
-export type IconEdge = {
-  __typename?: 'IconEdge';
-  /** A cursor for use in pagination. */
-  cursor: Scalars['String']['output'];
-  /** The item at the end of the edge. */
-  node: Icon;
-};
-
-/** Identifies documents */
-export type IconManyWhereInput = {
-  /** Logical AND on all given filters. */
-  AND?: InputMaybe<Array<IconWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: InputMaybe<Array<IconWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: InputMaybe<Array<IconWhereInput>>;
-  /** Contains search across all appropriate fields. */
-  _search?: InputMaybe<Scalars['String']['input']>;
-  family?: InputMaybe<Scalars['String']['input']>;
-  /** All values containing the given string. */
-  family_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values ending with the given string. */
-  family_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are contained in given list. */
-  family_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  family_not?: InputMaybe<Scalars['String']['input']>;
-  /** All values not containing the given string. */
-  family_not_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values not ending with the given string */
-  family_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are not contained in given list. */
-  family_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** All values not starting with the given string. */
-  family_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values starting with the given string. */
-  family_starts_with?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['ID']['input']>;
-  /** All values containing the given string. */
-  id_contains?: InputMaybe<Scalars['ID']['input']>;
-  /** All values ending with the given string. */
-  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values that are contained in given list. */
-  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  id_not?: InputMaybe<Scalars['ID']['input']>;
-  /** All values not containing the given string. */
-  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
-  /** All values not ending with the given string */
-  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values that are not contained in given list. */
-  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values starting with the given string. */
-  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** All values containing the given string. */
-  name_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values ending with the given string. */
-  name_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are contained in given list. */
-  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  name_not?: InputMaybe<Scalars['String']['input']>;
-  /** All values not containing the given string. */
-  name_not_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values not ending with the given string */
-  name_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are not contained in given list. */
-  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** All values not starting with the given string. */
-  name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values starting with the given string. */
-  name_starts_with?: InputMaybe<Scalars['String']['input']>;
-};
-
-export enum IconOrderByInput {
-  FamilyAsc = 'family_ASC',
-  FamilyDesc = 'family_DESC',
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC'
-}
-
-export type IconParent = ContactForm;
-
-export type IconParentConnectInput = {
-  ContactForm?: InputMaybe<ContactFormConnectInput>;
-};
-
-export type IconParentCreateInput = {
-  ContactForm?: InputMaybe<ContactFormCreateInput>;
-};
-
-export type IconParentCreateManyInlineInput = {
-  /** Connect multiple existing IconParent documents */
-  connect?: InputMaybe<Array<IconParentWhereUniqueInput>>;
-  /** Create and connect multiple existing IconParent documents */
-  create?: InputMaybe<Array<IconParentCreateInput>>;
-};
-
-export type IconParentCreateOneInlineInput = {
-  /** Connect one existing IconParent document */
-  connect?: InputMaybe<IconParentWhereUniqueInput>;
-  /** Create and connect one IconParent document */
-  create?: InputMaybe<IconParentCreateInput>;
-};
-
-export type IconParentUpdateInput = {
-  ContactForm?: InputMaybe<ContactFormUpdateInput>;
-};
-
-export type IconParentUpdateManyInlineInput = {
-  /** Connect multiple existing IconParent documents */
-  connect?: InputMaybe<Array<IconParentConnectInput>>;
-  /** Create and connect multiple IconParent documents */
-  create?: InputMaybe<Array<IconParentCreateInput>>;
-  /** Delete multiple IconParent documents */
-  delete?: InputMaybe<Array<IconParentWhereUniqueInput>>;
-  /** Disconnect multiple IconParent documents */
-  disconnect?: InputMaybe<Array<IconParentWhereUniqueInput>>;
-  /** Override currently-connected documents with multiple existing IconParent documents */
-  set?: InputMaybe<Array<IconParentWhereUniqueInput>>;
-  /** Update multiple IconParent documents */
-  update?: InputMaybe<Array<IconParentUpdateWithNestedWhereUniqueInput>>;
-  /** Upsert multiple IconParent documents */
-  upsert?: InputMaybe<Array<IconParentUpsertWithNestedWhereUniqueInput>>;
-};
-
-export type IconParentUpdateManyWithNestedWhereInput = {
-  ContactForm?: InputMaybe<ContactFormUpdateManyWithNestedWhereInput>;
-};
-
-export type IconParentUpdateOneInlineInput = {
-  /** Connect existing IconParent document */
-  connect?: InputMaybe<IconParentWhereUniqueInput>;
-  /** Create and connect one IconParent document */
-  create?: InputMaybe<IconParentCreateInput>;
-  /** Delete currently connected IconParent document */
-  delete?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Disconnect currently connected IconParent document */
-  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Update single IconParent document */
-  update?: InputMaybe<IconParentUpdateWithNestedWhereUniqueInput>;
-  /** Upsert single IconParent document */
-  upsert?: InputMaybe<IconParentUpsertWithNestedWhereUniqueInput>;
-};
-
-export type IconParentUpdateWithNestedWhereUniqueInput = {
-  ContactForm?: InputMaybe<ContactFormUpdateWithNestedWhereUniqueInput>;
-};
-
-export type IconParentUpsertWithNestedWhereUniqueInput = {
-  ContactForm?: InputMaybe<ContactFormUpsertWithNestedWhereUniqueInput>;
-};
-
-export type IconParentWhereInput = {
-  ContactForm?: InputMaybe<ContactFormWhereInput>;
-};
-
-export type IconParentWhereUniqueInput = {
-  ContactForm?: InputMaybe<ContactFormWhereUniqueInput>;
-};
-
-export type IconUpdateInput = {
-  family?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type IconUpdateManyInlineInput = {
-  /** Create and connect multiple Icon component instances */
-  create?: InputMaybe<Array<IconCreateWithPositionInput>>;
-  /** Delete multiple Icon documents */
-  delete?: InputMaybe<Array<IconWhereUniqueInput>>;
-  /** Update multiple Icon component instances */
-  update?: InputMaybe<Array<IconUpdateWithNestedWhereUniqueAndPositionInput>>;
-  /** Upsert multiple Icon component instances */
-  upsert?: InputMaybe<Array<IconUpsertWithNestedWhereUniqueAndPositionInput>>;
-};
-
-export type IconUpdateManyInput = {
-  family?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type IconUpdateManyWithNestedWhereInput = {
-  /** Update many input */
-  data: IconUpdateManyInput;
-  /** Document search */
-  where: IconWhereInput;
-};
-
-export type IconUpdateOneInlineInput = {
-  /** Create and connect one Icon document */
-  create?: InputMaybe<IconCreateInput>;
-  /** Delete currently connected Icon document */
-  delete?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Update single Icon document */
-  update?: InputMaybe<IconUpdateWithNestedWhereUniqueInput>;
-  /** Upsert single Icon document */
-  upsert?: InputMaybe<IconUpsertWithNestedWhereUniqueInput>;
-};
-
-export type IconUpdateWithNestedWhereUniqueAndPositionInput = {
-  /** Document to update */
-  data?: InputMaybe<IconUpdateInput>;
-  /** Position in the list of existing component instances, will default to appending at the end of list */
-  position?: InputMaybe<ConnectPositionInput>;
-  /** Unique component instance search */
-  where: IconWhereUniqueInput;
-};
-
-export type IconUpdateWithNestedWhereUniqueInput = {
-  /** Document to update */
-  data: IconUpdateInput;
-  /** Unique document search */
-  where: IconWhereUniqueInput;
-};
-
-export type IconUpsertInput = {
-  /** Create document if it didn't exist */
-  create: IconCreateInput;
-  /** Update document if it exists */
-  update: IconUpdateInput;
-};
-
-export type IconUpsertWithNestedWhereUniqueAndPositionInput = {
-  /** Document to upsert */
-  data?: InputMaybe<IconUpsertInput>;
-  /** Position in the list of existing component instances, will default to appending at the end of list */
-  position?: InputMaybe<ConnectPositionInput>;
-  /** Unique component instance search */
-  where: IconWhereUniqueInput;
-};
-
-export type IconUpsertWithNestedWhereUniqueInput = {
-  /** Upsert data */
-  data: IconUpsertInput;
-  /** Unique document search */
-  where: IconWhereUniqueInput;
-};
-
-/** Identifies documents */
-export type IconWhereInput = {
-  /** Logical AND on all given filters. */
-  AND?: InputMaybe<Array<IconWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: InputMaybe<Array<IconWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: InputMaybe<Array<IconWhereInput>>;
-  /** Contains search across all appropriate fields. */
-  _search?: InputMaybe<Scalars['String']['input']>;
-  family?: InputMaybe<Scalars['String']['input']>;
-  /** All values containing the given string. */
-  family_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values ending with the given string. */
-  family_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are contained in given list. */
-  family_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  family_not?: InputMaybe<Scalars['String']['input']>;
-  /** All values not containing the given string. */
-  family_not_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values not ending with the given string */
-  family_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are not contained in given list. */
-  family_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** All values not starting with the given string. */
-  family_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values starting with the given string. */
-  family_starts_with?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['ID']['input']>;
-  /** All values containing the given string. */
-  id_contains?: InputMaybe<Scalars['ID']['input']>;
-  /** All values ending with the given string. */
-  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values that are contained in given list. */
-  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  id_not?: InputMaybe<Scalars['ID']['input']>;
-  /** All values not containing the given string. */
-  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
-  /** All values not ending with the given string */
-  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values that are not contained in given list. */
-  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values starting with the given string. */
-  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** All values containing the given string. */
-  name_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values ending with the given string. */
-  name_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are contained in given list. */
-  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  name_not?: InputMaybe<Scalars['String']['input']>;
-  /** All values not containing the given string. */
-  name_not_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values not ending with the given string */
-  name_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are not contained in given list. */
-  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** All values not starting with the given string. */
-  name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values starting with the given string. */
-  name_starts_with?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** References Icon record uniquely */
-export type IconWhereUniqueInput = {
-  id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export enum ImageFit {
@@ -19708,8 +19362,6 @@ export type SelectFieldWhereUniqueInput = {
 export type SocialLink = {
   __typename?: 'SocialLink';
   href: Scalars['String']['output'];
-  /** react-icons family & name in {family}-{name} format */
-  iconName: Scalars['String']['output'];
   /** The unique identifier */
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
@@ -19736,7 +19388,6 @@ export type SocialLinkConnection = {
 
 export type SocialLinkCreateInput = {
   href: Scalars['String']['input'];
-  iconName: Scalars['String']['input'];
   name: Scalars['String']['input'];
 };
 
@@ -19795,25 +19446,6 @@ export type SocialLinkManyWhereInput = {
   href_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** All values starting with the given string. */
   href_starts_with?: InputMaybe<Scalars['String']['input']>;
-  iconName?: InputMaybe<Scalars['String']['input']>;
-  /** All values containing the given string. */
-  iconName_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values ending with the given string. */
-  iconName_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are contained in given list. */
-  iconName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  iconName_not?: InputMaybe<Scalars['String']['input']>;
-  /** All values not containing the given string. */
-  iconName_not_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values not ending with the given string */
-  iconName_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are not contained in given list. */
-  iconName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** All values not starting with the given string. */
-  iconName_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values starting with the given string. */
-  iconName_starts_with?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -19857,8 +19489,6 @@ export type SocialLinkManyWhereInput = {
 export enum SocialLinkOrderByInput {
   HrefAsc = 'href_ASC',
   HrefDesc = 'href_DESC',
-  IconNameAsc = 'iconName_ASC',
-  IconNameDesc = 'iconName_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
   NameAsc = 'name_ASC',
@@ -19947,7 +19577,6 @@ export type SocialLinkParentWhereUniqueInput = {
 
 export type SocialLinkUpdateInput = {
   href?: InputMaybe<Scalars['String']['input']>;
-  iconName?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -19964,7 +19593,6 @@ export type SocialLinkUpdateManyInlineInput = {
 
 export type SocialLinkUpdateManyInput = {
   href?: InputMaybe<Scalars['String']['input']>;
-  iconName?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -20054,25 +19682,6 @@ export type SocialLinkWhereInput = {
   href_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** All values starting with the given string. */
   href_starts_with?: InputMaybe<Scalars['String']['input']>;
-  iconName?: InputMaybe<Scalars['String']['input']>;
-  /** All values containing the given string. */
-  iconName_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values ending with the given string. */
-  iconName_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are contained in given list. */
-  iconName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  iconName_not?: InputMaybe<Scalars['String']['input']>;
-  /** All values not containing the given string. */
-  iconName_not_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values not ending with the given string */
-  iconName_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are not contained in given list. */
-  iconName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** All values not starting with the given string. */
-  iconName_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values starting with the given string. */
-  iconName_starts_with?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -24007,14 +23616,14 @@ export type ConfigQueryVariables = Exact<{
 }>;
 
 
-export type ConfigQuery = { __typename?: 'Query', values?: { __typename?: 'Configuration', description: string, organizationName: string, slogan: string, title: string, titleOverrides: Array<string>, statusUrl: string, createdAt: string, hqAddress: string, openMapsText: string, socialLinks: Array<{ __typename?: 'SocialLink', id: string, name: string, href: string, iconName: string }>, errorMessage: { __typename?: 'Alert', id: string, name: string, level: AlertLevel, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } }, callToAction: { __typename?: 'CallToAction', shown: number, title: string }, testimonials: Array<{ __typename?: 'Testimonial', subtitle?: string | null, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, image: { __typename?: 'Asset', fileName: string, handle: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, hqCoordinates: { __typename?: 'Location', latitude: number, longitude: number }, hqMapInfo: { __typename?: 'RichText', raw: RichTextContent }, subscribe?: { __typename?: 'Form', id: string, colorScheme: ThemeColor, button: { __typename?: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null } | null };
+export type ConfigQuery = { __typename?: 'Query', values?: { __typename?: 'Configuration', description: string, organizationName: string, slogan: string, title: string, titleOverrides: Array<string>, statusUrl: string, createdAt: string, hqAddress: string, openMapsText: string, socialLinks: Array<{ __typename?: 'SocialLink', id: string, name: string, href: string }>, errorMessage: { __typename?: 'Alert', id: string, name: string, level: AlertLevel, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } }, callToAction: { __typename?: 'CallToAction', shown: number, title: string }, testimonials: Array<{ __typename?: 'Testimonial', subtitle?: string | null, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, image: { __typename?: 'Asset', fileName: string, handle: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, hqCoordinates: { __typename?: 'Location', latitude: number, longitude: number }, hqMapInfo: { __typename?: 'RichText', raw: RichTextContent }, subscribe?: { __typename?: 'Form', id: string, colorScheme: ThemeColor, button: { __typename?: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null } | null };
 
 export type ContactFormsQueryVariables = Exact<{
   config?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type ContactFormsQuery = { __typename?: 'Query', configuration?: { __typename?: 'Configuration', contactForms: Array<{ __typename?: 'ContactForm', color: ThemeColor, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, button: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null }, fields: Array<{ __typename: 'CheckboxField', displayName: string, fieldGroup: number, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean } | { __typename: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', name: string, title?: string | null, level: AlertLevel, body: { __typename?: 'RichText', raw: RichTextContent } } | null } | { __typename: 'SelectField', displayName: string, fieldGroup: number, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean } | { __typename: 'TextAreaField', displayName: string, fieldGroup: number, formId: string, label?: string | null, required: boolean } | { __typename: 'TextInputField', displayName: string, fieldGroup: number, formId: string, label?: string | null, required: boolean, validationType?: TextInputValidationType | null }>, icon: { __typename?: 'Icon', name: string, family: string } }> } | null };
+export type ContactFormsQuery = { __typename?: 'Query', configuration?: { __typename?: 'Configuration', contactForms: Array<{ __typename?: 'ContactForm', color: ThemeColor, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, button: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null }, fields: Array<{ __typename: 'CheckboxField', displayName: string, fieldGroup: number, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean } | { __typename: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', name: string, title?: string | null, level: AlertLevel, body: { __typename?: 'RichText', raw: RichTextContent } } | null } | { __typename: 'SelectField', displayName: string, fieldGroup: number, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean } | { __typename: 'TextAreaField', displayName: string, fieldGroup: number, formId: string, label?: string | null, required: boolean } | { __typename: 'TextInputField', displayName: string, fieldGroup: number, formId: string, label?: string | null, required: boolean, validationType?: TextInputValidationType | null }>, icon: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }> } | null };
 
 export type DocsGroupStaticPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -24173,9 +23782,6 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
     "HomePageBlockParent": [
       "HomePage"
     ],
-    "IconParent": [
-      "ContactForm"
-    ],
     "Node": [
       "Admonition",
       "Asset",
@@ -24252,8 +23858,8 @@ export const BlogPostsByTagsDocument = {"kind":"Document","definitions":[{"kind"
 export const BlogPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPosts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"updatedAt_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"blogPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostsQuery, BlogPostsQueryVariables>;
 export const BlogPostTagsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostTagsQuery, BlogPostTagsQueryVariables>;
 export const CloudLocationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"cloudLocations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cloudLocations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"active"}},{"kind":"Field","name":{"kind":"Name","value":"coordinates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"testUrl"}},{"kind":"Field","name":{"kind":"Name","value":"timeout"}}]}}]}}]} as unknown as DocumentNode<CloudLocationsQuery, CloudLocationsQueryVariables>;
-export const ConfigDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"config"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"values"},"name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"organizationName"}},{"kind":"Field","name":{"kind":"Name","value":"slogan"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"titleOverrides"}},{"kind":"Field","name":{"kind":"Name","value":"statusUrl"}},{"kind":"Field","name":{"kind":"Name","value":"socialLinks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"href"}},{"kind":"Field","name":{"kind":"Name","value":"iconName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"errorMessage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shown"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"testimonials"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"handle"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hqAddress"}},{"kind":"Field","name":{"kind":"Name","value":"hqCoordinates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hqMapInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"openMapsText"}},{"kind":"Field","name":{"kind":"Name","value":"subscribe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}}]}}]}}]}}]} as unknown as DocumentNode<ConfigQuery, ConfigQueryVariables>;
-export const ContactFormsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"contactForms"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"config"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"config"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contactForms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"validationType"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"family"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<ContactFormsQuery, ContactFormsQueryVariables>;
+export const ConfigDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"config"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"values"},"name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"organizationName"}},{"kind":"Field","name":{"kind":"Name","value":"slogan"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"titleOverrides"}},{"kind":"Field","name":{"kind":"Name","value":"statusUrl"}},{"kind":"Field","name":{"kind":"Name","value":"socialLinks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"href"}}]}},{"kind":"Field","name":{"kind":"Name","value":"errorMessage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shown"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"testimonials"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"handle"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hqAddress"}},{"kind":"Field","name":{"kind":"Name","value":"hqCoordinates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hqMapInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"openMapsText"}},{"kind":"Field","name":{"kind":"Name","value":"subscribe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}}]}}]}}]}}]} as unknown as DocumentNode<ConfigQuery, ConfigQueryVariables>;
+export const ContactFormsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"contactForms"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"config"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"config"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contactForms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"validationType"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<ContactFormsQuery, ContactFormsQueryVariables>;
 export const DocsGroupStaticPathsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsGroupStaticPaths"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsGroups"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<DocsGroupStaticPathsQuery, DocsGroupStaticPathsQueryVariables>;
 export const DocsGroupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsGroup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"enable"}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"docsPages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"summary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DocsGroupQuery, DocsGroupQueryVariables>;
 export const DocsGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsGroups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsGroups"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"20"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"enable"}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"docsPages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"summary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DocsGroupsQuery, DocsGroupsQueryVariables>;
@@ -24351,7 +23957,6 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
   FormButtonParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   FormfieldsUnion: ( CheckboxField ) | ( SelectField ) | ( TextAreaField ) | ( TextInputField );
   HomePageBlockParent: ( HomePage );
-  IconParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } );
   ScheduledOperationAffectedDocument: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( BlogPostTag ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HomePage ) | ( Page ) | ( PageContent ) | ( Testimonial ) | ( Theme );
   SelectFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   SocialLinkParent: ( Configuration );
@@ -25080,41 +24685,6 @@ export type ResolversTypes = {
   HomePageWhereStageInput: HomePageWhereStageInput;
   HomePageWhereUniqueInput: HomePageWhereUniqueInput;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
-  Icon: ResolverTypeWrapper<Icon>;
-  IconConnectInput: IconConnectInput;
-  IconConnection: ResolverTypeWrapper<IconConnection>;
-  IconCreateInput: IconCreateInput;
-  IconCreateManyInlineInput: IconCreateManyInlineInput;
-  IconCreateOneInlineInput: IconCreateOneInlineInput;
-  IconCreateWithPositionInput: IconCreateWithPositionInput;
-  IconEdge: ResolverTypeWrapper<IconEdge>;
-  IconManyWhereInput: IconManyWhereInput;
-  IconOrderByInput: IconOrderByInput;
-  IconParent: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['IconParent']>;
-  IconParentConnectInput: IconParentConnectInput;
-  IconParentCreateInput: IconParentCreateInput;
-  IconParentCreateManyInlineInput: IconParentCreateManyInlineInput;
-  IconParentCreateOneInlineInput: IconParentCreateOneInlineInput;
-  IconParentUpdateInput: IconParentUpdateInput;
-  IconParentUpdateManyInlineInput: IconParentUpdateManyInlineInput;
-  IconParentUpdateManyWithNestedWhereInput: IconParentUpdateManyWithNestedWhereInput;
-  IconParentUpdateOneInlineInput: IconParentUpdateOneInlineInput;
-  IconParentUpdateWithNestedWhereUniqueInput: IconParentUpdateWithNestedWhereUniqueInput;
-  IconParentUpsertWithNestedWhereUniqueInput: IconParentUpsertWithNestedWhereUniqueInput;
-  IconParentWhereInput: IconParentWhereInput;
-  IconParentWhereUniqueInput: IconParentWhereUniqueInput;
-  IconUpdateInput: IconUpdateInput;
-  IconUpdateManyInlineInput: IconUpdateManyInlineInput;
-  IconUpdateManyInput: IconUpdateManyInput;
-  IconUpdateManyWithNestedWhereInput: IconUpdateManyWithNestedWhereInput;
-  IconUpdateOneInlineInput: IconUpdateOneInlineInput;
-  IconUpdateWithNestedWhereUniqueAndPositionInput: IconUpdateWithNestedWhereUniqueAndPositionInput;
-  IconUpdateWithNestedWhereUniqueInput: IconUpdateWithNestedWhereUniqueInput;
-  IconUpsertInput: IconUpsertInput;
-  IconUpsertWithNestedWhereUniqueAndPositionInput: IconUpsertWithNestedWhereUniqueAndPositionInput;
-  IconUpsertWithNestedWhereUniqueInput: IconUpsertWithNestedWhereUniqueInput;
-  IconWhereInput: IconWhereInput;
-  IconWhereUniqueInput: IconWhereUniqueInput;
   ImageFit: ImageFit;
   ImageResizeInput: ImageResizeInput;
   ImageTransformationInput: ImageTransformationInput;
@@ -26198,40 +25768,6 @@ export type ResolversParentTypes = {
   HomePageWhereStageInput: HomePageWhereStageInput;
   HomePageWhereUniqueInput: HomePageWhereUniqueInput;
   ID: Scalars['ID']['output'];
-  Icon: Icon;
-  IconConnectInput: IconConnectInput;
-  IconConnection: IconConnection;
-  IconCreateInput: IconCreateInput;
-  IconCreateManyInlineInput: IconCreateManyInlineInput;
-  IconCreateOneInlineInput: IconCreateOneInlineInput;
-  IconCreateWithPositionInput: IconCreateWithPositionInput;
-  IconEdge: IconEdge;
-  IconManyWhereInput: IconManyWhereInput;
-  IconParent: ResolversUnionTypes<ResolversParentTypes>['IconParent'];
-  IconParentConnectInput: IconParentConnectInput;
-  IconParentCreateInput: IconParentCreateInput;
-  IconParentCreateManyInlineInput: IconParentCreateManyInlineInput;
-  IconParentCreateOneInlineInput: IconParentCreateOneInlineInput;
-  IconParentUpdateInput: IconParentUpdateInput;
-  IconParentUpdateManyInlineInput: IconParentUpdateManyInlineInput;
-  IconParentUpdateManyWithNestedWhereInput: IconParentUpdateManyWithNestedWhereInput;
-  IconParentUpdateOneInlineInput: IconParentUpdateOneInlineInput;
-  IconParentUpdateWithNestedWhereUniqueInput: IconParentUpdateWithNestedWhereUniqueInput;
-  IconParentUpsertWithNestedWhereUniqueInput: IconParentUpsertWithNestedWhereUniqueInput;
-  IconParentWhereInput: IconParentWhereInput;
-  IconParentWhereUniqueInput: IconParentWhereUniqueInput;
-  IconUpdateInput: IconUpdateInput;
-  IconUpdateManyInlineInput: IconUpdateManyInlineInput;
-  IconUpdateManyInput: IconUpdateManyInput;
-  IconUpdateManyWithNestedWhereInput: IconUpdateManyWithNestedWhereInput;
-  IconUpdateOneInlineInput: IconUpdateOneInlineInput;
-  IconUpdateWithNestedWhereUniqueAndPositionInput: IconUpdateWithNestedWhereUniqueAndPositionInput;
-  IconUpdateWithNestedWhereUniqueInput: IconUpdateWithNestedWhereUniqueInput;
-  IconUpsertInput: IconUpsertInput;
-  IconUpsertWithNestedWhereUniqueAndPositionInput: IconUpsertWithNestedWhereUniqueAndPositionInput;
-  IconUpsertWithNestedWhereUniqueInput: IconUpsertWithNestedWhereUniqueInput;
-  IconWhereInput: IconWhereInput;
-  IconWhereUniqueInput: IconWhereUniqueInput;
   ImageResizeInput: ImageResizeInput;
   ImageTransformationInput: ImageTransformationInput;
   Int: Scalars['Int']['output'];
@@ -26670,6 +26206,7 @@ export type AssetResolvers<ContextType = any, ParentType extends ResolversParent
   handle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   height?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<AssetHistoryArgs, 'limit' | 'skip'>>;
+  iconContactForm?: Resolver<Array<ResolversTypes['ContactForm']>, ParentType, ContextType, Partial<AssetIconContactFormArgs>>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   imagePageContent?: Resolver<Array<ResolversTypes['PageContent']>, ParentType, ContextType, Partial<AssetImagePageContentArgs>>;
   imageTestimonial?: Resolver<Array<ResolversTypes['Testimonial']>, ParentType, ContextType, Partial<AssetImageTestimonialArgs>>;
@@ -27022,7 +26559,7 @@ export type ContactFormResolvers<ContextType = any, ParentType extends Resolvers
   documentInStages?: Resolver<Array<ResolversTypes['ContactForm']>, ParentType, ContextType, RequireFields<ContactFormDocumentInStagesArgs, 'includeCurrent' | 'inheritLocale' | 'stages'>>;
   fields?: Resolver<Array<ResolversTypes['ContactFormfieldsUnion']>, ParentType, ContextType, Partial<ContactFormFieldsArgs>>;
   history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<ContactFormHistoryArgs, 'limit' | 'skip'>>;
-  icon?: Resolver<ResolversTypes['Icon'], ParentType, ContextType, Partial<ContactFormIconArgs>>;
+  icon?: Resolver<ResolversTypes['Asset'], ParentType, ContextType, Partial<ContactFormIconArgs>>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<ContactFormPublishedByArgs>>;
@@ -27447,31 +26984,6 @@ export type HomePageEdgeResolvers<ContextType = any, ParentType extends Resolver
   cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   node?: Resolver<ResolversTypes['HomePage'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type IconResolvers<ContextType = any, ParentType extends ResolversParentTypes['Icon'] = ResolversParentTypes['Icon']> = {
-  family?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type IconConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['IconConnection'] = ResolversParentTypes['IconConnection']> = {
-  aggregate?: Resolver<ResolversTypes['Aggregate'], ParentType, ContextType>;
-  edges?: Resolver<Array<ResolversTypes['IconEdge']>, ParentType, ContextType>;
-  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type IconEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['IconEdge'] = ResolversParentTypes['IconEdge']> = {
-  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  node?: Resolver<ResolversTypes['Icon'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type IconParentResolvers<ContextType = any, ParentType extends ResolversParentTypes['IconParent'] = ResolversParentTypes['IconParent']> = {
-  __resolveType: TypeResolveFn<'ContactForm', ParentType, ContextType>;
 };
 
 export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Json'], any> {
@@ -28092,7 +27604,6 @@ export type SelectFieldParentResolvers<ContextType = any, ParentType extends Res
 
 export type SocialLinkResolvers<ContextType = any, ParentType extends ResolversParentTypes['SocialLink'] = ResolversParentTypes['SocialLink']> = {
   href?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  iconName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
@@ -28469,10 +27980,6 @@ export type Resolvers<ContextType = any> = {
   HomePageBlockParent?: HomePageBlockParentResolvers<ContextType>;
   HomePageConnection?: HomePageConnectionResolvers<ContextType>;
   HomePageEdge?: HomePageEdgeResolvers<ContextType>;
-  Icon?: IconResolvers<ContextType>;
-  IconConnection?: IconConnectionResolvers<ContextType>;
-  IconEdge?: IconEdgeResolvers<ContextType>;
-  IconParent?: IconParentResolvers<ContextType>;
   Json?: GraphQLScalarType;
   Location?: LocationResolvers<ContextType>;
   Long?: GraphQLScalarType;

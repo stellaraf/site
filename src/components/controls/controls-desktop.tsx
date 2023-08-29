@@ -1,27 +1,26 @@
+import { useCallback } from "react";
+
 import { Box, Button, VStack } from "@chakra-ui/react";
 
-import { DynamicIcon } from "~/components";
 import { useColorMode, useColorValue } from "~/context";
+import { Sun, Moon, ChevronUp } from "~/icons";
 
 import type { BoxProps } from "@chakra-ui/react";
 
-/**
- * SSR-safely smooth-scroll to the top of the viewport.
- */
-function scrollToTop(): void {
-  if (typeof window !== "undefined") {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    if (window.document.activeElement instanceof HTMLElement) {
-      window.document.activeElement.blur();
-    }
-  }
-}
-
 export const DControls = (props: BoxProps) => {
   const { toggleColorMode } = useColorMode();
-  const colorModeIcon = useColorValue({ bs: "BsMoon" }, { md: "MdWbSunny" });
+  const colorModeIcon = useColorValue(<Moon />, <Sun />);
   const switchTo = useColorValue("Dark", "Light");
   const colorModeLabel = `Switch to ${switchTo} Mode`;
+
+  const scrollToTop = useCallback(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (window.document.activeElement instanceof HTMLElement) {
+        window.document.activeElement.blur();
+      }
+    }
+  }, []);
 
   return (
     <Box
@@ -59,7 +58,7 @@ export const DControls = (props: BoxProps) => {
           _hover={{ color: "secondary.500" }}
           _dark={{ _hover: { color: "tertiary.300" } }}
         >
-          <DynamicIcon icon={colorModeIcon} />
+          {colorModeIcon}
         </Button>
         <Button
           minW="unset"
@@ -71,7 +70,7 @@ export const DControls = (props: BoxProps) => {
           _hover={{ color: "secondary.500" }}
           _dark={{ _hover: { color: "tertiary.300" } }}
         >
-          <DynamicIcon icon={{ bs: "BsChevronUp" }} />
+          <ChevronUp />
         </Button>
       </VStack>
     </Box>

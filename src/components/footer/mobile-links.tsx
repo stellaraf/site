@@ -47,7 +47,8 @@ export const MobileLinks = (props: FooterLinksProps) => {
                       fontSize="sm"
                       color={linkColor}
                       borderBottom="none"
-                      href={`/${item.slug}`}
+                      href={item.external ? item.slug : `/${item.slug}`}
+                      showIcon={item.external && item.showIcon}
                     >
                       {item.footerTitle ? item.footerTitle : item.title}
                     </Link>

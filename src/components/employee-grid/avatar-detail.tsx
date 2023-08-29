@@ -13,9 +13,10 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 
-import { Modal, RichText, DynamicIcon } from "~/components";
+import { Modal, RichText } from "~/components";
 import { useColorValue } from "~/context";
 import { useScaledText } from "~/hooks";
+import { LocationPin } from "~/icons";
 
 import { AvatarPhotoWrapper } from "./avatar-photo";
 import { useAvatar } from "./employee-grid";
@@ -69,8 +70,8 @@ const Footer = (props: Pick<Employee, "location">) => {
   return (
     <Flex alignItems="flex-end" justifyContent="flex-end">
       <Tag>
-        <TagLeftIcon as={() => <DynamicIcon icon={{ go: "location" }} />} />
-        <TagLabel ml={2}>{props.location}</TagLabel>
+        <TagLeftIcon as={LocationPin} />
+        <TagLabel>{props.location}</TagLabel>
       </Tag>
     </Flex>
   );

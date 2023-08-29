@@ -1,15 +1,7 @@
 import type { BoxProps } from "@chakra-ui/react";
-import type { DynamicIconProps } from "~/components";
 
-interface Base {
+export interface IconProps extends Omit<BoxProps, "color"> {
+  url: string;
   size?: number;
   color?: string;
 }
-
-interface IconFromURLProps extends Base, Omit<BoxProps, "color"> {
-  url: string;
-}
-
-interface IconFromIconProps extends Base, Omit<DynamicIconProps, "color"> {}
-
-export type IconProps = IconFromURLProps | IconFromIconProps;

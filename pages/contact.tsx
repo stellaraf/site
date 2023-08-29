@@ -2,7 +2,6 @@ import { Box, Flex, Button as ChakraButton, Heading, VStack } from "@chakra-ui/r
 
 import {
   Content,
-  DynamicIcon,
   Hero,
   FormCardGroup,
   Callout,
@@ -12,6 +11,7 @@ import {
   P,
 } from "~/components";
 import { useSlug, useResponsiveStyle } from "~/hooks";
+import { Phone } from "~/icons";
 import { is } from "~/lib";
 import { getHolidays, getLocationTime } from "~/lib/server";
 import {
@@ -55,7 +55,7 @@ const Contact: NextPage<ContactPageProps> = props => {
                 rounded="full"
                 colorScheme="green"
               >
-                <DynamicIcon icon={{ im: "ImPhone" }} />
+                <Phone />
               </ChakraButton>
               <Heading as="h4" fontSize="xl" fontWeight="medium">
                 {content.button.text}

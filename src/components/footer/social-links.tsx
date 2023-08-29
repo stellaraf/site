@@ -1,10 +1,17 @@
 import { HStack, IconButton } from "@chakra-ui/react";
 
-import { DynamicIcon } from "~/components";
 import { useConfig, useColorValue } from "~/context";
+import { Facebook, Twitter, LinkedIn, GitHub, type IconType } from "~/icons";
 
 import type { SocialLinkProps } from "./types";
 import type { StackProps } from "@chakra-ui/react";
+
+const iconMap: Record<string, IconType> = {
+  Facebook: Facebook,
+  Twitter: Twitter,
+  LinkedIn: LinkedIn,
+  GitHub: GitHub,
+};
 
 const SocialLink = (props: SocialLinkProps) => {
   const { label, ...rest } = props;
@@ -36,14 +43,9 @@ export const SocialLinks = (props: StackProps) => {
   return (
     <HStack spacing={4} alignItems={{ lg: "flex-start" }} {...props}>
       {socialLinks.map(social => {
-        const [family, iconName] = social.iconName.split("-");
+        const Icon = iconMap[social.name];
         return (
-          <SocialLink
-            key={social.name}
-            href={social.href}
-            label={social.name}
-            icon={<DynamicIcon icon={{ [family]: iconName }} />}
-          />
+          <SocialLink key={social.name} href={social.href} label={social.name} icon={<Icon />} />
         );
       })}
     </HStack>

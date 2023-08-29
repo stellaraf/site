@@ -9,8 +9,8 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 
-import { DynamicIcon } from "~/components";
 import { useColorValue } from "~/context";
+import { CircleArrowRight, CircleCheck, CircleX } from "~/icons";
 
 import type { SubscribeFieldProps } from "./types";
 
@@ -39,14 +39,14 @@ export const SubscribeField = forwardRef<HTMLInputElement, SubscribeFieldProps>(
     },
   );
 
-  const icon = useMemo(() => {
+  const icon = useMemo<JSX.Element>(() => {
     if (error) {
-      return { fa: "FaTimesCircle" };
+      return <CircleX />;
     }
     if (isSubmitSuccessful) {
-      return { fa: "FaCheckCircle" };
+      return <CircleCheck />;
     }
-    return { fa: "FaArrowAltCircleRight" };
+    return <CircleArrowRight />;
   }, [error, isSubmitSuccessful]);
 
   const color = useMemo(() => {
@@ -67,6 +67,7 @@ export const SubscribeField = forwardRef<HTMLInputElement, SubscribeFieldProps>(
           <IconButton
             p={2}
             h="100%"
+            icon={icon}
             color={color}
             title={title}
             type="submit"
@@ -76,7 +77,6 @@ export const SubscribeField = forwardRef<HTMLInputElement, SubscribeFieldProps>(
             display="inline-flex"
             isLoading={isSubmitting}
             _hover={{ color: "tertiary.500" }}
-            icon={<DynamicIcon icon={icon} />}
           />
         </InputRightElement>
       </InputGroup>

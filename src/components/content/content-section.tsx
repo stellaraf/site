@@ -2,9 +2,10 @@ import { forwardRef, useMemo } from "react";
 
 import { Box, Flex, VStack, Heading, VisuallyHidden } from "@chakra-ui/react";
 
-import { Button, DynamicIcon, Divider, RichText } from "~/components";
+import { Button, Divider, RichText } from "~/components";
 import { useColorValue } from "~/context";
 import { useMobile, useResponsiveStyle } from "~/hooks";
+import { ChevronRight } from "~/icons";
 import { is } from "~/lib";
 
 import { ContentBody } from "./content-body";
@@ -147,7 +148,7 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
             <Button
               my={8}
               href={button.link ?? "#"}
-              leftIcon={<DynamicIcon icon={{ bs: "BsChevronRight" }} />}
+              leftIcon={<ChevronRight />}
               variant={is(button.variant) ? button.variant : undefined}
             >
               {button.text}
