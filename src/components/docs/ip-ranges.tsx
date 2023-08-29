@@ -1,6 +1,6 @@
-import { Box, Tag, Heading, SimpleGrid, Skeleton, Wrap, WrapItem } from "@chakra-ui/react";
+import { Button, Box, Heading, SimpleGrid, Skeleton, Wrap, WrapItem } from "@chakra-ui/react";
 
-import { CodeBlock, Link, Error } from "~/components";
+import { CodeBlock, Error } from "~/components";
 import { useColorValue } from "~/context";
 
 import { useIPRanges } from "./use-ip-ranges";
@@ -36,11 +36,11 @@ export const IPRanges = () => {
               <Heading as="h3" size="md">{`Domains & URLs`}</Heading>
               <CodeBlock>{data?.urls.join("\n") ?? ""}</CodeBlock>
             </Box>
-            <Box maxW={{ base: "100%", lg: "50%" }}>
+            <Box w="100%">
               <Heading as="h3" size="md">
                 Other Formats
               </Heading>
-              <Wrap mt={5}>
+              <Wrap mt={5} spacing={4}>
                 {[
                   ["json", "JSON"],
                   ["", "Plain Text (IPv4 & IPv6)"],
@@ -49,11 +49,15 @@ export const IPRanges = () => {
                   ["urls", "Plain Text (URLs Only)"],
                 ].map(([href, title]) => (
                   <WrapItem key={title}>
-                    <Link href={`${URL}/${href}`}>
-                      <Tag px={3} py={2} colorScheme={tagColorScheme}>
-                        {title}
-                      </Tag>
-                    </Link>
+                    <Button
+                      as="a"
+                      target="_blank"
+                      href={`${URL}/${href}`}
+                      colorScheme={tagColorScheme}
+                      size={{ base: "xs", lg: "md" }}
+                    >
+                      {title}
+                    </Button>
                   </WrapItem>
                 ))}
               </Wrap>
