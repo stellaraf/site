@@ -48,6 +48,10 @@ export function getTextValueFromReactNode(node: unknown): string {
   const hasChildren = (obj: unknown): obj is { children: unknown } =>
     objectHasProperty(obj, "children");
 
+  if (typeof node === "string" || typeof node === "number" || typeof node === "boolean") {
+    return String(node);
+  }
+
   if (Array.isArray(node)) {
     return node.map(getTextValueFromReactNode).join("");
   }
