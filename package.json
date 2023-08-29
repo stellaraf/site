@@ -1,8 +1,9 @@
 {
   "name": "@stellaraf/site",
-  "version": "1.5.7",
+  "version": "1.6.0",
   "private": true,
   "type": "module",
+  "sideEffects": false,
   "dependencies": {
     "@18f/us-federal-holidays": "^4.0.0",
     "@chakra-ui/react": "^2.8.0",

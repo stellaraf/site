@@ -1,12 +1,15 @@
 import { useMemo } from "react";
 
+import dynamic from "next/dynamic";
+
 import { chakra } from "@chakra-ui/react";
-import Plyr from "plyr-react";
 
 import "plyr-react/plyr.css";
 
 import type { VideoProps } from "./types";
 import type { PlyrOptions, PlyrSource } from "plyr-react";
+
+const Plyr = dynamic(() => import("plyr-react"), { ssr: false });
 
 const controlledProps: PlyrOptions = {
   autoplay: false,
