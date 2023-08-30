@@ -35,6 +35,7 @@ const config = {
   env: {
     SITE_VERSION: getVersion(),
     GIT_BRANCH: process.env.VERCEL_GIT_COMMIT_REF,
+    VERCEL_ENV: process.env.VERCEL_ENV,
   },
 };
 

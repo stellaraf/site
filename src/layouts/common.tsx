@@ -15,8 +15,8 @@ export const Wrapper = (props: Animated<BoxProps>) => (
     minH="100vh"
     id="__wrapper"
     overflowX="hidden"
-    exit={{ opacity: 0 }}
-    initial={{ opacity: 0 }}
+    exit={{ opacity: 0.01 }}
+    initial={{ opacity: 0.01 }}
     animate={{ opacity: 1 }}
     {...props}
   />

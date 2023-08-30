@@ -1,6 +1,6 @@
 {
   "name": "@stellaraf/site",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "private": true,
   "type": "module",
   "sideEffects": false,
@@ -30,7 +30,6 @@
     "graphql": "^16.8.0",
     "hamburger-react": "^2.5.0",
     "isbot": "^3.6.2",
-    "keen-slider": "^5.5.1",
     "libphonenumber-js": "^1.10.43",
     "merge-anything": "^5.1.7",
     "next": "13.4.19",

@@ -1,6 +1,8 @@
+import dynamic from "next/dynamic";
+
 import { Box, HStack, VStack } from "@chakra-ui/react";
 
-import { Controls, Subscribe } from "~/components";
+import { Controls } from "~/components/controls";
 import { useMobile, useResponsiveStyle } from "~/hooks";
 
 import { Copyright } from "./copyright";
@@ -9,6 +11,11 @@ import { MobileLinks } from "./mobile-links";
 import { SocialLinks } from "./social-links";
 
 import type { FooterProps } from "./types";
+import type { StackProps } from "@chakra-ui/react";
+
+const Subscribe = dynamic<StackProps>(() =>
+  import("~/components/subscribe").then(m => m.Subscribe),
+);
 
 const DBottom = () => {
   return (

@@ -19,6 +19,9 @@ const Logo = () => {
   useNavLogo(logoRef);
   return (
     <Box overflowY="hidden" width={["90%", "66%", "33%"]} zIndex={1}>
+      <Heading as="h1" visibility="hidden" position="fixed">
+        Stellar
+      </Heading>
       <StellarLogo colorMode={colorMode} width="100%" height="100%" ref={logoRef} />
     </Box>
   );
@@ -48,7 +51,7 @@ const Home: NextPage<HomePageProps> = props => {
           <Logo />
           <Flex textAlign="center">
             <Heading
-              as="h1"
+              as="h2"
               fontSize={{ base: "1.5rem", md: "xl", lg: "2xl" }}
               fontWeight="light"
               mb={32}

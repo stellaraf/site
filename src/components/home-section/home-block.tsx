@@ -43,7 +43,7 @@ export const HomeBlock = (props: HomeBlockProps) => {
         transition="opacity 0.2s ease-in 0.1s"
         display={{ base: "none", lg: "flex" }}
       >
-        <Image boxSize="100%" src={image.url} />
+        <Image boxSize="100%" src={image.url} alt={image.fileName} />
       </Center>
       <Box gridArea="title">
         <Heading as="h3" fontSize={{ base: "2xl", lg: "4xl" }}>
