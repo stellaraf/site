@@ -34,7 +34,12 @@ query config($title: String) {
         height
         mimeType
         size
-        url
+        url(
+          transformation: {
+            image: { resize: { height: 113, fit: clip } }
+            document: { output: { format: webp } }
+          }
+        )
         width
       }
       subtitle

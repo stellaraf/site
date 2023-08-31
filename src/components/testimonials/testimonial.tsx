@@ -1,8 +1,6 @@
-import NextImage from "next/image";
-
 import { Box, Flex, VStack, Heading, Divider } from "@chakra-ui/react";
 
-import { RichText } from "~/components";
+import { RichText, ChakraNextImage } from "~/components";
 
 import { Quote } from "./quote";
 
@@ -44,15 +42,20 @@ export const Testimonial = (props: TestimonialProps) => {
               <Heading as="h4" fontSize={{ base: "lg", lg: "xl" }}>
                 {title}
               </Heading>
-              <Box minW={12} maxW={48} overflow="hidden">
-                <NextImage
-                  src={image.url}
-                  width={image.width ?? 400}
-                  height={image.height ?? 200}
-                  style={{ userSelect: "none", pointerEvents: "none" }}
-                  placeholder="blur"
-                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=)"
+              <Box
+                minW={12}
+                overflow="hidden"
+                css={{ "& > img": { maxWidth: "12rem", height: "auto" } }}
+              >
+                <ChakraNextImage
                   alt={title}
+                  width={200}
+                  height={113}
+                  src={image.url}
+                  userSelect="none"
+                  placeholder="blur"
+                  pointerEvents="none"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=)"
                 />
               </Box>
             </VStack>

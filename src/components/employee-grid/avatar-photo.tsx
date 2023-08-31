@@ -1,4 +1,6 @@
-import { chakra, Image, Button, Text, useBreakpointValue } from "@chakra-ui/react";
+import { chakra, Button, Text, useBreakpointValue } from "@chakra-ui/react";
+
+import { ChakraNextImage } from "~/components/util/next-image";
 
 import { useAvatar } from "./employee-grid";
 import { useSetCurrent } from "./state";
@@ -42,21 +44,23 @@ export const Photo = (props: AvatarPhotoProps) => {
         variant="unstyled"
         onClick={handleClick}
       >
-        <Image
-          width="100%"
+        <ChakraNextImage
+          width={128}
+          height={128}
           rounded="full"
           minHeight={32}
           _hover={hover}
           draggable={false}
-          objectFit="cover"
           borderWidth="1px"
+          placeholder="blur"
           borderStyle="solid"
           alt={employees[index].name}
           borderColor="whiteAlpha.400"
+          style={{ objectFit: "cover" }}
           src={employees[index].photo.url}
           transition="transform .15s ease 0s"
           _dark={{ borderColor: "blackAlpha.400" }}
-          fallbackSrc="https://via.placeholder.com/150"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=)"
         />
       </Button>
       <Text mt={4} fontSize="sm" fontWeight="medium" opacity={0.8}>

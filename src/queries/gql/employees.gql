@@ -11,7 +11,12 @@ query employees($config: String) {
         height
         mimeType
         size
-        url
+        url(
+          transformation: {
+            image: { resize: { fit: crop, height: 256, width: 256 } }
+            document: { output: { format: webp } }
+          }
+        )
         width
       }
       title

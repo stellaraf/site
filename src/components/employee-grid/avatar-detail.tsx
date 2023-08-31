@@ -4,7 +4,6 @@ import {
   Divider,
   Flex,
   Heading,
-  Image,
   Tag,
   TagLeftIcon,
   TagLabel,
@@ -13,7 +12,7 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 
-import { Modal, RichText } from "~/components";
+import { Modal, RichText, ChakraNextImage } from "~/components";
 import { useScaledText } from "~/hooks";
 import { LocationPin } from "~/icons";
 
@@ -32,19 +31,22 @@ const _Header = (props: Pick<Employee, "name" | "title" | "photo">) => {
     <Wrap justify={{ base: "center", lg: "space-between" }} align="center" ref={containerRef}>
       <WrapItem>
         <AvatarPhotoWrapper minWidth="unset" boxSize={32}>
-          <Image
+          <ChakraNextImage
             alt={name}
+            width={128}
+            height={128}
             rounded="full"
             boxSize="100%"
+            src={photo.url}
             draggable={false}
-            objectFit="cover"
             borderWidth="1px"
+            placeholder="blur"
             borderStyle="solid"
             borderColor="blackAlpha.300"
+            style={{ objectFit: "cover" }}
             transition="transform .15s ease 0s"
             _dark={{ borderColor: "whiteAlpha.300" }}
-            fallbackSrc="https://via.placeholder.com/150"
-            src={photo.url ?? "https://via.placeholder.com/150"}
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=)"
           />
         </AvatarPhotoWrapper>
       </WrapItem>
