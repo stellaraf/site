@@ -1,12 +1,24 @@
-import { Box, useStyleConfig, Code as ChakraCode, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  useStyleConfig,
+  Code as ChakraCode,
+  useColorModeValue,
+  type TextProps,
+  type CodeProps,
+} from "@chakra-ui/react";
 
 import { useCodeBlockStyle } from "~/components";
 
-import type { TextProps, CodeProps } from "@chakra-ui/react";
-
 export const P = (props: TextProps) => {
   return (
-    <Box className="st-content-p" my={8} sx={{ "&:first-of-type": { marginTop: 2 } }} {...props} />
+    <Box
+      my={8}
+      zIndex={1}
+      position="relative"
+      className="st-content-p"
+      sx={{ "&:first-of-type": { marginTop: 2 } }}
+      {...props}
+    />
   );
 };
 

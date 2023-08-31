@@ -46,14 +46,19 @@ export const HomeBlock = (props: HomeBlockProps) => {
         <Image boxSize="100%" src={image.url} alt={image.fileName} />
       </Center>
       <Box gridArea="title">
-        <Heading as="h3" fontSize={{ base: "2xl", lg: "4xl" }}>
+        <Heading as="h3" fontSize={{ base: "2xl", lg: "4xl" }} position="relative">
           {fnTitle(title)}
         </Heading>
-        <Heading as="h4" fontSize={{ base: "1.5rem", lg: "xl" }} fontWeight="light">
+        <Heading
+          as="h4"
+          fontSize={{ base: "1.5rem", lg: "xl" }}
+          fontWeight="light"
+          position="relative"
+        >
           {fnTitle(subtitle)}
         </Heading>
       </Box>
-      <Box whiteSpace="pre-line" fontSize="lg" gridArea="body">
+      <Box whiteSpace="pre-line" fontSize="lg" gridArea="body" id="test">
         {body}
       </Box>
       <Box gridArea="button">

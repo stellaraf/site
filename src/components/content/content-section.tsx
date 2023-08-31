@@ -1,6 +1,6 @@
 import { forwardRef, useMemo } from "react";
 
-import { Box, Flex, VStack, Heading, VisuallyHidden, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, VStack, Heading, VisuallyHidden } from "@chakra-ui/react";
 
 import { Button, Divider, RichText } from "~/components";
 import { useMobile, useResponsiveStyle } from "~/hooks";
@@ -59,7 +59,6 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
 
   const isMobile = useMobile();
   const rStyles = useResponsiveStyle();
-  const showBorder = useColorModeValue(false, true);
 
   const hasImage = useMemo(() => is(image) && !isMobile, [title, index, isMobile]);
   const side = useMemo<ContentSide>(() => (["right", "left"] as ContentSides)[index % 2], [index]);
@@ -156,7 +155,7 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
           {showUpdatedDate && <ContentUpdatedAt time={updatedAt} />}
         </Flex>
       </Box>
-      {showBorder && <Divider left={side === "left"} right={side === "right"} />}
+      <Divider left={side === "left"} right={side === "right"} _light={{ opacity: 0 }} />
     </>
   );
 });
