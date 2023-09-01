@@ -4,6 +4,7 @@ import { SimpleGrid, useDisclosure } from "@chakra-ui/react";
 
 import { Detail } from "./avatar-detail";
 import { Photo } from "./avatar-photo";
+import { useEmployeeQuery } from "./state";
 
 import type { EmployeeGridProps, EmployeeGridContext } from "./types";
 import type { SimpleGridProps } from "@chakra-ui/react";
@@ -43,11 +44,17 @@ const AvatarsWrapper = (props: SimpleGridProps) => {
  */
 export const EmployeeGrid = (props: EmployeeGridProps) => {
   const { employees, ...rest } = props;
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const [shouldOpen, reset] = useEmployeeQuery({ employees });
+  const { isOpen, onClose: baseOnClose, onOpen } = useDisclosure();
+
+  const onClose = () => {
+    baseOnClose();
+    reset();
+  };
 
   return (
     <AvatarContext.Provider value={{ employees }}>
-      <Detail isOpen={isOpen} onClose={onClose} />
+      <Detail isOpen={shouldOpen || isOpen} onClose={onClose} />
       <AvatarsWrapper {...rest}>
         {employees.map((employee, index) => (
           <Photo key={employee.name} index={index} onOpen={onOpen} gridColumn="span 2" />
