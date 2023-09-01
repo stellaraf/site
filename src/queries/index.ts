@@ -34,6 +34,14 @@ export { default as footerGroupsQuery, type FooterGroups } from "./footer-groups
 export { default as homePageQuery, type HomePage, type HomePageBlock } from "./home-page";
 
 export {
+  default as officeLocationsQuery,
+  type Address,
+  type OfficeLocation,
+  type OfficeLocations,
+  type OfficeLocationWithTimezone,
+} from "./office-locations";
+
+export {
   default as pageQuery,
   type Callout,
   type Feature,

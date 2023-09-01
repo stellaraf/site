@@ -14,6 +14,7 @@ import type {
   Employees,
   FooterGroups,
   HomePage,
+  OfficeLocationWithTimezone,
   Page,
 } from "~/queries";
 import type { ThemeConfig } from "~/theme";
@@ -92,4 +93,6 @@ export interface ContactPageProps extends PageProps {
 
 export interface AboutPageProps extends PageProps {
   employees: Employees;
+  officeLocations: OfficeLocationWithTimezone[];
+  holidays: Holidays;
 }

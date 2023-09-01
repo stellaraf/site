@@ -105,7 +105,11 @@ export const getStaticProps: GetStaticProps<ContactPageProps> = async ctx => {
   const common = await commonStaticPropsQuery();
   const holidays = getHolidays();
   const locations = await cloudLocationsQuery();
-  const locationTimes = await Promise.all(locations.map(getLocationTime));
+  const locationTimes = await Promise.all(
+    locations.map(({ coordinates: { latitude, longitude } }) =>
+      getLocationTime(latitude, longitude),
+    ),
+  );
   return {
     props: { ...page, holidays, contactForms, preview, locationTimes, common },
     revalidate: 43_200,

@@ -37,6 +37,550 @@ export type Scalars = {
   RichTextAST: { input: RichTextContent; output: RichTextContent; }
 };
 
+export type Address = {
+  __typename?: 'Address';
+  address1: Scalars['String']['output'];
+  address2?: Maybe<Scalars['String']['output']>;
+  address3?: Maybe<Scalars['String']['output']>;
+  city: Scalars['String']['output'];
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  /** System stage field */
+  stage: Stage;
+  state: Scalars['String']['output'];
+  zipCode: Scalars['String']['output'];
+};
+
+export type AddressConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: AddressWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type AddressConnection = {
+  __typename?: 'AddressConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<AddressEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type AddressCreateInput = {
+  address1: Scalars['String']['input'];
+  address2?: InputMaybe<Scalars['String']['input']>;
+  address3?: InputMaybe<Scalars['String']['input']>;
+  city: Scalars['String']['input'];
+  state: Scalars['String']['input'];
+  zipCode: Scalars['String']['input'];
+};
+
+export type AddressCreateManyInlineInput = {
+  /** Create and connect multiple existing Address documents */
+  create?: InputMaybe<Array<AddressCreateInput>>;
+};
+
+export type AddressCreateOneInlineInput = {
+  /** Create and connect one Address document */
+  create?: InputMaybe<AddressCreateInput>;
+};
+
+export type AddressCreateWithPositionInput = {
+  /** Document to create */
+  data: AddressCreateInput;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+};
+
+/** An edge in a connection. */
+export type AddressEdge = {
+  __typename?: 'AddressEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: Address;
+};
+
+/** Identifies documents */
+export type AddressManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<AddressWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<AddressWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<AddressWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  address1?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  address1_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  address1_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  address1_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  address1_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  address1_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  address1_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  address1_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  address1_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  address1_starts_with?: InputMaybe<Scalars['String']['input']>;
+  address2?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  address2_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  address2_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  address2_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  address2_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  address2_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  address2_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  address2_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  address2_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  address2_starts_with?: InputMaybe<Scalars['String']['input']>;
+  address3?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  address3_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  address3_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  address3_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  address3_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  address3_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  address3_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  address3_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  address3_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  address3_starts_with?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  city_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  city_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  city_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  city_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  city_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  city_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  city_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  city_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  city_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  state?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  state_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  state_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  state_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  state_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  state_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  state_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  state_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  state_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  state_starts_with?: InputMaybe<Scalars['String']['input']>;
+  zipCode?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  zipCode_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  zipCode_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  zipCode_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  zipCode_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  zipCode_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  zipCode_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  zipCode_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  zipCode_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  zipCode_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum AddressOrderByInput {
+  Address1Asc = 'address1_ASC',
+  Address1Desc = 'address1_DESC',
+  Address2Asc = 'address2_ASC',
+  Address2Desc = 'address2_DESC',
+  Address3Asc = 'address3_ASC',
+  Address3Desc = 'address3_DESC',
+  CityAsc = 'city_ASC',
+  CityDesc = 'city_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  StateAsc = 'state_ASC',
+  StateDesc = 'state_DESC',
+  ZipCodeAsc = 'zipCode_ASC',
+  ZipCodeDesc = 'zipCode_DESC'
+}
+
+export type AddressParent = OfficeLocation;
+
+export type AddressParentConnectInput = {
+  OfficeLocation?: InputMaybe<OfficeLocationConnectInput>;
+};
+
+export type AddressParentCreateInput = {
+  OfficeLocation?: InputMaybe<OfficeLocationCreateInput>;
+};
+
+export type AddressParentCreateManyInlineInput = {
+  /** Connect multiple existing AddressParent documents */
+  connect?: InputMaybe<Array<AddressParentWhereUniqueInput>>;
+  /** Create and connect multiple existing AddressParent documents */
+  create?: InputMaybe<Array<AddressParentCreateInput>>;
+};
+
+export type AddressParentCreateOneInlineInput = {
+  /** Connect one existing AddressParent document */
+  connect?: InputMaybe<AddressParentWhereUniqueInput>;
+  /** Create and connect one AddressParent document */
+  create?: InputMaybe<AddressParentCreateInput>;
+};
+
+export type AddressParentUpdateInput = {
+  OfficeLocation?: InputMaybe<OfficeLocationUpdateInput>;
+};
+
+export type AddressParentUpdateManyInlineInput = {
+  /** Connect multiple existing AddressParent documents */
+  connect?: InputMaybe<Array<AddressParentConnectInput>>;
+  /** Create and connect multiple AddressParent documents */
+  create?: InputMaybe<Array<AddressParentCreateInput>>;
+  /** Delete multiple AddressParent documents */
+  delete?: InputMaybe<Array<AddressParentWhereUniqueInput>>;
+  /** Disconnect multiple AddressParent documents */
+  disconnect?: InputMaybe<Array<AddressParentWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing AddressParent documents */
+  set?: InputMaybe<Array<AddressParentWhereUniqueInput>>;
+  /** Update multiple AddressParent documents */
+  update?: InputMaybe<Array<AddressParentUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple AddressParent documents */
+  upsert?: InputMaybe<Array<AddressParentUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type AddressParentUpdateManyWithNestedWhereInput = {
+  OfficeLocation?: InputMaybe<OfficeLocationUpdateManyWithNestedWhereInput>;
+};
+
+export type AddressParentUpdateOneInlineInput = {
+  /** Connect existing AddressParent document */
+  connect?: InputMaybe<AddressParentWhereUniqueInput>;
+  /** Create and connect one AddressParent document */
+  create?: InputMaybe<AddressParentCreateInput>;
+  /** Delete currently connected AddressParent document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected AddressParent document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single AddressParent document */
+  update?: InputMaybe<AddressParentUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single AddressParent document */
+  upsert?: InputMaybe<AddressParentUpsertWithNestedWhereUniqueInput>;
+};
+
+export type AddressParentUpdateWithNestedWhereUniqueInput = {
+  OfficeLocation?: InputMaybe<OfficeLocationUpdateWithNestedWhereUniqueInput>;
+};
+
+export type AddressParentUpsertWithNestedWhereUniqueInput = {
+  OfficeLocation?: InputMaybe<OfficeLocationUpsertWithNestedWhereUniqueInput>;
+};
+
+export type AddressParentWhereInput = {
+  OfficeLocation?: InputMaybe<OfficeLocationWhereInput>;
+};
+
+export type AddressParentWhereUniqueInput = {
+  OfficeLocation?: InputMaybe<OfficeLocationWhereUniqueInput>;
+};
+
+export type AddressUpdateInput = {
+  address1?: InputMaybe<Scalars['String']['input']>;
+  address2?: InputMaybe<Scalars['String']['input']>;
+  address3?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<Scalars['String']['input']>;
+  zipCode?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AddressUpdateManyInlineInput = {
+  /** Create and connect multiple Address component instances */
+  create?: InputMaybe<Array<AddressCreateWithPositionInput>>;
+  /** Delete multiple Address documents */
+  delete?: InputMaybe<Array<AddressWhereUniqueInput>>;
+  /** Update multiple Address component instances */
+  update?: InputMaybe<Array<AddressUpdateWithNestedWhereUniqueAndPositionInput>>;
+  /** Upsert multiple Address component instances */
+  upsert?: InputMaybe<Array<AddressUpsertWithNestedWhereUniqueAndPositionInput>>;
+};
+
+export type AddressUpdateManyInput = {
+  address1?: InputMaybe<Scalars['String']['input']>;
+  address2?: InputMaybe<Scalars['String']['input']>;
+  address3?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<Scalars['String']['input']>;
+  zipCode?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AddressUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: AddressUpdateManyInput;
+  /** Document search */
+  where: AddressWhereInput;
+};
+
+export type AddressUpdateOneInlineInput = {
+  /** Create and connect one Address document */
+  create?: InputMaybe<AddressCreateInput>;
+  /** Delete currently connected Address document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single Address document */
+  update?: InputMaybe<AddressUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Address document */
+  upsert?: InputMaybe<AddressUpsertWithNestedWhereUniqueInput>;
+};
+
+export type AddressUpdateWithNestedWhereUniqueAndPositionInput = {
+  /** Document to update */
+  data?: InputMaybe<AddressUpdateInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: AddressWhereUniqueInput;
+};
+
+export type AddressUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: AddressUpdateInput;
+  /** Unique document search */
+  where: AddressWhereUniqueInput;
+};
+
+export type AddressUpsertInput = {
+  /** Create document if it didn't exist */
+  create: AddressCreateInput;
+  /** Update document if it exists */
+  update: AddressUpdateInput;
+};
+
+export type AddressUpsertWithNestedWhereUniqueAndPositionInput = {
+  /** Document to upsert */
+  data?: InputMaybe<AddressUpsertInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: AddressWhereUniqueInput;
+};
+
+export type AddressUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: AddressUpsertInput;
+  /** Unique document search */
+  where: AddressWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type AddressWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<AddressWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<AddressWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<AddressWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  address1?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  address1_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  address1_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  address1_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  address1_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  address1_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  address1_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  address1_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  address1_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  address1_starts_with?: InputMaybe<Scalars['String']['input']>;
+  address2?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  address2_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  address2_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  address2_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  address2_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  address2_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  address2_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  address2_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  address2_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  address2_starts_with?: InputMaybe<Scalars['String']['input']>;
+  address3?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  address3_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  address3_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  address3_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  address3_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  address3_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  address3_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  address3_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  address3_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  address3_starts_with?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  city_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  city_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  city_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  city_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  city_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  city_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  city_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  city_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  city_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  state?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  state_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  state_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  state_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  state_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  state_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  state_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  state_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  state_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  state_starts_with?: InputMaybe<Scalars['String']['input']>;
+  zipCode?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  zipCode_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  zipCode_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  zipCode_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  zipCode_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  zipCode_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  zipCode_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  zipCode_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  zipCode_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  zipCode_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** References Address record uniquely */
+export type AddressWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 export type Admonition = Node & {
   __typename?: 'Admonition';
   body: RichText;
@@ -941,6 +1485,7 @@ export type Asset = Node & {
   /** The mime type of the file */
   mimeType?: Maybe<Scalars['String']['output']>;
   photoEmployee: Array<Employee>;
+  photoOfficeLocation: Array<OfficeLocation>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   /** User that last published this document */
@@ -1068,6 +1613,20 @@ export type AssetPhotoEmployeeArgs = {
 
 
 /** Asset system model */
+export type AssetPhotoOfficeLocationArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<OfficeLocationOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<OfficeLocationWhereInput>;
+};
+
+
+/** Asset system model */
 export type AssetPublishedAtArgs = {
   variation?: SystemDateTimeFieldVariation;
 };
@@ -1145,6 +1704,7 @@ export type AssetCreateInput = {
   mainVideoHomePage?: InputMaybe<HomePageCreateManyInlineInput>;
   mimeType?: InputMaybe<Scalars['String']['input']>;
   photoEmployee?: InputMaybe<EmployeeCreateManyInlineInput>;
+  photoOfficeLocation?: InputMaybe<OfficeLocationCreateManyInlineInput>;
   size?: InputMaybe<Scalars['Float']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   width?: InputMaybe<Scalars['Float']['input']>;
@@ -1258,6 +1818,9 @@ export type AssetManyWhereInput = {
   photoEmployee_every?: InputMaybe<EmployeeWhereInput>;
   photoEmployee_none?: InputMaybe<EmployeeWhereInput>;
   photoEmployee_some?: InputMaybe<EmployeeWhereInput>;
+  photoOfficeLocation_every?: InputMaybe<OfficeLocationWhereInput>;
+  photoOfficeLocation_none?: InputMaybe<OfficeLocationWhereInput>;
+  photoOfficeLocation_some?: InputMaybe<OfficeLocationWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1342,6 +1905,7 @@ export type AssetUpdateInput = {
   mainVideoHomePage?: InputMaybe<HomePageUpdateManyInlineInput>;
   mimeType?: InputMaybe<Scalars['String']['input']>;
   photoEmployee?: InputMaybe<EmployeeUpdateManyInlineInput>;
+  photoOfficeLocation?: InputMaybe<OfficeLocationUpdateManyInlineInput>;
   size?: InputMaybe<Scalars['Float']['input']>;
   width?: InputMaybe<Scalars['Float']['input']>;
 };
@@ -1605,6 +2169,9 @@ export type AssetWhereInput = {
   photoEmployee_every?: InputMaybe<EmployeeWhereInput>;
   photoEmployee_none?: InputMaybe<EmployeeWhereInput>;
   photoEmployee_some?: InputMaybe<EmployeeWhereInput>;
+  photoOfficeLocation_every?: InputMaybe<OfficeLocationWhereInput>;
+  photoOfficeLocation_none?: InputMaybe<OfficeLocationWhereInput>;
+  photoOfficeLocation_some?: InputMaybe<OfficeLocationWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -12594,6 +13161,8 @@ export type Mutation = {
   createForm?: Maybe<Form>;
   /** Create one homePage */
   createHomePage?: Maybe<HomePage>;
+  /** Create one officeLocation */
+  createOfficeLocation?: Maybe<OfficeLocation>;
   /** Create one page */
   createPage?: Maybe<Page>;
   /** Create one pageContent */
@@ -12731,6 +13300,13 @@ export type Mutation = {
   /** Delete many HomePage documents, return deleted documents */
   deleteManyHomePagesConnection: HomePageConnection;
   /**
+   * Delete many OfficeLocation documents
+   * @deprecated Please use the new paginated many mutation (deleteManyOfficeLocationsConnection)
+   */
+  deleteManyOfficeLocations: BatchPayload;
+  /** Delete many OfficeLocation documents, return deleted documents */
+  deleteManyOfficeLocationsConnection: OfficeLocationConnection;
+  /**
    * Delete many PageContent documents
    * @deprecated Please use the new paginated many mutation (deleteManyPageContentsConnection)
    */
@@ -12758,6 +13334,8 @@ export type Mutation = {
   deleteManyThemes: BatchPayload;
   /** Delete many Theme documents, return deleted documents */
   deleteManyThemesConnection: ThemeConnection;
+  /** Delete one officeLocation from _all_ existing stages. Returns deleted document. */
+  deleteOfficeLocation?: Maybe<OfficeLocation>;
   /** Delete one page from _all_ existing stages. Returns deleted document. */
   deletePage?: Maybe<Page>;
   /** Delete one pageContent from _all_ existing stages. Returns deleted document. */
@@ -12897,6 +13475,13 @@ export type Mutation = {
   /** Publish many HomePage documents */
   publishManyHomePagesConnection: HomePageConnection;
   /**
+   * Publish many OfficeLocation documents
+   * @deprecated Please use the new paginated many mutation (publishManyOfficeLocationsConnection)
+   */
+  publishManyOfficeLocations: BatchPayload;
+  /** Publish many OfficeLocation documents */
+  publishManyOfficeLocationsConnection: OfficeLocationConnection;
+  /**
    * Publish many PageContent documents
    * @deprecated Please use the new paginated many mutation (publishManyPageContentsConnection)
    */
@@ -12924,6 +13509,8 @@ export type Mutation = {
   publishManyThemes: BatchPayload;
   /** Publish many Theme documents */
   publishManyThemesConnection: ThemeConnection;
+  /** Publish one officeLocation */
+  publishOfficeLocation?: Maybe<OfficeLocation>;
   /** Publish one page */
   publishPage?: Maybe<Page>;
   /** Publish one pageContent */
@@ -12960,6 +13547,8 @@ export type Mutation = {
   schedulePublishForm?: Maybe<Form>;
   /** Schedule to publish one homePage */
   schedulePublishHomePage?: Maybe<HomePage>;
+  /** Schedule to publish one officeLocation */
+  schedulePublishOfficeLocation?: Maybe<OfficeLocation>;
   /** Schedule to publish one page */
   schedulePublishPage?: Maybe<Page>;
   /** Schedule to publish one pageContent */
@@ -12996,6 +13585,8 @@ export type Mutation = {
   scheduleUnpublishForm?: Maybe<Form>;
   /** Unpublish one homePage from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishHomePage?: Maybe<HomePage>;
+  /** Unpublish one officeLocation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishOfficeLocation?: Maybe<OfficeLocation>;
   /** Unpublish one page from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishPage?: Maybe<Page>;
   /** Unpublish one pageContent from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -13131,6 +13722,13 @@ export type Mutation = {
   /** Find many HomePage documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyHomePagesConnection: HomePageConnection;
   /**
+   * Unpublish many OfficeLocation documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyOfficeLocationsConnection)
+   */
+  unpublishManyOfficeLocations: BatchPayload;
+  /** Find many OfficeLocation documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyOfficeLocationsConnection: OfficeLocationConnection;
+  /**
    * Unpublish many PageContent documents
    * @deprecated Please use the new paginated many mutation (unpublishManyPageContentsConnection)
    */
@@ -13158,6 +13756,8 @@ export type Mutation = {
   unpublishManyThemes: BatchPayload;
   /** Find many Theme documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyThemesConnection: ThemeConnection;
+  /** Unpublish one officeLocation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishOfficeLocation?: Maybe<OfficeLocation>;
   /** Unpublish one page from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishPage?: Maybe<Page>;
   /** Unpublish one pageContent from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -13293,6 +13893,13 @@ export type Mutation = {
   /** Update many HomePage documents */
   updateManyHomePagesConnection: HomePageConnection;
   /**
+   * Update many officeLocations
+   * @deprecated Please use the new paginated many mutation (updateManyOfficeLocationsConnection)
+   */
+  updateManyOfficeLocations: BatchPayload;
+  /** Update many OfficeLocation documents */
+  updateManyOfficeLocationsConnection: OfficeLocationConnection;
+  /**
    * Update many pageContents
    * @deprecated Please use the new paginated many mutation (updateManyPageContentsConnection)
    */
@@ -13320,6 +13927,8 @@ export type Mutation = {
   updateManyThemes: BatchPayload;
   /** Update many Theme documents */
   updateManyThemesConnection: ThemeConnection;
+  /** Update one officeLocation */
+  updateOfficeLocation?: Maybe<OfficeLocation>;
   /** Update one page */
   updatePage?: Maybe<Page>;
   /** Update one pageContent */
@@ -13358,6 +13967,8 @@ export type Mutation = {
   upsertForm?: Maybe<Form>;
   /** Upsert one homePage */
   upsertHomePage?: Maybe<HomePage>;
+  /** Upsert one officeLocation */
+  upsertOfficeLocation?: Maybe<OfficeLocation>;
   /** Upsert one page */
   upsertPage?: Maybe<Page>;
   /** Upsert one pageContent */
@@ -13436,6 +14047,11 @@ export type MutationCreateFormArgs = {
 
 export type MutationCreateHomePageArgs = {
   data: HomePageCreateInput;
+};
+
+
+export type MutationCreateOfficeLocationArgs = {
+  data: OfficeLocationCreateInput;
 };
 
 
@@ -13744,6 +14360,21 @@ export type MutationDeleteManyHomePagesConnectionArgs = {
 };
 
 
+export type MutationDeleteManyOfficeLocationsArgs = {
+  where?: InputMaybe<OfficeLocationManyWhereInput>;
+};
+
+
+export type MutationDeleteManyOfficeLocationsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<OfficeLocationManyWhereInput>;
+};
+
+
 export type MutationDeleteManyPageContentsArgs = {
   where?: InputMaybe<PageContentManyWhereInput>;
 };
@@ -13801,6 +14432,11 @@ export type MutationDeleteManyThemesConnectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<ThemeManyWhereInput>;
+};
+
+
+export type MutationDeleteOfficeLocationArgs = {
+  where: OfficeLocationWhereUniqueInput;
 };
 
 
@@ -14179,6 +14815,24 @@ export type MutationPublishManyHomePagesConnectionArgs = {
 };
 
 
+export type MutationPublishManyOfficeLocationsArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<OfficeLocationManyWhereInput>;
+};
+
+
+export type MutationPublishManyOfficeLocationsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<OfficeLocationManyWhereInput>;
+};
+
+
 export type MutationPublishManyPageContentsArgs = {
   to?: Array<Stage>;
   where?: InputMaybe<PageContentManyWhereInput>;
@@ -14248,6 +14902,12 @@ export type MutationPublishManyThemesConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   to?: Array<Stage>;
   where?: InputMaybe<ThemeManyWhereInput>;
+};
+
+
+export type MutationPublishOfficeLocationArgs = {
+  to?: Array<Stage>;
+  where: OfficeLocationWhereUniqueInput;
 };
 
 
@@ -14387,6 +15047,14 @@ export type MutationSchedulePublishHomePageArgs = {
   releaseId?: InputMaybe<Scalars['String']['input']>;
   to?: Array<Stage>;
   where: HomePageWhereUniqueInput;
+};
+
+
+export type MutationSchedulePublishOfficeLocationArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
+  releaseId?: InputMaybe<Scalars['String']['input']>;
+  to?: Array<Stage>;
+  where: OfficeLocationWhereUniqueInput;
 };
 
 
@@ -14533,6 +15201,14 @@ export type MutationScheduleUnpublishHomePageArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
   releaseId?: InputMaybe<Scalars['String']['input']>;
   where: HomePageWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishOfficeLocationArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
+  releaseId?: InputMaybe<Scalars['String']['input']>;
+  where: OfficeLocationWhereUniqueInput;
 };
 
 
@@ -14910,6 +15586,24 @@ export type MutationUnpublishManyHomePagesConnectionArgs = {
 };
 
 
+export type MutationUnpublishManyOfficeLocationsArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<OfficeLocationManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyOfficeLocationsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<OfficeLocationManyWhereInput>;
+};
+
+
 export type MutationUnpublishManyPageContentsArgs = {
   from?: Array<Stage>;
   where?: InputMaybe<PageContentManyWhereInput>;
@@ -14979,6 +15673,12 @@ export type MutationUnpublishManyThemesConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   stage?: InputMaybe<Stage>;
   where?: InputMaybe<ThemeManyWhereInput>;
+};
+
+
+export type MutationUnpublishOfficeLocationArgs = {
+  from?: Array<Stage>;
+  where: OfficeLocationWhereUniqueInput;
 };
 
 
@@ -15328,6 +16028,23 @@ export type MutationUpdateManyHomePagesConnectionArgs = {
 };
 
 
+export type MutationUpdateManyOfficeLocationsArgs = {
+  data: OfficeLocationUpdateManyInput;
+  where?: InputMaybe<OfficeLocationManyWhereInput>;
+};
+
+
+export type MutationUpdateManyOfficeLocationsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  data: OfficeLocationUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<OfficeLocationManyWhereInput>;
+};
+
+
 export type MutationUpdateManyPageContentsArgs = {
   data: PageContentUpdateManyInput;
   where?: InputMaybe<PageContentManyWhereInput>;
@@ -15393,6 +16110,12 @@ export type MutationUpdateManyThemesConnectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<ThemeManyWhereInput>;
+};
+
+
+export type MutationUpdateOfficeLocationArgs = {
+  data: OfficeLocationUpdateInput;
+  where: OfficeLocationWhereUniqueInput;
 };
 
 
@@ -15510,6 +16233,12 @@ export type MutationUpsertHomePageArgs = {
 };
 
 
+export type MutationUpsertOfficeLocationArgs = {
+  upsert: OfficeLocationUpsertInput;
+  where: OfficeLocationWhereUniqueInput;
+};
+
+
 export type MutationUpsertPageArgs = {
   upsert: PageUpsertInput;
   where: PageWhereUniqueInput;
@@ -15539,6 +16268,536 @@ export type Node = {
   id: Scalars['ID']['output'];
   /** The Stage of an object */
   stage: Stage;
+};
+
+export type OfficeLocation = Node & {
+  __typename?: 'OfficeLocation';
+  address: Address;
+  /** Time office closes in 24 hour format in the local timezone */
+  closeTime: Scalars['Int']['output'];
+  /** The time the document was created */
+  createdAt: Scalars['DateTime']['output'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<OfficeLocation>;
+  /** List of OfficeLocation versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  location: Location;
+  name: Scalars['String']['output'];
+  /** Time office opens in 24 hour format in the local timezone */
+  openTime: Scalars['Int']['output'];
+  photo: Asset;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime']['output'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type OfficeLocationAddressArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type OfficeLocationCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type OfficeLocationDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean']['input'];
+  inheritLocale?: Scalars['Boolean']['input'];
+  stages?: Array<Stage>;
+};
+
+
+export type OfficeLocationHistoryArgs = {
+  limit?: Scalars['Int']['input'];
+  skip?: Scalars['Int']['input'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type OfficeLocationPhotoArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type OfficeLocationPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type OfficeLocationScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type OfficeLocationUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type OfficeLocationConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: OfficeLocationWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type OfficeLocationConnection = {
+  __typename?: 'OfficeLocationConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<OfficeLocationEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type OfficeLocationCreateInput = {
+  address: AddressCreateOneInlineInput;
+  closeTime: Scalars['Int']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  location: LocationInput;
+  name: Scalars['String']['input'];
+  openTime: Scalars['Int']['input'];
+  photo: AssetCreateOneInlineInput;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type OfficeLocationCreateManyInlineInput = {
+  /** Connect multiple existing OfficeLocation documents */
+  connect?: InputMaybe<Array<OfficeLocationWhereUniqueInput>>;
+  /** Create and connect multiple existing OfficeLocation documents */
+  create?: InputMaybe<Array<OfficeLocationCreateInput>>;
+};
+
+export type OfficeLocationCreateOneInlineInput = {
+  /** Connect one existing OfficeLocation document */
+  connect?: InputMaybe<OfficeLocationWhereUniqueInput>;
+  /** Create and connect one OfficeLocation document */
+  create?: InputMaybe<OfficeLocationCreateInput>;
+};
+
+/** An edge in a connection. */
+export type OfficeLocationEdge = {
+  __typename?: 'OfficeLocationEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: OfficeLocation;
+};
+
+/** Identifies documents */
+export type OfficeLocationManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<OfficeLocationWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<OfficeLocationWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<OfficeLocationWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  address?: InputMaybe<AddressWhereInput>;
+  closeTime?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  closeTime_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  closeTime_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  closeTime_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  closeTime_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  closeTime_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  closeTime_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  closeTime_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<OfficeLocationWhereStageInput>;
+  documentInStages_none?: InputMaybe<OfficeLocationWhereStageInput>;
+  documentInStages_some?: InputMaybe<OfficeLocationWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  name_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']['input']>;
+  openTime?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  openTime_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  openTime_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  openTime_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  openTime_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  openTime_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  openTime_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  openTime_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  photo?: InputMaybe<AssetWhereInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum OfficeLocationOrderByInput {
+  CloseTimeAsc = 'closeTime_ASC',
+  CloseTimeDesc = 'closeTime_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  OpenTimeAsc = 'openTime_ASC',
+  OpenTimeDesc = 'openTime_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type OfficeLocationUpdateInput = {
+  address?: InputMaybe<AddressUpdateOneInlineInput>;
+  closeTime?: InputMaybe<Scalars['Int']['input']>;
+  location?: InputMaybe<LocationInput>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  openTime?: InputMaybe<Scalars['Int']['input']>;
+  photo?: InputMaybe<AssetUpdateOneInlineInput>;
+};
+
+export type OfficeLocationUpdateManyInlineInput = {
+  /** Connect multiple existing OfficeLocation documents */
+  connect?: InputMaybe<Array<OfficeLocationConnectInput>>;
+  /** Create and connect multiple OfficeLocation documents */
+  create?: InputMaybe<Array<OfficeLocationCreateInput>>;
+  /** Delete multiple OfficeLocation documents */
+  delete?: InputMaybe<Array<OfficeLocationWhereUniqueInput>>;
+  /** Disconnect multiple OfficeLocation documents */
+  disconnect?: InputMaybe<Array<OfficeLocationWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing OfficeLocation documents */
+  set?: InputMaybe<Array<OfficeLocationWhereUniqueInput>>;
+  /** Update multiple OfficeLocation documents */
+  update?: InputMaybe<Array<OfficeLocationUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple OfficeLocation documents */
+  upsert?: InputMaybe<Array<OfficeLocationUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type OfficeLocationUpdateManyInput = {
+  closeTime?: InputMaybe<Scalars['Int']['input']>;
+  location?: InputMaybe<LocationInput>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  openTime?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type OfficeLocationUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: OfficeLocationUpdateManyInput;
+  /** Document search */
+  where: OfficeLocationWhereInput;
+};
+
+export type OfficeLocationUpdateOneInlineInput = {
+  /** Connect existing OfficeLocation document */
+  connect?: InputMaybe<OfficeLocationWhereUniqueInput>;
+  /** Create and connect one OfficeLocation document */
+  create?: InputMaybe<OfficeLocationCreateInput>;
+  /** Delete currently connected OfficeLocation document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected OfficeLocation document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single OfficeLocation document */
+  update?: InputMaybe<OfficeLocationUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single OfficeLocation document */
+  upsert?: InputMaybe<OfficeLocationUpsertWithNestedWhereUniqueInput>;
+};
+
+export type OfficeLocationUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: OfficeLocationUpdateInput;
+  /** Unique document search */
+  where: OfficeLocationWhereUniqueInput;
+};
+
+export type OfficeLocationUpsertInput = {
+  /** Create document if it didn't exist */
+  create: OfficeLocationCreateInput;
+  /** Update document if it exists */
+  update: OfficeLocationUpdateInput;
+};
+
+export type OfficeLocationUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: OfficeLocationUpsertInput;
+  /** Unique document search */
+  where: OfficeLocationWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type OfficeLocationWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Identifies documents */
+export type OfficeLocationWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<OfficeLocationWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<OfficeLocationWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<OfficeLocationWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  address?: InputMaybe<AddressWhereInput>;
+  closeTime?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  closeTime_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  closeTime_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  closeTime_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  closeTime_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  closeTime_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  closeTime_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  closeTime_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<OfficeLocationWhereStageInput>;
+  documentInStages_none?: InputMaybe<OfficeLocationWhereStageInput>;
+  documentInStages_some?: InputMaybe<OfficeLocationWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  name_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']['input']>;
+  openTime?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  openTime_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  openTime_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  openTime_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  openTime_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  openTime_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  openTime_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  openTime_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  photo?: InputMaybe<AssetWhereInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type OfficeLocationWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<OfficeLocationWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<OfficeLocationWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<OfficeLocationWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<OfficeLocationWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References OfficeLocation record uniquely */
+export type OfficeLocationWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type Page = Node & {
@@ -16966,6 +18225,14 @@ export type Query = {
   homePagesConnection: HomePageConnection;
   /** Fetches an object given its ID */
   node?: Maybe<Node>;
+  /** Retrieve a single officeLocation */
+  officeLocation?: Maybe<OfficeLocation>;
+  /** Retrieve document version */
+  officeLocationVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple officeLocations */
+  officeLocations: Array<OfficeLocation>;
+  /** Retrieve multiple officeLocations using the Relay connection interface */
+  officeLocationsConnection: OfficeLocationConnection;
   /** Retrieve a single page */
   page?: Maybe<Page>;
   /** Retrieve a single pageContent */
@@ -17558,6 +18825,44 @@ export type QueryNodeArgs = {
 };
 
 
+export type QueryOfficeLocationArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: OfficeLocationWhereUniqueInput;
+};
+
+
+export type QueryOfficeLocationVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryOfficeLocationsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<OfficeLocationOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: Stage;
+  where?: InputMaybe<OfficeLocationWhereInput>;
+};
+
+
+export type QueryOfficeLocationsConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<OfficeLocationOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: Stage;
+  where?: InputMaybe<OfficeLocationWhereInput>;
+};
+
+
 export type QueryPageArgs = {
   locales?: Array<Locale>;
   stage?: Stage;
@@ -17920,7 +19225,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Admonition | Asset | BlogPost | BlogPostTag | CloudLocation | Configuration | ContactForm | ContentButton | DocsGroup | DocsPage | Employee | FooterGroup | Form | HomePage | Page | PageContent | Testimonial | Theme;
+export type ScheduledOperationAffectedDocument = Admonition | Asset | BlogPost | BlogPostTag | CloudLocation | Configuration | ContactForm | ContentButton | DocsGroup | DocsPage | Employee | FooterGroup | Form | HomePage | OfficeLocation | Page | PageContent | Testimonial | Theme;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -23616,7 +24921,7 @@ export type ConfigQueryVariables = Exact<{
 }>;
 
 
-export type ConfigQuery = { __typename?: 'Query', values?: { __typename?: 'Configuration', description: string, organizationName: string, slogan: string, title: string, titleOverrides: Array<string>, statusUrl: string, createdAt: string, hqAddress: string, openMapsText: string, socialLinks: Array<{ __typename?: 'SocialLink', id: string, name: string, href: string }>, errorMessage: { __typename?: 'Alert', id: string, name: string, level: AlertLevel, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } }, callToAction: { __typename?: 'CallToAction', shown: number, title: string }, testimonials: Array<{ __typename?: 'Testimonial', subtitle?: string | null, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, image: { __typename?: 'Asset', fileName: string, handle: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, hqCoordinates: { __typename?: 'Location', latitude: number, longitude: number }, hqMapInfo: { __typename?: 'RichText', raw: RichTextContent }, subscribe?: { __typename?: 'Form', id: string, colorScheme: ThemeColor, button: { __typename?: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null } | null };
+export type ConfigQuery = { __typename?: 'Query', values?: { __typename?: 'Configuration', description: string, organizationName: string, slogan: string, title: string, titleOverrides: Array<string>, statusUrl: string, createdAt: string, socialLinks: Array<{ __typename?: 'SocialLink', id: string, name: string, href: string }>, errorMessage: { __typename?: 'Alert', id: string, name: string, level: AlertLevel, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } }, callToAction: { __typename?: 'CallToAction', shown: number, title: string }, testimonials: Array<{ __typename?: 'Testimonial', subtitle?: string | null, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, image: { __typename?: 'Asset', fileName: string, handle: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, subscribe?: { __typename?: 'Form', id: string, colorScheme: ThemeColor, button: { __typename?: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null } | null };
 
 export type ContactFormsQueryVariables = Exact<{
   config?: InputMaybe<Scalars['String']['input']>;
@@ -23677,6 +24982,11 @@ export type HomePageQueryVariables = Exact<{
 
 export type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePage', blocks: Array<{ __typename?: 'HomePageBlock', subtitle: string, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, button?: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null } | null, image: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null, handle: string } }>, mainVideo: { __typename?: 'Asset', fileName: string, handle: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } } | null };
 
+export type OfficeLocationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type OfficeLocationsQuery = { __typename?: 'Query', officeLocations: Array<{ __typename?: 'OfficeLocation', closeTime: number, name: string, openTime: number, photo: { __typename?: 'Asset', fileName: string, height?: number | null, width?: number | null, url: string, mimeType?: string | null, size?: number | null }, location: { __typename?: 'Location', latitude: number, longitude: number }, address: { __typename?: 'Address', address1: string, address2?: string | null, address3?: string | null, city: string, state: string, zipCode: string } }> };
+
 export type StaticPathsExactQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -23716,6 +25026,9 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       }
       const result: PossibleTypesResultData = {
   "possibleTypes": {
+    "AddressParent": [
+      "OfficeLocation"
+    ],
     "AlertParent": [
       "Configuration",
       "FormButton"
@@ -23797,6 +25110,7 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "FooterGroup",
       "Form",
       "HomePage",
+      "OfficeLocation",
       "Page",
       "PageContent",
       "ScheduledOperation",
@@ -23820,6 +25134,7 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "FooterGroup",
       "Form",
       "HomePage",
+      "OfficeLocation",
       "Page",
       "PageContent",
       "Testimonial",
@@ -23858,7 +25173,7 @@ export const BlogPostsByTagsDocument = {"kind":"Document","definitions":[{"kind"
 export const BlogPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPosts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"updatedAt_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"blogPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostsQuery, BlogPostsQueryVariables>;
 export const BlogPostTagsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostTagsQuery, BlogPostTagsQueryVariables>;
 export const CloudLocationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"cloudLocations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cloudLocations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"active"}},{"kind":"Field","name":{"kind":"Name","value":"coordinates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"testUrl"}},{"kind":"Field","name":{"kind":"Name","value":"timeout"}}]}}]}}]} as unknown as DocumentNode<CloudLocationsQuery, CloudLocationsQueryVariables>;
-export const ConfigDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"config"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"values"},"name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"organizationName"}},{"kind":"Field","name":{"kind":"Name","value":"slogan"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"titleOverrides"}},{"kind":"Field","name":{"kind":"Name","value":"statusUrl"}},{"kind":"Field","name":{"kind":"Name","value":"socialLinks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"href"}}]}},{"kind":"Field","name":{"kind":"Name","value":"errorMessage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shown"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"testimonials"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"handle"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"hqAddress"}},{"kind":"Field","name":{"kind":"Name","value":"hqCoordinates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hqMapInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"openMapsText"}},{"kind":"Field","name":{"kind":"Name","value":"subscribe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}}]}}]}}]}}]} as unknown as DocumentNode<ConfigQuery, ConfigQueryVariables>;
+export const ConfigDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"config"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"values"},"name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"organizationName"}},{"kind":"Field","name":{"kind":"Name","value":"slogan"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"titleOverrides"}},{"kind":"Field","name":{"kind":"Name","value":"statusUrl"}},{"kind":"Field","name":{"kind":"Name","value":"socialLinks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"href"}}]}},{"kind":"Field","name":{"kind":"Name","value":"errorMessage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shown"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"testimonials"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"handle"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"113"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"clip"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"subscribe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}}]}}]}}]}}]} as unknown as DocumentNode<ConfigQuery, ConfigQueryVariables>;
 export const ContactFormsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"contactForms"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"config"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"config"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contactForms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"validationType"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<ContactFormsQuery, ContactFormsQueryVariables>;
 export const DocsGroupStaticPathsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsGroupStaticPaths"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsGroups"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<DocsGroupStaticPathsQuery, DocsGroupStaticPathsQueryVariables>;
 export const DocsGroupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsGroup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"enable"}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"docsPages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"summary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DocsGroupQuery, DocsGroupQueryVariables>;
@@ -23868,6 +25183,7 @@ export const DocsPageDocument = {"kind":"Document","definitions":[{"kind":"Opera
 export const EmployeesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"employees"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"config"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"config"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"employees"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"50"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"bio"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"256"}},{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"256"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<EmployeesQuery, EmployeesQueryVariables>;
 export const FooterGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"footerGroups"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"footerGroups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"row"}},{"kind":"Field","name":{"kind":"Name","value":"sortAlphabetically"}},{"kind":"Field","name":{"kind":"Name","value":"pages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageContents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"externalLinks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"href"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]}}]} as unknown as DocumentNode<FooterGroupsQuery, FooterGroupsQueryVariables>;
 export const HomePageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"homePage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homePage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"handle"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"mainVideo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"handle"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}}]}}]}}]} as unknown as DocumentNode<HomePageQuery, HomePageQueryVariables>;
+export const OfficeLocationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"officeLocations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"officeLocations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"closeTime"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"openTime"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"128"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"128"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}}]}},{"kind":"Field","name":{"kind":"Name","value":"location"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"address1"}},{"kind":"Field","name":{"kind":"Name","value":"address2"}},{"kind":"Field","name":{"kind":"Name","value":"address3"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zipCode"}}]}}]}}]}}]} as unknown as DocumentNode<OfficeLocationsQuery, OfficeLocationsQueryVariables>;
 export const StaticPathsExactDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"staticPathsExact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug_not_contains"},"value":{"kind":"StringValue","value":"/","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<StaticPathsExactQuery, StaticPathsExactQueryVariables>;
 export const StaticPathsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"staticPaths"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startsWith"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug_starts_with"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startsWith"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<StaticPathsQuery, StaticPathsQueryVariables>;
 export const PageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"page"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"callout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"form"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"features"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"form"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"vendorLogo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"darkColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lightColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"logo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"postText"}},{"kind":"Field","name":{"kind":"Name","value":"pretext"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<PageQuery, PageQueryVariables>;
@@ -23942,6 +25258,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of union types */
 export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
+  AddressParent: ( OfficeLocation );
   AlertParent: ( Configuration ) | ( FormButton );
   BlogPostBodyRichTextEmbeddedTypes: ( Admonition ) | ( Asset ) | ( ContentButton );
   ButtonParent: ( Callout ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Feature ) | ( HomePageBlock ) | ( PageContent );
@@ -23957,7 +25274,7 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
   FormButtonParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   FormfieldsUnion: ( CheckboxField ) | ( SelectField ) | ( TextAreaField ) | ( TextInputField );
   HomePageBlockParent: ( HomePage );
-  ScheduledOperationAffectedDocument: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( BlogPostTag ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HomePage ) | ( Page ) | ( PageContent ) | ( Testimonial ) | ( Theme );
+  ScheduledOperationAffectedDocument: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( BlogPostTag ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Testimonial ) | ( Theme );
   SelectFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   SocialLinkParent: ( Configuration );
   TextAreaFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
@@ -23968,11 +25285,46 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
 
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = {
-  Node: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( BlogPostTag ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HomePage ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( Testimonial ) | ( Theme ) | ( User );
+  Node: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( BlogPostTag ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( Testimonial ) | ( Theme ) | ( User );
 };
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Address: ResolverTypeWrapper<Address>;
+  AddressConnectInput: AddressConnectInput;
+  AddressConnection: ResolverTypeWrapper<AddressConnection>;
+  AddressCreateInput: AddressCreateInput;
+  AddressCreateManyInlineInput: AddressCreateManyInlineInput;
+  AddressCreateOneInlineInput: AddressCreateOneInlineInput;
+  AddressCreateWithPositionInput: AddressCreateWithPositionInput;
+  AddressEdge: ResolverTypeWrapper<AddressEdge>;
+  AddressManyWhereInput: AddressManyWhereInput;
+  AddressOrderByInput: AddressOrderByInput;
+  AddressParent: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['AddressParent']>;
+  AddressParentConnectInput: AddressParentConnectInput;
+  AddressParentCreateInput: AddressParentCreateInput;
+  AddressParentCreateManyInlineInput: AddressParentCreateManyInlineInput;
+  AddressParentCreateOneInlineInput: AddressParentCreateOneInlineInput;
+  AddressParentUpdateInput: AddressParentUpdateInput;
+  AddressParentUpdateManyInlineInput: AddressParentUpdateManyInlineInput;
+  AddressParentUpdateManyWithNestedWhereInput: AddressParentUpdateManyWithNestedWhereInput;
+  AddressParentUpdateOneInlineInput: AddressParentUpdateOneInlineInput;
+  AddressParentUpdateWithNestedWhereUniqueInput: AddressParentUpdateWithNestedWhereUniqueInput;
+  AddressParentUpsertWithNestedWhereUniqueInput: AddressParentUpsertWithNestedWhereUniqueInput;
+  AddressParentWhereInput: AddressParentWhereInput;
+  AddressParentWhereUniqueInput: AddressParentWhereUniqueInput;
+  AddressUpdateInput: AddressUpdateInput;
+  AddressUpdateManyInlineInput: AddressUpdateManyInlineInput;
+  AddressUpdateManyInput: AddressUpdateManyInput;
+  AddressUpdateManyWithNestedWhereInput: AddressUpdateManyWithNestedWhereInput;
+  AddressUpdateOneInlineInput: AddressUpdateOneInlineInput;
+  AddressUpdateWithNestedWhereUniqueAndPositionInput: AddressUpdateWithNestedWhereUniqueAndPositionInput;
+  AddressUpdateWithNestedWhereUniqueInput: AddressUpdateWithNestedWhereUniqueInput;
+  AddressUpsertInput: AddressUpsertInput;
+  AddressUpsertWithNestedWhereUniqueAndPositionInput: AddressUpsertWithNestedWhereUniqueAndPositionInput;
+  AddressUpsertWithNestedWhereUniqueInput: AddressUpsertWithNestedWhereUniqueInput;
+  AddressWhereInput: AddressWhereInput;
+  AddressWhereUniqueInput: AddressWhereUniqueInput;
   Admonition: ResolverTypeWrapper<Admonition>;
   AdmonitionConnectInput: AdmonitionConnectInput;
   AdmonitionConnection: ResolverTypeWrapper<AdmonitionConnection>;
@@ -24696,6 +26048,27 @@ export type ResolversTypes = {
   Long: ResolverTypeWrapper<Scalars['Long']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
   Node: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['Node']>;
+  OfficeLocation: ResolverTypeWrapper<OfficeLocation>;
+  OfficeLocationConnectInput: OfficeLocationConnectInput;
+  OfficeLocationConnection: ResolverTypeWrapper<OfficeLocationConnection>;
+  OfficeLocationCreateInput: OfficeLocationCreateInput;
+  OfficeLocationCreateManyInlineInput: OfficeLocationCreateManyInlineInput;
+  OfficeLocationCreateOneInlineInput: OfficeLocationCreateOneInlineInput;
+  OfficeLocationEdge: ResolverTypeWrapper<OfficeLocationEdge>;
+  OfficeLocationManyWhereInput: OfficeLocationManyWhereInput;
+  OfficeLocationOrderByInput: OfficeLocationOrderByInput;
+  OfficeLocationUpdateInput: OfficeLocationUpdateInput;
+  OfficeLocationUpdateManyInlineInput: OfficeLocationUpdateManyInlineInput;
+  OfficeLocationUpdateManyInput: OfficeLocationUpdateManyInput;
+  OfficeLocationUpdateManyWithNestedWhereInput: OfficeLocationUpdateManyWithNestedWhereInput;
+  OfficeLocationUpdateOneInlineInput: OfficeLocationUpdateOneInlineInput;
+  OfficeLocationUpdateWithNestedWhereUniqueInput: OfficeLocationUpdateWithNestedWhereUniqueInput;
+  OfficeLocationUpsertInput: OfficeLocationUpsertInput;
+  OfficeLocationUpsertWithNestedWhereUniqueInput: OfficeLocationUpsertWithNestedWhereUniqueInput;
+  OfficeLocationWhereComparatorInput: OfficeLocationWhereComparatorInput;
+  OfficeLocationWhereInput: OfficeLocationWhereInput;
+  OfficeLocationWhereStageInput: OfficeLocationWhereStageInput;
+  OfficeLocationWhereUniqueInput: OfficeLocationWhereUniqueInput;
   Page: ResolverTypeWrapper<Page>;
   PageConnectInput: PageConnectInput;
   PageConnection: ResolverTypeWrapper<PageConnection>;
@@ -25085,6 +26458,40 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  Address: Address;
+  AddressConnectInput: AddressConnectInput;
+  AddressConnection: AddressConnection;
+  AddressCreateInput: AddressCreateInput;
+  AddressCreateManyInlineInput: AddressCreateManyInlineInput;
+  AddressCreateOneInlineInput: AddressCreateOneInlineInput;
+  AddressCreateWithPositionInput: AddressCreateWithPositionInput;
+  AddressEdge: AddressEdge;
+  AddressManyWhereInput: AddressManyWhereInput;
+  AddressParent: ResolversUnionTypes<ResolversParentTypes>['AddressParent'];
+  AddressParentConnectInput: AddressParentConnectInput;
+  AddressParentCreateInput: AddressParentCreateInput;
+  AddressParentCreateManyInlineInput: AddressParentCreateManyInlineInput;
+  AddressParentCreateOneInlineInput: AddressParentCreateOneInlineInput;
+  AddressParentUpdateInput: AddressParentUpdateInput;
+  AddressParentUpdateManyInlineInput: AddressParentUpdateManyInlineInput;
+  AddressParentUpdateManyWithNestedWhereInput: AddressParentUpdateManyWithNestedWhereInput;
+  AddressParentUpdateOneInlineInput: AddressParentUpdateOneInlineInput;
+  AddressParentUpdateWithNestedWhereUniqueInput: AddressParentUpdateWithNestedWhereUniqueInput;
+  AddressParentUpsertWithNestedWhereUniqueInput: AddressParentUpsertWithNestedWhereUniqueInput;
+  AddressParentWhereInput: AddressParentWhereInput;
+  AddressParentWhereUniqueInput: AddressParentWhereUniqueInput;
+  AddressUpdateInput: AddressUpdateInput;
+  AddressUpdateManyInlineInput: AddressUpdateManyInlineInput;
+  AddressUpdateManyInput: AddressUpdateManyInput;
+  AddressUpdateManyWithNestedWhereInput: AddressUpdateManyWithNestedWhereInput;
+  AddressUpdateOneInlineInput: AddressUpdateOneInlineInput;
+  AddressUpdateWithNestedWhereUniqueAndPositionInput: AddressUpdateWithNestedWhereUniqueAndPositionInput;
+  AddressUpdateWithNestedWhereUniqueInput: AddressUpdateWithNestedWhereUniqueInput;
+  AddressUpsertInput: AddressUpsertInput;
+  AddressUpsertWithNestedWhereUniqueAndPositionInput: AddressUpsertWithNestedWhereUniqueAndPositionInput;
+  AddressUpsertWithNestedWhereUniqueInput: AddressUpsertWithNestedWhereUniqueInput;
+  AddressWhereInput: AddressWhereInput;
+  AddressWhereUniqueInput: AddressWhereUniqueInput;
   Admonition: Admonition;
   AdmonitionConnectInput: AdmonitionConnectInput;
   AdmonitionConnection: AdmonitionConnection;
@@ -25777,6 +27184,26 @@ export type ResolversParentTypes = {
   Long: Scalars['Long']['output'];
   Mutation: {};
   Node: ResolversInterfaceTypes<ResolversParentTypes>['Node'];
+  OfficeLocation: OfficeLocation;
+  OfficeLocationConnectInput: OfficeLocationConnectInput;
+  OfficeLocationConnection: OfficeLocationConnection;
+  OfficeLocationCreateInput: OfficeLocationCreateInput;
+  OfficeLocationCreateManyInlineInput: OfficeLocationCreateManyInlineInput;
+  OfficeLocationCreateOneInlineInput: OfficeLocationCreateOneInlineInput;
+  OfficeLocationEdge: OfficeLocationEdge;
+  OfficeLocationManyWhereInput: OfficeLocationManyWhereInput;
+  OfficeLocationUpdateInput: OfficeLocationUpdateInput;
+  OfficeLocationUpdateManyInlineInput: OfficeLocationUpdateManyInlineInput;
+  OfficeLocationUpdateManyInput: OfficeLocationUpdateManyInput;
+  OfficeLocationUpdateManyWithNestedWhereInput: OfficeLocationUpdateManyWithNestedWhereInput;
+  OfficeLocationUpdateOneInlineInput: OfficeLocationUpdateOneInlineInput;
+  OfficeLocationUpdateWithNestedWhereUniqueInput: OfficeLocationUpdateWithNestedWhereUniqueInput;
+  OfficeLocationUpsertInput: OfficeLocationUpsertInput;
+  OfficeLocationUpsertWithNestedWhereUniqueInput: OfficeLocationUpsertWithNestedWhereUniqueInput;
+  OfficeLocationWhereComparatorInput: OfficeLocationWhereComparatorInput;
+  OfficeLocationWhereInput: OfficeLocationWhereInput;
+  OfficeLocationWhereStageInput: OfficeLocationWhereStageInput;
+  OfficeLocationWhereUniqueInput: OfficeLocationWhereUniqueInput;
   Page: Page;
   PageConnectInput: PageConnectInput;
   PageConnection: PageConnection;
@@ -26135,6 +27562,35 @@ export type ResolversParentTypes = {
   VersionWhereInput: VersionWhereInput;
 };
 
+export type AddressResolvers<ContextType = any, ParentType extends ResolversParentTypes['Address'] = ResolversParentTypes['Address']> = {
+  address1?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  address2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  address3?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
+  state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  zipCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AddressConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['AddressConnection'] = ResolversParentTypes['AddressConnection']> = {
+  aggregate?: Resolver<ResolversTypes['Aggregate'], ParentType, ContextType>;
+  edges?: Resolver<Array<ResolversTypes['AddressEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AddressEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['AddressEdge'] = ResolversParentTypes['AddressEdge']> = {
+  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['Address'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AddressParentResolvers<ContextType = any, ParentType extends ResolversParentTypes['AddressParent'] = ResolversParentTypes['AddressParent']> = {
+  __resolveType: TypeResolveFn<'OfficeLocation', ParentType, ContextType>;
+};
+
 export type AdmonitionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Admonition'] = ResolversParentTypes['Admonition']> = {
   body?: Resolver<ResolversTypes['RichText'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
@@ -26215,6 +27671,7 @@ export type AssetResolvers<ContextType = any, ParentType extends ResolversParent
   mainVideoHomePage?: Resolver<Array<ResolversTypes['HomePage']>, ParentType, ContextType, Partial<AssetMainVideoHomePageArgs>>;
   mimeType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   photoEmployee?: Resolver<Array<ResolversTypes['Employee']>, ParentType, ContextType, Partial<AssetPhotoEmployeeArgs>>;
+  photoOfficeLocation?: Resolver<Array<ResolversTypes['OfficeLocation']>, ParentType, ContextType, Partial<AssetPhotoOfficeLocationArgs>>;
   publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AssetPublishedAtArgs, 'variation'>>;
   publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<AssetPublishedByArgs>>;
   scheduledIn?: Resolver<Array<ResolversTypes['ScheduledOperation']>, ParentType, ContextType, Partial<AssetScheduledInArgs>>;
@@ -27016,6 +28473,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationCreateFooterGroupArgs, 'data'>>;
   createForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationCreateFormArgs, 'data'>>;
   createHomePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<MutationCreateHomePageArgs, 'data'>>;
+  createOfficeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<MutationCreateOfficeLocationArgs, 'data'>>;
   createPage?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<MutationCreatePageArgs, 'data'>>;
   createPageContent?: Resolver<Maybe<ResolversTypes['PageContent']>, ParentType, ContextType, RequireFields<MutationCreatePageContentArgs, 'data'>>;
   createScheduledRelease?: Resolver<Maybe<ResolversTypes['ScheduledRelease']>, ParentType, ContextType, RequireFields<MutationCreateScheduledReleaseArgs, 'data'>>;
@@ -27063,6 +28521,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteManyFormsConnection?: Resolver<ResolversTypes['FormConnection'], ParentType, ContextType, Partial<MutationDeleteManyFormsConnectionArgs>>;
   deleteManyHomePages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyHomePagesArgs>>;
   deleteManyHomePagesConnection?: Resolver<ResolversTypes['HomePageConnection'], ParentType, ContextType, Partial<MutationDeleteManyHomePagesConnectionArgs>>;
+  deleteManyOfficeLocations?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyOfficeLocationsArgs>>;
+  deleteManyOfficeLocationsConnection?: Resolver<ResolversTypes['OfficeLocationConnection'], ParentType, ContextType, Partial<MutationDeleteManyOfficeLocationsConnectionArgs>>;
   deleteManyPageContents?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyPageContentsArgs>>;
   deleteManyPageContentsConnection?: Resolver<ResolversTypes['PageContentConnection'], ParentType, ContextType, Partial<MutationDeleteManyPageContentsConnectionArgs>>;
   deleteManyPages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyPagesArgs>>;
@@ -27071,6 +28531,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteManyTestimonialsConnection?: Resolver<ResolversTypes['TestimonialConnection'], ParentType, ContextType, Partial<MutationDeleteManyTestimonialsConnectionArgs>>;
   deleteManyThemes?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyThemesArgs>>;
   deleteManyThemesConnection?: Resolver<ResolversTypes['ThemeConnection'], ParentType, ContextType, Partial<MutationDeleteManyThemesConnectionArgs>>;
+  deleteOfficeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<MutationDeleteOfficeLocationArgs, 'where'>>;
   deletePage?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<MutationDeletePageArgs, 'where'>>;
   deletePageContent?: Resolver<Maybe<ResolversTypes['PageContent']>, ParentType, ContextType, RequireFields<MutationDeletePageContentArgs, 'where'>>;
   deleteScheduledOperation?: Resolver<Maybe<ResolversTypes['ScheduledOperation']>, ParentType, ContextType, RequireFields<MutationDeleteScheduledOperationArgs, 'where'>>;
@@ -27119,6 +28580,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   publishManyFormsConnection?: Resolver<ResolversTypes['FormConnection'], ParentType, ContextType, RequireFields<MutationPublishManyFormsConnectionArgs, 'from' | 'to'>>;
   publishManyHomePages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyHomePagesArgs, 'to'>>;
   publishManyHomePagesConnection?: Resolver<ResolversTypes['HomePageConnection'], ParentType, ContextType, RequireFields<MutationPublishManyHomePagesConnectionArgs, 'from' | 'to'>>;
+  publishManyOfficeLocations?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyOfficeLocationsArgs, 'to'>>;
+  publishManyOfficeLocationsConnection?: Resolver<ResolversTypes['OfficeLocationConnection'], ParentType, ContextType, RequireFields<MutationPublishManyOfficeLocationsConnectionArgs, 'from' | 'to'>>;
   publishManyPageContents?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyPageContentsArgs, 'to'>>;
   publishManyPageContentsConnection?: Resolver<ResolversTypes['PageContentConnection'], ParentType, ContextType, RequireFields<MutationPublishManyPageContentsConnectionArgs, 'from' | 'to'>>;
   publishManyPages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyPagesArgs, 'to'>>;
@@ -27127,6 +28590,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   publishManyTestimonialsConnection?: Resolver<ResolversTypes['TestimonialConnection'], ParentType, ContextType, RequireFields<MutationPublishManyTestimonialsConnectionArgs, 'from' | 'to'>>;
   publishManyThemes?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyThemesArgs, 'to'>>;
   publishManyThemesConnection?: Resolver<ResolversTypes['ThemeConnection'], ParentType, ContextType, RequireFields<MutationPublishManyThemesConnectionArgs, 'from' | 'to'>>;
+  publishOfficeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<MutationPublishOfficeLocationArgs, 'to' | 'where'>>;
   publishPage?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<MutationPublishPageArgs, 'to' | 'where'>>;
   publishPageContent?: Resolver<Maybe<ResolversTypes['PageContent']>, ParentType, ContextType, RequireFields<MutationPublishPageContentArgs, 'to' | 'where'>>;
   publishTestimonial?: Resolver<Maybe<ResolversTypes['Testimonial']>, ParentType, ContextType, RequireFields<MutationPublishTestimonialArgs, 'to' | 'where'>>;
@@ -27145,6 +28609,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   schedulePublishFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationSchedulePublishFooterGroupArgs, 'to' | 'where'>>;
   schedulePublishForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationSchedulePublishFormArgs, 'to' | 'where'>>;
   schedulePublishHomePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<MutationSchedulePublishHomePageArgs, 'to' | 'where'>>;
+  schedulePublishOfficeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<MutationSchedulePublishOfficeLocationArgs, 'to' | 'where'>>;
   schedulePublishPage?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<MutationSchedulePublishPageArgs, 'to' | 'where'>>;
   schedulePublishPageContent?: Resolver<Maybe<ResolversTypes['PageContent']>, ParentType, ContextType, RequireFields<MutationSchedulePublishPageContentArgs, 'to' | 'where'>>;
   schedulePublishTestimonial?: Resolver<Maybe<ResolversTypes['Testimonial']>, ParentType, ContextType, RequireFields<MutationSchedulePublishTestimonialArgs, 'to' | 'where'>>;
@@ -27163,6 +28628,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   scheduleUnpublishFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishFooterGroupArgs, 'from' | 'where'>>;
   scheduleUnpublishForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishFormArgs, 'from' | 'where'>>;
   scheduleUnpublishHomePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishHomePageArgs, 'from' | 'where'>>;
+  scheduleUnpublishOfficeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishOfficeLocationArgs, 'from' | 'where'>>;
   scheduleUnpublishPage?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishPageArgs, 'from' | 'where'>>;
   scheduleUnpublishPageContent?: Resolver<Maybe<ResolversTypes['PageContent']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishPageContentArgs, 'from' | 'where'>>;
   scheduleUnpublishTestimonial?: Resolver<Maybe<ResolversTypes['Testimonial']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishTestimonialArgs, 'from' | 'where'>>;
@@ -27209,6 +28675,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   unpublishManyFormsConnection?: Resolver<ResolversTypes['FormConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyFormsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyHomePages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyHomePagesArgs, 'from'>>;
   unpublishManyHomePagesConnection?: Resolver<ResolversTypes['HomePageConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyHomePagesConnectionArgs, 'from' | 'stage'>>;
+  unpublishManyOfficeLocations?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyOfficeLocationsArgs, 'from'>>;
+  unpublishManyOfficeLocationsConnection?: Resolver<ResolversTypes['OfficeLocationConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyOfficeLocationsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyPageContents?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyPageContentsArgs, 'from'>>;
   unpublishManyPageContentsConnection?: Resolver<ResolversTypes['PageContentConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyPageContentsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyPages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyPagesArgs, 'from'>>;
@@ -27217,6 +28685,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   unpublishManyTestimonialsConnection?: Resolver<ResolversTypes['TestimonialConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyTestimonialsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyThemes?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyThemesArgs, 'from'>>;
   unpublishManyThemesConnection?: Resolver<ResolversTypes['ThemeConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyThemesConnectionArgs, 'from' | 'stage'>>;
+  unpublishOfficeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<MutationUnpublishOfficeLocationArgs, 'from' | 'where'>>;
   unpublishPage?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<MutationUnpublishPageArgs, 'from' | 'where'>>;
   unpublishPageContent?: Resolver<Maybe<ResolversTypes['PageContent']>, ParentType, ContextType, RequireFields<MutationUnpublishPageContentArgs, 'from' | 'where'>>;
   unpublishTestimonial?: Resolver<Maybe<ResolversTypes['Testimonial']>, ParentType, ContextType, RequireFields<MutationUnpublishTestimonialArgs, 'from' | 'where'>>;
@@ -27263,6 +28732,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateManyFormsConnection?: Resolver<ResolversTypes['FormConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyFormsConnectionArgs, 'data'>>;
   updateManyHomePages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyHomePagesArgs, 'data'>>;
   updateManyHomePagesConnection?: Resolver<ResolversTypes['HomePageConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyHomePagesConnectionArgs, 'data'>>;
+  updateManyOfficeLocations?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyOfficeLocationsArgs, 'data'>>;
+  updateManyOfficeLocationsConnection?: Resolver<ResolversTypes['OfficeLocationConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyOfficeLocationsConnectionArgs, 'data'>>;
   updateManyPageContents?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyPageContentsArgs, 'data'>>;
   updateManyPageContentsConnection?: Resolver<ResolversTypes['PageContentConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyPageContentsConnectionArgs, 'data'>>;
   updateManyPages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyPagesArgs, 'data'>>;
@@ -27271,6 +28742,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateManyTestimonialsConnection?: Resolver<ResolversTypes['TestimonialConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyTestimonialsConnectionArgs, 'data'>>;
   updateManyThemes?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyThemesArgs, 'data'>>;
   updateManyThemesConnection?: Resolver<ResolversTypes['ThemeConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyThemesConnectionArgs, 'data'>>;
+  updateOfficeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<MutationUpdateOfficeLocationArgs, 'data' | 'where'>>;
   updatePage?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<MutationUpdatePageArgs, 'data' | 'where'>>;
   updatePageContent?: Resolver<Maybe<ResolversTypes['PageContent']>, ParentType, ContextType, RequireFields<MutationUpdatePageContentArgs, 'data' | 'where'>>;
   updateScheduledRelease?: Resolver<Maybe<ResolversTypes['ScheduledRelease']>, ParentType, ContextType, RequireFields<MutationUpdateScheduledReleaseArgs, 'data' | 'where'>>;
@@ -27290,6 +28762,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   upsertFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationUpsertFooterGroupArgs, 'upsert' | 'where'>>;
   upsertForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationUpsertFormArgs, 'upsert' | 'where'>>;
   upsertHomePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<MutationUpsertHomePageArgs, 'upsert' | 'where'>>;
+  upsertOfficeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<MutationUpsertOfficeLocationArgs, 'upsert' | 'where'>>;
   upsertPage?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<MutationUpsertPageArgs, 'upsert' | 'where'>>;
   upsertPageContent?: Resolver<Maybe<ResolversTypes['PageContent']>, ParentType, ContextType, RequireFields<MutationUpsertPageContentArgs, 'upsert' | 'where'>>;
   upsertTestimonial?: Resolver<Maybe<ResolversTypes['Testimonial']>, ParentType, ContextType, RequireFields<MutationUpsertTestimonialArgs, 'upsert' | 'where'>>;
@@ -27297,9 +28770,43 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type NodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Node'] = ResolversParentTypes['Node']> = {
-  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'BlogPostTag' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HomePage' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'Testimonial' | 'Theme' | 'User', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'BlogPostTag' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'Testimonial' | 'Theme' | 'User', ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
+};
+
+export type OfficeLocationResolvers<ContextType = any, ParentType extends ResolversParentTypes['OfficeLocation'] = ResolversParentTypes['OfficeLocation']> = {
+  address?: Resolver<ResolversTypes['Address'], ParentType, ContextType, Partial<OfficeLocationAddressArgs>>;
+  closeTime?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<OfficeLocationCreatedByArgs>>;
+  documentInStages?: Resolver<Array<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<OfficeLocationDocumentInStagesArgs, 'includeCurrent' | 'inheritLocale' | 'stages'>>;
+  history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<OfficeLocationHistoryArgs, 'limit' | 'skip'>>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  location?: Resolver<ResolversTypes['Location'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  openTime?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  photo?: Resolver<ResolversTypes['Asset'], ParentType, ContextType, Partial<OfficeLocationPhotoArgs>>;
+  publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<OfficeLocationPublishedByArgs>>;
+  scheduledIn?: Resolver<Array<ResolversTypes['ScheduledOperation']>, ParentType, ContextType, Partial<OfficeLocationScheduledInArgs>>;
+  stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  updatedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<OfficeLocationUpdatedByArgs>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OfficeLocationConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['OfficeLocationConnection'] = ResolversParentTypes['OfficeLocationConnection']> = {
+  aggregate?: Resolver<ResolversTypes['Aggregate'], ParentType, ContextType>;
+  edges?: Resolver<Array<ResolversTypes['OfficeLocationEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OfficeLocationEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['OfficeLocationEdge'] = ResolversParentTypes['OfficeLocationEdge']> = {
+  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['OfficeLocation'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Page'] = ResolversParentTypes['Page']> = {
@@ -27447,6 +28954,10 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   homePages?: Resolver<Array<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<QueryHomePagesArgs, 'locales' | 'stage'>>;
   homePagesConnection?: Resolver<ResolversTypes['HomePageConnection'], ParentType, ContextType, RequireFields<QueryHomePagesConnectionArgs, 'locales' | 'stage'>>;
   node?: Resolver<Maybe<ResolversTypes['Node']>, ParentType, ContextType, RequireFields<QueryNodeArgs, 'id' | 'locales' | 'stage'>>;
+  officeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<QueryOfficeLocationArgs, 'locales' | 'stage' | 'where'>>;
+  officeLocationVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryOfficeLocationVersionArgs, 'where'>>;
+  officeLocations?: Resolver<Array<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<QueryOfficeLocationsArgs, 'locales' | 'stage'>>;
+  officeLocationsConnection?: Resolver<ResolversTypes['OfficeLocationConnection'], ParentType, ContextType, RequireFields<QueryOfficeLocationsConnectionArgs, 'locales' | 'stage'>>;
   page?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<QueryPageArgs, 'locales' | 'stage' | 'where'>>;
   pageContent?: Resolver<Maybe<ResolversTypes['PageContent']>, ParentType, ContextType, RequireFields<QueryPageContentArgs, 'locales' | 'stage' | 'where'>>;
   pageContentVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryPageContentVersionArgs, 'where'>>;
@@ -27522,7 +29033,7 @@ export type ScheduledOperationResolvers<ContextType = any, ParentType extends Re
 };
 
 export type ScheduledOperationAffectedDocumentResolvers<ContextType = any, ParentType extends ResolversParentTypes['ScheduledOperationAffectedDocument'] = ResolversParentTypes['ScheduledOperationAffectedDocument']> = {
-  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'BlogPostTag' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HomePage' | 'Page' | 'PageContent' | 'Testimonial' | 'Theme', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'BlogPostTag' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'Testimonial' | 'Theme', ParentType, ContextType>;
 };
 
 export type ScheduledOperationConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ScheduledOperationConnection'] = ResolversParentTypes['ScheduledOperationConnection']> = {
@@ -27883,6 +29394,10 @@ export type VersionResolvers<ContextType = any, ParentType extends ResolversPare
 };
 
 export type Resolvers<ContextType = any> = {
+  Address?: AddressResolvers<ContextType>;
+  AddressConnection?: AddressConnectionResolvers<ContextType>;
+  AddressEdge?: AddressEdgeResolvers<ContextType>;
+  AddressParent?: AddressParentResolvers<ContextType>;
   Admonition?: AdmonitionResolvers<ContextType>;
   AdmonitionConnection?: AdmonitionConnectionResolvers<ContextType>;
   AdmonitionEdge?: AdmonitionEdgeResolvers<ContextType>;
@@ -27985,6 +29500,9 @@ export type Resolvers<ContextType = any> = {
   Long?: GraphQLScalarType;
   Mutation?: MutationResolvers<ContextType>;
   Node?: NodeResolvers<ContextType>;
+  OfficeLocation?: OfficeLocationResolvers<ContextType>;
+  OfficeLocationConnection?: OfficeLocationConnectionResolvers<ContextType>;
+  OfficeLocationEdge?: OfficeLocationEdgeResolvers<ContextType>;
   Page?: PageResolvers<ContextType>;
   PageConnection?: PageConnectionResolvers<ContextType>;
   PageContent?: PageContentResolvers<ContextType>;

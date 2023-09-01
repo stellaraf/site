@@ -46,15 +46,6 @@ query config($title: String) {
       title
     }
     createdAt
-    hqAddress
-    hqCoordinates {
-      latitude
-      longitude
-    }
-    hqMapInfo {
-      raw
-    }
-    openMapsText
     subscribe {
       id
       button {

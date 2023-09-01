@@ -8,17 +8,16 @@ import {
   useJsApiLoader,
 } from "@react-google-maps/api";
 
-import { Link, Error, RichText } from "~/components";
-import { useConfig } from "~/context";
+import { Link, Error } from "~/components";
 import { useColorTokenValue } from "~/hooks";
 
 import { mapDark, mapLight } from "./styles";
 import { gm, useMapUrl } from "./util";
 
-import type { LocationProps, MapContainerProps } from "./types";
+import type { LocationProps, MapContainerProps, GoogleMapProps } from "./types";
 
 const Location = (props: LocationProps) => {
-  const { lat, lng, content, bg, color, openMapsText, orgName, address, ...rest } = props;
+  const { lat, lng, bg, color, orgName, address, ...rest } = props;
   const url = useMapUrl(address, orgName);
 
   return (
@@ -33,11 +32,11 @@ const Location = (props: LocationProps) => {
             }}
             {...rest}
           >
-            {content}
+            {address}
           </Box>
           <Box mt={2}>
             <Link href={url} fontWeight="medium">
-              {openMapsText}
+              Visit Us!
             </Link>
           </Box>
         </Box>
@@ -66,16 +65,8 @@ const MapContainer = (props: MapContainerProps) => {
   );
 };
 
-export const GoogleMap = () => {
-  const {
-    organizationName,
-    hqMapInfo,
-    hqAddress,
-    openMapsText,
-    hqCoordinates = { latitude: 0, longitude: 0 },
-  } = useConfig();
-
-  const { latitude: lat, longitude: lng } = hqCoordinates;
+export const GoogleMap = (props: GoogleMapProps) => {
+  const { lat, lng, orgName, displayAddress, ...rest } = props;
 
   const bg = useColorTokenValue("light.500", "dark.500");
   const color = useColorTokenValue("dark.500", "light.500");
@@ -98,10 +89,8 @@ export const GoogleMap = () => {
           lat={lat}
           lng={lng}
           color={color}
-          address={hqAddress}
-          orgName={organizationName}
-          openMapsText={openMapsText}
-          content={<RichText content={hqMapInfo} />}
+          address={displayAddress}
+          orgName={orgName}
         />
       </GoogleMapApi>
     ),
@@ -109,7 +98,7 @@ export const GoogleMap = () => {
   );
 
   return (
-    <MapContainer bg={bg} color={color}>
+    <MapContainer bg={bg} color={color} {...rest}>
       {typeof loadError !== "undefined" ? (
         <Error title="Error loading Google Map" description={loadError.message} />
       ) : isLoaded ? (

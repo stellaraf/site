@@ -1,4 +1,4 @@
-import type { BoxProps } from "@chakra-ui/react";
+import type { TableCellProps } from "@chakra-ui/react";
 import type { ButtonProps } from "~/components";
 import type { ContentButton } from "~/types";
 
@@ -6,7 +6,7 @@ export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
 export type Headings = `h${HeadingLevel}`;
 
-export interface TdProps extends BoxProps {
+export interface TdProps extends TableCellProps {
   isHeader?: boolean;
 }
 

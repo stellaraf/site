@@ -8,12 +8,17 @@ export interface MapContainerProps extends BoxProps {
 export type MapStyles = google.maps.MapTypeStyle[];
 
 export interface LocationProps extends BoxProps {
-  content: React.ReactNode;
-  openMapsText: string;
   orgName: string;
   address: string;
   color: string;
   lat: number;
   lng: number;
   bg: string;
+}
+
+export interface GoogleMapProps extends Omit<BoxProps, "bg" | "color"> {
+  lat: number;
+  lng: number;
+  orgName: string;
+  displayAddress: string;
 }

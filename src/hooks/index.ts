@@ -1,3 +1,4 @@
+export * from "./use-address";
 export * from "./use-alert";
 export * from "./use-apple";
 export * from "./use-boolean-value";

@@ -25,6 +25,7 @@ export * from "./media";
 export * from "./meta";
 export * from "./modal";
 export * from "./navigation";
+export * from "./office-location";
 export * from "./rich-text";
 export * from "./ripple";
 export * from "./screen";

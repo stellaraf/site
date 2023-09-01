@@ -1,11 +1,4 @@
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-
 import { objectHasProperty } from "../generic";
-
-import type { CloudLocation } from "~/queries";
-
-dayjs.extend(utc);
 
 export interface LocationTime {
   offset: number;
@@ -38,9 +31,9 @@ function formatCoordinate(num: number): number {
   return Number(num.toFixed(7));
 }
 
-export async function getLocationTime(cloudLocation: CloudLocation): Promise<LocationTime> {
-  const lat = formatCoordinate(cloudLocation.coordinates.latitude);
-  const long = formatCoordinate(cloudLocation.coordinates.longitude);
+export async function getLocationTime(latitude: number, longitude: number): Promise<LocationTime> {
+  const lat = formatCoordinate(latitude);
+  const long = formatCoordinate(longitude);
 
   const timestamp = (Date.now() / 1000).toString();
 
@@ -56,7 +49,7 @@ export async function getLocationTime(cloudLocation: CloudLocation): Promise<Loc
   const json = await res.json();
   if (isTimezoneError(json)) {
     throw new Error(
-      `Failed to get timezone data for location ${cloudLocation.name}. Error: [${json.status}]: ${json.errorMessage}`,
+      `Failed to get timezone data for location '${latitude},${longitude}'. Error: [${json.status}]: ${json.errorMessage}`,
     );
   }
   if (isTimezoneResponse(json)) {
@@ -68,7 +61,7 @@ export async function getLocationTime(cloudLocation: CloudLocation): Promise<Loc
     return { offset, timezoneId: json.timeZoneId, timezoneName: json.timeZoneName };
   }
   throw new Error(
-    `Failed to get timezone data for location '${cloudLocation.name}'. Error: ${JSON.stringify(
+    `Failed to get timezone data for location '${latitude},${longitude}'. Error: ${JSON.stringify(
       json,
     )}`,
   );

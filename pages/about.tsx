@@ -1,9 +1,10 @@
 import { Box, type BoxProps, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { EmployeeGrid, Hero, GoogleMap, Callout, Testimonials } from "~/components";
+import { EmployeeGrid, Hero, Callout, Testimonials, OfficeLocations } from "~/components";
 import { useResponsiveStyle } from "~/hooks";
-import { pageQuery, employeesQuery, commonStaticPropsQuery } from "~/queries";
+import { getLocationTime, getHolidays } from "~/lib/server";
+import { pageQuery, employeesQuery, commonStaticPropsQuery, officeLocationsQuery } from "~/queries";
 
 import type { GetStaticProps, NextPage } from "next";
 import type { AboutPageProps } from "~/types";
@@ -16,7 +17,7 @@ const Section = (props: React.PropsWithChildren<BoxProps & Pick<AboutPageProps, 
   return (
     <Box as="section" py={24} overflow="hidden" {...rest}>
       <Flex height="100%" {...rStyles} alignItems="center" flexDir="column" {...rStyles}>
-        <Heading as="h3" fontSize="4xl">
+        <Heading as="h3" fontSize={{ base: "3xl", md: "4xl" }}>
           {titleMe(title)}
         </Heading>
         {children}
@@ -26,7 +27,7 @@ const Section = (props: React.PropsWithChildren<BoxProps & Pick<AboutPageProps, 
 };
 
 const About: NextPage<AboutPageProps> = props => {
-  const { title, subtitle, body, contents, callout, employees } = props;
+  const { title, subtitle, body, contents, callout, employees, officeLocations, holidays } = props;
 
   const [employeesSection, locationsSection] = contents;
 
@@ -37,7 +38,11 @@ const About: NextPage<AboutPageProps> = props => {
         <EmployeeGrid employees={employees} />
       </Section>
       <Section title={locationsSection.title}>
-        <GoogleMap />
+        <OfficeLocations
+          officeLocations={officeLocations}
+          orgName={props.common.config.organizationName}
+          holidays={holidays}
+        />
       </Section>
       <Testimonials />
       {callout && <Callout {...callout} />}
@@ -49,9 +54,18 @@ export const getStaticProps: GetStaticProps<AboutPageProps> = async ctx => {
   const preview = ctx?.preview ?? false;
   const page = await pageQuery({ slug: "about" });
   const employees = await employeesQuery();
+  const locations = await officeLocationsQuery();
   const common = await commonStaticPropsQuery();
+  const holidays = getHolidays();
 
-  return { props: { ...page, employees, preview, common } };
+  const officeLocations = await Promise.all(
+    locations.map(async loc => {
+      const tz = await getLocationTime(loc.location.latitude, loc.location.longitude);
+      return { ...loc, ...tz };
+    }),
+  );
+
+  return { props: { ...page, employees, officeLocations, preview, holidays, common } };
 };
 
 export default About;

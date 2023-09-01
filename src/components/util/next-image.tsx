@@ -12,7 +12,6 @@ const NEXT_IMAGE_PROPS: string[] = [
   "lazyRoot",
   "loader",
   "loading",
-  "objectFit",
   "objectPosition",
   "onLoadingComplete",
   "placeholder",
@@ -26,6 +25,9 @@ const NEXT_IMAGE_PROPS: string[] = [
 
 const shouldForwardProp = (prop: string): boolean => NEXT_IMAGE_PROPS.includes(prop);
 
-export const ChakraNextImage: ChakraComponent<"img", ImageProps> = chakra(NextImage, {
-  shouldForwardProp,
-});
+export const ChakraNextImage: ChakraComponent<"img", Omit<ImageProps, "objectFit">> = chakra(
+  NextImage,
+  {
+    shouldForwardProp,
+  },
+);

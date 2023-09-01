@@ -63,6 +63,7 @@ export const Table = (props: TableProps) => {
     mt = 4,
     size = "sm",
     borderColor,
+    w = "100%",
     width = "100%",
     minWidth = "50%",
     variant = "simple",
@@ -76,7 +77,7 @@ export const Table = (props: TableProps) => {
   const styles = useMultiStyleConfig("Table", { ...themeProps });
   return (
     <TableContext.Provider value={{ ...styles, props: themeProps }}>
-      <Box overflowX="auto" width={{ base: "100%", lg: "fit-content" }}>
+      <Box overflowX="auto" width={w ?? width ?? { base: "100%", lg: "fit-content" }}>
         <TableContainer
           mt={mt}
           zIndex={1}
@@ -84,7 +85,7 @@ export const Table = (props: TableProps) => {
           borderWidth={borderWidth}
           borderRadius={borderRadius}
           borderColor={borderColor ? borderColor : (styles.td?.borderColor as string)}
-          width={width}
+          width={w ?? width}
         >
           <ChakraTable
             variant="simple"
