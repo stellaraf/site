@@ -40,6 +40,7 @@ const MMenuItem = (props: Omit<DocsPage, "body">) => {
         fontSize="sm"
         onClick={subNav.onClose}
         opacity={isCurrent ? 1 : 0.8}
+        borderBottom="none"
       >
         {title}
       </Link>
