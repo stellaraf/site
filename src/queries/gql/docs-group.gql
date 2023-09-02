@@ -1,5 +1,5 @@
-query docsGroup($slug: String) {
-  docsGroup(where: { slug: $slug }) {
+query docsGroup($slug: String, $stage: Stage = PUBLISHED) {
+  docsGroup(where: { slug: $slug }, stage: $stage) {
     callToAction {
       body {
         raw

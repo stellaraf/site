@@ -11,10 +11,10 @@ import {
   commonStaticPropsQuery,
   blogPostTagsQuery,
 } from "~/queries";
+import { Stage, type BlogTagPageProps } from "~/types";
 
 import type { BoxProps } from "@chakra-ui/react";
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
-import type { BlogTagPageProps } from "~/types";
 
 type Query = {
   tag: string;
@@ -76,16 +76,17 @@ const Page: NextPage<BlogTagPageProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps<BlogTagPageProps, Query> = async ctx => {
-  const preview = ctx?.preview ?? false;
   const pathTag = ctx.params?.tag;
   if (typeof pathTag === "undefined") {
     return { redirect: { destination: "/blog", statusCode: 302 } };
   }
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
   try {
-    const common = await commonStaticPropsQuery();
-    const page = await pageQuery({ slug: "blog" });
-    const { blogPosts, tag } = await blogPostsByTagsQuery({ tag: pathTag });
-    return { props: { ...page, blogPosts, preview, common, tag } };
+    const common = await commonStaticPropsQuery({ stage });
+    const page = await pageQuery({ slug: "blog", stage });
+    const { blogPosts, tag } = await blogPostsByTagsQuery({ tag: pathTag, stage });
+    return { props: { ...page, blogPosts, common, tag } };
   } catch (error) {
     console.error(error);
     return { notFound: true };

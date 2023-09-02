@@ -4,11 +4,11 @@ import { Callout, ContentLoader, ContentSection, Hero, SEO, Testimonials } from 
 import { FallbackLayout } from "~/layouts";
 import { is } from "~/lib";
 import { pageQuery, commonStaticPropsQuery, pageStaticPathsQuery } from "~/queries";
+import { Stage, type PageProps } from "~/types";
 
 import ErrorPage from "../_error";
 
 import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
-import type { PageProps } from "~/types";
 
 type UrlQuery = {
   page: string;
@@ -51,16 +51,18 @@ const CloudPage: NextPage<PageProps> = props => {
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const path = ctx.params?.page ?? "notfound";
-  const preview = ctx?.preview ?? false;
 
   if (path === "notfound") {
     return { notFound: true };
   }
 
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
+
   try {
-    const page = await pageQuery({ slug: `cloud/${path}` });
-    const common = await commonStaticPropsQuery();
-    return { props: { ...page, preview, common } };
+    const page = await pageQuery({ slug: `cloud/${path}`, stage });
+    const common = await commonStaticPropsQuery({ stage });
+    return { props: { ...page, common } };
   } catch (error) {
     console.error(error);
     return { notFound: true };

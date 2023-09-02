@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useBreakpointValue } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 
-import { Footer, DHeader, Preview, MHeader, RickRoll, Controls, CallToAction } from "~/components";
+import { Footer, DHeader, MHeader, RickRoll, Controls, CallToAction } from "~/components";
 import { useMobile } from "~/hooks";
 
 import { Wrapper, Root, Main } from "./common";
@@ -17,11 +17,10 @@ interface SiteLayoutProps {
   footerGroups: FooterGroups;
   actions: Actions;
   children: React.ReactNode;
-  preview: boolean;
 }
 
 export const SiteLayout = (props: SiteLayoutProps) => {
-  const { children, footerGroups, actions, preview } = props;
+  const { children, footerGroups, actions } = props;
 
   const isMobile = useMobile();
 
@@ -42,21 +41,18 @@ export const SiteLayout = (props: SiteLayoutProps) => {
   }
 
   return (
-    <>
-      {preview && <Preview />}
-      <AnimatePresence mode="wait">
-        <Wrapper>
-          {isMobile ? <MHeader /> : <DHeader />}
-          <Main>
-            <Root>{children}</Root>
-          </Main>
-          <CallToAction actions={actions} />
-          <Footer groups={footerGroups} />
-          {!isMobile && <Controls.Desktop />}
-          <Stars />
-          <RickRoll />
-        </Wrapper>
-      </AnimatePresence>
-    </>
+    <AnimatePresence mode="wait">
+      <Wrapper>
+        {isMobile ? <MHeader /> : <DHeader />}
+        <Main>
+          <Root>{children}</Root>
+        </Main>
+        <CallToAction actions={actions} />
+        <Footer groups={footerGroups} />
+        {!isMobile && <Controls.Desktop />}
+        <Stars />
+        <RickRoll />
+      </Wrapper>
+    </AnimatePresence>
   );
 };

@@ -8,9 +8,9 @@ import {
   docsPageStaticPathsQuery,
   docsGroupStaticPathsQuery,
 } from "~/queries";
+import { Stage, type DocsPageProps } from "~/types";
 
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
-import type { DocsPageProps } from "~/types";
 
 type UrlQuery = {
   slug: string;
@@ -54,15 +54,16 @@ const DocsPage: NextPage<DocsPageProps> = props => {
 
 export const getStaticProps: GetStaticProps<DocsPageProps, UrlQuery> = async ctx => {
   const slug = ctx.params?.slug ?? "notfound";
-  const preview = ctx?.preview ?? false;
 
   if (slug === "notfound") {
     return { notFound: true };
   }
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
   try {
-    const page = await docsPageQuery({ slug });
-    const common = await commonStaticPropsQuery();
-    return { props: { ...page, preview, common } };
+    const page = await docsPageQuery({ slug, stage });
+    const common = await commonStaticPropsQuery({ stage });
+    return { props: { ...page, common } };
   } catch (error) {
     console.error(error);
     return { notFound: true };

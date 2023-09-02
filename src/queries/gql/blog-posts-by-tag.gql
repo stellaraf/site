@@ -1,9 +1,5 @@
-query blogPostsByTags($tag: String!) {
-  blogPosts(
-    stage: PUBLISHED
-    orderBy: updatedAt_DESC
-    where: { blogPostTags_some: { tag: $tag } }
-  ) {
+query blogPostsByTags($tag: String!, $stage: Stage = PUBLISHED) {
+  blogPosts(stage: $stage, orderBy: updatedAt_DESC, where: { blogPostTags_some: { tag: $tag } }) {
     description
     id
     publishedAt

@@ -5,9 +5,9 @@ import { EmployeeGrid, Hero, Callout, Testimonials, OfficeLocations } from "~/co
 import { useResponsiveStyle } from "~/hooks";
 import { getLocationTime, getHolidays } from "~/lib/server";
 import { pageQuery, employeesQuery, commonStaticPropsQuery, officeLocationsQuery } from "~/queries";
+import { Stage, type AboutPageProps } from "~/types";
 
 import type { GetStaticProps, NextPage } from "next";
-import type { AboutPageProps } from "~/types";
 
 const Section = (props: React.PropsWithChildren<BoxProps & Pick<AboutPageProps, "title">>) => {
   const { title, children, ...rest } = props;
@@ -51,11 +51,12 @@ const About: NextPage<AboutPageProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps<AboutPageProps> = async ctx => {
-  const preview = ctx?.preview ?? false;
-  const page = await pageQuery({ slug: "about" });
-  const employees = await employeesQuery();
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
+  const page = await pageQuery({ slug: "about", stage });
+  const employees = await employeesQuery({ stage });
   const locations = await officeLocationsQuery();
-  const common = await commonStaticPropsQuery();
+  const common = await commonStaticPropsQuery({ stage });
   const holidays = getHolidays();
 
   const officeLocations = await Promise.all(
@@ -65,7 +66,7 @@ export const getStaticProps: GetStaticProps<AboutPageProps> = async ctx => {
     }),
   );
 
-  return { props: { ...page, employees, officeLocations, preview, holidays, common } };
+  return { props: { ...page, employees, officeLocations, holidays, common } };
 };
 
 export default About;

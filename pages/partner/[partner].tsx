@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 import { SEO, ContentLoader } from "~/components";
 import { PartnerLayout, FallbackLayout } from "~/layouts";
 import { pageQuery, commonStaticPropsQuery, pageStaticPathsQuery } from "~/queries";
+import { Stage, type PageProps } from "~/types";
 
 import ErrorPage from "../_error";
 
 import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
-import type { PageProps } from "~/types";
 
 type UrlQuery = {
   partner: string;
@@ -48,9 +48,11 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
   if (typeof partner === "undefined") {
     return { notFound: true };
   }
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
   try {
-    const page = await pageQuery({ slug: `partner/${partner}` });
-    const common = await commonStaticPropsQuery();
+    const page = await pageQuery({ slug: `partner/${partner}`, stage });
+    const common = await commonStaticPropsQuery({ stage });
     return { props: { ...page, preview, common } };
   } catch (error) {
     console.error(error);

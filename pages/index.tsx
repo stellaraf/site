@@ -7,9 +7,9 @@ import { HomeSection, SEO, Screen, Testimonials } from "~/components";
 import { useConfig } from "~/context";
 import { useGradient, useNavLogo, useResponsiveStyle } from "~/hooks";
 import { homePageQuery, commonStaticPropsQuery } from "~/queries";
+import { Stage, type HomePageProps } from "~/types";
 
 import type { NextPage, GetStaticProps } from "next";
-import type { HomePageProps } from "~/types";
 
 // Separate component to limit unnecessary re-renders of the whole page on scroll.
 const Logo = () => {
@@ -73,10 +73,11 @@ const Home: NextPage<HomePageProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async ctx => {
-  const preview = ctx?.preview ?? false;
-  const homePage = await homePageQuery();
-  const common = await commonStaticPropsQuery();
-  return { props: { ...homePage, preview, common } };
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
+  const homePage = await homePageQuery({ stage });
+  const common = await commonStaticPropsQuery({ stage });
+  return { props: { ...homePage, common } };
 };
 
 export default Home;

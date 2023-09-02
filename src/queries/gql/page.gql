@@ -1,5 +1,5 @@
-query page($slug: String) {
-  page(where: { slug: $slug }) {
+query page($slug: String, $stage: Stage = PUBLISHED) {
+  page(where: { slug: $slug }, stage: $stage) {
     body {
       raw
     }

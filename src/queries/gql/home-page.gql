@@ -1,5 +1,5 @@
-query homePage($name: String) {
-  homePage(where: { name: $name }) {
+query homePage($name: String, $stage: Stage = PUBLISHED) {
+  homePage(stage: $stage, where: { name: $name }) {
     blocks(first: 10) {
       body {
         raw

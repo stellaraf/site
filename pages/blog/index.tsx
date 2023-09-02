@@ -6,10 +6,10 @@ import { useTitleCase } from "use-title-case";
 import { SEO, Error, ContentLoader, Hero, BlogPosts, Testimonials, Callout } from "~/components";
 import { useResponsiveStyle } from "~/hooks";
 import { pageQuery, blogPostsQuery, commonStaticPropsQuery } from "~/queries";
+import { Stage, type BlogPageProps } from "~/types";
 
 import type { BoxProps } from "@chakra-ui/react";
 import type { NextPage, GetStaticProps } from "next";
-import type { BlogPageProps } from "~/types";
 
 const Layout = (props: React.PropsWithChildren<BoxProps & Pick<BlogPageProps, "title">>) => {
   const { title, children, ...rest } = props;
@@ -63,13 +63,14 @@ const Page: NextPage<BlogPageProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps<BlogPageProps> = async ctx => {
-  const preview = ctx?.preview ?? false;
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
 
   try {
-    const blogPosts = await blogPostsQuery();
-    const page = await pageQuery({ slug: "blog" });
-    const common = await commonStaticPropsQuery();
-    return { props: { ...page, blogPosts, preview, common } };
+    const blogPosts = await blogPostsQuery({ stage });
+    const page = await pageQuery({ slug: "blog", stage });
+    const common = await commonStaticPropsQuery({ stage });
+    return { props: { ...page, blogPosts, common } };
   } catch (error) {
     console.error(error);
     return { notFound: true };

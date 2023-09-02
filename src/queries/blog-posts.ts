@@ -17,8 +17,8 @@ export interface BlogPostsByTag {
   tag: string;
 }
 
-export default async function (): Promise<BlogPosts> {
-  const result = await queryFn<BlogPostsQuery, BlogPostsQueryVariables>({ query });
+export default async function (variables: BlogPostsQueryVariables): Promise<BlogPosts> {
+  const result = await queryFn<BlogPostsQuery, BlogPostsQueryVariables>({ query, variables });
   if (!is(result.blogPosts)) {
     throw new Error(`Failed to find blog posts`);
   }

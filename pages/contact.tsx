@@ -20,9 +20,9 @@ import {
   commonStaticPropsQuery,
   cloudLocationsQuery,
 } from "~/queries";
+import { Stage, type ContactPageProps } from "~/types";
 
 import type { GetStaticProps, NextPage } from "next";
-import type { ContactPageProps } from "~/types";
 
 const Contact: NextPage<ContactPageProps> = props => {
   const { title, subtitle, body, contents, callout, contactForms, holidays, locationTimes } = props;
@@ -98,11 +98,11 @@ const Contact: NextPage<ContactPageProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps<ContactPageProps> = async ctx => {
-  const preview = ctx?.preview ?? false;
-
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
   const contactForms = await contactFormsQuery();
-  const page = await pageQuery({ slug: "contact" });
-  const common = await commonStaticPropsQuery();
+  const page = await pageQuery({ slug: "contact", stage });
+  const common = await commonStaticPropsQuery({ stage });
   const holidays = getHolidays();
   const locations = await cloudLocationsQuery();
   const locationTimes = await Promise.all(
@@ -111,7 +111,7 @@ export const getStaticProps: GetStaticProps<ContactPageProps> = async ctx => {
     ),
   );
   return {
-    props: { ...page, holidays, contactForms, preview, locationTimes, common },
+    props: { ...page, holidays, contactForms, locationTimes, common },
     revalidate: 43_200,
   };
 };

@@ -7,9 +7,9 @@ import { DocsGroups, RichText } from "~/components";
 import { useScaledText } from "~/hooks";
 import { DocsLayout } from "~/layouts";
 import { pageQuery, commonStaticPropsQuery } from "~/queries";
+import { Stage, type PageProps } from "~/types";
 
 import type { GetStaticProps, NextPage } from "next";
-import type { PageProps } from "~/types";
 
 const TextContent = (props: PageProps) => {
   const { title, subtitle, body } = props;
@@ -56,10 +56,11 @@ const Docs: NextPage<PageProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps<PageProps> = async ctx => {
-  const preview = ctx?.preview ?? false;
-  const page = await pageQuery({ slug: "docs" });
-  const common = await commonStaticPropsQuery();
-  return { props: { ...page, preview, common } };
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
+  const page = await pageQuery({ slug: "docs", stage });
+  const common = await commonStaticPropsQuery({ stage });
+  return { props: { ...page, common } };
 };
 
 export default Docs;

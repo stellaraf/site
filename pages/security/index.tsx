@@ -1,8 +1,8 @@
 import { ContentSection, Hero, Callout, Testimonials } from "~/components";
 import { pageQuery, commonStaticPropsQuery } from "~/queries";
+import { Stage, type PageProps } from "~/types";
 
 import type { GetStaticProps, NextPage } from "next";
-import type { PageProps } from "~/types";
 
 type UrlQuery = {
   page: string;
@@ -24,10 +24,11 @@ const SecurityIndex: NextPage<PageProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
-  const preview = ctx?.preview ?? false;
-  const page = await pageQuery({ slug: "security" });
-  const common = await commonStaticPropsQuery();
-  return { props: { ...page, preview, common } };
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
+  const page = await pageQuery({ slug: "security", stage });
+  const common = await commonStaticPropsQuery({ stage });
+  return { props: { ...page, common } };
 };
 
 export default SecurityIndex;

@@ -1,5 +1,5 @@
-query docsPage($slug: String) {
-  docsPage(where: { slug: $slug }) {
+query docsPage($slug: String, $stage: Stage = PUBLISHED) {
+  docsPage(where: { slug: $slug }, stage: $stage) {
     body {
       raw
       references {

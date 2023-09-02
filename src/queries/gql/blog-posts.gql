@@ -1,5 +1,5 @@
-query blogPosts {
-  blogPosts(stage: PUBLISHED, orderBy: updatedAt_DESC) {
+query blogPosts($stage: Stage = PUBLISHED) {
+  blogPosts(stage: $stage, orderBy: updatedAt_DESC) {
     description
     id
     publishedAt

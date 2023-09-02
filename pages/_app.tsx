@@ -127,11 +127,7 @@ const Site = (props: AppProps<SiteProps>) => {
           dark={theme.colors.secondary}
           organizationName={organizationName}
         />
-        <SiteLayout
-          actions={actions}
-          footerGroups={footerGroups}
-          preview={pageProps?.preview ?? false}
-        >
+        <SiteLayout actions={actions} footerGroups={footerGroups}>
           <Component {...pageProps} />
         </SiteLayout>
       </Provider>

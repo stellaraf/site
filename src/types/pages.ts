@@ -37,13 +37,13 @@ interface WithError {
   error?: string;
 }
 
-export type PageProps = Page & WithError & WithPreview & WithCommonPageProps;
+export type PageProps = Page & WithError & WithCommonPageProps;
 
-export type DocsPageProps = DocsPage & WithPreview & WithError & WithCommonPageProps;
+export type DocsPageProps = DocsPage & WithError & WithCommonPageProps;
 
-export type BlogPostProps = BlogPost & WithPreview & WithError & WithCommonPageProps;
+export type BlogPostProps = BlogPost & WithError & WithCommonPageProps;
 
-export type HomePageProps = HomePage & WithPreview & WithError & WithCommonPageProps;
+export type HomePageProps = HomePage & WithError & WithCommonPageProps;
 
 export interface SiteProps {
   actions: Actions;
@@ -51,10 +51,6 @@ export interface SiteProps {
   docsGroups: DocsGroups;
   footerGroups: FooterGroups;
   theme: ThemeConfig;
-}
-
-interface WithPreview {
-  preview: boolean;
 }
 
 interface WithCommonPageProps {

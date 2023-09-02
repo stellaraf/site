@@ -4,8 +4,7 @@ import { useRouter } from "next/router";
 import { chakra } from "@chakra-ui/react";
 
 import { commonStaticPropsQuery } from "~/queries";
-
-// import { useGradient } from "~/hooks";
+import { Stage } from "~/types";
 
 import type { GetStaticProps, NextPage } from "next";
 
@@ -28,7 +27,6 @@ const Header = chakra("h1", {
 });
 
 const NotFound: NextPage = () => {
-  // const bg = useGradient();
   const { asPath } = useRouter();
 
   return (
@@ -51,6 +49,6 @@ const NotFound: NextPage = () => {
 export default NotFound;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const common = await commonStaticPropsQuery();
+  const common = await commonStaticPropsQuery({ stage: Stage.Published });
   return { props: { common } };
 };

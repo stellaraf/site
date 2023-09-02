@@ -7,10 +7,10 @@ import { CloudLocationsProvider } from "~/context";
 import { useAlert, useColorTokenValue } from "~/hooks";
 import { is } from "~/lib";
 import { pageQuery, cloudLocationsQuery, commonStaticPropsQuery } from "~/queries";
+import { Stage, type CloudPageProps } from "~/types";
 
 import type { GetStaticProps, NextPage } from "next";
 import type { USMapProps } from "~/components";
-import type { CloudPageProps } from "~/types";
 
 const USMap = dynamic<USMapProps>(() => import("~/components").then(i => i.USMap));
 
@@ -64,13 +64,14 @@ const Cloud: NextPage<CloudPageProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps<CloudPageProps> = async ctx => {
-  const preview = ctx?.preview ?? false;
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
   const geoRes = await fetch("https://us-map-geo-points.stellar.workers.dev");
   const geoData = await geoRes.json();
   const locations = await cloudLocationsQuery();
-  const page = await pageQuery({ slug: "cloud" });
-  const common = await commonStaticPropsQuery();
-  return { props: { ...page, geoData, preview, locations, common } };
+  const page = await pageQuery({ slug: "cloud", stage });
+  const common = await commonStaticPropsQuery({ stage });
+  return { props: { ...page, geoData, locations, common } };
 };
 
 export default Cloud;

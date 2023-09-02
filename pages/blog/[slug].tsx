@@ -5,10 +5,10 @@ import { Box, Flex } from "@chakra-ui/react";
 import { SEO, Error, ContentLoader, BlogPostContent } from "~/components";
 import { useResponsiveStyle } from "~/hooks";
 import { blogPostQuery, commonStaticPropsQuery, blogPostStaticPathsQuery } from "~/queries";
+import { Stage, type BlogPostProps } from "~/types";
 
 import type { BoxProps } from "@chakra-ui/react";
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
-import type { BlogPostProps } from "~/types";
 
 type UrlQuery = {
   slug: string;
@@ -64,15 +64,16 @@ const Post: NextPage<BlogPostProps> = props => {
 
 export const getStaticProps: GetStaticProps<BlogPostProps, UrlQuery> = async ctx => {
   const slug = ctx.params?.slug ?? "notfound";
-  const preview = ctx?.preview ?? false;
 
   if (slug === "notfound") {
     return { notFound: true };
   }
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
   try {
-    const page = await blogPostQuery({ slug });
-    const common = await commonStaticPropsQuery();
-    return { props: { ...page, preview, common } };
+    const page = await blogPostQuery({ slug, stage });
+    const common = await commonStaticPropsQuery({ stage });
+    return { props: { ...page, common } };
   } catch (error) {
     console.error(error);
     return { notFound: true };

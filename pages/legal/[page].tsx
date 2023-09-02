@@ -3,11 +3,11 @@ import { Box } from "@chakra-ui/react";
 import { ContentSection } from "~/components";
 import { FallbackLayout } from "~/layouts";
 import { pageQuery, commonStaticPropsQuery, pageStaticPathsQuery } from "~/queries";
+import { Stage, type PageProps } from "~/types";
 
 import ErrorPage from "../_error";
 
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
-import type { PageProps } from "~/types";
 
 type UrlQuery = {
   page: string;
@@ -40,11 +40,12 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
     return { notFound: true };
   }
 
-  const preview = ctx?.preview ?? false;
-  const page = await pageQuery({ slug: `legal/${slug}` });
-  const common = await commonStaticPropsQuery();
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
+  const page = await pageQuery({ slug: `legal/${slug}`, stage });
+  const common = await commonStaticPropsQuery({ stage });
 
-  return { props: { ...page, preview, common } };
+  return { props: { ...page, common } };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {

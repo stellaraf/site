@@ -1,5 +1,5 @@
-query blogPost($slug: String) {
-  blogPost(where: { slug: $slug }, stage: PUBLISHED) {
+query blogPost($slug: String, $stage: Stage = PUBLISHED) {
+  blogPost(where: { slug: $slug }, stage: $stage) {
     publishedAt
     description
     slug

@@ -8,12 +8,19 @@ import {
   twitterHandleQuery,
 } from "~/queries";
 
-import type { CommonPageProps } from "~/types";
+import type { CommonPageProps, Stage } from "~/types";
 
-export async function commonStaticPropsQuery(): Promise<CommonPageProps> {
+interface CommonStaticPropsQueryProps {
+  stage: Stage;
+}
+
+export async function commonStaticPropsQuery(
+  props: CommonStaticPropsQueryProps,
+): Promise<CommonPageProps> {
+  const { stage } = props;
   const actions = await actionsQuery();
   const config = await configQuery();
-  const docsGroups = await docsGroupsQuery();
+  const docsGroups = await docsGroupsQuery({ stage });
   const footerGroups = await footerGroupsQuery();
   const theme = await themeQuery();
   const twitterHandle = await twitterHandleQuery({ title: "Stellar" });

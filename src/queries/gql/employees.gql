@@ -1,5 +1,5 @@
-query employees($config: String) {
-  configuration(where: { title: $config }) {
+query employees($config: String, $stage: Stage = PUBLISHED) {
+  configuration(where: { title: $config }, stage: $stage) {
     employees(first: 50) {
       bio {
         raw

@@ -1,8 +1,8 @@
 import { ContentSection, Hero, Callout, Testimonials } from "~/components";
 import { pageQuery, commonStaticPropsQuery, pageStaticPathsExactQuery } from "~/queries";
+import { Stage, type PageProps } from "~/types";
 
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import type { PageProps } from "~/types";
 
 type UrlQuery = {
   page: string;
@@ -25,10 +25,11 @@ const DynamicPage: NextPage<PageProps> = props => {
 
 export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => {
   const slug = ctx.params?.page ?? "notfound";
-  const preview = ctx?.preview ?? false;
-  const page = await pageQuery({ slug });
-  const common = await commonStaticPropsQuery();
-  return { props: { ...page, preview, common } };
+  const draft = ctx.draftMode ?? false;
+  const stage = draft ? Stage.Draft : Stage.Published;
+  const page = await pageQuery({ slug, stage });
+  const common = await commonStaticPropsQuery({ stage });
+  return { props: { ...page, common } };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
