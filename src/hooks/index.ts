@@ -16,7 +16,6 @@ export * from "./use-mobile";
 export * from "./use-nav-logo";
 export * from "./use-opposing-color";
 export * from "./use-random-element";
-export * from "./use-responsive-style";
 export * from "./use-rick-roll";
 export * from "./use-scaled-text";
 export * from "./use-slug";

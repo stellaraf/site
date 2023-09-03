@@ -2,7 +2,7 @@ import { chakra, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { RichText } from "~/components";
-import { useGradient, useResponsiveStyle } from "~/hooks";
+import { useGradient } from "~/hooks";
 import { shouldForwardProp } from "~/theme";
 
 import type { HeroProps } from "./types";
@@ -16,11 +16,10 @@ export const Hero = (props: HeroProps) => {
   const { title, subtitle, body, children, ...rest } = props;
 
   const bg = useGradient();
-  const rStyles = useResponsiveStyle();
   const fnTitle = useTitleCase();
 
   return (
-    <Container className="__hero" {...bg} {...rStyles} {...rest}>
+    <Container className="__hero" layerStyle="container" {...bg} {...rest}>
       <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
         <Flex
           textAlign="center"

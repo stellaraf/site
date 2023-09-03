@@ -2,7 +2,7 @@ import { Center, VStack, useColorModeValue } from "@chakra-ui/react";
 
 import { AnimatedDiv } from "~/components";
 import { useConfig } from "~/context";
-import { useOpposingColor, useGlow, useResponsiveStyle, useRandomElement, useSSR } from "~/hooks";
+import { useOpposingColor, useGlow, useRandomElement, useSSR } from "~/hooks";
 
 import { Testimonial } from "./testimonial";
 
@@ -12,7 +12,6 @@ export const Testimonials = (props: CenterProps) => {
   const { testimonials } = useConfig();
   const testimonial = useRandomElement(testimonials);
 
-  const rStyles = useResponsiveStyle();
   const bg = useColorModeValue("light.500", "blackSolid.500");
   const color = useOpposingColor(bg);
   const glow = useGlow("blackSolid.500", "blackSolid.500");
@@ -27,18 +26,18 @@ export const Testimonials = (props: CenterProps) => {
       w="100%"
       minH="xs"
       as="section"
+      bg="light.500"
       pos="relative"
       overflow="hidden"
+      layerStyle="container"
       px={{ base: 4, lg: 16, xl: 64 }}
       my={{ base: 4, lg: 16, xl: 64 }}
       transition="box-shadow, background 0.2s ease-in-out"
-      bg="light.500"
       _dark={{
         my: { base: 32, xl: 64 },
         bg: glow.backgroundColor,
         boxShadow: glow.boxShadow,
       }}
-      {...rStyles}
       {...props}
     >
       <VStack

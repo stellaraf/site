@@ -8,7 +8,6 @@ import { useTitleCase } from "use-title-case";
 
 import { AnimatedDiv, Divider } from "~/components";
 import { useConfig } from "~/context";
-import { useResponsiveStyle } from "~/hooks";
 
 import { Action } from "./action";
 import { useRandomActions } from "./util";
@@ -19,7 +18,6 @@ import type { Actions } from "~/queries";
 export const _CallToActionContainer = (props: MemoCallToActionProps) => {
   const { actions: rawActions, currentPath, ...rest } = props;
 
-  const rStyles = useResponsiveStyle();
   const titleMe = useTitleCase();
 
   const { callToAction } = useConfig();
@@ -45,18 +43,25 @@ export const _CallToActionContainer = (props: MemoCallToActionProps) => {
 
   return (
     <>
-      <VStack py={24} spacing={12} className="__actions" minH="30vh" {...rStyles} {...rest}>
+      <VStack
+        py={24}
+        minH="30vh"
+        spacing={12}
+        className="__actions"
+        layerStyle="container"
+        {...rest}
+      >
         <Center>
           <Heading as="h5" fontSize={{ base: "lg", lg: "2xl" }}>
             {titleMe(callToAction.title)}
           </Heading>
         </Center>
         <Wrap
-          direction={{ base: "column", lg: "row" }}
+          ref={ref}
           spacing={8}
           justify="center"
-          ref={ref}
           overflow="visible"
+          direction={{ base: "column", lg: "row" }}
         >
           {inView &&
             actions.map((action, i) => (

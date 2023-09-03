@@ -5,7 +5,7 @@ import { StellarLogo } from "@stellaraf/logo";
 
 import { HomeSection, SEO, Screen, Testimonials } from "~/components";
 import { useConfig } from "~/context";
-import { useGradient, useNavLogo, useResponsiveStyle } from "~/hooks";
+import { useGradient, useNavLogo } from "~/hooks";
 import { homePageQuery, commonStaticPropsQuery } from "~/queries";
 import { Stage, type HomePageProps } from "~/types";
 
@@ -30,7 +30,6 @@ const Logo = () => {
 const Home: NextPage<HomePageProps> = props => {
   const { blocks, mainVideo } = props;
   const { slogan, organizationName } = useConfig();
-  const rStyles = useResponsiveStyle();
 
   const bg = useGradient();
 
@@ -43,8 +42,8 @@ const Home: NextPage<HomePageProps> = props => {
         minH="100vh"
         boxSize="100%"
         color="primary.500"
+        layerStyle="container"
         _dark={{ color: "white" }}
-        {...rStyles}
         {...bg}
       >
         <Flex flexDir="column" alignItems="center">

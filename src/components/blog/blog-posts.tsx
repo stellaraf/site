@@ -1,7 +1,6 @@
 import { Heading, VStack, Wrap, WrapItem } from "@chakra-ui/react";
 
 import { AnimatedDiv } from "~/components";
-import { useResponsiveStyle } from "~/hooks";
 
 import { BlogPreview } from "./blog-preview";
 
@@ -14,10 +13,16 @@ interface BlogPostsProps extends StackProps {
 
 export const BlogPosts = (props: BlogPostsProps) => {
   const { blogPosts, children, ...rest } = props;
-  const rStyles = useResponsiveStyle();
 
   return (
-    <VStack py={24} spacing={12} className="__blogposts" minH="30vh" {...rStyles} {...rest}>
+    <VStack
+      py={24}
+      minH="30vh"
+      spacing={12}
+      layerStyle="container"
+      className="__blogposts"
+      {...rest}
+    >
       {children}
       <Wrap
         spacing={8}

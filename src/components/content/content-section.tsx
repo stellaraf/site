@@ -3,7 +3,7 @@ import { forwardRef, useMemo } from "react";
 import { Box, Flex, VStack, Heading, VisuallyHidden } from "@chakra-ui/react";
 
 import { Button, Divider, RichText } from "~/components";
-import { useMobile, useResponsiveStyle } from "~/hooks";
+import { useMobile } from "~/hooks";
 import { ChevronRight } from "~/icons";
 import { is } from "~/lib";
 
@@ -58,7 +58,6 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
   } = content;
 
   const isMobile = useMobile();
-  const rStyles = useResponsiveStyle();
 
   const hasImage = useMemo(() => is(image) && !isMobile, [title, index, isMobile]);
   const side = useMemo<ContentSide>(() => (["right", "left"] as ContentSides)[index % 2], [index]);
@@ -92,10 +91,10 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
         ref={ref}
         as="article"
         overflow="hidden"
+        layerStyle="container"
         mt={{ base: 2, lg: 8, xl: 16 }}
         mb={{ base: 4, lg: 16, xl: 32 }}
         px={{ base: 4, lg: 16, xl: 64 }}
-        {...rStyles}
         {...rest}
       >
         <Flex h="100%" alignItems="center" justify="center" flexWrap="nowrap">

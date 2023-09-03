@@ -2,7 +2,6 @@ import { Box, type BoxProps, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { EmployeeGrid, Hero, Callout, Testimonials, OfficeLocations } from "~/components";
-import { useResponsiveStyle } from "~/hooks";
 import { getLocationTime, getHolidays } from "~/lib/server";
 import { pageQuery, employeesQuery, commonStaticPropsQuery, officeLocationsQuery } from "~/queries";
 import { Stage, type AboutPageProps } from "~/types";
@@ -11,12 +10,11 @@ import type { GetStaticProps, NextPage } from "next";
 
 const Section = (props: React.PropsWithChildren<BoxProps & Pick<AboutPageProps, "title">>) => {
   const { title, children, ...rest } = props;
-  const rStyles = useResponsiveStyle();
   const titleMe = useTitleCase();
 
   return (
     <Box as="section" py={24} overflow="hidden" {...rest}>
-      <Flex height="100%" {...rStyles} alignItems="center" flexDir="column" {...rStyles}>
+      <Flex height="100%" layerStyle="container" alignItems="center" flexDir="column">
         <Heading as="h3" fontSize={{ base: "3xl", md: "4xl" }}>
           {titleMe(title)}
         </Heading>

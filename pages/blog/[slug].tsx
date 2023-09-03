@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { Box, Flex } from "@chakra-ui/react";
 
 import { SEO, Error, ContentLoader, BlogPostContent } from "~/components";
-import { useResponsiveStyle } from "~/hooks";
 import { blogPostQuery, commonStaticPropsQuery, blogPostStaticPathsQuery } from "~/queries";
 import { Stage, type BlogPostProps } from "~/types";
 
@@ -18,11 +17,10 @@ type StaticPaths = Awaited<ReturnType<GetStaticPaths<UrlQuery>>>["paths"];
 
 const Layout = (props: React.PropsWithChildren<BoxProps & Pick<BlogPostProps, "title">>) => {
   const { title, children, ...rest } = props;
-  const rStyles = useResponsiveStyle();
 
   return (
     <Box as="section" py={{ base: 16, lg: 32 }} overflow="hidden" {...rest}>
-      <Flex height="100%" {...rStyles} alignItems="center" flexDir="column" {...rStyles}>
+      <Flex height="100%" alignItems="center" flexDir="column" layerStyle="container">
         {children}
       </Flex>
     </Box>

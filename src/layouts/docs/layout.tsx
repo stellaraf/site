@@ -2,7 +2,6 @@ import { Accordion, chakra, Box, Flex, VStack, useBreakpointValue } from "@chakr
 
 import { MSubNav } from "~/components";
 import { useConfig } from "~/context";
-import { useResponsiveStyle } from "~/hooks";
 
 import { DMenuGroup } from "./menu-desktop";
 import { MMenuGroup } from "./menu-mobile";
@@ -10,7 +9,7 @@ import { MMenuGroup } from "./menu-mobile";
 import type { BoxProps } from "@chakra-ui/react";
 
 const LayoutContainer = chakra("div", {
-  baseStyle: { w: "100%", minH: "40vh", pt: 32 },
+  baseStyle: { w: "100%", minH: "40vh", pt: 32, layerStyle: "container" },
 });
 
 const MLayout = (props: BoxProps) => {
@@ -83,18 +82,13 @@ export const DocsLayout = (props: BoxProps) => {
     lg: true,
     xl: true,
   });
-  const rStyles = useResponsiveStyle();
 
   return (
     <>
       {largeLayout ? (
-        <DLayout {...rStyles} {...rest}>
-          {children}
-        </DLayout>
+        <DLayout {...rest}>{children}</DLayout>
       ) : (
-        <MLayout {...rStyles} {...rest}>
-          {children}
-        </MLayout>
+        <MLayout {...rest}>{children}</MLayout>
       )}
     </>
   );

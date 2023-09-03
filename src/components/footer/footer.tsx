@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { Box, HStack, VStack } from "@chakra-ui/react";
 
 import { Controls } from "~/components/controls";
-import { useMobile, useResponsiveStyle } from "~/hooks";
+import { useMobile } from "~/hooks";
 
 import { Copyright } from "./copyright";
 import { DesktopLinks } from "./desktop-links";
@@ -46,7 +46,6 @@ const MBottom = () => {
 export const Footer = (props: FooterProps) => {
   const { groups, ...rest } = props;
 
-  const rStyles = useResponsiveStyle();
   const isMobile = useMobile();
 
   return (
@@ -58,11 +57,20 @@ export const Footer = (props: FooterProps) => {
       color="white"
       bg="primary.800"
       _dark={{ bg: "dark.500" }}
-      {...rStyles}
+      layerStyle="container"
       {...rest}
     >
-      {isMobile ? <MobileLinks groups={groups} /> : <DesktopLinks groups={groups} />}
-      {isMobile ? <MBottom /> : <DBottom />}
+      {isMobile ? (
+        <>
+          <MobileLinks groups={groups} />
+          <MBottom />
+        </>
+      ) : (
+        <>
+          <DesktopLinks groups={groups} />
+          <DBottom />
+        </>
+      )}
     </Box>
   );
 };

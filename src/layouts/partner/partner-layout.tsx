@@ -1,5 +1,6 @@
 import {
   Box,
+  chakra,
   Flex,
   VStack,
   Grid,
@@ -10,13 +11,17 @@ import {
 import { useTitleCase } from "use-title-case";
 
 import { Card, CardBody, GenericForm, RichText } from "~/components";
-import { useGradient, useMobile, useResponsiveStyle } from "~/hooks";
+import { useGradient, useMobile } from "~/hooks";
 import { is, separate } from "~/lib";
 
 import { PartnerContextProvider, usePartnerCtx } from "./context";
 
 import type { PartnerLayoutProps } from "./types";
 import type { VendorLogo } from "~/queries";
+
+const LayoutWrapper = chakra("div", {
+  baseStyle: { width: "100%", minHeight: "40vh", pt: 32, layerStyle: "container" },
+});
 
 const TextContent = () => {
   const { title, subtitle, body } = usePartnerCtx();
@@ -120,60 +125,6 @@ const FormCard = () => {
   );
 };
 
-const MVendorLayout = () => {
-  const bg = useGradient();
-  const rStyles = useResponsiveStyle();
-  const { contents } = usePartnerCtx();
-
-  const [vendorLogo] = separate(
-    contents,
-    "vendorLogo",
-    (v: unknown): v is VendorLogo => (v as Record<string, unknown>).__typename === "VendorLogo",
-  );
-
-  return (
-    <Box w="100%" minH="40vh" pt={32} {...bg} {...rStyles}>
-      <VStack spacing={8}>
-        <TextContent />
-        <FormCard />
-        {is(vendorLogo) && <PartnerLogo {...vendorLogo} />}
-      </VStack>
-    </Box>
-  );
-};
-
-const DVendorLayout = () => {
-  const bg = useGradient();
-  const rStyles = useResponsiveStyle();
-
-  const { contents } = usePartnerCtx();
-
-  const [vendorLogo] = separate(
-    contents,
-    "vendorLogo",
-    (v: unknown): v is VendorLogo => (v as Record<string, unknown>).__typename === "VendorLogo",
-  );
-
-  return (
-    <Box w="100%" minH="40vh" pt={32} {...bg} {...rStyles}>
-      <Grid
-        mt={16}
-        gridTemplateRows="1fr"
-        gridTemplateColumns="1fr 0.33fr"
-        gridTemplateAreas={`"content form"`}
-      >
-        <VStack alignItems="flex-start" gridArea="content">
-          <TextContent />
-          {is(vendorLogo) && <PartnerLogo {...vendorLogo} />}
-        </VStack>
-        <VStack alignItems="flex-end" gridArea="form" maxHeight="80%">
-          <FormCard />
-        </VStack>
-      </Grid>
-    </Box>
-  );
-};
-
 export const PartnerLayout = (props: PartnerLayoutProps) => {
   const largeLayout = useBreakpointValue({
     base: false,
@@ -182,9 +133,42 @@ export const PartnerLayout = (props: PartnerLayoutProps) => {
     xl: true,
   });
 
+  const bg = useGradient();
+
+  const [vendorLogo] = separate(
+    props.contents,
+    "vendorLogo",
+    (v: unknown): v is VendorLogo => (v as Record<string, unknown>).__typename === "VendorLogo",
+  );
+
   return (
     <PartnerContextProvider value={props}>
-      {largeLayout ? <DVendorLayout /> : <MVendorLayout />}
+      {largeLayout ? (
+        <LayoutWrapper {...bg}>
+          <Grid
+            mt={16}
+            gridTemplateRows="1fr"
+            gridTemplateColumns="1fr 0.33fr"
+            gridTemplateAreas={`"content form"`}
+          >
+            <VStack alignItems="flex-start" gridArea="content">
+              <TextContent />
+              {is(vendorLogo) && <PartnerLogo {...vendorLogo} />}
+            </VStack>
+            <VStack alignItems="flex-end" gridArea="form" maxHeight="80%">
+              <FormCard />
+            </VStack>
+          </Grid>
+        </LayoutWrapper>
+      ) : (
+        <LayoutWrapper {...bg}>
+          <VStack spacing={8}>
+            <TextContent />
+            <FormCard />
+            {is(vendorLogo) && <PartnerLogo {...vendorLogo} />}
+          </VStack>
+        </LayoutWrapper>
+      )}
     </PartnerContextProvider>
   );
 };

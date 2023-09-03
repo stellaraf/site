@@ -10,7 +10,7 @@ import {
   Timezones,
   P,
 } from "~/components";
-import { useSlug, useResponsiveStyle } from "~/hooks";
+import { useSlug } from "~/hooks";
 import { Phone } from "~/icons";
 import { is } from "~/lib";
 import { getHolidays, getLocationTime } from "~/lib/server";
@@ -27,7 +27,6 @@ import type { GetStaticProps, NextPage } from "next";
 const Contact: NextPage<ContactPageProps> = props => {
   const { title, subtitle, body, contents, callout, contactForms, holidays, locationTimes } = props;
 
-  const rStyles = useResponsiveStyle();
   const content = contents[0];
   const slug = useSlug(content.title, [content.title]);
 
@@ -35,13 +34,19 @@ const Contact: NextPage<ContactPageProps> = props => {
     <>
       <Hero title={title} subtitle={subtitle} body={body} minH="40vh">
         <Box as="section" py={{ base: 16, lg: 32 }}>
-          <Flex height="100%" align="center" direction="column" {...rStyles}>
+          <Flex height="100%" align="center" direction="column" layerStyle="container">
             <FormCardGroup contactForms={contactForms} />
           </Flex>
         </Box>
       </Hero>
       <Box as="section" overflow="hidden">
-        <Flex height="100%" overflow="hidden" align="center" direction="column" {...rStyles}>
+        <Flex
+          height="100%"
+          align="center"
+          overflow="hidden"
+          direction="column"
+          layerStyle="container"
+        >
           <VStack spacing={4} textAlign="center">
             <Content.Title id={slug}>{content.title}</Content.Title>
             {content.subtitle && <Content.Subtitle>{content.subtitle}</Content.Subtitle>}

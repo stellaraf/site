@@ -4,7 +4,6 @@ import { Box, Flex, Heading, Tag } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { SEO, Error, ContentLoader, Hero, BlogPosts, Testimonials, Callout } from "~/components";
-import { useResponsiveStyle } from "~/hooks";
 import {
   pageQuery,
   blogPostsByTagsQuery,
@@ -22,12 +21,11 @@ type Query = {
 
 const Layout = (props: React.PropsWithChildren<BoxProps & Pick<BlogTagPageProps, "title">>) => {
   const { title, children, ...rest } = props;
-  const rStyles = useResponsiveStyle();
   const fnTitle = useTitleCase();
 
   return (
     <Box as="section" py={24} overflow="hidden" {...rest}>
-      <Flex height="100%" {...rStyles} alignItems="center" flexDir="column" {...rStyles}>
+      <Flex height="100%" alignItems="center" flexDir="column" layerStyle="container">
         <Heading as="h3" fontSize="4xl">
           {fnTitle(title)}
         </Heading>

@@ -101,6 +101,11 @@ export const makeTheme = (userTheme: ThemeConfig, fontConfig: Fonts): CustomThem
     radii,
     styles: { global: globalStyles },
     components: { Button: button, Heading: heading },
+    layerStyles: {
+      container: {
+        px: { base: 4, md: 4, lg: 16, xl: 24 },
+      },
+    },
     semanticTokens: {
       colors: {
         "body-bg": {

@@ -2,7 +2,7 @@ import { Center, Heading, VStack, Divider, useColorModeValue } from "@chakra-ui/
 import { useTitleCase } from "use-title-case";
 
 import { Button, Ripple, RichText, Content } from "~/components";
-import { useOpposingColor, useColorWhenDark, useGlow, useResponsiveStyle } from "~/hooks";
+import { useOpposingColor, useColorWhenDark, useGlow } from "~/hooks";
 import { is } from "~/lib";
 import { ThemeColor } from "~/types";
 
@@ -11,7 +11,6 @@ import type { CalloutProps } from "./types";
 export const Callout = (props: CalloutProps) => {
   const { title, subtitle, body = null, button, form, ...rest } = props;
 
-  const rStyles = useResponsiveStyle();
   const isDarkMode = useColorModeValue(false, true);
   const colorScheme = useColorModeValue(ThemeColor.Secondary, ThemeColor.Purple);
   const bg = `${colorScheme}.500`;
@@ -22,23 +21,20 @@ export const Callout = (props: CalloutProps) => {
 
   const fnTitle = useTitleCase();
 
-  const wrapperProps = useColorModeValue(
-    { bg, boxShadow: undefined, my: { base: 4, lg: 16, xl: 64 } },
-    { bg: glow.backgroundColor, boxShadow: glow.boxShadow, my: { base: 32, xl: 64 } },
-  );
-
   return (
     <Center
       py={16}
+      bg={bg}
       w="100%"
       minH="xs"
       as="section"
       pos="relative"
       overflow="hidden"
+      layerStyle="container"
+      my={{ base: 4, lg: 16, xl: 64 }}
       px={{ base: 4, lg: 16, xl: 64 }}
       transition="box-shadow, background 0.2s ease-in-out"
-      {...wrapperProps}
-      {...rStyles}
+      _dark={{ bg: glow.backgroundColor, boxShadow: glow.boxShadow, my: { base: 32, xl: 64 } }}
       {...rest}
     >
       {!isDarkMode && <Ripple start={rippleStart} stop={bg} />}
