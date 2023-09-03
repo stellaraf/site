@@ -81,6 +81,12 @@ const config = {
         destructuredArrayIgnorePattern: "^_+",
       },
     ],
+    "react/no-unknown-property": [
+      2,
+      {
+        ignore: ["jsx", "global"],
+      },
+    ],
     "react/prop-types": "off",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",

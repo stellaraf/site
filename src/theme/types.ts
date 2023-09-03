@@ -34,18 +34,10 @@ export interface CustomTheme extends Omit<DefaultTheme, "colors"> {
   colors: CustomColors;
 }
 
-export type ThemeFonts = DefaultTheme["fonts"];
-
 export type FontWeights = DefaultTheme["fontWeights"];
 
 interface Colors {
   [k: string]: string;
-}
-
-export interface Fonts {
-  body: NextFont;
-  heading: NextFont;
-  monospace: NextFont;
 }
 
 export interface ThemeConfig {

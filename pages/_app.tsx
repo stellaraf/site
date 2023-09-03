@@ -45,15 +45,15 @@ const firaCode = Fira_Code({
 // Separate component so useTitleCase doesn't render outside of context.
 const RootSEO = (props: RootSEOProps) => {
   const {
+    title,
+    siteUrl,
+    imageUrl,
+    subtitle,
+    pageTitle,
     description,
     footerTitle,
-    imageUrl,
-    organizationName,
-    pageTitle,
-    siteUrl,
-    subtitle,
-    title,
     twitterHandle,
+    organizationName,
     ...rest
   } = props;
   const fnTitle = useTitleCase();
@@ -104,13 +104,20 @@ const Site = (props: AppProps<SiteProps>) => {
 
   return (
     <>
+      <style jsx global>
+        {`
+          :root {
+            --font-open-sans: ${openSans.style.fontFamily};
+            --font-fira-code: ${firaCode.style.fontFamily};
+          }
+        `}
+      </style>
       <Provider
         draft={draft}
         theme={theme}
         config={config}
         cookies={cookies}
         docsGroups={docsGroups}
-        fonts={{ body: openSans, heading: openSans, monospace: firaCode }}
       >
         <RootSEO
           title={title}

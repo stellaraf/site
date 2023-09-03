@@ -1,5 +1,5 @@
 import type { Config, DocsGroups } from "~/queries";
-import type { CustomTheme, ThemeConfig, Fonts } from "~/theme";
+import type { CustomTheme, ThemeConfig } from "~/theme";
 
 /**
  * Root Provider Props
@@ -27,7 +27,6 @@ export type UseTheme = () => CustomTheme;
 
 export interface UIProviderProps {
   theme: ThemeConfig;
-  fonts: Fonts;
   children: React.ReactNode;
   cookies?: string;
 }

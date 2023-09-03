@@ -11,13 +11,13 @@ import type { ProviderProps } from "./types";
 const queryClient = new QueryClient();
 
 export const Provider = (props: ProviderProps) => {
-  const { children, config, theme, docsGroups, fonts, draft } = props;
+  const { children, config, theme, docsGroups, draft } = props;
 
   return (
     <ConfigProvider config={config} docsGroups={docsGroups}>
       <JotaiProvider>
         <TitleCaseProvider overrides={config.titleOverrides}>
-          <UIProvider theme={theme} fonts={fonts}>
+          <UIProvider theme={theme}>
             <QueryClientProvider client={queryClient}>
               <DraftProvider initial={draft}>{children}</DraftProvider>
             </QueryClientProvider>
