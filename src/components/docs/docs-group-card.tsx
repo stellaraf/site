@@ -43,6 +43,7 @@ export const DocsGroupCard = (props: DocsGroup) => {
             content: "''",
             left: 0,
             top: 0,
+            zIndex: 5,
           }}
           _dark={{ _before: { bg: "linear-gradient(transparent, 200px, black)" } }}
         >
