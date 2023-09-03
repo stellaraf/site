@@ -28,26 +28,32 @@ const handler: NextApiHandler = async (request, response) => {
     console.error(error);
     return response.status(400).json({ error });
   }
-
+  console.group(`${name} form`);
   try {
     const handler = FORM_MAP.get(name);
     if (typeof handler === "undefined") {
       const error = `No handler defined for form '${name}'`;
       console.error(error);
+      console.groupEnd();
       return response.status(500).json({ error });
     }
     const result = await handler(request);
+    const body = await result.text();
+
     if (result.ok) {
-      const body = await result.text();
-      console.log({ status: result.status, body });
+      console.log(result.status, result.statusText);
+      console.log(body);
+      console.groupEnd();
       return response.status(201).send(null);
     } else {
-      const error = await result.json();
+      const error = JSON.stringify(body);
       console.error(error);
-      return response.status(500).json(error);
+      console.groupEnd();
+      return response.status(500).json({ error });
     }
   } catch (error) {
     console.error(error);
+    console.groupEnd();
     return response.status(500).json({ error: String(error) });
   }
 };

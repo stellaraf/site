@@ -28,6 +28,7 @@ export type SFDCLead = {
   debug?: 1;
   /** Email to receive debugging reports */
   debugEmail?: string;
+  retURL: string;
 };
 
 type SFDCCaseStatus =

@@ -10,7 +10,7 @@ import type { FieldValues } from "react-hook-form";
 export const TextArea = <V extends FieldValues>(props: FormFieldProps<TextareaProps, V>) => {
   const { name, field, defaultValue, rules = {}, isRequired = false, ...rest } = props;
 
-  const { register } = useFormContext();
+  const { register } = useFormContext<V>();
   const {
     fieldState: { error },
   } = useController({ name });

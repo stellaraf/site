@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { useMeasure } from "react-use";
+import useMeasure from "react-use/lib/useMeasure";
 
 import type { UseMeasureRef } from "react-use/esm/useMeasure";
 

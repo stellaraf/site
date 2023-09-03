@@ -24,7 +24,6 @@ if (typeof process.env.SFDC_ORG_ID === "undefined") {
   throw new Error("SFDC_ORG_ID missing from environment variables");
 }
 
-// eslint-disable-next-line import/no-unused-modules
 export async function handleSupportForm(request: NextApiRequest): Promise<Response> {
   if (!isValidJsonRequest(request)) {
     throw new Error("Invalid request payload");
@@ -84,7 +83,7 @@ export async function handleSupportForm(request: NextApiRequest): Promise<Respon
   };
 
   // Add debug fields if in development environment.
-  if (process.env.NODE_ENV === "development" || process.env.VERCEL_ENV === "preview") {
+  if (process.env.NODE_ENV !== "production") {
     formData.debug = 1;
     formData.debugEmail = "matt@stellar.tech";
   }
@@ -93,6 +92,10 @@ export async function handleSupportForm(request: NextApiRequest): Promise<Respon
     url: "https://webto.salesforce.com/servlet/servlet.WebToCase",
     query: formData,
   });
+  console.group("submitting form");
+  console.dir(formData);
+  console.groupEnd();
+
   return await fetch(url, {
     method: "POST",
   });
