@@ -1,5 +1,5 @@
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { RecoilRoot } from "recoil";
+import { Provider as JotaiProvider } from "jotai";
 import { TitleCaseProvider } from "use-title-case";
 
 import { ConfigProvider } from "./config";
@@ -15,7 +15,7 @@ export const Provider = (props: ProviderProps) => {
 
   return (
     <ConfigProvider config={config} docsGroups={docsGroups}>
-      <RecoilRoot>
+      <JotaiProvider>
         <TitleCaseProvider overrides={config.titleOverrides}>
           <UIProvider theme={theme} fonts={fonts}>
             <QueryClientProvider client={queryClient}>
@@ -23,7 +23,7 @@ export const Provider = (props: ProviderProps) => {
             </QueryClientProvider>
           </UIProvider>
         </TitleCaseProvider>
-      </RecoilRoot>
+      </JotaiProvider>
     </ConfigProvider>
   );
 };

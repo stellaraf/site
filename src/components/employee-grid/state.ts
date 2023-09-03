@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 
-import { atom, useRecoilValue, useSetRecoilState } from "recoil";
+import { atom, useSetAtom, useAtomValue } from "jotai";
 
 import { objectHasProperty } from "~/lib";
 
@@ -10,10 +10,10 @@ import type { Employees } from "~/queries";
 
 type AvatarReturn = [number, (n: number) => void];
 
-const currentAvatarAtom = atom({ key: "currentAvatar", default: 0 });
+const currentAvatarAtom = atom(0);
 
-export const useCurrent = (): AvatarReturn[0] => useRecoilValue(currentAvatarAtom);
-export const useSetCurrent = (): AvatarReturn[1] => useSetRecoilState(currentAvatarAtom);
+export const useCurrent = (): AvatarReturn[0] => useAtomValue(currentAvatarAtom);
+export const useSetCurrent = (): AvatarReturn[1] => useSetAtom(currentAvatarAtom);
 
 interface UseEmployeeQueryProps {
   employees: Employees;

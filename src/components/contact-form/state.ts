@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
+import { atom, useAtomValue, useAtom } from "jotai";
 
 import { useContactFormCtx } from "./context";
 
@@ -36,25 +36,16 @@ interface ContactFormMethods {
 }
 
 const formAtom = atom<ContactFormValues>({
-  key: "formState",
-  default: {
-    selected: null,
-    showSuccess: false,
-  },
+  selected: null,
+  showSuccess: false,
 });
 
-const formSelectedSelector = selector<ContactForm | null>({
-  key: "formState.selected",
-  get: ({ get }) => {
-    const state = get(formAtom);
-    return state.selected;
-  },
-});
+const selectedFormAtom = atom(get => get(formAtom).selected);
 
-export const useSelectedForm = () => useRecoilValue(formSelectedSelector);
+export const useSelectedForm = () => useAtomValue(selectedFormAtom);
 
 export function useContactForm(): ContactFormValues & ContactFormMethods {
-  const [state, setState] = useRecoilState(formAtom);
+  const [state, setState] = useAtom(formAtom);
 
   const cards = useContactFormCtx();
 

@@ -1,12 +1,12 @@
 import { useCallback } from "react";
 
-import { atom, useRecoilValue, useSetRecoilState } from "recoil";
+import { atom, useSetAtom, useAtomValue } from "jotai";
 
 import { useScrollPosition } from "./use-scroll-position";
 
-const navLogoAtom = atom({ key: "navLogo", default: false });
+const navLogoAtom = atom(false);
 
-export const useNavLogoState = (): boolean => useRecoilValue(navLogoAtom);
+export const useNavLogoState = (): boolean => useAtomValue(navLogoAtom);
 
 /**
  * Show or hide the navbar logo based on scroll position.
@@ -14,7 +14,7 @@ export const useNavLogoState = (): boolean => useRecoilValue(navLogoAtom);
  * @param logoRef Ref to the logo DOM element.
  */
 export function useNavLogo<E extends SVGElement>(logoRef: React.MutableRefObject<E>): void {
-  const setShow = useSetRecoilState(navLogoAtom);
+  const setShow = useSetAtom(navLogoAtom);
 
   const setVisibility = useCallback(
     (top: number): void => {
