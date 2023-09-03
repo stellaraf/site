@@ -2,7 +2,7 @@ import { Box, Flex, isStyleProp, useColorModeValue } from "@chakra-ui/react";
 
 import { useOpposingColor } from "~/hooks";
 
-import type { IconProps } from "./types";
+import type { Color, IconProps } from "./types";
 import type { ChakraProps } from "@chakra-ui/react";
 
 export const Icon = (props: IconProps) => {
@@ -16,7 +16,7 @@ export const Icon = (props: IconProps) => {
     return final;
   }, {} as ChakraProps);
 
-  const bg = useColorModeValue(
+  const bg = useColorModeValue<Color, Color>(
     bgColor === "black" ? "black" : bgColor === "white" ? "whiteAlpha.500" : `${bgColor}.500`,
     bgColor === "black" ? "white" : bgColor === "white" ? "white" : `${bgColor}.300`,
   );

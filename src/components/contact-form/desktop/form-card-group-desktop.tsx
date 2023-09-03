@@ -8,13 +8,13 @@ import { useTitleCase } from "use-title-case";
 
 import { Button, Icon, type FormSubmitRef } from "~/components";
 
+import { DesktopForm } from "./desktop-form";
 import { useContactFormCtx } from "../context";
 import { FormCard, FormCardBody } from "../form-card";
 import { FormCardContent } from "../form-card-content";
 import { isValidFormQuery } from "../guards";
 import { useContactForm } from "../state";
 import { separateFormFields } from "../util";
-import { DesktopForm } from "./desktop-form";
 
 import type { MotionItems } from "../types";
 

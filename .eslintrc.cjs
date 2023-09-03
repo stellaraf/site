@@ -7,7 +7,6 @@ const config = {
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
-    "prettier/@typescript-eslint",
   ],
   parser: "@typescript-eslint/parser",
   env: {
@@ -16,6 +15,8 @@ const config = {
     node: true,
   },
   parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
     project: "./tsconfig.json",
   },
   plugins: ["react", "@typescript-eslint", "prettier", "import"],
@@ -30,18 +31,15 @@ const config = {
       typescript: {},
     },
   },
-  ignorePatterns: [
-    "node_modules",
-    "next.config.mjs",
-    "generate-favicons.ts",
-    "middleware.ts",
-    "codegen.ts",
-  ],
+  ignorePatterns: ["node_modules", "next.config.mjs", "middleware.ts", "codegen.ts", "schema.ts"],
   rules: {
     "import/prefer-default-export": "off",
     "import/no-unused-modules": [
       1,
-      { unusedExports: true, ignoreExports: ["pages/**/*", "src/queries/**/*"] },
+      {
+        unusedExports: true,
+        ignoreExports: ["pages/**/*", "src/queries/**/*", "src/types/schema.ts"],
+      },
     ],
     "import/order": [
       "error",

@@ -14,12 +14,12 @@ import { useTitleCase } from "use-title-case";
 
 import { Button, Icon, type FormSubmitRef } from "~/components";
 
+import { MobileForm } from "./mobile-form";
 import { useContactFormCtx } from "../context";
 import { FormCard, FormCardBody } from "../form-card";
 import { FormCardContent } from "../form-card-content";
 import { useContactForm } from "../state";
 import { useFormQuery } from "../use-form-query";
-import { MobileForm } from "./mobile-form";
 
 const Container = motion(Stack);
 const AnimatedCenter = motion(Center);
