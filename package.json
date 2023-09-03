@@ -1,6 +1,6 @@
 {
   "name": "@stellaraf/site",
-  "version": "1.6.8",
+  "version": "1.6.9",
   "private": true,
   "type": "module",
   "sideEffects": false,
