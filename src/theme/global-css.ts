@@ -32,16 +32,4 @@ export const globalStyles = {
     fontFamily: "body",
     "*::selection": { backgroundColor: "text-selection-bg", color: "black" },
   },
-  // See https://github.com/rcbyr/keen-slider/blob/master/src/keen-slider.scss
-  ".__slider_container": {
-    "&[data-keen-slider-v]": {
-      flexWrap: "wrap",
-    },
-    "&[data-keen-slider-v] &__slider_slide": {
-      width: "100%",
-    },
-    "&[data-keen-slider-moves] *": {
-      pointerEvents: "none",
-    },
-  },
 };

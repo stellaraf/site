@@ -5,7 +5,7 @@ import { AnimatedDiv } from "~/components";
 import type { BoxProps } from "@chakra-ui/react";
 
 export const Root = (props: BoxProps) => {
-  return <Box id="__content" h="100%" minH="50vh" {...props} />;
+  return <Box id="__root" h="100%" minH="50vh" {...props} />;
 };
 
 export const Wrapper = (props: Animated<BoxProps>) => (

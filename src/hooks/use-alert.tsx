@@ -7,12 +7,12 @@ import {
   CloseButton,
   AlertDescription,
   useBreakpointValue,
+  type ToastProps,
+  type UseToastOptions,
 } from "@chakra-ui/react";
 
 import { RichText } from "~/components";
 import { useConfig } from "~/context";
-
-import type { ToastProps, UseToastOptions } from "@chakra-ui/react";
 
 interface UseAlert {
   message: React.ReactNode;
@@ -54,7 +54,6 @@ export function useAlert(options: UseAlertOptions = {}): UseAlertReturn {
               my={2}
               mb={4}
               pr={8}
-              right={{ base: 0, lg: 24 }}
               id={`${id}`}
               width="auto"
               fontSize="sm"
@@ -64,6 +63,7 @@ export function useAlert(options: UseAlertOptions = {}): UseAlertReturn {
               textAlign="left"
               borderRadius="md"
               alignItems="start"
+              right={{ base: 0, lg: 24 }}
             >
               <AlertIcon />
               <Flex flex="1">
