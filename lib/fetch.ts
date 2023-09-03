@@ -1,4 +1,4 @@
-import { merge } from "merge-anything";
+import { mergeWith } from "@chakra-ui/merge-utils";
 
 /**
  * Fetch Wrapper that incorporates a timeout via a passed AbortController instance.
@@ -36,7 +36,7 @@ export async function getJson<R extends Dict = Dict>(
     method: "GET",
     mode: "cors",
   } as RequestInit;
-  const merged = merge(defaultConfig, config) as RequestInit;
+  const merged = mergeWith(defaultConfig, config) as RequestInit;
   const res = await fetch(url, merged);
   return await res.json();
 }

@@ -6,11 +6,8 @@
   "sideEffects": false,
   "dependencies": {
     "@18f/us-federal-holidays": "^4.0.0",
+    "@chakra-ui/merge-utils": "^2.0.6",
     "@chakra-ui/react": "^2.8.0",
-    "@chakra-ui/react-utils": "^2.0.11",
-    "@chakra-ui/theme": "^3.2.0",
-    "@chakra-ui/theme-tools": "^2.1.0",
-    "@chakra-ui/utils": "^2.0.14",
     "@emotion/is-prop-valid": "^1.2.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -32,7 +29,6 @@
     "isbot": "^3.6.2",
     "jotai": "^2.4.1",
     "libphonenumber-js": "^1.10.43",
-    "merge-anything": "^5.1.7",
     "next": "13.4.19",
     "next-seo": "^6.1.0",
     "palette-by-numbers": "^0.1.6",
@@ -82,7 +78,9 @@
     ]
   },
   "devDependencies": {
+    "@chakra-ui/react-utils": "^2.0.11",
     "@chakra-ui/styled-system": "^2.9.1",
+    "@chakra-ui/theme": "^3.2.0",
     "@evilmartians/lefthook": "^1.1.1",
     "@graphcms/rich-text-types": "^0.5.0",
     "@graphql-codegen/add": "^5.0.0",

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
+import { mergeWith } from "@chakra-ui/merge-utils";
 import { useStyleConfig, useToken, useColorModeValue } from "@chakra-ui/react";
-import { mergeWith } from "@chakra-ui/utils";
 import * as ReactSelect from "react-select";
 
 import { useMobile, useOpposingColor, useColorTokenValue } from "~/hooks";

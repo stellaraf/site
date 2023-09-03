@@ -1,4 +1,4 @@
-import { merge } from "merge-anything";
+import { mergeWith } from "@chakra-ui/merge-utils";
 
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
 import type { DocumentNode } from "graphql";
@@ -17,7 +17,7 @@ export async function queryFn<TData, TVars>(
   }
   const { query, variables = {}, init = {} } = options;
   const body = JSON.stringify({ query, variables });
-  const requestInit = merge<RequestInit, RequestInit[]>(
+  const requestInit = mergeWith(
     {},
     { method: "POST", body, headers: { "content-type": "application/json" } },
     init,
