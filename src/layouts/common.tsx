@@ -1,12 +1,15 @@
-import { chakra, Box } from "@chakra-ui/react";
+import { chakra } from "@chakra-ui/react";
 
 import { AnimatedDiv } from "~/components";
 
 import type { BoxProps } from "@chakra-ui/react";
 
-export const Root = (props: BoxProps) => {
-  return <Box id="__root" h="100%" minH="50vh" {...props} />;
-};
+export const Base = chakra("div", {
+  baseStyle: {
+    height: "100%",
+    minHeight: "50vh",
+  },
+});
 
 export const Wrapper = (props: Animated<BoxProps>) => (
   <AnimatedDiv

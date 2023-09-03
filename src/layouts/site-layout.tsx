@@ -7,7 +7,7 @@ import { Footer, DHeader, MHeader, RickRoll, Controls, CallToAction, Preview } f
 import { useDraft } from "~/context";
 import { useMobile } from "~/hooks";
 
-import { Wrapper, Root, Main } from "./common";
+import { Wrapper, Base, Main } from "./common";
 
 import type { BoxProps } from "@chakra-ui/react";
 import type { FooterGroups, Actions } from "~/queries";
@@ -48,7 +48,7 @@ export const SiteLayout = (props: SiteLayoutProps) => {
         <Wrapper>
           {isMobile ? <MHeader /> : <DHeader />}
           <Main>
-            <Root>{children}</Root>
+            <Base id="__base">{children}</Base>
           </Main>
           <CallToAction actions={actions} />
           <Footer groups={footerGroups} />
