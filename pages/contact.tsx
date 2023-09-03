@@ -111,7 +111,7 @@ export const getStaticProps: GetStaticProps<ContactPageProps> = async ctx => {
     ),
   );
   return {
-    props: { ...page, holidays, contactForms, locationTimes, common },
+    props: { ...page, holidays, contactForms, draft, locationTimes, common },
     revalidate: 43_200,
   };
 };

@@ -64,7 +64,6 @@ const Post: NextPage<BlogPostProps> = props => {
 
 export const getStaticProps: GetStaticProps<BlogPostProps, UrlQuery> = async ctx => {
   const slug = ctx.params?.slug ?? "notfound";
-
   if (slug === "notfound") {
     return { notFound: true };
   }
@@ -73,7 +72,7 @@ export const getStaticProps: GetStaticProps<BlogPostProps, UrlQuery> = async ctx
   try {
     const page = await blogPostQuery({ slug, stage });
     const common = await commonStaticPropsQuery({ stage });
-    return { props: { ...page, common } };
+    return { props: { ...page, draft, common } };
   } catch (error) {
     console.error(error);
     return { notFound: true };

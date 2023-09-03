@@ -70,7 +70,7 @@ export const getStaticProps: GetStaticProps<BlogPageProps> = async ctx => {
     const blogPosts = await blogPostsQuery({ stage });
     const page = await pageQuery({ slug: "blog", stage });
     const common = await commonStaticPropsQuery({ stage });
-    return { props: { ...page, blogPosts, common } };
+    return { props: { ...page, draft, blogPosts, common } };
   } catch (error) {
     console.error(error);
     return { notFound: true };

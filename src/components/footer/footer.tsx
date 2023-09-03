@@ -13,8 +13,9 @@ import { SocialLinks } from "./social-links";
 import type { FooterProps } from "./types";
 import type { StackProps } from "@chakra-ui/react";
 
-const Subscribe = dynamic<StackProps>(() =>
-  import("~/components/subscribe").then(m => m.Subscribe),
+const Subscribe = dynamic<StackProps>(
+  () => import("~/components/subscribe").then(m => m.Subscribe),
+  { ssr: false },
 );
 
 const DBottom = () => {

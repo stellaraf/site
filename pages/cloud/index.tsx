@@ -71,7 +71,7 @@ export const getStaticProps: GetStaticProps<CloudPageProps> = async ctx => {
   const locations = await cloudLocationsQuery();
   const page = await pageQuery({ slug: "cloud", stage });
   const common = await commonStaticPropsQuery({ stage });
-  return { props: { ...page, geoData, locations, common } };
+  return { props: { ...page, geoData, draft, locations, common } };
 };
 
 export default Cloud;

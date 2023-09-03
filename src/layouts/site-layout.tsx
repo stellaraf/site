@@ -3,7 +3,8 @@ import dynamic from "next/dynamic";
 import { useBreakpointValue } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 
-import { Footer, DHeader, MHeader, RickRoll, Controls, CallToAction } from "~/components";
+import { Footer, DHeader, MHeader, RickRoll, Controls, CallToAction, Preview } from "~/components";
+import { useDraft } from "~/context";
 import { useMobile } from "~/hooks";
 
 import { Wrapper, Root, Main } from "./common";
@@ -21,7 +22,7 @@ interface SiteLayoutProps {
 
 export const SiteLayout = (props: SiteLayoutProps) => {
   const { children, footerGroups, actions } = props;
-
+  const [draft] = useDraft();
   const isMobile = useMobile();
 
   const bp = useBreakpointValue({
@@ -41,18 +42,21 @@ export const SiteLayout = (props: SiteLayoutProps) => {
   }
 
   return (
-    <AnimatePresence mode="wait">
-      <Wrapper>
-        {isMobile ? <MHeader /> : <DHeader />}
-        <Main>
-          <Root>{children}</Root>
-        </Main>
-        <CallToAction actions={actions} />
-        <Footer groups={footerGroups} />
-        {!isMobile && <Controls.Desktop />}
-        <Stars />
-        <RickRoll />
-      </Wrapper>
-    </AnimatePresence>
+    <>
+      {draft && <Preview />}
+      <AnimatePresence mode="wait">
+        <Wrapper>
+          {isMobile ? <MHeader /> : <DHeader />}
+          <Main>
+            <Root>{children}</Root>
+          </Main>
+          <CallToAction actions={actions} />
+          <Footer groups={footerGroups} />
+          {!isMobile && <Controls.Desktop />}
+          <Stars />
+          <RickRoll />
+        </Wrapper>
+      </AnimatePresence>
+    </>
   );
 };

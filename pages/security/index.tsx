@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
   const stage = draft ? Stage.Draft : Stage.Published;
   const page = await pageQuery({ slug: "security", stage });
   const common = await commonStaticPropsQuery({ stage });
-  return { props: { ...page, common } };
+  return { props: { ...page, draft, common } };
 };
 
 export default SecurityIndex;

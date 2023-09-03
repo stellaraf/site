@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
   const page = await pageQuery({ slug: `security/${slug}`, stage });
   const common = await commonStaticPropsQuery({ stage });
 
-  return { props: { ...page, common } };
+  return { props: { ...page, draft, common } };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {

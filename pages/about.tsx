@@ -66,7 +66,7 @@ export const getStaticProps: GetStaticProps<AboutPageProps> = async ctx => {
     }),
   );
 
-  return { props: { ...page, employees, officeLocations, holidays, common } };
+  return { props: { ...page, employees, officeLocations, draft, holidays, common } };
 };
 
 export default About;

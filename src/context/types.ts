@@ -7,6 +7,7 @@ import type { CustomTheme, ThemeConfig, Fonts } from "~/theme";
 export interface ProviderProps extends UIProviderProps {
   config: Config;
   docsGroups: DocsGroups;
+  draft: boolean;
 }
 
 export interface ConfigContextType extends Config {

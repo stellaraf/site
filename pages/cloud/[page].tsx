@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
   try {
     const page = await pageQuery({ slug: `cloud/${path}`, stage });
     const common = await commonStaticPropsQuery({ stage });
-    return { props: { ...page, common } };
+    return { props: { ...page, draft, common } };
   } catch (error) {
     console.error(error);
     return { notFound: true };

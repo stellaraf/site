@@ -1,14 +1,14 @@
 import { is } from "~/lib";
+import {
+  type BlogPostsQuery,
+  type BlogPostsByTagsQuery,
+  type BlogPostsQueryVariables,
+  type BlogPostsByTagsQueryVariables,
+  Stage,
+} from "~/types";
 
 import { queryFn } from "./base";
 import query from "./gql/blog-posts.gql";
-
-import type {
-  BlogPostsQuery,
-  BlogPostsByTagsQuery,
-  BlogPostsQueryVariables,
-  BlogPostsByTagsQueryVariables,
-} from "~/types";
 
 export type BlogPosts = NonNullable<BlogPostsQuery>["blogPosts"];
 
@@ -18,7 +18,17 @@ export interface BlogPostsByTag {
 }
 
 export default async function (variables: BlogPostsQueryVariables): Promise<BlogPosts> {
-  const result = await queryFn<BlogPostsQuery, BlogPostsQueryVariables>({ query, variables });
+  const { stage = Stage.Published } = variables;
+  let result = await queryFn<BlogPostsQuery, BlogPostsQueryVariables>({
+    query,
+    variables: { stage },
+  });
+  if (!is(result.blogPosts)) {
+    result = await queryFn<BlogPostsQuery, BlogPostsQueryVariables>({
+      query,
+      variables: { stage: Stage.Published },
+    });
+  }
   if (!is(result.blogPosts)) {
     throw new Error(`Failed to find blog posts`);
   }
@@ -28,20 +38,27 @@ export default async function (variables: BlogPostsQueryVariables): Promise<Blog
 export async function blogPostsByTagsQuery(
   variables: BlogPostsByTagsQueryVariables,
 ): Promise<BlogPostsByTag> {
-  const { blogPosts } = await queryFn<BlogPostsByTagsQuery, BlogPostsByTagsQueryVariables>({
+  const { tag, stage } = variables;
+  let result = await queryFn<BlogPostsByTagsQuery, BlogPostsByTagsQueryVariables>({
     query,
-    variables,
+    variables: { tag, stage },
   });
-  if (!is(blogPosts)) {
+  if (!is(result.blogPosts)) {
+    result = await queryFn<BlogPostsByTagsQuery, BlogPostsByTagsQueryVariables>({
+      query,
+      variables: { tag, stage: Stage.Published },
+    });
+  }
+  if (!is(result.blogPosts)) {
     throw new Error(`Failed to find blog posts`);
   }
   let match = variables.tag;
-  for (const post of blogPosts) {
+  for (const post of result.blogPosts) {
     for (const tag of post.blogPostTags) {
       if (tag.tag.toLowerCase() == variables.tag.toLowerCase()) {
         match = tag.tag;
       }
     }
   }
-  return { blogPosts, tag: match };
+  return { blogPosts: result.blogPosts, tag: match };
 }

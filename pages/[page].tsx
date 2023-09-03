@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
   const stage = draft ? Stage.Draft : Stage.Published;
   const page = await pageQuery({ slug, stage });
   const common = await commonStaticPropsQuery({ stage });
-  return { props: { ...page, common } };
+  return { props: { ...page, draft, common } };
 };
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {

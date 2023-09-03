@@ -37,13 +37,17 @@ interface WithError {
   error?: string;
 }
 
-export type PageProps = Page & WithError & WithCommonPageProps;
+interface WithDraft {
+  draft: boolean;
+}
 
-export type DocsPageProps = DocsPage & WithError & WithCommonPageProps;
+export type PageProps = Page & WithError & WithCommonPageProps & WithDraft;
 
-export type BlogPostProps = BlogPost & WithError & WithCommonPageProps;
+export type DocsPageProps = DocsPage & WithError & WithCommonPageProps & WithDraft;
 
-export type HomePageProps = HomePage & WithError & WithCommonPageProps;
+export type BlogPostProps = BlogPost & WithError & WithCommonPageProps & WithDraft;
+
+export type HomePageProps = HomePage & WithError & WithCommonPageProps & WithDraft;
 
 export interface SiteProps {
   actions: Actions;

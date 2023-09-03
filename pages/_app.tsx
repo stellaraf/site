@@ -82,13 +82,14 @@ const Site = (props: AppProps<SiteProps>) => {
   const {
     Component,
     pageProps,
-    router: { pathname },
+    router: { asPath },
   } = props;
-  const { common, title: pageTitle, subtitle, footerTitle, cookies } = pageProps;
+
+  const { common, title: pageTitle, subtitle, footerTitle, cookies, draft } = pageProps;
   const { config, theme, footerGroups, actions, docsGroups, twitterHandle, origin } = common;
   const { organizationName, title, description } = config;
 
-  const useFallback = pathname === "/" || typeof title !== "string";
+  const useFallback = asPath === "/" || typeof title !== "string";
 
   const imageUrl = useFallback
     ? new URL("/api/og/fallback", origin)
@@ -99,11 +100,12 @@ const Site = (props: AppProps<SiteProps>) => {
         }),
       );
 
-  const siteUrl = new URL(pathname, origin);
+  const siteUrl = new URL(asPath, origin);
 
   return (
     <>
       <Provider
+        draft={draft}
         theme={theme}
         config={config}
         cookies={cookies}
@@ -111,15 +113,15 @@ const Site = (props: AppProps<SiteProps>) => {
         fonts={{ body: openSans, heading: openSans, monospace: firaCode }}
       >
         <RootSEO
+          title={title}
+          siteUrl={siteUrl}
+          imageUrl={imageUrl}
+          subtitle={subtitle}
+          pageTitle={pageTitle}
           description={description}
           footerTitle={footerTitle}
-          imageUrl={imageUrl}
-          organizationName={organizationName}
-          pageTitle={pageTitle}
-          siteUrl={siteUrl}
-          subtitle={subtitle}
-          title={title}
           twitterHandle={twitterHandle}
+          organizationName={organizationName}
         />
 
         <Favicons

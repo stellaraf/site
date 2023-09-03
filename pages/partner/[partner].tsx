@@ -53,7 +53,7 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
   try {
     const page = await pageQuery({ slug: `partner/${partner}`, stage });
     const common = await commonStaticPropsQuery({ stage });
-    return { props: { ...page, preview, common } };
+    return { props: { ...page, draft, preview, common } };
   } catch (error) {
     console.error(error);
     return { notFound: true };

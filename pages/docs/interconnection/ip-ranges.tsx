@@ -28,9 +28,9 @@ const DocsArticlePage = (props: DocsPage) => {
 export const getStaticProps: GetStaticProps<DocsPage, UrlQuery> = async ctx => {
   const draft = ctx.draftMode ?? false;
   const stage = draft ? Stage.Draft : Stage.Published;
-  const page = await docsPageQuery({ slug: "ip-ranges" });
+  const page = await docsPageQuery({ slug: "ip-ranges", stage });
   const common = await commonStaticPropsQuery({ stage });
-  return { props: { ...page, common } };
+  return { props: { ...page, draft, common } };
 };
 
 export default DocsArticlePage;

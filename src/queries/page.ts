@@ -1,9 +1,8 @@
 import { is } from "~/lib";
+import { Stage, type PageQuery, type PageQueryVariables } from "~/types";
 
 import { queryFn } from "./base";
 import query from "./gql/page.gql";
-
-import type { PageQuery, PageQueryVariables } from "~/types";
 
 export type Page = NonNullable<PageQuery["page"]>;
 export type PageContents = Page["contents"];
@@ -13,7 +12,17 @@ export type Callout = NonNullable<Page["callout"]>;
 export type VendorLogo = NonNullable<PageContent["vendorLogo"]>;
 
 export default async function (variables: PageQueryVariables): Promise<Page> {
-  const result = await queryFn<PageQuery, PageQueryVariables>({ query, variables });
+  const { slug, stage } = variables;
+  let result = await queryFn<PageQuery, PageQueryVariables>({
+    query,
+    variables: { slug, stage },
+  });
+  if (!is(result.page)) {
+    result = await queryFn<PageQuery, PageQueryVariables>({
+      query,
+      variables: { slug, stage: Stage.Published },
+    });
+  }
   if (!is(result.page)) {
     throw new Error(`Failed to find page with query variables '${JSON.stringify(variables)}'`);
   }

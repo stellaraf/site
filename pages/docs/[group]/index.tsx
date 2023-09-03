@@ -89,7 +89,7 @@ export const getStaticProps: GetStaticProps<DocsGroup, UrlQuery> = async ctx => 
   try {
     const docsGroup = await docsGroupQuery({ slug: group, stage });
     const common = await commonStaticPropsQuery({ stage });
-    return { props: { ...docsGroup, common } };
+    return { props: { ...docsGroup, draft, common } };
   } catch (error) {
     console.error(error);
     return { notFound: true };

@@ -77,7 +77,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async ctx => {
   const stage = draft ? Stage.Draft : Stage.Published;
   const homePage = await homePageQuery({ stage });
   const common = await commonStaticPropsQuery({ stage });
-  return { props: { ...homePage, common } };
+  return { props: { ...homePage, draft, common } };
 };
 
 export default Home;
