@@ -3,13 +3,13 @@ import { useRouter } from "next/router";
 import { chakra, Box, useColorMode } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
 
-import { Link } from "~/components";
+import { Link, Menu } from "~/components";
 import { useNavLogoState } from "~/hooks";
 
-import { LinkGroup, LoginButton } from "./desktop-links";
+import { LoginButton } from "./desktop-links";
 import { HeaderLogo } from "./desktop-logo";
 
-import type { BoxProps } from "@chakra-ui/react";
+import type { HeaderProps } from "./types";
 
 const Header = chakra("header", {
   baseStyle: {
@@ -46,7 +46,8 @@ const NavGroup = chakra("div", {
   },
 });
 
-export const DHeader = (props: BoxProps) => {
+export const DHeader = (props: HeaderProps) => {
+  const { menus, ...rest } = props;
   const { pathname } = useRouter();
   const showLogo = useNavLogoState();
 
@@ -58,7 +59,7 @@ export const DHeader = (props: BoxProps) => {
       color="dark.500"
       _dark={{ bg: "transparent", color: "light.500", backdropFilter: "blur(10px)" }}
     >
-      <Navbar {...props}>
+      <Navbar {...rest}>
         <Box overflow="hidden" pos="absolute">
           {pathname === "/" ? (
             <HeaderLogo show={showLogo} />
@@ -69,7 +70,9 @@ export const DHeader = (props: BoxProps) => {
           )}
         </Box>
         <NavGroup>
-          <LinkGroup />
+          {menus.map(menu => (
+            <Menu key={menu.title} {...menu} />
+          ))}
           <LoginButton />
         </NavGroup>
       </Navbar>

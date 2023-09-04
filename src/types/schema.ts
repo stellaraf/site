@@ -6012,6 +6012,7 @@ export type Configuration = Node & {
   employees: Array<Employee>;
   errorMessage: Alert;
   footerGroups: Array<FooterGroup>;
+  headerGroups: Array<HeaderGroup>;
   /** List of Configuration versions */
   history: Array<Version>;
   hqAddress: Scalars['String']['output'];
@@ -6120,6 +6121,19 @@ export type ConfigurationFooterGroupsArgs = {
 };
 
 
+export type ConfigurationHeaderGroupsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<HeaderGroupOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HeaderGroupWhereInput>;
+};
+
+
 export type ConfigurationHistoryArgs = {
   limit?: Scalars['Int']['input'];
   skip?: Scalars['Int']['input'];
@@ -6214,6 +6228,7 @@ export type ConfigurationCreateInput = {
   employees?: InputMaybe<EmployeeCreateManyInlineInput>;
   errorMessage: AlertCreateOneInlineInput;
   footerGroups?: InputMaybe<FooterGroupCreateManyInlineInput>;
+  headerGroups?: InputMaybe<HeaderGroupCreateManyInlineInput>;
   hqAddress: Scalars['String']['input'];
   hqCoordinates: LocationInput;
   hqMapInfo: Scalars['RichTextAST']['input'];
@@ -6315,6 +6330,9 @@ export type ConfigurationManyWhereInput = {
   footerGroups_every?: InputMaybe<FooterGroupWhereInput>;
   footerGroups_none?: InputMaybe<FooterGroupWhereInput>;
   footerGroups_some?: InputMaybe<FooterGroupWhereInput>;
+  headerGroups_every?: InputMaybe<HeaderGroupWhereInput>;
+  headerGroups_none?: InputMaybe<HeaderGroupWhereInput>;
+  headerGroups_some?: InputMaybe<HeaderGroupWhereInput>;
   hqAddress?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   hqAddress_contains?: InputMaybe<Scalars['String']['input']>;
@@ -6538,6 +6556,7 @@ export type ConfigurationUpdateInput = {
   employees?: InputMaybe<EmployeeUpdateManyInlineInput>;
   errorMessage?: InputMaybe<AlertUpdateOneInlineInput>;
   footerGroups?: InputMaybe<FooterGroupUpdateManyInlineInput>;
+  headerGroups?: InputMaybe<HeaderGroupUpdateManyInlineInput>;
   hqAddress?: InputMaybe<Scalars['String']['input']>;
   hqCoordinates?: InputMaybe<LocationInput>;
   hqMapInfo?: InputMaybe<Scalars['RichTextAST']['input']>;
@@ -6693,6 +6712,9 @@ export type ConfigurationWhereInput = {
   footerGroups_every?: InputMaybe<FooterGroupWhereInput>;
   footerGroups_none?: InputMaybe<FooterGroupWhereInput>;
   footerGroups_some?: InputMaybe<FooterGroupWhereInput>;
+  headerGroups_every?: InputMaybe<HeaderGroupWhereInput>;
+  headerGroups_none?: InputMaybe<HeaderGroupWhereInput>;
+  headerGroups_some?: InputMaybe<HeaderGroupWhereInput>;
   hqAddress?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   hqAddress_contains?: InputMaybe<Scalars['String']['input']>;
@@ -10034,14 +10056,16 @@ export enum ExternalLinkOrderByInput {
   TitleDesc = 'title_DESC'
 }
 
-export type ExternalLinkParent = FooterGroup;
+export type ExternalLinkParent = FooterGroup | HeaderGroup;
 
 export type ExternalLinkParentConnectInput = {
   FooterGroup?: InputMaybe<FooterGroupConnectInput>;
+  HeaderGroup?: InputMaybe<HeaderGroupConnectInput>;
 };
 
 export type ExternalLinkParentCreateInput = {
   FooterGroup?: InputMaybe<FooterGroupCreateInput>;
+  HeaderGroup?: InputMaybe<HeaderGroupCreateInput>;
 };
 
 export type ExternalLinkParentCreateManyInlineInput = {
@@ -10060,6 +10084,7 @@ export type ExternalLinkParentCreateOneInlineInput = {
 
 export type ExternalLinkParentUpdateInput = {
   FooterGroup?: InputMaybe<FooterGroupUpdateInput>;
+  HeaderGroup?: InputMaybe<HeaderGroupUpdateInput>;
 };
 
 export type ExternalLinkParentUpdateManyInlineInput = {
@@ -10081,6 +10106,7 @@ export type ExternalLinkParentUpdateManyInlineInput = {
 
 export type ExternalLinkParentUpdateManyWithNestedWhereInput = {
   FooterGroup?: InputMaybe<FooterGroupUpdateManyWithNestedWhereInput>;
+  HeaderGroup?: InputMaybe<HeaderGroupUpdateManyWithNestedWhereInput>;
 };
 
 export type ExternalLinkParentUpdateOneInlineInput = {
@@ -10100,18 +10126,22 @@ export type ExternalLinkParentUpdateOneInlineInput = {
 
 export type ExternalLinkParentUpdateWithNestedWhereUniqueInput = {
   FooterGroup?: InputMaybe<FooterGroupUpdateWithNestedWhereUniqueInput>;
+  HeaderGroup?: InputMaybe<HeaderGroupUpdateWithNestedWhereUniqueInput>;
 };
 
 export type ExternalLinkParentUpsertWithNestedWhereUniqueInput = {
   FooterGroup?: InputMaybe<FooterGroupUpsertWithNestedWhereUniqueInput>;
+  HeaderGroup?: InputMaybe<HeaderGroupUpsertWithNestedWhereUniqueInput>;
 };
 
 export type ExternalLinkParentWhereInput = {
   FooterGroup?: InputMaybe<FooterGroupWhereInput>;
+  HeaderGroup?: InputMaybe<HeaderGroupWhereInput>;
 };
 
 export type ExternalLinkParentWhereUniqueInput = {
   FooterGroup?: InputMaybe<FooterGroupWhereUniqueInput>;
+  HeaderGroup?: InputMaybe<HeaderGroupWhereUniqueInput>;
 };
 
 export type ExternalLinkUpdateInput = {
@@ -12217,6 +12247,589 @@ export type FormfieldsUnionWhereUniqueInput = {
   TextInputField?: InputMaybe<TextInputFieldWhereUniqueInput>;
 };
 
+export type HeaderGroup = Node & {
+  __typename?: 'HeaderGroup';
+  /** Number of grid columns for the header menu */
+  columns: Scalars['Int']['output'];
+  /** The time the document was created */
+  createdAt: Scalars['DateTime']['output'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<HeaderGroup>;
+  externalLinks: Array<ExternalLink>;
+  /** List of HeaderGroup versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  /** If link is specified, the header will be a link to a specific page instead of a menu */
+  link?: Maybe<Scalars['String']['output']>;
+  pages: Array<Page>;
+  /** Only show links to direct pages instead of generating links to the page's content */
+  pagesOnly: Scalars['Boolean']['output'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  sortAlphabetically: Scalars['Boolean']['output'];
+  /** System stage field */
+  stage: Stage;
+  title: Scalars['String']['output'];
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime']['output'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type HeaderGroupCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type HeaderGroupDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean']['input'];
+  inheritLocale?: Scalars['Boolean']['input'];
+  stages?: Array<Stage>;
+};
+
+
+export type HeaderGroupExternalLinksArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<ExternalLinkOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ExternalLinkWhereInput>;
+};
+
+
+export type HeaderGroupHistoryArgs = {
+  limit?: Scalars['Int']['input'];
+  skip?: Scalars['Int']['input'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type HeaderGroupPagesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<PageOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<PageWhereInput>;
+};
+
+
+export type HeaderGroupPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type HeaderGroupScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type HeaderGroupUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type HeaderGroupConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: HeaderGroupWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type HeaderGroupConnection = {
+  __typename?: 'HeaderGroupConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<HeaderGroupEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type HeaderGroupCreateInput = {
+  clm50ga1l2zr001uk13iz8xa6?: InputMaybe<ConfigurationCreateManyInlineInput>;
+  columns: Scalars['Int']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  externalLinks?: InputMaybe<ExternalLinkCreateManyInlineInput>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  pages?: InputMaybe<PageCreateManyInlineInput>;
+  pagesOnly: Scalars['Boolean']['input'];
+  sortAlphabetically: Scalars['Boolean']['input'];
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HeaderGroupCreateManyInlineInput = {
+  /** Connect multiple existing HeaderGroup documents */
+  connect?: InputMaybe<Array<HeaderGroupWhereUniqueInput>>;
+  /** Create and connect multiple existing HeaderGroup documents */
+  create?: InputMaybe<Array<HeaderGroupCreateInput>>;
+};
+
+export type HeaderGroupCreateOneInlineInput = {
+  /** Connect one existing HeaderGroup document */
+  connect?: InputMaybe<HeaderGroupWhereUniqueInput>;
+  /** Create and connect one HeaderGroup document */
+  create?: InputMaybe<HeaderGroupCreateInput>;
+};
+
+/** An edge in a connection. */
+export type HeaderGroupEdge = {
+  __typename?: 'HeaderGroupEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: HeaderGroup;
+};
+
+/** Identifies documents */
+export type HeaderGroupManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<HeaderGroupWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<HeaderGroupWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<HeaderGroupWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  columns?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  columns_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  columns_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  columns_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  columns_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  columns_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  columns_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  columns_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<HeaderGroupWhereStageInput>;
+  documentInStages_none?: InputMaybe<HeaderGroupWhereStageInput>;
+  documentInStages_some?: InputMaybe<HeaderGroupWhereStageInput>;
+  externalLinks_every?: InputMaybe<ExternalLinkWhereInput>;
+  externalLinks_none?: InputMaybe<ExternalLinkWhereInput>;
+  externalLinks_some?: InputMaybe<ExternalLinkWhereInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  link_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  link_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  link_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  link_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  link_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  link_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  link_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  link_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  link_starts_with?: InputMaybe<Scalars['String']['input']>;
+  pagesOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  pagesOnly_not?: InputMaybe<Scalars['Boolean']['input']>;
+  pages_every?: InputMaybe<PageWhereInput>;
+  pages_none?: InputMaybe<PageWhereInput>;
+  pages_some?: InputMaybe<PageWhereInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  sortAlphabetically?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  sortAlphabetically_not?: InputMaybe<Scalars['Boolean']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum HeaderGroupOrderByInput {
+  ColumnsAsc = 'columns_ASC',
+  ColumnsDesc = 'columns_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  LinkAsc = 'link_ASC',
+  LinkDesc = 'link_DESC',
+  PagesOnlyAsc = 'pagesOnly_ASC',
+  PagesOnlyDesc = 'pagesOnly_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  SortAlphabeticallyAsc = 'sortAlphabetically_ASC',
+  SortAlphabeticallyDesc = 'sortAlphabetically_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type HeaderGroupUpdateInput = {
+  clm50ga1l2zr001uk13iz8xa6?: InputMaybe<ConfigurationUpdateManyInlineInput>;
+  columns?: InputMaybe<Scalars['Int']['input']>;
+  externalLinks?: InputMaybe<ExternalLinkUpdateManyInlineInput>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  pages?: InputMaybe<PageUpdateManyInlineInput>;
+  pagesOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  sortAlphabetically?: InputMaybe<Scalars['Boolean']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HeaderGroupUpdateManyInlineInput = {
+  /** Connect multiple existing HeaderGroup documents */
+  connect?: InputMaybe<Array<HeaderGroupConnectInput>>;
+  /** Create and connect multiple HeaderGroup documents */
+  create?: InputMaybe<Array<HeaderGroupCreateInput>>;
+  /** Delete multiple HeaderGroup documents */
+  delete?: InputMaybe<Array<HeaderGroupWhereUniqueInput>>;
+  /** Disconnect multiple HeaderGroup documents */
+  disconnect?: InputMaybe<Array<HeaderGroupWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing HeaderGroup documents */
+  set?: InputMaybe<Array<HeaderGroupWhereUniqueInput>>;
+  /** Update multiple HeaderGroup documents */
+  update?: InputMaybe<Array<HeaderGroupUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple HeaderGroup documents */
+  upsert?: InputMaybe<Array<HeaderGroupUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type HeaderGroupUpdateManyInput = {
+  columns?: InputMaybe<Scalars['Int']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  pagesOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  sortAlphabetically?: InputMaybe<Scalars['Boolean']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HeaderGroupUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: HeaderGroupUpdateManyInput;
+  /** Document search */
+  where: HeaderGroupWhereInput;
+};
+
+export type HeaderGroupUpdateOneInlineInput = {
+  /** Connect existing HeaderGroup document */
+  connect?: InputMaybe<HeaderGroupWhereUniqueInput>;
+  /** Create and connect one HeaderGroup document */
+  create?: InputMaybe<HeaderGroupCreateInput>;
+  /** Delete currently connected HeaderGroup document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected HeaderGroup document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single HeaderGroup document */
+  update?: InputMaybe<HeaderGroupUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single HeaderGroup document */
+  upsert?: InputMaybe<HeaderGroupUpsertWithNestedWhereUniqueInput>;
+};
+
+export type HeaderGroupUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: HeaderGroupUpdateInput;
+  /** Unique document search */
+  where: HeaderGroupWhereUniqueInput;
+};
+
+export type HeaderGroupUpsertInput = {
+  /** Create document if it didn't exist */
+  create: HeaderGroupCreateInput;
+  /** Update document if it exists */
+  update: HeaderGroupUpdateInput;
+};
+
+export type HeaderGroupUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: HeaderGroupUpsertInput;
+  /** Unique document search */
+  where: HeaderGroupWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type HeaderGroupWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Identifies documents */
+export type HeaderGroupWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<HeaderGroupWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<HeaderGroupWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<HeaderGroupWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  columns?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  columns_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  columns_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  columns_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  columns_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  columns_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  columns_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  columns_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<HeaderGroupWhereStageInput>;
+  documentInStages_none?: InputMaybe<HeaderGroupWhereStageInput>;
+  documentInStages_some?: InputMaybe<HeaderGroupWhereStageInput>;
+  externalLinks_every?: InputMaybe<ExternalLinkWhereInput>;
+  externalLinks_none?: InputMaybe<ExternalLinkWhereInput>;
+  externalLinks_some?: InputMaybe<ExternalLinkWhereInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  link_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  link_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  link_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  link_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  link_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  link_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  link_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  link_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  link_starts_with?: InputMaybe<Scalars['String']['input']>;
+  pagesOnly?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  pagesOnly_not?: InputMaybe<Scalars['Boolean']['input']>;
+  pages_every?: InputMaybe<PageWhereInput>;
+  pages_none?: InputMaybe<PageWhereInput>;
+  pages_some?: InputMaybe<PageWhereInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  sortAlphabetically?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  sortAlphabetically_not?: InputMaybe<Scalars['Boolean']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type HeaderGroupWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<HeaderGroupWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<HeaderGroupWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<HeaderGroupWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<HeaderGroupWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References HeaderGroup record uniquely */
+export type HeaderGroupWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 export type HomePage = Node & {
   __typename?: 'HomePage';
   blocks: Array<HomePageBlock>;
@@ -13159,6 +13772,8 @@ export type Mutation = {
   createFooterGroup?: Maybe<FooterGroup>;
   /** Create one form */
   createForm?: Maybe<Form>;
+  /** Create one headerGroup */
+  createHeaderGroup?: Maybe<HeaderGroup>;
   /** Create one homePage */
   createHomePage?: Maybe<HomePage>;
   /** Create one officeLocation */
@@ -13199,6 +13814,8 @@ export type Mutation = {
   deleteFooterGroup?: Maybe<FooterGroup>;
   /** Delete one form from _all_ existing stages. Returns deleted document. */
   deleteForm?: Maybe<Form>;
+  /** Delete one headerGroup from _all_ existing stages. Returns deleted document. */
+  deleteHeaderGroup?: Maybe<HeaderGroup>;
   /** Delete one homePage from _all_ existing stages. Returns deleted document. */
   deleteHomePage?: Maybe<HomePage>;
   /**
@@ -13293,6 +13910,13 @@ export type Mutation = {
   /** Delete many Form documents, return deleted documents */
   deleteManyFormsConnection: FormConnection;
   /**
+   * Delete many HeaderGroup documents
+   * @deprecated Please use the new paginated many mutation (deleteManyHeaderGroupsConnection)
+   */
+  deleteManyHeaderGroups: BatchPayload;
+  /** Delete many HeaderGroup documents, return deleted documents */
+  deleteManyHeaderGroupsConnection: HeaderGroupConnection;
+  /**
    * Delete many HomePage documents
    * @deprecated Please use the new paginated many mutation (deleteManyHomePagesConnection)
    */
@@ -13374,6 +13998,8 @@ export type Mutation = {
   publishFooterGroup?: Maybe<FooterGroup>;
   /** Publish one form */
   publishForm?: Maybe<Form>;
+  /** Publish one headerGroup */
+  publishHeaderGroup?: Maybe<HeaderGroup>;
   /** Publish one homePage */
   publishHomePage?: Maybe<HomePage>;
   /**
@@ -13468,6 +14094,13 @@ export type Mutation = {
   /** Publish many Form documents */
   publishManyFormsConnection: FormConnection;
   /**
+   * Publish many HeaderGroup documents
+   * @deprecated Please use the new paginated many mutation (publishManyHeaderGroupsConnection)
+   */
+  publishManyHeaderGroups: BatchPayload;
+  /** Publish many HeaderGroup documents */
+  publishManyHeaderGroupsConnection: HeaderGroupConnection;
+  /**
    * Publish many HomePage documents
    * @deprecated Please use the new paginated many mutation (publishManyHomePagesConnection)
    */
@@ -13545,6 +14178,8 @@ export type Mutation = {
   schedulePublishFooterGroup?: Maybe<FooterGroup>;
   /** Schedule to publish one form */
   schedulePublishForm?: Maybe<Form>;
+  /** Schedule to publish one headerGroup */
+  schedulePublishHeaderGroup?: Maybe<HeaderGroup>;
   /** Schedule to publish one homePage */
   schedulePublishHomePage?: Maybe<HomePage>;
   /** Schedule to publish one officeLocation */
@@ -13583,6 +14218,8 @@ export type Mutation = {
   scheduleUnpublishFooterGroup?: Maybe<FooterGroup>;
   /** Unpublish one form from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishForm?: Maybe<Form>;
+  /** Unpublish one headerGroup from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishHeaderGroup?: Maybe<HeaderGroup>;
   /** Unpublish one homePage from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishHomePage?: Maybe<HomePage>;
   /** Unpublish one officeLocation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -13621,6 +14258,8 @@ export type Mutation = {
   unpublishFooterGroup?: Maybe<FooterGroup>;
   /** Unpublish one form from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishForm?: Maybe<Form>;
+  /** Unpublish one headerGroup from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishHeaderGroup?: Maybe<HeaderGroup>;
   /** Unpublish one homePage from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishHomePage?: Maybe<HomePage>;
   /**
@@ -13715,6 +14354,13 @@ export type Mutation = {
   /** Find many Form documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyFormsConnection: FormConnection;
   /**
+   * Unpublish many HeaderGroup documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyHeaderGroupsConnection)
+   */
+  unpublishManyHeaderGroups: BatchPayload;
+  /** Find many HeaderGroup documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyHeaderGroupsConnection: HeaderGroupConnection;
+  /**
    * Unpublish many HomePage documents
    * @deprecated Please use the new paginated many mutation (unpublishManyHomePagesConnection)
    */
@@ -13792,6 +14438,8 @@ export type Mutation = {
   updateFooterGroup?: Maybe<FooterGroup>;
   /** Update one form */
   updateForm?: Maybe<Form>;
+  /** Update one headerGroup */
+  updateHeaderGroup?: Maybe<HeaderGroup>;
   /** Update one homePage */
   updateHomePage?: Maybe<HomePage>;
   /**
@@ -13886,6 +14534,13 @@ export type Mutation = {
   /** Update many Form documents */
   updateManyFormsConnection: FormConnection;
   /**
+   * Update many headerGroups
+   * @deprecated Please use the new paginated many mutation (updateManyHeaderGroupsConnection)
+   */
+  updateManyHeaderGroups: BatchPayload;
+  /** Update many HeaderGroup documents */
+  updateManyHeaderGroupsConnection: HeaderGroupConnection;
+  /**
    * Update many homePages
    * @deprecated Please use the new paginated many mutation (updateManyHomePagesConnection)
    */
@@ -13965,6 +14620,8 @@ export type Mutation = {
   upsertFooterGroup?: Maybe<FooterGroup>;
   /** Upsert one form */
   upsertForm?: Maybe<Form>;
+  /** Upsert one headerGroup */
+  upsertHeaderGroup?: Maybe<HeaderGroup>;
   /** Upsert one homePage */
   upsertHomePage?: Maybe<HomePage>;
   /** Upsert one officeLocation */
@@ -14042,6 +14699,11 @@ export type MutationCreateFooterGroupArgs = {
 
 export type MutationCreateFormArgs = {
   data: FormCreateInput;
+};
+
+
+export type MutationCreateHeaderGroupArgs = {
+  data: HeaderGroupCreateInput;
 };
 
 
@@ -14142,6 +14804,11 @@ export type MutationDeleteFooterGroupArgs = {
 
 export type MutationDeleteFormArgs = {
   where: FormWhereUniqueInput;
+};
+
+
+export type MutationDeleteHeaderGroupArgs = {
+  where: HeaderGroupWhereUniqueInput;
 };
 
 
@@ -14342,6 +15009,21 @@ export type MutationDeleteManyFormsConnectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<FormManyWhereInput>;
+};
+
+
+export type MutationDeleteManyHeaderGroupsArgs = {
+  where?: InputMaybe<HeaderGroupManyWhereInput>;
+};
+
+
+export type MutationDeleteManyHeaderGroupsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HeaderGroupManyWhereInput>;
 };
 
 
@@ -14548,6 +15230,12 @@ export type MutationPublishFooterGroupArgs = {
 export type MutationPublishFormArgs = {
   to?: Array<Stage>;
   where: FormWhereUniqueInput;
+};
+
+
+export type MutationPublishHeaderGroupArgs = {
+  to?: Array<Stage>;
+  where: HeaderGroupWhereUniqueInput;
 };
 
 
@@ -14797,6 +15485,24 @@ export type MutationPublishManyFormsConnectionArgs = {
 };
 
 
+export type MutationPublishManyHeaderGroupsArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<HeaderGroupManyWhereInput>;
+};
+
+
+export type MutationPublishManyHeaderGroupsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<HeaderGroupManyWhereInput>;
+};
+
+
 export type MutationPublishManyHomePagesArgs = {
   to?: Array<Stage>;
   where?: InputMaybe<HomePageManyWhereInput>;
@@ -15042,6 +15748,14 @@ export type MutationSchedulePublishFormArgs = {
 };
 
 
+export type MutationSchedulePublishHeaderGroupArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
+  releaseId?: InputMaybe<Scalars['String']['input']>;
+  to?: Array<Stage>;
+  where: HeaderGroupWhereUniqueInput;
+};
+
+
 export type MutationSchedulePublishHomePageArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
   releaseId?: InputMaybe<Scalars['String']['input']>;
@@ -15196,6 +15910,14 @@ export type MutationScheduleUnpublishFormArgs = {
 };
 
 
+export type MutationScheduleUnpublishHeaderGroupArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
+  releaseId?: InputMaybe<Scalars['String']['input']>;
+  where: HeaderGroupWhereUniqueInput;
+};
+
+
 export type MutationScheduleUnpublishHomePageArgs = {
   from?: Array<Stage>;
   releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -15321,6 +16043,12 @@ export type MutationUnpublishFooterGroupArgs = {
 export type MutationUnpublishFormArgs = {
   from?: Array<Stage>;
   where: FormWhereUniqueInput;
+};
+
+
+export type MutationUnpublishHeaderGroupArgs = {
+  from?: Array<Stage>;
+  where: HeaderGroupWhereUniqueInput;
 };
 
 
@@ -15568,6 +16296,24 @@ export type MutationUnpublishManyFormsConnectionArgs = {
 };
 
 
+export type MutationUnpublishManyHeaderGroupsArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<HeaderGroupManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyHeaderGroupsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<HeaderGroupManyWhereInput>;
+};
+
+
 export type MutationUnpublishManyHomePagesArgs = {
   from?: Array<Stage>;
   where?: InputMaybe<HomePageManyWhereInput>;
@@ -15781,6 +16527,12 @@ export type MutationUpdateFooterGroupArgs = {
 export type MutationUpdateFormArgs = {
   data: FormUpdateInput;
   where: FormWhereUniqueInput;
+};
+
+
+export type MutationUpdateHeaderGroupArgs = {
+  data: HeaderGroupUpdateInput;
+  where: HeaderGroupWhereUniqueInput;
 };
 
 
@@ -16011,6 +16763,23 @@ export type MutationUpdateManyFormsConnectionArgs = {
 };
 
 
+export type MutationUpdateManyHeaderGroupsArgs = {
+  data: HeaderGroupUpdateManyInput;
+  where?: InputMaybe<HeaderGroupManyWhereInput>;
+};
+
+
+export type MutationUpdateManyHeaderGroupsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  data: HeaderGroupUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HeaderGroupManyWhereInput>;
+};
+
+
 export type MutationUpdateManyHomePagesArgs = {
   data: HomePageUpdateManyInput;
   where?: InputMaybe<HomePageManyWhereInput>;
@@ -16224,6 +16993,12 @@ export type MutationUpsertFooterGroupArgs = {
 export type MutationUpsertFormArgs = {
   upsert: FormUpsertInput;
   where: FormWhereUniqueInput;
+};
+
+
+export type MutationUpsertHeaderGroupArgs = {
+  upsert: HeaderGroupUpsertInput;
+  where: HeaderGroupWhereUniqueInput;
 };
 
 
@@ -16813,6 +17588,7 @@ export type Page = Node & {
   documentInStages: Array<Page>;
   footerGroup?: Maybe<FooterGroup>;
   footerTitle?: Maybe<Scalars['String']['output']>;
+  headerGroup?: Maybe<HeaderGroup>;
   /** List of Page versions */
   history: Array<Version>;
   /** The unique identifier */
@@ -16867,6 +17643,12 @@ export type PageDocumentInStagesArgs = {
 
 
 export type PageFooterGroupArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type PageHeaderGroupArgs = {
   forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
   locales?: InputMaybe<Array<Locale>>;
 };
@@ -16934,6 +17716,7 @@ export type PageContent = Node & {
   footerGroup?: Maybe<FooterGroup>;
   footerTitle?: Maybe<Scalars['String']['output']>;
   form?: Maybe<Form>;
+  hideFromHeader: Scalars['Boolean']['output'];
   /** List of PageContent versions */
   history: Array<Version>;
   /** The unique identifier */
@@ -17083,6 +17866,7 @@ export type PageContentCreateInput = {
   footerGroup?: InputMaybe<FooterGroupCreateOneInlineInput>;
   footerTitle?: InputMaybe<Scalars['String']['input']>;
   form?: InputMaybe<FormCreateOneInlineInput>;
+  hideFromHeader: Scalars['Boolean']['input'];
   image?: InputMaybe<AssetCreateOneInlineInput>;
   page?: InputMaybe<PageCreateOneInlineInput>;
   showUpdatedDate: Scalars['Boolean']['input'];
@@ -17171,6 +17955,9 @@ export type PageContentManyWhereInput = {
   /** All values starting with the given string. */
   footerTitle_starts_with?: InputMaybe<Scalars['String']['input']>;
   form?: InputMaybe<FormWhereInput>;
+  hideFromHeader?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  hideFromHeader_not?: InputMaybe<Scalars['Boolean']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -17295,6 +18082,8 @@ export enum PageContentOrderByInput {
   CreatedAtDesc = 'createdAt_DESC',
   FooterTitleAsc = 'footerTitle_ASC',
   FooterTitleDesc = 'footerTitle_DESC',
+  HideFromHeaderAsc = 'hideFromHeader_ASC',
+  HideFromHeaderDesc = 'hideFromHeader_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
@@ -17319,6 +18108,7 @@ export type PageContentUpdateInput = {
   footerGroup?: InputMaybe<FooterGroupUpdateOneInlineInput>;
   footerTitle?: InputMaybe<Scalars['String']['input']>;
   form?: InputMaybe<FormUpdateOneInlineInput>;
+  hideFromHeader?: InputMaybe<Scalars['Boolean']['input']>;
   image?: InputMaybe<AssetUpdateOneInlineInput>;
   page?: InputMaybe<PageUpdateOneInlineInput>;
   showUpdatedDate?: InputMaybe<Scalars['Boolean']['input']>;
@@ -17348,6 +18138,7 @@ export type PageContentUpdateManyInlineInput = {
 export type PageContentUpdateManyInput = {
   body?: InputMaybe<Scalars['RichTextAST']['input']>;
   footerTitle?: InputMaybe<Scalars['String']['input']>;
+  hideFromHeader?: InputMaybe<Scalars['Boolean']['input']>;
   showUpdatedDate?: InputMaybe<Scalars['Boolean']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -17457,6 +18248,9 @@ export type PageContentWhereInput = {
   /** All values starting with the given string. */
   footerTitle_starts_with?: InputMaybe<Scalars['String']['input']>;
   form?: InputMaybe<FormWhereInput>;
+  hideFromHeader?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  hideFromHeader_not?: InputMaybe<Scalars['Boolean']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -17603,6 +18397,7 @@ export type PageCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   footerGroup?: InputMaybe<FooterGroupCreateOneInlineInput>;
   footerTitle?: InputMaybe<Scalars['String']['input']>;
+  headerGroup?: InputMaybe<HeaderGroupCreateOneInlineInput>;
   slug: Scalars['String']['input'];
   subtitle?: InputMaybe<Scalars['String']['input']>;
   title: Scalars['String']['input'];
@@ -17700,6 +18495,7 @@ export type PageManyWhereInput = {
   footerTitle_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** All values starting with the given string. */
   footerTitle_starts_with?: InputMaybe<Scalars['String']['input']>;
+  headerGroup?: InputMaybe<HeaderGroupWhereInput>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -17838,6 +18634,7 @@ export type PageUpdateInput = {
   contents?: InputMaybe<PageContentUpdateManyInlineInput>;
   footerGroup?: InputMaybe<FooterGroupUpdateOneInlineInput>;
   footerTitle?: InputMaybe<Scalars['String']['input']>;
+  headerGroup?: InputMaybe<HeaderGroupUpdateOneInlineInput>;
   slug?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -17969,6 +18766,7 @@ export type PageWhereInput = {
   footerTitle_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** All values starting with the given string. */
   footerTitle_starts_with?: InputMaybe<Scalars['String']['input']>;
+  headerGroup?: InputMaybe<HeaderGroupWhereInput>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -18215,6 +19013,14 @@ export type Query = {
   forms: Array<Form>;
   /** Retrieve multiple forms using the Relay connection interface */
   formsConnection: FormConnection;
+  /** Retrieve a single headerGroup */
+  headerGroup?: Maybe<HeaderGroup>;
+  /** Retrieve document version */
+  headerGroupVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple headerGroups */
+  headerGroups: Array<HeaderGroup>;
+  /** Retrieve multiple headerGroups using the Relay connection interface */
+  headerGroupsConnection: HeaderGroupConnection;
   /** Retrieve a single homePage */
   homePage?: Maybe<HomePage>;
   /** Retrieve document version */
@@ -18780,6 +19586,44 @@ export type QueryFormsConnectionArgs = {
 };
 
 
+export type QueryHeaderGroupArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: HeaderGroupWhereUniqueInput;
+};
+
+
+export type QueryHeaderGroupVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryHeaderGroupsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<HeaderGroupOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: Stage;
+  where?: InputMaybe<HeaderGroupWhereInput>;
+};
+
+
+export type QueryHeaderGroupsConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<HeaderGroupOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: Stage;
+  where?: InputMaybe<HeaderGroupWhereInput>;
+};
+
+
 export type QueryHomePageArgs = {
   locales?: Array<Locale>;
   stage?: Stage;
@@ -19225,7 +20069,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Admonition | Asset | BlogPost | BlogPostTag | CloudLocation | Configuration | ContactForm | ContentButton | DocsGroup | DocsPage | Employee | FooterGroup | Form | HomePage | OfficeLocation | Page | PageContent | Testimonial | Theme;
+export type ScheduledOperationAffectedDocument = Admonition | Asset | BlogPost | BlogPostTag | CloudLocation | Configuration | ContactForm | ContentButton | DocsGroup | DocsPage | Employee | FooterGroup | Form | HeaderGroup | HomePage | OfficeLocation | Page | PageContent | Testimonial | Theme;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -24984,6 +25828,13 @@ export type FooterGroupsQueryVariables = Exact<{
 
 export type FooterGroupsQuery = { __typename?: 'Query', configuration?: { __typename?: 'Configuration', footerGroups: Array<{ __typename?: 'FooterGroup', title: string, row: number, sortAlphabetically: boolean, pages: Array<{ __typename?: 'Page', slug: string, title: string, footerTitle?: string | null }>, pageContents: Array<{ __typename?: 'PageContent', slug: string, title: string, footerTitle?: string | null, page?: { __typename?: 'Page', slug: string } | null }>, docsGroup: Array<{ __typename?: 'DocsGroup', slug: string, footerTitle?: string | null, title: string }>, externalLinks: Array<{ __typename?: 'ExternalLink', href: string, showIcon: boolean, title: string }> }> } | null };
 
+export type HeaderGroupsQueryVariables = Exact<{
+  title?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type HeaderGroupsQuery = { __typename?: 'Query', configuration?: { __typename?: 'Configuration', headerGroups: Array<{ __typename?: 'HeaderGroup', columns: number, link?: string | null, pagesOnly: boolean, title: string, sortAlphabetically: boolean, pages: Array<{ __typename?: 'Page', footerTitle?: string | null, slug: string, title: string, subtitle?: string | null, contents: Array<{ __typename?: 'PageContent', title: string, subtitle?: string | null, slug: string, footerTitle?: string | null, hideFromHeader: boolean, callToAction: { __typename?: 'CallToActionSettings', enable: boolean, icon?: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, url: string, width?: number | null } | null } }> }>, externalLinks: Array<{ __typename?: 'ExternalLink', showIcon: boolean, title: string, href: string }> }> } | null };
+
 export type HomePageQueryVariables = Exact<{
   name?: InputMaybe<Scalars['String']['input']>;
   stage?: InputMaybe<Stage>;
@@ -25088,7 +25939,8 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "ContentButton"
     ],
     "ExternalLinkParent": [
-      "FooterGroup"
+      "FooterGroup",
+      "HeaderGroup"
     ],
     "FeatureParent": [
       "PageContent"
@@ -25120,6 +25972,7 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "Employee",
       "FooterGroup",
       "Form",
+      "HeaderGroup",
       "HomePage",
       "OfficeLocation",
       "Page",
@@ -25144,6 +25997,7 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "Employee",
       "FooterGroup",
       "Form",
+      "HeaderGroup",
       "HomePage",
       "OfficeLocation",
       "Page",
@@ -25193,6 +26047,7 @@ export const DocsPageStaticPathsDocument = {"kind":"Document","definitions":[{"k
 export const DocsPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsPage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<DocsPageQuery, DocsPageQueryVariables>;
 export const EmployeesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"employees"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"config"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"config"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"employees"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"50"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"bio"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"256"}},{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"256"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<EmployeesQuery, EmployeesQueryVariables>;
 export const FooterGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"footerGroups"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"footerGroups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"row"}},{"kind":"Field","name":{"kind":"Name","value":"sortAlphabetically"}},{"kind":"Field","name":{"kind":"Name","value":"pages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageContents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"externalLinks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"href"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]}}]} as unknown as DocumentNode<FooterGroupsQuery, FooterGroupsQueryVariables>;
+export const HeaderGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"headerGroups"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}},"defaultValue":{"kind":"StringValue","value":"Stellar","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"headerGroups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"columns"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"pagesOnly"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"sortAlphabetically"}},{"kind":"Field","name":{"kind":"Name","value":"pages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"hideFromHeader"}},{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"enable"}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"externalLinks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"href"}}]}}]}}]}}]}}]} as unknown as DocumentNode<HeaderGroupsQuery, HeaderGroupsQueryVariables>;
 export const HomePageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"homePage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homePage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"handle"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"mainVideo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"handle"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}}]}}]}}]} as unknown as DocumentNode<HomePageQuery, HomePageQueryVariables>;
 export const OfficeLocationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"officeLocations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"officeLocations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"closeTime"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"openTime"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"128"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"128"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}}]}},{"kind":"Field","name":{"kind":"Name","value":"location"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"address1"}},{"kind":"Field","name":{"kind":"Name","value":"address2"}},{"kind":"Field","name":{"kind":"Name","value":"address3"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zipCode"}}]}}]}}]}}]} as unknown as DocumentNode<OfficeLocationsQuery, OfficeLocationsQueryVariables>;
 export const StaticPathsExactDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"staticPathsExact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug_not_contains"},"value":{"kind":"StringValue","value":"/","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<StaticPathsExactQuery, StaticPathsExactQueryVariables>;
@@ -25280,12 +26135,12 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
   ContactFormfieldsUnion: ( CheckboxField ) | ( FormButton ) | ( SelectField ) | ( TextAreaField ) | ( TextInputField );
   DocsGroupSummaryRichTextEmbeddedTypes: ( Admonition ) | ( Asset ) | ( ContentButton );
   DocsPageBodyRichTextEmbeddedTypes: ( Admonition ) | ( Asset ) | ( ContentButton );
-  ExternalLinkParent: ( FooterGroup );
+  ExternalLinkParent: ( FooterGroup ) | ( HeaderGroup );
   FeatureParent: ( PageContent );
   FormButtonParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   FormfieldsUnion: ( CheckboxField ) | ( SelectField ) | ( TextAreaField ) | ( TextInputField );
   HomePageBlockParent: ( HomePage );
-  ScheduledOperationAffectedDocument: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( BlogPostTag ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Testimonial ) | ( Theme );
+  ScheduledOperationAffectedDocument: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( BlogPostTag ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Testimonial ) | ( Theme );
   SelectFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   SocialLinkParent: ( Configuration );
   TextAreaFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
@@ -25296,7 +26151,7 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
 
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = {
-  Node: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( BlogPostTag ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( Testimonial ) | ( Theme ) | ( User );
+  Node: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( BlogPostTag ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( Testimonial ) | ( Theme ) | ( User );
 };
 
 /** Mapping between all available schema types and the resolvers types */
@@ -25990,6 +26845,27 @@ export type ResolversTypes = {
   FormfieldsUnionUpsertWithNestedWhereUniqueInput: FormfieldsUnionUpsertWithNestedWhereUniqueInput;
   FormfieldsUnionWhereInput: FormfieldsUnionWhereInput;
   FormfieldsUnionWhereUniqueInput: FormfieldsUnionWhereUniqueInput;
+  HeaderGroup: ResolverTypeWrapper<HeaderGroup>;
+  HeaderGroupConnectInput: HeaderGroupConnectInput;
+  HeaderGroupConnection: ResolverTypeWrapper<HeaderGroupConnection>;
+  HeaderGroupCreateInput: HeaderGroupCreateInput;
+  HeaderGroupCreateManyInlineInput: HeaderGroupCreateManyInlineInput;
+  HeaderGroupCreateOneInlineInput: HeaderGroupCreateOneInlineInput;
+  HeaderGroupEdge: ResolverTypeWrapper<HeaderGroupEdge>;
+  HeaderGroupManyWhereInput: HeaderGroupManyWhereInput;
+  HeaderGroupOrderByInput: HeaderGroupOrderByInput;
+  HeaderGroupUpdateInput: HeaderGroupUpdateInput;
+  HeaderGroupUpdateManyInlineInput: HeaderGroupUpdateManyInlineInput;
+  HeaderGroupUpdateManyInput: HeaderGroupUpdateManyInput;
+  HeaderGroupUpdateManyWithNestedWhereInput: HeaderGroupUpdateManyWithNestedWhereInput;
+  HeaderGroupUpdateOneInlineInput: HeaderGroupUpdateOneInlineInput;
+  HeaderGroupUpdateWithNestedWhereUniqueInput: HeaderGroupUpdateWithNestedWhereUniqueInput;
+  HeaderGroupUpsertInput: HeaderGroupUpsertInput;
+  HeaderGroupUpsertWithNestedWhereUniqueInput: HeaderGroupUpsertWithNestedWhereUniqueInput;
+  HeaderGroupWhereComparatorInput: HeaderGroupWhereComparatorInput;
+  HeaderGroupWhereInput: HeaderGroupWhereInput;
+  HeaderGroupWhereStageInput: HeaderGroupWhereStageInput;
+  HeaderGroupWhereUniqueInput: HeaderGroupWhereUniqueInput;
   Hex: ResolverTypeWrapper<Scalars['Hex']['output']>;
   HomePage: ResolverTypeWrapper<HomePage>;
   HomePageBlock: ResolverTypeWrapper<HomePageBlock>;
@@ -27130,6 +28006,26 @@ export type ResolversParentTypes = {
   FormfieldsUnionUpsertWithNestedWhereUniqueInput: FormfieldsUnionUpsertWithNestedWhereUniqueInput;
   FormfieldsUnionWhereInput: FormfieldsUnionWhereInput;
   FormfieldsUnionWhereUniqueInput: FormfieldsUnionWhereUniqueInput;
+  HeaderGroup: HeaderGroup;
+  HeaderGroupConnectInput: HeaderGroupConnectInput;
+  HeaderGroupConnection: HeaderGroupConnection;
+  HeaderGroupCreateInput: HeaderGroupCreateInput;
+  HeaderGroupCreateManyInlineInput: HeaderGroupCreateManyInlineInput;
+  HeaderGroupCreateOneInlineInput: HeaderGroupCreateOneInlineInput;
+  HeaderGroupEdge: HeaderGroupEdge;
+  HeaderGroupManyWhereInput: HeaderGroupManyWhereInput;
+  HeaderGroupUpdateInput: HeaderGroupUpdateInput;
+  HeaderGroupUpdateManyInlineInput: HeaderGroupUpdateManyInlineInput;
+  HeaderGroupUpdateManyInput: HeaderGroupUpdateManyInput;
+  HeaderGroupUpdateManyWithNestedWhereInput: HeaderGroupUpdateManyWithNestedWhereInput;
+  HeaderGroupUpdateOneInlineInput: HeaderGroupUpdateOneInlineInput;
+  HeaderGroupUpdateWithNestedWhereUniqueInput: HeaderGroupUpdateWithNestedWhereUniqueInput;
+  HeaderGroupUpsertInput: HeaderGroupUpsertInput;
+  HeaderGroupUpsertWithNestedWhereUniqueInput: HeaderGroupUpsertWithNestedWhereUniqueInput;
+  HeaderGroupWhereComparatorInput: HeaderGroupWhereComparatorInput;
+  HeaderGroupWhereInput: HeaderGroupWhereInput;
+  HeaderGroupWhereStageInput: HeaderGroupWhereStageInput;
+  HeaderGroupWhereUniqueInput: HeaderGroupWhereUniqueInput;
   Hex: Scalars['Hex']['output'];
   HomePage: HomePage;
   HomePageBlock: HomePageBlock;
@@ -27981,6 +28877,7 @@ export type ConfigurationResolvers<ContextType = any, ParentType extends Resolve
   employees?: Resolver<Array<ResolversTypes['Employee']>, ParentType, ContextType, Partial<ConfigurationEmployeesArgs>>;
   errorMessage?: Resolver<ResolversTypes['Alert'], ParentType, ContextType, Partial<ConfigurationErrorMessageArgs>>;
   footerGroups?: Resolver<Array<ResolversTypes['FooterGroup']>, ParentType, ContextType, Partial<ConfigurationFooterGroupsArgs>>;
+  headerGroups?: Resolver<Array<ResolversTypes['HeaderGroup']>, ParentType, ContextType, Partial<ConfigurationHeaderGroupsArgs>>;
   history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<ConfigurationHistoryArgs, 'limit' | 'skip'>>;
   hqAddress?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   hqCoordinates?: Resolver<ResolversTypes['Location'], ParentType, ContextType>;
@@ -28261,7 +29158,7 @@ export type ExternalLinkEdgeResolvers<ContextType = any, ParentType extends Reso
 };
 
 export type ExternalLinkParentResolvers<ContextType = any, ParentType extends ResolversParentTypes['ExternalLinkParent'] = ResolversParentTypes['ExternalLinkParent']> = {
-  __resolveType: TypeResolveFn<'FooterGroup', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'FooterGroup' | 'HeaderGroup', ParentType, ContextType>;
 };
 
 export type FeatureResolvers<ContextType = any, ParentType extends ResolversParentTypes['Feature'] = ResolversParentTypes['Feature']> = {
@@ -28391,6 +29288,41 @@ export type FormfieldsUnionResolvers<ContextType = any, ParentType extends Resol
   __resolveType: TypeResolveFn<'CheckboxField' | 'SelectField' | 'TextAreaField' | 'TextInputField', ParentType, ContextType>;
 };
 
+export type HeaderGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['HeaderGroup'] = ResolversParentTypes['HeaderGroup']> = {
+  columns?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<HeaderGroupCreatedByArgs>>;
+  documentInStages?: Resolver<Array<ResolversTypes['HeaderGroup']>, ParentType, ContextType, RequireFields<HeaderGroupDocumentInStagesArgs, 'includeCurrent' | 'inheritLocale' | 'stages'>>;
+  externalLinks?: Resolver<Array<ResolversTypes['ExternalLink']>, ParentType, ContextType, Partial<HeaderGroupExternalLinksArgs>>;
+  history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<HeaderGroupHistoryArgs, 'limit' | 'skip'>>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  pages?: Resolver<Array<ResolversTypes['Page']>, ParentType, ContextType, Partial<HeaderGroupPagesArgs>>;
+  pagesOnly?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<HeaderGroupPublishedByArgs>>;
+  scheduledIn?: Resolver<Array<ResolversTypes['ScheduledOperation']>, ParentType, ContextType, Partial<HeaderGroupScheduledInArgs>>;
+  sortAlphabetically?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  updatedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<HeaderGroupUpdatedByArgs>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type HeaderGroupConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['HeaderGroupConnection'] = ResolversParentTypes['HeaderGroupConnection']> = {
+  aggregate?: Resolver<ResolversTypes['Aggregate'], ParentType, ContextType>;
+  edges?: Resolver<Array<ResolversTypes['HeaderGroupEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type HeaderGroupEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['HeaderGroupEdge'] = ResolversParentTypes['HeaderGroupEdge']> = {
+  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['HeaderGroup'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export interface HexScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Hex'], any> {
   name: 'Hex';
 }
@@ -28483,6 +29415,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationCreateEmployeeArgs, 'data'>>;
   createFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationCreateFooterGroupArgs, 'data'>>;
   createForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationCreateFormArgs, 'data'>>;
+  createHeaderGroup?: Resolver<Maybe<ResolversTypes['HeaderGroup']>, ParentType, ContextType, RequireFields<MutationCreateHeaderGroupArgs, 'data'>>;
   createHomePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<MutationCreateHomePageArgs, 'data'>>;
   createOfficeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<MutationCreateOfficeLocationArgs, 'data'>>;
   createPage?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<MutationCreatePageArgs, 'data'>>;
@@ -28503,6 +29436,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationDeleteEmployeeArgs, 'where'>>;
   deleteFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationDeleteFooterGroupArgs, 'where'>>;
   deleteForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationDeleteFormArgs, 'where'>>;
+  deleteHeaderGroup?: Resolver<Maybe<ResolversTypes['HeaderGroup']>, ParentType, ContextType, RequireFields<MutationDeleteHeaderGroupArgs, 'where'>>;
   deleteHomePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<MutationDeleteHomePageArgs, 'where'>>;
   deleteManyAdmonitions?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyAdmonitionsArgs>>;
   deleteManyAdmonitionsConnection?: Resolver<ResolversTypes['AdmonitionConnection'], ParentType, ContextType, Partial<MutationDeleteManyAdmonitionsConnectionArgs>>;
@@ -28530,6 +29464,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteManyFooterGroupsConnection?: Resolver<ResolversTypes['FooterGroupConnection'], ParentType, ContextType, Partial<MutationDeleteManyFooterGroupsConnectionArgs>>;
   deleteManyForms?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyFormsArgs>>;
   deleteManyFormsConnection?: Resolver<ResolversTypes['FormConnection'], ParentType, ContextType, Partial<MutationDeleteManyFormsConnectionArgs>>;
+  deleteManyHeaderGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyHeaderGroupsArgs>>;
+  deleteManyHeaderGroupsConnection?: Resolver<ResolversTypes['HeaderGroupConnection'], ParentType, ContextType, Partial<MutationDeleteManyHeaderGroupsConnectionArgs>>;
   deleteManyHomePages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyHomePagesArgs>>;
   deleteManyHomePagesConnection?: Resolver<ResolversTypes['HomePageConnection'], ParentType, ContextType, Partial<MutationDeleteManyHomePagesConnectionArgs>>;
   deleteManyOfficeLocations?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyOfficeLocationsArgs>>;
@@ -28562,6 +29498,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   publishEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationPublishEmployeeArgs, 'to' | 'where'>>;
   publishFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationPublishFooterGroupArgs, 'to' | 'where'>>;
   publishForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationPublishFormArgs, 'to' | 'where'>>;
+  publishHeaderGroup?: Resolver<Maybe<ResolversTypes['HeaderGroup']>, ParentType, ContextType, RequireFields<MutationPublishHeaderGroupArgs, 'to' | 'where'>>;
   publishHomePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<MutationPublishHomePageArgs, 'to' | 'where'>>;
   publishManyAdmonitions?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyAdmonitionsArgs, 'to'>>;
   publishManyAdmonitionsConnection?: Resolver<ResolversTypes['AdmonitionConnection'], ParentType, ContextType, RequireFields<MutationPublishManyAdmonitionsConnectionArgs, 'from' | 'to'>>;
@@ -28589,6 +29526,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   publishManyFooterGroupsConnection?: Resolver<ResolversTypes['FooterGroupConnection'], ParentType, ContextType, RequireFields<MutationPublishManyFooterGroupsConnectionArgs, 'from' | 'to'>>;
   publishManyForms?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyFormsArgs, 'to'>>;
   publishManyFormsConnection?: Resolver<ResolversTypes['FormConnection'], ParentType, ContextType, RequireFields<MutationPublishManyFormsConnectionArgs, 'from' | 'to'>>;
+  publishManyHeaderGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyHeaderGroupsArgs, 'to'>>;
+  publishManyHeaderGroupsConnection?: Resolver<ResolversTypes['HeaderGroupConnection'], ParentType, ContextType, RequireFields<MutationPublishManyHeaderGroupsConnectionArgs, 'from' | 'to'>>;
   publishManyHomePages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyHomePagesArgs, 'to'>>;
   publishManyHomePagesConnection?: Resolver<ResolversTypes['HomePageConnection'], ParentType, ContextType, RequireFields<MutationPublishManyHomePagesConnectionArgs, 'from' | 'to'>>;
   publishManyOfficeLocations?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyOfficeLocationsArgs, 'to'>>;
@@ -28619,6 +29558,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   schedulePublishEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationSchedulePublishEmployeeArgs, 'to' | 'where'>>;
   schedulePublishFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationSchedulePublishFooterGroupArgs, 'to' | 'where'>>;
   schedulePublishForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationSchedulePublishFormArgs, 'to' | 'where'>>;
+  schedulePublishHeaderGroup?: Resolver<Maybe<ResolversTypes['HeaderGroup']>, ParentType, ContextType, RequireFields<MutationSchedulePublishHeaderGroupArgs, 'to' | 'where'>>;
   schedulePublishHomePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<MutationSchedulePublishHomePageArgs, 'to' | 'where'>>;
   schedulePublishOfficeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<MutationSchedulePublishOfficeLocationArgs, 'to' | 'where'>>;
   schedulePublishPage?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<MutationSchedulePublishPageArgs, 'to' | 'where'>>;
@@ -28638,6 +29578,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   scheduleUnpublishEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishEmployeeArgs, 'from' | 'where'>>;
   scheduleUnpublishFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishFooterGroupArgs, 'from' | 'where'>>;
   scheduleUnpublishForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishFormArgs, 'from' | 'where'>>;
+  scheduleUnpublishHeaderGroup?: Resolver<Maybe<ResolversTypes['HeaderGroup']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishHeaderGroupArgs, 'from' | 'where'>>;
   scheduleUnpublishHomePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishHomePageArgs, 'from' | 'where'>>;
   scheduleUnpublishOfficeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishOfficeLocationArgs, 'from' | 'where'>>;
   scheduleUnpublishPage?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishPageArgs, 'from' | 'where'>>;
@@ -28657,6 +29598,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   unpublishEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationUnpublishEmployeeArgs, 'from' | 'where'>>;
   unpublishFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationUnpublishFooterGroupArgs, 'from' | 'where'>>;
   unpublishForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationUnpublishFormArgs, 'from' | 'where'>>;
+  unpublishHeaderGroup?: Resolver<Maybe<ResolversTypes['HeaderGroup']>, ParentType, ContextType, RequireFields<MutationUnpublishHeaderGroupArgs, 'from' | 'where'>>;
   unpublishHomePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<MutationUnpublishHomePageArgs, 'from' | 'where'>>;
   unpublishManyAdmonitions?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyAdmonitionsArgs, 'from'>>;
   unpublishManyAdmonitionsConnection?: Resolver<ResolversTypes['AdmonitionConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyAdmonitionsConnectionArgs, 'from' | 'stage'>>;
@@ -28684,6 +29626,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   unpublishManyFooterGroupsConnection?: Resolver<ResolversTypes['FooterGroupConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyFooterGroupsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyForms?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyFormsArgs, 'from'>>;
   unpublishManyFormsConnection?: Resolver<ResolversTypes['FormConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyFormsConnectionArgs, 'from' | 'stage'>>;
+  unpublishManyHeaderGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyHeaderGroupsArgs, 'from'>>;
+  unpublishManyHeaderGroupsConnection?: Resolver<ResolversTypes['HeaderGroupConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyHeaderGroupsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyHomePages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyHomePagesArgs, 'from'>>;
   unpublishManyHomePagesConnection?: Resolver<ResolversTypes['HomePageConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyHomePagesConnectionArgs, 'from' | 'stage'>>;
   unpublishManyOfficeLocations?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyOfficeLocationsArgs, 'from'>>;
@@ -28714,6 +29658,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationUpdateEmployeeArgs, 'data' | 'where'>>;
   updateFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationUpdateFooterGroupArgs, 'data' | 'where'>>;
   updateForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationUpdateFormArgs, 'data' | 'where'>>;
+  updateHeaderGroup?: Resolver<Maybe<ResolversTypes['HeaderGroup']>, ParentType, ContextType, RequireFields<MutationUpdateHeaderGroupArgs, 'data' | 'where'>>;
   updateHomePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<MutationUpdateHomePageArgs, 'data' | 'where'>>;
   updateManyAdmonitions?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyAdmonitionsArgs, 'data'>>;
   updateManyAdmonitionsConnection?: Resolver<ResolversTypes['AdmonitionConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyAdmonitionsConnectionArgs, 'data'>>;
@@ -28741,6 +29686,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateManyFooterGroupsConnection?: Resolver<ResolversTypes['FooterGroupConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyFooterGroupsConnectionArgs, 'data'>>;
   updateManyForms?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyFormsArgs, 'data'>>;
   updateManyFormsConnection?: Resolver<ResolversTypes['FormConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyFormsConnectionArgs, 'data'>>;
+  updateManyHeaderGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyHeaderGroupsArgs, 'data'>>;
+  updateManyHeaderGroupsConnection?: Resolver<ResolversTypes['HeaderGroupConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyHeaderGroupsConnectionArgs, 'data'>>;
   updateManyHomePages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyHomePagesArgs, 'data'>>;
   updateManyHomePagesConnection?: Resolver<ResolversTypes['HomePageConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyHomePagesConnectionArgs, 'data'>>;
   updateManyOfficeLocations?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyOfficeLocationsArgs, 'data'>>;
@@ -28772,6 +29719,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   upsertEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationUpsertEmployeeArgs, 'upsert' | 'where'>>;
   upsertFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationUpsertFooterGroupArgs, 'upsert' | 'where'>>;
   upsertForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationUpsertFormArgs, 'upsert' | 'where'>>;
+  upsertHeaderGroup?: Resolver<Maybe<ResolversTypes['HeaderGroup']>, ParentType, ContextType, RequireFields<MutationUpsertHeaderGroupArgs, 'upsert' | 'where'>>;
   upsertHomePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<MutationUpsertHomePageArgs, 'upsert' | 'where'>>;
   upsertOfficeLocation?: Resolver<Maybe<ResolversTypes['OfficeLocation']>, ParentType, ContextType, RequireFields<MutationUpsertOfficeLocationArgs, 'upsert' | 'where'>>;
   upsertPage?: Resolver<Maybe<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<MutationUpsertPageArgs, 'upsert' | 'where'>>;
@@ -28781,7 +29729,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type NodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Node'] = ResolversParentTypes['Node']> = {
-  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'BlogPostTag' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'Testimonial' | 'Theme' | 'User', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'BlogPostTag' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HeaderGroup' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'Testimonial' | 'Theme' | 'User', ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
 };
@@ -28829,6 +29777,7 @@ export type PageResolvers<ContextType = any, ParentType extends ResolversParentT
   documentInStages?: Resolver<Array<ResolversTypes['Page']>, ParentType, ContextType, RequireFields<PageDocumentInStagesArgs, 'includeCurrent' | 'inheritLocale' | 'stages'>>;
   footerGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, Partial<PageFooterGroupArgs>>;
   footerTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  headerGroup?: Resolver<Maybe<ResolversTypes['HeaderGroup']>, ParentType, ContextType, Partial<PageHeaderGroupArgs>>;
   history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<PageHistoryArgs, 'limit' | 'skip'>>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -28861,6 +29810,7 @@ export type PageContentResolvers<ContextType = any, ParentType extends Resolvers
   footerGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, Partial<PageContentFooterGroupArgs>>;
   footerTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   form?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, Partial<PageContentFormArgs>>;
+  hideFromHeader?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<PageContentHistoryArgs, 'limit' | 'skip'>>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, Partial<PageContentImageArgs>>;
@@ -28960,6 +29910,10 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   formVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryFormVersionArgs, 'where'>>;
   forms?: Resolver<Array<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<QueryFormsArgs, 'locales' | 'stage'>>;
   formsConnection?: Resolver<ResolversTypes['FormConnection'], ParentType, ContextType, RequireFields<QueryFormsConnectionArgs, 'locales' | 'stage'>>;
+  headerGroup?: Resolver<Maybe<ResolversTypes['HeaderGroup']>, ParentType, ContextType, RequireFields<QueryHeaderGroupArgs, 'locales' | 'stage' | 'where'>>;
+  headerGroupVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryHeaderGroupVersionArgs, 'where'>>;
+  headerGroups?: Resolver<Array<ResolversTypes['HeaderGroup']>, ParentType, ContextType, RequireFields<QueryHeaderGroupsArgs, 'locales' | 'stage'>>;
+  headerGroupsConnection?: Resolver<ResolversTypes['HeaderGroupConnection'], ParentType, ContextType, RequireFields<QueryHeaderGroupsConnectionArgs, 'locales' | 'stage'>>;
   homePage?: Resolver<Maybe<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<QueryHomePageArgs, 'locales' | 'stage' | 'where'>>;
   homePageVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryHomePageVersionArgs, 'where'>>;
   homePages?: Resolver<Array<ResolversTypes['HomePage']>, ParentType, ContextType, RequireFields<QueryHomePagesArgs, 'locales' | 'stage'>>;
@@ -29044,7 +29998,7 @@ export type ScheduledOperationResolvers<ContextType = any, ParentType extends Re
 };
 
 export type ScheduledOperationAffectedDocumentResolvers<ContextType = any, ParentType extends ResolversParentTypes['ScheduledOperationAffectedDocument'] = ResolversParentTypes['ScheduledOperationAffectedDocument']> = {
-  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'BlogPostTag' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'Testimonial' | 'Theme', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'BlogPostTag' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HeaderGroup' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'Testimonial' | 'Theme', ParentType, ContextType>;
 };
 
 export type ScheduledOperationConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ScheduledOperationConnection'] = ResolversParentTypes['ScheduledOperationConnection']> = {
@@ -29498,6 +30452,9 @@ export type Resolvers<ContextType = any> = {
   FormConnection?: FormConnectionResolvers<ContextType>;
   FormEdge?: FormEdgeResolvers<ContextType>;
   FormfieldsUnion?: FormfieldsUnionResolvers<ContextType>;
+  HeaderGroup?: HeaderGroupResolvers<ContextType>;
+  HeaderGroupConnection?: HeaderGroupConnectionResolvers<ContextType>;
+  HeaderGroupEdge?: HeaderGroupEdgeResolvers<ContextType>;
   Hex?: GraphQLScalarType;
   HomePage?: HomePageResolvers<ContextType>;
   HomePageBlock?: HomePageBlockResolvers<ContextType>;

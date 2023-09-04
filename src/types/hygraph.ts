@@ -1,3 +1,4 @@
+import type { Asset as BaseAsset } from "./schema";
 import type { RichTextProps } from "@graphcms/rich-text-react-renderer";
 import type { RichTextContent, ElementNode } from "@graphcms/rich-text-types";
 
@@ -5,6 +6,8 @@ export type RichTextValue = {
   raw?: RichTextContent | null;
   references?: RichTextProps["references"];
 };
+
+export type ImageAsset = Pick<BaseAsset, "fileName" | "height" | "width" | "mimeType" | "url">;
 
 function getElementText(elements: ElementNode[]): string[] {
   let parts: string[] = [];

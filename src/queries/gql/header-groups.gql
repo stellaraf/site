@@ -1,0 +1,39 @@
+query headerGroups($title: String = "Stellar") {
+  configuration(where: { title: $title }) {
+    headerGroups {
+      columns
+      link
+      pagesOnly
+      title
+      sortAlphabetically
+      pages {
+        footerTitle
+        slug
+        title
+        subtitle
+        contents {
+          title
+          subtitle
+          slug
+          footerTitle
+          hideFromHeader
+          callToAction {
+            enable
+            icon {
+              fileName
+              height
+              mimeType
+              url
+              width
+            }
+          }
+        }
+      }
+      externalLinks {
+        showIcon
+        title
+        href
+      }
+    }
+  }
+}

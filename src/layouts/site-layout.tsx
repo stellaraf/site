@@ -3,7 +3,16 @@ import dynamic from "next/dynamic";
 import { useBreakpointValue } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 
-import { Footer, DHeader, MHeader, RickRoll, Controls, CallToAction, Preview } from "~/components";
+import {
+  Footer,
+  DHeader,
+  MHeader,
+  RickRoll,
+  Controls,
+  CallToAction,
+  Preview,
+  type MenuProps,
+} from "~/components";
 import { useDraft } from "~/context";
 import { useMobile } from "~/hooks";
 
@@ -18,10 +27,11 @@ interface SiteLayoutProps {
   footerGroups: FooterGroups;
   actions: Actions;
   children: React.ReactNode;
+  menus: MenuProps[];
 }
 
 export const SiteLayout = (props: SiteLayoutProps) => {
-  const { children, footerGroups, actions } = props;
+  const { children, footerGroups, menus, actions } = props;
   const [draft] = useDraft();
   const isMobile = useMobile();
 
@@ -46,7 +56,7 @@ export const SiteLayout = (props: SiteLayoutProps) => {
       {draft && <Preview />}
       <AnimatePresence mode="wait">
         <Wrapper>
-          {isMobile ? <MHeader /> : <DHeader />}
+          {isMobile ? <MHeader /> : <DHeader menus={menus} />}
           <Main>
             <Base id="__base">{children}</Base>
           </Main>

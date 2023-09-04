@@ -31,6 +31,8 @@ export { default as employeesQuery, type Employee, type Employees } from "./empl
 
 export { default as footerGroupsQuery, type FooterGroups } from "./footer-groups";
 
+export { default as headerGroupsQuery, type HeaderGroups } from "./header-groups";
+
 export { default as homePageQuery, type HomePage, type HomePageBlock } from "./home-page";
 
 export {

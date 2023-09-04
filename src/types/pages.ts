@@ -1,6 +1,7 @@
 import type { AppProps, AppInitialProps, AppContext } from "next/app";
 
 import type { NextPageContext } from "next";
+import type { MenuProps } from "~/components";
 import type { Holidays, LocationTime } from "~/lib/server";
 import type {
   Actions,
@@ -14,6 +15,7 @@ import type {
   Employees,
   FooterGroups,
   HomePage,
+  HeaderGroups,
   OfficeLocationWithTimezone,
   Page,
 } from "~/queries";
@@ -54,6 +56,7 @@ export interface SiteProps {
   config: Config;
   docsGroups: DocsGroups;
   footerGroups: FooterGroups;
+  headerGroups: HeaderGroups;
   theme: ThemeConfig;
 }
 
@@ -74,6 +77,7 @@ export interface CommonPageProps {
   config: Config;
   docsGroups: DocsGroups;
   footerGroups: FooterGroups;
+  menus: MenuProps[];
   theme: ThemeConfig;
   twitterHandle: string;
   origin: string;
