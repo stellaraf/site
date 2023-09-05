@@ -69,11 +69,11 @@ const PopoverIcon = (props: { isOpen: boolean }) => {
 };
 
 const MenuSection = (props: MenuSectionProps) => {
-  const { title, subtitle, href, items, columns, menuTitle, ...rest } = props;
+  const { title, subtitle, href, items, columns, menuTitle, onClose, ...rest } = props;
   const { isOpen, onToggle } = useDisclosure();
   return (
     <>
-      <ChakraButton justifyContent="space-between" variant="tertiary" size="lg" onClick={onToggle}>
+      <ChakraButton justifyContent="space-between" variant="ghost" size="lg" onClick={onToggle}>
         <Text as="span">
           <TitleCase>{title}</TitleCase>
         </Text>
@@ -82,7 +82,14 @@ const MenuSection = (props: MenuSectionProps) => {
       <Collapse in={isOpen} animateOpacity {...rest}>
         <Stack spacing="1" alignItems="stretch" ps={4}>
           {items.map(item => (
-            <NavButton key={item.title} href={item.href} size="sm" justifyContent="start" ps={6}>
+            <NavButton
+              ps={6}
+              size="sm"
+              key={item.title}
+              href={item.href}
+              onClick={onClose}
+              justifyContent="start"
+            >
               <TitleCase>{item.title}</TitleCase>
             </NavButton>
           ))}
@@ -98,7 +105,7 @@ export const MobileDrawer = (
   const { menus, isOpen, onToggle, onClose, ...rest } = props;
   const { colorMode } = useColorMode();
   const merged = menus.reduce<MenuProps[]>((final, menu) => {
-    if (menu.sections.length === 1) {
+    if (menu.sections.length <= 1) {
       final = [...final, menu];
     } else {
       for (const section of menu.sections) {
@@ -164,12 +171,26 @@ export const MobileDrawer = (
                 return (
                   <Fragment key={menu.title}>
                     {menu.href && menu.sections.length === 0 ? (
-                      <NavButton ps={4} size="md" href={menu.href} justifyContent="start">
-                        <TitleCase>{menu.title}</TitleCase>
-                      </NavButton>
+                      <ChakraButton
+                        size="lg"
+                        as={NextLink}
+                        variant="ghost"
+                        href={menu.href}
+                        onClick={onClose}
+                        justifyContent="start"
+                      >
+                        <Text as="span">
+                          <TitleCase>{menu.title}</TitleCase>
+                        </Text>
+                      </ChakraButton>
                     ) : (
                       menu.sections.map(section => (
-                        <MenuSection key={section.title} {...section} title={menu.title} />
+                        <MenuSection
+                          {...section}
+                          onClose={onClose}
+                          title={menu.title}
+                          key={section.title}
+                        />
                       ))
                     )}
                   </Fragment>

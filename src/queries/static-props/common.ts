@@ -59,7 +59,7 @@ function buildMenus(headerGroups: HeaderGroups): MenuProps[] {
           const section: MenuSection = {
             title: page.footerTitle ?? page.title,
             subtitle: page.subtitle ?? null,
-            href: page.slug,
+            href: `/${page.slug}`,
             items,
             menuTitle: group.title,
           };

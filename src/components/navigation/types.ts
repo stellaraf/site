@@ -53,4 +53,6 @@ export interface MenuProps extends Omit<ChakraMenuProps, "children"> {
   columns?: number;
 }
 
-export type MenuSectionProps = MenuSection & Pick<MenuProps, "columns" | "href">;
+export type MenuSectionProps = MenuSection &
+  Pick<MenuProps, "columns" | "href"> &
+  Partial<Pick<UseDisclosureReturn, "onClose">>;
