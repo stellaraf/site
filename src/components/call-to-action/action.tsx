@@ -37,7 +37,21 @@ export const Action = (props: ArrayElement<Actions>) => {
         flexDirection="column"
       >
         <Card width={{ base: "20rem", md: "18rem", xl: "sm" }} maxHeight={64} zIndex={1}>
-          <CardBody spacing={4} textAlign="left" alignItems="flex-start">
+          <CardBody
+            textAlign="left"
+            alignItems="flex-start"
+            spacing={4}
+            _before={{
+              bg: "linear-gradient(transparent, 200px, white)",
+              position: "absolute",
+              boxSize: "100%",
+              content: "''",
+              left: 0,
+              top: 0,
+              zIndex: 5,
+            }}
+            _dark={{ _before: { bg: "linear-gradient(transparent, 200px, black)" } }}
+          >
             <Flex align="flex-start" justify="space-between" width="100%">
               <Flex flexDir="column" maxW="80%">
                 <Heading fontSize={{ base: "md", md: "md" }} whiteSpace="pre-wrap">
