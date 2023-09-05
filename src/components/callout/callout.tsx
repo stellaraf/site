@@ -40,7 +40,7 @@ export const Callout = (props: CalloutProps) => {
       {!isDarkMode && <Ripple start={rippleStart} stop={bg} />}
       <VStack spacing={{ base: 4, lg: 8 }} color={color} w="full">
         <VStack>
-          <Heading as="h2" fontSize="2xl">
+          <Heading as="h2" fontSize={{ base: "xl", lg: "2xl" }}>
             {fnTitle(title)}
           </Heading>
           {subtitle && (

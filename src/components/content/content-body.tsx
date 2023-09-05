@@ -8,6 +8,7 @@ export const ContentBody = (props: BoxProps) => (
     fontSize="lg"
     maxW={{ base: "100%", lg: "60%" }}
     whiteSpace="pre-line"
+    textAlign={{ base: "left", md: "center" }}
     my={{ base: 8, lg: 16 }}
     className="__st-content-body"
     {...props}

@@ -28,7 +28,7 @@ import { ChevronUp } from "~/icons";
 
 import { MenuToggle } from "./menu-toggle";
 
-import type { MenuProps, MenuSectionProps, HeaderProps } from "./types";
+import type { MenuProps, MenuSectionProps, HeaderProps, PopoverIconProps } from "./types";
 
 const NavButton = (props: ChakraButtonProps & NextLinkProps) => (
   <ChakraButton
@@ -59,13 +59,14 @@ const LoginButton = (props: ButtonProps) => (
   </Button>
 );
 
-const PopoverIcon = (props: { isOpen: boolean }) => {
+const PopoverIcon = (props: PopoverIconProps) => {
+  const { isOpen, ...rest } = props;
   const iconStyles = {
-    transform: props.isOpen ? undefined : "rotate(-180deg)",
+    transform: isOpen ? undefined : "rotate(-180deg)",
     transition: "transform 0.2s",
     transformOrigin: "center",
   };
-  return <Icon aria-hidden as={ChevronUp} __css={iconStyles} />;
+  return <Icon aria-hidden as={ChevronUp} __css={iconStyles} {...rest} />;
 };
 
 const MenuSection = (props: MenuSectionProps) => {
@@ -73,12 +74,38 @@ const MenuSection = (props: MenuSectionProps) => {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <>
-      <ChakraButton justifyContent="space-between" variant="ghost" size="lg" onClick={onToggle}>
-        <Text as="span">
-          <TitleCase>{title}</TitleCase>
-        </Text>
-        <PopoverIcon isOpen={isOpen} />
-      </ChakraButton>
+      <Flex justify="space-between" direction="row">
+        <ChakraButton
+          size="lg"
+          href={href}
+          variant="ghost"
+          onClick={onClose}
+          justifyContent="flex-start"
+          color={isOpen ? "primary.500" : "inherit"}
+          _dark={{ color: isOpen ? "tertiary.200" : "inherit" }}
+          as={href ? NextLink : undefined}
+        >
+          <Text as="span">
+            <TitleCase>{title}</TitleCase>
+          </Text>
+        </ChakraButton>
+        <ChakraButton
+          size="lg"
+          width="100%"
+          variant="ghost"
+          onClick={onToggle}
+          _hover={{ bg: "none" }}
+          _focus={{ bg: "none" }}
+          _active={{ bg: "none" }}
+          justifyContent="flex-end"
+        >
+          <PopoverIcon
+            isOpen={isOpen}
+            color={isOpen ? "primary.500" : "inherit"}
+            _dark={{ color: isOpen ? "tertiary.200" : "inherit" }}
+          />
+        </ChakraButton>
+      </Flex>
       <Collapse in={isOpen} animateOpacity {...rest}>
         <Stack spacing="1" alignItems="stretch" ps={4}>
           {items.map(item => (

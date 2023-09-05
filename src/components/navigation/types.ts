@@ -4,6 +4,7 @@ import type {
   UseDisclosureReturn,
   MenuItemProps as ChakraMenuItemProps,
   MenuProps as ChakraMenuProps,
+  IconProps,
 } from "@chakra-ui/react";
 import type { LinkProps } from "~/components";
 import type { ImageAsset } from "~/types";
@@ -56,3 +57,7 @@ export interface MenuProps extends Omit<ChakraMenuProps, "children"> {
 export type MenuSectionProps = MenuSection &
   Pick<MenuProps, "columns" | "href"> &
   Partial<Pick<UseDisclosureReturn, "onClose">>;
+
+export interface PopoverIconProps extends IconProps {
+  isOpen: boolean;
+}

@@ -8,9 +8,9 @@ export const ContentFeatureGrid = (props: ContentFeatureGridProps) => {
   const { features, ...rest } = props;
   return (
     <SimpleGrid
-      columns={{ base: 2, lg: 4 }}
       spacing={16}
-      my={16}
+      my={{ base: 8, lg: 16 }}
+      columns={{ base: 2, lg: 4 }}
       css={{
         "& > *": {
           gridColumn: "span 2",

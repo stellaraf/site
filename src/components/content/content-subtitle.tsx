@@ -7,7 +7,14 @@ export const ContentSubtitle = (props: ContentSubtitleProps) => {
   const fnTitle = useTitleCase();
   const { children, ...rest } = props;
   return (
-    <Heading as="h4" fontSize={{ base: "1.5rem", lg: "xl" }} fontWeight="light" mt={8} {...rest}>
+    <Heading
+      as="h4"
+      fontWeight="light"
+      mt={{ base: 4, lg: 8 }}
+      fontSize={{ base: "lg", lg: "xl" }}
+      textAlign={{ base: "left", md: "center" }}
+      {...rest}
+    >
       {fnTitle(children)}
     </Heading>
   );

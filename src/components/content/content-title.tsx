@@ -11,7 +11,13 @@ export const ContentTitle = forwardRef<HTMLHeadingElement, ContentTitleProps>((p
   return (
     <>
       <Box id={id} as="span" pos="relative" top={-130} visibility="hidden" />
-      <Heading ref={ref} as="h3" fontSize={{ base: "3xl", lg: "4xl" }} {...rest}>
+      <Heading
+        as="h3"
+        ref={ref}
+        fontSize={{ base: "xl", md: "2xl", lg: "4xl" }}
+        textAlign={{ base: "left", md: "center" }}
+        {...rest}
+      >
         {fnTitle(children)}
       </Heading>
     </>

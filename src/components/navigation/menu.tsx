@@ -52,7 +52,6 @@ const NavButton = chakra(Button, {
     transition: "all 0.2s",
     _focus: { borderRadius: "lg" },
     _hover: { textDecoration: "none", transform: "translateY(-2px)" },
-    opacity: 0.8,
   },
 });
 

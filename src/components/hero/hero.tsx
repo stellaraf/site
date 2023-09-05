@@ -22,9 +22,9 @@ export const Hero = (props: HeroProps) => {
     <Container className="__hero" layerStyle="container" {...bg} {...rest}>
       <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
         <Flex
-          textAlign="center"
+          textAlign={{ base: "left", md: "center" }}
           flexDir="column"
-          alignItems="center"
+          alignItems={{ base: "flex-start", md: "center" }}
           sx={{
             "& p": {
               mt: 8,
@@ -36,11 +36,11 @@ export const Hero = (props: HeroProps) => {
             },
           }}
         >
-          <Heading as="h1" fontSize={{ base: "4xl", lg: "6xl" }} fontWeight="light">
+          <Heading as="h1" fontSize={{ base: "2xl", md: "3xl", lg: "6xl" }} fontWeight="light">
             {fnTitle(title)}
           </Heading>
           {subtitle && (
-            <Heading as="h2" fontSize={{ base: "1.5rem", lg: "3xl" }} fontWeight="light">
+            <Heading as="h2" fontSize={{ base: "lg", md: "xl", lg: "3xl" }} fontWeight="light">
               {fnTitle(subtitle)}
             </Heading>
           )}

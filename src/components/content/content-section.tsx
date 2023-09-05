@@ -105,13 +105,13 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
             image={is(image) ? <ContentImage src={image.url} /> : null}
           />
         </Flex>
-        <Flex height="100%" align="center" direction="column" mb={{ base: 12, lg: "" }}>
+        <Flex height="100%" direction="column" mb={{ base: 12, lg: "" }} align="center">
           {is(body) && (
             <ContentBody>
               <RichText content={body} />
             </ContentBody>
           )}
-          <ContentFeatureGrid features={features} />
+          {features.length !== 0 && <ContentFeatureGrid features={features} />}
           {is(vendorLogo) && (
             <VStack w="100%" alignItems={{ base: "center", lg: "flex-start" }} spacing={4}>
               <Heading as="h3" fontSize="sm" opacity={0.8}>
@@ -143,7 +143,7 @@ export const ContentSection = forwardRef<HTMLDivElement, ContentSectionProps>((p
           {is(form) && <ContentForm form={form} />}
           {is(button) && (
             <Button
-              my={8}
+              my={{ base: 4, lg: 8 }}
               href={button.link ?? "#"}
               leftIcon={<ChevronRight />}
               variant={is(button.variant) ? button.variant : undefined}

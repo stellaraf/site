@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import { Center, Heading, VStack, Wrap, WrapItem } from "@chakra-ui/react";
 import { useInView } from "react-intersection-observer";
-import { useTitleCase } from "use-title-case";
+import { TitleCase } from "use-title-case";
 
 import { AnimatedDiv, Divider } from "~/components";
 import { useConfig } from "~/context";
@@ -17,8 +17,6 @@ import type { Actions } from "~/queries";
 
 export const _CallToActionContainer = (props: MemoCallToActionProps) => {
   const { actions: rawActions, currentPath, ...rest } = props;
-
-  const titleMe = useTitleCase();
 
   const { callToAction } = useConfig();
 
@@ -53,7 +51,7 @@ export const _CallToActionContainer = (props: MemoCallToActionProps) => {
       >
         <Center>
           <Heading as="h5" fontSize={{ base: "lg", lg: "2xl" }}>
-            {titleMe(callToAction.title)}
+            <TitleCase>{callToAction.title}</TitleCase>
           </Heading>
         </Center>
         <Wrap
@@ -61,7 +59,7 @@ export const _CallToActionContainer = (props: MemoCallToActionProps) => {
           spacing={8}
           justify="center"
           overflow="visible"
-          direction={{ base: "column", lg: "row" }}
+          direction={{ base: "column", md: "row" }}
         >
           {inView &&
             actions.map((action, i) => (
