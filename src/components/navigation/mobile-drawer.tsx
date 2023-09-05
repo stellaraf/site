@@ -23,7 +23,7 @@ import {
 import { StellarLogo } from "@stellaraf/logo";
 import { TitleCase } from "use-title-case";
 
-import { Button, Controls, type ButtonProps } from "~/components";
+import { Button, Controls, Status, type ButtonProps } from "~/components";
 import { ChevronUp } from "~/icons";
 
 import { MenuToggle } from "./menu-toggle";
@@ -46,8 +46,7 @@ const NavButton = (props: ChakraButtonProps & NextLinkProps) => (
 
 const LoginButton = (props: ButtonProps) => (
   <Button
-    mr={8}
-    w="100%"
+    w="50%"
     target="_blank"
     variant="outline"
     borderWidth="1px"
@@ -226,7 +225,8 @@ export const MobileDrawer = (
             </Stack>
           </DrawerBody>
           <DrawerFooter>
-            <HStack w="100%" justify="flex-start">
+            <HStack w="100%" justify="space-between">
+              <Status fontSize={{ base: "md", md: "lg" }} size="16px" />
               <LoginButton />
               <Controls.Mobile />
             </HStack>

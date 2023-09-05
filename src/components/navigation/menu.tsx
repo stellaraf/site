@@ -1,18 +1,21 @@
+import { useMemo, useRef } from "react";
+
 import NextLink from "next/link";
 
 import {
-  Button,
-  Menu as ChakraMenu,
-  MenuButton,
-  MenuList,
-  MenuGroup,
-  MenuDivider,
-  MenuItem as ChakraMenuItem,
-  SimpleGrid,
   Text,
+  Button,
   VStack,
   Portal,
   chakra,
+  MenuList,
+  MenuGroup,
+  MenuButton,
+  SimpleGrid,
+  MenuDivider,
+  useDisclosure,
+  Menu as ChakraMenu,
+  MenuItem as ChakraMenuItem,
 } from "@chakra-ui/react";
 import { TitleCase } from "use-title-case";
 
@@ -34,24 +37,26 @@ const activeAfterProps = {
   marginRight: "auto",
   position: "absolute",
   borderRadius: "0.75rem",
-  backgroundColor: "blackAlpha.300",
+  backgroundColor: "primary.500",
+  opacity: 0.25,
   transform: "translateY(-10px)",
   transition: "width: 0.5s, opacity: 0.5s, transform 0.5s",
 };
 const activeDarkAfterProps = {
-  backgroundColor: "whiteAlpha.300",
+  backgroundColor: "tertiary.500",
+  opacity: 0.25,
 };
 
 const NavButton = chakra(Button, {
   baseStyle: {
     py: 4,
-    fontWeight: "medium",
+    opacity: 0.7,
     pos: "relative",
-    px: { lg: 2, xl: 3, "2xl": 6 },
+    fontWeight: "medium",
     mr: { lg: 4, xl: 8 },
-    transition: "all 0.2s",
-    _focus: { borderRadius: "lg" },
-    _hover: { textDecoration: "none", transform: "translateY(-2px)" },
+    _hover: { opacity: 1 },
+    _focus: { border: "none" },
+    px: { lg: 2, xl: 3, "2xl": 6 },
   },
 });
 
@@ -77,7 +82,6 @@ const MenuItem = (props: Omit<MenuItemProps, "title" | "description">) => {
 
 const MenuSection = (props: MenuSectionProps) => {
   const { title, subtitle, href, columns = 2, items } = props;
-
   return (
     <MenuGroup>
       {href && (
@@ -125,8 +129,23 @@ const MenuSection = (props: MenuSectionProps) => {
 
 export const Menu = (props: MenuProps) => {
   const { title, sections, href, columns = 2, ...rest } = props;
+  const focusRef = useRef(null);
+  const disclosure = useDisclosure();
 
-  const isActive = useIsActive(href ?? "/");
+  const slugs = useMemo(() => {
+    let initial: string[] = [];
+    if (href) {
+      initial = [href];
+    }
+    return sections.reduce<string[]>((final, each) => {
+      if (each.href && !final.includes(each.href)) {
+        final = [...final, each.href];
+      }
+      return final;
+    }, initial);
+  }, [sections.length, href]);
+
+  const isActive = useIsActive(...slugs);
 
   if (href && sections.length === 0) {
     // Direct Page Link
@@ -141,26 +160,47 @@ export const Menu = (props: MenuProps) => {
       </NavButton>
     );
   }
+
   return (
-    <ChakraMenu isLazy {...rest}>
+    <ChakraMenu
+      isLazy
+      offset={[0, 0]}
+      placement="auto-end"
+      lazyBehavior="keepMounted"
+      initialFocusRef={focusRef}
+      {...disclosure}
+      {...rest}
+    >
       <MenuButton
         as={NavButton}
-        variant="unstyled"
         height="unset"
-        _dark={{ _after: isActive ? activeDarkAfterProps : {} }}
+        variant="unstyled"
+        onMouseEnter={disclosure.onOpen}
+        onMouseLeave={disclosure.onClose}
         _after={isActive ? activeAfterProps : undefined}
+        _light={{ color: isActive ? "primary.500" : undefined }}
+        _dark={{
+          _after: isActive ? activeDarkAfterProps : {},
+          fontWeight: isActive ? "bold" : "medium",
+        }}
+        _focus={{ border: "none" }}
       >
         {title}
       </MenuButton>
       <Portal>
         <MenuList
           p={4}
+          ref={focusRef}
           color="body-fg"
           zIndex="overlay"
           borderRadius="lg"
+          onFocus={disclosure.onOpen}
+          onBlur={disclosure.onClose}
           backgroundColor="light.500"
           _light={{ boxShadow: "lg" }}
           borderColor="blackAlpha.300"
+          onMouseEnter={disclosure.onOpen}
+          onMouseLeave={disclosure.onClose}
           _dark={{
             borderColor: "whiteAlpha.300",
             backgroundColor: "blackAlpha.700",

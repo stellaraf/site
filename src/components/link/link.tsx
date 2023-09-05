@@ -80,11 +80,12 @@ const InternalLink = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
  * optionally show an external link icon.
  */
 export const Link = (props: LinkProps) => {
-  const { href = "/", showIcon = false, children, rightIcon, ...rest } = props;
+  const { href = "/", showIcon = false, children, rightIcon, iconProps = {}, ...rest } = props;
 
   const { isExternal, target } = useLinkType(href);
 
-  const icon = typeof rightIcon !== "undefined" ? rightIcon : showIcon ? <LinkIcon /> : <></>;
+  const icon =
+    typeof rightIcon !== "undefined" ? rightIcon : showIcon ? <LinkIcon {...iconProps} /> : <></>;
 
   if (isExternal) {
     return (

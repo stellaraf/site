@@ -53,7 +53,7 @@ export function buildHeaders(headerGroups: HeaderGroups): MenuProps[] {
       }
       final = [
         ...final,
-        { title: group.title, href: group.pages[0].slug, sections, columns: group.columns },
+        { title: group.title, href: `/${group.pages[0].slug}`, sections, columns: group.columns },
       ];
     }
     return final;

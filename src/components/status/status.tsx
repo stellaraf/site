@@ -4,17 +4,27 @@ import { useConfig } from "~/context";
 import { Dot } from "./dot";
 import { useStatus } from "./use-status";
 
-interface StatusProps extends LinkProps {
+interface StatusProps extends Omit<LinkProps, "size"> {
   status?: boolean;
+  size?: LinkProps["boxSize"];
 }
 
 export const Status = (props: StatusProps) => {
-  const { status: override, ...rest } = props;
+  const { status: override, size = "8px", ...rest } = props;
   const { statusUrl } = useConfig();
   const status = useStatus(override);
   return (
-    <Link href={statusUrl} isExternal showIcon fontSize={{ base: "xs", lg: "sm" }} {...rest}>
-      <Dot status={status} />
+    <Link
+      showIcon
+      isExternal
+      href={statusUrl}
+      alignItems="center"
+      display="inline-flex"
+      fontSize={{ base: "xs", lg: "sm" }}
+      iconProps={{ mb: 0, mx: 0 }}
+      {...rest}
+    >
+      <Dot status={status} size={size} />
       Status
     </Link>
   );

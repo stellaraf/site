@@ -47,7 +47,6 @@ const Dots = (props: IconProps) => (
 
 export const MSubNav = (props: BoxProps) => {
   const { children, ...rest } = props;
-  // const { isOpen, onToggle, onClose } = useDisclosure();
   const disclosure = useDisclosure();
 
   return (

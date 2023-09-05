@@ -1,19 +1,20 @@
 import { chakra, useColorModeValue, type ChakraProps } from "@chakra-ui/react";
 
-interface DotProps extends ChakraProps {
+interface DotProps extends Omit<ChakraProps, "size"> {
   status: boolean;
+  size: ChakraProps["boxSize"];
 }
 
 export const Dot = (props: DotProps) => {
-  const { status, ...rest } = props;
+  const { status, size, ...rest } = props;
   const up = useColorModeValue("green.500", "green.300");
   const down = useColorModeValue("yellow.500", "yellow.300");
   return (
     <chakra.span
       mr={2}
-      boxSize="8px"
+      boxSize={size}
       borderRadius="full"
-      display="inline-block"
+      display="inline-flex"
       bg={status ? up : down}
       {...rest}
     />

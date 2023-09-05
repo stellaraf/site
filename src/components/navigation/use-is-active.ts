@@ -1,14 +1,19 @@
+import { useMemo } from "react";
+
 import { useRouter } from "next/router";
 
-export function useIsActive(slug: string): boolean {
+export function useIsActive(...slugs: string[]): boolean {
   const { asPath } = useRouter();
-
-  let isActive = false;
-  if (asPath === "/" && slug === "/") {
-    isActive = true;
-  } else if (slug !== "/") {
-    const match = asPath.match(new RegExp(slug, "gi")) ?? [];
-    isActive = match.length !== 0;
-  }
-  return isActive;
+  return useMemo(() => {
+    for (const slug of slugs) {
+      if (asPath === "/" && slug === "/") {
+        return true;
+      } else if (slug !== "/") {
+        if (asPath.startsWith(slug)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }, [slugs.length, asPath]);
 }
