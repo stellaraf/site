@@ -86,7 +86,7 @@ const Site = (props: AppProps<SiteProps>) => {
   } = props;
 
   const { common, title: pageTitle, subtitle, footerTitle, cookies, draft } = pageProps;
-  const { config, theme, footerGroups, actions, docsGroups, twitterHandle, origin, menus } = common;
+  const { config, theme, footers, actions, docsGroups, twitterHandle, origin, menus } = common;
   const { organizationName, title, description } = config;
 
   const useFallback = asPath === "/" || typeof title !== "string";
@@ -136,7 +136,7 @@ const Site = (props: AppProps<SiteProps>) => {
           dark={theme.colors.secondary}
           organizationName={organizationName}
         />
-        <SiteLayout actions={actions} footerGroups={footerGroups} menus={menus}>
+        <SiteLayout actions={actions} footers={footers} menus={menus}>
           <Component {...pageProps} />
         </SiteLayout>
       </Provider>

@@ -3,8 +3,6 @@ import { useTitleCase } from "use-title-case";
 
 import { Link, Status } from "~/components";
 
-import { useFooterLinks } from "./use-footer-links";
-
 import type { FooterLinksProps } from "./types";
 
 export const DesktopLinks = (props: FooterLinksProps) => {
@@ -13,29 +11,27 @@ export const DesktopLinks = (props: FooterLinksProps) => {
   const borderRadius = useToken("radii", "lg");
   const fnTitle = useTitleCase();
 
-  const rows = useFooterLinks(groups);
-
   return (
     <>
-      {rows.map((row, i) => (
+      {groups.map((row, i) => (
         <SimpleGrid
           key={i}
           mb={12}
           justifyContent="space-evenly"
           spacing={{ base: 8, lg: 16 }}
-          columns={{ base: 2, lg: rows[0].length * 2 }}
+          columns={{ base: 2, lg: groups[0].length * 2 }}
           sx={{
             // CSS fuckery to center-align the last row which may not be full.
             // See: https://css-irl.info/controlling-leftover-grid-items
-            [`& :last-child:nth-of-type(${rows[0].length}n - 1)`]: {
+            [`& :last-child:nth-of-type(${groups[0].length}n - 1)`]: {
               base: { gridColumnEnd: -2 },
               lg: { gridColumnEnd: -2 },
             },
-            [`& :nth-last-of-type(2):nth-of-type(${rows[0].length}n + 1)`]: {
-              lg: { gridColumnEnd: rows[0].length - 1 },
+            [`& :nth-last-of-type(2):nth-of-type(${groups[0].length}n + 1)`]: {
+              lg: { gridColumnEnd: groups[0].length - 1 },
             },
-            [`& :last-child:nth-of-type(${rows[0].length}n - 2)`]: {
-              lg: { gridColumnEnd: { base: 4, lg: rows[0].length * 2 + 1 } },
+            [`& :last-child:nth-of-type(${groups[0].length}n - 2)`]: {
+              lg: { gridColumnEnd: { base: 4, lg: groups[0].length * 2 + 1 } },
             },
           }}
           {...rest}

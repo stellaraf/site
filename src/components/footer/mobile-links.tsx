@@ -11,23 +11,22 @@ import {
 
 import { Link, Status } from "~/components";
 
-import { useFooterLinks } from "./use-footer-links";
+import type { MobileFooterLinksProps } from "./types";
 
-import type { FooterLinksProps } from "./types";
-
-export const MobileLinks = (props: FooterLinksProps) => {
-  const rows = useFooterLinks(props.groups);
-  const groups = rows.flat();
+export const MobileLinks = (props: MobileFooterLinksProps) => {
+  const { groups, ...rest } = props;
+  const flat = groups.flat();
 
   return (
-    <Accordion allowToggle position="relative" zIndex={1}>
-      {groups.map((group, i) => {
+    <Accordion allowToggle position="relative" zIndex={1} {...rest}>
+      {flat.map((group, i) => {
         return (
           <AccordionItem
             key={i}
             borderTopWidth={0}
             borderBottomWidth={1}
-            _last={{ borderBottomWidth: 1 }}
+            _last={{ borderBottomWidth: 0 }}
+            _light={{ borderColor: "whiteAlpha.300" }}
           >
             <AccordionButton my={4}>
               <Box w="100%" textAlign="left">

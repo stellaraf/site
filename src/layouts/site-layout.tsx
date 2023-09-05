@@ -3,28 +3,34 @@ import dynamic from "next/dynamic";
 import { useBreakpointValue, type BoxProps } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 
-import { Header, Footer, Controls, CallToAction, Preview, type MenuProps } from "~/components";
+import {
+  Header,
+  Footer,
+  Preview,
+  Controls,
+  CallToAction,
+  type MenuProps,
+  type FooterGroup,
+} from "~/components";
 import { useDraft } from "~/context";
-import { useMobile } from "~/hooks";
 
 import { Wrapper, Base, Main } from "./common";
 
-import type { FooterGroups, Actions } from "~/queries";
+import type { Actions } from "~/queries";
 
 const Stars = dynamic<BoxProps>(() => import("~/components").then(i => i.Stars));
 const RickRoll = dynamic(() => import("~/components/special/rick-roll").then(i => i.RickRoll));
 
 interface SiteLayoutProps {
-  footerGroups: FooterGroups;
+  footers: FooterGroup[][];
   actions: Actions;
   children: React.ReactNode;
   menus: MenuProps[];
 }
 
 export const SiteLayout = (props: SiteLayoutProps) => {
-  const { children, footerGroups, menus, actions } = props;
+  const { children, footers, menus, actions } = props;
   const [draft] = useDraft();
-  const isMobile = useMobile();
 
   const bp = useBreakpointValue({
     base: "Base",
@@ -52,8 +58,8 @@ export const SiteLayout = (props: SiteLayoutProps) => {
             <Base id="__base">{children}</Base>
           </Main>
           <CallToAction actions={actions} />
-          <Footer groups={footerGroups} />
-          {!isMobile && <Controls.Desktop />}
+          <Footer groups={footers} />
+          <Controls.Desktop display={{ base: "none", lg: "flex" }} />
           <Stars />
           <RickRoll />
         </Wrapper>
