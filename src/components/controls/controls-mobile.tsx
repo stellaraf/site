@@ -6,7 +6,6 @@ import type { StackProps } from "@chakra-ui/react";
 
 export const MControls = (props: StackProps) => {
   const { toggleColorMode } = useColorMode();
-  const colorModeIcon = useColorModeValue(<Moon boxSize={10} />, <Sun boxSize={10} />);
   const switchTo = useColorModeValue("Dark", "Light");
   const colorModeLabel = `Switch to ${switchTo} Mode`;
 
@@ -21,7 +20,10 @@ export const MControls = (props: StackProps) => {
         onClick={toggleColorMode}
         aria-label={colorModeLabel}
       >
-        {colorModeIcon}
+        <>
+          <Moon boxSize={8} _dark={{ display: "none" }} />
+          <Sun boxSize={8} _light={{ display: "none" }} />
+        </>
       </Button>
     </HStack>
   );

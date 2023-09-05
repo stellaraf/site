@@ -58,18 +58,20 @@ const NavButton = chakra(Button, {
 
 const MenuItem = (props: Omit<MenuItemProps, "title" | "description">) => {
   const { icon, showIcon, href, children, ...rest } = props;
+  const isExternal = showIcon && !icon && href.startsWith("http");
   return (
     <ChakraMenuItem
       href={href}
       as={NextLink}
+      target={isExternal ? "_blank" : undefined}
       _dark={{ _hover: { bg: "whiteAlpha.100" } }}
       _hover={{ backgroundColor: "blackAlpha.100" }}
       css={{ "& .chakra-menu__icon-wrapper": { marginInlineEnd: 0 } }}
-      icon={icon && !showIcon ? <Icon url={icon.url} size={12} noBackground /> : undefined}
+      icon={icon && !isExternal ? <Icon url={icon.url} size={12} noBackground /> : undefined}
       {...rest}
     >
       {children}
-      {showIcon && !icon ? <Icon size={6} icon={ExternalLink} noBackground /> : undefined}
+      {isExternal ? <Icon size={6} icon={ExternalLink} noBackground /> : undefined}
     </ChakraMenuItem>
   );
 };
@@ -83,7 +85,7 @@ const MenuSection = (props: MenuSectionProps) => {
         <>
           <MenuItem href={href}>
             <VStack alignItems="flex-start" spacing={1}>
-              <Text fontSize="lg" fontWeight="bold">
+              <Text fontSize="lg" fontWeight="bold" _light={{ color: "primary.500" }}>
                 <TitleCase>{title}</TitleCase>
               </Text>
               <Text fontSize="sm" fontWeight="light">
@@ -91,7 +93,11 @@ const MenuSection = (props: MenuSectionProps) => {
               </Text>
             </VStack>
           </MenuItem>
-          <MenuDivider mx={-4} key={`${title}--divider-1`} />
+          <MenuDivider
+            mx={-4}
+            key={`${title}--divider-1`}
+            _dark={{ bg: "tertiary.300", opacity: 0.5 }}
+          />
         </>
       )}
       <SimpleGrid columns={columns}>
@@ -124,6 +130,7 @@ export const Menu = (props: MenuProps) => {
   const isActive = useIsActive(href ?? "/");
 
   if (href && sections.length === 0) {
+    // Direct Page Link
     return (
       <NavButton
         as={NextLink}

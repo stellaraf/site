@@ -1,14 +1,38 @@
 import { useCallback } from "react";
 
-import { Box, Button, VStack, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Button, VStack, chakra, useColorMode, useColorModeValue } from "@chakra-ui/react";
 
 import { Sun, Moon, ChevronUp } from "~/icons";
 
 import type { BoxProps } from "@chakra-ui/react";
 
+const Wrapper = chakra("div", {
+  baseStyle: {
+    py: 4,
+    bg: "white",
+    right: 0,
+    zIndex: "modal",
+    pos: "fixed",
+    width: "2rem",
+    height: "6rem",
+    bottom: "25px",
+    display: "flex",
+    boxShadow: "md",
+    alignItems: "center",
+    borderTopWidth: "1px",
+    borderLeftWidth: "1px",
+    justifyContent: "center",
+    borderBottomWidth: "1px",
+    borderTopLeftRadius: "lg",
+    borderColor: "blackAlpha.300",
+    _dark: { bg: "blackAlpha.300", borderColor: "whiteAlpha.300" },
+    borderBottomLeftRadius: "lg",
+    backdropFilter: "blur(20px)",
+  },
+});
+
 export const DControls = (props: BoxProps) => {
   const { toggleColorMode } = useColorMode();
-  const colorModeIcon = useColorModeValue(<Moon />, <Sun />);
   const switchTo = useColorModeValue("Dark", "Light");
   const colorModeLabel = `Switch to ${switchTo} Mode`;
 
@@ -22,31 +46,8 @@ export const DControls = (props: BoxProps) => {
   }, []);
 
   return (
-    <Box
-      py={4}
-      bg="white"
-      right={0}
-      zIndex="modal"
-      pos="fixed"
-      width="2rem"
-      height="6rem"
-      bottom="25px"
-      display="flex"
-      boxShadow="md"
-      alignItems="center"
-      borderTopWidth="1px"
-      borderLeftWidth="1px"
-      justifyContent="center"
-      borderBottomWidth="1px"
-      borderTopLeftRadius="lg"
-      borderColor="blackAlpha.300"
-      _dark={{ bg: "blackAlpha.300", borderColor: "whiteAlpha.300" }}
-      borderBottomLeftRadius="lg"
-      css={{ backdropFilter: "blur(20px)" }}
-      {...props}
-    >
+    <Wrapper {...props}>
       <VStack pos="relative" spacing={6}>
-        ?
         <Button
           minW="unset"
           height="unset"
@@ -57,7 +58,8 @@ export const DControls = (props: BoxProps) => {
           _hover={{ color: "secondary.500" }}
           _dark={{ _hover: { color: "tertiary.300" } }}
         >
-          {colorModeIcon}
+          <Moon _dark={{ display: "none" }} />
+          <Sun _light={{ display: "none" }} />
         </Button>
         <Button
           minW="unset"
@@ -72,6 +74,6 @@ export const DControls = (props: BoxProps) => {
           <ChevronUp />
         </Button>
       </VStack>
-    </Box>
+    </Wrapper>
   );
 };

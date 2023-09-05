@@ -6,13 +6,13 @@ interface ToggleButtonProps extends IconButtonProps {
 
 const Bar = chakra("span", {
   baseStyle: {
-    display: "block",
-    pos: "absolute",
-    w: "1.25rem",
-    h: "0.125rem",
-    rounded: "full",
-    bg: "currentcolor",
+    w: "2rem",
     mx: "auto",
+    bg: "body-fg",
+    h: "0.1875rem",
+    pos: "absolute",
+    rounded: "full",
+    display: "block",
     insetStart: "0.125rem",
     transition: "all 0.12s",
   },
@@ -21,8 +21,8 @@ const Bar = chakra("span", {
 const ToggleIcon = (props: { active: boolean }) => (
   <Box
     as="span"
-    w="1.5rem"
-    h="1.5rem"
+    w="3rem"
+    h="3rem"
     aria-hidden
     pos="relative"
     color="inherit"
@@ -31,20 +31,12 @@ const ToggleIcon = (props: { active: boolean }) => (
     pointerEvents="none"
     data-active={props.active ? "" : undefined}
   >
-    <Bar top="0.4375rem" _groupActive={{ top: "0.6875rem", transform: "rotate(45deg)" }} />
-    <Bar bottom="0.4375rem" _groupActive={{ bottom: "0.6875rem", transform: "rotate(-45deg)" }} />
+    <Bar top="1rem" _groupActive={{ top: "1.5rem", transform: "rotate(45deg)" }} />
+    <Bar bottom="1rem" _groupActive={{ top: "1.5rem", transform: "rotate(-45deg)" }} />
   </Box>
 );
 
 export const MenuToggle = (props: ToggleButtonProps) => {
   const { isOpen, ...rest } = props;
-  return (
-    <IconButton
-      size="xs"
-      variant="unstyled"
-      display="inline-flex"
-      icon={<ToggleIcon active={isOpen} />}
-      {...rest}
-    />
-  );
+  return <IconButton variant="unstyled" icon={<ToggleIcon active={isOpen} />} {...rest} />;
 };

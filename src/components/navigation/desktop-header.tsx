@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import { chakra, Box, useColorMode } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
 
-import { Link, Menu } from "~/components";
+import { Link } from "~/components";
 import { useNavLogoState } from "~/hooks";
 
 import { LoginButton } from "./desktop-links";
 import { HeaderLogo } from "./desktop-logo";
+import { Menu } from "./menu";
 
 import type { HeaderProps } from "./types";
 
@@ -58,8 +59,10 @@ export const DHeader = (props: HeaderProps) => {
       bg="light.500"
       color="dark.500"
       _dark={{ bg: "transparent", color: "light.500", backdropFilter: "blur(10px)" }}
+      className="__header-lg"
+      {...rest}
     >
-      <Navbar {...rest}>
+      <Navbar>
         <Box overflow="hidden" pos="absolute">
           {pathname === "/" ? (
             <HeaderLogo show={showLogo} />

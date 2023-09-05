@@ -55,9 +55,11 @@ export const Wrapper = (props: BaseHeaderProps) => {
       pos="fixed"
       zIndex={1000}
       bg="light.500"
+      className="__header-sm"
       _dark={{ bg: "transparent" }}
       css={{ backdropFilter: "blur(10px)" }}
       transition={{ transition: "all 200ms ease-in" }}
+      {...rest}
     >
       <Flex
         px={8}
@@ -72,11 +74,10 @@ export const Wrapper = (props: BaseHeaderProps) => {
         justifyContent="space-between"
         borderBottomColor="blackAlpha.300"
         _dark={{ borderBottomColor: "whiteAlpha.300" }}
-        {...rest}
       >
         <>
           <Link href="/" opacity={showLogo ? 1 : 0} mb={2}>
-            <StellarLogo colorMode={colorMode} width="auto" height={navHeaderHeight} />
+            <StellarLogo colorMode={colorMode} width="100%" height={navHeaderHeight} />
           </Link>
           {children}
         </>

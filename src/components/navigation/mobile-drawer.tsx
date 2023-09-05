@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 import NextLink, { type LinkProps as NextLinkProps } from "next/link";
 
 import {
@@ -67,7 +69,7 @@ const PopoverIcon = (props: { isOpen: boolean }) => {
 };
 
 const MenuSection = (props: MenuSectionProps) => {
-  const { title, subtitle, href, items, columns, ...rest } = props;
+  const { title, subtitle, href, items, columns, menuTitle, ...rest } = props;
   const { isOpen, onToggle } = useDisclosure();
   return (
     <>
@@ -120,7 +122,7 @@ export const MobileDrawer = (
         display={{ base: "inline-flex", lg: "none" }}
         {...rest}
       />
-      <Drawer placement="right" isOpen={isOpen} onClose={onClose}>
+      <Drawer placement="right" isOpen={isOpen} onClose={onClose} size="lg">
         <DrawerContent
           color="body-fg"
           backgroundColor="light.500"
@@ -130,13 +132,21 @@ export const MobileDrawer = (
             backdropFilter: "blur(8px)",
           }}
         >
-          <DrawerHeader>
-            <Flex align="center" justify="space-between">
+          <DrawerHeader
+            py={2}
+            px={8}
+            height={20}
+            borderBottomWidth="1px"
+            borderBottomStyle="solid"
+            borderBottomColor="blackAlpha.300"
+            _dark={{ borderBottomColor: "whiteAlpha.300" }}
+          >
+            <Flex align="center" justify="space-between" h="100%">
               <StellarLogo
                 noAnimate
-                width="auto"
-                colorMode={colorMode}
                 height={56}
+                width="100%"
+                colorMode={colorMode}
                 style={{ marginBlock: "0.5rem" }}
               />
               <MenuToggle
@@ -152,15 +162,9 @@ export const MobileDrawer = (
             <Stack spacing="1">
               {merged.map(menu => {
                 return (
-                  <>
+                  <Fragment key={menu.title}>
                     {menu.href && menu.sections.length === 0 ? (
-                      <NavButton
-                        ps={4}
-                        size="md"
-                        key={menu.title}
-                        href={menu.href}
-                        justifyContent="start"
-                      >
+                      <NavButton ps={4} size="md" href={menu.href} justifyContent="start">
                         <TitleCase>{menu.title}</TitleCase>
                       </NavButton>
                     ) : (
@@ -168,7 +172,7 @@ export const MobileDrawer = (
                         <MenuSection key={section.title} {...section} title={menu.title} />
                       ))
                     )}
-                  </>
+                  </Fragment>
                 );
               })}
             </Stack>
