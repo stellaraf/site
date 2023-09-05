@@ -45,7 +45,7 @@ function buildMenus(headerGroups: HeaderGroups): MenuProps[] {
         if (group.sortAlphabetically) {
           items = items.sort((a, b) => (a.title > b.title ? 1 : -1));
         }
-        sections = [...sections, { title: "", items }];
+        sections = [...sections, { title: "", menuTitle: group.title, items }];
       } else {
         for (const page of group.pages) {
           const contents = page.contents.filter(content => !content.hideFromHeader);
@@ -58,8 +58,10 @@ function buildMenus(headerGroups: HeaderGroups): MenuProps[] {
           items = [...items, ...externalLinks];
           const section: MenuSection = {
             title: page.footerTitle ?? page.title,
+            subtitle: page.subtitle ?? null,
             href: page.slug,
             items,
+            menuTitle: group.title,
           };
           sections = [...sections, section];
         }

@@ -78,7 +78,7 @@ export const Wrapper = (props: BaseHeaderProps) => {
           <Link href="/" opacity={showLogo ? 1 : 0} mb={2}>
             <StellarLogo colorMode={colorMode} width="auto" height={navHeaderHeight} />
           </Link>
-          {!isOpen && children}
+          {children}
         </>
       </Flex>
     </Box>

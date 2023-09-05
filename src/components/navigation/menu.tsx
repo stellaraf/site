@@ -23,19 +23,6 @@ import { useIsActive } from "./use-is-active";
 
 import type { MenuProps, MenuItemProps, MenuSectionProps } from "./types";
 
-const NavButton = chakra(Button, {
-  baseStyle: {
-    py: 4,
-    fontWeight: "medium",
-    pos: "relative",
-    px: { lg: 2, xl: 3, "2xl": 6 },
-    mr: { lg: 4, xl: 8 },
-    transition: "all 0.2s",
-    _focus: { borderRadius: "lg" },
-    _hover: { textDecoration: "none", transform: "translateY(-2px)" },
-    opacity: 0.8,
-  },
-});
 const activeAfterProps = {
   left: 0,
   right: 0,
@@ -55,54 +42,76 @@ const activeDarkAfterProps = {
   backgroundColor: "whiteAlpha.300",
 };
 
-const MenuItem = (props: MenuItemProps) => {
-  const { title, description, icon, showIcon = false, href, ...rest } = props;
+const NavButton = chakra(Button, {
+  baseStyle: {
+    py: 4,
+    fontWeight: "medium",
+    pos: "relative",
+    px: { lg: 2, xl: 3, "2xl": 6 },
+    mr: { lg: 4, xl: 8 },
+    transition: "all 0.2s",
+    _focus: { borderRadius: "lg" },
+    _hover: { textDecoration: "none", transform: "translateY(-2px)" },
+    opacity: 0.8,
+  },
+});
 
+const MenuItem = (props: Omit<MenuItemProps, "title" | "description">) => {
+  const { icon, showIcon, href, children, ...rest } = props;
   return (
     <ChakraMenuItem
-      as={NextLink}
       href={href}
-      icon={icon && !showIcon ? <Icon url={icon.url} size={12} noBackground /> : undefined}
+      as={NextLink}
+      _dark={{ _hover: { bg: "whiteAlpha.100" } }}
       _hover={{ backgroundColor: "blackAlpha.100" }}
-      _dark={{
-        _hover: { bg: "whiteAlpha.100" },
-      }}
       css={{ "& .chakra-menu__icon-wrapper": { marginInlineEnd: 0 } }}
+      icon={icon && !showIcon ? <Icon url={icon.url} size={12} noBackground /> : undefined}
       {...rest}
     >
-      {description ? (
-        <VStack alignItems="flex-start">
-          <Text as={TitleCase} fontSize="lg" fontWeight="bold">
-            {title}
-          </Text>
-          <Text fontSize="sm" fontWeight="light">
-            {description}
-          </Text>
-        </VStack>
-      ) : (
-        <Text as={TitleCase} fontSize="lg" fontWeight="bold">
-          {title}
-        </Text>
-      )}
+      {children}
       {showIcon && !icon ? <Icon size={6} icon={ExternalLink} noBackground /> : undefined}
     </ChakraMenuItem>
   );
 };
 
 const MenuSection = (props: MenuSectionProps) => {
-  const { title, href, columns = 2, items } = props;
+  const { title, subtitle, href, columns = 2, items } = props;
 
   return (
     <MenuGroup>
       {href && (
         <>
-          <MenuItem href={href} title={title} width="fit-content" />
+          <MenuItem href={href}>
+            <VStack alignItems="flex-start" spacing={1}>
+              <Text fontSize="lg" fontWeight="bold">
+                <TitleCase>{title}</TitleCase>
+              </Text>
+              <Text fontSize="sm" fontWeight="light">
+                {subtitle}
+              </Text>
+            </VStack>
+          </MenuItem>
           <MenuDivider mx={-4} key={`${title}--divider-1`} />
         </>
       )}
       <SimpleGrid columns={columns}>
-        {items.map(item => (
-          <MenuItem key={item.title} {...item} />
+        {items.map(({ title, description, ...rest }) => (
+          <MenuItem key={title} {...rest}>
+            {description ? (
+              <VStack alignItems="flex-start" spacing={1}>
+                <Text fontSize="lg">
+                  <TitleCase>{title}</TitleCase>
+                </Text>
+                <Text fontSize="xs" fontWeight="light">
+                  {description}
+                </Text>
+              </VStack>
+            ) : (
+              <Text as={TitleCase} fontSize="lg" fontWeight="bold">
+                {title}
+              </Text>
+            )}
+          </MenuItem>
         ))}
       </SimpleGrid>
     </MenuGroup>
@@ -122,7 +131,7 @@ export const Menu = (props: MenuProps) => {
         _dark={{ _after: isActive ? activeDarkAfterProps : {} }}
         _after={isActive ? activeAfterProps : undefined}
       >
-        {title}
+        <TitleCase>{title}</TitleCase>
       </NavButton>
     );
   }
@@ -139,9 +148,9 @@ export const Menu = (props: MenuProps) => {
       </MenuButton>
       <Portal>
         <MenuList
-          zIndex="overlay"
           p={4}
           color="body-fg"
+          zIndex="overlay"
           borderRadius="lg"
           backgroundColor="light.500"
           _light={{ boxShadow: "lg" }}
@@ -152,8 +161,8 @@ export const Menu = (props: MenuProps) => {
             backdropFilter: "blur(8px)",
           }}
           sx={{
-            "& .chakra-menu__menuitem": { borderRadius: "lg", background: "inherit" },
             "& .chakra-menu__group:not(:last-of-type)": { mb: 6 },
+            "& .chakra-menu__menuitem": { borderRadius: "lg", background: "inherit" },
           }}
         >
           {sections.map(section => (

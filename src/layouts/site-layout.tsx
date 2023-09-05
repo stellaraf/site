@@ -56,7 +56,7 @@ export const SiteLayout = (props: SiteLayoutProps) => {
       {draft && <Preview />}
       <AnimatePresence mode="wait">
         <Wrapper>
-          {isMobile ? <MHeader /> : <DHeader menus={menus} />}
+          {isMobile ? <MHeader menus={menus} /> : <DHeader menus={menus} />}
           <Main>
             <Base id="__base">{children}</Base>
           </Main>

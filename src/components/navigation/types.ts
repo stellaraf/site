@@ -40,8 +40,10 @@ export interface MenuItemProps extends Omit<ChakraMenuItemProps, "icon"> {
 
 export interface MenuSection {
   title: string;
+  subtitle?: string | null;
   href?: string;
   items: MenuItemProps[];
+  menuTitle: string;
 }
 
 export interface MenuProps extends Omit<ChakraMenuProps, "children"> {
