@@ -40,18 +40,12 @@ const Cloud: NextPage<CloudPageProps> = props => {
   const { geoData, locations, title, subtitle, body, callout, contents } = props;
 
   const mapColor = useColorTokenValue("blackAlpha.200", "whiteAlpha.200");
-  const markerColor = useColorTokenValue("primary.400", "tertiary.500");
 
   return (
     <>
       <CloudLocationsProvider value={locations}>
         <Content title={title} subtitle={subtitle} body={body}>
-          <USMap
-            geoData={geoData}
-            mapColor={mapColor}
-            markerColor={markerColor}
-            maxW={{ base: "100%", lg: "75%" }}
-          />
+          <USMap geoData={geoData} mapColor={mapColor} maxW={{ base: "100%", lg: "75%" }} />
         </Content>
       </CloudLocationsProvider>
       {contents.map((sect, i) => {

@@ -10,7 +10,7 @@ import type { USMapProps } from "./types";
 const Container = chakra("div", { baseStyle: { mx: "auto" } });
 
 export const USMap = (props: USMapProps) => {
-  const { geoData, mapColor, markerColor, ...rest } = props;
+  const { geoData, mapColor, ...rest } = props;
   const measurements = useCloudMeasurementValues();
 
   return (
@@ -33,7 +33,7 @@ export const USMap = (props: USMapProps) => {
               ))}
               <LayoutGroup>
                 {measurements.map(loc => (
-                  <Location key={loc.name} loc={loc} color={markerColor} />
+                  <Location key={loc.name} loc={loc} />
                 ))}
               </LayoutGroup>
             </>

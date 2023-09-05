@@ -10,19 +10,16 @@ export interface CloudMeasurement extends CloudLocation {
 }
 
 export interface MapMarkerProps extends MarkerProps {
-  color?: string;
   best?: boolean;
 }
 
-export interface LocationProps extends Omit<PopoverContentProps, "color"> {
-  color?: string;
+export interface LocationProps extends PopoverContentProps {
   loc: CloudMeasurement;
 }
 
 export interface USMapProps extends BoxProps {
   geoData: Dict;
   mapColor: string;
-  markerColor?: string;
 }
 
 export interface LatencyProps {

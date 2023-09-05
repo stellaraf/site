@@ -55,7 +55,7 @@ const Latency = (props: LatencyProps) => {
 };
 
 export const Location = (props: LocationProps) => {
-  const { loc, color = "currentcolor", ...rest } = props;
+  const { loc, ...rest } = props;
   const { coordinates, name, description } = loc;
 
   const best = useBestMeasurement();
@@ -64,7 +64,6 @@ export const Location = (props: LocationProps) => {
     <Popover trigger="hover" placement="top">
       <MapMarker
         best={best?.identifier === loc.identifier}
-        color={color}
         coordinates={[coordinates.longitude, coordinates.latitude]}
       />
       <Portal>
