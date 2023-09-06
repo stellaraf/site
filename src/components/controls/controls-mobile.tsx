@@ -1,30 +1,24 @@
-import { HStack, Button, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { IconButton, useColorMode, type IconButtonProps } from "@chakra-ui/react";
 
 import { Sun, Moon } from "~/icons";
 
-import type { StackProps } from "@chakra-ui/react";
-
-export const MControls = (props: StackProps) => {
-  const { toggleColorMode } = useColorMode();
-  const switchTo = useColorModeValue("Dark", "Light");
-  const colorModeLabel = `Switch to ${switchTo} Mode`;
+export const MControls = (props: Omit<IconButtonProps, "aria-label">) => {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const colorModeLabel = `Switch to ${colorMode === "dark" ? "Light" : "Dark"} Mode`;
 
   return (
-    <HStack {...props}>
-      <Button
-        py={2}
-        minW="unset"
-        height="unset"
-        variant="unstyled"
-        title={colorModeLabel}
-        onClick={toggleColorMode}
-        aria-label={colorModeLabel}
-      >
-        <>
-          <Moon boxSize={8} _dark={{ display: "none" }} />
-          <Sun boxSize={8} _light={{ display: "none" }} />
-        </>
-      </Button>
-    </HStack>
+    <IconButton
+      px={3}
+      py={1}
+      lineHeight={1.5}
+      borderRadius="lg"
+      variant="outline"
+      colorScheme="primary"
+      title={colorModeLabel}
+      onClick={toggleColorMode}
+      aria-label={colorModeLabel}
+      icon={colorMode === "dark" ? <Sun /> : <Moon />}
+      {...props}
+    />
   );
 };

@@ -36,8 +36,12 @@ export const BlogPostContent = (props: React.PropsWithChildren<BlogPost>) => {
     <Article {...rest}>
       <Flex direction="column" align="flex-start">
         <PublishedAt time={overrideDate ?? publishedAt!} />
-        <Content.Title id={generatedSlug}>{title}</Content.Title>
-        <Content.Subtitle my={2}>{description}</Content.Subtitle>
+        <Content.Title textAlign="left" id={generatedSlug}>
+          {title}
+        </Content.Title>
+        <Content.Subtitle textAlign="left" my={2}>
+          {description}
+        </Content.Subtitle>
         <Stack spacing={8} direction={{ base: "column", lg: "row" }}>
           <HStack>
             {authors.map(author => (
@@ -49,7 +53,7 @@ export const BlogPostContent = (props: React.PropsWithChildren<BlogPost>) => {
         </Stack>
       </Flex>
       <Box>
-        <Content.Body maxW="unset">
+        <Content.Body textAlign="left" maxW="unset">
           <RichText
             content={body}
             overrides={{

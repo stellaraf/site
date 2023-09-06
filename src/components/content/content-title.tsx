@@ -1,12 +1,11 @@
 import { forwardRef } from "react";
 
 import { Box, Heading } from "@chakra-ui/react";
-import { useTitleCase } from "use-title-case";
+import { TitleCase } from "use-title-case";
 
 import type { ContentTitleProps } from "./types";
 
 export const ContentTitle = forwardRef<HTMLHeadingElement, ContentTitleProps>((props, ref) => {
-  const fnTitle = useTitleCase();
   const { id, children, ...rest } = props;
   return (
     <>
@@ -18,7 +17,7 @@ export const ContentTitle = forwardRef<HTMLHeadingElement, ContentTitleProps>((p
         textAlign={{ base: "left", md: "center" }}
         {...rest}
       >
-        {fnTitle(children)}
+        <TitleCase>{children}</TitleCase>
       </Heading>
     </>
   );

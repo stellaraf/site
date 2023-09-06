@@ -5,22 +5,27 @@ import NextLink from "next/link";
 import { Button as ChakraButton } from "@chakra-ui/react";
 
 import { useLinkType } from "~/hooks";
+import { ExternalLink } from "~/icons";
 
 import type { ButtonProps, ButtonLinkElement } from "./types";
 
-const BaseButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => (
-  <ChakraButton as="a" ref={ref} px={3} py={1} lineHeight={1.5} borderRadius="lg" {...props} />
-));
+const BaseButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => {
+  const { showIcon, externalIconProps, isExternal, ...rest } = props;
+  return (
+    <ChakraButton as="a" ref={ref} px={3} py={1} lineHeight={1.5} borderRadius="lg" {...rest} />
+  );
+});
 
 const ExternalButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => {
-  const { href = "#", target, ...rest } = props;
+  const { href = "#", target, showIcon, externalIconProps = {}, ...rest } = props;
   return (
     <BaseButton
       ref={ref}
       href={href}
+      as={NextLink}
       target="_blank"
       rel="noopener noreferrer"
-      as={NextLink}
+      rightIcon={showIcon ? <ExternalLink {...externalIconProps} /> : undefined}
       {...rest}
     />
   );
@@ -28,7 +33,7 @@ const ExternalButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) =
 
 export const Button = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => {
   /* eslint prefer-const: 0 */
-  let { href = "#", ...rest } = props;
+  let { href = "#", showIcon = false, externalIconProps, ...rest } = props;
   if (typeof rest.children === "string") {
     rest = { ...rest, "aria-label": rest.children };
   }
@@ -38,7 +43,15 @@ export const Button = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) =>
   if (isExternal) {
     Component = ExternalButton;
   }
-  return <Component href={target} ref={ref} {...rest} />;
+  return (
+    <Component
+      ref={ref}
+      href={target}
+      showIcon={showIcon}
+      externalIconProps={externalIconProps}
+      {...rest}
+    />
+  );
 });
 
 BaseButton.displayName = "BaseButton";

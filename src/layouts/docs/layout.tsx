@@ -1,4 +1,4 @@
-import { Accordion, chakra, Box, Flex, VStack, useBreakpointValue } from "@chakra-ui/react";
+import { Accordion, chakra, Box, Flex, VStack } from "@chakra-ui/react";
 
 import { MSubNav } from "~/components";
 import { useConfig } from "~/context";
@@ -76,20 +76,14 @@ const DNav = () => {
 export const DocsLayout = (props: BoxProps) => {
   const { children, ...rest } = props;
 
-  const largeLayout = useBreakpointValue({
-    base: false,
-    md: false,
-    lg: true,
-    xl: true,
-  });
-
   return (
     <>
-      {largeLayout ? (
-        <DLayout {...rest}>{children}</DLayout>
-      ) : (
-        <MLayout {...rest}>{children}</MLayout>
-      )}
+      <DLayout display={{ base: "none", lg: "block" }} {...rest}>
+        {children}
+      </DLayout>
+      <MLayout display={{ lg: "none" }} {...rest}>
+        {children}
+      </MLayout>
     </>
   );
 };

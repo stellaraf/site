@@ -23,7 +23,7 @@ import {
 import { StellarLogo } from "@stellaraf/logo";
 import { TitleCase } from "use-title-case";
 
-import { Button, Controls, Status, type ButtonProps } from "~/components";
+import { Button, Controls, StatusButton, type ButtonProps } from "~/components";
 import { ChevronUp } from "~/icons";
 
 import { MenuToggle } from "./menu-toggle";
@@ -46,7 +46,6 @@ const NavButton = (props: ChakraButtonProps & NextLinkProps) => (
 
 const LoginButton = (props: ButtonProps) => (
   <Button
-    w="50%"
     target="_blank"
     variant="outline"
     borderWidth="1px"
@@ -78,11 +77,14 @@ const MenuSection = (props: MenuSectionProps) => {
           size="lg"
           href={href}
           variant="ghost"
-          onClick={onClose}
+          _hover={{ bg: "none" }}
+          _focus={{ bg: "none" }}
+          _active={{ bg: "none" }}
           justifyContent="flex-start"
+          as={href ? NextLink : undefined}
+          onClick={href ? onClose : onToggle}
           color={isOpen ? "primary.500" : "inherit"}
           _dark={{ color: isOpen ? "tertiary.200" : "inherit" }}
-          as={href ? NextLink : undefined}
         >
           <Text as="span">
             <TitleCase>{title}</TitleCase>
@@ -226,9 +228,11 @@ export const MobileDrawer = (
           </DrawerBody>
           <DrawerFooter>
             <HStack w="100%" justify="space-between">
-              <Status fontSize={{ base: "md", md: "lg" }} size="16px" />
-              <LoginButton />
-              <Controls.Mobile />
+              <StatusButton fontSize={{ base: "md", md: "lg" }} size="16px" />
+              <HStack>
+                <LoginButton fontSize={{ base: "md", md: "lg" }} />
+                <Controls.Mobile />
+              </HStack>
             </HStack>
           </DrawerFooter>
         </DrawerContent>

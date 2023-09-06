@@ -20,12 +20,14 @@ export const DocsArticle = (props: React.PropsWithChildren<DocsPage>) => {
 
   return (
     <Article {...rest}>
-      <Flex direction="column" align="flex-start">
-        <Content.Title id={generatedSlug}>{title}</Content.Title>
+      <Flex direction="column" align="flex-start" textAlign="left">
+        <Content.Title textAlign="left" id={generatedSlug}>
+          {title}
+        </Content.Title>
         {showUpdatedDate && <Content.UpdatedAt time={updated} />}
       </Flex>
       <Box>
-        <Content.Body maxW="unset">
+        <Content.Body textAlign="left" maxW="unset">
           <RichText content={body} />
         </Content.Body>
         {typeof children !== "undefined" && children}

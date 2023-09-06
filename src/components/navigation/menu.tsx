@@ -56,7 +56,8 @@ const NavButton = chakra(Button, {
     mr: { lg: 4, xl: 8 },
     _hover: { opacity: 1 },
     _focus: { border: "none" },
-    px: { lg: 2, xl: 3, "2xl": 6 },
+    _focusVisible: { border: "none" },
+    px: { lg: 3, "2xl": 6 },
   },
 });
 
@@ -165,7 +166,6 @@ export const Menu = (props: MenuProps) => {
     <ChakraMenu
       isLazy
       offset={[0, 0]}
-      placement="auto-end"
       lazyBehavior="keepMounted"
       initialFocusRef={focusRef}
       {...disclosure}
@@ -184,6 +184,7 @@ export const Menu = (props: MenuProps) => {
           fontWeight: isActive ? "bold" : "medium",
         }}
         _focus={{ border: "none" }}
+        _focusVisible={{ border: "none" }}
       >
         {title}
       </MenuButton>

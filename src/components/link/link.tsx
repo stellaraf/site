@@ -3,36 +3,31 @@ import { forwardRef } from "react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 
-import { chakra, Link as ChakraLink } from "@chakra-ui/react";
+import { chakra } from "@chakra-ui/react";
 
-import { useLinkType, useColorTokenValue } from "~/hooks";
+import { useLinkType } from "~/hooks";
 import { ExternalLink as ExternalLinkIcon } from "~/icons";
+import { shouldForwardProp } from "~/theme";
 
 import type { LinkProps } from "./types";
 import type { BoxProps } from "@chakra-ui/react";
 
-const BaseLink = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
-  const borderColor = useColorTokenValue("secondary.500", "secondary.300");
-
-  return (
-    <ChakraLink
-      ref={ref}
-      css={{
-        "&": { "--link-color": borderColor },
-        "p > &, .st-content-p > &, td > &, li > &": {
-          borderBottomWidth: "1px",
-          borderBottomColor: "var(--link-color)",
-          color: "inherit",
-          transition: "all 0.2s ease-in-out",
-          "&:hover": {
-            textDecoration: "none",
-            color: "var(--link-color)",
-          },
-        },
-      }}
-      {...props}
-    />
-  );
+const BaseLink = chakra("a", {
+  shouldForwardProp,
+  baseStyle: {
+    "--link-color": "colors.secondary.500",
+    _dark: { "--link-color": "colors.secondary.300" },
+    "p > &, .st-content-p > &, td > &, li > &": {
+      borderBottomWidth: "1px",
+      borderBottomColor: "var(--link-color)",
+      color: "inherit",
+      transition: "all 0.2s ease-in-out",
+      "&:hover": {
+        textDecoration: "none",
+        color: "var(--link-color)",
+      },
+    },
+  },
 });
 
 /**

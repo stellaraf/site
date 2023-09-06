@@ -38,7 +38,12 @@ export const DesktopLinks = (props: FooterLinksProps) => {
         >
           {row.map(({ group, items }) => {
             return (
-              <Box key={group} zIndex={1} gridColumn="span 2">
+              <Box
+                key={group}
+                zIndex={1}
+                gridColumn="span 2"
+                sx={{ "& a": { borderBottom: "none" }, "& ul li a:hover": { color: "inherit" } }}
+              >
                 <Text as="label" mb={8}>
                   {fnTitle(group)}
                 </Text>
@@ -54,7 +59,7 @@ export const DesktopLinks = (props: FooterLinksProps) => {
                         p={1}
                         opacity={0.6}
                         fontSize={{ base: "xs", lg: "sm" }}
-                        css={{ "&:focus": { borderRadius } }}
+                        _focus={{ borderRadius }}
                         showIcon={item.external && item.showIcon}
                         _hover={{ textDecoration: "none", opacity: 0.9 }}
                         href={item.external ? item.slug : `/${item.slug}`}

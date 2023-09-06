@@ -5,13 +5,14 @@ import { useTitleCase } from "use-title-case";
 
 import { useSlug } from "~/hooks";
 import { getTextValueFromReactNode } from "~/lib";
+import { shouldForwardProp } from "~/theme";
 
 import type { Headings, HeadingLevel } from "./types";
 import type { HeadingProps } from "@chakra-ui/react";
 import type { SystemStyleObject } from "@chakra-ui/styled-system";
 
 function createHeading(level: HeadingLevel, baseStyle: SystemStyleObject): React.FC<HeadingProps> {
-  const Base = chakra("h2", { baseStyle: { mb: 2, mt: 12, ...baseStyle } });
+  const Base = chakra("h2", { baseStyle: { mb: 2, mt: 12, ...baseStyle }, shouldForwardProp });
 
   const HeadingComponent = (props: HeadingProps): JSX.Element => {
     const { children, ...rest } = props;
