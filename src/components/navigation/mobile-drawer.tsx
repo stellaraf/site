@@ -3,34 +3,34 @@ import { Fragment } from "react";
 import NextLink, { type LinkProps as NextLinkProps } from "next/link";
 
 import {
-  Button as ChakraButton,
-  Collapse,
   Text,
   Flex,
+  Stack,
   Drawer,
+  HStack,
+  Collapse,
   DrawerBody,
-  Icon,
-  DrawerContent,
   DrawerHeader,
   DrawerFooter,
-  Stack,
-  HStack,
-  useDisclosure,
   useColorMode,
+  DrawerContent,
+  useDisclosure,
+  Icon as ChakraIcon,
+  Button as ChakraButton,
   type ButtonProps as ChakraButtonProps,
   type UseDisclosureReturn,
 } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
 import { TitleCase } from "use-title-case";
 
-import { Button, Controls, StatusButton, type ButtonProps } from "~/components";
-import { ChevronUp } from "~/icons";
+import { Button, Controls, Icon, StatusButton, type ButtonProps } from "~/components";
+import { ChevronUp, ExternalLink } from "~/icons";
 
 import { MenuToggle } from "./menu-toggle";
 
 import type { MenuProps, MenuSectionProps, HeaderProps, PopoverIconProps } from "./types";
 
-const NavButton = (props: ChakraButtonProps & NextLinkProps) => (
+const NavButton = (props: ChakraButtonProps & NextLinkProps & React.AnchorHTMLAttributes<"a">) => (
   <ChakraButton
     py={4}
     as={NextLink}
@@ -64,7 +64,7 @@ const PopoverIcon = (props: PopoverIconProps) => {
     transition: "transform 0.2s",
     transformOrigin: "center",
   };
-  return <Icon aria-hidden as={ChevronUp} __css={iconStyles} {...rest} />;
+  return <ChakraIcon aria-hidden as={ChevronUp} __css={iconStyles} {...rest} />;
 };
 
 const MenuSection = (props: MenuSectionProps) => {
@@ -109,18 +109,26 @@ const MenuSection = (props: MenuSectionProps) => {
       </Flex>
       <Collapse in={isOpen} animateOpacity {...rest}>
         <Stack spacing="1" alignItems="stretch" ps={4}>
-          {items.map(item => (
-            <NavButton
-              ps={6}
-              size="sm"
-              key={item.title}
-              href={item.href}
-              onClick={onClose}
-              justifyContent="start"
-            >
-              <TitleCase>{item.title}</TitleCase>
-            </NavButton>
-          ))}
+          {items.map(item => {
+            const isExternal = item.showIcon && !item.icon && item.href.startsWith("http");
+            return (
+              <NavButton
+                ps={6}
+                size="sm"
+                key={item.title}
+                href={item.href}
+                onClick={onClose}
+                justifyContent="start"
+                target={isExternal ? "_blank" : undefined}
+                sx={{ "& > span.chakra-button__icon": { ms: 1 } }}
+                rightIcon={
+                  isExternal ? <Icon size={6} icon={ExternalLink} noBackground /> : undefined
+                }
+              >
+                <TitleCase>{item.title}</TitleCase>
+              </NavButton>
+            );
+          })}
         </Stack>
       </Collapse>
     </>
