@@ -26,6 +26,11 @@ import { useIsActive } from "./use-is-active";
 
 import type { MenuProps, MenuItemProps, MenuSectionProps } from "./types";
 
+const noFocus = {
+  _focus: { border: "none", boxShadow: "none" },
+  _focusVisible: { border: "none", boxShadow: "none" },
+};
+
 const activeAfterProps = {
   left: 0,
   right: 0,
@@ -55,9 +60,8 @@ const NavButton = chakra(Button, {
     fontWeight: "medium",
     mr: { lg: 4, xl: 8 },
     _hover: { opacity: 1 },
-    _focus: { border: "none" },
-    _focusVisible: { border: "none" },
     px: { lg: 3, "2xl": 6 },
+    ...noFocus,
   },
 });
 
@@ -183,8 +187,7 @@ export const Menu = (props: MenuProps) => {
           _after: isActive ? activeDarkAfterProps : {},
           fontWeight: isActive ? "bold" : "medium",
         }}
-        _focus={{ border: "none" }}
-        _focusVisible={{ border: "none" }}
+        {...noFocus}
       >
         {title}
       </MenuButton>
