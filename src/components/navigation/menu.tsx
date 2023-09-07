@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { TitleCase } from "use-title-case";
 
-import { Icon } from "~/components";
+import { Icon, StatusButton } from "~/components";
 import { ExternalLink } from "~/icons";
 
 import { useIsActive } from "./use-is-active";
@@ -199,7 +199,6 @@ export const Menu = (props: MenuProps) => {
           zIndex="overlay"
           borderRadius="lg"
           onFocus={disclosure.onOpen}
-          onBlur={disclosure.onClose}
           backgroundColor="light.500"
           _light={{ boxShadow: "lg" }}
           borderColor="blackAlpha.300"
@@ -218,6 +217,16 @@ export const Menu = (props: MenuProps) => {
           {sections.map(section => (
             <MenuSection key={section.title} columns={columns} {...section} />
           ))}
+          {title === "Cloud" && (
+            <>
+              <MenuDivider
+                mx={-4}
+                key={`${title}--divider-1`}
+                _dark={{ bg: "tertiary.300", opacity: 0.5 }}
+              />
+              <StatusButton variant="ghost" />
+            </>
+          )}
         </MenuList>
       </Portal>
     </ChakraMenu>

@@ -1,7 +1,7 @@
 import NextLink from "next/link";
 
 import { Box, Flex, Button, Heading } from "@chakra-ui/react";
-import { useTitleCase } from "use-title-case";
+import { TitleCase } from "use-title-case";
 
 import { Card, CardBody, Icon, RichText } from "~/components";
 import { useSlug } from "~/hooks";
@@ -14,7 +14,6 @@ import type { Actions } from "~/queries";
 export const Action = (props: ArrayElement<Actions>) => {
   const { body, page, title, subtitle, callToAction } = props;
 
-  const titleMe = useTitleCase();
   const resolvedBody = useBody(callToAction.body, body, page?.body);
 
   const slug = useSlug(title, [title]);
@@ -23,26 +22,32 @@ export const Action = (props: ArrayElement<Actions>) => {
     <NextLink href={`${page?.slug}#${slug}`} scroll={false}>
       <Button
         p={0}
+        zIndex={1}
         rounded="lg"
         display="flex"
         height="unset"
         flex="1 0 100%"
-        borderWidth={0}
         variant="ghost"
+        borderWidth={0}
+        color="body-fg"
         overflow="hidden"
         textAlign="unset"
         lineHeight="unset"
         borderColor="unset"
         verticalAlign="unset"
         flexDirection="column"
+        colorScheme="whiteAlpha"
+        _dark={{ colorScheme: "blackAlpha" }}
       >
         <Card width={{ base: "20rem", md: "18rem", xl: "sm" }} maxHeight={64} zIndex={1}>
           <CardBody
-            textAlign="left"
-            alignItems="flex-start"
             spacing={4}
+            textAlign="left"
+            overflow="hidden"
+            alignItems="flex-start"
+            // Fade out the text
             _before={{
-              bg: "linear-gradient(transparent, 200px, white)",
+              bg: "linear-gradient(transparent, 150px, white)",
               position: "absolute",
               boxSize: "100%",
               content: "''",
@@ -50,12 +55,16 @@ export const Action = (props: ArrayElement<Actions>) => {
               top: 0,
               zIndex: 5,
             }}
-            _dark={{ _before: { bg: "linear-gradient(transparent, 200px, black)" } }}
+            _dark={{
+              _before: {
+                bg: "linear-gradient(transparent, 150px, var(--chakra-colors-blackSolid-800))",
+              },
+            }}
           >
             <Flex align="flex-start" justify="space-between" width="100%">
               <Flex flexDir="column" maxW="80%">
                 <Heading fontSize={{ base: "md", md: "md" }} whiteSpace="pre-wrap">
-                  {titleMe(title)}
+                  <TitleCase>{title}</TitleCase>
                 </Heading>
                 {is(page) && (
                   <Heading
@@ -90,7 +99,7 @@ export const Action = (props: ArrayElement<Actions>) => {
               fontWeight="normal"
               whiteSpace="pre-line"
               css={{
-                "& p": {
+                "& p, & .st-content-p": {
                   marginTop: "unset",
                   marginBottom: "unset",
                   textOverflow: "ellipsis",

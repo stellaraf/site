@@ -76,6 +76,7 @@ const MenuSection = (props: MenuSectionProps) => {
         <ChakraButton
           size="lg"
           href={href}
+          width="100%"
           variant="ghost"
           _hover={{ bg: "none" }}
           _focus={{ bg: "none" }}
@@ -92,13 +93,11 @@ const MenuSection = (props: MenuSectionProps) => {
         </ChakraButton>
         <ChakraButton
           size="lg"
-          width="100%"
           variant="ghost"
           onClick={onToggle}
           _hover={{ bg: "none" }}
           _focus={{ bg: "none" }}
           _active={{ bg: "none" }}
-          justifyContent="flex-end"
         >
           <PopoverIcon
             isOpen={isOpen}

@@ -12,8 +12,41 @@ import type { Engine } from "tsparticles-engine";
 
 export type ParticlesOptions = NonNullable<ParticlesProps["options"]>;
 
-const DEFAULT_OPTIONS = {
+const DEFAULT_OPTIONS: ParticlesOptions = {
   detectRetina: true,
+  responsive: [
+    {
+      mode: "screen",
+      maxWidth: 991,
+      options: {
+        interactivity: {},
+      },
+    },
+    {
+      mode: "screen",
+      maxWidth: 5000,
+      options: {
+        interactivity: {
+          events: {
+            onClick: {
+              enable: true,
+              mode: "push",
+            },
+            onHover: {
+              enable: true,
+              mode: "connect",
+            },
+          },
+          modes: {
+            connect: { distance: 100, radius: 200, links: { opacity: 0.2 } },
+            push: {
+              quantity: 2,
+            },
+          },
+        },
+      },
+    },
+  ],
   particles: {
     shape: { type: "circle" },
     number: {
@@ -47,27 +80,9 @@ const DEFAULT_OPTIONS = {
       },
     },
   },
-  interactivity: {
-    events: {
-      onClick: {
-        enable: true,
-        mode: "push",
-      },
-      onHover: {
-        enable: true,
-        mode: "connect",
-      },
-    },
-    modes: {
-      connect: { distance: 100, radius: 200, links: { opacity: 0.2 } },
-      push: {
-        quantity: 2,
-      },
-    },
-  },
-} as ParticlesOptions;
+};
 
-const konamiOptions: ParticlesOptions = {
+const KONAMI_OPTIONS: ParticlesOptions = {
   detectRetina: true,
   particles: {
     shape: { type: "circle" },
@@ -112,15 +127,19 @@ const konamiOptions: ParticlesOptions = {
   },
 };
 
-const Base = (particleProps: ParticlesProps) => {
+function useOptions(): ParticlesOptions {
   const [konami] = useKonami();
 
-  const options = useMemo(() => {
+  return useMemo<ParticlesOptions>(() => {
     if (konami) {
-      return konamiOptions;
+      return KONAMI_OPTIONS;
     }
     return DEFAULT_OPTIONS;
   }, [konami]);
+}
+
+const Base = (particleProps: ParticlesProps) => {
+  const options = useOptions();
 
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
