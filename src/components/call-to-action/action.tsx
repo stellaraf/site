@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 
-import { Box, Flex, Button, Heading } from "@chakra-ui/react";
+import { Box, Flex, Button, Heading, useColorModeValue } from "@chakra-ui/react";
 import { TitleCase } from "use-title-case";
 
 import { Card, CardBody, Icon, RichText } from "~/components";
@@ -17,6 +17,8 @@ export const Action = (props: ArrayElement<Actions>) => {
   const resolvedBody = useBody(callToAction.body, body, page?.body);
 
   const slug = useSlug(title, [title]);
+
+  const colorScheme = useColorModeValue("whiteAlpha", "blackAlpha");
 
   return (
     <NextLink href={`${page?.slug}#${slug}`} scroll={false}>
@@ -36,8 +38,7 @@ export const Action = (props: ArrayElement<Actions>) => {
         borderColor="unset"
         verticalAlign="unset"
         flexDirection="column"
-        colorScheme="whiteAlpha"
-        _dark={{ colorScheme: "blackAlpha" }}
+        colorScheme={colorScheme}
       >
         <Card width={{ base: "20rem", md: "18rem", xl: "sm" }} maxHeight={64} zIndex={1}>
           <CardBody

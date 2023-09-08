@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 
-import { Box, Button, Heading, Divider, HStack } from "@chakra-ui/react";
+import { Box, Button, Heading, Divider, HStack, useColorModeValue } from "@chakra-ui/react";
 import { TitleCase } from "use-title-case";
 
 import { Card, CardBody, Icon, RichText } from "~/components";
@@ -10,6 +10,8 @@ import type { DocsGroup } from "~/queries";
 
 export const DocsGroupCard = (props: DocsGroup) => {
   const { slug, title, summary, subtitle, callToAction } = props;
+
+  const colorScheme = useColorModeValue("whiteAlpha", "blackAlpha");
 
   return (
     <NextLink href={`/docs/${slug}`} scroll={false}>
@@ -29,8 +31,7 @@ export const DocsGroupCard = (props: DocsGroup) => {
         borderColor="unset"
         verticalAlign="unset"
         flexDirection="column"
-        colorScheme="whiteAlpha"
-        _dark={{ colorScheme: "blackAlpha" }}
+        colorScheme={colorScheme}
       >
         <Card width={{ base: "20rem", md: "18rem", xl: "24rem" }} maxHeight={80} zIndex={1}>
           <CardBody

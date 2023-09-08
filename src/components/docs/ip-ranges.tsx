@@ -58,7 +58,6 @@ export const IPRanges = () => {
                 target="_blank"
                 href={`${URL}/${href}`}
                 colorScheme="gray"
-                _dark={{ colorScheme: "tertiary" }}
                 size={{ base: "xs", lg: "md" }}
               >
                 {title}

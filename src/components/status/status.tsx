@@ -45,8 +45,8 @@ export const StatusButton = (props: StatusButtonProps) => {
       href={statusUrl}
       variant="outline"
       alignItems="center"
-      colorScheme="primary"
       display="inline-flex"
+      colorScheme="primary"
       fontSize={{ base: "xs", lg: "sm" }}
       externalIconProps={{ mb: 0, mx: 0 }}
       leftIcon={<Dot status={status} size={size} mr={0} />}

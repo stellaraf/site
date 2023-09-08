@@ -10,6 +10,7 @@ import {
   useDisclosure,
   DrawerOverlay,
   DrawerContent,
+  useColorModeValue,
   type UseDisclosureReturn,
 } from "@chakra-ui/react";
 import { BoxProps, IconProps } from "@chakra-ui/react";
@@ -48,6 +49,7 @@ const Dots = (props: IconProps) => (
 export const MSubNav = (props: BoxProps) => {
   const { children, ...rest } = props;
   const disclosure = useDisclosure();
+  const colorScheme = useColorModeValue("primary", "dark");
 
   return (
     <Nav {...rest}>
@@ -55,9 +57,8 @@ export const MSubNav = (props: BoxProps) => {
         <MobileSubNavContext.Provider value={disclosure}>
           <Button
             borderRadius="1rem"
-            colorScheme="primary"
+            colorScheme={colorScheme}
             onClick={disclosure.onToggle}
-            _dark={{ colorScheme: "dark" }}
             aria-label="Open Sub-Navigation"
           >
             <Dots />

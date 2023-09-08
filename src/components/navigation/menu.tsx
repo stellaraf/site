@@ -14,6 +14,7 @@ import {
   SimpleGrid,
   MenuDivider,
   useDisclosure,
+  useColorModeValue,
   Menu as ChakraMenu,
   MenuItem as ChakraMenuItem,
 } from "@chakra-ui/react";
@@ -137,6 +138,8 @@ export const Menu = (props: MenuProps) => {
   const focusRef = useRef(null);
   const disclosure = useDisclosure();
 
+  const colorScheme = useColorModeValue("primary", "whiteSolid");
+
   const slugs = useMemo(() => {
     let initial: string[] = [];
     if (href) {
@@ -207,7 +210,7 @@ export const Menu = (props: MenuProps) => {
           _dark={{
             borderColor: "whiteAlpha.300",
             backgroundColor: "blackAlpha.700",
-            backdropFilter: "blur(8px)",
+            backdropFilter: "blur(10px)",
           }}
           sx={{
             "& .chakra-menu__group:not(:last-of-type)": { mb: 6 },
@@ -224,7 +227,7 @@ export const Menu = (props: MenuProps) => {
                 key={`${title}--divider-1`}
                 _dark={{ bg: "tertiary.300", opacity: 0.5 }}
               />
-              <StatusButton variant="ghost" />
+              <StatusButton variant="ghost" colorScheme={colorScheme} />
             </>
           )}
         </MenuList>
