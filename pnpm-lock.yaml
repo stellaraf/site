@@ -65,9 +65,6 @@ dependencies:
   graphql:
     specifier: ^16.8.0
     version: 16.8.0
-  hamburger-react:
-    specifier: ^2.5.0
-    version: 2.5.0(react@18.2.0)
   isbot:
     specifier: ^3.6.2
     version: 3.6.2
@@ -6110,14 +6107,6 @@ packages:
     dependencies:
       duplexer: 0.1.2
     dev: true
-
-  /hamburger-react@2.5.0(react@18.2.0):
-    resolution: {integrity: sha512-5GSXe+ucxTPJ0SkhIsPQ/PRDweZPIKya1lfahAuExx31SdheeUA4uOPfQIAirbKona8hvo79VDr5LJQzPXsdpw==}
-    peerDependencies:
-      react: ^16.8 || ^17 || ^18
-    dependencies:
-      react: 18.2.0
-    dev: false
 
   /has-bigints@1.0.2:
     resolution: {integrity: sha512-tSvCKtBr9lkF0Ex0aQiP9N+OpV4zi2r/Nee5VkRDbaqv35RLYMzbwQfFSZZH0kR+Rd6302UJZ2p/bJCEoR3VoQ==}
