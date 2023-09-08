@@ -70,14 +70,8 @@ export const Favicons = (props: FaviconsProps) => {
   ];
 
   const metaTags: MetaTags = [
-    { name: "mobile-web-app-capable", content: "yes" },
     { name: "theme-color", content: theme },
     { name: "application-name", content: organizationName },
-    { name: "apple-mobile-web-app-capable", content: "yes" },
-    { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
-    { name: "apple-mobile-web-app-title", content: organizationName },
-    { name: "msapplication-TileColor", content: "#fff" },
-    { name: "msapplication-TileImage", content: `/api/favicon?m=${colorMode}&w=144&h=144&a=true` },
   ];
 
   return <NextSeo additionalLinkTags={linkTags} additionalMetaTags={metaTags} />;

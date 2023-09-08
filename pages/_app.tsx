@@ -132,8 +132,8 @@ const Site = (props: AppProps<SiteProps>) => {
         />
 
         <Favicons
-          light={theme.colors.primary}
-          dark={theme.colors.secondary}
+          light={theme.colors.light}
+          dark={theme.colors.primary}
           organizationName={organizationName}
         />
         <SiteLayout actions={actions} footers={footers} menus={menus}>

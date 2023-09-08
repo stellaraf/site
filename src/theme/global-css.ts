@@ -25,6 +25,12 @@ export const globalStyles = {
   [zIndexKeys]: {
     zIndex: 1,
   },
+  ":root,:root[data-theme],:root[data-theme=light]": {
+    "--system-theme-color": "var(--chakra-colors-body-bg)",
+  },
+  ":root[data-theme=dark]": {
+    "--system-theme-color": "var(--chakra-colors-primary-500)",
+  },
   html: { scrollBehavior: "smooth" },
   body: {
     bg: "body-bg",

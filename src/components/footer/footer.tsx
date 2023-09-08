@@ -2,8 +2,6 @@ import dynamic from "next/dynamic";
 
 import { Box, HStack, VStack, type StackProps } from "@chakra-ui/react";
 
-import { Controls } from "~/components/controls";
-
 import { Copyright } from "./copyright";
 import { DesktopLinks } from "./desktop-links";
 import { MobileLinks } from "./mobile-links";
@@ -28,7 +26,6 @@ const DBottom = (props: StackProps) => (
 
 const MBottom = (props: StackProps) => (
   <VStack justify="space-between" align="center" mb={8} mt={12} spacing={12} {...props}>
-    <Controls.Mobile />
     <Subscribe width="100%" align="center" />
     <VStack align="flex-start" spacing={12}>
       <SocialLinks />
