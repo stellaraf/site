@@ -7,19 +7,17 @@ import type { BackdropProps } from "./types";
 const Base = chakra("div", {
   shouldForwardProp,
   baseStyle: {
-    mx: "auto",
     zIndex: 1,
+    mx: "auto",
     pos: "relative",
     cursor: "pointer",
     overflow: "hidden",
-    borderStyle: "solid",
-    width: { base: "100%", lg: "75%", xl: "50%" },
     borderRadius: "lg",
+    borderStyle: "solid",
     borderWidth: "0.1rem",
     borderColor: "blackAlpha.200",
-    _dark: {
-      borderColor: "whiteAlpha.300",
-    },
+    _dark: { borderColor: "whiteAlpha.300" },
+    width: { base: "100%", lg: "75%", xl: "50%" },
   },
 });
 
@@ -41,6 +39,10 @@ const ChildContainer = chakra("div", {
   shouldForwardProp,
   baseStyle: {
     p: 2,
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "center",
   },
 });
 
