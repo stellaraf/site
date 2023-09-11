@@ -94,7 +94,7 @@ export const getStaticProps: GetStaticProps<BlogTagPageProps, Query> = async ctx
 export const getStaticPaths: GetStaticPaths<Query> = async () => {
   const tags = await blogPostTagsQuery({});
   const paths = tags.map(tag => ({ params: { tag } }));
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 export default Page;

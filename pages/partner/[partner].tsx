@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
   const pages = await pageStaticPathsQuery({ startsWith: "partner" });
   const paths = pages.map(partner => ({ params: { partner } }));
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 export default PartnerPage;

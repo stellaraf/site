@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps<PageProps, UrlQuery> = async ctx => 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
   const pages = await pageStaticPathsQuery({ startsWith: "security" });
   const paths = pages.map(page => ({ params: { page } }));
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 export default SecurityPage;

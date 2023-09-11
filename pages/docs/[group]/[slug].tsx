@@ -79,7 +79,7 @@ export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
       paths = [...paths, { params: { group, slug } }];
     }
   }
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 export default DocsPage;
