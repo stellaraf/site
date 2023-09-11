@@ -28,7 +28,7 @@ export const BlogPosts = (props: BlogPostsProps) => {
         spacing={8}
         justify="center"
         overflow="visible"
-        direction={{ base: "column", lg: "row" }}
+        direction={{ base: "column", md: "row" }}
       >
         {blogPosts.length === 0 ? (
           <Heading as="h4">No Posts Found</Heading>

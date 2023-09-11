@@ -32,14 +32,18 @@ export const BlogPreview = (props: BlogPost) => {
         verticalAlign="unset"
         flexDirection="column"
       >
-        <Card width={{ base: "20rem", md: "18rem", xl: "sm" }} maxHeight={64} zIndex={1}>
+        <Card
+          zIndex={1}
+          p={{ base: 6, lg: 8 }}
+          maxHeight={{ base: 72, md: 64 }}
+          height={{ base: "unset", md: "md" }}
+          width={{ base: "20rem", md: "18rem", xl: "sm" }}
+        >
           <CardBody spacing={4} textAlign="left" alignItems="flex-start">
-            <Flex align="flex-start" justify="space-between" width="100%">
-              <Flex flexDir="column" maxW="80%">
-                <Heading fontSize={{ base: "md", md: "md" }} whiteSpace="pre-wrap">
-                  {titleMe(title)}
-                </Heading>
-              </Flex>
+            <Flex flexDir="column" align="flex-start" justify="space-between" width="100%">
+              <Heading fontSize={{ base: "md", md: "md" }} whiteSpace="pre-wrap">
+                {titleMe(title)}
+              </Heading>
             </Flex>
             <Heading as="h4" fontSize="sm" fontWeight="light" whiteSpace="pre-wrap">
               {description}
