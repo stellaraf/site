@@ -83,7 +83,7 @@ export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
   for (const slug of posts) {
     paths = [...paths, { params: { slug } }];
   }
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 export default Post;
