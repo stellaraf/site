@@ -50,7 +50,7 @@ export const IPRanges = () => {
             ["", "Plain Text (IPv4 & IPv6)"],
             ["ipv4", "Plain Text (IPv4 Only)"],
             ["ipv6", "Plain Text (IPv6 Only)"],
-            ["urls", "Plain Text (URLs Only)"],
+            ["url", "Plain Text (URLs Only)"],
           ].map(([href, title]) => (
             <WrapItem key={title}>
               <Button
