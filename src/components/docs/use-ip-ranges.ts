@@ -7,7 +7,7 @@ import type { UseQueryResult, QueryFunction } from "@tanstack/react-query";
 type IPRanges = {
   ipv4: string[];
   ipv6: string[];
-  urls: string[];
+  url: string[];
 };
 
 const queryFn: QueryFunction<IPRanges, string[]> = async ctx => {

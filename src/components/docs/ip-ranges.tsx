@@ -37,7 +37,7 @@ export const IPRanges = () => {
       <Box>
         <Heading as="h3" size="md">{`Domains & URLs`}</Heading>
         <Skeleton isLoaded={isSuccess}>
-          {isSuccess && <CodeBlock>{data.urls.join("\n")}</CodeBlock>}
+          {isSuccess && <CodeBlock>{data.url.join("\n")}</CodeBlock>}
         </Skeleton>
       </Box>
       <Box w="100%">
