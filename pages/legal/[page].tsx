@@ -27,7 +27,14 @@ const LegalPage: NextPage<PageProps> = props => {
     <>
       <Box minH="10vh" />
       {contents.map((sect, i) => {
-        return <ContentSection index={i} content={sect} key={sect.title} />;
+        return (
+          <ContentSection
+            index={i}
+            content={sect}
+            key={sect.title}
+            sx={{ "& .__st-content-body": { textAlign: "left", maxW: "100%" } }}
+          />
+        );
       })}
     </>
   );
