@@ -80,6 +80,9 @@ dependencies:
   next-seo:
     specifier: ^6.1.0
     version: 6.1.0(next@13.4.19)(react-dom@18.2.0)(react@18.2.0)
+  p-throttle:
+    specifier: ^5.1.0
+    version: 5.1.0
   palette-by-numbers:
     specifier: ^0.1.6
     version: 0.1.6
@@ -7359,6 +7362,11 @@ packages:
     dependencies:
       aggregate-error: 3.1.0
     dev: true
+
+  /p-throttle@5.1.0:
+    resolution: {integrity: sha512-+N+s2g01w1Zch4D0K3OpnPDqLOKmLcQ4BvIFq3JC0K29R28vUOjWpO+OJZBNt8X9i3pFCksZJZ0YXkUGjaFE6g==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dev: false
 
   /p-try@2.2.0:
     resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}

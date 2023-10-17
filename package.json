@@ -30,6 +30,7 @@
     "libphonenumber-js": "^1.10.43",
     "next": "13.4.19",
     "next-seo": "^6.1.0",
+    "p-throttle": "^5.1.0",
     "palette-by-numbers": "^0.1.6",
     "plyr-react": "^5.3.0",
     "query-string": "^7.1.1",

@@ -1,4 +1,5 @@
 import { mergeWith } from "@chakra-ui/merge-utils";
+import pThrottle from "p-throttle";
 
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
 import type { DocumentNode } from "graphql";
@@ -8,6 +9,11 @@ export interface QueryFunctionOptions<TData, TVars> {
   variables?: TVars;
   init?: Omit<RequestInit, "body" | "url">;
 }
+
+const throttler = pThrottle({
+  limit: 5,
+  interval: 5 * 1_000,
+});
 
 export async function queryFn<TData, TVars>(
   options: QueryFunctionOptions<TData, TVars>,
@@ -23,7 +29,9 @@ export async function queryFn<TData, TVars>(
     init,
   );
 
-  const res = await fetch(process.env.HYGRAPH_API_ENDPOINT, requestInit);
+  const throttled = throttler(async (url: string, init: RequestInit) => fetch(url, init));
+
+  const res = await throttled(process.env.HYGRAPH_API_ENDPOINT, requestInit);
   const json = (await res.json()) as GraphQLResponse<NonNullable<TData>>;
 
   if ("errors" in json) {
