@@ -3,6 +3,7 @@ import { UAParser } from "ua-parser-js";
 import { all, is } from "~/lib";
 
 import type { UserData } from "./types";
+import type { IncomingHttpHeaders } from "http";
 import type { NextApiRequest } from "next";
 
 export function parseUserAgent(request: NextApiRequest): UserData {
@@ -27,4 +28,19 @@ export function parseUserAgent(request: NextApiRequest): UserData {
     userData["User Agent"] = userAgent;
   }
   return userData;
+}
+
+export function formNameFromHeaders(headers: IncomingHttpHeaders): string {
+  const _default = "unknown";
+  const formName = headers["x-form-name"] ?? _default;
+  if (Array.isArray(formName)) {
+    if (formName.length !== 0) {
+      const name = formName[0];
+      if (name !== "") {
+        return name;
+      }
+    }
+    return _default;
+  }
+  return formName;
 }
