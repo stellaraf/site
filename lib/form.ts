@@ -7,7 +7,7 @@ export async function submitForm(name: string, data: unknown): Promise<Response 
       const url = `${window.location.origin}/api/form/${formName}`;
       const response = await fetch(url, {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json", "x-form-name": name },
         body: JSON.stringify(data),
       });
       return response;

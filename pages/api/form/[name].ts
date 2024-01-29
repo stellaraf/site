@@ -1,4 +1,4 @@
-import { handleSalesForm, handleSupportForm, handleSubscribe } from "~/lib/api";
+import { handleSalesForm, handleSupportForm, handleSubscribe, handleTrialForm } from "~/lib/api";
 
 import type { NextApiHandler, NextApiRequest } from "next";
 
@@ -10,10 +10,27 @@ const FORM_MAP = new Map<FormKeys | string, FormHandler>([
   ["support", handleSupportForm],
   ["subscribe", handleSubscribe],
   ["security-demo", handleSalesForm],
+  ["trial", handleTrialForm],
 ]);
 
 function isValidForm(form: unknown): form is FormKeys {
-  return typeof form === "string" && FORM_MAP.has(form);
+  if (typeof form === "string") {
+    for (const key of FORM_MAP.keys()) {
+      if (form.includes(key)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function getFormHandler(form: FormKeys): FormHandler | undefined {
+  for (const key of FORM_MAP.keys()) {
+    if (form.includes(key)) {
+      return FORM_MAP.get(key);
+    }
+  }
+  return undefined;
 }
 
 const handler: NextApiHandler = async (request, response) => {
@@ -30,7 +47,7 @@ const handler: NextApiHandler = async (request, response) => {
   }
   console.group(`${name} form`);
   try {
-    const handler = FORM_MAP.get(name);
+    const handler = getFormHandler(name);
     if (typeof handler === "undefined") {
       const error = `No handler defined for form '${name}'`;
       console.error(error);

@@ -11,8 +11,8 @@ import {
 import { useTitleCase } from "use-title-case";
 
 import { Card, CardBody, GenericForm, RichText } from "~/components";
-import { useGradient, useMobile } from "~/hooks";
-import { is, separate } from "~/lib";
+import { useGradient, useMobile, useAlert } from "~/hooks";
+import { is, separate, messageFromResponseOrError } from "~/lib";
 
 import { PartnerContextProvider, usePartnerCtx } from "./context";
 
@@ -99,6 +99,8 @@ const PartnerLogo = (props: VendorLogo) => {
 const FormCard = () => {
   const { contents } = usePartnerCtx();
 
+  const showAlert = useAlert();
+
   const [, pageContents] = separate(
     contents,
     "vendorLogo",
@@ -106,6 +108,22 @@ const FormCard = () => {
   );
 
   const form = pageContents.find(c => is(c.form))?.form;
+
+  form?.button.alert?.body;
+
+  const onSuccess = () => {
+    if (is(form)) {
+      showAlert({
+        message: <RichText content={form.button.alert?.body} />,
+        status: form.button.alert?.level,
+      });
+    }
+  };
+
+  const onFailure = async (result: Response | Error) => {
+    const message = await messageFromResponseOrError(result);
+    showAlert({ message, status: "error" });
+  };
 
   return (
     <Card minHeight="lg" height="min-content" w={{ base: "20rem", md: "80%", lg: "100%" }}>
@@ -118,6 +136,8 @@ const FormCard = () => {
             fields={form.fields}
             colorScheme={form.colorScheme}
             buttonProps={{ maxW: undefined }}
+            onFailure={onFailure}
+            onSuccess={onSuccess}
           />
         )}
       </CardBody>
