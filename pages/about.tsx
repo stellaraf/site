@@ -1,7 +1,15 @@
 import { Box, type BoxProps, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { EmployeeGrid, Hero, Callout, Testimonials, OfficeLocations } from "~/components";
+import {
+  EmployeeGrid,
+  Hero,
+  Callout,
+  Testimonials,
+  OfficeLocations,
+  ContentSection,
+  Divider,
+} from "~/components";
 import { getLocationTime, getHolidays } from "~/lib/server";
 import { pageQuery, employeesQuery, commonStaticPropsQuery, officeLocationsQuery } from "~/queries";
 import { Stage, type AboutPageProps } from "~/types";
@@ -27,7 +35,7 @@ const Section = (props: React.PropsWithChildren<BoxProps & Pick<AboutPageProps, 
 const About: NextPage<AboutPageProps> = props => {
   const { title, subtitle, body, contents, callout, employees, officeLocations, holidays } = props;
 
-  const [employeesSection, locationsSection] = contents;
+  const [employeesSection, valuesSection, locationsSection] = contents;
 
   return (
     <>
@@ -35,6 +43,8 @@ const About: NextPage<AboutPageProps> = props => {
       <Section title={employeesSection.title}>
         <EmployeeGrid employees={employees} />
       </Section>
+      <Divider right my={8} _light={{ opacity: 0 }} />
+      <ContentSection content={valuesSection} index={1} />
       <Section title={locationsSection.title}>
         <OfficeLocations
           officeLocations={officeLocations}

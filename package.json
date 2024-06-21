@@ -1,6 +1,6 @@
 {
   "name": "@stellaraf/site",
-  "version": "1.7.5",
+  "version": "1.7.7",
   "private": true,
   "type": "module",
   "sideEffects": false,
@@ -63,7 +63,8 @@
     "analyze:server": "BUNDLE_ANALYZE=server next build",
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
     "precommit": "pnpx lefthook run pre-commit",
-    "codegen": "graphql-codegen-esm --config codegen.ts --overwrite"
+    "codegen": "graphql-codegen-esm --config codegen.ts --overwrite",
+    "test": "vitest run"
   },
   "browserslist": {
     "production": [
@@ -114,6 +115,7 @@
     "eslint-plugin-react": "^7.33.2",
     "prettier": "^3.0.3",
     "raw-loader": "^4.0.2",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vitest": "^1.6.0"
   }
 }

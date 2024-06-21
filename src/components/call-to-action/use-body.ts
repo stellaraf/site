@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { isEmptyContent } from "~/lib";
+import { isEmptyRichText } from "~/lib";
 
 import type { RichTextValue } from "~/types";
 
@@ -10,8 +10,8 @@ import type { RichTextValue } from "~/types";
 export function useBody(...bodies: (RichTextValue | null | undefined)[]): RichTextValue | null {
   return useMemo(() => {
     for (const body of bodies) {
-      if (!isEmptyContent(body?.raw)) {
-        return body as RichTextValue;
+      if (!isEmptyRichText(body)) {
+        return body;
       }
     }
     return null;
