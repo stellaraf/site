@@ -2,10 +2,10 @@ import NextLink from "next/link";
 
 import { Tag, type TagProps, Wrap, WrapItem } from "@chakra-ui/react";
 
-import type { BlogPostTags } from "~/queries";
+import type { ContentTags } from "~/queries";
 
 interface TagsProps extends TagProps {
-  tags: BlogPostTags;
+  tags: ContentTags;
 }
 export const Tags = (props: TagsProps) => {
   const { tags, ...rest } = props;

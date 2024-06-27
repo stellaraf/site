@@ -37,7 +37,7 @@ export type Scalars = {
   RichTextAST: { input: RichTextContent; output: RichTextContent; }
 };
 
-export type Address = {
+export type Address = Entity & {
   __typename?: 'Address';
   address1: Scalars['String']['output'];
   address2?: Maybe<Scalars['String']['output']>;
@@ -581,7 +581,7 @@ export type AddressWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type Admonition = Node & {
+export type Admonition = Entity & Node & {
   __typename?: 'Admonition';
   body: RichText;
   /** The time the document was created */
@@ -1048,7 +1048,7 @@ export type Aggregate = {
   count: Scalars['Int']['output'];
 };
 
-export type Alert = {
+export type Alert = Entity & {
   __typename?: 'Alert';
   body: RichText;
   /** The unique identifier */
@@ -1456,7 +1456,7 @@ export type AlertWhereUniqueInput = {
 };
 
 /** Asset system model */
-export type Asset = Node & {
+export type Asset = Entity & Node & {
   __typename?: 'Asset';
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
@@ -2264,11 +2264,11 @@ export type BatchPayload = {
   count: Scalars['Long']['output'];
 };
 
-export type BlogPost = Node & {
+export type BlogPost = Entity & Node & {
   __typename?: 'BlogPost';
   authors: Array<Employee>;
-  blogPostTags: Array<BlogPostTag>;
   body: BlogPostBodyRichText;
+  contentTags: Array<ContentTag>;
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
   /** User that created this document */
@@ -2311,16 +2311,16 @@ export type BlogPostAuthorsArgs = {
 };
 
 
-export type BlogPostBlogPostTagsArgs = {
+export type BlogPostContentTagsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   locales?: InputMaybe<Array<Locale>>;
-  orderBy?: InputMaybe<BlogPostTagOrderByInput>;
+  orderBy?: InputMaybe<ContentTagOrderByInput>;
   skip?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<BlogPostTagWhereInput>;
+  where?: InputMaybe<ContentTagWhereInput>;
 };
 
 
@@ -2411,8 +2411,8 @@ export type BlogPostConnection = {
 
 export type BlogPostCreateInput = {
   authors?: InputMaybe<EmployeeCreateManyInlineInput>;
-  blogPostTags?: InputMaybe<BlogPostTagCreateManyInlineInput>;
   body: Scalars['RichTextAST']['input'];
+  contentTags?: InputMaybe<ContentTagCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   overrideDate?: InputMaybe<Scalars['Date']['input']>;
@@ -2457,9 +2457,9 @@ export type BlogPostManyWhereInput = {
   authors_every?: InputMaybe<EmployeeWhereInput>;
   authors_none?: InputMaybe<EmployeeWhereInput>;
   authors_some?: InputMaybe<EmployeeWhereInput>;
-  blogPostTags_every?: InputMaybe<BlogPostTagWhereInput>;
-  blogPostTags_none?: InputMaybe<BlogPostTagWhereInput>;
-  blogPostTags_some?: InputMaybe<BlogPostTagWhereInput>;
+  contentTags_every?: InputMaybe<ContentTagWhereInput>;
+  contentTags_none?: InputMaybe<ContentTagWhereInput>;
+  contentTags_some?: InputMaybe<ContentTagWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2626,464 +2626,10 @@ export enum BlogPostOrderByInput {
   UpdatedAtDesc = 'updatedAt_DESC'
 }
 
-export type BlogPostTag = Node & {
-  __typename?: 'BlogPostTag';
-  blogPosts: Array<BlogPost>;
-  /** The time the document was created */
-  createdAt: Scalars['DateTime']['output'];
-  /** User that created this document */
-  createdBy?: Maybe<User>;
-  /** Get the document in other stages */
-  documentInStages: Array<BlogPostTag>;
-  /** List of BlogPostTag versions */
-  history: Array<Version>;
-  /** The unique identifier */
-  id: Scalars['ID']['output'];
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** User that last published this document */
-  publishedBy?: Maybe<User>;
-  scheduledIn: Array<ScheduledOperation>;
-  /** System stage field */
-  stage: Stage;
-  tag: Scalars['String']['output'];
-  /** The time the document was updated */
-  updatedAt: Scalars['DateTime']['output'];
-  /** User that last updated this document */
-  updatedBy?: Maybe<User>;
-};
-
-
-export type BlogPostTagBlogPostsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  locales?: InputMaybe<Array<Locale>>;
-  orderBy?: InputMaybe<BlogPostOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<BlogPostWhereInput>;
-};
-
-
-export type BlogPostTagCreatedByArgs = {
-  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
-  locales?: InputMaybe<Array<Locale>>;
-};
-
-
-export type BlogPostTagDocumentInStagesArgs = {
-  includeCurrent?: Scalars['Boolean']['input'];
-  inheritLocale?: Scalars['Boolean']['input'];
-  stages?: Array<Stage>;
-};
-
-
-export type BlogPostTagHistoryArgs = {
-  limit?: Scalars['Int']['input'];
-  skip?: Scalars['Int']['input'];
-  stageOverride?: InputMaybe<Stage>;
-};
-
-
-export type BlogPostTagPublishedByArgs = {
-  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
-  locales?: InputMaybe<Array<Locale>>;
-};
-
-
-export type BlogPostTagScheduledInArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  locales?: InputMaybe<Array<Locale>>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<ScheduledOperationWhereInput>;
-};
-
-
-export type BlogPostTagUpdatedByArgs = {
-  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
-  locales?: InputMaybe<Array<Locale>>;
-};
-
-export type BlogPostTagConnectInput = {
-  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
-  position?: InputMaybe<ConnectPositionInput>;
-  /** Document to connect */
-  where: BlogPostTagWhereUniqueInput;
-};
-
-/** A connection to a list of items. */
-export type BlogPostTagConnection = {
-  __typename?: 'BlogPostTagConnection';
-  aggregate: Aggregate;
-  /** A list of edges. */
-  edges: Array<BlogPostTagEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-};
-
-export type BlogPostTagCreateInput = {
-  blogPosts?: InputMaybe<BlogPostCreateManyInlineInput>;
-  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
-  tag: Scalars['String']['input'];
-  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
-};
-
-export type BlogPostTagCreateManyInlineInput = {
-  /** Connect multiple existing BlogPostTag documents */
-  connect?: InputMaybe<Array<BlogPostTagWhereUniqueInput>>;
-  /** Create and connect multiple existing BlogPostTag documents */
-  create?: InputMaybe<Array<BlogPostTagCreateInput>>;
-};
-
-export type BlogPostTagCreateOneInlineInput = {
-  /** Connect one existing BlogPostTag document */
-  connect?: InputMaybe<BlogPostTagWhereUniqueInput>;
-  /** Create and connect one BlogPostTag document */
-  create?: InputMaybe<BlogPostTagCreateInput>;
-};
-
-/** An edge in a connection. */
-export type BlogPostTagEdge = {
-  __typename?: 'BlogPostTagEdge';
-  /** A cursor for use in pagination. */
-  cursor: Scalars['String']['output'];
-  /** The item at the end of the edge. */
-  node: BlogPostTag;
-};
-
-/** Identifies documents */
-export type BlogPostTagManyWhereInput = {
-  /** Logical AND on all given filters. */
-  AND?: InputMaybe<Array<BlogPostTagWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: InputMaybe<Array<BlogPostTagWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: InputMaybe<Array<BlogPostTagWhereInput>>;
-  /** Contains search across all appropriate fields. */
-  _search?: InputMaybe<Scalars['String']['input']>;
-  blogPosts_every?: InputMaybe<BlogPostWhereInput>;
-  blogPosts_none?: InputMaybe<BlogPostWhereInput>;
-  blogPosts_some?: InputMaybe<BlogPostWhereInput>;
-  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values greater than the given value. */
-  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values greater than or equal the given value. */
-  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values that are contained in given list. */
-  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  /** All values less than the given value. */
-  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values less than or equal the given value. */
-  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** Any other value that exists and is not equal to the given value. */
-  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values that are not contained in given list. */
-  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  createdBy?: InputMaybe<UserWhereInput>;
-  documentInStages_every?: InputMaybe<BlogPostTagWhereStageInput>;
-  documentInStages_none?: InputMaybe<BlogPostTagWhereStageInput>;
-  documentInStages_some?: InputMaybe<BlogPostTagWhereStageInput>;
-  id?: InputMaybe<Scalars['ID']['input']>;
-  /** All values containing the given string. */
-  id_contains?: InputMaybe<Scalars['ID']['input']>;
-  /** All values ending with the given string. */
-  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values that are contained in given list. */
-  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  id_not?: InputMaybe<Scalars['ID']['input']>;
-  /** All values not containing the given string. */
-  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
-  /** All values not ending with the given string */
-  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values that are not contained in given list. */
-  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values starting with the given string. */
-  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values greater than the given value. */
-  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values greater than or equal the given value. */
-  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values that are contained in given list. */
-  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  /** All values less than the given value. */
-  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values less than or equal the given value. */
-  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** Any other value that exists and is not equal to the given value. */
-  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values that are not contained in given list. */
-  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  publishedBy?: InputMaybe<UserWhereInput>;
-  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
-  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
-  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
-  tag?: InputMaybe<Scalars['String']['input']>;
-  /** All values containing the given string. */
-  tag_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values ending with the given string. */
-  tag_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are contained in given list. */
-  tag_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  tag_not?: InputMaybe<Scalars['String']['input']>;
-  /** All values not containing the given string. */
-  tag_not_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values not ending with the given string */
-  tag_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are not contained in given list. */
-  tag_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** All values not starting with the given string. */
-  tag_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values starting with the given string. */
-  tag_starts_with?: InputMaybe<Scalars['String']['input']>;
-  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  /** All values less than the given value. */
-  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** Any other value that exists and is not equal to the given value. */
-  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  updatedBy?: InputMaybe<UserWhereInput>;
-};
-
-export enum BlogPostTagOrderByInput {
-  CreatedAtAsc = 'createdAt_ASC',
-  CreatedAtDesc = 'createdAt_DESC',
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  PublishedAtAsc = 'publishedAt_ASC',
-  PublishedAtDesc = 'publishedAt_DESC',
-  TagAsc = 'tag_ASC',
-  TagDesc = 'tag_DESC',
-  UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC'
-}
-
-export type BlogPostTagUpdateInput = {
-  blogPosts?: InputMaybe<BlogPostUpdateManyInlineInput>;
-  tag?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type BlogPostTagUpdateManyInlineInput = {
-  /** Connect multiple existing BlogPostTag documents */
-  connect?: InputMaybe<Array<BlogPostTagConnectInput>>;
-  /** Create and connect multiple BlogPostTag documents */
-  create?: InputMaybe<Array<BlogPostTagCreateInput>>;
-  /** Delete multiple BlogPostTag documents */
-  delete?: InputMaybe<Array<BlogPostTagWhereUniqueInput>>;
-  /** Disconnect multiple BlogPostTag documents */
-  disconnect?: InputMaybe<Array<BlogPostTagWhereUniqueInput>>;
-  /** Override currently-connected documents with multiple existing BlogPostTag documents */
-  set?: InputMaybe<Array<BlogPostTagWhereUniqueInput>>;
-  /** Update multiple BlogPostTag documents */
-  update?: InputMaybe<Array<BlogPostTagUpdateWithNestedWhereUniqueInput>>;
-  /** Upsert multiple BlogPostTag documents */
-  upsert?: InputMaybe<Array<BlogPostTagUpsertWithNestedWhereUniqueInput>>;
-};
-
-export type BlogPostTagUpdateManyInput = {
-  /** No fields in updateMany data input */
-  _?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type BlogPostTagUpdateManyWithNestedWhereInput = {
-  /** Update many input */
-  data: BlogPostTagUpdateManyInput;
-  /** Document search */
-  where: BlogPostTagWhereInput;
-};
-
-export type BlogPostTagUpdateOneInlineInput = {
-  /** Connect existing BlogPostTag document */
-  connect?: InputMaybe<BlogPostTagWhereUniqueInput>;
-  /** Create and connect one BlogPostTag document */
-  create?: InputMaybe<BlogPostTagCreateInput>;
-  /** Delete currently connected BlogPostTag document */
-  delete?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Disconnect currently connected BlogPostTag document */
-  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Update single BlogPostTag document */
-  update?: InputMaybe<BlogPostTagUpdateWithNestedWhereUniqueInput>;
-  /** Upsert single BlogPostTag document */
-  upsert?: InputMaybe<BlogPostTagUpsertWithNestedWhereUniqueInput>;
-};
-
-export type BlogPostTagUpdateWithNestedWhereUniqueInput = {
-  /** Document to update */
-  data: BlogPostTagUpdateInput;
-  /** Unique document search */
-  where: BlogPostTagWhereUniqueInput;
-};
-
-export type BlogPostTagUpsertInput = {
-  /** Create document if it didn't exist */
-  create: BlogPostTagCreateInput;
-  /** Update document if it exists */
-  update: BlogPostTagUpdateInput;
-};
-
-export type BlogPostTagUpsertWithNestedWhereUniqueInput = {
-  /** Upsert data */
-  data: BlogPostTagUpsertInput;
-  /** Unique document search */
-  where: BlogPostTagWhereUniqueInput;
-};
-
-/** This contains a set of filters that can be used to compare values internally */
-export type BlogPostTagWhereComparatorInput = {
-  /** This field can be used to request to check if the entry is outdated by internal comparison */
-  outdated_to?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** Identifies documents */
-export type BlogPostTagWhereInput = {
-  /** Logical AND on all given filters. */
-  AND?: InputMaybe<Array<BlogPostTagWhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: InputMaybe<Array<BlogPostTagWhereInput>>;
-  /** Logical OR on all given filters. */
-  OR?: InputMaybe<Array<BlogPostTagWhereInput>>;
-  /** Contains search across all appropriate fields. */
-  _search?: InputMaybe<Scalars['String']['input']>;
-  blogPosts_every?: InputMaybe<BlogPostWhereInput>;
-  blogPosts_none?: InputMaybe<BlogPostWhereInput>;
-  blogPosts_some?: InputMaybe<BlogPostWhereInput>;
-  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values greater than the given value. */
-  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values greater than or equal the given value. */
-  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values that are contained in given list. */
-  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  /** All values less than the given value. */
-  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values less than or equal the given value. */
-  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** Any other value that exists and is not equal to the given value. */
-  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values that are not contained in given list. */
-  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  createdBy?: InputMaybe<UserWhereInput>;
-  documentInStages_every?: InputMaybe<BlogPostTagWhereStageInput>;
-  documentInStages_none?: InputMaybe<BlogPostTagWhereStageInput>;
-  documentInStages_some?: InputMaybe<BlogPostTagWhereStageInput>;
-  id?: InputMaybe<Scalars['ID']['input']>;
-  /** All values containing the given string. */
-  id_contains?: InputMaybe<Scalars['ID']['input']>;
-  /** All values ending with the given string. */
-  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values that are contained in given list. */
-  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  id_not?: InputMaybe<Scalars['ID']['input']>;
-  /** All values not containing the given string. */
-  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
-  /** All values not ending with the given string */
-  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values that are not contained in given list. */
-  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
-  /** All values starting with the given string. */
-  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values greater than the given value. */
-  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values greater than or equal the given value. */
-  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values that are contained in given list. */
-  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  /** All values less than the given value. */
-  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values less than or equal the given value. */
-  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** Any other value that exists and is not equal to the given value. */
-  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values that are not contained in given list. */
-  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  publishedBy?: InputMaybe<UserWhereInput>;
-  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
-  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
-  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
-  tag?: InputMaybe<Scalars['String']['input']>;
-  /** All values containing the given string. */
-  tag_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values ending with the given string. */
-  tag_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are contained in given list. */
-  tag_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  tag_not?: InputMaybe<Scalars['String']['input']>;
-  /** All values not containing the given string. */
-  tag_not_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values not ending with the given string */
-  tag_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are not contained in given list. */
-  tag_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** All values not starting with the given string. */
-  tag_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values starting with the given string. */
-  tag_starts_with?: InputMaybe<Scalars['String']['input']>;
-  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  /** All values less than the given value. */
-  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** Any other value that exists and is not equal to the given value. */
-  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  updatedBy?: InputMaybe<UserWhereInput>;
-};
-
-/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
-export type BlogPostTagWhereStageInput = {
-  /** Logical AND on all given filters. */
-  AND?: InputMaybe<Array<BlogPostTagWhereStageInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: InputMaybe<Array<BlogPostTagWhereStageInput>>;
-  /** Logical OR on all given filters. */
-  OR?: InputMaybe<Array<BlogPostTagWhereStageInput>>;
-  /** This field contains fields which can be set as true or false to specify an internal comparison */
-  compareWithParent?: InputMaybe<BlogPostTagWhereComparatorInput>;
-  /** Specify the stage to compare with */
-  stage?: InputMaybe<Stage>;
-};
-
-/** References BlogPostTag record uniquely */
-export type BlogPostTagWhereUniqueInput = {
-  id?: InputMaybe<Scalars['ID']['input']>;
-  tag?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type BlogPostUpdateInput = {
   authors?: InputMaybe<EmployeeUpdateManyInlineInput>;
-  blogPostTags?: InputMaybe<BlogPostTagUpdateManyInlineInput>;
   body?: InputMaybe<Scalars['RichTextAST']['input']>;
+  contentTags?: InputMaybe<ContentTagUpdateManyInlineInput>;
   description?: InputMaybe<Scalars['String']['input']>;
   overrideDate?: InputMaybe<Scalars['Date']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
@@ -3176,9 +2722,9 @@ export type BlogPostWhereInput = {
   authors_every?: InputMaybe<EmployeeWhereInput>;
   authors_none?: InputMaybe<EmployeeWhereInput>;
   authors_some?: InputMaybe<EmployeeWhereInput>;
-  blogPostTags_every?: InputMaybe<BlogPostTagWhereInput>;
-  blogPostTags_none?: InputMaybe<BlogPostTagWhereInput>;
-  blogPostTags_some?: InputMaybe<BlogPostTagWhereInput>;
+  contentTags_every?: InputMaybe<ContentTagWhereInput>;
+  contentTags_none?: InputMaybe<ContentTagWhereInput>;
+  contentTags_some?: InputMaybe<ContentTagWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -3346,7 +2892,7 @@ export type BlogPostWhereUniqueInput = {
   slug?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Button = {
+export type Button = Entity & {
   __typename?: 'Button';
   /** The unique identifier */
   id: Scalars['ID']['output'];
@@ -3774,7 +3320,7 @@ export type ButtonWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type CallToAction = {
+export type CallToAction = Entity & {
   __typename?: 'CallToAction';
   /** The unique identifier */
   id: Scalars['ID']['output'];
@@ -3986,7 +3532,7 @@ export type CallToActionParentWhereUniqueInput = {
   Configuration?: InputMaybe<ConfigurationWhereUniqueInput>;
 };
 
-export type CallToActionSettings = {
+export type CallToActionSettings = Entity & {
   __typename?: 'CallToActionSettings';
   body?: Maybe<RichText>;
   enable: Scalars['Boolean']['output'];
@@ -4469,7 +4015,7 @@ export type CallToActionWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type Callout = {
+export type Callout = Entity & {
   __typename?: 'Callout';
   body?: Maybe<RichText>;
   button?: Maybe<Button>;
@@ -4863,7 +4409,7 @@ export type CalloutWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type CheckboxField = {
+export type CheckboxField = Entity & {
   __typename?: 'CheckboxField';
   displayName: Scalars['String']['output'];
   fieldGroup: Scalars['Int']['output'];
@@ -5369,7 +4915,7 @@ export type CheckboxFieldWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type CloudLocation = Node & {
+export type CloudLocation = Entity & Node & {
   __typename?: 'CloudLocation';
   active: Scalars['Boolean']['output'];
   coordinates: Location;
@@ -5997,7 +5543,7 @@ export type ColorInput = {
   rgba?: InputMaybe<RgbaInput>;
 };
 
-export type Configuration = Node & {
+export type Configuration = Entity & Node & {
   __typename?: 'Configuration';
   callToAction: CallToAction;
   contactForms: Array<ContactForm>;
@@ -6934,7 +6480,7 @@ export type ConnectPositionInput = {
   start?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type ContactForm = Node & {
+export type ContactForm = Entity & Node & {
   __typename?: 'ContactForm';
   body: RichText;
   button: Button;
@@ -7556,7 +7102,7 @@ export type ContactFormfieldsUnionWhereUniqueInput = {
   TextInputField?: InputMaybe<TextInputFieldWhereUniqueInput>;
 };
 
-export type ContentButton = Node & {
+export type ContentButton = Entity & Node & {
   __typename?: 'ContentButton';
   colorScheme?: Maybe<ThemeColor>;
   /** The time the document was created */
@@ -8083,7 +7629,461 @@ export type ContentButtonWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type DocsGroup = Node & {
+export type ContentTag = Entity & Node & {
+  __typename?: 'ContentTag';
+  blogPosts: Array<BlogPost>;
+  /** The time the document was created */
+  createdAt: Scalars['DateTime']['output'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<ContentTag>;
+  /** List of ContentTag versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  tag: Scalars['String']['output'];
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime']['output'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type ContentTagBlogPostsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<BlogPostOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BlogPostWhereInput>;
+};
+
+
+export type ContentTagCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type ContentTagDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean']['input'];
+  inheritLocale?: Scalars['Boolean']['input'];
+  stages?: Array<Stage>;
+};
+
+
+export type ContentTagHistoryArgs = {
+  limit?: Scalars['Int']['input'];
+  skip?: Scalars['Int']['input'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type ContentTagPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type ContentTagScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type ContentTagUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type ContentTagConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: ContentTagWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type ContentTagConnection = {
+  __typename?: 'ContentTagConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<ContentTagEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type ContentTagCreateInput = {
+  blogPosts?: InputMaybe<BlogPostCreateManyInlineInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  tag: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type ContentTagCreateManyInlineInput = {
+  /** Connect multiple existing ContentTag documents */
+  connect?: InputMaybe<Array<ContentTagWhereUniqueInput>>;
+  /** Create and connect multiple existing ContentTag documents */
+  create?: InputMaybe<Array<ContentTagCreateInput>>;
+};
+
+export type ContentTagCreateOneInlineInput = {
+  /** Connect one existing ContentTag document */
+  connect?: InputMaybe<ContentTagWhereUniqueInput>;
+  /** Create and connect one ContentTag document */
+  create?: InputMaybe<ContentTagCreateInput>;
+};
+
+/** An edge in a connection. */
+export type ContentTagEdge = {
+  __typename?: 'ContentTagEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: ContentTag;
+};
+
+/** Identifies documents */
+export type ContentTagManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<ContentTagWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<ContentTagWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<ContentTagWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  blogPosts_every?: InputMaybe<BlogPostWhereInput>;
+  blogPosts_none?: InputMaybe<BlogPostWhereInput>;
+  blogPosts_some?: InputMaybe<BlogPostWhereInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<ContentTagWhereStageInput>;
+  documentInStages_none?: InputMaybe<ContentTagWhereStageInput>;
+  documentInStages_some?: InputMaybe<ContentTagWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  tag?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  tag_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  tag_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  tag_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  tag_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  tag_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  tag_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  tag_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  tag_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  tag_starts_with?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum ContentTagOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  TagAsc = 'tag_ASC',
+  TagDesc = 'tag_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type ContentTagUpdateInput = {
+  blogPosts?: InputMaybe<BlogPostUpdateManyInlineInput>;
+  tag?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContentTagUpdateManyInlineInput = {
+  /** Connect multiple existing ContentTag documents */
+  connect?: InputMaybe<Array<ContentTagConnectInput>>;
+  /** Create and connect multiple ContentTag documents */
+  create?: InputMaybe<Array<ContentTagCreateInput>>;
+  /** Delete multiple ContentTag documents */
+  delete?: InputMaybe<Array<ContentTagWhereUniqueInput>>;
+  /** Disconnect multiple ContentTag documents */
+  disconnect?: InputMaybe<Array<ContentTagWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing ContentTag documents */
+  set?: InputMaybe<Array<ContentTagWhereUniqueInput>>;
+  /** Update multiple ContentTag documents */
+  update?: InputMaybe<Array<ContentTagUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple ContentTag documents */
+  upsert?: InputMaybe<Array<ContentTagUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type ContentTagUpdateManyInput = {
+  /** No fields in updateMany data input */
+  _?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContentTagUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: ContentTagUpdateManyInput;
+  /** Document search */
+  where: ContentTagWhereInput;
+};
+
+export type ContentTagUpdateOneInlineInput = {
+  /** Connect existing ContentTag document */
+  connect?: InputMaybe<ContentTagWhereUniqueInput>;
+  /** Create and connect one ContentTag document */
+  create?: InputMaybe<ContentTagCreateInput>;
+  /** Delete currently connected ContentTag document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected ContentTag document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single ContentTag document */
+  update?: InputMaybe<ContentTagUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single ContentTag document */
+  upsert?: InputMaybe<ContentTagUpsertWithNestedWhereUniqueInput>;
+};
+
+export type ContentTagUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: ContentTagUpdateInput;
+  /** Unique document search */
+  where: ContentTagWhereUniqueInput;
+};
+
+export type ContentTagUpsertInput = {
+  /** Create document if it didn't exist */
+  create: ContentTagCreateInput;
+  /** Update document if it exists */
+  update: ContentTagUpdateInput;
+};
+
+export type ContentTagUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: ContentTagUpsertInput;
+  /** Unique document search */
+  where: ContentTagWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type ContentTagWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Identifies documents */
+export type ContentTagWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<ContentTagWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<ContentTagWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<ContentTagWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  blogPosts_every?: InputMaybe<BlogPostWhereInput>;
+  blogPosts_none?: InputMaybe<BlogPostWhereInput>;
+  blogPosts_some?: InputMaybe<BlogPostWhereInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<ContentTagWhereStageInput>;
+  documentInStages_none?: InputMaybe<ContentTagWhereStageInput>;
+  documentInStages_some?: InputMaybe<ContentTagWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  tag?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  tag_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  tag_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  tag_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  tag_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  tag_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  tag_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  tag_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  tag_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  tag_starts_with?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type ContentTagWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<ContentTagWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<ContentTagWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<ContentTagWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<ContentTagWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References ContentTag record uniquely */
+export type ContentTagWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  tag?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DocsGroup = Entity & Node & {
   __typename?: 'DocsGroup';
   callToAction: CallToActionSettings;
   /** The time the document was created */
@@ -8720,7 +8720,7 @@ export type DocsGroupWhereUniqueInput = {
   slug?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocsPage = Node & {
+export type DocsPage = Entity & Node & {
   __typename?: 'DocsPage';
   body: DocsPageBodyRichText;
   /** The time the document was created */
@@ -9355,7 +9355,7 @@ export type DocumentVersion = {
   stage: Stage;
 };
 
-export type Employee = Node & {
+export type Employee = Entity & Node & {
   __typename?: 'Employee';
   bio: RichText;
   blogPosts: Array<BlogPost>;
@@ -9912,7 +9912,74 @@ export type EmployeeWhereUniqueInput = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type ExternalLink = {
+/** An object with an ID */
+export type Entity = {
+  /** The id of the object. */
+  id: Scalars['ID']['output'];
+  /** The Stage of an object */
+  stage: Stage;
+};
+
+/** This enumeration holds all typenames that implement the Entity interface. Components and models implement the Entity interface. */
+export enum EntityTypeName {
+  Address = 'Address',
+  Admonition = 'Admonition',
+  Alert = 'Alert',
+  /** Asset system model */
+  Asset = 'Asset',
+  BlogPost = 'BlogPost',
+  Button = 'Button',
+  CallToAction = 'CallToAction',
+  CallToActionSettings = 'CallToActionSettings',
+  Callout = 'Callout',
+  CheckboxField = 'CheckboxField',
+  CloudLocation = 'CloudLocation',
+  Configuration = 'Configuration',
+  ContactForm = 'ContactForm',
+  ContentButton = 'ContentButton',
+  ContentTag = 'ContentTag',
+  DocsGroup = 'DocsGroup',
+  DocsPage = 'DocsPage',
+  Employee = 'Employee',
+  ExternalLink = 'ExternalLink',
+  Feature = 'Feature',
+  FooterGroup = 'FooterGroup',
+  Form = 'Form',
+  FormButton = 'FormButton',
+  HeaderGroup = 'HeaderGroup',
+  HomePage = 'HomePage',
+  HomePageBlock = 'HomePageBlock',
+  OfficeLocation = 'OfficeLocation',
+  Page = 'Page',
+  PageContent = 'PageContent',
+  /** Scheduled Operation system model */
+  ScheduledOperation = 'ScheduledOperation',
+  /** Scheduled Release system model */
+  ScheduledRelease = 'ScheduledRelease',
+  SelectField = 'SelectField',
+  SocialLink = 'SocialLink',
+  Testimonial = 'Testimonial',
+  TextAreaField = 'TextAreaField',
+  TextInputField = 'TextInputField',
+  Theme = 'Theme',
+  ThemeColors = 'ThemeColors',
+  ThemeFonts = 'ThemeFonts',
+  /** User system model */
+  User = 'User',
+  VendorLogo = 'VendorLogo'
+}
+
+/** Allows to specify input to query models and components directly */
+export type EntityWhereInput = {
+  /** The ID of an object */
+  id: Scalars['ID']['input'];
+  locale?: InputMaybe<Locale>;
+  stage: Stage;
+  /** The Type name of an object */
+  typename: EntityTypeName;
+};
+
+export type ExternalLink = Entity & {
   __typename?: 'ExternalLink';
   href: Scalars['String']['output'];
   /** The unique identifier */
@@ -10301,7 +10368,7 @@ export type ExternalLinkWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type Feature = {
+export type Feature = Entity & {
   __typename?: 'Feature';
   body: RichText;
   button?: Maybe<Button>;
@@ -10671,7 +10738,7 @@ export type FeatureWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type FooterGroup = Node & {
+export type FooterGroup = Entity & Node & {
   __typename?: 'FooterGroup';
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
@@ -11239,7 +11306,7 @@ export type FooterGroupWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type Form = Node & {
+export type Form = Entity & Node & {
   __typename?: 'Form';
   button: FormButton;
   colorScheme: ThemeColor;
@@ -11348,7 +11415,7 @@ export enum FormAction {
   Submit = 'submit'
 }
 
-export type FormButton = {
+export type FormButton = Entity & {
   __typename?: 'FormButton';
   action?: Maybe<FormAction>;
   alert?: Maybe<Alert>;
@@ -12247,7 +12314,7 @@ export type FormfieldsUnionWhereUniqueInput = {
   TextInputField?: InputMaybe<TextInputFieldWhereUniqueInput>;
 };
 
-export type HeaderGroup = Node & {
+export type HeaderGroup = Entity & Node & {
   __typename?: 'HeaderGroup';
   /** Number of grid columns for the header menu */
   columns: Scalars['Int']['output'];
@@ -12830,7 +12897,7 @@ export type HeaderGroupWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type HomePage = Node & {
+export type HomePage = Entity & Node & {
   __typename?: 'HomePage';
   blocks: Array<HomePageBlock>;
   /** The time the document was created */
@@ -12921,7 +12988,7 @@ export type HomePageUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type HomePageBlock = {
+export type HomePageBlock = Entity & {
   __typename?: 'HomePageBlock';
   body: RichText;
   button?: Maybe<Button>;
@@ -13752,8 +13819,6 @@ export type Mutation = {
   createAsset?: Maybe<Asset>;
   /** Create one blogPost */
   createBlogPost?: Maybe<BlogPost>;
-  /** Create one blogPostTag */
-  createBlogPostTag?: Maybe<BlogPostTag>;
   /** Create one cloudLocation */
   createCloudLocation?: Maybe<CloudLocation>;
   /** Create one configuration */
@@ -13762,6 +13827,8 @@ export type Mutation = {
   createContactForm?: Maybe<ContactForm>;
   /** Create one contentButton */
   createContentButton?: Maybe<ContentButton>;
+  /** Create one contentTag */
+  createContentTag?: Maybe<ContentTag>;
   /** Create one docsGroup */
   createDocsGroup?: Maybe<DocsGroup>;
   /** Create one docsPage */
@@ -13794,8 +13861,6 @@ export type Mutation = {
   deleteAsset?: Maybe<Asset>;
   /** Delete one blogPost from _all_ existing stages. Returns deleted document. */
   deleteBlogPost?: Maybe<BlogPost>;
-  /** Delete one blogPostTag from _all_ existing stages. Returns deleted document. */
-  deleteBlogPostTag?: Maybe<BlogPostTag>;
   /** Delete one cloudLocation from _all_ existing stages. Returns deleted document. */
   deleteCloudLocation?: Maybe<CloudLocation>;
   /** Delete one configuration from _all_ existing stages. Returns deleted document. */
@@ -13804,6 +13869,8 @@ export type Mutation = {
   deleteContactForm?: Maybe<ContactForm>;
   /** Delete one contentButton from _all_ existing stages. Returns deleted document. */
   deleteContentButton?: Maybe<ContentButton>;
+  /** Delete one contentTag from _all_ existing stages. Returns deleted document. */
+  deleteContentTag?: Maybe<ContentTag>;
   /** Delete one docsGroup from _all_ existing stages. Returns deleted document. */
   deleteDocsGroup?: Maybe<DocsGroup>;
   /** Delete one docsPage from _all_ existing stages. Returns deleted document. */
@@ -13832,13 +13899,6 @@ export type Mutation = {
   deleteManyAssets: BatchPayload;
   /** Delete many Asset documents, return deleted documents */
   deleteManyAssetsConnection: AssetConnection;
-  /**
-   * Delete many BlogPostTag documents
-   * @deprecated Please use the new paginated many mutation (deleteManyBlogPostTagsConnection)
-   */
-  deleteManyBlogPostTags: BatchPayload;
-  /** Delete many BlogPostTag documents, return deleted documents */
-  deleteManyBlogPostTagsConnection: BlogPostTagConnection;
   /**
    * Delete many BlogPost documents
    * @deprecated Please use the new paginated many mutation (deleteManyBlogPostsConnection)
@@ -13874,6 +13934,13 @@ export type Mutation = {
   deleteManyContentButtons: BatchPayload;
   /** Delete many ContentButton documents, return deleted documents */
   deleteManyContentButtonsConnection: ContentButtonConnection;
+  /**
+   * Delete many ContentTag documents
+   * @deprecated Please use the new paginated many mutation (deleteManyContentTagsConnection)
+   */
+  deleteManyContentTags: BatchPayload;
+  /** Delete many ContentTag documents, return deleted documents */
+  deleteManyContentTagsConnection: ContentTagConnection;
   /**
    * Delete many DocsGroup documents
    * @deprecated Please use the new paginated many mutation (deleteManyDocsGroupsConnection)
@@ -13978,8 +14045,6 @@ export type Mutation = {
   publishAsset?: Maybe<Asset>;
   /** Publish one blogPost */
   publishBlogPost?: Maybe<BlogPost>;
-  /** Publish one blogPostTag */
-  publishBlogPostTag?: Maybe<BlogPostTag>;
   /** Publish one cloudLocation */
   publishCloudLocation?: Maybe<CloudLocation>;
   /** Publish one configuration */
@@ -13988,6 +14053,8 @@ export type Mutation = {
   publishContactForm?: Maybe<ContactForm>;
   /** Publish one contentButton */
   publishContentButton?: Maybe<ContentButton>;
+  /** Publish one contentTag */
+  publishContentTag?: Maybe<ContentTag>;
   /** Publish one docsGroup */
   publishDocsGroup?: Maybe<DocsGroup>;
   /** Publish one docsPage */
@@ -14016,13 +14083,6 @@ export type Mutation = {
   publishManyAssets: BatchPayload;
   /** Publish many Asset documents */
   publishManyAssetsConnection: AssetConnection;
-  /**
-   * Publish many BlogPostTag documents
-   * @deprecated Please use the new paginated many mutation (publishManyBlogPostTagsConnection)
-   */
-  publishManyBlogPostTags: BatchPayload;
-  /** Publish many BlogPostTag documents */
-  publishManyBlogPostTagsConnection: BlogPostTagConnection;
   /**
    * Publish many BlogPost documents
    * @deprecated Please use the new paginated many mutation (publishManyBlogPostsConnection)
@@ -14058,6 +14118,13 @@ export type Mutation = {
   publishManyContentButtons: BatchPayload;
   /** Publish many ContentButton documents */
   publishManyContentButtonsConnection: ContentButtonConnection;
+  /**
+   * Publish many ContentTag documents
+   * @deprecated Please use the new paginated many mutation (publishManyContentTagsConnection)
+   */
+  publishManyContentTags: BatchPayload;
+  /** Publish many ContentTag documents */
+  publishManyContentTagsConnection: ContentTagConnection;
   /**
    * Publish many DocsGroup documents
    * @deprecated Please use the new paginated many mutation (publishManyDocsGroupsConnection)
@@ -14158,8 +14225,6 @@ export type Mutation = {
   schedulePublishAsset?: Maybe<Asset>;
   /** Schedule to publish one blogPost */
   schedulePublishBlogPost?: Maybe<BlogPost>;
-  /** Schedule to publish one blogPostTag */
-  schedulePublishBlogPostTag?: Maybe<BlogPostTag>;
   /** Schedule to publish one cloudLocation */
   schedulePublishCloudLocation?: Maybe<CloudLocation>;
   /** Schedule to publish one configuration */
@@ -14168,6 +14233,8 @@ export type Mutation = {
   schedulePublishContactForm?: Maybe<ContactForm>;
   /** Schedule to publish one contentButton */
   schedulePublishContentButton?: Maybe<ContentButton>;
+  /** Schedule to publish one contentTag */
+  schedulePublishContentTag?: Maybe<ContentTag>;
   /** Schedule to publish one docsGroup */
   schedulePublishDocsGroup?: Maybe<DocsGroup>;
   /** Schedule to publish one docsPage */
@@ -14198,8 +14265,6 @@ export type Mutation = {
   scheduleUnpublishAsset?: Maybe<Asset>;
   /** Unpublish one blogPost from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishBlogPost?: Maybe<BlogPost>;
-  /** Unpublish one blogPostTag from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
-  scheduleUnpublishBlogPostTag?: Maybe<BlogPostTag>;
   /** Unpublish one cloudLocation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishCloudLocation?: Maybe<CloudLocation>;
   /** Unpublish one configuration from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -14208,6 +14273,8 @@ export type Mutation = {
   scheduleUnpublishContactForm?: Maybe<ContactForm>;
   /** Unpublish one contentButton from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishContentButton?: Maybe<ContentButton>;
+  /** Unpublish one contentTag from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishContentTag?: Maybe<ContentTag>;
   /** Unpublish one docsGroup from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishDocsGroup?: Maybe<DocsGroup>;
   /** Unpublish one docsPage from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -14238,8 +14305,6 @@ export type Mutation = {
   unpublishAsset?: Maybe<Asset>;
   /** Unpublish one blogPost from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishBlogPost?: Maybe<BlogPost>;
-  /** Unpublish one blogPostTag from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
-  unpublishBlogPostTag?: Maybe<BlogPostTag>;
   /** Unpublish one cloudLocation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishCloudLocation?: Maybe<CloudLocation>;
   /** Unpublish one configuration from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -14248,6 +14313,8 @@ export type Mutation = {
   unpublishContactForm?: Maybe<ContactForm>;
   /** Unpublish one contentButton from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishContentButton?: Maybe<ContentButton>;
+  /** Unpublish one contentTag from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishContentTag?: Maybe<ContentTag>;
   /** Unpublish one docsGroup from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishDocsGroup?: Maybe<DocsGroup>;
   /** Unpublish one docsPage from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -14276,13 +14343,6 @@ export type Mutation = {
   unpublishManyAssets: BatchPayload;
   /** Find many Asset documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyAssetsConnection: AssetConnection;
-  /**
-   * Unpublish many BlogPostTag documents
-   * @deprecated Please use the new paginated many mutation (unpublishManyBlogPostTagsConnection)
-   */
-  unpublishManyBlogPostTags: BatchPayload;
-  /** Find many BlogPostTag documents that match criteria in specified stage and unpublish from target stages */
-  unpublishManyBlogPostTagsConnection: BlogPostTagConnection;
   /**
    * Unpublish many BlogPost documents
    * @deprecated Please use the new paginated many mutation (unpublishManyBlogPostsConnection)
@@ -14318,6 +14378,13 @@ export type Mutation = {
   unpublishManyContentButtons: BatchPayload;
   /** Find many ContentButton documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyContentButtonsConnection: ContentButtonConnection;
+  /**
+   * Unpublish many ContentTag documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyContentTagsConnection)
+   */
+  unpublishManyContentTags: BatchPayload;
+  /** Find many ContentTag documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyContentTagsConnection: ContentTagConnection;
   /**
    * Unpublish many DocsGroup documents
    * @deprecated Please use the new paginated many mutation (unpublishManyDocsGroupsConnection)
@@ -14418,8 +14485,6 @@ export type Mutation = {
   updateAsset?: Maybe<Asset>;
   /** Update one blogPost */
   updateBlogPost?: Maybe<BlogPost>;
-  /** Update one blogPostTag */
-  updateBlogPostTag?: Maybe<BlogPostTag>;
   /** Update one cloudLocation */
   updateCloudLocation?: Maybe<CloudLocation>;
   /** Update one configuration */
@@ -14428,6 +14493,8 @@ export type Mutation = {
   updateContactForm?: Maybe<ContactForm>;
   /** Update one contentButton */
   updateContentButton?: Maybe<ContentButton>;
+  /** Update one contentTag */
+  updateContentTag?: Maybe<ContentTag>;
   /** Update one docsGroup */
   updateDocsGroup?: Maybe<DocsGroup>;
   /** Update one docsPage */
@@ -14456,13 +14523,6 @@ export type Mutation = {
   updateManyAssets: BatchPayload;
   /** Update many Asset documents */
   updateManyAssetsConnection: AssetConnection;
-  /**
-   * Update many blogPostTags
-   * @deprecated Please use the new paginated many mutation (updateManyBlogPostTagsConnection)
-   */
-  updateManyBlogPostTags: BatchPayload;
-  /** Update many BlogPostTag documents */
-  updateManyBlogPostTagsConnection: BlogPostTagConnection;
   /**
    * Update many blogPosts
    * @deprecated Please use the new paginated many mutation (updateManyBlogPostsConnection)
@@ -14498,6 +14558,13 @@ export type Mutation = {
   updateManyContentButtons: BatchPayload;
   /** Update many ContentButton documents */
   updateManyContentButtonsConnection: ContentButtonConnection;
+  /**
+   * Update many contentTags
+   * @deprecated Please use the new paginated many mutation (updateManyContentTagsConnection)
+   */
+  updateManyContentTags: BatchPayload;
+  /** Update many ContentTag documents */
+  updateManyContentTagsConnection: ContentTagConnection;
   /**
    * Update many docsGroups
    * @deprecated Please use the new paginated many mutation (updateManyDocsGroupsConnection)
@@ -14600,8 +14667,6 @@ export type Mutation = {
   upsertAsset?: Maybe<Asset>;
   /** Upsert one blogPost */
   upsertBlogPost?: Maybe<BlogPost>;
-  /** Upsert one blogPostTag */
-  upsertBlogPostTag?: Maybe<BlogPostTag>;
   /** Upsert one cloudLocation */
   upsertCloudLocation?: Maybe<CloudLocation>;
   /** Upsert one configuration */
@@ -14610,6 +14675,8 @@ export type Mutation = {
   upsertContactForm?: Maybe<ContactForm>;
   /** Upsert one contentButton */
   upsertContentButton?: Maybe<ContentButton>;
+  /** Upsert one contentTag */
+  upsertContentTag?: Maybe<ContentTag>;
   /** Upsert one docsGroup */
   upsertDocsGroup?: Maybe<DocsGroup>;
   /** Upsert one docsPage */
@@ -14652,11 +14719,6 @@ export type MutationCreateBlogPostArgs = {
 };
 
 
-export type MutationCreateBlogPostTagArgs = {
-  data: BlogPostTagCreateInput;
-};
-
-
 export type MutationCreateCloudLocationArgs = {
   data: CloudLocationCreateInput;
 };
@@ -14674,6 +14736,11 @@ export type MutationCreateContactFormArgs = {
 
 export type MutationCreateContentButtonArgs = {
   data: ContentButtonCreateInput;
+};
+
+
+export type MutationCreateContentTagArgs = {
+  data: ContentTagCreateInput;
 };
 
 
@@ -14757,11 +14824,6 @@ export type MutationDeleteBlogPostArgs = {
 };
 
 
-export type MutationDeleteBlogPostTagArgs = {
-  where: BlogPostTagWhereUniqueInput;
-};
-
-
 export type MutationDeleteCloudLocationArgs = {
   where: CloudLocationWhereUniqueInput;
 };
@@ -14779,6 +14841,11 @@ export type MutationDeleteContactFormArgs = {
 
 export type MutationDeleteContentButtonArgs = {
   where: ContentButtonWhereUniqueInput;
+};
+
+
+export type MutationDeleteContentTagArgs = {
+  where: ContentTagWhereUniqueInput;
 };
 
 
@@ -14844,21 +14911,6 @@ export type MutationDeleteManyAssetsConnectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<AssetManyWhereInput>;
-};
-
-
-export type MutationDeleteManyBlogPostTagsArgs = {
-  where?: InputMaybe<BlogPostTagManyWhereInput>;
-};
-
-
-export type MutationDeleteManyBlogPostTagsConnectionArgs = {
-  after?: InputMaybe<Scalars['ID']['input']>;
-  before?: InputMaybe<Scalars['ID']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<BlogPostTagManyWhereInput>;
 };
 
 
@@ -14934,6 +14986,21 @@ export type MutationDeleteManyContentButtonsConnectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<ContentButtonManyWhereInput>;
+};
+
+
+export type MutationDeleteManyContentTagsArgs = {
+  where?: InputMaybe<ContentTagManyWhereInput>;
+};
+
+
+export type MutationDeleteManyContentTagsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ContentTagManyWhereInput>;
 };
 
 
@@ -15173,12 +15240,6 @@ export type MutationPublishBlogPostArgs = {
 };
 
 
-export type MutationPublishBlogPostTagArgs = {
-  to?: Array<Stage>;
-  where: BlogPostTagWhereUniqueInput;
-};
-
-
 export type MutationPublishCloudLocationArgs = {
   to?: Array<Stage>;
   where: CloudLocationWhereUniqueInput;
@@ -15200,6 +15261,12 @@ export type MutationPublishContactFormArgs = {
 export type MutationPublishContentButtonArgs = {
   to?: Array<Stage>;
   where: ContentButtonWhereUniqueInput;
+};
+
+
+export type MutationPublishContentTagArgs = {
+  to?: Array<Stage>;
+  where: ContentTagWhereUniqueInput;
 };
 
 
@@ -15284,24 +15351,6 @@ export type MutationPublishManyAssetsConnectionArgs = {
   to?: Array<Stage>;
   where?: InputMaybe<AssetManyWhereInput>;
   withDefaultLocale?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-export type MutationPublishManyBlogPostTagsArgs = {
-  to?: Array<Stage>;
-  where?: InputMaybe<BlogPostTagManyWhereInput>;
-};
-
-
-export type MutationPublishManyBlogPostTagsConnectionArgs = {
-  after?: InputMaybe<Scalars['ID']['input']>;
-  before?: InputMaybe<Scalars['ID']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  from?: InputMaybe<Stage>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  to?: Array<Stage>;
-  where?: InputMaybe<BlogPostTagManyWhereInput>;
 };
 
 
@@ -15392,6 +15441,24 @@ export type MutationPublishManyContentButtonsConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   to?: Array<Stage>;
   where?: InputMaybe<ContentButtonManyWhereInput>;
+};
+
+
+export type MutationPublishManyContentTagsArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<ContentTagManyWhereInput>;
+};
+
+
+export type MutationPublishManyContentTagsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<ContentTagManyWhereInput>;
 };
 
 
@@ -15668,14 +15735,6 @@ export type MutationSchedulePublishBlogPostArgs = {
 };
 
 
-export type MutationSchedulePublishBlogPostTagArgs = {
-  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
-  releaseId?: InputMaybe<Scalars['String']['input']>;
-  to?: Array<Stage>;
-  where: BlogPostTagWhereUniqueInput;
-};
-
-
 export type MutationSchedulePublishCloudLocationArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
   releaseId?: InputMaybe<Scalars['String']['input']>;
@@ -15705,6 +15764,14 @@ export type MutationSchedulePublishContentButtonArgs = {
   releaseId?: InputMaybe<Scalars['String']['input']>;
   to?: Array<Stage>;
   where: ContentButtonWhereUniqueInput;
+};
+
+
+export type MutationSchedulePublishContentTagArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
+  releaseId?: InputMaybe<Scalars['String']['input']>;
+  to?: Array<Stage>;
+  where: ContentTagWhereUniqueInput;
 };
 
 
@@ -15830,14 +15897,6 @@ export type MutationScheduleUnpublishBlogPostArgs = {
 };
 
 
-export type MutationScheduleUnpublishBlogPostTagArgs = {
-  from?: Array<Stage>;
-  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
-  releaseId?: InputMaybe<Scalars['String']['input']>;
-  where: BlogPostTagWhereUniqueInput;
-};
-
-
 export type MutationScheduleUnpublishCloudLocationArgs = {
   from?: Array<Stage>;
   releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -15867,6 +15926,14 @@ export type MutationScheduleUnpublishContentButtonArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
   releaseId?: InputMaybe<Scalars['String']['input']>;
   where: ContentButtonWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishContentTagArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
+  releaseId?: InputMaybe<Scalars['String']['input']>;
+  where: ContentTagWhereUniqueInput;
 };
 
 
@@ -15986,12 +16053,6 @@ export type MutationUnpublishBlogPostArgs = {
 };
 
 
-export type MutationUnpublishBlogPostTagArgs = {
-  from?: Array<Stage>;
-  where: BlogPostTagWhereUniqueInput;
-};
-
-
 export type MutationUnpublishCloudLocationArgs = {
   from?: Array<Stage>;
   where: CloudLocationWhereUniqueInput;
@@ -16013,6 +16074,12 @@ export type MutationUnpublishContactFormArgs = {
 export type MutationUnpublishContentButtonArgs = {
   from?: Array<Stage>;
   where: ContentButtonWhereUniqueInput;
+};
+
+
+export type MutationUnpublishContentTagArgs = {
+  from?: Array<Stage>;
+  where: ContentTagWhereUniqueInput;
 };
 
 
@@ -16095,24 +16162,6 @@ export type MutationUnpublishManyAssetsConnectionArgs = {
   stage?: InputMaybe<Stage>;
   unpublishBase?: InputMaybe<Scalars['Boolean']['input']>;
   where?: InputMaybe<AssetManyWhereInput>;
-};
-
-
-export type MutationUnpublishManyBlogPostTagsArgs = {
-  from?: Array<Stage>;
-  where?: InputMaybe<BlogPostTagManyWhereInput>;
-};
-
-
-export type MutationUnpublishManyBlogPostTagsConnectionArgs = {
-  after?: InputMaybe<Scalars['ID']['input']>;
-  before?: InputMaybe<Scalars['ID']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  from?: Array<Stage>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  stage?: InputMaybe<Stage>;
-  where?: InputMaybe<BlogPostTagManyWhereInput>;
 };
 
 
@@ -16203,6 +16252,24 @@ export type MutationUnpublishManyContentButtonsConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   stage?: InputMaybe<Stage>;
   where?: InputMaybe<ContentButtonManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyContentTagsArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<ContentTagManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyContentTagsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<ContentTagManyWhereInput>;
 };
 
 
@@ -16470,12 +16537,6 @@ export type MutationUpdateBlogPostArgs = {
 };
 
 
-export type MutationUpdateBlogPostTagArgs = {
-  data: BlogPostTagUpdateInput;
-  where: BlogPostTagWhereUniqueInput;
-};
-
-
 export type MutationUpdateCloudLocationArgs = {
   data: CloudLocationUpdateInput;
   where: CloudLocationWhereUniqueInput;
@@ -16497,6 +16558,12 @@ export type MutationUpdateContactFormArgs = {
 export type MutationUpdateContentButtonArgs = {
   data: ContentButtonUpdateInput;
   where: ContentButtonWhereUniqueInput;
+};
+
+
+export type MutationUpdateContentTagArgs = {
+  data: ContentTagUpdateInput;
+  where: ContentTagWhereUniqueInput;
 };
 
 
@@ -16573,23 +16640,6 @@ export type MutationUpdateManyAssetsConnectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<AssetManyWhereInput>;
-};
-
-
-export type MutationUpdateManyBlogPostTagsArgs = {
-  data: BlogPostTagUpdateManyInput;
-  where?: InputMaybe<BlogPostTagManyWhereInput>;
-};
-
-
-export type MutationUpdateManyBlogPostTagsConnectionArgs = {
-  after?: InputMaybe<Scalars['ID']['input']>;
-  before?: InputMaybe<Scalars['ID']['input']>;
-  data: BlogPostTagUpdateManyInput;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<BlogPostTagManyWhereInput>;
 };
 
 
@@ -16675,6 +16725,23 @@ export type MutationUpdateManyContentButtonsConnectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<ContentButtonManyWhereInput>;
+};
+
+
+export type MutationUpdateManyContentTagsArgs = {
+  data: ContentTagUpdateManyInput;
+  where?: InputMaybe<ContentTagManyWhereInput>;
+};
+
+
+export type MutationUpdateManyContentTagsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  data: ContentTagUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ContentTagManyWhereInput>;
 };
 
 
@@ -16936,12 +17003,6 @@ export type MutationUpsertBlogPostArgs = {
 };
 
 
-export type MutationUpsertBlogPostTagArgs = {
-  upsert: BlogPostTagUpsertInput;
-  where: BlogPostTagWhereUniqueInput;
-};
-
-
 export type MutationUpsertCloudLocationArgs = {
   upsert: CloudLocationUpsertInput;
   where: CloudLocationWhereUniqueInput;
@@ -16963,6 +17024,12 @@ export type MutationUpsertContactFormArgs = {
 export type MutationUpsertContentButtonArgs = {
   upsert: ContentButtonUpsertInput;
   where: ContentButtonWhereUniqueInput;
+};
+
+
+export type MutationUpsertContentTagArgs = {
+  upsert: ContentTagUpsertInput;
+  where: ContentTagWhereUniqueInput;
 };
 
 
@@ -17045,7 +17112,7 @@ export type Node = {
   stage: Stage;
 };
 
-export type OfficeLocation = Node & {
+export type OfficeLocation = Entity & Node & {
   __typename?: 'OfficeLocation';
   address: Address;
   /** Time office closes in 24 hour format in the local timezone */
@@ -17575,7 +17642,7 @@ export type OfficeLocationWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type Page = Node & {
+export type Page = Entity & Node & {
   __typename?: 'Page';
   body?: Maybe<RichText>;
   callout?: Maybe<Callout>;
@@ -17701,7 +17768,7 @@ export type PageConnection = {
   pageInfo: PageInfo;
 };
 
-export type PageContent = Node & {
+export type PageContent = Entity & Node & {
   __typename?: 'PageContent';
   body?: Maybe<RichText>;
   button?: Maybe<Button>;
@@ -18927,14 +18994,6 @@ export type Query = {
   assetsConnection: AssetConnection;
   /** Retrieve a single blogPost */
   blogPost?: Maybe<BlogPost>;
-  /** Retrieve a single blogPostTag */
-  blogPostTag?: Maybe<BlogPostTag>;
-  /** Retrieve document version */
-  blogPostTagVersion?: Maybe<DocumentVersion>;
-  /** Retrieve multiple blogPostTags */
-  blogPostTags: Array<BlogPostTag>;
-  /** Retrieve multiple blogPostTags using the Relay connection interface */
-  blogPostTagsConnection: BlogPostTagConnection;
   /** Retrieve document version */
   blogPostVersion?: Maybe<DocumentVersion>;
   /** Retrieve multiple blogPosts */
@@ -18973,6 +19032,14 @@ export type Query = {
   contentButtons: Array<ContentButton>;
   /** Retrieve multiple contentButtons using the Relay connection interface */
   contentButtonsConnection: ContentButtonConnection;
+  /** Retrieve a single contentTag */
+  contentTag?: Maybe<ContentTag>;
+  /** Retrieve document version */
+  contentTagVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple contentTags */
+  contentTags: Array<ContentTag>;
+  /** Retrieve multiple contentTags using the Relay connection interface */
+  contentTagsConnection: ContentTagConnection;
   /** Retrieve a single docsGroup */
   docsGroup?: Maybe<DocsGroup>;
   /** Retrieve document version */
@@ -18997,6 +19064,8 @@ export type Query = {
   employees: Array<Employee>;
   /** Retrieve multiple employees using the Relay connection interface */
   employeesConnection: EmployeeConnection;
+  /** Fetches an object given its ID */
+  entities?: Maybe<Array<Entity>>;
   /** Retrieve a single footerGroup */
   footerGroup?: Maybe<FooterGroup>;
   /** Retrieve document version */
@@ -19172,44 +19241,6 @@ export type QueryBlogPostArgs = {
   locales?: Array<Locale>;
   stage?: Stage;
   where: BlogPostWhereUniqueInput;
-};
-
-
-export type QueryBlogPostTagArgs = {
-  locales?: Array<Locale>;
-  stage?: Stage;
-  where: BlogPostTagWhereUniqueInput;
-};
-
-
-export type QueryBlogPostTagVersionArgs = {
-  where: VersionWhereInput;
-};
-
-
-export type QueryBlogPostTagsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  locales?: Array<Locale>;
-  orderBy?: InputMaybe<BlogPostTagOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  stage?: Stage;
-  where?: InputMaybe<BlogPostTagWhereInput>;
-};
-
-
-export type QueryBlogPostTagsConnectionArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  locales?: Array<Locale>;
-  orderBy?: InputMaybe<BlogPostTagOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  stage?: Stage;
-  where?: InputMaybe<BlogPostTagWhereInput>;
 };
 
 
@@ -19396,6 +19427,44 @@ export type QueryContentButtonsConnectionArgs = {
 };
 
 
+export type QueryContentTagArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: ContentTagWhereUniqueInput;
+};
+
+
+export type QueryContentTagVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryContentTagsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<ContentTagOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: Stage;
+  where?: InputMaybe<ContentTagWhereInput>;
+};
+
+
+export type QueryContentTagsConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<ContentTagOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: Stage;
+  where?: InputMaybe<ContentTagWhereInput>;
+};
+
+
 export type QueryDocsGroupArgs = {
   locales?: Array<Locale>;
   stage?: Stage;
@@ -19507,6 +19576,12 @@ export type QueryEmployeesConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   stage?: Stage;
   where?: InputMaybe<EmployeeWhereInput>;
+};
+
+
+export type QueryEntitiesArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+  where: Array<EntityWhereInput>;
 };
 
 
@@ -19988,7 +20063,7 @@ export type RichText = {
 };
 
 /** Scheduled Operation system model */
-export type ScheduledOperation = Node & {
+export type ScheduledOperation = Entity & Node & {
   __typename?: 'ScheduledOperation';
   affectedDocuments: Array<ScheduledOperationAffectedDocument>;
   /** The time the document was created */
@@ -20069,7 +20144,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Admonition | Asset | BlogPost | BlogPostTag | CloudLocation | Configuration | ContactForm | ContentButton | DocsGroup | DocsPage | Employee | FooterGroup | Form | HeaderGroup | HomePage | OfficeLocation | Page | PageContent | Testimonial | Theme;
+export type ScheduledOperationAffectedDocument = Admonition | Asset | BlogPost | CloudLocation | Configuration | ContactForm | ContentButton | ContentTag | DocsGroup | DocsPage | Employee | FooterGroup | Form | HeaderGroup | HomePage | OfficeLocation | Page | PageContent | Testimonial | Theme;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -20423,7 +20498,7 @@ export type ScheduledOperationWhereUniqueInput = {
 };
 
 /** Scheduled Release system model */
-export type ScheduledRelease = Node & {
+export type ScheduledRelease = Entity & Node & {
   __typename?: 'ScheduledRelease';
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
@@ -21002,7 +21077,7 @@ export type ScheduledReleaseWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type SelectField = {
+export type SelectField = Entity & {
   __typename?: 'SelectField';
   displayName: Scalars['String']['output'];
   fieldGroup: Scalars['Int']['output'];
@@ -21508,7 +21583,7 @@ export type SelectFieldWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type SocialLink = {
+export type SocialLink = Entity & {
   __typename?: 'SocialLink';
   href: Scalars['String']['output'];
   /** The unique identifier */
@@ -21890,7 +21965,7 @@ export enum SystemDateTimeFieldVariation {
   Localization = 'LOCALIZATION'
 }
 
-export type Testimonial = Node & {
+export type Testimonial = Entity & Node & {
   __typename?: 'Testimonial';
   body: RichText;
   /** The time the document was created */
@@ -22381,7 +22456,7 @@ export type TestimonialWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type TextAreaField = {
+export type TextAreaField = Entity & {
   __typename?: 'TextAreaField';
   displayName: Scalars['String']['output'];
   fieldGroup: Scalars['Int']['output'];
@@ -22849,7 +22924,7 @@ export type TextAreaFieldWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type TextInputField = {
+export type TextInputField = Entity & {
   __typename?: 'TextInputField';
   displayName: Scalars['String']['output'];
   fieldGroup: Scalars['Int']['output'];
@@ -23342,7 +23417,7 @@ export enum TextInputValidationType {
   Phone = 'phone'
 }
 
-export type Theme = Node & {
+export type Theme = Entity & Node & {
   __typename?: 'Theme';
   colors: ThemeColors;
   configurations: Array<Configuration>;
@@ -23451,7 +23526,7 @@ export enum ThemeColor {
   Yellow = 'yellow'
 }
 
-export type ThemeColors = {
+export type ThemeColors = Entity & {
   __typename?: 'ThemeColors';
   black: Color;
   blue: Color;
@@ -23847,7 +23922,7 @@ export type ThemeEdge = {
   node: Theme;
 };
 
-export type ThemeFonts = {
+export type ThemeFonts = Entity & {
   __typename?: 'ThemeFonts';
   black: Scalars['Int']['output'];
   body: Scalars['String']['output'];
@@ -24798,7 +24873,7 @@ export type UnpublishLocaleInput = {
 };
 
 /** User system model */
-export type User = Node & {
+export type User = Entity & Node & {
   __typename?: 'User';
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
@@ -25188,7 +25263,7 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type VendorLogo = {
+export type VendorLogo = Entity & {
   __typename?: 'VendorLogo';
   /** Logo color in dark mode (black background) */
   darkColor: Color;
@@ -25737,7 +25812,7 @@ export type BlogPostQueryVariables = Exact<{
 }>;
 
 
-export type BlogPostQuery = { __typename?: 'Query', blogPost?: { __typename?: 'BlogPost', publishedAt?: string | null, description: string, slug: string, title: string, overrideDate?: string | null, blogPostTags: Array<{ __typename?: 'BlogPostTag', tag: string }>, authors: Array<{ __typename?: 'Employee', name: string, title: string, photo: { __typename?: 'Asset', mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } }>, body: { __typename?: 'BlogPostBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } } | null };
+export type BlogPostQuery = { __typename?: 'Query', blogPost?: { __typename?: 'BlogPost', publishedAt?: string | null, description: string, slug: string, title: string, overrideDate?: string | null, contentTags: Array<{ __typename?: 'ContentTag', tag: string }>, authors: Array<{ __typename?: 'Employee', name: string, title: string, photo: { __typename?: 'Asset', mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } }>, body: { __typename?: 'BlogPostBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } } | null };
 
 export type BlogPostsByTagsQueryVariables = Exact<{
   tag: Scalars['String']['input'];
@@ -25745,19 +25820,14 @@ export type BlogPostsByTagsQueryVariables = Exact<{
 }>;
 
 
-export type BlogPostsByTagsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', description: string, id: string, publishedAt?: string | null, slug: string, title: string, overrideDate?: string | null, blogPostTags: Array<{ __typename?: 'BlogPostTag', tag: string }>, authors: Array<{ __typename?: 'Employee', name: string, title: string, photo: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, body: { __typename?: 'BlogPostBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } }> };
+export type BlogPostsByTagsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', description: string, id: string, publishedAt?: string | null, slug: string, title: string, overrideDate?: string | null, contentTags: Array<{ __typename?: 'ContentTag', tag: string }>, authors: Array<{ __typename?: 'Employee', name: string, title: string, photo: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, body: { __typename?: 'BlogPostBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } }> };
 
 export type BlogPostsQueryVariables = Exact<{
   stage?: InputMaybe<Stage>;
 }>;
 
 
-export type BlogPostsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', description: string, id: string, publishedAt?: string | null, slug: string, title: string, overrideDate?: string | null, blogPostTags: Array<{ __typename?: 'BlogPostTag', tag: string }>, authors: Array<{ __typename?: 'Employee', name: string, title: string, photo: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, body: { __typename?: 'BlogPostBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } }> };
-
-export type BlogPostTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type BlogPostTagsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', blogPostTags: Array<{ __typename?: 'BlogPostTag', tag: string }> }> };
+export type BlogPostsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', description: string, id: string, publishedAt?: string | null, slug: string, title: string, overrideDate?: string | null, contentTags: Array<{ __typename?: 'ContentTag', tag: string }>, authors: Array<{ __typename?: 'Employee', name: string, title: string, photo: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, body: { __typename?: 'BlogPostBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } }> };
 
 export type CloudLocationsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -25777,6 +25847,11 @@ export type ContactFormsQueryVariables = Exact<{
 
 
 export type ContactFormsQuery = { __typename?: 'Query', configuration?: { __typename?: 'Configuration', contactForms: Array<{ __typename?: 'ContactForm', color: ThemeColor, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, button: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null }, fields: Array<{ __typename: 'CheckboxField', displayName: string, fieldGroup: number, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean } | { __typename: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', name: string, title?: string | null, level: AlertLevel, body: { __typename?: 'RichText', raw: RichTextContent } } | null } | { __typename: 'SelectField', displayName: string, fieldGroup: number, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean } | { __typename: 'TextAreaField', displayName: string, fieldGroup: number, formId: string, label?: string | null, required: boolean } | { __typename: 'TextInputField', displayName: string, fieldGroup: number, formId: string, label?: string | null, required: boolean, validationType?: TextInputValidationType | null }>, icon: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }> } | null };
+
+export type ContentTagsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ContentTagsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', contentTags: Array<{ __typename?: 'ContentTag', tag: string }> }> };
 
 export type DocsGroupStaticPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -25938,6 +26013,49 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "Asset",
       "ContentButton"
     ],
+    "Entity": [
+      "Address",
+      "Admonition",
+      "Alert",
+      "Asset",
+      "BlogPost",
+      "Button",
+      "CallToAction",
+      "CallToActionSettings",
+      "Callout",
+      "CheckboxField",
+      "CloudLocation",
+      "Configuration",
+      "ContactForm",
+      "ContentButton",
+      "ContentTag",
+      "DocsGroup",
+      "DocsPage",
+      "Employee",
+      "ExternalLink",
+      "Feature",
+      "FooterGroup",
+      "Form",
+      "FormButton",
+      "HeaderGroup",
+      "HomePage",
+      "HomePageBlock",
+      "OfficeLocation",
+      "Page",
+      "PageContent",
+      "ScheduledOperation",
+      "ScheduledRelease",
+      "SelectField",
+      "SocialLink",
+      "Testimonial",
+      "TextAreaField",
+      "TextInputField",
+      "Theme",
+      "ThemeColors",
+      "ThemeFonts",
+      "User",
+      "VendorLogo"
+    ],
     "ExternalLinkParent": [
       "FooterGroup",
       "HeaderGroup"
@@ -25962,11 +26080,11 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "Admonition",
       "Asset",
       "BlogPost",
-      "BlogPostTag",
       "CloudLocation",
       "Configuration",
       "ContactForm",
       "ContentButton",
+      "ContentTag",
       "DocsGroup",
       "DocsPage",
       "Employee",
@@ -25987,11 +26105,11 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "Admonition",
       "Asset",
       "BlogPost",
-      "BlogPostTag",
       "CloudLocation",
       "Configuration",
       "ContactForm",
       "ContentButton",
+      "ContentTag",
       "DocsGroup",
       "DocsPage",
       "Employee",
@@ -26033,13 +26151,13 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
 
 export const ActionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"actions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageContents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"callToAction"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"enable"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ActionsQuery, ActionsQueryVariables>;
 export const BlogPostStaticPathsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPostStaticPaths"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<BlogPostStaticPathsQuery, BlogPostStaticPathsQueryVariables>;
-export const BlogPostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"blogPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostQuery, BlogPostQueryVariables>;
-export const BlogPostsByTagsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPostsByTags"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"tag"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"updatedAt_DESC"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"blogPostTags_some"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"tag"},"value":{"kind":"Variable","name":{"kind":"Name","value":"tag"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"blogPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostsByTagsQuery, BlogPostsByTagsQueryVariables>;
-export const BlogPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPosts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"updatedAt_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"blogPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostsQuery, BlogPostsQueryVariables>;
-export const BlogPostTagsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostTagsQuery, BlogPostTagsQueryVariables>;
+export const BlogPostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostQuery, BlogPostQueryVariables>;
+export const BlogPostsByTagsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPostsByTags"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"tag"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"updatedAt_DESC"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contentTags_some"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"tag"},"value":{"kind":"Variable","name":{"kind":"Name","value":"tag"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostsByTagsQuery, BlogPostsByTagsQueryVariables>;
+export const BlogPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPosts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"updatedAt_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostsQuery, BlogPostsQueryVariables>;
 export const CloudLocationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"cloudLocations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cloudLocations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"active"}},{"kind":"Field","name":{"kind":"Name","value":"coordinates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"testUrl"}},{"kind":"Field","name":{"kind":"Name","value":"timeout"}}]}}]}}]} as unknown as DocumentNode<CloudLocationsQuery, CloudLocationsQueryVariables>;
 export const ConfigDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"config"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"values"},"name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"organizationName"}},{"kind":"Field","name":{"kind":"Name","value":"slogan"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"titleOverrides"}},{"kind":"Field","name":{"kind":"Name","value":"statusUrl"}},{"kind":"Field","name":{"kind":"Name","value":"socialLinks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"href"}}]}},{"kind":"Field","name":{"kind":"Name","value":"errorMessage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shown"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"testimonials"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"handle"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"113"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"clip"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"subscribe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}}]}}]}}]}}]} as unknown as DocumentNode<ConfigQuery, ConfigQueryVariables>;
 export const ContactFormsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"contactForms"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"config"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"config"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contactForms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"validationType"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<ContactFormsQuery, ContactFormsQueryVariables>;
+export const ContentTagsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}}]}}]} as unknown as DocumentNode<ContentTagsQuery, ContentTagsQueryVariables>;
 export const DocsGroupStaticPathsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsGroupStaticPaths"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsGroups"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<DocsGroupStaticPathsQuery, DocsGroupStaticPathsQueryVariables>;
 export const DocsGroupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsGroup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"enable"}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"docsPages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"summary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DocsGroupQuery, DocsGroupQueryVariables>;
 export const DocsGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsGroups"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsGroups"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"20"}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"enable"}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"docsPages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"summary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DocsGroupsQuery, DocsGroupsQueryVariables>;
@@ -26140,7 +26258,7 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
   FormButtonParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   FormfieldsUnion: ( CheckboxField ) | ( SelectField ) | ( TextAreaField ) | ( TextInputField );
   HomePageBlockParent: ( HomePage );
-  ScheduledOperationAffectedDocument: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( BlogPostTag ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Testimonial ) | ( Theme );
+  ScheduledOperationAffectedDocument: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Testimonial ) | ( Theme );
   SelectFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   SocialLinkParent: ( Configuration );
   TextAreaFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
@@ -26151,7 +26269,8 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
 
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = {
-  Node: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( BlogPostTag ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( Testimonial ) | ( Theme ) | ( User );
+  Entity: ( Address ) | ( Admonition ) | ( Alert ) | ( Asset ) | ( BlogPost ) | ( Button ) | ( CallToAction ) | ( CallToActionSettings ) | ( Callout ) | ( CheckboxField ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( ExternalLink ) | ( Feature ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( FormButton ) | ( HeaderGroup ) | ( HomePage ) | ( HomePageBlock ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( SelectField ) | ( SocialLink ) | ( Testimonial ) | ( TextAreaField ) | ( TextInputField ) | ( Theme ) | ( ThemeColors ) | ( ThemeFonts ) | ( User ) | ( VendorLogo );
+  Node: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( Testimonial ) | ( Theme ) | ( User );
 };
 
 /** Mapping between all available schema types and the resolvers types */
@@ -26294,27 +26413,6 @@ export type ResolversTypes = {
   BlogPostEdge: ResolverTypeWrapper<BlogPostEdge>;
   BlogPostManyWhereInput: BlogPostManyWhereInput;
   BlogPostOrderByInput: BlogPostOrderByInput;
-  BlogPostTag: ResolverTypeWrapper<BlogPostTag>;
-  BlogPostTagConnectInput: BlogPostTagConnectInput;
-  BlogPostTagConnection: ResolverTypeWrapper<BlogPostTagConnection>;
-  BlogPostTagCreateInput: BlogPostTagCreateInput;
-  BlogPostTagCreateManyInlineInput: BlogPostTagCreateManyInlineInput;
-  BlogPostTagCreateOneInlineInput: BlogPostTagCreateOneInlineInput;
-  BlogPostTagEdge: ResolverTypeWrapper<BlogPostTagEdge>;
-  BlogPostTagManyWhereInput: BlogPostTagManyWhereInput;
-  BlogPostTagOrderByInput: BlogPostTagOrderByInput;
-  BlogPostTagUpdateInput: BlogPostTagUpdateInput;
-  BlogPostTagUpdateManyInlineInput: BlogPostTagUpdateManyInlineInput;
-  BlogPostTagUpdateManyInput: BlogPostTagUpdateManyInput;
-  BlogPostTagUpdateManyWithNestedWhereInput: BlogPostTagUpdateManyWithNestedWhereInput;
-  BlogPostTagUpdateOneInlineInput: BlogPostTagUpdateOneInlineInput;
-  BlogPostTagUpdateWithNestedWhereUniqueInput: BlogPostTagUpdateWithNestedWhereUniqueInput;
-  BlogPostTagUpsertInput: BlogPostTagUpsertInput;
-  BlogPostTagUpsertWithNestedWhereUniqueInput: BlogPostTagUpsertWithNestedWhereUniqueInput;
-  BlogPostTagWhereComparatorInput: BlogPostTagWhereComparatorInput;
-  BlogPostTagWhereInput: BlogPostTagWhereInput;
-  BlogPostTagWhereStageInput: BlogPostTagWhereStageInput;
-  BlogPostTagWhereUniqueInput: BlogPostTagWhereUniqueInput;
   BlogPostUpdateInput: BlogPostUpdateInput;
   BlogPostUpdateManyInlineInput: BlogPostUpdateManyInlineInput;
   BlogPostUpdateManyInput: BlogPostUpdateManyInput;
@@ -26607,6 +26705,27 @@ export type ResolversTypes = {
   ContentButtonWhereInput: ContentButtonWhereInput;
   ContentButtonWhereStageInput: ContentButtonWhereStageInput;
   ContentButtonWhereUniqueInput: ContentButtonWhereUniqueInput;
+  ContentTag: ResolverTypeWrapper<ContentTag>;
+  ContentTagConnectInput: ContentTagConnectInput;
+  ContentTagConnection: ResolverTypeWrapper<ContentTagConnection>;
+  ContentTagCreateInput: ContentTagCreateInput;
+  ContentTagCreateManyInlineInput: ContentTagCreateManyInlineInput;
+  ContentTagCreateOneInlineInput: ContentTagCreateOneInlineInput;
+  ContentTagEdge: ResolverTypeWrapper<ContentTagEdge>;
+  ContentTagManyWhereInput: ContentTagManyWhereInput;
+  ContentTagOrderByInput: ContentTagOrderByInput;
+  ContentTagUpdateInput: ContentTagUpdateInput;
+  ContentTagUpdateManyInlineInput: ContentTagUpdateManyInlineInput;
+  ContentTagUpdateManyInput: ContentTagUpdateManyInput;
+  ContentTagUpdateManyWithNestedWhereInput: ContentTagUpdateManyWithNestedWhereInput;
+  ContentTagUpdateOneInlineInput: ContentTagUpdateOneInlineInput;
+  ContentTagUpdateWithNestedWhereUniqueInput: ContentTagUpdateWithNestedWhereUniqueInput;
+  ContentTagUpsertInput: ContentTagUpsertInput;
+  ContentTagUpsertWithNestedWhereUniqueInput: ContentTagUpsertWithNestedWhereUniqueInput;
+  ContentTagWhereComparatorInput: ContentTagWhereComparatorInput;
+  ContentTagWhereInput: ContentTagWhereInput;
+  ContentTagWhereStageInput: ContentTagWhereStageInput;
+  ContentTagWhereUniqueInput: ContentTagWhereUniqueInput;
   Date: ResolverTypeWrapper<Scalars['Date']['output']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
   DocsGroup: ResolverTypeWrapper<DocsGroup>;
@@ -26680,6 +26799,9 @@ export type ResolversTypes = {
   EmployeeWhereInput: EmployeeWhereInput;
   EmployeeWhereStageInput: EmployeeWhereStageInput;
   EmployeeWhereUniqueInput: EmployeeWhereUniqueInput;
+  Entity: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['Entity']>;
+  EntityTypeName: EntityTypeName;
+  EntityWhereInput: EntityWhereInput;
   ExternalLink: ResolverTypeWrapper<ExternalLink>;
   ExternalLinkConnectInput: ExternalLinkConnectInput;
   ExternalLinkConnection: ResolverTypeWrapper<ExternalLinkConnection>;
@@ -27476,26 +27598,6 @@ export type ResolversParentTypes = {
   BlogPostCreateOneInlineInput: BlogPostCreateOneInlineInput;
   BlogPostEdge: BlogPostEdge;
   BlogPostManyWhereInput: BlogPostManyWhereInput;
-  BlogPostTag: BlogPostTag;
-  BlogPostTagConnectInput: BlogPostTagConnectInput;
-  BlogPostTagConnection: BlogPostTagConnection;
-  BlogPostTagCreateInput: BlogPostTagCreateInput;
-  BlogPostTagCreateManyInlineInput: BlogPostTagCreateManyInlineInput;
-  BlogPostTagCreateOneInlineInput: BlogPostTagCreateOneInlineInput;
-  BlogPostTagEdge: BlogPostTagEdge;
-  BlogPostTagManyWhereInput: BlogPostTagManyWhereInput;
-  BlogPostTagUpdateInput: BlogPostTagUpdateInput;
-  BlogPostTagUpdateManyInlineInput: BlogPostTagUpdateManyInlineInput;
-  BlogPostTagUpdateManyInput: BlogPostTagUpdateManyInput;
-  BlogPostTagUpdateManyWithNestedWhereInput: BlogPostTagUpdateManyWithNestedWhereInput;
-  BlogPostTagUpdateOneInlineInput: BlogPostTagUpdateOneInlineInput;
-  BlogPostTagUpdateWithNestedWhereUniqueInput: BlogPostTagUpdateWithNestedWhereUniqueInput;
-  BlogPostTagUpsertInput: BlogPostTagUpsertInput;
-  BlogPostTagUpsertWithNestedWhereUniqueInput: BlogPostTagUpsertWithNestedWhereUniqueInput;
-  BlogPostTagWhereComparatorInput: BlogPostTagWhereComparatorInput;
-  BlogPostTagWhereInput: BlogPostTagWhereInput;
-  BlogPostTagWhereStageInput: BlogPostTagWhereStageInput;
-  BlogPostTagWhereUniqueInput: BlogPostTagWhereUniqueInput;
   BlogPostUpdateInput: BlogPostUpdateInput;
   BlogPostUpdateManyInlineInput: BlogPostUpdateManyInlineInput;
   BlogPostUpdateManyInput: BlogPostUpdateManyInput;
@@ -27778,6 +27880,26 @@ export type ResolversParentTypes = {
   ContentButtonWhereInput: ContentButtonWhereInput;
   ContentButtonWhereStageInput: ContentButtonWhereStageInput;
   ContentButtonWhereUniqueInput: ContentButtonWhereUniqueInput;
+  ContentTag: ContentTag;
+  ContentTagConnectInput: ContentTagConnectInput;
+  ContentTagConnection: ContentTagConnection;
+  ContentTagCreateInput: ContentTagCreateInput;
+  ContentTagCreateManyInlineInput: ContentTagCreateManyInlineInput;
+  ContentTagCreateOneInlineInput: ContentTagCreateOneInlineInput;
+  ContentTagEdge: ContentTagEdge;
+  ContentTagManyWhereInput: ContentTagManyWhereInput;
+  ContentTagUpdateInput: ContentTagUpdateInput;
+  ContentTagUpdateManyInlineInput: ContentTagUpdateManyInlineInput;
+  ContentTagUpdateManyInput: ContentTagUpdateManyInput;
+  ContentTagUpdateManyWithNestedWhereInput: ContentTagUpdateManyWithNestedWhereInput;
+  ContentTagUpdateOneInlineInput: ContentTagUpdateOneInlineInput;
+  ContentTagUpdateWithNestedWhereUniqueInput: ContentTagUpdateWithNestedWhereUniqueInput;
+  ContentTagUpsertInput: ContentTagUpsertInput;
+  ContentTagUpsertWithNestedWhereUniqueInput: ContentTagUpsertWithNestedWhereUniqueInput;
+  ContentTagWhereComparatorInput: ContentTagWhereComparatorInput;
+  ContentTagWhereInput: ContentTagWhereInput;
+  ContentTagWhereStageInput: ContentTagWhereStageInput;
+  ContentTagWhereUniqueInput: ContentTagWhereUniqueInput;
   Date: Scalars['Date']['output'];
   DateTime: Scalars['DateTime']['output'];
   DocsGroup: DocsGroup;
@@ -27847,6 +27969,8 @@ export type ResolversParentTypes = {
   EmployeeWhereInput: EmployeeWhereInput;
   EmployeeWhereStageInput: EmployeeWhereStageInput;
   EmployeeWhereUniqueInput: EmployeeWhereUniqueInput;
+  Entity: ResolversInterfaceTypes<ResolversParentTypes>['Entity'];
+  EntityWhereInput: EntityWhereInput;
   ExternalLink: ExternalLink;
   ExternalLinkConnectInput: ExternalLinkConnectInput;
   ExternalLinkConnection: ExternalLinkConnection;
@@ -28611,8 +28735,8 @@ export type BatchPayloadResolvers<ContextType = any, ParentType extends Resolver
 
 export type BlogPostResolvers<ContextType = any, ParentType extends ResolversParentTypes['BlogPost'] = ResolversParentTypes['BlogPost']> = {
   authors?: Resolver<Array<ResolversTypes['Employee']>, ParentType, ContextType, Partial<BlogPostAuthorsArgs>>;
-  blogPostTags?: Resolver<Array<ResolversTypes['BlogPostTag']>, ParentType, ContextType, Partial<BlogPostBlogPostTagsArgs>>;
   body?: Resolver<ResolversTypes['BlogPostBodyRichText'], ParentType, ContextType>;
+  contentTags?: Resolver<Array<ResolversTypes['ContentTag']>, ParentType, ContextType, Partial<BlogPostContentTagsArgs>>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<BlogPostCreatedByArgs>>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -28655,36 +28779,6 @@ export type BlogPostConnectionResolvers<ContextType = any, ParentType extends Re
 export type BlogPostEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['BlogPostEdge'] = ResolversParentTypes['BlogPostEdge']> = {
   cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   node?: Resolver<ResolversTypes['BlogPost'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type BlogPostTagResolvers<ContextType = any, ParentType extends ResolversParentTypes['BlogPostTag'] = ResolversParentTypes['BlogPostTag']> = {
-  blogPosts?: Resolver<Array<ResolversTypes['BlogPost']>, ParentType, ContextType, Partial<BlogPostTagBlogPostsArgs>>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<BlogPostTagCreatedByArgs>>;
-  documentInStages?: Resolver<Array<ResolversTypes['BlogPostTag']>, ParentType, ContextType, RequireFields<BlogPostTagDocumentInStagesArgs, 'includeCurrent' | 'inheritLocale' | 'stages'>>;
-  history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<BlogPostTagHistoryArgs, 'limit' | 'skip'>>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<BlogPostTagPublishedByArgs>>;
-  scheduledIn?: Resolver<Array<ResolversTypes['ScheduledOperation']>, ParentType, ContextType, Partial<BlogPostTagScheduledInArgs>>;
-  stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
-  tag?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  updatedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<BlogPostTagUpdatedByArgs>>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type BlogPostTagConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['BlogPostTagConnection'] = ResolversParentTypes['BlogPostTagConnection']> = {
-  aggregate?: Resolver<ResolversTypes['Aggregate'], ParentType, ContextType>;
-  edges?: Resolver<Array<ResolversTypes['BlogPostTagEdge']>, ParentType, ContextType>;
-  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type BlogPostTagEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['BlogPostTagEdge'] = ResolversParentTypes['BlogPostTagEdge']> = {
-  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  node?: Resolver<ResolversTypes['BlogPostTag'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -28986,6 +29080,36 @@ export type ContentButtonEdgeResolvers<ContextType = any, ParentType extends Res
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ContentTagResolvers<ContextType = any, ParentType extends ResolversParentTypes['ContentTag'] = ResolversParentTypes['ContentTag']> = {
+  blogPosts?: Resolver<Array<ResolversTypes['BlogPost']>, ParentType, ContextType, Partial<ContentTagBlogPostsArgs>>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<ContentTagCreatedByArgs>>;
+  documentInStages?: Resolver<Array<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<ContentTagDocumentInStagesArgs, 'includeCurrent' | 'inheritLocale' | 'stages'>>;
+  history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<ContentTagHistoryArgs, 'limit' | 'skip'>>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<ContentTagPublishedByArgs>>;
+  scheduledIn?: Resolver<Array<ResolversTypes['ScheduledOperation']>, ParentType, ContextType, Partial<ContentTagScheduledInArgs>>;
+  stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
+  tag?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  updatedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<ContentTagUpdatedByArgs>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ContentTagConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ContentTagConnection'] = ResolversParentTypes['ContentTagConnection']> = {
+  aggregate?: Resolver<ResolversTypes['Aggregate'], ParentType, ContextType>;
+  edges?: Resolver<Array<ResolversTypes['ContentTagEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ContentTagEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ContentTagEdge'] = ResolversParentTypes['ContentTagEdge']> = {
+  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['ContentTag'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
   name: 'Date';
 }
@@ -29133,6 +29257,12 @@ export type EmployeeEdgeResolvers<ContextType = any, ParentType extends Resolver
   cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   node?: Resolver<ResolversTypes['Employee'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type EntityResolvers<ContextType = any, ParentType extends ResolversParentTypes['Entity'] = ResolversParentTypes['Entity']> = {
+  __resolveType: TypeResolveFn<'Address' | 'Admonition' | 'Alert' | 'Asset' | 'BlogPost' | 'Button' | 'CallToAction' | 'CallToActionSettings' | 'Callout' | 'CheckboxField' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'ExternalLink' | 'Feature' | 'FooterGroup' | 'Form' | 'FormButton' | 'HeaderGroup' | 'HomePage' | 'HomePageBlock' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'SelectField' | 'SocialLink' | 'Testimonial' | 'TextAreaField' | 'TextInputField' | 'Theme' | 'ThemeColors' | 'ThemeFonts' | 'User' | 'VendorLogo', ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
 };
 
 export type ExternalLinkResolvers<ContextType = any, ParentType extends ResolversParentTypes['ExternalLink'] = ResolversParentTypes['ExternalLink']> = {
@@ -29405,11 +29535,11 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createAdmonition?: Resolver<Maybe<ResolversTypes['Admonition']>, ParentType, ContextType, RequireFields<MutationCreateAdmonitionArgs, 'data'>>;
   createAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, RequireFields<MutationCreateAssetArgs, 'data'>>;
   createBlogPost?: Resolver<Maybe<ResolversTypes['BlogPost']>, ParentType, ContextType, RequireFields<MutationCreateBlogPostArgs, 'data'>>;
-  createBlogPostTag?: Resolver<Maybe<ResolversTypes['BlogPostTag']>, ParentType, ContextType, RequireFields<MutationCreateBlogPostTagArgs, 'data'>>;
   createCloudLocation?: Resolver<Maybe<ResolversTypes['CloudLocation']>, ParentType, ContextType, RequireFields<MutationCreateCloudLocationArgs, 'data'>>;
   createConfiguration?: Resolver<Maybe<ResolversTypes['Configuration']>, ParentType, ContextType, RequireFields<MutationCreateConfigurationArgs, 'data'>>;
   createContactForm?: Resolver<Maybe<ResolversTypes['ContactForm']>, ParentType, ContextType, RequireFields<MutationCreateContactFormArgs, 'data'>>;
   createContentButton?: Resolver<Maybe<ResolversTypes['ContentButton']>, ParentType, ContextType, RequireFields<MutationCreateContentButtonArgs, 'data'>>;
+  createContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationCreateContentTagArgs, 'data'>>;
   createDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationCreateDocsGroupArgs, 'data'>>;
   createDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationCreateDocsPageArgs, 'data'>>;
   createEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationCreateEmployeeArgs, 'data'>>;
@@ -29426,11 +29556,11 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteAdmonition?: Resolver<Maybe<ResolversTypes['Admonition']>, ParentType, ContextType, RequireFields<MutationDeleteAdmonitionArgs, 'where'>>;
   deleteAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, RequireFields<MutationDeleteAssetArgs, 'where'>>;
   deleteBlogPost?: Resolver<Maybe<ResolversTypes['BlogPost']>, ParentType, ContextType, RequireFields<MutationDeleteBlogPostArgs, 'where'>>;
-  deleteBlogPostTag?: Resolver<Maybe<ResolversTypes['BlogPostTag']>, ParentType, ContextType, RequireFields<MutationDeleteBlogPostTagArgs, 'where'>>;
   deleteCloudLocation?: Resolver<Maybe<ResolversTypes['CloudLocation']>, ParentType, ContextType, RequireFields<MutationDeleteCloudLocationArgs, 'where'>>;
   deleteConfiguration?: Resolver<Maybe<ResolversTypes['Configuration']>, ParentType, ContextType, RequireFields<MutationDeleteConfigurationArgs, 'where'>>;
   deleteContactForm?: Resolver<Maybe<ResolversTypes['ContactForm']>, ParentType, ContextType, RequireFields<MutationDeleteContactFormArgs, 'where'>>;
   deleteContentButton?: Resolver<Maybe<ResolversTypes['ContentButton']>, ParentType, ContextType, RequireFields<MutationDeleteContentButtonArgs, 'where'>>;
+  deleteContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationDeleteContentTagArgs, 'where'>>;
   deleteDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationDeleteDocsGroupArgs, 'where'>>;
   deleteDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationDeleteDocsPageArgs, 'where'>>;
   deleteEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationDeleteEmployeeArgs, 'where'>>;
@@ -29442,8 +29572,6 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteManyAdmonitionsConnection?: Resolver<ResolversTypes['AdmonitionConnection'], ParentType, ContextType, Partial<MutationDeleteManyAdmonitionsConnectionArgs>>;
   deleteManyAssets?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyAssetsArgs>>;
   deleteManyAssetsConnection?: Resolver<ResolversTypes['AssetConnection'], ParentType, ContextType, Partial<MutationDeleteManyAssetsConnectionArgs>>;
-  deleteManyBlogPostTags?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyBlogPostTagsArgs>>;
-  deleteManyBlogPostTagsConnection?: Resolver<ResolversTypes['BlogPostTagConnection'], ParentType, ContextType, Partial<MutationDeleteManyBlogPostTagsConnectionArgs>>;
   deleteManyBlogPosts?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyBlogPostsArgs>>;
   deleteManyBlogPostsConnection?: Resolver<ResolversTypes['BlogPostConnection'], ParentType, ContextType, Partial<MutationDeleteManyBlogPostsConnectionArgs>>;
   deleteManyCloudLocations?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyCloudLocationsArgs>>;
@@ -29454,6 +29582,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteManyContactFormsConnection?: Resolver<ResolversTypes['ContactFormConnection'], ParentType, ContextType, Partial<MutationDeleteManyContactFormsConnectionArgs>>;
   deleteManyContentButtons?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyContentButtonsArgs>>;
   deleteManyContentButtonsConnection?: Resolver<ResolversTypes['ContentButtonConnection'], ParentType, ContextType, Partial<MutationDeleteManyContentButtonsConnectionArgs>>;
+  deleteManyContentTags?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyContentTagsArgs>>;
+  deleteManyContentTagsConnection?: Resolver<ResolversTypes['ContentTagConnection'], ParentType, ContextType, Partial<MutationDeleteManyContentTagsConnectionArgs>>;
   deleteManyDocsGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyDocsGroupsArgs>>;
   deleteManyDocsGroupsConnection?: Resolver<ResolversTypes['DocsGroupConnection'], ParentType, ContextType, Partial<MutationDeleteManyDocsGroupsConnectionArgs>>;
   deleteManyDocsPages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyDocsPagesArgs>>;
@@ -29488,11 +29618,11 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   publishAdmonition?: Resolver<Maybe<ResolversTypes['Admonition']>, ParentType, ContextType, RequireFields<MutationPublishAdmonitionArgs, 'to' | 'where'>>;
   publishAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, RequireFields<MutationPublishAssetArgs, 'publishBase' | 'to' | 'where' | 'withDefaultLocale'>>;
   publishBlogPost?: Resolver<Maybe<ResolversTypes['BlogPost']>, ParentType, ContextType, RequireFields<MutationPublishBlogPostArgs, 'to' | 'where'>>;
-  publishBlogPostTag?: Resolver<Maybe<ResolversTypes['BlogPostTag']>, ParentType, ContextType, RequireFields<MutationPublishBlogPostTagArgs, 'to' | 'where'>>;
   publishCloudLocation?: Resolver<Maybe<ResolversTypes['CloudLocation']>, ParentType, ContextType, RequireFields<MutationPublishCloudLocationArgs, 'to' | 'where'>>;
   publishConfiguration?: Resolver<Maybe<ResolversTypes['Configuration']>, ParentType, ContextType, RequireFields<MutationPublishConfigurationArgs, 'to' | 'where'>>;
   publishContactForm?: Resolver<Maybe<ResolversTypes['ContactForm']>, ParentType, ContextType, RequireFields<MutationPublishContactFormArgs, 'to' | 'where'>>;
   publishContentButton?: Resolver<Maybe<ResolversTypes['ContentButton']>, ParentType, ContextType, RequireFields<MutationPublishContentButtonArgs, 'to' | 'where'>>;
+  publishContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationPublishContentTagArgs, 'to' | 'where'>>;
   publishDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationPublishDocsGroupArgs, 'to' | 'where'>>;
   publishDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationPublishDocsPageArgs, 'to' | 'where'>>;
   publishEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationPublishEmployeeArgs, 'to' | 'where'>>;
@@ -29504,8 +29634,6 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   publishManyAdmonitionsConnection?: Resolver<ResolversTypes['AdmonitionConnection'], ParentType, ContextType, RequireFields<MutationPublishManyAdmonitionsConnectionArgs, 'from' | 'to'>>;
   publishManyAssets?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyAssetsArgs, 'publishBase' | 'to' | 'withDefaultLocale'>>;
   publishManyAssetsConnection?: Resolver<ResolversTypes['AssetConnection'], ParentType, ContextType, RequireFields<MutationPublishManyAssetsConnectionArgs, 'from' | 'publishBase' | 'to' | 'withDefaultLocale'>>;
-  publishManyBlogPostTags?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyBlogPostTagsArgs, 'to'>>;
-  publishManyBlogPostTagsConnection?: Resolver<ResolversTypes['BlogPostTagConnection'], ParentType, ContextType, RequireFields<MutationPublishManyBlogPostTagsConnectionArgs, 'from' | 'to'>>;
   publishManyBlogPosts?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyBlogPostsArgs, 'to'>>;
   publishManyBlogPostsConnection?: Resolver<ResolversTypes['BlogPostConnection'], ParentType, ContextType, RequireFields<MutationPublishManyBlogPostsConnectionArgs, 'from' | 'to'>>;
   publishManyCloudLocations?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyCloudLocationsArgs, 'to'>>;
@@ -29516,6 +29644,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   publishManyContactFormsConnection?: Resolver<ResolversTypes['ContactFormConnection'], ParentType, ContextType, RequireFields<MutationPublishManyContactFormsConnectionArgs, 'from' | 'to'>>;
   publishManyContentButtons?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyContentButtonsArgs, 'to'>>;
   publishManyContentButtonsConnection?: Resolver<ResolversTypes['ContentButtonConnection'], ParentType, ContextType, RequireFields<MutationPublishManyContentButtonsConnectionArgs, 'from' | 'to'>>;
+  publishManyContentTags?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyContentTagsArgs, 'to'>>;
+  publishManyContentTagsConnection?: Resolver<ResolversTypes['ContentTagConnection'], ParentType, ContextType, RequireFields<MutationPublishManyContentTagsConnectionArgs, 'from' | 'to'>>;
   publishManyDocsGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyDocsGroupsArgs, 'to'>>;
   publishManyDocsGroupsConnection?: Resolver<ResolversTypes['DocsGroupConnection'], ParentType, ContextType, RequireFields<MutationPublishManyDocsGroupsConnectionArgs, 'from' | 'to'>>;
   publishManyDocsPages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyDocsPagesArgs, 'to'>>;
@@ -29548,11 +29678,11 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   schedulePublishAdmonition?: Resolver<Maybe<ResolversTypes['Admonition']>, ParentType, ContextType, RequireFields<MutationSchedulePublishAdmonitionArgs, 'to' | 'where'>>;
   schedulePublishAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, RequireFields<MutationSchedulePublishAssetArgs, 'publishBase' | 'to' | 'where' | 'withDefaultLocale'>>;
   schedulePublishBlogPost?: Resolver<Maybe<ResolversTypes['BlogPost']>, ParentType, ContextType, RequireFields<MutationSchedulePublishBlogPostArgs, 'to' | 'where'>>;
-  schedulePublishBlogPostTag?: Resolver<Maybe<ResolversTypes['BlogPostTag']>, ParentType, ContextType, RequireFields<MutationSchedulePublishBlogPostTagArgs, 'to' | 'where'>>;
   schedulePublishCloudLocation?: Resolver<Maybe<ResolversTypes['CloudLocation']>, ParentType, ContextType, RequireFields<MutationSchedulePublishCloudLocationArgs, 'to' | 'where'>>;
   schedulePublishConfiguration?: Resolver<Maybe<ResolversTypes['Configuration']>, ParentType, ContextType, RequireFields<MutationSchedulePublishConfigurationArgs, 'to' | 'where'>>;
   schedulePublishContactForm?: Resolver<Maybe<ResolversTypes['ContactForm']>, ParentType, ContextType, RequireFields<MutationSchedulePublishContactFormArgs, 'to' | 'where'>>;
   schedulePublishContentButton?: Resolver<Maybe<ResolversTypes['ContentButton']>, ParentType, ContextType, RequireFields<MutationSchedulePublishContentButtonArgs, 'to' | 'where'>>;
+  schedulePublishContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationSchedulePublishContentTagArgs, 'to' | 'where'>>;
   schedulePublishDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationSchedulePublishDocsGroupArgs, 'to' | 'where'>>;
   schedulePublishDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationSchedulePublishDocsPageArgs, 'to' | 'where'>>;
   schedulePublishEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationSchedulePublishEmployeeArgs, 'to' | 'where'>>;
@@ -29568,11 +29698,11 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   scheduleUnpublishAdmonition?: Resolver<Maybe<ResolversTypes['Admonition']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishAdmonitionArgs, 'from' | 'where'>>;
   scheduleUnpublishAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishAssetArgs, 'from' | 'unpublishBase' | 'where'>>;
   scheduleUnpublishBlogPost?: Resolver<Maybe<ResolversTypes['BlogPost']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishBlogPostArgs, 'from' | 'where'>>;
-  scheduleUnpublishBlogPostTag?: Resolver<Maybe<ResolversTypes['BlogPostTag']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishBlogPostTagArgs, 'from' | 'where'>>;
   scheduleUnpublishCloudLocation?: Resolver<Maybe<ResolversTypes['CloudLocation']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishCloudLocationArgs, 'from' | 'where'>>;
   scheduleUnpublishConfiguration?: Resolver<Maybe<ResolversTypes['Configuration']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishConfigurationArgs, 'from' | 'where'>>;
   scheduleUnpublishContactForm?: Resolver<Maybe<ResolversTypes['ContactForm']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishContactFormArgs, 'from' | 'where'>>;
   scheduleUnpublishContentButton?: Resolver<Maybe<ResolversTypes['ContentButton']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishContentButtonArgs, 'from' | 'where'>>;
+  scheduleUnpublishContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishContentTagArgs, 'from' | 'where'>>;
   scheduleUnpublishDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishDocsGroupArgs, 'from' | 'where'>>;
   scheduleUnpublishDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishDocsPageArgs, 'from' | 'where'>>;
   scheduleUnpublishEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishEmployeeArgs, 'from' | 'where'>>;
@@ -29588,11 +29718,11 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   unpublishAdmonition?: Resolver<Maybe<ResolversTypes['Admonition']>, ParentType, ContextType, RequireFields<MutationUnpublishAdmonitionArgs, 'from' | 'where'>>;
   unpublishAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, RequireFields<MutationUnpublishAssetArgs, 'from' | 'unpublishBase' | 'where'>>;
   unpublishBlogPost?: Resolver<Maybe<ResolversTypes['BlogPost']>, ParentType, ContextType, RequireFields<MutationUnpublishBlogPostArgs, 'from' | 'where'>>;
-  unpublishBlogPostTag?: Resolver<Maybe<ResolversTypes['BlogPostTag']>, ParentType, ContextType, RequireFields<MutationUnpublishBlogPostTagArgs, 'from' | 'where'>>;
   unpublishCloudLocation?: Resolver<Maybe<ResolversTypes['CloudLocation']>, ParentType, ContextType, RequireFields<MutationUnpublishCloudLocationArgs, 'from' | 'where'>>;
   unpublishConfiguration?: Resolver<Maybe<ResolversTypes['Configuration']>, ParentType, ContextType, RequireFields<MutationUnpublishConfigurationArgs, 'from' | 'where'>>;
   unpublishContactForm?: Resolver<Maybe<ResolversTypes['ContactForm']>, ParentType, ContextType, RequireFields<MutationUnpublishContactFormArgs, 'from' | 'where'>>;
   unpublishContentButton?: Resolver<Maybe<ResolversTypes['ContentButton']>, ParentType, ContextType, RequireFields<MutationUnpublishContentButtonArgs, 'from' | 'where'>>;
+  unpublishContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationUnpublishContentTagArgs, 'from' | 'where'>>;
   unpublishDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationUnpublishDocsGroupArgs, 'from' | 'where'>>;
   unpublishDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationUnpublishDocsPageArgs, 'from' | 'where'>>;
   unpublishEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationUnpublishEmployeeArgs, 'from' | 'where'>>;
@@ -29604,8 +29734,6 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   unpublishManyAdmonitionsConnection?: Resolver<ResolversTypes['AdmonitionConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyAdmonitionsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyAssets?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyAssetsArgs, 'from' | 'unpublishBase'>>;
   unpublishManyAssetsConnection?: Resolver<ResolversTypes['AssetConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyAssetsConnectionArgs, 'from' | 'stage' | 'unpublishBase'>>;
-  unpublishManyBlogPostTags?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyBlogPostTagsArgs, 'from'>>;
-  unpublishManyBlogPostTagsConnection?: Resolver<ResolversTypes['BlogPostTagConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyBlogPostTagsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyBlogPosts?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyBlogPostsArgs, 'from'>>;
   unpublishManyBlogPostsConnection?: Resolver<ResolversTypes['BlogPostConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyBlogPostsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyCloudLocations?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyCloudLocationsArgs, 'from'>>;
@@ -29616,6 +29744,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   unpublishManyContactFormsConnection?: Resolver<ResolversTypes['ContactFormConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyContactFormsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyContentButtons?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyContentButtonsArgs, 'from'>>;
   unpublishManyContentButtonsConnection?: Resolver<ResolversTypes['ContentButtonConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyContentButtonsConnectionArgs, 'from' | 'stage'>>;
+  unpublishManyContentTags?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyContentTagsArgs, 'from'>>;
+  unpublishManyContentTagsConnection?: Resolver<ResolversTypes['ContentTagConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyContentTagsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyDocsGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyDocsGroupsArgs, 'from'>>;
   unpublishManyDocsGroupsConnection?: Resolver<ResolversTypes['DocsGroupConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyDocsGroupsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyDocsPages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyDocsPagesArgs, 'from'>>;
@@ -29648,11 +29778,11 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateAdmonition?: Resolver<Maybe<ResolversTypes['Admonition']>, ParentType, ContextType, RequireFields<MutationUpdateAdmonitionArgs, 'data' | 'where'>>;
   updateAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, RequireFields<MutationUpdateAssetArgs, 'data' | 'where'>>;
   updateBlogPost?: Resolver<Maybe<ResolversTypes['BlogPost']>, ParentType, ContextType, RequireFields<MutationUpdateBlogPostArgs, 'data' | 'where'>>;
-  updateBlogPostTag?: Resolver<Maybe<ResolversTypes['BlogPostTag']>, ParentType, ContextType, RequireFields<MutationUpdateBlogPostTagArgs, 'data' | 'where'>>;
   updateCloudLocation?: Resolver<Maybe<ResolversTypes['CloudLocation']>, ParentType, ContextType, RequireFields<MutationUpdateCloudLocationArgs, 'data' | 'where'>>;
   updateConfiguration?: Resolver<Maybe<ResolversTypes['Configuration']>, ParentType, ContextType, RequireFields<MutationUpdateConfigurationArgs, 'data' | 'where'>>;
   updateContactForm?: Resolver<Maybe<ResolversTypes['ContactForm']>, ParentType, ContextType, RequireFields<MutationUpdateContactFormArgs, 'data' | 'where'>>;
   updateContentButton?: Resolver<Maybe<ResolversTypes['ContentButton']>, ParentType, ContextType, RequireFields<MutationUpdateContentButtonArgs, 'data' | 'where'>>;
+  updateContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationUpdateContentTagArgs, 'data' | 'where'>>;
   updateDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationUpdateDocsGroupArgs, 'data' | 'where'>>;
   updateDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationUpdateDocsPageArgs, 'data' | 'where'>>;
   updateEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationUpdateEmployeeArgs, 'data' | 'where'>>;
@@ -29664,8 +29794,6 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateManyAdmonitionsConnection?: Resolver<ResolversTypes['AdmonitionConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyAdmonitionsConnectionArgs, 'data'>>;
   updateManyAssets?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyAssetsArgs, 'data'>>;
   updateManyAssetsConnection?: Resolver<ResolversTypes['AssetConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyAssetsConnectionArgs, 'data'>>;
-  updateManyBlogPostTags?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyBlogPostTagsArgs, 'data'>>;
-  updateManyBlogPostTagsConnection?: Resolver<ResolversTypes['BlogPostTagConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyBlogPostTagsConnectionArgs, 'data'>>;
   updateManyBlogPosts?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyBlogPostsArgs, 'data'>>;
   updateManyBlogPostsConnection?: Resolver<ResolversTypes['BlogPostConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyBlogPostsConnectionArgs, 'data'>>;
   updateManyCloudLocations?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyCloudLocationsArgs, 'data'>>;
@@ -29676,6 +29804,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateManyContactFormsConnection?: Resolver<ResolversTypes['ContactFormConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyContactFormsConnectionArgs, 'data'>>;
   updateManyContentButtons?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyContentButtonsArgs, 'data'>>;
   updateManyContentButtonsConnection?: Resolver<ResolversTypes['ContentButtonConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyContentButtonsConnectionArgs, 'data'>>;
+  updateManyContentTags?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyContentTagsArgs, 'data'>>;
+  updateManyContentTagsConnection?: Resolver<ResolversTypes['ContentTagConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyContentTagsConnectionArgs, 'data'>>;
   updateManyDocsGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyDocsGroupsArgs, 'data'>>;
   updateManyDocsGroupsConnection?: Resolver<ResolversTypes['DocsGroupConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyDocsGroupsConnectionArgs, 'data'>>;
   updateManyDocsPages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyDocsPagesArgs, 'data'>>;
@@ -29709,11 +29839,11 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   upsertAdmonition?: Resolver<Maybe<ResolversTypes['Admonition']>, ParentType, ContextType, RequireFields<MutationUpsertAdmonitionArgs, 'upsert' | 'where'>>;
   upsertAsset?: Resolver<Maybe<ResolversTypes['Asset']>, ParentType, ContextType, RequireFields<MutationUpsertAssetArgs, 'upsert' | 'where'>>;
   upsertBlogPost?: Resolver<Maybe<ResolversTypes['BlogPost']>, ParentType, ContextType, RequireFields<MutationUpsertBlogPostArgs, 'upsert' | 'where'>>;
-  upsertBlogPostTag?: Resolver<Maybe<ResolversTypes['BlogPostTag']>, ParentType, ContextType, RequireFields<MutationUpsertBlogPostTagArgs, 'upsert' | 'where'>>;
   upsertCloudLocation?: Resolver<Maybe<ResolversTypes['CloudLocation']>, ParentType, ContextType, RequireFields<MutationUpsertCloudLocationArgs, 'upsert' | 'where'>>;
   upsertConfiguration?: Resolver<Maybe<ResolversTypes['Configuration']>, ParentType, ContextType, RequireFields<MutationUpsertConfigurationArgs, 'upsert' | 'where'>>;
   upsertContactForm?: Resolver<Maybe<ResolversTypes['ContactForm']>, ParentType, ContextType, RequireFields<MutationUpsertContactFormArgs, 'upsert' | 'where'>>;
   upsertContentButton?: Resolver<Maybe<ResolversTypes['ContentButton']>, ParentType, ContextType, RequireFields<MutationUpsertContentButtonArgs, 'upsert' | 'where'>>;
+  upsertContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationUpsertContentTagArgs, 'upsert' | 'where'>>;
   upsertDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationUpsertDocsGroupArgs, 'upsert' | 'where'>>;
   upsertDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationUpsertDocsPageArgs, 'upsert' | 'where'>>;
   upsertEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationUpsertEmployeeArgs, 'upsert' | 'where'>>;
@@ -29729,7 +29859,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type NodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Node'] = ResolversParentTypes['Node']> = {
-  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'BlogPostTag' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HeaderGroup' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'Testimonial' | 'Theme' | 'User', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HeaderGroup' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'Testimonial' | 'Theme' | 'User', ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
 };
@@ -29867,10 +29997,6 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   assets?: Resolver<Array<ResolversTypes['Asset']>, ParentType, ContextType, RequireFields<QueryAssetsArgs, 'locales' | 'stage'>>;
   assetsConnection?: Resolver<ResolversTypes['AssetConnection'], ParentType, ContextType, RequireFields<QueryAssetsConnectionArgs, 'locales' | 'stage'>>;
   blogPost?: Resolver<Maybe<ResolversTypes['BlogPost']>, ParentType, ContextType, RequireFields<QueryBlogPostArgs, 'locales' | 'stage' | 'where'>>;
-  blogPostTag?: Resolver<Maybe<ResolversTypes['BlogPostTag']>, ParentType, ContextType, RequireFields<QueryBlogPostTagArgs, 'locales' | 'stage' | 'where'>>;
-  blogPostTagVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryBlogPostTagVersionArgs, 'where'>>;
-  blogPostTags?: Resolver<Array<ResolversTypes['BlogPostTag']>, ParentType, ContextType, RequireFields<QueryBlogPostTagsArgs, 'locales' | 'stage'>>;
-  blogPostTagsConnection?: Resolver<ResolversTypes['BlogPostTagConnection'], ParentType, ContextType, RequireFields<QueryBlogPostTagsConnectionArgs, 'locales' | 'stage'>>;
   blogPostVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryBlogPostVersionArgs, 'where'>>;
   blogPosts?: Resolver<Array<ResolversTypes['BlogPost']>, ParentType, ContextType, RequireFields<QueryBlogPostsArgs, 'locales' | 'stage'>>;
   blogPostsConnection?: Resolver<ResolversTypes['BlogPostConnection'], ParentType, ContextType, RequireFields<QueryBlogPostsConnectionArgs, 'locales' | 'stage'>>;
@@ -29890,6 +30016,10 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   contentButtonVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryContentButtonVersionArgs, 'where'>>;
   contentButtons?: Resolver<Array<ResolversTypes['ContentButton']>, ParentType, ContextType, RequireFields<QueryContentButtonsArgs, 'locales' | 'stage'>>;
   contentButtonsConnection?: Resolver<ResolversTypes['ContentButtonConnection'], ParentType, ContextType, RequireFields<QueryContentButtonsConnectionArgs, 'locales' | 'stage'>>;
+  contentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<QueryContentTagArgs, 'locales' | 'stage' | 'where'>>;
+  contentTagVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryContentTagVersionArgs, 'where'>>;
+  contentTags?: Resolver<Array<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<QueryContentTagsArgs, 'locales' | 'stage'>>;
+  contentTagsConnection?: Resolver<ResolversTypes['ContentTagConnection'], ParentType, ContextType, RequireFields<QueryContentTagsConnectionArgs, 'locales' | 'stage'>>;
   docsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<QueryDocsGroupArgs, 'locales' | 'stage' | 'where'>>;
   docsGroupVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryDocsGroupVersionArgs, 'where'>>;
   docsGroups?: Resolver<Array<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<QueryDocsGroupsArgs, 'locales' | 'stage'>>;
@@ -29902,6 +30032,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   employeeVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryEmployeeVersionArgs, 'where'>>;
   employees?: Resolver<Array<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<QueryEmployeesArgs, 'locales' | 'stage'>>;
   employeesConnection?: Resolver<ResolversTypes['EmployeeConnection'], ParentType, ContextType, RequireFields<QueryEmployeesConnectionArgs, 'locales' | 'stage'>>;
+  entities?: Resolver<Maybe<Array<ResolversTypes['Entity']>>, ParentType, ContextType, RequireFields<QueryEntitiesArgs, 'where'>>;
   footerGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<QueryFooterGroupArgs, 'locales' | 'stage' | 'where'>>;
   footerGroupVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryFooterGroupVersionArgs, 'where'>>;
   footerGroups?: Resolver<Array<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<QueryFooterGroupsArgs, 'locales' | 'stage'>>;
@@ -29998,7 +30129,7 @@ export type ScheduledOperationResolvers<ContextType = any, ParentType extends Re
 };
 
 export type ScheduledOperationAffectedDocumentResolvers<ContextType = any, ParentType extends ResolversParentTypes['ScheduledOperationAffectedDocument'] = ResolversParentTypes['ScheduledOperationAffectedDocument']> = {
-  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'BlogPostTag' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HeaderGroup' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'Testimonial' | 'Theme', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HeaderGroup' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'Testimonial' | 'Theme', ParentType, ContextType>;
 };
 
 export type ScheduledOperationConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ScheduledOperationConnection'] = ResolversParentTypes['ScheduledOperationConnection']> = {
@@ -30380,9 +30511,6 @@ export type Resolvers<ContextType = any> = {
   BlogPostBodyRichTextEmbeddedTypes?: BlogPostBodyRichTextEmbeddedTypesResolvers<ContextType>;
   BlogPostConnection?: BlogPostConnectionResolvers<ContextType>;
   BlogPostEdge?: BlogPostEdgeResolvers<ContextType>;
-  BlogPostTag?: BlogPostTagResolvers<ContextType>;
-  BlogPostTagConnection?: BlogPostTagConnectionResolvers<ContextType>;
-  BlogPostTagEdge?: BlogPostTagEdgeResolvers<ContextType>;
   Button?: ButtonResolvers<ContextType>;
   ButtonConnection?: ButtonConnectionResolvers<ContextType>;
   ButtonEdge?: ButtonEdgeResolvers<ContextType>;
@@ -30417,6 +30545,9 @@ export type Resolvers<ContextType = any> = {
   ContentButton?: ContentButtonResolvers<ContextType>;
   ContentButtonConnection?: ContentButtonConnectionResolvers<ContextType>;
   ContentButtonEdge?: ContentButtonEdgeResolvers<ContextType>;
+  ContentTag?: ContentTagResolvers<ContextType>;
+  ContentTagConnection?: ContentTagConnectionResolvers<ContextType>;
+  ContentTagEdge?: ContentTagEdgeResolvers<ContextType>;
   Date?: GraphQLScalarType;
   DateTime?: GraphQLScalarType;
   DocsGroup?: DocsGroupResolvers<ContextType>;
@@ -30433,6 +30564,7 @@ export type Resolvers<ContextType = any> = {
   Employee?: EmployeeResolvers<ContextType>;
   EmployeeConnection?: EmployeeConnectionResolvers<ContextType>;
   EmployeeEdge?: EmployeeEdgeResolvers<ContextType>;
+  Entity?: EntityResolvers<ContextType>;
   ExternalLink?: ExternalLinkResolvers<ContextType>;
   ExternalLinkConnection?: ExternalLinkConnectionResolvers<ContextType>;
   ExternalLinkEdge?: ExternalLinkEdgeResolvers<ContextType>;

@@ -26,7 +26,7 @@ export const BlogPostContent = (props: React.PropsWithChildren<BlogPost>) => {
     overrideDate,
     publishedAt,
     authors,
-    blogPostTags,
+    contentTags,
     ...rest
   } = props;
 
@@ -48,7 +48,7 @@ export const BlogPostContent = (props: React.PropsWithChildren<BlogPost>) => {
               <Author key={author.name} {...author} />
             ))}
           </HStack>
-          <Tags fontSize="lg" tags={blogPostTags} />
+          <Tags fontSize="lg" tags={contentTags} />
           <Share url={`https://stellar.tech/blog/${slug}`} title={title} />
         </Stack>
       </Flex>

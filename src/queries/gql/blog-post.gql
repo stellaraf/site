@@ -5,7 +5,7 @@ query blogPost($slug: String, $stage: Stage = PUBLISHED) {
     slug
     title
     overrideDate
-    blogPostTags {
+    contentTags {
       tag
     }
     authors {

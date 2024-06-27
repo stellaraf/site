@@ -1,12 +1,12 @@
 query blogPostsByTags($tag: String!, $stage: Stage = PUBLISHED) {
-  blogPosts(stage: $stage, orderBy: updatedAt_DESC, where: { blogPostTags_some: { tag: $tag } }) {
+  blogPosts(stage: $stage, orderBy: updatedAt_DESC, where: { contentTags_some: { tag: $tag } }) {
     description
     id
     publishedAt
     slug
     title
     overrideDate
-    blogPostTags {
+    contentTags {
       tag
     }
     authors {

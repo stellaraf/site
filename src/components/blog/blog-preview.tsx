@@ -11,7 +11,7 @@ import { PublishedAt } from "./published-at";
 import type { BlogPost } from "~/queries";
 
 export const BlogPreview = (props: BlogPost) => {
-  const { title, slug, description, publishedAt, overrideDate, authors, blogPostTags } = props;
+  const { title, slug, description, publishedAt, overrideDate, authors, contentTags } = props;
 
   const titleMe = useTitleCase();
 
@@ -63,7 +63,7 @@ export const BlogPreview = (props: BlogPost) => {
               </Flex>
             </Flex>
             <HStack w="100%" justifyContent="flex-start">
-              {blogPostTags.map(pt => (
+              {contentTags.map(pt => (
                 <Badge key={pt.tag}>{pt.tag}</Badge>
               ))}
             </HStack>

@@ -54,7 +54,7 @@ export async function blogPostsByTagsQuery(
   }
   let match = variables.tag;
   for (const post of result.blogPosts) {
-    for (const tag of post.blogPostTags) {
+    for (const tag of post.contentTags) {
       if (tag.tag.toLowerCase() == variables.tag.toLowerCase()) {
         match = tag.tag;
       }

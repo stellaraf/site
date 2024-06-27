@@ -1,6 +1,6 @@
-query blogPostTags {
+query contentTags {
   blogPosts(stage: PUBLISHED) {
-    blogPostTags {
+    contentTags {
       tag
     }
   }
