@@ -1,0 +1,7 @@
+query documentTags {
+  documents(stage: PUBLISHED, where: { file: { mimeType: "application/pdf" } }) {
+    contentTags {
+      tag
+    }
+  }
+}

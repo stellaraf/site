@@ -1,4 +1,6 @@
 import fs from "node:fs";
+import path, { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import createBundleAnalyzer from "@next/bundle-analyzer";
 
 const withBundleAnalyzer = createBundleAnalyzer({
@@ -12,6 +14,15 @@ function getVersion() {
 }
 
 console.dir(process.env, { depth: null });
+
+function copyPDFWorker() {
+  const cwd = dirname(fileURLToPath(import.meta.url));
+  const src = path.join(cwd, "node_modules", "pdfjs-dist", "build", "pdf.worker.js");
+  const dst = path.join(cwd, "public", "assets", "pdf.worker.js");
+  fs.copyFileSync(src, dst);
+}
+
+copyPDFWorker();
 
 /** @type {import("next").NextConfig} */
 const config = {

@@ -11,6 +11,7 @@ import { H1, H2, H3, H4, H5, H6 } from "./headings";
 import { Ul, Ol, Li } from "./lists";
 import { Table, Td, Th } from "./table";
 import { Code, P } from "./text";
+import { Document, DocumentGrid } from "../documents";
 
 import type { NodeRendererType } from "@graphcms/rich-text-react-renderer";
 import type { RichTextValue } from "~/types";
@@ -44,6 +45,8 @@ const defaultRenderers: NodeRendererType = {
   embed: {
     Admonition: props => <Admonition {...props} />,
     ContentButton: props => <ContentButton {...props} />,
+    Document: props => <Document document={props} />,
+    DocumentGroup: props => <DocumentGrid {...props} />,
   },
   class: ({ className, children }) =>
     className === "expandable" ? <Expandable>{children}</Expandable> : <>{children}</>,

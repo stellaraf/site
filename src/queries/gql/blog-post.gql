@@ -48,6 +48,30 @@ query blogPost($slug: String, $stage: Stage = PUBLISHED) {
           text
           variant
         }
+        ... on Document {
+          id
+          name
+          file {
+            fileName
+            mimeType
+            size
+            url
+          }
+        }
+        ... on DocumentGroup {
+          id
+          name
+          documents(where: { file: { mimeType: "application/pdf" } }) {
+            id
+            name
+            file {
+              fileName
+              mimeType
+              size
+              url
+            }
+          }
+        }
       }
     }
   }

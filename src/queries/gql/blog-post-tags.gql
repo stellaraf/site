@@ -1,4 +1,4 @@
-query contentTags {
+query blogPostTags {
   blogPosts(stage: PUBLISHED) {
     contentTags {
       tag

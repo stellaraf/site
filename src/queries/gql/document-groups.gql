@@ -1,0 +1,17 @@
+query documentGroups($stage: Stage = PUBLISHED) {
+  documentGroups(stage: $stage, orderBy: updatedAt_DESC) {
+    documents(where: { file: { mimeType: "application/pdf" } }) {
+      name
+      file {
+        fileName
+        mimeType
+        size
+        url
+      }
+      contentTags {
+        id
+        tag
+      }
+    }
+  }
+}

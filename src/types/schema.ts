@@ -1464,6 +1464,7 @@ export type Asset = Entity & Node & {
   createdBy?: Maybe<User>;
   /** Get the document in other stages */
   documentInStages: Array<Asset>;
+  fileDocument: Array<Document>;
   /** The file name */
   fileName: Scalars['String']['output'];
   /** The file handle */
@@ -1524,6 +1525,20 @@ export type AssetDocumentInStagesArgs = {
   includeCurrent?: Scalars['Boolean']['input'];
   inheritLocale?: Scalars['Boolean']['input'];
   stages?: Array<Stage>;
+};
+
+
+/** Asset system model */
+export type AssetFileDocumentArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<DocumentOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DocumentWhereInput>;
 };
 
 
@@ -1689,6 +1704,7 @@ export type AssetConnection = {
 
 export type AssetCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  fileDocument?: InputMaybe<DocumentCreateManyInlineInput>;
   fileName: Scalars['String']['input'];
   handle: Scalars['String']['input'];
   height?: InputMaybe<Scalars['Float']['input']>;
@@ -1784,6 +1800,9 @@ export type AssetManyWhereInput = {
   documentInStages_every?: InputMaybe<AssetWhereStageInput>;
   documentInStages_none?: InputMaybe<AssetWhereStageInput>;
   documentInStages_some?: InputMaybe<AssetWhereStageInput>;
+  fileDocument_every?: InputMaybe<DocumentWhereInput>;
+  fileDocument_none?: InputMaybe<DocumentWhereInput>;
+  fileDocument_some?: InputMaybe<DocumentWhereInput>;
   iconContactForm_every?: InputMaybe<ContactFormWhereInput>;
   iconContactForm_none?: InputMaybe<ContactFormWhereInput>;
   iconContactForm_some?: InputMaybe<ContactFormWhereInput>;
@@ -1890,6 +1909,7 @@ export type AssetTransformationInput = {
 };
 
 export type AssetUpdateInput = {
+  fileDocument?: InputMaybe<DocumentUpdateManyInlineInput>;
   fileName?: InputMaybe<Scalars['String']['input']>;
   handle?: InputMaybe<Scalars['String']['input']>;
   height?: InputMaybe<Scalars['Float']['input']>;
@@ -2063,6 +2083,9 @@ export type AssetWhereInput = {
   documentInStages_every?: InputMaybe<AssetWhereStageInput>;
   documentInStages_none?: InputMaybe<AssetWhereStageInput>;
   documentInStages_some?: InputMaybe<AssetWhereStageInput>;
+  fileDocument_every?: InputMaybe<DocumentWhereInput>;
+  fileDocument_none?: InputMaybe<DocumentWhereInput>;
+  fileDocument_some?: InputMaybe<DocumentWhereInput>;
   fileName?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   fileName_contains?: InputMaybe<Scalars['String']['input']>;
@@ -2390,7 +2413,7 @@ export type BlogPostBodyRichTextReferencesArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type BlogPostBodyRichTextEmbeddedTypes = Admonition | Asset | ContentButton;
+export type BlogPostBodyRichTextEmbeddedTypes = Admonition | Asset | ContentButton | Document | DocumentGroup;
 
 export type BlogPostConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -7638,6 +7661,7 @@ export type ContentTag = Entity & Node & {
   createdBy?: Maybe<User>;
   /** Get the document in other stages */
   documentInStages: Array<ContentTag>;
+  documents: Array<Document>;
   /** List of ContentTag versions */
   history: Array<Version>;
   /** The unique identifier */
@@ -7680,6 +7704,19 @@ export type ContentTagDocumentInStagesArgs = {
   includeCurrent?: Scalars['Boolean']['input'];
   inheritLocale?: Scalars['Boolean']['input'];
   stages?: Array<Stage>;
+};
+
+
+export type ContentTagDocumentsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<DocumentOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DocumentWhereInput>;
 };
 
 
@@ -7733,6 +7770,7 @@ export type ContentTagConnection = {
 export type ContentTagCreateInput = {
   blogPosts?: InputMaybe<BlogPostCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  documents?: InputMaybe<DocumentCreateManyInlineInput>;
   tag: Scalars['String']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -7792,6 +7830,9 @@ export type ContentTagManyWhereInput = {
   documentInStages_every?: InputMaybe<ContentTagWhereStageInput>;
   documentInStages_none?: InputMaybe<ContentTagWhereStageInput>;
   documentInStages_some?: InputMaybe<ContentTagWhereStageInput>;
+  documents_every?: InputMaybe<DocumentWhereInput>;
+  documents_none?: InputMaybe<DocumentWhereInput>;
+  documents_some?: InputMaybe<DocumentWhereInput>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -7882,6 +7923,7 @@ export enum ContentTagOrderByInput {
 
 export type ContentTagUpdateInput = {
   blogPosts?: InputMaybe<BlogPostUpdateManyInlineInput>;
+  documents?: InputMaybe<DocumentUpdateManyInlineInput>;
   tag?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -7988,6 +8030,9 @@ export type ContentTagWhereInput = {
   documentInStages_every?: InputMaybe<ContentTagWhereStageInput>;
   documentInStages_none?: InputMaybe<ContentTagWhereStageInput>;
   documentInStages_some?: InputMaybe<ContentTagWhereStageInput>;
+  documents_every?: InputMaybe<DocumentWhereInput>;
+  documents_none?: InputMaybe<DocumentWhereInput>;
+  documents_some?: InputMaybe<DocumentWhereInput>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -8825,7 +8870,7 @@ export type DocsPageBodyRichTextReferencesArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type DocsPageBodyRichTextEmbeddedTypes = Admonition | Asset | ContentButton;
+export type DocsPageBodyRichTextEmbeddedTypes = Admonition | Asset | ContentButton | Document | DocumentGroup;
 
 export type DocsPageConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -9291,6 +9336,160 @@ export type DocsPageWhereUniqueInput = {
   slug?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type Document = Entity & Node & {
+  __typename?: 'Document';
+  contentTags: Array<ContentTag>;
+  /** The time the document was created */
+  createdAt: Scalars['DateTime']['output'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  documentGroups: Array<DocumentGroup>;
+  /** Get the document in other stages */
+  documentInStages: Array<Document>;
+  file: Asset;
+  /** List of Document versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime']['output'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type DocumentContentTagsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<ContentTagOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ContentTagWhereInput>;
+};
+
+
+export type DocumentCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type DocumentDocumentGroupsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<DocumentGroupOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DocumentGroupWhereInput>;
+};
+
+
+export type DocumentDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean']['input'];
+  inheritLocale?: Scalars['Boolean']['input'];
+  stages?: Array<Stage>;
+};
+
+
+export type DocumentFileArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type DocumentHistoryArgs = {
+  limit?: Scalars['Int']['input'];
+  skip?: Scalars['Int']['input'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type DocumentPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type DocumentScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type DocumentUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type DocumentConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: DocumentWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type DocumentConnection = {
+  __typename?: 'DocumentConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<DocumentEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type DocumentCreateInput = {
+  contentTags?: InputMaybe<ContentTagCreateManyInlineInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  documentGroups?: InputMaybe<DocumentGroupCreateManyInlineInput>;
+  file: AssetCreateOneInlineInput;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type DocumentCreateManyInlineInput = {
+  /** Connect multiple existing Document documents */
+  connect?: InputMaybe<Array<DocumentWhereUniqueInput>>;
+  /** Create and connect multiple existing Document documents */
+  create?: InputMaybe<Array<DocumentCreateInput>>;
+};
+
+export type DocumentCreateOneInlineInput = {
+  /** Connect one existing Document document */
+  connect?: InputMaybe<DocumentWhereUniqueInput>;
+  /** Create and connect one Document document */
+  create?: InputMaybe<DocumentCreateInput>;
+};
+
+/** An edge in a connection. */
+export type DocumentEdge = {
+  __typename?: 'DocumentEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: Document;
+};
+
 export enum DocumentFileTypes {
   Doc = 'doc',
   Docx = 'docx',
@@ -9308,6 +9507,584 @@ export enum DocumentFileTypes {
   Webp = 'webp',
   Xls = 'xls',
   Xlsx = 'xlsx'
+}
+
+export type DocumentGroup = Entity & Node & {
+  __typename?: 'DocumentGroup';
+  /** The time the document was created */
+  createdAt: Scalars['DateTime']['output'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<DocumentGroup>;
+  documents: Array<Document>;
+  /** List of DocumentGroup versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime']['output'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type DocumentGroupCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type DocumentGroupDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean']['input'];
+  inheritLocale?: Scalars['Boolean']['input'];
+  stages?: Array<Stage>;
+};
+
+
+export type DocumentGroupDocumentsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<DocumentOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DocumentWhereInput>;
+};
+
+
+export type DocumentGroupHistoryArgs = {
+  limit?: Scalars['Int']['input'];
+  skip?: Scalars['Int']['input'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type DocumentGroupPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type DocumentGroupScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type DocumentGroupUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type DocumentGroupConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: DocumentGroupWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type DocumentGroupConnection = {
+  __typename?: 'DocumentGroupConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<DocumentGroupEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type DocumentGroupCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  documents?: InputMaybe<DocumentCreateManyInlineInput>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type DocumentGroupCreateManyInlineInput = {
+  /** Connect multiple existing DocumentGroup documents */
+  connect?: InputMaybe<Array<DocumentGroupWhereUniqueInput>>;
+  /** Create and connect multiple existing DocumentGroup documents */
+  create?: InputMaybe<Array<DocumentGroupCreateInput>>;
+};
+
+export type DocumentGroupCreateOneInlineInput = {
+  /** Connect one existing DocumentGroup document */
+  connect?: InputMaybe<DocumentGroupWhereUniqueInput>;
+  /** Create and connect one DocumentGroup document */
+  create?: InputMaybe<DocumentGroupCreateInput>;
+};
+
+/** An edge in a connection. */
+export type DocumentGroupEdge = {
+  __typename?: 'DocumentGroupEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: DocumentGroup;
+};
+
+/** Identifies documents */
+export type DocumentGroupManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<DocumentGroupWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<DocumentGroupWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<DocumentGroupWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<DocumentGroupWhereStageInput>;
+  documentInStages_none?: InputMaybe<DocumentGroupWhereStageInput>;
+  documentInStages_some?: InputMaybe<DocumentGroupWhereStageInput>;
+  documents_every?: InputMaybe<DocumentWhereInput>;
+  documents_none?: InputMaybe<DocumentWhereInput>;
+  documents_some?: InputMaybe<DocumentWhereInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  name_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum DocumentGroupOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type DocumentGroupUpdateInput = {
+  documents?: InputMaybe<DocumentUpdateManyInlineInput>;
+  name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DocumentGroupUpdateManyInlineInput = {
+  /** Connect multiple existing DocumentGroup documents */
+  connect?: InputMaybe<Array<DocumentGroupConnectInput>>;
+  /** Create and connect multiple DocumentGroup documents */
+  create?: InputMaybe<Array<DocumentGroupCreateInput>>;
+  /** Delete multiple DocumentGroup documents */
+  delete?: InputMaybe<Array<DocumentGroupWhereUniqueInput>>;
+  /** Disconnect multiple DocumentGroup documents */
+  disconnect?: InputMaybe<Array<DocumentGroupWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing DocumentGroup documents */
+  set?: InputMaybe<Array<DocumentGroupWhereUniqueInput>>;
+  /** Update multiple DocumentGroup documents */
+  update?: InputMaybe<Array<DocumentGroupUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple DocumentGroup documents */
+  upsert?: InputMaybe<Array<DocumentGroupUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type DocumentGroupUpdateManyInput = {
+  /** No fields in updateMany data input */
+  _?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DocumentGroupUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: DocumentGroupUpdateManyInput;
+  /** Document search */
+  where: DocumentGroupWhereInput;
+};
+
+export type DocumentGroupUpdateOneInlineInput = {
+  /** Connect existing DocumentGroup document */
+  connect?: InputMaybe<DocumentGroupWhereUniqueInput>;
+  /** Create and connect one DocumentGroup document */
+  create?: InputMaybe<DocumentGroupCreateInput>;
+  /** Delete currently connected DocumentGroup document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected DocumentGroup document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single DocumentGroup document */
+  update?: InputMaybe<DocumentGroupUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single DocumentGroup document */
+  upsert?: InputMaybe<DocumentGroupUpsertWithNestedWhereUniqueInput>;
+};
+
+export type DocumentGroupUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: DocumentGroupUpdateInput;
+  /** Unique document search */
+  where: DocumentGroupWhereUniqueInput;
+};
+
+export type DocumentGroupUpsertInput = {
+  /** Create document if it didn't exist */
+  create: DocumentGroupCreateInput;
+  /** Update document if it exists */
+  update: DocumentGroupUpdateInput;
+};
+
+export type DocumentGroupUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: DocumentGroupUpsertInput;
+  /** Unique document search */
+  where: DocumentGroupWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type DocumentGroupWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Identifies documents */
+export type DocumentGroupWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<DocumentGroupWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<DocumentGroupWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<DocumentGroupWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<DocumentGroupWhereStageInput>;
+  documentInStages_none?: InputMaybe<DocumentGroupWhereStageInput>;
+  documentInStages_some?: InputMaybe<DocumentGroupWhereStageInput>;
+  documents_every?: InputMaybe<DocumentWhereInput>;
+  documents_none?: InputMaybe<DocumentWhereInput>;
+  documents_some?: InputMaybe<DocumentWhereInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  name_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type DocumentGroupWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<DocumentGroupWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<DocumentGroupWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<DocumentGroupWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<DocumentGroupWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References DocumentGroup record uniquely */
+export type DocumentGroupWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Identifies documents */
+export type DocumentManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<DocumentWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<DocumentWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<DocumentWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  contentTags_every?: InputMaybe<ContentTagWhereInput>;
+  contentTags_none?: InputMaybe<ContentTagWhereInput>;
+  contentTags_some?: InputMaybe<ContentTagWhereInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentGroups_every?: InputMaybe<DocumentGroupWhereInput>;
+  documentGroups_none?: InputMaybe<DocumentGroupWhereInput>;
+  documentGroups_some?: InputMaybe<DocumentGroupWhereInput>;
+  documentInStages_every?: InputMaybe<DocumentWhereStageInput>;
+  documentInStages_none?: InputMaybe<DocumentWhereStageInput>;
+  documentInStages_some?: InputMaybe<DocumentWhereStageInput>;
+  file?: InputMaybe<AssetWhereInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  name_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum DocumentOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
 }
 
 export type DocumentOutputInput = {
@@ -9346,6 +10123,78 @@ export type DocumentTransformationInput = {
   output?: InputMaybe<DocumentOutputInput>;
 };
 
+export type DocumentUpdateInput = {
+  contentTags?: InputMaybe<ContentTagUpdateManyInlineInput>;
+  documentGroups?: InputMaybe<DocumentGroupUpdateManyInlineInput>;
+  file?: InputMaybe<AssetUpdateOneInlineInput>;
+  name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DocumentUpdateManyInlineInput = {
+  /** Connect multiple existing Document documents */
+  connect?: InputMaybe<Array<DocumentConnectInput>>;
+  /** Create and connect multiple Document documents */
+  create?: InputMaybe<Array<DocumentCreateInput>>;
+  /** Delete multiple Document documents */
+  delete?: InputMaybe<Array<DocumentWhereUniqueInput>>;
+  /** Disconnect multiple Document documents */
+  disconnect?: InputMaybe<Array<DocumentWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Document documents */
+  set?: InputMaybe<Array<DocumentWhereUniqueInput>>;
+  /** Update multiple Document documents */
+  update?: InputMaybe<Array<DocumentUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Document documents */
+  upsert?: InputMaybe<Array<DocumentUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type DocumentUpdateManyInput = {
+  /** No fields in updateMany data input */
+  _?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DocumentUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: DocumentUpdateManyInput;
+  /** Document search */
+  where: DocumentWhereInput;
+};
+
+export type DocumentUpdateOneInlineInput = {
+  /** Connect existing Document document */
+  connect?: InputMaybe<DocumentWhereUniqueInput>;
+  /** Create and connect one Document document */
+  create?: InputMaybe<DocumentCreateInput>;
+  /** Delete currently connected Document document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected Document document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single Document document */
+  update?: InputMaybe<DocumentUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Document document */
+  upsert?: InputMaybe<DocumentUpsertWithNestedWhereUniqueInput>;
+};
+
+export type DocumentUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: DocumentUpdateInput;
+  /** Unique document search */
+  where: DocumentWhereUniqueInput;
+};
+
+export type DocumentUpsertInput = {
+  /** Create document if it didn't exist */
+  create: DocumentCreateInput;
+  /** Update document if it exists */
+  update: DocumentUpdateInput;
+};
+
+export type DocumentUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: DocumentUpsertInput;
+  /** Unique document search */
+  where: DocumentWhereUniqueInput;
+};
+
 export type DocumentVersion = {
   __typename?: 'DocumentVersion';
   createdAt: Scalars['DateTime']['output'];
@@ -9353,6 +10202,143 @@ export type DocumentVersion = {
   id: Scalars['ID']['output'];
   revision: Scalars['Int']['output'];
   stage: Stage;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type DocumentWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Identifies documents */
+export type DocumentWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<DocumentWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<DocumentWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<DocumentWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  contentTags_every?: InputMaybe<ContentTagWhereInput>;
+  contentTags_none?: InputMaybe<ContentTagWhereInput>;
+  contentTags_some?: InputMaybe<ContentTagWhereInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentGroups_every?: InputMaybe<DocumentGroupWhereInput>;
+  documentGroups_none?: InputMaybe<DocumentGroupWhereInput>;
+  documentGroups_some?: InputMaybe<DocumentGroupWhereInput>;
+  documentInStages_every?: InputMaybe<DocumentWhereStageInput>;
+  documentInStages_none?: InputMaybe<DocumentWhereStageInput>;
+  documentInStages_some?: InputMaybe<DocumentWhereStageInput>;
+  file?: InputMaybe<AssetWhereInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  name_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type DocumentWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<DocumentWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<DocumentWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<DocumentWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<DocumentWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References Document record uniquely */
+export type DocumentWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Employee = Entity & Node & {
@@ -9940,6 +10926,8 @@ export enum EntityTypeName {
   ContentTag = 'ContentTag',
   DocsGroup = 'DocsGroup',
   DocsPage = 'DocsPage',
+  Document = 'Document',
+  DocumentGroup = 'DocumentGroup',
   Employee = 'Employee',
   ExternalLink = 'ExternalLink',
   Feature = 'Feature',
@@ -13833,6 +14821,10 @@ export type Mutation = {
   createDocsGroup?: Maybe<DocsGroup>;
   /** Create one docsPage */
   createDocsPage?: Maybe<DocsPage>;
+  /** Create one document */
+  createDocument?: Maybe<Document>;
+  /** Create one documentGroup */
+  createDocumentGroup?: Maybe<DocumentGroup>;
   /** Create one employee */
   createEmployee?: Maybe<Employee>;
   /** Create one footerGroup */
@@ -13875,6 +14867,10 @@ export type Mutation = {
   deleteDocsGroup?: Maybe<DocsGroup>;
   /** Delete one docsPage from _all_ existing stages. Returns deleted document. */
   deleteDocsPage?: Maybe<DocsPage>;
+  /** Delete one document from _all_ existing stages. Returns deleted document. */
+  deleteDocument?: Maybe<Document>;
+  /** Delete one documentGroup from _all_ existing stages. Returns deleted document. */
+  deleteDocumentGroup?: Maybe<DocumentGroup>;
   /** Delete one employee from _all_ existing stages. Returns deleted document. */
   deleteEmployee?: Maybe<Employee>;
   /** Delete one footerGroup from _all_ existing stages. Returns deleted document. */
@@ -13955,6 +14951,20 @@ export type Mutation = {
   deleteManyDocsPages: BatchPayload;
   /** Delete many DocsPage documents, return deleted documents */
   deleteManyDocsPagesConnection: DocsPageConnection;
+  /**
+   * Delete many DocumentGroup documents
+   * @deprecated Please use the new paginated many mutation (deleteManyDocumentGroupsConnection)
+   */
+  deleteManyDocumentGroups: BatchPayload;
+  /** Delete many DocumentGroup documents, return deleted documents */
+  deleteManyDocumentGroupsConnection: DocumentGroupConnection;
+  /**
+   * Delete many Document documents
+   * @deprecated Please use the new paginated many mutation (deleteManyDocumentsConnection)
+   */
+  deleteManyDocuments: BatchPayload;
+  /** Delete many Document documents, return deleted documents */
+  deleteManyDocumentsConnection: DocumentConnection;
   /**
    * Delete many Employee documents
    * @deprecated Please use the new paginated many mutation (deleteManyEmployeesConnection)
@@ -14059,6 +15069,10 @@ export type Mutation = {
   publishDocsGroup?: Maybe<DocsGroup>;
   /** Publish one docsPage */
   publishDocsPage?: Maybe<DocsPage>;
+  /** Publish one document */
+  publishDocument?: Maybe<Document>;
+  /** Publish one documentGroup */
+  publishDocumentGroup?: Maybe<DocumentGroup>;
   /** Publish one employee */
   publishEmployee?: Maybe<Employee>;
   /** Publish one footerGroup */
@@ -14139,6 +15153,20 @@ export type Mutation = {
   publishManyDocsPages: BatchPayload;
   /** Publish many DocsPage documents */
   publishManyDocsPagesConnection: DocsPageConnection;
+  /**
+   * Publish many DocumentGroup documents
+   * @deprecated Please use the new paginated many mutation (publishManyDocumentGroupsConnection)
+   */
+  publishManyDocumentGroups: BatchPayload;
+  /** Publish many DocumentGroup documents */
+  publishManyDocumentGroupsConnection: DocumentGroupConnection;
+  /**
+   * Publish many Document documents
+   * @deprecated Please use the new paginated many mutation (publishManyDocumentsConnection)
+   */
+  publishManyDocuments: BatchPayload;
+  /** Publish many Document documents */
+  publishManyDocumentsConnection: DocumentConnection;
   /**
    * Publish many Employee documents
    * @deprecated Please use the new paginated many mutation (publishManyEmployeesConnection)
@@ -14239,6 +15267,10 @@ export type Mutation = {
   schedulePublishDocsGroup?: Maybe<DocsGroup>;
   /** Schedule to publish one docsPage */
   schedulePublishDocsPage?: Maybe<DocsPage>;
+  /** Schedule to publish one document */
+  schedulePublishDocument?: Maybe<Document>;
+  /** Schedule to publish one documentGroup */
+  schedulePublishDocumentGroup?: Maybe<DocumentGroup>;
   /** Schedule to publish one employee */
   schedulePublishEmployee?: Maybe<Employee>;
   /** Schedule to publish one footerGroup */
@@ -14279,6 +15311,10 @@ export type Mutation = {
   scheduleUnpublishDocsGroup?: Maybe<DocsGroup>;
   /** Unpublish one docsPage from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishDocsPage?: Maybe<DocsPage>;
+  /** Unpublish one document from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishDocument?: Maybe<Document>;
+  /** Unpublish one documentGroup from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishDocumentGroup?: Maybe<DocumentGroup>;
   /** Unpublish one employee from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishEmployee?: Maybe<Employee>;
   /** Unpublish one footerGroup from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -14319,6 +15355,10 @@ export type Mutation = {
   unpublishDocsGroup?: Maybe<DocsGroup>;
   /** Unpublish one docsPage from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishDocsPage?: Maybe<DocsPage>;
+  /** Unpublish one document from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishDocument?: Maybe<Document>;
+  /** Unpublish one documentGroup from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishDocumentGroup?: Maybe<DocumentGroup>;
   /** Unpublish one employee from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishEmployee?: Maybe<Employee>;
   /** Unpublish one footerGroup from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -14399,6 +15439,20 @@ export type Mutation = {
   unpublishManyDocsPages: BatchPayload;
   /** Find many DocsPage documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyDocsPagesConnection: DocsPageConnection;
+  /**
+   * Unpublish many DocumentGroup documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyDocumentGroupsConnection)
+   */
+  unpublishManyDocumentGroups: BatchPayload;
+  /** Find many DocumentGroup documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyDocumentGroupsConnection: DocumentGroupConnection;
+  /**
+   * Unpublish many Document documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyDocumentsConnection)
+   */
+  unpublishManyDocuments: BatchPayload;
+  /** Find many Document documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyDocumentsConnection: DocumentConnection;
   /**
    * Unpublish many Employee documents
    * @deprecated Please use the new paginated many mutation (unpublishManyEmployeesConnection)
@@ -14499,6 +15553,10 @@ export type Mutation = {
   updateDocsGroup?: Maybe<DocsGroup>;
   /** Update one docsPage */
   updateDocsPage?: Maybe<DocsPage>;
+  /** Update one document */
+  updateDocument?: Maybe<Document>;
+  /** Update one documentGroup */
+  updateDocumentGroup?: Maybe<DocumentGroup>;
   /** Update one employee */
   updateEmployee?: Maybe<Employee>;
   /** Update one footerGroup */
@@ -14579,6 +15637,20 @@ export type Mutation = {
   updateManyDocsPages: BatchPayload;
   /** Update many DocsPage documents */
   updateManyDocsPagesConnection: DocsPageConnection;
+  /**
+   * Update many documentGroups
+   * @deprecated Please use the new paginated many mutation (updateManyDocumentGroupsConnection)
+   */
+  updateManyDocumentGroups: BatchPayload;
+  /** Update many DocumentGroup documents */
+  updateManyDocumentGroupsConnection: DocumentGroupConnection;
+  /**
+   * Update many documents
+   * @deprecated Please use the new paginated many mutation (updateManyDocumentsConnection)
+   */
+  updateManyDocuments: BatchPayload;
+  /** Update many Document documents */
+  updateManyDocumentsConnection: DocumentConnection;
   /**
    * Update many employees
    * @deprecated Please use the new paginated many mutation (updateManyEmployeesConnection)
@@ -14681,6 +15753,10 @@ export type Mutation = {
   upsertDocsGroup?: Maybe<DocsGroup>;
   /** Upsert one docsPage */
   upsertDocsPage?: Maybe<DocsPage>;
+  /** Upsert one document */
+  upsertDocument?: Maybe<Document>;
+  /** Upsert one documentGroup */
+  upsertDocumentGroup?: Maybe<DocumentGroup>;
   /** Upsert one employee */
   upsertEmployee?: Maybe<Employee>;
   /** Upsert one footerGroup */
@@ -14751,6 +15827,16 @@ export type MutationCreateDocsGroupArgs = {
 
 export type MutationCreateDocsPageArgs = {
   data: DocsPageCreateInput;
+};
+
+
+export type MutationCreateDocumentArgs = {
+  data: DocumentCreateInput;
+};
+
+
+export type MutationCreateDocumentGroupArgs = {
+  data: DocumentGroupCreateInput;
 };
 
 
@@ -14856,6 +15942,16 @@ export type MutationDeleteDocsGroupArgs = {
 
 export type MutationDeleteDocsPageArgs = {
   where: DocsPageWhereUniqueInput;
+};
+
+
+export type MutationDeleteDocumentArgs = {
+  where: DocumentWhereUniqueInput;
+};
+
+
+export type MutationDeleteDocumentGroupArgs = {
+  where: DocumentGroupWhereUniqueInput;
 };
 
 
@@ -15031,6 +16127,36 @@ export type MutationDeleteManyDocsPagesConnectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<DocsPageManyWhereInput>;
+};
+
+
+export type MutationDeleteManyDocumentGroupsArgs = {
+  where?: InputMaybe<DocumentGroupManyWhereInput>;
+};
+
+
+export type MutationDeleteManyDocumentGroupsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DocumentGroupManyWhereInput>;
+};
+
+
+export type MutationDeleteManyDocumentsArgs = {
+  where?: InputMaybe<DocumentManyWhereInput>;
+};
+
+
+export type MutationDeleteManyDocumentsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DocumentManyWhereInput>;
 };
 
 
@@ -15282,6 +16408,18 @@ export type MutationPublishDocsPageArgs = {
 };
 
 
+export type MutationPublishDocumentArgs = {
+  to?: Array<Stage>;
+  where: DocumentWhereUniqueInput;
+};
+
+
+export type MutationPublishDocumentGroupArgs = {
+  to?: Array<Stage>;
+  where: DocumentGroupWhereUniqueInput;
+};
+
+
 export type MutationPublishEmployeeArgs = {
   to?: Array<Stage>;
   where: EmployeeWhereUniqueInput;
@@ -15495,6 +16633,42 @@ export type MutationPublishManyDocsPagesConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   to?: Array<Stage>;
   where?: InputMaybe<DocsPageManyWhereInput>;
+};
+
+
+export type MutationPublishManyDocumentGroupsArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<DocumentGroupManyWhereInput>;
+};
+
+
+export type MutationPublishManyDocumentGroupsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<DocumentGroupManyWhereInput>;
+};
+
+
+export type MutationPublishManyDocumentsArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<DocumentManyWhereInput>;
+};
+
+
+export type MutationPublishManyDocumentsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<DocumentManyWhereInput>;
 };
 
 
@@ -15791,6 +16965,22 @@ export type MutationSchedulePublishDocsPageArgs = {
 };
 
 
+export type MutationSchedulePublishDocumentArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
+  releaseId?: InputMaybe<Scalars['String']['input']>;
+  to?: Array<Stage>;
+  where: DocumentWhereUniqueInput;
+};
+
+
+export type MutationSchedulePublishDocumentGroupArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
+  releaseId?: InputMaybe<Scalars['String']['input']>;
+  to?: Array<Stage>;
+  where: DocumentGroupWhereUniqueInput;
+};
+
+
 export type MutationSchedulePublishEmployeeArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
   releaseId?: InputMaybe<Scalars['String']['input']>;
@@ -15953,6 +17143,22 @@ export type MutationScheduleUnpublishDocsPageArgs = {
 };
 
 
+export type MutationScheduleUnpublishDocumentArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
+  releaseId?: InputMaybe<Scalars['String']['input']>;
+  where: DocumentWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishDocumentGroupArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
+  releaseId?: InputMaybe<Scalars['String']['input']>;
+  where: DocumentGroupWhereUniqueInput;
+};
+
+
 export type MutationScheduleUnpublishEmployeeArgs = {
   from?: Array<Stage>;
   releaseAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -16092,6 +17298,18 @@ export type MutationUnpublishDocsGroupArgs = {
 export type MutationUnpublishDocsPageArgs = {
   from?: Array<Stage>;
   where: DocsPageWhereUniqueInput;
+};
+
+
+export type MutationUnpublishDocumentArgs = {
+  from?: Array<Stage>;
+  where: DocumentWhereUniqueInput;
+};
+
+
+export type MutationUnpublishDocumentGroupArgs = {
+  from?: Array<Stage>;
+  where: DocumentGroupWhereUniqueInput;
 };
 
 
@@ -16306,6 +17524,42 @@ export type MutationUnpublishManyDocsPagesConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   stage?: InputMaybe<Stage>;
   where?: InputMaybe<DocsPageManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyDocumentGroupsArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<DocumentGroupManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyDocumentGroupsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<DocumentGroupManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyDocumentsArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<DocumentManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyDocumentsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<DocumentManyWhereInput>;
 };
 
 
@@ -16579,6 +17833,18 @@ export type MutationUpdateDocsPageArgs = {
 };
 
 
+export type MutationUpdateDocumentArgs = {
+  data: DocumentUpdateInput;
+  where: DocumentWhereUniqueInput;
+};
+
+
+export type MutationUpdateDocumentGroupArgs = {
+  data: DocumentGroupUpdateInput;
+  where: DocumentGroupWhereUniqueInput;
+};
+
+
 export type MutationUpdateEmployeeArgs = {
   data: EmployeeUpdateInput;
   where: EmployeeWhereUniqueInput;
@@ -16776,6 +18042,40 @@ export type MutationUpdateManyDocsPagesConnectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<DocsPageManyWhereInput>;
+};
+
+
+export type MutationUpdateManyDocumentGroupsArgs = {
+  data: DocumentGroupUpdateManyInput;
+  where?: InputMaybe<DocumentGroupManyWhereInput>;
+};
+
+
+export type MutationUpdateManyDocumentGroupsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  data: DocumentGroupUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DocumentGroupManyWhereInput>;
+};
+
+
+export type MutationUpdateManyDocumentsArgs = {
+  data: DocumentUpdateManyInput;
+  where?: InputMaybe<DocumentManyWhereInput>;
+};
+
+
+export type MutationUpdateManyDocumentsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']['input']>;
+  before?: InputMaybe<Scalars['ID']['input']>;
+  data: DocumentUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<DocumentManyWhereInput>;
 };
 
 
@@ -17042,6 +18342,18 @@ export type MutationUpsertDocsGroupArgs = {
 export type MutationUpsertDocsPageArgs = {
   upsert: DocsPageUpsertInput;
   where: DocsPageWhereUniqueInput;
+};
+
+
+export type MutationUpsertDocumentArgs = {
+  upsert: DocumentUpsertInput;
+  where: DocumentWhereUniqueInput;
+};
+
+
+export type MutationUpsertDocumentGroupArgs = {
+  upsert: DocumentGroupUpsertInput;
+  where: DocumentGroupWhereUniqueInput;
 };
 
 
@@ -19056,6 +20368,22 @@ export type Query = {
   docsPages: Array<DocsPage>;
   /** Retrieve multiple docsPages using the Relay connection interface */
   docsPagesConnection: DocsPageConnection;
+  /** Retrieve a single document */
+  document?: Maybe<Document>;
+  /** Retrieve a single documentGroup */
+  documentGroup?: Maybe<DocumentGroup>;
+  /** Retrieve document version */
+  documentGroupVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple documentGroups */
+  documentGroups: Array<DocumentGroup>;
+  /** Retrieve multiple documentGroups using the Relay connection interface */
+  documentGroupsConnection: DocumentGroupConnection;
+  /** Retrieve document version */
+  documentVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple documents */
+  documents: Array<Document>;
+  /** Retrieve multiple documents using the Relay connection interface */
+  documentsConnection: DocumentConnection;
   /** Retrieve a single employee */
   employee?: Maybe<Employee>;
   /** Retrieve document version */
@@ -19538,6 +20866,82 @@ export type QueryDocsPagesConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   stage?: Stage;
   where?: InputMaybe<DocsPageWhereInput>;
+};
+
+
+export type QueryDocumentArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: DocumentWhereUniqueInput;
+};
+
+
+export type QueryDocumentGroupArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: DocumentGroupWhereUniqueInput;
+};
+
+
+export type QueryDocumentGroupVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryDocumentGroupsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<DocumentGroupOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: Stage;
+  where?: InputMaybe<DocumentGroupWhereInput>;
+};
+
+
+export type QueryDocumentGroupsConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<DocumentGroupOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: Stage;
+  where?: InputMaybe<DocumentGroupWhereInput>;
+};
+
+
+export type QueryDocumentVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryDocumentsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<DocumentOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: Stage;
+  where?: InputMaybe<DocumentWhereInput>;
+};
+
+
+export type QueryDocumentsConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<DocumentOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  stage?: Stage;
+  where?: InputMaybe<DocumentWhereInput>;
 };
 
 
@@ -20144,7 +21548,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Admonition | Asset | BlogPost | CloudLocation | Configuration | ContactForm | ContentButton | ContentTag | DocsGroup | DocsPage | Employee | FooterGroup | Form | HeaderGroup | HomePage | OfficeLocation | Page | PageContent | Testimonial | Theme;
+export type ScheduledOperationAffectedDocument = Admonition | Asset | BlogPost | CloudLocation | Configuration | ContactForm | ContentButton | ContentTag | DocsGroup | DocsPage | Document | DocumentGroup | Employee | FooterGroup | Form | HeaderGroup | HomePage | OfficeLocation | Page | PageContent | Testimonial | Theme;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -25806,13 +27210,18 @@ export type BlogPostStaticPathsQueryVariables = Exact<{ [key: string]: never; }>
 
 export type BlogPostStaticPathsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', slug: string }> };
 
+export type BlogPostTagsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BlogPostTagsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', contentTags: Array<{ __typename?: 'ContentTag', tag: string }> }> };
+
 export type BlogPostQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']['input']>;
   stage?: InputMaybe<Stage>;
 }>;
 
 
-export type BlogPostQuery = { __typename?: 'Query', blogPost?: { __typename?: 'BlogPost', publishedAt?: string | null, description: string, slug: string, title: string, overrideDate?: string | null, contentTags: Array<{ __typename?: 'ContentTag', tag: string }>, authors: Array<{ __typename?: 'Employee', name: string, title: string, photo: { __typename?: 'Asset', mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } }>, body: { __typename?: 'BlogPostBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } } | null };
+export type BlogPostQuery = { __typename?: 'Query', blogPost?: { __typename?: 'BlogPost', publishedAt?: string | null, description: string, slug: string, title: string, overrideDate?: string | null, contentTags: Array<{ __typename?: 'ContentTag', tag: string }>, authors: Array<{ __typename?: 'Employee', name: string, title: string, photo: { __typename?: 'Asset', mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } }>, body: { __typename?: 'BlogPostBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null } | { __typename?: 'Document', id: string, name: string, file: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string } } | { __typename?: 'DocumentGroup', id: string, name: string, documents: Array<{ __typename?: 'Document', id: string, name: string, file: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string } }> }> } } | null };
 
 export type BlogPostsByTagsQueryVariables = Exact<{
   tag: Scalars['String']['input'];
@@ -25820,14 +27229,14 @@ export type BlogPostsByTagsQueryVariables = Exact<{
 }>;
 
 
-export type BlogPostsByTagsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', description: string, id: string, publishedAt?: string | null, slug: string, title: string, overrideDate?: string | null, contentTags: Array<{ __typename?: 'ContentTag', tag: string }>, authors: Array<{ __typename?: 'Employee', name: string, title: string, photo: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, body: { __typename?: 'BlogPostBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } }> };
+export type BlogPostsByTagsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', description: string, id: string, publishedAt?: string | null, slug: string, title: string, overrideDate?: string | null, contentTags: Array<{ __typename?: 'ContentTag', tag: string }>, authors: Array<{ __typename?: 'Employee', name: string, title: string, photo: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, body: { __typename?: 'BlogPostBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null } | { __typename?: 'Document', id: string, name: string, file: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string } } | { __typename?: 'DocumentGroup', id: string, name: string, documents: Array<{ __typename?: 'Document', id: string, name: string, file: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string } }> }> } }> };
 
 export type BlogPostsQueryVariables = Exact<{
   stage?: InputMaybe<Stage>;
 }>;
 
 
-export type BlogPostsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', description: string, id: string, publishedAt?: string | null, slug: string, title: string, overrideDate?: string | null, contentTags: Array<{ __typename?: 'ContentTag', tag: string }>, authors: Array<{ __typename?: 'Employee', name: string, title: string, photo: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, body: { __typename?: 'BlogPostBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } }> };
+export type BlogPostsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', description: string, id: string, publishedAt?: string | null, slug: string, title: string, overrideDate?: string | null, contentTags: Array<{ __typename?: 'ContentTag', tag: string }>, authors: Array<{ __typename?: 'Employee', name: string, title: string, photo: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, body: { __typename?: 'BlogPostBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null } | { __typename?: 'Document', id: string, name: string, file: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string } } | { __typename?: 'DocumentGroup', id: string, name: string, documents: Array<{ __typename?: 'Document', id: string, name: string, file: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string } }> }> } }> };
 
 export type CloudLocationsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -25848,11 +27257,6 @@ export type ContactFormsQueryVariables = Exact<{
 
 export type ContactFormsQuery = { __typename?: 'Query', configuration?: { __typename?: 'Configuration', contactForms: Array<{ __typename?: 'ContactForm', color: ThemeColor, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, button: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null }, fields: Array<{ __typename: 'CheckboxField', displayName: string, fieldGroup: number, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean } | { __typename: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', name: string, title?: string | null, level: AlertLevel, body: { __typename?: 'RichText', raw: RichTextContent } } | null } | { __typename: 'SelectField', displayName: string, fieldGroup: number, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean } | { __typename: 'TextAreaField', displayName: string, fieldGroup: number, formId: string, label?: string | null, required: boolean } | { __typename: 'TextInputField', displayName: string, fieldGroup: number, formId: string, label?: string | null, required: boolean, validationType?: TextInputValidationType | null }>, icon: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }> } | null };
 
-export type ContentTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ContentTagsQuery = { __typename?: 'Query', blogPosts: Array<{ __typename?: 'BlogPost', contentTags: Array<{ __typename?: 'ContentTag', tag: string }> }> };
-
 export type DocsGroupStaticPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -25864,14 +27268,14 @@ export type DocsGroupQueryVariables = Exact<{
 }>;
 
 
-export type DocsGroupQuery = { __typename?: 'Query', docsGroup?: { __typename?: 'DocsGroup', slug: string, subtitle?: string | null, title: string, callToAction: { __typename?: 'CallToActionSettings', enable: boolean, iconColor?: ThemeColor | null, body?: { __typename?: 'RichText', raw: RichTextContent } | null, icon?: { __typename?: 'Asset', mimeType?: string | null, height?: number | null, size?: number | null, url: string, width?: number | null, fileName: string } | null }, docsPages: Array<{ __typename?: 'DocsPage', updatedAt: string, title: string, slug: string, showUpdatedDate: boolean, description: string, body: { __typename?: 'DocsPageBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } }>, summary: { __typename?: 'DocsGroupSummaryRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } } | null };
+export type DocsGroupQuery = { __typename?: 'Query', docsGroup?: { __typename?: 'DocsGroup', slug: string, subtitle?: string | null, title: string, callToAction: { __typename?: 'CallToActionSettings', enable: boolean, iconColor?: ThemeColor | null, body?: { __typename?: 'RichText', raw: RichTextContent } | null, icon?: { __typename?: 'Asset', mimeType?: string | null, height?: number | null, size?: number | null, url: string, width?: number | null, fileName: string } | null }, docsPages: Array<{ __typename?: 'DocsPage', updatedAt: string, title: string, slug: string, showUpdatedDate: boolean, description: string, body: { __typename?: 'DocsPageBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null } | { __typename?: 'Document' } | { __typename?: 'DocumentGroup' }> } }>, summary: { __typename?: 'DocsGroupSummaryRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } } | null };
 
 export type DocsGroupsQueryVariables = Exact<{
   stage?: InputMaybe<Stage>;
 }>;
 
 
-export type DocsGroupsQuery = { __typename?: 'Query', docsGroups: Array<{ __typename?: 'DocsGroup', slug: string, subtitle?: string | null, title: string, callToAction: { __typename?: 'CallToActionSettings', enable: boolean, iconColor?: ThemeColor | null, body?: { __typename?: 'RichText', raw: RichTextContent } | null, icon?: { __typename?: 'Asset', mimeType?: string | null, height?: number | null, size?: number | null, url: string, width?: number | null, fileName: string } | null }, docsPages: Array<{ __typename?: 'DocsPage', updatedAt: string, title: string, slug: string, showUpdatedDate: boolean, description: string, body: { __typename?: 'DocsPageBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> }, docsGroup?: { __typename?: 'DocsGroup', slug: string } | null }>, summary: { __typename?: 'DocsGroupSummaryRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } }> };
+export type DocsGroupsQuery = { __typename?: 'Query', docsGroups: Array<{ __typename?: 'DocsGroup', slug: string, subtitle?: string | null, title: string, callToAction: { __typename?: 'CallToActionSettings', enable: boolean, iconColor?: ThemeColor | null, body?: { __typename?: 'RichText', raw: RichTextContent } | null, icon?: { __typename?: 'Asset', mimeType?: string | null, height?: number | null, size?: number | null, url: string, width?: number | null, fileName: string } | null }, docsPages: Array<{ __typename?: 'DocsPage', updatedAt: string, title: string, slug: string, showUpdatedDate: boolean, description: string, body: { __typename?: 'DocsPageBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null } | { __typename?: 'Document' } | { __typename?: 'DocumentGroup' }> }, docsGroup?: { __typename?: 'DocsGroup', slug: string } | null }>, summary: { __typename?: 'DocsGroupSummaryRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> } }> };
 
 export type DocsPageStaticPathsQueryVariables = Exact<{
   group?: InputMaybe<Scalars['String']['input']>;
@@ -25886,7 +27290,19 @@ export type DocsPageQueryVariables = Exact<{
 }>;
 
 
-export type DocsPageQuery = { __typename?: 'Query', docsPage?: { __typename?: 'DocsPage', description: string, slug: string, showUpdatedDate: boolean, title: string, updatedAt: string, body: { __typename?: 'DocsPageBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null }> }, docsGroup?: { __typename?: 'DocsGroup', slug: string } | null } | null };
+export type DocsPageQuery = { __typename?: 'Query', docsPage?: { __typename?: 'DocsPage', description: string, slug: string, showUpdatedDate: boolean, title: string, updatedAt: string, body: { __typename?: 'DocsPageBodyRichText', raw: RichTextContent, references: Array<{ __typename?: 'Admonition', id: string, title?: string | null, type: AdmonitionType, body: { __typename?: 'RichText', raw: RichTextContent } } | { __typename?: 'Asset', id: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null, fileName: string } | { __typename?: 'ContentButton', id: string, colorScheme?: ThemeColor | null, link: string, showIcon: boolean, text: string, variant?: ButtonVariant | null } | { __typename?: 'Document', id: string, name: string, file: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string } } | { __typename?: 'DocumentGroup', id: string, name: string, documents: Array<{ __typename?: 'Document', id: string, name: string, file: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string }, contentTags: Array<{ __typename?: 'ContentTag', id: string, tag: string }> }> }> }, docsGroup?: { __typename?: 'DocsGroup', slug: string } | null } | null };
+
+export type DocumentGroupsQueryVariables = Exact<{
+  stage?: InputMaybe<Stage>;
+}>;
+
+
+export type DocumentGroupsQuery = { __typename?: 'Query', documentGroups: Array<{ __typename?: 'DocumentGroup', documents: Array<{ __typename?: 'Document', name: string, file: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string }, contentTags: Array<{ __typename?: 'ContentTag', id: string, tag: string }> }> }> };
+
+export type DocumentTagsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DocumentTagsQuery = { __typename?: 'Query', documents: Array<{ __typename?: 'Document', contentTags: Array<{ __typename?: 'ContentTag', tag: string }> }> };
 
 export type EmployeesQueryVariables = Exact<{
   config?: InputMaybe<Scalars['String']['input']>;
@@ -25973,7 +27389,9 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
     "BlogPostBodyRichTextEmbeddedTypes": [
       "Admonition",
       "Asset",
-      "ContentButton"
+      "ContentButton",
+      "Document",
+      "DocumentGroup"
     ],
     "ButtonParent": [
       "Callout",
@@ -26011,7 +27429,9 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
     "DocsPageBodyRichTextEmbeddedTypes": [
       "Admonition",
       "Asset",
-      "ContentButton"
+      "ContentButton",
+      "Document",
+      "DocumentGroup"
     ],
     "Entity": [
       "Address",
@@ -26031,6 +27451,8 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "ContentTag",
       "DocsGroup",
       "DocsPage",
+      "Document",
+      "DocumentGroup",
       "Employee",
       "ExternalLink",
       "Feature",
@@ -26087,6 +27509,8 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "ContentTag",
       "DocsGroup",
       "DocsPage",
+      "Document",
+      "DocumentGroup",
       "Employee",
       "FooterGroup",
       "Form",
@@ -26112,6 +27536,8 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "ContentTag",
       "DocsGroup",
       "DocsPage",
+      "Document",
+      "DocumentGroup",
       "Employee",
       "FooterGroup",
       "Form",
@@ -26151,18 +27577,20 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
 
 export const ActionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"actions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageContents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"callToAction"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"enable"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ActionsQuery, ActionsQueryVariables>;
 export const BlogPostStaticPathsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPostStaticPaths"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<BlogPostStaticPathsQuery, BlogPostStaticPathsQueryVariables>;
-export const BlogPostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostQuery, BlogPostQueryVariables>;
-export const BlogPostsByTagsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPostsByTags"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"tag"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"updatedAt_DESC"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contentTags_some"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"tag"},"value":{"kind":"Variable","name":{"kind":"Name","value":"tag"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostsByTagsQuery, BlogPostsByTagsQueryVariables>;
-export const BlogPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPosts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"updatedAt_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostsQuery, BlogPostsQueryVariables>;
+export const BlogPostTagsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostTagsQuery, BlogPostTagsQueryVariables>;
+export const BlogPostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DocumentGroup"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"file"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType"},"value":{"kind":"StringValue","value":"application/pdf","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostQuery, BlogPostQueryVariables>;
+export const BlogPostsByTagsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPostsByTags"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"tag"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"updatedAt_DESC"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contentTags_some"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"tag"},"value":{"kind":"Variable","name":{"kind":"Name","value":"tag"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DocumentGroup"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"file"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType"},"value":{"kind":"StringValue","value":"application/pdf","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostsByTagsQuery, BlogPostsByTagsQueryVariables>;
+export const BlogPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"blogPosts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"updatedAt_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"overrideDate"}},{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DocumentGroup"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"file"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType"},"value":{"kind":"StringValue","value":"application/pdf","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogPostsQuery, BlogPostsQueryVariables>;
 export const CloudLocationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"cloudLocations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cloudLocations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"active"}},{"kind":"Field","name":{"kind":"Name","value":"coordinates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"identifier"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"testUrl"}},{"kind":"Field","name":{"kind":"Name","value":"timeout"}}]}}]}}]} as unknown as DocumentNode<CloudLocationsQuery, CloudLocationsQueryVariables>;
 export const ConfigDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"config"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"values"},"name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"organizationName"}},{"kind":"Field","name":{"kind":"Name","value":"slogan"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"titleOverrides"}},{"kind":"Field","name":{"kind":"Name","value":"statusUrl"}},{"kind":"Field","name":{"kind":"Name","value":"socialLinks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"href"}}]}},{"kind":"Field","name":{"kind":"Name","value":"errorMessage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shown"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"testimonials"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"handle"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"113"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"clip"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"subscribe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}}]}}]}}]}}]} as unknown as DocumentNode<ConfigQuery, ConfigQueryVariables>;
 export const ContactFormsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"contactForms"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"config"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"config"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contactForms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"validationType"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<ContactFormsQuery, ContactFormsQueryVariables>;
-export const ContentTagsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"blogPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}}]}}]} as unknown as DocumentNode<ContentTagsQuery, ContentTagsQueryVariables>;
 export const DocsGroupStaticPathsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsGroupStaticPaths"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsGroups"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<DocsGroupStaticPathsQuery, DocsGroupStaticPathsQueryVariables>;
 export const DocsGroupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsGroup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"enable"}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"docsPages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"summary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DocsGroupQuery, DocsGroupQueryVariables>;
 export const DocsGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsGroups"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsGroups"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"20"}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"enable"}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}}]}},{"kind":"Field","name":{"kind":"Name","value":"docsPages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"summary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DocsGroupsQuery, DocsGroupsQueryVariables>;
 export const DocsPageStaticPathsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsPageStaticPaths"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"group"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsPages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"docsGroup"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"group"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<DocsPageStaticPathsQuery, DocsPageStaticPathsQueryVariables>;
-export const DocsPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsPage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<DocsPageQuery, DocsPageQueryVariables>;
+export const DocsPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"docsPage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"docsPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}},{"kind":"Field","name":{"kind":"Name","value":"references"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Admonition"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Asset"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContentButton"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DocumentGroup"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"file"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType"},"value":{"kind":"StringValue","value":"application/pdf","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<DocsPageQuery, DocsPageQueryVariables>;
+export const DocumentGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"documentGroups"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentGroups"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"updatedAt_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"file"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType"},"value":{"kind":"StringValue","value":"application/pdf","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}}]}}]}}]} as unknown as DocumentNode<DocumentGroupsQuery, DocumentGroupsQueryVariables>;
+export const DocumentTagsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"documentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"file"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType"},"value":{"kind":"StringValue","value":"application/pdf","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contentTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}}]}}]} as unknown as DocumentNode<DocumentTagsQuery, DocumentTagsQueryVariables>;
 export const EmployeesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"employees"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"config"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"config"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"employees"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"50"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"bio"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"256"}},{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"256"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<EmployeesQuery, EmployeesQueryVariables>;
 export const FooterGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"footerGroups"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"footerGroups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"row"}},{"kind":"Field","name":{"kind":"Name","value":"sortAlphabetically"}},{"kind":"Field","name":{"kind":"Name","value":"pages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageContents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"docsGroup"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"externalLinks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"href"}},{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]}}]} as unknown as DocumentNode<FooterGroupsQuery, FooterGroupsQueryVariables>;
 export const HeaderGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"headerGroups"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}},"defaultValue":{"kind":"StringValue","value":"Stellar","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"headerGroups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"columns"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"pagesOnly"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"sortAlphabetically"}},{"kind":"Field","name":{"kind":"Name","value":"pages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"hideFromHeader"}},{"kind":"Field","name":{"kind":"Name","value":"callToAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"enable"}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"externalLinks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"showIcon"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"href"}}]}}]}}]}}]}}]} as unknown as DocumentNode<HeaderGroupsQuery, HeaderGroupsQueryVariables>;
@@ -26244,7 +27672,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
   AddressParent: ( OfficeLocation );
   AlertParent: ( Configuration ) | ( FormButton );
-  BlogPostBodyRichTextEmbeddedTypes: ( Admonition ) | ( Asset ) | ( ContentButton );
+  BlogPostBodyRichTextEmbeddedTypes: ( Admonition ) | ( Asset ) | ( ContentButton ) | ( Document ) | ( DocumentGroup );
   ButtonParent: ( Callout ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Feature ) | ( HomePageBlock ) | ( PageContent );
   CallToActionParent: ( Configuration );
   CallToActionSettingsParent: ( DocsGroup ) | ( PageContent );
@@ -26252,13 +27680,13 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
   CheckboxFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   ContactFormfieldsUnion: ( CheckboxField ) | ( FormButton ) | ( SelectField ) | ( TextAreaField ) | ( TextInputField );
   DocsGroupSummaryRichTextEmbeddedTypes: ( Admonition ) | ( Asset ) | ( ContentButton );
-  DocsPageBodyRichTextEmbeddedTypes: ( Admonition ) | ( Asset ) | ( ContentButton );
+  DocsPageBodyRichTextEmbeddedTypes: ( Admonition ) | ( Asset ) | ( ContentButton ) | ( Document ) | ( DocumentGroup );
   ExternalLinkParent: ( FooterGroup ) | ( HeaderGroup );
   FeatureParent: ( PageContent );
   FormButtonParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   FormfieldsUnion: ( CheckboxField ) | ( SelectField ) | ( TextAreaField ) | ( TextInputField );
   HomePageBlockParent: ( HomePage );
-  ScheduledOperationAffectedDocument: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Testimonial ) | ( Theme );
+  ScheduledOperationAffectedDocument: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Document ) | ( DocumentGroup ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Testimonial ) | ( Theme );
   SelectFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   SocialLinkParent: ( Configuration );
   TextAreaFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
@@ -26269,8 +27697,8 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
 
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = {
-  Entity: ( Address ) | ( Admonition ) | ( Alert ) | ( Asset ) | ( BlogPost ) | ( Button ) | ( CallToAction ) | ( CallToActionSettings ) | ( Callout ) | ( CheckboxField ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( ExternalLink ) | ( Feature ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( FormButton ) | ( HeaderGroup ) | ( HomePage ) | ( HomePageBlock ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( SelectField ) | ( SocialLink ) | ( Testimonial ) | ( TextAreaField ) | ( TextInputField ) | ( Theme ) | ( ThemeColors ) | ( ThemeFonts ) | ( User ) | ( VendorLogo );
-  Node: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( Testimonial ) | ( Theme ) | ( User );
+  Entity: ( Address ) | ( Admonition ) | ( Alert ) | ( Asset ) | ( BlogPost ) | ( Button ) | ( CallToAction ) | ( CallToActionSettings ) | ( Callout ) | ( CheckboxField ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Document ) | ( DocumentGroup ) | ( Employee ) | ( ExternalLink ) | ( Feature ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( FormButton ) | ( HeaderGroup ) | ( HomePage ) | ( HomePageBlock ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( SelectField ) | ( SocialLink ) | ( Testimonial ) | ( TextAreaField ) | ( TextInputField ) | ( Theme ) | ( ThemeColors ) | ( ThemeFonts ) | ( User ) | ( VendorLogo );
+  Node: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Document ) | ( DocumentGroup ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( Testimonial ) | ( Theme ) | ( User );
 };
 
 /** Mapping between all available schema types and the resolvers types */
@@ -26774,10 +28202,52 @@ export type ResolversTypes = {
   DocsPageWhereInput: DocsPageWhereInput;
   DocsPageWhereStageInput: DocsPageWhereStageInput;
   DocsPageWhereUniqueInput: DocsPageWhereUniqueInput;
+  Document: ResolverTypeWrapper<Document>;
+  DocumentConnectInput: DocumentConnectInput;
+  DocumentConnection: ResolverTypeWrapper<DocumentConnection>;
+  DocumentCreateInput: DocumentCreateInput;
+  DocumentCreateManyInlineInput: DocumentCreateManyInlineInput;
+  DocumentCreateOneInlineInput: DocumentCreateOneInlineInput;
+  DocumentEdge: ResolverTypeWrapper<DocumentEdge>;
   DocumentFileTypes: DocumentFileTypes;
+  DocumentGroup: ResolverTypeWrapper<DocumentGroup>;
+  DocumentGroupConnectInput: DocumentGroupConnectInput;
+  DocumentGroupConnection: ResolverTypeWrapper<DocumentGroupConnection>;
+  DocumentGroupCreateInput: DocumentGroupCreateInput;
+  DocumentGroupCreateManyInlineInput: DocumentGroupCreateManyInlineInput;
+  DocumentGroupCreateOneInlineInput: DocumentGroupCreateOneInlineInput;
+  DocumentGroupEdge: ResolverTypeWrapper<DocumentGroupEdge>;
+  DocumentGroupManyWhereInput: DocumentGroupManyWhereInput;
+  DocumentGroupOrderByInput: DocumentGroupOrderByInput;
+  DocumentGroupUpdateInput: DocumentGroupUpdateInput;
+  DocumentGroupUpdateManyInlineInput: DocumentGroupUpdateManyInlineInput;
+  DocumentGroupUpdateManyInput: DocumentGroupUpdateManyInput;
+  DocumentGroupUpdateManyWithNestedWhereInput: DocumentGroupUpdateManyWithNestedWhereInput;
+  DocumentGroupUpdateOneInlineInput: DocumentGroupUpdateOneInlineInput;
+  DocumentGroupUpdateWithNestedWhereUniqueInput: DocumentGroupUpdateWithNestedWhereUniqueInput;
+  DocumentGroupUpsertInput: DocumentGroupUpsertInput;
+  DocumentGroupUpsertWithNestedWhereUniqueInput: DocumentGroupUpsertWithNestedWhereUniqueInput;
+  DocumentGroupWhereComparatorInput: DocumentGroupWhereComparatorInput;
+  DocumentGroupWhereInput: DocumentGroupWhereInput;
+  DocumentGroupWhereStageInput: DocumentGroupWhereStageInput;
+  DocumentGroupWhereUniqueInput: DocumentGroupWhereUniqueInput;
+  DocumentManyWhereInput: DocumentManyWhereInput;
+  DocumentOrderByInput: DocumentOrderByInput;
   DocumentOutputInput: DocumentOutputInput;
   DocumentTransformationInput: DocumentTransformationInput;
+  DocumentUpdateInput: DocumentUpdateInput;
+  DocumentUpdateManyInlineInput: DocumentUpdateManyInlineInput;
+  DocumentUpdateManyInput: DocumentUpdateManyInput;
+  DocumentUpdateManyWithNestedWhereInput: DocumentUpdateManyWithNestedWhereInput;
+  DocumentUpdateOneInlineInput: DocumentUpdateOneInlineInput;
+  DocumentUpdateWithNestedWhereUniqueInput: DocumentUpdateWithNestedWhereUniqueInput;
+  DocumentUpsertInput: DocumentUpsertInput;
+  DocumentUpsertWithNestedWhereUniqueInput: DocumentUpsertWithNestedWhereUniqueInput;
   DocumentVersion: ResolverTypeWrapper<DocumentVersion>;
+  DocumentWhereComparatorInput: DocumentWhereComparatorInput;
+  DocumentWhereInput: DocumentWhereInput;
+  DocumentWhereStageInput: DocumentWhereStageInput;
+  DocumentWhereUniqueInput: DocumentWhereUniqueInput;
   Employee: ResolverTypeWrapper<Employee>;
   EmployeeConnectInput: EmployeeConnectInput;
   EmployeeConnection: ResolverTypeWrapper<EmployeeConnection>;
@@ -27946,9 +29416,49 @@ export type ResolversParentTypes = {
   DocsPageWhereInput: DocsPageWhereInput;
   DocsPageWhereStageInput: DocsPageWhereStageInput;
   DocsPageWhereUniqueInput: DocsPageWhereUniqueInput;
+  Document: Document;
+  DocumentConnectInput: DocumentConnectInput;
+  DocumentConnection: DocumentConnection;
+  DocumentCreateInput: DocumentCreateInput;
+  DocumentCreateManyInlineInput: DocumentCreateManyInlineInput;
+  DocumentCreateOneInlineInput: DocumentCreateOneInlineInput;
+  DocumentEdge: DocumentEdge;
+  DocumentGroup: DocumentGroup;
+  DocumentGroupConnectInput: DocumentGroupConnectInput;
+  DocumentGroupConnection: DocumentGroupConnection;
+  DocumentGroupCreateInput: DocumentGroupCreateInput;
+  DocumentGroupCreateManyInlineInput: DocumentGroupCreateManyInlineInput;
+  DocumentGroupCreateOneInlineInput: DocumentGroupCreateOneInlineInput;
+  DocumentGroupEdge: DocumentGroupEdge;
+  DocumentGroupManyWhereInput: DocumentGroupManyWhereInput;
+  DocumentGroupUpdateInput: DocumentGroupUpdateInput;
+  DocumentGroupUpdateManyInlineInput: DocumentGroupUpdateManyInlineInput;
+  DocumentGroupUpdateManyInput: DocumentGroupUpdateManyInput;
+  DocumentGroupUpdateManyWithNestedWhereInput: DocumentGroupUpdateManyWithNestedWhereInput;
+  DocumentGroupUpdateOneInlineInput: DocumentGroupUpdateOneInlineInput;
+  DocumentGroupUpdateWithNestedWhereUniqueInput: DocumentGroupUpdateWithNestedWhereUniqueInput;
+  DocumentGroupUpsertInput: DocumentGroupUpsertInput;
+  DocumentGroupUpsertWithNestedWhereUniqueInput: DocumentGroupUpsertWithNestedWhereUniqueInput;
+  DocumentGroupWhereComparatorInput: DocumentGroupWhereComparatorInput;
+  DocumentGroupWhereInput: DocumentGroupWhereInput;
+  DocumentGroupWhereStageInput: DocumentGroupWhereStageInput;
+  DocumentGroupWhereUniqueInput: DocumentGroupWhereUniqueInput;
+  DocumentManyWhereInput: DocumentManyWhereInput;
   DocumentOutputInput: DocumentOutputInput;
   DocumentTransformationInput: DocumentTransformationInput;
+  DocumentUpdateInput: DocumentUpdateInput;
+  DocumentUpdateManyInlineInput: DocumentUpdateManyInlineInput;
+  DocumentUpdateManyInput: DocumentUpdateManyInput;
+  DocumentUpdateManyWithNestedWhereInput: DocumentUpdateManyWithNestedWhereInput;
+  DocumentUpdateOneInlineInput: DocumentUpdateOneInlineInput;
+  DocumentUpdateWithNestedWhereUniqueInput: DocumentUpdateWithNestedWhereUniqueInput;
+  DocumentUpsertInput: DocumentUpsertInput;
+  DocumentUpsertWithNestedWhereUniqueInput: DocumentUpsertWithNestedWhereUniqueInput;
   DocumentVersion: DocumentVersion;
+  DocumentWhereComparatorInput: DocumentWhereComparatorInput;
+  DocumentWhereInput: DocumentWhereInput;
+  DocumentWhereStageInput: DocumentWhereStageInput;
+  DocumentWhereUniqueInput: DocumentWhereUniqueInput;
   Employee: Employee;
   EmployeeConnectInput: EmployeeConnectInput;
   EmployeeConnection: EmployeeConnection;
@@ -28689,6 +30199,7 @@ export type AssetResolvers<ContextType = any, ParentType extends ResolversParent
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType, RequireFields<AssetCreatedAtArgs, 'variation'>>;
   createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<AssetCreatedByArgs>>;
   documentInStages?: Resolver<Array<ResolversTypes['Asset']>, ParentType, ContextType, RequireFields<AssetDocumentInStagesArgs, 'includeCurrent' | 'inheritLocale' | 'stages'>>;
+  fileDocument?: Resolver<Array<ResolversTypes['Document']>, ParentType, ContextType, Partial<AssetFileDocumentArgs>>;
   fileName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   handle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   height?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -28766,7 +30277,7 @@ export type BlogPostBodyRichTextResolvers<ContextType = any, ParentType extends 
 };
 
 export type BlogPostBodyRichTextEmbeddedTypesResolvers<ContextType = any, ParentType extends ResolversParentTypes['BlogPostBodyRichTextEmbeddedTypes'] = ResolversParentTypes['BlogPostBodyRichTextEmbeddedTypes']> = {
-  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'ContentButton', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'ContentButton' | 'Document' | 'DocumentGroup', ParentType, ContextType>;
 };
 
 export type BlogPostConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['BlogPostConnection'] = ResolversParentTypes['BlogPostConnection']> = {
@@ -29085,6 +30596,7 @@ export type ContentTagResolvers<ContextType = any, ParentType extends ResolversP
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<ContentTagCreatedByArgs>>;
   documentInStages?: Resolver<Array<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<ContentTagDocumentInStagesArgs, 'includeCurrent' | 'inheritLocale' | 'stages'>>;
+  documents?: Resolver<Array<ResolversTypes['Document']>, ParentType, ContextType, Partial<ContentTagDocumentsArgs>>;
   history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<ContentTagHistoryArgs, 'limit' | 'skip'>>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -29200,7 +30712,7 @@ export type DocsPageBodyRichTextResolvers<ContextType = any, ParentType extends 
 };
 
 export type DocsPageBodyRichTextEmbeddedTypesResolvers<ContextType = any, ParentType extends ResolversParentTypes['DocsPageBodyRichTextEmbeddedTypes'] = ResolversParentTypes['DocsPageBodyRichTextEmbeddedTypes']> = {
-  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'ContentButton', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'ContentButton' | 'Document' | 'DocumentGroup', ParentType, ContextType>;
 };
 
 export type DocsPageConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['DocsPageConnection'] = ResolversParentTypes['DocsPageConnection']> = {
@@ -29213,6 +30725,68 @@ export type DocsPageConnectionResolvers<ContextType = any, ParentType extends Re
 export type DocsPageEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['DocsPageEdge'] = ResolversParentTypes['DocsPageEdge']> = {
   cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   node?: Resolver<ResolversTypes['DocsPage'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DocumentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Document'] = ResolversParentTypes['Document']> = {
+  contentTags?: Resolver<Array<ResolversTypes['ContentTag']>, ParentType, ContextType, Partial<DocumentContentTagsArgs>>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<DocumentCreatedByArgs>>;
+  documentGroups?: Resolver<Array<ResolversTypes['DocumentGroup']>, ParentType, ContextType, Partial<DocumentDocumentGroupsArgs>>;
+  documentInStages?: Resolver<Array<ResolversTypes['Document']>, ParentType, ContextType, RequireFields<DocumentDocumentInStagesArgs, 'includeCurrent' | 'inheritLocale' | 'stages'>>;
+  file?: Resolver<ResolversTypes['Asset'], ParentType, ContextType, Partial<DocumentFileArgs>>;
+  history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<DocumentHistoryArgs, 'limit' | 'skip'>>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<DocumentPublishedByArgs>>;
+  scheduledIn?: Resolver<Array<ResolversTypes['ScheduledOperation']>, ParentType, ContextType, Partial<DocumentScheduledInArgs>>;
+  stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  updatedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<DocumentUpdatedByArgs>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DocumentConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['DocumentConnection'] = ResolversParentTypes['DocumentConnection']> = {
+  aggregate?: Resolver<ResolversTypes['Aggregate'], ParentType, ContextType>;
+  edges?: Resolver<Array<ResolversTypes['DocumentEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DocumentEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['DocumentEdge'] = ResolversParentTypes['DocumentEdge']> = {
+  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['Document'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DocumentGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['DocumentGroup'] = ResolversParentTypes['DocumentGroup']> = {
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  createdBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<DocumentGroupCreatedByArgs>>;
+  documentInStages?: Resolver<Array<ResolversTypes['DocumentGroup']>, ParentType, ContextType, RequireFields<DocumentGroupDocumentInStagesArgs, 'includeCurrent' | 'inheritLocale' | 'stages'>>;
+  documents?: Resolver<Array<ResolversTypes['Document']>, ParentType, ContextType, Partial<DocumentGroupDocumentsArgs>>;
+  history?: Resolver<Array<ResolversTypes['Version']>, ParentType, ContextType, RequireFields<DocumentGroupHistoryArgs, 'limit' | 'skip'>>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  publishedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  publishedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<DocumentGroupPublishedByArgs>>;
+  scheduledIn?: Resolver<Array<ResolversTypes['ScheduledOperation']>, ParentType, ContextType, Partial<DocumentGroupScheduledInArgs>>;
+  stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  updatedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<DocumentGroupUpdatedByArgs>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DocumentGroupConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['DocumentGroupConnection'] = ResolversParentTypes['DocumentGroupConnection']> = {
+  aggregate?: Resolver<ResolversTypes['Aggregate'], ParentType, ContextType>;
+  edges?: Resolver<Array<ResolversTypes['DocumentGroupEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DocumentGroupEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['DocumentGroupEdge'] = ResolversParentTypes['DocumentGroupEdge']> = {
+  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['DocumentGroup'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -29260,7 +30834,7 @@ export type EmployeeEdgeResolvers<ContextType = any, ParentType extends Resolver
 };
 
 export type EntityResolvers<ContextType = any, ParentType extends ResolversParentTypes['Entity'] = ResolversParentTypes['Entity']> = {
-  __resolveType: TypeResolveFn<'Address' | 'Admonition' | 'Alert' | 'Asset' | 'BlogPost' | 'Button' | 'CallToAction' | 'CallToActionSettings' | 'Callout' | 'CheckboxField' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'ExternalLink' | 'Feature' | 'FooterGroup' | 'Form' | 'FormButton' | 'HeaderGroup' | 'HomePage' | 'HomePageBlock' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'SelectField' | 'SocialLink' | 'Testimonial' | 'TextAreaField' | 'TextInputField' | 'Theme' | 'ThemeColors' | 'ThemeFonts' | 'User' | 'VendorLogo', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Address' | 'Admonition' | 'Alert' | 'Asset' | 'BlogPost' | 'Button' | 'CallToAction' | 'CallToActionSettings' | 'Callout' | 'CheckboxField' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'DocsGroup' | 'DocsPage' | 'Document' | 'DocumentGroup' | 'Employee' | 'ExternalLink' | 'Feature' | 'FooterGroup' | 'Form' | 'FormButton' | 'HeaderGroup' | 'HomePage' | 'HomePageBlock' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'SelectField' | 'SocialLink' | 'Testimonial' | 'TextAreaField' | 'TextInputField' | 'Theme' | 'ThemeColors' | 'ThemeFonts' | 'User' | 'VendorLogo', ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
 };
@@ -29542,6 +31116,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationCreateContentTagArgs, 'data'>>;
   createDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationCreateDocsGroupArgs, 'data'>>;
   createDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationCreateDocsPageArgs, 'data'>>;
+  createDocument?: Resolver<Maybe<ResolversTypes['Document']>, ParentType, ContextType, RequireFields<MutationCreateDocumentArgs, 'data'>>;
+  createDocumentGroup?: Resolver<Maybe<ResolversTypes['DocumentGroup']>, ParentType, ContextType, RequireFields<MutationCreateDocumentGroupArgs, 'data'>>;
   createEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationCreateEmployeeArgs, 'data'>>;
   createFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationCreateFooterGroupArgs, 'data'>>;
   createForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationCreateFormArgs, 'data'>>;
@@ -29563,6 +31139,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationDeleteContentTagArgs, 'where'>>;
   deleteDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationDeleteDocsGroupArgs, 'where'>>;
   deleteDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationDeleteDocsPageArgs, 'where'>>;
+  deleteDocument?: Resolver<Maybe<ResolversTypes['Document']>, ParentType, ContextType, RequireFields<MutationDeleteDocumentArgs, 'where'>>;
+  deleteDocumentGroup?: Resolver<Maybe<ResolversTypes['DocumentGroup']>, ParentType, ContextType, RequireFields<MutationDeleteDocumentGroupArgs, 'where'>>;
   deleteEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationDeleteEmployeeArgs, 'where'>>;
   deleteFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationDeleteFooterGroupArgs, 'where'>>;
   deleteForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationDeleteFormArgs, 'where'>>;
@@ -29588,6 +31166,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteManyDocsGroupsConnection?: Resolver<ResolversTypes['DocsGroupConnection'], ParentType, ContextType, Partial<MutationDeleteManyDocsGroupsConnectionArgs>>;
   deleteManyDocsPages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyDocsPagesArgs>>;
   deleteManyDocsPagesConnection?: Resolver<ResolversTypes['DocsPageConnection'], ParentType, ContextType, Partial<MutationDeleteManyDocsPagesConnectionArgs>>;
+  deleteManyDocumentGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyDocumentGroupsArgs>>;
+  deleteManyDocumentGroupsConnection?: Resolver<ResolversTypes['DocumentGroupConnection'], ParentType, ContextType, Partial<MutationDeleteManyDocumentGroupsConnectionArgs>>;
+  deleteManyDocuments?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyDocumentsArgs>>;
+  deleteManyDocumentsConnection?: Resolver<ResolversTypes['DocumentConnection'], ParentType, ContextType, Partial<MutationDeleteManyDocumentsConnectionArgs>>;
   deleteManyEmployees?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyEmployeesArgs>>;
   deleteManyEmployeesConnection?: Resolver<ResolversTypes['EmployeeConnection'], ParentType, ContextType, Partial<MutationDeleteManyEmployeesConnectionArgs>>;
   deleteManyFooterGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, Partial<MutationDeleteManyFooterGroupsArgs>>;
@@ -29625,6 +31207,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   publishContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationPublishContentTagArgs, 'to' | 'where'>>;
   publishDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationPublishDocsGroupArgs, 'to' | 'where'>>;
   publishDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationPublishDocsPageArgs, 'to' | 'where'>>;
+  publishDocument?: Resolver<Maybe<ResolversTypes['Document']>, ParentType, ContextType, RequireFields<MutationPublishDocumentArgs, 'to' | 'where'>>;
+  publishDocumentGroup?: Resolver<Maybe<ResolversTypes['DocumentGroup']>, ParentType, ContextType, RequireFields<MutationPublishDocumentGroupArgs, 'to' | 'where'>>;
   publishEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationPublishEmployeeArgs, 'to' | 'where'>>;
   publishFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationPublishFooterGroupArgs, 'to' | 'where'>>;
   publishForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationPublishFormArgs, 'to' | 'where'>>;
@@ -29650,6 +31234,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   publishManyDocsGroupsConnection?: Resolver<ResolversTypes['DocsGroupConnection'], ParentType, ContextType, RequireFields<MutationPublishManyDocsGroupsConnectionArgs, 'from' | 'to'>>;
   publishManyDocsPages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyDocsPagesArgs, 'to'>>;
   publishManyDocsPagesConnection?: Resolver<ResolversTypes['DocsPageConnection'], ParentType, ContextType, RequireFields<MutationPublishManyDocsPagesConnectionArgs, 'from' | 'to'>>;
+  publishManyDocumentGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyDocumentGroupsArgs, 'to'>>;
+  publishManyDocumentGroupsConnection?: Resolver<ResolversTypes['DocumentGroupConnection'], ParentType, ContextType, RequireFields<MutationPublishManyDocumentGroupsConnectionArgs, 'from' | 'to'>>;
+  publishManyDocuments?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyDocumentsArgs, 'to'>>;
+  publishManyDocumentsConnection?: Resolver<ResolversTypes['DocumentConnection'], ParentType, ContextType, RequireFields<MutationPublishManyDocumentsConnectionArgs, 'from' | 'to'>>;
   publishManyEmployees?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyEmployeesArgs, 'to'>>;
   publishManyEmployeesConnection?: Resolver<ResolversTypes['EmployeeConnection'], ParentType, ContextType, RequireFields<MutationPublishManyEmployeesConnectionArgs, 'from' | 'to'>>;
   publishManyFooterGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationPublishManyFooterGroupsArgs, 'to'>>;
@@ -29685,6 +31273,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   schedulePublishContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationSchedulePublishContentTagArgs, 'to' | 'where'>>;
   schedulePublishDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationSchedulePublishDocsGroupArgs, 'to' | 'where'>>;
   schedulePublishDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationSchedulePublishDocsPageArgs, 'to' | 'where'>>;
+  schedulePublishDocument?: Resolver<Maybe<ResolversTypes['Document']>, ParentType, ContextType, RequireFields<MutationSchedulePublishDocumentArgs, 'to' | 'where'>>;
+  schedulePublishDocumentGroup?: Resolver<Maybe<ResolversTypes['DocumentGroup']>, ParentType, ContextType, RequireFields<MutationSchedulePublishDocumentGroupArgs, 'to' | 'where'>>;
   schedulePublishEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationSchedulePublishEmployeeArgs, 'to' | 'where'>>;
   schedulePublishFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationSchedulePublishFooterGroupArgs, 'to' | 'where'>>;
   schedulePublishForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationSchedulePublishFormArgs, 'to' | 'where'>>;
@@ -29705,6 +31295,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   scheduleUnpublishContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishContentTagArgs, 'from' | 'where'>>;
   scheduleUnpublishDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishDocsGroupArgs, 'from' | 'where'>>;
   scheduleUnpublishDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishDocsPageArgs, 'from' | 'where'>>;
+  scheduleUnpublishDocument?: Resolver<Maybe<ResolversTypes['Document']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishDocumentArgs, 'from' | 'where'>>;
+  scheduleUnpublishDocumentGroup?: Resolver<Maybe<ResolversTypes['DocumentGroup']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishDocumentGroupArgs, 'from' | 'where'>>;
   scheduleUnpublishEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishEmployeeArgs, 'from' | 'where'>>;
   scheduleUnpublishFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishFooterGroupArgs, 'from' | 'where'>>;
   scheduleUnpublishForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationScheduleUnpublishFormArgs, 'from' | 'where'>>;
@@ -29725,6 +31317,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   unpublishContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationUnpublishContentTagArgs, 'from' | 'where'>>;
   unpublishDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationUnpublishDocsGroupArgs, 'from' | 'where'>>;
   unpublishDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationUnpublishDocsPageArgs, 'from' | 'where'>>;
+  unpublishDocument?: Resolver<Maybe<ResolversTypes['Document']>, ParentType, ContextType, RequireFields<MutationUnpublishDocumentArgs, 'from' | 'where'>>;
+  unpublishDocumentGroup?: Resolver<Maybe<ResolversTypes['DocumentGroup']>, ParentType, ContextType, RequireFields<MutationUnpublishDocumentGroupArgs, 'from' | 'where'>>;
   unpublishEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationUnpublishEmployeeArgs, 'from' | 'where'>>;
   unpublishFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationUnpublishFooterGroupArgs, 'from' | 'where'>>;
   unpublishForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationUnpublishFormArgs, 'from' | 'where'>>;
@@ -29750,6 +31344,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   unpublishManyDocsGroupsConnection?: Resolver<ResolversTypes['DocsGroupConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyDocsGroupsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyDocsPages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyDocsPagesArgs, 'from'>>;
   unpublishManyDocsPagesConnection?: Resolver<ResolversTypes['DocsPageConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyDocsPagesConnectionArgs, 'from' | 'stage'>>;
+  unpublishManyDocumentGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyDocumentGroupsArgs, 'from'>>;
+  unpublishManyDocumentGroupsConnection?: Resolver<ResolversTypes['DocumentGroupConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyDocumentGroupsConnectionArgs, 'from' | 'stage'>>;
+  unpublishManyDocuments?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyDocumentsArgs, 'from'>>;
+  unpublishManyDocumentsConnection?: Resolver<ResolversTypes['DocumentConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyDocumentsConnectionArgs, 'from' | 'stage'>>;
   unpublishManyEmployees?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyEmployeesArgs, 'from'>>;
   unpublishManyEmployeesConnection?: Resolver<ResolversTypes['EmployeeConnection'], ParentType, ContextType, RequireFields<MutationUnpublishManyEmployeesConnectionArgs, 'from' | 'stage'>>;
   unpublishManyFooterGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUnpublishManyFooterGroupsArgs, 'from'>>;
@@ -29785,6 +31383,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationUpdateContentTagArgs, 'data' | 'where'>>;
   updateDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationUpdateDocsGroupArgs, 'data' | 'where'>>;
   updateDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationUpdateDocsPageArgs, 'data' | 'where'>>;
+  updateDocument?: Resolver<Maybe<ResolversTypes['Document']>, ParentType, ContextType, RequireFields<MutationUpdateDocumentArgs, 'data' | 'where'>>;
+  updateDocumentGroup?: Resolver<Maybe<ResolversTypes['DocumentGroup']>, ParentType, ContextType, RequireFields<MutationUpdateDocumentGroupArgs, 'data' | 'where'>>;
   updateEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationUpdateEmployeeArgs, 'data' | 'where'>>;
   updateFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationUpdateFooterGroupArgs, 'data' | 'where'>>;
   updateForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationUpdateFormArgs, 'data' | 'where'>>;
@@ -29810,6 +31410,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateManyDocsGroupsConnection?: Resolver<ResolversTypes['DocsGroupConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyDocsGroupsConnectionArgs, 'data'>>;
   updateManyDocsPages?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyDocsPagesArgs, 'data'>>;
   updateManyDocsPagesConnection?: Resolver<ResolversTypes['DocsPageConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyDocsPagesConnectionArgs, 'data'>>;
+  updateManyDocumentGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyDocumentGroupsArgs, 'data'>>;
+  updateManyDocumentGroupsConnection?: Resolver<ResolversTypes['DocumentGroupConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyDocumentGroupsConnectionArgs, 'data'>>;
+  updateManyDocuments?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyDocumentsArgs, 'data'>>;
+  updateManyDocumentsConnection?: Resolver<ResolversTypes['DocumentConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyDocumentsConnectionArgs, 'data'>>;
   updateManyEmployees?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyEmployeesArgs, 'data'>>;
   updateManyEmployeesConnection?: Resolver<ResolversTypes['EmployeeConnection'], ParentType, ContextType, RequireFields<MutationUpdateManyEmployeesConnectionArgs, 'data'>>;
   updateManyFooterGroups?: Resolver<ResolversTypes['BatchPayload'], ParentType, ContextType, RequireFields<MutationUpdateManyFooterGroupsArgs, 'data'>>;
@@ -29846,6 +31450,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   upsertContentTag?: Resolver<Maybe<ResolversTypes['ContentTag']>, ParentType, ContextType, RequireFields<MutationUpsertContentTagArgs, 'upsert' | 'where'>>;
   upsertDocsGroup?: Resolver<Maybe<ResolversTypes['DocsGroup']>, ParentType, ContextType, RequireFields<MutationUpsertDocsGroupArgs, 'upsert' | 'where'>>;
   upsertDocsPage?: Resolver<Maybe<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<MutationUpsertDocsPageArgs, 'upsert' | 'where'>>;
+  upsertDocument?: Resolver<Maybe<ResolversTypes['Document']>, ParentType, ContextType, RequireFields<MutationUpsertDocumentArgs, 'upsert' | 'where'>>;
+  upsertDocumentGroup?: Resolver<Maybe<ResolversTypes['DocumentGroup']>, ParentType, ContextType, RequireFields<MutationUpsertDocumentGroupArgs, 'upsert' | 'where'>>;
   upsertEmployee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<MutationUpsertEmployeeArgs, 'upsert' | 'where'>>;
   upsertFooterGroup?: Resolver<Maybe<ResolversTypes['FooterGroup']>, ParentType, ContextType, RequireFields<MutationUpsertFooterGroupArgs, 'upsert' | 'where'>>;
   upsertForm?: Resolver<Maybe<ResolversTypes['Form']>, ParentType, ContextType, RequireFields<MutationUpsertFormArgs, 'upsert' | 'where'>>;
@@ -29859,7 +31465,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type NodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Node'] = ResolversParentTypes['Node']> = {
-  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HeaderGroup' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'Testimonial' | 'Theme' | 'User', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'DocsGroup' | 'DocsPage' | 'Document' | 'DocumentGroup' | 'Employee' | 'FooterGroup' | 'Form' | 'HeaderGroup' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'Testimonial' | 'Theme' | 'User', ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
 };
@@ -30028,6 +31634,14 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   docsPageVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryDocsPageVersionArgs, 'where'>>;
   docsPages?: Resolver<Array<ResolversTypes['DocsPage']>, ParentType, ContextType, RequireFields<QueryDocsPagesArgs, 'locales' | 'stage'>>;
   docsPagesConnection?: Resolver<ResolversTypes['DocsPageConnection'], ParentType, ContextType, RequireFields<QueryDocsPagesConnectionArgs, 'locales' | 'stage'>>;
+  document?: Resolver<Maybe<ResolversTypes['Document']>, ParentType, ContextType, RequireFields<QueryDocumentArgs, 'locales' | 'stage' | 'where'>>;
+  documentGroup?: Resolver<Maybe<ResolversTypes['DocumentGroup']>, ParentType, ContextType, RequireFields<QueryDocumentGroupArgs, 'locales' | 'stage' | 'where'>>;
+  documentGroupVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryDocumentGroupVersionArgs, 'where'>>;
+  documentGroups?: Resolver<Array<ResolversTypes['DocumentGroup']>, ParentType, ContextType, RequireFields<QueryDocumentGroupsArgs, 'locales' | 'stage'>>;
+  documentGroupsConnection?: Resolver<ResolversTypes['DocumentGroupConnection'], ParentType, ContextType, RequireFields<QueryDocumentGroupsConnectionArgs, 'locales' | 'stage'>>;
+  documentVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryDocumentVersionArgs, 'where'>>;
+  documents?: Resolver<Array<ResolversTypes['Document']>, ParentType, ContextType, RequireFields<QueryDocumentsArgs, 'locales' | 'stage'>>;
+  documentsConnection?: Resolver<ResolversTypes['DocumentConnection'], ParentType, ContextType, RequireFields<QueryDocumentsConnectionArgs, 'locales' | 'stage'>>;
   employee?: Resolver<Maybe<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<QueryEmployeeArgs, 'locales' | 'stage' | 'where'>>;
   employeeVersion?: Resolver<Maybe<ResolversTypes['DocumentVersion']>, ParentType, ContextType, RequireFields<QueryEmployeeVersionArgs, 'where'>>;
   employees?: Resolver<Array<ResolversTypes['Employee']>, ParentType, ContextType, RequireFields<QueryEmployeesArgs, 'locales' | 'stage'>>;
@@ -30129,7 +31743,7 @@ export type ScheduledOperationResolvers<ContextType = any, ParentType extends Re
 };
 
 export type ScheduledOperationAffectedDocumentResolvers<ContextType = any, ParentType extends ResolversParentTypes['ScheduledOperationAffectedDocument'] = ResolversParentTypes['ScheduledOperationAffectedDocument']> = {
-  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'DocsGroup' | 'DocsPage' | 'Employee' | 'FooterGroup' | 'Form' | 'HeaderGroup' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'Testimonial' | 'Theme', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Admonition' | 'Asset' | 'BlogPost' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'DocsGroup' | 'DocsPage' | 'Document' | 'DocumentGroup' | 'Employee' | 'FooterGroup' | 'Form' | 'HeaderGroup' | 'HomePage' | 'OfficeLocation' | 'Page' | 'PageContent' | 'Testimonial' | 'Theme', ParentType, ContextType>;
 };
 
 export type ScheduledOperationConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ScheduledOperationConnection'] = ResolversParentTypes['ScheduledOperationConnection']> = {
@@ -30560,6 +32174,12 @@ export type Resolvers<ContextType = any> = {
   DocsPageBodyRichTextEmbeddedTypes?: DocsPageBodyRichTextEmbeddedTypesResolvers<ContextType>;
   DocsPageConnection?: DocsPageConnectionResolvers<ContextType>;
   DocsPageEdge?: DocsPageEdgeResolvers<ContextType>;
+  Document?: DocumentResolvers<ContextType>;
+  DocumentConnection?: DocumentConnectionResolvers<ContextType>;
+  DocumentEdge?: DocumentEdgeResolvers<ContextType>;
+  DocumentGroup?: DocumentGroupResolvers<ContextType>;
+  DocumentGroupConnection?: DocumentGroupConnectionResolvers<ContextType>;
+  DocumentGroupEdge?: DocumentGroupEdgeResolvers<ContextType>;
   DocumentVersion?: DocumentVersionResolvers<ContextType>;
   Employee?: EmployeeResolvers<ContextType>;
   EmployeeConnection?: EmployeeConnectionResolvers<ContextType>;

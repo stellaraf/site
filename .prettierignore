@@ -9,3 +9,4 @@ CHANGELOG.md
 *.lock
 src/types/schema.ts
 .vercel/
+public/

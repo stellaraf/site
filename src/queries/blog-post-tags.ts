@@ -1,12 +1,12 @@
 import { is } from "~/lib";
 
 import { queryFn } from "./base";
-import query from "./gql/blog-tags.gql";
+import query from "./gql/blog-post-tags.gql";
 
-import type { ContentTagsQuery, ContentTagsQueryVariables } from "~/types";
+import type { BlogPostTagsQuery, BlogPostTagsQueryVariables } from "~/types";
 
-export default async function (variables: ContentTagsQueryVariables): Promise<string[]> {
-  const result = await queryFn<ContentTagsQuery, ContentTagsQueryVariables>({ query, variables });
+export default async function (variables: BlogPostTagsQueryVariables): Promise<string[]> {
+  const result = await queryFn<BlogPostTagsQuery, BlogPostTagsQueryVariables>({ query, variables });
   if (!is(result)) {
     throw new Error(`Failed to find blog post with query variables '${JSON.stringify(variables)}'`);
   }

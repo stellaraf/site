@@ -5,10 +5,10 @@ import { AnimatedDiv } from "~/components";
 import { BlogPreview } from "./blog-preview";
 
 import type { StackProps } from "@chakra-ui/react";
-import type { BlogPosts as BlogPostsQuery } from "~/queries";
+import type { BlogPosts as BlogPostsType } from "~/queries";
 
 interface BlogPostsProps extends StackProps {
-  blogPosts: BlogPostsQuery;
+  blogPosts: BlogPostsType;
 }
 
 export const BlogPosts = (props: BlogPostsProps) => {
@@ -20,7 +20,7 @@ export const BlogPosts = (props: BlogPostsProps) => {
       minH="30vh"
       spacing={12}
       layerStyle="container"
-      className="__blogposts"
+      className="__st-blog-posts"
       {...rest}
     >
       {children}

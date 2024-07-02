@@ -1,6 +1,7 @@
 # Project
 .vscode
 pages/test.tsx
+public/pdf.worker.js
 
 # Next JS
 .next

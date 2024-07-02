@@ -8,7 +8,7 @@ import type { DocsPage } from "~/queries";
 
 const Article = chakra("article", {
   shouldForwardProp,
-  baseStyle: { overflow: "auto", zIndex: 1 },
+  baseStyle: { overflow: "auto", zIndex: 1, width: "100%" },
 });
 
 export const DocsArticle = (props: React.PropsWithChildren<DocsPage>) => {

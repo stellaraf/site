@@ -25,7 +25,11 @@ export { default as blogPostQuery, type BlogPost, type ContentTags } from "./blo
 
 export { default as blogPostsQuery, blogPostsByTagsQuery, type BlogPosts } from "./blog-posts";
 
-export { default as contentTagsQuery } from "./content-tags";
+export { default as blogPostTagsQuery } from "./blog-post-tags";
+
+export { default as documentTagsQuery } from "./document-tags";
+
+export { default as documentGroupsQuery, type DocumentGroups } from "./document-groups";
 
 export { default as employeesQuery, type Employee, type Employees } from "./employees";
 

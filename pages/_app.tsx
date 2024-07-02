@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import { Open_Sans, Fira_Code } from "next/font/google";
 
+import { Worker } from "@react-pdf-viewer/core";
 import { Analytics } from "@vercel/analytics/react";
 import { DefaultSeo, DefaultSeoProps } from "next-seo";
 import queryString from "query-string";
@@ -137,7 +138,9 @@ const Site = (props: AppProps<SiteProps>) => {
           organizationName={organizationName}
         />
         <SiteLayout actions={actions} footers={footers} menus={menus}>
-          <Component {...pageProps} />
+          <Worker workerUrl="/assets/pdf.worker.js">
+            <Component {...pageProps} />
+          </Worker>
         </SiteLayout>
       </Provider>
       <Analytics debug={process.env.NODE_ENV === "development"} />

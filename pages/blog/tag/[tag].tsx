@@ -8,7 +8,7 @@ import {
   pageQuery,
   blogPostsByTagsQuery,
   commonStaticPropsQuery,
-  contentTagsQuery,
+  blogPostTagsQuery,
 } from "~/queries";
 import { Stage, type BlogTagPageProps } from "~/types";
 
@@ -92,7 +92,7 @@ export const getStaticProps: GetStaticProps<BlogTagPageProps, Query> = async ctx
 };
 
 export const getStaticPaths: GetStaticPaths<Query> = async () => {
-  const tags = await contentTagsQuery({});
+  const tags = await blogPostTagsQuery({});
   const paths = tags.map(tag => ({ params: { tag } }));
   return { paths, fallback: "blocking" };
 };
