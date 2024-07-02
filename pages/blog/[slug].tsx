@@ -80,8 +80,12 @@ export const getStaticProps: GetStaticProps<BlogPostProps, UrlQuery> = async ctx
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
   let paths: StaticPaths = [];
   const posts = await blogPostStaticPathsQuery();
-  for (const slug of posts) {
-    paths = [...paths, { params: { slug } }];
+  try {
+    for (const slug of posts) {
+      paths = [...paths, { params: { slug } }];
+    }
+  } catch (error) {
+    console.error(error);
   }
   return { paths, fallback: "blocking" };
 };

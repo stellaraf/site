@@ -74,9 +74,13 @@ export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
   const groups = await docsGroupStaticPathsQuery();
   let paths: StaticPaths = [];
   for (const group of groups) {
-    const pages = await docsPageStaticPathsQuery({ group });
-    for (const slug of pages) {
-      paths = [...paths, { params: { group, slug } }];
+    try {
+      const pages = await docsPageStaticPathsQuery({ group });
+      for (const slug of pages) {
+        paths = [...paths, { params: { group, slug } }];
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
   return { paths, fallback: "blocking" };
