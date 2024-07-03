@@ -11,7 +11,7 @@ export const LoginButton = (props: ButtonProps) => (
     borderWidth="1px"
     variant="outline"
     borderColor="secondary.500"
-    href="https://launch.stellar.tech"
+    href="https://sso.stellar.tech"
     _hover={{ backgroundColor: "secondary.50", _dark: { backgroundColor: "white" } }}
     {...props}
   >
