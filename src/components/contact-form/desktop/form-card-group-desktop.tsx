@@ -226,8 +226,8 @@ export const DFormCardGroup = () => {
                   {layout === "form" && !formState.showSuccess
                     ? renderedFormButton
                     : formState.showSuccess
-                    ? null
-                    : cardsButton}
+                      ? null
+                      : cardsButton}
                 </AnimatedCenter>
               </AnimatedCard>
             </motion.div>

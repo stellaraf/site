@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import { Box, Flex } from "@chakra-ui/react";
 
-import { SEO, Error, ContentLoader, BlogPostContent } from "~/components";
+import { SEO, ErrorAlert, ContentLoader, BlogPostContent } from "~/components";
 import { blogPostQuery, commonStaticPropsQuery, blogPostStaticPathsQuery } from "~/queries";
 import { Stage, type BlogPostProps } from "~/types";
 
@@ -36,7 +36,7 @@ const Post: NextPage<BlogPostProps> = props => {
       <>
         <SEO title="Error" noindex nofollow />
         <Layout title="Error">
-          <Error />
+          <ErrorAlert />
         </Layout>
       </>
     );

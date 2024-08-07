@@ -3,9 +3,9 @@ import { Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react
 import { RichText } from "~/components";
 import { useConfig } from "~/context";
 
-import type { ErrorProps } from "./types";
+import type { ErrorAlertProps } from "./types";
 
-export const Error = (props: ErrorProps) => {
+export const ErrorAlert = (props: ErrorAlertProps) => {
   const { title, description, children, ...rest } = props;
 
   const { errorMessage } = useConfig();

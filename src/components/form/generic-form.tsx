@@ -1,10 +1,9 @@
-import { useImperativeHandle, forwardRef } from "react";
+import { useImperativeHandle, forwardRef, Fragment } from "react";
 
 import { Button, Flex } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm, type UseFormHandleSubmit } from "react-hook-form";
 import { useTitleCase } from "use-title-case";
-import { z } from "zod";
 
 import { FieldGroup, TextArea, TextInput, SelectField, CheckboxField } from "~/components";
 import { is, submitForm, awaitIfNeeded } from "~/lib";
@@ -12,6 +11,7 @@ import { is, submitForm, awaitIfNeeded } from "~/lib";
 import { isCheckboxField, isSelectField, isTextAreaField, isTextInputField } from "./guards";
 import { createSchema } from "./schema";
 
+import type { z } from "zod";
 import type { GenericFormProps, FormField } from "./types";
 
 type FormSubmitter = ReturnType<UseFormHandleSubmit<Dict>>;
@@ -96,7 +96,10 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
                     label={field.displayName}
                     isRequired={field.required}
                     defaultValue={field.options[0]}
-                    opts={field.options.map(opt => ({ value: opt, label: opt }))}
+                    opts={field.options.map(opt => ({
+                      value: opt,
+                      label: opt,
+                    }))}
                   />
                 );
               }
@@ -110,7 +113,10 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
                     isMulti={field.multiple}
                     required={field.required}
                     placeholder={field.displayName}
-                    opts={field.options.map(opt => ({ value: opt, label: opt }))}
+                    opts={field.options.map(opt => ({
+                      value: opt,
+                      label: opt,
+                    }))}
                     menuPortalTarget={typeof document !== "undefined" ? document.body : undefined}
                   />
                 );
@@ -139,7 +145,7 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
                   />
                 );
               }
-              return <></>;
+              return <Fragment key={index} />;
             })}
           </FieldGroup>
         ))}

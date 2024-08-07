@@ -39,33 +39,31 @@ export default async function handler(request: NextApiRequest, response: NextApi
   const [w, h] = getDimensions(width, height);
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexWrap: "nowrap",
+        textAlign: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        justifyContent: "center",
+        background,
+      }}
+    >
       <div
         style={{
           width: "100%",
           height: "100%",
           display: "flex",
-          flexWrap: "nowrap",
-          textAlign: "center",
           alignItems: "center",
-          flexDirection: "column",
           justifyContent: "center",
-          background,
         }}
       >
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img src={image} width={w} height={h} />
-        </div>
+        <img src={image} width={w} height={h} />
       </div>
-    ),
+    </div>,
     { width, height },
   );
 }

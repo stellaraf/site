@@ -31,10 +31,10 @@ export const HolidayTable = (props: HolidayTableProps) => {
                 holidays.active === idx
                   ? activeColor
                   : elapsed
-                  ? elapsedColor
-                  : holidays.next === idx && holidays.active === null
-                  ? nextColor
-                  : undefined
+                    ? elapsedColor
+                    : holidays.next === idx && holidays.active === null
+                      ? nextColor
+                      : undefined
               }
             >
               <Td>{holiday.date}</Td>

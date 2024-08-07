@@ -56,17 +56,17 @@ export const Icon = (props: IconProps) => {
     noBackground
       ? "white"
       : lightColor === "black"
-      ? "black"
-      : lightColor === "white"
-      ? "whiteAlpha.500"
-      : `${lightColor}.500`,
+        ? "black"
+        : lightColor === "white"
+          ? "whiteAlpha.500"
+          : `${lightColor}.500`,
     noBackground
       ? "black"
       : darkColor === "black"
-      ? "white"
-      : darkColor === "white"
-      ? "white"
-      : `${darkColor}.300`,
+        ? "white"
+        : darkColor === "white"
+          ? "white"
+          : `${darkColor}.300`,
   );
 
   const color = useOpposingColor(bg);

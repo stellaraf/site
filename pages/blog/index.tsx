@@ -3,7 +3,15 @@ import { useRouter } from "next/router";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { SEO, Error, ContentLoader, Hero, BlogPosts, Testimonials, Callout } from "~/components";
+import {
+  SEO,
+  ErrorAlert,
+  ContentLoader,
+  Hero,
+  BlogPosts,
+  Testimonials,
+  Callout,
+} from "~/components";
 import { pageQuery, blogPostsQuery, commonStaticPropsQuery } from "~/queries";
 import { Stage, type BlogPageProps } from "~/types";
 
@@ -35,7 +43,7 @@ const Page: NextPage<BlogPageProps> = props => {
       <>
         <SEO title="Error" noindex nofollow />
         <Layout title="Error">
-          <Error />
+          <ErrorAlert />
         </Layout>
       </>
     );

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { SEO, DocsArticle, Error, ContentLoader } from "~/components";
+import { SEO, DocsArticle, ErrorAlert, ContentLoader } from "~/components";
 import { DocsLayout } from "~/layouts";
 import {
   docsPageQuery,
@@ -28,7 +28,7 @@ const DocsPage: NextPage<DocsPageProps> = props => {
       <>
         <SEO title="Error" noindex nofollow />
         <DocsLayout>
-          <Error />
+          <ErrorAlert />
         </DocsLayout>
       </>
     );

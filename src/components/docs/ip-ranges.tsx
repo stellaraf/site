@@ -1,6 +1,6 @@
 import { Button, Box, Heading, SimpleGrid, Skeleton, Wrap, WrapItem } from "@chakra-ui/react";
 
-import { CodeBlock, Error } from "~/components";
+import { CodeBlock, ErrorAlert } from "~/components";
 
 import { useIPRanges } from "./use-ip-ranges";
 
@@ -13,7 +13,7 @@ export const IPRanges = () => {
 
   if (isError) {
     console.error(error);
-    return <Error />;
+    return <ErrorAlert />;
   }
 
   return (
@@ -35,7 +35,9 @@ export const IPRanges = () => {
         </Skeleton>
       </Box>
       <Box>
-        <Heading as="h3" size="md">{`Domains & URLs`}</Heading>
+        <Heading as="h3" size="md">
+          Domains & URLs
+        </Heading>
         <Skeleton isLoaded={isSuccess}>
           {isSuccess && <CodeBlock>{data.url.join("\n")}</CodeBlock>}
         </Skeleton>

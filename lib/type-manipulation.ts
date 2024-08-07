@@ -6,22 +6,22 @@ type SerializedKey<T> = T extends `_${string}` ? never : T extends string ? T : 
 
 type SerializedValue<T> = T extends string | number | boolean | null | undefined
   ? T
-  : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  T extends (...args: any[]) => any
-  ? never
-  : T extends Array<infer A>
-  ? Array<SerializedValue<A>>
-  : T extends Set<infer S>
-  ? Array<SerializedValue<S>>
-  : T extends WithEntries
-  ? Record<string, string>
-  : T extends Map<infer MK, infer MV>
-  ? Record<MK & string, MV>
-  : T extends IncomingHttpHeaders
-  ? Record<string, string | string[]>
-  : T extends Record<infer RK, infer RV>
-  ? Record<RK, SerializedNever<RV>>
-  : never;
+  : // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    T extends (...args: any[]) => any
+    ? never
+    : T extends Array<infer A>
+      ? Array<SerializedValue<A>>
+      : T extends Set<infer S>
+        ? Array<SerializedValue<S>>
+        : T extends WithEntries
+          ? Record<string, string>
+          : T extends Map<infer MK, infer MV>
+            ? Record<MK & string, MV>
+            : T extends IncomingHttpHeaders
+              ? Record<string, string | string[]>
+              : T extends Record<infer RK, infer RV>
+                ? Record<RK, SerializedNever<RV>>
+                : never;
 
 type SerializedNever<T, Key extends keyof T & string = keyof T & string> = {
   [K in SerializedKey<Key>]: SerializedValue<T[K]>;

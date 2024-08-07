@@ -8,7 +8,7 @@ import {
   useJsApiLoader,
 } from "@react-google-maps/api";
 
-import { Link, Error } from "~/components";
+import { Link, ErrorAlert } from "~/components";
 import { useColorTokenValue } from "~/hooks";
 
 import { mapDark, mapLight } from "./styles";
@@ -100,7 +100,7 @@ export const GoogleMap = (props: GoogleMapProps) => {
   return (
     <MapContainer bg={bg} color={color} {...rest}>
       {typeof loadError !== "undefined" ? (
-        <Error title="Error loading Google Map" description={loadError.message} />
+        <ErrorAlert title="Error loading Google Map" description={loadError.message} />
       ) : isLoaded ? (
         renderMap()
       ) : (

@@ -11,12 +11,13 @@ export function all<T>(...iter: T[]): boolean {
 
 export function slug(original: string, parent = "", prefix = "#"): string {
   let result = "";
+  let _parent = parent;
   if (typeof original === "string") {
     const slugged = slugify(original, { lower: true });
-    if (parent && parent.charAt(0) !== "/") {
-      parent = `/${parent}`;
+    if (_parent && _parent.charAt(0) !== "/") {
+      _parent = `/${_parent}`;
     }
-    result = [parent, slugged].join(prefix);
+    result = [_parent, slugged].join(prefix);
   }
   return result;
 }
@@ -129,12 +130,12 @@ export function publicProps<
   PrivateKeys extends All extends `_${infer S}`
     ? `_${S}`
     : All extends `__${infer S}`
-    ? `__${S}`
-    : All extends `-${infer S}`
-    ? `-${S}`
-    : All extends `--${infer S}`
-    ? `--${S}`
-    : never,
+      ? `__${S}`
+      : All extends `-${infer S}`
+        ? `-${S}`
+        : All extends `--${infer S}`
+          ? `--${S}`
+          : never,
   Kept extends string & (Keep | PrivateKeys),
   Return extends { [K in Kept]: Props[K] },
 >(obj: Props, ...keysToKeep: Keep[]): Return {
@@ -160,21 +161,21 @@ export function publicProps<
  * @param func
  * @param args
  */
-export async function awaitIfNeeded<Func extends (...args: never[]) => unknown>(
+export async function awaitIfNeeded<R, Func extends (...args: never[]) => R>(
   func: Func,
   ...args: Parameters<Func>
 ): Promise<ReturnType<Func>> {
   if (typeof func !== "function") {
     throw new Error("First argument to awaitIfNeeded must be a function");
   }
-  let result;
+  let result: R;
   const initial = func(...args);
   if (initial instanceof Promise) {
     result = await initial;
   } else {
     result = initial;
   }
-  return result;
+  return result as ReturnType<Func>;
 }
 
 export async function messageFromResponseOrError(response: Error | Response): Promise<string> {
@@ -190,7 +191,7 @@ export async function messageFromResponseOrError(response: Error | Response): Pr
       } else {
         message = JSON.stringify(parsed, null, 2);
       }
-    } catch (error) {
+    } catch {
       message = response.statusText;
     }
   }
@@ -217,7 +218,7 @@ export function parseCookie(
       } else if (value.toLowerCase() === "true") {
         value = true;
       } else if (value.match(/^[0-9]+$/)) {
-        value = parseInt(value);
+        value = Number.parseInt(value);
       }
       final[key] = value;
       return final;

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { ContentLoader, Error, SEO, RichText } from "~/components";
+import { ContentLoader, ErrorAlert, SEO, RichText } from "~/components";
 import { useScaledText } from "~/hooks";
 import { DocsLayout } from "~/layouts";
 import {
@@ -60,7 +60,7 @@ const DocsGroupIndex: NextPage<DocsGroup> = props => {
       <>
         <SEO title="Error" noindex nofollow />
         <DocsLayout>
-          <Error />
+          <ErrorAlert />
         </DocsLayout>
       </>
     );

@@ -1,6 +1,6 @@
 import { chakra } from "@chakra-ui/react";
 
-import { SEO, Error } from "~/components";
+import { SEO, ErrorAlert } from "~/components";
 import { useGradient } from "~/hooks";
 
 import type { PageWithInitialProps } from "~/types";
@@ -33,7 +33,7 @@ const ErrorPage: PageWithInitialProps<ErrorPageProps> = props => {
     <>
       <SEO title="Error" noindex nofollow />
       <Wrapper {...bg}>
-        <Error title={`${statusCode} Error`} description={error} />
+        <ErrorAlert title={`${statusCode} Error`} description={error} />
       </Wrapper>
     </>
   );

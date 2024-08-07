@@ -44,10 +44,10 @@ export type FormField = Omit<
 export type FormValue<Field extends FormField> = Field extends CheckboxField
   ? string[]
   : Field extends SelectField
-  ? string[]
-  : Field["required"] extends true
-  ? string
-  : null;
+    ? string[]
+    : Field["required"] extends true
+      ? string
+      : null;
 
 export interface GenericFormProps<Fields extends FormField[]>
   extends Omit<FlexProps, "onSubmit" | "title">,
