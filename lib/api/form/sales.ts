@@ -1,4 +1,4 @@
-import isBot from "isbot";
+import { isbot } from "isbot";
 import queryString from "query-string";
 import { z } from "zod";
 
@@ -29,7 +29,7 @@ export async function handleSalesForm(request: NextApiRequest): Promise<Response
     throw new Error("Invalid request payload");
   }
 
-  if (isBot(request.headers["user-agent"])) {
+  if (isbot(request.headers["user-agent"])) {
     throw new Error("You seem like a robot");
   }
 

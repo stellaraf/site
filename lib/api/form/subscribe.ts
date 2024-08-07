@@ -1,4 +1,4 @@
-import isBot from "isbot";
+import { isbot } from "isbot";
 import { z } from "zod";
 
 import { isValidJsonRequest } from "~/lib";
@@ -20,7 +20,7 @@ export async function handleSubscribe(request: NextApiRequest): Promise<Response
     throw new Error("Invalid request payload");
   }
 
-  if (isBot(request.headers["user-agent"])) {
+  if (isbot(request.headers["user-agent"])) {
     throw new Error("You seem like a robot");
   }
 

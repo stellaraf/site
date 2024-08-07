@@ -1,16 +1,15 @@
-import { useCallback, useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 
 import { chakra } from "@chakra-ui/react";
-import Particles from "react-tsparticles";
-import { loadSlim } from "tsparticles-slim";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 
 import { useKonami } from "~/hooks";
 
 import type { BoxProps } from "@chakra-ui/react";
-import type { ParticlesProps } from "react-tsparticles";
-import type { Engine } from "tsparticles-engine";
+import type { IParticlesProps } from "@tsparticles/react";
 
-export type ParticlesOptions = NonNullable<ParticlesProps["options"]>;
+export type ParticlesOptions = NonNullable<IParticlesProps["options"]>;
 
 const DEFAULT_OPTIONS: ParticlesOptions = {
   detectRetina: true,
@@ -50,11 +49,12 @@ const DEFAULT_OPTIONS: ParticlesOptions = {
   particles: {
     shape: { type: "circle" },
     number: {
-      limit: 100,
+      limit: { mode: "delete", value: 100 },
       value: 160,
       density: {
         enable: true,
-        value_area: typeof window === "undefined" ? 800 : window.outerHeight,
+        width: typeof window === "undefined" ? 1200 : window.outerWidth,
+        height: typeof window === "undefined" ? 800 : window.outerHeight,
       },
     },
     links: {
@@ -70,13 +70,16 @@ const DEFAULT_OPTIONS: ParticlesOptions = {
     },
     size: {
       value: 1,
-      random: true,
+      animation: {
+        mode: "random",
+      },
     },
     opacity: {
-      anim: {
+      value: 0.5,
+      animation: {
         enable: true,
         speed: 1,
-        opacity_min: 0.05,
+        startValue: "min",
       },
     },
   },
@@ -87,22 +90,26 @@ const KONAMI_OPTIONS: ParticlesOptions = {
   particles: {
     shape: { type: "circle" },
     number: {
-      limit: 1000,
+      limit: { mode: "delete", value: 1000 },
       value: 500,
       density: {
         enable: true,
-        value_area: typeof window === "undefined" ? 800 : window.outerHeight,
+        width: typeof window === "undefined" ? 1200 : window.outerWidth,
+        height: typeof window === "undefined" ? 800 : window.outerHeight,
       },
     },
     size: {
       value: 0,
-      random: true,
+      animation: {
+        mode: "random",
+      },
     },
     opacity: {
-      anim: {
+      value: 0.5,
+      animation: {
         enable: true,
         speed: 1,
-        opacity_min: 0.05,
+        startValue: "min",
       },
     },
     twinkle: { particles: { enable: true } },
@@ -111,10 +118,9 @@ const KONAMI_OPTIONS: ParticlesOptions = {
       speed: 6,
       direction: "inside",
       size: true,
-      trail: { enable: true, length: 3, fillColor: "transparent" },
-      outMode: "out",
+      trail: { enable: true, length: 3, fill: { color: "transparent" } },
+      outModes: "out",
       straight: true,
-      collisions: false,
     },
   },
   interactivity: {
@@ -138,20 +144,23 @@ function useOptions(): ParticlesOptions {
   }, [konami]);
 }
 
-const Base = (particleProps: ParticlesProps) => {
+function useParticles(): boolean {
+  const [init, setInit] = useState(false);
+
+  useEffect(() => {
+    initParticlesEngine(async engine => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
+  }, []);
+  return init;
+}
+
+const Base = (particleProps: IParticlesProps) => {
   const options = useOptions();
-
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadSlim(engine);
-  }, []);
-
-  const particlesLoaded = useCallback(async () => {
-    return;
-  }, []);
-
-  return (
-    <Particles options={options} {...particleProps} init={particlesInit} loaded={particlesLoaded} />
-  );
+  const init = useParticles();
+  return init ? <Particles options={options} {...particleProps} /> : <></>;
 };
 
 const Wrapper = chakra("div", {
