@@ -1,4 +1,4 @@
-import { Text, VStack, type StackProps } from "@chakra-ui/react";
+import { type StackProps, Text, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useTitleCase } from "use-title-case";
@@ -7,7 +7,7 @@ import { z } from "zod";
 import { CodeBlock, RichText, createSchema } from "~/components";
 import { useConfig } from "~/context";
 import { useAlert } from "~/hooks";
-import { is, submitForm, messageFromResponseOrError } from "~/lib";
+import { is, messageFromResponseOrError, submitForm } from "~/lib";
 
 import { SubscribeField } from "./subscribe-field";
 

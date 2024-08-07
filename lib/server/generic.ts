@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { findUp, pathExists, type Options } from "find-up";
+import { type Options, findUp, pathExists } from "find-up";
 
 interface DirectoryFilesOptions {
   /** @default RegExp(".*") */

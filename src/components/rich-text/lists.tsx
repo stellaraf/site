@@ -1,6 +1,6 @@
 import { List, ListItem } from "@chakra-ui/react";
 
-import type { ListProps, ListItemProps } from "@chakra-ui/react";
+import type { ListItemProps, ListProps } from "@chakra-ui/react";
 
 export const Ul = (props: ListProps) => <List styleType="circle" ml={8} {...props} />;
 

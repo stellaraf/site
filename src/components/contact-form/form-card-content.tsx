@@ -1,4 +1,4 @@
-import { Heading, Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { RichText } from "~/components";

@@ -1,4 +1,4 @@
-import { Avatar, chakra, HStack } from "@chakra-ui/react";
+import { Avatar, HStack, chakra } from "@chakra-ui/react";
 
 import type { BlogPost } from "~/queries";
 

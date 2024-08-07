@@ -3,32 +3,32 @@ import { Fragment } from "react";
 import NextLink, { type LinkProps as NextLinkProps } from "next/link";
 
 import {
-  Text,
-  Flex,
-  Stack,
-  Drawer,
-  HStack,
-  Collapse,
-  DrawerBody,
-  DrawerHeader,
-  DrawerFooter,
-  useColorMode,
-  DrawerContent,
-  useDisclosure,
-  Icon as ChakraIcon,
   Button as ChakraButton,
   type ButtonProps as ChakraButtonProps,
+  Icon as ChakraIcon,
+  Collapse,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  Flex,
+  HStack,
+  Stack,
+  Text,
   type UseDisclosureReturn,
+  useColorMode,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
 import { TitleCase } from "use-title-case";
 
-import { Button, Controls, Icon, StatusButton, type ButtonProps } from "~/components";
+import { Button, type ButtonProps, Controls, Icon, StatusButton } from "~/components";
 import { ChevronUp, ExternalLink } from "~/icons";
 
 import { MenuToggle } from "./menu-toggle";
 
-import type { MenuProps, MenuSectionProps, HeaderProps, PopoverIconProps } from "./types";
+import type { HeaderProps, MenuProps, MenuSectionProps, PopoverIconProps } from "./types";
 
 const NavButton = (props: ChakraButtonProps & NextLinkProps & React.AnchorHTMLAttributes<"a">) => (
   <ChakraButton

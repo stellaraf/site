@@ -1,12 +1,12 @@
 import { isValidPhoneNumber } from "libphonenumber-js";
 import {
-  z,
   type ZodArray,
+  type ZodEffects,
   type ZodObject,
+  type ZodRawShape,
   type ZodString,
   type ZodTypeAny,
-  type ZodEffects,
-  type ZodRawShape,
+  z,
 } from "zod";
 
 import { is } from "~/lib";

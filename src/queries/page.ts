@@ -1,5 +1,5 @@
 import { is } from "~/lib";
-import { Stage, type PageQuery, type PageQueryVariables } from "~/types";
+import { type PageQuery, type PageQueryVariables, Stage } from "~/types";
 
 import { queryFn } from "./base";
 import query from "./gql/page.gql";

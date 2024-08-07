@@ -3,15 +3,15 @@ import { useMemo } from "react";
 
 import {
   ChakraProvider,
+  type ColorModeProviderProps,
   cookieStorageManagerSSR,
   localStorageManager,
   useTheme as useChakraTheme,
-  type ColorModeProviderProps,
 } from "@chakra-ui/react";
 
 import { makeTheme } from "~/theme";
 
-import type { UseTheme, UIProviderProps } from "./types";
+import type { UIProviderProps, UseTheme } from "./types";
 
 type StorageManager = NonNullable<ColorModeProviderProps["colorModeManager"]>;
 

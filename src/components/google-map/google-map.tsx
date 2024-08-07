@@ -3,18 +3,18 @@ import { useCallback } from "react";
 import { Box, Skeleton, useColorModeValue } from "@chakra-ui/react";
 import {
   GoogleMap as GoogleMapApi,
-  MarkerF,
   InfoWindow,
+  MarkerF,
   useJsApiLoader,
 } from "@react-google-maps/api";
 
-import { Link, ErrorAlert } from "~/components";
+import { ErrorAlert, Link } from "~/components";
 import { useColorTokenValue } from "~/hooks";
 
 import { mapDark, mapLight } from "./styles";
 import { gm, useMapUrl } from "./util";
 
-import type { LocationProps, MapContainerProps, GoogleMapProps } from "./types";
+import type { GoogleMapProps, LocationProps, MapContainerProps } from "./types";
 
 const Location = (props: LocationProps) => {
   const { lat, lng, bg, color, orgName, address, ...rest } = props;

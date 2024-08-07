@@ -1,4 +1,4 @@
-import { Card, CardBody, GenericForm, RichText, CodeBlock } from "~/components";
+import { Card, CardBody, CodeBlock, GenericForm, RichText } from "~/components";
 import { useAlert } from "~/hooks";
 import { messageFromResponseOrError } from "~/lib";
 

@@ -2,12 +2,12 @@ import { useRouter } from "next/router";
 
 import { Box, Flex } from "@chakra-ui/react";
 
-import { SEO, ErrorAlert, ContentLoader, BlogPostContent } from "~/components";
-import { blogPostQuery, commonStaticPropsQuery, blogPostStaticPathsQuery } from "~/queries";
-import { Stage, type BlogPostProps } from "~/types";
+import { BlogPostContent, ContentLoader, ErrorAlert, SEO } from "~/components";
+import { blogPostQuery, blogPostStaticPathsQuery, commonStaticPropsQuery } from "~/queries";
+import { type BlogPostProps, Stage } from "~/types";
 
 import type { BoxProps } from "@chakra-ui/react";
-import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 type UrlQuery = {
   slug: string;

@@ -5,14 +5,14 @@ import {
   Flex,
   Heading,
   Tag,
-  TagLeftIcon,
   TagLabel,
+  TagLeftIcon,
   VStack,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
 
-import { Modal, RichText, ChakraNextImage } from "~/components";
+import { ChakraNextImage, Modal, RichText } from "~/components";
 import { useScaledText } from "~/hooks";
 import { LocationPin } from "~/icons";
 
@@ -20,8 +20,8 @@ import { AvatarPhotoWrapper } from "./avatar-photo";
 import { useAvatar } from "./employee-grid";
 import { useCurrent } from "./state";
 
-import type { AvatarDetailProps } from "./types";
 import type { Employee } from "~/queries";
+import type { AvatarDetailProps } from "./types";
 
 const _Header = (props: Pick<Employee, "name" | "title" | "photo">) => {
   const { name, title, photo } = props;

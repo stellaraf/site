@@ -1,5 +1,5 @@
 import { is } from "~/lib";
-import { type DocsPageQuery, type DocsPageQueryVariables, type Admonition, Stage } from "~/types";
+import { type Admonition, type DocsPageQuery, type DocsPageQueryVariables, Stage } from "~/types";
 
 import { queryFn } from "./base";
 import query from "./gql/docs-page.gql";

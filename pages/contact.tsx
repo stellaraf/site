@@ -1,26 +1,26 @@
-import { Box, Flex, Button as ChakraButton, Heading, VStack } from "@chakra-ui/react";
+import { Box, Button as ChakraButton, Flex, Heading, VStack } from "@chakra-ui/react";
 
 import {
-  Content,
-  Hero,
-  FormCardGroup,
   Callout,
-  RichText,
+  Content,
+  FormCardGroup,
+  Hero,
   HolidayTable,
-  Timezones,
   P,
+  RichText,
+  Timezones,
 } from "~/components";
 import { useSlug } from "~/hooks";
 import { Phone } from "~/icons";
 import { is } from "~/lib";
 import { getHolidays, getLocationTime } from "~/lib/server";
 import {
+  cloudLocationsQuery,
+  commonStaticPropsQuery,
   contactFormsQuery,
   pageQuery,
-  commonStaticPropsQuery,
-  cloudLocationsQuery,
 } from "~/queries";
-import { Stage, type ContactPageProps } from "~/types";
+import { type ContactPageProps, Stage } from "~/types";
 
 import type { GetStaticProps, NextPage } from "next";
 

@@ -3,12 +3,12 @@ import dynamic from "next/dynamic";
 import {
   Card,
   CardBody,
-  CardHeader,
   CardFooter,
+  CardHeader,
   Center,
+  Divider,
   Flex,
   HStack,
-  Divider,
   Heading,
   VStack,
 } from "@chakra-ui/react";

@@ -1,23 +1,23 @@
 import {
   Box,
-  chakra,
   Flex,
-  VStack,
   Grid,
   Heading,
+  VStack,
   VisuallyHidden,
+  chakra,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { Card, CardBody, GenericForm, RichText } from "~/components";
-import { useGradient, useMobile, useAlert } from "~/hooks";
-import { is, separate, messageFromResponseOrError } from "~/lib";
+import { useAlert, useGradient, useMobile } from "~/hooks";
+import { is, messageFromResponseOrError, separate } from "~/lib";
 
 import { PartnerContextProvider, usePartnerCtx } from "./context";
 
-import type { PartnerLayoutProps } from "./types";
 import type { VendorLogo } from "~/queries";
+import type { PartnerLayoutProps } from "./types";
 
 const LayoutWrapper = chakra("div", {
   baseStyle: { width: "100%", minHeight: "40vh", pt: 32, layerStyle: "container" },

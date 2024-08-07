@@ -1,7 +1,7 @@
 import { HStack, IconButton, StackProps } from "@chakra-ui/react";
 import queryString from "query-string";
 
-import { Facebook, Twitter, LinkedIn } from "~/icons";
+import { Facebook, LinkedIn, Twitter } from "~/icons";
 
 interface ShareProps extends StackProps {
   url: string;

@@ -1,6 +1,6 @@
 import NextImage, { type ImageProps } from "next/image";
 
-import { chakra, type ChakraComponent } from "@chakra-ui/react";
+import { type ChakraComponent, chakra } from "@chakra-ui/react";
 
 const NEXT_IMAGE_PROPS: string[] = [
   "alt",

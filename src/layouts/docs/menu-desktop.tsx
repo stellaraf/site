@@ -1,12 +1,12 @@
 import {
-  Box,
-  VStack,
-  useToken,
+  AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  AccordionButton,
+  Box,
+  VStack,
   useColorModeValue,
+  useToken,
 } from "@chakra-ui/react";
 
 import { Link } from "~/components";

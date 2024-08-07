@@ -1,10 +1,10 @@
 import type {
+  BoxProps,
+  ModalProps as ChakraModalProps,
   FlexProps,
   ModalBodyProps,
   ModalFooterProps,
   ModalHeaderProps,
-  BoxProps,
-  ModalProps as ChakraModalProps,
   UseModalProps,
 } from "@chakra-ui/react";
 import type { PropGetter } from "@chakra-ui/react-utils";

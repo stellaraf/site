@@ -6,10 +6,10 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import utc from "dayjs/plugin/utc";
 
 import { Table, Td, Th } from "~/components";
-import { useSSR, useTimezone, useBrowserTimezone } from "~/hooks";
+import { useBrowserTimezone, useSSR, useTimezone } from "~/hooks";
 
-import type { TimezonesProps, TimezoneProps } from "./types";
 import type { LocationTime } from "~/lib/server";
+import type { TimezoneProps, TimezonesProps } from "./types";
 
 dayjs.extend(localizedFormat);
 dayjs.extend(utc);

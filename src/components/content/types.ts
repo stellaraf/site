@@ -1,6 +1,6 @@
 import type { BoxProps, GridProps, HeadingProps } from "@chakra-ui/react";
-import type { LabelProps, CardProps } from "~/components";
-import type { PageContent, Feature } from "~/queries";
+import type { CardProps, LabelProps } from "~/components";
+import type { Feature, PageContent } from "~/queries";
 
 export interface ContentTitleProps extends HeadingProps {
   id: string;

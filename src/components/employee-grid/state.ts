@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 
-import { atom, useSetAtom, useAtomValue } from "jotai";
+import { atom, useAtomValue, useSetAtom } from "jotai";
 
 import { objectHasProperty } from "~/lib";
 

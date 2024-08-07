@@ -1,18 +1,18 @@
-import { useImperativeHandle, forwardRef, Fragment } from "react";
+import { Fragment, forwardRef, useImperativeHandle } from "react";
 
 import { Button, Flex } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm, type UseFormHandleSubmit } from "react-hook-form";
+import { FormProvider, type UseFormHandleSubmit, useForm } from "react-hook-form";
 import { useTitleCase } from "use-title-case";
 
-import { FieldGroup, TextArea, TextInput, SelectField, CheckboxField } from "~/components";
-import { is, submitForm, awaitIfNeeded } from "~/lib";
+import { CheckboxField, FieldGroup, SelectField, TextArea, TextInput } from "~/components";
+import { awaitIfNeeded, is, submitForm } from "~/lib";
 
 import { isCheckboxField, isSelectField, isTextAreaField, isTextInputField } from "./guards";
 import { createSchema } from "./schema";
 
 import type { z } from "zod";
-import type { GenericFormProps, FormField } from "./types";
+import type { FormField, GenericFormProps } from "./types";
 
 type FormSubmitter = ReturnType<UseFormHandleSubmit<Dict>>;
 

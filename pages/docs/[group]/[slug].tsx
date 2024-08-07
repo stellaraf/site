@@ -1,16 +1,16 @@
 import { useRouter } from "next/router";
 
-import { SEO, DocsArticle, ErrorAlert, ContentLoader } from "~/components";
+import { ContentLoader, DocsArticle, ErrorAlert, SEO } from "~/components";
 import { DocsLayout } from "~/layouts";
 import {
-  docsPageQuery,
   commonStaticPropsQuery,
-  docsPageStaticPathsQuery,
   docsGroupStaticPathsQuery,
+  docsPageQuery,
+  docsPageStaticPathsQuery,
 } from "~/queries";
-import { Stage, type DocsPageProps } from "~/types";
+import { type DocsPageProps, Stage } from "~/types";
 
-import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 type UrlQuery = {
   slug: string;

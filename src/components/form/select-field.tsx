@@ -1,12 +1,12 @@
 import { useCallback } from "react";
 
 import { FormControl, FormErrorMessage } from "@chakra-ui/react";
-import { useFormContext, useController } from "react-hook-form";
+import { useController, useFormContext } from "react-hook-form";
 
 import { Select } from "~/components";
 
-import type { SelectFieldProps } from "./types";
 import type { SelectOptionSingle } from "~/types";
+import type { SelectFieldProps } from "./types";
 
 function selectMultiple(options: SelectOptionSingle[], value: string[]): SelectOptionSingle[] {
   return value.reduce<SelectOptionSingle[]>((matching, each) => {

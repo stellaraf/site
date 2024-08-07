@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getJson } from "~/lib";
 
-import type { UseQueryResult, QueryFunction } from "@tanstack/react-query";
+import type { QueryFunction, UseQueryResult } from "@tanstack/react-query";
 
 type IPRanges = {
   ipv4: string[];

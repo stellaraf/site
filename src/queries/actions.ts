@@ -1,5 +1,5 @@
 import { is } from "~/lib";
-import { ThemeColor, type ActionsQuery, type ActionsQueryVariables } from "~/types";
+import { type ActionsQuery, type ActionsQueryVariables, ThemeColor } from "~/types";
 
 import { queryFn } from "./base";
 import query from "./gql/actions.gql";

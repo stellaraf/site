@@ -1,17 +1,17 @@
 import {
   Link,
-  chakra,
   PopoverTrigger,
-  useColorModeValue,
+  chakra,
   useBreakpointValue,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Marker } from "react-simple-maps";
 
 import { useColorTokenValue } from "~/hooks";
 
-import type { MapMarkerProps } from "./types";
 import type { Variants } from "framer-motion";
+import type { MapMarkerProps } from "./types";
 
 const bestVariants = {
   best: {

@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { is } from "~/lib";
-import { findProjectRoot, directoryFiles } from "~/lib/server";
+import { directoryFiles, findProjectRoot } from "~/lib/server";
 
 import { queryFn } from "../base";
 import query from "../gql/docs-page-static-paths.gql";

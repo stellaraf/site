@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isEmptyRichText, is } from "./type-guards";
+import { is, isEmptyRichText } from "./type-guards";
 
 describe("isEmptyRichText", () => {
   it("should be true", () => {

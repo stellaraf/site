@@ -1,7 +1,7 @@
 import { isFormButton } from "~/components";
 
-import type { FormElements } from "./types";
 import type { ContactForm } from "~/queries";
+import type { FormElements } from "./types";
 
 export function separateFormFields(form: ContactForm | null): FormElements {
   const defaultValue: FormElements = { button: null, fields: [] };

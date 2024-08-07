@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import { Open_Sans, Fira_Code } from "next/font/google";
+import { Fira_Code, Open_Sans } from "next/font/google";
 
 import { Worker } from "@react-pdf-viewer/core";
 import { Analytics } from "@vercel/analytics/react";

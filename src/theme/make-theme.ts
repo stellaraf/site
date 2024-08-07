@@ -1,5 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
-import { generatePalette, Palette } from "palette-by-numbers";
+import { Palette, generatePalette } from "palette-by-numbers";
 
 import { entries } from "~/lib";
 
@@ -7,11 +7,11 @@ import { button, heading } from "./components";
 import { globalStyles } from "./global-css";
 
 import type {
-  CustomTheme,
-  ThemeConfig,
-  CustomColors,
   ChangeableColors,
+  CustomColors,
+  CustomTheme,
   InitialTheme,
+  ThemeConfig,
 } from "./types";
 
 const radii = {

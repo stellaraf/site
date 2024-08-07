@@ -3,18 +3,18 @@ import { useRouter } from "next/router";
 import { Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { ContentLoader, ErrorAlert, SEO, RichText } from "~/components";
+import { ContentLoader, ErrorAlert, RichText, SEO } from "~/components";
 import { useScaledText } from "~/hooks";
 import { DocsLayout } from "~/layouts";
 import {
-  docsGroupQuery,
-  commonStaticPropsQuery,
-  docsGroupStaticPathsQuery,
   type DocsGroup,
+  commonStaticPropsQuery,
+  docsGroupQuery,
+  docsGroupStaticPathsQuery,
 } from "~/queries";
 import { Stage } from "~/types";
 
-import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 type UrlQuery = {
   group: string;

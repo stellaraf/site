@@ -4,19 +4,19 @@ import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import {
-  SEO,
-  ErrorAlert,
-  ContentLoader,
-  Hero,
   BlogPosts,
-  Testimonials,
   Callout,
+  ContentLoader,
+  ErrorAlert,
+  Hero,
+  SEO,
+  Testimonials,
 } from "~/components";
-import { pageQuery, blogPostsQuery, commonStaticPropsQuery } from "~/queries";
-import { Stage, type BlogPageProps } from "~/types";
+import { blogPostsQuery, commonStaticPropsQuery, pageQuery } from "~/queries";
+import { type BlogPageProps, Stage } from "~/types";
 
 import type { BoxProps } from "@chakra-ui/react";
-import type { NextPage, GetStaticProps } from "next";
+import type { GetStaticProps, NextPage } from "next";
 
 const Layout = (props: React.PropsWithChildren<BoxProps & Pick<BlogPageProps, "title">>) => {
   const { title, children, ...rest } = props;

@@ -1,14 +1,14 @@
 import {
-  Stack,
-  Radio,
   Checkbox,
-  FormLabel,
-  RadioGroup,
-  FormControl,
   CheckboxGroup,
+  FormControl,
   FormErrorMessage,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Stack,
 } from "@chakra-ui/react";
-import { useFormContext, useController, type FieldValues } from "react-hook-form";
+import { type FieldValues, useController, useFormContext } from "react-hook-form";
 
 import type { CheckboxGroupProps, FormFieldProps } from "./types";
 

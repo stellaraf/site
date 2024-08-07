@@ -1,4 +1,4 @@
-import { Accordion, chakra, Box, Flex, VStack } from "@chakra-ui/react";
+import { Accordion, Box, Flex, VStack, chakra } from "@chakra-ui/react";
 
 import { MSubNav } from "~/components";
 import { useConfig } from "~/context";

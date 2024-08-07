@@ -1,6 +1,6 @@
-import { IconButton, useColorMode, type IconButtonProps } from "@chakra-ui/react";
+import { IconButton, type IconButtonProps, useColorMode } from "@chakra-ui/react";
 
-import { Sun, Moon } from "~/icons";
+import { Moon, Sun } from "~/icons";
 
 export const MControls = (props: Omit<IconButtonProps, "aria-label">) => {
   const { colorMode, toggleColorMode } = useColorMode();

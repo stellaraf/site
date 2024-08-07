@@ -12,8 +12,8 @@ import { useConfig } from "~/context";
 import { Action } from "./action";
 import { useRandomActions } from "./util";
 
-import type { CallToActionProps, MemoCallToActionProps } from "./types";
 import type { Actions } from "~/queries";
+import type { CallToActionProps, MemoCallToActionProps } from "./types";
 
 export const _CallToActionContainer = (props: MemoCallToActionProps) => {
   const { actions: rawActions, currentPath, ...rest } = props;

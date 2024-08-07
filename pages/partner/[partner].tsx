@@ -1,14 +1,14 @@
 import NextError from "next/error";
 import { useRouter } from "next/router";
 
-import { SEO, ContentLoader } from "~/components";
-import { PartnerLayout, FallbackLayout } from "~/layouts";
-import { pageQuery, commonStaticPropsQuery, pageStaticPathsQuery } from "~/queries";
-import { Stage, type PageProps } from "~/types";
+import { ContentLoader, SEO } from "~/components";
+import { FallbackLayout, PartnerLayout } from "~/layouts";
+import { commonStaticPropsQuery, pageQuery, pageStaticPathsQuery } from "~/queries";
+import { type PageProps, Stage } from "~/types";
 
 import ErrorPage from "../_error";
 
-import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 type UrlQuery = {
   partner: string;

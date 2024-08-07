@@ -1,20 +1,20 @@
 import dynamic from "next/dynamic";
 
-import { useBreakpointValue, type BoxProps } from "@chakra-ui/react";
+import { type BoxProps, useBreakpointValue } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 
 import {
-  Header,
-  Footer,
-  Preview,
-  Controls,
   CallToAction,
-  type MenuProps,
+  Controls,
+  Footer,
   type FooterGroup,
+  Header,
+  type MenuProps,
+  Preview,
 } from "~/components";
 import { useDraft } from "~/context";
 
-import { Wrapper, Base, Main } from "./common";
+import { Base, Main, Wrapper } from "./common";
 
 import type { Actions } from "~/queries";
 

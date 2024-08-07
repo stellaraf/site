@@ -1,32 +1,32 @@
 import { createContext, forwardRef, useContext } from "react";
 
-import { useDisclosure, useColorMode } from "@chakra-ui/react";
+import { useColorMode, useDisclosure } from "@chakra-ui/react";
 import ReactSelect from "react-select";
 
 import { Option } from "./option";
 import {
-  useRSTheme,
-  useMenuStyle,
-  useMenuPortal,
-  useOptionStyle,
   useControlStyle,
+  useIndicatorSeparatorStyle,
   useMenuListStyle,
-  useMultiValueStyle,
-  usePlaceholderStyle,
+  useMenuPortal,
+  useMenuStyle,
   useMultiValueLabelStyle,
   useMultiValueRemoveStyle,
-  useIndicatorSeparatorStyle,
+  useMultiValueStyle,
+  useOptionStyle,
+  usePlaceholderStyle,
+  useRSTheme,
 } from "./styles";
 import { isSingleValue } from "./types";
 
-import type { SelectProps, SelectContextProps } from "./types";
 import type {
-  Props as ReactSelectProps,
   MultiValue,
   OnChangeValue,
+  Props as ReactSelectProps,
   SelectInstance,
 } from "react-select";
 import type { SelectOptionSingle } from "~/types";
+import type { SelectContextProps, SelectProps } from "./types";
 
 const SelectContext = createContext<SelectContextProps>({} as SelectContextProps);
 export const useSelectContext = (): SelectContextProps => useContext(SelectContext);

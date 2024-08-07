@@ -1,4 +1,4 @@
-import { chakra, Box, Flex, HStack, Stack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Stack, chakra } from "@chakra-ui/react";
 
 import { CodeBlock, Content, RichText } from "~/components";
 import { useSlug } from "~/hooks";

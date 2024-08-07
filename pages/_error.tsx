@@ -1,6 +1,6 @@
 import { chakra } from "@chakra-ui/react";
 
-import { SEO, ErrorAlert } from "~/components";
+import { ErrorAlert, SEO } from "~/components";
 import { useGradient } from "~/hooks";
 
 import type { PageWithInitialProps } from "~/types";

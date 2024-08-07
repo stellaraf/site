@@ -1,5 +1,5 @@
 import { is } from "~/lib";
-import { Stage, type DocsGroupsQuery, type DocsGroupsQueryVariables } from "~/types";
+import { type DocsGroupsQuery, type DocsGroupsQueryVariables, Stage } from "~/types";
 
 import { queryFn } from "./base";
 import query from "./gql/docs-groups.gql";

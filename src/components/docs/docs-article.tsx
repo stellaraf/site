@@ -1,7 +1,7 @@
-import { chakra, Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, chakra } from "@chakra-ui/react";
 
 import { Content, RichText } from "~/components";
-import { useSlug, useDate } from "~/hooks";
+import { useDate, useSlug } from "~/hooks";
 import { shouldForwardProp } from "~/theme";
 
 import type { DocsPage } from "~/queries";

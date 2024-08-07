@@ -1,6 +1,6 @@
-import { ContentSection, Hero, Callout, Testimonials } from "~/components";
-import { pageQuery, commonStaticPropsQuery, pageStaticPathsExactQuery } from "~/queries";
-import { Stage, type PageProps } from "~/types";
+import { Callout, ContentSection, Hero, Testimonials } from "~/components";
+import { commonStaticPropsQuery, pageQuery, pageStaticPathsExactQuery } from "~/queries";
+import { type PageProps, Stage } from "~/types";
 
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 

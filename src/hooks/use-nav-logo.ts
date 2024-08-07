@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { atom, useSetAtom, useAtomValue } from "jotai";
+import { atom, useAtomValue, useSetAtom } from "jotai";
 
 import { useScrollPosition } from "./use-scroll-position";
 

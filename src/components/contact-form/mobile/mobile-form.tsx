@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 
-import { Button as ChakraButton, Center, Flex, IconButton, Heading, Grid } from "@chakra-ui/react";
+import { Center, Button as ChakraButton, Flex, Grid, Heading, IconButton } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { Modal, RichText, GenericForm } from "~/components";
+import { GenericForm, Modal, RichText } from "~/components";
 import { CaretLeft } from "~/icons";
 import { is } from "~/lib";
 

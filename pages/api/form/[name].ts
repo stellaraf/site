@@ -1,4 +1,4 @@
-import { handleSalesForm, handleSupportForm, handleSubscribe, handleTrialForm } from "~/lib/api";
+import { handleSalesForm, handleSubscribe, handleSupportForm, handleTrialForm } from "~/lib/api";
 
 import type { NextApiHandler, NextApiRequest } from "next";
 

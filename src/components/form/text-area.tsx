@@ -1,11 +1,11 @@
-import { FormControl, Textarea, FormErrorMessage, FormLabel } from "@chakra-ui/react";
-import { useFormContext, useController } from "react-hook-form";
+import { FormControl, FormErrorMessage, FormLabel, Textarea } from "@chakra-ui/react";
+import { useController, useFormContext } from "react-hook-form";
 
 import { is } from "~/lib";
 
-import type { FormFieldProps } from "./types";
 import type { TextareaProps } from "@chakra-ui/react";
 import type { FieldValues } from "react-hook-form";
+import type { FormFieldProps } from "./types";
 
 export const TextArea = <V extends FieldValues>(props: FormFieldProps<TextareaProps, V>) => {
   const { name, field, defaultValue, rules = {}, isRequired = false, ...rest } = props;

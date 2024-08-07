@@ -1,6 +1,6 @@
-import { SEO, DocsArticle, IPRanges } from "~/components";
+import { DocsArticle, IPRanges, SEO } from "~/components";
 import { DocsLayout } from "~/layouts";
-import { docsPageQuery, commonStaticPropsQuery } from "~/queries";
+import { commonStaticPropsQuery, docsPageQuery } from "~/queries";
 import { Stage } from "~/types";
 
 import type { GetStaticProps } from "next";

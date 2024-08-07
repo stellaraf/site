@@ -1,7 +1,7 @@
 import { chakra } from "@chakra-ui/react";
 import { components } from "react-select";
 
-import type { OptionProps, GroupBase } from "react-select";
+import type { GroupBase, OptionProps } from "react-select";
 import type { SelectOptionSingle } from "~/types";
 
 export const Option = <Opt extends SelectOptionSingle, IsMulti extends boolean>(

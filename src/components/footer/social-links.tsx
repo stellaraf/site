@@ -1,10 +1,10 @@
 import { HStack, IconButton } from "@chakra-ui/react";
 
 import { useConfig } from "~/context";
-import { Facebook, Twitter, LinkedIn, GitHub, type IconType } from "~/icons";
+import { Facebook, GitHub, type IconType, LinkedIn, Twitter } from "~/icons";
 
-import type { SocialLinkProps } from "./types";
 import type { StackProps } from "@chakra-ui/react";
+import type { SocialLinkProps } from "./types";
 
 const iconMap: Record<string, IconType> = {
   Facebook: Facebook,

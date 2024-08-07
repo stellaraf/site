@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { Callout, ContentLoader, ContentSection, Hero, SEO, Testimonials } from "~/components";
 import { FallbackLayout } from "~/layouts";
 import { is } from "~/lib";
-import { pageQuery, commonStaticPropsQuery, pageStaticPathsQuery } from "~/queries";
-import { Stage, type PageProps } from "~/types";
+import { commonStaticPropsQuery, pageQuery, pageStaticPathsQuery } from "~/queries";
+import { type PageProps, Stage } from "~/types";
 
 import ErrorPage from "../_error";
 
-import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 type UrlQuery = {
   page: string;

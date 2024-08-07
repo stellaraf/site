@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
+import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/react";
 
 import { RichText } from "~/components";
 import { useConfig } from "~/context";

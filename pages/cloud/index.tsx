@@ -2,12 +2,12 @@ import dynamic from "next/dynamic";
 
 import { Button, Wrap } from "@chakra-ui/react";
 
-import { ContentSection, Hero, useDataCenter, Callout, Testimonials } from "~/components";
+import { Callout, ContentSection, Hero, Testimonials, useDataCenter } from "~/components";
 import { CloudLocationsProvider } from "~/context";
 import { useAlert, useColorTokenValue } from "~/hooks";
 import { is } from "~/lib";
-import { pageQuery, cloudLocationsQuery, commonStaticPropsQuery } from "~/queries";
-import { Stage, type CloudPageProps } from "~/types";
+import { cloudLocationsQuery, commonStaticPropsQuery, pageQuery } from "~/queries";
+import { type CloudPageProps, Stage } from "~/types";
 
 import type { GetStaticProps, NextPage } from "next";
 import type { USMapProps } from "~/components";

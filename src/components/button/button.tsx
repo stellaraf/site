@@ -7,7 +7,7 @@ import { Button as ChakraButton } from "@chakra-ui/react";
 import { useLinkType } from "~/hooks";
 import { ExternalLink } from "~/icons";
 
-import type { ButtonProps, ButtonLinkElement } from "./types";
+import type { ButtonLinkElement, ButtonProps } from "./types";
 
 const BaseButton = forwardRef<ButtonLinkElement, ButtonProps>((props, ref) => {
   const { showIcon, externalIconProps, isExternal, ...rest } = props;

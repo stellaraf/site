@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { chakra, Box, useColorMode } from "@chakra-ui/react";
+import { Box, chakra, useColorMode } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
 
 import { Link } from "~/components";

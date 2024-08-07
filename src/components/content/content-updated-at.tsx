@@ -1,4 +1,4 @@
-import { useColorModeValue, type FlexProps } from "@chakra-ui/react";
+import { type FlexProps, useColorModeValue } from "@chakra-ui/react";
 
 import { Label } from "~/components";
 import { useDate } from "~/hooks";

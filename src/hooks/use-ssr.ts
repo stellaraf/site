@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface UseSSR {
   /** `true` if render is taking place on the client, `false` if not. */

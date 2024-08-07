@@ -7,9 +7,9 @@ import { useSlug } from "~/hooks";
 import { getTextValueFromReactNode } from "~/lib";
 import { shouldForwardProp } from "~/theme";
 
-import type { Headings, HeadingLevel } from "./types";
 import type { HeadingProps } from "@chakra-ui/react";
 import type { SystemStyleObject } from "@chakra-ui/styled-system";
+import type { HeadingLevel, Headings } from "./types";
 
 function createHeading(level: HeadingLevel, baseStyle: SystemStyleObject): React.FC<HeadingProps> {
   const Base = chakra("h2", { baseStyle: { mb: 2, mt: 12, ...baseStyle }, shouldForwardProp });

@@ -3,20 +3,20 @@ import { useMemo, useRef } from "react";
 import NextLink from "next/link";
 
 import {
-  Text,
   Button,
-  VStack,
-  Portal,
-  chakra,
-  MenuList,
-  MenuGroup,
-  MenuButton,
-  SimpleGrid,
-  MenuDivider,
-  useDisclosure,
-  useColorModeValue,
   Menu as ChakraMenu,
   MenuItem as ChakraMenuItem,
+  MenuButton,
+  MenuDivider,
+  MenuGroup,
+  MenuList,
+  Portal,
+  SimpleGrid,
+  Text,
+  VStack,
+  chakra,
+  useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { TitleCase } from "use-title-case";
 
@@ -25,7 +25,7 @@ import { ExternalLink } from "~/icons";
 
 import { useIsActive } from "./use-is-active";
 
-import type { MenuProps, MenuItemProps, MenuSectionProps } from "./types";
+import type { MenuItemProps, MenuProps, MenuSectionProps } from "./types";
 
 const noFocus = {
   _focus: { border: "none", boxShadow: "none" },

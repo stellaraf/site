@@ -1,8 +1,8 @@
-import { Center, Heading, VStack, Divider, useColorModeValue } from "@chakra-ui/react";
+import { Center, Divider, Heading, VStack, useColorModeValue } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
-import { Button, Ripple, RichText, Content } from "~/components";
-import { useOpposingColor, useColorWhenDark, useGlow } from "~/hooks";
+import { Button, Content, RichText, Ripple } from "~/components";
+import { useColorWhenDark, useGlow, useOpposingColor } from "~/hooks";
 import { is } from "~/lib";
 import { ThemeColor } from "~/types";
 

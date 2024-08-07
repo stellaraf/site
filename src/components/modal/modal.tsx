@@ -1,10 +1,10 @@
 import {
   Modal as ChakraModal,
   ModalBody,
+  ModalCloseButton,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  ModalCloseButton,
 } from "@chakra-ui/react";
 
 import { ModalContent } from "./modal-content";

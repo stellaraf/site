@@ -4,24 +4,24 @@ import { Box, Flex, Heading, Tag } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import {
-  SEO,
-  ErrorAlert,
-  ContentLoader,
-  Hero,
   BlogPosts,
-  Testimonials,
   Callout,
+  ContentLoader,
+  ErrorAlert,
+  Hero,
+  SEO,
+  Testimonials,
 } from "~/components";
 import {
-  pageQuery,
+  blogPostTagsQuery,
   blogPostsByTagsQuery,
   commonStaticPropsQuery,
-  blogPostTagsQuery,
+  pageQuery,
 } from "~/queries";
-import { Stage, type BlogTagPageProps } from "~/types";
+import { type BlogTagPageProps, Stage } from "~/types";
 
 import type { BoxProps } from "@chakra-ui/react";
-import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 type Query = {
   tag: string;

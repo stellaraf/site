@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { slug, getTextValueFromReactNode } from "~/lib";
+import { getTextValueFromReactNode, slug } from "~/lib";
 
 export const useSlug = (original: string | React.ReactNode, deps: unknown[] = []): string => {
   return useMemo(() => {

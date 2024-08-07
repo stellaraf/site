@@ -1,9 +1,9 @@
 import { is } from "~/lib";
 import {
-  type BlogPostsQuery,
   type BlogPostsByTagsQuery,
-  type BlogPostsQueryVariables,
   type BlogPostsByTagsQueryVariables,
+  type BlogPostsQuery,
+  type BlogPostsQueryVariables,
   Stage,
 } from "~/types";
 

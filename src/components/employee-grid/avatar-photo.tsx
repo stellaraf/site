@@ -1,4 +1,4 @@
-import { chakra, Button, Text, useBreakpointValue } from "@chakra-ui/react";
+import { Button, Text, chakra, useBreakpointValue } from "@chakra-ui/react";
 
 import { ChakraNextImage } from "~/components/util/next-image";
 

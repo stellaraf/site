@@ -1,6 +1,6 @@
-import type { Asset as BaseAsset } from "./schema";
 import type { RichTextProps } from "@graphcms/rich-text-react-renderer";
-import type { RichTextContent, ElementNode } from "@graphcms/rich-text-types";
+import type { ElementNode, RichTextContent } from "@graphcms/rich-text-types";
+import type { Asset as BaseAsset } from "./schema";
 
 export type RichTextValue = {
   raw?: RichTextContent | null;

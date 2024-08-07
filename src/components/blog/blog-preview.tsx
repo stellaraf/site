@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 
-import { Flex, HStack, Button, Heading, Badge } from "@chakra-ui/react";
+import { Badge, Button, Flex, HStack, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { Card, CardBody } from "~/components";

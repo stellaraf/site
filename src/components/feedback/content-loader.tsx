@@ -1,4 +1,4 @@
-import { chakra, Flex, SkeletonText, Skeleton } from "@chakra-ui/react";
+import { Flex, Skeleton, SkeletonText, chakra } from "@chakra-ui/react";
 import { BoxProps } from "@chakra-ui/react";
 
 import { Content } from "~/components";

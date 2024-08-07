@@ -1,4 +1,4 @@
-import { useQuery, type QueryFunction, type QueryFunctionContext } from "@tanstack/react-query";
+import { type QueryFunction, type QueryFunctionContext, useQuery } from "@tanstack/react-query";
 import queryString from "query-string";
 
 import { useBrowserTimezone } from "~/hooks";

@@ -6,8 +6,8 @@ import { useTitleCase } from "use-title-case";
 import { DocsGroups, RichText } from "~/components";
 import { useScaledText } from "~/hooks";
 import { DocsLayout } from "~/layouts";
-import { pageQuery, commonStaticPropsQuery } from "~/queries";
-import { Stage, type PageProps } from "~/types";
+import { commonStaticPropsQuery, pageQuery } from "~/queries";
+import { type PageProps, Stage } from "~/types";
 
 import type { GetStaticProps, NextPage } from "next";
 

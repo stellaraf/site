@@ -1,4 +1,4 @@
-import { Box, Center, Grid, Image, Heading } from "@chakra-ui/react";
+import { Box, Center, Grid, Heading, Image } from "@chakra-ui/react";
 import { useInView } from "react-intersection-observer";
 import { useTitleCase } from "use-title-case";
 

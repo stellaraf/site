@@ -1,14 +1,14 @@
 import {
-  Box,
-  Flex,
   Alert,
-  useToast,
-  AlertIcon,
-  CloseButton,
   AlertDescription,
-  useBreakpointValue,
+  AlertIcon,
+  Box,
+  CloseButton,
+  Flex,
   type ToastProps,
   type UseToastOptions,
+  useBreakpointValue,
+  useToast,
 } from "@chakra-ui/react";
 
 import { RichText } from "~/components";

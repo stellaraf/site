@@ -1,8 +1,8 @@
-import { chakra, Box, isStyleProp, useColorModeValue } from "@chakra-ui/react";
+import { Box, chakra, isStyleProp, useColorModeValue } from "@chakra-ui/react";
 
 import { useOpposingColor } from "~/hooks";
 
-import { isElementIcon, isUrlIcon, type Color, type IconProps } from "./types";
+import { type Color, type IconProps, isElementIcon, isUrlIcon } from "./types";
 
 import type { ChakraProps } from "@chakra-ui/react";
 

@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 
-import { Box, Button, Heading, Divider, HStack, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, Divider, HStack, Heading, useColorModeValue } from "@chakra-ui/react";
 import { TitleCase } from "use-title-case";
 
 import { Card, CardBody, Icon, RichText } from "~/components";

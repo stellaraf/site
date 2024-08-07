@@ -1,5 +1,5 @@
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-import { getFilePlugin, type GetFilePlugin } from "@react-pdf-viewer/get-file";
+import { type GetFilePlugin, getFilePlugin } from "@react-pdf-viewer/get-file";
 
 import { useSlug } from "~/hooks";
 

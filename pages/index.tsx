@@ -6,10 +6,10 @@ import { StellarLogo } from "@stellaraf/logo";
 import { HomeSection, SEO, Screen, Testimonials } from "~/components";
 import { useConfig } from "~/context";
 import { useGradient, useNavLogo } from "~/hooks";
-import { homePageQuery, commonStaticPropsQuery } from "~/queries";
-import { Stage, type HomePageProps } from "~/types";
+import { commonStaticPropsQuery, homePageQuery } from "~/queries";
+import { type HomePageProps, Stage } from "~/types";
 
-import type { NextPage, GetStaticProps } from "next";
+import type { GetStaticProps, NextPage } from "next";
 
 // Separate component to limit unnecessary re-renders of the whole page on scroll.
 const Logo = () => {

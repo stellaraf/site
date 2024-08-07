@@ -1,4 +1,4 @@
-import type { SimpleGridProps, UseDisclosureReturn, BoxProps } from "@chakra-ui/react";
+import type { BoxProps, SimpleGridProps, UseDisclosureReturn } from "@chakra-ui/react";
 import type { Employees } from "~/queries";
 
 export interface EmployeeGridContext {

@@ -6,8 +6,8 @@ import { isValidJsonRequest } from "~/lib";
 
 import { parseUserAgent } from "./common";
 
-import type { SFDCCase } from "./types";
 import type { NextApiRequest } from "next";
+import type { SFDCCase } from "./types";
 
 const schema = z.object({
   firstName: z.string(),

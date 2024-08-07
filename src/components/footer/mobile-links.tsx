@@ -1,12 +1,12 @@
 import {
-  Box,
-  List,
-  ListItem,
   Accordion,
+  AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  AccordionButton,
+  Box,
+  List,
+  ListItem,
 } from "@chakra-ui/react";
 
 import { Link, Status } from "~/components";

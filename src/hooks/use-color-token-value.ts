@@ -1,4 +1,4 @@
-import { useToken, useColorModeValue } from "@chakra-ui/react";
+import { useColorModeValue, useToken } from "@chakra-ui/react";
 
 /**
  * Get a color token value based on color-mode.

@@ -2,7 +2,7 @@ import { chakra } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 import type { BoxProps } from "@chakra-ui/react";
-import type { CustomDomComponent, Transition, MotionProps } from "framer-motion";
+import type { CustomDomComponent, MotionProps, Transition } from "framer-motion";
 
 type MCComponent = Parameters<typeof chakra>[0];
 type MCOptions = Parameters<typeof chakra>[1];

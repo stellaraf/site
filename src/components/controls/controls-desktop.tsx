@@ -2,7 +2,7 @@ import { useCallback } from "react";
 
 import { Button, VStack, chakra, useColorMode, useColorModeValue } from "@chakra-ui/react";
 
-import { Sun, Moon, ChevronUp } from "~/icons";
+import { ChevronUp, Moon, Sun } from "~/icons";
 
 import type { BoxProps } from "@chakra-ui/react";
 

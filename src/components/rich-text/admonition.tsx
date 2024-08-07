@@ -1,4 +1,4 @@
-import { Box, Heading, chakra, HStack, useToken, useColorModeValue } from "@chakra-ui/react";
+import { Box, HStack, Heading, chakra, useColorModeValue, useToken } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { BlockQuoteStyleProvider, CodeBlockStyleProvider, RichText } from "~/components";

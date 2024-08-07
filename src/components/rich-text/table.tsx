@@ -2,15 +2,15 @@ import { createContext, useContext } from "react";
 
 import {
   Box,
-  TableContainer,
-  Th as ChakraTh,
-  Td as ChakraTd,
-  useMultiStyleConfig,
   Table as ChakraTable,
+  Td as ChakraTd,
+  Th as ChakraTh,
+  type SystemStyleObject,
+  type TableCellProps,
+  TableContainer,
   type TableProps,
   type ThemingProps,
-  type TableCellProps,
-  type SystemStyleObject,
+  useMultiStyleConfig,
 } from "@chakra-ui/react";
 
 import type { TdProps } from "./types";

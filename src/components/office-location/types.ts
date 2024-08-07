@@ -1,4 +1,4 @@
-import type { TableProps, StackProps, CardProps } from "@chakra-ui/react";
+import type { CardProps, StackProps, TableProps } from "@chakra-ui/react";
 import type { Holidays } from "~/lib/server";
 import type { OfficeLocationWithTimezone } from "~/queries";
 

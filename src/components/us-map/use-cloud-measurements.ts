@@ -6,8 +6,8 @@ import { atomWithReset, useResetAtom } from "jotai/utils";
 import { useCloudLocations } from "~/context";
 import { all } from "~/lib";
 
-import type { CloudMeasurement } from "./types";
 import type { CloudLocation } from "~/queries";
+import type { CloudMeasurement } from "./types";
 
 export type PartialMeasurement = Pick<CloudMeasurement, "identifier"> & Partial<CloudMeasurement>;
 

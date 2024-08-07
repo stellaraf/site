@@ -1,4 +1,4 @@
-import { type MergeWithAs, type ChakraProps } from "@chakra-ui/react";
+import { type ChakraProps, type MergeWithAs } from "@chakra-ui/react";
 
 export type IconProps = MergeWithAs<
   React.ComponentProps<"svg">,

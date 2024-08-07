@@ -1,4 +1,4 @@
-import { getToken, extendTheme } from "@chakra-ui/react";
+import { extendTheme, getToken } from "@chakra-ui/react";
 import { readableColorIsBlack } from "color2k";
 import { getProperty } from "dot-prop";
 

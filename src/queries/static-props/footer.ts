@@ -1,4 +1,4 @@
-import type { FooterGroupItem, FooterGroup } from "~/components";
+import type { FooterGroup, FooterGroupItem } from "~/components";
 import type { FooterGroups } from "~/queries";
 
 type Pages = ArrayElement<FooterGroups>["pages"];

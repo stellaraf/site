@@ -2,12 +2,12 @@ import { Box } from "@chakra-ui/react";
 
 import { ContentSection } from "~/components";
 import { FallbackLayout } from "~/layouts";
-import { pageQuery, commonStaticPropsQuery, pageStaticPathsQuery } from "~/queries";
-import { Stage, type PageProps } from "~/types";
+import { commonStaticPropsQuery, pageQuery, pageStaticPathsQuery } from "~/queries";
+import { type PageProps, Stage } from "~/types";
 
 import ErrorPage from "../_error";
 
-import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 type UrlQuery = {
   page: string;

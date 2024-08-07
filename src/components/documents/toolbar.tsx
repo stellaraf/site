@@ -1,22 +1,22 @@
 import {
-  IconButton,
-  ButtonGroup,
   Button,
-  HStack,
-  chakra,
-  type IconButtonProps,
-  type ButtonProps,
+  ButtonGroup,
   type ButtonGroupProps,
+  type ButtonProps,
+  HStack,
+  IconButton,
+  type IconButtonProps,
+  chakra,
 } from "@chakra-ui/react";
 import { type RenderCurrentPageLabelProps } from "@react-pdf-viewer/page-navigation";
 import { type ToolbarSlot } from "@react-pdf-viewer/toolbar";
 
 import {
-  ZoomIn as ZoomInIcon,
-  ZoomOut as ZoomOutIcon,
   CaretLeft,
   CaretRight,
   Download as DownloadIcon,
+  ZoomIn as ZoomInIcon,
+  ZoomOut as ZoomOutIcon,
 } from "~/icons";
 
 const disabledButtonProps: Partial<ButtonProps> = {

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { Flex, Center, Heading, IconButton, Grid } from "@chakra-ui/react";
+import { Center, Flex, Grid, Heading, IconButton } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { GenericForm, RichText } from "~/components";

@@ -1,4 +1,4 @@
-import { Button, Link, type ButtonProps, type LinkProps } from "~/components";
+import { Button, type ButtonProps, Link, type LinkProps } from "~/components";
 import { useConfig } from "~/context";
 
 import { Dot } from "./dot";

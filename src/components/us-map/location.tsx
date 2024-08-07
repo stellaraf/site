@@ -1,22 +1,22 @@
 import { useMemo } from "react";
 
 import {
-  Tag,
   Flex,
   HStack,
-  Portal,
   Popover,
   PopoverBody,
-  PopoverHeader,
-  type TagProps,
   PopoverContent,
+  PopoverHeader,
+  Portal,
+  Tag,
+  type TagProps,
   useColorModeValue,
 } from "@chakra-ui/react";
 
 import { MapMarker } from "./map-marker";
 import { useBestMeasurement } from "./use-cloud-measurements";
 
-import type { LocationProps, LatencyProps } from "./types";
+import type { LatencyProps, LocationProps } from "./types";
 
 const Latency = (props: LatencyProps) => {
   const colorScheme = useColorModeValue("secondary", "tertiary");

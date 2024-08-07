@@ -2,7 +2,7 @@ import { Center, VStack, useColorModeValue } from "@chakra-ui/react";
 
 import { AnimatedDiv } from "~/components";
 import { useConfig } from "~/context";
-import { useOpposingColor, useGlow, useRandomElement, useSSR } from "~/hooks";
+import { useGlow, useOpposingColor, useRandomElement, useSSR } from "~/hooks";
 
 import { Testimonial } from "./testimonial";
 

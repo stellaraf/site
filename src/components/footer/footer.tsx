@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-import { Box, HStack, VStack, type StackProps } from "@chakra-ui/react";
+import { Box, HStack, type StackProps, VStack } from "@chakra-ui/react";
 
 import { Copyright } from "./copyright";
 import { DesktopLinks } from "./desktop-links";

@@ -1,4 +1,4 @@
-import { allForYear, Holiday as BaseHoliday } from "@18f/us-federal-holidays";
+import { Holiday as BaseHoliday, allForYear } from "@18f/us-federal-holidays";
 import dayjs from "dayjs";
 import advFmt from "dayjs/plugin/advancedFormat";
 import isBetween from "dayjs/plugin/isBetween";

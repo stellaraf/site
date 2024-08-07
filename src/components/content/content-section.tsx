@@ -1,6 +1,6 @@
 import { forwardRef, useMemo } from "react";
 
-import { Box, Flex, VStack, Heading, VisuallyHidden } from "@chakra-ui/react";
+import { Box, Flex, Heading, VStack, VisuallyHidden } from "@chakra-ui/react";
 
 import { Button, Divider, RichText } from "~/components";
 import { useMobile } from "~/hooks";
@@ -15,8 +15,8 @@ import { ContentSubtitle } from "./content-subtitle";
 import { ContentTitle } from "./content-title";
 import { ContentUpdatedAt } from "./content-updated-at";
 
-import type { ContentSectionProps, ContentSides, ContentSide, TitleLayoutProps } from "./types";
 import type { FlexProps } from "@chakra-ui/react";
+import type { ContentSectionProps, ContentSide, ContentSides, TitleLayoutProps } from "./types";
 
 const TitleLayout = (props: TitleLayoutProps) => {
   const { titleBlock, image, side, isMobile } = props;

@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 
-import { Avatar, chakra, VStack, HStack } from "@chakra-ui/react";
+import { Avatar, HStack, VStack, chakra } from "@chakra-ui/react";
 import queryString from "query-string";
 
 import type { BlogPost } from "~/queries";

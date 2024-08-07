@@ -6,8 +6,8 @@ import { isValidJsonRequest } from "~/lib";
 
 import { parseUserAgent } from "./common";
 
-import type { SFDCLead } from "./types";
 import type { NextApiRequest } from "next";
+import type { SFDCLead } from "./types";
 
 const schema = z.object({
   firstName: z.string(),

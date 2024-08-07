@@ -1,4 +1,4 @@
-import { chakra, useColorModeValue, type ChakraProps } from "@chakra-ui/react";
+import { type ChakraProps, chakra, useColorModeValue } from "@chakra-ui/react";
 
 interface DotProps extends Omit<ChakraProps, "size"> {
   status: boolean;

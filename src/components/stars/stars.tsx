@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { chakra } from "@chakra-ui/react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";

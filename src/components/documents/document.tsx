@@ -1,7 +1,7 @@
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
-import { Box, useColorMode, type SystemCSSProperties } from "@chakra-ui/react";
+import { Box, type SystemCSSProperties, useColorMode } from "@chakra-ui/react";
 import { Viewer } from "@react-pdf-viewer/core";
 
 import { usePlugins } from "./plugins";

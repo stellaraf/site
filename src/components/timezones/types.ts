@@ -1,4 +1,4 @@
-import type { TableProps, TableCellProps } from "@chakra-ui/react";
+import type { TableCellProps, TableProps } from "@chakra-ui/react";
 import type { Dayjs } from "dayjs";
 import type { LocationTime } from "~/lib/server";
 

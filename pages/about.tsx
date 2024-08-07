@@ -2,17 +2,17 @@ import { Box, type BoxProps, Flex, Heading } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import {
-  EmployeeGrid,
-  Hero,
   Callout,
-  Testimonials,
-  OfficeLocations,
   ContentSection,
   Divider,
+  EmployeeGrid,
+  Hero,
+  OfficeLocations,
+  Testimonials,
 } from "~/components";
-import { getLocationTime, getHolidays } from "~/lib/server";
-import { pageQuery, employeesQuery, commonStaticPropsQuery, officeLocationsQuery } from "~/queries";
-import { Stage, type AboutPageProps } from "~/types";
+import { getHolidays, getLocationTime } from "~/lib/server";
+import { commonStaticPropsQuery, employeesQuery, officeLocationsQuery, pageQuery } from "~/queries";
+import { type AboutPageProps, Stage } from "~/types";
 
 import type { GetStaticProps, NextPage } from "next";
 

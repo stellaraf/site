@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 
 import { useColorMode } from "@chakra-ui/react";
 import { StellarLogo } from "@stellaraf/logo";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { Link } from "~/components";
 

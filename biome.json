@@ -20,10 +20,28 @@
       "**/*.lock",
       "**/src/types/schema.ts",
       "**/.vercel/**/*",
-      "**/public/**/*"
+      "**/public/**/*",
+      "**/.vscode/**"
     ]
   },
-  "organizeImports": { "enabled": true },
+  "organizeImports": {
+    "enabled": true,
+    "ignore": [
+      "**/node_modules/**/*",
+      "**/dist/**/*",
+      "**/.next/**/*",
+      "**/CHANGELOG.md",
+      "**/*.yml",
+      "**/*.yaml",
+      "**/*-lock.yaml",
+      "**/*-lock.json",
+      "**/*.lock",
+      "**/src/types/schema.ts",
+      "**/.vercel/**/*",
+      "**/public/**/*",
+      "**/.vscode/**"
+    ]
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -116,7 +134,8 @@
       "**/*.lock",
       "**/.next/**/*",
       "**/.vercel/**/*",
-      "**/public/**/*"
+      "**/public/**/*",
+      "**/.vscode/**"
     ]
   },
   "javascript": {

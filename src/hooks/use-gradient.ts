@@ -1,4 +1,4 @@
-import { useToken, useColorModeValue } from "@chakra-ui/react";
+import { useColorModeValue, useToken } from "@chakra-ui/react";
 import { parseToRgba } from "color2k";
 
 import type { BoxProps } from "@chakra-ui/react";

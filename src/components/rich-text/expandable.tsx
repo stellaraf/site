@@ -1,11 +1,11 @@
 import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
   useToken,
-  Accordion,
-  AccordionItem,
-  AccordionIcon,
-  AccordionPanel,
-  AccordionButton,
 } from "@chakra-ui/react";
 
 export const Expandable = (props: React.PropsWithChildren) => {

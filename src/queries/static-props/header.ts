@@ -1,7 +1,7 @@
 import { is } from "~/lib";
 
-import type { HeaderGroups } from "../";
 import type { MenuProps, MenuSection } from "~/components";
+import type { HeaderGroups } from "../";
 
 export function buildHeaders(headerGroups: HeaderGroups): MenuProps[] {
   return headerGroups.reduce<MenuProps[]>((final, group) => {

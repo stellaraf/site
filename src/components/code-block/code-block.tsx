@@ -1,13 +1,13 @@
 import {
   Box,
-  useClipboard,
   IconButton,
-  useStyleConfig,
   useBreakpointValue,
+  useClipboard,
   useColorModeValue,
+  useStyleConfig,
 } from "@chakra-ui/react";
 
-import { Copy, Check } from "~/icons";
+import { Check, Copy } from "~/icons";
 import { getTextValueFromReactNode, publicProps } from "~/lib";
 
 import { useCodeBlockStyle } from "./use-code-block-style";

@@ -2,9 +2,9 @@ import { UAParser } from "ua-parser-js";
 
 import { all, is } from "~/lib";
 
-import type { UserData } from "./types";
 import type { IncomingHttpHeaders } from "http";
 import type { NextApiRequest } from "next";
+import type { UserData } from "./types";
 
 export function parseUserAgent(request: NextApiRequest): UserData {
   const userAgent = request.headers["user-agent"];

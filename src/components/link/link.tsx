@@ -9,8 +9,8 @@ import { useLinkType } from "~/hooks";
 import { ExternalLink as ExternalLinkIcon } from "~/icons";
 import { shouldForwardProp } from "~/theme";
 
-import type { LinkProps } from "./types";
 import type { BoxProps } from "@chakra-ui/react";
+import type { LinkProps } from "./types";
 
 const BaseLink = chakra("a", {
   shouldForwardProp,

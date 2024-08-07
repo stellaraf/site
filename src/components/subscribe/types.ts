@@ -1,5 +1,5 @@
 import type { InputProps } from "@chakra-ui/react";
-import type { FormState, ControllerFieldState, FieldValues } from "react-hook-form";
+import type { ControllerFieldState, FieldValues, FormState } from "react-hook-form";
 
 export interface SubscribeFieldProps
   extends Omit<InputProps, "name" | "title">,

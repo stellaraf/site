@@ -1,10 +1,10 @@
 import {
   Box,
-  useStyleConfig,
   Code as ChakraCode,
-  useColorModeValue,
-  type TextProps,
   type CodeProps,
+  type TextProps,
+  useColorModeValue,
+  useStyleConfig,
 } from "@chakra-ui/react";
 
 import { useCodeBlockStyle } from "~/components";

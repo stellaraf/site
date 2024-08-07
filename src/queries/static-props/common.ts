@@ -1,16 +1,16 @@
 import { originFromEnv } from "~/lib";
 
-import { buildFooter } from "./footer";
-import { buildHeaders } from "./header";
 import {
+  actionsQuery,
   configQuery,
-  themeQuery,
   docsGroupsQuery,
   footerGroupsQuery,
   headerGroupsQuery,
-  actionsQuery,
+  themeQuery,
   twitterHandleQuery,
 } from "../";
+import { buildFooter } from "./footer";
+import { buildHeaders } from "./header";
 
 import type { CommonPageProps, Stage } from "~/types";
 

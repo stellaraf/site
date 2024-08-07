@@ -1,6 +1,6 @@
-import { Box, Flex, VStack, Heading, Divider } from "@chakra-ui/react";
+import { Box, Divider, Flex, Heading, VStack } from "@chakra-ui/react";
 
-import { RichText, ChakraNextImage } from "~/components";
+import { ChakraNextImage, RichText } from "~/components";
 
 import { Quote } from "./quote";
 

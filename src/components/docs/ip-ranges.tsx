@@ -1,4 +1,4 @@
-import { Button, Box, Heading, SimpleGrid, Skeleton, Wrap, WrapItem } from "@chakra-ui/react";
+import { Box, Button, Heading, SimpleGrid, Skeleton, Wrap, WrapItem } from "@chakra-ui/react";
 
 import { CodeBlock, ErrorAlert } from "~/components";
 

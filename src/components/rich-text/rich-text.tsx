@@ -1,17 +1,17 @@
 import { RichText as HygraphRichText } from "@graphcms/rich-text-react-renderer";
 
-import { Link, CodeBlock, BlockQuote } from "~/components";
+import { BlockQuote, CodeBlock, Link } from "~/components";
 import { is } from "~/lib";
 
+import { Document, DocumentGrid } from "../documents";
 import { Admonition } from "./admonition";
 import { ImageAsset, VideoAsset } from "./asset";
 import { ContentButton } from "./content-button";
 import { Expandable } from "./expandable";
 import { H1, H2, H3, H4, H5, H6 } from "./headings";
-import { Ul, Ol, Li } from "./lists";
+import { Li, Ol, Ul } from "./lists";
 import { Table, Td, Th } from "./table";
 import { Code, P } from "./text";
-import { Document, DocumentGrid } from "../documents";
 
 import type { NodeRendererType } from "@graphcms/rich-text-react-renderer";
 import type { RichTextValue } from "~/types";

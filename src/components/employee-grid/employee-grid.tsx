@@ -6,8 +6,8 @@ import { Detail } from "./avatar-detail";
 import { Photo } from "./avatar-photo";
 import { useEmployeeQuery } from "./state";
 
-import type { EmployeeGridProps, EmployeeGridContext } from "./types";
 import type { SimpleGridProps } from "@chakra-ui/react";
+import type { EmployeeGridContext, EmployeeGridProps } from "./types";
 
 const AvatarContext = createContext<EmployeeGridContext>({} as EmployeeGridContext);
 export const useAvatar = (): EmployeeGridContext => useContext(AvatarContext);

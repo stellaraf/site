@@ -1,4 +1,4 @@
-import { Box, List, ListItem, Text, SimpleGrid, useToken } from "@chakra-ui/react";
+import { Box, List, ListItem, SimpleGrid, Text, useToken } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { Link, Status } from "~/components";

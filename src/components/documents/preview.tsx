@@ -1,8 +1,8 @@
-import { Box, Tag, Wrap, chakra, useDisclosure, WrapItem, type BoxProps } from "@chakra-ui/react";
-import { Viewer, type Plugin, type RenderViewer } from "@react-pdf-viewer/core";
+import { Box, type BoxProps, Tag, Wrap, WrapItem, chakra, useDisclosure } from "@chakra-ui/react";
+import { type Plugin, type RenderViewer, Viewer } from "@react-pdf-viewer/core";
 import { thumbnailPlugin } from "@react-pdf-viewer/thumbnail";
 
-import { Modal, Backdrop } from "~/components";
+import { Backdrop, Modal } from "~/components";
 
 import { Document } from "./document";
 

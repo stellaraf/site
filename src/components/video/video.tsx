@@ -6,8 +6,8 @@ import { chakra } from "@chakra-ui/react";
 
 import "plyr-react/plyr.css";
 
-import type { VideoProps } from "./types";
 import type { PlyrOptions, PlyrSource } from "plyr-react";
+import type { VideoProps } from "./types";
 
 const Plyr = dynamic(() => import("plyr-react"), { ssr: false });
 

@@ -2,8 +2,8 @@ import { forwardRef } from "react";
 
 import { VStack } from "@chakra-ui/react";
 
-import type { FormCardBodyProps } from "./types";
 import type { StackProps } from "@chakra-ui/react";
+import type { FormCardBodyProps } from "./types";
 
 export const FormCardBody = (props: FormCardBodyProps) => {
   const { spacing = 8, ...rest } = props;

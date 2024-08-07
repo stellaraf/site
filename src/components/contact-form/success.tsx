@@ -1,4 +1,4 @@
-import { VStack, Heading } from "@chakra-ui/react";
+import { Heading, VStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 import { CircleCheck } from "~/icons";

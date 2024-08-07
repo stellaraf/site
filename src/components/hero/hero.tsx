@@ -1,4 +1,4 @@
-import { chakra, Flex, Heading } from "@chakra-ui/react";
+import { Flex, Heading, chakra } from "@chakra-ui/react";
 import { useTitleCase } from "use-title-case";
 
 import { RichText } from "~/components";
