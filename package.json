@@ -61,10 +61,10 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --ext .ts --ext .tsx --ext .js --ext .jsx",
-    "lint:fix": "eslint . --fix --ext .ts --ext .tsx --ext .js --ext .jsx",
-    "format": "prettier --log-level warn -c .",
-    "format:fix": "prettier --log-level warn -w .",
+    "lint": "biome lint --error-on-warnings",
+    "lint:fix": "biome lint --write",
+    "format": "biome format .",
+    "format:fix": "biome format --write .",
     "analyze": "ANALYZE=true next build",
     "analyze:server": "BUNDLE_ANALYZE=server next build",
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
@@ -73,18 +73,11 @@
     "test": "vitest run"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.3",
     "@chakra-ui/react-utils": "^2.0.11",
     "@chakra-ui/styled-system": "^2.9.1",
     "@chakra-ui/theme": "^3.2.0",

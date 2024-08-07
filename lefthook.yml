@@ -3,10 +3,10 @@ pre-commit:
   commands:
     prettier:
       glob: '*.{js,jsx,ts,tsx,yml,yaml,json,md,mjs}'
-      run: 'pnpm exec prettier --loglevel warn -c {staged_files}'
+      run: 'pnpm run format {staged_files}'
     eslint:
       glob: '*.{js,jsx,ts,tsx}'
-      run: 'pnpm exec eslint {staged_files}'
+      run: 'pnpm run lint {staged_files}'
     typescript:
       glob: '*.{ts,tsx}'
-      run: 'pnpm exec tsc --noEmit'
+      run: 'pnpm run typecheck'
