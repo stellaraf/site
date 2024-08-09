@@ -1,25 +1,52 @@
 import * as ReactSelect from "react-select";
 
-import type { ChakraProps } from "@chakra-ui/react";
+import type {
+  AsyncProps,
+  GroupBase as ChakraGroupBase,
+  OptionsOrGroups as ChakraOptionsOrGroups,
+  MultiValue,
+  Props,
+} from "chakra-react-select";
 import type { StylesConfig } from "react-select";
 import type { ColorNames } from "~/theme";
 import type { SelectOptionSingle } from "~/types";
-
-type ReactSelectExcluded = KeysOf<ReactSelect.Props, "onChange" | "components" | "styles">;
 
 export type SelectOnChange<
   Opt extends SelectOptionSingle = SelectOptionSingle,
   IsMulti extends boolean = boolean,
 > = NonNullable<PropOf<ReactSelect.Props<Opt, IsMulti>, "onChange">>;
 
+// export interface SelectProps<Opt extends SelectOptionSingle, IsMulti extends boolean = boolean>
+//   extends Omit<ReactSelect.Props<Opt, IsMulti>, ReactSelectExcluded>,
+//     ChakraProps {
+//   name: string;
+//   isMulti?: IsMulti;
+//   isError?: boolean;
+//   required?: boolean;
+//   onSelect?: (s: ReactSelect.MultiValue<Opt>) => void;
+//   colorScheme?: ColorNames;
+// }
+
 export interface SelectProps<Opt extends SelectOptionSingle, IsMulti extends boolean = boolean>
-  extends Omit<ReactSelect.Props<Opt, IsMulti>, ReactSelectExcluded>,
-    ChakraProps {
+  extends Props<Opt, IsMulti> {
+  name: string;
+  isMulti?: IsMulti;
+  isError?: boolean;
+  creatable?: boolean;
+  required?: boolean;
+  onSelect?: (s: MultiValue<Opt>) => void;
+  colorScheme?: ColorNames;
+}
+
+export interface SelectDynamicProps<
+  Opt extends SelectOptionSingle,
+  IsMulti extends boolean = boolean,
+> extends Omit<AsyncProps<Opt, IsMulti, ChakraGroupBase<Opt>>, "options"> {
+  options: (search: string) => Promise<ChakraOptionsOrGroups<Opt, ChakraGroupBase<Opt>>>;
   name: string;
   isMulti?: IsMulti;
   isError?: boolean;
   required?: boolean;
-  onSelect?: (s: ReactSelect.MultiValue<Opt>) => void;
   colorScheme?: ColorNames;
 }
 

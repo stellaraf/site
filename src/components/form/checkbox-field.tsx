@@ -10,10 +10,10 @@ import {
 } from "@chakra-ui/react";
 import { type FieldValues, useController, useFormContext } from "react-hook-form";
 
-import type { CheckboxGroupProps, FormFieldProps } from "./types";
+import type { CheckboxGroupProps, CheckboxProps } from "./types";
 
 export const CheckboxField = <V extends FieldValues>(
-  props: FormFieldProps<CheckboxGroupProps, V>,
+  props: CheckboxProps<CheckboxGroupProps, V>,
 ) => {
   const {
     opts,

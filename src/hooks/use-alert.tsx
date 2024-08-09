@@ -39,8 +39,18 @@ export function useAlert(options: UseAlertOptions = {}): UseAlertReturn {
       message = "Something went wrong",
       position = options.position ?? defaultPosition ?? "bottom",
       onClose: customOnClose = options.onClose,
-      duration = options.duration ?? 5000,
     } = opts;
+
+    let duration: number | null | undefined = opts.duration;
+
+    if (typeof duration === "undefined") {
+      if (status === "error") {
+        duration = null;
+      } else {
+        duration = 5_000;
+      }
+    }
+
     toast({
       status,
       duration,
@@ -86,7 +96,7 @@ export function useAlert(options: UseAlertOptions = {}): UseAlertReturn {
                 >
                   {message}
                   {status === "error" && (
-                    <Box mt={4}>
+                    <Box mt={4} color="inherit">
                       <RichText content={errorMessage.body} />
                     </Box>
                   )}

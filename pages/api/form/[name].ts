@@ -1,4 +1,10 @@
-import { handleSalesForm, handleSubscribe, handleSupportForm, handleTrialForm } from "~/lib/api";
+import {
+  handlePartnershipForm,
+  handleSalesForm,
+  handleSubscribe,
+  handleSupportForm,
+  handleTrialForm,
+} from "~/lib/api";
 
 import type { NextApiHandler, NextApiRequest } from "next";
 
@@ -11,6 +17,7 @@ const FORM_MAP = new Map<FormKeys | string, FormHandler>([
   ["subscribe", handleSubscribe],
   ["security-demo", handleSalesForm],
   ["trial", handleTrialForm],
+  ["partnership-inquiry", handlePartnershipForm],
 ]);
 
 function isValidForm(form: unknown): form is FormKeys {

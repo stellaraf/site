@@ -5,9 +5,9 @@ import { is } from "~/lib";
 
 import type { InputProps } from "@chakra-ui/react";
 import type { FieldValues } from "react-hook-form";
-import type { FormFieldProps } from "./types";
+import type { TextInputProps } from "./types";
 
-export const TextInput = <V extends FieldValues>(props: FormFieldProps<InputProps, V>) => {
+export const TextInput = <V extends FieldValues>(props: TextInputProps<InputProps, V>) => {
   const { field, name, defaultValue, rules = {}, isRequired = false, ...rest } = props;
 
   const { register } = useFormContext<V>();

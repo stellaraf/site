@@ -5,9 +5,9 @@ import { is } from "~/lib";
 
 import type { TextareaProps } from "@chakra-ui/react";
 import type { FieldValues } from "react-hook-form";
-import type { FormFieldProps } from "./types";
+import type { TextAreaProps } from "./types";
 
-export const TextArea = <V extends FieldValues>(props: FormFieldProps<TextareaProps, V>) => {
+export const TextArea = <V extends FieldValues>(props: TextAreaProps<TextareaProps, V>) => {
   const { name, field, defaultValue, rules = {}, isRequired = false, ...rest } = props;
 
   const { register } = useFormContext<V>();

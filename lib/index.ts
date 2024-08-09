@@ -5,3 +5,4 @@ export * from "./hygraph";
 export * from "./next";
 export * from "./type-guards";
 export * from "./type-manipulation";
+export * from "./address-types";

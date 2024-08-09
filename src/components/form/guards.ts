@@ -1,8 +1,10 @@
 import { is } from "~/lib";
 
 import type {
+  AddressSearchField,
   CheckboxField,
   FormButton,
+  FormGroup,
   SelectField,
   TextAreaField,
   TextInputField,
@@ -31,4 +33,14 @@ export function isTextInputField(field: unknown): field is TextInputField {
 export function isFormButton(field: unknown): field is FormButton {
   if (!is(field)) return false;
   return (field as Record<string, unknown>).__typename === "FormButton";
+}
+
+export function isAddressSearchField(field: unknown): field is AddressSearchField {
+  if (!is(field)) return false;
+  return (field as Record<string, unknown>).__typename === "AddressSearchField";
+}
+
+export function isFormGroup(field: unknown): field is FormGroup {
+  if (!is(field)) return false;
+  return (field as Record<string, unknown>).__typename === "FormGroup";
 }

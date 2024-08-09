@@ -1,17 +1,25 @@
 import { chakra } from "@chakra-ui/react";
-import { components } from "react-select";
-
-import type { GroupBase, OptionProps } from "react-select";
+import { GroupBase, OptionProps, chakraComponents } from "chakra-react-select";
 import type { SelectOptionSingle } from "~/types";
 
 export const Option = <Opt extends SelectOptionSingle, IsMulti extends boolean>(
   props: OptionProps<Opt, IsMulti>,
 ): JSX.Element => {
-  const { label } = props;
+  const {
+    label,
+    data: { description },
+  } = props;
 
   return (
-    <components.Option<Opt, IsMulti, GroupBase<Opt>> {...props}>
-      <chakra.span display={{ base: "block", lg: "inline" }}>{label}</chakra.span>
-    </components.Option>
+    <chakraComponents.Option<Opt, IsMulti, GroupBase<Opt>> {...props}>
+      <chakra.div>
+        {label}
+        {description && (
+          <chakra.span display="block" fontSize="sm" opacity={0.7}>
+            {description}
+          </chakra.span>
+        )}
+      </chakra.div>
+    </chakraComponents.Option>
   );
 };

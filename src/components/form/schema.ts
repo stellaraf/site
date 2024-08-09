@@ -12,7 +12,13 @@ import {
 import { is } from "~/lib";
 import { TextInputValidationType } from "~/types";
 
-import { isCheckboxField, isSelectField, isTextAreaField, isTextInputField } from "./guards";
+import {
+  isAddressSearchField,
+  isCheckboxField,
+  isSelectField,
+  isTextAreaField,
+  isTextInputField,
+} from "./guards";
 
 import type { FormField } from "./types";
 
@@ -33,7 +39,10 @@ function createEmailString(field: BaseFormField): ZodString {
 function createPhoneNumberString(field: BaseFormField): ZodEffects<ZodString, string, string> {
   return z
     .string()
-    .refine(v => validatePhoneNumber(v, field.required), `${field.displayName} is invalid`);
+    .refine(
+      v => validatePhoneNumber(v, field?.required ?? false),
+      `${field.displayName} is invalid`,
+    );
 }
 
 function validatePhoneNumber(value: string, required: boolean) {
@@ -59,6 +68,10 @@ export function createSchema<Fields extends BaseFormField[]>(
       }
 
       // Add field to schema
+      is(value) && (final[fieldConfig.formId] = value);
+      return final;
+    } else if (isAddressSearchField(fieldConfig)) {
+      value = fieldConfig.required ? createRequiredString(fieldConfig) : z.string();
       is(value) && (final[fieldConfig.formId] = value);
       return final;
     }

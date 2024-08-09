@@ -5,24 +5,43 @@ import { useController, useFormContext } from "react-hook-form";
 
 import { Select } from "~/components";
 
+import type { GroupBase, OptionsOrGroups } from "chakra-react-select";
 import type { SelectOptionSingle } from "~/types";
 import type { SelectFieldProps } from "./types";
 
-function selectMultiple(options: SelectOptionSingle[], value: string[]): SelectOptionSingle[] {
+function selectMultiple(
+  options: OptionsOrGroups<SelectOptionSingle, GroupBase<SelectOptionSingle>> | undefined,
+  value: string[],
+  creatable: boolean,
+): SelectOptionSingle[] {
   return value.reduce<SelectOptionSingle[]>((matching, each) => {
-    for (const option of options) {
-      if (option.value === each) {
-        matching.push(option);
+    if (Array.isArray(options)) {
+      if (creatable) {
+        matching.push({ value: value[0], label: value[0] });
+      }
+      for (const option of options) {
+        if (option.value === each) {
+          matching.push(option);
+        }
       }
     }
     return matching;
   }, []);
 }
 
-function selectSingle(options: SelectOptionSingle[], value: string): SelectOptionSingle | null {
-  for (const option of options) {
-    if (option.value === value) {
-      return option;
+function selectSingle(
+  options: OptionsOrGroups<SelectOptionSingle, GroupBase<SelectOptionSingle>> | undefined,
+  value: string,
+  creatable: boolean,
+): SelectOptionSingle | null {
+  if (Array.isArray(options)) {
+    if (creatable) {
+      return { value, label: value };
+    }
+    for (const option of options) {
+      if (option.value === value) {
+        return option;
+      }
     }
   }
   return null;
@@ -30,11 +49,12 @@ function selectSingle(options: SelectOptionSingle[], value: string): SelectOptio
 
 export const SelectField = (props: SelectFieldProps) => {
   const {
-    opts,
+    options,
     name,
     field,
     isMulti = false,
     required = false,
+    creatable = false,
     defaultValue = [],
     ...rest
   } = props;
@@ -66,13 +86,18 @@ export const SelectField = (props: SelectFieldProps) => {
       <Select
         ref={ref}
         name={name}
-        options={opts}
+        options={options}
         onBlur={onBlur}
         isMulti={isMulti}
         required={required}
         onSelect={handleSelect}
         defaultValue={defaultValue}
-        value={isMulti ? selectMultiple(opts, value) : selectSingle(opts, value)}
+        creatable={creatable}
+        value={
+          isMulti
+            ? selectMultiple(options, value, creatable)
+            : selectSingle(options, value, creatable)
+        }
         {...rest}
       />
 

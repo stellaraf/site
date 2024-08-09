@@ -1,3 +1,4 @@
+export * from "./use-address-search";
 export * from "./use-address";
 export * from "./use-alert";
 export * from "./use-color-token-value";

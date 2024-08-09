@@ -30,7 +30,6 @@ declare module "*.gql" {
 }
 
 declare namespace NodeJS {
-  // eslint-disable-next-line import/no-unused-modules
   export interface ProcessEnv {
     CPM_API_KEY: string;
     CPM_LIST_ID: string;
@@ -40,5 +39,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_GMAPS_KEY: string;
     BETTER_UPTIME_TOKEN: string;
     HYGRAPH_DRAFT_TOKEN: string;
+    MAPBOX_TOKEN: string;
   }
 }

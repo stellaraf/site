@@ -33,7 +33,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
     colorScheme: ctx.codeBlock.colorScheme,
   });
 
-  const containerStyle = publicProps(code, "bg", "color");
+  const containerStyle = publicProps(code, "bg");
 
   const btnSx = useStyleConfig("Button", {
     colorScheme: ctx.copyButton.colorScheme,
@@ -65,7 +65,7 @@ export const CodeBlock = (props: CodeBlockProps) => {
         whiteSpace="pre-wrap"
         minHeight={btnSx.h as number}
         css={{
-          "& > code": { background: "unset", color: "unset", padding: 0 },
+          "& > code,pre": { background: "unset", color: "unset", padding: 0 },
         }}
       >
         {children}

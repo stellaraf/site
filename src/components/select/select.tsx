@@ -1,30 +1,20 @@
+import {
+  Select as ChakraReactSelect,
+  CreatableSelect,
+  type MultiValue,
+  type OnChangeValue,
+  Props as ReactSelectProps,
+  type SelectInstance,
+  type SelectOptionActionMeta,
+} from "chakra-react-select";
 import { createContext, forwardRef, useContext } from "react";
 
-import { useColorMode, useDisclosure } from "@chakra-ui/react";
-import ReactSelect from "react-select";
+import { useDisclosure } from "@chakra-ui/react";
 
 import { Option } from "./option";
-import {
-  useControlStyle,
-  useIndicatorSeparatorStyle,
-  useMenuListStyle,
-  useMenuPortal,
-  useMenuStyle,
-  useMultiValueLabelStyle,
-  useMultiValueRemoveStyle,
-  useMultiValueStyle,
-  useOptionStyle,
-  usePlaceholderStyle,
-  useRSTheme,
-} from "./styles";
+
 import { isSingleValue } from "./types";
 
-import type {
-  MultiValue,
-  OnChangeValue,
-  Props as ReactSelectProps,
-  SelectInstance,
-} from "react-select";
 import type { SelectOptionSingle } from "~/types";
 import type { SelectContextProps, SelectProps } from "./types";
 
@@ -36,11 +26,17 @@ export const Select = forwardRef(
     props: SelectProps<Opt, IsMulti>,
     ref: React.Ref<SelectInstance<Opt, IsMulti>>,
   ): JSX.Element => {
-    const { options, isMulti, onSelect, isError = false, colorScheme = "gray", ...rest } = props;
+    const {
+      options,
+      isMulti,
+      onSelect,
+      isError = false,
+      colorScheme = "gray",
+      creatable = false,
+      ...rest
+    } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-
-    const { colorMode } = useColorMode();
 
     const defaultOnChange: ReactSelectProps<Opt, IsMulti>["onChange"] = changed => {
       if (changed === null) {
@@ -54,56 +50,42 @@ export const Select = forwardRef(
       }
     };
 
-    const menu = useMenuStyle<Opt, IsMulti>({ colorMode, colorScheme });
-    const menuList = useMenuListStyle<Opt, IsMulti>({ colorMode, colorScheme });
-    const control = useControlStyle<Opt, IsMulti>({ colorMode, colorScheme });
-    const option = useOptionStyle<Opt, IsMulti>({ colorMode, colorScheme });
-    const multiValue = useMultiValueStyle<Opt, IsMulti>({
-      colorMode,
-      colorScheme,
-    });
-    const multiValueLabel = useMultiValueLabelStyle<Opt, IsMulti>({
-      colorMode,
-      colorScheme,
-    });
-    const multiValueRemove = useMultiValueRemoveStyle<Opt, IsMulti>({
-      colorMode,
-      colorScheme,
-    });
-    const menuPortal = useMenuPortal<Opt, IsMulti>();
-    const placeholder = usePlaceholderStyle<Opt, IsMulti>({
-      colorMode,
-      colorScheme,
-    });
-    const indicatorSeparator = useIndicatorSeparatorStyle<Opt, IsMulti>({
-      colorMode,
-      colorScheme,
-    });
-    const rsTheme = useRSTheme();
+    const Component = creatable ? CreatableSelect : ChakraReactSelect;
 
     return (
       <SelectContext.Provider value={{ isOpen, isError }}>
-        <ReactSelect<Opt, IsMulti>
+        <Component<Opt, IsMulti>
           onChange={defaultOnChange}
           onMenuClose={onClose}
           onMenuOpen={onOpen}
           isClearable={true}
+          useBasicStyles
+          formatCreateLabel={value => `Add "${value}"`}
           options={options}
+          colorScheme={colorScheme}
+          onCreateOption={value => {
+            defaultOnChange(
+              { value, label: value } as OnChangeValue<Opt, IsMulti>,
+              { action: "select-option" } as SelectOptionActionMeta<Opt>,
+            );
+          }}
           isMulti={isMulti}
-          theme={rsTheme}
+          menuPortalTarget={typeof document !== "undefined" ? document.body : undefined}
           components={{ Option }}
           ref={ref}
+          selectedOptionColorScheme={colorScheme}
           styles={{
-            menu,
-            option,
-            control,
-            menuList,
-            menuPortal,
-            multiValue,
-            placeholder,
-            multiValueLabel,
-            multiValueRemove,
-            indicatorSeparator,
+            menuPortal: provided => ({ ...provided, zIndex: 100 }),
+          }}
+          chakraStyles={{
+            placeholder: provided => ({
+              ...provided,
+              _dark: {
+                opacity: 0.3,
+              },
+              color: "inherit",
+              opacity: 0.6,
+            }),
           }}
           {...rest}
         />

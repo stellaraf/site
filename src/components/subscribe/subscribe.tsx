@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useTitleCase } from "use-title-case";
 import { z } from "zod";
 
-import { CodeBlock, RichText, createSchema } from "~/components";
+import { CodeBlock, RichText, createSchema, isTextInputField } from "~/components";
 import { useConfig } from "~/context";
 import { useAlert } from "~/hooks";
 import { is, messageFromResponseOrError, submitForm } from "~/lib";
@@ -20,6 +20,10 @@ export const Subscribe = (props: StackProps) => {
 
   if (!is(field)) {
     throw new Error("Subscribe field not defined in CMS");
+  }
+
+  if (!isTextInputField(field)) {
+    throw new Error("Invalid field type defined in CMS");
   }
 
   const schema = createSchema([field]);

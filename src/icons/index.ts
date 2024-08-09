@@ -24,6 +24,7 @@ export * from "./moon";
 export * from "./phone";
 export * from "./quotes-left";
 export * from "./quotes-right";
+export * from "./search";
 export * from "./sun";
 export * from "./twitter";
 export * from "./types";

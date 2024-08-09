@@ -6,10 +6,12 @@ import type {
   StackProps,
 } from "@chakra-ui/react";
 import type { ControllerProps, FieldValues } from "react-hook-form";
-import type { SelectProps } from "~/components";
+import type { SelectDynamicProps, SelectProps } from "~/components";
 import type { PageContent } from "~/queries";
 import type {
+  AddressSearchField,
   CheckboxField,
+  FormGroup,
   SelectField,
   SelectOptionSingle,
   TextAreaField,
@@ -21,23 +23,59 @@ type ControlProps<V extends FieldValues> = Required<
 > &
   Pick<ControllerProps<V>, "rules">;
 
-export type FormFieldProps<Props, FormData extends Dict> = Pick<
+// export type FormFieldProps<Props, FormData extends Dict> = Pick<
+//   ControlProps<FormData>,
+//   "name" | "rules" | "defaultValue"
+// > &
+//   Omit<Props, "as" | "onFocus" | "name" | "defaultValue" | "rules"> & {
+//     field: FormField;
+//   };
+
+export type FormFieldProps<Props, FormData extends Dict, F extends FormField> = Pick<
   ControlProps<FormData>,
   "name" | "rules" | "defaultValue"
 > &
   Omit<Props, "as" | "onFocus" | "name" | "defaultValue" | "rules"> & {
-    field: FormField;
+    field: F;
   };
 
+export type TextInputProps<Props, FormData extends Dict> = FormFieldProps<
+  Props,
+  FormData,
+  TextInputField
+>;
+
+export type TextAreaProps<Props, FormData extends Dict> = FormFieldProps<
+  Props,
+  FormData,
+  TextAreaField
+>;
+
+export type CheckboxProps<Props, FormData extends Dict> = FormFieldProps<
+  Props,
+  FormData,
+  CheckboxField
+>;
+
 export interface SelectFieldProps
-  extends Omit<SelectProps<SelectOptionSingle>, "name" | "onSelect" | "options"> {
+  extends Omit<SelectProps<SelectOptionSingle>, "name" | "onSelect"> {
   name: string;
-  opts: SelectOptionSingle[];
+  field: SelectField;
+}
+
+export interface SelectDynamicFieldProps
+  extends Omit<SelectDynamicProps<SelectOptionSingle>, "name" | "onSelect" | "options"> {
+  name: string;
   field: FormField;
 }
 
 export type FormField = Omit<
-  CheckboxField | SelectField | TextInputField | TextAreaField,
+  | CheckboxField
+  | SelectField
+  | TextInputField
+  | TextAreaField
+  | (FormGroup & { required?: boolean; fieldGroup?: number })
+  | AddressSearchField,
   "id" | "stage"
 >;
 
@@ -45,9 +83,11 @@ export type FormValue<Field extends FormField> = Field extends CheckboxField
   ? string[]
   : Field extends SelectField
     ? string[]
-    : Field["required"] extends true
-      ? string
-      : null;
+    : Field extends FormGroup
+      ? never
+      : Field["required"] extends true
+        ? string
+        : null;
 
 export interface GenericFormProps<Fields extends FormField[]>
   extends Omit<FlexProps, "onSubmit" | "title">,
