@@ -95,6 +95,15 @@ query page($slug: String, $stage: Stage = PUBLISHED) {
                         allowPast
                         fieldGroup
                     }
+                    ... on CurrencyField {
+                        __typename
+                        displayName
+                        formId
+                        label
+                        required
+                        fieldGroup
+                        unitSymbol
+                    }
                 }
             }
         }
@@ -211,6 +220,15 @@ query page($slug: String, $stage: Stage = PUBLISHED) {
                         allowFuture
                         allowPast
                         fieldGroup
+                    }
+                    ... on CurrencyField {
+                        __typename
+                        displayName
+                        formId
+                        label
+                        required
+                        fieldGroup
+                        unitSymbol
                     }
                 }
             }

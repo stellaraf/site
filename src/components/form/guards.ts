@@ -3,6 +3,7 @@ import { is } from "~/lib";
 import type {
   AddressSearchField,
   CheckboxField,
+  CurrencyField,
   DateField,
   FormButton,
   FormGroup,
@@ -49,4 +50,9 @@ export function isFormGroup(field: unknown): field is FormGroup {
 export function isDateField(field: unknown): field is DateField {
   if (!is(field)) return false;
   return (field as Record<string, unknown>).__typename === "DateField";
+}
+
+export function isCurrencyField(field: unknown): field is CurrencyField {
+  if (!is(field)) return false;
+  return (field as Record<string, unknown>).__typename === "CurrencyField";
 }

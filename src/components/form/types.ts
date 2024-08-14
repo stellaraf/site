@@ -11,6 +11,7 @@ import type { PageContent } from "~/queries";
 import type {
   AddressSearchField,
   CheckboxField,
+  CurrencyField,
   DateField,
   FormGroup,
   SelectField,
@@ -58,6 +59,12 @@ export type CheckboxProps<Props, FormData extends Dict> = FormFieldProps<
   CheckboxField
 >;
 
+export type CurrencyFieldProps<Props, FormData extends Dict> = FormFieldProps<
+  Props,
+  FormData,
+  CurrencyField
+>;
+
 export interface SelectFieldProps
   extends Omit<SelectProps<SelectOptionSingle>, "name" | "onSelect"> {
   name: string;
@@ -80,6 +87,7 @@ export type FormField = Omit<
   | SelectField
   | TextInputField
   | TextAreaField
+  | CurrencyField
   | DateField
   | (FormGroup & { required?: boolean; fieldGroup?: number })
   | AddressSearchField,

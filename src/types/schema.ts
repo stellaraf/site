@@ -8588,6 +8588,510 @@ export type ContentTagWhereUniqueInput = {
   tag?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type CurrencyField = Entity & {
+  __typename?: 'CurrencyField';
+  displayName: Scalars['String']['output'];
+  fieldGroup: Scalars['Int']['output'];
+  formId: Scalars['String']['output'];
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  label?: Maybe<Scalars['String']['output']>;
+  required: Scalars['Boolean']['output'];
+  /** System stage field */
+  stage: Stage;
+  unitSymbol: Scalars['String']['output'];
+};
+
+export type CurrencyFieldConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: CurrencyFieldWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type CurrencyFieldConnection = {
+  __typename?: 'CurrencyFieldConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<CurrencyFieldEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type CurrencyFieldCreateInput = {
+  displayName: Scalars['String']['input'];
+  fieldGroup: Scalars['Int']['input'];
+  formId: Scalars['String']['input'];
+  label?: InputMaybe<Scalars['String']['input']>;
+  required: Scalars['Boolean']['input'];
+  unitSymbol: Scalars['String']['input'];
+};
+
+export type CurrencyFieldCreateManyInlineInput = {
+  /** Create and connect multiple existing CurrencyField documents */
+  create?: InputMaybe<Array<CurrencyFieldCreateInput>>;
+};
+
+export type CurrencyFieldCreateOneInlineInput = {
+  /** Create and connect one CurrencyField document */
+  create?: InputMaybe<CurrencyFieldCreateInput>;
+};
+
+export type CurrencyFieldCreateWithPositionInput = {
+  /** Document to create */
+  data: CurrencyFieldCreateInput;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+};
+
+/** An edge in a connection. */
+export type CurrencyFieldEdge = {
+  __typename?: 'CurrencyFieldEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: CurrencyField;
+};
+
+/** Identifies documents */
+export type CurrencyFieldManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<CurrencyFieldWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<CurrencyFieldWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<CurrencyFieldWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  displayName?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  displayName_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  displayName_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  displayName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  displayName_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  displayName_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  displayName_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  displayName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  displayName_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  displayName_starts_with?: InputMaybe<Scalars['String']['input']>;
+  fieldGroup?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  fieldGroup_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  fieldGroup_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  fieldGroup_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  fieldGroup_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  fieldGroup_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  fieldGroup_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  fieldGroup_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  formId?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  formId_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  formId_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  formId_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  formId_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  formId_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  formId_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  formId_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  formId_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  formId_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  label_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  label_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  label_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  label_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  label_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  label_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  label_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  label_starts_with?: InputMaybe<Scalars['String']['input']>;
+  required?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  required_not?: InputMaybe<Scalars['Boolean']['input']>;
+  unitSymbol?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  unitSymbol_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  unitSymbol_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  unitSymbol_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  unitSymbol_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  unitSymbol_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  unitSymbol_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  unitSymbol_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  unitSymbol_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  unitSymbol_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum CurrencyFieldOrderByInput {
+  DisplayNameAsc = 'displayName_ASC',
+  DisplayNameDesc = 'displayName_DESC',
+  FieldGroupAsc = 'fieldGroup_ASC',
+  FieldGroupDesc = 'fieldGroup_DESC',
+  FormIdAsc = 'formId_ASC',
+  FormIdDesc = 'formId_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  RequiredAsc = 'required_ASC',
+  RequiredDesc = 'required_DESC',
+  UnitSymbolAsc = 'unitSymbol_ASC',
+  UnitSymbolDesc = 'unitSymbol_DESC'
+}
+
+export type CurrencyFieldParent = Form;
+
+export type CurrencyFieldParentConnectInput = {
+  Form?: InputMaybe<FormConnectInput>;
+};
+
+export type CurrencyFieldParentCreateInput = {
+  Form?: InputMaybe<FormCreateInput>;
+};
+
+export type CurrencyFieldParentCreateManyInlineInput = {
+  /** Connect multiple existing CurrencyFieldParent documents */
+  connect?: InputMaybe<Array<CurrencyFieldParentWhereUniqueInput>>;
+  /** Create and connect multiple existing CurrencyFieldParent documents */
+  create?: InputMaybe<Array<CurrencyFieldParentCreateInput>>;
+};
+
+export type CurrencyFieldParentCreateOneInlineInput = {
+  /** Connect one existing CurrencyFieldParent document */
+  connect?: InputMaybe<CurrencyFieldParentWhereUniqueInput>;
+  /** Create and connect one CurrencyFieldParent document */
+  create?: InputMaybe<CurrencyFieldParentCreateInput>;
+};
+
+export type CurrencyFieldParentUpdateInput = {
+  Form?: InputMaybe<FormUpdateInput>;
+};
+
+export type CurrencyFieldParentUpdateManyInlineInput = {
+  /** Connect multiple existing CurrencyFieldParent documents */
+  connect?: InputMaybe<Array<CurrencyFieldParentConnectInput>>;
+  /** Create and connect multiple CurrencyFieldParent documents */
+  create?: InputMaybe<Array<CurrencyFieldParentCreateInput>>;
+  /** Delete multiple CurrencyFieldParent documents */
+  delete?: InputMaybe<Array<CurrencyFieldParentWhereUniqueInput>>;
+  /** Disconnect multiple CurrencyFieldParent documents */
+  disconnect?: InputMaybe<Array<CurrencyFieldParentWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing CurrencyFieldParent documents */
+  set?: InputMaybe<Array<CurrencyFieldParentWhereUniqueInput>>;
+  /** Update multiple CurrencyFieldParent documents */
+  update?: InputMaybe<Array<CurrencyFieldParentUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple CurrencyFieldParent documents */
+  upsert?: InputMaybe<Array<CurrencyFieldParentUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type CurrencyFieldParentUpdateManyWithNestedWhereInput = {
+  Form?: InputMaybe<FormUpdateManyWithNestedWhereInput>;
+};
+
+export type CurrencyFieldParentUpdateOneInlineInput = {
+  /** Connect existing CurrencyFieldParent document */
+  connect?: InputMaybe<CurrencyFieldParentWhereUniqueInput>;
+  /** Create and connect one CurrencyFieldParent document */
+  create?: InputMaybe<CurrencyFieldParentCreateInput>;
+  /** Delete currently connected CurrencyFieldParent document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected CurrencyFieldParent document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single CurrencyFieldParent document */
+  update?: InputMaybe<CurrencyFieldParentUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single CurrencyFieldParent document */
+  upsert?: InputMaybe<CurrencyFieldParentUpsertWithNestedWhereUniqueInput>;
+};
+
+export type CurrencyFieldParentUpdateWithNestedWhereUniqueInput = {
+  Form?: InputMaybe<FormUpdateWithNestedWhereUniqueInput>;
+};
+
+export type CurrencyFieldParentUpsertWithNestedWhereUniqueInput = {
+  Form?: InputMaybe<FormUpsertWithNestedWhereUniqueInput>;
+};
+
+export type CurrencyFieldParentWhereInput = {
+  Form?: InputMaybe<FormWhereInput>;
+};
+
+export type CurrencyFieldParentWhereUniqueInput = {
+  Form?: InputMaybe<FormWhereUniqueInput>;
+};
+
+export type CurrencyFieldUpdateInput = {
+  displayName?: InputMaybe<Scalars['String']['input']>;
+  fieldGroup?: InputMaybe<Scalars['Int']['input']>;
+  formId?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  required?: InputMaybe<Scalars['Boolean']['input']>;
+  unitSymbol?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CurrencyFieldUpdateManyInlineInput = {
+  /** Create and connect multiple CurrencyField component instances */
+  create?: InputMaybe<Array<CurrencyFieldCreateWithPositionInput>>;
+  /** Delete multiple CurrencyField documents */
+  delete?: InputMaybe<Array<CurrencyFieldWhereUniqueInput>>;
+  /** Update multiple CurrencyField component instances */
+  update?: InputMaybe<Array<CurrencyFieldUpdateWithNestedWhereUniqueAndPositionInput>>;
+  /** Upsert multiple CurrencyField component instances */
+  upsert?: InputMaybe<Array<CurrencyFieldUpsertWithNestedWhereUniqueAndPositionInput>>;
+};
+
+export type CurrencyFieldUpdateManyInput = {
+  displayName?: InputMaybe<Scalars['String']['input']>;
+  fieldGroup?: InputMaybe<Scalars['Int']['input']>;
+  formId?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  required?: InputMaybe<Scalars['Boolean']['input']>;
+  unitSymbol?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CurrencyFieldUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: CurrencyFieldUpdateManyInput;
+  /** Document search */
+  where: CurrencyFieldWhereInput;
+};
+
+export type CurrencyFieldUpdateOneInlineInput = {
+  /** Create and connect one CurrencyField document */
+  create?: InputMaybe<CurrencyFieldCreateInput>;
+  /** Delete currently connected CurrencyField document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single CurrencyField document */
+  update?: InputMaybe<CurrencyFieldUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single CurrencyField document */
+  upsert?: InputMaybe<CurrencyFieldUpsertWithNestedWhereUniqueInput>;
+};
+
+export type CurrencyFieldUpdateWithNestedWhereUniqueAndPositionInput = {
+  /** Document to update */
+  data?: InputMaybe<CurrencyFieldUpdateInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: CurrencyFieldWhereUniqueInput;
+};
+
+export type CurrencyFieldUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: CurrencyFieldUpdateInput;
+  /** Unique document search */
+  where: CurrencyFieldWhereUniqueInput;
+};
+
+export type CurrencyFieldUpsertInput = {
+  /** Create document if it didn't exist */
+  create: CurrencyFieldCreateInput;
+  /** Update document if it exists */
+  update: CurrencyFieldUpdateInput;
+};
+
+export type CurrencyFieldUpsertWithNestedWhereUniqueAndPositionInput = {
+  /** Document to upsert */
+  data?: InputMaybe<CurrencyFieldUpsertInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: CurrencyFieldWhereUniqueInput;
+};
+
+export type CurrencyFieldUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: CurrencyFieldUpsertInput;
+  /** Unique document search */
+  where: CurrencyFieldWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type CurrencyFieldWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<CurrencyFieldWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<CurrencyFieldWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<CurrencyFieldWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  displayName?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  displayName_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  displayName_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  displayName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  displayName_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  displayName_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  displayName_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  displayName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  displayName_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  displayName_starts_with?: InputMaybe<Scalars['String']['input']>;
+  fieldGroup?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  fieldGroup_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  fieldGroup_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  fieldGroup_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  fieldGroup_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  fieldGroup_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  fieldGroup_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  fieldGroup_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  formId?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  formId_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  formId_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  formId_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  formId_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  formId_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  formId_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  formId_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  formId_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  formId_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  label_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  label_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  label_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  label_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  label_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  label_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  label_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  label_starts_with?: InputMaybe<Scalars['String']['input']>;
+  required?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  required_not?: InputMaybe<Scalars['Boolean']['input']>;
+  unitSymbol?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  unitSymbol_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  unitSymbol_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  unitSymbol_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  unitSymbol_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  unitSymbol_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  unitSymbol_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  unitSymbol_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  unitSymbol_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  unitSymbol_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** References CurrencyField record uniquely */
+export type CurrencyFieldWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 export type DateField = Entity & {
   __typename?: 'DateField';
   /** Allow selection of dates in the future */
@@ -11884,6 +12388,7 @@ export enum EntityTypeName {
   ContactForm = 'ContactForm',
   ContentButton = 'ContentButton',
   ContentTag = 'ContentTag',
+  CurrencyField = 'CurrencyField',
   DateField = 'DateField',
   DocsGroup = 'DocsGroup',
   DocsPage = 'DocsPage',
@@ -14513,11 +15018,12 @@ export type FormWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type FormfieldsUnion = AddressSearchField | CheckboxField | DateField | FormGroup | SelectField | TextAreaField | TextInputField;
+export type FormfieldsUnion = AddressSearchField | CheckboxField | CurrencyField | DateField | FormGroup | SelectField | TextAreaField | TextInputField;
 
 export type FormfieldsUnionConnectInput = {
   AddressSearchField?: InputMaybe<AddressSearchFieldConnectInput>;
   CheckboxField?: InputMaybe<CheckboxFieldConnectInput>;
+  CurrencyField?: InputMaybe<CurrencyFieldConnectInput>;
   DateField?: InputMaybe<DateFieldConnectInput>;
   FormGroup?: InputMaybe<FormGroupConnectInput>;
   SelectField?: InputMaybe<SelectFieldConnectInput>;
@@ -14528,6 +15034,7 @@ export type FormfieldsUnionConnectInput = {
 export type FormfieldsUnionCreateInput = {
   AddressSearchField?: InputMaybe<AddressSearchFieldCreateInput>;
   CheckboxField?: InputMaybe<CheckboxFieldCreateInput>;
+  CurrencyField?: InputMaybe<CurrencyFieldCreateInput>;
   DateField?: InputMaybe<DateFieldCreateInput>;
   FormGroup?: InputMaybe<FormGroupCreateInput>;
   SelectField?: InputMaybe<SelectFieldCreateInput>;
@@ -14548,6 +15055,7 @@ export type FormfieldsUnionCreateOneInlineInput = {
 export type FormfieldsUnionCreateWithPositionInput = {
   AddressSearchField?: InputMaybe<AddressSearchFieldCreateWithPositionInput>;
   CheckboxField?: InputMaybe<CheckboxFieldCreateWithPositionInput>;
+  CurrencyField?: InputMaybe<CurrencyFieldCreateWithPositionInput>;
   DateField?: InputMaybe<DateFieldCreateWithPositionInput>;
   FormGroup?: InputMaybe<FormGroupCreateWithPositionInput>;
   SelectField?: InputMaybe<SelectFieldCreateWithPositionInput>;
@@ -14558,6 +15066,7 @@ export type FormfieldsUnionCreateWithPositionInput = {
 export type FormfieldsUnionUpdateInput = {
   AddressSearchField?: InputMaybe<AddressSearchFieldUpdateInput>;
   CheckboxField?: InputMaybe<CheckboxFieldUpdateInput>;
+  CurrencyField?: InputMaybe<CurrencyFieldUpdateInput>;
   DateField?: InputMaybe<DateFieldUpdateInput>;
   FormGroup?: InputMaybe<FormGroupUpdateInput>;
   SelectField?: InputMaybe<SelectFieldUpdateInput>;
@@ -14579,6 +15088,7 @@ export type FormfieldsUnionUpdateManyInlineInput = {
 export type FormfieldsUnionUpdateManyWithNestedWhereInput = {
   AddressSearchField?: InputMaybe<AddressSearchFieldUpdateManyWithNestedWhereInput>;
   CheckboxField?: InputMaybe<CheckboxFieldUpdateManyWithNestedWhereInput>;
+  CurrencyField?: InputMaybe<CurrencyFieldUpdateManyWithNestedWhereInput>;
   DateField?: InputMaybe<DateFieldUpdateManyWithNestedWhereInput>;
   FormGroup?: InputMaybe<FormGroupUpdateManyWithNestedWhereInput>;
   SelectField?: InputMaybe<SelectFieldUpdateManyWithNestedWhereInput>;
@@ -14600,6 +15110,7 @@ export type FormfieldsUnionUpdateOneInlineInput = {
 export type FormfieldsUnionUpdateWithNestedWhereUniqueAndPositionInput = {
   AddressSearchField?: InputMaybe<AddressSearchFieldUpdateWithNestedWhereUniqueAndPositionInput>;
   CheckboxField?: InputMaybe<CheckboxFieldUpdateWithNestedWhereUniqueAndPositionInput>;
+  CurrencyField?: InputMaybe<CurrencyFieldUpdateWithNestedWhereUniqueAndPositionInput>;
   DateField?: InputMaybe<DateFieldUpdateWithNestedWhereUniqueAndPositionInput>;
   FormGroup?: InputMaybe<FormGroupUpdateWithNestedWhereUniqueAndPositionInput>;
   SelectField?: InputMaybe<SelectFieldUpdateWithNestedWhereUniqueAndPositionInput>;
@@ -14610,6 +15121,7 @@ export type FormfieldsUnionUpdateWithNestedWhereUniqueAndPositionInput = {
 export type FormfieldsUnionUpdateWithNestedWhereUniqueInput = {
   AddressSearchField?: InputMaybe<AddressSearchFieldUpdateWithNestedWhereUniqueInput>;
   CheckboxField?: InputMaybe<CheckboxFieldUpdateWithNestedWhereUniqueInput>;
+  CurrencyField?: InputMaybe<CurrencyFieldUpdateWithNestedWhereUniqueInput>;
   DateField?: InputMaybe<DateFieldUpdateWithNestedWhereUniqueInput>;
   FormGroup?: InputMaybe<FormGroupUpdateWithNestedWhereUniqueInput>;
   SelectField?: InputMaybe<SelectFieldUpdateWithNestedWhereUniqueInput>;
@@ -14620,6 +15132,7 @@ export type FormfieldsUnionUpdateWithNestedWhereUniqueInput = {
 export type FormfieldsUnionUpsertWithNestedWhereUniqueAndPositionInput = {
   AddressSearchField?: InputMaybe<AddressSearchFieldUpsertWithNestedWhereUniqueAndPositionInput>;
   CheckboxField?: InputMaybe<CheckboxFieldUpsertWithNestedWhereUniqueAndPositionInput>;
+  CurrencyField?: InputMaybe<CurrencyFieldUpsertWithNestedWhereUniqueAndPositionInput>;
   DateField?: InputMaybe<DateFieldUpsertWithNestedWhereUniqueAndPositionInput>;
   FormGroup?: InputMaybe<FormGroupUpsertWithNestedWhereUniqueAndPositionInput>;
   SelectField?: InputMaybe<SelectFieldUpsertWithNestedWhereUniqueAndPositionInput>;
@@ -14630,6 +15143,7 @@ export type FormfieldsUnionUpsertWithNestedWhereUniqueAndPositionInput = {
 export type FormfieldsUnionUpsertWithNestedWhereUniqueInput = {
   AddressSearchField?: InputMaybe<AddressSearchFieldUpsertWithNestedWhereUniqueInput>;
   CheckboxField?: InputMaybe<CheckboxFieldUpsertWithNestedWhereUniqueInput>;
+  CurrencyField?: InputMaybe<CurrencyFieldUpsertWithNestedWhereUniqueInput>;
   DateField?: InputMaybe<DateFieldUpsertWithNestedWhereUniqueInput>;
   FormGroup?: InputMaybe<FormGroupUpsertWithNestedWhereUniqueInput>;
   SelectField?: InputMaybe<SelectFieldUpsertWithNestedWhereUniqueInput>;
@@ -14640,6 +15154,7 @@ export type FormfieldsUnionUpsertWithNestedWhereUniqueInput = {
 export type FormfieldsUnionWhereInput = {
   AddressSearchField?: InputMaybe<AddressSearchFieldWhereInput>;
   CheckboxField?: InputMaybe<CheckboxFieldWhereInput>;
+  CurrencyField?: InputMaybe<CurrencyFieldWhereInput>;
   DateField?: InputMaybe<DateFieldWhereInput>;
   FormGroup?: InputMaybe<FormGroupWhereInput>;
   SelectField?: InputMaybe<SelectFieldWhereInput>;
@@ -14650,6 +15165,7 @@ export type FormfieldsUnionWhereInput = {
 export type FormfieldsUnionWhereUniqueInput = {
   AddressSearchField?: InputMaybe<AddressSearchFieldWhereUniqueInput>;
   CheckboxField?: InputMaybe<CheckboxFieldWhereUniqueInput>;
+  CurrencyField?: InputMaybe<CurrencyFieldWhereUniqueInput>;
   DateField?: InputMaybe<DateFieldWhereUniqueInput>;
   FormGroup?: InputMaybe<FormGroupWhereUniqueInput>;
   SelectField?: InputMaybe<SelectFieldWhereUniqueInput>;
@@ -28616,7 +29132,7 @@ export type ConfigQueryVariables = Exact<{
 }>;
 
 
-export type ConfigQuery = { __typename?: 'Query', values?: { __typename?: 'Configuration', description: string, organizationName: string, slogan: string, title: string, titleOverrides: Array<string>, statusUrl: string, createdAt: string, socialLinks: Array<{ __typename?: 'SocialLink', id: string, name: string, href: string }>, errorMessage: { __typename?: 'Alert', id: string, name: string, level: AlertLevel, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } }, callToAction: { __typename?: 'CallToAction', shown: number, title: string }, testimonials: Array<{ __typename?: 'Testimonial', subtitle?: string | null, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, image: { __typename?: 'Asset', fileName: string, handle: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, subscribe?: { __typename?: 'Form', id: string, colorScheme: ThemeColor, button: { __typename?: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename?: 'AddressSearchField' } | { __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename?: 'DateField' } | { __typename?: 'FormGroup' } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null } | null };
+export type ConfigQuery = { __typename?: 'Query', values?: { __typename?: 'Configuration', description: string, organizationName: string, slogan: string, title: string, titleOverrides: Array<string>, statusUrl: string, createdAt: string, socialLinks: Array<{ __typename?: 'SocialLink', id: string, name: string, href: string }>, errorMessage: { __typename?: 'Alert', id: string, name: string, level: AlertLevel, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } }, callToAction: { __typename?: 'CallToAction', shown: number, title: string }, testimonials: Array<{ __typename?: 'Testimonial', subtitle?: string | null, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, image: { __typename?: 'Asset', fileName: string, handle: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, subscribe?: { __typename?: 'Form', id: string, colorScheme: ThemeColor, button: { __typename?: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename?: 'AddressSearchField' } | { __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename?: 'CurrencyField' } | { __typename?: 'DateField' } | { __typename?: 'FormGroup' } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null } | null };
 
 export type ContactFormsQueryVariables = Exact<{
   config?: InputMaybe<Scalars['String']['input']>;
@@ -28725,7 +29241,7 @@ export type PageQueryVariables = Exact<{
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page?: { __typename?: 'Page', slug: string, title: string, subtitle?: string | null, footerTitle?: string | null, body?: { __typename?: 'RichText', raw: RichTextContent } | null, callout?: { __typename?: 'Callout', subtitle?: string | null, title: string, body?: { __typename?: 'RichText', raw: RichTextContent } | null, button?: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null } | null, form?: { __typename?: 'Form', name: string, colorScheme: ThemeColor, button: { __typename: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename: 'AddressSearchField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'DateField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, range: boolean, allowFuture: boolean, allowPast: boolean } | { __typename: 'FormGroup', name: string, groupId: number } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, creatable: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null } | null, contents: Array<{ __typename?: 'PageContent', slug: string, showUpdatedDate: boolean, subtitle?: string | null, title: string, updatedAt: string, body?: { __typename?: 'RichText', raw: RichTextContent } | null, button?: { __typename?: 'Button', text: string, link?: string | null, variant?: ButtonVariant | null } | null, features: Array<{ __typename?: 'Feature', iconColor?: ThemeColor | null, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, button?: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null } | null, icon?: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } | null }>, form?: { __typename?: 'Form', name: string, colorScheme: ThemeColor, button: { __typename: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename: 'AddressSearchField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'DateField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, range: boolean, allowFuture: boolean, allowPast: boolean } | { __typename: 'FormGroup', name: string, groupId: number } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, creatable: boolean, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null, image?: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null } | null, vendorLogo?: { __typename: 'VendorLogo', postText?: string | null, pretext: string, name: string, darkColor: { __typename?: 'Color', hex: string }, lightColor: { __typename?: 'Color', hex: string }, logo: { __typename?: 'Asset', size?: number | null, mimeType?: string | null, width?: number | null, url: string, height?: number | null } } | null }> } | null };
+export type PageQuery = { __typename?: 'Query', page?: { __typename?: 'Page', slug: string, title: string, subtitle?: string | null, footerTitle?: string | null, body?: { __typename?: 'RichText', raw: RichTextContent } | null, callout?: { __typename?: 'Callout', subtitle?: string | null, title: string, body?: { __typename?: 'RichText', raw: RichTextContent } | null, button?: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null } | null, form?: { __typename?: 'Form', name: string, colorScheme: ThemeColor, button: { __typename: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename: 'AddressSearchField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'CurrencyField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, unitSymbol: string } | { __typename: 'DateField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, range: boolean, allowFuture: boolean, allowPast: boolean } | { __typename: 'FormGroup', name: string, groupId: number } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, creatable: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null } | null, contents: Array<{ __typename?: 'PageContent', slug: string, showUpdatedDate: boolean, subtitle?: string | null, title: string, updatedAt: string, body?: { __typename?: 'RichText', raw: RichTextContent } | null, button?: { __typename?: 'Button', text: string, link?: string | null, variant?: ButtonVariant | null } | null, features: Array<{ __typename?: 'Feature', iconColor?: ThemeColor | null, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, button?: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null } | null, icon?: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } | null }>, form?: { __typename?: 'Form', name: string, colorScheme: ThemeColor, button: { __typename: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename: 'AddressSearchField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'CurrencyField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, unitSymbol: string } | { __typename: 'DateField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, range: boolean, allowFuture: boolean, allowPast: boolean } | { __typename: 'FormGroup', name: string, groupId: number } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, creatable: boolean, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null, image?: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null } | null, vendorLogo?: { __typename: 'VendorLogo', postText?: string | null, pretext: string, name: string, darkColor: { __typename?: 'Color', hex: string }, lightColor: { __typename?: 'Color', hex: string }, logo: { __typename?: 'Asset', size?: number | null, mimeType?: string | null, width?: number | null, url: string, height?: number | null } } | null }> } | null };
 
 export type ThemeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -28792,6 +29308,9 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "TextAreaField",
       "TextInputField"
     ],
+    "CurrencyFieldParent": [
+      "Form"
+    ],
     "DateFieldParent": [
       "Form"
     ],
@@ -28824,6 +29343,7 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "ContactForm",
       "ContentButton",
       "ContentTag",
+      "CurrencyField",
       "DateField",
       "DocsGroup",
       "DocsPage",
@@ -28872,6 +29392,7 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
     "FormfieldsUnion": [
       "AddressSearchField",
       "CheckboxField",
+      "CurrencyField",
       "DateField",
       "FormGroup",
       "SelectField",
@@ -28981,7 +29502,7 @@ export const HomePageDocument = {"kind":"Document","definitions":[{"kind":"Opera
 export const OfficeLocationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"officeLocations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"officeLocations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"closeTime"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"openTime"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"128"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"128"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}}]}},{"kind":"Field","name":{"kind":"Name","value":"location"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"address1"}},{"kind":"Field","name":{"kind":"Name","value":"address2"}},{"kind":"Field","name":{"kind":"Name","value":"address3"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zipCode"}}]}}]}}]}}]} as unknown as DocumentNode<OfficeLocationsQuery, OfficeLocationsQueryVariables>;
 export const StaticPathsExactDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"staticPathsExact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug_not_contains"},"value":{"kind":"StringValue","value":"/","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<StaticPathsExactQuery, StaticPathsExactQueryVariables>;
 export const StaticPathsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"staticPaths"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startsWith"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug_starts_with"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startsWith"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<StaticPathsQuery, StaticPathsQueryVariables>;
-export const PageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"page"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"callout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"form"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"50"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormGroup"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"groupId"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"creatable"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AddressSearchField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DateField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"range"}},{"kind":"Field","name":{"kind":"Name","value":"allowFuture"}},{"kind":"Field","name":{"kind":"Name","value":"allowPast"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"features"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"form"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"50"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormGroup"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"groupId"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"creatable"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AddressSearchField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DateField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"range"}},{"kind":"Field","name":{"kind":"Name","value":"allowFuture"}},{"kind":"Field","name":{"kind":"Name","value":"allowPast"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"vendorLogo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"darkColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lightColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"logo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"postText"}},{"kind":"Field","name":{"kind":"Name","value":"pretext"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<PageQuery, PageQueryVariables>;
+export const PageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"page"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"callout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"form"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"50"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormGroup"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"groupId"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"creatable"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AddressSearchField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DateField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"range"}},{"kind":"Field","name":{"kind":"Name","value":"allowFuture"}},{"kind":"Field","name":{"kind":"Name","value":"allowPast"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CurrencyField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"unitSymbol"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"features"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"form"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"50"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormGroup"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"groupId"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"creatable"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AddressSearchField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DateField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"range"}},{"kind":"Field","name":{"kind":"Name","value":"allowFuture"}},{"kind":"Field","name":{"kind":"Name","value":"allowPast"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CurrencyField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"unitSymbol"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"vendorLogo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"darkColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lightColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"logo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"postText"}},{"kind":"Field","name":{"kind":"Name","value":"pretext"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<PageQuery, PageQueryVariables>;
 export const ThemeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"theme"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"StringValue","value":"Stellar","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"theme"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"colors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"black"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"blue"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"cyan"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dark"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"gray"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"green"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"light"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"orange"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pink"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"primary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"purple"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"red"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"secondary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"teal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tertiary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"white"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"yellow"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ThemeQuery, ThemeQueryVariables>;
 export const TwitterHandleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"twitterHandle"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"socialLinks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"href_contains"},"value":{"kind":"StringValue","value":"twitter","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"href"}}]}}]}}]}}]} as unknown as DocumentNode<TwitterHandleQuery, TwitterHandleQueryVariables>;
 
@@ -29063,6 +29584,7 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
   CalloutParent: ( Page );
   CheckboxFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   ContactFormfieldsUnion: ( CheckboxField ) | ( FormButton ) | ( SelectField ) | ( TextAreaField ) | ( TextInputField );
+  CurrencyFieldParent: ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   DateFieldParent: ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   DocsGroupSummaryRichTextEmbeddedTypes: ( Admonition ) | ( Asset ) | ( ContentButton );
   DocsPageBodyRichTextEmbeddedTypes: ( Admonition ) | ( Asset ) | ( ContentButton ) | ( Document ) | ( DocumentGroup );
@@ -29070,7 +29592,7 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
   FeatureParent: ( PageContent );
   FormButtonParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   FormGroupParent: ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
-  FormfieldsUnion: ( AddressSearchField ) | ( CheckboxField ) | ( DateField ) | ( FormGroup ) | ( SelectField ) | ( TextAreaField ) | ( TextInputField );
+  FormfieldsUnion: ( AddressSearchField ) | ( CheckboxField ) | ( CurrencyField ) | ( DateField ) | ( FormGroup ) | ( SelectField ) | ( TextAreaField ) | ( TextInputField );
   HomePageBlockParent: ( HomePage );
   ScheduledOperationAffectedDocument: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Document ) | ( DocumentGroup ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Testimonial ) | ( Theme );
   SelectFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
@@ -29083,7 +29605,7 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
 
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = {
-  Entity: ( Address ) | ( AddressSearchField ) | ( Admonition ) | ( Alert ) | ( Asset ) | ( BlogPost ) | ( Button ) | ( CallToAction ) | ( CallToActionSettings ) | ( Callout ) | ( CheckboxField ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DateField ) | ( DocsGroup ) | ( DocsPage ) | ( Document ) | ( DocumentGroup ) | ( Employee ) | ( ExternalLink ) | ( Feature ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( FormButton ) | ( FormGroup ) | ( HeaderGroup ) | ( HomePage ) | ( HomePageBlock ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( SelectField ) | ( SocialLink ) | ( Testimonial ) | ( TextAreaField ) | ( TextInputField ) | ( Theme ) | ( ThemeColors ) | ( ThemeFonts ) | ( User ) | ( VendorLogo );
+  Entity: ( Address ) | ( AddressSearchField ) | ( Admonition ) | ( Alert ) | ( Asset ) | ( BlogPost ) | ( Button ) | ( CallToAction ) | ( CallToActionSettings ) | ( Callout ) | ( CheckboxField ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( CurrencyField ) | ( DateField ) | ( DocsGroup ) | ( DocsPage ) | ( Document ) | ( DocumentGroup ) | ( Employee ) | ( ExternalLink ) | ( Feature ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( FormButton ) | ( FormGroup ) | ( HeaderGroup ) | ( HomePage ) | ( HomePageBlock ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( SelectField ) | ( SocialLink ) | ( Testimonial ) | ( TextAreaField ) | ( TextInputField ) | ( Theme ) | ( ThemeColors ) | ( ThemeFonts ) | ( User ) | ( VendorLogo );
   Node: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Document ) | ( DocumentGroup ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( Testimonial ) | ( Theme ) | ( User );
 };
 
@@ -29575,6 +30097,41 @@ export type ResolversTypes = {
   ContentTagWhereInput: ContentTagWhereInput;
   ContentTagWhereStageInput: ContentTagWhereStageInput;
   ContentTagWhereUniqueInput: ContentTagWhereUniqueInput;
+  CurrencyField: ResolverTypeWrapper<CurrencyField>;
+  CurrencyFieldConnectInput: CurrencyFieldConnectInput;
+  CurrencyFieldConnection: ResolverTypeWrapper<CurrencyFieldConnection>;
+  CurrencyFieldCreateInput: CurrencyFieldCreateInput;
+  CurrencyFieldCreateManyInlineInput: CurrencyFieldCreateManyInlineInput;
+  CurrencyFieldCreateOneInlineInput: CurrencyFieldCreateOneInlineInput;
+  CurrencyFieldCreateWithPositionInput: CurrencyFieldCreateWithPositionInput;
+  CurrencyFieldEdge: ResolverTypeWrapper<CurrencyFieldEdge>;
+  CurrencyFieldManyWhereInput: CurrencyFieldManyWhereInput;
+  CurrencyFieldOrderByInput: CurrencyFieldOrderByInput;
+  CurrencyFieldParent: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['CurrencyFieldParent']>;
+  CurrencyFieldParentConnectInput: CurrencyFieldParentConnectInput;
+  CurrencyFieldParentCreateInput: CurrencyFieldParentCreateInput;
+  CurrencyFieldParentCreateManyInlineInput: CurrencyFieldParentCreateManyInlineInput;
+  CurrencyFieldParentCreateOneInlineInput: CurrencyFieldParentCreateOneInlineInput;
+  CurrencyFieldParentUpdateInput: CurrencyFieldParentUpdateInput;
+  CurrencyFieldParentUpdateManyInlineInput: CurrencyFieldParentUpdateManyInlineInput;
+  CurrencyFieldParentUpdateManyWithNestedWhereInput: CurrencyFieldParentUpdateManyWithNestedWhereInput;
+  CurrencyFieldParentUpdateOneInlineInput: CurrencyFieldParentUpdateOneInlineInput;
+  CurrencyFieldParentUpdateWithNestedWhereUniqueInput: CurrencyFieldParentUpdateWithNestedWhereUniqueInput;
+  CurrencyFieldParentUpsertWithNestedWhereUniqueInput: CurrencyFieldParentUpsertWithNestedWhereUniqueInput;
+  CurrencyFieldParentWhereInput: CurrencyFieldParentWhereInput;
+  CurrencyFieldParentWhereUniqueInput: CurrencyFieldParentWhereUniqueInput;
+  CurrencyFieldUpdateInput: CurrencyFieldUpdateInput;
+  CurrencyFieldUpdateManyInlineInput: CurrencyFieldUpdateManyInlineInput;
+  CurrencyFieldUpdateManyInput: CurrencyFieldUpdateManyInput;
+  CurrencyFieldUpdateManyWithNestedWhereInput: CurrencyFieldUpdateManyWithNestedWhereInput;
+  CurrencyFieldUpdateOneInlineInput: CurrencyFieldUpdateOneInlineInput;
+  CurrencyFieldUpdateWithNestedWhereUniqueAndPositionInput: CurrencyFieldUpdateWithNestedWhereUniqueAndPositionInput;
+  CurrencyFieldUpdateWithNestedWhereUniqueInput: CurrencyFieldUpdateWithNestedWhereUniqueInput;
+  CurrencyFieldUpsertInput: CurrencyFieldUpsertInput;
+  CurrencyFieldUpsertWithNestedWhereUniqueAndPositionInput: CurrencyFieldUpsertWithNestedWhereUniqueAndPositionInput;
+  CurrencyFieldUpsertWithNestedWhereUniqueInput: CurrencyFieldUpsertWithNestedWhereUniqueInput;
+  CurrencyFieldWhereInput: CurrencyFieldWhereInput;
+  CurrencyFieldWhereUniqueInput: CurrencyFieldWhereUniqueInput;
   Date: ResolverTypeWrapper<Scalars['Date']['output']>;
   DateField: ResolverTypeWrapper<DateField>;
   DateFieldConnectInput: DateFieldConnectInput;
@@ -30895,6 +31452,40 @@ export type ResolversParentTypes = {
   ContentTagWhereInput: ContentTagWhereInput;
   ContentTagWhereStageInput: ContentTagWhereStageInput;
   ContentTagWhereUniqueInput: ContentTagWhereUniqueInput;
+  CurrencyField: CurrencyField;
+  CurrencyFieldConnectInput: CurrencyFieldConnectInput;
+  CurrencyFieldConnection: CurrencyFieldConnection;
+  CurrencyFieldCreateInput: CurrencyFieldCreateInput;
+  CurrencyFieldCreateManyInlineInput: CurrencyFieldCreateManyInlineInput;
+  CurrencyFieldCreateOneInlineInput: CurrencyFieldCreateOneInlineInput;
+  CurrencyFieldCreateWithPositionInput: CurrencyFieldCreateWithPositionInput;
+  CurrencyFieldEdge: CurrencyFieldEdge;
+  CurrencyFieldManyWhereInput: CurrencyFieldManyWhereInput;
+  CurrencyFieldParent: ResolversUnionTypes<ResolversParentTypes>['CurrencyFieldParent'];
+  CurrencyFieldParentConnectInput: CurrencyFieldParentConnectInput;
+  CurrencyFieldParentCreateInput: CurrencyFieldParentCreateInput;
+  CurrencyFieldParentCreateManyInlineInput: CurrencyFieldParentCreateManyInlineInput;
+  CurrencyFieldParentCreateOneInlineInput: CurrencyFieldParentCreateOneInlineInput;
+  CurrencyFieldParentUpdateInput: CurrencyFieldParentUpdateInput;
+  CurrencyFieldParentUpdateManyInlineInput: CurrencyFieldParentUpdateManyInlineInput;
+  CurrencyFieldParentUpdateManyWithNestedWhereInput: CurrencyFieldParentUpdateManyWithNestedWhereInput;
+  CurrencyFieldParentUpdateOneInlineInput: CurrencyFieldParentUpdateOneInlineInput;
+  CurrencyFieldParentUpdateWithNestedWhereUniqueInput: CurrencyFieldParentUpdateWithNestedWhereUniqueInput;
+  CurrencyFieldParentUpsertWithNestedWhereUniqueInput: CurrencyFieldParentUpsertWithNestedWhereUniqueInput;
+  CurrencyFieldParentWhereInput: CurrencyFieldParentWhereInput;
+  CurrencyFieldParentWhereUniqueInput: CurrencyFieldParentWhereUniqueInput;
+  CurrencyFieldUpdateInput: CurrencyFieldUpdateInput;
+  CurrencyFieldUpdateManyInlineInput: CurrencyFieldUpdateManyInlineInput;
+  CurrencyFieldUpdateManyInput: CurrencyFieldUpdateManyInput;
+  CurrencyFieldUpdateManyWithNestedWhereInput: CurrencyFieldUpdateManyWithNestedWhereInput;
+  CurrencyFieldUpdateOneInlineInput: CurrencyFieldUpdateOneInlineInput;
+  CurrencyFieldUpdateWithNestedWhereUniqueAndPositionInput: CurrencyFieldUpdateWithNestedWhereUniqueAndPositionInput;
+  CurrencyFieldUpdateWithNestedWhereUniqueInput: CurrencyFieldUpdateWithNestedWhereUniqueInput;
+  CurrencyFieldUpsertInput: CurrencyFieldUpsertInput;
+  CurrencyFieldUpsertWithNestedWhereUniqueAndPositionInput: CurrencyFieldUpsertWithNestedWhereUniqueAndPositionInput;
+  CurrencyFieldUpsertWithNestedWhereUniqueInput: CurrencyFieldUpsertWithNestedWhereUniqueInput;
+  CurrencyFieldWhereInput: CurrencyFieldWhereInput;
+  CurrencyFieldWhereUniqueInput: CurrencyFieldWhereUniqueInput;
   Date: Scalars['Date']['output'];
   DateField: DateField;
   DateFieldConnectInput: DateFieldConnectInput;
@@ -32243,6 +32834,35 @@ export type ContentTagEdgeResolvers<ContextType = any, ParentType extends Resolv
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CurrencyFieldResolvers<ContextType = any, ParentType extends ResolversParentTypes['CurrencyField'] = ResolversParentTypes['CurrencyField']> = {
+  displayName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  fieldGroup?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  formId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  label?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  required?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
+  unitSymbol?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CurrencyFieldConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['CurrencyFieldConnection'] = ResolversParentTypes['CurrencyFieldConnection']> = {
+  aggregate?: Resolver<ResolversTypes['Aggregate'], ParentType, ContextType>;
+  edges?: Resolver<Array<ResolversTypes['CurrencyFieldEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CurrencyFieldEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['CurrencyFieldEdge'] = ResolversParentTypes['CurrencyFieldEdge']> = {
+  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['CurrencyField'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CurrencyFieldParentResolvers<ContextType = any, ParentType extends ResolversParentTypes['CurrencyFieldParent'] = ResolversParentTypes['CurrencyFieldParent']> = {
+  __resolveType: TypeResolveFn<'Form', ParentType, ContextType>;
+};
+
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
   name: 'Date';
 }
@@ -32486,7 +33106,7 @@ export type EmployeeEdgeResolvers<ContextType = any, ParentType extends Resolver
 };
 
 export type EntityResolvers<ContextType = any, ParentType extends ResolversParentTypes['Entity'] = ResolversParentTypes['Entity']> = {
-  __resolveType: TypeResolveFn<'Address' | 'AddressSearchField' | 'Admonition' | 'Alert' | 'Asset' | 'BlogPost' | 'Button' | 'CallToAction' | 'CallToActionSettings' | 'Callout' | 'CheckboxField' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'DateField' | 'DocsGroup' | 'DocsPage' | 'Document' | 'DocumentGroup' | 'Employee' | 'ExternalLink' | 'Feature' | 'FooterGroup' | 'Form' | 'FormButton' | 'FormGroup' | 'HeaderGroup' | 'HomePage' | 'HomePageBlock' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'SelectField' | 'SocialLink' | 'Testimonial' | 'TextAreaField' | 'TextInputField' | 'Theme' | 'ThemeColors' | 'ThemeFonts' | 'User' | 'VendorLogo', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Address' | 'AddressSearchField' | 'Admonition' | 'Alert' | 'Asset' | 'BlogPost' | 'Button' | 'CallToAction' | 'CallToActionSettings' | 'Callout' | 'CheckboxField' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'CurrencyField' | 'DateField' | 'DocsGroup' | 'DocsPage' | 'Document' | 'DocumentGroup' | 'Employee' | 'ExternalLink' | 'Feature' | 'FooterGroup' | 'Form' | 'FormButton' | 'FormGroup' | 'HeaderGroup' | 'HomePage' | 'HomePageBlock' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'SelectField' | 'SocialLink' | 'Testimonial' | 'TextAreaField' | 'TextInputField' | 'Theme' | 'ThemeColors' | 'ThemeFonts' | 'User' | 'VendorLogo', ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
 };
@@ -32666,7 +33286,7 @@ export type FormGroupParentResolvers<ContextType = any, ParentType extends Resol
 };
 
 export type FormfieldsUnionResolvers<ContextType = any, ParentType extends ResolversParentTypes['FormfieldsUnion'] = ResolversParentTypes['FormfieldsUnion']> = {
-  __resolveType: TypeResolveFn<'AddressSearchField' | 'CheckboxField' | 'DateField' | 'FormGroup' | 'SelectField' | 'TextAreaField' | 'TextInputField', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'AddressSearchField' | 'CheckboxField' | 'CurrencyField' | 'DateField' | 'FormGroup' | 'SelectField' | 'TextAreaField' | 'TextInputField', ParentType, ContextType>;
 };
 
 export type HeaderGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['HeaderGroup'] = ResolversParentTypes['HeaderGroup']> = {
@@ -33844,6 +34464,10 @@ export type Resolvers<ContextType = any> = {
   ContentTag?: ContentTagResolvers<ContextType>;
   ContentTagConnection?: ContentTagConnectionResolvers<ContextType>;
   ContentTagEdge?: ContentTagEdgeResolvers<ContextType>;
+  CurrencyField?: CurrencyFieldResolvers<ContextType>;
+  CurrencyFieldConnection?: CurrencyFieldConnectionResolvers<ContextType>;
+  CurrencyFieldEdge?: CurrencyFieldEdgeResolvers<ContextType>;
+  CurrencyFieldParent?: CurrencyFieldParentResolvers<ContextType>;
   Date?: GraphQLScalarType;
   DateField?: DateFieldResolvers<ContextType>;
   DateFieldConnection?: DateFieldConnectionResolvers<ContextType>;
