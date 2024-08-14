@@ -18,8 +18,10 @@ export const Hero = (props: HeroProps) => {
   const bg = useGradient();
   const fnTitle = useTitleCase();
 
+  const minH = body === null ? "20vh" : "40vh";
+
   return (
-    <Container className="__hero" layerStyle="container" {...bg} {...rest}>
+    <Container className="__hero" layerStyle="container" {...bg} {...rest} minH={minH}>
       <Flex flexDir="column" alignItems="center" mt={[4, 4, 8]}>
         <Flex
           textAlign={{ base: "left", md: "center" }}
