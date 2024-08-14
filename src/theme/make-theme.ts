@@ -1,9 +1,18 @@
 import { extendTheme } from "@chakra-ui/react";
+
 import { Palette, generatePalette } from "palette-by-numbers";
 
 import { entries } from "~/lib";
 
-import { button, heading, menu } from "./components";
+import {
+  Calendar,
+  CalendarControl,
+  CalendarDay,
+  CalendarMonth,
+  button,
+  heading,
+  menu,
+} from "./components";
 import { globalStyles } from "./global-css";
 
 import type {
@@ -95,7 +104,15 @@ export const makeTheme = (userTheme: ThemeConfig): CustomTheme => {
     fontSizes,
     radii,
     styles: { global: globalStyles },
-    components: { Button: button, Heading: heading, Menu: menu },
+    components: {
+      Button: button,
+      Heading: heading,
+      Menu: menu,
+      Calendar,
+      CalendarControl,
+      CalendarDay,
+      CalendarMonth,
+    },
     layerStyles: {
       container: {
         px: { base: 4, md: 4, lg: 16, xl: 24 },

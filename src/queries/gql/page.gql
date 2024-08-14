@@ -83,6 +83,18 @@ query page($slug: String, $stage: Stage = PUBLISHED) {
                         required
                         fieldGroup
                     }
+                    ... on DateField {
+                        __typename
+                        displayName
+                        formId
+                        label
+                        required
+                        fieldGroup
+                        range
+                        allowFuture
+                        allowPast
+                        fieldGroup
+                    }
                 }
             }
         }
@@ -186,6 +198,18 @@ query page($slug: String, $stage: Stage = PUBLISHED) {
                         formId
                         label
                         required
+                        fieldGroup
+                    }
+                    ... on DateField {
+                        __typename
+                        displayName
+                        formId
+                        label
+                        required
+                        fieldGroup
+                        range
+                        allowFuture
+                        allowPast
                         fieldGroup
                     }
                 }

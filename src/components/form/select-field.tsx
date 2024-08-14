@@ -15,16 +15,19 @@ function selectMultiple(
   creatable: boolean,
 ): SelectOptionSingle[] {
   return value.reduce<SelectOptionSingle[]>((matching, each) => {
+    let match: SelectOptionSingle | undefined;
     if (Array.isArray(options)) {
-      if (creatable) {
-        matching.push({ value: value[0], label: value[0] });
-      }
       for (const option of options) {
         if (option.value === each) {
+          match = option;
           matching.push(option);
         }
       }
+      if (creatable && typeof match === "undefined") {
+        matching.push({ value: value[0], label: value[0] });
+      }
     }
+
     return matching;
   }, []);
 }
@@ -69,12 +72,7 @@ export const SelectField = (props: SelectFieldProps) => {
 
   const handleSelect = useCallback(
     (values: readonly SelectOptionSingle[]) => {
-      const labels = values.reduce<string[]>((final, value) => {
-        if (value.label) {
-          final.push(value.label);
-        }
-        return final;
-      }, []);
+      const labels = values.filter(v => !!v.label).map(v => v.label);
       setValue(name, labels);
       onChange(labels);
     },

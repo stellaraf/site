@@ -15,6 +15,7 @@ import { TextInputValidationType } from "~/types";
 import {
   isAddressSearchField,
   isCheckboxField,
+  isDateField,
   isSelectField,
   isTextAreaField,
   isTextInputField,
@@ -74,8 +75,12 @@ export function createSchema<Fields extends BaseFormField[]>(
       value = fieldConfig.required ? createRequiredString(fieldConfig) : z.string();
       is(value) && (final[fieldConfig.formId] = value);
       return final;
-    }
-    // Text Area
+    } // Date Field
+    else if (isDateField(fieldConfig)) {
+      value = z.date();
+      is(value) && (final[fieldConfig.formId] = value);
+      return final;
+    } // Text Area
     else if (isTextAreaField(fieldConfig)) {
       value = z.string();
 

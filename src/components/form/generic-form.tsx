@@ -9,6 +9,7 @@ import { H4 } from "~/components";
 import { awaitIfNeeded, is, submitForm } from "~/lib";
 import { AddressSearchField } from "./address-search-field";
 import { CheckboxField } from "./checkbox-field";
+import { DateField } from "./date-field";
 import { FieldGroup } from "./field-group";
 import { SelectField } from "./select-field";
 import { TextArea } from "./text-area";
@@ -17,6 +18,7 @@ import { TextInput } from "./text-input";
 import {
   isAddressSearchField,
   isCheckboxField,
+  isDateField,
   isFormGroup,
   isSelectField,
   isTextAreaField,
@@ -178,6 +180,16 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
                         required={field.required}
                         isRequired={field.required}
                         placeholder={field.displayName}
+                      />
+                    );
+                  }
+                  if (isDateField(field)) {
+                    return (
+                      <DateField
+                        field={field}
+                        key={field.formId}
+                        name={field.formId}
+                        defaultValue={{}}
                       />
                     );
                   }

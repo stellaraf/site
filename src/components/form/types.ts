@@ -11,6 +11,7 @@ import type { PageContent } from "~/queries";
 import type {
   AddressSearchField,
   CheckboxField,
+  DateField,
   FormGroup,
   SelectField,
   SelectOptionSingle,
@@ -69,11 +70,17 @@ export interface SelectDynamicFieldProps
   field: FormField;
 }
 
+export type DateFieldProps<Props, FormData extends Dict> = Omit<
+  FormFieldProps<Props, FormData, DateField>,
+  "value" | "onSelectDate"
+>;
+
 export type FormField = Omit<
   | CheckboxField
   | SelectField
   | TextInputField
   | TextAreaField
+  | DateField
   | (FormGroup & { required?: boolean; fieldGroup?: number })
   | AddressSearchField,
   "id" | "stage"
@@ -83,11 +90,13 @@ export type FormValue<Field extends FormField> = Field extends CheckboxField
   ? string[]
   : Field extends SelectField
     ? string[]
-    : Field extends FormGroup
-      ? never
-      : Field["required"] extends true
-        ? string
-        : null;
+    : Field extends DateField
+      ? { start: string; end: string }
+      : Field extends FormGroup
+        ? never
+        : Field["required"] extends true
+          ? string
+          : null;
 
 export interface GenericFormProps<Fields extends FormField[]>
   extends Omit<FlexProps, "onSubmit" | "title">,
