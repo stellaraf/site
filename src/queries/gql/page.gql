@@ -65,6 +65,7 @@ query page($slug: String, $stage: Stage = PUBLISHED) {
                         formId
                         label
                         required
+                        locationType
                         fieldGroup
                     }
                     ... on TextAreaField {
@@ -205,6 +206,7 @@ query page($slug: String, $stage: Stage = PUBLISHED) {
                         __typename
                         displayName
                         formId
+                        locationType
                         label
                         required
                         fieldGroup

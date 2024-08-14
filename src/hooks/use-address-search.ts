@@ -1,10 +1,14 @@
 import debounce from "p-debounce";
 import queryString from "query-string";
+import { useCallback } from "react";
 import { isSearchError, isSearchResults } from "~/lib";
-import type { SelectOptionSingle } from "~/types";
+import type { LocationType, SelectOptionSingle } from "~/types";
 
-async function queryFn(search: string): Promise<SelectOptionSingle[]> {
-  const url = queryString.stringifyUrl({ url: "/api/address-search", query: { search } });
+async function queryFn(search: string, locationType: LocationType): Promise<SelectOptionSingle[]> {
+  const url = queryString.stringifyUrl({
+    url: "/api/address-search",
+    query: { search, locationType },
+  });
   const res = await fetch(url);
   const data = await res.json();
   if (isSearchError(data)) {
@@ -17,6 +21,12 @@ async function queryFn(search: string): Promise<SelectOptionSingle[]> {
   throw new Error(data);
 }
 
-export function useAddressSearch(): (s: string) => Promise<SelectOptionSingle[]> {
-  return debounce(queryFn, 1_500);
+export function useAddressSearch(
+  locationType: LocationType,
+): (s: string) => Promise<SelectOptionSingle[]> {
+  const cb = useCallback(
+    async (search: string): Promise<SelectOptionSingle[]> => queryFn(search, locationType),
+    [locationType],
+  );
+  return debounce(cb, 1_500);
 }

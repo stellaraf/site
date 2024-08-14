@@ -5,14 +5,13 @@ import { SelectDynamic, isSingleValue } from "~/components";
 import { useAddressSearch } from "~/hooks";
 
 import { useEffect, useState } from "react";
-import { SelectOptionSingle } from "~/types";
+import type { AddressSearchField as AddressSearchFieldType, SelectOptionSingle } from "~/types";
 import type { SelectDynamicFieldProps } from "./types";
 
-export const AddressSearchField = (props: SelectDynamicFieldProps) => {
+export const AddressSearchField = (props: SelectDynamicFieldProps<AddressSearchFieldType>) => {
   const { name, field, required = false, defaultValue, ...rest } = props;
   const { setValue, control } = useFormContext();
   const [realValue, setRealValue] = useState<SelectOptionSingle | null>(null);
-
   const {
     field: { onChange, onBlur, ref },
     fieldState: { error },
@@ -21,7 +20,7 @@ export const AddressSearchField = (props: SelectDynamicFieldProps) => {
 
   typeof error !== "undefined" && console.warn(error);
 
-  const options = useAddressSearch();
+  const options = useAddressSearch(field.locationType);
 
   useEffect(() => {
     isSubmitted && setRealValue(null);

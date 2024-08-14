@@ -38,6 +38,21 @@ export function isMapboxSearchResult(data: unknown): data is MapboxSearchResult 
   );
 }
 
+export function isMapboxCity(data: Suggestion): boolean {
+  return data.feature_type === "place";
+}
+
+export function formatCity(data: Suggestion): SearchResult {
+  const name = [data.name, data.context.region.region_code].join(", ");
+  let addressParts: string[] = [];
+  if (typeof data.context.district !== "undefined") {
+    addressParts = [...addressParts, data.context.district.name];
+  }
+  addressParts = [...addressParts, data.context.region.name, data.context.country.name];
+  const address = addressParts.join(", ");
+  return { name, address };
+}
+
 export interface MapboxSearchResult {
   attribution: string;
   response_id: string;

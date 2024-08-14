@@ -71,10 +71,10 @@ export interface SelectFieldProps
   field: SelectField;
 }
 
-export interface SelectDynamicFieldProps
+export interface SelectDynamicFieldProps<Field extends FormField>
   extends Omit<SelectDynamicProps<SelectOptionSingle>, "name" | "onSelect" | "options"> {
   name: string;
-  field: FormField;
+  field: Field;
 }
 
 export type DateFieldProps<Props, FormData extends Dict> = Omit<

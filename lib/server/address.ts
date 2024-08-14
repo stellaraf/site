@@ -1,7 +1,10 @@
 import queryString from "query-string";
-import { isMapboxSearchResult } from "../../address-types";
-
-import type { SearchResult } from "../../address-types";
+import {
+  type SearchResult,
+  formatCity,
+  isMapboxCity,
+  isMapboxSearchResult,
+} from "../address-types";
 
 const headers = new Headers({
   "content-type": "application/json",
@@ -9,11 +12,16 @@ const headers = new Headers({
   "user-agent": "stellar.tech/lib/server/address",
 });
 
-export async function search(q: string, sessionId: string): Promise<SearchResult[]> {
+export async function search(
+  sessionId: string,
+  q: string,
+  locationType: string,
+): Promise<SearchResult[]> {
   const url = queryString.stringifyUrl({
     url: "https://api.mapbox.com/search/searchbox/v1/suggest",
     query: {
       q,
+      types: locationType,
       access_token: process.env.MAPBOX_TOKEN,
       session_token: sessionId,
     },
@@ -26,6 +34,10 @@ export async function search(q: string, sessionId: string): Promise<SearchResult
   if (!isMapboxSearchResult(data)) {
     console.error(data);
     throw new Error("data does not conform to expected format");
+  }
+  if (locationType === "city") {
+    const results: SearchResult[] = data.suggestions.filter(isMapboxCity).map(formatCity);
+    return results;
   }
   const results: SearchResult[] = data.suggestions.map(suggestion => ({
     address: suggestion.full_address,

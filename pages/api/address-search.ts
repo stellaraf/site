@@ -9,8 +9,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (Array.isArray(q)) {
     q = q[0];
   }
+  let locationType = "address";
+  if (typeof req.query.locationType === "string" && req.query.locationType !== "") {
+    locationType = req.query.locationType;
+  }
   try {
-    const results = await search(q, "857DE7DA-0FFC-4136-91F4-ECD681C5F645");
+    const results = await search("857DE7DA-0FFC-4136-91F4-ECD681C5F645", q, locationType);
     return res.json(results);
   } catch (error) {
     console.error(error);
