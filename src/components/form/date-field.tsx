@@ -79,7 +79,7 @@ export const DateField = <V extends FieldValues>(props: DateFieldProps<CalendarP
         >
           <FormLabel as="legend">{label ? label : displayName}</FormLabel>
           <Input readOnly value={displayValue} placeholder="Select Date" />
-          <input name={name} ref={ref} hidden value={formValue} />
+          <input readOnly name={name} ref={ref} hidden value={formValue} />
           <FormErrorMessage>{typeof error !== "undefined" && error.message}</FormErrorMessage>
         </FormControl>
       </PopoverTrigger>
