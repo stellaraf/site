@@ -56,7 +56,7 @@ export const CheckboxField = <V extends FieldValues>(
             </Stack>
           </CheckboxGroup>
         ) : (
-          <RadioGroup {...rest}>
+          <RadioGroup defaultValue={opts[0].value} {...rest}>
             <Stack spacing={[1, 5]} direction={["column", "row"]}>
               {opts.map(opt => (
                 <Radio

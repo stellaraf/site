@@ -1,6 +1,7 @@
 export interface SearchResult {
-  address: string;
-  name: string;
+  displayName: string;
+  description: string;
+  formValue: string;
 }
 
 export interface SearchError {
@@ -18,10 +19,12 @@ export function isSearchResults(data: unknown): data is SearchResult[] {
     return (
       typeof data[0] === "object" &&
       data[0] !== null &&
-      "address" in data[0] &&
-      "name" in data[0] &&
-      typeof data[0].address === "string" &&
-      typeof data[0].name === "string"
+      "displayName" in data[0] &&
+      "formValue" in data[0] &&
+      "description" in data[0] &&
+      typeof data[0].displayName === "string" &&
+      typeof data[0].formValue === "string" &&
+      typeof data[0].description === "string"
     );
   }
   return Array.isArray(data);
@@ -43,14 +46,14 @@ export function isMapboxCity(data: Suggestion): boolean {
 }
 
 export function formatCity(data: Suggestion): SearchResult {
-  const name = [data.name, data.context.region.region_code].join(", ");
+  const displayName = [data.name, data.context.region.region_code].join(", ");
   let addressParts: string[] = [];
   if (typeof data.context.district !== "undefined") {
     addressParts = [...addressParts, data.context.district.name];
   }
   addressParts = [...addressParts, data.context.region.name, data.context.country.name];
-  const address = addressParts.join(", ");
-  return { name, address };
+  const description = addressParts.join(", ");
+  return { displayName, description, formValue: displayName };
 }
 
 export interface MapboxSearchResult {

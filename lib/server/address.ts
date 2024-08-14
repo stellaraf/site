@@ -40,8 +40,9 @@ export async function search(
     return results;
   }
   const results: SearchResult[] = data.suggestions.map(suggestion => ({
-    address: suggestion.full_address,
-    name: suggestion.name,
+    displayName: suggestion.name,
+    formValue: suggestion.full_address,
+    description: suggestion.full_address,
   }));
   return results;
 }

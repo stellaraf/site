@@ -15,6 +15,7 @@ import { TextInputValidationType } from "~/types";
 import {
   isAddressSearchField,
   isCheckboxField,
+  isCurrencyField,
   isDateField,
   isSelectField,
   isTextAreaField,
@@ -62,12 +63,19 @@ export function createSchema<Fields extends BaseFormField[]>(
 
     // Checkbox or Select
     if (isCheckboxField(fieldConfig) || isSelectField(fieldConfig)) {
-      value = z.array(z.string());
+      if (fieldConfig.multiple) {
+        value = z.array(z.string());
 
-      if (fieldConfig.required) {
-        value = createRequiredArray(fieldConfig);
+        if (fieldConfig.required) {
+          value = createRequiredArray(fieldConfig);
+        }
+      } else {
+        value = z.string();
+
+        if (fieldConfig.required) {
+          value = createRequiredString(fieldConfig);
+        }
       }
-
       // Add field to schema
       is(value) && (final[fieldConfig.formId] = value);
       return final;
@@ -80,7 +88,16 @@ export function createSchema<Fields extends BaseFormField[]>(
       value = z.date();
       is(value) && (final[fieldConfig.formId] = value);
       return final;
-    } // Text Area
+    } // Currency Field
+    else if (isCurrencyField(fieldConfig)) {
+      value = z.coerce.number();
+      if (fieldConfig.required) {
+        value = value.min(1);
+      }
+      is(value) && (final[fieldConfig.formId] = value);
+      return final;
+    }
+    // Text Area
     else if (isTextAreaField(fieldConfig)) {
       value = z.string();
 

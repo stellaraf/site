@@ -71,14 +71,19 @@ export const SelectField = (props: SelectFieldProps) => {
 
   const handleSelect = useCallback(
     (values: readonly SelectOptionSingle[]) => {
-      if (values.length === 0) {
+      if (values.length === 0 || values === null) {
         setValue(name, defaultValue);
         onChange(defaultValue);
         return;
       }
-      const labels = values.filter(v => !!v.label).map(v => v.label);
-      setValue(name, labels);
-      onChange(labels);
+      if (isMulti) {
+        const labels = values.filter(v => !!v.label).map(v => v.label);
+        setValue(name, labels);
+        onChange(labels);
+      } else {
+        setValue(name, values[0].label);
+        onChange(values[0].label);
+      }
     },
     [name, setValue],
   );

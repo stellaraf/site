@@ -40,22 +40,20 @@ export const DateField = <V extends FieldValues>(props: DateFieldProps<CalendarP
   const { onClose, isOpen, onOpen } = useDisclosure();
 
   const [dates, setDates] = useState<CalendarValues>({});
-  const [formValue, setFormValue] = useState("");
   const [displayValue, setDisplayValue] = useState<string>();
   const initialRef = useRef(null);
 
-  const { control } = useFormContext<V>();
+  const { control, register } = useFormContext<V>();
 
   const {
-    field: { onChange, ref },
+    field: { onChange },
     fieldState: { error },
   } = useController<V>({ name, control, rules: { required }, defaultValue });
 
   const onDateChange = (changed: CalendarDate | CalendarValues): void => {
     if (changed instanceof Date) {
       setDisplayValue(changed.toLocaleDateString(undefined, { dateStyle: "full" }));
-      setFormValue(changed.toISOString());
-      onChange(formValue);
+      onChange(changed);
       onClose();
       setDates({ start: changed, end: changed });
     }
@@ -79,7 +77,7 @@ export const DateField = <V extends FieldValues>(props: DateFieldProps<CalendarP
         >
           <FormLabel as="legend">{label ? label : displayName}</FormLabel>
           <Input readOnly value={displayValue} placeholder="Select Date" />
-          <input readOnly name={name} ref={ref} hidden value={formValue} />
+          <input readOnly hidden {...register(name, { required: field.required, ...rules })} />
           <FormErrorMessage>{typeof error !== "undefined" && error.message}</FormErrorMessage>
         </FormControl>
       </PopoverTrigger>

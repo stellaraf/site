@@ -16,7 +16,11 @@ async function queryFn(search: string, locationType: LocationType): Promise<Sele
     throw new Error(data.error);
   }
   if (isSearchResults(data)) {
-    return data.map(d => ({ label: d.name, value: d.address, description: d.address }));
+    return data.map(d => ({
+      label: d.displayName,
+      value: d.formValue,
+      description: d.description,
+    }));
   }
   throw new Error(data);
 }

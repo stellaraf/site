@@ -34,7 +34,7 @@ export const CurrencyField = <V extends FieldValues>(
         <InputLeftElement pointerEvents="none" opacity={0.5} fontSize="large">
           {field.unitSymbol}
         </InputLeftElement>
-        <NumberInput min={1} precision={2}>
+        <NumberInput min={0} precision={2}>
           <NumberInputField
             pl={8}
             {...register(name, { required: field.required, ...rules })}
