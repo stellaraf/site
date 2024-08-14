@@ -27,7 +27,6 @@ function selectMultiple(
         matching.push({ value: value[0], label: value[0] });
       }
     }
-
     return matching;
   }, []);
 }
@@ -38,7 +37,7 @@ function selectSingle(
   creatable: boolean,
 ): SelectOptionSingle | null {
   if (Array.isArray(options)) {
-    if (creatable) {
+    if (creatable && value !== null) {
       return { value, label: value };
     }
     for (const option of options) {
@@ -58,7 +57,7 @@ export const SelectField = (props: SelectFieldProps) => {
     isMulti = false,
     required = false,
     creatable = false,
-    defaultValue = [],
+    defaultValue = isMulti ? [] : null,
     ...rest
   } = props;
   const { setValue, control } = useFormContext();
@@ -72,6 +71,11 @@ export const SelectField = (props: SelectFieldProps) => {
 
   const handleSelect = useCallback(
     (values: readonly SelectOptionSingle[]) => {
+      if (values.length === 0) {
+        setValue(name, defaultValue);
+        onChange(defaultValue);
+        return;
+      }
       const labels = values.filter(v => !!v.label).map(v => v.label);
       setValue(name, labels);
       onChange(labels);
