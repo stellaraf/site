@@ -1,5 +1,5 @@
 import { FormControl, FormErrorMessage, FormLabel, Textarea } from "@chakra-ui/react";
-import { useController, useFormContext } from "react-hook-form";
+import { useController } from "react-hook-form";
 
 import { is } from "~/lib";
 
@@ -10,13 +10,18 @@ import type { TextAreaProps } from "./types";
 export const TextArea = <V extends FieldValues>(props: TextAreaProps<TextareaProps, V>) => {
   const { name, field, defaultValue, rules = {}, isRequired = false, ...rest } = props;
 
-  const { register } = useFormContext<V>();
+  // const { register } = useFormContext<V>();
   const {
+    field: register,
     fieldState: { error },
-  } = useController({ name });
+  } = useController({ name, rules: { required: isRequired, ...rules } });
 
   return (
-    <FormControl id={name} isRequired={isRequired} isInvalid={typeof error !== "undefined"}>
+    <FormControl
+      id={`form-control--${name}`}
+      isRequired={isRequired}
+      isInvalid={typeof error !== "undefined"}
+    >
       {is(field.label) && <FormLabel>{field.label}</FormLabel>}
       <Textarea
         resize="vertical"
@@ -25,7 +30,7 @@ export const TextArea = <V extends FieldValues>(props: TextAreaProps<TextareaPro
           _light: { opacity: 0.8, color: "gray.600" },
           _dark: { color: "whiteAlpha.600", opacity: 1 },
         }}
-        {...register(name, { required: isRequired, ...rules })}
+        {...register}
         {...rest}
       />
       <FormErrorMessage>{typeof error !== "undefined" && error.message}</FormErrorMessage>

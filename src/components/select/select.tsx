@@ -55,6 +55,7 @@ export const Select = forwardRef(
     return (
       <SelectContext.Provider value={{ isOpen, isError }}>
         <Component<Opt, IsMulti>
+          ref={ref}
           onChange={defaultOnChange}
           onMenuClose={onClose}
           onMenuOpen={onOpen}
@@ -72,7 +73,6 @@ export const Select = forwardRef(
           isMulti={isMulti}
           menuPortalTarget={typeof document !== "undefined" ? document.body : undefined}
           components={{ Option }}
-          ref={ref}
           selectedOptionColorScheme={colorScheme}
           styles={{
             menuPortal: provided => ({ ...provided, zIndex: 100 }),

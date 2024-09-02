@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 
 import { FormControl, FormErrorMessage } from "@chakra-ui/react";
 import { useController, useFormContext } from "react-hook-form";
@@ -9,7 +9,7 @@ import type { GroupBase, OptionsOrGroups } from "chakra-react-select";
 import type { SelectOptionSingle } from "~/types";
 import type { SelectFieldProps } from "./types";
 
-function selectMultiple(
+export function selectMultiple(
   options: OptionsOrGroups<SelectOptionSingle, GroupBase<SelectOptionSingle>> | undefined,
   value: string[],
   creatable: boolean,
@@ -18,7 +18,7 @@ function selectMultiple(
     let match: SelectOptionSingle | undefined;
     if (Array.isArray(options)) {
       for (const option of options) {
-        if (option.value === each) {
+        if (option.value === each || option.label === each) {
           match = option;
           matching.push(option);
         }
@@ -31,7 +31,7 @@ function selectMultiple(
   }, []);
 }
 
-function selectSingle(
+export function selectSingle(
   options: OptionsOrGroups<SelectOptionSingle, GroupBase<SelectOptionSingle>> | undefined,
   value: string,
   creatable: boolean,
@@ -41,7 +41,7 @@ function selectSingle(
       return { value, label: value };
     }
     for (const option of options) {
-      if (option.value === value) {
+      if (option.value === value || option.label === value) {
         return option;
       }
     }
@@ -60,6 +60,9 @@ export const SelectField = (props: SelectFieldProps) => {
     defaultValue = isMulti ? [] : null,
     ...rest
   } = props;
+
+  const selector = useMemo(() => (isMulti ? selectMultiple : selectSingle), [isMulti]);
+
   const { setValue, control } = useFormContext();
 
   const {
@@ -89,25 +92,24 @@ export const SelectField = (props: SelectFieldProps) => {
   );
 
   return (
-    <FormControl id={name} isInvalid={typeof error !== "undefined"} isRequired={required}>
+    <FormControl
+      id={`form-control--${name}`}
+      isInvalid={typeof error !== "undefined"}
+      isRequired={required}
+    >
       <Select
         ref={ref}
         name={name}
-        options={options}
         onBlur={onBlur}
+        options={options}
         isMulti={isMulti}
         required={required}
+        creatable={creatable}
         onSelect={handleSelect}
         defaultValue={defaultValue}
-        creatable={creatable}
-        value={
-          isMulti
-            ? selectMultiple(options, value, creatable)
-            : selectSingle(options, value, creatable)
-        }
+        value={selector(options, value, creatable)}
         {...rest}
       />
-
       <FormErrorMessage>
         {typeof error !== "undefined" && error.message?.toString()}
       </FormErrorMessage>

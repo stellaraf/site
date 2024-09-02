@@ -70,7 +70,7 @@ export const DateField = <V extends FieldValues>(props: DateFieldProps<CalendarP
     >
       <PopoverTrigger>
         <FormControl
-          id={name}
+          id={`form-control--${name}`}
           as="fieldset"
           isRequired={field.required}
           isInvalid={typeof error !== "undefined"}

@@ -2,6 +2,7 @@ import queryString from "query-string";
 import {
   type SearchResult,
   formatCity,
+  getContextValue,
   isMapboxCity,
   isMapboxSearchResult,
 } from "../address-types";
@@ -41,7 +42,7 @@ export async function search(
   }
   const results: SearchResult[] = data.suggestions.map(suggestion => ({
     displayName: suggestion.name,
-    formValue: suggestion.full_address,
+    formValue: getContextValue(suggestion.context),
     description: suggestion.full_address,
   }));
   return results;

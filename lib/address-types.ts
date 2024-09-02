@@ -1,7 +1,7 @@
 export interface SearchResult {
   displayName: string;
   description: string;
-  formValue: string;
+  formValue: SearchResultValue;
 }
 
 export interface SearchError {
@@ -23,7 +23,8 @@ export function isSearchResults(data: unknown): data is SearchResult[] {
       "formValue" in data[0] &&
       "description" in data[0] &&
       typeof data[0].displayName === "string" &&
-      typeof data[0].formValue === "string" &&
+      typeof data[0].formValue === "object" &&
+      data[0].formValue !== null &&
       typeof data[0].description === "string"
     );
   }
@@ -53,13 +54,31 @@ export function formatCity(data: Suggestion): SearchResult {
   }
   addressParts = [...addressParts, data.context.region.name, data.context.country.name];
   const description = addressParts.join(", ");
-  return { displayName, description, formValue: displayName };
+  return { displayName, description, formValue: getContextValue(data.context) };
+}
+
+export function getContextValue(data: Context): SearchResultValue {
+  return {
+    region: data.region.name,
+    postcode: data.postcode.name,
+    country: data.country.name,
+    place: data.place.name,
+    street: data.address?.name ?? data.street.name,
+  };
 }
 
 export interface MapboxSearchResult {
   attribution: string;
   response_id: string;
   suggestions: Suggestion[];
+}
+
+export interface SearchResultValue {
+  region: string;
+  postcode: string;
+  country: string;
+  place: string;
+  street: string;
 }
 
 export interface Suggestion {

@@ -11,7 +11,7 @@ import {
   type NumberInputFieldProps,
   NumberInputStepper,
 } from "@chakra-ui/react";
-import { useController, useFormContext } from "react-hook-form";
+import { useController } from "react-hook-form";
 
 import type { FieldValues } from "react-hook-form";
 import type { CurrencyFieldProps } from "./types";
@@ -21,25 +21,24 @@ export const CurrencyField = <V extends FieldValues>(
 ) => {
   const { field, name, defaultValue, rules = {}, ...rest } = props;
 
-  const { register } = useFormContext<V>();
-
   const {
+    field: register,
     fieldState: { error },
-  } = useController<V>({ name });
+  } = useController<V>({ name, rules: { required: field.required, ...rules } });
 
   return (
-    <FormControl id={name} isRequired={field.required} isInvalid={typeof error !== "undefined"}>
+    <FormControl
+      id={`form-control--${name}`}
+      isRequired={field.required}
+      isInvalid={typeof error !== "undefined"}
+    >
       <FormLabel>{field.displayName}</FormLabel>
       <InputGroup>
         <InputLeftElement pointerEvents="none" opacity={0.5} fontSize="large">
           {field.unitSymbol}
         </InputLeftElement>
         <NumberInput min={0} precision={2}>
-          <NumberInputField
-            pl={8}
-            {...register(name, { required: field.required, ...rules })}
-            {...rest}
-          />
+          <NumberInputField pl={8} {...register} {...rest} />
           <NumberInputStepper>
             <NumberIncrementStepper />
             <NumberDecrementStepper />

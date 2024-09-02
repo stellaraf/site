@@ -13,7 +13,7 @@ export const AddressSearchField = (props: SelectDynamicFieldProps<AddressSearchF
   const { setValue, control } = useFormContext();
   const [realValue, setRealValue] = useState<SelectOptionSingle | null>(null);
   const {
-    field: { onChange, onBlur, ref },
+    field: { onChange, value, ...register },
     fieldState: { error },
     formState: { isSubmitted },
   } = useController({ name, control, rules: { required }, defaultValue });
@@ -27,16 +27,16 @@ export const AddressSearchField = (props: SelectDynamicFieldProps<AddressSearchF
   }, [isSubmitted]);
 
   return (
-    <FormControl id={name} isInvalid={typeof error !== "undefined"} isRequired={required}>
+    <FormControl
+      id={`form-control--${name}`}
+      isInvalid={typeof error !== "undefined"}
+      isRequired={required}
+    >
       <SelectDynamic
-        ref={ref}
-        name={name}
-        onBlur={onBlur}
         isMulti={false}
         required={required}
         options={options}
         onChange={value => {
-          console.log(value);
           if (isSingleValue(value)) {
             setRealValue(value);
             setValue(name, value.value);
@@ -49,6 +49,7 @@ export const AddressSearchField = (props: SelectDynamicFieldProps<AddressSearchF
         }}
         defaultValue={defaultValue}
         value={realValue}
+        {...register}
         {...rest}
       />
 

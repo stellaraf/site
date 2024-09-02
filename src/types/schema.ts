@@ -12427,6 +12427,7 @@ export enum EntityTypeName {
   OfficeLocation = 'OfficeLocation',
   Page = 'Page',
   PageContent = 'PageContent',
+  RemoteSelectField = 'RemoteSelectField',
   /** Scheduled Operation system model */
   ScheduledOperation = 'ScheduledOperation',
   /** Scheduled Release system model */
@@ -15038,7 +15039,7 @@ export type FormWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type FormfieldsUnion = AddressSearchField | CheckboxField | CurrencyField | DateField | FormGroup | SelectField | TextAreaField | TextInputField;
+export type FormfieldsUnion = AddressSearchField | CheckboxField | CurrencyField | DateField | FormGroup | RemoteSelectField | SelectField | TextAreaField | TextInputField;
 
 export type FormfieldsUnionConnectInput = {
   AddressSearchField?: InputMaybe<AddressSearchFieldConnectInput>;
@@ -15046,6 +15047,7 @@ export type FormfieldsUnionConnectInput = {
   CurrencyField?: InputMaybe<CurrencyFieldConnectInput>;
   DateField?: InputMaybe<DateFieldConnectInput>;
   FormGroup?: InputMaybe<FormGroupConnectInput>;
+  RemoteSelectField?: InputMaybe<RemoteSelectFieldConnectInput>;
   SelectField?: InputMaybe<SelectFieldConnectInput>;
   TextAreaField?: InputMaybe<TextAreaFieldConnectInput>;
   TextInputField?: InputMaybe<TextInputFieldConnectInput>;
@@ -15057,6 +15059,7 @@ export type FormfieldsUnionCreateInput = {
   CurrencyField?: InputMaybe<CurrencyFieldCreateInput>;
   DateField?: InputMaybe<DateFieldCreateInput>;
   FormGroup?: InputMaybe<FormGroupCreateInput>;
+  RemoteSelectField?: InputMaybe<RemoteSelectFieldCreateInput>;
   SelectField?: InputMaybe<SelectFieldCreateInput>;
   TextAreaField?: InputMaybe<TextAreaFieldCreateInput>;
   TextInputField?: InputMaybe<TextInputFieldCreateInput>;
@@ -15078,6 +15081,7 @@ export type FormfieldsUnionCreateWithPositionInput = {
   CurrencyField?: InputMaybe<CurrencyFieldCreateWithPositionInput>;
   DateField?: InputMaybe<DateFieldCreateWithPositionInput>;
   FormGroup?: InputMaybe<FormGroupCreateWithPositionInput>;
+  RemoteSelectField?: InputMaybe<RemoteSelectFieldCreateWithPositionInput>;
   SelectField?: InputMaybe<SelectFieldCreateWithPositionInput>;
   TextAreaField?: InputMaybe<TextAreaFieldCreateWithPositionInput>;
   TextInputField?: InputMaybe<TextInputFieldCreateWithPositionInput>;
@@ -15089,6 +15093,7 @@ export type FormfieldsUnionUpdateInput = {
   CurrencyField?: InputMaybe<CurrencyFieldUpdateInput>;
   DateField?: InputMaybe<DateFieldUpdateInput>;
   FormGroup?: InputMaybe<FormGroupUpdateInput>;
+  RemoteSelectField?: InputMaybe<RemoteSelectFieldUpdateInput>;
   SelectField?: InputMaybe<SelectFieldUpdateInput>;
   TextAreaField?: InputMaybe<TextAreaFieldUpdateInput>;
   TextInputField?: InputMaybe<TextInputFieldUpdateInput>;
@@ -15111,6 +15116,7 @@ export type FormfieldsUnionUpdateManyWithNestedWhereInput = {
   CurrencyField?: InputMaybe<CurrencyFieldUpdateManyWithNestedWhereInput>;
   DateField?: InputMaybe<DateFieldUpdateManyWithNestedWhereInput>;
   FormGroup?: InputMaybe<FormGroupUpdateManyWithNestedWhereInput>;
+  RemoteSelectField?: InputMaybe<RemoteSelectFieldUpdateManyWithNestedWhereInput>;
   SelectField?: InputMaybe<SelectFieldUpdateManyWithNestedWhereInput>;
   TextAreaField?: InputMaybe<TextAreaFieldUpdateManyWithNestedWhereInput>;
   TextInputField?: InputMaybe<TextInputFieldUpdateManyWithNestedWhereInput>;
@@ -15133,6 +15139,7 @@ export type FormfieldsUnionUpdateWithNestedWhereUniqueAndPositionInput = {
   CurrencyField?: InputMaybe<CurrencyFieldUpdateWithNestedWhereUniqueAndPositionInput>;
   DateField?: InputMaybe<DateFieldUpdateWithNestedWhereUniqueAndPositionInput>;
   FormGroup?: InputMaybe<FormGroupUpdateWithNestedWhereUniqueAndPositionInput>;
+  RemoteSelectField?: InputMaybe<RemoteSelectFieldUpdateWithNestedWhereUniqueAndPositionInput>;
   SelectField?: InputMaybe<SelectFieldUpdateWithNestedWhereUniqueAndPositionInput>;
   TextAreaField?: InputMaybe<TextAreaFieldUpdateWithNestedWhereUniqueAndPositionInput>;
   TextInputField?: InputMaybe<TextInputFieldUpdateWithNestedWhereUniqueAndPositionInput>;
@@ -15144,6 +15151,7 @@ export type FormfieldsUnionUpdateWithNestedWhereUniqueInput = {
   CurrencyField?: InputMaybe<CurrencyFieldUpdateWithNestedWhereUniqueInput>;
   DateField?: InputMaybe<DateFieldUpdateWithNestedWhereUniqueInput>;
   FormGroup?: InputMaybe<FormGroupUpdateWithNestedWhereUniqueInput>;
+  RemoteSelectField?: InputMaybe<RemoteSelectFieldUpdateWithNestedWhereUniqueInput>;
   SelectField?: InputMaybe<SelectFieldUpdateWithNestedWhereUniqueInput>;
   TextAreaField?: InputMaybe<TextAreaFieldUpdateWithNestedWhereUniqueInput>;
   TextInputField?: InputMaybe<TextInputFieldUpdateWithNestedWhereUniqueInput>;
@@ -15155,6 +15163,7 @@ export type FormfieldsUnionUpsertWithNestedWhereUniqueAndPositionInput = {
   CurrencyField?: InputMaybe<CurrencyFieldUpsertWithNestedWhereUniqueAndPositionInput>;
   DateField?: InputMaybe<DateFieldUpsertWithNestedWhereUniqueAndPositionInput>;
   FormGroup?: InputMaybe<FormGroupUpsertWithNestedWhereUniqueAndPositionInput>;
+  RemoteSelectField?: InputMaybe<RemoteSelectFieldUpsertWithNestedWhereUniqueAndPositionInput>;
   SelectField?: InputMaybe<SelectFieldUpsertWithNestedWhereUniqueAndPositionInput>;
   TextAreaField?: InputMaybe<TextAreaFieldUpsertWithNestedWhereUniqueAndPositionInput>;
   TextInputField?: InputMaybe<TextInputFieldUpsertWithNestedWhereUniqueAndPositionInput>;
@@ -15166,6 +15175,7 @@ export type FormfieldsUnionUpsertWithNestedWhereUniqueInput = {
   CurrencyField?: InputMaybe<CurrencyFieldUpsertWithNestedWhereUniqueInput>;
   DateField?: InputMaybe<DateFieldUpsertWithNestedWhereUniqueInput>;
   FormGroup?: InputMaybe<FormGroupUpsertWithNestedWhereUniqueInput>;
+  RemoteSelectField?: InputMaybe<RemoteSelectFieldUpsertWithNestedWhereUniqueInput>;
   SelectField?: InputMaybe<SelectFieldUpsertWithNestedWhereUniqueInput>;
   TextAreaField?: InputMaybe<TextAreaFieldUpsertWithNestedWhereUniqueInput>;
   TextInputField?: InputMaybe<TextInputFieldUpsertWithNestedWhereUniqueInput>;
@@ -15177,6 +15187,7 @@ export type FormfieldsUnionWhereInput = {
   CurrencyField?: InputMaybe<CurrencyFieldWhereInput>;
   DateField?: InputMaybe<DateFieldWhereInput>;
   FormGroup?: InputMaybe<FormGroupWhereInput>;
+  RemoteSelectField?: InputMaybe<RemoteSelectFieldWhereInput>;
   SelectField?: InputMaybe<SelectFieldWhereInput>;
   TextAreaField?: InputMaybe<TextAreaFieldWhereInput>;
   TextInputField?: InputMaybe<TextInputFieldWhereInput>;
@@ -15188,6 +15199,7 @@ export type FormfieldsUnionWhereUniqueInput = {
   CurrencyField?: InputMaybe<CurrencyFieldWhereUniqueInput>;
   DateField?: InputMaybe<DateFieldWhereUniqueInput>;
   FormGroup?: InputMaybe<FormGroupWhereUniqueInput>;
+  RemoteSelectField?: InputMaybe<RemoteSelectFieldWhereUniqueInput>;
   SelectField?: InputMaybe<SelectFieldWhereUniqueInput>;
   TextAreaField?: InputMaybe<TextAreaFieldWhereUniqueInput>;
   TextInputField?: InputMaybe<TextInputFieldWhereUniqueInput>;
@@ -23349,6 +23361,522 @@ export type RgbaInput = {
   r: Scalars['RGBAHue']['input'];
 };
 
+export type RemoteSelectField = Entity & {
+  __typename?: 'RemoteSelectField';
+  dataPath: Scalars['String']['output'];
+  displayName: Scalars['String']['output'];
+  fieldGroup: Scalars['Int']['output'];
+  formId: Scalars['String']['output'];
+  /** The unique identifier */
+  id: Scalars['ID']['output'];
+  label?: Maybe<Scalars['String']['output']>;
+  multiple: Scalars['Boolean']['output'];
+  required: Scalars['Boolean']['output'];
+  /** System stage field */
+  stage: Stage;
+};
+
+export type RemoteSelectFieldConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: RemoteSelectFieldWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type RemoteSelectFieldConnection = {
+  __typename?: 'RemoteSelectFieldConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<RemoteSelectFieldEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type RemoteSelectFieldCreateInput = {
+  dataPath: Scalars['String']['input'];
+  displayName: Scalars['String']['input'];
+  fieldGroup: Scalars['Int']['input'];
+  formId: Scalars['String']['input'];
+  label?: InputMaybe<Scalars['String']['input']>;
+  multiple: Scalars['Boolean']['input'];
+  required: Scalars['Boolean']['input'];
+};
+
+export type RemoteSelectFieldCreateManyInlineInput = {
+  /** Create and connect multiple existing RemoteSelectField documents */
+  create?: InputMaybe<Array<RemoteSelectFieldCreateInput>>;
+};
+
+export type RemoteSelectFieldCreateOneInlineInput = {
+  /** Create and connect one RemoteSelectField document */
+  create?: InputMaybe<RemoteSelectFieldCreateInput>;
+};
+
+export type RemoteSelectFieldCreateWithPositionInput = {
+  /** Document to create */
+  data: RemoteSelectFieldCreateInput;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+};
+
+/** An edge in a connection. */
+export type RemoteSelectFieldEdge = {
+  __typename?: 'RemoteSelectFieldEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: RemoteSelectField;
+};
+
+/** Identifies documents */
+export type RemoteSelectFieldManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<RemoteSelectFieldWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<RemoteSelectFieldWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<RemoteSelectFieldWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  dataPath?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  dataPath_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  dataPath_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  dataPath_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  dataPath_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  dataPath_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  dataPath_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  dataPath_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  dataPath_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  dataPath_starts_with?: InputMaybe<Scalars['String']['input']>;
+  displayName?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  displayName_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  displayName_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  displayName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  displayName_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  displayName_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  displayName_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  displayName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  displayName_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  displayName_starts_with?: InputMaybe<Scalars['String']['input']>;
+  fieldGroup?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  fieldGroup_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  fieldGroup_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  fieldGroup_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  fieldGroup_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  fieldGroup_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  fieldGroup_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  fieldGroup_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  formId?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  formId_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  formId_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  formId_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  formId_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  formId_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  formId_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  formId_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  formId_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  formId_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  label_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  label_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  label_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  label_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  label_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  label_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  label_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  label_starts_with?: InputMaybe<Scalars['String']['input']>;
+  multiple?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  multiple_not?: InputMaybe<Scalars['Boolean']['input']>;
+  required?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  required_not?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export enum RemoteSelectFieldOrderByInput {
+  DataPathAsc = 'dataPath_ASC',
+  DataPathDesc = 'dataPath_DESC',
+  DisplayNameAsc = 'displayName_ASC',
+  DisplayNameDesc = 'displayName_DESC',
+  FieldGroupAsc = 'fieldGroup_ASC',
+  FieldGroupDesc = 'fieldGroup_DESC',
+  FormIdAsc = 'formId_ASC',
+  FormIdDesc = 'formId_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  MultipleAsc = 'multiple_ASC',
+  MultipleDesc = 'multiple_DESC',
+  RequiredAsc = 'required_ASC',
+  RequiredDesc = 'required_DESC'
+}
+
+export type RemoteSelectFieldParent = Form;
+
+export type RemoteSelectFieldParentConnectInput = {
+  Form?: InputMaybe<FormConnectInput>;
+};
+
+export type RemoteSelectFieldParentCreateInput = {
+  Form?: InputMaybe<FormCreateInput>;
+};
+
+export type RemoteSelectFieldParentCreateManyInlineInput = {
+  /** Connect multiple existing RemoteSelectFieldParent documents */
+  connect?: InputMaybe<Array<RemoteSelectFieldParentWhereUniqueInput>>;
+  /** Create and connect multiple existing RemoteSelectFieldParent documents */
+  create?: InputMaybe<Array<RemoteSelectFieldParentCreateInput>>;
+};
+
+export type RemoteSelectFieldParentCreateOneInlineInput = {
+  /** Connect one existing RemoteSelectFieldParent document */
+  connect?: InputMaybe<RemoteSelectFieldParentWhereUniqueInput>;
+  /** Create and connect one RemoteSelectFieldParent document */
+  create?: InputMaybe<RemoteSelectFieldParentCreateInput>;
+};
+
+export type RemoteSelectFieldParentUpdateInput = {
+  Form?: InputMaybe<FormUpdateInput>;
+};
+
+export type RemoteSelectFieldParentUpdateManyInlineInput = {
+  /** Connect multiple existing RemoteSelectFieldParent documents */
+  connect?: InputMaybe<Array<RemoteSelectFieldParentConnectInput>>;
+  /** Create and connect multiple RemoteSelectFieldParent documents */
+  create?: InputMaybe<Array<RemoteSelectFieldParentCreateInput>>;
+  /** Delete multiple RemoteSelectFieldParent documents */
+  delete?: InputMaybe<Array<RemoteSelectFieldParentWhereUniqueInput>>;
+  /** Disconnect multiple RemoteSelectFieldParent documents */
+  disconnect?: InputMaybe<Array<RemoteSelectFieldParentWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing RemoteSelectFieldParent documents */
+  set?: InputMaybe<Array<RemoteSelectFieldParentWhereUniqueInput>>;
+  /** Update multiple RemoteSelectFieldParent documents */
+  update?: InputMaybe<Array<RemoteSelectFieldParentUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple RemoteSelectFieldParent documents */
+  upsert?: InputMaybe<Array<RemoteSelectFieldParentUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type RemoteSelectFieldParentUpdateManyWithNestedWhereInput = {
+  Form?: InputMaybe<FormUpdateManyWithNestedWhereInput>;
+};
+
+export type RemoteSelectFieldParentUpdateOneInlineInput = {
+  /** Connect existing RemoteSelectFieldParent document */
+  connect?: InputMaybe<RemoteSelectFieldParentWhereUniqueInput>;
+  /** Create and connect one RemoteSelectFieldParent document */
+  create?: InputMaybe<RemoteSelectFieldParentCreateInput>;
+  /** Delete currently connected RemoteSelectFieldParent document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Disconnect currently connected RemoteSelectFieldParent document */
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single RemoteSelectFieldParent document */
+  update?: InputMaybe<RemoteSelectFieldParentUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single RemoteSelectFieldParent document */
+  upsert?: InputMaybe<RemoteSelectFieldParentUpsertWithNestedWhereUniqueInput>;
+};
+
+export type RemoteSelectFieldParentUpdateWithNestedWhereUniqueInput = {
+  Form?: InputMaybe<FormUpdateWithNestedWhereUniqueInput>;
+};
+
+export type RemoteSelectFieldParentUpsertWithNestedWhereUniqueInput = {
+  Form?: InputMaybe<FormUpsertWithNestedWhereUniqueInput>;
+};
+
+export type RemoteSelectFieldParentWhereInput = {
+  Form?: InputMaybe<FormWhereInput>;
+};
+
+export type RemoteSelectFieldParentWhereUniqueInput = {
+  Form?: InputMaybe<FormWhereUniqueInput>;
+};
+
+export type RemoteSelectFieldUpdateInput = {
+  dataPath?: InputMaybe<Scalars['String']['input']>;
+  displayName?: InputMaybe<Scalars['String']['input']>;
+  fieldGroup?: InputMaybe<Scalars['Int']['input']>;
+  formId?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  multiple?: InputMaybe<Scalars['Boolean']['input']>;
+  required?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type RemoteSelectFieldUpdateManyInlineInput = {
+  /** Create and connect multiple RemoteSelectField component instances */
+  create?: InputMaybe<Array<RemoteSelectFieldCreateWithPositionInput>>;
+  /** Delete multiple RemoteSelectField documents */
+  delete?: InputMaybe<Array<RemoteSelectFieldWhereUniqueInput>>;
+  /** Update multiple RemoteSelectField component instances */
+  update?: InputMaybe<Array<RemoteSelectFieldUpdateWithNestedWhereUniqueAndPositionInput>>;
+  /** Upsert multiple RemoteSelectField component instances */
+  upsert?: InputMaybe<Array<RemoteSelectFieldUpsertWithNestedWhereUniqueAndPositionInput>>;
+};
+
+export type RemoteSelectFieldUpdateManyInput = {
+  dataPath?: InputMaybe<Scalars['String']['input']>;
+  displayName?: InputMaybe<Scalars['String']['input']>;
+  fieldGroup?: InputMaybe<Scalars['Int']['input']>;
+  formId?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  multiple?: InputMaybe<Scalars['Boolean']['input']>;
+  required?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type RemoteSelectFieldUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: RemoteSelectFieldUpdateManyInput;
+  /** Document search */
+  where: RemoteSelectFieldWhereInput;
+};
+
+export type RemoteSelectFieldUpdateOneInlineInput = {
+  /** Create and connect one RemoteSelectField document */
+  create?: InputMaybe<RemoteSelectFieldCreateInput>;
+  /** Delete currently connected RemoteSelectField document */
+  delete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Update single RemoteSelectField document */
+  update?: InputMaybe<RemoteSelectFieldUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single RemoteSelectField document */
+  upsert?: InputMaybe<RemoteSelectFieldUpsertWithNestedWhereUniqueInput>;
+};
+
+export type RemoteSelectFieldUpdateWithNestedWhereUniqueAndPositionInput = {
+  /** Document to update */
+  data?: InputMaybe<RemoteSelectFieldUpdateInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: RemoteSelectFieldWhereUniqueInput;
+};
+
+export type RemoteSelectFieldUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: RemoteSelectFieldUpdateInput;
+  /** Unique document search */
+  where: RemoteSelectFieldWhereUniqueInput;
+};
+
+export type RemoteSelectFieldUpsertInput = {
+  /** Create document if it didn't exist */
+  create: RemoteSelectFieldCreateInput;
+  /** Update document if it exists */
+  update: RemoteSelectFieldUpdateInput;
+};
+
+export type RemoteSelectFieldUpsertWithNestedWhereUniqueAndPositionInput = {
+  /** Document to upsert */
+  data?: InputMaybe<RemoteSelectFieldUpsertInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: RemoteSelectFieldWhereUniqueInput;
+};
+
+export type RemoteSelectFieldUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: RemoteSelectFieldUpsertInput;
+  /** Unique document search */
+  where: RemoteSelectFieldWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type RemoteSelectFieldWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<RemoteSelectFieldWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<RemoteSelectFieldWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<RemoteSelectFieldWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']['input']>;
+  dataPath?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  dataPath_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  dataPath_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  dataPath_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  dataPath_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  dataPath_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  dataPath_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  dataPath_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  dataPath_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  dataPath_starts_with?: InputMaybe<Scalars['String']['input']>;
+  displayName?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  displayName_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  displayName_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  displayName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  displayName_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  displayName_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  displayName_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  displayName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  displayName_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  displayName_starts_with?: InputMaybe<Scalars['String']['input']>;
+  fieldGroup?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  fieldGroup_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  fieldGroup_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  fieldGroup_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  fieldGroup_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  fieldGroup_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  fieldGroup_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  fieldGroup_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  formId?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  formId_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  formId_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  formId_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  formId_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  formId_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  formId_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  formId_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  formId_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  formId_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']['input']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  label_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  label_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  label_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  label_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  label_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  label_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  label_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  label_starts_with?: InputMaybe<Scalars['String']['input']>;
+  multiple?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  multiple_not?: InputMaybe<Scalars['Boolean']['input']>;
+  required?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  required_not?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** References RemoteSelectField record uniquely */
+export type RemoteSelectFieldWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 /** Custom type representing a rich text value comprising of raw rich text ast, html, markdown and text values */
 export type RichText = {
   __typename?: 'RichText';
@@ -29157,7 +29685,7 @@ export type ConfigQueryVariables = Exact<{
 }>;
 
 
-export type ConfigQuery = { __typename?: 'Query', values?: { __typename?: 'Configuration', description: string, organizationName: string, slogan: string, title: string, titleOverrides: Array<string>, statusUrl: string, createdAt: string, socialLinks: Array<{ __typename?: 'SocialLink', id: string, name: string, href: string }>, errorMessage: { __typename?: 'Alert', id: string, name: string, level: AlertLevel, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } }, callToAction: { __typename?: 'CallToAction', shown: number, title: string }, testimonials: Array<{ __typename?: 'Testimonial', subtitle?: string | null, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, image: { __typename?: 'Asset', fileName: string, handle: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, subscribe?: { __typename?: 'Form', id: string, colorScheme: ThemeColor, button: { __typename?: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename?: 'AddressSearchField' } | { __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename?: 'CurrencyField' } | { __typename?: 'DateField' } | { __typename?: 'FormGroup' } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null } | null };
+export type ConfigQuery = { __typename?: 'Query', values?: { __typename?: 'Configuration', description: string, organizationName: string, slogan: string, title: string, titleOverrides: Array<string>, statusUrl: string, createdAt: string, socialLinks: Array<{ __typename?: 'SocialLink', id: string, name: string, href: string }>, errorMessage: { __typename?: 'Alert', id: string, name: string, level: AlertLevel, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } }, callToAction: { __typename?: 'CallToAction', shown: number, title: string }, testimonials: Array<{ __typename?: 'Testimonial', subtitle?: string | null, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, image: { __typename?: 'Asset', fileName: string, handle: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } }>, subscribe?: { __typename?: 'Form', id: string, colorScheme: ThemeColor, button: { __typename?: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename?: 'AddressSearchField' } | { __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename?: 'CurrencyField' } | { __typename?: 'DateField' } | { __typename?: 'FormGroup' } | { __typename?: 'RemoteSelectField' } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null } | null };
 
 export type ContactFormsQueryVariables = Exact<{
   config?: InputMaybe<Scalars['String']['input']>;
@@ -29266,7 +29794,7 @@ export type PageQueryVariables = Exact<{
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page?: { __typename?: 'Page', slug: string, title: string, subtitle?: string | null, footerTitle?: string | null, body?: { __typename?: 'RichText', raw: RichTextContent } | null, callout?: { __typename?: 'Callout', subtitle?: string | null, title: string, body?: { __typename?: 'RichText', raw: RichTextContent } | null, button?: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null } | null, form?: { __typename?: 'Form', name: string, colorScheme: ThemeColor, button: { __typename: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename: 'AddressSearchField', displayName: string, formId: string, label?: string | null, required: boolean, locationType: LocationType, fieldGroup: number } | { __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'CurrencyField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, unitSymbol: string } | { __typename: 'DateField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, range: boolean, allowFuture: boolean, allowPast: boolean } | { __typename: 'FormGroup', name: string, groupId: number } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, creatable: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null } | null, contents: Array<{ __typename?: 'PageContent', slug: string, showUpdatedDate: boolean, subtitle?: string | null, title: string, updatedAt: string, body?: { __typename?: 'RichText', raw: RichTextContent } | null, button?: { __typename?: 'Button', text: string, link?: string | null, variant?: ButtonVariant | null } | null, features: Array<{ __typename?: 'Feature', iconColor?: ThemeColor | null, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, button?: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null } | null, icon?: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } | null }>, form?: { __typename?: 'Form', name: string, colorScheme: ThemeColor, button: { __typename: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename: 'AddressSearchField', displayName: string, formId: string, locationType: LocationType, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'CurrencyField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, unitSymbol: string } | { __typename: 'DateField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, range: boolean, allowFuture: boolean, allowPast: boolean } | { __typename: 'FormGroup', name: string, groupId: number } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, creatable: boolean, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null, image?: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null } | null, vendorLogo?: { __typename: 'VendorLogo', postText?: string | null, pretext: string, name: string, darkColor: { __typename?: 'Color', hex: string }, lightColor: { __typename?: 'Color', hex: string }, logo: { __typename?: 'Asset', size?: number | null, mimeType?: string | null, width?: number | null, url: string, height?: number | null } } | null }> } | null };
+export type PageQuery = { __typename?: 'Query', page?: { __typename?: 'Page', slug: string, title: string, subtitle?: string | null, footerTitle?: string | null, body?: { __typename?: 'RichText', raw: RichTextContent } | null, callout?: { __typename?: 'Callout', subtitle?: string | null, title: string, body?: { __typename?: 'RichText', raw: RichTextContent } | null, button?: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null } | null, form?: { __typename?: 'Form', name: string, colorScheme: ThemeColor, button: { __typename: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename: 'AddressSearchField', displayName: string, formId: string, label?: string | null, required: boolean, locationType: LocationType, fieldGroup: number } | { __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'CurrencyField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, unitSymbol: string } | { __typename: 'DateField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, range: boolean, allowFuture: boolean, allowPast: boolean } | { __typename: 'FormGroup', name: string, groupId: number } | { __typename: 'RemoteSelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, dataPath: string, required: boolean, fieldGroup: number } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, creatable: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null } | null, contents: Array<{ __typename?: 'PageContent', slug: string, showUpdatedDate: boolean, subtitle?: string | null, title: string, updatedAt: string, body?: { __typename?: 'RichText', raw: RichTextContent } | null, button?: { __typename?: 'Button', text: string, link?: string | null, variant?: ButtonVariant | null } | null, features: Array<{ __typename?: 'Feature', iconColor?: ThemeColor | null, title: string, body: { __typename?: 'RichText', raw: RichTextContent }, button?: { __typename?: 'Button', link?: string | null, text: string, variant?: ButtonVariant | null } | null, icon?: { __typename?: 'Asset', fileName: string, height?: number | null, mimeType?: string | null, size?: number | null, url: string, width?: number | null } | null }>, form?: { __typename?: 'Form', name: string, colorScheme: ThemeColor, button: { __typename: 'FormButton', id: string, action?: FormAction | null, text: string, variant?: ButtonVariant | null, alert?: { __typename?: 'Alert', level: AlertLevel, name: string, title?: string | null, body: { __typename?: 'RichText', raw: RichTextContent } } | null }, fields: Array<{ __typename: 'AddressSearchField', displayName: string, formId: string, locationType: LocationType, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'CheckboxField', displayName: string, formId: string, label?: string | null, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'CurrencyField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, unitSymbol: string } | { __typename: 'DateField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number, range: boolean, allowFuture: boolean, allowPast: boolean } | { __typename: 'FormGroup', name: string, groupId: number } | { __typename: 'RemoteSelectField', displayName: string, formId: string, label?: string | null, multiple: boolean, dataPath: string, required: boolean, fieldGroup: number } | { __typename: 'SelectField', displayName: string, formId: string, label?: string | null, creatable: boolean, multiple: boolean, options: Array<string>, required: boolean, fieldGroup: number } | { __typename: 'TextAreaField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number } | { __typename: 'TextInputField', displayName: string, formId: string, label?: string | null, required: boolean, fieldGroup: number }> } | null, image?: { __typename?: 'Asset', fileName: string, mimeType?: string | null, size?: number | null, url: string, width?: number | null, height?: number | null } | null, vendorLogo?: { __typename: 'VendorLogo', postText?: string | null, pretext: string, name: string, darkColor: { __typename?: 'Color', hex: string }, lightColor: { __typename?: 'Color', hex: string }, logo: { __typename?: 'Asset', size?: number | null, mimeType?: string | null, width?: number | null, url: string, height?: number | null } } | null }> } | null };
 
 export type ThemeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -29387,6 +29915,7 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "OfficeLocation",
       "Page",
       "PageContent",
+      "RemoteSelectField",
       "ScheduledOperation",
       "ScheduledRelease",
       "SelectField",
@@ -29420,6 +29949,7 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "CurrencyField",
       "DateField",
       "FormGroup",
+      "RemoteSelectField",
       "SelectField",
       "TextAreaField",
       "TextInputField"
@@ -29453,6 +29983,9 @@ export type TwitterHandleQuery = { __typename?: 'Query', configuration?: { __typ
       "Testimonial",
       "Theme",
       "User"
+    ],
+    "RemoteSelectFieldParent": [
+      "Form"
     ],
     "ScheduledOperationAffectedDocument": [
       "Admonition",
@@ -29527,7 +30060,7 @@ export const HomePageDocument = {"kind":"Document","definitions":[{"kind":"Opera
 export const OfficeLocationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"officeLocations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"officeLocations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"closeTime"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"openTime"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"128"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"128"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}}]}},{"kind":"Field","name":{"kind":"Name","value":"location"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"address1"}},{"kind":"Field","name":{"kind":"Name","value":"address2"}},{"kind":"Field","name":{"kind":"Name","value":"address3"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zipCode"}}]}}]}}]}}]} as unknown as DocumentNode<OfficeLocationsQuery, OfficeLocationsQueryVariables>;
 export const StaticPathsExactDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"staticPathsExact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug_not_contains"},"value":{"kind":"StringValue","value":"/","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<StaticPathsExactQuery, StaticPathsExactQueryVariables>;
 export const StaticPathsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"staticPaths"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"startsWith"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug_starts_with"},"value":{"kind":"Variable","name":{"kind":"Name","value":"startsWith"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<StaticPathsQuery, StaticPathsQueryVariables>;
-export const PageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"page"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"callout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"form"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"50"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormGroup"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"groupId"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"creatable"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AddressSearchField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"locationType"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DateField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"range"}},{"kind":"Field","name":{"kind":"Name","value":"allowFuture"}},{"kind":"Field","name":{"kind":"Name","value":"allowPast"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CurrencyField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"unitSymbol"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"features"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"form"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"50"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormGroup"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"groupId"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"creatable"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AddressSearchField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"locationType"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DateField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"range"}},{"kind":"Field","name":{"kind":"Name","value":"allowFuture"}},{"kind":"Field","name":{"kind":"Name","value":"allowPast"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CurrencyField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"unitSymbol"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"vendorLogo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"darkColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lightColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"logo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"postText"}},{"kind":"Field","name":{"kind":"Name","value":"pretext"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<PageQuery, PageQueryVariables>;
+export const PageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"page"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}},"defaultValue":{"kind":"EnumValue","value":"PUBLISHED"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"callout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"form"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"50"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormGroup"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"groupId"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"creatable"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AddressSearchField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"locationType"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"RemoteSelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"dataPath"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DateField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"range"}},{"kind":"Field","name":{"kind":"Name","value":"allowFuture"}},{"kind":"Field","name":{"kind":"Name","value":"allowPast"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CurrencyField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"unitSymbol"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"footerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"features"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"icon"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}}]}},{"kind":"Field","name":{"kind":"Name","value":"iconColor"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"form"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"colorScheme"}},{"kind":"Field","name":{"kind":"Name","value":"button"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"alert"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"raw"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fields"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"50"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FormGroup"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"groupId"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CheckboxField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"SelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"creatable"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"options"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"RemoteSelectField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"multiple"}},{"kind":"Field","name":{"kind":"Name","value":"dataPath"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextAreaField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextInputField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AddressSearchField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"locationType"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DateField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"range"}},{"kind":"Field","name":{"kind":"Name","value":"allowFuture"}},{"kind":"Field","name":{"kind":"Name","value":"allowPast"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"CurrencyField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"required"}},{"kind":"Field","name":{"kind":"Name","value":"fieldGroup"}},{"kind":"Field","name":{"kind":"Name","value":"unitSymbol"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"showUpdatedDate"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"vendorLogo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"darkColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lightColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"logo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}},{"kind":"Field","name":{"kind":"Name","value":"postText"}},{"kind":"Field","name":{"kind":"Name","value":"pretext"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<PageQuery, PageQueryVariables>;
 export const ThemeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"theme"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"StringValue","value":"Stellar","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"theme"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"colors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"black"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"blue"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"cyan"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"dark"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"gray"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"green"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"light"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"orange"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pink"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"primary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"purple"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"red"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"secondary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"teal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tertiary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"white"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"yellow"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ThemeQuery, ThemeQueryVariables>;
 export const TwitterHandleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"twitterHandle"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"configuration"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"socialLinks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"href_contains"},"value":{"kind":"StringValue","value":"twitter","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"href"}}]}}]}}]}}]} as unknown as DocumentNode<TwitterHandleQuery, TwitterHandleQueryVariables>;
 
@@ -29617,8 +30150,9 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
   FeatureParent: ( PageContent );
   FormButtonParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   FormGroupParent: ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
-  FormfieldsUnion: ( AddressSearchField ) | ( CheckboxField ) | ( CurrencyField ) | ( DateField ) | ( FormGroup ) | ( SelectField ) | ( TextAreaField ) | ( TextInputField );
+  FormfieldsUnion: ( AddressSearchField ) | ( CheckboxField ) | ( CurrencyField ) | ( DateField ) | ( FormGroup ) | ( RemoteSelectField ) | ( SelectField ) | ( TextAreaField ) | ( TextInputField );
   HomePageBlockParent: ( HomePage );
+  RemoteSelectFieldParent: ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   ScheduledOperationAffectedDocument: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Document ) | ( DocumentGroup ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Testimonial ) | ( Theme );
   SelectFieldParent: ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } );
   SocialLinkParent: ( Configuration );
@@ -29630,7 +30164,7 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
 
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = {
-  Entity: ( Address ) | ( AddressSearchField ) | ( Admonition ) | ( Alert ) | ( Asset ) | ( BlogPost ) | ( Button ) | ( CallToAction ) | ( CallToActionSettings ) | ( Callout ) | ( CheckboxField ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( CurrencyField ) | ( DateField ) | ( DocsGroup ) | ( DocsPage ) | ( Document ) | ( DocumentGroup ) | ( Employee ) | ( ExternalLink ) | ( Feature ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( FormButton ) | ( FormGroup ) | ( HeaderGroup ) | ( HomePage ) | ( HomePageBlock ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( SelectField ) | ( SocialLink ) | ( Testimonial ) | ( TextAreaField ) | ( TextInputField ) | ( Theme ) | ( ThemeColors ) | ( ThemeFonts ) | ( User ) | ( VendorLogo );
+  Entity: ( Address ) | ( AddressSearchField ) | ( Admonition ) | ( Alert ) | ( Asset ) | ( BlogPost ) | ( Button ) | ( CallToAction ) | ( CallToActionSettings ) | ( Callout ) | ( CheckboxField ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( CurrencyField ) | ( DateField ) | ( DocsGroup ) | ( DocsPage ) | ( Document ) | ( DocumentGroup ) | ( Employee ) | ( ExternalLink ) | ( Feature ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( FormButton ) | ( FormGroup ) | ( HeaderGroup ) | ( HomePage ) | ( HomePageBlock ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( RemoteSelectField ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( SelectField ) | ( SocialLink ) | ( Testimonial ) | ( TextAreaField ) | ( TextInputField ) | ( Theme ) | ( ThemeColors ) | ( ThemeFonts ) | ( User ) | ( VendorLogo );
   Node: ( Admonition ) | ( Asset ) | ( BlogPost ) | ( CloudLocation ) | ( Configuration ) | ( Omit<ContactForm, 'fields'> & { fields: Array<RefType['ContactFormfieldsUnion']> } ) | ( ContentButton ) | ( ContentTag ) | ( DocsGroup ) | ( DocsPage ) | ( Document ) | ( DocumentGroup ) | ( Employee ) | ( FooterGroup ) | ( Omit<Form, 'fields'> & { fields: Array<RefType['FormfieldsUnion']> } ) | ( HeaderGroup ) | ( HomePage ) | ( OfficeLocation ) | ( Page ) | ( PageContent ) | ( Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<RefType['ScheduledOperationAffectedDocument']> } ) | ( ScheduledRelease ) | ( Testimonial ) | ( Theme ) | ( User );
 };
 
@@ -30671,6 +31205,41 @@ export type ResolversTypes = {
   RGBAHue: ResolverTypeWrapper<Scalars['RGBAHue']['output']>;
   RGBAInput: RgbaInput;
   RGBATransparency: ResolverTypeWrapper<Scalars['RGBATransparency']['output']>;
+  RemoteSelectField: ResolverTypeWrapper<RemoteSelectField>;
+  RemoteSelectFieldConnectInput: RemoteSelectFieldConnectInput;
+  RemoteSelectFieldConnection: ResolverTypeWrapper<RemoteSelectFieldConnection>;
+  RemoteSelectFieldCreateInput: RemoteSelectFieldCreateInput;
+  RemoteSelectFieldCreateManyInlineInput: RemoteSelectFieldCreateManyInlineInput;
+  RemoteSelectFieldCreateOneInlineInput: RemoteSelectFieldCreateOneInlineInput;
+  RemoteSelectFieldCreateWithPositionInput: RemoteSelectFieldCreateWithPositionInput;
+  RemoteSelectFieldEdge: ResolverTypeWrapper<RemoteSelectFieldEdge>;
+  RemoteSelectFieldManyWhereInput: RemoteSelectFieldManyWhereInput;
+  RemoteSelectFieldOrderByInput: RemoteSelectFieldOrderByInput;
+  RemoteSelectFieldParent: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['RemoteSelectFieldParent']>;
+  RemoteSelectFieldParentConnectInput: RemoteSelectFieldParentConnectInput;
+  RemoteSelectFieldParentCreateInput: RemoteSelectFieldParentCreateInput;
+  RemoteSelectFieldParentCreateManyInlineInput: RemoteSelectFieldParentCreateManyInlineInput;
+  RemoteSelectFieldParentCreateOneInlineInput: RemoteSelectFieldParentCreateOneInlineInput;
+  RemoteSelectFieldParentUpdateInput: RemoteSelectFieldParentUpdateInput;
+  RemoteSelectFieldParentUpdateManyInlineInput: RemoteSelectFieldParentUpdateManyInlineInput;
+  RemoteSelectFieldParentUpdateManyWithNestedWhereInput: RemoteSelectFieldParentUpdateManyWithNestedWhereInput;
+  RemoteSelectFieldParentUpdateOneInlineInput: RemoteSelectFieldParentUpdateOneInlineInput;
+  RemoteSelectFieldParentUpdateWithNestedWhereUniqueInput: RemoteSelectFieldParentUpdateWithNestedWhereUniqueInput;
+  RemoteSelectFieldParentUpsertWithNestedWhereUniqueInput: RemoteSelectFieldParentUpsertWithNestedWhereUniqueInput;
+  RemoteSelectFieldParentWhereInput: RemoteSelectFieldParentWhereInput;
+  RemoteSelectFieldParentWhereUniqueInput: RemoteSelectFieldParentWhereUniqueInput;
+  RemoteSelectFieldUpdateInput: RemoteSelectFieldUpdateInput;
+  RemoteSelectFieldUpdateManyInlineInput: RemoteSelectFieldUpdateManyInlineInput;
+  RemoteSelectFieldUpdateManyInput: RemoteSelectFieldUpdateManyInput;
+  RemoteSelectFieldUpdateManyWithNestedWhereInput: RemoteSelectFieldUpdateManyWithNestedWhereInput;
+  RemoteSelectFieldUpdateOneInlineInput: RemoteSelectFieldUpdateOneInlineInput;
+  RemoteSelectFieldUpdateWithNestedWhereUniqueAndPositionInput: RemoteSelectFieldUpdateWithNestedWhereUniqueAndPositionInput;
+  RemoteSelectFieldUpdateWithNestedWhereUniqueInput: RemoteSelectFieldUpdateWithNestedWhereUniqueInput;
+  RemoteSelectFieldUpsertInput: RemoteSelectFieldUpsertInput;
+  RemoteSelectFieldUpsertWithNestedWhereUniqueAndPositionInput: RemoteSelectFieldUpsertWithNestedWhereUniqueAndPositionInput;
+  RemoteSelectFieldUpsertWithNestedWhereUniqueInput: RemoteSelectFieldUpsertWithNestedWhereUniqueInput;
+  RemoteSelectFieldWhereInput: RemoteSelectFieldWhereInput;
+  RemoteSelectFieldWhereUniqueInput: RemoteSelectFieldWhereUniqueInput;
   RichText: ResolverTypeWrapper<RichText>;
   RichTextAST: ResolverTypeWrapper<Scalars['RichTextAST']['output']>;
   ScheduledOperation: ResolverTypeWrapper<Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<ResolversTypes['ScheduledOperationAffectedDocument']> }>;
@@ -32002,6 +32571,40 @@ export type ResolversParentTypes = {
   RGBAHue: Scalars['RGBAHue']['output'];
   RGBAInput: RgbaInput;
   RGBATransparency: Scalars['RGBATransparency']['output'];
+  RemoteSelectField: RemoteSelectField;
+  RemoteSelectFieldConnectInput: RemoteSelectFieldConnectInput;
+  RemoteSelectFieldConnection: RemoteSelectFieldConnection;
+  RemoteSelectFieldCreateInput: RemoteSelectFieldCreateInput;
+  RemoteSelectFieldCreateManyInlineInput: RemoteSelectFieldCreateManyInlineInput;
+  RemoteSelectFieldCreateOneInlineInput: RemoteSelectFieldCreateOneInlineInput;
+  RemoteSelectFieldCreateWithPositionInput: RemoteSelectFieldCreateWithPositionInput;
+  RemoteSelectFieldEdge: RemoteSelectFieldEdge;
+  RemoteSelectFieldManyWhereInput: RemoteSelectFieldManyWhereInput;
+  RemoteSelectFieldParent: ResolversUnionTypes<ResolversParentTypes>['RemoteSelectFieldParent'];
+  RemoteSelectFieldParentConnectInput: RemoteSelectFieldParentConnectInput;
+  RemoteSelectFieldParentCreateInput: RemoteSelectFieldParentCreateInput;
+  RemoteSelectFieldParentCreateManyInlineInput: RemoteSelectFieldParentCreateManyInlineInput;
+  RemoteSelectFieldParentCreateOneInlineInput: RemoteSelectFieldParentCreateOneInlineInput;
+  RemoteSelectFieldParentUpdateInput: RemoteSelectFieldParentUpdateInput;
+  RemoteSelectFieldParentUpdateManyInlineInput: RemoteSelectFieldParentUpdateManyInlineInput;
+  RemoteSelectFieldParentUpdateManyWithNestedWhereInput: RemoteSelectFieldParentUpdateManyWithNestedWhereInput;
+  RemoteSelectFieldParentUpdateOneInlineInput: RemoteSelectFieldParentUpdateOneInlineInput;
+  RemoteSelectFieldParentUpdateWithNestedWhereUniqueInput: RemoteSelectFieldParentUpdateWithNestedWhereUniqueInput;
+  RemoteSelectFieldParentUpsertWithNestedWhereUniqueInput: RemoteSelectFieldParentUpsertWithNestedWhereUniqueInput;
+  RemoteSelectFieldParentWhereInput: RemoteSelectFieldParentWhereInput;
+  RemoteSelectFieldParentWhereUniqueInput: RemoteSelectFieldParentWhereUniqueInput;
+  RemoteSelectFieldUpdateInput: RemoteSelectFieldUpdateInput;
+  RemoteSelectFieldUpdateManyInlineInput: RemoteSelectFieldUpdateManyInlineInput;
+  RemoteSelectFieldUpdateManyInput: RemoteSelectFieldUpdateManyInput;
+  RemoteSelectFieldUpdateManyWithNestedWhereInput: RemoteSelectFieldUpdateManyWithNestedWhereInput;
+  RemoteSelectFieldUpdateOneInlineInput: RemoteSelectFieldUpdateOneInlineInput;
+  RemoteSelectFieldUpdateWithNestedWhereUniqueAndPositionInput: RemoteSelectFieldUpdateWithNestedWhereUniqueAndPositionInput;
+  RemoteSelectFieldUpdateWithNestedWhereUniqueInput: RemoteSelectFieldUpdateWithNestedWhereUniqueInput;
+  RemoteSelectFieldUpsertInput: RemoteSelectFieldUpsertInput;
+  RemoteSelectFieldUpsertWithNestedWhereUniqueAndPositionInput: RemoteSelectFieldUpsertWithNestedWhereUniqueAndPositionInput;
+  RemoteSelectFieldUpsertWithNestedWhereUniqueInput: RemoteSelectFieldUpsertWithNestedWhereUniqueInput;
+  RemoteSelectFieldWhereInput: RemoteSelectFieldWhereInput;
+  RemoteSelectFieldWhereUniqueInput: RemoteSelectFieldWhereUniqueInput;
   RichText: RichText;
   RichTextAST: Scalars['RichTextAST']['output'];
   ScheduledOperation: Omit<ScheduledOperation, 'affectedDocuments'> & { affectedDocuments: Array<ResolversParentTypes['ScheduledOperationAffectedDocument']> };
@@ -33133,7 +33736,7 @@ export type EmployeeEdgeResolvers<ContextType = any, ParentType extends Resolver
 };
 
 export type EntityResolvers<ContextType = any, ParentType extends ResolversParentTypes['Entity'] = ResolversParentTypes['Entity']> = {
-  __resolveType: TypeResolveFn<'Address' | 'AddressSearchField' | 'Admonition' | 'Alert' | 'Asset' | 'BlogPost' | 'Button' | 'CallToAction' | 'CallToActionSettings' | 'Callout' | 'CheckboxField' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'CurrencyField' | 'DateField' | 'DocsGroup' | 'DocsPage' | 'Document' | 'DocumentGroup' | 'Employee' | 'ExternalLink' | 'Feature' | 'FooterGroup' | 'Form' | 'FormButton' | 'FormGroup' | 'HeaderGroup' | 'HomePage' | 'HomePageBlock' | 'OfficeLocation' | 'Page' | 'PageContent' | 'ScheduledOperation' | 'ScheduledRelease' | 'SelectField' | 'SocialLink' | 'Testimonial' | 'TextAreaField' | 'TextInputField' | 'Theme' | 'ThemeColors' | 'ThemeFonts' | 'User' | 'VendorLogo', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Address' | 'AddressSearchField' | 'Admonition' | 'Alert' | 'Asset' | 'BlogPost' | 'Button' | 'CallToAction' | 'CallToActionSettings' | 'Callout' | 'CheckboxField' | 'CloudLocation' | 'Configuration' | 'ContactForm' | 'ContentButton' | 'ContentTag' | 'CurrencyField' | 'DateField' | 'DocsGroup' | 'DocsPage' | 'Document' | 'DocumentGroup' | 'Employee' | 'ExternalLink' | 'Feature' | 'FooterGroup' | 'Form' | 'FormButton' | 'FormGroup' | 'HeaderGroup' | 'HomePage' | 'HomePageBlock' | 'OfficeLocation' | 'Page' | 'PageContent' | 'RemoteSelectField' | 'ScheduledOperation' | 'ScheduledRelease' | 'SelectField' | 'SocialLink' | 'Testimonial' | 'TextAreaField' | 'TextInputField' | 'Theme' | 'ThemeColors' | 'ThemeFonts' | 'User' | 'VendorLogo', ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
 };
@@ -33313,7 +33916,7 @@ export type FormGroupParentResolvers<ContextType = any, ParentType extends Resol
 };
 
 export type FormfieldsUnionResolvers<ContextType = any, ParentType extends ResolversParentTypes['FormfieldsUnion'] = ResolversParentTypes['FormfieldsUnion']> = {
-  __resolveType: TypeResolveFn<'AddressSearchField' | 'CheckboxField' | 'CurrencyField' | 'DateField' | 'FormGroup' | 'SelectField' | 'TextAreaField' | 'TextInputField', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'AddressSearchField' | 'CheckboxField' | 'CurrencyField' | 'DateField' | 'FormGroup' | 'RemoteSelectField' | 'SelectField' | 'TextAreaField' | 'TextInputField', ParentType, ContextType>;
 };
 
 export type HeaderGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['HeaderGroup'] = ResolversParentTypes['HeaderGroup']> = {
@@ -34035,6 +34638,36 @@ export interface RgbaTransparencyScalarConfig extends GraphQLScalarTypeConfig<Re
   name: 'RGBATransparency';
 }
 
+export type RemoteSelectFieldResolvers<ContextType = any, ParentType extends ResolversParentTypes['RemoteSelectField'] = ResolversParentTypes['RemoteSelectField']> = {
+  dataPath?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  displayName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  fieldGroup?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  formId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  label?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  multiple?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  required?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RemoteSelectFieldConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['RemoteSelectFieldConnection'] = ResolversParentTypes['RemoteSelectFieldConnection']> = {
+  aggregate?: Resolver<ResolversTypes['Aggregate'], ParentType, ContextType>;
+  edges?: Resolver<Array<ResolversTypes['RemoteSelectFieldEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RemoteSelectFieldEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['RemoteSelectFieldEdge'] = ResolversParentTypes['RemoteSelectFieldEdge']> = {
+  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['RemoteSelectField'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RemoteSelectFieldParentResolvers<ContextType = any, ParentType extends ResolversParentTypes['RemoteSelectFieldParent'] = ResolversParentTypes['RemoteSelectFieldParent']> = {
+  __resolveType: TypeResolveFn<'Form', ParentType, ContextType>;
+};
+
 export type RichTextResolvers<ContextType = any, ParentType extends ResolversParentTypes['RichText'] = ResolversParentTypes['RichText']> = {
   html?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   markdown?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -34575,6 +35208,10 @@ export type Resolvers<ContextType = any> = {
   RGBA?: RgbaResolvers<ContextType>;
   RGBAHue?: GraphQLScalarType;
   RGBATransparency?: GraphQLScalarType;
+  RemoteSelectField?: RemoteSelectFieldResolvers<ContextType>;
+  RemoteSelectFieldConnection?: RemoteSelectFieldConnectionResolvers<ContextType>;
+  RemoteSelectFieldEdge?: RemoteSelectFieldEdgeResolvers<ContextType>;
+  RemoteSelectFieldParent?: RemoteSelectFieldParentResolvers<ContextType>;
   RichText?: RichTextResolvers<ContextType>;
   RichTextAST?: GraphQLScalarType;
   ScheduledOperation?: ScheduledOperationResolvers<ContextType>;

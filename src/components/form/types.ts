@@ -14,6 +14,7 @@ import type {
   CurrencyField,
   DateField,
   FormGroup,
+  RemoteSelectField,
   SelectField,
   SelectOptionSingle,
   TextAreaField,
@@ -24,14 +25,6 @@ type ControlProps<V extends FieldValues> = Required<
   Pick<ControllerProps<V>, "control" | "defaultValue" | "name">
 > &
   Pick<ControllerProps<V>, "rules">;
-
-// export type FormFieldProps<Props, FormData extends Dict> = Pick<
-//   ControlProps<FormData>,
-//   "name" | "rules" | "defaultValue"
-// > &
-//   Omit<Props, "as" | "onFocus" | "name" | "defaultValue" | "rules"> & {
-//     field: FormField;
-//   };
 
 export type FormFieldProps<Props, FormData extends Dict, F extends FormField> = Pick<
   ControlProps<FormData>,
@@ -77,6 +70,12 @@ export interface SelectDynamicFieldProps<Field extends FormField>
   field: Field;
 }
 
+export interface RemoteSelectFieldProps
+  extends Omit<SelectProps<SelectOptionSingle>, "name" | "onSelect" | "options"> {
+  name: string;
+  field: RemoteSelectField;
+}
+
 export type DateFieldProps<Props, FormData extends Dict> = Omit<
   FormFieldProps<Props, FormData, DateField>,
   "value" | "onSelectDate"
@@ -90,7 +89,8 @@ export type FormField = Omit<
   | CurrencyField
   | DateField
   | (FormGroup & { required?: boolean; fieldGroup?: number })
-  | AddressSearchField,
+  | AddressSearchField
+  | RemoteSelectField,
   "id" | "stage"
 >;
 

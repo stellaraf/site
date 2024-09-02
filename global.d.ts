@@ -40,5 +40,6 @@ declare namespace NodeJS {
     BETTER_UPTIME_TOKEN: string;
     HYGRAPH_DRAFT_TOKEN: string;
     MAPBOX_TOKEN: string;
+    ALERTHUB_TOKEN: string;
   }
 }

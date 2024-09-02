@@ -22,13 +22,41 @@ export type SFDCLead = {
   subject?: string;
   /** Case Description */
   description?: string;
+  /** Website */
+  website?: string;
+  /** Title */
+  title?: string;
+  /** Address */
+  address?: string;
   /** Custom field - Web Form Metadata */
   "00N3j00000FccT7"?: string;
+  /** Custom field - Lead Type */
+  "00N3j00000GcDjn"?: string;
   /** Enable SFDC debugging */
   debug?: 1;
   /** Email to receive debugging reports */
   debugEmail?: string;
   retURL: string;
+};
+
+export type SFDCLeadToAlertHub = {
+  firstName: string;
+  lastName: string;
+  company: string;
+  phone: string;
+  email: string;
+  website: string;
+  title: string;
+  address: {
+    city: string;
+    country: string;
+    state: string;
+    street: string;
+  };
+  leadSource: string;
+  description: string;
+  webFormMetadata: string;
+  leadType: string;
 };
 
 type SFDCCaseStatus =

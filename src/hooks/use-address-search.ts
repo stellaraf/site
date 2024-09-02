@@ -18,7 +18,7 @@ async function queryFn(search: string, locationType: LocationType): Promise<Sele
   if (isSearchResults(data)) {
     return data.map(d => ({
       label: d.displayName,
-      value: d.formValue,
+      value: JSON.stringify(d.formValue),
       description: d.description,
     }));
   }

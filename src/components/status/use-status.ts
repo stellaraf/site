@@ -21,7 +21,7 @@ export function useStatus(override?: boolean): boolean {
   }
   const res = useQuery({ queryKey: [tz], queryFn });
   if (res.isError) {
-    console.log(res.error);
+    console.error(res.error);
   }
   if (typeof override !== "undefined") {
     return override;

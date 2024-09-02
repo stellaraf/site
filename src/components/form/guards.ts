@@ -7,6 +7,7 @@ import type {
   DateField,
   FormButton,
   FormGroup,
+  RemoteSelectField,
   SelectField,
   TextAreaField,
   TextInputField,
@@ -55,4 +56,9 @@ export function isDateField(field: unknown): field is DateField {
 export function isCurrencyField(field: unknown): field is CurrencyField {
   if (!is(field)) return false;
   return (field as Record<string, unknown>).__typename === "CurrencyField";
+}
+
+export function isRemoteSelectField(field: unknown): field is RemoteSelectField {
+  if (!is(field)) return false;
+  return (field as Record<string, unknown>).__typename === "RemoteSelectField";
 }

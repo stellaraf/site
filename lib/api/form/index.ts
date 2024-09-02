@@ -1,4 +1,3 @@
-export * from "./deal-registration";
 export * from "./partnership";
 export * from "./sales";
 export * from "./subscribe";

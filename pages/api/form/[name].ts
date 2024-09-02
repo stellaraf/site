@@ -1,5 +1,4 @@
 import {
-  handleDealRegistrationForm,
   handlePartnershipForm,
   handleSalesForm,
   handleSubscribe,
@@ -19,7 +18,6 @@ const FORM_MAP = new Map<FormKeys | string, FormHandler>([
   ["security-demo", handleSalesForm],
   ["trial", handleTrialForm],
   ["partnership-inquiry", handlePartnershipForm],
-  ["deal-registration", handleDealRegistrationForm],
 ]);
 
 function isValidForm(form: unknown): form is FormKeys {

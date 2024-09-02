@@ -12,6 +12,7 @@ import { CheckboxField } from "./checkbox-field";
 import { CurrencyField } from "./currency-field";
 import { DateField } from "./date-field";
 import { FieldGroup } from "./field-group";
+import { RemoteSelectField } from "./remote-select-field";
 import { SelectField } from "./select-field";
 import { TextArea } from "./text-area";
 import { TextInput } from "./text-input";
@@ -22,6 +23,7 @@ import {
   isCurrencyField,
   isDateField,
   isFormGroup,
+  isRemoteSelectField,
   isSelectField,
   isTextAreaField,
   isTextInputField,
@@ -69,6 +71,7 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
   const form = useForm<Schema>({ resolver: zodResolver(schema) });
 
   const handleSubmit = async (data: Schema) => {
+    data = form.getValues();
     if (typeof onSubmit === "function") {
       awaitIfNeeded(onSubmit);
     }
@@ -146,6 +149,18 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
                         required={field.required}
                         placeholder={field.displayName}
                         options={field.options.map(opt => ({ value: opt, label: opt }))}
+                      />
+                    );
+                  }
+                  if (isRemoteSelectField(field)) {
+                    return (
+                      <RemoteSelectField
+                        field={field}
+                        key={field.formId}
+                        name={field.formId}
+                        isMulti={field.multiple}
+                        required={field.required}
+                        placeholder={field.displayName}
                       />
                     );
                   }

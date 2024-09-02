@@ -96,7 +96,7 @@ export function useAlert(options: UseAlertOptions = {}): UseAlertReturn {
                 >
                   {message}
                   {status === "error" && (
-                    <Box mt={4} color="inherit">
+                    <Box mt={4} color="inherit" overflow="auto">
                       <RichText content={errorMessage.body} />
                     </Box>
                   )}

@@ -68,6 +68,16 @@ query page($slug: String, $stage: Stage = PUBLISHED) {
                         locationType
                         fieldGroup
                     }
+                    ... on RemoteSelectField {
+                        __typename
+                        displayName
+                        formId
+                        label
+                        multiple
+                        dataPath
+                        required
+                        fieldGroup
+                    }
                     ... on TextAreaField {
                         __typename
                         displayName
@@ -183,6 +193,16 @@ query page($slug: String, $stage: Stage = PUBLISHED) {
                         creatable
                         multiple
                         options
+                        required
+                        fieldGroup
+                    }
+                    ... on RemoteSelectField {
+                        __typename
+                        displayName
+                        formId
+                        label
+                        multiple
+                        dataPath
                         required
                         fieldGroup
                     }
