@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { v4 as uuid4 } from "uuid";
 import { search } from "~/lib/server";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
@@ -13,8 +14,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (typeof req.query.locationType === "string" && req.query.locationType !== "") {
     locationType = req.query.locationType;
   }
+  const sessionId = req.cookies["st-session-id"] ?? uuid4();
+
   try {
-    const results = await search("857DE7DA-0FFC-4136-91F4-ECD681C5F645", q, locationType);
+    const results = await search(sessionId, q, locationType);
     return res.json(results);
   } catch (error) {
     console.error(error);

@@ -58,6 +58,7 @@
     "slugify": "^1.6.6",
     "ua-parser-js": "^1.0.38",
     "use-title-case": "^0.1.5",
+    "uuid": "^10.0.0",
     "zod": "^3.23.8"
   },
   "scripts": {
@@ -107,6 +108,7 @@
     "@types/react": "^18.0.21",
     "@types/react-simple-maps": "^1.0.8",
     "@types/ua-parser-js": "^0.7.36",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@typescript-eslint/parser": "^6.5.0",
     "@welldone-software/why-did-you-render": "^4.3.2",
