@@ -21,18 +21,17 @@ export const HolidayTable = (props: HolidayTableProps) => {
       </thead>
       <tbody>
         {holidays.all.map((holiday, idx) => {
-          const elapsed = holidays.elapsed.includes(idx);
           return (
             <Tr
               key={holiday.date}
-              opacity={elapsed ? 0.5 : 1}
-              fontStyle={elapsed ? "italic" : undefined}
+              opacity={holiday.elapsed ? 0.5 : 1}
+              fontStyle={holiday.elapsed ? "italic" : undefined}
               bg={
-                holidays.active === idx
+                holiday.active
                   ? activeColor
-                  : elapsed
+                  : holiday.elapsed
                     ? elapsedColor
-                    : holidays.next === idx && holidays.active === null
+                    : holidays.next === idx && !holiday.active
                       ? nextColor
                       : undefined
               }

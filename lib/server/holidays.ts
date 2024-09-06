@@ -12,15 +12,21 @@ interface HolidayIn extends BaseHoliday {
   alsoObservedAs?: string;
 }
 
+enum EvePosition {
+  BEFORE = 0,
+  AFTER = 1,
+}
+
 export interface Holiday {
   name: string;
   date: string;
+  ts: number;
+  active: boolean;
+  elapsed: boolean;
 }
 
 export interface Holidays {
   all: Holiday[];
-  active: number | null;
-  elapsed: number[];
   next: number;
 }
 
@@ -43,16 +49,33 @@ const holidayNames = [
   "Christmas Day",
 ];
 
-const eves = [
-  ["Christmas Day", "Christmas Eve"],
-  ["Thanksgiving Day", "Black Friday"],
+const eves: [string, string, EvePosition][] = [
+  ["Christmas Day", "Christmas Eve", EvePosition.BEFORE],
+  ["Thanksgiving Day", "Black Friday", EvePosition.AFTER],
 ];
 
-function matchEve(holiday: EveArgs): Holiday | undefined {
-  for (const [day, eve] of eves) {
+function matchEve(holiday: EveArgs, start: dayjs.Dayjs, end: dayjs.Dayjs): Holiday | undefined {
+  for (const [day, eve, pos] of eves) {
     if (holiday.name.test(day)) {
-      const date = holiday.date.clone().subtract(1, "day");
-      return { name: eve, date: date.format(DATE_FORMAT) };
+      if (pos === EvePosition.BEFORE) {
+        const date = holiday.date.clone().subtract(1, "day");
+        return {
+          name: eve,
+          date: date.format(DATE_FORMAT),
+          active: date.isBetween(start, end),
+          ts: date.unix(),
+          elapsed: date.isBefore(dayjs(), "day"),
+        };
+      } else if (pos === EvePosition.AFTER) {
+        const date = holiday.date.clone().add(1, "day");
+        return {
+          name: eve,
+          date: date.format(DATE_FORMAT),
+          active: date.isBetween(start, end),
+          ts: date.unix(),
+          elapsed: date.isBefore(dayjs(), "day"),
+        };
+      }
     }
   }
   return;
@@ -73,9 +96,6 @@ export function getHolidays(): Holidays {
     .add(3.6e6 - 1);
   const allHolidays: HolidayIn[] = allForYear(now.year());
   let all: Holiday[] = [];
-  let active: number | null = null;
-  let elapsed: number[] = [];
-  let idx = -1;
 
   const holidayPatterns = holidayNames.map(h => new RegExp(h));
 
@@ -99,15 +119,17 @@ export function getHolidays(): Holidays {
       }
     }
     if (typeof name === "string" && typeof date !== "undefined" && typeof pattern !== "undefined") {
-      idx++;
+      // idx++;
       out.date = date.format(DATE_FORMAT);
+      out.ts = date.unix();
+      out.active = false;
       out.name = name;
-      const eve = matchEve({ name: pattern, date });
+      const eve = matchEve({ name: pattern, date }, start, end);
       if (date.isBefore(now, "day")) {
-        elapsed = [...elapsed, idx];
+        out.elapsed = true;
       }
       if (date.isBetween(start, end)) {
-        active = idx;
+        out.active = true;
       }
       if (typeof eve !== "undefined") {
         all = [...all, eve];
@@ -115,12 +137,7 @@ export function getHolidays(): Holidays {
       all = [...all, out];
     }
   }
-  const next = elapsed.length === 0 ? 0 : elapsed.length;
-  const result: Holidays = {
-    all,
-    active,
-    elapsed,
-    next,
-  };
-  return result;
+  all = all.sort((a, b) => (a.ts > b.ts ? 1 : -1));
+  const next = all.filter(h => h.elapsed).length;
+  return { all, next };
 }
