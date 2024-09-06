@@ -11,9 +11,12 @@ import type { SelectFieldProps } from "./types";
 
 export function selectMultiple(
   options: OptionsOrGroups<SelectOptionSingle, GroupBase<SelectOptionSingle>> | undefined,
-  value: string[],
+  value: string[] | null,
   creatable: boolean,
 ): SelectOptionSingle[] {
+  if (value === null) {
+    return [];
+  }
   return value.reduce<SelectOptionSingle[]>((matching, each) => {
     let match: SelectOptionSingle | undefined;
     if (Array.isArray(options)) {
