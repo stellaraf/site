@@ -2,6 +2,7 @@ import { isbot } from "isbot";
 import type { NextApiRequest } from "next";
 import { z } from "zod";
 import { isValidJsonRequest } from "~/lib";
+import { type SearchResultValue, mapboxToSalesforce } from "../../address-types";
 import { parseUserAgent } from "./common";
 import type { SFDCLeadToAlertHub } from "./types";
 
@@ -67,7 +68,8 @@ export async function handlePartnershipForm(request: NextApiRequest): Promise<Re
 
   const userData = parseUserAgent(request);
 
-  const address = JSON.parse(addressString);
+  const addressData = JSON.parse(addressString) as SearchResultValue;
+  const address = mapboxToSalesforce(addressData);
 
   let webFormMetadata = `Form: ${form}
 
@@ -104,10 +106,24 @@ export async function handlePartnershipForm(request: NextApiRequest): Promise<Re
     });
     if (res.status !== 200) {
       const errData = await res.json();
-      return new Response(JSON.stringify(errData), { status: 500 });
+      const errStr = JSON.stringify(errData);
+      if (errStr.includes("DUPLICATES_DETECTED")) {
+        return new Response(
+          JSON.stringify({
+            error:
+              "Contact information has already been submitted. Please reach out to sales@stellar.tech for further assistance.",
+          }),
+          { status: 400, headers: { "content-type": "application/json" } },
+        );
+      }
+      return new Response(errStr, { status: 500, headers: { "content-type": "application/json" } });
     }
     return new Response(null, { status: 201 });
   } catch (error) {
-    return new Response(JSON.stringify({ error: String(error) }), { status: 500 });
+    console.error(error);
+    return new Response(JSON.stringify({ error: String(error) }), {
+      status: 500,
+      headers: { "content-type": "application/json" },
+    });
   }
 }

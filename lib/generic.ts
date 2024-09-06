@@ -179,23 +179,24 @@ export async function awaitIfNeeded<R, Func extends (...args: never[]) => R>(
 }
 
 export async function messageFromResponseOrError(response: Error | Response): Promise<string> {
-  let message = `Failed to parse message from ${String(response)} (type ${typeof response})`;
   if (response instanceof Error) {
-    message = response.message;
+    return response.message;
   } else {
-    message = await response.text();
+    const contentType = response.headers.get("content-type");
     try {
-      const parsed = JSON.parse(message);
-      if (typeof parsed === "object" && parsed !== null && "error" in parsed) {
-        message = parsed.error;
-      } else {
-        message = JSON.stringify(parsed, null, 2);
+      if (contentType?.includes("application/json")) {
+        const parsed = await response.json();
+        if ("error" in parsed) {
+          return parsed.error;
+        }
+        return JSON.stringify(parsed, null, 2);
       }
+      const text = await response.text();
+      return text;
     } catch {
-      message = response.statusText;
+      return response.statusText;
     }
   }
-  return message;
 }
 
 export function parseCookie(

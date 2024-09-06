@@ -1,15 +1,6 @@
 import { isValidPhoneNumber } from "libphonenumber-js";
-import {
-  type ZodArray,
-  type ZodEffects,
-  type ZodObject,
-  type ZodRawShape,
-  type ZodString,
-  type ZodTypeAny,
-  z,
-} from "zod";
+import { type ZodObject, type ZodRawShape, type ZodTypeAny, z } from "zod";
 
-import { is } from "~/lib";
 import { TextInputValidationType } from "~/types";
 
 import {
@@ -17,6 +8,7 @@ import {
   isCheckboxField,
   isCurrencyField,
   isDateField,
+  isRemoteSelectField,
   isSelectField,
   isTextAreaField,
   isTextInputField,
@@ -26,27 +18,6 @@ import type { FormField } from "./types";
 
 type BaseFormField = Omit<FormField, "fieldGroup"> & Record<string, unknown>;
 
-function createRequiredString(field: BaseFormField): ZodString {
-  return z.string().min(1, `'${field.displayName}' is required`);
-}
-
-function createRequiredArray(field: BaseFormField): ZodArray<ZodString, "many"> {
-  return z.array(z.string()).min(1, `Please select at least one option from ${field.displayName}`);
-}
-
-function createEmailString(field: BaseFormField): ZodString {
-  return z.string().email(`${field.displayName} is missing or invalid`);
-}
-
-function createPhoneNumberString(field: BaseFormField): ZodEffects<ZodString, string, string> {
-  return z
-    .string()
-    .refine(
-      v => validatePhoneNumber(v, field?.required ?? false),
-      `${field.displayName} is invalid`,
-    );
-}
-
 function validatePhoneNumber(value: string, required: boolean) {
   if (!required) {
     return true;
@@ -54,94 +25,93 @@ function validatePhoneNumber(value: string, required: boolean) {
   return isValidPhoneNumber(value, "US");
 }
 
+export function getDefaultValues<Fields extends BaseFormField[]>(
+  fields: Fields,
+): Record<string, any> {
+  const out: Record<string, any> = {};
+  for (const field of fields) {
+    if (isCheckboxField(field) || isSelectField(field) || isRemoteSelectField(field)) {
+      out[field.formId] = null;
+    } else if (isAddressSearchField(field)) {
+      out[field.formId] = null;
+    } else if (isDateField(field) || isTextAreaField(field) || isTextInputField(field)) {
+      out[field.formId] = "";
+    } else if (isCurrencyField(field)) {
+      out[field.formId] = 0;
+    }
+  }
+  return out;
+}
+
 export function createSchema<Fields extends BaseFormField[]>(
   fields: Fields,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): ZodObject<ZodRawShape, "strip", ZodTypeAny, Record<string, any>, Record<string, any>> {
-  const schema = fields.reduce<ZodRawShape>((final, fieldConfig) => {
-    let value;
+  const obj: Record<string, any> = {};
 
+  for (const field of fields) {
     // Checkbox or Select
-    if (isCheckboxField(fieldConfig) || isSelectField(fieldConfig)) {
-      if (fieldConfig.multiple) {
-        value = z.array(z.string());
-
-        if (fieldConfig.required) {
-          value = createRequiredArray(fieldConfig);
-        }
-      } else {
-        value = z.string();
-
-        if (fieldConfig.required) {
-          value = createRequiredString(fieldConfig);
-        }
+    if (isCheckboxField(field) || isSelectField(field) || isRemoteSelectField(field)) {
+      if (field.multiple && field.required) {
+        obj[field.formId] = z
+          .array(z.string())
+          .min(1, `Please select at least one option from ${field.displayName}`);
+      } else if (field.multiple && !field.required) {
+        obj[field.formId] = z.array(z.string()).optional();
+      } else if (!field.multiple && field.required) {
+        obj[field.formId] = z.string().min(1, `Please select an option from ${field.displayName}`);
+      } else if (!field.multiple && !field.required) {
+        obj[field.formId] = z.string().optional();
       }
-      // Add field to schema
-      is(value) && (final[fieldConfig.formId] = value);
-      return final;
-    } else if (isAddressSearchField(fieldConfig)) {
-      value = fieldConfig.required ? createRequiredString(fieldConfig) : z.string();
-      is(value) && (final[fieldConfig.formId] = value);
-      return final;
-    } // Date Field
-    else if (isDateField(fieldConfig)) {
-      value = z.date();
-      is(value) && (final[fieldConfig.formId] = value);
-      return final;
-    } // Currency Field
-    else if (isCurrencyField(fieldConfig)) {
-      value = z.coerce.number();
-      if (fieldConfig.required) {
-        value = value.min(1);
-      }
-      is(value) && (final[fieldConfig.formId] = value);
-      return final;
-    }
-    // Text Area
-    else if (isTextAreaField(fieldConfig)) {
-      value = z.string();
-
-      if (fieldConfig.required) {
-        value = createRequiredString(fieldConfig);
-      } else {
-        value = value.optional();
-      }
-
-      // Add field to schema
-      is(value) && (final[fieldConfig.formId] = value);
-      return final;
     }
     // Text Input
-    else if (isTextInputField(fieldConfig)) {
-      value = z.string();
-
-      // Handle non-validated input field required vs. optional.
-      if (fieldConfig.required) {
-        value = createRequiredString(fieldConfig);
+    if (isTextInputField(field)) {
+      if (field.required) {
+        obj[field.formId] = z.string().min(1, `'${field.displayName}' is required`);
       } else {
-        value = value.optional();
+        obj[field.formId] = z.string();
       }
-
-      // Handle email address input field validation.
-      if (fieldConfig.validationType === TextInputValidationType.Email) {
-        value = createEmailString(fieldConfig);
+      if (typeof field.validationType !== "undefined") {
+        if (field.validationType === TextInputValidationType.Email) {
+          obj[field.formId] = z
+            .string()
+            .refine(
+              v => v.match(`^(.+)\@(.+)\.(.+)$`),
+              `${field.displayName} is missing or invalid`,
+            );
+        } else if (field.validationType === TextInputValidationType.Phone) {
+          obj[field.formId] = z
+            .string()
+            .refine(
+              v => validatePhoneNumber(v, field?.required ?? false),
+              `${field.displayName} is invalid`,
+            );
+        }
       }
-      // Handle phone number input field validation.
-      else if (fieldConfig.validationType === TextInputValidationType.Phone) {
-        value = createPhoneNumberString(fieldConfig);
-      }
-
-      // Make sure `optional` is still set after phone and email validations.
-      if (!fieldConfig.required) {
-        value = value.optional();
-      }
-
-      // Add field to schema
-      is(value) && (final[fieldConfig.formId] = value);
-      return final;
     }
-    return final;
-  }, {});
-
-  return z.object<ZodRawShape>(schema);
+    // Text Area & Address Search
+    if (isTextAreaField(field) || isAddressSearchField(field)) {
+      if (field.required) {
+        obj[field.formId] = z.string().min(1, `'${field.displayName}' is required`);
+      } else {
+        obj[field.formId] = z.string().optional();
+      }
+    }
+    // Currency
+    if (isCurrencyField(field)) {
+      if (field.required) {
+        obj[field.formId] = z.coerce.number().min(1);
+      } else {
+        obj[field.formId] = z.coerce.number().optional();
+      }
+    }
+    // Date
+    if (isDateField(field)) {
+      if (field.required) {
+        obj[field.formId] = z.date();
+      } else {
+        obj[field.formId] = z.date().optional();
+      }
+    }
+  }
+  return z.object<ZodRawShape>(obj).required();
 }

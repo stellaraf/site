@@ -1,4 +1,4 @@
-import { Fragment, forwardRef, useImperativeHandle } from "react";
+import { Fragment, forwardRef, useEffect, useImperativeHandle } from "react";
 
 import { Button, Flex } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,7 +28,7 @@ import {
   isTextAreaField,
   isTextInputField,
 } from "./guards";
-import { createSchema } from "./schema";
+import { createSchema, getDefaultValues } from "./schema";
 
 import type { z } from "zod";
 import type { FormGroup } from "~/types";
@@ -68,17 +68,17 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
   const schema = createSchema(fields);
   type Schema = z.infer<typeof schema>;
 
-  const form = useForm<Schema>({ resolver: zodResolver(schema) });
+  const defaultValues = getDefaultValues(fields);
+
+  const form = useForm<Schema>({ defaultValues, resolver: zodResolver(schema) });
 
   const handleSubmit = async (data: Schema) => {
-    data = form.getValues();
     if (typeof onSubmit === "function") {
       awaitIfNeeded(onSubmit);
     }
     const result = await submitForm(name, data);
-    const isError = result instanceof Error || !result.ok;
 
-    if (isError) {
+    if (result instanceof Error || !result.ok) {
       if (typeof onFailure === "function") {
         await awaitIfNeeded(onFailure, result);
       }
@@ -86,7 +86,6 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
       if (typeof onSuccess === "function") {
         await awaitIfNeeded(onSuccess, result);
       }
-      form.reset();
     }
   };
 
@@ -109,6 +108,12 @@ function _GenericForm<Fields extends FormField[]>(props: GenericFormPropsWithRef
     }
     return final;
   }, []);
+
+  useEffect(() => {
+    if (form.formState.isSubmitSuccessful && form.formState.isValid) {
+      form.reset();
+    }
+  }, [form.formState.isSubmitSuccessful, form.formState.isValid]);
 
   return (
     <Flex as="form" onSubmit={submit} flexDir="column" w={{ base: "100%", lg: "75%" }} {...rest}>

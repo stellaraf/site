@@ -92,6 +92,7 @@ query page($slug: String, $stage: Stage = PUBLISHED) {
                         formId
                         label
                         required
+                        validationType
                         fieldGroup
                     }
                     ... on DateField {
@@ -220,6 +221,7 @@ query page($slug: String, $stage: Stage = PUBLISHED) {
                         formId
                         label
                         required
+                        validationType
                         fieldGroup
                     }
                     ... on AddressSearchField {

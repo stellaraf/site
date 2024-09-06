@@ -2,6 +2,7 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
+  AlertTitle,
   Box,
   CloseButton,
   Flex,
@@ -16,6 +17,7 @@ import { useConfig } from "~/context";
 
 interface UseAlert {
   message: React.ReactNode;
+  title?: React.ReactNode;
   status?: ToastProps["status"];
   duration?: ToastProps["duration"];
   position?: ToastPosition;
@@ -36,7 +38,8 @@ export function useAlert(options: UseAlertOptions = {}): UseAlertReturn {
   const showToast: UseAlertReturn = opts => {
     const {
       status = options.status ?? "error",
-      message = "Something went wrong",
+      title,
+      message,
       position = options.position ?? defaultPosition ?? "bottom",
       onClose: customOnClose = options.onClose,
     } = opts;
@@ -52,12 +55,13 @@ export function useAlert(options: UseAlertOptions = {}): UseAlertReturn {
     }
 
     toast({
+      title,
       status,
       duration,
       isClosable: true,
       onCloseComplete: customOnClose,
       position,
-      render: ({ id, onClose }) => {
+      render: ({ id, onClose, title }) => {
         const component = (
           <>
             <Alert
@@ -76,7 +80,8 @@ export function useAlert(options: UseAlertOptions = {}): UseAlertReturn {
               right={{ base: 0, lg: 24 }}
             >
               <AlertIcon />
-              <Flex flex="1">
+              <Flex flex="1" flexDir="column">
+                {title && <AlertTitle>{title}</AlertTitle>}
                 <AlertDescription
                   display="block"
                   css={{

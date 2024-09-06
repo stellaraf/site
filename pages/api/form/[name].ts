@@ -70,6 +70,16 @@ const handler: NextApiHandler = async (request, response) => {
       console.groupEnd();
       return response.status(201).send(null);
     } else {
+      if (request.headers["content-type"]?.includes("application/json")) {
+        const headers: Record<string, string> = {};
+        for (const [key, val] of result.headers.entries()) {
+          headers[key] = val;
+        }
+        return response
+          .status(result.status)
+          .writeHead(result.status, result.statusText, headers)
+          .send(body);
+      }
       const error = JSON.stringify(body);
       console.error(error);
       console.groupEnd();

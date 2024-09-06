@@ -67,6 +67,11 @@ export function getContextValue(data: Context): SearchResultValue {
   };
 }
 
+export function mapboxToSalesforce(data: SearchResultValue): SalesforceAddress {
+  const { street, place: city, region: state, country } = data;
+  return { state, street, city, country };
+}
+
 export interface MapboxSearchResult {
   attribution: string;
   response_id: string;
@@ -79,6 +84,13 @@ export interface SearchResultValue {
   country: string;
   place: string;
   street: string;
+}
+
+export interface SalesforceAddress {
+  street: string;
+  city: string;
+  state: string;
+  country: string;
 }
 
 export interface Suggestion {

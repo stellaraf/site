@@ -12,6 +12,9 @@ export async function submitForm(name: string, data: unknown): Promise<Response 
       });
       return response;
     } catch (err) {
+      console.group("Error Submitting Form");
+      console.error(err);
+      console.groupEnd();
       if (err instanceof Error) {
         return err;
       }

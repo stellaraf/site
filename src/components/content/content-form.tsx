@@ -17,12 +17,8 @@ export const ContentForm = (props: ContentFormProps) => {
   const onFailure = async (result: Response | Error) => {
     const message = await messageFromResponseOrError(result);
     showAlert({
-      message: (
-        <>
-          Something went wrong
-          <CodeBlock colorScheme="red">{message}</CodeBlock>
-        </>
-      ),
+      title: "Something Went Wrong",
+      message: <CodeBlock colorScheme="red">{message}</CodeBlock>,
     });
   };
 

@@ -8,12 +8,12 @@ import type { FieldValues } from "react-hook-form";
 import type { TextInputProps } from "./types";
 
 export const TextInput = <V extends FieldValues>(props: TextInputProps<InputProps, V>) => {
-  const { field, name, defaultValue, rules = {}, isRequired = false, ...rest } = props;
+  const { field, name, defaultValue, rules, isRequired = false, ...rest } = props;
 
   const {
     field: register,
     fieldState: { error },
-  } = useController({ name, rules: { required: isRequired, ...rules } });
+  } = useController({ name });
 
   return (
     <FormControl
