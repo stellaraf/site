@@ -41,9 +41,8 @@ export async function search(
     return results;
   }
   const results: SearchResult[] = data.suggestions.map(suggestion => ({
-    displayName: suggestion.name,
+    displayName: suggestion.full_address,
     formValue: getContextValue(suggestion.context),
-    description: suggestion.full_address,
   }));
   return results;
 }

@@ -19,7 +19,6 @@ async function queryFn(search: string, locationType: LocationType): Promise<Sele
     return data.map(d => ({
       label: d.displayName,
       value: JSON.stringify(d.formValue),
-      description: d.description,
     }));
   }
   throw new Error(data);

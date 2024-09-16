@@ -1,6 +1,5 @@
 export interface SearchResult {
   displayName: string;
-  description: string;
   formValue: SearchResultValue;
 }
 
@@ -21,11 +20,9 @@ export function isSearchResults(data: unknown): data is SearchResult[] {
       data[0] !== null &&
       "displayName" in data[0] &&
       "formValue" in data[0] &&
-      "description" in data[0] &&
       typeof data[0].displayName === "string" &&
       typeof data[0].formValue === "object" &&
-      data[0].formValue !== null &&
-      typeof data[0].description === "string"
+      data[0].formValue !== null
     );
   }
   return Array.isArray(data);
@@ -47,14 +44,8 @@ export function isMapboxCity(data: Suggestion): boolean {
 }
 
 export function formatCity(data: Suggestion): SearchResult {
-  const displayName = [data.name, data.context.region.region_code].join(", ");
-  let addressParts: string[] = [];
-  if (typeof data.context.district !== "undefined") {
-    addressParts = [...addressParts, data.context.district.name];
-  }
-  addressParts = [...addressParts, data.context.region.name, data.context.country.name];
-  const description = addressParts.join(", ");
-  return { displayName, description, formValue: getContextValue(data.context) };
+  const displayName = data.full_address;
+  return { displayName, formValue: getContextValue(data.context) };
 }
 
 export function getContextValue(data: Context): SearchResultValue {
