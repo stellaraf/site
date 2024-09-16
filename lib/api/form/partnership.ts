@@ -111,7 +111,7 @@ export async function handlePartnershipForm(request: NextApiRequest): Promise<Re
         return new Response(
           JSON.stringify({
             error:
-              "Contact information has already been submitted. Please reach out to sales@stellar.tech for further assistance.",
+              "Email address already exists. Please contact partners@stellar.tech for assistance.",
           }),
           { status: 400, headers: { "content-type": "application/json" } },
         );
