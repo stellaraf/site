@@ -93,7 +93,7 @@ export async function handlePartnershipForm(request: NextApiRequest): Promise<Re
     phone,
     title,
     address,
-    leadSource: "Website",
+    leadSource: "Prospective Partner",
     leadType,
     description,
   };
