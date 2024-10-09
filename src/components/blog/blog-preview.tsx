@@ -23,20 +23,22 @@ export const BlogPreview = (props: BlogPost) => {
         display="flex"
         height="unset"
         flex="1 0 100%"
-        borderWidth={0}
+        borderWidth={1}
         variant="ghost"
         overflow="hidden"
         textAlign="unset"
         lineHeight="unset"
-        borderColor="unset"
+        borderColor="transparent"
         verticalAlign="unset"
         flexDirection="column"
+        _hover={{ borderColor: "secondary.500" }}
+        _dark={{ _hover: { borderColor: "secondary.300" } }}
       >
         <Card
+          minH={64}
           zIndex={1}
+          height="unset"
           p={{ base: 6, lg: 8 }}
-          maxHeight={{ base: 72, md: 64 }}
-          height={{ base: "unset", md: "md" }}
           width={{ base: "20rem", md: "18rem", xl: "sm" }}
         >
           <CardBody spacing={4} textAlign="left" alignItems="flex-start">
@@ -48,7 +50,7 @@ export const BlogPreview = (props: BlogPost) => {
             <Heading as="h4" fontSize="sm" fontWeight="light" whiteSpace="pre-wrap">
               {description}
             </Heading>
-            <Flex boxSize="100%" alignItems="flex-end" justifyContent="space-between">
+            <Flex width="100%" alignItems="flex-end" justifyContent="space-between">
               <HStack justifyContent="flex-start" alignItems="flex-end">
                 {authors.map(author => (
                   <AuthorPreview key={author.name} {...author} />

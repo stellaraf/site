@@ -8,7 +8,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => (
   <VStack
     p={8}
     w="md"
-    h={props.minH ?? props.minHeight ?? props.height ?? props.h ?? "md"}
+    minH={props.minH ?? props.minHeight}
+    h={props.height ?? props.h ?? "md"}
     ref={ref}
     zIndex={1}
     pos="relative"
