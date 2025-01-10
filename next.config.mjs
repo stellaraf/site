@@ -41,7 +41,7 @@ const config = {
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
-    remotePatterns: [{ protocol: "https", hostname: "media.graphassets.com" }],
+    remotePatterns: [{ protocol: "https", hostname: "**.graphassets.com" }],
   },
   env: {
     SITE_VERSION: getVersion(),
