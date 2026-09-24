@@ -12,12 +12,12 @@ jobs:
             - name: Node Setup
               uses: actions/setup-node@v4
               with:
-                  node-version: latest
+                  node-version: "22"
 
             - name: PNPM Setup
               uses: pnpm/action-setup@v4
               with:
-                  version: latest
+                  version: "9.15.9"
                   run_install: true
 
             - name: Formatting
